@@ -279,3 +279,164 @@ def expand_text(text: str, runtime: Runtime) -> str:
     return runtime.exec(content=[
         {"type": "text", "text": text},
     ])
+
+
+# ---------------------------------------------------------------------------
+# Chinese paper support (中文论文)
+# ---------------------------------------------------------------------------
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def rewrite_zh(text: str, runtime: Runtime) -> str:
+    """Rewrite fragmented Chinese draft into polished academic Chinese (中转中).
+
+    You are a senior editor for top Chinese CS journals (计算机学报, 软件学报).
+
+    Rules:
+    - Restructure logic: identify the main thread, reconnect loose sentences.
+    - One paragraph = one core idea. No multi-topic paragraphs.
+    - Convert oral speech to formal academic writing
+      (e.g. "我们觉得" → "实验结果表明", "不管A还是B" → "无论A抑或B").
+    - Convert lists to continuous paragraphs.
+    - Pure text output, NO Markdown formatting (no bold, italic, headers).
+    - Use Chinese full-width punctuation (，。；：""）.
+    - Preserve English technical terms (Transformer, CNN, Few-shot).
+
+    Output:
+    - Part 1 [Refined Text]: Rewritten Chinese paragraph.
+    - Part 2 [Logic flow]: Brief explanation of restructuring logic.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": text},
+    ])
+
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def polish_zh(text: str, runtime: Runtime) -> str:
+    """Polish Chinese academic paper text (表达润色中文).
+
+    You are a senior editor for core Chinese CS journals, following the
+    principle of "respect the original, restrain modifications."
+
+    Rules:
+    - Only modify when detecting: oral expressions, grammar errors,
+      logic breaks, or severely Europeanized long sentences.
+    - If the original is already clear and correct, DO NOT change it.
+    - Use modern academic Chinese, not archaic bureaucratic style.
+    - Replace oral speech with objective statements.
+    - Pure text output, NO Markdown formatting.
+    - Chinese full-width punctuation.
+
+    Output:
+    - Part 1 [Refined Text]: Polished text (or original if no changes needed).
+    - Part 2 [Review Comments]: Changes made, or affirmation if unchanged.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": text},
+    ])
+
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def remove_ai_flavor_zh(text: str, runtime: Runtime) -> str:
+    """Remove AI-generated patterns from Chinese text (去AI味中文).
+
+    Eliminate machine-translated, over-rendered language patterns:
+    - Remove meaningless emotional words (毋庸置疑, 颠覆性, 深刻, 至关重要).
+    - Break up English-style long attributive structures.
+    - Reduce passive voice, replace list formats with logical prose.
+    - No Markdown formatting in output.
+
+    Output:
+    - Part 1 [Text]: Cleaned text (or original if already natural).
+    - Part 2 [Log]: Changes made, or "[检测通过] 原文自然，无AI味。"
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": text},
+    ])
+
+
+# ---------------------------------------------------------------------------
+# Figures & Tables
+# ---------------------------------------------------------------------------
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def generate_figure_caption(description: str, runtime: Runtime) -> str:
+    """Generate an English figure caption for a top-tier conference paper.
+
+    Title Case for noun phrases (no period). Sentence case for sentences (with period).
+    Minimal style: never start with "The figure shows..."
+    Use "show", "compare", "present" — avoid "showcase", "depict".
+    Do NOT include "Figure X:" prefix — just the caption text.
+
+    Output: English caption text only.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": description},
+    ])
+
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def generate_table_caption(description: str, runtime: Runtime) -> str:
+    """Generate an English table caption for a top-tier conference paper.
+
+    Recommended structures: "Comparison of ... on ...",
+    "Ablation study on ...", "Results on ... dataset", "Effect of ... on ...".
+    Use "show", "compare", "report" — avoid "showcase", "depict".
+    Do NOT include "Table X:" prefix.
+
+    Output: English caption text only.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": description},
+    ])
+
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def recommend_visualization(data_description: str, runtime: Runtime) -> str:
+    """Recommend chart types for experimental data visualization.
+
+    Available types: grouped bar, horizontal bar, stacked bar,
+    line with CI, Pareto front, radar, scatter, heatmap, bubble,
+    violin, box, ROC/PR, dual-axis, facet grid, inset zoom.
+
+    Consider: data scale (broken axes, log scale), color-blind palettes,
+    vector format (PDF/EPS), text size >= body text.
+
+    Output: Recommended chart type + rationale + design specs.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": data_description},
+    ])
+
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def design_architecture_figure(method_description: str, runtime: Runtime) -> str:
+    """Design a paper architecture/framework diagram.
+
+    Style: flat vector, clean lines (DeepMind/OpenAI style).
+    Professional pastels on white background. English labels, minimal text.
+
+    Output: diagram layout description, component list, connections,
+    color scheme, and draw.io / TikZ reproduction notes.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": method_description},
+    ])
+
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def results_to_claims(results: str, intended_claims: str,
+                      runtime: Runtime) -> str:
+    """Judge what claims experimental results actually support.
+
+    For each claim: supported? (yes/partial/no), evidence strength,
+    gaps, suggested rewording if too strong. Be brutally honest.
+
+    Output JSON: {"claims": [{"claim": "...", "supported": "yes/partial/no",
+    "evidence": "...", "gaps": "...", "suggested_wording": "..."}]}
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": (
+            f"Intended claims:\n{intended_claims}\n\n"
+            f"Experimental results:\n{results}"
+        )},
+    ])

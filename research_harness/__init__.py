@@ -14,16 +14,12 @@ from research_harness.evaluate import compete
 
 
 def research():
-    """Print all available research functions and pipeline stages.
-
-    Call this to see everything the harness can do.
-    """
+    """Print all available research functions and pipeline stages."""
     print("🔬 Research Agent Harness")
     print("=" * 60)
-    print()
 
-    print("Pipeline stages:")
-    stage_desc = {
+    print("\nPipeline stages:")
+    for i, (s, d) in enumerate({
         "init":       "Create project structure, LaTeX scaffold, outline",
         "literature": "Survey papers, identify research gaps",
         "idea":       "Generate ideas, check novelty, rank",
@@ -32,13 +28,11 @@ def research():
         "writing":    "Write sections, polish, translate, de-AI",
         "review":     "Cross-model review loop until pass",
         "submission": "Pre-submission checklist",
-    }
-    for i, s in enumerate(STAGES):
-        print(f"  {i}. {s:12s} — {stage_desc.get(s, '')}")
+    }.items()):
+        print(f"  {i}. {s:12s} — {d}")
 
-    print()
-    print("Writing functions:")
-    writing_fns = {
+    print("\nWriting (English):")
+    for n, d in {
         "write_section":    "Write a paper section from outline + notes",
         "polish_rigorous":  "Deep polish for academic rigor",
         "polish_natural":   "Polish for naturalness, remove AI patterns",
@@ -48,23 +42,57 @@ def research():
         "expand_text":      "Add 5-15 words with deeper logic",
         "check_logic":      "Final check for fatal errors only",
         "analyze_results":  "Experimental data → LaTeX analysis",
-    }
-    for name, desc in writing_fns.items():
-        print(f"  {name:20s} — {desc}")
+        "results_to_claims":"Judge what claims results support",
+    }.items():
+        print(f"  {n:24s} — {d}")
 
-    print()
-    print("Review functions:")
-    review_fns = {
-        "review_paper":  "Review paper (as reviewer model)",
-        "fix_paper":     "Fix paper based on review feedback",
-        "review_loop":   "Full review-fix cycle until pass",
-    }
-    for name, desc in review_fns.items():
-        print(f"  {name:20s} — {desc}")
+    print("\nWriting (Chinese 中文):")
+    for n, d in {
+        "rewrite_zh":         "中转中 — rewrite fragmented draft",
+        "polish_zh":          "表达润色 — polish Chinese paper text",
+        "remove_ai_flavor_zh":"去AI味 — remove AI patterns from Chinese",
+    }.items():
+        print(f"  {n:24s} — {d}")
 
-    print()
-    print("Research functions:")
-    research_fns = {
+    print("\nFigures & Tables:")
+    for n, d in {
+        "generate_figure_caption":  "Generate English figure caption",
+        "generate_table_caption":   "Generate English table caption",
+        "recommend_visualization":  "Recommend chart type for data",
+        "design_architecture_figure":"Design framework/architecture diagram",
+    }.items():
+        print(f"  {n:24s} — {d}")
+
+    print("\nReview & Rebuttal:")
+    for n, d in {
+        "review_paper":       "Review paper (as reviewer model)",
+        "fix_paper":          "Fix paper based on review feedback",
+        "review_loop":        "Full review-fix cycle until pass",
+        "parse_reviews":      "Parse reviewer comments into issues",
+        "build_rebuttal_strategy":"Build response strategy",
+        "draft_rebuttal":     "Draft venue-compliant rebuttal",
+    }.items():
+        print(f"  {n:24s} — {d}")
+
+    print("\nPresentation:")
+    for n, d in {
+        "generate_slides":    "Beamer slides for conference talk",
+        "generate_poster":    "LaTeX poster for poster session",
+        "generate_speaker_notes":"Speaker notes + Q&A prep",
+    }.items():
+        print(f"  {n:24s} — {d}")
+
+    print("\nTheory & Planning:")
+    for n, d in {
+        "derive_formula":     "Derive formulas from scattered notes",
+        "write_proof":        "Write rigorous mathematical proof",
+        "plan_ablations":     "Design ablation studies",
+        "refine_research":    "Refine vague direction → focused plan",
+    }.items():
+        print(f"  {n:24s} — {d}")
+
+    print("\nResearch Pipeline:")
+    for n, d in {
         "survey_topic":       "Literature survey for a topic",
         "identify_gaps":      "Find research gaps from survey",
         "generate_ideas":     "Generate ideas from gaps",
@@ -74,24 +102,16 @@ def research():
         "run_experiment":     "Execute one experiment step",
         "check_training":     "Check training logs for issues",
         "check_submission":   "Pre-submission checklist",
-    }
-    for name, desc in research_fns.items():
-        print(f"  {name:20s} — {desc}")
+    }.items():
+        print(f"  {n:24s} — {d}")
 
-    print()
-    print("Utilities:")
-    print(f"  {'compete':20s} — Run prompt competition between functions")
-    print(f"  {'init_research':20s} — Initialize project directory structure")
+    print("\nUtilities:")
+    print(f"  {'compete':24s} — Prompt competition between functions")
+    print(f"  {'init_research':24s} — Initialize project directory")
 
-    print()
-    print("Usage:")
+    print("\nUsage:")
     print('  from research_harness import research_pipeline')
-    print('  result = research_pipeline(')
-    print('      project_dir="~/research/My Project",')
-    print('      topic="my research topic",')
-    print('      venue="NeurIPS",')
-    print('      exec_runtime=runtime,')
-    print('  )')
+    print('  result = research_pipeline(project_dir="...", topic="...", exec_runtime=rt)')
 
 
 __all__ = ["research", "research_pipeline", "compete", "STAGES"]
