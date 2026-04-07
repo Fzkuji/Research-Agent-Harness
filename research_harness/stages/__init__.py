@@ -1,1 +1,1 @@
-# Research pipeline stages
+# Research pipeline stages — each @agentic_function in its own file.
