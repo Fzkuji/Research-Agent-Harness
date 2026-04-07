@@ -4,36 +4,72 @@ Autonomous research agent: from topic to submission-ready paper.
 
 Built with [Agentic Programming](https://github.com/Fzkuji/Agentic-Programming) — Python controls the workflow, LLM reasons at each step via `@agentic_function` docstrings.
 
-## Quick Start
+## 🚀 Quick Start
 
-### Option 1: Install as Python package
+### 1. Install
+
+**Via PyPI:**
+
+```bash
+pip install research-agent-harness
+```
+
+**Via Skills (Claude Code / Cursor):**
 
 ```bash
 git clone https://github.com/Fzkuji/Research-Agent-Harness.git
-cd Research-Agent-Harness
-pip install -e .
+mkdir -p ~/.claude/skills/
+cp -r Research-Agent-Harness/skills/* ~/.claude/skills/
 ```
 
-Requires an LLM provider — any one of:
-- [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) (recommended): `npm install -g @anthropic-ai/claude-code && claude login`
-- Anthropic API: `export ANTHROPIC_API_KEY=sk-...`
-- OpenAI API: `export OPENAI_API_KEY=sk-...`
+### 2. Set up LLM provider
 
-### Option 2: As Claude Code / Cursor skills
+Any one of:
 
 ```bash
-# Copy skills into your project
-cp -r skills/* /path/to/your/project/.claude/skills/
+# Claude Code CLI (recommended)
+npm install -g @anthropic-ai/claude-code && claude login
+
+# Or Anthropic API
+export ANTHROPIC_API_KEY=sk-...
+
+# Or OpenAI API
+export OPENAI_API_KEY=sk-...
 ```
 
-Then use slash commands directly in Claude Code or Cursor:
+### 3. Use
+
+**In Claude Code / Cursor** (via skills):
 
 ```
-/research-pipeline "your research topic"
-/paper-write "NeurIPS"
-/review-loop "paper/"
-/rebuttal "paper/ + reviews" — venue: ICML, character limit: 5000
-/paper-slides "paper/" — talk_type: oral, minutes: 15
+> /research-pipeline "factorized gap in discrete diffusion LMs"    # Full pipeline: literature → idea → experiment → paper
+> /paper-write "NeurIPS"                                           # Write paper sections from outline
+> /review-loop "paper/"                                            # Cross-model review until pass
+> /rebuttal "paper/ + reviews" — venue: ICML, char limit: 5000    # Draft venue-compliant rebuttal
+> /paper-slides "paper/" — talk_type: oral, minutes: 15            # Generate Beamer slides
+> /paper-poster "paper/" — venue: NeurIPS                          # Generate conference poster
+> /polish "paragraph text..."                                      # Polish English LaTeX
+> /translate-zh2en "中文草稿..."                                    # Chinese → English LaTeX
+> /check-logic "paper section..."                                  # Final logic check
+> /analyze-results "experiment data..."                            # Data → LaTeX analysis
+> /plan-ablations "method description..."                          # Design ablation studies
+> /refine-research "vague research direction"                      # Refine → focused plan
+```
+
+**In Python** (via package):
+
+```bash
+# See all available functions
+python -c "from research_harness import research; research()"
+
+# Run the pipeline
+agentic research "your topic" --venue NeurIPS
+```
+
+🗑️ **Uninstall skills:**
+
+```bash
+cd Research-Agent-Harness && ls skills/ | xargs -I{} rm -rf ~/.claude/skills/{}
 ```
 
 ## Pipeline
@@ -53,27 +89,7 @@ init → literature → idea → experiment → analysis → writing → review 
 | **review** | Cross-model review loop (executor + reviewer, different LLMs) |
 | **submission** | Pre-submission checklist (anonymity, format, references) |
 
-Run the full pipeline, specific stages, or start from any point:
-
-```python
-# Full pipeline
-research_pipeline(project_dir="...", topic="...", exec_runtime=rt)
-
-# Just writing + review
-research_pipeline(project_dir="...", stages=["writing", "review"], exec_runtime=rt)
-
-# Start from analysis onwards
-research_pipeline(project_dir="...", start_from="analysis", exec_runtime=rt)
-```
-
-## All Functions
-
-Call `research()` to see everything:
-
-```python
-from research_harness import research
-research()
-```
+## All Functions (36)
 
 ### Writing (English)
 | Function | Description |
@@ -131,20 +147,7 @@ research()
 
 ### Prompt Competition
 
-When multiple approaches exist for the same task, compete them:
-
-```python
-from research_harness.evaluate import compete
-from research_harness.stages.writing import polish_rigorous, polish_natural
-
-best = compete(
-    functions=[polish_rigorous, polish_natural],
-    kwargs={"text": latex_text, "runtime": exec_runtime},
-    eval_runtime=gpt_runtime,  # different model evaluates
-    task="Polish LaTeX for NeurIPS",
-)
-print(best["winner_name"], best["reasoning"])
-```
+For tasks with multiple approaches (e.g. `polish_rigorous` vs `polish_natural`), the harness can run each and let a different LLM pick the best output. See `research_harness.evaluate.compete()`.
 
 ## Project Structure
 
@@ -153,9 +156,9 @@ research_harness/
 ├── __init__.py          # Entry point: research(), research_pipeline()
 ├── pipeline.py          # 8-stage orchestrator
 ├── evaluate.py          # Prompt competition between @agentic_functions
-├── utils.py             # Shared utilities (parse_json)
+├── utils.py             # Shared utilities
 └── stages/
-    ├── init.py          # init_research — project directory setup
+    ├── init.py          # Project directory setup
     ├── literature.py    # survey_topic, identify_gaps
     ├── idea.py          # generate_ideas, check_novelty, rank_ideas
     ├── experiment.py    # design_experiments, run_experiment, check_training
