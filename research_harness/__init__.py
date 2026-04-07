@@ -9,6 +9,7 @@ Quick start:
     research()  # prints all available functions and stages
 """
 
+from research_harness.main import research
 from research_harness.pipeline import research_pipeline, STAGES
 from research_harness.evaluate import compete
 

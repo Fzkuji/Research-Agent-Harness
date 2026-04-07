@@ -6,25 +6,35 @@ from agentic.runtime import Runtime
 
 @agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
 def analyze_results(data: str, runtime: Runtime) -> str:
-    """Analyze experimental data and write LaTeX analysis paragraphs.
+    """# Role
+    你是一位具有敏锐洞察力的资深数据科学家，擅长处理复杂的实验数据并撰写高质量的学术分析报告。
 
-    You are a senior data scientist with sharp insight into experimental
-    results, writing for a top-tier conference.
+    # Task
+    请仔细阅读我提供的【实验数据】从中挖掘关键特征、趋势和对比结论，并将其整理为符合顶级会议标准的 LaTeX 分析段落。
 
-    Rules:
-    - ALL conclusions must be strictly based on the input data.
-      NEVER fabricate data, exaggerate improvements, or invent phenomena.
-    - Focus on comparisons and trends, not raw number reporting.
-    - Analysis pattern for each finding:
-      Observation (B beats A) → Reason (B has X, A lacks it) → Conclusion
-      (proves importance of X / necessity of introducing Y).
-    - Use \\paragraph{Core Conclusion} + analysis text format (Title Case).
-    - No bold/italic, no list environments, pure text paragraphs.
-    - Escape special chars: %, _, &.
+    # Constraints
+    1. 数据真实性：
+       - 所有结论必须严格基于输入的数据。严禁编造数据、夸大提升幅度或捏造不存在的实验现象。
+       - 如果数据中没有明显的优势或趋势，请如实描述，不要强行总结所谓的显著提升。
 
-    Output:
-    - Part 1 [LaTeX]: Analysis paragraphs.
-    - Part 2 [Translation]: Chinese translation for verification.
+    2. 分析深度：
+       - 拒绝简单的报账式描述（例如不要只说 A 是 0.5，B 是 0.6），重点在于比较和趋势分析。
+       - 关注点包括：方法的有效性（SOTA 比较）、参数的敏感性、性能与效率的权衡，以及消融实验中的关键模块贡献。
+
+    3. 排版与格式规范：
+       - 严禁使用加粗或斜体：正文中不要使用 \\\\textbf 或 \\\\emph，依靠文字逻辑来表达重点。
+       - 结构强制：必须使用 \\\\paragraph{核心结论} + 分析文本 的形式。
+         * \\\\paragraph{} 中填写高度凝练的短语结论（使用 Title Case 格式）。
+         * 紧接着在同一段落中展开具体的数值分析和逻辑推演。
+       - 不要使用列表环境，保持纯文本段落。
+
+    4. 输出格式：
+       - Part 1 [LaTeX]：只输出分析后的 LaTeX 代码。
+         * 必须对特殊字符进行转义（例如：%, _, &）。
+         * 保持数学公式原样（保留 $ 符号）。
+         * 不同的结论点之间请空一行。
+       - Part 2 [Translation]：对应的中文直译（用于核对数据结论是否准确）。
+       - 除以上两部分外，不要输出任何多余的对话。
     """
     return runtime.exec(content=[
         {"type": "text", "text": data},

@@ -16,21 +16,50 @@ def paper_improvement_loop(
     max_rounds: int = 2,
     callback: Optional[callable] = None,
 ) -> dict:
-    """Auto paper improvement loop: review → fix writing → recompile.
+    """Autonomously improve a generated paper via external LLM review, implement
+    fixes, and recompile, for up to max_rounds rounds.
 
-    Unlike review_loop (which iterates on research — experiments, data),
-    this iterates on WRITING QUALITY — fixing theoretical inconsistencies,
-    softening overclaims, adding missing content, improving presentation.
+    This skill runs after paper-plan -> paper-figure -> paper-write -> paper-compile.
+    It takes a compiled paper and iteratively improves it through external review.
 
-    Round 1 typically catches structural issues (4→6/10).
-    Round 2 catches presentation issues (6→7/10).
+    Unlike review_loop (which iterates on research -- running experiments, collecting
+    data, rewriting narrative), this iterates on WRITING QUALITY -- fixing theoretical
+    inconsistencies, softening overclaims, adding missing content, and improving
+    presentation.
+
+    Round 1 typically catches structural issues (4->6/10).
+    Round 2 catches remaining presentation issues (6->7/10).
     Diminishing returns beyond 2 rounds for writing-only improvements.
+
+    Each round:
+    1. Collect paper text (concatenate all sections/*.tex)
+    2. Send to external reviewer (GPT-5.4 xhigh) for structured review:
+       - Overall Score (1-10), Summary, Strengths, Weaknesses (CRITICAL > MAJOR > MINOR),
+         actionable fixes per weakness, missing references, verdict
+       - Focus on: theoretical rigor, claims vs evidence alignment, writing clarity,
+         self-containedness, notation consistency
+    3. Implement fixes by severity:
+       - CRITICAL: assumption mismatches, internal contradictions
+       - MAJOR: overclaims, missing content, notation issues
+       - MINOR: if time permits
+    4. Recompile and verify (0 undefined references, 0 undefined citations)
+
+    Common fix patterns:
+    - Assumption-model mismatch -> rewrite assumption, add bridging proposition
+    - Overclaims -> soften: "validate" -> "demonstrate practical relevance"
+    - Missing metrics -> add quantitative table with honest caveats
+    - Theorem not self-contained -> add Interpretation paragraph listing dependencies
+    - Notation confusion -> rename conflicting symbols globally
+    - Theory-practice gap -> frame theory as idealized, add synthetic validation
+
+    State persistence: writes PAPER_IMPROVEMENT_STATE.json after each round for
+    checkpoint recovery. On resume within 24h, continues from saved phase.
 
     Args:
         paper_dir:       Path to paper/ directory.
         venue:           Target venue.
         exec_runtime:    Runtime for fixing.
-        review_runtime:  Runtime for reviewing.
+        review_runtime:  Runtime for reviewing (different model recommended).
         max_rounds:      Max improvement rounds (default: 2).
         callback:        Progress callback.
 
