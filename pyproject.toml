@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "research-agent-harness"
+version = "0.1.0"
+description = "Autonomous research agent: from topic to submission-ready paper."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+    "agentic-programming",
+]
+
+[project.urls]
+Homepage = "https://github.com/Fzkuji/Research-Agent-Harness"
