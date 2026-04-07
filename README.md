@@ -6,91 +6,34 @@ Built with [Agentic Programming](https://github.com/Fzkuji/Agentic-Programming) 
 
 ## Quick Start
 
-### Option 1: As a Python package
+### Option 1: Install as Python package
 
 ```bash
-# 1. Install
 git clone https://github.com/Fzkuji/Research-Agent-Harness.git
 cd Research-Agent-Harness
 pip install -e .
-
-# 2. Make sure you have an LLM provider available
-# Claude Code CLI (recommended):
-npm install -g @anthropic-ai/claude-code && claude login
-# Or set API key:
-export ANTHROPIC_API_KEY=sk-...
-# Or OpenAI:
-export OPENAI_API_KEY=sk-...
-
-# 3. Use in Python
-python -c "from research_harness import research; research()"
 ```
 
-```python
-from agentic import create_runtime
-from research_harness import research_pipeline
-
-runtime = create_runtime()  # auto-detects your LLM provider
-
-# Initialize a research project
-from research_harness.stages.init import init_research
-init_research(name="LLM Uncertainty", venue="NeurIPS", base_dir="~/research")
-
-# Run the full pipeline
-result = research_pipeline(
-    project_dir="~/research/LLM Uncertainty",
-    topic="Uncertainty quantification in LLMs",
-    venue="NeurIPS",
-    exec_runtime=runtime,
-)
-
-# Or run individual functions
-from research_harness.stages.writing import polish_rigorous
-polished = polish_rigorous(text="We propose a method...", runtime=runtime)
-```
+Requires an LLM provider — any one of:
+- [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) (recommended): `npm install -g @anthropic-ai/claude-code && claude login`
+- Anthropic API: `export ANTHROPIC_API_KEY=sk-...`
+- OpenAI API: `export OPENAI_API_KEY=sk-...`
 
 ### Option 2: As Claude Code / Cursor skills
 
-Copy the `skills/` directory into your project's `.claude/skills/` or Cursor skills folder:
-
 ```bash
-# For Claude Code
+# Copy skills into your project
 cp -r skills/* /path/to/your/project/.claude/skills/
-
-# Then use in Claude Code:
-# /research-pipeline "your research topic"
-# /paper-write "NeurIPS"
-# /review-loop "paper/"
-# /rebuttal "paper/ + reviews"
 ```
 
-### Option 3: Just the functions
+Then use slash commands directly in Claude Code or Cursor:
 
-```python
-# Pick any function you need — each one works standalone
-from agentic import create_runtime
-runtime = create_runtime()
-
-# Polish English text
-from research_harness.stages.writing import polish_rigorous
-result = polish_rigorous(text="...", runtime=runtime)
-
-# Translate Chinese → English
-from research_harness.stages.writing import translate_zh2en
-result = translate_zh2en(text="我们提出了一种方法...", runtime=runtime)
-
-# Generate figure caption
-from research_harness.stages.writing import generate_figure_caption
-caption = generate_figure_caption(description="性能对比柱状图", runtime=runtime)
-
-# Review paper with different model
-from research_harness.stages.review import review_loop
-result = review_loop(
-    paper_dir="paper/",
-    venue="NeurIPS",
-    exec_runtime=claude_runtime,
-    review_runtime=gpt_runtime,
-)
+```
+/research-pipeline "your research topic"
+/paper-write "NeurIPS"
+/review-loop "paper/"
+/rebuttal "paper/ + reviews" — venue: ICML, character limit: 5000
+/paper-slides "paper/" — talk_type: oral, minutes: 15
 ```
 
 ## Pipeline
