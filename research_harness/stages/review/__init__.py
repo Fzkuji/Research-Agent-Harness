@@ -1,6 +1,7 @@
 """Stage: review"""
 
 from research_harness.stages.review.fix_paper import fix_paper
+from research_harness.stages.review.lookup_venue_criteria import lookup_venue_criteria
 from research_harness.stages.review.review_paper import review_paper
 
 import os
@@ -77,6 +78,9 @@ def paper_improvement_loop(
     log_path = os.path.join(os.path.dirname(paper_dir), "PAPER_IMPROVEMENT_LOG.md")
     rounds_log = []
 
+    # Lookup venue criteria once before the loop
+    venue_criteria = lookup_venue_criteria(venue=venue, runtime=review_runtime)
+
     for round_num in range(1, max_rounds + 1):
         # Read current paper
         paper_content = _read_paper(paper_dir)
@@ -88,6 +92,7 @@ def paper_improvement_loop(
         reply = review_paper(
             paper_content=paper_content[:15000],
             venue=venue,
+            venue_criteria=venue_criteria,
             runtime=review_runtime,
         )
 
@@ -165,6 +170,9 @@ def review_loop(
     log_path = os.path.join(os.path.dirname(paper_dir), "AUTO_REVIEW.md")
     reviews = []
 
+    # Lookup venue criteria once before the loop
+    venue_criteria = lookup_venue_criteria(venue=venue, runtime=review_runtime)
+
     for round_num in range(1, max_rounds + 1):
         # Review phase (reviewer model)
         if hasattr(review_runtime, 'reset'):
@@ -173,6 +181,7 @@ def review_loop(
         reply = review_paper(
             paper_content=paper_content[:15000],
             venue=venue,
+            venue_criteria=venue_criteria,
             runtime=review_runtime,
         )
 
@@ -213,4 +222,4 @@ def review_loop(
     }
 
 
-__all__ = ['fix_paper', 'review_paper', 'paper_improvement_loop', 'review_loop']
+__all__ = ['fix_paper', 'lookup_venue_criteria', 'review_paper', 'paper_improvement_loop', 'review_loop']
