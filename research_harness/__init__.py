@@ -44,7 +44,7 @@ def research():
         "analyze_results":  "Experimental data → LaTeX analysis",
         "results_to_claims":"Judge what claims results support",
     }.items():
-        print(f"  {n:24s} — {d}")
+        print(f"  {n:28s} — {d}")
 
     print("\nWriting (Chinese 中文):")
     for n, d in {
@@ -52,62 +52,81 @@ def research():
         "polish_zh":          "表达润色 — polish Chinese paper text",
         "remove_ai_flavor_zh":"去AI味 — remove AI patterns from Chinese",
     }.items():
-        print(f"  {n:24s} — {d}")
+        print(f"  {n:28s} — {d}")
 
-    print("\nFigures & Tables:")
+    print("\nFigures, Tables & Diagrams:")
     for n, d in {
-        "generate_figure_caption":  "Generate English figure caption",
-        "generate_table_caption":   "Generate English table caption",
-        "recommend_visualization":  "Recommend chart type for data",
-        "design_architecture_figure":"Design framework/architecture diagram",
+        "generate_figure_caption":    "Generate English figure caption",
+        "generate_table_caption":     "Generate English table caption",
+        "recommend_visualization":    "Recommend chart type for data",
+        "design_architecture_figure": "Design framework/architecture diagram",
+        "generate_paper_figures":     "Generate matplotlib plots from data",
+        "generate_mermaid_diagram":   "Generate Mermaid flowchart/diagram",
     }.items():
-        print(f"  {n:24s} — {d}")
+        print(f"  {n:28s} — {d}")
+
+    print("\nCompilation:")
+    for n, d in {
+        "compile_paper": "Compile LaTeX → PDF, fix errors",
+    }.items():
+        print(f"  {n:28s} — {d}")
 
     print("\nReview & Rebuttal:")
     for n, d in {
-        "review_paper":       "Review paper (as reviewer model)",
-        "fix_paper":          "Fix paper based on review feedback",
-        "review_loop":        "Full review-fix cycle until pass",
-        "parse_reviews":      "Parse reviewer comments into issues",
-        "build_rebuttal_strategy":"Build response strategy",
-        "draft_rebuttal":     "Draft venue-compliant rebuttal",
+        "review_paper":              "Review paper (as reviewer model)",
+        "fix_paper":                 "Fix paper based on review feedback",
+        "review_loop":               "Full review-fix cycle until pass",
+        "paper_improvement_loop":    "Writing quality improvement loop",
+        "parse_reviews":             "Parse reviewer comments into issues",
+        "build_rebuttal_strategy":   "Build response strategy",
+        "draft_rebuttal":            "Draft venue-compliant rebuttal",
     }.items():
-        print(f"  {n:24s} — {d}")
+        print(f"  {n:28s} — {d}")
 
     print("\nPresentation:")
     for n, d in {
-        "generate_slides":    "Beamer slides for conference talk",
-        "generate_poster":    "LaTeX poster for poster session",
-        "generate_speaker_notes":"Speaker notes + Q&A prep",
+        "generate_slides":        "Beamer slides for conference talk",
+        "generate_poster":        "LaTeX poster for poster session",
+        "generate_speaker_notes": "Speaker notes + Q&A prep",
     }.items():
-        print(f"  {n:24s} — {d}")
+        print(f"  {n:28s} — {d}")
 
     print("\nTheory & Planning:")
     for n, d in {
-        "derive_formula":     "Derive formulas from scattered notes",
-        "write_proof":        "Write rigorous mathematical proof",
-        "plan_ablations":     "Design ablation studies",
-        "refine_research":    "Refine vague direction → focused plan",
+        "derive_formula":       "Derive formulas from scattered notes",
+        "write_proof":          "Write rigorous mathematical proof",
+        "plan_ablations":       "Design ablation studies",
+        "refine_research":      "Refine vague direction → focused plan",
+        "write_grant_proposal": "Draft grant proposal (NSFC/NSF/ERC/...)",
     }.items():
-        print(f"  {n:24s} — {d}")
+        print(f"  {n:28s} — {d}")
 
-    print("\nResearch Pipeline:")
+    print("\nLiterature & Search:")
     for n, d in {
-        "survey_topic":       "Literature survey for a topic",
-        "identify_gaps":      "Find research gaps from survey",
+        "survey_topic":              "Literature survey for a topic",
+        "identify_gaps":             "Find research gaps from survey",
+        "search_arxiv":              "Search arXiv for papers",
+        "search_semantic_scholar":   "Search Semantic Scholar (published venues)",
+        "comprehensive_lit_review":  "Deep related work section (LaTeX)",
+    }.items():
+        print(f"  {n:28s} — {d}")
+
+    print("\nIdea & Experiment:")
+    for n, d in {
         "generate_ideas":     "Generate ideas from gaps",
         "check_novelty":      "Check if idea is novel",
         "rank_ideas":         "Rank ideas by promise",
         "design_experiments": "Design experiment plan",
+        "experiment_bridge":  "Implement plan → running code",
         "run_experiment":     "Execute one experiment step",
         "check_training":     "Check training logs for issues",
         "check_submission":   "Pre-submission checklist",
     }.items():
-        print(f"  {n:24s} — {d}")
+        print(f"  {n:28s} — {d}")
 
     print("\nUtilities:")
-    print(f"  {'compete':24s} — Prompt competition between functions")
-    print(f"  {'init_research':24s} — Initialize project directory")
+    print(f"  {'compete':28s} — Prompt competition between functions")
+    print(f"  {'init_research':28s} — Initialize project directory")
 
     print("\nUsage:")
     print('  from research_harness import research_pipeline')

@@ -90,3 +90,95 @@ def run_literature(
         f.write(f"# Research Gaps\n\n{gaps}")
 
     return {"survey": survey, "gaps": gaps}
+
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def search_arxiv(query: str, runtime: Runtime) -> str:
+    """Search arXiv for papers matching the query.
+
+    You have full access to run commands. Use the arXiv API to search:
+
+    ```python
+    import urllib.request, urllib.parse
+    url = "http://export.arxiv.org/api/query?" + urllib.parse.urlencode({
+        "search_query": "all:<query>",
+        "max_results": 10,
+        "sortBy": "relevance",
+    })
+    ```
+
+    For each result, extract:
+    - Title, authors, arXiv ID, published date
+    - Abstract (first 2 sentences)
+    - Categories
+    - PDF link
+
+    Optionally download PDFs to papers/ directory if requested.
+
+    Output: Structured list of papers found.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": f"Search query: {query}"},
+    ])
+
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def search_semantic_scholar(query: str, runtime: Runtime) -> str:
+    """Search Semantic Scholar API for published venue papers.
+
+    Complements arXiv (preprints) with citation counts, venue metadata,
+    and TLDR summaries from published conferences/journals (IEEE, ACM, etc.).
+
+    Use the Semantic Scholar API:
+    ```
+    GET https://api.semanticscholar.org/graph/v1/paper/search
+        ?query=<query>&limit=10
+        &fields=title,authors,year,venue,citationCount,tldr,externalIds
+    ```
+
+    For each result, extract:
+    - Title, authors, venue, year
+    - Citation count
+    - TLDR summary
+    - Whether it's also on arXiv (check externalIds.ArXiv)
+
+    Prioritize: high citation count, top venues, recent work.
+
+    Output: Structured list of papers with citation counts and venues.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": f"Search query: {query}"},
+    ])
+
+
+@agentic_function(compress=True, summarize={"siblings": -1})
+def comprehensive_lit_review(topic: str, subtopics: str,
+                             runtime: Runtime) -> str:
+    """Write a comprehensive, publication-ready related work section.
+
+    Deeper than survey_topic — this produces a full Related Work section
+    suitable for direct inclusion in a paper.
+
+    Structure per subsection (choose progression or parallel style):
+
+    Progression style:
+    - Start with foundational concept, list existing works, end with limitations.
+
+    Parallel style:
+    - Overview sentence → subtopic 1 works → subtopic 2 works → our novelty.
+
+    Rules:
+    - End each subsection discussing limitations vs our method.
+    - Use \\citep{} for parenthetical, \\citet{} for textual.
+    - Never use citations as sentence subjects.
+    - Cite published versions over arXiv when available.
+    - Include recent work (within 2 years) for baselines.
+
+    Output: LaTeX related work section with proper citations.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": (
+            f"Topic: {topic}\n\n"
+            f"Subtopics to cover:\n{subtopics}"
+        )},
+    ])

@@ -440,3 +440,106 @@ def results_to_claims(results: str, intended_claims: str,
             f"Experimental results:\n{results}"
         )},
     ])
+
+
+# ---------------------------------------------------------------------------
+# Paper compilation
+# ---------------------------------------------------------------------------
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def compile_paper(paper_dir: str, runtime: Runtime) -> str:
+    """Compile LaTeX paper to PDF and fix any errors.
+
+    You have full access to run shell commands.
+
+    Steps:
+    1. Verify prerequisites: check pdflatex, latexmk, bibtex are installed.
+    2. Run: latexmk -pdf -interaction=nonstopmode <main.tex>
+    3. If errors occur, read the .log file, diagnose, fix the .tex files,
+       and recompile (up to 3 attempts).
+    4. Verify the output PDF exists and report page count.
+
+    Common fixes:
+    - Missing packages: add \\usepackage{} or install via tlmgr
+    - Undefined references: run bibtex + recompile
+    - Overfull hbox: adjust text or figure sizes
+    - Missing figures: check paths in \\includegraphics{}
+
+    Page limits (main body to Conclusion, excluding refs & appendix):
+    NeurIPS=9, ICML=8, ICLR=9, AAAI=7, ACL=8.
+    IEEE venues: references ARE included in page count.
+
+    Output: Compilation result (success/failure, page count, warnings).
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": f"Paper directory: {paper_dir}"},
+    ])
+
+
+# ---------------------------------------------------------------------------
+# Paper figures (data-driven plots)
+# ---------------------------------------------------------------------------
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def generate_paper_figures(data_description: str, figure_plan: str,
+                           runtime: Runtime) -> str:
+    """Generate publication-quality matplotlib figures from experiment data.
+
+    You have full access to write and run Python code.
+
+    Can auto-generate:
+    - Line plots (training curves), bar charts (method comparison)
+    - Scatter plots, heatmaps, box/violin plots
+    - Multi-panel subfigure grids
+    - LaTeX comparison tables
+
+    Cannot auto-generate (note in output):
+    - Architecture diagrams (use draw.io manually)
+    - Generated image grids (run model separately)
+    - Screenshots / photographs
+
+    Style rules:
+    - DPI = 300, format = PDF (vector)
+    - Color palette: tab10 or colorblind-safe
+    - Font size >= paper body text (typically 10pt)
+    - No grid lines unless essential
+    - Legend inside plot or below, never covering data
+    - Save to figures/ directory
+
+    Output: Python code for each figure + file paths.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": (
+            f"Data:\n{data_description}\n\n"
+            f"Figure plan:\n{figure_plan}"
+        )},
+    ])
+
+
+# ---------------------------------------------------------------------------
+# Mermaid diagrams
+# ---------------------------------------------------------------------------
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def generate_mermaid_diagram(description: str, runtime: Runtime) -> str:
+    """Generate a Mermaid diagram from a description.
+
+    Supports: flowchart, sequence diagram, class diagram, ER diagram,
+    Gantt chart, state diagram, pie chart, mindmap, timeline, and more.
+
+    Steps:
+    1. Determine the best diagram type for the description.
+    2. Generate syntactically correct Mermaid code.
+    3. Verify syntax (no unescaped special chars, proper arrow syntax).
+    4. Save as .mmd file to figures/ directory.
+
+    Common pitfalls to avoid:
+    - Escape special characters in labels: use quotes for labels with spaces
+    - Use proper arrow syntax: --> for flowchart, ->> for sequence
+    - Avoid reserved words as node IDs
+
+    Output: Mermaid code block + saved file path.
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": description},
+    ])
