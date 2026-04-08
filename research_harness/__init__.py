@@ -17,7 +17,7 @@ Quick start:
     show_capabilities()
 """
 
-from research_harness.agent import agentic_research
+from research_harness.main import agentic_research
 from research_harness.pipeline import research_pipeline, STAGES
 from research_harness.evaluate import compete
 from research_harness.wiki.wiki_agent import research_wiki
