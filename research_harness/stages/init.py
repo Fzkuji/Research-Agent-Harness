@@ -166,9 +166,18 @@ def _create_paper(project_dir: str, name: str, venue: Optional[str], author: Opt
     # Bibliography
     _write_if_missing(
         os.path.join(paper_dir, "9Reference.bib"),
-        "% Bibliography — use ONLY Google Scholar entries.\n"
-        "% Do NOT use AI to generate or modify this file.\n"
-        "% Verify every entry before submission.\n\n",
+        "% Bibliography — Citation Discipline\n"
+        "%\n"
+        "% NEVER generate BibTeX from LLM memory. Use this workflow:\n"
+        "% 1. Search: DBLP / Semantic Scholar / arXiv\n"
+        "% 2. Verify: confirm in at least 2 sources\n"
+        "% 3. Retrieve: DBLP .bib or DOI content negotiation\n"
+        "% 4. Validate: confirm cited paper supports your claim\n"
+        "%\n"
+        "% Key format: firstauthor_year_keyword (e.g., vaswani_2017_attention)\n"
+        "% Prefer published version over arXiv when both exist.\n"
+        "% Mark uncertain entries with: % [VERIFY]\n"
+        "% Keep only cited entries — no dumping ground.\n\n",
     )
 
 
@@ -178,20 +187,56 @@ def _create_paper(project_dir: str, name: str, venue: Optional[str], author: Opt
 
 def _main_tex(name: str, latex_name: str, venue: str) -> str:
     return f"""\\documentclass{{article}}
+% ============================================================
+% VENUE TEMPLATE INSTRUCTIONS
+% ============================================================
+% This is a PLACEHOLDER template. Before writing your paper:
+%
+% 1. Download the OFFICIAL template from the venue website:
+%    - NeurIPS: https://neurips.cc/Conferences/2026/CallForPapers
+%    - ICML:    https://icml.cc/Conferences/2026/CallForPapers
+%    - ICLR:    https://iclr.cc/Conferences/2026/CallForPapers
+%    - CVPR:    https://cvpr.thecvf.com/
+%    - ACL:     https://www.aclweb.org/portal/
+%    - AAAI:    https://aaai.org/conference/aaai/
+%    - IEEE:    Use IEEEtran.cls (journal or conference option)
+%
+% 2. Replace this \\documentclass line with the venue's style:
+%    - NeurIPS: \\documentclass{{article}} + \\usepackage{{neurips_2026}}
+%    - ICML:    \\documentclass{{article}} + \\usepackage{{icml2026}}
+%    - ICLR:    \\documentclass{{article}} + \\usepackage{{iclr2026_conference}}
+%    - IEEE:    \\documentclass[journal]{{IEEEtran}} or [conference]
+%
+% 3. Check venue-specific requirements:
+%    - ML venues (NeurIPS/ICML/ICLR): references NOT counted in page limit
+%    - IEEE venues: references COUNTED in page limit
+%    - NeurIPS: paper checklist MANDATORY
+%    - ICML: Broader Impact statement REQUIRED
+%    - IEEE: use \\cite{{}} only (NOT \\citep/\\citet), IEEEtran.bst
+%
+% 4. Page limits (body only, unless noted):
+%    NeurIPS=9, ICML=8, ICLR=9, CVPR=8(+refs), ACL=8, AAAI=7
+%    IEEE Trans=12-14(total), IEEE Conf=5-8(total)
+%
+% 5. Citation style:
+%    - ML venues: natbib (\\citep for parenthetical, \\citet for textual)
+%    - IEEE: numeric \\cite{{}} only, IEEEtran.bst
+%    - Never use citations as sentence subjects
+% ============================================================
 
 % ============================================================
-% Common packages
+% Common packages (keep these when switching venue template)
 % ============================================================
 \\usepackage{{amsmath,amssymb,amsfonts}}
 \\usepackage{{graphicx}}
-\\usepackage{{booktabs}}       % Better tables
+\\usepackage{{booktabs}}       % Better tables (\\toprule/\\midrule/\\bottomrule)
 \\usepackage{{hyperref}}
 \\usepackage{{xspace}}
 \\usepackage{{color}}
 \\usepackage{{enumitem}}
 
 % ============================================================
-% Macros
+% Macros (portable across venues)
 % ============================================================
 \\newcommand{{\\etal}}{{\\emph{{et al.}}\\xspace}}
 \\newcommand{{\\eg}}{{\\emph{{e.g.,}}\\xspace}}
@@ -218,7 +263,7 @@ def _main_tex(name: str, latex_name: str, venue: str) -> str:
 \\input{{5RelatedWork}}
 \\input{{6Conclusion}}
 
-\\bibliographystyle{{plain}}
+\\bibliographystyle{{plain}}  % Replace with venue-specific .bst
 \\bibliography{{9Reference}}
 
 \\appendix

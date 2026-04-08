@@ -243,6 +243,16 @@ def research(task: str, runtime: Runtime) -> str:
       CLI helper: python -m research_harness.wiki.research_wiki
 
     ═══════════════════════════════════════════════════════════════
+    META-OPTIMIZATION
+    ═══════════════════════════════════════════════════════════════
+
+    meta_optimize(target, runtime)
+      Analyze usage logs and propose optimizations to the harness.
+      Target: function name, stage name, or "all".
+      Analyzes: frequency, failures, convergence, human interventions.
+      NEVER auto-applies — presents diffs for user approval.
+
+    ═══════════════════════════════════════════════════════════════
     PROMPT COMPETITION
     ═══════════════════════════════════════════════════════════════
 
@@ -251,10 +261,26 @@ def research(task: str, runtime: Runtime) -> str:
       pick the best output. E.g. polish_rigorous vs polish_natural.
 
     ═══════════════════════════════════════════════════════════════
+    SHARED REFERENCES (importable constants)
+    ═══════════════════════════════════════════════════════════════
+
+    from research_harness.references import WRITING_PRINCIPLES
+    from research_harness.references import CITATION_DISCIPLINE
+    from research_harness.references import VENUE_CHECKLISTS
+
+    These are reference documents for writing/review functions.
+    Import and include in prompts when needed.
+
+    ═══════════════════════════════════════════════════════════════
 
     Based on the user's task, decide which functions to call.
     You can chain functions (e.g. search → generate ideas → design experiments).
     Always use the most specific function available for the task.
+
+    REVIEW LOOP supports 3 difficulty levels:
+    - medium: standard review (default)
+    - hard: + reviewer memory + debate protocol
+    - nightmare: + adversarial verification (reviewer checks claims independently)
     """
     return runtime.exec(content=[
         {"type": "text", "text": task},
