@@ -33,7 +33,7 @@ This single entry point covers the entire research lifecycle. The agent reads yo
 
 ## Available Functions
 
-See the full list by calling `agentic_research()` in Python, or read the docstring in `main.py`.
+See the full list by calling `show_capabilities()` in Python, or read the `agentic_research` docstring in `research_harness/agent.py`.
 
 **Pipeline**: init → literature → idea → experiment → analysis → writing → review → submission
 

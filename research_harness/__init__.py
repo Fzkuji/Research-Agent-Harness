@@ -4,18 +4,26 @@ Research Agent Harness — autonomous research from topic to submission.
 Built on Agentic Programming. Python controls flow, LLM reasons via docstrings.
 
 Quick start:
-    from research_harness import agentic_research
+    from research_harness import agentic_research, research_pipeline
 
-    agentic_research()  # prints all available functions and stages
+    # LLM entry point (used by Agentic-Programming runtime)
+    result = agentic_research(task="...", runtime=my_runtime)
+
+    # Or run the full pipeline programmatically
+    result = research_pipeline(project_dir="...", topic="...", exec_runtime=rt)
+
+    # Print all available functions
+    from research_harness import show_capabilities
+    show_capabilities()
 """
 
-from main import agentic_research
+from research_harness.agent import agentic_research
 from research_harness.pipeline import research_pipeline, STAGES
 from research_harness.evaluate import compete
 from research_harness.wiki.wiki_agent import research_wiki
 
 
-def agentic_research():
+def show_capabilities():
     """Print all available research functions and pipeline stages."""
     print("Agentic Research (Agentic-Programming ecosystem)")
     print("=" * 60)
@@ -26,35 +34,35 @@ def agentic_research():
         "literature": "Survey papers, identify research gaps",
         "idea":       "Generate ideas, check novelty, rank",
         "experiment": "Design experiments, generate code, run & monitor",
-        "analysis":   "Analyze results → LaTeX paragraphs",
+        "analysis":   "Analyze results -> LaTeX paragraphs",
         "writing":    "Write sections, polish, translate, de-AI",
         "review":     "Cross-model review loop until pass",
         "submission": "Pre-submission checklist",
     }.items()):
-        print(f"  {i}. {s:12s} — {d}")
+        print(f"  {i}. {s:12s} -- {d}")
 
     print("\nWriting (English):")
     for n, d in {
         "write_section":    "Write a paper section from outline + notes",
         "polish_rigorous":  "Deep polish for academic rigor",
         "polish_natural":   "Polish for naturalness, remove AI patterns",
-        "translate_zh2en":  "Chinese draft → English LaTeX",
-        "translate_en2zh":  "English LaTeX → Chinese text",
+        "translate_zh2en":  "Chinese draft -> English LaTeX",
+        "translate_en2zh":  "English LaTeX -> Chinese text",
         "compress_text":    "Reduce word count by 5-15 words",
         "expand_text":      "Add 5-15 words with deeper logic",
         "check_logic":      "Final check for fatal errors only",
-        "analyze_results":  "Experimental data → LaTeX analysis",
+        "analyze_results":  "Experimental data -> LaTeX analysis",
         "results_to_claims":"Judge what claims results support",
     }.items():
-        print(f"  {n:28s} — {d}")
+        print(f"  {n:28s} -- {d}")
 
-    print("\nWriting (Chinese 中文):")
+    print("\nWriting (Chinese):")
     for n, d in {
-        "rewrite_zh":         "中转中 — rewrite fragmented draft",
-        "polish_zh":          "表达润色 — polish Chinese paper text",
-        "remove_ai_flavor_zh":"去AI味 — remove AI patterns from Chinese",
+        "rewrite_zh":         "Rewrite fragmented draft",
+        "polish_zh":          "Polish Chinese paper text",
+        "remove_ai_flavor_zh":"Remove AI patterns from Chinese",
     }.items():
-        print(f"  {n:28s} — {d}")
+        print(f"  {n:28s} -- {d}")
 
     print("\nFigures, Tables & Diagrams:")
     for n, d in {
@@ -64,26 +72,21 @@ def agentic_research():
         "design_architecture_figure": "Design framework/architecture diagram",
         "generate_paper_figures":     "Generate matplotlib plots from data",
         "generate_mermaid_diagram":   "Generate Mermaid flowchart/diagram",
+        "compile_paper":              "Compile LaTeX -> PDF, fix errors",
     }.items():
-        print(f"  {n:28s} — {d}")
-
-    print("\nCompilation:")
-    for n, d in {
-        "compile_paper": "Compile LaTeX → PDF, fix errors",
-    }.items():
-        print(f"  {n:28s} — {d}")
+        print(f"  {n:28s} -- {d}")
 
     print("\nReview & Rebuttal:")
     for n, d in {
         "review_paper":              "Review paper (as reviewer model)",
         "fix_paper":                 "Fix paper based on review feedback",
-        "review_loop":               "Full review-fix cycle until pass",
+        "review_loop":               "Full review-fix cycle (medium/hard/nightmare)",
         "paper_improvement_loop":    "Writing quality improvement loop",
         "parse_reviews":             "Parse reviewer comments into issues",
         "build_rebuttal_strategy":   "Build response strategy",
         "draft_rebuttal":            "Draft venue-compliant rebuttal",
     }.items():
-        print(f"  {n:28s} — {d}")
+        print(f"  {n:28s} -- {d}")
 
     print("\nPresentation:")
     for n, d in {
@@ -91,17 +94,17 @@ def agentic_research():
         "generate_poster":        "LaTeX poster for poster session",
         "generate_speaker_notes": "Speaker notes + Q&A prep",
     }.items():
-        print(f"  {n:28s} — {d}")
+        print(f"  {n:28s} -- {d}")
 
     print("\nTheory & Planning:")
     for n, d in {
         "derive_formula":       "Derive formulas from scattered notes",
         "write_proof":          "Write rigorous mathematical proof",
         "plan_ablations":       "Design ablation studies",
-        "refine_research":      "Refine vague direction → focused plan",
+        "refine_research":      "Refine vague direction -> focused plan",
         "write_grant_proposal": "Draft grant proposal (NSFC/NSF/ERC/...)",
     }.items():
-        print(f"  {n:28s} — {d}")
+        print(f"  {n:28s} -- {d}")
 
     print("\nLiterature & Search:")
     for n, d in {
@@ -111,7 +114,7 @@ def agentic_research():
         "search_semantic_scholar":   "Search Semantic Scholar (published venues)",
         "comprehensive_lit_review":  "Deep related work section (LaTeX)",
     }.items():
-        print(f"  {n:28s} — {d}")
+        print(f"  {n:28s} -- {d}")
 
     print("\nIdea & Experiment:")
     for n, d in {
@@ -119,20 +122,28 @@ def agentic_research():
         "check_novelty":      "Check if idea is novel",
         "rank_ideas":         "Rank ideas by promise",
         "design_experiments": "Design experiment plan",
-        "experiment_bridge":  "Implement plan → running code",
+        "experiment_bridge":  "Implement plan -> running code",
         "run_experiment":     "Execute one experiment step",
         "check_training":     "Check training logs for issues",
+    }.items():
+        print(f"  {n:28s} -- {d}")
+
+    print("\nKnowledge & Meta:")
+    for n, d in {
+        "research_wiki":      "Persistent knowledge base (papers/ideas/claims)",
+        "meta_optimize":      "Analyze usage, propose harness improvements",
+        "compete":            "Prompt competition between functions",
+        "init_research":      "Initialize project directory",
         "check_submission":   "Pre-submission checklist",
     }.items():
-        print(f"  {n:28s} — {d}")
-
-    print("\nUtilities:")
-    print(f"  {'compete':28s} — Prompt competition between functions")
-    print(f"  {'init_research':28s} — Initialize project directory")
-
-    print("\nUsage:")
-    print('  from research_harness import research_pipeline')
-    print('  result = research_pipeline(project_dir="...", topic="...", exec_runtime=rt)')
+        print(f"  {n:28s} -- {d}")
 
 
-__all__ = ["agentic_research", "research_pipeline", "compete", "research_wiki", "STAGES"]
+__all__ = [
+    "agentic_research",
+    "research_pipeline",
+    "compete",
+    "research_wiki",
+    "show_capabilities",
+    "STAGES",
+]
