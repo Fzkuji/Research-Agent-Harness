@@ -12,6 +12,7 @@ Quick start:
 from research_harness.main import research
 from research_harness.pipeline import research_pipeline, STAGES
 from research_harness.evaluate import compete
+from research_harness.wiki.wiki_agent import research_wiki
 
 
 def research():
@@ -134,4 +135,4 @@ def research():
     print('  result = research_pipeline(project_dir="...", topic="...", exec_runtime=rt)')
 
 
-__all__ = ["research", "research_pipeline", "compete", "STAGES"]
+__all__ = ["research", "research_pipeline", "compete", "research_wiki", "STAGES"]

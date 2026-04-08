@@ -233,6 +233,16 @@ def research(task: str, runtime: Runtime) -> str:
       Draft grant proposal. Supports NSFC/NSF/KAKENHI/ERC/DFG/etc.
 
     ═══════════════════════════════════════════════════════════════
+    KNOWLEDGE BASE
+    ═══════════════════════════════════════════════════════════════
+
+    research_wiki(task, runtime)
+      Persistent per-project knowledge base. Accumulates papers,
+      ideas, experiments, claims, and their typed relationships.
+      Subcommands: init, ingest, query, update, lint, stats.
+      CLI helper: python -m research_harness.wiki.research_wiki
+
+    ═══════════════════════════════════════════════════════════════
     PROMPT COMPETITION
     ═══════════════════════════════════════════════════════════════
 
