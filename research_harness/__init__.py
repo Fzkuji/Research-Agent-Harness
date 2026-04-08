@@ -4,20 +4,20 @@ Research Agent Harness — autonomous research from topic to submission.
 Built on Agentic Programming. Python controls flow, LLM reasons via docstrings.
 
 Quick start:
-    from research_harness import research
+    from research_harness import agentic_research
 
-    research()  # prints all available functions and stages
+    agentic_research()  # prints all available functions and stages
 """
 
-from main import research
+from main import agentic_research
 from research_harness.pipeline import research_pipeline, STAGES
 from research_harness.evaluate import compete
 from research_harness.wiki.wiki_agent import research_wiki
 
 
-def research():
+def agentic_research():
     """Print all available research functions and pipeline stages."""
-    print("🔬 Research Agent Harness")
+    print("Agentic Research (Agentic-Programming ecosystem)")
     print("=" * 60)
 
     print("\nPipeline stages:")
@@ -135,4 +135,4 @@ def research():
     print('  result = research_pipeline(project_dir="...", topic="...", exec_runtime=rt)')
 
 
-__all__ = ["research", "research_pipeline", "compete", "research_wiki", "STAGES"]
+__all__ = ["agentic_research", "research_pipeline", "compete", "research_wiki", "STAGES"]

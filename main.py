@@ -1,5 +1,8 @@
 """
-main — single entry point for Research Agent Harness.
+main — single entry point for Agentic Research.
+
+Part of the Agentic-Programming ecosystem:
+  https://github.com/Fzkuji/Agentic-Programming
 
 The @agentic_function's docstring describes ALL available capabilities.
 The LLM reads the docstring, understands what tools are available,
@@ -15,7 +18,7 @@ from agentic.runtime import Runtime
 
 
 @agentic_function(summarize={"depth": 0, "siblings": 0})
-def research(task: str, runtime: Runtime) -> str:
+def agentic_research(task: str, runtime: Runtime) -> str:
     """You are an autonomous research agent. Based on the user's task,
     decide which research functions to call and execute them.
 
