@@ -276,6 +276,12 @@ def agentic_research(task: str, runtime: Runtime) -> str:
 
     ═══════════════════════════════════════════════════════════════
 
+    IMPORTANT: Call functions via Python import, NOT via shell/CLI commands.
+    Example:
+        from research_harness.stages.writing import polish_rigorous
+        result = polish_rigorous(text="...", runtime=runtime)
+    The `runtime` variable is already available in scope.
+
     Based on the user's task, decide which functions to call.
     You can chain functions (e.g. search → generate ideas → design experiments).
     Always use the most specific function available for the task.

@@ -13,5 +13,11 @@ dependencies = [
     "agentic-programming",
 ]
 
+[project.scripts]
+research-harness = "research_harness.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["research_harness*"]
+
 [project.urls]
 Homepage = "https://github.com/Fzkuji/Research-Agent-Harness"
