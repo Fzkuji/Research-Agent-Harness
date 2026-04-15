@@ -47,6 +47,13 @@ def generate_poster(paper_content: str, venue: str,
     Key Results (1-2 figures), Analysis/Ablation, Conclusion, QR code.
 
     Output: Complete LaTeX poster source code using article class + tcbposter.
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": (

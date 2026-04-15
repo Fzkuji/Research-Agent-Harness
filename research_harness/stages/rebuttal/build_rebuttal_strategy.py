@@ -46,6 +46,13 @@ def build_rebuttal_strategy(parsed_reviews: str, paper_summary: str,
     - Per-issue response plan with response_mode and evidence source
     - Character budget allocation
     - Blocked claims requiring user input
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": (

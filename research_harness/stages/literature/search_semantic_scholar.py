@@ -59,6 +59,13 @@ def search_semantic_scholar(query: str, runtime: Runtime) -> str:
     - Do NOT duplicate arXiv's job: if paper has ArXiv ID, note but don't re-fetch
 
     Output: Structured list of papers with citation counts, venues, and DOI links.
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": f"Search query: {query}"},

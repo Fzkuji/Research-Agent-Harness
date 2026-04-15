@@ -41,6 +41,13 @@ def results_to_claims(results: str, intended_claims: str,
       "what_results_support": "...", "what_results_dont_support": "...",
       "missing_evidence": "...", "suggested_claim_revision": "...",
       "next_experiments_needed": "...", "confidence": "high|medium|low"}}]}}
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": (

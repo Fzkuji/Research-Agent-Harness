@@ -1,296 +1,392 @@
 """
-main — single entry point for Agentic Research.
+main — entry point for Research Agent Harness.
 
-Part of the Agentic-Programming ecosystem:
-  https://github.com/Fzkuji/Agentic-Programming
+Two-level autonomous loop:
+  Level 1: LLM picks which research STAGE to enter
+  Level 2: Within a stage, LLM picks and executes functions sequentially
 
-The @agentic_function's docstring describes ALL available capabilities.
-The LLM reads the docstring, understands what tools are available,
-and decides which sub-functions to call based on the user's request.
-
-This is the ONLY function that needs to be called from outside.
+Each level is a separate @agentic_function (exec() once per call).
 """
 
 from __future__ import annotations
 
+import argparse
+import inspect
+import sys
+
 from agentic.function import agentic_function
 from agentic.runtime import Runtime
 
-
-@agentic_function(summarize={"depth": 0, "siblings": 0})
-def agentic_research(task: str, runtime: Runtime) -> str:
-    """You are an autonomous research agent. Based on the user's task,
-    decide which research functions to call and execute them.
-
-    You have access to ALL of the following capabilities. Choose the
-    appropriate ones based on what the user asks. You can chain multiple
-    functions in sequence.
-
-    ═══════════════════════════════════════════════════════════════
-    PIPELINE (full or partial)
-    ═══════════════════════════════════════════════════════════════
-
-    research_pipeline(project_dir, topic, venue, stages, start_from,
-                      exec_runtime, review_runtime)
-      Run the 8-stage pipeline: init → literature → idea → experiment
-      → analysis → writing → review → submission.
-      Can run all stages, specific ones (stages=["writing","review"]),
-      or start from a point (start_from="analysis").
-
-    ═══════════════════════════════════════════════════════════════
-    PROJECT INITIALIZATION
-    ═══════════════════════════════════════════════════════════════
-
-    init_research(name, venue, base_dir, code_repo_url, author)
-      Create project directory: code/, outline/, introduction/, method/,
-      experiments/, related_work/, paper/ (LaTeX scaffold), references/.
-
-    ═══════════════════════════════════════════════════════════════
-    LITERATURE & SEARCH
-    ═══════════════════════════════════════════════════════════════
-
-    survey_topic(topic, runtime)
-      Survey literature: find papers, organize by subtopic, note gaps.
-
-    identify_gaps(survey, runtime)
-      Identify specific, actionable research gaps from a survey.
-
-    search_arxiv(query, runtime)
-      Search arXiv API for papers. Returns titles, abstracts, PDF links.
-
-    search_semantic_scholar(query, runtime)
-      Search Semantic Scholar for published venue papers with citation
-      counts, TLDR, and venue metadata.
-
-    comprehensive_lit_review(topic, subtopics, runtime)
-      Write a full Related Work section in LaTeX. Deeper than survey_topic.
-      Supports progression and parallel writing styles.
-
-    ═══════════════════════════════════════════════════════════════
-    IDEA GENERATION
-    ═══════════════════════════════════════════════════════════════
-
-    generate_ideas(topic, gaps, runtime)
-      Generate 3-5 diverse research ideas addressing identified gaps.
-
-    check_novelty(idea, runtime)
-      Check if an idea is novel vs existing work.
-
-    rank_ideas(ideas, novelty_results, runtime)
-      Rank ideas by novelty, feasibility, impact.
-
-    refine_research(direction, runtime)
-      Refine a vague direction into a concrete, focused plan.
-      Principles: freeze Problem Anchor, smallest adequate mechanism,
-      one paper one contribution.
-
-    ═══════════════════════════════════════════════════════════════
-    EXPERIMENT
-    ═══════════════════════════════════════════════════════════════
-
-    design_experiments(idea, runtime)
-      Design complete experiment plan: RQs, datasets, baselines,
-      metrics, ablations, implementation details.
-
-    experiment_bridge(plan, runtime)
-      Bridge from plan to running code: implement, sanity check, deploy.
-
-    run_experiment(plan, step, runtime)
-      Execute one experiment step with full tool access.
-
-    check_training(log, runtime)
-      Analyze training logs: healthy/warning/critical, recommendations.
-
-    plan_ablations(method_description, results, claims, runtime)
-      Design ablation studies from a reviewer's perspective.
-
-    ═══════════════════════════════════════════════════════════════
-    WRITING (English)
-    ═══════════════════════════════════════════════════════════════
-
-    write_section(section, context, runtime)
-      Write one paper section from outline + notes.
-
-    polish_rigorous(text, runtime)
-      Deep polish for NeurIPS/ICLR/ICML: academic rigor, zero errors,
-      formal register, no contractions, proper LaTeX preservation.
-
-    polish_natural(text, runtime)
-      Remove AI-generated patterns: replace overused words (leverage,
-      delve, tapestry), remove mechanical connectors, natural flow.
-
-    compress_text(text, runtime)
-      Reduce word count by 5-15 words. Preserve all information.
-
-    expand_text(text, runtime)
-      Add 5-15 words by deepening logic. Never fabricate.
-
-    check_logic(text, runtime)
-      Final check for fatal errors only. High tolerance.
-      Returns "[检测通过]" if clean.
-
-    analyze_results(data, runtime)
-      Experimental data → LaTeX analysis paragraphs.
-      Pattern: Observation → Reason → Conclusion.
-      Format: \\paragraph{Core Conclusion} + analysis text.
-
-    results_to_claims(results, intended_claims, runtime)
-      Judge what claims results actually support (yes/partial/no).
-
-    ═══════════════════════════════════════════════════════════════
-    WRITING (Chinese 中文)
-    ═══════════════════════════════════════════════════════════════
-
-    translate_zh2en(text, runtime)
-      中转英: Chinese draft → English LaTeX. Present tense for methods.
-
-    translate_en2zh(text, runtime)
-      英转中: English LaTeX → Chinese plain text. Remove all LaTeX.
-
-    rewrite_zh(text, runtime)
-      中转中: Rewrite fragmented Chinese into polished academic Chinese.
-
-    polish_zh(text, runtime)
-      表达润色: Polish Chinese paper text. Conservative editing.
-
-    remove_ai_flavor_zh(text, runtime)
-      去AI味: Remove AI patterns from Chinese text.
-
-    ═══════════════════════════════════════════════════════════════
-    FIGURES, TABLES & DIAGRAMS
-    ═══════════════════════════════════════════════════════════════
-
-    generate_figure_caption(description, runtime)
-      Generate English figure caption. Title Case, minimal style.
-
-    generate_table_caption(description, runtime)
-      Generate English table caption. "Comparison of...", "Ablation...".
-
-    recommend_visualization(data_description, runtime)
-      Recommend chart type from 19-type library for data visualization.
-
-    design_architecture_figure(method_description, runtime)
-      Design framework diagram. Flat vector, DeepMind/OpenAI style.
-
-    generate_paper_figures(data_description, figure_plan, runtime)
-      Generate matplotlib plots. PDF format, 300 DPI, colorblind-safe.
-
-    generate_mermaid_diagram(description, runtime)
-      Generate Mermaid diagram code (flowchart, sequence, class, etc.).
-
-    compile_paper(paper_dir, runtime)
-      Compile LaTeX → PDF. Fix errors, verify page count.
-
-    ═══════════════════════════════════════════════════════════════
-    REVIEW & REBUTTAL
-    ═══════════════════════════════════════════════════════════════
-
-    review_paper(paper_content, venue, runtime)
-      Review paper as a rigorous reviewer. Score 1-10, structured feedback.
-
-    fix_paper(paper_content, review_feedback, round_num, runtime)
-      Fix paper based on reviewer feedback. Address every weakness.
-
-    review_loop(paper_dir, venue, exec_runtime, review_runtime,
-                max_rounds=4, pass_threshold=7)
-      Cross-model review loop: review → fix → re-review until pass.
-      Use different models for executor and reviewer.
-
-    paper_improvement_loop(paper_dir, venue, exec_runtime, review_runtime)
-      Writing quality improvement (not research): fix presentation,
-      soften overclaims, improve clarity. 2 rounds.
-
-    parse_reviews(reviews_text, runtime)
-      Parse reviewer comments into structured, actionable issues.
-
-    build_rebuttal_strategy(parsed_reviews, paper_summary, runtime)
-      Build response strategy. No fabrication, no overpromise.
-
-    draft_rebuttal(strategy, venue, char_limit, runtime)
-      Draft venue-compliant rebuttal within character limit.
-
-    ═══════════════════════════════════════════════════════════════
-    PRESENTATION
-    ═══════════════════════════════════════════════════════════════
-
-    generate_slides(paper_content, venue, talk_type, minutes, runtime)
-      Beamer slides. Talk types: poster-talk/spotlight/oral/invited.
-
-    generate_poster(paper_content, venue, runtime)
-      LaTeX poster. A0/A1, 3-4 columns, visual-first.
-
-    generate_speaker_notes(slides_content, runtime)
-      Speaker notes per slide + Q&A preparation.
-
-    ═══════════════════════════════════════════════════════════════
-    THEORY
-    ═══════════════════════════════════════════════════════════════
-
-    derive_formula(notes, runtime)
-      Derive formulas from scattered notes. Honest derivation package.
-
-    write_proof(theorem, runtime)
-      Write rigorous mathematical proof. Honest — reports if not provable.
-
-    write_grant_proposal(direction, grant_type, runtime)
-      Draft grant proposal. Supports NSFC/NSF/KAKENHI/ERC/DFG/etc.
-
-    ═══════════════════════════════════════════════════════════════
-    KNOWLEDGE BASE
-    ═══════════════════════════════════════════════════════════════
-
-    research_wiki(task, runtime)
-      Persistent per-project knowledge base. Accumulates papers,
-      ideas, experiments, claims, and their typed relationships.
-      Subcommands: init, ingest, query, update, lint, stats.
-      CLI helper: python -m research_harness.wiki.research_wiki
-
-    ═══════════════════════════════════════════════════════════════
-    META-OPTIMIZATION
-    ═══════════════════════════════════════════════════════════════
-
-    meta_optimize(target, runtime)
-      Analyze usage logs and propose optimizations to the harness.
-      Target: function name, stage name, or "all".
-      Analyzes: frequency, failures, convergence, human interventions.
-      NEVER auto-applies — presents diffs for user approval.
-
-    ═══════════════════════════════════════════════════════════════
-    PROMPT COMPETITION
-    ═══════════════════════════════════════════════════════════════
-
-    compete(functions, kwargs, eval_runtime, task)
-      Run multiple @agentic_functions on same input, let another LLM
-      pick the best output. E.g. polish_rigorous vs polish_natural.
-
-    ═══════════════════════════════════════════════════════════════
-    SHARED REFERENCES (importable constants)
-    ═══════════════════════════════════════════════════════════════
-
-    from research_harness.references import WRITING_PRINCIPLES
-    from research_harness.references import CITATION_DISCIPLINE
-    from research_harness.references import VENUE_CHECKLISTS
-
-    These are reference documents for writing/review functions.
-    Import and include in prompts when needed.
-
-    ═══════════════════════════════════════════════════════════════
-
-    IMPORTANT: Call functions via Python import, NOT via shell/CLI commands.
-    Example:
-        from research_harness.stages.writing import polish_rigorous
-        result = polish_rigorous(text="...", runtime=runtime)
-    The `runtime` variable is already available in scope.
-
-    Based on the user's task, decide which functions to call.
-    You can chain functions (e.g. search → generate ideas → design experiments).
-    Always use the most specific function available for the task.
-
-    REVIEW LOOP supports 3 difficulty levels:
-    - medium: standard review (default)
-    - hard: + reviewer memory + debate protocol
-    - nightmare: + adversarial verification (reviewer checks claims independently)
-    """
-    return runtime.exec(content=[
-        {"type": "text", "text": task},
+from research_harness.registry import (
+    STAGES, AUTO_PARAMS,
+    get_function, build_stage_list, build_stage_functions,
+    stage_functions,
+)
+from research_harness.utils import parse_json
+from research_harness import log as oplog
+
+
+# ═══════════════════════════════════════════
+# Level 1: Pick a stage
+# ═══════════════════════════════════════════
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
+    """Given a research task and current progress, decide which stage to work on next.
+
+You are a senior ML researcher managing a research project.
+Based on the task and what has been done so far, pick the next stage.
+
+Available stages:
+{stages}
+
+Return JSON:
+{
+  "stage": "stage_name",
+  "reasoning": "why this stage is needed now",
+  "sub_task": "specific goal for this stage",
+  "done": false
+}
+
+Set done=true ONLY when the overall task is FULLY complete.
+
+Args:
+    task: The overall research task.
+    progress: Summary of what has been accomplished so far.
+    runtime: LLM runtime instance.
+"""
+    stages = build_stage_list()
+    reply = runtime.exec(content=[
+        {"type": "text", "text": (
+            f"Task: {task}\n\n"
+            f"Progress so far:\n{progress or '(nothing yet)'}\n\n"
+            f"Available stages:\n{stages}"
+        )},
     ])
+    try:
+        return parse_json(reply)
+    except ValueError:
+        return {"stage": None, "reasoning": reply[:200], "done": True}
+
+
+# ═══════════════════════════════════════════
+# Level 2: Execute within a stage
+# ═══════════════════════════════════════════
+
+_PERSISTENCE_REMINDER = (
+    "\n\nIMPORTANT: All results must be saved to files — nothing should be lost. "
+    "Orchestrator functions (run_literature, run_idea, run_experiments, review_loop, paper_improvement_loop, etc.) already save results. "
+    "For individual functions, save the output yourself."
+)
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def _stage_step(stage: str, sub_task: str, context: str, runtime: Runtime) -> dict:
+    """Within a research stage, pick and execute the best function for the sub-task.
+
+You are a dispatcher. Your ONLY job is to pick a function and its arguments. Do NOT do the work yourself.
+
+You are working in the [{stage}] stage.
+
+Available functions in this stage:
+{functions}
+
+Return JSON:
+{
+  "call": "function_name",
+  "args": {"param": "value"},
+  "reasoning": "why this function",
+  "stage_done": false
+}
+
+Rules:
+- You MUST pick a function from the list above. Do NOT attempt to do the work yourself.
+- Set stage_done=true ONLY when all necessary work in this stage has been completed by previous function calls.
+- Do NOT include `runtime`, `exec_runtime`, `review_runtime`, or `project_dir` in args — they are auto-injected.
+- Prefer orchestrator functions (run_literature, run_idea, run_experiments, review_loop, paper_improvement_loop, etc.) for complete workflows. They chain multiple steps internally.
+
+Args:
+    stage: Current research stage name.
+    sub_task: What to accomplish in this step.
+    context: Results from previous steps in this stage.
+    runtime: LLM runtime instance.
+"""
+    functions = build_stage_functions(stage)
+    reply = runtime.exec(content=[
+        {"type": "text", "text": (
+            f"Sub-task: {sub_task}\n\n"
+            f"Context from previous steps:\n{context or '(first step)'}\n\n"
+            f"{functions}"
+            f"{_PERSISTENCE_REMINDER}"
+        )},
+    ])
+    try:
+        decision = parse_json(reply)
+    except ValueError:
+        return {"call": None, "result": reply[:500], "success": True, "stage_done": True}
+
+    # Check if LLM signals stage completion
+    if decision.get("stage_done") or decision.get("done"):
+        return {"call": None, "result": decision.get("reasoning", "stage complete"), "success": True, "stage_done": True}
+
+    call_target = decision.get("call", "")
+    args = decision.get("args", {})
+
+    func = get_function(call_target)
+    if func is None:
+        return {"call": call_target, "result": f"Unknown function: {call_target}", "success": False}
+
+    # Inject auto-params
+    sig = inspect.signature(func)
+    for p_name in sig.parameters:
+        if p_name in AUTO_PARAMS and p_name not in args:
+            args[p_name] = runtime
+
+    try:
+        result = func(**args)
+        result_str = str(result) if result is not None else "(no output)"
+        return {
+            "call": call_target,
+            "args_summary": ", ".join(f"{k}={str(v)[:30]}" for k, v in args.items() if k not in AUTO_PARAMS),
+            "result": result_str[:3000],
+            "success": True,
+        }
+    except Exception as e:
+        return {
+            "call": call_target,
+            "result": f"{e.__class__.__name__}: {e}",
+            "success": False,
+        }
+
+
+# ═══════════════════════════════════════════
+# research_agent — top-level entry
+# ═══════════════════════════════════════════
+
+@agentic_function(
+    compress=True,
+    summarize={"siblings": -1},
+    input={
+        "task": {
+            "source": "llm",
+            "description": "Research task (natural language)",
+            "placeholder": "e.g. Survey recent work on LLM uncertainty",
+            "multiline": True,
+        },
+        "max_stages": {
+            "description": "Maximum number of stage transitions",
+            "options": ["3", "5", "10"],
+        },
+        "steps_per_stage": {
+            "description": "Maximum function calls per stage",
+            "options": ["3", "5", "10"],
+        },
+        "runtime": {"hidden": True},
+    },
+)
+def research_agent(
+    task: str,
+    max_stages: int = 5,
+    steps_per_stage: int = 5,
+    log_file: str = None,
+    runtime: Runtime = None,
+) -> dict:
+    """Autonomous research agent with two-level control.
+
+Level 1: LLM decides which research stage to enter (literature, idea, writing, etc.)
+Level 2: Within a stage, LLM sequentially picks and executes functions.
+
+This mirrors the natural research workflow — you first decide "what phase am I in",
+then execute specific tasks within that phase.
+
+Args:
+    task: What the user wants to accomplish.
+    max_stages: Maximum stage transitions (default: 5).
+    steps_per_stage: Maximum function calls per stage (default: 5).
+    log_file: Path to operation log file (optional, enables persistent logging).
+    runtime: LLM runtime instance.
+
+Returns:
+    dict with: task, success, stages_completed, history
+"""
+    if runtime is None:
+        raise ValueError("research_agent() requires a runtime argument")
+
+    # Init log
+    oplog.log_session(log_file, task)
+
+    history = []
+    progress_parts = []
+
+    for stage_num in range(1, max_stages + 1):
+        # Level 1: Pick stage
+        progress = "\n".join(progress_parts) if progress_parts else ""
+        stage_decision = _pick_stage(task=task, progress=progress, runtime=runtime)
+
+        if stage_decision.get("done"):
+            reasoning = stage_decision.get('reasoning', '')[:80]
+            print(f"  [stage {stage_num}] DONE: {reasoning}", file=sys.stderr)
+            oplog.log_done(log_file, reasoning)
+            history.append({"stage_num": stage_num, "stage": "done", "decision": stage_decision})
+            break
+
+        stage = stage_decision.get("stage", "")
+        sub_task = stage_decision.get("sub_task", task)
+        reasoning = stage_decision.get("reasoning", "")
+
+        if stage not in STAGES:
+            print(f"  [stage {stage_num}] Unknown stage: {stage}", file=sys.stderr)
+            history.append({"stage_num": stage_num, "stage": stage, "error": "unknown stage"})
+            continue
+
+        print(f"  [stage {stage_num}] → {stage}: {reasoning[:80]}", file=sys.stderr)
+        oplog.log_stage(log_file, stage_num, stage, sub_task)
+
+        # Level 2: Execute within stage
+        stage_context_parts = []
+        stage_history = []
+
+        for step_num in range(1, steps_per_stage + 1):
+            context = "\n".join(stage_context_parts) if stage_context_parts else ""
+            step_result = _stage_step(
+                stage=stage, sub_task=sub_task, context=context, runtime=runtime,
+            )
+
+            call = step_result.get("call", "?")
+            success = step_result.get("success", False)
+            result_preview = step_result.get("result", "")[:200]
+            args_summary = step_result.get("args_summary", "")
+
+            print(f"    [{stage}/{step_num}] {call}: {'OK' if success else 'FAIL'}", file=sys.stderr)
+            oplog.log_step(log_file, call, args_summary, success, result_preview[:100])
+
+            stage_history.append(step_result)
+            stage_context_parts.append(f"  {call} → {result_preview}")
+
+            # Stage is done if: no function call resolved, or LLM signals stage_done
+            if step_result.get("call") is None or step_result.get("stage_done"):
+                break
+
+        # Summarize stage progress
+        stage_summary = f"[{stage}] {sub_task}: " + "; ".join(
+            f"{h.get('call', '?')}={'OK' if h.get('success') else 'FAIL'}"
+            for h in stage_history
+        )
+        progress_parts.append(stage_summary)
+        history.append({
+            "stage_num": stage_num,
+            "stage": stage,
+            "sub_task": sub_task,
+            "steps": stage_history,
+        })
+
+    completed = any(
+        h.get("stage") == "done" or h.get("decision", {}).get("done")
+        for h in history
+    )
+
+    return {
+        "task": task,
+        "success": completed,
+        "stages_completed": len(history),
+        "history": history,
+    }
+
+
+# Backwards compatibility
+agentic_research = research_agent
+
+
+# ═══════════════════════════════════════════
+# Runtime factory
+# ═══════════════════════════════════════════
+
+def _create_runtime(provider: str = None, model: str = None):
+    """Auto-detect and create an LLM runtime from available providers."""
+    import os
+
+    if provider == "openai" or (provider is None and os.environ.get("OPENAI_API_KEY")):
+        from agentic.providers import OpenAIRuntime
+        return OpenAIRuntime(model=model or "gpt-4o")
+
+    if provider == "anthropic" or (provider is None and os.environ.get("ANTHROPIC_API_KEY")):
+        from agentic.providers import AnthropicRuntime
+        return AnthropicRuntime(model=model or "claude-sonnet-4-20250514")
+
+    if provider == "claude-code" or provider is None:
+        from agentic.providers import ClaudeCodeRuntime
+        return ClaudeCodeRuntime()
+
+    raise RuntimeError(
+        "No LLM provider available. Set OPENAI_API_KEY or ANTHROPIC_API_KEY, "
+        "or use --provider claude-code."
+    )
+
+
+# ═══════════════════════════════════════════
+# CLI entry point
+# ═══════════════════════════════════════════
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Research Agent — autonomous research task execution"
+    )
+    parser.add_argument("task", nargs="?", help="What to do (natural language)")
+    parser.add_argument("--provider", help="LLM provider: openai, anthropic, claude-code")
+    parser.add_argument("--model", help="Model name override")
+    parser.add_argument("--max-stages", type=int, default=5, help="Max stage transitions (default: 5)")
+    parser.add_argument("--steps-per-stage", type=int, default=5, help="Max steps per stage (default: 5)")
+    parser.add_argument("--log", help="Path to operation log file (enables persistent logging)")
+    parser.add_argument("--list", action="store_true", help="List all available functions")
+    args = parser.parse_args()
+
+    if args.list:
+        from research_harness.registry import build_function_list
+        print("research-harness: available functions")
+        print("=" * 60)
+        print(build_function_list())
+        return
+
+    task = args.task
+    if task is None:
+        if not sys.stdin.isatty():
+            task = sys.stdin.read().strip()
+        else:
+            parser.print_help()
+            return
+
+    rt = _create_runtime(provider=args.provider, model=args.model)
+
+    print(f"Task: {task}")
+    print(f"Max stages: {args.max_stages}, Steps/stage: {args.steps_per_stage}")
+    if args.log:
+        print(f"Log: {args.log}")
+    print()
+
+    result = research_agent(
+        task=task,
+        max_stages=args.max_stages,
+        steps_per_stage=args.steps_per_stage,
+        log_file=args.log,
+        runtime=rt,
+    )
+
+    # Report
+    print()
+    print("=" * 60)
+    success = result.get("success", False)
+    print(f"{'OK' if success else 'FAIL'} | Task: {result.get('task', task)}")
+    print(f"Stages: {result.get('stages_completed', '?')}")
+    print()
+    for h in result.get("history", []):
+        stage = h.get("stage", "?")
+        sub = h.get("sub_task", "")
+        print(f"  Stage {h.get('stage_num', '?')}: [{stage}] {sub[:60]}")
+        for s in h.get("steps", []):
+            call = s.get("call", "?")
+            ok = "OK" if s.get("success") else "FAIL"
+            print(f"    - {call} [{ok}]: {s.get('result', '')[:60]}")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    main()

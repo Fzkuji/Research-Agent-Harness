@@ -38,6 +38,13 @@ def rewrite_zh(text: str, runtime: Runtime) -> str:
     2. 是否存在口语化残留？
     3. 是否存在Markdown 格式符号？
     3. 复制到 Word 里是否会有讨厌的格式符？（如有，请立即删除）
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},

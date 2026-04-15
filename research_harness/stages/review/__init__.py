@@ -4,7 +4,6 @@ from research_harness.stages.review.fix_paper import fix_paper
 from research_harness.stages.review.lookup_venue_criteria import lookup_venue_criteria
 from research_harness.stages.review.review_paper import review_paper
 
-import json
 import os
 from datetime import datetime, timezone
 from typing import Optional
@@ -52,63 +51,6 @@ def _save_review_log(log_path: str, reviews: list[dict]):
         lines.append("")
     with open(log_path, "w") as f:
         f.write("\n".join(lines))
-
-
-def _save_review_state(project_dir: str, state: dict):
-    """Write REVIEW_STATE.json for checkpoint recovery."""
-    state["timestamp"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    path = os.path.join(project_dir, "REVIEW_STATE.json")
-    with open(path, "w") as f:
-        json.dump(state, f, indent=2)
-
-
-def _load_review_state(project_dir: str) -> Optional[dict]:
-    """Load REVIEW_STATE.json if it exists and is recent."""
-    path = os.path.join(project_dir, "REVIEW_STATE.json")
-    if not os.path.exists(path):
-        return None
-    with open(path, "r") as f:
-        state = json.load(f)
-    if state.get("status") == "completed":
-        return None
-    # Check staleness (24h)
-    ts = state.get("timestamp", "")
-    if ts:
-        try:
-            dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
-            age = (datetime.now(timezone.utc) - dt).total_seconds()
-            if age > 86400:
-                return None  # stale
-        except ValueError:
-            pass
-    return state
-
-
-def _update_reviewer_memory(project_dir: str, round_num: int, score: float,
-                            review_text: str):
-    """Append round summary to REVIEWER_MEMORY.md (hard/nightmare only)."""
-    mem_path = os.path.join(project_dir, "REVIEWER_MEMORY.md")
-    if not os.path.exists(mem_path):
-        header = "# Reviewer Memory\n\n"
-    else:
-        header = ""
-    entry = (
-        f"\n## Round {round_num} — Score: {score}/10\n"
-        f"- **Review excerpt**: {review_text[:500]}\n"
-    )
-    with open(mem_path, "a") as f:
-        if header:
-            f.write(header)
-        f.write(entry)
-
-
-def _read_reviewer_memory(project_dir: str) -> str:
-    """Read REVIEWER_MEMORY.md if it exists."""
-    mem_path = os.path.join(project_dir, "REVIEWER_MEMORY.md")
-    if os.path.exists(mem_path):
-        with open(mem_path, "r") as f:
-            return f.read()
-    return ""
 
 
 # ---------------------------------------------------------------------------
@@ -390,25 +332,17 @@ def review_loop(
     project_dir = os.path.dirname(paper_dir)
     log_path = os.path.join(project_dir, "AUTO_REVIEW.md")
     reviews = []
-
-    # Check for resumable state
-    saved_state = _load_review_state(project_dir)
-    start_round = 1
-    if saved_state:
-        start_round = saved_state.get("round", 0) + 1
-        reviews = saved_state.get("reviews", [])
+    reviewer_memory = ""  # in-memory, accumulates across rounds
 
     venue_criteria = lookup_venue_criteria(venue=venue, runtime=review_runtime)
 
-    for round_num in range(start_round, max_rounds + 1):
+    for round_num in range(1, max_rounds + 1):
         paper_content = _read_paper(paper_dir)
 
         if hasattr(review_runtime, 'reset'):
             review_runtime.reset()
 
         # Phase A: Review (route by difficulty)
-        reviewer_memory = _read_reviewer_memory(project_dir)
-
         if difficulty == "medium":
             reply = _review_medium(
                 paper_content, venue, venue_criteria,
@@ -434,15 +368,14 @@ def review_loop(
         review["full_review"] = reply
         review["difficulty"] = difficulty
 
-        # Phase B.5: Reviewer Memory (hard + nightmare)
+        # Accumulate reviewer memory in-memory (hard/nightmare)
         if difficulty in ("hard", "nightmare"):
-            _update_reviewer_memory(
-                project_dir, round_num,
-                review.get("score", 0), reply,
+            reviewer_memory += (
+                f"\n## Round {round_num} — Score: {review.get('score', 0)}/10\n"
+                f"- {reply[:500]}\n"
             )
 
-        # Phase B.6: Debate Protocol (hard + nightmare)
-        debate_transcript = ""
+        # Debate Protocol (hard/nightmare, if weaknesses exist)
         if difficulty in ("hard", "nightmare") and review.get("weaknesses"):
             debate_transcript = _run_debate(
                 review["weaknesses"], paper_content,
@@ -459,11 +392,6 @@ def review_loop(
         # Check stop condition
         score = review.get("score", 0)
         if score >= pass_threshold:
-            _save_review_state(project_dir, {
-                "round": round_num, "status": "completed",
-                "last_score": score, "difficulty": difficulty,
-                "reviews": reviews,
-            })
             return {"passed": True, "rounds": round_num,
                     "final_score": score, "reviews": reviews,
                     "difficulty": difficulty}
@@ -472,7 +400,7 @@ def review_loop(
         if hasattr(exec_runtime, 'reset'):
             exec_runtime.reset()
 
-        paper_content = fix_paper(
+        fix_paper(
             paper_content=paper_content[:15000],
             review_feedback=reply[:5000],
             round_num=round_num,
@@ -482,21 +410,7 @@ def review_loop(
         if callback:
             callback({"type": "fix", "round": round_num})
 
-        # Phase E: Save state for checkpoint recovery
-        _save_review_state(project_dir, {
-            "round": round_num, "status": "in_progress",
-            "last_score": score, "difficulty": difficulty,
-            "reviews": reviews,
-        })
-
-    # Termination
     final_score = reviews[-1].get("score", 0) if reviews else 0
-    _save_review_state(project_dir, {
-        "round": max_rounds, "status": "completed",
-        "last_score": final_score, "difficulty": difficulty,
-        "reviews": reviews,
-    })
-
     return {
         "passed": False, "rounds": max_rounds,
         "final_score": final_score, "reviews": reviews,

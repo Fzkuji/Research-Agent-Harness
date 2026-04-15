@@ -19,6 +19,13 @@ def check_training(log: str, runtime: Runtime) -> str:
     {"status": "healthy/warning/critical",
      "issues": ["list of issues"],
      "recommendation": "what to do next"}
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": log},

@@ -14,10 +14,15 @@ dependencies = [
 ]
 
 [project.scripts]
-research-harness = "research_harness.cli:main"
+research-harness = "research_harness.main:main"
 
 [tool.setuptools.packages.find]
 include = ["research_harness*"]
+
+[tool.pytest.ini_options]
+markers = [
+    "e2e: end-to-end tests that call a real LLM (slow, needs API key or claude-code)",
+]
 
 [project.urls]
 Homepage = "https://github.com/Fzkuji/Research-Agent-Harness"

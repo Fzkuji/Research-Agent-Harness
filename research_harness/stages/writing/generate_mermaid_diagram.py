@@ -48,6 +48,13 @@ def generate_mermaid_diagram(description: str, runtime: Runtime) -> str:
     - Use descriptive kebab-case naming (e.g., auth-flow, system-architecture)
 
     Output: Mermaid code block + saved file paths + verification result.
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": description},

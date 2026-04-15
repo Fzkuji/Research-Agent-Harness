@@ -26,6 +26,13 @@ def generate_table_caption(description: str, runtime: Runtime) -> str:
        - 不要包含 Table 1: 这样的前缀，只输出内容本身。
        - 必须对特殊字符进行转义（例如：%, _, &）。
        - 保持数学公式原样（保留 $ 符号）。
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": description},

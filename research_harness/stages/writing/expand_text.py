@@ -40,6 +40,13 @@ def expand_text(text: str, runtime: Runtime) -> str:
     在输出前，请自查：
     1. 内容价值检查：新增的内容是否是基于原文的合理推演？（严禁产生幻觉或编造数据）。
     2. 风格检查：扩写后的文字是否依然凝练？（避免变成废话文学）。
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},

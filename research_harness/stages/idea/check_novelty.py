@@ -20,6 +20,13 @@ def check_novelty(idea: str, runtime: Runtime) -> str:
     {"novel": true/false, "confidence": 0.0-1.0,
      "closest_work": "description of most similar existing work",
      "differentiation": "what makes this idea different"}
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": idea},

@@ -53,6 +53,13 @@ def comprehensive_lit_review(topic: str, subtopics: str,
     - End each subsection discussing limitations of existing work vs our method
 
     Output: LaTeX related work section with proper citations.
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": (

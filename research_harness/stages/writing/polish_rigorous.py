@@ -39,6 +39,13 @@ def polish_rigorous(text: str, runtime: Runtime) -> str:
          * 严禁在中文名词后使用括号标注英文（拒绝双语冗余）。
        - Part 3 [Modification Log]：使用中文简要说明主要的润色点（例如：优化了句式结构，增强了学术语气，修正了语法错误）。
        - 除以上三部分外，不要输出任何多余的对话。
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},

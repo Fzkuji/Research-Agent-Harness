@@ -39,6 +39,13 @@ def translate_zh2en(text: str, runtime: Runtime) -> str:
     在输出最终结果前，请务必在后台进行自我审查：
     1. 审稿人视角：假设你是最挑剔的 Reviewer，检查是否存在过度排版、逻辑跳跃或未翻译的中文。
     2. 立即纠正：针对发现的问题进行修改，确保最终输出的内容严谨、纯净且完全英文化。
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},

@@ -10,13 +10,20 @@ Tests check that the LLM understands the task and produces relevant output.
 """
 
 import pytest
-from agentic import create_runtime
+
+from research_harness.main import _create_runtime
 
 
 @pytest.fixture(scope="module")
 def rt():
-    """Create a shared runtime for all LLM tests."""
-    return create_runtime()
+    """Create a shared runtime for all LLM tests.
+
+    Uses claude-code by default to avoid API key issues.
+    Override with TEST_PROVIDER env var.
+    """
+    import os
+    provider = os.environ.get("TEST_PROVIDER", "claude-code")
+    return _create_runtime(provider=provider)
 
 
 class TestPolishRigorous:

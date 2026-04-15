@@ -24,6 +24,13 @@ def write_section(section: str, context: str, runtime: Runtime) -> str:
     - No AI-flavor words (leverage, delve, tapestry, utilize). Use simple, clear vocabulary.
 
     Output ONLY the LaTeX content for the section. No explanation.
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": (

@@ -66,6 +66,13 @@ def recommend_visualization(data_description: str, runtime: Runtime) -> str:
        - 尺度处理：若涉及数据差异巨大，请在此处给出断裂轴、对数坐标或归一化的具体建议。
        - 统计要素：若适用，说明误差线、拟合曲线或显著性标记的要求。
        - 配色与样式：提供具体的配色策略及线型建议。
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": data_description},

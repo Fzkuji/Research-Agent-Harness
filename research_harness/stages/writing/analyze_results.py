@@ -35,6 +35,13 @@ def analyze_results(data: str, runtime: Runtime) -> str:
          * 不同的结论点之间请空一行。
        - Part 2 [Translation]：对应的中文直译（用于核对数据结论是否准确）。
        - 除以上两部分外，不要输出任何多余的对话。
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": data},

@@ -42,6 +42,13 @@ def plan_ablations(method_description: str, results: str,
 
     Output: Structured ablation plan in markdown table format with coverage
     assessment, unnecessary ablations list, run order, and compute estimate.
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": (

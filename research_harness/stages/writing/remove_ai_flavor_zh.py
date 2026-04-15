@@ -43,6 +43,13 @@ def remove_ai_flavor_zh(text: str, runtime: Runtime) -> str:
     1. 拟人度检查：读起来是否像一位严谨的国内高校学者写的论文？是否准确传达了学术意图而非单纯堆砌辞藻？
     2. 纯净度检查：是否去除了所有的 Markdown 符号，方便直接粘贴入 Word？
     3. 必要性检查：当前的修改是否真的提升了学术连贯性？如果是为了换词而换词，请撤销修改并判定为"检测通过"。
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},

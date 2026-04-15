@@ -49,19 +49,15 @@ class TestPackageExports:
 
     def test_top_level_key_functions(self):
         from research_harness import (
+            research_agent,
             agentic_research,
-            compete,
             research_pipeline,
-            research_wiki,
-            show_capabilities,
             STAGES,
         )
+        assert callable(research_agent)
         assert callable(agentic_research)
-        assert callable(compete)
         assert callable(research_pipeline)
-        assert callable(research_wiki)
-        assert callable(show_capabilities)
-        assert isinstance(STAGES, list)
+        assert isinstance(STAGES, (list, dict))
 
     def test_references_exports(self):
         from research_harness.references import (

@@ -39,6 +39,13 @@ def compress_text(text: str, runtime: Runtime) -> str:
     在输出前，请自查：
     1. 信息完整性：是否不小心删除了某个实验参数或限定条件？（如有，请放回去）。
     2. 字数检查：是否缩减过度？（目标只是微调，不要把一段话变成一句话）。
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},

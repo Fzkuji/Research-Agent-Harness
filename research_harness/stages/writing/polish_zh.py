@@ -44,6 +44,13 @@ def polish_zh(text: str, runtime: Runtime) -> str:
     2. 如果我没改动，Part 1 是否完整输出了原文？Part 2 是否给予了肯定？
     3. 输出内容是否不含任何格式标记？
     4. 我修改的部分是否都是必要的，存在明显问题的？
+    
+
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
+    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
+    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},
