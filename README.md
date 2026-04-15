@@ -146,13 +146,15 @@ review_loop(paper_dir, venue, exec_runtime=Claude, review_runtime=Codex/GPT)
     └── Phase C: fix_paper()             [Claude fixes the paper]
 ```
 
-**Difficulty levels:**
+**Difficulty levels (information control):**
 
-| Level | What the reviewer sees | Extra capabilities |
-|-------|----------------------|-------------------|
-| **medium** | Curated 15k tokens | Standard review |
-| **hard** | 14k tokens + reviewer memory | Memory across rounds + debate protocol |
-| **nightmare** | Full paper (no truncation) | Adversarial verification (check claims, find hidden problems) |
+| Level | Who controls what reviewer sees | Extra capabilities |
+|-------|-------------------------------|-------------------|
+| **medium** | **Author** curates 15k tokens for reviewer | Standard review |
+| **hard** | **Author** curates 14k tokens, but reviewer has memory | Memory across rounds + debate protocol |
+| **nightmare** | **Reviewer reads files independently** (author has zero info control) | Adversarial verification + independent file access |
+
+The key design from ARIS: difficulty controls **information asymmetry**. In medium/hard, Claude decides what GPT sees. In nightmare, GPT reads the repo directly — Claude cannot hide anything.
 
 **Providers:**
 

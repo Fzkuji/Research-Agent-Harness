@@ -127,15 +127,20 @@ def _review_hard(paper_content: str, venue: str, venue_criteria: str,
     )
 
 
-def _review_nightmare(paper_content: str, venue: str, venue_criteria: str,
+def _review_nightmare(paper_dir: str, venue: str, venue_criteria: str,
                       round_num: int, max_rounds: int,
                       reviewer_memory: str,
                       review_runtime: Runtime) -> str:
-    """Nightmare: reviewer gets memory + adversarial verification + full content.
+    """Nightmare: reviewer reads the paper directory INDEPENDENTLY.
 
-    Key difference from hard: NO content truncation. The reviewer sees
-    everything and is instructed to verify claims independently.
-    In ARIS, this maps to GPT reading the repo directly via codex exec.
+    ARIS design: the author (Claude) does NOT control what the reviewer sees.
+    The reviewer gets the paper_dir path and reads files itself.
+
+    - CodexRuntime / ClaudeCodeRuntime: agent reads files via tools/bash
+    - OpenAI / Anthropic API: no file access, falls back to passing full content
+
+    This is the key difference from medium/hard: information control shifts
+    from the author to the reviewer.
     """
     memory_block = ""
     if reviewer_memory.strip():
@@ -144,29 +149,66 @@ def _review_nightmare(paper_content: str, venue: str, venue_criteria: str,
             f"{reviewer_memory}\n\n"
         )
 
-    return review_paper(
-        paper_content=(
-            f"[Round {round_num}/{max_rounds} — NIGHTMARE MODE review]\n"
-            f"{memory_block}"
-            f"{paper_content}\n\n"  # NO truncation — reviewer sees everything
-            "## Adversarial Verification Instructions\n"
-            "You have full access to all content. The author does NOT control "
-            "what you see. Your job is to find problems that might be hidden.\n\n"
-            "1. Verify that reported numbers are internally consistent\n"
-            "2. Check if claims in the introduction match the actual evidence\n"
-            "3. Look for cherry-picked results or missing ablations\n"
-            "4. Check notation consistency across sections\n"
-            "5. Verify each claim has sufficient evidence\n\n"
-            "After your review, include:\n"
-            "- **Verified claims**: which claims you confirmed\n"
-            "- **Unverified claims**: which claims lack evidence\n"
-            "- **Memory update**: suspicions and patterns to track\n\n"
-            "Be adversarial. Trust nothing — verify everything."
-        ),
-        venue=venue,
-        venue_criteria=venue_criteria,
-        runtime=review_runtime,
-    )
+    # Check if the runtime has file access (CLI-based runtimes do)
+    runtime_has_file_access = hasattr(review_runtime, 'cli_path')
+
+    if runtime_has_file_access:
+        # Reviewer reads files independently — author cannot filter
+        return review_paper(
+            paper_content=(
+                f"[Round {round_num}/{max_rounds} — NIGHTMARE MODE review]\n"
+                f"{memory_block}"
+                f"## Independent Verification Mode\n"
+                f"The paper files are at: {paper_dir}\n"
+                f"You MUST read the .tex files yourself using your file access tools. "
+                f"Do NOT rely on any author-provided summary. The author (Claude) does "
+                f"NOT control what you see — explore freely.\n\n"
+                f"Read ALL .tex files in the directory. Check code, data, results files "
+                f"if they exist. Look in subdirectories too.\n\n"
+                f"## Adversarial Verification Instructions\n"
+                f"1. Read the actual .tex files and verify reported numbers are internally consistent\n"
+                f"2. Check if claims in the introduction match the actual evidence in experiments\n"
+                f"3. Look for cherry-picked results or missing ablations\n"
+                f"4. Check notation consistency across sections\n"
+                f"5. Verify each claim has sufficient evidence\n"
+                f"6. Check if referenced figures/tables actually exist and match descriptions\n\n"
+                f"After your review, include:\n"
+                f"- **Verified claims**: which claims you confirmed by reading the source\n"
+                f"- **Unverified claims**: which claims lack evidence or contradict the source\n"
+                f"- **Memory update**: suspicions and patterns to track\n\n"
+                f"Be adversarial. Trust nothing — verify everything by reading the files."
+            ),
+            venue=venue,
+            venue_criteria=venue_criteria,
+            runtime=review_runtime,
+        )
+    else:
+        # API runtime: no file access, pass full content as fallback
+        # Still adds adversarial instructions but author controls the content
+        paper_content = _read_paper(paper_dir)
+        return review_paper(
+            paper_content=(
+                f"[Round {round_num}/{max_rounds} — NIGHTMARE MODE review]\n"
+                f"(Note: running in API mode without file access. Full paper content below.)\n"
+                f"{memory_block}"
+                f"{paper_content}\n\n"
+                f"## Adversarial Verification Instructions\n"
+                f"Your job is to find problems that might be hidden.\n\n"
+                f"1. Verify that reported numbers are internally consistent\n"
+                f"2. Check if claims in the introduction match the actual evidence\n"
+                f"3. Look for cherry-picked results or missing ablations\n"
+                f"4. Check notation consistency across sections\n"
+                f"5. Verify each claim has sufficient evidence\n\n"
+                f"After your review, include:\n"
+                f"- **Verified claims**: which claims you confirmed\n"
+                f"- **Unverified claims**: which claims lack evidence\n"
+                f"- **Memory update**: suspicions and patterns to track\n\n"
+                f"Be adversarial. Trust nothing — verify everything."
+            ),
+            venue=venue,
+            venue_criteria=venue_criteria,
+            runtime=review_runtime,
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -402,6 +444,8 @@ def review_loop(
             review_runtime.reset()
 
         # ── Phase A: Review (route by difficulty) ──
+        # medium/hard: author controls what reviewer sees (curated content)
+        # nightmare: reviewer reads files independently (info control shifts)
         if difficulty == "medium":
             reply = _review_medium(
                 paper_content, venue, venue_criteria,
@@ -412,9 +456,9 @@ def review_loop(
                 paper_content, venue, venue_criteria,
                 round_num, max_rounds, reviewer_memory, review_runtime,
             )
-        else:  # nightmare
+        else:  # nightmare — pass paper_dir, not paper_content
             reply = _review_nightmare(
-                paper_content, venue, venue_criteria,
+                paper_dir, venue, venue_criteria,
                 round_num, max_rounds, reviewer_memory, review_runtime,
             )
 
