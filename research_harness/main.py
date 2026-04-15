@@ -80,7 +80,8 @@ _PERSISTENCE_REMINDER = (
 )
 
 @agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
-def _stage_step(stage: str, sub_task: str, context: str, runtime: Runtime) -> dict:
+def _stage_step(stage: str, sub_task: str, context: str,
+                runtime: Runtime, review_runtime: Runtime = None) -> dict:
     """Within a research stage, pick and execute the best function for the sub-task.
 
 You are a dispatcher. Your ONLY job is to pick a function and its arguments. Do NOT do the work yourself.
@@ -109,6 +110,7 @@ Args:
     sub_task: What to accomplish in this step.
     context: Results from previous steps in this stage.
     runtime: LLM runtime instance.
+    review_runtime: Separate runtime for review tasks (different model).
 """
     functions = build_stage_functions(stage)
     reply = runtime.exec(content=[
@@ -135,11 +137,15 @@ Args:
     if func is None:
         return {"call": call_target, "result": f"Unknown function: {call_target}", "success": False}
 
-    # Inject auto-params
+    # Inject auto-params: review_runtime gets the dedicated reviewer,
+    # runtime/exec_runtime get the main executor
     sig = inspect.signature(func)
     for p_name in sig.parameters:
         if p_name in AUTO_PARAMS and p_name not in args:
-            args[p_name] = runtime
+            if p_name == "review_runtime" and review_runtime is not None:
+                args[p_name] = review_runtime
+            else:
+                args[p_name] = runtime
 
     try:
         result = func(**args)
@@ -189,21 +195,24 @@ def research_agent(
     steps_per_stage: int = 5,
     log_file: str = None,
     runtime: Runtime = None,
+    review_runtime: Runtime = None,
 ) -> dict:
     """Autonomous research agent with two-level control.
 
 Level 1: LLM decides which research stage to enter (literature, idea, writing, etc.)
 Level 2: Within a stage, LLM sequentially picks and executes functions.
 
-This mirrors the natural research workflow — you first decide "what phase am I in",
-then execute specific tasks within that phase.
+Cross-model review: when review_runtime is provided, review functions use a
+different model (e.g. GPT) from the executor (e.g. Claude). This follows the
+ARIS design where the reviewer and author are adversarial by being different models.
 
 Args:
     task: What the user wants to accomplish.
     max_stages: Maximum stage transitions (default: 5).
     steps_per_stage: Maximum function calls per stage (default: 5).
     log_file: Path to operation log file (optional, enables persistent logging).
-    runtime: LLM runtime instance.
+    runtime: LLM runtime instance (executor — writes, fixes, implements).
+    review_runtime: Separate LLM runtime for review (reviewer — different model recommended).
 
 Returns:
     dict with: task, success, stages_completed, history
@@ -248,7 +257,8 @@ Returns:
         for step_num in range(1, steps_per_stage + 1):
             context = "\n".join(stage_context_parts) if stage_context_parts else ""
             step_result = _stage_step(
-                stage=stage, sub_task=sub_task, context=context, runtime=runtime,
+                stage=stage, sub_task=sub_task, context=context,
+                runtime=runtime, review_runtime=review_runtime,
             )
 
             call = step_result.get("call", "?")
@@ -301,8 +311,19 @@ agentic_research = research_agent
 # ═══════════════════════════════════════════
 
 def _create_runtime(provider: str = None, model: str = None):
-    """Auto-detect and create an LLM runtime from available providers."""
+    """Auto-detect and create an LLM runtime from available providers.
+
+    Providers:
+        claude-code: Claude Code CLI (default, full file system access)
+        codex:       OpenAI Codex CLI (session continuity, repo access)
+        openai:      OpenAI API (stateless, needs OPENAI_API_KEY)
+        anthropic:   Anthropic API (stateless, needs ANTHROPIC_API_KEY)
+    """
     import os
+
+    if provider == "codex":
+        from agentic.providers import CodexRuntime
+        return CodexRuntime(model=model or "gpt-5.4-mini", session_id="auto")
 
     if provider == "openai" or (provider is None and os.environ.get("OPENAI_API_KEY")):
         from agentic.providers import OpenAIRuntime
@@ -318,7 +339,7 @@ def _create_runtime(provider: str = None, model: str = None):
 
     raise RuntimeError(
         "No LLM provider available. Set OPENAI_API_KEY or ANTHROPIC_API_KEY, "
-        "or use --provider claude-code."
+        "or use --provider claude-code / --provider codex."
     )
 
 
@@ -331,8 +352,10 @@ def main():
         description="Research Agent — autonomous research task execution"
     )
     parser.add_argument("task", nargs="?", help="What to do (natural language)")
-    parser.add_argument("--provider", help="LLM provider: openai, anthropic, claude-code")
+    parser.add_argument("--provider", help="LLM provider: claude-code, codex, openai, anthropic")
     parser.add_argument("--model", help="Model name override")
+    parser.add_argument("--review-provider", help="Review model provider (default: codex for cross-model review)")
+    parser.add_argument("--review-model", help="Review model name (default: gpt-5.4-mini)")
     parser.add_argument("--max-stages", type=int, default=5, help="Max stage transitions (default: 5)")
     parser.add_argument("--steps-per-stage", type=int, default=5, help="Max steps per stage (default: 5)")
     parser.add_argument("--log", help="Path to operation log file (enables persistent logging)")
@@ -356,7 +379,18 @@ def main():
 
     rt = _create_runtime(provider=args.provider, model=args.model)
 
+    # Create separate review runtime for cross-model review
+    review_rt = None
+    if args.review_provider or args.review_model:
+        review_rt = _create_runtime(
+            provider=args.review_provider or "openai",
+            model=args.review_model,
+        )
+
     print(f"Task: {task}")
+    print(f"Executor: {args.provider or 'auto'}/{args.model or 'default'}")
+    if review_rt:
+        print(f"Reviewer: {args.review_provider or 'openai'}/{args.review_model or 'default'}")
     print(f"Max stages: {args.max_stages}, Steps/stage: {args.steps_per_stage}")
     if args.log:
         print(f"Log: {args.log}")
@@ -368,6 +402,7 @@ def main():
         steps_per_stage=args.steps_per_stage,
         log_file=args.log,
         runtime=rt,
+        review_runtime=review_rt,
     )
 
     # Report

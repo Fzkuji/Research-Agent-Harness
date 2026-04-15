@@ -1,4 +1,4 @@
-# Agentic Research
+# Research Agent Harness
 
 Autonomous research agent: from topic to submission-ready paper.
 
@@ -8,80 +8,204 @@ Built with [Agentic Programming](https://github.com/Fzkuji/Agentic-Programming) 
 
 ### 1. Install
 
-**Via PyPI:**
-
 ```bash
 pip install research-agent-harness
 ```
 
-**Via Skills (Claude Code / Cursor):**
+### 2. Set up LLM providers
 
 ```bash
-git clone https://github.com/Fzkuji/Research-Agent-Harness.git
-mkdir -p ~/.claude/skills/
-cp -r Research-Agent-Harness/skills/* ~/.claude/skills/
-```
-
-### 2. Set up LLM provider
-
-```bash
-# Claude Code CLI (recommended)
+# Executor: Claude Code CLI (recommended — full file system access)
 npm install -g @anthropic-ai/claude-code && claude login
 
-# Or Anthropic API
-export ANTHROPIC_API_KEY=sk-...
+# Reviewer: Codex CLI (recommended — cross-model review with GPT)
+npm install -g @openai/codex && codex auth login
 
-# Or OpenAI API
+# Or use API keys directly
+export ANTHROPIC_API_KEY=sk-...
 export OPENAI_API_KEY=sk-...
 ```
 
 ### 3. Use
 
-**In Claude Code / Cursor** (via skills):
+**CLI:**
+
+```bash
+# Basic: Claude does everything
+research-harness "Survey recent work on LLM uncertainty"
+
+# Cross-model review: Claude writes, GPT reviews (ARIS design)
+research-harness "Review the paper at ./my-project/" \
+    --provider claude-code \
+    --review-provider codex
+
+# List all available functions
+research-harness --list
+```
+
+**In Python:**
+
+```python
+from research_harness.main import research_agent, _create_runtime
+
+# Single model
+rt = _create_runtime(provider="claude-code")
+result = research_agent(task="Survey LLM uncertainty", runtime=rt)
+
+# Cross-model review: Claude executor + Codex/GPT reviewer
+exec_rt = _create_runtime(provider="claude-code")
+review_rt = _create_runtime(provider="codex")
+result = research_agent(
+    task="Review the paper at ./my-project/ as EMNLP reviewer",
+    runtime=exec_rt,
+    review_runtime=review_rt,
+)
+```
+
+**In Claude Code / Cursor (via skills):**
 
 ```
 > /agentic-research "Survey recent work on LLM uncertainty and identify gaps"
-> /agentic-research "Generate 5 research ideas from related_work/gaps.md"
-> /agentic-research "Write the introduction section based on outline/outline.md"
 > /agentic-research "Review paper/ as a NeurIPS reviewer with difficulty: nightmare"
 > /agentic-research "Polish this paragraph for NeurIPS: <text>"
-> /agentic-research "Run the full pipeline for topic 'LLM Uncertainty', venue NeurIPS"
 ```
 
-**In Python** (via package):
+## Architecture
+
+### Two-Level Autonomous Loop
+
+```
+research_agent(task, runtime, review_runtime)
+│
+├── Level 1: _pick_stage(task, progress)
+│   LLM sees 10 stages, picks the right one based on task + progress.
+│
+└── Level 2: _stage_step(stage, sub_task, context)
+    LLM sees all functions in that stage, picks one to call.
+    Prefers orchestrator functions (review_loop, run_literature, etc.)
+    that chain multiple steps internally.
+    Loops until stage_done or max steps reached.
+
+→ Back to Level 1 with updated progress, until done or max stages.
+```
+
+**Key design:** Python controls the loop structure, LLM makes decisions at each step. Each `@agentic_function` calls `runtime.exec()` exactly once — the LLM reads the docstring and does the work.
+
+### Registry
+
+All 48+ functions are registered in `registry.py` with their stage membership. Functions are lazy-loaded. The dispatcher shows only functions in the current stage.
 
 ```python
-# See all available functions
-from research_harness import show_capabilities
-show_capabilities()
-
-# LLM entry point (used by Agentic-Programming runtime)
-from research_harness import agentic_research
-result = agentic_research(task="your task", runtime=my_runtime)
-
-# Or run the pipeline programmatically
-from research_harness import research_pipeline
-result = research_pipeline(project_dir="...", topic="...", exec_runtime=rt)
+STAGES = {
+    "literature":   "Survey papers, search arXiv/Semantic Scholar, identify research gaps",
+    "idea":         "Generate research ideas, check novelty, rank by promise",
+    "experiment":   "Design experiments, implement, run, monitor training",
+    "writing":      "Write sections, polish, translate, compress/expand, figures, compile LaTeX",
+    "review":       "Review paper, fix based on feedback, review-fix loop",
+    "rebuttal":     "Parse reviewer comments, build strategy, draft rebuttal",
+    "presentation": "Generate slides, poster, speaker notes",
+    "theory":       "Derive formulas, write proofs, plan ablations, grant proposals",
+    "knowledge":    "Research wiki, meta-optimize harness",
+    "project":      "Initialize project, run full pipeline",
+}
 ```
 
-## Pipeline
+### Cross-Model Review (ARIS Design)
+
+Following [ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep), the review system uses **two different models** — the reviewer (GPT via Codex) and the author (Claude) are adversarial by design.
 
 ```
-init -> literature -> idea -> experiment -> analysis -> writing -> review -> submission
+review_loop(paper_dir, venue, exec_runtime=Claude, review_runtime=Codex/GPT)
+│
+├── lookup_venue_criteria(venue)         [GPT — query scoring rubric]
+│
+└── for round 1..4:                      [each round = new session]
+    │
+    ├── review_runtime.reset()           ← new session
+    │
+    ├── Phase A: review_paper()          [GPT reviews the paper]
+    │   ├── medium:    curated context (15k tokens)
+    │   ├── hard:      + reviewer memory + debate protocol
+    │   └── nightmare: + full content (no truncation) + adversarial verification
+    │
+    ├── Phase B: Parse assessment        [extract score, verdict, weaknesses]
+    │
+    ├── Phase B.5: Reviewer Memory       [hard/nightmare — accumulate suspicions]
+    │   In-memory string, passed to reviewer in next round's prompt.
+    │   Reviewer checks if previous concerns were addressed or sidestepped.
+    │
+    ├── Phase B.6: Debate Protocol       [hard/nightmare — if weaknesses exist]
+    │   ├── Author (Claude): rebut up to 3 weaknesses
+    │   └── Reviewer (GPT): rule SUSTAINED / OVERRULED / PARTIALLY SUSTAINED
+    │
+    ├── Phase E: Save to AUTO_REVIEW.md  [cumulative log with full raw responses]
+    │
+    ├── Stop? score >= 6 or verdict contains "accept"/"ready" → return
+    │
+    ├── exec_runtime.reset()             ← new session
+    └── Phase C: fix_paper()             [Claude fixes the paper]
 ```
 
-| Stage | What it does |
-|-------|-------------|
-| **init** | Create project directory, LaTeX scaffold, outline template |
-| **literature** | Survey related papers, identify research gaps |
-| **idea** | Generate ideas, check novelty, rank by feasibility & impact |
-| **experiment** | Design experiments, generate code, run & monitor |
-| **analysis** | Analyze results, generate LaTeX analysis paragraphs |
-| **writing** | Write paper sections, polish, translate, remove AI flavor |
-| **review** | Cross-model review loop (3 difficulty levels: medium/hard/nightmare) |
-| **submission** | Pre-submission checklist (anonymity, format, references) |
+**Difficulty levels:**
+
+| Level | What the reviewer sees | Extra capabilities |
+|-------|----------------------|-------------------|
+| **medium** | Curated 15k tokens | Standard review |
+| **hard** | 14k tokens + reviewer memory | Memory across rounds + debate protocol |
+| **nightmare** | Full paper (no truncation) | Adversarial verification (check claims, find hidden problems) |
+
+**Providers:**
+
+| Role | Recommended | Alternative |
+|------|------------|------------|
+| Executor (author) | `claude-code` (Claude Code CLI) | `anthropic` (API) |
+| Reviewer | `codex` (Codex CLI, GPT, session continuity) | `openai` (API, stateless) |
+
+### Runtime Providers
+
+| Provider | CLI Flag | Session | File Access | Auth |
+|----------|----------|---------|-------------|------|
+| `claude-code` | `--provider claude-code` | Yes (reset per step) | Full file system | `claude login` |
+| `codex` | `--provider codex` | Yes (auto thread ID) | Repo access | `codex auth login` |
+| `openai` | `--provider openai` | No (stateless API) | None | `OPENAI_API_KEY` |
+| `anthropic` | `--provider anthropic` | No (stateless API) | None | `ANTHROPIC_API_KEY` |
+
+### Persistence & Tracing
+
+- All leaf functions include a `# Persistence` prompt: the agent saves complete output to files and returns a summary.
+- `AUTO_REVIEW.md` — cumulative review log with full raw reviewer responses, debate transcripts.
+- Operation log (`--log path`) — append-only markdown log of all stage/step decisions.
+- Results are saved to the **target project directory** (the agent infers the path from the task description).
 
 ## All Functions (48+)
+
+### Literature & Search
+| Function | Description |
+|----------|-------------|
+| `survey_topic` | Survey literature: find papers, organize by subtopic, note gaps |
+| `identify_gaps` | Identify specific, actionable research gaps from a survey |
+| `search_arxiv` | Search arXiv API for papers |
+| `search_semantic_scholar` | Search Semantic Scholar API |
+| `comprehensive_lit_review` | Full literature review with structured output |
+| `run_literature` | **Orchestrator**: survey + gaps in one call |
+
+### Idea Generation
+| Function | Description |
+|----------|-------------|
+| `generate_ideas` | Generate research ideas from gaps |
+| `check_novelty` | Check idea novelty against literature |
+| `rank_ideas` | Rank ideas by feasibility and impact |
+| `run_idea` | **Orchestrator**: generate + novelty check + rank |
+
+### Experiment
+| Function | Description |
+|----------|-------------|
+| `design_experiments` | Design experiment plan |
+| `experiment_bridge` | Bridge from idea to executable experiment |
+| `run_experiment` | Generate and run experiment code |
+| `check_training` | Monitor training progress |
+| `plan_ablations` | Design ablation studies |
+| `run_experiments` | **Orchestrator**: design + run experiments |
 
 ### Writing (English)
 | Function | Description |
@@ -118,12 +242,13 @@ init -> literature -> idea -> experiment -> analysis -> writing -> review -> sub
 ### Review & Rebuttal
 | Function | Description |
 |----------|-------------|
-| `review_paper` | Review paper (as reviewer model) |
+| `review_paper` | Review paper against venue criteria |
 | `fix_paper` | Fix paper based on review feedback |
-| `review_loop` | Full review-fix cycle (medium/hard/nightmare) |
-| `paper_improvement_loop` | Writing quality improvement loop |
-| `parse_reviews` | Parse reviewer comments into issues |
-| `build_rebuttal_strategy` | Build response strategy |
+| `lookup_venue_criteria` | Query venue-specific scoring rubric |
+| `review_loop` | **Orchestrator**: full review-fix cycle (medium/hard/nightmare) |
+| `paper_improvement_loop` | **Orchestrator**: writing quality improvement (2 rounds) |
+| `parse_reviews` | Parse reviewer comments into structured issues |
+| `build_rebuttal_strategy` | Build response strategy per weakness |
 | `draft_rebuttal` | Draft venue-compliant rebuttal |
 
 ### Presentation
@@ -145,9 +270,8 @@ init -> literature -> idea -> experiment -> analysis -> writing -> review -> sub
 ### Knowledge & Meta
 | Function | Description |
 |----------|-------------|
-| `research_wiki` | Persistent knowledge base (papers/ideas/experiments/claims) |
+| `research_wiki` | Persistent knowledge base |
 | `meta_optimize` | Analyze usage, propose harness improvements |
-| `compete` | Prompt competition between functions |
 
 ## Project Structure
 
@@ -155,11 +279,11 @@ init -> literature -> idea -> experiment -> analysis -> writing -> review -> sub
 Research-Agent-Harness/
 ├── SKILL.md                     # Skill definition for IDE discovery
 ├── research_harness/
-│   ├── __init__.py              # Exports: agentic_research, research_pipeline, etc.
-│   ├── agent.py                 # Entry point: agentic_research() @agentic_function
+│   ├── main.py                  # Two-level loop + CLI entry point
+│   ├── registry.py              # Function registry (lazy loading, stage mapping)
+│   ├── log.py                   # Append-only operation log
 │   ├── pipeline.py              # 8-stage orchestrator
-│   ├── evaluate.py              # Prompt competition
-│   ├── utils.py                 # Shared utilities
+│   ├── utils.py                 # Shared utilities (parse_json, etc.)
 │   ├── references/              # Writing principles, citation discipline, venue checklists
 │   ├── wiki/                    # Research Wiki (persistent knowledge base)
 │   └── stages/
@@ -174,36 +298,27 @@ Research-Agent-Harness/
 │       ├── theory/              # derive_formula, write_proof, plan_ablations, ...
 │       ├── submission/          # check_submission
 │       └── meta/                # meta_optimize
+├── tests/
+│   ├── test_main.py             # Two-level loop, CLI, operation log
+│   ├── test_registry.py         # Registry, stage mapping, orchestrators
+│   ├── test_log.py              # Operation log
+│   ├── test_e2e.py              # End-to-end against real projects
+│   └── conftest.py              # MockRuntime, fixtures
 ├── skills/                      # SKILL.md files for IDE discovery
-│   ├── agentic-research/        # Our entry point skill
-│   ├── 20-ml-paper-writing/     # Third-party
-│   ├── humanizer/               # Third-party
-│   ├── docx/                    # Third-party
-│   ├── doc-coauthoring/         # Third-party
-│   └── canvas-design/           # Third-party
 └── templates/                   # Structured input/output templates
-    ├── RESEARCH_BRIEF_TEMPLATE.md
-    ├── RESEARCH_CONTRACT_TEMPLATE.md
-    ├── EXPERIMENT_PLAN_TEMPLATE.md
-    ├── NARRATIVE_REPORT_TEMPLATE.md
-    ├── PAPER_PLAN_TEMPLATE.md
-    ├── IDEA_CANDIDATES_TEMPLATE.md
-    ├── EXPERIMENT_LOG_TEMPLATE.md
-    └── FINDINGS_TEMPLATE.md
 ```
 
 ## Design Principles
 
-1. **Python controls flow, LLM reasons** — workflow is deterministic Python; each step's intelligence comes from `@agentic_function` docstrings
-2. **Prompt = docstring** — no external prompt files; the function's docstring IS the instruction to the LLM
-3. **Single entry point** — `agentic_research()` reads its docstring listing all capabilities; the LLM decides what to call
-4. **Cross-model review** — executor and reviewer use different LLMs to avoid self-play blind spots
-5. **3 review difficulty levels** — medium (standard), hard (+reviewer memory, +debate), nightmare (+adversarial verification)
-6. **Prompt competition** — for tasks with multiple approaches, generate from each and let another LLM pick the best
-7. **Stage independence** — run any stage alone or chain them into a pipeline
+1. **Two-level autonomous loop** — Level 1 picks the research stage, Level 2 dispatches to functions within that stage. Python controls the loop, LLM makes decisions.
+2. **Prompt = docstring** — no external prompt files; the function's docstring IS the instruction to the LLM.
+3. **Cross-model review (ARIS design)** — executor (Claude) and reviewer (GPT/Codex) are different models to avoid self-play blind spots. 3 difficulty levels with reviewer memory and debate protocol.
+4. **Agent saves files** — leaf functions prompt the agent to save complete output. No Python `open().write()` in the hot path. The agent decides where to save based on context.
+5. **Orchestrators for complete workflows** — `review_loop`, `run_literature`, `run_idea`, `run_experiments` chain multiple steps. The dispatcher prefers these over individual leaf functions.
+6. **Everything leaves a trace** — AUTO_REVIEW.md, operation logs, file saves. No work is lost.
 
 ## References
 
-Prompt engineering informed by:
+- [ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) — autonomous research pipeline with cross-model review (primary reference for review loop design)
 - [awesome-ai-research-writing](https://github.com/Leey21/awesome-ai-research-writing) — battle-tested writing prompts from top research labs
-- [ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) — autonomous research pipeline with cross-model review
+- [Agentic Programming](https://github.com/Fzkuji/Agentic-Programming) — the runtime framework (`@agentic_function`, `Runtime.exec()`)

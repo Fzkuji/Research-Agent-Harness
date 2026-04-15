@@ -7,6 +7,8 @@ description: "Autonomous research agent: literature, ideas, experiments, writing
 
 Autonomous research agent built with [Agentic Programming](https://github.com/Fzkuji/Agentic-Programming).
 
+Two-level autonomous loop: Level 1 picks a research stage (literature, writing, review, ...), Level 2 dispatches to functions within that stage. Cross-model review uses GPT (via Codex) as reviewer and Claude as author.
+
 ## Usage
 
 ```
@@ -26,16 +28,39 @@ Single entry point — the agent reads your task and autonomously decides which 
 ## CLI
 
 ```bash
+# Basic usage
 research-harness "your task"
-research-harness --list                  # list all functions
-research-harness --provider codex "task" # choose provider
-echo "text" | research-harness "润色"     # pipe input
+research-harness --list                              # list all functions
+
+# Cross-model review: Claude writes, GPT reviews (ARIS design)
+research-harness "Review the paper at ./project/" \
+    --provider claude-code \
+    --review-provider codex
+
+# Custom models
+research-harness "Survey LLM uncertainty" \
+    --provider openai --model gpt-4o \
+    --review-provider codex --review-model gpt-5.4-mini
+
+# Operation logging
+research-harness "task" --log harness_log.md
 ```
 
 ## Python
 
 ```python
-from research_harness import research_agent
+from research_harness.main import research_agent, _create_runtime
 
-result = research_agent(task="Survey LLM uncertainty", runtime=my_runtime)
+# Single model
+rt = _create_runtime(provider="claude-code")
+result = research_agent(task="Survey LLM uncertainty", runtime=rt)
+
+# Cross-model review
+exec_rt = _create_runtime(provider="claude-code")
+review_rt = _create_runtime(provider="codex")
+result = research_agent(
+    task="Review the paper at ./project/ as EMNLP reviewer",
+    runtime=exec_rt,
+    review_runtime=review_rt,
+)
 ```
