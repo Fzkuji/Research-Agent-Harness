@@ -73,11 +73,9 @@ def review_paper(paper_content: str, venue: str, venue_criteria: str, runtime: R
     ```
     
 
-    # Persistence
-    Save your COMPLETE output to a file in the current working directory.
-    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
-    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
-    Format: "Saved to <path>. <summary of content>."
+    # Output
+    Return your COMPLETE review (Part 1 + Part 2 + JSON block) as your response.
+    Do NOT save to a file — the caller handles persistence.
     """
     return runtime.exec(content=[
         {"type": "text", "text": (

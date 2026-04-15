@@ -473,9 +473,12 @@ def review_loop(
         # ── 6. Stop if passed ──
         score = review.get("score", 0)
         verdict = str(review.get("verdict", "")).lower()
-        if (score >= pass_threshold
-                or "accept" in verdict
-                or "ready" in verdict):
+        passed_by_score = score >= pass_threshold
+        passed_by_verdict = (
+            ("accept" in verdict and "reject" not in verdict)
+            or ("ready" in verdict and "not ready" not in verdict)
+        )
+        if passed_by_score or passed_by_verdict:
             return {"passed": True, "rounds": round_num,
                     "final_score": score, "reviews": reviews,
                     "difficulty": difficulty}
