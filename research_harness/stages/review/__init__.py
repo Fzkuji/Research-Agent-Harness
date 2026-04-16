@@ -266,12 +266,14 @@ def paper_improvement_loop(
         review_runtime = exec_runtime
 
     paper_dir = os.path.expanduser(paper_dir)
-    log_path = os.path.join(os.path.dirname(paper_dir), "PAPER_IMPROVEMENT_LOG.md")
+    project_dir = os.path.dirname(paper_dir)
+    base_dir = os.path.join(project_dir, "auto_improvement")
     rounds_log = []
 
     venue_criteria = lookup_venue_criteria(venue=venue, runtime=review_runtime)
 
     for round_num in range(1, max_rounds + 1):
+        round_dir = os.path.join(base_dir, f"round_{round_num}")
         paper_content = _read_paper(paper_dir)
 
         if hasattr(review_runtime, 'reset'):
@@ -283,6 +285,7 @@ def paper_improvement_loop(
             venue_criteria=venue_criteria,
             runtime=review_runtime,
         )
+        _save(round_dir, "review.md", reply)
 
         try:
             review = parse_json(reply)
@@ -297,25 +300,37 @@ def paper_improvement_loop(
         if hasattr(exec_runtime, 'reset'):
             exec_runtime.reset()
 
-        fix_paper(
+        fix_reply = fix_paper(
             paper_content=paper_content[:15000],
             review_feedback=reply[:5000],
             round_num=round_num,
             runtime=exec_runtime,
         )
+        _save(round_dir, "fix.md", fix_reply)
 
         compile_paper(paper_dir=paper_dir, runtime=exec_runtime)
 
         if callback:
             callback({"type": "fix_and_compile", "round": round_num})
 
-    with open(log_path, "w") as f:
-        f.write("# Paper Improvement Log\n\n")
-        for r in rounds_log:
-            f.write(f"## Round {r['round']}\n")
-            f.write(f"- Score: {r.get('score', '?')}/10\n\n")
+    summary_lines = [
+        "# Paper Improvement Summary\n",
+        f"- **Paper**: {paper_dir}",
+        f"- **Venue**: {venue}",
+        f"- **Rounds**: {len(rounds_log)}\n",
+    ]
+    for r in rounds_log:
+        rn = r["round"]
+        summary_lines.append(f"## Round {rn}")
+        summary_lines.append(f"- Score: {r.get('score', '?')}/10")
+        summary_lines.append(f"- Review: `round_{rn}/review.md`")
+        summary_lines.append(f"- Fix: `round_{rn}/fix.md`")
+        summary_lines.append("")
 
-    return {"rounds": rounds_log}
+    summary = "\n".join(summary_lines)
+    _save(base_dir, "SUMMARY.md", summary)
+
+    return {"summary": summary, "rounds": rounds_log}
 
 
 # ---------------------------------------------------------------------------
