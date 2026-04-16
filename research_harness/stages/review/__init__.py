@@ -461,7 +461,8 @@ def review_loop(
         paper_content = _read_paper(paper_dir)
 
         # ── 2. N independent reviews (each with fresh session) ──
-        review_dir = os.path.join(project_dir, "review_logs")
+        base_dir = os.path.join(project_dir, "auto_review")
+        round_dir = os.path.join(base_dir, f"round_{round_num}")
         individual_replies = []
         individual_parsed = []
         for reviewer_id in range(1, num_reviewers + 1):
@@ -474,7 +475,7 @@ def review_loop(
             )
             individual_replies.append(reply)
             # Save raw reviewer output immediately
-            _save(review_dir, f"round_{round_num}_reviewer_{reviewer_id}.md", reply)
+            _save(round_dir, f"reviewer_{reviewer_id}.md", reply)
 
             try:
                 parsed = parse_json(reply)
@@ -497,7 +498,7 @@ def review_loop(
             runtime=review_runtime,
         )
         # Save raw AC output
-        _save(review_dir, f"round_{round_num}_meta_review.md", meta_reply)
+        _save(round_dir, "meta_review.md", meta_reply)
 
         # ── 4. Parse meta-review ──
         try:
@@ -538,7 +539,7 @@ def review_loop(
 
         # ── 6. Save debate + accumulate reviews ──
         if review.get("debate_transcript"):
-            _save(review_dir, f"round_{round_num}_debate.md", review["debate_transcript"])
+            _save(round_dir, "debate.md", review["debate_transcript"])
         reviews.append(review)
 
         if callback and callback({"type": "review", **review}) is False:
@@ -569,7 +570,7 @@ def review_loop(
             round_num=round_num,
             runtime=exec_runtime,
         )
-        _save(review_dir, f"round_{round_num}_fix.md", fix_reply)
+        _save(round_dir, "fix.md", fix_reply)
 
         if callback:
             callback({"type": "fix", "round": round_num})
@@ -599,15 +600,16 @@ def review_loop(
         for ip in r.get("individual_parsed", []):
             rid = ip.get("reviewer_id", "?")
             s = ip.get("score", "?")
-            summary_lines.append(f"- Reviewer {rid}: **{s}** → `review_logs/round_{rn}_reviewer_{rid}.md`")
-        summary_lines.append(f"- Area Chair: **{r.get('score', '?')}** → `review_logs/round_{rn}_meta_review.md`")
+            summary_lines.append(f"- Reviewer {rid}: **{s}** → `round_{rn}/reviewer_{rid}.md`")
+        summary_lines.append(f"- Area Chair: **{r.get('score', '?')}** → `round_{rn}/meta_review.md`")
         if r.get("debate_transcript"):
-            summary_lines.append(f"- Debate → `review_logs/round_{rn}_debate.md`")
+            summary_lines.append(f"- Debate → `round_{rn}/debate.md`")
         summary_lines.append(f"- Verdict: {r.get('verdict', 'N/A')}")
         summary_lines.append("")
 
     summary = "\n".join(summary_lines)
-    _save(project_dir, "AUTO_REVIEW.md", summary)
+    base_dir = os.path.join(project_dir, "auto_review")
+    _save(base_dir, "AUTO_REVIEW.md", summary)
 
     return {
         "passed": passed,
