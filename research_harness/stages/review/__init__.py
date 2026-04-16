@@ -361,23 +361,91 @@ def paper_improvement_loop(
 
 POSITIVE_THRESHOLD = 6
 
+
+# ---------------------------------------------------------------------------
+# Multi-reviewer: N independent reviews + Area Chair meta-review
+# ---------------------------------------------------------------------------
+
+def _run_single_review(paper_content: str, paper_dir: str,
+                       venue: str, venue_criteria: str,
+                       round_num: int, max_rounds: int,
+                       difficulty: str, reviewer_memory: str,
+                       review_runtime: Runtime) -> str:
+    """Run one independent review (fresh session)."""
+    if hasattr(review_runtime, 'reset'):
+        review_runtime.reset()
+
+    if difficulty == "medium":
+        return _review_medium(
+            paper_content, venue, venue_criteria,
+            round_num, max_rounds, review_runtime,
+        )
+    elif difficulty == "hard":
+        return _review_hard(
+            paper_content, venue, venue_criteria,
+            round_num, max_rounds, reviewer_memory, review_runtime,
+        )
+    else:
+        return _review_nightmare(
+            paper_dir, venue, venue_criteria,
+            round_num, max_rounds, reviewer_memory, review_runtime,
+        )
+
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def _meta_review(individual_reviews: str, venue: str, runtime: Runtime) -> str:
+    """You are the Area Chair (AC) for {venue}. You have received multiple
+    independent reviewer reports for the same paper.
+
+    Your job:
+    1. Identify consensus points (issues ALL reviewers agree on).
+    2. Identify disagreements and adjudicate them.
+    3. Produce a final meta-review with:
+       - Overall assessment (synthesizing all reviewers)
+       - Consolidated weaknesses (deduplicated, ranked by severity)
+       - Consolidated strengths
+       - Final score (average of individual scores, adjusted by your judgment)
+       - Final verdict
+
+    Return a JSON block at the end:
+    ```json
+    {"score": <number>, "score_scale": "1-10",
+     "venue": "<venue>", "passed": <true/false>,
+     "weaknesses": ["consolidated list"],
+     "strengths": ["consolidated list"],
+     "confidence": <1-5>,
+     "verdict": "one-line summary",
+     "individual_scores": [<score1>, <score2>, ...]}
+    ```
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": (
+            f"Venue: {venue}\n\n"
+            f"=== INDIVIDUAL REVIEWER REPORTS ===\n\n{individual_reviews}"
+        )},
+    ])
+
+
 def review_loop(
     paper_dir: str,
     venue: str = "NeurIPS",
     exec_runtime: Runtime = None,
     review_runtime: Runtime = None,
+    num_reviewers: int = 3,
     max_rounds: int = 4,
     pass_threshold: int = POSITIVE_THRESHOLD,
     difficulty: str = "medium",
     auto_fix: bool = False,
     callback: Optional[callable] = None,
 ) -> dict:
-    """Cross-model review loop following ARIS design.
+    """Multi-reviewer review loop with Area Chair meta-review.
 
-    The reviewer (review_runtime, e.g. GPT) and the author (exec_runtime,
-    e.g. Claude) are different models.
+    Each round: N independent reviews → AC meta-review → debate → log → (fix).
 
-    Each round: review → parse → debate → log → check stop → (fix if auto_fix).
+    Following AI-Scientist / AgentReview design:
+    - N reviewers independently review the paper (fresh sessions, same runtime)
+    - Area Chair synthesizes all reviews into a meta-review with final score
+    - Variation comes from fresh sessions (no shared context between reviewers)
 
     Difficulty controls information asymmetry:
         medium:    Author curates content for reviewer (15k tokens).
@@ -385,18 +453,19 @@ def review_loop(
         nightmare: Reviewer reads files independently, author has zero control.
 
     Args:
-        paper_dir:       Path to paper/ directory with .tex files.
+        paper_dir:       Path to directory with .tex files.
         venue:           Target venue.
-        exec_runtime:    Runtime for fixing (author, e.g. Claude).
-        review_runtime:  Runtime for reviewing (reviewer, e.g. GPT).
+        exec_runtime:    Runtime for fixing (author).
+        review_runtime:  Runtime for reviewing (each reviewer gets a fresh session).
+        num_reviewers:   Number of independent reviewers per round (default: 3).
         max_rounds:      Max review-fix cycles (default: 4).
         pass_threshold:  Min score to pass (default: 6/10).
         difficulty:      "medium" | "hard" | "nightmare".
-        auto_fix:        If True, author auto-fixes paper after each round (default: False).
+        auto_fix:        If True, auto-fix paper after each round (default: False).
         callback:        Called after review and fix. Return False to break.
 
     Returns:
-        dict with: passed, rounds, final_score, reviews, difficulty
+        dict with: passed, rounds, final_score, reviews, difficulty, num_reviewers
     """
     if exec_runtime is None:
         raise ValueError("exec_runtime is required")
@@ -419,58 +488,85 @@ def review_loop(
         # ── 1. Read paper ──
         paper_content = _read_paper(paper_dir)
 
-        # ── 2. Review (new session each round) ──
+        # ── 2. N independent reviews (each with fresh session) ──
+        individual_replies = []
+        individual_parsed = []
+        for reviewer_id in range(1, num_reviewers + 1):
+            reply = _run_single_review(
+                paper_content=paper_content, paper_dir=paper_dir,
+                venue=venue, venue_criteria=venue_criteria,
+                round_num=round_num, max_rounds=max_rounds,
+                difficulty=difficulty, reviewer_memory=reviewer_memory,
+                review_runtime=review_runtime,
+            )
+            individual_replies.append(reply)
+            try:
+                parsed = parse_json(reply)
+            except ValueError:
+                parsed = {"score": 0, "weaknesses": [], "strengths": []}
+            parsed["reviewer_id"] = reviewer_id
+            individual_parsed.append(parsed)
+
+        # ── 3. Area Chair meta-review ──
+        all_reviews_text = "\n\n---\n\n".join(
+            f"### Reviewer {i+1} (Score: {p.get('score', '?')})\n\n{r}"
+            for i, (r, p) in enumerate(zip(individual_replies, individual_parsed))
+        )
+
         if hasattr(review_runtime, 'reset'):
             review_runtime.reset()
+        meta_reply = _meta_review(
+            individual_reviews=all_reviews_text,
+            venue=venue,
+            runtime=review_runtime,
+        )
 
-        if difficulty == "medium":
-            reply = _review_medium(
-                paper_content, venue, venue_criteria,
-                round_num, max_rounds, review_runtime,
-            )
-        elif difficulty == "hard":
-            reply = _review_hard(
-                paper_content, venue, venue_criteria,
-                round_num, max_rounds, reviewer_memory, review_runtime,
-            )
-        else:  # nightmare
-            reply = _review_nightmare(
-                paper_dir, venue, venue_criteria,
-                round_num, max_rounds, reviewer_memory, review_runtime,
-            )
-
-        # ── 3. Parse score / verdict / weaknesses ──
+        # ── 4. Parse meta-review ──
         try:
-            review = parse_json(reply)
+            review = parse_json(meta_reply)
         except ValueError:
-            review = {"score": 0, "passed": False, "weaknesses": [], "strengths": []}
+            # Fallback: average individual scores
+            scores = [p.get("score", 0) for p in individual_parsed]
+            avg_score = sum(scores) / len(scores) if scores else 0
+            all_weaknesses = [w for p in individual_parsed for w in p.get("weaknesses", [])]
+            all_strengths = [s for p in individual_parsed for s in p.get("strengths", [])]
+            review = {
+                "score": avg_score,
+                "weaknesses": all_weaknesses,
+                "strengths": all_strengths,
+                "individual_scores": scores,
+            }
+
         review["round"] = round_num
-        review["full_review"] = reply
+        review["full_review"] = meta_reply
+        review["individual_reviews"] = individual_replies
+        review["individual_parsed"] = individual_parsed
         review["difficulty"] = difficulty
         review["timestamp"] = ts
+        review["num_reviewers"] = num_reviewers
 
         # Accumulate reviewer memory (hard/nightmare)
         if difficulty in ("hard", "nightmare"):
             reviewer_memory += (
-                f"\n## Round {round_num} — Score: {review.get('score', 0)}/10\n"
-                f"- **Suspicions**: {reply[:500]}\n"
+                f"\n## Round {round_num} — Meta Score: {review.get('score', 0)}/10\n"
+                f"- **Suspicions**: {meta_reply[:500]}\n"
             )
 
-        # ── 4. Debate: author rebuts, reviewer rules (hard/nightmare) ──
+        # ── 5. Debate (hard/nightmare) ──
         if difficulty in ("hard", "nightmare") and review.get("weaknesses"):
             review["debate_transcript"] = _run_debate(
                 review["weaknesses"], paper_content,
                 exec_runtime, review_runtime,
             )
 
-        # ── 5. Log to AUTO_REVIEW.md ──
+        # ── 6. Log to AUTO_REVIEW.md ──
         reviews.append(review)
         _save_review_log(log_path, reviews)
 
         if callback and callback({"type": "review", **review}) is False:
             break
 
-        # ── 6. Stop if passed ──
+        # ── 7. Stop if passed ──
         score = review.get("score", 0)
         verdict = str(review.get("verdict", "")).lower()
         passed_by_score = score >= pass_threshold
@@ -481,9 +577,9 @@ def review_loop(
         if passed_by_score or passed_by_verdict:
             return {"passed": True, "rounds": round_num,
                     "final_score": score, "reviews": reviews,
-                    "difficulty": difficulty}
+                    "difficulty": difficulty, "num_reviewers": num_reviewers}
 
-        # ── 7. Fix paper (only if auto_fix enabled) ──
+        # ── 8. Fix paper (only if auto_fix enabled) ──
         if not auto_fix:
             break
 
@@ -492,7 +588,7 @@ def review_loop(
 
         fix_paper(
             paper_content=paper_content[:15000],
-            review_feedback=reply[:5000],
+            review_feedback=meta_reply[:5000],
             round_num=round_num,
             runtime=exec_runtime,
         )
@@ -504,7 +600,7 @@ def review_loop(
     return {
         "passed": False, "rounds": max_rounds,
         "final_score": final_score, "reviews": reviews,
-        "difficulty": difficulty,
+        "difficulty": difficulty, "num_reviewers": num_reviewers,
     }
 
 
