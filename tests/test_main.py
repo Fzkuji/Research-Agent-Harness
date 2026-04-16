@@ -151,7 +151,7 @@ class TestResearchAgent:
             _json({"stage": "done", "reasoning": "task complete", "done": True}),
         ]
         rt = MockRuntime(responses)
-        result = research_agent(task="polish my text", max_stages=3, steps_per_stage=3, runtime=rt)
+        result = research_agent(task="polish my text", runtime=rt)
 
         assert result["success"] is True
         assert result["stages_completed"] >= 1
@@ -168,30 +168,28 @@ class TestResearchAgent:
             _json({"stage": "done", "reasoning": "done", "done": True}),
         ]
         rt = MockRuntime(responses)
-        result = research_agent(task="test", max_stages=3, steps_per_stage=3, runtime=rt)
+        result = research_agent(task="test", runtime=rt)
 
         assert result["success"] is True
         assert any("error" in h for h in result["history"])
 
-    def test_max_stages_respected(self):
-        """Loop stops after max_stages even if LLM never says done."""
-        from research_harness.main import research_agent
+    def test_safety_limit_stops_loop(self):
+        """Loop stops at internal safety limit even if LLM never says done."""
+        from research_harness.main import research_agent, _MAX_STAGES
 
-        # LLM always picks writing, always calls polish_rigorous, never says done
         always_writing = _json({"stage": "writing", "reasoning": "more polish", "sub_task": "polish", "done": False})
         always_polish = _json({"call": "polish_rigorous", "args": {"text": "x"}, "reasoning": "polish"})
         mock_polish_result = "polished"
         stage_done = _json({"stage_done": True, "reasoning": "ok"})
 
         responses = []
-        for _ in range(5):
+        for _ in range(_MAX_STAGES + 5):
             responses.extend([always_writing, always_polish, mock_polish_result, stage_done])
 
         rt = MockRuntime(responses)
-        result = research_agent(task="test", max_stages=2, steps_per_stage=2, runtime=rt)
+        result = research_agent(task="test", runtime=rt)
 
-        # Should stop at 2 stages (not run forever)
-        assert result["stages_completed"] <= 3  # 2 stages + maybe done
+        assert result["stages_completed"] <= _MAX_STAGES + 1
 
     def test_history_records_steps(self):
         """History captures stage names, sub_tasks, and step results."""
@@ -205,7 +203,7 @@ class TestResearchAgent:
             _json({"done": True, "reasoning": "all done"}),
         ]
         rt = MockRuntime(responses)
-        result = research_agent(task="test", max_stages=3, steps_per_stage=3, runtime=rt)
+        result = research_agent(task="test", runtime=rt)
 
         writing_stage = [h for h in result["history"] if h.get("stage") == "writing"]
         assert len(writing_stage) == 1
@@ -305,7 +303,7 @@ class TestOperationLog:
             _json({"done": True, "reasoning": "complete"}),
         ]
         rt = MockRuntime(responses)
-        research_agent(task="test log", max_stages=2, steps_per_stage=2, log_file=log_path, runtime=rt)
+        research_agent(task="test log", log_file=log_path, runtime=rt)
 
         assert os.path.exists(log_path)
         with open(log_path) as f:
@@ -321,5 +319,5 @@ class TestOperationLog:
 
         responses = [_json({"done": True, "reasoning": "nothing to do"})]
         rt = MockRuntime(responses)
-        result = research_agent(task="test", max_stages=1, steps_per_stage=1, runtime=rt)
+        result = research_agent(task="test", runtime=rt)
         assert result["success"] is True

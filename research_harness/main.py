@@ -168,6 +168,10 @@ Args:
 # research_agent — top-level entry
 # ═══════════════════════════════════════════
 
+_MAX_STAGES = 10
+_MAX_STEPS_PER_STAGE = 20
+
+
 @agentic_function(
     compress=True,
     summarize={"siblings": -1},
@@ -178,21 +182,11 @@ Args:
             "placeholder": "e.g. Survey recent work on LLM uncertainty",
             "multiline": True,
         },
-        "max_stages": {
-            "description": "Maximum number of stage transitions",
-            "options": ["3", "5", "10"],
-        },
-        "steps_per_stage": {
-            "description": "Maximum function calls per stage",
-            "options": ["3", "5", "10"],
-        },
         "runtime": {"hidden": True},
     },
 )
 def research_agent(
     task: str,
-    max_stages: int = 5,
-    steps_per_stage: int = 5,
     log_file: str = None,
     runtime: Runtime = None,
     review_runtime: Runtime = None,
@@ -208,11 +202,9 @@ ARIS design where the reviewer and author are adversarial by being different mod
 
 Args:
     task: What the user wants to accomplish.
-    max_stages: Maximum stage transitions (default: 5).
-    steps_per_stage: Maximum function calls per stage (default: 5).
-    log_file: Path to operation log file (optional, enables persistent logging).
-    runtime: LLM runtime instance (executor — writes, fixes, implements).
-    review_runtime: Separate LLM runtime for review (reviewer — different model recommended).
+    log_file: Path to operation log file (optional).
+    runtime: LLM runtime instance (executor).
+    review_runtime: Separate LLM runtime for review (different model recommended).
 
 Returns:
     dict with: task, success, stages_completed, history
@@ -226,7 +218,7 @@ Returns:
     history = []
     progress_parts = []
 
-    for stage_num in range(1, max_stages + 1):
+    for stage_num in range(1, _MAX_STAGES + 1):
         # Level 1: Pick stage
         progress = "\n".join(progress_parts) if progress_parts else ""
         stage_decision = _pick_stage(task=task, progress=progress, runtime=runtime)
@@ -254,7 +246,7 @@ Returns:
         stage_context_parts = []
         stage_history = []
 
-        for step_num in range(1, steps_per_stage + 1):
+        for step_num in range(1, _MAX_STEPS_PER_STAGE + 1):
             context = "\n".join(stage_context_parts) if stage_context_parts else ""
             step_result = _stage_step(
                 stage=stage, sub_task=sub_task, context=context,
@@ -356,8 +348,6 @@ def main():
     parser.add_argument("--model", help="Model name override")
     parser.add_argument("--review-provider", help="Review model provider (default: codex for cross-model review)")
     parser.add_argument("--review-model", help="Review model name (default: gpt-5.4-mini)")
-    parser.add_argument("--max-stages", type=int, default=5, help="Max stage transitions (default: 5)")
-    parser.add_argument("--steps-per-stage", type=int, default=5, help="Max steps per stage (default: 5)")
     parser.add_argument("--log", help="Path to operation log file (enables persistent logging)")
     parser.add_argument("--list", action="store_true", help="List all available functions")
     args = parser.parse_args()
@@ -391,15 +381,12 @@ def main():
     print(f"Executor: {args.provider or 'auto'}/{args.model or 'default'}")
     if review_rt:
         print(f"Reviewer: {args.review_provider or 'openai'}/{args.review_model or 'default'}")
-    print(f"Max stages: {args.max_stages}, Steps/stage: {args.steps_per_stage}")
     if args.log:
         print(f"Log: {args.log}")
     print()
 
     result = research_agent(
         task=task,
-        max_stages=args.max_stages,
-        steps_per_stage=args.steps_per_stage,
         log_file=args.log,
         runtime=rt,
         review_runtime=review_rt,

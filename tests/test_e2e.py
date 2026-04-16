@@ -49,8 +49,6 @@ class TestTravelAgentProject:
             task=f"Review the paper at {TRAVEL_AGENT_PROJECT} as an EMNLP reviewer. "
                  f"Read all .tex files, identify strengths and weaknesses, "
                  f"and save the review to that project directory.",
-            max_stages=2,
-            steps_per_stage=3,
             log_file=log_file,
             runtime=rt,
         )
@@ -63,8 +61,6 @@ class TestTravelAgentProject:
             task=f"Read the introduction at {TRAVEL_AGENT_PROJECT}/1.\\ Introduction.tex, "
                  f"polish it for EMNLP submission quality, "
                  f"and save the polished version back to the project.",
-            max_stages=2,
-            steps_per_stage=3,
             runtime=rt,
         )
         _print_result(result)
@@ -76,8 +72,6 @@ class TestTravelAgentProject:
             task=f"Based on the paper at {TRAVEL_AGENT_PROJECT}, "
                  f"survey recent work on LLM-based travel planning agents and multi-agent frameworks. "
                  f"Save the survey results to the project directory.",
-            max_stages=2,
-            steps_per_stage=5,
             runtime=rt,
         )
         _print_result(result)
