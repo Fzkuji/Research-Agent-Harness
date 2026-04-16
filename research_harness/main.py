@@ -23,7 +23,6 @@ from research_harness.registry import (
     stage_functions,
 )
 from research_harness.utils import parse_json
-from research_harness import log as oplog
 
 
 # ═══════════════════════════════════════════
@@ -187,7 +186,6 @@ _MAX_STEPS_PER_STAGE = 20
 )
 def research_agent(
     task: str,
-    log_file: str = None,
     runtime: Runtime = None,
     review_runtime: Runtime = None,
 ) -> dict:
@@ -202,7 +200,6 @@ ARIS design where the reviewer and author are adversarial by being different mod
 
 Args:
     task: What the user wants to accomplish.
-    log_file: Path to operation log file (optional).
     runtime: LLM runtime instance (executor).
     review_runtime: Separate LLM runtime for review (different model recommended).
 
@@ -213,8 +210,6 @@ Returns:
         raise ValueError("research_agent() requires a runtime argument")
 
     # Init log
-    oplog.log_session(log_file, task)
-
     history = []
     progress_parts = []
 
@@ -226,7 +221,7 @@ Returns:
         if stage_decision.get("done"):
             reasoning = stage_decision.get('reasoning', '')[:80]
             print(f"  [stage {stage_num}] DONE: {reasoning}", file=sys.stderr)
-            oplog.log_done(log_file, reasoning)
+
             history.append({"stage_num": stage_num, "stage": "done", "decision": stage_decision})
             break
 
@@ -240,7 +235,7 @@ Returns:
             continue
 
         print(f"  [stage {stage_num}] → {stage}: {reasoning[:80]}", file=sys.stderr)
-        oplog.log_stage(log_file, stage_num, stage, sub_task)
+
 
         # Level 2: Execute within stage
         stage_context_parts = []
@@ -259,7 +254,7 @@ Returns:
             args_summary = step_result.get("args_summary", "")
 
             print(f"    [{stage}/{step_num}] {call}: {'OK' if success else 'FAIL'}", file=sys.stderr)
-            oplog.log_step(log_file, call, args_summary, success, result_preview[:100])
+
 
             stage_history.append(step_result)
             stage_context_parts.append(f"  {call} → {result_preview}")
@@ -348,7 +343,6 @@ def main():
     parser.add_argument("--model", help="Model name override")
     parser.add_argument("--review-provider", help="Review model provider (default: codex for cross-model review)")
     parser.add_argument("--review-model", help="Review model name (default: gpt-5.4-mini)")
-    parser.add_argument("--log", help="Path to operation log file (enables persistent logging)")
     parser.add_argument("--list", action="store_true", help="List all available functions")
     args = parser.parse_args()
 
@@ -381,13 +375,10 @@ def main():
     print(f"Executor: {args.provider or 'auto'}/{args.model or 'default'}")
     if review_rt:
         print(f"Reviewer: {args.review_provider or 'openai'}/{args.review_model or 'default'}")
-    if args.log:
-        print(f"Log: {args.log}")
     print()
 
     result = research_agent(
         task=task,
-        log_file=args.log,
         runtime=rt,
         review_runtime=review_rt,
     )

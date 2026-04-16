@@ -23,11 +23,6 @@ def rt():
     return _create_runtime(provider=provider)
 
 
-@pytest.fixture
-def log_file(tmp_path):
-    return str(tmp_path / "harness_log.md")
-
-
 def _print_result(result):
     print(f"\n[RESULT] success={result['success']}, stages={result['stages_completed']}")
     for h in result["history"]:
@@ -43,13 +38,12 @@ def _print_result(result):
 class TestTravelAgentProject:
     """Tests that work ON the Travel Agent research project."""
 
-    def test_review_existing_paper(self, rt, log_file):
+    def test_review_existing_paper(self, rt):
         """Review the current state of the Travel Agent paper and identify what needs work."""
         result = research_agent(
             task=f"Review the paper at {TRAVEL_AGENT_PROJECT} as an EMNLP reviewer. "
                  f"Read all .tex files, identify strengths and weaknesses, "
                  f"and save the review to that project directory.",
-            log_file=log_file,
             runtime=rt,
         )
         _print_result(result)
