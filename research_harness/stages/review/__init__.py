@@ -37,39 +37,11 @@ def _read_paper(paper_dir: str) -> str:
     return "\n\n".join(parts)
 
 
-def _save_review_log(log_path: str, reviews: list[dict]):
-    """Write cumulative review log to AUTO_REVIEW.md."""
-    lines = ["# Auto Review Log\n"]
-    for r in reviews:
-        ts = r.get("timestamp", datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
-        lines.append(f"## Round {r['round']} ({ts})\n")
-        lines.append(f"### Assessment")
-        lines.append(f"- **Score**: {r.get('score', '?')}/10")
-        lines.append(f"- **Verdict**: {r.get('verdict', 'unknown')}")
-        lines.append(f"- **Difficulty**: {r.get('difficulty', 'medium')}")
-        if r.get("weaknesses"):
-            lines.append("\n### Weaknesses")
-            for i, w in enumerate(r["weaknesses"], 1):
-                lines.append(f"{i}. {w}")
-        if r.get("strengths"):
-            lines.append("\n### Strengths")
-            for s in r["strengths"]:
-                lines.append(f"- {s}")
-        if r.get("full_review"):
-            lines.append("\n### Full Review")
-            lines.append("\n<details>")
-            lines.append("<summary>Click to expand</summary>\n")
-            lines.append(r["full_review"])
-            lines.append("\n</details>")
-        if r.get("debate_transcript"):
-            lines.append("\n### Debate")
-            lines.append("\n<details>")
-            lines.append("<summary>Click to expand</summary>\n")
-            lines.append(r["debate_transcript"])
-            lines.append("\n</details>")
-        lines.append("")
-    with open(log_path, "w") as f:
-        f.write("\n".join(lines))
+def _save(directory: str, filename: str, content: str):
+    """Save raw content to file."""
+    os.makedirs(directory, exist_ok=True)
+    with open(os.path.join(directory, filename), "w") as f:
+        f.write(content)
 
 
 # ---------------------------------------------------------------------------
@@ -476,11 +448,11 @@ def review_loop(
 
     paper_dir = os.path.expanduser(paper_dir)
     project_dir = os.path.dirname(paper_dir)
-    log_path = os.path.join(project_dir, "AUTO_REVIEW.md")
     reviews = []
     reviewer_memory = ""
 
     venue_criteria = lookup_venue_criteria(venue=venue, runtime=review_runtime)
+    passed = False
 
     for round_num in range(1, max_rounds + 1):
         ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -489,6 +461,7 @@ def review_loop(
         paper_content = _read_paper(paper_dir)
 
         # ── 2. N independent reviews (each with fresh session) ──
+        review_dir = os.path.join(project_dir, "review_logs")
         individual_replies = []
         individual_parsed = []
         for reviewer_id in range(1, num_reviewers + 1):
@@ -500,6 +473,9 @@ def review_loop(
                 review_runtime=review_runtime,
             )
             individual_replies.append(reply)
+            # Save raw reviewer output immediately
+            _save(review_dir, f"round_{round_num}_reviewer_{reviewer_id}.md", reply)
+
             try:
                 parsed = parse_json(reply)
             except ValueError:
@@ -520,12 +496,13 @@ def review_loop(
             venue=venue,
             runtime=review_runtime,
         )
+        # Save raw AC output
+        _save(review_dir, f"round_{round_num}_meta_review.md", meta_reply)
 
         # ── 4. Parse meta-review ──
         try:
             review = parse_json(meta_reply)
         except ValueError:
-            # Fallback: average individual scores
             scores = [p.get("score", 0) for p in individual_parsed]
             avg_score = sum(scores) / len(scores) if scores else 0
             all_weaknesses = [w for p in individual_parsed for w in p.get("weaknesses", [])]
@@ -559,9 +536,10 @@ def review_loop(
                 exec_runtime, review_runtime,
             )
 
-        # ── 6. Log to AUTO_REVIEW.md ──
+        # ── 6. Save debate + accumulate reviews ──
+        if review.get("debate_transcript"):
+            _save(review_dir, f"round_{round_num}_debate.md", review["debate_transcript"])
         reviews.append(review)
-        _save_review_log(log_path, reviews)
 
         if callback and callback({"type": "review", **review}) is False:
             break
@@ -575,9 +553,8 @@ def review_loop(
             or ("ready" in verdict and "not ready" not in verdict)
         )
         if passed_by_score or passed_by_verdict:
-            return {"passed": True, "rounds": round_num,
-                    "final_score": score, "reviews": reviews,
-                    "difficulty": difficulty, "num_reviewers": num_reviewers}
+            passed = True
+            break
 
         # ── 8. Fix paper (only if auto_fix enabled) ──
         if not auto_fix:
@@ -586,21 +563,60 @@ def review_loop(
         if hasattr(exec_runtime, 'reset'):
             exec_runtime.reset()
 
-        fix_paper(
+        fix_reply = fix_paper(
             paper_content=paper_content[:15000],
             review_feedback=meta_reply[:5000],
             round_num=round_num,
             runtime=exec_runtime,
         )
+        _save(review_dir, f"round_{round_num}_fix.md", fix_reply)
 
         if callback:
             callback({"type": "fix", "round": round_num})
+    else:
+        passed = False
 
+    # ── Build summary ──
     final_score = reviews[-1].get("score", 0) if reviews else 0
+    total_rounds = reviews[-1].get("round", 0) if reviews else 0
+
+    summary_lines = [
+        f"# Review Summary",
+        f"",
+        f"- **Paper**: {paper_dir}",
+        f"- **Venue**: {venue}",
+        f"- **Difficulty**: {difficulty}",
+        f"- **Reviewers per round**: {num_reviewers}",
+        f"- **Rounds completed**: {total_rounds}",
+        f"- **Auto-fix**: {'enabled' if auto_fix else 'disabled'}",
+        f"- **Result**: {'PASSED' if passed else 'NOT PASSED'} (score: {final_score})",
+        f"",
+    ]
+
+    for r in reviews:
+        rn = r.get("round", "?")
+        summary_lines.append(f"## Round {rn}")
+        for ip in r.get("individual_parsed", []):
+            rid = ip.get("reviewer_id", "?")
+            s = ip.get("score", "?")
+            summary_lines.append(f"- Reviewer {rid}: **{s}** → `review_logs/round_{rn}_reviewer_{rid}.md`")
+        summary_lines.append(f"- Area Chair: **{r.get('score', '?')}** → `review_logs/round_{rn}_meta_review.md`")
+        if r.get("debate_transcript"):
+            summary_lines.append(f"- Debate → `review_logs/round_{rn}_debate.md`")
+        summary_lines.append(f"- Verdict: {r.get('verdict', 'N/A')}")
+        summary_lines.append("")
+
+    summary = "\n".join(summary_lines)
+    _save(project_dir, "AUTO_REVIEW.md", summary)
+
     return {
-        "passed": False, "rounds": max_rounds,
-        "final_score": final_score, "reviews": reviews,
-        "difficulty": difficulty, "num_reviewers": num_reviewers,
+        "passed": passed,
+        "rounds": total_rounds,
+        "final_score": final_score,
+        "reviews": reviews,
+        "difficulty": difficulty,
+        "num_reviewers": num_reviewers,
+        "summary": summary,
     }
 
 
