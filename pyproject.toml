@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 dependencies = [
-    "agentic-programming",
+    "openprogram @ git+https://github.com/Fzkuji/OpenProgram.git",
 ]
 
 [project.scripts]
