@@ -38,13 +38,20 @@ STAGES: dict[str, str] = {
 # ---------------------------------------------------------------------------
 
 _ENTRIES: dict[str, tuple[str, str, str]] = {
-    # Literature — individual functions + orchestrator
+    # Literature — single-step loop driven by run_literature; leaves used internally
+    "run_literature":           ("research_harness.stages.literature", "run_literature", "literature"),
+    "seed_surveys":             ("research_harness.stages.literature", "seed_surveys", "literature"),
+    "extract_framework":        ("research_harness.stages.literature", "extract_framework", "literature"),
+    "search_papers_for_topic":  ("research_harness.stages.literature", "search_papers_for_topic", "literature"),
+    "annotate_papers":          ("research_harness.stages.literature", "annotate_papers", "literature"),
+    "evolve_framework":         ("research_harness.stages.literature", "evolve_framework", "literature"),
+    "synthesize_literature":    ("research_harness.stages.literature", "synthesize_literature", "literature"),
+    # Legacy / complementary leaves (still available; run_literature does not chain them)
     "survey_topic":             ("research_harness.stages.literature", "survey_topic", "literature"),
     "identify_gaps":            ("research_harness.stages.literature", "identify_gaps", "literature"),
     "search_arxiv":             ("research_harness.stages.literature", "search_arxiv", "literature"),
     "search_semantic_scholar":  ("research_harness.stages.literature", "search_semantic_scholar", "literature"),
     "comprehensive_lit_review": ("research_harness.stages.literature", "comprehensive_lit_review", "literature"),
-    "run_literature":           ("research_harness.stages.literature", "run_literature", "literature"),
     # Idea — individual functions + orchestrator
     "generate_ideas":           ("research_harness.stages.idea", "generate_ideas", "idea"),
     "check_novelty":            ("research_harness.stages.idea", "check_novelty", "idea"),

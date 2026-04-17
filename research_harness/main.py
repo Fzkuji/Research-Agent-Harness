@@ -49,6 +49,15 @@ Return JSON:
 
 Set done=true ONLY when the overall task is FULLY complete.
 
+Workspace routing — IMPORTANT:
+Every research project writes to a single workspace directory shared across
+stages. If the user's task mentions an absolute path (e.g. "/Users/.../X",
+"~/...") or a clearly named project folder, COPY that path (or project name)
+verbatim into `sub_task`. If the task only names a research direction (no
+path), write that direction into `sub_task` so the next level can derive a
+workspace from it. The next level (stage dispatcher) needs this information
+to construct `output_dir`; do NOT strip it out.
+
 Args:
     task: The overall research task.
     progress: Summary of what has been accomplished so far.
@@ -100,9 +109,60 @@ Return JSON:
 
 Rules:
 - You MUST pick a function from the list above. Do NOT attempt to do the work yourself.
-- Set stage_done=true ONLY when all necessary work in this stage has been completed by previous function calls.
+- `stage_done` describes the state of PREVIOUS steps (seen in the context above), NOT this call.
+  - Set stage_done=true ONLY when previous steps have already completed this stage and no further call is needed. In that case, omit `call` (set to null).
+  - If you are requesting a call this turn, ALWAYS set stage_done=false. The stage cannot be done before this call has executed.
 - Do NOT include `runtime`, `exec_runtime`, `review_runtime`, or `project_dir` in args — they are auto-injected.
 - Prefer orchestrator functions (run_literature, run_idea, run_experiments, review_loop, paper_improvement_loop, etc.) for complete workflows. They chain multiple steps internally.
+
+Workspace path — when calling an orchestrator that accepts `output_dir`
+(run_literature, run_idea, run_experiments, review_loop, ...), YOU MUST
+construct and pass `output_dir` as an ABSOLUTE path in this shape:
+
+    output_dir = <base> / <project_name> / <stage_folder>
+
+Where:
+  base          — if the task/sub_task/context mentions an absolute path
+                  (e.g. "/Users/.../LLM Distillation", "~/..."), treat the
+                  DIRECTORY CONTAINING that path as `base`, and reuse the
+                  LAST COMPONENT as `project_name`.
+                  Example: user said "/Users/X/Documents/LLM Distillation"
+                           → base="/Users/X/Documents",
+                             project_name="LLM Distillation".
+                  If no path is mentioned, default `base` to
+                  "<HOME>/Documents" (the absolute HOME is given in the
+                  runtime-provided "HOME: ..." line below).
+  project_name  — human-readable name for the overall research project,
+                  derived from the task. Use the SAME project_name across
+                  every stage of the same project (literature → idea →
+                  experiment → writing all share one folder).
+                  Example: "LLM Distillation", "Retrieval-Augmented Generation".
+  stage_folder  — readable folder for THIS stage:
+                    literature   → "literature review"
+                    idea         → "ideas"
+                    experiment   → "experiments"
+                    writing      → "paper"
+                    review       → "review"
+                    rebuttal     → "rebuttal"
+                    presentation → "presentation"
+                    theory       → "theory"
+                    knowledge    → "knowledge"
+                    project      → "" (write directly under the project root)
+
+Examples (replace <HOME> with the actual path given below):
+  Task: "调研 LLM 蒸馏"  (no path given, stage=literature)
+    → output_dir = "<HOME>/Documents/LLM Distillation/literature review"
+  Task: "研究 retrieval，存到 ~/Documents/RAG"  (stage=idea)
+    → output_dir = "<HOME>/Documents/RAG/ideas"
+  Task: "继续之前在 <HOME>/Documents/LLM Distillation 的调研"
+        (stage=literature)
+    → output_dir = "<HOME>/Documents/LLM Distillation/literature review"
+    (If this directory already has material from a prior run, the orchestrator
+    will pick up where it left off — do NOT invent a fresh folder.)
+
+Always pass ABSOLUTE paths. Do not pass relative paths like "auto_literature".
+Never invent a sibling folder like "auto_xxx" — use the readable stage folder
+name from the list above.
 
 Args:
     stage: Current research stage name.
@@ -111,11 +171,15 @@ Args:
     runtime: LLM runtime instance.
     review_runtime: Separate runtime for review tasks (different model).
 """
+    import os as _os
     functions = build_stage_functions(stage)
+    home = _os.path.expanduser("~")
     reply = runtime.exec(content=[
         {"type": "text", "text": (
             f"Sub-task: {sub_task}\n\n"
             f"Context from previous steps:\n{context or '(first step)'}\n\n"
+            f"HOME: {home}\n"
+            f"(Use this absolute path wherever the dispatcher prompt references <HOME>.)\n\n"
             f"{functions}"
             f"{_PERSISTENCE_REMINDER}"
         )},
@@ -123,18 +187,27 @@ Args:
     try:
         decision = parse_json(reply)
     except ValueError:
-        return {"call": None, "result": reply[:500], "success": True, "stage_done": True}
+        # Parse failure is a real failure — do NOT mark the stage as done.
+        return {"call": None, "result": f"JSON parse failed: {reply[:500]}",
+                "success": False, "stage_done": False}
 
-    # Check if LLM signals stage completion
-    if decision.get("stage_done") or decision.get("done"):
-        return {"call": None, "result": decision.get("reasoning", "stage complete"), "success": True, "stage_done": True}
+    call_target = decision.get("call") or ""
+    args = decision.get("args") or {}
+    stage_done_flag = bool(decision.get("stage_done") or decision.get("done"))
 
-    call_target = decision.get("call", "")
-    args = decision.get("args", {})
+    # No call requested — only then honor stage_done as "stage already finished".
+    if not call_target:
+        return {
+            "call": None,
+            "result": decision.get("reasoning", "stage complete" if stage_done_flag else "no function selected"),
+            "success": True,
+            "stage_done": stage_done_flag,
+        }
 
     func = get_function(call_target)
     if func is None:
-        return {"call": call_target, "result": f"Unknown function: {call_target}", "success": False}
+        return {"call": call_target, "result": f"Unknown function: {call_target}",
+                "success": False, "stage_done": False}
 
     # Inject auto-params: review_runtime gets the dedicated reviewer,
     # runtime/exec_runtime get the main executor
@@ -154,12 +227,15 @@ Args:
             "args_summary": ", ".join(f"{k}={str(v)[:30]}" for k, v in args.items() if k not in AUTO_PARAMS),
             "result": result_str[:3000],
             "success": True,
+            # Only propagate stage_done after the call actually executed.
+            "stage_done": stage_done_flag,
         }
     except Exception as e:
         return {
             "call": call_target,
             "result": f"{e.__class__.__name__}: {e}",
             "success": False,
+            "stage_done": False,
         }
 
 

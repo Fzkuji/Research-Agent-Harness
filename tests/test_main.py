@@ -107,13 +107,33 @@ class TestStageStep:
         assert result["stage_done"] is True
         assert result["call"] is None
 
-    def test_bad_json_returns_done(self):
+    def test_bad_json_is_failure_not_done(self):
+        """Parse failure must NOT silently mark the stage as done."""
         from research_harness.main import _stage_step
 
         rt = MockRuntime("I think the task is complete now.")
         result = _stage_step(stage="writing", sub_task="task", context="", runtime=rt)
-        assert result["success"] is True
+        assert result["success"] is False
         assert result["call"] is None
+        assert result["stage_done"] is False
+
+    def test_call_executed_even_if_stage_done_flag_set(self):
+        """If LLM returns both a call AND stage_done=true, the call must still run.
+        Guards against the bug where stage_done short-circuited the call."""
+        from research_harness.main import _stage_step
+
+        rt = MockRuntime(_json({
+            "call": "polish_rigorous",
+            "args": {"text": "draft"},
+            "reasoning": "polish then stop",
+            "stage_done": True,
+        }))
+        result = _stage_step(stage="writing", sub_task="polish", context="", runtime=rt)
+        assert result["call"] == "polish_rigorous"
+        assert result["success"] is True
+        assert result["stage_done"] is True
+        # 2 calls: dispatcher + polish_rigorous's own exec
+        assert len(rt.calls) == 2
 
     def test_context_passed_to_llm(self):
         from research_harness.main import _stage_step
