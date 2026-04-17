@@ -31,7 +31,7 @@ from __future__ import annotations
 import os
 from typing import Optional
 
-from agentic.runtime import Runtime
+from openprogram.agentic_programming.runtime import Runtime
 
 
 STAGES = [
@@ -123,7 +123,7 @@ def _stage_literature(project_dir, topic, runtime):
     from research_harness.stages.literature import run_literature
     if not topic:
         return {"status": "skipped", "reason": "no topic provided"}
-    return run_literature(topic=topic, project_dir=project_dir, runtime=runtime)
+    return run_literature(direction=topic, output_dir=project_dir, runtime=runtime)
 
 
 def _stage_idea(project_dir, topic, runtime):

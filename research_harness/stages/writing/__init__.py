@@ -23,7 +23,7 @@ from research_harness.stages.writing.write_section import write_section
 
 import os
 from typing import Optional
-from agentic.runtime import Runtime
+from openprogram.agentic_programming.runtime import Runtime
 
 
 def gather_context(project_dir: str, section: str) -> str:

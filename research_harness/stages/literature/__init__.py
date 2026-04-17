@@ -16,8 +16,8 @@ import os
 import sys
 from typing import Any
 
-from agentic.function import agentic_function
-from agentic.runtime import Runtime
+from openprogram.agentic_programming.function import agentic_function
+from openprogram.agentic_programming.runtime import Runtime
 
 from research_harness.stages.literature.annotate_papers import annotate_papers
 from research_harness.stages.literature.comprehensive_lit_review import comprehensive_lit_review
@@ -65,7 +65,7 @@ Available actions (pick exactly one):
                       synthesis, gaps, ideas, bibliography). Marks stage done.
                       args: {{}}
 
-Rules for picking:
+Rules for picking — FIRST-PASS mode (no prior synthesize in state):
 - Cold start (no surveys): seed_surveys.
 - Have surveys, no framework: extract_framework.
 - Framework exists, leaves thin (<5 papers) and not yet searched: search_papers
@@ -77,6 +77,32 @@ Rules for picking:
   annotated papers AND no orphans remain: synthesize.
 - If none of the above fits, pick the action that most reduces the biggest
   remaining weakness. Explain in `reasoning`.
+
+Rules for picking — REFINEMENT mode (prior synthesize exists):
+Your job is to IMPROVE what's already there, not redo it. The state summary
+will show `mode: REFINEMENT` and `N non-trivial improvements since` the last
+synthesize. Priorities, in order:
+  1. If papers at tier=abstract_only exist, re-run search_papers on their topic
+     with `top_k_pdf` large enough to include them — so they upgrade to PDF
+     tier. This is the most valuable cheap improvement.
+  2. If any leaf has <5 papers, run search_papers for it.
+  3. If the research direction is time-sensitive (LLM-era topics, fast fields)
+     and the newest paper in state is >12 months old, run search_papers or
+     seed_surveys with a query restricted to the latest year.
+  4. If annotations are thin (many summaries based on abstract_only), re-run
+     annotate_papers after step 1 upgraded them.
+  5. If new papers materially shifted the structure (new orphan cluster,
+     a leaf grew past 15), run evolve_framework.
+  6. Re-synthesize ONLY when BOTH:
+       - ≥3 non-trivial improvements have been made since the last synthesize,
+         AND
+       - convergence is re-achieved (stable framework, no orphans, all leaves
+         ≥5 annotated papers).
+     If you believe no meaningful improvement is possible (already saturated),
+     pick action=synthesize with reasoning="nothing to improve; finalize" and
+     the synthesize leaf will read existing files and touch up in place.
+  7. Never pick the same no-op synthesize back-to-back. If you picked it and
+     nothing changed, prefer stage_done or a search/expand action.
 
 Output format — return ONE JSON object, nothing else:
 ```json
@@ -129,13 +155,20 @@ def _init_state(direction: str) -> dict:
 
 
 def _load_or_init_state(output_dir: str, direction: str) -> dict:
+    """Resume state if state.json exists in output_dir, else init a new one.
+
+    We intentionally do NOT require the stored direction to match the
+    incoming one — output_dir is the resume key. The incoming direction
+    overwrites state["direction"] so the latest phrasing (possibly carrying
+    new intent from the user) flows into the dispatcher prompt.
+    """
     path = os.path.join(output_dir, "state.json")
     if os.path.exists(path):
         try:
             with open(path, "r", encoding="utf-8") as f:
                 state = json.load(f)
-            if state.get("direction") == direction:
-                return state
+            state["direction"] = direction
+            return state
         except (OSError, json.JSONDecodeError):
             pass
     return _init_state(direction)
@@ -146,6 +179,289 @@ def _save_state(output_dir: str, state: dict) -> None:
     try:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(state, f, ensure_ascii=False, indent=2)
+    except OSError:
+        pass
+
+
+# ─── Artifact tree (human-readable md layout) ──────────────────────────────
+
+_FS_FORBIDDEN = r'[<>:"\\|?*\x00-\x1f]'
+
+
+def _slug(s: str) -> str:
+    """Filesystem-safe slug. Preserves spaces and unicode; just strips chars
+    that are illegal on macOS/Linux FS. Keeps names readable."""
+    import re as _re
+    out = _re.sub(_FS_FORBIDDEN, "_", (s or "").strip())
+    return out or "unnamed"
+
+
+def _topic_dir(output_dir: str, topic_path: str) -> str:
+    parts = [_slug(p) for p in (topic_path or "").split("/") if p]
+    return os.path.join(output_dir, "topics", *parts) if parts else os.path.join(output_dir, "topics")
+
+
+def _rel_pdf(pdf_path: str | None, output_dir: str) -> str:
+    if not pdf_path:
+        return "—"
+    try:
+        return os.path.relpath(pdf_path, output_dir)
+    except ValueError:
+        return pdf_path
+
+
+def _render_framework_tree(node: dict | None, papers_by_topic: dict[str, list],
+                           prefix: str = "", depth: int = 0) -> list[str]:
+    if not node:
+        return ["(no framework yet)"]
+    lines = []
+    name = node.get("name", "?")
+    path = f"{prefix}/{name}".strip("/")
+    children = node.get("children") or []
+    if children:
+        lines.append(f"{'  ' * depth}- **{name}** — {node.get('description','')[:80]}")
+        for c in children:
+            lines.extend(_render_framework_tree(c, papers_by_topic, path, depth + 1))
+    else:
+        count = len(papers_by_topic.get(path, []))
+        lines.append(f"{'  ' * depth}- **{name}** ({count} papers) — {node.get('description','')[:80]}")
+    return lines
+
+
+def _index_papers_by_topic(state: dict) -> dict[str, list]:
+    idx: dict[str, list] = {}
+    for p in state["papers"]:
+        for pl in p.get("placements") or []:
+            tp = pl.get("topic_path", "")
+            if not tp:
+                continue
+            idx.setdefault(tp, []).append((_paper_id(p), pl))
+    return idx
+
+
+def _write(path: str, content: str) -> None:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+
+def _write_survey_md(path: str, s: dict, output_dir: str) -> None:
+    authors = ", ".join(s.get("authors", []) or [])
+    toc = s.get("toc", []) or []
+    claims = s.get("key_claims", []) or []
+    content = (
+        f"# {s.get('title', 'Untitled survey')}\n\n"
+        f"- **ID**: {s.get('id', '—')}\n"
+        f"- **Authors**: {authors or '—'}\n"
+        f"- **Year**: {s.get('year', '—')}\n"
+        f"- **Venue**: {s.get('venue', '—')}\n"
+        f"- **PDF**: `{_rel_pdf(s.get('pdf_path'), output_dir)}`\n\n"
+        f"## Abstract\n\n{s.get('abstract', '—')}\n\n"
+        f"## Table of contents\n\n"
+        + ("\n".join(f"- {t}" for t in toc) if toc else "_(none)_")
+        + "\n\n## Key claims\n\n"
+        + ("\n".join(f"- {c}" for c in claims) if claims else "_(none)_")
+        + "\n"
+    )
+    _write(path, content)
+
+
+def _write_paper_md(path: str, p: dict, placement: dict | None,
+                    output_dir: str) -> None:
+    authors = ", ".join(p.get("authors", []) or [])
+    topic = placement.get("topic_path") if placement else "(orphan)"
+    contribution = (placement or {}).get("contribution_summary", "")
+    orphan_note = ""
+    if p.get("is_orphan"):
+        orphan_note = (
+            f"- **Orphan**: yes — suggested topic: "
+            f"{p.get('orphan_suggested_topic') or '—'}\n"
+        )
+    content = (
+        f"# {p.get('title', 'Untitled')}\n\n"
+        f"- **ID**: {p.get('id', '—')}\n"
+        f"- **Authors**: {authors or '—'}\n"
+        f"- **Year**: {p.get('year', '—')}, **Venue**: {p.get('venue', '—')}\n"
+        f"- **Citations**: {p.get('citation_count', '—')}\n"
+        f"- **Topic**: {topic}\n"
+        f"- **Tier**: {p.get('tier', '—')} "
+        f"(source used: {p.get('source_used') or '—'})\n"
+        f"- **PDF**: `{_rel_pdf(p.get('pdf_path'), output_dir)}`\n"
+        f"{orphan_note}\n"
+        f"## Abstract\n\n{p.get('abstract', '—')}\n\n"
+    )
+    if placement is not None and contribution:
+        content += f"## Contribution in `{topic}`\n\n{contribution}\n"
+    elif p.get("is_orphan"):
+        content += "## Contribution\n\n_(not yet placed — see suggested topic above)_\n"
+    else:
+        content += "## Contribution\n\n_(not yet annotated)_\n"
+    _write(path, content)
+
+
+def _write_topic_overview_md(path: str, topic_path: str, node: dict,
+                             papers: list, state: dict) -> None:
+    paper_idx = {_paper_id(p): p for p in state["papers"]}
+    lines = [
+        f"# {node.get('name', topic_path)}",
+        "",
+        f"**Path**: `{topic_path}`",
+        f"**Source**: {node.get('source', '—')}",
+        f"**Papers in this topic**: {len(papers)}",
+        "",
+        f"## Description\n\n{node.get('description', '—')}",
+        "",
+    ]
+    oq = node.get("open_questions") or []
+    lines.append("## Open questions\n")
+    if oq:
+        lines.extend(f"- {q}" for q in oq)
+    else:
+        lines.append("_(none)_")
+    lines.append("\n## Papers\n")
+    if papers:
+        for pid, _pl in papers:
+            p = paper_idx.get(pid)
+            if not p:
+                continue
+            title = p.get("title", pid)
+            year = p.get("year", "?")
+            lines.append(f"- [{title}]({_slug(pid)}.md) ({year})")
+    else:
+        lines.append("_(none yet)_")
+    lines.append("")
+    _write(path, "\n".join(lines))
+
+
+def _write_readme_md(path: str, state: dict, output_dir: str,
+                     iter_no: int, done: bool) -> None:
+    fw = state.get("framework")
+    counts = _index_papers_by_topic(state)
+    annotated = sum(1 for p in state["papers"] if p.get("annotated"))
+    orphans = sum(1 for p in state["papers"] if p.get("is_orphan"))
+    status = "done" if done else f"running (iter {iter_no})"
+    lines = [
+        f"# Literature Review — {state.get('direction', '')}",
+        "",
+        f"- **Status**: {status}",
+        f"- **Iterations**: {state.get('iter', 0)}",
+        f"- **Surveys**: {len(state['surveys'])}",
+        f"- **Papers**: {len(state['papers'])} (annotated: {annotated}, orphans: {orphans})",
+        f"- **Framework leaves**: {_leaf_count(fw)}",
+        f"- **no_delta_streak**: {state.get('no_delta_streak', 0)}",
+        "",
+        "## Framework",
+        "",
+    ]
+    lines.extend(_render_framework_tree(fw, counts))
+    lines.append("")
+    lines.append("## Recent actions")
+    lines.append("")
+    for a in state.get("audit", [])[-10:]:
+        lines.append(
+            f"- iter {a.get('iter', '?')}: **{a.get('action', '?')}** — "
+            f"{(a.get('summary') or '')[:140]}"
+        )
+    lines.append("")
+    lines.append("## Layout")
+    lines.append("")
+    lines.extend([
+        "- `state.json` — canonical machine state",
+        "- `surveys/` — one markdown per survey",
+        "- `topics/<path>/` — per-topic folders: `_overview.md` + per-paper annotations",
+        "- `orphans/` — papers not yet placed in the framework",
+        "- `papers/<id>.pdf` — downloaded PDFs",
+        "- `audit.md` — chronological action log",
+        "- `synthesis/` — final deliverables (written when `synthesize` fires)",
+    ])
+    lines.append("")
+    _write(path, "\n".join(lines))
+
+
+def _write_audit_md(path: str, state: dict) -> None:
+    lines = [f"# Audit log — {state.get('direction', '')}", ""]
+    for a in state.get("audit", []):
+        lines.append(f"## Iter {a.get('iter', '?')} — `{a.get('action', '?')}`")
+        if a.get("reasoning"):
+            lines.append(f"\n**Reasoning**: {a['reasoning']}")
+        if a.get("summary"):
+            lines.append(f"\n**Result**: {a['summary']}")
+        if a.get("changed") is not None:
+            lines.append(f"\n**Changed**: {a['changed']}")
+        lines.append("")
+    _write(path, "\n".join(lines))
+
+
+def _flush_artifacts(state: dict, output_dir: str, iter_no: int,
+                     done: bool = False) -> None:
+    """Rewrite the human-readable artifact tree from state.
+
+    - `topics/` and `orphans/` are fully regenerated (wiped then rewritten)
+      so that evolve_framework's merge/split/rename/drop ops reflect
+      immediately.
+    - `surveys/` is append-only (surveys don't get removed mid-run).
+    - `README.md` and `audit.md` are rewritten each call.
+    - `papers/` (PDFs) is untouched.
+    - `synthesis/` is untouched (only the synthesize leaf writes there).
+    """
+    import shutil
+    try:
+        topics_dir = os.path.join(output_dir, "topics")
+        orphans_dir = os.path.join(output_dir, "orphans")
+        if os.path.isdir(topics_dir):
+            shutil.rmtree(topics_dir, ignore_errors=True)
+        if os.path.isdir(orphans_dir):
+            shutil.rmtree(orphans_dir, ignore_errors=True)
+
+        # Surveys — incremental, keyed by id
+        surveys_dir = os.path.join(output_dir, "surveys")
+        os.makedirs(surveys_dir, exist_ok=True)
+        for s in state["surveys"]:
+            sid = _slug(s.get("id") or s.get("title", "unknown"))
+            path = os.path.join(surveys_dir, f"{sid}.md")
+            if not os.path.exists(path):
+                _write_survey_md(path, s, output_dir)
+
+        # Topics
+        fw = state.get("framework")
+        if fw:
+            papers_by_topic = _index_papers_by_topic(state)
+            for tp, node in _iter_leaves(fw):
+                td = _topic_dir(output_dir, tp)
+                os.makedirs(td, exist_ok=True)
+                papers_here = papers_by_topic.get(tp, [])
+                _write_topic_overview_md(
+                    os.path.join(td, "_overview.md"),
+                    tp, node, papers_here, state,
+                )
+                for pid, placement in papers_here:
+                    p = next(
+                        (p for p in state["papers"] if _paper_id(p) == pid),
+                        None,
+                    )
+                    if p is None:
+                        continue
+                    _write_paper_md(
+                        os.path.join(td, f"{_slug(pid)}.md"),
+                        p, placement, output_dir,
+                    )
+
+        # Orphans
+        orphans = [p for p in state["papers"] if p.get("is_orphan")]
+        if orphans:
+            os.makedirs(orphans_dir, exist_ok=True)
+            for p in orphans:
+                pid = _paper_id(p)
+                _write_paper_md(
+                    os.path.join(orphans_dir, f"{_slug(pid)}.md"),
+                    p, placement=None, output_dir=output_dir,
+                )
+
+        _write_readme_md(
+            os.path.join(output_dir, "README.md"),
+            state, output_dir, iter_no, done,
+        )
+        _write_audit_md(os.path.join(output_dir, "audit.md"), state)
     except OSError:
         pass
 
@@ -188,6 +504,48 @@ def _orphan_count(state: dict) -> int:
     return sum(1 for p in state["papers"] if p.get("is_orphan"))
 
 
+def _abstract_only_count(state: dict) -> int:
+    return sum(1 for p in state["papers"] if p.get("tier") == "abstract_only")
+
+
+def _thin_leaves(state: dict, threshold: int = 5) -> list[tuple[str, int]]:
+    fw = state.get("framework")
+    if not fw:
+        return []
+    counts = _papers_per_topic(state)
+    out = []
+    for path, _node in _iter_leaves(fw):
+        n = counts.get(path, 0)
+        if n < threshold:
+            out.append((path, n))
+    return out
+
+
+def _prior_synthesize_iter(state: dict) -> int | None:
+    """Return iter number of the most recent successful synthesize, else None."""
+    for a in reversed(state.get("audit", [])):
+        if a.get("action") == "synthesize" and (a.get("changed") or 0) > 0:
+            return a.get("iter")
+    return None
+
+
+def _improvements_since_synth(state: dict) -> int:
+    """Count non-trivial, non-synthesize actions after the last synthesize."""
+    last = _prior_synthesize_iter(state)
+    if last is None:
+        return 0
+    n = 0
+    for a in state.get("audit", []):
+        if (a.get("iter") or 0) <= last:
+            continue
+        if a.get("action") == "synthesize":
+            continue
+        if (a.get("changed") or 0) <= 0:
+            continue
+        n += 1
+    return n
+
+
 def _build_state_summary(state: dict) -> str:
     surveys = state["surveys"]
     papers = state["papers"]
@@ -225,6 +583,28 @@ def _build_state_summary(state: dict) -> str:
 
     lines.append(f"no_delta_streak: {state.get('no_delta_streak', 0)} "
                  "(consecutive evolve rounds with no non-trivial change)")
+
+    prior = _prior_synthesize_iter(state)
+    if prior is None:
+        lines.append("mode: FIRST-PASS (no prior synthesize)")
+    else:
+        improvements = _improvements_since_synth(state)
+        lines.append(
+            f"mode: REFINEMENT (prior synthesize at iter {prior}; "
+            f"{improvements} non-trivial improvements since)"
+        )
+        abs_only = _abstract_only_count(state)
+        if abs_only:
+            lines.append(
+                f"  weakness: {abs_only} papers still at tier=abstract_only "
+                "— candidates for re-search in PDF mode"
+            )
+        if framework:
+            thin = _thin_leaves(state, threshold=5)
+            if thin:
+                lines.append(
+                    f"  weakness: {len(thin)} thin leaves (<5 annotated papers)"
+                )
 
     if audit_tail:
         lines.append("recent audit:")
@@ -504,16 +884,16 @@ def _dispatch(action: str, args: dict, state: dict, direction: str,
 # Orchestrator
 # ═══════════════════════════════════════════════════════════════════════════
 
-def _derive_project_name(topic: str) -> str:
+def _derive_project_name(direction: str) -> str:
     """Turn a research direction into a short, readable folder name."""
     import re as _re
-    clean = _re.sub(r"[\r\n]+", " ", (topic or "").strip())
+    clean = _re.sub(r"[\r\n]+", " ", (direction or "").strip())
     clean = _re.sub(r"[/:\\]", " ", clean)
     words = clean.split()[:6] or ["research"]
     return " ".join(words).strip() or "research"
 
 
-def _resolve_output_dir(output_dir: str | None, topic: str) -> str:
+def _resolve_output_dir(output_dir: str | None, direction: str) -> str:
     """Resolve output_dir to an absolute path.
 
     - If the caller passed an absolute path (after user-expansion), use it.
@@ -524,14 +904,14 @@ def _resolve_output_dir(output_dir: str | None, topic: str) -> str:
     if output_dir:
         expanded = os.path.abspath(os.path.expanduser(output_dir))
         return expanded
-    project = _derive_project_name(topic)
+    project = _derive_project_name(direction)
     return os.path.abspath(
         os.path.expanduser(f"~/Documents/{project}/literature review")
     )
 
 
 def run_literature(
-    topic: str,
+    direction: str,
     output_dir: str = None,
     runtime: Runtime = None,
     max_iters: int = _DEFAULT_MAX_ITERS,
@@ -545,11 +925,16 @@ def run_literature(
     or `max_iters` is reached.
 
     Args:
-        topic:      Research direction (root of the topic tree).
+        direction:  Research direction / project descriptor. May be short
+                    ("LLM Distillation") or a longer phrase that carries
+                    extra intent ("LLM Distillation, focus on 2024 on-policy
+                    methods"). Used to build the LLM prompt and to derive a
+                    folder name when output_dir is omitted. Not used as a
+                    strict resume key — resume is keyed on output_dir only.
         output_dir: Absolute directory for state.json + synthesis artifacts.
                     If omitted, defaults to
                     `~/Documents/<project>/literature review` where `project`
-                    is derived from `topic`.
+                    is derived from `direction`. Same output_dir → resume.
         runtime:    LLM runtime (required).
         max_iters:  Hard cap on iterations.
 
@@ -559,9 +944,9 @@ def run_literature(
     if runtime is None:
         raise ValueError("run_literature() requires a runtime argument")
 
-    output_dir = _resolve_output_dir(output_dir, topic)
+    output_dir = _resolve_output_dir(output_dir, direction)
     os.makedirs(output_dir, exist_ok=True)
-    state = _load_or_init_state(output_dir, topic)
+    state = _load_or_init_state(output_dir, direction)
 
     done = False
     last_action = None
@@ -574,7 +959,7 @@ def run_literature(
         framework_preview = _framework_preview(state)
 
         reply = _lit_decide(
-            direction=topic, state_summary=state_summary,
+            direction=direction, state_summary=state_summary,
             framework_preview=framework_preview, runtime=runtime,
         )
 
@@ -589,6 +974,7 @@ def run_literature(
                 "summary": f"decision parse failed: {str(reply)[:120]}",
             })
             _save_state(output_dir, state)
+            _flush_artifacts(state, output_dir, i)
             print(f"    [literature/{i}] decide: PARSE_FAIL", file=sys.stderr)
             if i >= 3 and last_action is None:
                 break
@@ -596,7 +982,7 @@ def run_literature(
 
         print(f"    [literature/{i}] {action}  ({reasoning[:80]})", file=sys.stderr)
 
-        text, parsed = _dispatch(action, args, state, topic, output_dir, runtime)
+        text, parsed = _dispatch(action, args, state, direction, output_dir, runtime)
 
         if "error" in parsed and len(parsed) == 1:
             summary = f"dispatch error: {parsed['error']}"
@@ -628,13 +1014,14 @@ def run_literature(
             "changed": changed, "summary": summary,
         })
         _save_state(output_dir, state)
+        _flush_artifacts(state, output_dir, i, done=(action == "synthesize" and done))
         last_action = action
 
         if action == "synthesize" and done:
             break
 
     return {
-        "direction": topic,
+        "direction": direction,
         "output_dir": output_dir,
         "iterations": state["iter"],
         "done": done,

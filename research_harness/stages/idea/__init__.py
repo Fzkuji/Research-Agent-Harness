@@ -6,7 +6,7 @@ from research_harness.stages.idea.check_novelty import check_novelty
 from research_harness.stages.idea.generate_ideas import generate_ideas
 from research_harness.stages.idea.rank_ideas import rank_ideas
 
-from agentic.runtime import Runtime
+from openprogram.agentic_programming.runtime import Runtime
 
 
 def run_idea(

@@ -7,7 +7,7 @@ from research_harness.stages.experiment.design_experiments import design_experim
 from research_harness.stages.experiment.experiment_bridge import experiment_bridge
 from research_harness.stages.experiment.run_experiment import run_experiment
 
-from agentic.runtime import Runtime
+from openprogram.agentic_programming.runtime import Runtime
 
 
 def run_experiments(

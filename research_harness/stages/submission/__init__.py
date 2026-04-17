@@ -4,7 +4,7 @@ from research_harness.stages.submission.check_submission import check_submission
 
 import os
 from typing import Optional
-from agentic.runtime import Runtime
+from openprogram.agentic_programming.runtime import Runtime
 
 
 def run_submission_check(

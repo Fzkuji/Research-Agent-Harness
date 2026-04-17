@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from agentic.function import agentic_function
-from agentic.runtime import Runtime
+from openprogram.agentic_programming.function import agentic_function
+from openprogram.agentic_programming.runtime import Runtime
 
 
 @agentic_function(compress=True, summarize={"siblings": -1})

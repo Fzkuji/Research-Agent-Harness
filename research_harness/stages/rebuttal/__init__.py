@@ -6,7 +6,7 @@ from research_harness.stages.rebuttal.parse_reviews import parse_reviews
 
 import os
 from typing import Optional
-from agentic.runtime import Runtime
+from openprogram.agentic_programming.runtime import Runtime
 
 
 def run_rebuttal(

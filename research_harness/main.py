@@ -14,11 +14,11 @@ import argparse
 import inspect
 import sys
 
-from agentic.function import agentic_function
-from agentic.runtime import Runtime
+from openprogram.agentic_programming.function import agentic_function
+from openprogram.agentic_programming.runtime import Runtime
 
 from research_harness.registry import (
-    STAGES, AUTO_PARAMS,
+    STAGES, AUTO_PARAMS, HIDDEN_PARAMS,
     get_function, build_stage_list, build_stage_functions,
     stage_functions,
 )
@@ -113,7 +113,15 @@ Rules:
   - Set stage_done=true ONLY when previous steps have already completed this stage and no further call is needed. In that case, omit `call` (set to null).
   - If you are requesting a call this turn, ALWAYS set stage_done=false. The stage cannot be done before this call has executed.
 - Do NOT include `runtime`, `exec_runtime`, `review_runtime`, or `project_dir` in args — they are auto-injected.
+- Do NOT include `max_iters` or similar iteration/retry caps — those are
+  system-controlled defaults. You decide WHEN to stop (by choosing not to call
+  the orchestrator again once its result shows the work is done), not HOW MANY
+  steps it gets per call.
 - Prefer orchestrator functions (run_literature, run_idea, run_experiments, review_loop, paper_improvement_loop, etc.) for complete workflows. They chain multiple steps internally.
+- If an orchestrator returns `done: false` (or similar incomplete signal) in
+  its result, call it AGAIN on the next turn so it can continue. Do NOT mark
+  the stage done just because an orchestrator was called once — check the
+  returned `done` flag.
 
 Workspace path — when calling an orchestrator that accepts `output_dir`
 (run_literature, run_idea, run_experiments, review_loop, ...), YOU MUST
@@ -208,6 +216,10 @@ Args:
     if func is None:
         return {"call": call_target, "result": f"Unknown function: {call_target}",
                 "success": False, "stage_done": False}
+
+    # Drop any system-controlled params the LLM tried to set (iteration caps,
+    # retry limits, etc.). These are not LLM's decision.
+    args = {k: v for k, v in args.items() if k not in HIDDEN_PARAMS}
 
     # Inject auto-params: review_runtime gets the dedicated reviewer,
     # runtime/exec_runtime get the main executor

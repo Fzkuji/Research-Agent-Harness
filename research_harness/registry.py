@@ -114,6 +114,12 @@ _ENTRIES: dict[str, tuple[str, str, str]] = {
 # Parameters auto-injected by the framework (hidden from LLM and CLI)
 AUTO_PARAMS = {"runtime", "exec_runtime", "review_runtime"}
 
+# Parameters hidden from LLM view (system-controlled knobs — iteration caps,
+# retry limits, debugging switches). Unlike AUTO_PARAMS these are NOT
+# auto-injected; orchestrators use their own defaults. Programmatic callers
+# (pipeline.py, tests) can still pass them directly.
+HIDDEN_PARAMS = {"max_iters"}
+
 
 # ---------------------------------------------------------------------------
 # Lazy loading
@@ -137,14 +143,14 @@ def get_function(name: str) -> Optional[callable]:
 
 
 def get_signature(name: str) -> str:
-    """Get function signature string, excluding auto-injected params."""
+    """Get function signature string, excluding auto-injected + hidden params."""
     func = get_function(name)
     if func is None:
         return f"{name}(?)"
     sig = inspect.signature(func)
     params = []
     for p in sig.parameters.values():
-        if p.name in AUTO_PARAMS:
+        if p.name in AUTO_PARAMS or p.name in HIDDEN_PARAMS:
             continue
         ann = p.annotation
         type_name = ann.__name__ if hasattr(ann, '__name__') else str(ann)
