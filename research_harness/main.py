@@ -29,29 +29,35 @@ from research_harness.utils import parse_json
 # Level 1: Pick a stage
 # ═══════════════════════════════════════════
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0}, no_tools=True)
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
 def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
-    """Pick the next research stage to enter (router turn — JSON only).
+    """Given a research task and current progress, decide which stage to work on next.
 
-Given the task and progress so far, choose one of the available stages
-listed in the caller's message. Return exactly this JSON:
+Reply with ONLY a single JSON object. Do NOT run any commands, do NOT
+read any files, do NOT use any tools. Inspect only the text provided
+below and output the JSON.
 
-  {
-    "stage": "<stage_name>",
-    "reasoning": "<one-sentence why this stage is needed now>",
-    "sub_task": "<goal for this stage>",
-    "done": false
-  }
+Available stages:
+{stages}
 
-Rules:
-- "stage" must be one of the names from the Available stages list below.
-- "done": true ONLY when the overall task is fully complete and no further
-  stage is required. Otherwise false.
-- "sub_task" carries forward workspace information. If the task mentions
-  an absolute path (e.g. "/Users/.../LLM Distillation", "~/RAG") or a
-  named project folder, copy that path/name verbatim into sub_task so
-  the next-level dispatcher can derive output_dir. If the task only
-  names a direction, put that direction in sub_task.
+Return JSON:
+{
+  "stage": "stage_name",
+  "reasoning": "why this stage is needed now",
+  "sub_task": "specific goal for this stage",
+  "done": false
+}
+
+Set done=true ONLY when the overall task is FULLY complete.
+
+Workspace routing — IMPORTANT:
+Every research project writes to a single workspace directory shared across
+stages. If the user's task mentions an absolute path (e.g. "/Users/.../X",
+"~/...") or a clearly named project folder, COPY that path (or project name)
+verbatim into `sub_task`. If the task only names a research direction (no
+path), write that direction into `sub_task` so the next level can derive a
+workspace from it. The next level (stage dispatcher) needs this information
+to construct `output_dir`; do NOT strip it out.
 
 Args:
     task: The overall research task.
@@ -76,40 +82,50 @@ Args:
 # Level 2: Execute within a stage
 # ═══════════════════════════════════════════
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0}, no_tools=True)
+_PERSISTENCE_REMINDER = (
+    "\n\nIMPORTANT: All results must be saved to files — nothing should be lost. "
+    "Orchestrator functions (run_literature, run_idea, run_experiments, review_loop, paper_improvement_loop, etc.) already save results. "
+    "For individual functions, save the output yourself."
+)
+
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
 def _stage_step(stage: str, sub_task: str, context: str,
                 runtime: Runtime, review_runtime: Runtime = None) -> dict:
-    """Pick ONE function to call for this stage (router turn — JSON only).
+    """Within a research stage, pick and execute the best function for the sub-task.
 
-Return exactly this JSON:
+Reply with ONLY a single JSON object. Do NOT run any commands, do NOT
+read any files, do NOT use any tools, do NOT do the work yourself —
+your ONLY job is to pick a function name and its arguments from the
+list below.
 
-  {
-    "call": "<function_name_or_null>",
-    "args": {"<param>": <value>, ...},
-    "reasoning": "<one-sentence why this function>",
-    "stage_done": false
-  }
+Current stage: [{stage}]
 
-Rules for `call` / `stage_done`:
-- `call` must be one of the function names listed under "Available functions"
-  in the caller's message, or null.
-- `stage_done` describes the PREVIOUS steps (shown in the context above),
-  not this call.
-  - Set stage_done=true ONLY when the previous steps have already finished
-    this stage and no further function needs to run. In that case set
-    call=null.
-  - If you are requesting a function this turn, stage_done MUST be false.
-- If an orchestrator (run_literature, run_idea, run_experiments,
-  review_loop, paper_improvement_loop, …) previously returned
-  `done: false`, call it again so it can continue. Do NOT mark stage_done
-  just because the orchestrator was called once.
+Available functions in this stage:
+{functions}
 
-Rules for `args`:
-- Prefer orchestrators over individual steps — they chain the work inside.
-- Do NOT include `runtime`, `exec_runtime`, `review_runtime`, `project_dir`.
-  Those are auto-injected.
+Return JSON:
+{
+  "call": "function_name",
+  "args": {"param": "value"},
+  "reasoning": "why this function",
+  "stage_done": false
+}
+
+Rules:
+- You MUST pick a function from the list above. Do NOT attempt to do the work yourself.
+- `stage_done` describes the state of PREVIOUS steps (seen in the context above), NOT this call.
+  - Set stage_done=true ONLY when previous steps have already completed this stage and no further call is needed. In that case, omit `call` (set to null).
+  - If you are requesting a call this turn, ALWAYS set stage_done=false. The stage cannot be done before this call has executed.
+- Do NOT include `runtime`, `exec_runtime`, `review_runtime`, or `project_dir` in args — they are auto-injected.
 - Do NOT include `max_iters`, `max_outer`, `max_inner`, or any similar
-  iteration/retry cap — those are system-controlled.
+  iteration/retry caps — those are system-controlled defaults. You decide
+  WHEN to stop (by choosing not to call the orchestrator again once its
+  result shows the work is done), not HOW MANY steps it gets per call.
+- Prefer orchestrator functions (run_literature, run_idea, run_experiments, review_loop, paper_improvement_loop, etc.) for complete workflows. They chain multiple steps internally.
+- If an orchestrator returns `done: false` (or similar incomplete signal) in
+  its result, call it AGAIN on the next turn so it can continue. Do NOT mark
+  the stage done just because an orchestrator was called once — check the
+  returned `done` flag.
 
 Workspace path — when calling an orchestrator that accepts `output_dir`
 (run_literature, run_idea, run_experiments, review_loop, ...), YOU MUST
@@ -175,8 +191,9 @@ Args:
             f"Sub-task: {sub_task}\n\n"
             f"Context from previous steps:\n{context or '(first step)'}\n\n"
             f"HOME: {home}\n"
-            f"(Use this absolute path wherever the docstring references <HOME>.)\n\n"
+            f"(Use this absolute path wherever the dispatcher prompt references <HOME>.)\n\n"
             f"{functions}"
+            f"{_PERSISTENCE_REMINDER}"
         )},
     ])
     try:

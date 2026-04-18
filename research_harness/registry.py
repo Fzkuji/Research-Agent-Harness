@@ -118,7 +118,7 @@ AUTO_PARAMS = {"runtime", "exec_runtime", "review_runtime"}
 # retry limits, debugging switches). Unlike AUTO_PARAMS these are NOT
 # auto-injected; orchestrators use their own defaults. Programmatic callers
 # (pipeline.py, tests) can still pass them directly.
-HIDDEN_PARAMS = {"max_iters"}
+HIDDEN_PARAMS = {"max_iters", "max_outer", "max_inner"}
 
 
 # ---------------------------------------------------------------------------

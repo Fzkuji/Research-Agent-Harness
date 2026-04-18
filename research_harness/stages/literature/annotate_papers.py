@@ -9,8 +9,8 @@ def annotate_papers(papers_json: str, framework_json: str,
                     runtime: Runtime) -> str:
     """Place each paper in the framework and annotate its contribution.
 
-    You are deciding: where does this paper belong in the topic tree, and
-    what did it concretely contribute there?
+    For each paper, decide where it belongs in the topic tree and what it
+    concretely contributed there.
 
     Source material per paper (use the most detailed available):
     1. `pdf_path` (if non-null) — read the PDF for method, experiments,

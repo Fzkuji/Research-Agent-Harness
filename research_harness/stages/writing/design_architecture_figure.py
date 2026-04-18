@@ -40,9 +40,9 @@ def design_architecture_figure(method_description: str, runtime: Runtime) -> str
 
     Also available as an English prompt for image generation models (e.g. nano banana):
 
-    You are an expert Scientific Illustrator for top-tier AI conferences (NeurIPS/CVPR/ICML).
-    Your task is to generate a professional "Illustration" (main figure for the paper) based on the
-    research paper abstract and methodology provided.
+    Generate a professional "Illustration" (main figure for the paper) suitable
+    for top-tier AI conferences (NeurIPS/CVPR/ICML), based on the research paper
+    abstract and methodology provided.
 
     Visual Style Requirements:
     1. Style: Flat vector illustration, clean lines, academic aesthetic. Similar to figures in

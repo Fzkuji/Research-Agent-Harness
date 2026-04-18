@@ -181,8 +181,8 @@ def _run_debate(weaknesses: list, paper_content: str,
     @agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
     def _generate_rebuttal(weaknesses_text: str, paper_context: str,
                            runtime: Runtime) -> str:
-        """You are the paper author. The reviewer identified these weaknesses.
-        For each (up to 3), write a structured rebuttal:
+        """Write a structured rebuttal (from the author's perspective) to the
+        weaknesses the reviewer identified. For each (up to 3):
 
         ### Rebuttal to Weakness #N
         - **Accept / Partially Accept / Reject**
@@ -201,8 +201,8 @@ def _run_debate(weaknesses: list, paper_content: str,
 
     @agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
     def _rule_on_rebuttal(rebuttal_text: str, runtime: Runtime) -> str:
-        """You are the reviewer. The author rebuts your review.
-        For each rebuttal, rule:
+        """Rule on the author's rebuttals (from the reviewer's perspective).
+        For each rebuttal, decide:
         - SUSTAINED (valid, withdraw weakness)
         - OVERRULED (criticism stands, explain why)
         - PARTIALLY SUSTAINED (revise to narrower scope)
@@ -381,10 +381,9 @@ def _run_single_review(paper_content: str, paper_dir: str,
 
 @agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
 def _meta_review(individual_reviews: str, venue: str, runtime: Runtime) -> str:
-    """You are the Area Chair (AC) for {venue}. You have received multiple
+    """Produce an Area Chair meta-review for {venue} based on multiple
     independent reviewer reports for the same paper.
 
-    Your job:
     1. Identify consensus points (issues ALL reviewers agree on).
     2. Identify disagreements and adjudicate them.
     3. Produce a final meta-review with:

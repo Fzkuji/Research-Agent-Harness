@@ -61,48 +61,36 @@ Available actions (pick exactly one):
   evolve_framework    refactor the topic tree based on accumulated evidence
                       args: {{}}
 
-  synthesize          write the final deliverables (framework, topic reviews,
-                      synthesis, gaps, ideas, bibliography). Marks stage done.
-                      args: {{}}
+  done                no further useful action at this moment
+                      args: {{ "scope": "cycle" | "all" (default="cycle") }}
 
-Rules for picking — FIRST-PASS mode (no prior synthesize in state):
+Guidance — FIRST-PASS mode (no prior synthesize in state):
 - Cold start (no surveys): seed_surveys.
 - Have surveys, no framework: extract_framework.
-- Framework exists, leaves thin (<5 papers) and not yet searched: search_papers
-  for the leaf that needs coverage most.
+- Framework exists, leaves thin (<5 papers) and not yet searched:
+  search_papers for the leaf that needs coverage most.
 - Papers with annotated=false: annotate_papers.
-- Orphan papers or a leaf >15 papers or a long streak of untouched evolution:
-  evolve_framework.
-- Framework hasn't changed meaningfully in ≥3 rounds AND every leaf has ≥5
-  annotated papers AND no orphans remain: synthesize.
-- If none of the above fits, pick the action that most reduces the biggest
-  remaining weakness. Explain in `reasoning`.
+- Orphans present, or a leaf past ~15 papers, or several rounds passed with
+  no structural review: evolve_framework.
+- Framework has been stable for several rounds AND every leaf has ≥5
+  annotated papers AND no orphans remain: done.
 
-Rules for picking — REFINEMENT mode (prior synthesize exists):
+Guidance — REFINEMENT mode (prior synthesize exists):
 Your job is to IMPROVE what's already there, not redo it. The state summary
 will show `mode: REFINEMENT` and `N non-trivial improvements since` the last
 synthesize. Priorities, in order:
-  1. If papers at tier=abstract_only exist, re-run search_papers on their topic
-     with `top_k_pdf` large enough to include them — so they upgrade to PDF
-     tier. This is the most valuable cheap improvement.
+  1. If papers at tier=abstract_only exist, re-run search_papers on their
+     topic with `top_k_pdf` large enough to include them — so they upgrade
+     to PDF tier. This is the most valuable cheap improvement.
   2. If any leaf has <5 papers, run search_papers for it.
-  3. If the research direction is time-sensitive (LLM-era topics, fast fields)
-     and the newest paper in state is >12 months old, run search_papers or
+  3. If the direction is time-sensitive (LLM-era topics, fast fields) and
+     the newest paper in state is >12 months old, run search_papers or
      seed_surveys with a query restricted to the latest year.
   4. If annotations are thin (many summaries based on abstract_only), re-run
      annotate_papers after step 1 upgraded them.
   5. If new papers materially shifted the structure (new orphan cluster,
      a leaf grew past 15), run evolve_framework.
-  6. Re-synthesize ONLY when BOTH:
-       - ≥3 non-trivial improvements have been made since the last synthesize,
-         AND
-       - convergence is re-achieved (stable framework, no orphans, all leaves
-         ≥5 annotated papers).
-     If you believe no meaningful improvement is possible (already saturated),
-     pick action=synthesize with reasoning="nothing to improve; finalize" and
-     the synthesize leaf will read existing files and touch up in place.
-  7. Never pick the same no-op synthesize back-to-back. If you picked it and
-     nothing changed, prefer stage_done or a search/expand action.
+  6. If the state looks saturated (no clear gap to fill): done.
 
 Output format — return ONE JSON object, nothing else:
 ```json
@@ -628,7 +616,8 @@ def _safe_parse(text: Any) -> dict:
     if not isinstance(text, str):
         return {}
     try:
-        return parse_json(text)
+        result = parse_json(text)
+        return result if isinstance(result, dict) else {}
     except ValueError:
         return {}
 
@@ -771,7 +760,8 @@ def _merge_evolve(state: dict, parsed: dict) -> tuple[int, str]:
 # Action dispatcher
 # ═══════════════════════════════════════════════════════════════════════════
 
-_DEFAULT_MAX_ITERS = 30
+_DEFAULT_MAX_OUTER = 8
+_DEFAULT_MAX_INNER = 10
 
 
 def _dispatch(action: str, args: dict, state: dict, direction: str,
@@ -863,17 +853,10 @@ def _dispatch(action: str, args: dict, state: dict, direction: str,
             surveys_json=surveys_json, audit_tail=audit_tail, runtime=runtime,
         )
 
-    elif action == "synthesize":
-        framework_json = json.dumps(state["framework"] or {}, ensure_ascii=False)
-        papers_json = json.dumps(state["papers"], ensure_ascii=False)
-        surveys_json = json.dumps(state["surveys"], ensure_ascii=False)
-        text = synthesize_literature(
-            direction=direction, framework_json=framework_json,
-            papers_json=papers_json, surveys_json=surveys_json,
-            output_dir=output_dir, runtime=runtime,
-        )
-
     else:
+        # synthesize is NOT a valid inner action — it runs unconditionally
+        # as end-of-run finalization. If the LLM picks it here by mistake,
+        # return a noop error so nothing gets written out of order.
         return "", {"error": f"unknown action: {action}"}
 
     parsed = _safe_parse(text)
@@ -910,33 +893,115 @@ def _resolve_output_dir(output_dir: str | None, direction: str) -> str:
     )
 
 
+def _run_compensation_evolve(state: dict, direction: str, output_dir: str,
+                             runtime: Runtime, outer_no: int) -> None:
+    """End-of-cycle compensation: run evolve_framework once.
+
+    The inner loop tends to favor search/annotate; this guarantees the topic
+    tree gets restructured at least once per outer cycle.
+    """
+    state["iter"] = state.get("iter", 0) + 1
+    i = state["iter"]
+    framework_json = json.dumps(state["framework"] or {}, ensure_ascii=False)
+    papers_json = json.dumps(
+        [{"id": _paper_id(p), "title": p.get("title", ""),
+          "placements": p.get("placements", []),
+          "is_orphan": p.get("is_orphan", False),
+          "orphan_suggested_topic": p.get("orphan_suggested_topic")}
+         for p in state["papers"]], ensure_ascii=False,
+    )
+    surveys_json = json.dumps(state["surveys"], ensure_ascii=False)
+    audit_tail = "\n".join(
+        f"iter {a.get('iter','?')}: {a.get('action','?')} — {a.get('summary','')}"
+        for a in state["audit"][-8:]
+    )
+    try:
+        text = evolve_framework(
+            framework_json=framework_json, papers_json=papers_json,
+            surveys_json=surveys_json, audit_tail=audit_tail, runtime=runtime,
+        )
+    except Exception as e:  # noqa: BLE001
+        state["audit"].append({
+            "iter": i, "action": "evolve_framework",
+            "changed": 0, "summary": f"compensation error: {e}",
+        })
+        print(f"    [literature/{outer_no}.evolve] ERROR: {e}", file=sys.stderr)
+        return
+    parsed = _safe_parse(text)
+    changed, summary = _merge_evolve(state, parsed)
+    state["audit"].append({
+        "iter": i, "action": "evolve_framework",
+        "reasoning": "end-of-cycle compensation",
+        "changed": changed, "summary": summary,
+    })
+    print(f"    [literature/{outer_no}.evolve] {summary[:80]}", file=sys.stderr)
+
+
+def _run_final_synthesize(state: dict, direction: str, output_dir: str,
+                          runtime: Runtime) -> tuple[dict, bool]:
+    """End-of-run finalization: run synthesize_literature once.
+
+    Writes the 6-file deliverable (framework, topic reviews, synthesis,
+    gaps, ideas, bibliography). Called after the outer loop completes,
+    regardless of whether it exited naturally or via `done/all`.
+    """
+    state["iter"] = state.get("iter", 0) + 1
+    i = state["iter"]
+    framework_json = json.dumps(state["framework"] or {}, ensure_ascii=False)
+    papers_json = json.dumps(state["papers"], ensure_ascii=False)
+    surveys_json = json.dumps(state["surveys"], ensure_ascii=False)
+    print(f"    [literature/finalize] synthesize", file=sys.stderr)
+    try:
+        text = synthesize_literature(
+            direction=direction, framework_json=framework_json,
+            papers_json=papers_json, surveys_json=surveys_json,
+            output_dir=output_dir, runtime=runtime,
+        )
+    except Exception as e:  # noqa: BLE001
+        state["audit"].append({
+            "iter": i, "action": "synthesize",
+            "changed": 0, "summary": f"error: {e}",
+        })
+        return {}, False
+    parsed = _safe_parse(text)
+    done = bool(parsed.get("done"))
+    state["audit"].append({
+        "iter": i, "action": "synthesize",
+        "changed": 1 if done else 0,
+        "summary": "synthesis complete" if done else (
+            "synthesize did not return done=true; "
+            + (("error: " + parsed.get("error", "?")) if parsed else "parse failed")
+        ),
+    })
+    return parsed, done
+
+
 def run_literature(
     direction: str,
     output_dir: str = None,
     runtime: Runtime = None,
-    max_iters: int = _DEFAULT_MAX_ITERS,
+    max_outer: int = _DEFAULT_MAX_OUTER,
+    max_inner: int = _DEFAULT_MAX_INNER,
 ) -> dict:
-    """Iteratively build a literature review by looping a single-step dispatcher.
+    """Iteratively build a literature review via a two-level loop.
 
-    Each iteration: an LLM picks one of six actions (seed_surveys,
-    extract_framework, search_papers, annotate_papers, evolve_framework,
-    synthesize). The corresponding leaf function runs, its JSON output is
-    parsed and merged into state. The loop exits when `synthesize` succeeds
-    or `max_iters` is reached.
+    Structure:
+      for outer in 1..max_outer:
+        for inner in 1..max_inner:
+          LLM picks ONE action from {seed_surveys, extract_framework,
+          search_papers, annotate_papers, evolve_framework, done}.
+          Leaf runs, result merged into state.
+          If action="done" (scope=cycle): break inner.
+          If action="done" (scope=all):   break inner AND outer.
+        end-of-cycle compensation: evolve_framework (unconditional).
+      end-of-run finalization: synthesize_literature (unconditional).
 
     Args:
-        direction:  Research direction / project descriptor. May be short
-                    ("LLM Distillation") or a longer phrase that carries
-                    extra intent ("LLM Distillation, focus on 2024 on-policy
-                    methods"). Used to build the LLM prompt and to derive a
-                    folder name when output_dir is omitted. Not used as a
-                    strict resume key — resume is keyed on output_dir only.
-        output_dir: Absolute directory for state.json + synthesis artifacts.
-                    If omitted, defaults to
-                    `~/Documents/<project>/literature review` where `project`
-                    is derived from `direction`. Same output_dir → resume.
+        direction:  Research direction / project descriptor.
+        output_dir: Absolute directory. Same output_dir → resume.
         runtime:    LLM runtime (required).
-        max_iters:  Hard cap on iterations.
+        max_outer:  Hard cap on outer cycles.
+        max_inner:  Hard cap on inner steps per cycle.
 
     Returns:
         dict with direction, iterations, stats, framework, output_dir, done.
@@ -948,77 +1013,97 @@ def run_literature(
     os.makedirs(output_dir, exist_ok=True)
     state = _load_or_init_state(output_dir, direction)
 
-    done = False
-    last_action = None
     synth_result: dict = {}
+    done = False
+    stop_all = False
 
-    for i in range(state["iter"] + 1, max_iters + 1):
-        state["iter"] = i
+    for outer in range(1, max_outer + 1):
+        state["outer"] = outer
 
-        state_summary = _build_state_summary(state)
-        framework_preview = _framework_preview(state)
+        for inner in range(1, max_inner + 1):
+            state["iter"] = state.get("iter", 0) + 1
+            i = state["iter"]
 
-        reply = _lit_decide(
-            direction=direction, state_summary=state_summary,
-            framework_preview=framework_preview, runtime=runtime,
-        )
+            state_summary = _build_state_summary(state)
+            framework_preview = _framework_preview(state)
 
-        decision = _safe_parse(reply)
-        action = (decision.get("action") or "").strip()
-        args = decision.get("action_args") or {}
-        reasoning = decision.get("reasoning", "")
+            reply = _lit_decide(
+                direction=direction, state_summary=state_summary,
+                framework_preview=framework_preview, runtime=runtime,
+            )
 
-        if not action:
+            decision = _safe_parse(reply)
+            action = (decision.get("action") or "").strip()
+            args = decision.get("action_args") or {}
+            reasoning = decision.get("reasoning", "")
+
+            if not action:
+                state["audit"].append({
+                    "iter": i, "action": "<none>",
+                    "summary": f"decision parse failed: {str(reply)[:120]}",
+                })
+                _save_state(output_dir, state)
+                _flush_artifacts(state, output_dir, i)
+                print(f"    [literature/{outer}.{inner}] PARSE_FAIL", file=sys.stderr)
+                continue
+
+            if action == "done":
+                scope = (args.get("scope") or "cycle").strip().lower()
+                if scope == "all":
+                    stop_all = True
+                state["audit"].append({
+                    "iter": i, "action": "done",
+                    "reasoning": reasoning,
+                    "changed": 0,
+                    "summary": f"LLM done (scope={scope})",
+                })
+                _save_state(output_dir, state)
+                _flush_artifacts(state, output_dir, i)
+                print(f"    [literature/{outer}.{inner}] done scope={scope}  ({reasoning[:80]})",
+                      file=sys.stderr)
+                break
+
+            print(f"    [literature/{outer}.{inner}] {action}  ({reasoning[:80]})",
+                  file=sys.stderr)
+
+            text, parsed = _dispatch(action, args, state, direction, output_dir, runtime)
+
+            if "error" in parsed and len(parsed) == 1:
+                summary = f"dispatch error: {parsed['error']}"
+                changed = 0
+            elif action == "seed_surveys":
+                changed, summary = _merge_seed_surveys(state, parsed)
+            elif action == "extract_framework":
+                changed, summary = _merge_extract_framework(state, parsed)
+            elif action == "search_papers":
+                changed, summary = _merge_search_papers(state, parsed)
+            elif action == "annotate_papers":
+                changed, summary = _merge_annotate(state, parsed)
+            elif action == "evolve_framework":
+                changed, summary = _merge_evolve(state, parsed)
+            else:
+                changed = 0
+                summary = f"unknown action: {action}"
+
             state["audit"].append({
-                "iter": i, "action": "<none>",
-                "summary": f"decision parse failed: {str(reply)[:120]}",
+                "iter": i, "action": action, "reasoning": reasoning,
+                "changed": changed, "summary": summary,
             })
             _save_state(output_dir, state)
             _flush_artifacts(state, output_dir, i)
-            print(f"    [literature/{i}] decide: PARSE_FAIL", file=sys.stderr)
-            if i >= 3 and last_action is None:
-                break
-            continue
 
-        print(f"    [literature/{i}] {action}  ({reasoning[:80]})", file=sys.stderr)
-
-        text, parsed = _dispatch(action, args, state, direction, output_dir, runtime)
-
-        if "error" in parsed and len(parsed) == 1:
-            summary = f"dispatch error: {parsed['error']}"
-            changed = 0
-        elif action == "seed_surveys":
-            changed, summary = _merge_seed_surveys(state, parsed)
-        elif action == "extract_framework":
-            changed, summary = _merge_extract_framework(state, parsed)
-        elif action == "search_papers":
-            changed, summary = _merge_search_papers(state, parsed)
-        elif action == "annotate_papers":
-            changed, summary = _merge_annotate(state, parsed)
-        elif action == "evolve_framework":
-            changed, summary = _merge_evolve(state, parsed)
-        elif action == "synthesize":
-            synth_result = parsed
-            done = bool(parsed.get("done"))
-            changed = 1 if done else 0
-            summary = "synthesis complete" if done else (
-                "synthesize returned no done flag; "
-                + (("error: " + parsed.get("error", "?")) if parsed else "parse failed")
-            )
-        else:
-            changed = 0
-            summary = f"unknown action: {action}"
-
-        state["audit"].append({
-            "iter": i, "action": action, "reasoning": reasoning,
-            "changed": changed, "summary": summary,
-        })
+        # End-of-cycle compensation (always runs, even if inner broke early)
+        _run_compensation_evolve(state, direction, output_dir, runtime, outer)
         _save_state(output_dir, state)
-        _flush_artifacts(state, output_dir, i, done=(action == "synthesize" and done))
-        last_action = action
+        _flush_artifacts(state, output_dir, state["iter"])
 
-        if action == "synthesize" and done:
+        if stop_all:
             break
+
+    # End-of-run finalization (always runs, regardless of outer exit reason)
+    synth_result, done = _run_final_synthesize(state, direction, output_dir, runtime)
+    _save_state(output_dir, state)
+    _flush_artifacts(state, output_dir, state["iter"], done=done)
 
     return {
         "direction": direction,

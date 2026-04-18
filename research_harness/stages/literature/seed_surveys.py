@@ -10,8 +10,8 @@ def seed_surveys(query: str, k: int, existing_titles: str,
                  runtime: Runtime) -> str:
     """Search for survey papers and DOWNLOAD their PDFs for deeper analysis.
 
-    You are a senior researcher bootstrapping a literature review. You must
-    actually search the web / arXiv / Semantic Scholar — do NOT fabricate.
+    Actually search the web / arXiv / Semantic Scholar — do NOT fabricate
+    results.
 
     Workflow:
     1. Search for SURVEY / REVIEW papers on `query`.

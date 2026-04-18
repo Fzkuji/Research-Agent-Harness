@@ -10,7 +10,7 @@ def evolve_framework(framework_json: str, papers_json: str,
                      runtime: Runtime) -> str:
     """Revise the topic framework based on accumulated evidence.
 
-    You are refactoring the topic tree. Evidence to consider:
+    Refactor the topic tree. Evidence to consider:
     - Current framework (what we have now)
     - All annotated papers (topic_path per paper + contribution_summary)
     - All surveys (TOC + key claims)

@@ -6,9 +6,11 @@ from openprogram.agentic_programming.runtime import Runtime
 
 @agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
 def lookup_venue_criteria(venue: str, runtime: Runtime) -> str:
-    """You are an expert on academic peer review processes across all major CS/AI conferences and journals.
+    """Return a venue's EXACT review scoring criteria in a structured format.
 
-    Given a venue name (conference or journal), return its EXACT review scoring criteria in a structured format.
+    Given a venue name (conference or journal), look up its scoring
+    system using knowledge of academic peer review processes across
+    major CS/AI conferences and journals.
 
     You must provide:
     1. **Overall Assessment / Recommendation**: The exact scale (e.g., 1-5, 1-10, 1-6), with what each score means.

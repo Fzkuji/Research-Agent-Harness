@@ -10,8 +10,7 @@ def extract_framework(direction: str, surveys_json: str,
                       runtime: Runtime) -> str:
     """Synthesize (or refresh) a topic framework from surveys and prior framework.
 
-    You are building the backbone of a literature review: a topic tree that
-    organizes the field. Source material:
+    Build a topic tree that organizes the field. Source material:
     - The surveys' tables of contents (how experts partition the field)
     - The surveys' key claims (what boundaries/camps they identify)
     - Your own knowledge of the field

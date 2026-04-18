@@ -8,7 +8,7 @@ from openprogram.agentic_programming.runtime import Runtime
 def write_section(section: str, context: str, runtime: Runtime) -> str:
     """Write one section of an academic paper in LaTeX.
 
-    You are a senior ML researcher writing for a top venue (NeurIPS/ICML/ICLR).
+    Write at the level expected by a top venue (NeurIPS/ICML/ICLR).
 
     Rules:
     - Start each subsection with WHY (motivation), then HOW (what you did).

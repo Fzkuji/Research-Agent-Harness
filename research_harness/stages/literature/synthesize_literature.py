@@ -11,9 +11,9 @@ def synthesize_literature(direction: str, framework_json: str,
                           runtime: Runtime) -> str:
     """Produce the final, publication-ready literature synthesis.
 
-    You are writing the deliverable: six coherent artifacts that, taken
-    together, let a reader (or downstream `run_idea` stage) understand the
-    field, see where it's at, and pick promising directions.
+    Produce six coherent artifacts that, taken together, let a reader (or
+    downstream `run_idea` stage) understand the field, see where it's at,
+    and pick promising directions.
 
     Inputs:
     - `direction`: overall research direction (tree root).

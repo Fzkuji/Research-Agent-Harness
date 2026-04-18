@@ -19,9 +19,8 @@ from openprogram.agentic_programming.runtime import Runtime
 def meta_optimize(target: str, runtime: Runtime) -> str:
     """Analyze usage logs and propose optimizations to the research harness.
 
-    You are a harness optimization agent. Your job is to observe how the
-    research pipeline is used and propose improvements to the harness
-    itself (NOT to the research artifacts it produces).
+    Observe how the research pipeline is used and propose improvements
+    to the harness itself (NOT to the research artifacts it produces).
 
     ═══════════════════════════════════════════════════════════════
     WHAT YOU OPTIMIZE
