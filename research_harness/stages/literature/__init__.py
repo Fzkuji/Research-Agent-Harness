@@ -18,6 +18,8 @@ from typing import Any
 
 from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
+from openprogram.programs.functions.buildin.build_catalog import build_catalog
+from openprogram.programs.functions.buildin.parse_action import parse_action
 
 from research_harness.stages.literature.annotate_papers import annotate_papers
 from research_harness.stages.literature.comprehensive_lit_review import comprehensive_lit_review
@@ -37,31 +39,112 @@ from research_harness.utils import parse_json
 # Dispatcher — LLM picks the next action
 # ═══════════════════════════════════════════════════════════════════════════
 
-_DISPATCH_PROMPT = """Each turn, pick ONE action from the list below. The orchestrator
-executes it and feeds the result back into state.
+def _noop(**_kw):
+    """Placeholder callable for catalog entries — _lit_decide only picks,
+    the orchestrator's _dispatch() calls the real implementations."""
+    return None
 
-Available actions (pick exactly one):
 
-  seed_surveys        find survey papers → add to state.surveys
-                      args: {{ "query": str (default=direction),
-                               "k": int (default=3) }}
+def _build_lit_actions_available() -> dict:
+    """Registry of literature-loop actions for build_catalog/parse_action.
 
-  extract_framework   from surveys + your knowledge, build/refresh topic tree
-                      args: {{}}  (consumes state.surveys + state.framework)
+    The dispatcher (_dispatch in this module) maps each action name to the
+    actual leaf function; these entries exist only for the catalog the LLM
+    sees — `function` is a no-op placeholder.
+    """
+    return {
+        "seed_surveys": {
+            "function": _noop,
+            "description": (
+                "Find survey papers (defaults to the research direction as "
+                "query) and add them to state.surveys."
+            ),
+            "input": {
+                "query": {
+                    "source": "llm", "type": str,
+                    "description": "search query; defaults to the research direction",
+                },
+                "k": {
+                    "source": "llm", "type": int,
+                    "description": "number of surveys to fetch (default 3)",
+                },
+            },
+            "output": {},
+        },
+        "extract_framework": {
+            "function": _noop,
+            "description": (
+                "From state.surveys plus any existing framework, build or "
+                "refresh the topic tree. Consumes state.surveys + state.framework."
+            ),
+            "input": {},
+            "output": {},
+        },
+        "search_papers": {
+            "function": _noop,
+            "description": (
+                "Find NEW papers under a specific topic path in the framework."
+            ),
+            "input": {
+                "topic_path": {
+                    "source": "llm", "type": str,
+                    "description": "path in the framework tree, e.g. 'a/b/c'",
+                },
+                "k": {
+                    "source": "llm", "type": int,
+                    "description": "number of papers to fetch (default 5)",
+                },
+                "top_k_pdf": {
+                    "source": "llm", "type": int,
+                    "description": "how many of those to upgrade to PDF tier (default 3)",
+                },
+            },
+            "output": {},
+        },
+        "annotate_papers": {
+            "function": _noop,
+            "description": (
+                "For every paper with annotated=false, assign topic_path and "
+                "write a contribution_summary. Picks all unannotated papers."
+            ),
+            "input": {},
+            "output": {},
+        },
+        "evolve_framework": {
+            "function": _noop,
+            "description": (
+                "Refactor the topic tree based on accumulated evidence "
+                "(merge/split/rename/drop leaves)."
+            ),
+            "input": {},
+            "output": {},
+        },
+        "done": {
+            "function": _noop,
+            "description": (
+                "No further useful action at this moment. scope='cycle' "
+                "breaks the inner loop; scope='all' stops the outer loop too."
+            ),
+            "input": {
+                "scope": {
+                    "source": "llm", "type": str,
+                    "options": ["cycle", "all"],
+                    "description": "'cycle' (default) or 'all'",
+                },
+            },
+            "output": {},
+        },
+    }
 
-  search_papers       find NEW papers under a specific topic (uses framework)
-                      args: {{ "topic_path": "a/b/c",
-                               "k": int (default=5) }}
 
-  annotate_papers     assign topic_path + write contribution_summary for papers
-                      that are not yet annotated
-                      args: {{}}  (picks all unannotated papers)
+@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+def _lit_decide(direction: str, state_summary: str, framework_preview: str,
+                runtime: Runtime) -> str:
+    """Pick the next literature-loop action. Single-step dispatch.
 
-  evolve_framework    refactor the topic tree based on accumulated evidence
-                      args: {{}}
+Reply in the standard openprogram action format, with the action's args:
 
-  done                no further useful action at this moment
-                      args: {{ "scope": "cycle" | "all" (default="cycle") }}
+    {"call": "<action_name>", "args": { ... }}
 
 Guidance — FIRST-PASS mode (no prior synthesize in state):
 - Cold start (no surveys): seed_surveys.
@@ -71,56 +154,41 @@ Guidance — FIRST-PASS mode (no prior synthesize in state):
 - Papers with annotated=false: annotate_papers.
 - Orphans present, or a leaf past ~15 papers, or several rounds passed with
   no structural review: evolve_framework.
-- Framework has been stable for several rounds AND every leaf has ≥5
-  annotated papers AND no orphans remain: done.
+- Framework stable for several rounds AND every leaf has ≥5 annotated
+  papers AND no orphans remain: done.
 
 Guidance — REFINEMENT mode (prior synthesize exists):
-Your job is to IMPROVE what's already there, not redo it. The state summary
-will show `mode: REFINEMENT` and `N non-trivial improvements since` the last
+Improve what's there, don't redo it. The state summary shows `mode:
+REFINEMENT` and the number of non-trivial improvements since the last
 synthesize. Priorities, in order:
   1. If papers at tier=abstract_only exist, re-run search_papers on their
-     topic with `top_k_pdf` large enough to include them — so they upgrade
-     to PDF tier. This is the most valuable cheap improvement.
+     topic with `top_k_pdf` large enough to include them — upgrades them
+     to PDF tier. Most valuable cheap improvement.
   2. If any leaf has <5 papers, run search_papers for it.
-  3. If the direction is time-sensitive (LLM-era topics, fast fields) and
-     the newest paper in state is >12 months old, run search_papers or
-     seed_surveys with a query restricted to the latest year.
-  4. If annotations are thin (many summaries based on abstract_only), re-run
+  3. If the direction is time-sensitive and the newest paper is >12
+     months old, search_papers / seed_surveys with a recent-year query.
+  4. If annotations are thin (many abstract_only summaries), re-run
      annotate_papers after step 1 upgraded them.
   5. If new papers materially shifted the structure (new orphan cluster,
      a leaf grew past 15), run evolve_framework.
-  6. If the state looks saturated (no clear gap to fill): done.
+  6. If saturated: done.
 
-Output format — return ONE JSON object, nothing else:
-```json
-{{
-  "action": "<one of the actions above>",
-  "action_args": {{ ... }},
-  "reasoning": "why this action, now",
-  "expect": "what the state should look like after this action"
-}}
-```
+Returns raw JSON text; the orchestrator parses and dispatches.
 
-Research direction:
-{direction}
-
-State summary:
-{state_summary}
-
-Current framework (truncated):
-{framework_preview}
+Args:
+    direction: Research direction string.
+    state_summary: Compact dump of state (surveys/papers/framework/audit).
+    framework_preview: Truncated framework JSON for inspection.
+    runtime: LLM runtime instance.
 """
-
-
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
-def _lit_decide(direction: str, state_summary: str, framework_preview: str,
-                runtime: Runtime) -> str:
-    """Ask the LLM which action to execute next. Returns raw JSON text."""
+    available = _build_lit_actions_available()
+    catalog = build_catalog(available)
     return runtime.exec(content=[
-        {"type": "text", "text": _DISPATCH_PROMPT.format(
-            direction=direction,
-            state_summary=state_summary,
-            framework_preview=framework_preview or "(no framework yet)",
+        {"type": "text", "text": (
+            f"Research direction:\n{direction}\n\n"
+            f"State summary:\n{state_summary}\n\n"
+            f"Current framework (truncated):\n{framework_preview or '(no framework yet)'}\n\n"
+            f"== Actions ==\n{catalog}"
         )},
     ])
 
@@ -1031,10 +1099,16 @@ def run_literature(
                 framework_preview=framework_preview, runtime=runtime,
             )
 
-            decision = _safe_parse(reply)
-            action = (decision.get("action") or "").strip()
-            args = decision.get("action_args") or {}
-            reasoning = decision.get("reasoning", "")
+            parsed_action = parse_action(reply) if isinstance(reply, str) else None
+            if parsed_action is None:
+                decision = {}
+                action = ""
+                args = {}
+            else:
+                decision = parsed_action
+                action = (parsed_action.get("call") or "").strip()
+                args = parsed_action.get("args") or {}
+            reasoning = ""  # not part of the openprogram action schema
 
             if not action:
                 state["audit"].append({

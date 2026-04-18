@@ -215,3 +215,101 @@ def build_function_list() -> str:
         for name in names:
             lines.append(f"  {get_signature(name)}")
     return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Builders for openprogram dispatch pattern (build_catalog / parse_action / prepare_args)
+# ---------------------------------------------------------------------------
+
+def _noop(**_kw):
+    """Placeholder callable for catalog entries that aren't directly called.
+
+    `_pick_stage` picks a stage name and returns it to the orchestrator —
+    it never invokes the entry's `function`. `build_catalog` requires the
+    field to exist but never reads it, so a no-op satisfies the shape.
+    """
+    return None
+
+
+def build_stages_available() -> dict:
+    """Build the `available` registry for stage-level routing.
+
+    Each stage becomes an entry consumable by `build_catalog()`. Plus a
+    `done` meta-entry for signaling the whole task is complete.
+
+    Consumed by: `_pick_stage` in main.py.
+    """
+    out: dict = {
+        stage: {
+            "function": _noop,
+            "description": desc,
+            "input": {
+                "sub_task": {
+                    "source": "llm",
+                    "type": str,
+                    "description": (
+                        "if the task mentions an absolute path (/Users/.../X, "
+                        "~/...) or a named project folder, copy that string "
+                        "verbatim; otherwise copy the research direction phrase"
+                    ),
+                },
+            },
+            "output": {},
+        }
+        for stage, desc in STAGES.items()
+    }
+    out["done"] = {
+        "function": _noop,
+        "description": (
+            "Mark the overall task complete. Pick only when every stage "
+            "has finished and the final artifact exists."
+        ),
+        "input": {},
+        "output": {},
+    }
+    return out
+
+
+def build_stage_available(stage: str) -> dict:
+    """Build the `available` registry for functions in one stage.
+
+    Includes every function in the stage plus a `stage_done` meta-entry for
+    signaling the stage has nothing more to do. Consumable by
+    `build_catalog()` + `parse_action()` + `prepare_args()`.
+
+    Consumed by: `_stage_step` in main.py.
+    """
+    out: dict = {}
+    for name in stage_functions(stage):
+        func = get_function(name)
+        if func is None:
+            continue
+        sig = inspect.signature(func)
+        input_spec: dict = {}
+        for param in sig.parameters.values():
+            if param.name in AUTO_PARAMS or param.name in HIDDEN_PARAMS:
+                continue
+            ann = param.annotation
+            ptype = ann if ann is not inspect.Parameter.empty else str
+            spec: dict = {"source": "llm", "type": ptype}
+            if param.default is not inspect.Parameter.empty:
+                spec["description"] = f"optional (default={param.default!r})"
+            input_spec[param.name] = spec
+        doc_head = (inspect.getdoc(func) or "").split("\n\n")[0]
+        out[name] = {
+            "function": func,
+            "description": doc_head[:200],
+            "input": input_spec,
+            "output": {},
+        }
+    out["stage_done"] = {
+        "function": _noop,
+        "description": (
+            "Signal this stage is already complete — previous steps finished "
+            "the work, no further function call is needed. Do NOT pick this "
+            "if you intend to run a function this turn."
+        ),
+        "input": {},
+        "output": {},
+    }
+    return out
