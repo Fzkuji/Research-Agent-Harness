@@ -234,16 +234,11 @@ _MAX_STEPS_PER_STAGE = 20
             "placeholder": "e.g. Survey recent work on LLM uncertainty",
             "multiline": True,
         },
-        "work_dir": {
-            "description": "Absolute path where all research artifacts (papers, surveys, state.json, synthesis) will be written. The runtime's codex process runs with --cd to this directory, so every relative path the LLM writes lands here.",
-            "placeholder": "/Users/you/Documents/<project>/literature review",
-        },
         "runtime": {"hidden": True},
     },
 )
 def research_agent(
     task: str,
-    work_dir: str,
     runtime: Runtime = None,
     review_runtime: Runtime = None,
 ) -> dict:
@@ -256,11 +251,12 @@ Cross-model review: when review_runtime is provided, review functions use a
 different model (e.g. GPT) from the executor (e.g. Claude). This follows the
 ARIS design where the reviewer and author are adversarial by being different models.
 
+The runtime's working directory must be configured before calling this function
+(webui sets it via exec_rt.set_workdir(); CLI uses --work-dir). Every codex
+shell command and file write the LLM issues runs with that as cwd.
+
 Args:
     task: What the user wants to accomplish.
-    work_dir: Absolute path for all research artifacts. Every codex shell
-              command + file write the LLM issues runs with this as cwd, so
-              relative paths never leak into the OpenProgram repo.
     runtime: LLM runtime instance (executor).
     review_runtime: Separate LLM runtime for review (different model recommended).
 
@@ -269,12 +265,6 @@ Returns:
 """
     if runtime is None:
         raise ValueError("research_agent() requires a runtime argument")
-
-    work_dir = os.path.abspath(os.path.expanduser(work_dir))
-    os.makedirs(work_dir, exist_ok=True)
-    runtime.set_workdir(work_dir)
-    if review_runtime is not None:
-        review_runtime.set_workdir(work_dir)
 
     # Init log
     history = []
@@ -395,7 +385,11 @@ def main():
 
     from openprogram.providers import create_runtime
 
+    work_dir = os.path.abspath(os.path.expanduser(args.work_dir))
+    os.makedirs(work_dir, exist_ok=True)
+
     rt = create_runtime(provider=args.provider or "auto", model=args.model)
+    rt.set_workdir(work_dir)
 
     # Create separate review runtime for cross-model review
     review_rt = None
@@ -404,6 +398,7 @@ def main():
             provider=args.review_provider or "openai",
             model=args.review_model,
         )
+        review_rt.set_workdir(work_dir)
 
     print(f"Task: {task}")
     print(f"Executor: {args.provider or 'auto'}/{args.model or 'default'}")
@@ -413,7 +408,6 @@ def main():
 
     result = research_agent(
         task=task,
-        work_dir=args.work_dir,
         runtime=rt,
         review_runtime=review_rt,
     )
