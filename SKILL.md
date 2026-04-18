@@ -5,7 +5,7 @@ description: "Autonomous research agent: literature, ideas, experiments, writing
 
 # Agentic Research
 
-Autonomous research agent built with [Agentic Programming](https://github.com/Fzkuji/Agentic-Programming).
+Autonomous research agent built with [OpenProgram](https://github.com/Fzkuji/OpenProgram) (Agentic Programming paradigm).
 
 Two-level autonomous loop: Level 1 picks a research stage (literature, writing, review, ...), Level 2 dispatches to functions within that stage. Cross-model review uses GPT (via Codex) as reviewer and Claude as author.
 

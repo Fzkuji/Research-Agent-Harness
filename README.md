@@ -2,7 +2,7 @@
 
 Autonomous research agent: from topic to submission-ready paper.
 
-Built with [Agentic Programming](https://github.com/Fzkuji/Agentic-Programming) — Python controls the workflow, LLM reasons at each step via `@agentic_function` docstrings.
+Built with [OpenProgram](https://github.com/Fzkuji/OpenProgram) (Agentic Programming paradigm) — Python controls the workflow, LLM reasons at each step via `@agentic_function` docstrings.
 
 ## Quick Start
 
@@ -11,6 +11,21 @@ Built with [Agentic Programming](https://github.com/Fzkuji/Agentic-Programming) 
 ```bash
 pip install research-agent-harness
 ```
+
+<details>
+<summary><b>Local development (editable)</b></summary>
+
+Three-repo layout, `openprogram` first (this repo depends on it):
+
+```bash
+pip install -e ~/Documents/LLM\ Agent\ Harness/OpenProgram
+pip install -e ~/Documents/Research-Agent-Harness     # this repo
+```
+
+`pip install -e` hard-codes absolute paths into `site-packages/*.pth`. If you rename any parent folder, `import research_harness` (or `openprogram`) will break with `ModuleNotFoundError` until you rerun `pip install -e .` from the new location. The OpenProgram symlink at `openprogram/programs/applications/Research-Agent-Harness` also points to an absolute path — recreate it after any move.
+
+</details>
+
 
 ### 2. Set up LLM providers
 
