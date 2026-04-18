@@ -37,9 +37,8 @@ from research_harness.utils import parse_json
 # Dispatcher — LLM picks the next action
 # ═══════════════════════════════════════════════════════════════════════════
 
-_DISPATCH_PROMPT = """You are driving a literature-review loop. Each turn you pick ONE
-action from the list below. The orchestrator executes it and feeds the result
-back into state.
+_DISPATCH_PROMPT = """Each turn, pick ONE action from the list below. The orchestrator
+executes it and feeds the result back into state.
 
 Available actions (pick exactly one):
 

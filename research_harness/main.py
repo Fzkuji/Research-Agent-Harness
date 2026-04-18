@@ -33,10 +33,6 @@ from research_harness.utils import parse_json
 def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
     """Given a research task and current progress, decide which stage to work on next.
 
-Reply with ONLY a single JSON object. Do NOT run any commands, do NOT
-read any files, do NOT use any tools. Inspect only the text provided
-below and output the JSON.
-
 Available stages:
 {stages}
 
@@ -91,12 +87,9 @@ _PERSISTENCE_REMINDER = (
 @agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
 def _stage_step(stage: str, sub_task: str, context: str,
                 runtime: Runtime, review_runtime: Runtime = None) -> dict:
-    """Within a research stage, pick and execute the best function for the sub-task.
-
-Reply with ONLY a single JSON object. Do NOT run any commands, do NOT
-read any files, do NOT use any tools, do NOT do the work yourself —
-your ONLY job is to pick a function name and its arguments from the
-list below.
+    """Within a research stage, pick ONE function from the list below and
+return its name and arguments. This is a routing step — the chosen
+function performs the work; you only pick which one.
 
 Current stage: [{stage}]
 
