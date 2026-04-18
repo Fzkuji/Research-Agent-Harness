@@ -113,10 +113,10 @@ Rules:
   - Set stage_done=true ONLY when previous steps have already completed this stage and no further call is needed. In that case, omit `call` (set to null).
   - If you are requesting a call this turn, ALWAYS set stage_done=false. The stage cannot be done before this call has executed.
 - Do NOT include `runtime`, `exec_runtime`, `review_runtime`, or `project_dir` in args — they are auto-injected.
-- Do NOT include `max_iters` or similar iteration/retry caps — those are
-  system-controlled defaults. You decide WHEN to stop (by choosing not to call
-  the orchestrator again once its result shows the work is done), not HOW MANY
-  steps it gets per call.
+- Do NOT include `max_iters`, `max_outer`, `max_inner`, or any similar
+  iteration/retry caps — those are system-controlled defaults. You decide
+  WHEN to stop (by choosing not to call the orchestrator again once its
+  result shows the work is done), not HOW MANY steps it gets per call.
 - Prefer orchestrator functions (run_literature, run_idea, run_experiments, review_loop, paper_improvement_loop, etc.) for complete workflows. They chain multiple steps internally.
 - If an orchestrator returns `done: false` (or similar incomplete signal) in
   its result, call it AGAIN on the next turn so it can continue. Do NOT mark
@@ -382,43 +382,6 @@ agentic_research = research_agent
 
 
 # ═══════════════════════════════════════════
-# Runtime factory
-# ═══════════════════════════════════════════
-
-def _create_runtime(provider: str = None, model: str = None):
-    """Auto-detect and create an LLM runtime from available providers.
-
-    Providers:
-        claude-code: Claude Code CLI (default, full file system access)
-        codex:       OpenAI Codex CLI (session continuity, repo access)
-        openai:      OpenAI API (stateless, needs OPENAI_API_KEY)
-        anthropic:   Anthropic API (stateless, needs ANTHROPIC_API_KEY)
-    """
-    import os
-
-    if provider == "codex":
-        from agentic.providers import CodexRuntime
-        return CodexRuntime(model=model or "gpt-5.4-mini", session_id="auto")
-
-    if provider == "openai" or (provider is None and os.environ.get("OPENAI_API_KEY")):
-        from agentic.providers import OpenAIRuntime
-        return OpenAIRuntime(model=model or "gpt-4o")
-
-    if provider == "anthropic" or (provider is None and os.environ.get("ANTHROPIC_API_KEY")):
-        from agentic.providers import AnthropicRuntime
-        return AnthropicRuntime(model=model or "claude-sonnet-4-20250514")
-
-    if provider == "claude-code" or provider is None:
-        from agentic.providers import ClaudeCodeRuntime
-        return ClaudeCodeRuntime()
-
-    raise RuntimeError(
-        "No LLM provider available. Set OPENAI_API_KEY or ANTHROPIC_API_KEY, "
-        "or use --provider claude-code / --provider codex."
-    )
-
-
-# ═══════════════════════════════════════════
 # CLI entry point
 # ═══════════════════════════════════════════
 
@@ -449,12 +412,14 @@ def main():
             parser.print_help()
             return
 
-    rt = _create_runtime(provider=args.provider, model=args.model)
+    from openprogram.providers import create_runtime
+
+    rt = create_runtime(provider=args.provider or "auto", model=args.model)
 
     # Create separate review runtime for cross-model review
     review_rt = None
     if args.review_provider or args.review_model:
-        review_rt = _create_runtime(
+        review_rt = create_runtime(
             provider=args.review_provider or "openai",
             model=args.review_model,
         )

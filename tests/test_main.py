@@ -233,20 +233,20 @@ class TestResearchAgent:
         assert steps[0]["success"] is True
 
 
-# ── _create_runtime ──────────────────────────────────────────────────
+# ── create_runtime ───────────────────────────────────────────────────
 
 class TestCreateRuntime:
-    """Runtime factory auto-detection."""
+    """Runtime factory (delegates to openprogram.providers.create_runtime)."""
 
     def test_claude_code_provider(self):
-        from research_harness.main import _create_runtime
-        rt = _create_runtime(provider="claude-code")
+        from openprogram.providers import create_runtime
+        rt = create_runtime(provider="claude-code")
         assert rt is not None
 
     def test_unknown_provider_raises(self):
-        from research_harness.main import _create_runtime
-        with pytest.raises(RuntimeError):
-            _create_runtime(provider="nonexistent_provider_xyz")
+        from openprogram.providers import create_runtime
+        with pytest.raises((ValueError, RuntimeError)):
+            create_runtime(provider="nonexistent_provider_xyz")
 
 
 # ── CLI main() ───────────────────────────────────────────────────────

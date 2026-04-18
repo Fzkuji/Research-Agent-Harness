@@ -11,7 +11,7 @@ Tests check that the LLM understands the task and produces relevant output.
 
 import pytest
 
-from research_harness.main import _create_runtime
+from openprogram.providers import create_runtime
 
 
 @pytest.fixture(scope="module")
@@ -23,7 +23,7 @@ def rt():
     """
     import os
     provider = os.environ.get("TEST_PROVIDER", "claude-code")
-    return _create_runtime(provider=provider)
+    return create_runtime(provider=provider)
 
 
 class TestPolishRigorous:

@@ -11,7 +11,8 @@ import os
 
 import pytest
 
-from research_harness.main import _create_runtime, research_agent
+from openprogram.providers import create_runtime
+from research_harness.main import research_agent
 
 # The real research project to work on
 TRAVEL_AGENT_PROJECT = "/Users/fzkuji/Documents/Travel Agent/2026-EMNLP-6002-TravelAgent"
@@ -20,7 +21,7 @@ TRAVEL_AGENT_PROJECT = "/Users/fzkuji/Documents/Travel Agent/2026-EMNLP-6002-Tra
 @pytest.fixture(scope="module")
 def rt():
     provider = os.environ.get("TEST_PROVIDER", "claude-code")
-    return _create_runtime(provider=provider)
+    return create_runtime(provider=provider)
 
 
 def _print_result(result):
