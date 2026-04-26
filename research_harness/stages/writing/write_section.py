@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def write_section(section: str, context: str, runtime: Runtime) -> str:
     """Write one section of an academic paper in LaTeX.
 

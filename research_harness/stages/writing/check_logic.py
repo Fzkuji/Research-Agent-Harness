@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def check_logic(text: str, runtime: Runtime) -> str:
     """# Role
     你是一位负责论文终稿校对的学术助手。你的任务是进行"红线审查"，确保论文没有致命错误。

@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"siblings": -1})
+@agentic_function(render_range={"siblings": -1})
 def comprehensive_lit_review(topic: str, subtopics: str,
                              runtime: Runtime) -> str:
     """Write a comprehensive, publication-ready related work section with

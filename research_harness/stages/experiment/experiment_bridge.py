@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"siblings": -1})
+@agentic_function(render_range={"siblings": -1})
 def experiment_bridge(plan: str, runtime: Runtime) -> str:
     """Bridge between idea discovery and auto review loop. Takes an experiment plan
     and turns it into running experiments with initial results.

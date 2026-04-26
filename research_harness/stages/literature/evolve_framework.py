@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def evolve_framework(framework_json: str, papers_json: str,
                      surveys_json: str, audit_tail: str,
                      runtime: Runtime) -> str:

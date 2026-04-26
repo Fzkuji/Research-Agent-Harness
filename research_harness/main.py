@@ -32,7 +32,7 @@ from research_harness.registry import (
 # Level 1: Pick a stage
 # ═══════════════════════════════════════════
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
     """Route a research task to the next stage. Single-step classification.
 
@@ -91,7 +91,7 @@ Args:
 # Level 2: Execute within a stage
 # ═══════════════════════════════════════════
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def _stage_step(stage: str, sub_task: str, context: str,
                 runtime: Runtime, review_runtime: Runtime = None) -> dict:
     """Pick ONE function from this stage's catalog and return the action
@@ -225,8 +225,7 @@ _MAX_STEPS_PER_STAGE = 20
 
 
 @agentic_function(
-    compress=True,
-    summarize={"siblings": -1},
+    render_range={"siblings": -1},
     input={
         "task": {
             "source": "llm",

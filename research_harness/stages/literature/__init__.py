@@ -137,7 +137,7 @@ def _build_lit_actions_available() -> dict:
     }
 
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def _lit_decide(direction: str, state_summary: str, framework_preview: str,
                 runtime: Runtime) -> str:
     """Pick the next literature-loop action. Single-step dispatch.

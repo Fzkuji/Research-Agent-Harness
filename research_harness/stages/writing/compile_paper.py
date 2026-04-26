@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def compile_paper(paper_dir: str, runtime: Runtime) -> str:
     """Compile LaTeX paper to PDF, fix errors, and verify output.
 

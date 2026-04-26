@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"siblings": -1})
+@agentic_function(render_range={"siblings": -1})
 def draft_rebuttal(strategy: str, venue: str, char_limit: int,
                    runtime: Runtime) -> str:
     """Draft a venue-compliant, safety-validated rebuttal response.

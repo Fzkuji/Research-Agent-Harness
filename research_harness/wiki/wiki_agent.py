@@ -11,7 +11,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def research_wiki(task: str, runtime: Runtime) -> str:
     """You manage a persistent Research Wiki — a per-project knowledge base
     that accumulates papers, ideas, experiments, claims, and their

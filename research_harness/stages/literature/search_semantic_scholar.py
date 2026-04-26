@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def search_semantic_scholar(query: str, runtime: Runtime) -> str:
     """Search published venue papers (IEEE, ACM, Springer, etc.) via Semantic Scholar
     API. Complements arXiv (preprints) with citation counts, venue metadata, and TLDR.

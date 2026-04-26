@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def generate_table_caption(description: str, runtime: Runtime) -> str:
     """# Role
     你是一位经验丰富的学术编辑，擅长撰写精准、规范的论文表格标题。

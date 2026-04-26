@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(compress=True, summarize={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"depth": 0, "siblings": 0})
 def build_rebuttal_strategy(parsed_reviews: str, paper_summary: str,
                             runtime: Runtime) -> str:
     """Build a venue-compliant rebuttal strategy from parsed reviewer concerns.
