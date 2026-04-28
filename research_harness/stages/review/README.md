@@ -1,6 +1,7 @@
 # Paper-review skills
 
-Two stand-alone agent skills shipped with this sub-module:
+Two stand-alone agent skills (Claude Code / opencode) shipped with this
+sub-module:
 
 - **`paper-review`** — write a venue-format peer review from scratch
   using sentence skeletons drawn live from a corpus of ~500
@@ -12,67 +13,136 @@ Two stand-alone agent skills shipped with this sub-module:
   score / verdict / sub_scores verbatim from the draft, lands at 1% AI
   on GPTZero.
 
+The skills themselves live at `<repo>/skills/{paper-review,humanize-paper-review}/SKILL.md`.
+This directory holds the underlying `review_app` CLI, the corpus
+(`review_corpus/`), and the cross-platform installer.
+
 ## One-line install
 
-Mac / Linux:
 ```bash
+# === Mac / Linux ===
+
+# Claude Code, default paths
 curl -sSL https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python3
+
+# opencode
+AGENT_SKILL_DIR=~/.opencode/skills bash -c 'curl -sSL https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python3'
+
+# Cursor / Continue / any agent that just reads SKILL.md from a directory
+AGENT_SKILL_DIR=~/my-prompts/skills bash -c 'curl -sSL https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python3'
+
+# Custom repo location
+RESEARCH_HARNESS_DIR=/opt/research-harness bash -c 'curl -sSL https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python3'
+
+# Custom repo + custom skill dir at once
+RESEARCH_HARNESS_DIR=/opt/rah AGENT_SKILL_DIR=~/my-prompts/skills bash -c 'curl -sSL https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python3'
+
+# Don't touch my PYTHONPATH (I'll set it myself)
+curl -sSL https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python3 - --no-pythonpath
+
+# Install for Claude Code AND opencode side by side (one repo, two symlinks)
+curl -sSL https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python3
+AGENT_SKILL_DIR=~/.opencode/skills bash -c 'curl -sSL https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python3'
 ```
 
-Windows (PowerShell):
 ```powershell
+# === Windows (PowerShell) ===
+
+# Claude Code, default paths
 irm https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python
+
+# opencode
+$env:AGENT_SKILL_DIR = "$env:USERPROFILE\.opencode\skills"
+irm https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python
+
+# Custom paths
+$env:RESEARCH_HARNESS_DIR = "C:\research-harness"
+$env:AGENT_SKILL_DIR      = "$env:USERPROFILE\my-prompts\skills"
+irm https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python
+
+# Don't touch my PYTHONPATH
+irm https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python - --no-pythonpath
 ```
 
-The installer auto-detects every supported agent on your machine
-(Claude Code, opencode, Cursor, codex, Gemini Code, continue.dev) and
-installs the skills into all of them. It clones the repo to
-`~/.research-agent-harness`, links the skills, and adds the repo to
-`PYTHONPATH`. It prints exactly where everything went.
+### What gets installed where
 
-Re-running upgrades the repo (`git pull`) and refreshes all skill
-links — same one-line command.
+The installer touches **three places** on your machine:
+
+| What | Default path | Override |
+|---|---|---|
+| 1. The repo (full clone, ~13 MB) — contains review_app, corpus (1265 reviewer JSONs + sentence index), and the skill source files | `~/.research-agent-harness/` | `RESEARCH_HARNESS_DIR=<path>` env var or `--repo-dir <path>` flag |
+| 2. The two skills (symlink → repo on Mac/Linux; copy on Windows w/o dev mode) | `~/.claude/skills/paper-review/`<br>`~/.claude/skills/humanize-paper-review/` | `AGENT_SKILL_DIR=<path>` env var or `--skill-dir <path>` flag |
+| 3. `PYTHONPATH` (so `python -m research_harness.review_app` resolves) | Appended to `~/.zshrc` (Mac, default shell) or `~/.bashrc` (Linux) — Windows uses `setx` to write the user-scope env var | `--no-pythonpath` flag to skip |
+
+After install your filesystem looks like:
+
+```
+~/.research-agent-harness/                # ← the repo
+├── research_harness/
+│   ├── review_app.py                     # the CLI both skills call
+│   └── stages/review/
+│       ├── install.py                    # this installer
+│       ├── README.md                     # this file
+│       └── review_corpus/
+│           ├── source/                   # 1265 GPTZero-verified human reviewer JSONs
+│           └── processed/                # sentence-template index for sample_for_venue
+└── skills/
+    ├── paper-review/SKILL.md
+    └── humanize-paper-review/SKILL.md
+
+~/.claude/skills/                         # ← where Claude Code looks for skills
+├── paper-review            -> ~/.research-agent-harness/skills/paper-review
+└── humanize-paper-review   -> ~/.research-agent-harness/skills/humanize-paper-review
+
+~/.zshrc                                  # ← appended:
+                                          # export PYTHONPATH="$HOME/.research-agent-harness:$PYTHONPATH"
+```
+
+### Uninstall
+
+There is no uninstaller, but cleanup is three deletes (whatever paths
+you actually used):
+
+```bash
+rm -rf ~/.research-agent-harness                          # the repo + corpus
+rm ~/.claude/skills/paper-review                          # the symlinks
+rm ~/.claude/skills/humanize-paper-review
+# Then remove the `export PYTHONPATH=...` line install.py added
+# to ~/.zshrc / ~/.bashrc (or `setx PYTHONPATH ""` on Windows).
+```
 
 ## Use after install
 
-In your agent:
+In Claude Code / opencode:
+
 ```
 > /paper-review my_paper.pdf venue="NeurIPS"
 > /humanize-paper-review my_paper.pdf draft=existing_review.md venue="ACM Multimedia"
 ```
 
-Or call the underlying CLI directly:
+Or call the underlying CLI directly (no agent needed):
+
 ```bash
+# From-scratch review
 python -m research_harness.review_app my_paper.pdf \
-    --venue "ACM Multimedia" --output review.json
+    --venue "ACM Multimedia" \
+    --output review.json
+
+# Humanize existing draft (2-stage redaction)
 python -m research_harness.review_app my_paper.pdf \
-    --venue "ACM Multimedia" --draft existing.md --output humanized.json
+    --venue "ACM Multimedia" \
+    --draft existing_llm_review.md \
+    --output humanized.json
 ```
 
-## Override the defaults
+Each invocation: 3-7 minutes (codex CLI is the bottleneck).
 
-If auto-detection picks the wrong place, override:
+## Upgrade
 
-```bash
-# Force a single skill destination
-AGENT_SKILL_DIR=~/my-prompts/skills python install.py
-
-# Custom repo location
-RESEARCH_HARNESS_DIR=/opt/rah python install.py
-
-# Don't touch PYTHONPATH
-python install.py --no-pythonpath
-```
-
-## Uninstall
+Re-run the installer (it does `git pull` and re-links):
 
 ```bash
-rm -rf ~/.research-agent-harness                  # the repo + corpus
-# Then for each agent the installer linked into:
-rm ~/.claude/skills/paper-review ~/.claude/skills/humanize-paper-review
-# (the install summary printed the exact paths to remove)
-# Finally remove the `export PYTHONPATH=...` line install.py added
-# to ~/.zshrc / ~/.bashrc, or `setx PYTHONPATH ""` on Windows.
+python ~/.research-agent-harness/research_harness/stages/review/install.py
 ```
 
 ## Background
