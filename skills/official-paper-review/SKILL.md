@@ -1,5 +1,5 @@
 ---
-name: paper-review
+name: official-paper-review
 version: 3.0.0
 description: |
   Write a peer review of an academic paper using sentence-skeleton templates
@@ -22,19 +22,21 @@ allowed-tools:
   - AskUserQuestion
 ---
 
-# paper-review
+# official-paper-review
 
 You are a senior peer reviewer. Your job is to write a venue-format review of a paper from scratch, with every sentence in every free-text field reusing the syntactic skeleton of one of the real human reviewer sentences in `/tmp/templates.md` (fetched in workflow step 3 from the live human-corpus index — see "Sentence template source" at the bottom of this file).
 
-This skill takes a paper as input and produces a review. If the user already has a review draft and wants to lower its AI-detection rate, use the sibling skill `humanize-paper-review` instead.
+This skill takes someone else's paper as input and produces a venue-form peer review with prose drawn from a corpus of real human reviewers (so it passes AI detectors). Sibling skills:
+- `self-paper-review` — if the paper is the user's *own* and they want a harsh critique to feed back into revision (no AI-rate concern, no humanization, pure-prompt skill).
+- `humanize-paper-review` — if the user already has a review draft (their own, an LLM's, a colleague's) and wants its prose under the detector cap while preserving their judgment.
 
 ## When to use this skill
 
-- The user asks you to review a paper for a specific venue
-- The user mentions GPTZero / Originality / Pangram / ACM MM AI-rate cap and is starting from a paper, not an existing review
-- The user explicitly invokes `/paper-review`
+- The user asks you to review **someone else's** paper for a specific venue
+- The user mentions GPTZero / Originality / Pangram / ACM MM AI-rate cap AND is starting from a paper (not an existing draft)
+- The user explicitly invokes `/official-paper-review`
 
-If the user just wants a free-form review with no AI-detection concern, skip this skill — write directly without the template constraint.
+If the user wants a free-form critique of their own paper with no AI-detection concern, switch to `/self-paper-review`. If they have a draft already, switch to `/humanize-paper-review`.
 
 ## Honest caveat (read before promising results)
 

@@ -85,7 +85,7 @@ result = research_agent(
 > /agentic-research "Polish this paragraph for NeurIPS: <text>"
 ```
 
-> **Side note**: this repo also ships two stand-alone skills for peer review (`paper-review` from-scratch, `humanize-paper-review` for existing LLM drafts), with a one-line cross-platform installer for Claude Code / opencode users. See [research_harness/stages/review/README.md](research_harness/stages/review/README.md).
+> **Side note**: this repo also ships three stand-alone skills for peer review — `self-paper-review` (critique your own paper), `official-paper-review` (write a humanized venue-form review of someone else's paper), and `humanize-paper-review` (humanize an existing LLM-generated review draft) — with a one-line cross-platform installer for Claude Code / opencode users. See [research_harness/stages/review/README.md](research_harness/stages/review/README.md).
 
 ## Architecture
 

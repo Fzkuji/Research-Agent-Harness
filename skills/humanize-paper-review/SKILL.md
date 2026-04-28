@@ -13,9 +13,11 @@ description: |
   draft-prose token ever enters the prose-generator's context.
   Empirical: 1% AI on GPTZero, ACM MM smoke test.
 
-  Sibling `paper-review` is for the from-scratch case (no draft).
-  Use this skill when the user has a draft they want to keep the
-  judgment from.
+  Sibling skills:
+    - official-paper-review: from-scratch venue-form review when the
+      user has only the paper (no draft) and someone else wrote it.
+    - self-paper-review: harsh self-critique of the user's own paper
+      (no AI-detector concern; pure-prompt skill).
 license: MIT
 compatibility: claude-code opencode
 allowed-tools:
@@ -41,7 +43,9 @@ collect inputs, run the CLI, and report the result.
   AND is starting from a draft (not from a paper alone)
 - The user explicitly invokes `/humanize-paper-review`
 
-If the user has only the paper (no draft), use `/paper-review` instead.
+If the user has only the paper (no draft), redirect:
+- Reviewing someone else's paper → `/official-paper-review`
+- Critiquing the user's own paper → `/self-paper-review`
 
 ## Empirical evidence (v4)
 

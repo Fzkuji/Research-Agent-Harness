@@ -1,21 +1,37 @@
 # Paper-review skills
 
-Two stand-alone agent skills (Claude Code / opencode) shipped with this
-sub-module:
+Three stand-alone agent skills (Claude Code / opencode) shipped with this
+sub-module, covering the two distinct review use cases (self-eval vs
+submission to a venue):
 
-- **`paper-review`** — write a venue-format peer review from scratch
-  using sentence skeletons drawn live from a corpus of ~500
+- **`self-paper-review`** — critique your own paper before submitting.
+  Pure-prompt skill; no corpus templates, no external CLI, no AI-detector
+  constraint. Optimized for harsh, paper-grounded critique that the user
+  can feed into a revision loop.
+- **`official-paper-review`** — write a venue-form peer review of someone
+  else's paper, from scratch, with prose drawn from a corpus of ~500
   GPTZero-verified human reviews (COLM / ICLR / NeurIPS / ICML,
-  2018-2025). Empirically 0% AI on GPTZero (ACM MM smoke test).
-- **`humanize-paper-review`** — humanize an existing LLM-generated
-  review draft via 2-stage redaction (extract structured judgment from
-  the draft, then re-generate prose from scratch). Preserves
-  score / verdict / sub_scores verbatim from the draft, lands at 1% AI
-  on GPTZero.
+  2018-2025). Targets the lab's AI-detector cap (e.g. ACM MM 2026
+  <=20%). Empirically 0% AI on GPTZero (ACM MM smoke test).
+- **`humanize-paper-review`** — you (or an LLM) already wrote a review
+  draft, and now its prose has to pass an AI detector while keeping your
+  score / verdict / observations verbatim. Uses 2-stage redaction:
+  extracts structured judgment from the draft, then regenerates prose
+  from scratch (so no draft-prose token reaches the prose generator's
+  context). 1% AI on GPTZero in the smoke test.
 
-The skills themselves live at `<repo>/skills/{paper-review,humanize-paper-review}/SKILL.md`.
-This directory holds the underlying `review_app` CLI, the corpus
+The skills themselves live at `<repo>/skills/{self,official,humanize}-paper-review/SKILL.md`.
+This directory holds the underlying `review_app` CLI (used by `official-`
+and `humanize-`; `self-` is a pure-prompt skill), the corpus
 (`review_corpus/`), and the cross-platform installer.
+
+Use-case map:
+
+| You are... | Use this skill |
+|---|---|
+| Pre-submission self-critique of *your* paper | `self-paper-review` |
+| Reviewing someone else's paper, AI-rate matters | `official-paper-review` |
+| Already have a review draft (yours, an LLM's, a colleague's), want it under the detector cap | `humanize-paper-review` |
 
 ## One-line install
 
@@ -71,7 +87,7 @@ The installer touches **three places** on your machine:
 | What | Default path | Override |
 |---|---|---|
 | 1. The repo (full clone, ~13 MB) — contains review_app, corpus (1265 reviewer JSONs + sentence index), and the skill source files | `~/.research-agent-harness/` | `RESEARCH_HARNESS_DIR=<path>` env var or `--repo-dir <path>` flag |
-| 2. The two skills (symlink → repo on Mac/Linux; copy on Windows w/o dev mode) | `~/.claude/skills/paper-review/`<br>`~/.claude/skills/humanize-paper-review/` | `AGENT_SKILL_DIR=<path>` env var or `--skill-dir <path>` flag |
+| 2. The three skills (symlink → repo on Mac/Linux; copy on Windows w/o dev mode) | `~/.claude/skills/self-paper-review/`<br>`~/.claude/skills/official-paper-review/`<br>`~/.claude/skills/humanize-paper-review/` | `AGENT_SKILL_DIR=<path>` env var or `--skill-dir <path>` flag |
 | 3. `PYTHONPATH` (so `python -m research_harness.review_app` resolves) | Appended to `~/.zshrc` (Mac, default shell) or `~/.bashrc` (Linux) — Windows uses `setx` to write the user-scope env var | `--no-pythonpath` flag to skip |
 
 After install your filesystem looks like:
@@ -79,7 +95,7 @@ After install your filesystem looks like:
 ```
 ~/.research-agent-harness/                # ← the repo
 ├── research_harness/
-│   ├── review_app.py                     # the CLI both skills call
+│   ├── review_app.py                     # the CLI official- and humanize- skills call
 │   └── stages/review/
 │       ├── install.py                    # this installer
 │       ├── README.md                     # this file
@@ -87,11 +103,13 @@ After install your filesystem looks like:
 │           ├── source/                   # 1265 GPTZero-verified human reviewer JSONs
 │           └── processed/                # sentence-template index for sample_for_venue
 └── skills/
-    ├── paper-review/SKILL.md
+    ├── self-paper-review/SKILL.md
+    ├── official-paper-review/SKILL.md
     └── humanize-paper-review/SKILL.md
 
 ~/.claude/skills/                         # ← where Claude Code looks for skills
-├── paper-review            -> ~/.research-agent-harness/skills/paper-review
+├── self-paper-review       -> ~/.research-agent-harness/skills/self-paper-review
+├── official-paper-review   -> ~/.research-agent-harness/skills/official-paper-review
 └── humanize-paper-review   -> ~/.research-agent-harness/skills/humanize-paper-review
 
 ~/.zshrc                                  # ← appended:
@@ -105,7 +123,8 @@ you actually used):
 
 ```bash
 rm -rf ~/.research-agent-harness                          # the repo + corpus
-rm ~/.claude/skills/paper-review                          # the symlinks
+rm ~/.claude/skills/self-paper-review                              # the symlinks
+rm ~/.claude/skills/official-paper-review
 rm ~/.claude/skills/humanize-paper-review
 # Then remove the `export PYTHONPATH=...` line install.py added
 # to ~/.zshrc / ~/.bashrc (or `setx PYTHONPATH ""` on Windows).
@@ -116,11 +135,14 @@ rm ~/.claude/skills/humanize-paper-review
 In Claude Code / opencode:
 
 ```
-> /paper-review my_paper.pdf venue="NeurIPS"
-> /humanize-paper-review my_paper.pdf draft=existing_review.md venue="ACM Multimedia"
+> /self-paper-review my_own_paper.pdf venue=NeurIPS
+> /official-paper-review someone_elses_paper.pdf venue="NeurIPS"
+> /humanize-paper-review someone_elses_paper.pdf draft=existing_review.md venue="ACM Multimedia"
 ```
 
-Or call the underlying CLI directly (no agent needed):
+`self-paper-review` runs entirely inside the agent (no external CLI).
+`official-` and `humanize-` delegate prose generation to the
+`review_app` CLI; you can also call that CLI directly (no agent needed):
 
 ```bash
 # From-scratch review
