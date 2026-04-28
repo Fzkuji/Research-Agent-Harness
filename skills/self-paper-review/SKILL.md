@@ -1,6 +1,6 @@
 ---
 name: self-paper-review
-version: 1.3.0
+version: 1.4.0
 description: |
   Critically review your own paper to find real weaknesses before
   submission. Output is meant to be read by you (the author) and fed
@@ -91,27 +91,57 @@ already has an LLM-written review draft they want to humanize, use
    step *first*, internally, and only then start writing weaknesses.
    They do NOT compute "rating = 10 − number of weaknesses".
 
-   With weaknesses set aside, decide independently: what is this paper's
-   base value at the target venue, on a scale roughly aligned with that
-   venue's rating scale (use ICLR's 1-10 as a default proxy)? Score it
-   from these dimensions:
-   - **Problem importance**: is this a real problem the venue's
-     community cares about? (Strong = many follow-up papers possible;
-     weak = niche.)
-   - **Conceptual contribution**: does it propose something new — a
-     method, a phenomenon, a connection, a benchmark — vs. a
-     straightforward combination of existing pieces?
-   - **Execution**: is the experimental scope, the model sizes, the
-     dataset coverage at the venue's bar? Does the paper deliver what
-     it promises?
-   - **Impact / interest**: would a researcher in this area want to
-     read this paper, cite it, or build on it?
+   With weaknesses set aside, **score each of the four dimensions
+   below on its own 1-10 scale, then take the unweighted average to
+   get the base value**. Do NOT skip the dimensional scores and
+   directly write a single number — the dimensional decomposition is
+   what produces useful spread across papers. (Earlier versions of
+   this skill that asked for a single number directly produced
+   distribution collapse: 4/5 papers all received the same modal
+   rating regardless of their actual differences.)
 
-   Write down a one-line *base rating estimate* (e.g. "base value ≈
-   6.5 / 10 — a solid execution of an interesting but not novel idea on
-   the standard benchmarks for this subfield"). You will use this in
-   step 7 (the Recommendation), and you commit to it *before* the
-   weakness pass biases you downward.
+   For each dimension, score 1-10 against the venue's bar (use ICLR
+   as default). Use the same per-point ICLR anchors below for each
+   dimension. State each score on its own line with one-sentence
+   evidence from the paper.
+
+   - **Problem importance** (P): is this a real problem the venue's
+     community cares about?
+     - 8: a problem multiple top-tier papers per year address.
+     - 6: a problem the subfield acknowledges but is not the
+       hottest direction.
+     - 4: a niche / under-motivated problem.
+     - 2: out-of-scope or contrived.
+   - **Conceptual contribution** (C): does the paper propose something
+     genuinely new — a method, a phenomenon, a connection, a benchmark
+     — vs. a straightforward combination of existing pieces?
+     - 8: a new mechanism, theoretical insight, or empirical finding
+       that did not exist before.
+     - 6: a real but incremental contribution (a new variant, a new
+       application of an existing technique, a new analysis tool).
+     - 4: a known method on a slightly different setting.
+     - 2: nothing new beyond engineering.
+   - **Execution** (E): is the experimental scope, model sizes,
+     dataset coverage, and rigor at the venue's bar?
+     - 8: comprehensive experiments across multiple settings, strong
+       baselines, error bars, ablations.
+     - 6: standard execution at the venue's bar.
+     - 4: thin experiments (one dataset, one seed, weak baselines).
+     - 2: experiments do not actually test the claim.
+   - **Impact / interest** (I): would a researcher in the area
+     actively want to read, cite, or build on this paper?
+     - 8: yes, will be on a follow-up paper's reading list.
+     - 6: noted by the subfield but not pivotal.
+     - 4: of limited interest beyond a small group.
+     - 2: unlikely to be read.
+
+   Then compute:
+
+       base value = round((P + C + E + I) / 4)
+
+   Write the four scores and the resulting base value explicitly.
+   You commit to this base value *before* the weakness pass biases
+   you downward.
 
    **Calibration anchors — ICLR-style 1-10 scale**.
 
@@ -205,10 +235,18 @@ already has an LLM-written review draft they want to humanize, use
 
 7. **Output as markdown** to the destination path. Required structure:
    - `## Core claim` — the one-sentence claim you extracted (step 3).
-   - `## Base value` — your step-4 base rating estimate, with a
-     one-line justification. Format: `Base value ≈ <N>/10 — <one-line
-     reason>`. This is the part the Recommendation builds on; do not
-     skip or hedge it.
+   - `## Base value` — the four dimensional scores from step 4, plus
+     the average. Required format:
+
+         - Problem importance (P): <N>/10 — <evidence>
+         - Conceptual contribution (C): <N>/10 — <evidence>
+         - Execution (E): <N>/10 — <evidence>
+         - Impact / interest (I): <N>/10 — <evidence>
+         - **Base value = round((P + C + E + I) / 4) = <N>/10**
+
+     Do not skip the dimensional breakdown. Do not pre-decide the base
+     value and then write dimensions to match it; do dimensions first
+     and let the average produce the base.
    - `## What works` — short. Don't waste space on praise. List only
      the things that actually hold up under stress-testing.
    - `## What's wrong` — the main output. Group by severity:
