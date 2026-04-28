@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "O-fOgeI_D-B",
+  "reviewer": "8BJz",
+  "paper": {
+    "title": "Active Learning of Convex Halfspaces on Graphs",
+    "authors": [
+      "Maximilian Thiessen",
+      "Thomas Gärtner"
+    ],
+    "abstract": "We systematically study the query complexity of learning geodesically convex halfspaces on graphs. Geodesic convexity is a natural generalisation of Euclidean convexity and allows the definition of convex sets and halfspaces on graphs. We prove an upper bound on the query complexity linear in the treewidth and the minimum hull set size but only logarithmic in the diameter. We show tight lower bounds along well-established separation axioms and identify the Radon number as a central parameter of the query complexity and the VC dimension. While previous bounds typically depend on the cut size of the labelling, all parameters in our bounds can be computed from the unlabelled graph. We provide evidence that ground-truth communities in real-world graphs are often convex and empirically compare our proposed approach with other active learning algorithms.",
+    "keywords": [
+      "active learning",
+      "learning theory",
+      "semi-supervised learning",
+      "transduction",
+      "vertex classification",
+      "graphs",
+      "convexity theory",
+      "geodesic convexity",
+      "shortest paths",
+      "halfspaces",
+      "query complexity"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=O-fOgeI_D-B"
+  },
+  "review_fields": {
+    "comment": "Dear Author(s),\n\nI have another question. Could you please provide some practical input examples for this specific learning problem where the above mentioned sufficient conditions to achieve the bound $qc(G) \\leq h(G) + \\log d(G) + \\max_{\\{a,b\\}} |W_{=ab}^*|$ in polynomial time are satisfied? \n\nYour answer can clarify if such sufficient conditions/assumptions can be considered \"strong\" or not for this problem (in real-world scenarios). \n\nThank you."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

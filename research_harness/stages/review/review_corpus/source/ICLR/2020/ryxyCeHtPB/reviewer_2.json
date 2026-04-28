@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "ryxyCeHtPB",
+  "reviewer": "2",
+  "paper": {
+    "title": "Pay Attention to Features, Transfer Learn Faster CNNs",
+    "authors": [
+      "Kafeng Wang",
+      "Xitong Gao",
+      "Yiren Zhao",
+      "Xingjian Li",
+      "Dejing Dou",
+      "Cheng-Zhong Xu"
+    ],
+    "abstract": "Deep convolutional neural networks are now widely deployed in vision applications, but a limited size of training data can restrict their task performance. Transfer learning offers the chance for CNNs to learn with limited data samples by transferring knowledge from models pretrained on large datasets. Blindly transferring all learned features from the source dataset, however, brings unnecessary computation to CNNs on the target task. In this paper, we propose attentive feature distillation and selection (AFDS), which not only adjusts the strength of transfer learning regularization but also dynamically determines the important features to transfer. By deploying AFDS on ResNet-101, we achieved a state-of-the-art computation reduction at the same accuracy budget, outperforming all existing transfer learning methods. With a 10x MACs reduction budget, a ResNet-101 equipped with AFDS transfer learned from ImageNet to Stanford Dogs 120, can achieve an accuracy 11.07% higher than its best competitor.",
+    "keywords": [
+      "transfer learning",
+      "pruning",
+      "faster CNNs"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ryxyCeHtPB"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "In general, I think it is a good paper and I like the contribution of the author. I think they explain in detail the methodology. The results compare the new methodologies with different databases which increase the credibility of the results. However, there is a couple of additional question that is important to manage:  \n\n1) The paper presents three different contributions. However, it is so clear how this work helps for \"By changing the fraction of channel neurons to skip for each convolution, AFDS can further accelerate the transfer learned models while minimizing the impact on task accuracy\" I think a better explanation of this part it would be necessary. \n\n2) The comparison of the results are very focused on AFDS, Did you compare the results with different transfer learning approach? \n\n3) During the training procedure. We need a better explanation of why \"we found that in residual networks with greater depths, AFS could become notably challenging to train to high accuracies\". Also, the results of the empirical test it would be useful to understand the challenges to train the network. \n\n4) I think it would be useful to have the code available for the final version."
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "B7ZbqNLDn-_",
+  "reviewer": "FQxe",
+  "paper": {
+    "title": "Recycling Model Updates in Federated Learning: Are Gradient Subspaces Low-Rank?",
+    "authors": [
+      "Sheikh Shams Azam",
+      "Seyyedali Hosseinalipour",
+      "Qiang Qiu",
+      "Christopher Brinton"
+    ],
+    "abstract": "In this paper, we question the rationale behind propagating large numbers of parameters through a distributed system during federated learning. We start by examining the rank characteristics of the subspace spanned by gradients (i.e., the gradient-space) in centralized model training, and observe that the gradient-space often consists of a few leading principal components accounting for an overwhelming majority (95-99%) of the explained variance. Motivated by this, we propose the \"Look-back Gradient Multiplier\" (LBGM) algorithm, which utilizes this low-rank property of the gradient-space in federated learning. Operationally, LBGM recycles the gradients between model update rounds to significantly reduce the number of parameters to be propagated through the system. We analytically characterize the convergence behavior of LBGM, revealing the nature of the trade-off between communication savings and model performance. Our subsequent experimental results demonstrate the improvement LBGM obtains on communication overhead compared to federated learning baselines. Additionally, we show that LBGM is a general plug-and-play algorithm that can be used standalone or stacked on top of existing sparsification techniques for distributed model training.",
+    "keywords": [
+      "Distributed Machine Learning",
+      "Federated Learning",
+      "Gradient Subspace",
+      "SGD"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=B7ZbqNLDn-_"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper studies the gradient subspace and finds it low-rank propery.\nThis observation motivates them to propose a new algorithm that reuses similar past gradients to save communication.\nThey provide a theoretical analysis (with some mistakes) and conduct experiments to validate their method.",
+    "main_review": "From my perspective, the main novelty is two folds.\nOne is the investigation of the gradient subspace, while the other is the proposed method which reuses similar past gradients to save communication.\nThe proof technique for the theorem is standard. However, it seems to have some mistakes, which though can be fixed with additional efforts and some quantities redefined.\nThe paper provides abundant experiments which I appreciate a lot.\nExperiments illustrate communication efficiency and the plug-and-play property of their method.\nMost of the writing is clear but some parts are hard to understand.\n\nI have the following concerns:\n1. The readability for Figure 1-3 should be improved. Without the help of Algorithm 2, I can’t figure out the meaning of each coordinate axis. \n2. In the first paragraph of Section 3, it is better to add $\\theta^{(t, 0)}_k$ is initialized as $\\theta_k$ explicitly. \n3. The description of LBGM Algorithm is hard to understand at the first glance. Some undefined terms are used, like look-back coefficients. I have to look up their meanings and exact mathematical forms in Lemma 1 and Algorithm 1, which increases the reading burden. I suggest the author could give a specific definition of frequently used terminology at the beginning. Besides, to better deliver the main idea of Algorithm 1, certain properties could be provided. For example, each device uploads just one LBG to the server, and the server tracks and maintains all updated LBGs.\n4. Lemma 1 seems to have a mistake. Since both $\\rho_k^{(t), \\ell}$ and $\\cos(\\alpha_k^{(t), \\ell})$ are scalers, the equality (L1) implies that the vectors $g_k^{\\ell}$ and $g_k^{(t)}$ have the same direction (and thus are parallel), which is contradictory to (a) in Figure 4, where $g_k^{\\ell}$ and $g_k^{(t)}$ has an angle. \n5. The equality of the projections of a vector into two different vectors, though being wrong, is frequently used in the proof of Theorem 1. As a result, (14) and the first line of $Z_5$ are incorrect. However, these mistakes can be avoided. Letting $\\tilde{d}_k^{(t)} = d_k^{(t)} \\cos(\\alpha_k^{(t), \\ell})$ and abandon $\\tilde{d}_k^{(t)} =  \\rho_k^{(t), \\ell}d_k^{\\ell}$ solve the first problem. To bound $Z_5$, we can directly use the fact: $(1-\\cos \\theta)^2 \\le |\\sin \\theta|$ for all $- \\pi/2 \\le \\theta \\le \\pi/2$. In the way, though Theorem 1 can be rescued to be correct, the current proof is definitely not ready for publication.\n6. It is unclear the frequency of LBC being transmitted. Note that communication is only saved when we communicate LBC rather than the whole vector. In the paper, related results include Figure 5 and 6 which investigates the variation of the total number of parameters shared. Besides, to compute the LBPs, we should first compute $\\nabla F(\\theta_k^{(t)})$ which incurs additional communication. I don’t know whether Figure 5 and 6 have taken this factor into account or not.\n\nSome discussion:\n1. I think there are more choices to set LBGs. In the paper, the LBG are just one of the history gradient. Why not define LBG as a moving average? This means we update the new LBG as the average of all LBGs. When the algorithm starts to converges, the average could be more stable.\n2. The paper spends a lot of time studying the low-rank property of subsequent gradients. Why not let each device maintain more than one LBGs? In this way, each device has an LBG set, which is updated when the space it spans can’t explain the variance of the new coming LBG. Maybe we need PCA to determine whether the LBG set meets the requirement. With more LBGs, I guess the empirical performance would be improved further. After all, current experiments show with LBGM the test accuracy might slightly decay.",
+    "summary_of_the_review": "I appreciate the empirical investigation of low-rank gradient space and the idea behind the proposed method.\nHowever, the current version of this paper is not proper for publication due to the mentioned concerns.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3945,
+    "words": 646,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ffa77ee3-d622-45a7-b136-9e2aa9c7df95",
+    "error": null,
+    "scored_chars": 3949
+  }
+}

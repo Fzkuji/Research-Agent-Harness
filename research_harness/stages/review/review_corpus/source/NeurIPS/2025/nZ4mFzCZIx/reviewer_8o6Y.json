@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "nZ4mFzCZIx",
+  "reviewer": "8o6Y",
+  "paper": {
+    "title": "Towards Generalizable 3D Human Pose Estimation via Ensembles on Flat Loss Landscapes",
+    "authors": [
+      "Jumin Han",
+      "Jun-Hee Kim",
+      "Seong-Whan Lee"
+    ],
+    "abstract": "3D Human Pose Estimation (HPE) is a fundamental task in the computer vision. Generalization in 3D HPE task is crucial due to the need for robustness across diverse environments and datasets. Existing methods often focus on learning relationships between joints to enhance the generalization capability, but the role of the loss landscape, which is closely tied to generalization, remains underexplored. In this paper, we empirically visualize the loss landscape of the 3D HPE task, revealing its complexity and the challenges it poses for optimization. To address this, we first introduce a simple adaptive scaling mechanism that smooths the loss landscape. We further observe that different solutions on this smoothed loss landscape exhibit varying generalization behaviors. Based on this insight, we propose an efficient ensemble approach that combines diverse solutions on the smooth loss landscape induced by our adaptive scaling mechanism. Extensive experimental results demonstrate that our approach improves the generalization capability of 3D HPE models, and can be easily applied, regardless of model architecture, with consistent performance gains.",
+    "keywords": [
+      "Lifting-based 3D Human Pose Estimation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=nZ4mFzCZIx"
+  },
+  "review_fields": {
+    "comment": "Thanks for your efforts.\nVia training with an additional in-the-wild dataset, SkiPose, and test on 3DPW, the proposed method still achieves promising improvement than the baseline model. Such an experiment may indicate that the proposed method could be beneficial to models trained on large-scale and diverse datasets.  \nDifferent from BEDLAM, SkiPose is relatively limited in diversity of human motion. Please consider to show the results using BEDLAM in the final version.  \nBecause we still can't be sure of how much improvement the proposed method can bring to the models trained with large-scale and diverse datasets, the significance of the proposed method is hard to determine."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

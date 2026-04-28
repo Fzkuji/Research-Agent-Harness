@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "tBRNC6YemY",
+  "reviewer": "jdAv",
+  "paper": {
+    "title": "Gorilla: Large Language Model Connected with Massive APIs",
+    "authors": [
+      "Shishir G Patil",
+      "Tianjun Zhang",
+      "Xin Wang",
+      "Joseph E. Gonzalez"
+    ],
+    "abstract": "Large Language Models (LLMs) have seen an impressive wave of advances, with\nmodels now excelling in a variety of tasks, such as mathematical reasoning and\nprogram synthesis. However, their potential to effectively use tools via API calls\nremains unfulfilled. This is a challenging task even for today’s state-of-the-art\nLLMs such as GPT-4 largely due to their unawareness of what APIs are available\nand how to use them in a frequently updated tool set. We develop Gorilla, a\nfinetuned LLaMA model that surpasses the performance of GPT-4 on writing API\ncalls. Trained with the novel Retriever Aware Training (RAT), when combined\nwith a document retriever, Gorilla demonstrates a strong capability to adapt to\ntest-time document changes, allowing flexible user updates or version changes.\nIt also substantially mitigates the issue of hallucination, commonly encountered\nwhen prompting LLMs directly. To evaluate the model’s ability, we introduce\nAPIBench, a comprehensive dataset consisting of HuggingFace, TorchHub, and\nTensorHub APIs. The successful integration of the retrieval system with Gorilla\ndemonstrates the potential for LLMs to use tools more accurately, keep up with\nfrequently updated documentation, and consequently increase the reliability and\napplicability of their outputs. Gorilla’s code, model, data, and demo are available\nat: https://gorilla.cs.berkeley.edu",
+    "keywords": [
+      "LLM",
+      "Tool Use",
+      "APIs",
+      "Function Calling"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=tBRNC6YemY"
+  },
+  "review_fields": {
+    "comment": "Thank you for the response. I appreciate the clarification about why Toolformer would not be an appropriate direct comparison. A few questions and concerns remain, however.\n\nFirst, I'm not sure I was totally clear about question (2) -- I am asking for some kind of a t-test to compare the performance of different models. Are the improvements from Gorilla statistically significant (i.e. P < 0.05)? This is not a question of out-of-domain generalization, but of the robustness of the apparent improvement.\n\nFor question (3) -- while I understand that constraints on space make including additional examples difficult, I would recommend at least a supplemental table in which the counts of different error types (e.g. \"model name hallucination\" or \"formatting hallucination\" as you present) are presented."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 804,
+    "words": 125,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d23bb74b-49ec-41ab-9241-39fd36c31537",
+    "error": null,
+    "scored_chars": 804
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "2aC0_RxkBL_",
+  "reviewer": "gifg",
+  "paper": {
+    "title": "Where is the bottleneck in long-tailed classification?",
+    "authors": [
+      "Zaid Khan",
+      "Yun Fu"
+    ],
+    "abstract": "A commonly held belief in deep-learning based long-tailed classiﬁcation is that the representations learned from long-tailed data are ”good enough” and the performance bottleneck is the classiﬁcation head atop the representation learner. We design experiments to investigate this folk wisdom, and ﬁnd that representations learned from long-tailed data distributions substantially differ from the representations learned from ”normal” data distributions. We show that the long-tailed representations are volatile and brittle with respect to the true data distribution. Compared to the representations learned from the true, balanced distributions, long-tailed representations fail to localize tail classes and display vastly worse inter-class separation and intra-class compactness when unseen samples from the true data distribution are embedded into the feature space. We provide an explanation for why data augmentation helps long-tailed classiﬁcation despite leaving the dataset imbalance unchanged — it promotes inter-class separation, intra-class compactness, and improves localization of tail classes w.r.t to the true data distribution.",
+    "keywords": [
+      "fairness",
+      "bias",
+      "long tailed learning",
+      "imbalanced learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=2aC0_RxkBL_"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper tries to prove that there is a bottleneck in feature learning for long-tailed classification and data augmentation can help relieve the issues in long-tail feature space. Three major experiments were done to prove that feature space 1) is more biased than balanced feature space, 2)  is more disused and less compact than balanced feature space, and 3) less localized in terms of feature centroids. And data augmentation can help alleviate all three issues.",
+    "main_review": "The weakness: \n1) The second objective of this paper is to discuss \"why data augmentation helps in representation learning\". However, in the paper, only positive effects from data augmentation were shown, the reasons and mechanisms were not fully discussed. \n\n2) The overall paper is based on the unserious term \"good enough\". What is this term defined? How good is good enough? Good enough in terms of what? Generalization and robustness compared to full balanced data sets or in terms of knowledge transfer? If it is the first one, of course, long-tailed representations are less generalized and robust compared to balanced representations. It is not a new idea and is already discussed in [1]. If it is the second one, then the later experiments don't make any sense. And I think when people say long-tail representations are \"good enough\" in studies like [2], it is more like it is good enough for long-tail learning rather than comparing it to balanced learning. \n\n3) All the experiments seem unfair to me. For example, D_LT are representations from long-tailed data sets, and D* are representations from balanced data sets. Balanced data sets always have much more training samples compared to corresponding long-tailed counterparts. How do you know these inferior results were not caused by the lack of training samples? \n\n4) In the \"adding unseen samples\" experiments (e.g., Fig 6, Fig 7, Fig 8), only results on D_LT were reported. I want to see results when unseen samples are added to D* as well. Only by doing this can you prove D* is less diffused and better localized. \n\n5) Fig 7 needs a more detailed legend. So many components don't have explanations. \n\n6) By looking at Figure 5, I don't see a significant difference between D_LT and D* in Cifar100-LT and ImageNet-LT.\n\n[1] Liu, Z., Miao, Z., Zhan, X., Wang, J., Gong, B., & Yu, S. X. (2019). Large-scale long-tailed recognition in an open world. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 2537-2546).\n[2] Kang, B., Xie, S., Rohrbach, M., Yan, Z., Gordo, A., Feng, J., & Kalantidis, Y. (2019). Decoupling representation and classifier for long-tailed recognition. arXiv preprint arXiv:1910.09217.",
+    "summary_of_the_review": "I think the intuition of this paper is not clear and the experiments are not persuasive.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "1: The contributions are neither significant nor novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2294,
+    "words": 377,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3702d2a5-60cb-4cd1-81df-6f58b2d91c19",
+    "error": null,
+    "scored_chars": 2300
+  }
+}

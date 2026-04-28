@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "lkrH6ovzsj",
+  "reviewer": "bkdk",
+  "paper": {
+    "title": "Multi-FAct: Assessing Factuality of Multilingual LLMs using FActScore",
+    "authors": [
+      "Sheikh Shafayat",
+      "Eunsu Kim",
+      "Juhyun Oh",
+      "Alice Oh"
+    ],
+    "abstract": "Evaluating the factuality of long-form large language model (LLM)-generated text is an important challenge. Recently there has been a surge of interest in factuality evaluation for English, but little is known about the factuality evaluation of multilingual LLMs, specially when it comes to long-form generation.\nThis paper systematically evaluates multilingual LLMs' factual accuracy across languages and geographic regions.\nWe introduce a simple pipeline for multilingual factuality evaluation, by applying FActScore \\citep{min2023factscore} for diverse languages. In addition to evaluating multilingual factual generation, we evaluate the factual accuracy of long-form text generation in topics that reflect regional diversity. We also examine the feasibility of running the FActScore pipeline using non-English Wikipedia and provide comprehensive guidelines on multilingual factual evaluation for regionally diverse topics.",
+    "keywords": [
+      "multilinguality",
+      "factuality",
+      "knowledge representation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=lkrH6ovzsj"
+  },
+  "review_fields": {
+    "comment": "I like this work and think it is an incorrect topic. The authors have promised some revisions which I think are minor and easy to do.\n\nI think the paper will make for good conversation at the conference and agree it is an understudied area.\n\nRe: other reviewer concerns: I agree that this paper doesn't propose any new methods and the evaluation process is simple. However, I don't think that is a major blocker - simple analyses done well are important also.  \n\nI agree with reviewer a4f9 that more models would be nice - perhaps the authors could use Together.ai (if they can't run them locally) to use some of the larger models like Llama3-70B (but of course you couldn't have put that in the paper since it wasn't out yet).  I think the authors could and probably should do this so that there are reproducible results but again this wouldn't take very long to add."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:09Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:09Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1618,
+    "words": 276,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b4149a37-38b6-4e89-82cb-9269aac293f3",
+    "error": null,
+    "scored_chars": 1622
+  }
+}

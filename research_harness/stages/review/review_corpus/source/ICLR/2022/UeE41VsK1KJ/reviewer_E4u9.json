@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "UeE41VsK1KJ",
+  "reviewer": "E4u9",
+  "paper": {
+    "title": "Subjective Learning for Open-Ended Data",
+    "authors": [
+      "Tianren Zhang",
+      "Yizhou Jiang",
+      "Xin Su",
+      "Shangqi Guo",
+      "Feng Chen"
+    ],
+    "abstract": "Conventional supervised learning typically assumes that the learning task can be solved by learning a single function since the data is sampled from a fixed distribution. However, this assumption is invalid in open-ended environments where no task-level data partitioning is available. In this paper, we present a novel supervised learning framework of learning from open-ended data, which is modeled as data implicitly sampled from multiple domains with the data in each domain obeying a domain-specific target function. Since different domains may possess distinct target functions, open-ended data inherently requires multiple functions to capture all its input-output relations, rendering training a single global model problematic. To address this issue, we devise an Open-ended Supervised Learning (OSL) framework, of which the key component is a subjective function that allocates the data among multiple candidate models to resolve the \"conflict'' between the data from different domains, exhibiting a natural hierarchy. We theoretically analyze the learnability and the generalization error of OSL, and empirically validate its efficacy in both open-ended regression and classification tasks.",
+    "keywords": [
+      "Open-ended data",
+      "machine learning",
+      "supervised learning",
+      "data conflict"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=UeE41VsK1KJ"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper introduces \"Open-ended Supervised Learning (OSL)\", a method that handles data form multiple domains (open-ended data). OSL leverages an Expectation-Maximization (EM) algorithm to train the \"subjective function\" that allocates models to data domains. The paper presents the theoretical foundations and empirical results in which it outperforms existing baselines for (generated) regression and classification tasks.",
+    "main_review": "**List strong and weak points of the paper. Be as comprehensive as possible.**\n\n**Pros:**\n\n* Generally, the paper is well written and easy to grasp the underlying ideas and concepts except how the data sampling works (see questions).\n* The intorduction makes it very clear what the problem is this paper is trying to solve. (see additional feedback)\n* A strength of Section 2+3 is that it bundles the theoretical formulas with intuitions in natural language, which makes it very clear at any time what the author trying to achieve or show.\n\n**Cons:**\n\n* While the generated regression example is great to gain intuitions on how OSL works and the influence of its hyperparameters, it's difficult to draw conclusions in regard to \"real\" regression problems. (see question)\n* The proposed concept of the mapping rank seems to not account for label noise explicitly - but I would guess that in the presence of label noise there could be a rank > 1 even though there is only one sensible target function? \n* The experimental evaluation appears to be rather specific and the baselines appear not directly related to other state of the art approaches. It would probably be a much stronger paper, if the authors showed that the proposed approach improves on some metric that is not specific to this submission\n* The paper do not show training and prediction times for OSL and the other baselines. \n* Minor/Typos:\n  * in the introduction: would prefer to change \"(image, label) pairs\" -> \"image-label pairs\"\n  * in the introduction: \"can correlates\" -> \"can correlate\" or \"correlates\"\n  * last paragraph of the introduction: define PAC before use the abbreviation\n  * first paragraph of Section 6: \"facilicate\" -> \"facilitate\"\n  * page 4 last line: \"objectives 2 3\" -> \"objectives 2 and 3\"\n\n**Clearly state your recommendation (accept or reject) with one or two key reasons for this choice.**\n\nIf the authors can clarify the points below, I vote for accept. The introduced approach OSL solves the problem of allocating data from different domains to their model. Currently, we often see very over-parametrized models that try to solve this implicitly. OSL could present a path to more efficient ML.\n\n**Ask questions you would like answered by the authors to help you clarify your understanding of the paper and provide the additional evidence you need to be confident in your assessment.**\n\n* Did you try at least a multidimensional generated regression? I think it would be interesting to see the method comparison in at least >1-D generated regression, better for a datasets, e.g., form OpenML.\n* Could you clarify how the data sampling mechanism works?\n  * It is still not clear to me whether the dataset X is sampled once or iteratively. \n\n**Provide additional feedback with the aim to improve the paper. Make it clear that these points are here to help, and not necessarily part of your decision assessment.**\n\n* The first paragraph after Definition 1 (introduction) is a bit lengthy. Shortening to its main points (difference between R=1 and R>1, metadata difficult to use for data allocation) could improve clarity\n* Providing more description for Figure 2 and 3, especially, what the three lines show would add clarity\n* You should consider to move the description of the DNNs from appendix to the paper.\n* Providing an overview of training and prediction times of OSL and the baselines could be interesting for some readers.",
+    "summary_of_the_review": "Interesting approach and novel concept of mapping rank, the experimental evaluation could provide more direct evidence for the value of the contribution. \n\nUpdate after authors‘ response:\nThe authors addressed all points and provided convincing additional experiments, I’m hence increasing my score.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3709,
+    "words": 611,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/21b451d5-cf4f-4ab4-81b0-88f9f8dc0c3e",
+    "error": null,
+    "scored_chars": 3725
+  }
+}

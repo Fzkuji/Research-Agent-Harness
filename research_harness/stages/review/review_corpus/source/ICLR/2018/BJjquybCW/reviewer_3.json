@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "BJjquybCW",
+  "reviewer": "3",
+  "paper": {
+    "title": "The loss surface and expressivity of deep convolutional neural networks",
+    "authors": [
+      "Quynh Nguyen",
+      "Matthias Hein"
+    ],
+    "abstract": "We analyze the expressiveness and loss surface of practical deep convolutional\nneural networks (CNNs) with shared weights and max pooling layers. We show\nthat such CNNs produce linearly independent features at a “wide” layer which\nhas more neurons than the number of training samples. This condition holds e.g.\nfor the VGG network. Furthermore, we provide for such wide CNNs necessary\nand sufficient conditions for global minima with zero training error. For the case\nwhere the wide layer is followed by a fully connected layer we show that almost\nevery critical point of the empirical loss is a global minimum with zero training\nerror. Our analysis suggests that both depth and width are very important in deep\nlearning. While depth brings more representational power and allows the network\nto learn high level features, width smoothes the optimization landscape of the\nloss function in the sense that a sufficiently wide network has a well-behaved loss\nsurface with almost no bad local minima.",
+    "keywords": [
+      "convolutional neural networks",
+      "loss surface",
+      "expressivity",
+      "critical point",
+      "global minima",
+      "linear separability"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=BJjquybCW"
+  },
+  "review_fields": {
+    "review": "This paper presents several theoretical results on the loss functions of CNNs and fully-connected neural networks. I summarize the results as follows:\n\n(1) Under certain assumptions, if the network contains a \"wide“ hidden layer, such that the layer width is larger than the number of training examples, then (with random weights) this layer almost surely extracts linearly independent features for the training examples.\n\n(2) If the wide layer is at the top of all hidden layers, then the neural network can perfectly fit the training data.\n\n(3) Under similar assumptions and within a restricted parameter set S_k, all critical points are the global minimum. These solutions achieve zero squared-loss.\n\nI would consider result (1) as the main result of this paper, because (2) is a direct consequence of (1). Intuitively, (1) is an easy result. Under the assumptions of Theorem 3.5, it is clear that any tiny random perturbation on the weights will make the output linearly independent. The result will be more interesting if the authors can show that the smallest eigenvalue of the output matrix is relatively large, or at least not exponentially small.\n\nResult (3) has severe limitations, because: (a) there can be infinitely many critical point not in S_k that are spurious local minima; (b) Even though these spurious local minima have zero Lebesgue measure, the union of their basins of attraction can have substantial Lebesgue measure; (c) inside S_k, Theorem 4.4 doesn't exclude the solutions with exponentially small gradients, but whose loss function values are bounded away above zero. If an optimization algorithm falls onto these solutions, it will be hard to escape.\n\nOverall, the paper presents several incremental improvement over existing theories. However, the novelty and the technical contribution are not sufficient for securing an acceptance."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

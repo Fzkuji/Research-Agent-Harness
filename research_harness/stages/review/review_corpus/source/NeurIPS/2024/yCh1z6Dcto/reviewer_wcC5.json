@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "yCh1z6Dcto",
+  "reviewer": "wcC5",
+  "paper": {
+    "title": "Stepping Forward on the Last Mile",
+    "authors": [
+      "Chen Feng",
+      "Shaojie Zhuo",
+      "Xiaopeng Zhang",
+      "Ramchalam Kinattinkara Ramakrishnan",
+      "Zhaocong Yuan",
+      "Andrew Zou Li"
+    ],
+    "abstract": "Continuously adapting pre-trained models to local data on resource constrained edge devices is the \\emph{last mile} for model deployment. However, as models increase in size and depth, backpropagation requires a large amount of memory, which becomes prohibitive for edge devices. In addition, most existing low power neural processing engines (e.g., NPUs, DSPs, MCUs, etc.) are designed as fixed-point inference accelerators, without training capabilities. Forward gradients, solely based on directional derivatives computed from two forward calls, have been recently used for model training, with substantial savings in computation and memory. However, the performance of quantized training with fixed-point forward gradients remains unclear. In this paper, we investigate the feasibility of on-device training using fixed-point forward gradients, by conducting comprehensive experiments across a variety of deep learning benchmark tasks in both vision and audio domains. We propose a series of algorithm enhancements that further reduce the memory footprint, and the accuracy gap compared to backpropagation. An empirical study on how training with forward gradients navigates in the loss landscape is further explored. Our results demonstrate that on the last mile of model customization on edge devices, training with fixed-point forward gradients is a feasible and practical approach.",
+    "keywords": [
+      "On-device model adaptation",
+      "Fixed-point forward gradient learning",
+      "Low memory",
+      "Edge devices"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=yCh1z6Dcto"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a quantization approach for fine-tuning pretrained data to new local data on resource-constrained devices. In particular, the weights perturbation, gradients estimation, and weights updates are quantized to either 8-bit or 16-bit. This quantization approach is combined with Momentum Guided Sampling, Sharpness-aware Perturbation, Sparse Update, and Kernel-wise Normalization to enhance fine-tuning performance. The proposed approaches are evaluated on various AI benchmarks. The results of this study indicate that quantized forward gradients are a good candidate for a fine-tuning approach that can be deployed on edge devices.",
+    "strengths": "1- The paper is well-written and well-organized.\n\n2- The quantized approach is evaluated on a variety of tasks that show the generalizability of the new approach.\n\n3- The Sign-m-SPSA-SGD approach is interesting and novel.",
+    "weaknesses": "1- The author are recommended to discuss the accuracy degradation of quantized forward gradients compared to the backpropagation algorithm. In some cases, the accuracy degradation is high (more than 5%). A comparison of performance versus hardware complexity (FLOPs or another metric) is recommended, as seen in [1].\n\n2- Evaluating the efficacy of quantized forward gradients on fine-tuning LLM models such as LLaMA-3 is recommended. \n\n[1] Carmichael, Zachariah, et al. \"Performance-efficiency trade-off of low-precision numerical formats in deep neural networks.\" Proceedings of the conference for next generation arithmetic 2019. 2019.",
+    "questions": "Why is the random perturbation vector z sampled from a normal distribution with zero mean and standard deviation? Is it possible to sample from a log-normal distribution since activation gradients are shown to be distributed near log-normal [1]?\n\n[1] Chmiel, Brian, et al. \"Neural gradients are near-lognormal: improved quantized and sparse training.\" arXiv preprint arXiv:2006.08173 (2020).",
+    "limitations": "The author addresses the limitations of this study by mentioning the initialization requirements for forward gradients and 16-bit weight quantization.\n\n1- It would be suggested to discuss various initialization approaches that might be used instead of a pretrained network.\n2- It would be suggested to discuss other numerical formats, such as 8-bit floating point or Posit, to solve the 16-bit weight quantization problem."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1676,
+    "words": 242,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3aa4a2ad-02dc-471e-a0c2-d2e6380a153c",
+    "error": null,
+    "scored_chars": 1677
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "MNLAbfZwh2",
+  "reviewer": "G5uM",
+  "paper": {
+    "title": "ScenicNL: Generating Probabilistic Scenario Programs from Natural Language",
+    "authors": [
+      "Karim Elmaaroufi",
+      "Devan Shanker",
+      "Ana Cismaru",
+      "Marcell Vazquez-Chanlatte",
+      "Alberto Sangiovanni-Vincentelli",
+      "Matei Zaharia",
+      "Sanjit A. Seshia"
+    ],
+    "abstract": "For cyber-physical systems, including robotics and autonomous vehicles, mass deployment has been hindered by fatal errors that occur when operating in rare events. To better understand failure modes, companies meticulously recreate rare crash events in simulation, but current methods do not easily allow for exploring ”what if” scenarios which could reveal how accidents might have been avoided. We present ScenicNL, an AI system that generates probabilistic scenario programs from natural language. Given the abundance of documented failures of autonomous vehicles due to regulatory requirements, we apply ScenicNL to police crash reports, providing a data-driven approach to capturing and understanding these failures. By using a probabilistic language such as Scenic, we can clearly and concisely represent such scenarios of interest and easily ask “what if” questions. We demonstrate how commonplace prompting techniques with Large Language Models are incapable of generating code for low-resource languages such as Scenic. We propose an AI system via the composition of several prompting techniques to extract the reasoning abilities needed to model probability distributions around the uncertainty in the crash events. Our system then uses Constrained Decoding and tools such as a compiler and simulator to produce scenario programs in this low-resource setting. We evaluate our system on publicly available autonomous vehicle crash reports in California from the last five years and share insights into how we generate code that is both semantically meaningful and syntactically correct. Finally, we release our code and a collection of over 500 crash reports from the California Department of Motor Vehicles.",
+    "keywords": [
+      "probabilistic programming languages",
+      "cyber physical systems",
+      "autonomous vehicles",
+      "scenarios",
+      "domain specific languages",
+      "low resource languages"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=MNLAbfZwh2"
+  },
+  "review_fields": {
+    "summary": "Due to the scarcity of real-world recorded car crash videos and sensor data, there is a heavy demand for simulation-based data. This paper proposes to use LLMs to generate Scenic programs based on natural language descriptions from car crash reports. These programs can then be simulated and used to train more robust autonomous driving systems.\n\nThey combine many prompt engineering techniques and propose ScenarioNL that achieves 90% program syntactic correctness and gets high human ratings (4.3 out of 5 on average).",
+    "reasons_to_accept": "1. They apply LLMs in an interesting, novel, and challenging scenario. \n\n2. They thoroughly explore and combine many prompt engineering techniques. \n\n3. Their results show that their final method (ScenarioNL) works very well, compared to single prompt engineering method.\n\n4. They show that through careful prompt engineering, LLMs can be used to generate domain-specific languages that LLMs have not seen and little data exists for finetuning.",
+    "reasons_to_reject": "1. The paper is more like a technical report for solving a domain-specific code generation task via prompt engineering. I find limited research interest out of it. \n\n2. Though the paper tries to claim that their methods are not unique to Scenic, the generalizability is concerning. ScenarioNL is more like a task-specific recipe. I don't see how it can easily generalize to other domain specific languages. \n\n3. As an application oriented paper, the discussion or evaluation on how useful the LLM-generated programs are for downstream training of autonomous driving systems is quite thin.",
+    "questions_to_authors": "1. Do you plan to release your code and the generated programs? Because the whole system involves many steps, without code releasing, there might be reproducibility issues."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:29Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:29Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1204,
+    "words": 186,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/795a16ef-94ab-4f56-830a-f70728ac3a36",
+    "error": null,
+    "scored_chars": 1208
+  }
+}

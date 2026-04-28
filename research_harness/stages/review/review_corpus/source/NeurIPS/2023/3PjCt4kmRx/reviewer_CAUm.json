@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "3PjCt4kmRx",
+  "reviewer": "CAUm",
+  "paper": {
+    "title": "From Pixels to UI Actions: Learning to Follow Instructions via Graphical User Interfaces",
+    "authors": [
+      "Peter Shaw",
+      "Mandar Joshi",
+      "James Cohan",
+      "Jonathan Berant",
+      "Panupong Pasupat",
+      "Hexiang Hu",
+      "Urvashi Khandelwal",
+      "Kenton Lee",
+      "Kristina Toutanova"
+    ],
+    "abstract": "Much of the previous work towards digital agents for graphical user interfaces (GUIs) has relied on text-based representations (derived from HTML or other structured data sources), which are not always readily available. These input representations have been often coupled with custom, task-specific action spaces.  This paper focuses on creating agents that interact with the digital world using the same conceptual interface that humans commonly use — via pixel-based screenshots and a generic action space corresponding to keyboard and mouse actions. Building upon recent progress in pixel-based pretraining, we show, for the first time, that it is possible for such agents to outperform human crowdworkers on the MiniWob++ benchmark of GUI-based instruction following tasks.",
+    "keywords": [
+      "instruction following",
+      "web tasks",
+      "user interface tasks",
+      "vision and language",
+      "representation learning",
+      "reinforcement learning",
+      "imitation learning",
+      "tree search",
+      "language grounding",
+      "web agents",
+      "computer control"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=3PjCt4kmRx"
+  },
+  "review_fields": {
+    "summary": "This paper presents PIX2ACT, a method that interacts with GUIs using pixel-level visual representations and generic low-level actions, emulating how humans interact with these interfaces. Unlike previous approaches, it doesn't rely on structured text-based data sources, but rather processes pixel-based screenshots, circumventing issues associated with obfuscation or misalignment in structured application data. The model showed improved performance compared to human crowdworkers on the MiniWob++ benchmark for GUI-based instruction following tasks.",
+    "strengths": "The paper introduces a novel approach to the challenge of automated GUI interactions, using pixel-based screenshots as opposed to relying on text-based representations.\nThe PIX2ACT model was tested on two benchmark datasets, MiniWob++ and WebShop, which ensured a robust and varied testing process.\nThe paper is clearly written and offers substantial and important contributions, namely the ability to build an agent that can outperform humans in task completion using pixel-based inputs and a generic action space.\nTheir findings indicate that the pre-training of PIX2STRUCT via screenshot parsing is effective for GUI-based instruction following with pixel-based inputs.",
+    "weaknesses": "The performance on the WebShop benchmark is still significantly below larger language models using HTML-based inputs and task-specific actions.\nSince the method uses tree search, it seems to rely on offline environments. It’s not clear if this approach will be useful in real-world online environments, although I could see this working with perhaps re-settable virtual environments.",
+    "questions": "Would the model maintain high performance in real-time environments, given the training was conducted in offline environments?\nHow much of the performance difference is due to the size of the model? Can this method be easily adapted to take advantage of existing larger pretrained models?",
+    "limitations": "The tree search approach relies on the ability to generate new environment and instruction variations and receive reward signals, which might not be feasible in some real-world applications.\nThe paper does not provide a clear solution for the performance gap on complex tasks and environments, like the WebShop benchmark."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 9,
+    "mixed_pct": 0,
+    "human_pct": 91,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1670,
+    "words": 246,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d79861cc-cb37-4ffd-a2fb-2b5c9c526005",
+    "error": null,
+    "scored_chars": 1670
+  }
+}

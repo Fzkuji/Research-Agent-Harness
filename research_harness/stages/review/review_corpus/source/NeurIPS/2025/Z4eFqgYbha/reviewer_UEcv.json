@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "Z4eFqgYbha",
+  "reviewer": "UEcv",
+  "paper": {
+    "title": "Structure-Aware Spectral Sparsification via Uniform Edge Sampling",
+    "authors": [
+      "Kaiwen He",
+      "Petros Drineas",
+      "Rajiv Khanna"
+    ],
+    "abstract": "Spectral clustering is a fundamental method for graph partitioning, but its reliance on eigenvector computation limits scalability to massive graphs. Classical sparsification methods preserve spectral properties by sampling edges proportionally to their effective resistances, but require expensive preprocessing to estimate these resistances. We study whether uniform edge sampling—a simple, structure-agnostic strategy—can suffice for spectral clustering. Our main result shows that for graphs admitting a well-separated $k$-clustering, characterized by a large structure ratio $\\Upsilon(k) = \\lambda_{k+1} / \\rho_G(k)$, uniform sampling preserves the spectral subspace used for clustering. Specifically, we prove that uniformly sampling $O(\\gamma^2 n \\log n / \\varepsilon^2)$ edges, where $\\gamma$ is the Laplacian condition number, yields a sparsifier whose top $(n-k)$-dimensional eigenspace is approximately orthogonal to the cluster indicators. This ensures that the spectral embedding remains faithful, and clustering quality is preserved. Our analysis introduces new resistance bounds for intra-cluster edges, a rank-$(n-k)$ effective resistance formulation, and a matrix Chernoff bound adapted to the dominant eigenspace. These tools allow us to bypass importance sampling entirely. Conceptually, our result connects recent coreset-based clustering theory to spectral sparsification, showing that under strong clusterability, even uniform sampling is structure-aware. This provides the first provable guarantee that uniform edge sampling suffices for structure-preserving spectral clustering.",
+    "keywords": [
+      "Spectral Clustering",
+      "Graph Sparsification"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Z4eFqgYbha"
+  },
+  "review_fields": {
+    "summary": "The paper investigates the effectiveness of uniform edge sampling for spectral sparsification in the context of spectral clustering. Traditionally,  spectral sparsification involves the approximate computation of effective resistance values for sampling. This work, however, demonstrates that under certain graph-structural assumptions, specifically quantified by a structure ratio $\\Upsilon$, simple uniform sampling can effectively preserve spectral clustering structure. High structure ratio $\\Upsilon(k)$ implies that the clusters within the graph are well-separated and the graph has a clear $k$ - partitioning structure. Under such conditions, the authors show that uniform edge sampling (randomly selecting edges without bias) sufficiently preserves spectral clustering quality, eliminating the need for other importance-based sampling methods.\n\nThe main theoretical result establishes that uniformly sampling edges preserves the eigenspaces crucial to clustering, given a sufficiently large structure ratio and well-conditioned rank properties. Experiments using stochastic block model (SBM) graphs confirm that uniform sampling performs comparably to more expensive sampling strategies under these conditions.",
+    "strengths_and_weaknesses": "Strengths: \n1) The paper identifies conditions under which uniform sampling suffices for spectral sparsification.\n\n2) Introduces rank‑(n‑k) effective‑resistance formulation and subspace‑specific Chernoff bound. \n\nThe paper shows that if a graph is genuinely clusterable, expensive importance sampling is unnecessary. This is a non‑trivial theoretical contribution that sharpens our understanding of when uniform sampling works. While the practical section is thin, the conceptual result fills a gap between coreset theory and spectral sparsification and should interest both theoretical and applied communities.\n\nWeakness:\n\n1) Evaluating the method on graph families beyond SBMs would better demonstrate its empirical robustness.\n\n2) The experiments could include synthetic graphs that span a range of condition numbers.\n\nRelated work:\n\nSuggestion: include the following work in the related work section. Efficient approximation algorithms exist to estimate effective resistance. However, that doesn’t lessen the significance of the results established in this paper. \n\nLocal algorithms for estimating effective resistance, KDD 2021.",
+    "final_justification": "This work’s main contributions are theoretical, and the overall quality is strong. I maintain my score."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 4,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

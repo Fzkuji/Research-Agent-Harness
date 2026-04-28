@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "i8PjQT3Uig",
+  "reviewer": "LJy1",
+  "paper": {
+    "title": "Locality Sensitive Sparse Encoding for Learning World Models Online",
+    "authors": [
+      "Zichen Liu",
+      "Chao Du",
+      "Wee Sun Lee",
+      "Min Lin"
+    ],
+    "abstract": "Acquiring an accurate world model $\\textit{online}$ for model-based reinforcement learning (MBRL) is challenging due to data nonstationarity, which typically causes catastrophic forgetting for neural networks (NNs). From the online learning perspective, a Follow-The-Leader (FTL) world model is desirable, which optimally fits all previous experiences at each round. Unfortunately, NN-based models need re-training on all accumulated data at every interaction step to achieve FTL, which is computationally expensive for lifelong agents. In this paper, we revisit models that can achieve FTL with incremental updates. Specifically, our world model is a linear regression model supported by nonlinear random features. The linear part ensures efficient FTL update while the nonlinear random feature empowers the fitting of complex environments. To best trade off model capacity and computation efficiency, we introduce a locality sensitive sparse encoding, which allows us to conduct efficient sparse updates even with very high dimensional nonlinear features. We validate the representation power of our encoding and verify that it allows efficient online learning under data covariate shift. We also show, in the Dyna MBRL setting, that our world models learned online using a $\\textit{single pass}$ of trajectory data either surpass or match the performance of deep world models trained with replay and other continual learning methods.",
+    "keywords": [
+      "model-based rl",
+      "online learning",
+      "incremental learning",
+      "catastrophic forgetting"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=i8PjQT3Uig"
+  },
+  "review_fields": {
+    "summary": "The paper presents a method for the online learning of a world model for model-based reinforcement learning (MBRL). To obtain efficient updates to the world model, the world model is expressed as a linear combination of a set of spare features. This efficiency allows online learning at a constant computational cost.",
+    "strengths": "The work is well motivated in the introduction and a sufficient and clear background is provided for non-expert readers in the preliminaries section. The algorithms, definitions, etc. are mathematically rigorously presented. \n\nA comprehensive set of experiments has been conducted demonstrating the efficacy of Losse-FTL",
+    "weaknesses": "Significant discussion around catastrophic forgetting was mentioned in the introduction but little discussion is presented in the main text and left in the appendix.\n\n“Example 3.1” could be a regular paragraph. Formatting this as an Example does not improve readability and is, in fact, the only Example in the entire paper.",
+    "questions": "In figure (1): d(s_(t+1), f(st, at)) and \\delta were not defined in the caption or anywhere obvious in the main text.\n\nIn eq (3), does || . ||^2_F denote the Frobenius matrix norm? It is only stated so after eq (5). It helps to have the notation introduced earlier here. Especially since “F” is the dimension of the feature space"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 976,
+    "words": 155,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7b2f4cb0-116f-4fa3-ad2f-25bc8551b1f9",
+    "error": null,
+    "scored_chars": 977
+  }
+}

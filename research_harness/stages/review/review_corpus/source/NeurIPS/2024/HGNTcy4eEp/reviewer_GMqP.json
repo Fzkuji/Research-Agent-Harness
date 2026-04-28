@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "HGNTcy4eEp",
+  "reviewer": "GMqP",
+  "paper": {
+    "title": "Learning Group Actions on Latent Representations",
+    "authors": [
+      "Yinzhu Jin",
+      "Aman Shrivastava",
+      "Tom Fletcher"
+    ],
+    "abstract": "In this work, we introduce a new approach to model group actions in autoencoders. Diverging from prior research in this domain, we propose to learn the group actions on the latent space rather than strictly on the data space. This adaptation enhances the versatility of our model, enabling it to learn a broader range of scenarios prevalent in the real world, where groups can act on latent factors. Our method allows a wide flexibility in the encoder and decoder architectures and does not require group-specific layers. In addition, we show that our model theoretically serves as a superset of methods that learn group actions on the data space. We test our approach on five image datasets with diverse groups acting on them and demonstrate superior performance to recently proposed methods for modeling group actions.",
+    "keywords": [
+      "group action",
+      "representation learning",
+      "image rendering"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=HGNTcy4eEp"
+  },
+  "review_fields": {
+    "summary": "This paper introduces an approach to modelling group actions using autoencoders, particualrly by learning these actions in the latent rather than observed data space. The authors argue that this allows modelling a broader range of real-world scenarios, and does not require particular layers - however, it does require specific architectural changes (e.g., specific skip connections, and  attention modules before concatenating upsampling path).  In practice, it seems that the main idea of the paper is to enforce a sort of cycle consistency on the decoder output (e.g., bidirectional consistency), with inputs the group action applied to the latent representation. The authors demonstrate the effectiveness of their approach through  experiments on  image datasets, covering a range of group actions including. Results appear promising, and good with respect to compared work.",
+    "strengths": "The ablation study on the NMR dataset (Table 3) provides valuable insights into the contribution of different components (skip connections, LPIPS loss) to the model's performance.\n\nThe approach is simple, and shows promise in transfer learning, few-shot learning, and domain generalization",
+    "weaknesses": "As the authors identify, the model requires ground truth group actions during training\n\nThe authors claim that this method does not require group-specific layers, which it indeed doesn't - however the authors propose a specific architecture to show best results\n\nThe main idea behind this method is basically in the proposed loss function, which is similar to reconstruction-based cycle consistency losses\n\nThe method relies on the loss function to learn these symmetries from data, requiring also ground truth. There are many methods that can attempt to do so if data exists",
+    "questions": "How sensitive is the method to hyperparameter choices? e.g. latent dimensionality - split between invariant and variable part\n\nHow does the model scale/what is the computational overhead?\n\nan example that measures, besides similarity metrics, if the resulting representations/data have truly captured the group symmetry (e.g., measuring variability of output/representations given different inputs)"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1266,
+    "words": 184,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8bd3ef5b-cf93-41d5-a03e-1c4b9e2fbcf3",
+    "error": null,
+    "scored_chars": 1266
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "BAakY1hNKS",
+  "reviewer": "9adi",
+  "paper": {
+    "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversations",
+    "authors": [
+      "Qingyun Wu",
+      "Gagan Bansal",
+      "Jieyu Zhang",
+      "Yiran Wu",
+      "Beibin Li",
+      "Erkang Zhu",
+      "Li Jiang",
+      "Xiaoyun Zhang",
+      "Shaokun Zhang",
+      "Jiale Liu",
+      "Ahmed Hassan Awadallah",
+      "Ryen W White",
+      "Doug Burger",
+      "Chi Wang"
+    ],
+    "abstract": "We present AutoGen, an open-source framework that allows developers to build LLM applications by composing multiple agents to converse with each other to accomplish tasks. AutoGen agents are customizable, conversable, and can operate in various modes that employ combinations of LLMs, human inputs, and tools. It also enables developers to create flexible agent behaviors and conversation patterns for different applications using both natural language and code. AutoGen serves as a generic infrastructure and is widely used by AI practitioners and researchers to build diverse applications of various complexities and LLM capacities. We demonstrate the framework’s effectiveness with several pilot applications, with domains ranging from mathematics and coding to question-answering, supply-chain optimization, online decision-making, and entertainment.",
+    "keywords": [
+      "Large Language Model",
+      "Multi-Agent Conversation Framework",
+      "Open-Source Library"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=BAakY1hNKS"
+  },
+  "review_fields": {
+    "summary": "The paper introduces AutoGen, an open-source framework that enables multiple LLM-based agents to collaborate on tasks through role-playing and tool usage. The framework has gained significant attention from the community since its release. While the central idea of multi-agent interaction in LLMs aligns with prior work and some earliy frameworks like SocraticAI [1], the authors highlight two novel engineering concepts: \"conversable agents\" and \"conversation programming,\" which simplify agent configuration and interaction for developers. AutoGen also unifies other multi-agent LLM frameworks, and the paper demonstrates its wide usability through six application examples, along with quantitative evaluations and comparisons to other methods.\n\nThe engineering effort behind AutoGen is commendable, and this open-source framework is a valuable resource for the COLM community. However, the authors should temper their claims about the absolute superiority of multi-agent methods for problem-solving and discuss the limitations of these methods, such as potential failure modes and comparisons of inference costs. Additionally, the paper would benefit from a more rigorous validation of the effectiveness and key design factors of multi-agent systems, such as the separation of context among agents and the use of directed graphs versus broadcasting.\n\nThere are some controversy surrounding the superiority of multi-agent systems over single agents [2], as well as the potential for agents to be distracted by irrelevant context [3]. While a comprehensive validation of multi-agent superiority may be beyond the scope of this paper, AutoGen provides an efficient platform for conducting comparative experiments to test the effectiveness and key design factors of multi-agent task-solving systems. The authors should provide more caveats to readers regarding these aspects.\n\n[1] SocraticAI: https://princeton-nlp.github.io/SocraticAI/\n[2] Huang & Chen et al. Large Language Models Cannot Self-Correct Reasoning Yet. ICLR'24\n[3] Shi & Chen et al. Large Language Models Can Be Easily Distracted by Irrelevant Context ICML'23",
+    "reasons_to_accept": "- novel engineering design of the framework\n - thorough experiments demonstrating wide application\n - open-source, helpful resource to the community",
+    "reasons_to_reject": "- quantitative evaluation can be improved to show statistical significance of the results. figure 4, in particular, should include sample sizes and appropriate error measurements. \n- the effectiveness of multi-agent over single agent should be more carefully examined. the performance gap in experiment A1 is mainly from tool usage, and it's unclear whether it's human-in-the-loop scenario. \n - didn't do enough analyses of failure modes in A1-A6."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:47Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:47Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 592,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1798e4bb-f83a-4d19-a3b2-7c5cb8a042f6",
+    "error": null,
+    "scored_chars": 597
+  }
+}

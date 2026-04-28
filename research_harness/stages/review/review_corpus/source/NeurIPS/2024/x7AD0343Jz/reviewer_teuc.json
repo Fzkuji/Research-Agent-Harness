@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "x7AD0343Jz",
+  "reviewer": "teuc",
+  "paper": {
+    "title": "Limits of Transformer Language Models on Learning to Compose Algorithms",
+    "authors": [
+      "Jonathan Thomm",
+      "Giacomo Camposampiero",
+      "Aleksandar Terzic",
+      "Michael Hersche",
+      "Bernhard Schölkopf",
+      "Abbas Rahimi"
+    ],
+    "abstract": "We analyze the capabilities of Transformer language models in learning compositional discrete tasks. To this end, we evaluate training LLaMA models and prompting GPT-4 and Gemini on four tasks demanding to learn a composition of several discrete sub-tasks. In particular, we measure how well these models can reuse primitives observable in the sub-tasks to learn the composition task. Our results indicate that compositional learning in state-of-the-art Transformer language models is highly sample inefficient: LLaMA requires more data samples than relearning all sub-tasks from scratch to learn the compositional task; in-context prompting with few samples is unreliable and fails at executing the sub-tasks or correcting the errors in multi-round code generation. Further, by leveraging complexity theory, we support these findings with a theoretical analysis focused on the sample inefficiency of gradient descent in memorizing feedforward models. We open source our code at https://github.com/IBM/limitations-lm-algorithmic-compositional-learning.",
+    "keywords": [
+      "Few-shot Compositional Learning",
+      "Compositionality",
+      "Sample Efficiency",
+      "Algorithmic Learning",
+      "Large Language Models",
+      "Transformers"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=x7AD0343Jz"
+  },
+  "review_fields": {
+    "summary": "This paper focuses on analyzing the transformer language models' learning and transferability on compositional discrete tasks. Specifically, it has four hypothesis, and the author studies for a variety of language models, whether does these hypothesis hold. \nH1. An LLM can learn to perform a compositional task with constant number of datapoints. \nH2. An LLM can learn to perform a compositional task, given as many sample as the most difficult sub-task required.\nH3. An LLM can learn to perform a compositional task, given the data samples of relearning all sub-tasks for learning the composition.\nH4. An LLM can learn to perform a compositional task, given more data samples in H3.\nThe authors introduces a new benchmark for creating systematic sub-tasks and testing compositionally.\nWith LLaMA model, H4 holds; with both GPT-4 and Gemini, using H1 (prompting) fails to perform the tasks, or multi-round code generation with COT technique.",
+    "strengths": "Originality: 3.5 / 5\n\nThis paper examines how the number of datapoint samples affects the learning of compositional tasks in existing transformer-based large language models (LLMs). The authors created a new, challenging compositional dataset based on computation graphs and demonstrated that learning compositional tasks with LLMs is highly data-inefficient. While the BIG-bench paper indicates the insufficiency of reasoning and compositional abilities in LLMs, this paper innovatively provides a concrete, quantitative, and extensive study on the extent of this insufficiency.\n\nQuality: 3.5/5\n\nThe empirical study is pretty extensive with both LLaMA, GPT-4 and Gemini. There are multiple prompting techniques adopted with GPT-4 and Gemini, all of them fails to generate a reliable result. There are also very interesting theotrical proofs in the appendix to bolster the authors' claims. \n\nClarity: 3/5\n\nFigure 1 is hard to understand just by staring at the graph. For each task, it only provides one example which is non-trivial at all. One can hardly figure out its ground truth program for each example, and whether in a task of PE, is the underlying program the same across all the datapoints. I believe a descriptive caption by the side of each task is necessary. For example, PE refers to a program that takes a sequence of words and returns a list of words all colored green, where the first output word matches the first input word, and any subsequent output word starts with the last two characters of the previous word. However, the figures and tables in the experimental section are pretty clear and helpful to understand. \n\nSignificance: 2.5/5\n\nUnderstanding the problem of the data inefficiency in transformer based LLMs is important to the community which focuses on data efficiency and reasoning, such as neuro-symbolic community.",
+    "weaknesses": "As stated in the strengths above. One of the main issue is the clarity issue of the tasks. Besides \"what is the task\", I also want to understand \"why these two tasks are needed\". What do PEN and PERM these two datasets bring?",
+    "questions": "Q1. Is the PEN dataset only corresponding to one underlying program?  \nQ2. What are the insights of PEN and PERM these two datasets?",
+    "limitations": "I believe the stated limitation regarding addressing weaknesses in the LLM is not appropriate for this specific paper. Instead, the limitation should focus on the choice of the compositional dataset."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2405,
+    "words": 384,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c2c0fa53-3610-4f04-868a-1cb74448020e",
+    "error": null,
+    "scored_chars": 2409
+  }
+}

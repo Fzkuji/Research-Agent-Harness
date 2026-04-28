@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "AJBkfwXh3u",
+  "reviewer": "8sLV",
+  "paper": {
+    "title": "Causality-Inspired Spatial-Temporal Explanations for Dynamic Graph Neural Networks",
+    "authors": [
+      "Kesen Zhao",
+      "Liang Zhang"
+    ],
+    "abstract": "Dynamic Graph Neural Networks (DyGNNs) have gained significant popularity in the research of dynamic graphs, but are limited by the low transparency, such that human-understandable insights can hardly be drawn from their predictions. Although a number of existing research have been devoted to investigating the interpretability of graph neural networks (GNNs), achieving the interpretability of DyGNNs is pivotally challenging due to the complex spatial-temporal correlations in dynamic graphs. To this end, we propose an innovative causality-inspired generative model based on structural causal model (SCM), which explores the underlying philosophies of DyGNN predictions by identifying the trivial, static, and dynamic causal relationships. To reach this goal, two critical tasks need to be accomplished including (1) disentangling the complex causal relationships, and (2) fitting the spatial-temporal explanations of DyGNNs in the SCM architecture. To tackle these challenges, the proposed method incorporates a contrastive learning module to disentangle trivial and causal relationships, and a dynamic correlating module to disentangle dynamic and static causal relationships, respectively. A dynamic VGAE-based framework is further developed, which generates causal-and-dynamic masks for spatial interpretability, and recognizes dynamic relationships along the time horizon through causal invention for temporal interpretability. Comprehensive experiments have been conducted on both synthetic and real-world datasets, where our approach yields substantial improvements, thereby demonstrating significant superiority.",
+    "keywords": [
+      "Dynamic Graph",
+      "Graph Explanation",
+      "Graph Neural Network",
+      "Causal Inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=AJBkfwXh3u"
+  },
+  "review_fields": {
+    "summary": "This paper presents a causal approach to improving the interpretability of GNNs. The authors have integrated a contrastive learning module that distinguishes between non-causal and causal relationships, enhancing the clarity of the model's decision-making process. Additionally, a dynamic correlating component is employed to differentiate dynamic from static causal relationships, providing a nuanced understanding of changes over time. Furthermore, the authors utilize a VGAE-based model to generate causal-and-dynamic masks, which contribute to spatial interpretability. This model also captures dynamic relationships across temporal scales through causal inference, thereby boosting the model's ability to interpret temporal data.",
+    "strengths": "(1) The composition and articulation of the paper are logical and coherent. The use of a causality-driven approach to enhance the out-of-distribution generalization capabilities of dynamic GNNs is intriguing.\n\n(2) Introducing research on temporal distribution shift in sequential processes is important and may provide valuable insights for subsequent studies.",
+    "weaknesses": "(1) The paper's presentation appears problematic, particularly in the description of the backdoor adjustment. While simplified results are provided in the main text, the specific derivation process is absent and should be relegated to the appendix. Additionally, the computational intensity of introducing temporal masks, which could be exacerbated by the incorporation of contrastive learning (VGAE is known to be computationally demanding), is not addressed. The authors should include complexity descriptions to inform the reader. However, these issues are not discussed in the paper.\n\n(2) The proposal of 4 loss functions can be unfriendly to network training. If even one parameter is improperly tuned, it could lead to significant instability or even failure in network training. The authors should systematically discuss parameter selection techniques or guidelines to aid those who follow in this line of work.\n\n(3) There is a lack of related experiments: although experiments are conducted, there is a shortage of benchmarks in this field. It is recommended that the authors refer to [1] to add more experiments to validate the effectiveness of their DyGNN, such as including the Ogbn-Arxiv dataset. Additionally, an ablation study replacing VGAE-like models is crucial to help others understand the contribution of each model component.\n\n(4) Related work is missing from the paper, especially concerning spatio-temporal related work [5], generalization/extrapolation on graphs, and causality learning [2-4]. The authors should consider these areas to provide a more comprehensive context for their research.\n\n[2] Sui, Yongduo, et al. \"Causal attention for interpretable and generalizable graph classification.\" Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining. 2022.\n\n[3] Wu, Ying-Xin, et al. \"Discovering invariant rationales for graph neural networks.\" arXiv preprint arXiv:2201.12872 (2022).\n\n[4] Miao, Siqi, Mia Liu, and Pan Li. \"Interpretable and generalizable graph learning via stochastic attention mechanism.\" International Conference on Machine Learning. PMLR, 2022.\n\n[5] Xia, Yutong, et al. \"Deciphering Spatio-Temporal Graph Forecasting: A Causal Lens and Treatment.\" arXiv preprint arXiv:2309.13378 (2023)."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 33,
+    "mixed_pct": 7,
+    "human_pct": 60,
+    "verdict": null,
+    "confidence": null,
+    "chars": 2626,
+    "words": 371,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/36e4ef0d-f0f5-4008-9f5a-9d10635dd245",
+    "error": null,
+    "scored_chars": 2626
+  }
+}

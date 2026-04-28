@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "DomBynQsqt",
+  "reviewer": "xhrH",
+  "paper": {
+    "title": "3M-Diffusion: Latent Multi-Modal Diffusion for Language-Guided Molecular Structure Generation",
+    "authors": [
+      "Huaisheng Zhu",
+      "Teng Xiao",
+      "Vasant G Honavar"
+    ],
+    "abstract": "Generating molecular structures with desired properties is a critical task with broad applications in drug discovery and materials design. We propose 3M-Diffusion, a novel multi-modal molecular graph generation method, to generate diverse, ideally novel molecular structures with desired properties.  3M-Diffusion encodes molecular graphs into a graph latent space which it then aligns with the text space learned by encoder-based LLMs from textual descriptions. It then reconstructs the molecular structure and atomic attributes based on the given text descriptions using the molecule decoder. It then learns a probabilistic mapping from the text space to the latent molecular graph space using a diffusion model. The results of our extensive experiments on several datasets demonstrate that 3M-Diffusion can generate high-quality, novel and diverse molecular graphs that semantically match the textual description provided.",
+    "keywords": [
+      "Multi-modal",
+      "Molecule Generation",
+      "Diffusion Model"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=DomBynQsqt"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a method for text-guided molecule generation. The method leverages a latent diffusion model to generate latent representations of molecular graphs. Further, a variational graph autoencoder is employed to decode a molecular graph from the latent representation. For text-guided generation, an LLM encoder is trained to align with the graph encoder by cross-modal contrastive learning. The output of the LLM encoder is also incorporated as a condition to control the latent diffusion model.",
+    "reasons_to_accept": "- The method is overall sound and novel. Applying diffusion models for text-guided molecule generation is an important application.\n- The literature review is comprehensive and effectively positions this work within the context of existing studies.",
+    "reasons_to_reject": "* In Introduction, the authors promised results on the GuacaMol benchmarks, yet these results are absent from the subsequent sections. \n* The evaluation metrics in Table 1 and Table 2 are insufficient. Why are the evaluation metrics from MolT5 (*e.g.*, BLEU, Exact, Levenshtein, MACCS) missing in this work?\n* **Unconditional molecule generation (Table 5)**\n  * Since no textual condition is used, the comparison should include baselines in [1]. \n  * Table 5 should be moved to the main body of the paper.\n* Table 1 and Table 2 have the same caption, yet the contents are different. The authors should specify the distinct contents of each table to avoid confusion.\n\n[1] Molecular Sets (MOSES): A Benchmarking Platform for Molecular Generation Models. In Frontiers in Pharmacology, 2020."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:01Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:01Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 6,
+    "mixed_pct": 0,
+    "human_pct": 94,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1043,
+    "words": 163,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/197f9140-3c24-49e2-866e-a7a1e25f7c21",
+    "error": null,
+    "scored_chars": 1049
+  }
+}

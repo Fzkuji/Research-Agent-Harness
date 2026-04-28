@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "U8GUmxnzXn",
+  "reviewer": "JbxW",
+  "paper": {
+    "title": "UnHiPPO: Uncertainty-aware Initialization for State Space Models",
+    "authors": [
+      "Marten Lienen",
+      "Abdullah Saydemir",
+      "Stephan Günnemann"
+    ],
+    "abstract": "State space models are emerging as a dominant model class for sequence problems with many relying on the HiPPO framework to initialize their dynamics. However, HiPPO fundamentally assumes data to be noise-free; an assumption often violated in practice. We extend the HiPPO theory with measurement noise and derive an uncertainty-aware initialization for state space model dynamics. In our analysis, we interpret HiPPO as a linear stochastic control problem where the data enters as a noise-free control signal. We then reformulate the problem so that the data become noisy outputs of a latent system and arrive at an alternative dynamics initialization that infers the posterior of this latent system from the data without increasing runtime. Our experiments show that our initialization improves the resistance of state-space models to noise both at training and inference time.",
+    "keywords": [
+      "state space",
+      "uncertainty",
+      "hippo",
+      "mamba",
+      "kalman",
+      "noise",
+      "filter"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=U8GUmxnzXn"
+  },
+  "review_fields": {
+    "summary": "This paper investigates state space models (SSMs) through the lens of linear stochastic control theory and proposes a novel initialization method to enhance robustness against input noise. The authors first reformulate the linear recurrence in SSMs as a homogeneous linear dynamical system with noise, replacing the input signals with their closed-form reconstructions. Next, they derive a regularized HiPPO formulation by enforcing the online approximator to extrapolate linearly and maintain a consistent time derivative with the closed-form approximation at the boundary. Building on this new dynamic system, the authors compute the posterior mean estimate under Gaussian noise, which ultimately yields an improved initialization for the state transition matrix in SSMs.",
+    "claims_and_evidence": "Most claims in the paper are clear and well-supported. However, I have some reservations regarding certain steps in the derivation of the UnHiPPO initialization:\n\nTo obtain data-free dynamics, the authors substitute $f(t)$ with $\\hat{f}_{\\le t}(t)$. While this choice eases the derivation, it introduces a discrepancy between the dynamics used for initialization and those used during actual signal processing. Further justification would strengthen this step\n\nAdditionally, as far as I understand, models such as LSSL and S4 do not learn time-dependent matrices $A$ and $B$ directly. Instead, they learn static matrices $A$ and $B$ which are then converted into time-varying forms during training or inference. In contrast, the proposed initialization appears to generate a separate $A_k$ and $B_k$ for each timestep. It remains unclear whether the proposed method requires time-wise parameterization in practice, and if not, how the initialization is reconciled with the time-independent parameterization commonly used in these models.",
+    "methods_and_evaluation_criteria": "The primary goal of this paper is to enhance the robustness of state space models (SSMs) against input noise. The proposed method is an initialization scheme that provides a posterior estimate of the signal under Gaussian noise at the initialization stage. The derivation appears rigorous and well-grounded. However, when integrated into an SSM, the scheme seems to instantiate time-dependent parameters $A_k$ and $B_k$, which may diverge from the common practice of using time-invariant parameters $A$ and $B$ that are converted to $A_k$ and $B_k$ on the fly during training or inference. The experiments focus primarily on evaluating the robustness of the proposed approach under noise perturbations, which is well-aligned with the stated objective.",
+    "theoretical_claims": "All derivations look correct to me.",
+    "experimental_designs_or_analyses": "The experimental setup feels somewhat limited. Unlike many recent works on SSMs that evaluate on the Long Range Arena benchmark [1], this paper validates the proposed approach on a relatively small-scale dataset. Additionally, the comparisons are restricted to LSSL with HiPPO initialization, without including other competitive baselines. It would strengthen the empirical evaluation to include comparisons with more recent and widely adopted models such as S4 [2], DSS [3], or other state-of-the-art SSM variants.\n\n[1] Tay et al., Long Range Arena: A Benchmark for Efficient Transformers\n\n[2] Gu et al., Efficiently Modeling Long Sequences with Structured State Spaces\n\n[3] Gupta et al., Diagonal State Spaces are as Effective as Structured State Spaces",
+    "relation_to_broader_scientific_literature": "The proposed method is highly relevant to recent advancements in sub-quadratic sequence modeling, which aim to improve the efficiency and effectiveness of long-sequence processing. The underlying dynamical system studied in this work forms the core foundation for this class of models.",
+    "essential_references_not_discussed": "Two core works on the initialization and parameterization of SSMs appear to be missing:\n\n[1] Gupta et al., Diagonal State Spaces are as Effective as Structured State Spaces\n\n[2] Gu et al., How to Train Your HiPPO: State Space Models with Generalized Orthogonal Basis Projections",
+    "other_strengths_and_weaknesses": "Strengths:\n\n+ Analyzing SSMs through the lens of stochastic linear control theory provides a novel perspective and a powerful theoretical tool. I found Section 4.1 particularly insightful, in particular, the idea of regularizing the extrapolation behavior of SSMs using boundary conditions. The authors may also want to emphasize that this regularized formulation contributes directly to improving robustness against noise.\n\nWeaknesses:\n\n- The writing could benefit from greater clarity. For example, it took me some time to fully understand how $\\hat{f}_{\\le t}$ depends on $\\tau$. If I understand correctly,  $\\hat{f}$ should be expressed as two functions of $t$ and $\\tau$ separately rather than ambiguously as a function of one variable.\n\n- While the derived initialization is theoretically interesting, the empirical analysis could be strengthened. I recommend evaluating the method on more diverse tasks, such as language modeling, to demonstrate broader applicability. Additionally, it would be valuable to discuss how this initialization connects with recent advances in SSMs, such as Mamba [1], and whether it can be integrated into these newer architectures.\n\n[1] Gu et. al. Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+    "other_comments_or_suggestions": "I caught one typo:\n\nLn 279-280, a GELU nonlinearity followed a linear layer -> a GELU nonlinearity following a linear layer",
+    "questions_for_authors": "A question is whether the proposed initialization remains compatible with computationally efficient parameterizations, which serve as a core advantage of SSMs. The original HiPPO matrix has been shown to admit a normal-plus-low-rank decomposition, enabling fast computation. Subsequent work further simplifies this structure by approximating HiPPO with diagonal matrices. It remains unclear whether the UnHiPPO formulation retains or admits similar structural properties."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "zyZkaqNnpa",
+  "reviewer": "8MoS",
+  "paper": {
+    "title": "Don’t blame Dataset Shift! Shortcut Learning due to Gradients and Cross Entropy",
+    "authors": [
+      "Aahlad Manas Puli",
+      "Lily H Zhang",
+      "Yoav Wald",
+      "Rajesh Ranganath"
+    ],
+    "abstract": "Common explanations for shortcut learning assume that the shortcut improves prediction only under the training distribution. Thus, models trained in the typical way by minimizing log-loss using gradient descent, which we call default-ERM, should utilize the shortcut. However, even when the stable feature determines the label in the training distribution and the shortcut does not provide any additional information, like in perception tasks, default-ERM exhibits shortcut learning. Why are such solutions preferred when the loss can be driven to zero when using the stable feature alone? By studying a linear perception task, we show that default-ERM’s preference for maximizing the margin, even without overparameterization, leads to models that depend more on the shortcut than the stable feature. This insight suggests that default-ERM’s implicit inductive bias towards max-margin may be unsuitable for perception tasks. Instead, we consider inductive biases toward uniform margins. We show that uniform margins guarantee sole dependence on the perfect stable feature in the linear perception task and suggest alternative loss functions, termed margin control (MARG-CTRL), that encourage uniform-margin solutions. MARG-CTRL techniques mitigate shortcut learning on a variety of vision and language tasks, showing that changing inductive biases can remove the need for complicated shortcut-mitigating methods in perception tasks.",
+    "keywords": [
+      "shortcut learning",
+      "spurious correlations",
+      "perfect stable feature",
+      "perception tasks",
+      "implicit bias in optimization",
+      "improving inductive biases"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=zyZkaqNnpa"
+  },
+  "review_fields": {
+    "summary": "This paper explores the phenomenon of models using easy-to-learn spurious features (aka, shortcuts) instead of reliable but harder-to-learn true features. They find in their theoretical that max-margin relies on the spurious feature while controlling for uniforming margin induces learning the true feature. With this insight, they try numerous loss functions that provide a bias towards uniform margins and find improved worst-group accuracy on a variety of tasks.",
+    "strengths": "* Experiments show good results for their methods.",
+    "weaknesses": "* The informal statement of Theorem 1 in the main text is too vague in my opinion. In particular, it's not stated what the regime of $n$ is and how these other quantities interact with it. \n* The graphs are tough to read (too small) and the legends overlap with the plots.",
+    "questions": "* How does the dimensionality (e.g., choosing $d=100$) come into play? The story setting up the analogy does not in principle rely on the dimensionality all, just the gradient sizes of the noisy and true signals. I'm guessing it has something to do with interpolation, but I think it'd be good to have further discussion of this.\n* What's the connection between the neural network trained in section 2.1 and the linear model theorems? What happens if you train a logistic regression model instead?\n* Similar toy settings as in this paper (such as (Sagawa et al., 2020)) have been examined in the past and seemed to rely on overparameterization for their phenomena. What are the particulars in this paper's setup that allow us to observe phenomena in the underparameterized setting?\n* How should I think of the different MARG-CTRL? What factors cause their difference in performance and how should I make the decision in which to pick?",
+    "limitations": "The authors adequately addressed the limitations."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1310,
+    "words": 224,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9cf93cc7-e81a-4d2a-b533-864d1ab25a1e",
+    "error": null,
+    "scored_chars": 1311
+  }
+}

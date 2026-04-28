@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "mEV0nvHcK3",
+  "reviewer": "ngPf",
+  "paper": {
+    "title": "Towards Practical Defect-Focused Automated Code Review",
+    "authors": [
+      "Junyi Lu",
+      "Lili Jiang",
+      "Xiaojia Li",
+      "Jianbing Fang",
+      "Fengjun Zhang",
+      "Li Yang",
+      "Chun Zuo"
+    ],
+    "abstract": "The complexity of code reviews has driven efforts to automate review comments, but prior approaches oversimplify this task by treating it as snippet-level code-to-text generation and relying on text similarity metrics like BLEU for evaluation. These methods overlook repository context, real-world merge request evaluation, and defect detection, limiting their practicality. To address these issues, we explore the full automation pipeline within the online recommendation service of a company with nearly 400 million daily active users, analyzing industry-grade C++ codebases comprising hundreds of thousands of lines of code. We identify four key challenges: 1) capturing relevant context, 2) improving key bug inclusion (KBI), 3) reducing false alarm rates (FAR), and 4) integrating human workflows. To tackle these, we propose 1) code slicing algorithms for context extraction, 2) a multi-role LLM framework for KBI, 3) a filtering mechanism for FAR reduction, and 4) a novel prompt design for better human interaction. Our approach, validated on real-world merge requests from historical fault reports, achieves a 2× improvement over standard LLMs and a 10× gain over previous baselines. While the presented results focus on C++, the underlying framework design leverages language-agnostic principles (e.g., AST-based analysis), suggesting potential for broader applicability.",
+    "keywords": [
+      "Automated Code Review",
+      "Merge Request Analysis",
+      "Large Language Models (LLMs)",
+      "Defect Detection",
+      "Evaluation Metrics for Code Review",
+      "Code Context Extraction",
+      "Multi-Agent LLM Collaboration"
+    ],
+    "decision": "Accept (spotlight poster)",
+    "openreview_url": "https://openreview.net/forum?id=mEV0nvHcK3"
+  },
+  "review_fields": {
+    "summary": "The paper introduces an end‐to‐end automated code review system designed specifically for defect detection in large-scale, industrial codebases. The authors identify four key challenges in automating code review: capturing the full, relevant code context; improving key bug inclusion to ensure that critical defects are detected; reducing the false alarm rate by filtering out redundant or irrelevant comments; and integrating the system into human workflows. \n\nTo overcome these challenges, the paper proposes an approach that includes:\n• A static analysis system using several code slicing algorithms\n• A multi-agent framework where different LLM roles (Reviewer, Meta-Reviewer, Validator, and Translator) collaborate\n• A robust filtering mechanism that systematically reduces false positives by eliminating nitpicks and hallucinations\n• A line-aware prompt design that ensures review comments are accurately attached to the relevant lines of code\n\nEmpirical evaluations demonstrate that this integrated approach can achieve good performance.",
+    "claims_and_evidence": "Most of the paper's claims are supported by empirical evaluations and ablation studies.\nThe evidence might be less convincing on the generalizability of the approach to other programming languages.",
+    "methods_and_evaluation_criteria": "The methods and evaluation criteria proposed in the paper are well-aligned.\nOn the evaluation side, the authors introduce metrics such as Key Bug Inclusion (KBI), False Alarm Rate (FAR), Comprehensive Performance Index (CPI), and Line Localization Success Rate (LSR).",
+    "theoretical_claims": "The paper does not include formal proofs or theoretical claims.",
+    "experimental_designs_or_analyses": "One potential issue is that while these metrics and the accompanying analyses are well-structured, some evaluation criteria (like KBI and CPI) are specific to this work and might not fully capture all dimensions of code review quality as experienced by developers and can not be well compared with the literatures..",
+    "relation_to_broader_scientific_literature": "The key contributions of the paper extend prior findings to an integrated, context-rich, and workflow-aware system that is validated on industrial-scale data.",
+    "other_strengths_and_weaknesses": "Strengths:\n\nThe paper presents an innovative integration of multiple techniques—including diverse code slicing algorithms, a multi-agent framework with chain-of-thought reasoning, and a robust filtering mechanism—to tackle real-world challenges in automated code review.\nThe experimental evaluation is comprehensive and grounded in industrial-scale data, using metrics (KBI, FAR, CPI, LSR) that directly address practical defect detection concerns.\n\nWeaknesses:\n\nSome design choices, such as the thresholds in the filtering mechanism, appear heuristic, and it remains unclear how sensitive the results are to these parameters.\nThe evaluation is primarily confined to a specific industrial C++ codebase, leaving questions about the generalizability of the approach to other programming languages or domains.",
+    "questions_for_authors": "1. Could you elaborate on the trade-offs observed with the validator role? \n\n2. Could you discuss how your approach might generalize to other programming languages or domains? \n\n3. How sensitive is the system’s performance to the thresholds, and have you considered adaptive or data-driven methods for threshold selection? \n\n4. Have you conducted any user studies or qualitative evaluations with developers to validate that these metrics align well with real-world expectations of code review quality?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

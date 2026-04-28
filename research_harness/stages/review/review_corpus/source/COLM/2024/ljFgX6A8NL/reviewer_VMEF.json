@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "ljFgX6A8NL",
+  "reviewer": "VMEF",
+  "paper": {
+    "title": "Automatic Pseudo-Harmful Prompt Generation for Evaluating False Refusals in Large Language Models",
+    "authors": [
+      "Bang An",
+      "Sicheng Zhu",
+      "Ruiyi Zhang",
+      "Michael-Andrei Panaitescu-Liess",
+      "Yuancheng Xu",
+      "Furong Huang"
+    ],
+    "abstract": "Safety-aligned large language models (LLMs) sometimes falsely refuse pseudo-harmful prompts, like \"how to kill a mosquito,\" which are actually harmless. Frequent false refusals not only frustrate users but also provoke public backlash against the very values alignment seeks to protect. In this paper, we propose the first method to auto-generate diverse, content-controlled, and model-dependent pseudo-harmful prompts. Using this method, we construct an evaluation dataset called PHTest, which is ten times larger than existing datasets, covers more false refusal patterns, and separately labels controversial prompts. We evaluate 20 LLMs on PHTest, uncovering new insights due to its scale and labeling. Our findings reveal a trade-off between minimizing false refusals and improving safety against jailbreak attacks. Moreover, we show that many jailbreak defenses significantly increase the false refusal rates, thereby undermining usability. Our method and dataset can help developers evaluate and fine-tune safer and more usable LLMs. Our code and dataset are available at \\href{https://github.com/umd-huang-lab/FalseRefusal}{https://github.com/umd-huang-lab/FalseRefusal}",
+    "keywords": [
+      "safety alignment",
+      "false refusals",
+      "pseudo-harmful prompts",
+      "controllable text generation",
+      "usability-safety trade-off",
+      "LLM"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ljFgX6A8NL"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors study the problem of falsely refusing pseudo-harmful prompts by LLMs. Specifically, the work proposes an approach to automatically generate pseudo-harmful prompts. Using this method, the authors construct a new dataset called PHTest which is larger in scale and more finely annotated than existing datasets for this purpose. They evaluate current LLMs on PHTest, revealing insights such as the correlation between model size and false refusal types, and the trade-off between safety against jailbreak attacks and low false refusal rates.",
+    "reasons_to_accept": "1. The studied problem is highly practical and important for developing safer and more user-friendly LLMs.\n    \n2. The PHTest dataset is a significant resource, being 10x larger than prior datasets. A natural and fine-grained dataset can help identify the detailed drawbacks of existing LLMs and provide developers with insights on their capabilities, which is valuable for advancing the community.",
+    "reasons_to_reject": "1. The content-steering process could be explained in more detail. The writer LLM may not be able to generate desired pseudo-harmful prompts with x_{natural, harmless}. I think the generation quality is severely limited by the writer LLM and the reference prompt. How can the authors ensure that the writer LLM generates prompts within some specific categories, like \"Compound term\" or \"Shared Property vs Privacy\"? Additional experiments or analysis on the effectiveness of content-steering would strengthen this part of the methodology.\n\n2. The generated prompts may not transfer to other LLMs as being pseudo-harmful. As the authors mention in Section 2, the definition of harmfulness is inherently complex and controversial. Using a single target LLM to guide the generation process could introduce biases specific to that model. To improve the generalizability of the generated prompts, the authors could consider using an ensemble of different target LLMs to mitigate model-specific biases.",
+    "questions_to_authors": "1. How can the authors ensure that the writer LLM generates prompts within specific desired categories, such as \"Compound term\" or \"Shared Property vs Privacy\"? \n\n2. Did the authors experiment with using different target LLMs in the generation process to improve the transferability of the generated prompts?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:35:58Z",
+    "migrated_from_v1_at": "2026-04-27T15:35:58Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1701,
+    "words": 255,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/62808d60-fa93-4bd6-987c-c7706f5e7388",
+    "error": null,
+    "scored_chars": 1706
+  }
+}

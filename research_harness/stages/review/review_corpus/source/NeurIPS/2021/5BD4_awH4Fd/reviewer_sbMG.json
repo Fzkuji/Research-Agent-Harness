@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "5BD4_awH4Fd",
+  "reviewer": "sbMG",
+  "paper": {
+    "title": "A Stochastic Newton Algorithm for Distributed Convex Optimization",
+    "authors": [
+      "Brian Bullins",
+      "Kumar Kshitij Patel",
+      "Ohad Shamir",
+      "Nathan Srebro",
+      "Blake Woodworth"
+    ],
+    "abstract": "We propose and analyze a stochastic Newton algorithm for homogeneous distributed stochastic convex optimization, where each machine can calculate stochastic gradients of the same population objective, as well as stochastic Hessian-vector products (products of an independent unbiased estimator of the Hessian of the population objective with arbitrary vectors), with many such stochastic computations performed between rounds of communication.  We show that our method can reduce the number, and frequency, of required communication rounds, compared to existing methods without hurting performance, by proving convergence guarantees for quasi-self-concordant objectives (e.g., logistic regression), alongside empirical evidence.",
+    "keywords": [
+      "Distributed Optimization",
+      "Stochastic Optimization",
+      "Federated Learning",
+      "Newton's Method"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=5BD4_awH4Fd"
+  },
+  "review_fields": {
+    "summary": "This paper studies a distributed Stochastic Newton method in the intermittent communication model. At each step, the Newton direction is obtained by solving the associated minimization problem (instead of directly computing the Hessian) using One Shot Averaging (one round of communication only): nodes locally run a stochastic gradient algorithm and then average their solutions at the end. This is known to work well for quadratic objective, which is the case for computing the Newton direction. \n\nThen, under reasonable higher order smoothness assumptions (quasi self-concordance, third order smoothness and bounded fourth central moment), it is shown that obtaining approximate solutions to a constrained version of the Newton subproblem  leads to a globally convergent algorithm. Thus, the solution to the constrained Newton subproblem is replaced by the equivalent regularized subproblem, where the unknown regularization parameter is approximated by binary search. Thus, an approximate solution to the constrained subproblem is obtained by solving unconstrained subproblems only, which can be handled using one shot averaging.\n\nThen, an appropriate choice of parameters is given, which allows to prove convergence guarantees for the whole algorithm. These guarantees are compared to the lower bound, which can be beaten in some regimes thanks to the slightly different assumptions as well as the fact that stochastic Hessian-vector oracles are considered, which is reasonable for generalized linear models. \n\nFinally, simulations are given to show that FedSN outperforms reasonable baselines (Local and Minibatch SGD in particular) in terms of Suboptimality for a given number of communication rounds.",
+    "main_review": "The paper is globally clear and well-written. The relevant state of the art is adequately reviewed, and the series of (informal) theorems present a clear logical progression for the different steps needed to analyze the algorithm. \n\nAlthough the idea of approximating each Newton step using One Shot Averaging to reduce communications is quite natural, several tricks are required, such as approximating the constrained optimization problem. Besides, the analysis seems sound, and is based on strong but reasonable assumptions (local stability and quasi-self concordance in particular). \n\nIf I am not mistaken, all nodes need to draw stochastic gradients for the same function. Maybe this is worth mentioning (does not allow for data heterogeneity between nodes). \n\nIt seems that FedSN is globally convergent thanks to the constrained step, and then a complex scheme is developed to turn this into an unconstrained problem. In the end, the algorithm comes down to approximately solving a series of unconstrained Newton subproblems with varying regularization, similarly to, e.g., [A]. Is there a fundamental benefit of approximating constrained subproblems instead of a sequence of regularized Newton steps? If so, I believe it would be great to highlight it. Or is it the way [A] approximates the steps (directly via sketching) that makes the analysis viable without resorting to constrained subproblems? You don't assume strong convexity (but the experiments use regularized logistic regression), could that be an explanation?\n\nYou mention that the advantage of using Hessian-vector products is due to the distributed setting, and in particular the fact that the lower bound is not quadratic, so the Hessian-vector information is not equivalent to gradient information. Yet, if I understand correctly, this is also true for generalized linear models, which is the prime example for which stochastic Hessian vector products are easy to compute (and quasi-self concordance holds). From this perspective, it seems that using this kind of second-order information is mainly beneficial when it is not that easy to compute, or have I missed something? Is it possible that some slackness in the lower bound comes from different variance that is assumed for second order information (the \\rho parameter)? I believe that the \"comparison with the lower bound\" part is great, but could be improved even further. \n\n[A] Marteau-Ferey, Ulysse, Francis Bach, and Alessandro Rudi. \"Globally Convergent Newton Methods for Ill-conditioned Generalized Self-concordant Losses.\" Advances in Neural Information Processing Systems 32 (2019): 7636-7646.",
+    "limitations_and_societal_impact": "No foreseeable societal impact."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

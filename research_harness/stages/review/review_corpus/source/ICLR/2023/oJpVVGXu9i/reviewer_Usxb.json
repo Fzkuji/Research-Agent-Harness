@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "oJpVVGXu9i",
+  "reviewer": "Usxb",
+  "paper": {
+    "title": "Share Your Representation Only: Guaranteed Improvement of the Privacy-Utility Tradeoff in Federated Learning",
+    "authors": [
+      "Zebang Shen",
+      "Jiayuan Ye",
+      "Anmin Kang",
+      "Hamed Hassani",
+      "Reza Shokri"
+    ],
+    "abstract": "Repeated parameter sharing in federated learning causes significant information leakage about private data, thus defeating its main purpose: data privacy.  Mitigating the risk of this information leakage, using state of the art differentially private algorithms, also does not come for free.  Randomized mechanisms can prevent convergence of models on learning even the useful representation functions, especially if there is more disagreement between local models on the classification functions (due to data heterogeneity). In this paper, we consider a representation federated learning objective that encourages various parties to collaboratively refine the consensus part of the model, with differential privacy guarantees, while separately allowing sufficient freedom for local personalization (without releasing it).  We prove that in the linear representation setting, while the objective is non-convex, our proposed new algorithm \\DPFEDREP\\ converges to a ball centered around the \\emph{global optimal} solution at a linear rate, and the radius of the ball is proportional to the reciprocal of the privacy budget.  With this novel utility analysis, we improve the SOTA utility-privacy trade-off for this problem by a factor of $\\sqrt{d}$, where $d$ is the input dimension.  We empirically evaluate our method with the image classification task on CIFAR10, CIFAR100, and EMNIST, and observe a significant performance improvement over the prior work under the same small privacy budget. The code can be found in this link, https://github.com/shenzebang/CENTAUR-Privacy-Federated-Representation-Learning.",
+    "keywords": [
+      "Differential Privacy",
+      "Representation Learning",
+      "Federated Learning"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=oJpVVGXu9i"
+  },
+  "review_fields": {
+    "comment": "Thanks for explaining and addressing this issue about possible miscommunication of the contribution.\n\n> First, we would like to point out that in the contribution section of our introduction, we did not emphasize the design of the Server/Client procedure as our major contribution. Instead, we highlighted our novel theoretical improvement, the cross-validation based initialization scheme, and the improved empirical result.\n\nIn your introduction section, the contribution part has two paragraphs, and what you wanted to highlight, as said above, was only the last two sentences of the first paragraph, and the other parts of that paragraph gave me the impression that the whole procedure was also your contribution. It seems inappropriate to have 1/3 of the contribution part describing the existing framework without citing the paper you have mentioned in the related work. If we use DP-SGD as an example, they did not claim that SGD was part of their contribution.\n\nI appreciate your comments about the comparison to the methods from Collins et al. (2021) and Jain et al. (2021), and I hope that they will also be added to the main text."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

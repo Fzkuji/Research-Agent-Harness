@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "H1x3SnAcYQ",
+  "reviewer": "5",
+  "paper": {
+    "title": "A Better Baseline for Second Order Gradient Estimation in Stochastic Computation Graphs",
+    "authors": [
+      "Jingkai Mao",
+      "Jakob Foerster",
+      "Tim Rocktäschel",
+      "Gregory Farquhar",
+      "Maruan Al-Shedivat",
+      "Shimon Whiteson"
+    ],
+    "abstract": "Motivated by the need for higher order gradients in multi-agent reinforcement learning and meta-learning, this paper studies the construction of baselines for second order Monte Carlo gradient estimators in order to reduce the sample variance. Following the construction of a stochastic computation graph (SCG), the Infinitely Differentiable Monte-Carlo Estimator (DiCE) can generate correct estimates of arbitrary order gradients through differentiation. However, a baseline term that serves as a control variate for reducing variance is currently provided only for first order gradient estimation, limiting the utility of higher-order gradient estimates. To improve the sample efficiency of DiCE, we propose a new baseline term for higher order gradient estimation. This term may be easily included in the objective, and produces unbiased variance-reduced estimators under (automatic) differentiation, without affecting the estimate of the objective itself or of the first order gradient. We provide theoretical analysis and numerical evaluations of our baseline term, which demonstrate that it can dramatically reduce the variance of second order gradient estimators produced by DiCE. This computational tool can be easily used to estimate second order gradients with unprecedented efficiency wherever automatic differentiation is utilised, and has the potential to unlock applications of higher order gradients in reinforcement learning and meta-learning.",
+    "keywords": [
+      "Reinforcement learning",
+      "meta-learning",
+      "higher order derivatives",
+      "gradient estimation",
+      "stochastic computation graphs"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H1x3SnAcYQ"
+  },
+  "review_fields": {
+    "review": "Thank you for an interesting read.\n\nThis paper extends the recently published DiCE estimator for gradients of SCGs and proposed a control variate method for the second order gradient. The paper is well written. Experiments are a bit too toy, but the authors did show significant improvements over DiCE with no control variate.\n\nGiven that control variates are widely used in deep RL and Monte Carlo VI, the paper can be interesting to many people. I haven't read the DiCE paper, but my impression is that DiCE found a way to conveniently implement the REINFORCE rules applied infinite times. So if I were to derive a baseline control variate for the second or higher order derivatives, I would \"reverse engineer\" from the exact derivatives and figure out the corresponding DiCE formula. Therefore I would say the proposed idea is new, although fairly straightforward for people who knows REINFORCE and baseline methods.\n\nFor me, the biggest issue of the paper is the lack of explanation on the choice of the baseline. Why using the same baseline b_w for both control variates? Is this choice optimal for the second order control variate, even when b_w is selected to be optimal for the first order control variate? The paper has no explanation on this issue, and if the answer is no, then it's important to find out an (approximately) optimal baseline for this second order control variate. \n\nAlso the evaluation seems quite toy. As the design choice of b_w is not rigorously explained, I am not sure the better performance of the variance-reduced derivatives generalises to more complicated tasks such as MAML for few-shot learning.\n\nMinor:\n1. In DiCE, given a set of stochastic nodes W, why did you use marginal distributions p(w, \\theta) for a node w in W, instead of the joint distribution p(W, \\theta)? I agree that there's no need to use p(S, \\theta) that includes all stochastic nodes, but I can't see why using marginal distribution is valid when nodes in W are not independent.\n\n2. For the choice of b_w discussed below eq (4), you probably need to cite [1][2].\n\n3. In your experiments, what does \"correlation coefficient\" mean? Normalised dot product?\n\n[1] Mnih and Rezende (2016). Variational inference for Monte Carlo objectives. ICML 2016.\n[2] Titsias and Lázaro-Gredilla (2015). Local Expectation Gradients for Black Box Variational Inference. NIPS 2015."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

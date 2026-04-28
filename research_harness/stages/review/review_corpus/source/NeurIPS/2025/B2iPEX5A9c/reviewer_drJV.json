@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "B2iPEX5A9c",
+  "reviewer": "drJV",
+  "paper": {
+    "title": "Information-Theoretic Discrete Diffusion",
+    "authors": [
+      "Moongyu Jeon",
+      "Sangwoo Shin",
+      "Dongjae Jeon",
+      "Albert No"
+    ],
+    "abstract": "We present an information-theoretic framework for discrete diffusion models \nthat yields principled estimators of log-likelihood using score-matching losses.\nInspired by the I-MMSE identity for the Gaussian setup, we derive analogous results for the discrete setting.\nSpecifically, we introduce the Information–Minimum Denoising Score Entropy (I-MDSE) relation,\nwhich links mutual information between data and its diffused version to the minimum denoising score entropy (DSE) loss.\nWe extend this theory to masked diffusion and establish the Information–Minimum Denoising Cross-Entropy (I-MDCE) relation,\nconnecting cross-entropy losses to mutual information in discrete masked processes.\nThese results provide a time-integral decomposition of the log-likelihood of the data in terms of optimal score-based losses,\nshowing that commonly used losses such as DSE and DCE are not merely variational bounds \nbut tight and principled estimators of log-likelihood.\nThe I-MDCE decomposition further enables practical extensions, including time-free formula,\nconditional likelihood estimation in prompt–response tasks, and coupled Monte Carlo estimation of likelihood ratios.\nExperiments on synthetic and real-world data confirm the accuracy, variance stability, and utility of our estimators.\nThe code is publicly available at https://github.com/Dongjae0324/infodis.",
+    "keywords": [
+      "Discrete Diffusion Models",
+      "Information Theory",
+      "Score Matching",
+      "Denoising Score Entropy (DSE)",
+      "Denoising Cross-Entropy (DCE)"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=B2iPEX5A9c"
+  },
+  "review_fields": {
+    "summary": "This paper introduces a scalable, information-theoretic framework for discrete diffusion models, where tokens are randomly masked via an absorbing diffusion process and reconstructed using a novel info-minimization denoising cross-entropy (I-MDCE) loss that connects score-based estimation and mutual information. This approach enables efficient Monte Carlo estimation of NLL without requiring time integration. Additionally, the proposed model demonstrates strong NLL estimation on synthetic DNA data, and experiments on large models like LLaDA highlight its utility for interpreting model behavior and data influence.",
+    "strengths_and_weaknesses": "# Strengths:\nThe paper is well-structured, easy to follow, and features a thorough theoretical derivation. By integrating information theory into discrete diffusion models, it captures the essence of the information-theoretic approach, namely, building pointwise relationships, which adds substantial novelty. The authors are the first to introduce the I-MDSE relationship. To further extend this, they derive a mask setting of I-MDSE in masked diffusion models, termed I-MDCE. Additionally, to improve scalability, they propose a time-free likelihood estimation framework to facilitate model training. \n\n\n# Weaknesses:\n- The experimental section is relatively limited. It only validates the effectiveness of the proposed model, without comparison to other baselines. For example, in the experiments on DNA sequences, could NLL estimation be performed using other discrete diffusion models as well? Beyond the visualizations in Figures 1 and 2, is it possible to provide concrete quantitative metrics to measure the estimation error? I suggest expanding the experiments, such as displaying sampling results in the prompt-response experiments and comparing perplexity across different models. Nevertheless, given the theoretical contributions of this paper, the current experiments are still acceptable.\n\n- A few minor points to note:\n\n  - There is a comma typo in Eq. (10) and Eq. (12).\n\n  - It is recommended to number all the equations on page 6.\n\n  - In Line 214, the description is reversed. It should read: \"In practice, replacing $c^*$ with a learned predictor $c^\\theta$ gives the estimator.\"",
+    "questions": "(Line 191) Could you clarify why the DCE can be used as an approximation to the MSE in MMSE estimation? Since DCE (cross-entropy) and MSE (L2 norm) represent fundamentally different geometric measures, what is the intuition or theoretical justification for treating them as approximately equivalent in this context?",
+    "limitations": "1. The time-free likelihood formulation is currently only applicable to masked diffusion models (via I-MDCE) and does not generalize to the broader I-MDSE setting.\n\n2. The ability of the method to recover likelihoods could raise privacy concerns in sensitive applications, highlighting the need for cautious use in downstream tasks.",
+    "final_justification": "Thank you for your response and for providing a variance-based analysis to support the quantitative evaluation. However, I still find that the comparison against diverse baselines is lacking, which is also raised by other reviewers. Due to this limitation, I’m inclined to lower the assessment of the paper’s significance and have adjusted my final rating to 4."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5,
+    "quality": 4,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "qrfp4eeZ47",
+  "reviewer": "a4X8",
+  "paper": {
+    "title": "FactorizePhys: Matrix Factorization for Multidimensional Attention in Remote Physiological Sensing",
+    "authors": [
+      "Jitesh Joshi",
+      "Sos Agaian",
+      "Youngjun Cho"
+    ],
+    "abstract": "Remote photoplethysmography (rPPG) enables non-invasive extraction of blood volume pulse signals through imaging, transforming spatial-temporal data into time series signals. Advances in end-to-end rPPG approaches have focused on this transformation where attention mechanisms are crucial for feature extraction. However, existing methods compute attention disjointly across spatial, temporal, and channel dimensions. Here, we propose the Factorized Self-Attention Module (FSAM), which jointly computes multidimensional attention from voxel embeddings using nonnegative matrix factorization. To demonstrate FSAM's effectiveness, we developed FactorizePhys, an end-to-end 3D-CNN architecture for estimating blood volume pulse signals from raw video frames. Our approach adeptly factorizes voxel embeddings to achieve comprehensive spatial, temporal, and channel attention, enhancing performance of generic signal extraction tasks. Furthermore, we deploy FSAM within an existing 2D-CNN-based rPPG architecture to illustrate its versatility. FSAM and FactorizePhys are thoroughly evaluated against state-of-the-art rPPG methods, each representing different types of architecture and attention mechanism. We perform ablation studies to investigate the architectural decisions and hyperparameters of FSAM. Experiments on four publicly available datasets and intuitive visualization of learned spatial-temporal features substantiate the effectiveness of FSAM and enhanced cross-dataset generalization in estimating rPPG signals, suggesting its broader potential as a multidimensional attention mechanism. The code is accessible at https://github.com/PhysiologicAILab/FactorizePhys.",
+    "keywords": [
+      "Time-series estimation",
+      "remote photo-plethysmography",
+      "spatial-temporal attention",
+      "non-negative matrix factorization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=qrfp4eeZ47"
+  },
+  "review_fields": {
+    "comment": "The authors answer most of my questions. I especially appreciate the effort of putting in more visualization.  But the concern \"It is still unclear why and in what situation the proposed method is better than the SOTA methods\" is still not answered well. I understand the experimental results are better than the SOTA but still not clear how the proposed method could gain significant improvement. If it is due to the use of joint computation of multi-dimensional attention, the case study should compare the difference(either visualization or some deep explanation of results) of different approaches that use attention as well."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 628,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4f426c81-bdc1-4fd0-8e89-ca748cf1d77a",
+    "error": null,
+    "scored_chars": 629
+  }
+}

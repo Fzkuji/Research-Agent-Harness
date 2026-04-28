@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "7J1kwZY72h",
+  "reviewer": "xaaD",
+  "paper": {
+    "title": "Kinetic Langevin Diffusion for Crystalline Materials Generation",
+    "authors": [
+      "François R J Cornet",
+      "Federico Bergamin",
+      "Arghya Bhowmik",
+      "Juan Maria Garcia-Lastra",
+      "Jes Frellsen",
+      "Mikkel N. Schmidt"
+    ],
+    "abstract": "Generative modeling of crystalline materials using diffusion models presents a series of challenges: the data distribution is characterized by inherent symmetries and involves multiple modalities, with some defined on specific manifolds. Notably, the treatment of fractional coordinates representing atomic positions in the unit cell requires careful consideration, as they lie on a hypertorus. In this work, we introduce Kinetic Langevin Diffusion for Materials (KLDM), a novel diffusion model for crystalline materials generation, where the key innovation resides in the modeling of the coordinates. Instead of resorting to Riemannian diffusion on the hypertorus directly, we generalize Trivialized Diffusion Model (TDM) to account for the symmetries inherent to crystals. By coupling coordinates with auxiliary Euclidean variables representing velocities, the diffusion process is now offset to a flat space. This allows us to effectively perform diffusion on the hypertorus while providing a training objective that accounts for the periodic translation symmetry of the true data distribution. We evaluate KLDM on both Crystal Structure Prediction (CSP) and De-novo Generation (DNG) tasks, demonstrating its competitive performance with current state-of-the-art models.",
+    "keywords": [
+      "generative models",
+      "diffusion models",
+      "crystals",
+      "materials"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7J1kwZY72h"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a new diffusion model for modeling crystalline materials.\n\nThe model is built upon a Kinetic Langevin Diffusion on the fractional coordinates, and standard Euclidean diffusion for the lattice vector and atom types (one-hot embedded).\n\nThe core contributions of the paper are:\n- proposing to use a velocity noising process in the fractional coordinate diffusion to make the noising process itself invariant to fractional translations.\n- proposing a simplified score parameterisation for the combined model.\n- application of the model to standard benchmark tasks.",
+    "claims_and_evidence": "For the most part the claims are well supported.\n\nThe claim I have most issue with is the discussion around issue in the subsection *Score parametrization and targets*.\n\nIt is not clear to me that the issue is that the conditional target scores can be different for different translations of the same $f_t$. Is this not an expected result of score matching? The point of the denoising score matching loss is to minimise the average square error over the conditional scores to give you the score function. Perhaps I have misunderstood the issue?\n\nThe solution proposed still seems interesting to me - but in that it reduces the complexity of the learnt function by quotienting out an additional symmetry of the model, namely by the noising process.\n\nThis feature is not ablated in the experimental results, although the simplification in the parameterisation of the score function is, and I think it would be quite important to show that this procedure does indeed help with better model performance.",
+    "methods_and_evaluation_criteria": "The benchmarks are in line with prior work in the area, and appear to be sufficient.",
+    "theoretical_claims": "The pieces of analysis in the paper, such as the loss derivation, are correct. There are no other claims made.",
+    "experimental_designs_or_analyses": "Overall the design is sound. \n\nI have one small nitpick and that is that for some of the experiments there are error bars computed, and for others there are not. Could the authors explain why?\n\nAdditionally, in the De Novo generation task the majority of the methods appear to be very close together in performance for the majority of metrics. Could the authors comment on which of these metrics is most important, and why there is little gain on this task compared to the tasks presented in table 1.",
+    "relation_to_broader_scientific_literature": "The paper builds upon other work in the crystal structure generation literature, and is compared well to other baseline methods such as CDVAE, DIFFCSP, EQUICSP, FLOWMM. The paper is most related to DIFFSCP, where it replaces the diffusion on the fractional coordinates with the Kinetic Langevin Diffusion.",
+    "other_strengths_and_weaknesses": "I appreciate the value in the combination of previous ideas presented here, and the innovations in the modelling process regarding the score function parameterisation and noising process. The results in Table 1 tasks suggest that the new model does perform better than competitors in some settings.\n\nThere are quite a few typos in the paper:\n- 248R differ -> defer.\n- 407R does not make sense.\nFor example.",
+    "questions_for_authors": "Other than the questions posed in other boxes, could the Authors discuss why they think this method appears to be working better than previous methods? Could they discuss why this does not appear to be the case for the denovo task?\n\nCould the Authors discuss if they see impact for this work and the modeling developments outside the application area of crystal structure generation?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

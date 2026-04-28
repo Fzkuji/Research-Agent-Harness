@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "9k0krNzvlV",
+  "reviewer": "hxrQ",
+  "paper": {
+    "title": "On the Learnability of Watermarks for Language Models",
+    "authors": [
+      "Chenchen Gu",
+      "Xiang Lisa Li",
+      "Percy Liang",
+      "Tatsunori Hashimoto"
+    ],
+    "abstract": "Watermarking of language model outputs enables statistical detection of model-generated text, which can mitigate harms and misuses of language models. Existing watermarking strategies operate by altering the decoder of an existing language model. In this paper, we ask whether language models can directly learn to generate watermarked text, which would have significant implications for the real-world deployment of watermarks. First, learned watermarks could be used to build open models that naturally generate watermarked text, enabling watermarking for open models, where users can control the decoding procedure. Second, if watermarking is used to determine the provenance of generated text, an adversary can hurt the reputation of a victim model by spoofing its watermark and generating damaging watermarked text. To investigate the learnability of watermarks, we propose watermark distillation, which trains a student model to behave like a teacher model that uses decoding-based watermarking. We test our approach on three decoding-based watermarking strategies and various hyperparameter settings, finding that models can learn to generate watermarked text with high detectability. We also find limitations to learnability, including the loss of watermarking capabilities under fine-tuning on normal text and high sample complexity when learning low-distortion watermarks.",
+    "keywords": [
+      "watermarking",
+      "large language models",
+      "distillation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=9k0krNzvlV"
+  },
+  "review_fields": {
+    "summary": "The paper investigates whether watermarks for language models, which allow for the detecting model-generated text, can be directly learned by another model without applying the same watermarking decoding algorithm, termed weights-based watermarking. This has implications for using watermarks in open-source models and for potential spoofing attacks.\n\nThe authors propose two methods for learning weights-based watermarks without specialized decoding - logits-based and sampling-based watermark distillation. This transfers watermarks from a teacher model to a student model.\n\nExperiments are run with three different decoding-based watermarking techniques. The results show that the proposed distillation methods can learn watermarks, but learnability varies across schemes and hyperparameters. Lower distortion watermarks are harder to learn.\n\nThe authors demonstrate two applications of the findings. For open models, learned watermarks will be removed by further fine-tuning, and they leave the learning weights-based watermarking that is robust to fine-tuning for future work. For spoofing attacks, sampling-based distillation can replicate watermarks. This suggests limitations of using watermarks for provenance.\n\nIn summary, this paper provides an interesting empirical analysis of the learnability of current decoding-based textual watermarks. It highlights the potential limitations of text watermarks for provenance. Their findings suggest the need for investigation on watermarks that are difficult to learn as a prevention of the discussed spoofing attacks.",
+    "strengths": "Originality:\n- Investigates the novel problem of whether language models can learn to generate watermarks themselves. This question has important implications but was previously unexplored.\n\nQuality:\n- Provides extensive empirical results across three watermarking schemes and hyperparameters—thorough, reproducible experiments.\n- Uses appropriate metrics to assess watermark detection and text quality—rigorous quantitative evaluation.\n- Clear methodology and training details—enable replicability.\n\nClarity:\n- Structured logically to build understanding incrementally. Smooth flow between sections.\n\nSignificance:\n- Foundational insights into watermark learnability advance knowledge in an important emerging area.\n- Learnability findings have direct implications for applications like watermarking open models.\n- Identifies risks around spoofing that impact watermark security. Informs responsible development.\n- Benchmark results across schemes and hyperparameters enable future work. Valuable analysis.",
+    "weaknesses": "The experimental methodology could be strengthened by\n 1. controlling for model architecture (use the Llama-2 as the student model for both logits-based and sample-based experiments for a more intuitive comparison of the results)). This would better isolate the distillation techniques themselves.\n 2. increasing the dataset diversity (currently, only one dataset is used).\n 3. somehow, seq-rep-3 is not evaluated on the sample-based distillation.\n\nThe technical writing is condensed in some areas, making it harder to follow for non-experts. Expanding explanations around key concepts like the distillation objectives could improve readability.\n\nThe related work could be expanded to provide a broader context. Watermarking has been studied for other modalities like images, which could give a useful perspective. Meanwhile, model-specific watermark leveraging the learnability of distribution difference has also been discussed in the literature [He, Xuanli, et al. ].\n\nThe spoofing attack evaluation is limited to a simple harmful/innocuous categorization. More nuanced human evaluations could better characterize risks.\n\nThe limitations around fine-tuning robustness are acknowledged but not thoroughly investigated. Exploring techniques to improve robustness could be valuable.\n\nHe, Xuanli, et al. \"Cater: Intellectual property protection on text generation apis via conditional watermarks.\" Advances in Neural Information Processing Systems 35 (2022): 5431-5445.",
+    "questions": "I would like to request an evaluation using Llama-2 for both distillation techniques, rather than different models for each. Doing so would allow for a more direct comparison of the distillation methods themselves, better isolating the impact of the techniques. This could strengthen the technical contributions by providing improved analysis of the relative efficacy of logits-based vs sampling-based distillation.\n\nAdditionally, conducting more in-depth studies on spoofing attacks across diverse topics and datasets could further increase the impact of the work's findings. Expanding the spoofing experiments to include varied contexts beyond the current proof of concept could substantiate the risks posed. Rigorously demonstrating successful spoofing in different settings would validate concerns around watermark security and attribution. This expanded analysis could strengthen the evaluative assessment by demonstrating comprehensive consideration of the practical implications."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 2,
+    "mixed_pct": 0,
+    "human_pct": 98,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3462,
+    "words": 450,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f73f78b7-2fa8-43ad-bca9-bbb909ded36f",
+    "error": null,
+    "scored_chars": 3465
+  }
+}

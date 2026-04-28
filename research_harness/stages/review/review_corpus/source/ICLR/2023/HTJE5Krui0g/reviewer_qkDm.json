@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "HTJE5Krui0g",
+  "reviewer": "qkDm",
+  "paper": {
+    "title": "Softened Symbol Grounding for Neuro-symbolic Systems",
+    "authors": [
+      "Zenan Li",
+      "Yuan Yao",
+      "Taolue Chen",
+      "Jingwei Xu",
+      "Chun Cao",
+      "Xiaoxing Ma",
+      "Jian L\\\"{u}"
+    ],
+    "abstract": "Neuro-symbolic learning generally consists of two separated worlds, i.e., neural network training and symbolic constraint solving, \nwhose success hinges on symbol grounding, a fundamental problem in AI. This paper presents a novel, softened symbol grounding process, bridging the gap between the two worlds, and resulting in an effective and efficient neuro-symbolic learning framework. Technically, the framework features (1) modeling of symbol solution states as a Boltzmann distribution, which avoids expensive state searching and facilitates mutually beneficial interactions between network training and symbolic reasoning; (2) a new MCMC technique leveraging projection and SMT solvers, which efficiently samples from disconnected symbol solution spaces; (3) an annealing mechanism that can escape from sub-optimal symbol groundings. Experiments with three representative neuro-symbolic learning tasks demonstrate that, owing to its superior symbol grounding capability, our framework successfully solves problems well beyond the frontier of the existing proposals.",
+    "keywords": [
+      "neuro-symbolic learning",
+      "symbol grounding problem",
+      "projection-based sampling"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=HTJE5Krui0g"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper proposes softening the symbol grounding problem in joint neural-symbolic learning. The major challenge in the neural-symbolic learning system studied in this work is the lack of supervision for the symbol grounding problem. This work presents efforts to model the symbol grounding problem as a Boltzmann distribution with efficient MCMC sampling to bridge the worlds of neural grounding and symbolic reasoning. Of particular interest is the sampling method the authors use to resolves the connectivity barrier in searching for feasible symbol representation. In experiments involving handwritten formulae, visual sudoku, and shortest path, the method shows improved performance compared to existing baselines.",
+    "strength_and_weaknesses": "As the authors mention, the key problem in the neural-symbolic systems is how to efficiently search for the feasible hidden symbol state in the exponentially large and discrete space. The authors propose a very interesting formulation to address the problem, prove the convergence and even connect with existing works. The entropy formulation that softens symbol grounding is really interesting and I quite like the accompanied sampling method proposed for the connectivity barrier. Both empirical results and the theoretical analysis are convincing enough.\n\nI do not have many technical questions but would rather like to ask some open ones.\n\nTo me, the scope of problems that this method can be applied is limited, a minor problem though. The problems studied in this work are only challenging without hidden symbol supervision. However, in practice, for the toy problems studied, it is not hard to obtain, and may take only a few hours to get enough data to train a decent symbol grounding network. Is it possible to show your method applied to problems where data is either too complex to label for humans while your method can obtain good performance, or it simply is too bordering to get labels for intermediate representation?\n\nAnother issue with the method is efficiency. I can see that the sampling process, though improved, could still be very slow (or correct me if not). SMT solvers could also be a major bottleneck for efficiency, as they might only be feasible for moderately small problem scales. Can you show some quantitative results regarding efficiency?",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is clearly written, of high quality and original to the best of my knowledge.",
+    "summary_of_the_review": "The paper is well done and the strengths far outweigh the weaknesses.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "jT1EwXu-4hj",
+  "reviewer": "ozid",
+  "paper": {
+    "title": "From Intervention to Domain Transportation: A Novel Perspective to Optimize Recommendation",
+    "authors": [
+      "Da Xu",
+      "Yuting Ye",
+      "Chuanwei Ruan",
+      "Evren Korpeoglu",
+      "Sushant Kumar",
+      "Kannan Achan"
+    ],
+    "abstract": "The interventional nature of recommendation has attracted increasing attention in recent years. It particularly motivates researchers to formulate learning and evaluating recommendation as causal inference and data missing-not-at-random problems. However, few take seriously the consequence of violating the critical assumption of overlapping, which we prove can significantly threaten the validity and interpretation of the outcome. We find a critical piece missing in the current understanding of information retrieval (IR) systems: as interventions, recommendation not only affects the already observed data, but it also interferes with the target domain (distribution) of interest. We then rephrase optimizing recommendation as finding an intervention that best transports the patterns it learns from the observed domain to its intervention domain. Towards this end, we use domain transportation to characterize the learning-intervention mechanism of recommendation. We design a principled transportation-constraint risk minimization objective and convert it to a two-player minimax game.\nWe prove the consistency, generalization, and excessive risk bounds for the proposed objective, and elaborate how they compare to the current results. Finally, we carry out extensive real-data and semi-synthetic experiments to demonstrate the advantage of our approach, and launch online testing with a real-world IR system.",
+    "keywords": [
+      "Information retrieval",
+      "Learning theory",
+      "Causal inference",
+      "Missing data",
+      "Overlapping",
+      "Reweighting",
+      "Optimal transport"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=jT1EwXu-4hj"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposed a new perspective for recommender systems: rephrase optimizing recommendation as finding an intervention that best transports the patterns it learns from the observed domain to its intervention domain. To optimize the recommendation algorithms in this setting, the authors proposed a transportation-constraint risk minimization objective and convert it to a two-player minimax game. Theoretical and empirical studies demonstrated the effectiveness of the proposed method.",
+    "main_review": "The paper views recommender systems from a new perspective, which is similar but different to existing works in causal collaborative filtering. The theoretical analyses are comprehensive. The experimental studies are conducted in synthetic data, offline data and online data, which can well demonstrate the effectiveness of the proposed method.\n\nI have the following questions/concerns about this paper:\n1.\tIt seems to me that the proposed method can outperform IW methods when the overlap between the source and target domains are insufficient. However, there is no measurement about the insufficiency. It will be better to have some theoretical or empirical analysis about how the overlap between different domains can affect the performance.\n2.\tIt is hard to directly compare the bounds derived by the paper, e.g., between Theorem 3 and Proposition 1. This will be important to intuitively understand the advances of the proposed method.\n3.\tThe online evaluation used the Deep and Wide method. But the same method is not evaluated in the offline setting, which seems unreasonable.\n4.\tThe proposed method tries to optimize recommendation algorithms via a minimax game, which could be much more complicated than other baselines. Thus, it would be necessary to analyze the efficiency of the proposed method in the experiments.",
+    "summary_of_the_review": "In summary, this paper targets at an interesting problem and shows promising theoretical and empirical results, which could be helpful for the community of recommender systems.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1504,
+    "words": 232,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ce8e82be-8a28-419b-9254-0aff62caefae",
+    "error": null,
+    "scored_chars": 1504
+  }
+}

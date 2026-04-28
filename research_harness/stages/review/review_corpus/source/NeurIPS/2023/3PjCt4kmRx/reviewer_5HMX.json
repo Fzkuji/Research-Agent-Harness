@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "3PjCt4kmRx",
+  "reviewer": "5HMX",
+  "paper": {
+    "title": "From Pixels to UI Actions: Learning to Follow Instructions via Graphical User Interfaces",
+    "authors": [
+      "Peter Shaw",
+      "Mandar Joshi",
+      "James Cohan",
+      "Jonathan Berant",
+      "Panupong Pasupat",
+      "Hexiang Hu",
+      "Urvashi Khandelwal",
+      "Kenton Lee",
+      "Kristina Toutanova"
+    ],
+    "abstract": "Much of the previous work towards digital agents for graphical user interfaces (GUIs) has relied on text-based representations (derived from HTML or other structured data sources), which are not always readily available. These input representations have been often coupled with custom, task-specific action spaces.  This paper focuses on creating agents that interact with the digital world using the same conceptual interface that humans commonly use — via pixel-based screenshots and a generic action space corresponding to keyboard and mouse actions. Building upon recent progress in pixel-based pretraining, we show, for the first time, that it is possible for such agents to outperform human crowdworkers on the MiniWob++ benchmark of GUI-based instruction following tasks.",
+    "keywords": [
+      "instruction following",
+      "web tasks",
+      "user interface tasks",
+      "vision and language",
+      "representation learning",
+      "reinforcement learning",
+      "imitation learning",
+      "tree search",
+      "language grounding",
+      "web agents",
+      "computer control"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=3PjCt4kmRx"
+  },
+  "review_fields": {
+    "summary": "The paper introduces PIX2ACT, a model designed to interact with GUIs using only pixel-level visual representations. Unlike most prior works that depend on structured interfaces (like HTML or DOM trees), PIX2ACT relies solely on what it visually sees. This approach is motivated by the way humans interact with interfaces without necessarily knowing the underlying code , which is interesting. The study reveals that such a model can efficiently operate in GUI tasks with generic mouse and keyboard actions, and even outperforms humans in specific benchmarks. For this they use PIX2STRUCT pre-trained on mapping screenshots to structured representation.\n\nMajor Contributions:\n\n1. Demonstrated that an agent with pixel-only inputs and generic actions can outperform humans on the MiniWob++ benchmark, achieving performance similar to top-tier agents with access to DOM information.\n\n2. Adapted the WebShop benchmark to function with pixel-based observations and generic actions, establishing the initial baseline performance in this setting.\n\n3. Highlighted the efficiency of PIX2STRUCT’s pre-training through screenshot parsing for GUI-based instruction with pixel-only inputs, leading to notable performance improvements on benchmarks like MiniWob++ and WebShop.\n\n4. Successfully applied tree search for policy improvement in the MiniWob++ environment.",
+    "strengths": "The paper studies a new approach to controlling GUIs using just pixel level information unlike alternate approach which uses DOM tree or HTML. While both has its pros and cons , this is one of the new papers ton explore the pixel based controls in this setting.\n\nAdaptable Benchmarking Capabilities: Authors successfully adapt and operate on the WebShop benchmark using solely pixel-based observations and broad actions, laying down a foundational performance standard.\n\nRobust Pre-training Mechanism: The strength of PIX2STRUCT’s screenshot parsing pre-training is evident. This pre-training strategy remarkably boosts the model's efficiency in GUI-based instruction tasks using pixel-based inputs, as observed in dramatic performance jumps on benchmarks. The authors have performed and demonstrated the importance of this through the ablation studies. This is very interesting.\n\nEffective Policy Enhancement with Tree Search: The model employs tree search effectively, which proves to be a straightforward yet potent method for enhancing its policy in environments like MiniWob++.\n\nA very good point that the paper has made - \" Finally, aligning human demonstrations with task-dependent actions is often challenging.\"",
+    "weaknesses": "The paper talks about generalization but slightly fails to highlight the same- for example : The chosen datasets ( miniwob++ and webshop(which is a great start) ) are relatively simple datasets and does not capture not capture the full complexity of real-world GUIs. \nAddtionally , to perform well reasonable well on the webshop dataset the model seems to require a fine tuning on miniwob++ which is still unclear as to why it is needed. Thus does it actually generalize to webshop? Furthermore, the authors perform hold out set evaluation on miniwob++. However, the tasks are \"click-checkboxes-large, click-color, click-tab-2, click-tab-2-hard, count-shape, drag-shapes, use-color-wheel-2, use-slider-2\" which could be similar to tasks in the miniwob++ benchmark train set , for instance \"click-tab-2-hard\" etc. It would be great to test on more diverse and complicated datasets.\n\nOver-reliance on Pre-training: While the pre-training from PIX2STRUCT seems beneficial, depending heavily on pre-trained models can sometimes limit the adaptability and flexibility of the system.\n\nHuman Demonstrations: The model seems to be heavily reliant on human demonstrations for training. Gathering these demonstrations can be time-consuming and might not be feasible for all applications. Plus, the quality of these demonstrations can significantly affect the model's performance.\n\nScalability: The approach described in the paper works well for small, simple web applications. It is not clear how the approach would scale to larger, more complex web applications.\n\nThe limitation I see in the environment setup is the use of discrete bins for mouse coordinates and scroll amounts rather than allowing continuous values. A few potential issues with the discrete coordinate binning:\nIt may make precise clicking and dragging actions more difficult if the bin sizes are too coarse. The agent would need to learn to chain multiple discrete drag actions to move long distances. The optimal binning resolution may vary across different interfaces and tasks. Finding the right granularity could require environment-specific tuning. Discretization can potentially lead to suboptimal policies compared to allowing continuous coordinates.\n\nSimilarly for scroll amounts: Scrolling by discrete bins could be inefficient for long pages compared to direct scrolling by pixel amounts. The scroll bin size would again need tuning based on typical page lengths. Overall, the discrete coordinate and scrolling simplification may be necessary to limit the action space size. But it could negatively impact performance on some tasks compared to an environment with continuous values.\n\nNo fine-tuning of visual features. The Vision Transformer weights are frozen, so the model may not learn visual representations best suited for this task.\n\nMinor comments: Despite the visual nature of GUIs, prior work has primarily focused on utilizing structured representations of the user interfaces (such as HTML sources, Document Object Model (DOM) trees, and Android view hierarchies) as well as custom, task-specific representations of high-level actions based on these structured representations. ---- > Missing citations.",
+    "questions": "Latency and Computation: Transforming screenshots into structured representations can be computationally intensive, which may lead to latency in real-time applications. So what is the typical time taken? Wanted to hear authors thoughts since , the system is based on interpreting pixel-level information from screenshots. This can be computationally intensive?? and may struggle with dynamic content that changes frequently, or with GUI elements that look visually similar but have different functionalities.\n\nHuman Demonstrations: The model seems to be heavily reliant on human demonstrations for training. Gathering these demonstrations can be time-consuming and might not be feasible for all applications. Plus, the quality of these demonstrations can significantly affect the model's performance. Does authors have any thoughts one this?\n\nScalability: How does PIX2ACT scale with different screen resolutions, GUI complexities, or dynamic content on the screens? The performance of models designed for specific benchmarks might not generalize well to real-world applications. Since even the original PIX2STRUCT paper talks about the impact of resolution.\n\nis there a scope for more sophisticated reward function, such as one that provides the agent with feedback about the progress of the task? also is the cumulative reward that accumulates in the miniwob++ benchmark based on the time taken to solve the task in one episode considered? since the agent receives a reward only at a terminal state. Sparse rewards can make learning more challenging, especially if the agent needs to take a long sequence of actions before receiving feedback?\n\nCursor Representation: The system manually draws a cursor on the screenshot to indicate the mouse pointer position. This might not capture the full nuance of the cursor's state or type (e.g., a hand cursor vs. an arrow cursor), which could provide additional context to the agent.\n\nGreedy Action Selection: The agent follows a greedy policy by selecting the highest scoring action. Does this kind of approach can be short-sighted and might not always result in the optimal long-term strategy??\n\nBeam Search Limitations: While beam search helps in narrowing down the set of most probable sequences, does it always yield the optimal sequence in practice. in the context longer sequences, where the algorithm might not explore sufficiently outside of its \"beam\" to find a better solution. It can sometimes prefer shorter sequences over more accurate longer ones??\n\nFuture work: An additional pre-training task that could potentially improve the model is predicting affordances of UI elements from screenshots. Affordances refer to the possible interactions that an element supports, like if a button can be clicked, a text box can be typed in, a menu can be opened, etc.",
+    "limitations": "The authors have mentioned the limitations ( It was thoughtful to anticipate about CAPTCHA) .\nHowever:\nData Privacy: Since they are using screenshots to interpret and interact with GUIs, there might be concerns about data privacy, especially if sensitive information is displayed on the screen. This should be highlighted.\nI understand this would be issue while using DOM/HTML as well but highlighted might lead to responsible adoption."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 7659 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 7659,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 7659
+  }
+}

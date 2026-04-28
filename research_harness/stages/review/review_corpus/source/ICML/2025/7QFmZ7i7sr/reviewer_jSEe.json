@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "7QFmZ7i7sr",
+  "reviewer": "jSEe",
+  "paper": {
+    "title": "GPEN: Global Position Encoding Network for Enhanced Subgraph Representation Learning",
+    "authors": [
+      "Nannan Wu",
+      "Yuming Huang",
+      "Yiming Zhao",
+      "Jie Chen",
+      "Wenjun Wang"
+    ],
+    "abstract": "Subgraph representation learning has attracted growing interest due to its wide applications in various domains. However, existing methods primarily focus on local neighborhood structures while overlooking the significant impact of global structural information, in particular the influence of multi-hop neighbors beyond immediate neighborhoods. This presents two key challenges: how to effectively capture the structural relationships between distant nodes, and how to prevent excessive aggregation of global structural information from weakening the discriminative ability of subgraph representations.\nTo address these challenges, we propose GPEN (Global Position Encoding Network). GPEN leverages a hierarchical tree structure to encode each node's global position based on its path distance to the root node, enabling a systematic way to capture relationships between distant nodes. Furthermore, we introduce a boundary-aware convolution module that selectively integrates global structural information while maintaining the unique structural patterns of each subgraph. Extensive experiments on eight public datasets identify that GPEN significantly outperforms state-of-the-art methods in subgraph representation learning.",
+    "keywords": [
+      "Subgraph Representation Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7QFmZ7i7sr"
+  },
+  "review_fields": {
+    "summary": "This paper presents GPEN, a novel method for subgraph representation learning that addresses two key challenges: capturing structural relationships between distant nodes and preventing excessive aggregation of global structural information.",
+    "claims_and_evidence": "yes, the submission is supported by clear and convincing evidence",
+    "methods_and_evaluation_criteria": "yes, the proposed method makes sense for the graph learning challenges.",
+    "theoretical_claims": "yes, the theoretical proof of the paper seems correct.",
+    "experimental_designs_or_analyses": "yes, the experiment section is well-designed.",
+    "relation_to_broader_scientific_literature": "This paper addresses existing challenges in a more novel way",
+    "other_strengths_and_weaknesses": "**Strengths:**\n\nS1. The paper provides rigorous theoretical analysis (Theorems 4.1–4.4) to validate its claims, such as bounded representation discrepancy and noise robustness, which adds intellectual depth to the innovation.\n\nS2. The introduction provides a clear overview of the limitations inherent in existing methods, which highlights the key challenges capturing distant relationships, avoiding over-aggregation. Figure 1 enhances this by visually contrasting fraudulent and legitimate subgraphs, making the motivation intuitive.\n\n\n**Weaknesses:**\n\n\nW1. Although the tree-based encoding approach introduces an innovative perspective, its fundamental assumption may limit its applicability, such as a tree structure can sufficiently capture the intricacies of complex graph topologies. Specifically, in graphs characterized by high cyclicity or dense interconnectivity, the hierarchical simplification imposed by tree-based representations could lead to an oversimplification of relational patterns, potentially compromising the model's ability to generalize effectively.\n\nW2. While it is appropriate to provide the detailed theoretical proofs in appendix, it would be beneficial to provide a concise summary of the key insights in the main text, such as the mechanism by which boundary-aware convolution enhances the signal-to-noise ratio. This approach would significantly improve the accessibility and clarity of the work for readers. \n\nW3. There is little discussion of scenarios where it might underperform (e.g., sparse graphs, small subgraphs). This could highlight limitations and guide future work.\n\nTypo: Line 804 'real-work datasets' -> 'real-world datasets'"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

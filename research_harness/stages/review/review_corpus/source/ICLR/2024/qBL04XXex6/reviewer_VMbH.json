@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "qBL04XXex6",
+  "reviewer": "VMbH",
+  "paper": {
+    "title": "Boosting of Thoughts: Trial-and-Error Problem Solving with Large Language Models",
+    "authors": [
+      "Sijia Chen",
+      "Baochun Li",
+      "Di Niu"
+    ],
+    "abstract": "The reasoning performance of Large Language Models (LLMs) on a wide range of problems critically relies on chain-of-thought prompting, which involves providing a few chain of thought demonstrations as exemplars in prompts. Recent work, e.g., Tree of Thoughts, has pointed out the importance of exploration and self-evaluation in reasoning step selection for complex problem solving. In this paper, we present Boosting of Thoughts (BoT), an automated prompting framework for problem solving with LLMs by iteratively exploring and self-evaluating many trees of thoughts in order to acquire an ensemble of trial-and-error reasoning experiences, which will serve as a new form of prompting to solve the complex problem. Starting from a simple prompt without requiring examples, BoT iteratively explores and evaluates a large collection of reasoning steps, and more importantly, uses error analysis obtained from the LLM on them to explicitly revise prompting, which in turn enhances reasoning step generation, until a final answer is attained. Our experiments with GPT-4 and Llama2 across extensive complex mathematical problems demonstrate that BoT consistently achieves higher or comparable problem-solving rates than other advanced prompting approaches.",
+    "keywords": [
+      "Large Language Models; Prompt Engineering; Boosting Mechanism;"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=qBL04XXex6"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a Boosting of Thoughts (BoT) framework, which aims to achieve the boosting mechanism that embraces aggregation and experience, thereby enabling the progressive refinement of unreliable reasoning steps (weak thoughts) by learning from errors to solve various problems, eventually.",
+    "strengths": "This paper reiterates their proposition that a simple prompt can be enhanced by gradually accumulating error analysis on its generated thoughts to address complex tasks.  The authors present a novel framework, the Boosting of Thoughts (BoT), to implement such progressive prompt enhancement for effective thought generation with an experience-driven iteration process. Iteratively exploring and self-evaluating the generated simplistic trees of thoughts enables a simple initial prompt to be gradually enhanced by an ensemble of trial-and-error reasoning experiences, resulting in accurate solutions. \nThis work seems like a quite comprehensive investigation with well-structured and easy to read sections.",
+    "weaknesses": "The paper is based on the motivation that starting with a simple prompt without human annotations for LLMs, BoT may get weak thoughts. However, with aggregation, BoT is capable of deriving a more logical and effective thought chain from them, thereby guiding the subsequent refinement.\n\nCould the authors expand on this statement \"Experience consistently leads to thought revision, but too much can have the opposite effect.\"? If one is looking to recreate the study, are there any guidelines or steps one could adopt to as where should be the stopping point?\n\nVery interesting findings, however Experimental results reported are limited. The authors evaluated LLM models only on a single testing procedure. However, the analysis doesn't seem concrete due to the smaller sample set considered and it would truly be insightful if the analysis was done on a larger dataset to infer results.\nFurther experiments should be performed using statistical metrics, and statistical distribution of the results should be extracted. These outcomes help better support the conclusions' claims.\nThe paper would be greatly strengthened if the proposed algorithm would outperform state-of-the-art methods",
+    "questions": "Please review the weakness section"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1930,
+    "words": 282,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4191aae2-4e1e-460d-ae0b-0ad4fa53713c",
+    "error": null,
+    "scored_chars": 1932
+  }
+}

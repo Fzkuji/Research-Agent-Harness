@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "rJe8pxSFwr",
+  "reviewer": "1",
+  "paper": {
+    "title": "End-to-end learning of energy-based representations for irregularly-sampled signals and images",
+    "authors": [
+      "Ronan Fablet",
+      "Lucas Drumetz",
+      "François Rousseau"
+    ],
+    "abstract": "For numerous domains, including for instance earth observation, medical imaging, astrophysics,..., available image and signal datasets often irregular space-time sampling patterns and large missing data rates. These sampling properties is a critical issue to apply state-of-the-art learning-based (e.g., auto-encoders, CNNs,...) to fully benefit from the available large-scale observations and reach breakthroughs in the reconstruction and identification of processes of interest. In this paper, we address the end-to-end learning of representations of signals, images and image sequences from irregularly-sampled data, {\\em i.e.} when the training data involved missing data. From an analogy to Bayesian formulation, we consider energy-based representations. Two energy forms are investigated: one derived from auto-encoders and one relating to Gibbs energies. The learning stage of these energy-based representations (or priors) involve a joint interpolation issue, which resorts to solving an energy minimization problem under observation constraints. Using a neural-network-based implementation of the considered energy forms, we can state an end-to-end learning scheme from irregularly-sampled data. We demonstrate the relevance of the proposed representations for different case-studies: namely, multivariate time series, 2{\\sc } images and image sequences.",
+    "keywords": [
+      "end-to-end-learning",
+      "irregularly-sampled data",
+      "energy representations",
+      "optimal interpolation"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=rJe8pxSFwr"
+  },
+  "review_fields": {
+    "experience_assessment": "I do not know much about this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "The paper proposes an end-to-end learning framework for interpolation problems, motivated by problems such as irregularly-sampled images or time-series.\n\nIt was not clear after reading the paper where the key novelty of the proposal lies. The energy formulations for Uθ, namely an autoencoder and Gibbs model, are not to my knowledge new in this context. I gather the novelty must then be in Section 3.2, which uses a neural-network based interpolation scheme. This builds on an existing update scheme (Equation 8), but replaces the full operator ψ with an iterative update. The key idea is then to replace the full gradient for the energy function with a learned function, based on a CNN. While this is not my area of expertise, I am not sure as to technical significance or novelty of such a proposal.\n\nThe paper emphasises their view of an interpolation operator I, which is a little confusing in an autoencoder context. Typically, we pick \\hat{X} to be the solution attaining minimal squared error compared to the reference Y. It was not clear why one needs a further invocation of a minimisation between Y^i and I(Uθ, Y^i, Ω^i).\n\nThe writing could be improved, as there are a number of grammatical issues, as well as missing section or equation #'s. In terms of presentation, the Introduction delves far too soon into a detailed discussion of related work in the area. I would suggest instead to provide a crisp high-level overview of the limitations of existing work, and how they are overcome in the present paper."
+  },
+  "review_metadata": {
+    "rating": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

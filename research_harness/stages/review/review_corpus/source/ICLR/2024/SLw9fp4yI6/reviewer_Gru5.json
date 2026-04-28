@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "SLw9fp4yI6",
+  "reviewer": "Gru5",
+  "paper": {
+    "title": "Controlled Text Generation via Language Model Arithmetic",
+    "authors": [
+      "Jasper Dekoninck",
+      "Marc Fischer",
+      "Luca Beurer-Kellner",
+      "Martin Vechev"
+    ],
+    "abstract": "As Large Language Models (LLMs) are deployed more widely, customization with respect to vocabulary, style, and character becomes more important. In this work, we introduce model arithmetic, a novel inference framework for composing and biasing LLMs without the need for model (re)training or highly specific datasets. In addition, the framework allows for more precise control of generated text than direct prompting and prior controlled text generation (CTG) techniques. Using model arithmetic, we can express prior CTG techniques as simple formulas and naturally extend them to new and more effective formulations. Further, we show that speculative sampling, a technique for efficient LLM sampling, extends to our setting. This enables highly efficient text generation with multiple composed models with only marginal overhead over a single model. Our empirical evaluation demonstrates that model arithmetic allows fine-grained control of generated text while outperforming state-of-the-art on the task of toxicity reduction. We release an open source easy-to-use implementation of our framework at https://github.com/eth-sri/language-model-arithmetic.",
+    "keywords": [
+      "Controlled text generation",
+      "LLM",
+      "Natural Language Processing"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=SLw9fp4yI6"
+  },
+  "review_fields": {
+    "summary": "This paper introduces model arithmetic, a new method for controlled text generation (CTG). Model arithmetic works by solving for combinations of divergences between a base distribution and attribute distributions that may be full token-wise probabilities or classifiers. Particularly, model arithmetic allows weighted linear combinations of such distributions (positive or negative) and a union operator which is defined to allow probability mass to come from either the base distribution or the attribute distribution. The authors find the method works well for toxicity reduction, as well as for different attributes in a conversation model. The authors also demonstrate that speculative sampling works with the proposed technique to increase efficiency.",
+    "strengths": "- The method of combining attributes in model arithmetic is inventive\n- Derivations of the solutions to the model arithmetic optimizations are interesting\n- It is useful to know that this works with speculative sampling\n- Results seem to generally support that the framing of attribute combination works, particularly the toxicity results",
+    "weaknesses": "- The paper largely frames against other CTG methods, which use a magnitude variable lambda to control the effect of the given attribute. However, model arithmetic does not seem to provide a more principled definition of magnitude of effect--users will still simply pick a weight, that does not necessarily have an intuitive interpretation\n- Similarly, it is not quite clear how or when such a method can be applied. Two example applications are given. \n   - The first is toxicity which does use both the linear and union operators but only in conjunction with weights that seem to be quite hand tuned (0.9, 0.96, 0.99). It would be useful to also see a simpler framing of this problem with model arithmetic, e.g. simply subtracting the M_toxic instead of the union. The question I am trying to get at here is: does toxicity require the full complexity of model arithmetic? It seems like a fairly simple application which may simply require a subtraction, in which case the need for more complex proposed model arithmetic might not be supported here.\n   - While the second application, conversation, presents a more complex use-case for model arithmetic, it seems that the complex application space means that no baselines would work or be comparable here. So this application also does not make a complete case for the full complexity of model arithmetic improving on past work.",
+    "questions": "Do the authors have other examples of how model arithmetic might intuitively be used?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1799,
+    "words": 295,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2f596b05-56e6-4d31-8882-902f79c21f5f",
+    "error": null,
+    "scored_chars": 1806
+  }
+}

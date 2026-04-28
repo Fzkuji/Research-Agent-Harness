@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "Dy8gq-LuckD",
+  "reviewer": "PUm3",
+  "paper": {
+    "title": "Recognizing and overcoming the greedy nature of learning in multi-modal deep neural networks",
+    "authors": [
+      "Nan Wu",
+      "Stanislaw Kamil Jastrzebski",
+      "Kyunghyun Cho",
+      "Krzysztof J. Geras"
+    ],
+    "abstract": "We hypothesize that due to the greedy nature of learning in multi-modal deep neural networks (DNNs), these models tend to rely on just one modality while under-utilizing the other modalities. We observe empirically that such behavior hurts its overall generalization. We validate our hypothesis by estimating the gain on the accuracy when the model has access to an additional modality. We refer to this gain as the conditional utilization rate of the modality. In the experiments, we consistently observe an imbalance in conditional utilization rate between modalities, across multiple tasks and architectures. Since conditional utilization rate cannot be computed efficiently during training, we introduce an efficient proxy based on the pace at which a DNN learns from each modality, which we refer to as conditional learning speed. We thus propose a training algorithm, balanced multi-modal learning, and demonstrate that it indeed addresses the issue of greedy learning. The proposed algorithm is found to improve the model’s generalization on three datasets: Colored MNIST (Kim et al., 2019), Princeton ModelNet40 (Wu et al., 2015), and NVIDIA Dynamic Hand Gesture Dataset (Molchanov et al., 2016).",
+    "keywords": [
+      "multi-modal learning",
+      "deep neural networks",
+      "multi-view learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=Dy8gq-LuckD"
+  },
+  "review_fields": {
+    "comment": "Thanks for the authors' efforts. After viewing the reviews and other rebuttals, I tend to keep my rating. The topic of this paper is interesting and worthy of exploration, but the method and analysis in this paper is not well supported, except some empirical validation on several visual-only dataset, and the method is only compared with some simple baseline. I think the author should further thoroughly analyze the proposed method not only in theories but also in experiments, especially on dataset with natural modality (such as some audio-visual dataset, like Kinetics-Sounds)."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 582,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/55cf33d7-0880-431b-8a3d-f6b9ea28a89c",
+    "error": null,
+    "scored_chars": 582
+  }
+}

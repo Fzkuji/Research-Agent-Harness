@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ByzcS3AcYX",
+  "reviewer": "3",
+  "paper": {
+    "title": "Neural TTS Stylization with Adversarial and Collaborative Games",
+    "authors": [
+      "Shuang Ma",
+      "Daniel Mcduff",
+      "Yale Song"
+    ],
+    "abstract": "The modeling of style when synthesizing natural human speech from text has been the focus of significant attention. Some state-of-the-art approaches train an encoder-decoder network on paired text and audio samples (x_txt, x_aud) by encouraging its output to reconstruct x_aud. The synthesized audio waveform is expected to contain the verbal content of x_txt and the auditory style of x_aud. Unfortunately, modeling style in TTS is somewhat under-determined and training models with a reconstruction loss alone is insufficient to disentangle content and style from other factors of variation. In this work, we introduce an end-to-end TTS model that offers enhanced content-style disentanglement ability and controllability. We achieve this by combining a pairwise training procedure, an adversarial game, and a collaborative game into one training scheme. The adversarial game concentrates the true data distribution, and the collaborative game minimizes the distance between real samples and generated samples in both the original space and the latent space. As a result, the proposed model delivers a highly controllable generator, and a disentangled representation. Benefiting from the separate modeling of style and content, our model can generate human fidelity speech that satisfies the desired style conditions. Our model achieves start-of-the-art results across multiple tasks, including style transfer (content and style swapping), emotion modeling, and identity transfer (fitting a new speaker's voice).",
+    "keywords": [
+      "Text-To-Speech synthesis",
+      "GANs"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ByzcS3AcYX"
+  },
+  "review_fields": {
+    "comment": "I agree with the other reviewers that the paper is significantly improved compared to the last version. I appreciate the author's efforts!\n\nTwo of my main concerns remain, however:\n* Some of the comparisons depend on the setting of the key hyper-params in the prosody-tacotron and GST models.  E.g. the authors mention that the proposed model synthesizes speech with a closer speaking style to reference than GST does. Did you observe the same trend when you use a bigger reference embedding size or more heads in the multiheaded attention in GST?  (It doesn't need to consistently beat GST, etc. but a depiction of the performance trend, or trade-off, would be helpful to better understand the work)\n\n* I am surprised by the author's results with Fader network style adversarial loss for style transfer, which also contradicts to my own experience. I don't think that idea is specific to image. As an obvious baseline, at least, I think the authors should put some relevant discussions around it in the paper.\n\nAgain, thanks for the authors' thorough comments and the willingness to change the paper contents!"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

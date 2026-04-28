@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "YkBDJWerKg",
+  "reviewer": "vziy",
+  "paper": {
+    "title": "STEVE-1: A Generative Model for Text-to-Behavior in Minecraft",
+    "authors": [
+      "Shalev Lifshitz",
+      "Keiran Paster",
+      "Harris Chan",
+      "Jimmy Ba",
+      "Sheila A. McIlraith"
+    ],
+    "abstract": "Constructing AI models that respond to text instructions is challenging, especially for sequential decision-making tasks. This work introduces a methodology, inspired by unCLIP, for instruction-tuning generative models of behavior without relying on a large dataset of instruction-labeled trajectories. Using this methodology, we create an instruction-tuned Video Pretraining (VPT) model called STEVE-1, which can follow short-horizon open-ended text and visual instructions in Minecraft. STEVE-1 is trained in two steps: adapting the pretrained VPT model to follow commands in MineCLIP's latent space, then training a prior to predict latent codes from text. This allows us to finetune VPT through self-supervised behavioral cloning and hindsight relabeling, reducing the need for costly human text annotations, and all for only $60 of compute. By leveraging pretrained models like VPT and MineCLIP and employing best practices from text-conditioned image generation, STEVE-1 sets a new bar for open-ended instruction following in Minecraft with low-level controls (mouse and keyboard) and raw pixel inputs, far outperforming previous baselines and robustly completing 12 of 13 tasks in our early-game evaluation suite. We provide experimental evidence highlighting key factors for downstream performance, including pretraining, classifier-free guidance, and data scaling. All resources, including our model weights, training scripts, and evaluation tools are made available for further research.",
+    "keywords": [
+      "minecraft",
+      "instruction following",
+      "foundation models",
+      "sequence models",
+      "reinforcement learning",
+      "sequential decision making",
+      "goal conditioned reinforcement learning",
+      "text conditioned reinforcement learning",
+      "transformers",
+      "deep learning"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=YkBDJWerKg"
+  },
+  "review_fields": {
+    "summary": "This paper proposed an instruction-tuned model for Minecraft, which turns previous RL model like VPT into goal-conditioned model. The experiment shows that the proposed method can follow nearly any short-horizon open-ended text and visual task in Minecraft.",
+    "strengths": "1. This paper proposes a novel technique for instruction-tuning video game RL-agent which is inspired by previous unCLIP method in the text-to-image generation field. This idea is interesting and the method can turn an RL agent into a goal-conditioned one which shows great potential for designing a more general RL agent.\n\n2. The experiment part shows that the tuned agent can follow short-horizon goal instructions very well. When given the appropriate textual instruction, the proposed method collects 66x more dirt, 4.5x more wood, 28x more seeds, and travels 3x further than the unconditional agent.",
+    "weaknesses": "This method is not applicable for long-horizon tasks in the open world. For example, in Minecraft, if the goal is obtaining a diamond, the instruction may be too difficult for the proposed method since it is not trained for long-horizon trajectories. Regarding this, it is not sure if this method can be applied to challenging tasks in the open world which may contain extremely long planning steps. In this paper, no complicated tasks like obtaining diamond are studied. Thus I am concerned the scalability of the proposed method to much complicated tasks.",
+    "questions": "I am curious about how is the prompt designed in this paper? The detail of the prompt should be explained in the main text of the paper.",
+    "limitations": "The limitation is adequately addressed in the paper. No discussion about negative social impact."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1399,
+    "words": 227,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a1c10f75-10ff-496b-857b-3742d4b25beb",
+    "error": null,
+    "scored_chars": 1399
+  }
+}

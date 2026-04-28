@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "NnMEadcdyD",
+  "reviewer": "Qo9S",
+  "paper": {
+    "title": "Understanding Diffusion Objectives as the ELBO with Simple Data Augmentation",
+    "authors": [
+      "Diederik P Kingma",
+      "Ruiqi Gao"
+    ],
+    "abstract": "To achieve the highest perceptual quality, state-of-the-art diffusion models are optimized with objectives that typically look very different from the maximum likelihood and the Evidence Lower Bound (ELBO) objectives. In this work, we reveal that diffusion model objectives are actually closely related to the ELBO.\n\nSpecifically, we show that all commonly used diffusion model objectives equate to a weighted integral of ELBOs over different noise levels, where the weighting depends on the specific objective used. Under the condition of monotonic weighting, the connection is even closer: the diffusion objective then equals the ELBO, combined with simple data augmentation, namely Gaussian noise perturbation. We show that this condition holds for a number of state-of-the-art diffusion models. \n\nIn experiments, we explore new monotonic weightings and demonstrate their effectiveness, achieving state-of-the-art FID scores on the high-resolution ImageNet benchmark.",
+    "keywords": [
+      "Diffusion Model",
+      "Evidence Lower Bound",
+      "Maximum Likelihood"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=NnMEadcdyD"
+  },
+  "review_fields": {
+    "comment": "Dear authors,\nthanks a lot for the effort you put in your rebuttal, for all reviews. \n\nOn the theoretical side, concerning my comments on rigor and notation, you addressed all the points and clarified your notation, as well as the continuous-time limit formulation. Thank you.\nI think you managed to identify more clearly what sets apart the submitted paper from [Kingma et al, 2021], namely to extend their results to more general losses. I see now this to be interesting, with some benefits for practitioners who seek high sample quality.\n\nOn the empirical side, I have checked the rebuttal pdf with the new results on higher resolution ImageNet data. These new results illustrate some cases in which the proposed approach does indeed surpass or is well on par with SOTA. Also the general comment to explain why in one experimental setting you didn't obtain the best FID is well detailed and convincing.\nI am still convinced that this work could have included at least one different dataset, even an easier one such as CelebA-HQ or similar, to consolidate our understanding of the generality of the proposed technique.\n\nOverall, I have noticed concrete improvements to the draft, and I am going to raise my score in the official review.\n\nAgain, thank you very much for your work."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:19Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:19Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3271,
+    "words": 517,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fce63236-f2a5-4d14-b926-684c13a3b10a",
+    "error": null,
+    "scored_chars": 3274
+  }
+}

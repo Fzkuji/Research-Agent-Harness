@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "lClK4uBxSG",
+  "reviewer": "17dD",
+  "paper": {
+    "title": "ModHiFi: Identifying High Fidelity predictive components for Model Modification",
+    "authors": [
+      "Dhruva Kashyap",
+      "Chaitanya Murti",
+      "Pranav K Nayak",
+      "Tanay Narshana",
+      "Chiranjib Bhattacharyya"
+    ],
+    "abstract": "Open weight models, which are ubiquitous, rarely provide access to their training data or loss function. This makes modifying such models for tasks such as pruning or unlearning, which are constrained by this unavailability, an active area of research. Existing techniques typically require gradients or ground-truth labels, rendering them infeasible in settings with limited computational resources.\nIn this work, we investigate the fundamental question of identifying components that are critical to the model's predictive performance, without access to either gradients or the loss function, and with only distributional access such as synthetic data. \nWe theoretically demonstrate that the global error is linearly bounded by local reconstruction errors for Lipschitz-continuous networks such as CNNs and well-trained Transformers (which, contrary to existing literature, we find exhibit Lipschitz continuity).\nThis motivates using the locally reconstructive behavior of component subsets to quantify their global importance, via a metric that we term *Subset Fidelity*. \nIn the uncorrelated features setting, selecting individual components based on their Subset Fidelity scores is optimal, which we utilize to propose **ModHiFi**, an algorithm for model modification that requires neither training data nor access to a loss function. \n**ModHiFi-P**, for structured pruning, achieves an 11\\% speedup over the current state of the art on ImageNet models and competitive performance on language models. **ModHiFi-U**, for classwise unlearning, achieves complete unlearning on CIFAR-10 without fine-tuning and demonstrates competitive performance on Swin Transformers.",
+    "keywords": [
+      "Pruning",
+      "Machine Unlearning"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=lClK4uBxSG"
+  },
+  "review_fields": {
+    "summary": "This paper proposes ModHiFi, a pre-training data- and loss-free algorithm for model modification tasks such as pruning and unlearning. It introduces a theoretical method to identify critical model components and demonstrates competitive performance on both vision and language benchmarks.",
+    "strengths_and_weaknesses": "### Strengths \n- The paper provides a theoretical analysis showing that, under Lipschitz continuity, the reconstruction error of the model is linearly bounded by the local reconstruction error.\n- It introduces a Monte Carlo-based sampling strategy to identify subsets of important components using the proposed Subset Fidelity metric.\n-The method is extensively validated on CNN and Transformer architectures, across vision and language tasks, demonstrating its generality and effectiveness.\n\n### Weaknesses\n-  Theorem 3.1 appears to be an extension or adaptation of prior work [1], which is not cited in the main paper.\n- The method computes fidelity scores and prunes components independently for each layer, which potentially overlooks inter-layer dependencies among components during pruning.\n- The paper would benefit from comparison with more recent baselines, where applicable, to ensure a fair and up-to-date evaluation.\n\n[1] NISP: Pruning Networks using Neuron Importance Score Propagation, CVPR 2018",
+    "questions": "Q1: The term \"model modification\" may encompass diverse tasks beyond pruning/unlearning (e.g., model editing in LLM and some vision tasks in [2]). In addition, the paper exclusively evaluates zeroing out as the modification strategy. How might the identified components be adapted to other modification strategies (e.g., fine-tuning, structural reparameterization), and would their effectiveness generalize across different model modification tasks? Alternatively, it may be more appropriate to refine the terminology and scope description to better reflect the range of tasks actually validated in the experiments.\n\nQ2. Under the same setting that uses synthetic image data for component identification in vision models, how does the proposed method compare to [2], which estimates component importances across the entire model rather than treating each layer separately? \n\nQ3. In Table 3, the reported time cost for the proposed methods appears to exclude the Monte Carlo sampling-based identification step, which may make the comparison unfair.  Additionally, what is the time cost when applying the method to large language models? \n\nQ4. Could the paper include comparisons with more recent methods, such as [3] (which appeared online before March 1st, 2025), to better position the proposed approach within the state-of-the-art?\n\n[2] Decomposing and Editing Predictions by Modeling Model Computation, ICML 2024\n\n[3] Numerical Pruning for Efficient Autoregressive Models, AAAI 2025",
+    "limitations": "The method computes the fidelity of each layer independently, potentially overlooking inter-layer connections. Additionally, the computational cost of the Monte Carlo–based subset identification may become high when applied to large foundation models.",
+    "paper_formatting_concerns": "Table 3 exceeds the text margin.",
+    "final_justification": "The rebuttal clarifies the Monte Carlo sampling and the model modification strategy, and discusses prior work. Therefore, I keep the current positive rating."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "JDoA6admhv",
+  "reviewer": "eEv4",
+  "paper": {
+    "title": "Adversarial Examples Might be Avoidable: The Role of Data Concentration in Adversarial Robustness",
+    "authors": [
+      "Ambar Pal",
+      "Jeremias Sulam",
+      "Rene Vidal"
+    ],
+    "abstract": "The susceptibility of modern machine learning classifiers to adversarial examples has motivated theoretical results suggesting that these might be unavoidable. However, these results can be too general to be applicable to natural data distributions. Indeed, humans are quite robust for tasks involving vision. This apparent conflict motivates a deeper dive into the question: Are adversarial examples truly unavoidable? \nIn this work, we theoretically demonstrate that a key property of the data distribution -- concentration on small-volume subsets of the input space -- determines whether a robust classifier exists. We further demonstrate that, for a data distribution concentrated on a union of low-dimensional linear subspaces, utilizing structure in data naturally leads to classifiers that enjoy data-dependent polyhedral robustness guarantees, improving upon methods for provable certification in certain regimes.",
+    "keywords": [
+      "Adversarial Robustness",
+      "Geometry in Data",
+      "Low Dimensional Modeling"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JDoA6admhv"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their detailed response and for answering all of my questions. I am satisfied with their justification of Definition 3.1 and additional experiments. I also agree with their discussion on (1) vs consistency. I am increasing my score to 8 and recommend acceptance of this paper. I think it is well written and a good contribution to the research area. I would also ask that the authors incoroporate these additional discussions in the final manuscript."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 474,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/344b7676-5e90-49a6-9b42-d3ce6c86e68b",
+    "error": null,
+    "scored_chars": 474
+  }
+}

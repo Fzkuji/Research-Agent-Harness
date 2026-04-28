@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "iEeiZlTbts",
+  "reviewer": "Su34",
+  "paper": {
+    "title": "No Regrets: Investigating and Improving Regret Approximations for Curriculum Discovery",
+    "authors": [
+      "Alexander Rutherford",
+      "Michael Beukman",
+      "Timon Willi",
+      "Bruno Lacerda",
+      "Nick Hawes",
+      "Jakob Nicolaus Foerster"
+    ],
+    "abstract": "What data or environments to use for training to improve downstream performance is a longstanding and very topical question in reinforcement learning. \nIn particular, Unsupervised Environment Design (UED) methods have gained recent attention as their adaptive curricula promise to enable agents to be robust to in- and out-of-distribution tasks.\nThis work investigates how existing UED methods select training environments, focusing on task prioritisation metrics.\nSurprisingly, despite methods aiming to maximise regret in theory, the practical approximations do not correlate with regret but with success rate.\nAs a result, a significant portion of an agent's experience comes from environments it has already mastered, offering little to no contribution toward enhancing its abilities. Put differently, current methods fail to predict intuitive measures of *learnability*. Specifically, they are unable to consistently identify those scenarios that the agent can sometimes solve, but not always.\nBased on our analysis, we develop a method that directly trains on scenarios with high learnability. This simple and intuitive approach outperforms existing UED methods in several binary-outcome environments, including the standard domain of Minigrid and a novel setting closely inspired by a real-world robotics problem. \nWe further introduce a new adversarial evaluation procedure for directly measuring robustness, closely mirroring the conditional value at risk (CVaR).\nWe open-source all our code and present visualisations of final policies here: https://github.com/amacrutherford/sampling-for-learnability.",
+    "keywords": [
+      "MARL",
+      "UED",
+      "Robotics"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=iEeiZlTbts"
+  },
+  "review_fields": {
+    "comment": "I’d like to thank the authors for their very thorough response and comprehensive additional experiments, as well as apologize for not responding sooner.\n\nThank you for performing a more thorough hyperparameter sweep, and for pointing out the difference in minigrid block budgets from prior work. After looking through JaxUED and Robust PLR again, I agree with the authors that UED is comparable to DR in the 50 and 60 block setting. That being said, I think the authors should also experiment in the more challenging 25 block setting where UED methods are most effective. Regardless, these new results provide convincing evidence that the proposed method is better than the SOTA in at least some settings.\n\nThan you also for running the requested ablations so quickly. The results seem inconsistent across hyperparameters and environments, but it does appear that SFL is generally better, and both the sampling and prioritization metrics positively impact performance.\n\nMy main concern was that there seemed to be strong evidence that the evaluations in the paper were not fair. With these extensive new results and changes, I believe the contribution of this work is convincing, and I hope the authors will incorporate these new results in their paper as promised. I will raise my score to a 7."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1295,
+    "words": 211,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9f87a8de-18b3-44ab-9080-65dd10857b4f",
+    "error": null,
+    "scored_chars": 1295
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "elMKXvhhQ9",
+  "reviewer": "ZNLh",
+  "paper": {
+    "title": "Consistency Training with Learnable Data Augmentation for Graph Anomaly Detection with Limited Supervision",
+    "authors": [
+      "Nan Chen",
+      "Zemin Liu",
+      "Bryan Hooi",
+      "Bingsheng He",
+      "Rizal Fathony",
+      "Jun Hu",
+      "Jia Chen"
+    ],
+    "abstract": "Graph Anomaly Detection (GAD) has surfaced as a significant field of research, predominantly due to its substantial influence in production environments. Although existing approaches for node anomaly detection have shown effectiveness, they have yet to fully address two major challenges: operating in settings with limited supervision and managing class imbalance effectively. In response to these challenges, we propose a novel model, ConsisGAD, which is tailored for GAD in scenarios characterized by limited supervision and is anchored in the principles of consistency training. Under limited supervision, ConsisGAD effectively leverages the abundance of unlabeled data for consistency training by incorporating a novel learnable data augmentation mechanism, thereby introducing controlled noise into the dataset. Moreover, ConsisGAD takes advantage of the variance in homophily distribution between normal and anomalous nodes to craft a simplified GNN backbone, enhancing its capability to distinguish effectively between these two classes. Comprehensive experiments on several benchmark datasets validate the superior performance of ConsisGAD in comparison to state-of-the-art baselines. Our code is available at https://github.com/Xtra-Computing/ConsisGAD.",
+    "keywords": [
+      "Graph anomaly detection",
+      "consistency training",
+      "learnable data augmentation"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=elMKXvhhQ9"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors tackle the problem of anomaly detection in graphs by introducing a novel approach---consistency training coupled with a learnable data augmentation mechanism. Their method involves leveraging a simple GNN backbone that emphasizes edge-level homophily representation for anomaly detection. By exploiting disparities in homophily distribution, the proposed model achieves enhanced anomaly detection capabilities. Additionally, the authors introduce two evaluation metrics designed to optimize their innovative learnable data augmentation technique, guiding its effectiveness in data synthesis. In their experimental evaluation, the authors assess the performance of their model across four benchmark datasets commonly used for graph-based anomaly detection, along with a private dataset. The proposed model generally outperforms existing state-of-the-art baselines across three key evaluation metrics.",
+    "strengths": "1. I find the proposed learnable data augmentation mechanism intriguing. Intuitively, this approach appears effective, as it can be finely tuned through the optimization of two core metrics: label consistency and data distribution. Through iterative optimization of these components---the GNN module and the learnable data augmentation module---it seems both elements can be well-trained, enhancing the overall performance of the model.\n\n2. The node clusters displayed in Figure 3 provide a compelling visual representation of the effectiveness of the proposed GNN backbone. The well-separated node clusters, especially concerning different edge relations, serve as a strong validation of the necessity of leveraging distinctions in homophily distribution for anomaly detection. This visualization underscores the robustness of the proposed method.\n\n3. The paper is skillfully composed, ensuring clarity and coherence in conveying the research concepts. Additionally, the experiments conducted are generally comprehensive, offering substantial evidence to support the effectiveness of the proposed model.",
+    "weaknesses": "1. Regarding consistency training, the proposed model employs thresholds to identify \"high-quality nodes\" from the unlabeled data for training. This step, akin to semi-supervised learning, assigns synthetic labels to unlabeled data for consistency training. The performance of these \"high-quality nodes\" is pivotal for downstream iterative training, emphasizing the significance of their accuracy. Hence, the authors should analyze the actual quality of these \"high-quality nodes\" and the accuracy of their predicted labels. This aspect holds significant importance in evaluating the reliability and effectiveness of the model.\n\n2. The paper introduces essential hyperparameters, including $\\alpha$ and $\\xi$. While the authors provide their specific settings in the experiments, the impact of these parameters on the performance of the model remains unexplored. The authors should perform a sensitivity analysis for the crucial hyperparameters in the proposed model.\n\n3. The proposed GNN backbone shows promise for anomaly detection by capturing distinctions in the homophily distribution of nodes in graphs. However, it raises intriguing questions about its performance on graphs with varying levels of heterophily. Specifically, how well does the proposed GNN backbone perform on graphs with low or high heterophily when applied to generic multi-class node classification tasks?",
+    "questions": "1. How about the correctness of the \"high-quality nodes\"?\n\n2. The authors should perform a sensitivity analysis for the crucial hyperparameters in the proposed model.\n\n3. Can the proposed GNN backbone effectively handle generic multi-class node classification tasks?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 88,
+    "human_pct": 12,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 2755,
+    "words": 380,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b504486d-93f2-4311-bcaf-c24b68589a02",
+    "error": null,
+    "scored_chars": 2755
+  }
+}

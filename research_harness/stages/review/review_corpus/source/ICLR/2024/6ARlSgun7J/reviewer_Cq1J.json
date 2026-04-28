@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "6ARlSgun7J",
+  "reviewer": "Cq1J",
+  "paper": {
+    "title": "Enhancing Tail Performance in Extreme Classifiers by Label Variance Reduction",
+    "authors": [
+      "Anirudh Buvanesh",
+      "Rahul Chand",
+      "Jatin Prakash",
+      "Bhawna Paliwal",
+      "Mudit Dhawan",
+      "Neelabh Madan",
+      "Deepesh Hada",
+      "Vidit Jain",
+      "SONU MEHTA",
+      "Yashoteja Prabhu",
+      "Manish Gupta",
+      "Ramachandran Ramjee",
+      "Manik Varma"
+    ],
+    "abstract": "Extreme Classification (XC) architectures, which utilize a massive One-vs-All (OvA) classifier layer at the output, have demonstrated remarkable performance on problems with large label sets. Nonetheless, these architectures falter on tail labels with few representative samples. This phenomenon has been attributed to factors such as classifier over-fitting and missing label bias, and solutions involving regularization and loss re-calibration have been developed. This paper explores the impact of label variance - a previously unexamined factor - on the tail performance in extreme classifiers. It also develops a method to systematically reduce label variance in XC by transferring the knowledge from a specialized tail-robust teacher model to the OvA classifiers. For this purpose, it proposes a principled knowledge distillation framework, LEVER, which enhances the tail performance in extreme classifiers with formal guarantees on generalization. Comprehensive experiments are conducted on a diverse set of XC datasets, demonstrating that LEVER can enhance tail performance by around 5\\% and 6\\% points in PSP and coverage metrics, respectively, when integrated with leading extreme classifiers. Moreover, it establishes a new state-of-the-art when added to the top-performing Renee classifier. Extensive ablations and analyses substantiate the efficacy of our design choices. Another significant contribution is the release of two new XC datasets that are different from and more challenging than the available benchmark datasets, thereby encouraging more rigorous algorithmic evaluation in the future. Code for LEVER is available at: aka.ms/lever.",
+    "keywords": [
+      "Extreme Classification",
+      "Extreme Multi-Label Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=6ARlSgun7J"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for additional clarifications. I also checked the other reviews and responses. I'm generally satisfied with the additional experiments conducted by the authors. The experimental setup and a large number of experiments are big strengths of the paper and the authors' rebuttal only improves in this area. However, the discussion does not change my opinion on the limited novelty of this work and the weak and unoriginal theoretical justification for the idea. If that it would be possible, at this point, I would give this paper a 7, but right now, I'm keeping my score as it is.\n\nAdditional comments:\nThe $\\tau$ parameters seem to have a significant impact on model performance. I believe it should be already discussed and motivated in Section 3 of the paper.\n\nNIT:\nI found a broken reference in the appendix in the added section about the impact of $\\lambda$:\n> Effect of varying λ: The hyperparameter λ controls the importance between the two loss terms. Table 16 shows the effect of varying λ, and Figures ?? show their corresponding decile-wise plots"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1074,
+    "words": 180,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8332014f-a8dc-4b18-80e2-948387d9a7a7",
+    "error": null,
+    "scored_chars": 1074
+  }
+}

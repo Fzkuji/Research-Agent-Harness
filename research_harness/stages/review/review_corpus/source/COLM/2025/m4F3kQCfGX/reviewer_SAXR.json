@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "m4F3kQCfGX",
+  "reviewer": "SAXR",
+  "paper": {
+    "title": "LLM Unlearning Without an Expert Curated Dataset",
+    "authors": [
+      "Xiaoyuan Zhu",
+      "Muru Zhang",
+      "Ollie Liu",
+      "Robin Jia",
+      "Willie Neiswanger"
+    ],
+    "abstract": "Modern large language models often encode sensitive, harmful, or copyrighted knowledge, raising the need for post-hoc unlearning—the ability to remove specific domains of knowledge from a model without full retraining. A major bottleneck in current unlearning pipelines is constructing effective forget sets—datasets that approximate the target domain and guide the model to forget it. In this work, we introduce a scalable, automated approach to generate high-quality forget sets using language models themselves. Our method synthesizes textbook-style data through a structured prompting pipeline, requiring only a domain name as input. Through experiments on unlearning biosecurity, cybersecurity, and Harry Potter novels, we show that our synthetic datasets consistently outperform the baseline synthetic alternatives and are comparable to the expert-curated ones. Additionally, ablation studies reveal that the multi-step generation pipeline significantly boosts data diversity, which in turn improves unlearning utility. Overall, our findings suggest that synthetic datasets offer a promising path toward practical, scalable unlearning for a wide range of emerging domains without the need for manual intervention. We release our code and dataset at [https://github.com/xyzhu123/Synthetic_Textbook](https://github.com/xyzhu123/Synthetic_Textbook).",
+    "keywords": [
+      "NLP",
+      "Machine Unlearning",
+      "Synthetic Data Generation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=m4F3kQCfGX"
+  },
+  "review_fields": {
+    "summary": "This paper proposes an automated approach to develop a target domain specific dataset that can be used in the LLM post-training phase to perform LLM unlearning. To improve safety and prevent the generation of copyrighted content, LLM unlearning step uses expert curated dataset to guide a model to forget a specific set of knowledge. Developing such forget sets is time consuming and expensive process. \n\nThe proposed method takes a step to overcome this limitation. The input to the system is the target domain name, and then the system uses LLM to generate textbook-style data using a structured prompting pipeline. Given the input domain, it produces 10 subdomains, and 20 bullet points for each subdomain tailored to 4 audience knowledge levels (elementary school, high school, undergraduate, and PhD). For each of these 800 (10x4x20) bullet points, 5 textbook-style chapters are generated. Then the chapters are split into sentences and 20K longest ones are takes to create the final forget set. GPT-4o-mini is used to generate the data.\n\nThe authors evaluated their approach by using the generated synthetic dataset in LLM unlearning, where they observed superior performance than alternative baselines and competitive performance to expert curated forget sets in WMDP. The evaluation involves two models (Mistral-7B-Instruct-v0.3, Llama3-8B-Instruct), three unlearning methods (Random Mask Unlearning, Representation Routing, and Erasure of Language Memory) and three target domains (Biosecurity and Cybersecurity from WMDP, and Harry Potter). They additionally compared against filtering-based forget sets by constructing forgets sets from The Pile and TxT360, and it underperformed the forget sets produced by the proposed approach.\n\n\n* Increased my support for the paper after reading the author response.",
+    "reasons_to_accept": "* The proposed method is very simple but well-motivated and clearly explained. \n* The data generated from the pipeline has shown high diversity, improving robustness of the unlearning process. This is a solid strength of the method.\n* The experimental setup involves grid searching over parameters of the proposed method to have a set of strong baselines to compare against.\n* The proposed method relies on the generation of synthetic data and the authors showed that even with smaller open source model, strong and impactful synthetic data can be generated to gain strong performance in unlearning.",
+    "reasons_to_reject": "* The ablation study showed that all steps are important. But, an important angle to look at is the knowledge levels' impact and how much data we really need to generate. Do we need all these four levels? Instead of generating a detailed chapter, can a sentence or expanded keyword list for the bullet points do the work? The method is really interesting, but such insights can save computational costs and help with the interpretability as well.\n* A qualitative analysis to compare a handful of samples from a human-developed forget sets and the proposed synthetic data would be helpful to identify the gaps.\n\nMinor\n------\n* In Table 1 caption, explain what is the 'General Cap' column, or just right 'General Capability' as the column header; and how is it computed. At a first glance it is confusing. Also add a 'lower is better' symbol to be consistant with other columns."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1476,
+    "words": 248,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0c6b843d-7577-40ef-911e-f959b0d08f13",
+    "error": null,
+    "scored_chars": 1477
+  }
+}

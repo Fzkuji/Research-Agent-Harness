@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "B7ZbqNLDn-_",
+  "reviewer": "LE1r",
+  "paper": {
+    "title": "Recycling Model Updates in Federated Learning: Are Gradient Subspaces Low-Rank?",
+    "authors": [
+      "Sheikh Shams Azam",
+      "Seyyedali Hosseinalipour",
+      "Qiang Qiu",
+      "Christopher Brinton"
+    ],
+    "abstract": "In this paper, we question the rationale behind propagating large numbers of parameters through a distributed system during federated learning. We start by examining the rank characteristics of the subspace spanned by gradients (i.e., the gradient-space) in centralized model training, and observe that the gradient-space often consists of a few leading principal components accounting for an overwhelming majority (95-99%) of the explained variance. Motivated by this, we propose the \"Look-back Gradient Multiplier\" (LBGM) algorithm, which utilizes this low-rank property of the gradient-space in federated learning. Operationally, LBGM recycles the gradients between model update rounds to significantly reduce the number of parameters to be propagated through the system. We analytically characterize the convergence behavior of LBGM, revealing the nature of the trade-off between communication savings and model performance. Our subsequent experimental results demonstrate the improvement LBGM obtains on communication overhead compared to federated learning baselines. Additionally, we show that LBGM is a general plug-and-play algorithm that can be used standalone or stacked on top of existing sparsification techniques for distributed model training.",
+    "keywords": [
+      "Distributed Machine Learning",
+      "Federated Learning",
+      "Gradient Subspace",
+      "SGD"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=B7ZbqNLDn-_"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper hypothesizes that,  \n**(H1)** the subspace $S$ spanned by the stochastic gradients while training through SGD is low rank, and  \n**(H2)** $S$ is well approximated by a subset of the actual stochastic gradients. \n\nIt provides empirical evidence to support these claims by calculating,   \n(i) the number of principal components that almost explain the entire variance of the stochastic gradients over time, and  \n(ii) the alignment between the principal components of $S$ and the stochastic gradients, as well as the consecutive stochastic gradients, across different models and data sets. \n\nWith these observations, the paper aims to reduce the complexity of the communicated bits between the devices in data-parallel distributed training. Specifically, it proceeds by first estimating the principal components of $S$ through consecutive stochastic gradients. These vectors are then stored at the server as well as each worker. At each communication round the device then only needs to share the projection coefficients for these principal vectors, until the set of the principal vectors needs to be updated and broadcasted to all the machines. \n\nThis technique is empirically shown to reduce the communicated bits while almost retaining the performance on certain data sets. A convergence rate is also provided for this algorithm under assumptions that highlight the trade-off between the frequency of updating the principal vectors and the convergence rate to a first-order stationary point.",
+    "main_review": "## Important existing work\n\nI'd prelude everything by first mentioning **[this paper](https://arxiv.org/pdf/2103.11154.pdf)** from earlier this year, which is closely related to the paper but hasn't been cited. It approximates the subspace $S$ using only the (first-order) information from the optimization trajectory and then uses it to build a quasi-newton method. In light of this, it is not true that the paper is the first work that studies, \n>the effect of overparameterization on optimization of NN via the rank-characteristics of the first order optimization (gradient) landscape.\n \nFurthermore, an **[older paper](https://arxiv.org/pdf/1812.04754.pdf)** (which is cited) has already made the case that the stochastic gradients lie in a tiny sub-space, which is **(H1)** in this paper. I don't understand why this is underplayed while discussing this paper in the related works section, where this paper is clubbed with other papers that study the hessian?\n\nHaving said that, I am a bit apprehensive about both **(H1)** and **(H2)** (more below). But if we believe these hypotheses, it is indeed novel to use them in the context of federated learning. I'd encourage the authors to revise their writing and their discussion of novelty in the light of these papers. \n\n## Results on other data-sets\n\nIt is commendable that the authors do experiments with many different data sets and architectures and include them in the appendix. However, I am not convinced that the two hypotheses **(H1)** and **(H2)** are well corroborated in all the experiments. For instance, it is not clear if **(H1)** holds true in figures 11 and 13. Why were these experiments not run long enough to actually let the PCA components stabilize and the curve flatten out? Similarly in figures 18, 19, 23, 26, 27, 31, i.e., experiments with bigger models it is not clear if either hypothesis is true, and the figures look uninformative when compared to figure 2 which is presented in the main paper. Similarly, the consecutive gradient alignment curves in figures 52, 53 look uninformative. \n\nI am not saying that this phenomenon can be refuted entirely, but it seems that it is at least not robust to the choice of the model and dataset. And this has not been discussed sufficiently in the paper. \n\nFinally, why were figures 5-8 not presented for instance for U-Net for Pascal-VOC? Were the improvements worse? If they were it is important to include those for a fair presentation of the work. In fact, for this technique to be relevant to federated learning, it is important to know how it scales to bigger models and datasets. I am specifically mentioning this instance, based on the gradient alignment curves and model size.  \n\n### Learning rate scheduling\nWhat is happening at the 25th iteration in figure 3 for CelebA? Is there a learning rate decay there? These kinds of shifts in principal components happen throughout all the curves in the appendix as well. Looking at the provided code it is not clear what learning rate schedules were used for respective figures, and it would be good to highlight this in the paper. More importantly, does the schedule impact the principal components? It seems to be the case looking at the curves. It would be good to investigate that.\n\n## Convergence Rate\n\nI am mostly happy with the convergence analysis and the following discussion. The analysis is not particularly novel, but it is good to see how $\\Delta$ appears in the convergence guarantee.  \n\n***\n\n## Minor comments\n\n>Can we observe the effect of overparameterization in gradient descent-based optimization of NNs    \n\n1) This comes off as an ill-posed question, given the plethora of empirical and theoretical work that has come up in this area.\n    \n>We further reveal that LBGM can be extended to distributed training\n\n2) The distinction that the authors make between FL and distributed training is slightly confusing (even later in the paper). Latter subsumes the former, and it seems that the authors want to demarcate between homogeneous v/s heterogeneous data-distribution settings or cross-silo v/s cross-device FL. This is especially confusing when the authors choose to demarcate between the baselines for **P2** and **P3**. I think the point there is that just communicating gradient signs can be detrimental for the heterogeneous setting?\n  \n3) I don't like the term *principal gradients* for principal components of $S$, as they are not really *gradients*. Moreover, I couldn't find anywhere a mathematical description of how these components are calculated, perhaps using SVD of the concatenation of all the gradients? The pseudocode in the appendix just uses a black-box function. It would be useful to include this in the appendix and specify how different levels of variance are specified.  \n\n>SGD is resilient to noisy updates and often benefits from them in terms of generalization error\n\n4) This is a vague statement, first of all, what does it mean for an optimization algorithm to be resilient to noisy updates? Do you mean that the analysis of SGD can be done for any unbiased stochastic gradients, with bounded variance? That is true, but it is unclear (at least apriori) if the noise introduced by the LBGM procedure is like that. This is a slippery slope argument to make. Or do you mean that while training with SGD, additive noise doesn't hurt the performance? If you mean the latter, I am not convinced that there is conclusive evidence to show this, across a range of models, data sets, and noise levels. So this is an underqualified statement as well. Please re-write this sentence or avoid it. \n\n5) Lemma 1 seems trivial to me. You are basically re-deriving what it means to project onto a vector. Is it really worth putting this into a lemma and writing a proof? or am I missing something here? \n\n> S2: FCN on FMNIST and FMNIST\n\n6) Typo \n \n>The fact that rank deficiency of the gradient-space is not a consequence of model complexity or model performance suggests that the gradient-space of state-of-the-art large-scale ML models could be represented using a few principal gradient directions.\n\n7) I was hoping that the authors will further investigate what causes this rank deficiency. That would have been a significant contribution by itself. **[This paper](https://arxiv.org/pdf/2103.11154.pdf)** conjectured that it had something to do with the number of classes in the data-set. Could the authors corroborate or refute that claim?\n\n8) In many experiments (such as figure 2) the stochastic gradients were almost determined by a single PCA gradient. Did the authors investigate what caused this? How is the learning rate being decayed in these figures?\n\n9) Did the authors experiment with layer-wise PCA gradients? Perhaps even a proof of concept experiment could be done by using actual principal components of $S$?",
+    "summary_of_the_review": "I think the claims of novelty in the first half of the paper are slightly inflated. The application to federated learning is definitely novel though and should become the focus of the paper. This can be done by improving the discussion of the related work, providing fair and well-rounded evidence for the low-rank hypotheses, and extending the experiments for federated learning to the biggest data-set and model possible. I am open to increasing my score if my concerns are addressed.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 7324 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 7324,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 7324
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "g1SzIRLQXMM",
+  "reviewer": "Ekkd",
+  "paper": {
+    "title": "Wiring Up Vision: Minimizing Supervised Synaptic Updates Needed to Produce a Primate Ventral Stream",
+    "authors": [
+      "Franziska Geiger",
+      "Martin Schrimpf",
+      "Tiago Marques",
+      "James J. DiCarlo"
+    ],
+    "abstract": "After training on large datasets, certain deep neural networks are surprisingly good models of the neural mechanisms of adult primate visual object recognition. Nevertheless, these models are considered poor models of the development of the visual system because they posit millions of sequential, precisely coordinated synaptic updates, each based on a labeled image.  While ongoing research is pursuing the use of unsupervised proxies for labels, we here explore a complementary strategy of reducing the required number of supervised synaptic updates to produce an adult-like ventral visual stream (as judged by the match to V1, V2, V4, IT, and behavior). Such models might require less precise machinery and energy expenditure to coordinate these updates and would thus move us closer to viable neuroscientific hypotheses about how the visual system wires itself up. Relative to standard model training on labeled images in ImageNet, we here demonstrate that the total number of supervised weight updates can be substantially reduced using three complementary strategies: First, we find that only 2% of supervised updates (epochs and images) are needed to achieve 80% of the match to adult ventral stream. Specifically, training benefits predictions of higher visual cortex the most whereas early visual cortex predictions only improve marginally over the course of training. Second, by improving the random distribution of synaptic connectivity, we find that 54% of the brain match can already be achieved “at birth\" (i.e. no training at all). Third, we find that, by training only 5% of model synapses, we can still achieve nearly 80% of the match to the ventral stream. This approach further improves on ImageNet performance over previous attempts in computer vision of minimizing trained components without substantially increasing the relative number of trained parameters. These results reflect first steps in modeling not just primate adult visual processing during inference, but also how the ventral visual stream might be \"wired up\" by evolution (a model's \"birth\" state) and by developmental learning (a model's updates based on visual experience).",
+    "keywords": [
+      "computational neuroscience",
+      "primate visual ventral stream",
+      "convolutional neural networks",
+      "biologically plausible learning"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=g1SzIRLQXMM"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "## Updated the score\n\nThis paper proposes to address an important research question for connecting biological (BNN) and artificial neural networks (ANN). Although after training, ANN replicates various salient features of BNN, the way they are often trained is biologically implausible and thus, it is hard to argue that ANNs are suitable for modeling BNNs convincingly. In particular, this work focuses on the already existing CORnet who has shown a high Brain-score. The idea of the authors is to show that they can largely reduce the number of updates when using their methods while still retaining a high Brain-score, thus proposing a potential training mechanism for BNNs.",
+    "main_review": "### Strength:\n\nFirst of all, the question addressed in the paper is essential for both the machine learning and neuroscience community and the author aim at addressing in a well-written piece of work that also clearly contextualizes and motivates the issue at hand. This work uses a state-of-the-art neural architecture, instead of a reduced version of models as is often the case in this type of work. The authors also propose a good analysis and clearly lay out their results, although their interpretation is one of the weaknesses of the paper. \n\n### Weakness:\n\nAlthough it is true that this work has many strengths it is hard to overcome the following weaknesses, which question the motivation of the approach undertaken. First, there exists a set of more principled approaches that have been developed over the last 4-5 years for training ANNs in a biologically plausible way.  Second, the results obtained are very subjective to the authors as the result of the improvement of the score is minor. \n\nAlthough it is true that we don’t expect the authors to solve how the visual system develops and that this work corresponds to a proof of principle, it is still hard to navigate the plausibility of the assumptions made among all possibilities. On the other hand, there is a large set of work that has been proposed to build biologically plausible deep neural networks starting from clear objective function minimization and enforcing locality of learning rules. Compared to this set of works this one seems more adhoc than principled. This represents an important weakness when addressing the more neuroscience-friendly community. \n\nIndeed the approach proposed is more of a combination of existing approaches rather than a novel idea: the use of training of a subset of layers, different weights initialization based on the distribution of trained weights. It is not clear how this provides new insight to the statistical learning community.",
+    "summary_of_the_review": "This paper is well-written and addresses an important question possibly helping bridge neuroscience and machine learning. However, this work falls short on both the relevance of the experimental results and the ad-hoc nature of the proposed approach.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2195,
+    "words": 353,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/24719d6d-6797-48b5-baa9-50631a93ba07",
+    "error": null,
+    "scored_chars": 2199
+  }
+}

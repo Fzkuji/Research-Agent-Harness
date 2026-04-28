@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "mEV0nvHcK3",
+  "reviewer": "6FuX",
+  "paper": {
+    "title": "Towards Practical Defect-Focused Automated Code Review",
+    "authors": [
+      "Junyi Lu",
+      "Lili Jiang",
+      "Xiaojia Li",
+      "Jianbing Fang",
+      "Fengjun Zhang",
+      "Li Yang",
+      "Chun Zuo"
+    ],
+    "abstract": "The complexity of code reviews has driven efforts to automate review comments, but prior approaches oversimplify this task by treating it as snippet-level code-to-text generation and relying on text similarity metrics like BLEU for evaluation. These methods overlook repository context, real-world merge request evaluation, and defect detection, limiting their practicality. To address these issues, we explore the full automation pipeline within the online recommendation service of a company with nearly 400 million daily active users, analyzing industry-grade C++ codebases comprising hundreds of thousands of lines of code. We identify four key challenges: 1) capturing relevant context, 2) improving key bug inclusion (KBI), 3) reducing false alarm rates (FAR), and 4) integrating human workflows. To tackle these, we propose 1) code slicing algorithms for context extraction, 2) a multi-role LLM framework for KBI, 3) a filtering mechanism for FAR reduction, and 4) a novel prompt design for better human interaction. Our approach, validated on real-world merge requests from historical fault reports, achieves a 2× improvement over standard LLMs and a 10× gain over previous baselines. While the presented results focus on C++, the underlying framework design leverages language-agnostic principles (e.g., AST-based analysis), suggesting potential for broader applicability.",
+    "keywords": [
+      "Automated Code Review",
+      "Merge Request Analysis",
+      "Large Language Models (LLMs)",
+      "Defect Detection",
+      "Evaluation Metrics for Code Review",
+      "Code Context Extraction",
+      "Multi-Agent LLM Collaboration"
+    ],
+    "decision": "Accept (spotlight poster)",
+    "openreview_url": "https://openreview.net/forum?id=mEV0nvHcK3"
+  },
+  "review_fields": {
+    "summary": "This paper proposes an advanced method for automating code reviews, focused on defect detection and improving real-world code review workflows. To address the challenges, the authors introduce a multi-agent LLM framework that utilizes code slicing algorithms, a filtering mechanism to remove irrelevant comments, and a new prompt design for better integration into human workflows. Their system was validated using real-world industry data, achieving significant improvements over previous methods in detecting key bugs, reducing false alarms, and improving code review performance.",
+    "claims_and_evidence": "1. The evaluation primarily focuses on performance metrics rather than directly on qualitative assessments and user studies that demonstrate improved usability or reduced developer burden. Thus, the claim \"Real-world Workflow Integration\" is limitedly supported.\n2. The title didn't specifically mention C++ focus, but the \"10× improvement\" is primarily based on C++ code. This raises the concern about the generality of the framework, and the scope of the paper",
+    "methods_and_evaluation_criteria": "Assuming the paper focuses on C++ related code review, the methods and evaluation make sense.",
+    "theoretical_claims": "The paper primarily focuses on designing and empirically evaluating its defect-focused automated code review framework.",
+    "experimental_designs_or_analyses": "The paper does not provide an in-depth justification for the chosen thresholds of the redundancy comment filter. A sensitivity analysis regarding these thresholds could strengthen confidence in the filtering mechanism's robustness.",
+    "relation_to_broader_scientific_literature": "The paper extended existing automated code review methods from isolated snippet-level generation to holistic, context-rich analysis. And by proposing a multi-agent, collaborative framework with evaluation metrics that better capture the practical realities of defect detection. These innovations build directly on and address limitations identified in prior work.",
+    "other_strengths_and_weaknesses": "### Strengths\n\n1. The use of multiple agents adds flexibility and scalability, ensuring that the review process is thorough and precise.\n\n2. The method achieves up to 10x improvement over previous baselines in detecting critical bugs and reducing irrelevant comments.\n\n\n### Weaknesses\n\n1. The framework is mainly tailored for C++, and its adaptability to other languages may need further research and development.\n\n2. The effectiveness of the framework strongly depends on the underlying LLM engine, with larger models like LLaMA3.1 performing better, which might be a limitation for certain applications where computational resources are constrained.\n\n3. The more detailed slicing methods (like Left Flow and Full Flow) showed better performance but could potentially be computationally expensive or difficult to implement in all environments."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

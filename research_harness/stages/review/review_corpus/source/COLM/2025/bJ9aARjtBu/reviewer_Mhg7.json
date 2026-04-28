@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "bJ9aARjtBu",
+  "reviewer": "Mhg7",
+  "paper": {
+    "title": "From Next-Token to Mathematics: The Learning Dynamics of Mathematical Reasoning in Language Models",
+    "authors": [
+      "Shubhra Mishra",
+      "Gabriel Poesia",
+      "Noah Goodman"
+    ],
+    "abstract": "Large Language Models (LLMs) solely trained on next-token prediction learn to solve a wide range of problems involving mathematical reasoning. How does this ability evolve during training? We show the first analysis of how mathematical reasoning abilities of several open-weight LLMs develop during pre-training and post-training. To this end, we construct MathCAMPS, a synthetic dataset of novel mathematical reasoning problems grounded in 44 fine-grained skills taken from the Common Core curriculum from K to 8th grades. In one experiment, we show that mathematical skills are learned during pre-training in an order that measurably correlates with the human-designed curriculum, even though training data are randomly ordered. We also show a detailed analysis of which mathematical abilities benefit from instruction-tuning, a widely used post-training method and, in contrast, which skills suffer. Our work paves the way for an empirical understanding of LLM training dynamics in relation to reasoning.",
+    "keywords": [
+      "math reasoning",
+      "training dynamics",
+      "reasoning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=bJ9aARjtBu"
+  },
+  "review_fields": {
+    "summary": "This paper proposed to study the acquisition of math abilities during pretraining and instruction tuning. The authors first define a problem generation procedure that synthesize problems from common core objectives. Then, the authors studied the performance of models in different checkpoints of pre-training on these generated problems. Last, the authors studied the performance change between pretraining and instruction finetuning. Overall, the authors found that the math skill acquisition is genenerally monotonic and the model learns to solve problems of different difficulty simultaneously (rather than one by one). Furthermore, instruction finetuning has different effect on different models.",
+    "reasons_to_accept": "The paper's investigation is new and the paper is also well written.\n\nThe data generation procedure is quite novel and could be used to synthesize even harder questions. \n\nThe analysis is generally comprehensive, with intuitive results.",
+    "reasons_to_reject": "I don't think this paper has critical weaknesses, but a few things that could be improved: \n\n1. Compared to pretraining, the finetuning analysis feels a bit rushed, with only the original and final checkpoints before and after finetuning. As finetuning is much lighter than pretraining, the authors may be able to conduct custom finetuning to even strengthen the paper's analysis. \n\n2. The authors should do an ablation study on the quality of the data generation compared to directly prompting GPT-4o to generate problems on a given theme according to the common core description. It is unclear if we actually need all the complexity in the current data generation pipeline. \n\n3. The figures should be made in vector graphics. Right now, many plots are pixelated when zoomed in. Also, I don't recommend the use of bold font in plot as they are too distractive on the normal flow of reading."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1125,
+    "words": 185,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3478eab8-0ea1-4eaa-88dc-e657eb0e2841",
+    "error": null,
+    "scored_chars": 1129
+  }
+}

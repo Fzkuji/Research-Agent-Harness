@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "m5dyKArVn8",
+  "reviewer": "2Qk3",
+  "paper": {
+    "title": "How many classifiers do we need?",
+    "authors": [
+      "Hyunsuk Kim",
+      "Liam Hodgkinson",
+      "Ryan Theisen",
+      "Michael W. Mahoney"
+    ],
+    "abstract": "As performance gains through scaling data and/or model size experience diminishing returns, it is becoming increasingly popular to turn to ensembling, where the predictions of multiple models are combined to improve accuracy. \nIn this paper, we provide a detailed analysis of how the disagreement and the polarization (a notion we introduce and define in this paper) among classifiers relate to the performance gain achieved by aggregating individual classifiers, for majority vote strategies in classification tasks.\nWe address these questions in the following ways. \n(1) An upper bound for polarization is derived, and we propose what we call a neural polarization law: most interpolating neural network models are 4/3-polarized. Our empirical results not only support this conjecture but also show that polarization is nearly constant for a dataset, regardless of hyperparameters or architectures of classifiers. \n(2) The error rate of the majority vote classifier is considered under restricted entropy conditions, and we present a tight upper bound that indicates that the disagreement is linearly correlated with the error rate, and that the slope is linear in the polarization.\n(3) We prove results for the asymptotic behavior of the disagreement in terms of the number of classifiers, which we show can help in predicting the performance for a larger number of classifiers from that of a smaller number. \nOur theoretical findings are supported by empirical results on several image classification tasks with various types of neural networks.",
+    "keywords": [
+      "ensemble",
+      "model aggregation",
+      "machine learning",
+      "computer vision"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=m5dyKArVn8"
+  },
+  "review_fields": {
+    "summary": "The authors address the setting of ensembling, where the predictions of multiple models are combined to improve accuracy and form more robust conclusions. The authors define a quantity η (polarity among agents within a dataset), and show both empirically and theoretically that this quantity is nearly constant regardless of hyperparameters or architectures of classifiers. The authors present a tight upper bound for the error of majority vote under restricted entropy conditions. This bound indicates that the disagreement is linearly correlated with the target, and the slope is linear in polarity, η. Finally, the authors prove asymptotic behavior of disagreement in terms of the number of agents, which can help predicting the performance for a larger number of agents from that of a smaller number.",
+    "strengths": "1. Section 2 is, by in large, excellent, and does a very good job of summarizing the existing work in this area.\n2. The concept of polarity is clearly defined and well supported via the helpful example in Fig. 1.\n3. The tighter bounds in Sec. 4 are well-described and scoped.",
+    "weaknesses": "1. The claim that the authors have shown empirically that η is nearly constant regardless of hparams or architectures is overbroad for the provided evidence; the authors should consider scoping their empirical claims more modestly, in keeping with the small scale experiments in this paper.\n2. The phrase \"a distribution over a parametric family hθ , e.g., a distribution of classifiers that is trained from a neural network or a random forest\", could be misinterpreted as a claim that random forests are parametric models\n3. Equation (6) appears to have a formatting error, there's a long underscore under one half of the equation\n4. Conjecture 1 uses the term *interpolating* neural networks; however, this term is not defined in Sec. 2 and is overloaded in the literature. Please provide a definition in Sec. 2 or a relevant citation.\n5. \"Since the denominator ... is invariant to the number of classifiers and the numerator resembles the disagreement between classifiers, δ is expected to follow a similar pattern\": this point could use more clarification",
+    "questions": "QUESTIONS\n\n* How do the authors define *interpolating* neural networks in this work?\n* Can the authors please expand on the point raised in W5?\n\nSUMMARY OF THE REVIEW\n\nThis paper presents significant new theoretical contributions in its area, which is important and of interest to the larger community, but has a few overclaims and oversights which currently limit it. As the paper stands, I will give a weak accept, but if the weaknesses I list are addressed, I will raise my score.",
+    "limitations": "The authors have adequately addressed the limitations and potential negative societal impact of their work."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 5,
+    "human_pct": 95,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1930,
+    "words": 321,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fe6e7b35-e299-4ea7-88d4-c5963e4ef153",
+    "error": null,
+    "scored_chars": 1930
+  }
+}

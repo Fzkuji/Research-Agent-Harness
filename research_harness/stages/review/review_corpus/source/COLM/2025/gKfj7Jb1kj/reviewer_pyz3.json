@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "gKfj7Jb1kj",
+  "reviewer": "pyz3",
+  "paper": {
+    "title": "X-Teaming: Multi-Turn Jailbreaks and Defenses with Adaptive Multi-Agents",
+    "authors": [
+      "Salman Rahman",
+      "Liwei Jiang",
+      "James Shiffer",
+      "Genglin Liu",
+      "Sheriff Issaka",
+      "Md Rizwan Parvez",
+      "Hamid Palangi",
+      "Kai-Wei Chang",
+      "Yejin Choi",
+      "Saadia Gabriel"
+    ],
+    "abstract": "Multi-turn interactions with language models (LMs) pose critical safety risks, as harmful intent can be strategically spread across exchanges. Yet, the vast majority of prior work has focused on single-turn safety, while adaptability and diversity remain among the key challenges of multi-turn red-teaming. To address these challenges, we present X-Teaming, a scalable framework that systematically explores how seemingly harmless interactions escalate into harmful outcomes and generates corresponding attack scenarios. X-Teaming employs collaborative agents for planning, attack optimization, and verification, achieving state-of-the-art multi-turn jailbreak effectiveness and diversity with success rates up to 98.1% across representative leading open-weight and closed-source models. In particular, X-Teaming achieves a 96.2% attack success rate against the latest Claude 3.7 Sonnet model, which has been considered nearly immune to single-turn attacks. Building on X-Teaming, we introduce X-Guard-Train, an open-source multi-turn safety training dataset that's $~20\\times$ larger than the previous best resource, comprising 30K interactive jailbreaks, designed to enable robust multi-turn safety alignment for LMs. Our work offers essential tools and insights for mitigating sophisticated conversational attacks, advancing the multi-turn safety of LMs.",
+    "keywords": [
+      "Multi-turn Jailbreaks",
+      "Adaptive Multi-Agent",
+      "Conversational AI Safety",
+      "Red-Teaming",
+      "Defensive Alignment"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=gKfj7Jb1kj"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a multi-turn jailbreaking method using multi-agent collaboration to achieve very high success rate. It then also proposes an open-source multi-turn safety training dataset Guard-Train including 14k interactive jailbreaking datapoints.",
+    "reasons_to_accept": "1. The paper proposes an effective multi-turn jailbreaking method\n2. The effectiveness of the method is demonstrated across multiple datasets and models",
+    "reasons_to_reject": "Multi-turn jailbreak has been studied by many papers including \"PANDORA: Detailed LLM Jailbreaking via Collaborated Phishing Agents with Decomposed Reasoning\", \"Foot-In-The-Door: A Multi-turn Jailbreak for LLMs\", \"Great, Now Write an Article About That: The Crescendo Multi-Turn LLM Jailbreak Attack\", \"Multi-Turn Context Jailbreak Attack on Large Language Models From First Principles\" etc. These papers are not mentioned or analyzed enough in the paper. A more thorough comparative analysis on related work should be added to strengthen the paper's positioning within the current research landscape and better highlight its contributions. Also, this should be mentioned in the early part of the paper such as in the introduction."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 885,
+    "words": 127,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/84bc46e1-4cca-4616-97a5-4111a1324773",
+    "error": null,
+    "scored_chars": 885
+  }
+}

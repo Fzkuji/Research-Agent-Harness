@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "o3Q4m8jg4BR",
+  "reviewer": "kpRZ",
+  "paper": {
+    "title": "LS-IQ: Implicit Reward Regularization for Inverse Reinforcement Learning",
+    "authors": [
+      "Firas Al-Hafez",
+      "Davide Tateo",
+      "Oleg Arenz",
+      "Guoping Zhao",
+      "Jan Peters"
+    ],
+    "abstract": "Recent methods for imitation learning directly learn a $Q$-function using an implicit reward formulation rather than an explicit reward function. However, these methods generally require implicit reward regularization to improve stability and often mistreat absorbing states. Previous works show that a squared norm regularization on the implicit reward function is effective, but do not provide a theoretical analysis of the resulting properties of the algorithms. In this work, we show that using this regularizer under a mixture distribution of the policy and the expert provides a particularly illuminating perspective: the original objective can be understood as squared Bellman error minimization, and the corresponding optimization problem minimizes a bounded $\\chi^2$-Divergence between the expert and the mixture distribution. This perspective allows us to address instabilities and properly treat absorbing states. We show that our method, Least Squares Inverse Q-Learning (LS-IQ), outperforms state-of-the-art algorithms, particularly in environments with absorbing states. Finally, we propose to use an inverse dynamics model to learn from observations only. Using this approach, we retain performance in settings where no expert actions are available.",
+    "keywords": [
+      "Inverse Reinforcement Learning",
+      "Imitation Learning",
+      "Reward Regularization",
+      "Deep Reinforcement Learning"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=o3Q4m8jg4BR"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "An online imitation learning algorithm with implicit reward is proposed, where the learning objective is to minimize $\\chi^2$-divergence between the expert distribution and the mixture of expert and policy distributions. The idea of this work is motivated by the practical implementation of IQ-Learn that violates their theoretical derivation from introducing reward regularizer in practice. Authors argue that the proposed learning objective with the mixture-based divergence is more stable since it properly bounds the range of Q (whereas the range is  unbounded when the mixture is not considered). Additional details on absorbing states, a shared critic for entropy and reward regularization, and LfO with Inverse Dynamics Model are considered to improve the performance of the proposed idea.",
+    "strength_and_weaknesses": "Strengths\n- Authors look into the gap between practical algorithm and theoretical derivation of the baseline and try to minimize the gap.\n- Algorithm is shown to applicable to various IL scenarios (online IL, LfO) and seems stable for all MuJoCo tasks.\n- Algorithm used a lot existing techniques (dealing with absorbing states, IDM) to improve the performance. \n\nWeaknesses\n- The readability should be improved.\n- Whether the proposed learning objective is new or not is unclear. I'd like to argue that the objective (12) has a strong relation with SQIL's objective. \n- The baseline performance is much poorer than the performance reported in the paper.",
+    "clarity,_quality,_novelty_and_reproducibility": "For each category, I added my questions below:\n\n### Clarity\n- In introduction section, when implicit reward approach is introduced, Kostrikov's DAC is referred to be one of implicit reward approaches. Since DAC uses the discriminator, I think we should move it to explicit reward methods.\n- In introduction, authors mentioned more robust extrapolation is possible, but I don't think any extrapolation was tested in the paper. \n- In introduction, the \"less variance\" cannot be guaranteed through the experiments (I agree that the proposed method may stabilize the algorithm). Similarly, how can we see the exploding Q-functions targets?\n- For IDM, there should be the references.\n- In Introduction>Related Work> \"aforementioned imitation learning approaches\" need to be more clearly stated. \n- In Section 2 in Eq (3), the definition of $\\mathcal{J}_\\rho$ is not defined.\n- In Section 3.1., above Eq (7), it may be better to put a short definition of the variation form of $\\chi^2$ divergence. \n- In Section 3.1., below Eq (8), what is $r^*$?\n- In Section 3.2., I think the authors argue that there are RL perspectives since we minimize Bellman errors, but it seems quite awkward to me. I think this is simply the form of the learning objective and not strongly relevant to RL.\n- I couldn't understand the intuition in Section 3.3. The explanation between Eq (13) and Eq (14) needs to be more elaborated. \n- In Section 3.3., Eq (13) and (14) uses subscripts iq and lsiq, but I would use non-italic capital letters. \n- In Section 3.4., it is unclear why we have to introduce hard-Q for explanation. I think what authors have to emphasize is simply about using a single critic for entropy and reward regularizer, which is not relevant to hard-Q.\n- Below Eq (17), I think the description should be elaborated. \n- In the sentence \"Finally, ~\" below Eq (20). Why do we care about data imbalance and do we need to discuss this?\n\n\n### Quality\n- The partition function $Z_s$ below Eq (2) uses integral, but I think it should be defined by using summation since I believe the discrete action space is assumed in Notation section. \n- In Eq (4), $r$ should be replace to the Bellman error in the last equation. \n- In Eq (9), $\\pi\\in\\Pi$ should be replaced to $\\pi\\in\\Omega$.\n- In the paragraph above (17), we need to remove \"When now\".\n\n\n### Novelty\n- Authors argue that the proposed objective is different from SQIL's objective in Eq (12). However, I believe if we use Q+c (constant) instead of Q in Eq (11), we can shift $r_{max}$ and $r_{min}$ by constant and find that the objective becomes exactly the same as that of SQIL.\n\n\n### Reproducibility\n- IQ-Learn is the crucial baseline of this work, and it seems to me that it performs far worse than what was reported from the IQ-Learn's paper. For example, when a single trajectory is used for Hopper in IQ-Learn paper, IQ-Learn successfully imitates the expert's performance. However, we can see that IQ-Learn performs poorly on Hopper in Figure 3 and 4. I wonder why such difference happened.",
+    "summary_of_the_review": "Although the motivation of this work is interesting, the paper should become clearer to be accepted. With the current version, the authors' intuitions behind are not straightforward. There's also a baseline reproducibility issue.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

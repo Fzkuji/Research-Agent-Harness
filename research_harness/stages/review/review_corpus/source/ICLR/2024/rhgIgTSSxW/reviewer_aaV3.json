@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "rhgIgTSSxW",
+  "reviewer": "aaV3",
+  "paper": {
+    "title": "TabR: Tabular Deep Learning Meets Nearest Neighbors",
+    "authors": [
+      "Yury Gorishniy",
+      "Ivan Rubachev",
+      "Nikolay Kartashev",
+      "Daniil Shlenskii",
+      "Akim Kotelnikov",
+      "Artem Babenko"
+    ],
+    "abstract": "Deep learning (DL) models for tabular data problems (e.g. classification, regression) are currently receiving increasingly more attention from researchers.\nHowever, despite the recent efforts, the non-DL algorithms based on gradient-boosted decision trees (GBDT) remain a strong go-to solution for these problems.\nOne of the research directions aimed at improving the position of tabular DL involves designing so-called retrieval-augmented models.\nFor a target object, such models retrieve other objects (e.g. the nearest neighbors) from the available training data and use their features and labels to make a better prediction.\n\nIn this work, we present TabR -- essentially, a feed-forward network with a custom k-Nearest-Neighbors-like component in the middle.\nOn a set of public benchmarks with datasets up to several million objects, TabR marks a big step forward for tabular DL: it demonstrates the best average performance among tabular DL models, becomes the new state-of-the-art on several datasets, and even outperforms GBDT models on the recently proposed \"GBDT-friendly\" benchmark (see Figure 1).\nAmong the important findings and technical details powering TabR, the main ones lie in the attention-like mechanism that is responsible for retrieving the nearest neighbors and extracting valuable signal from them.\nIn addition to the higher performance, TabR is simple and significantly more efficient compared to prior retrieval-based tabular DL models.",
+    "keywords": [
+      "tabular",
+      "tabular data",
+      "architecture",
+      "deep learning",
+      "neural networks"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rhgIgTSSxW"
+  },
+  "review_fields": {
+    "summary": "This paper considers the problem of making predictions on tabular data. The authors propose a retrieval-augmented approach where a predictor takes the representation not of the table being predicted but also the representation of the nearest neighbors from a training dataset. The encoding representations and the predictors are training together and use straightforward architecture architectures. The main result is that a combination of the carefully crafted techniques outperforms GBDT on an ensemble of tasks. The training time is higher than GBDT but not unreasonable, and better compared to prior deep learning methods. The prediction times are better",
+    "strengths": "1. The results seem to be a significant advance over prior work in tabular data predictions. In particular, the first deep learning model to outperform GBDT on an ensemble of datasets.\n2. The experiments and analysis are quite extensive. Multiple datasets of different kinds of data, analysis of training and prediction times.\n3. Clear articulation of which techniques helped. the techniques are overall not too complex.",
+    "weaknesses": "A comparison of the inference and query complexity between the methods is lacking.",
+    "questions": "1. Inference time and compexity -- are the studies based on normalized inference time between models? If not, could you comment more? How does the inference complexity depend on the size of the table data?\n\n2. Could a different selection of datasets prove that the tabR is not superior to GBDT? In other words, are these datasets highly representative?\n\n3. Is it not surprising that Step-1 (adding context labels) did not help that much? One would guess that this is a big component of signal in retrieval augmentation.\n\n4. Not a question, but the methodology here reminds one of extreme classification and specifically this paper. https://arxiv.org/abs/2207.04452"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1170,
+    "words": 185,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0bfb053a-8b53-41c7-b14a-a8670f73273d",
+    "error": null,
+    "scored_chars": 1170
+  }
+}

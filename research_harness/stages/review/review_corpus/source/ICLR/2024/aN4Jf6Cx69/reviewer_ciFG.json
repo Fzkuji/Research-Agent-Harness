@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "aN4Jf6Cx69",
+  "reviewer": "ciFG",
+  "paper": {
+    "title": "The mechanistic basis of data dependence and abrupt learning in an in-context classification task",
+    "authors": [
+      "Gautam Reddy"
+    ],
+    "abstract": "Transformer models exhibit in-context learning: the ability to accurately predict the response to a novel query based on illustrative examples in the input sequence, which contrasts with traditional in-weights learning of query-output relationships. What aspects of the training data distribution and architecture favor in-context vs in-weights learning? Recent work has shown that specific distributional properties inherent in language, such as burstiness, large dictionaries and skewed rank-frequency distributions, control the trade-off or simultaneous appearance of these two forms of learning. We first show that these results are recapitulated in a minimal attention-only network trained on a simplified dataset. In-context learning (ICL) is driven by the abrupt emergence of an induction head, which subsequently competes with in-weights learning. By identifying progress measures that precede in-context learning and targeted experiments, we construct a two-parameter model of an induction head which emulates the full data distributional dependencies displayed by the attention-based network. A phenomenological model of induction head formation traces its abrupt emergence to the sequential learning of three nested logits enabled by an intrinsic curriculum. We propose that the sharp transitions in attention-based networks arise due to a specific chain of multi-layer operations necessary to achieve ICL, which is implemented by nested nonlinearities sequentially learned during training.",
+    "keywords": [
+      "in-context learning",
+      "mechanistic interpretability",
+      "language models",
+      "induction heads"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=aN4Jf6Cx69"
+  },
+  "review_fields": {
+    "summary": "This paper explores how and why properties of the data distribution control a transformer's propensity to use in-context vs. in-weights learning strategies.  The authors design a synthetic, parameterized family of tasks that expose dependencies of learning strategies on the data distribution that have been identified in prior work.  They then analyze the behavior of models trained on these tasks to understand how the dynamics of learning give rise to different strategies over time.  One of the key findings is that models learn a shortcut strategy that enables better-than-chance (but suboptimal) performance -- choosing an answer among one the labels presented in-context, without regard for the inputs presented in context.  In a stripped-down model that maintains the qualitative behavior of the full transformer parameterization, the authors show how this shortcut strategy facilitates (but is not necessary for) learning of a true ICL strategy via an analysis of the loss landscape.",
+    "strengths": "This paper tackles a timely and interesting topic, and contains several insights and useful contributions.\n\n-- The synthetic task family introduced is a clean and intuitive way of exposing dependencies of learning strategies on pretraining data distributions.  Showing that key phenomena identified in (Chan et al., 2022) can be replicated in this setting is a useful contribution.\n\n-- The characterization of the initial slow learning phase as driven by an increase in context-label accuracy is interesting\n\n-- The idea that a strategy that results in good context-label accuracy can facilitate (despite not being necessary for) learning of a true ICL strategy is very interesting, and some evidence is provided for this idea\n\n-- The evidence provided that the emergence of induction heads is strongly linked with the development of the ICL strategy, while not entirely novel, is nice to see",
+    "weaknesses": "I have the following concerns about this paper.  Many of them involve claims that I feel are made too strongly in the paper relative to the level of evidence provided.\n\n-- The paper illustrates a set of phenomena in figure 2, and promises a mechanistic understanding of these phenomena.  But the mechanistic analysis provided later in the paper does not speak to most of the phenomenology -- for instance, the dependence of the ICL/IWL tradeoff on B, epsilon, K, and alpha.  In fact, the mechanistic analysis focuses on the p_C > 0 case, which is different from the p_c = 0 regime that gives rise to all the tradeoffs observed in Figure 2.  Thus, the connection between pages 1-4 of the paper and the rest is not entirely clear.\n\n-- -- The following sentence, while intuitively reasonable, is written as a key strong claim and as far as I can tell is not really justified with evidence: \"Therefore, the relative rates at which the network acquires ICL and IWL control the fraction of loss explained by each mechanism after convergence.\"\n\n-- The paper makes strong causal claims based only on correlational evidence.  For instance, \"Induction head formation drives the abrupt transition during ICL.\"  As far as I can tell no evidence is given for this claim, other than the (very suggestive, I agree!) fact that they coincide in time.\n\n-- The paper makes strong claims about the three-parameter model proving or ruling out certain hypotheses.  An example is the sentence \"This rules out hypothesis V as only the factors corresponding to the progress measures (a) through (d) have been included in the minimal model.\"  In my opinion, such claims are much too strong.  The three-parameter model is ultimately a different model from the original transformer architecture being used!  While the analysis of its behavior is suggestive of the learning strategies used by the original architecture, it is not conclusive.  The strength of the claims should be adjusted accordingly.",
+    "questions": "-- In my opinion, the connection between the phenomenology observed in the full transformer model and the insights the authors derive from the three-parameter model could be made stronger with more experiments.  Have the authors considered techniques like activation/path patching and knockouts (see e.g. https://openreview.net/forum?id=NpsVSN6o4ul for examples of this approach) to test whether the explanations they come up with actually have explanatory power in the original model?\n\n-- Why do the authors switch from the p_C = 0 case to the p_C > 0 case halfway through the paper?  I find this confusing as it makes the relevance of the mechanistic analysis to the p_C = 0 regime unclear.\n\n-- The authors note that when p_B < 1, the network learns an IWL solution, and then fix p_B = 1 thereafter.  Later, they note that p_C > 0 always leads to an ICL solution (presumably with p_B fixed at 1).  To me, the authors have failed to consider the most realistic and interesting regime, where 0 < p_B < 1, and 0 < p_C < 1, where neither an ICL solution alone nor an IWL solution alone is optimal.  Is there a reason the authors choose not to consider this regime?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:32Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:32Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2854,
+    "words": 468,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/17b39fba-ba57-4c78-9da1-5804df808a57",
+    "error": null,
+    "scored_chars": 2866
+  }
+}

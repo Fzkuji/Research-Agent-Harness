@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "jT1EwXu-4hj",
+  "reviewer": "n8vS",
+  "paper": {
+    "title": "From Intervention to Domain Transportation: A Novel Perspective to Optimize Recommendation",
+    "authors": [
+      "Da Xu",
+      "Yuting Ye",
+      "Chuanwei Ruan",
+      "Evren Korpeoglu",
+      "Sushant Kumar",
+      "Kannan Achan"
+    ],
+    "abstract": "The interventional nature of recommendation has attracted increasing attention in recent years. It particularly motivates researchers to formulate learning and evaluating recommendation as causal inference and data missing-not-at-random problems. However, few take seriously the consequence of violating the critical assumption of overlapping, which we prove can significantly threaten the validity and interpretation of the outcome. We find a critical piece missing in the current understanding of information retrieval (IR) systems: as interventions, recommendation not only affects the already observed data, but it also interferes with the target domain (distribution) of interest. We then rephrase optimizing recommendation as finding an intervention that best transports the patterns it learns from the observed domain to its intervention domain. Towards this end, we use domain transportation to characterize the learning-intervention mechanism of recommendation. We design a principled transportation-constraint risk minimization objective and convert it to a two-player minimax game.\nWe prove the consistency, generalization, and excessive risk bounds for the proposed objective, and elaborate how they compare to the current results. Finally, we carry out extensive real-data and semi-synthetic experiments to demonstrate the advantage of our approach, and launch online testing with a real-world IR system.",
+    "keywords": [
+      "Information retrieval",
+      "Learning theory",
+      "Causal inference",
+      "Missing data",
+      "Overlapping",
+      "Reweighting",
+      "Optimal transport"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=jT1EwXu-4hj"
+  },
+  "review_fields": {
+    "comment": "1. The motivation is still not very clear. The authors still do not give a clear motivation of why this problem is important in real-world RL systems.\n\n2. Theorem 1 and Theorem 2 are only the finite sample bounds under $P$ but not the transfer generalization bound w.r.t the target distribution like Proposition 1. It is unclear to me why Theorem 1 and Theorem 2 can resolve the insufficient overlapping problem mentioned for using DA in the IR system. \nWhy does Theorem 2 state that the learned policy (the one that minimizes the transportation-constraint risk) is close to the oracle policy in terms of the target risk? Should the target risk be under $Q$?  I can not find any risk on $Q$ in Theorem 1 and 2.\n\n3. Thanks for your additional experiments and results."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 764,
+    "words": 135,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8eb371bd-66fb-41d1-a223-2ef8357d3e2f",
+    "error": null,
+    "scored_chars": 766
+  }
+}

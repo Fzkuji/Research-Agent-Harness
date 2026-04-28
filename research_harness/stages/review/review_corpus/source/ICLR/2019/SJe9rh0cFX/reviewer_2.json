@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "SJe9rh0cFX",
+  "reviewer": "2",
+  "paper": {
+    "title": "On the Universal Approximability and Complexity Bounds of Quantized ReLU Neural Networks",
+    "authors": [
+      "Yukun Ding",
+      "Jinglan Liu",
+      "Jinjun Xiong",
+      "Yiyu Shi"
+    ],
+    "abstract": "Compression is a key step to deploy large neural networks on resource-constrained platforms. As a popular compression technique, quantization constrains the number of distinct weight values and thus reducing the number of bits required to represent and store each weight. In this paper, we study the representation power of quantized neural networks. First, we prove the universal approximability of quantized ReLU networks on a wide class of functions. Then we provide upper bounds on the number of weights and the memory size for a given approximation error bound and the bit-width of weights for function-independent and function-dependent structures. Our results reveal that, to attain an approximation error bound of $\\epsilon$, the number of weights needed by a quantized network is no more than $\\mathcal{O}\\left(\\log^5(1/\\epsilon)\\right)$ times that of an unquantized network. This overhead is of much lower order than the lower bound of the number of weights needed for the error bound, supporting the empirical success of various quantization techniques. To the best of our knowledge, this is the first in-depth study on the complexity bounds of quantized neural networks.",
+    "keywords": [
+      "Quantized Neural Networks",
+      "Universial Approximability",
+      "Complexity Bounds",
+      "Optimal Bit-width"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SJe9rh0cFX"
+  },
+  "review_fields": {
+    "review": "This paper studies the expressive power of quantized ReLU networks from a theoretical point of view. This is well-motivated by the recent success of using quantized neural networks as a compression technique. This paper considers both linear quantization and non-linear quantization, both function independent network structures and function dependent network structures. The obtained results show that the number of weights need by a quantized network is no more than polylog factors times that of a unquantized network. This justifies the use of quantized neural networks as a compression technique. \n\nOverall, this paper is well-written and sheds light on a well-motivated problem, makes important progress in understanding the full power of quantized neural networks as a compression technique. I didn’t check all details of the proof, but the structure of the proof and several key constructions seem correct to me. I would recommend acceptance. \n\nThe presentation can be improved by having a formal definition of linear quantized networks and non-linear quantized networks, function-independent structure and function-dependent structure in Section 3 to make the discussion mathematically rigorous. Also, some of the ideas/constructions seem to follow (Yarotsky, 2017). It seems to be a good idea to have a paragraph in the introduction to have a more detailed comparison with (Yarotsky, 2017), highlighting the difference of the constructions, the difficulties that the authors overcame when deriving the bounds, etc. \n\nMinor Comment: First paragraph of page 2: extra space after ``to prove the universal approximability’’."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

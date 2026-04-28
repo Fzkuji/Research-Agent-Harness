@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "ekeyCgeRfC",
+  "reviewer": "9RLW",
+  "paper": {
+    "title": "Understanding In-Context Learning in Transformers and LLMs by Learning to Learn Discrete Functions",
+    "authors": [
+      "Satwik Bhattamishra",
+      "Arkil Patel",
+      "Phil Blunsom",
+      "Varun Kanade"
+    ],
+    "abstract": "In order to understand the in-context learning phenomenon, recent works have adopted a stylized experimental framework and demonstrated that Transformers can match the performance of gradient-based learning algorithms for various classes of real-valued functions. However, the limitations of Transformers in implementing learning algorithms, and their ability to learn other forms of algorithms are not well understood. Additionally, the degree to which these capabilities are confined to attention-based models is unclear. Furthermore, it remains to be seen whether the insights derived from these stylized settings can be extrapolated to pretrained Large Language Models (LLMs). In this work, we take a step towards answering these questions by demonstrating the following: (a) On a test-bed with a variety of Boolean function classes, we find that Transformers can nearly match the optimal learning algorithm for 'simpler' tasks, while their performance deteriorates on more 'complex' tasks. Additionally, we find that certain attention-free models perform (almost) identically to Transformers on a range of tasks. (b) When provided a *teaching sequence*, i.e. a set of examples that uniquely identifies a function in a class, we show that Transformers learn more sample-efficiently. Interestingly, our results show that Transformers can learn to implement *two distinct* algorithms to solve a *single* task, and can adaptively select the more sample-efficient algorithm depending on the sequence of in-context examples. (c) Lastly, we show that extant LLMs, e.g. LLaMA-2, GPT-4, can compete with nearest-neighbor baselines on prediction tasks that are guaranteed to not be in their training set.",
+    "keywords": [
+      "In-context learning",
+      "Transformers",
+      "Large language models",
+      "Boolean functions"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=ekeyCgeRfC"
+  },
+  "review_fields": {
+    "summary": "This paper investigated the in-context learnability of Transformers on discrete Boolean functions. They showed that when trained in an in-context way, the Transformers can in-context learn some Boolean functions like conjunctions, disjunctions, DNFs and CNFs, while they can struggle on more difficult tasks such as parities. They showed that when presented the teaching sequences, the Transformers show better in-context learnability and they can learn tasks like parities in this case. \n\nThey also showed that besides TFs, many other architectures show in-context learnability competitive to TFs on learning Boolean functions. They hypothesized that TFs learn two distinct algorithms on some tasks, which I feel not that convincing (I will explain it later). They also did some experiments on LLM and showed that the GPT2 architecture with fixed parameter, and many other LLMs can in-context learn Boolean functions and are competitive to Nearest Neighbour.\n\nIn general, this paper showed in experiments that the trained TFs can in-context learn some Boolean functions. The experiments with teaching sequence is particularly interesting. It's possible for me to update the score.\n\nThanks for the response from the authors. I raised my score to eight.",
+    "strengths": "1. The  experiments are sufficient and interesting, showing the in-context learnability of trained TFs on discrete Boolean functions. Previous papers mostly focused on the IC learnability of linear functions, sparse linear functions or NNs. The consideration of Boolean functions is particularly creative.\n\n2. The experiments about teaching sequence is particularly interesting, and also for the experiments on LLMs. The fact that LLMs can implement the kNN algorithm in-context is amazing, and I also like the narratives of the algorithm learning perspective of in-context learning.\n\n3. The writing is great and easy to follow.",
+    "weaknesses": "1. The author claimed that TFs can learn two distinct algorithms on tasks such as conjunctions, which is not that convincing to me. \n\nLet's take figure 3 as an example and let's call the four sub-figure a to d from the left to the right. The way that authors compared these four figures and draw conclusions is that: they compare a and b, and the compare c with d, then they drew conclusion that the trained TFs can learn two distinct algorithms. This is not a good way for comparison. This is because one can easily give a counter-example to show that a single algorithm can simultaneously achieve a and b. For example, suppose the algorithm that TFs learn is: randomly pick one decision rule (or Boolean function) which is in the conjunction function class and agrees with all examples in the test context (the x_i, y_i pairs at test time). Then, when tested on teach conjunction (fig a), since there is only one conjunction function matching all test context, it will achieve a perfect accuracy. When tested with random sequence of examples from a conjunction task, there can be many functions in the conjunction function class that satisfying all test examples, so it can achieve a imperfect performance. Similar logic applies on the comparison between c and d.\n\nAt a high level, if you want to show the trained TFs can learn two distinct algorithms, it is not a good idea to show that they achieve different performance on different test examples but trained on same data distribution, It is better to show that they achieve different performance when trained on different data distribution, but tested on the same examples. In this case, you should compare figure b and c to draw your conclusion, instead of comparing a and b. The reason behind this is that the in-context learning is specific to the pre-training distribution, and it s very natural that they learn different algorithms on different pre-training distributions.",
+    "questions": "Below are my suggestions, which I think can help make your paper stronger.\n\n1. Your definition and narratives of in-context learning and the algorithm learning perspective (the last two paragraphs in 'in-context learning' paragraph in section 2) seems to follow closely with the formulation in [1] and the formal definition in [2]. Does your definition of in-context learning similar to their definitions? Or do you have any differences? IMO maybe you can discuss more about your definition of ICL and how it relates to algorithm learning process.\n\n2. I am not sure how you sampled the random conjunction function for each task. I think it is more important to say how you sample the random functions than how you sample the random inputs. Do you sample the random conjunction functions by sampling k variables for a fixed k and then form the conjunction function as the intersection of these k variables (f = 1 iff all these k variables are 1)?\n\n3. Is it possible for you to show what algorithm the TFs actually implement on some simple tasks like conjunction or disjunction? For this, you can either look into the attention weight of attention matrix (maybe train a single-layer TF?) or maybe you can try to provide some constructions that can provably learn these tasks? These can be hard even an open problem, which is definitely not a requirement.\n\n4. For some tasks in your paper, there should be existing algorithms to learn it, such as conjunction or disjunction. I am also wondering how does trained TFs compare to them? Also, some existing paper shows that the TFs can approximate or possibly learn (in-context) the Bayesian optimal estimator over some function class [1,2,3]. I suppose under the task distribution in your paper, it is very likely that the Bayesian optimal estimator is analytically intractible, but I think it should be numerically computable under some simple tasks. So I am wondering how does trained TFs compare to the Bayesian optimal estimators (or some strong, computationally efficient baseline on specific task, if any).\n\n[1]. Transformers as Algorithms: Generalization and Stability in In-context Learning\n\n[2]. Trained Transformers Learn Linear Models In-Context\n\n[3]. Pretraining task diversity and the emergence of non-Bayesian in-context learning for regression."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:38Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:38Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2561,
+    "words": 423,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f339d82c-3635-46c1-9edc-ae95ac73ded8",
+    "error": null,
+    "scored_chars": 2563
+  }
+}

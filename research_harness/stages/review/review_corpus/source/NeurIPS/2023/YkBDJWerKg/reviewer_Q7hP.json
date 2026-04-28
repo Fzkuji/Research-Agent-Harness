@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "YkBDJWerKg",
+  "reviewer": "Q7hP",
+  "paper": {
+    "title": "STEVE-1: A Generative Model for Text-to-Behavior in Minecraft",
+    "authors": [
+      "Shalev Lifshitz",
+      "Keiran Paster",
+      "Harris Chan",
+      "Jimmy Ba",
+      "Sheila A. McIlraith"
+    ],
+    "abstract": "Constructing AI models that respond to text instructions is challenging, especially for sequential decision-making tasks. This work introduces a methodology, inspired by unCLIP, for instruction-tuning generative models of behavior without relying on a large dataset of instruction-labeled trajectories. Using this methodology, we create an instruction-tuned Video Pretraining (VPT) model called STEVE-1, which can follow short-horizon open-ended text and visual instructions in Minecraft. STEVE-1 is trained in two steps: adapting the pretrained VPT model to follow commands in MineCLIP's latent space, then training a prior to predict latent codes from text. This allows us to finetune VPT through self-supervised behavioral cloning and hindsight relabeling, reducing the need for costly human text annotations, and all for only $60 of compute. By leveraging pretrained models like VPT and MineCLIP and employing best practices from text-conditioned image generation, STEVE-1 sets a new bar for open-ended instruction following in Minecraft with low-level controls (mouse and keyboard) and raw pixel inputs, far outperforming previous baselines and robustly completing 12 of 13 tasks in our early-game evaluation suite. We provide experimental evidence highlighting key factors for downstream performance, including pretraining, classifier-free guidance, and data scaling. All resources, including our model weights, training scripts, and evaluation tools are made available for further research.",
+    "keywords": [
+      "minecraft",
+      "instruction following",
+      "foundation models",
+      "sequence models",
+      "reinforcement learning",
+      "sequential decision making",
+      "goal conditioned reinforcement learning",
+      "text conditioned reinforcement learning",
+      "transformers",
+      "deep learning"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=YkBDJWerKg"
+  },
+  "review_fields": {
+    "summary": "The paper introduces STEVE-1, a sequential decision-making agent designed to follow textual instructions and accomplish goals in the Minecraft environment. The authors utilize two pre-trained models, VPT (Video Pretraining Transformer) and MineCLIP, to facilitate this process. VPT is a transformer model trained to predict action sequences from aligned video sequences, while MineCLIP aligns consecutive video timesteps with corresponding transcripts in Minecraft.\n\nTo finetune VPT, the authors employ self-supervised behavioral cloning conditioned on latent visual goals. They generate goal-conditioned data by randomly selecting timesteps from episodes and using hindsight relabeling to set intermediate goals. MineCLIP is used to map textual goals to visual goal embeddings in the unCLIP-based approach. This mapping is achieved through a conditional Variational Autoencoder (VAE) with Gaussian prior and posterior, conditioned on MineCLIP text representations.\n\nThe training dataset comprises Minecraft gameplay data, combined with the OpenAI contractor dataset, and additional data generated using VPT. The authors curate 2,000 instruction-labeled trajectory segments, each consisting of 16 frames, and augment this dataset by identifying similar gameplay segments. Additionally, 8,000 additional instructions are generated using GPT-3.5 Turbo. Classifier-free guidance is employed to balance the logits between unconditional and conditional behavior.\n\nThe results demonstrate that STEVE-1 successfully solves various short-horizon open-ended text and visual tasks, with a training cost of only $60. The performance of the agent is evaluated using programmatic evaluation and MineCLIP evaluation, revealing significant improvements with goal conditioning, especially visual. The authors also observe that prompt chaining, as opposed to direct prompting, proves advantageous for complex tasks like building towers or creating planks. A thorough ablation study is conducted on the classifier-free guidance hyperparameter, pretrained VPT weights, and prompt engineering, providing valuable insights into the optimal settings for these components.\n\nOverall, the paper showcases the effectiveness of STEVE-1 in achieving goals based on textual instructions in the Minecraft environment. The combination of VPT and MineCLIP, along with the conditioning techniques and ablation studies, contribute to a comprehensive understanding of the agent's performance and its potential applications.",
+    "strengths": "- This unique adaptation - STEVE-1 - of the unCLIP method demonstrates the versatility and effectiveness of the approach in the context of sequential decision making in Minecraft.\n- The experiments and analysis conducted in the paper are highly novel and insightful. The authors provide valuable findings, such as the benefits of prompt chaining, the potential for scaling to improve certain metrics, and the limitations observed in complex tasks. These insights enhance our understanding of the proposed approach and its implications.\n- The paper demonstrates that prompt chaining is effective in accomplishing complex tasks, such as building towers or making wooden planks. The results show that success rates and programmatic evaluation metrics plateau after a certain number of frames, highlighting the potential and limitations of the approach. Additionally, the comparison to direct prompting reveals the superiority of prompt chaining in achieving satisfactory performance.\n- The thorough ablation study conducted on various components, including the classifier-free guidance hyperparameter, pretrained VPT weights, and prompt engineering, provides valuable insights into the optimal settings for these elements.\n- The inclusion of additional ablations, such as goal chunk sizes, VAE variants, and text augmentation, in the appendix further enhances reproducibility and facilitates a deeper understanding of the approach.",
+    "weaknesses": "- The paper would benefit from clearer explanations regarding certain aspects, such as the distinction between packed hindsight relabeling and hindsight relabeling. Additionally, providing a more detailed explanation of the interpretation of the heatmap, specifically the meaning of the 1/0 values, would enhance understanding.\n- Some questions (see section) during the review could be addressed in the main work or in an appendix to provide a more comprehensive understanding of the approach.\n- The proposed approach combines existing ideas from well-established approaches, such as CVAE, MineCLIP, and VPT, which may limit the novelty of the work. However, the extensive experiments and detailed study conducted in the paper contribute to its significance and overall value.\n- The scalability of the approach to other environments or datasets is not discussed or addressed in the paper. Considering the dependency on pretrained video-text aligned models and large-scale pretrained transformers like VPT, the applicability of the approach to environments without such models is unclear. Addressing this limitation and discussing potential scalability issues would enhance the practical relevance and broader applicability of the approach.",
+    "questions": "- Can you provide insights into why random timesteps from episodes are selected as goals? Are there alternative approaches that could be considered, and why is this method deemed the most effective?\n- Does randomly resetting the agent's memory and turning the agent to a random direction during data generation provide necessary benefits? What would be the implications if this step were omitted?\n- How does the utilization of pre-trained VPT contribute to the approach when the input is modified with conditional goal embeddings? Can you elaborate on the specific advantages and improvements gained from incorporating VPT in this manner?\n- Could you explain the process of generating additional text instructions based on GPT 3.5? How are these instructions generated and integrated into the training process?\n- It is not clear why the graph from Baker et al. is not included in the text-conditioning results. Can you provide clarification or discuss the reasoning behind its exclusion?\n- In Figure 4 (right), what is \"relevant\" and \"irrelevant\" in the graph? Clarifying the interpretation of these components would improve the understanding of the presented results.",
+    "limitations": "- The authors extensively discuss the limitations of the approach, including challenges with multiple steps of reasoning, prompt engineering, and potential negative societal impacts. While further discussion on these aspects could be beneficial, there are no explicit omissions or significant limitations that require specific mention. The paper adequately addresses and acknowledges its limitations."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 27,
+    "mixed_pct": 5,
+    "human_pct": 68,
+    "verdict": "We are moderately confident this text is entirely human",
+    "confidence": "moderately",
+    "chars": 4241,
+    "words": 617,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ce833ef6-6d7e-4ad3-ab6a-5518223e4874",
+    "error": null,
+    "scored_chars": 4241
+  }
+}

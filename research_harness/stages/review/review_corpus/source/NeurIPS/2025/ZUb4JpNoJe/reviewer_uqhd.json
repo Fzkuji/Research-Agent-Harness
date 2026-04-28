@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "ZUb4JpNoJe",
+  "reviewer": "uqhd",
+  "paper": {
+    "title": "Cost-Sensitive Freeze-thaw Bayesian Optimization for Efficient Hyperparameter Tuning",
+    "authors": [
+      "Dong Bok Lee",
+      "Aoxuan Silvia Zhang",
+      "Byungjoo Kim",
+      "Junhyeon Park",
+      "Steven Adriaensen",
+      "Juho Lee",
+      "Sung Ju Hwang",
+      "Hae Beom Lee"
+    ],
+    "abstract": "In this paper, we address the problem of cost-sensitive hyperparameter optimization (HPO) built upon freeze-thaw Bayesian optimization (BO). Specifically, we assume a scenario where users want to early-stop the HPO process when the expected performance improvement is not satisfactory with respect to the additional computational cost. Motivated by this scenario, we introduce \\emph{utility} in the freeze-thaw framework, a function describing the trade-off between the cost and performance that can be estimated from the user's preference data. This utility function, combined with our novel acquisition function and stopping criterion, allows us to dynamically continue training the configuration that we expect to maximally improve the utility in the future, and also automatically stop the HPO process around the maximum utility. Further, we improve the sample efficiency of existing freeze-thaw methods with transfer learning to develop a specialized surrogate model for the cost-sensitive HPO problem. We validate our algorithm on established multi-fidelity HPO benchmarks and show that it outperforms all the previous freeze-thaw BO and transfer-BO baselines we consider, while achieving a significantly better trade-off between the cost and performance.",
+    "keywords": [
+      "Cost-Sensitive",
+      "Bayesian Optimization",
+      "Multi-Fidelity HPO",
+      "PFNs",
+      "Transfer Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZUb4JpNoJe"
+  },
+  "review_fields": {
+    "comment": "Thanks for the response and clarifying the ablations. Most of my concerns have been addressed, and I'll increase my score.\n\n> So the choice is whether the extra benefit from more exploration is worth the credits that could instead be spent on other tasks.\n\nThis requires that the utility function captures preferences over spending on other future tasks, which might be hard for the user to estimate. That said, using pairwise feedback is a reasonable approach.\n\n\n> CFBO‑NT still achieves substantial improvements over all baselines that do not use transfer learning\n\nMy point was that there are faster methods for transfer learning that re-training a PFN, which could be quite expensive. Although CFBO-NT performs quite well, FSBO often outperforms it and I would imagine is much cheaper than CFBO when including retraining time.\n\n\n> Why not plan for a fixed budget?\n\nThis question was largely aimed to understand how this method compares against a method that seeks to optimally use a pre-specified budget. I.e. does stopping early help, compared to optimally using a fixed budget? The latter bakes in a user-preferred allocation for this task vs other future tasks, but I do understand that a user may not know the potential gains a priori for a given task, and so using stopping rules can be quite preferable."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

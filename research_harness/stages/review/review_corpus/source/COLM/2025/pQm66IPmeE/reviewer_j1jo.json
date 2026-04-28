@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "pQm66IPmeE",
+  "reviewer": "j1jo",
+  "paper": {
+    "title": "Traceable and Explainable Multimodal Large Language Models: An Information-Theoretic View",
+    "authors": [
+      "Zihan Huang",
+      "Junda Wu",
+      "Rohan Surana",
+      "Raghav Jain",
+      "Tong Yu",
+      "Raghavendra Addanki",
+      "David Arbour",
+      "Sungchul Kim",
+      "Julian McAuley"
+    ],
+    "abstract": "Existing multimodal large language models (MLLMs) often lack traceable and explainable mechanisms for visual-textual alignment, making it challenging to understand how textual instructions shape multimodal representations. To address this shortcoming, we propose an information-theoretic framework that clarifies how MLLMs handle and transform both text and visual inputs. In particular, we measure the visual information gain that arises from textual instructions and multimodal encodings, thereby illuminating how different modalities interact and contribute to the model’s overall processing.\nOur framework decomposes the multimodal encoding process into layer-wise mutual information measures for better explainability, quantifying the visual contribution as the difference between unconditional and text-conditional mutual information. Specifically, inspired by the Information Bottleneck framework, we introduce a Concept Bottleneck that maps high-dimensional multimodal representations into an interpretable space, enabling tractable variational upper bounds on the mutual information between visual inputs and the model’s internal states. Furthermore, we quantify the contextual contribution introduced by textual cues via an InfoNCE mechanism that contrasts multimodal representations computed with and without text guidance. This dual perspective, facilitated by tractable variational upper bounds, provides insight into how visual information is encoded and filtered by textual instructions, while also highlighting the contextual information induced and enhanced by MLLMs. \nEmpirical findings demonstrate underexplored dynamics of visual-textual interaction within MLLMs, \nunderscoring how textual instructions distinctly shape visual representations and demonstrating how visual prompts, \nwhen effectively paired with instructions, enhance multimodal understanding.",
+    "keywords": [
+      "multimodal LLM",
+      "information theory"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=pQm66IPmeE"
+  },
+  "review_fields": {
+    "summary": "The paper introduces an information-theoretic framework to understand and quantify how textual instructions shape multimodal representations in Multimodal Large Language Models (MLLMs). By leveraging principles from the Information Bottleneck and Concept Bottleneck, the authors proposed a framework that maps complex multimodal representations into interpretable latent spaces. An InfoNCE-based contrastive mechanism is then used to explicitly separate and quantify the contribution of textual input from raw visual information. Empirical studies are conducted to demonstrate the dynamics of multimodal processing, including how visual information undergoes multi-stage transformations when influenced by various types of textual instructions, and how disruptions in text input can lead to degradation or hallucinations in visual representation quality. Overall, the paper is theoretical strong and has several empirical results backed inferences that would be useful to the multimodal community.",
+    "reasons_to_accept": "1. Strong theoretical and novel framework to combine the Information bottleneck principle with a concept bottleneck approach, offering a systematic, quantitative way to disentangle and study the role of text in shaping visual representations.",
+    "reasons_to_reject": "1. It remains unclear whether the proposed framework can be easily generalized across different architectures and tasks within multimodal systems. Ideally, it would be nice to see this study across two broad categories of MLLMs, i.e. unified embeddings ones like LLAVA and cross modality attention ones like NVLM from NVIDIA. \n\n2. It would be interesting to see if inference/findings are consistent across different vision embedding models like CLIP, ImageBind, other unified embedding models. \n\n3. Need some discussion on how the findings can help us to design better multimodal architecture or training mechanism in future.",
+    "questions_to_authors": "Findings 7 and 8 are not clear. can you elaborate how the results are supporting these claims."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 963,
+    "words": 145,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/87d8f2ac-a888-4e67-85f1-ca845e773c66",
+    "error": null,
+    "scored_chars": 965
+  }
+}

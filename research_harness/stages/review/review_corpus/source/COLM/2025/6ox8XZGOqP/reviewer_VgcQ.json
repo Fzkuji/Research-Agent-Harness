@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "6ox8XZGOqP",
+  "reviewer": "VgcQ",
+  "paper": {
+    "title": "Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale",
+    "authors": [
+      "Bowen Jiang",
+      "Zhuoqun Hao",
+      "Young Min Cho",
+      "Bryan Li",
+      "Yuan Yuan",
+      "Sihao Chen",
+      "Lyle Ungar",
+      "Camillo Jose Taylor",
+      "Dan Roth"
+    ],
+    "abstract": "Large Language Models (LLMs) have emerged as personalized assistants for users across a wide range of tasks – from offering writing support to delivering tailored recommendations or consultations. Over time, the interaction history between a user and an LLM can provide extensive information about an individual’s traits and preferences. However, open questions remain on how well LLMs today can effectively leverage such history to (1) internalize the user’s inherent traits and preferences, (2) track how the user profiling and preferences evolve over time, and (3) generate personalized responses accordingly in new scenarios.\n\nIn this work, we introduce the PERSONAMEM benchmark. PERSONAMEM features curated user profiles with over 180 simulated user-LLM interaction histories, each containing up to 60 sessions of multi-turn conversations across 15 real-world tasks that require personalization. Given an in-situ user query at a specific time point, we evaluate LLM chatbots’ ability to identify the most suitable response according to the current state of the user’s profile. We observe that current LLMs still struggle to recognize the dynamic evolution in users’ profiles over time through direct prompting approaches. As a consequence, LLMs often fail to deliver responses that align with users’ current situations and preferences, with frontier models such as GPT-4.5, or Gemini-2.0 achieving only around 50% overall accuracy, suggesting room for improvement. We hope that PERSONAMEM, along with the user profile and conversation simulation pipeline, can facilitate future research in the development of truly user-aware chatbots.",
+    "keywords": [
+      "personalization",
+      "long context",
+      "memory",
+      "conversational chatbot"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=6ox8XZGOqP"
+  },
+  "review_fields": {
+    "summary": "This paper presents PERSONAMEM, a large-scale benchmark designed to evaluate the personalization capabilities of LLMs in long-context, dynamic user interactions. PERSONAMEM features over 180 user-LLM interaction histories, each with up to 60 multi-turn conversation sessions across 15 real-world tasks such as food recommendations, therapy, and travel planning. The benchmark includes 7 types of in-situ queries that test a model’s ability. The authors evaluate 12 frontier models, including GPT-4.5, Gemini 2.0, Claude, and LLaMA-3, using both discriminative (multiple-choice) and generative (log-probability ranking) settings. Results reveal significant gaps in personalization capabilities, particularly in tracking preference updates and generating responses in novel scenarios. PERSONAMEM offers a scalable and systematic framework to benchmark and analyze these challenges, with implications for future user-aware LLM design.",
+    "reasons_to_accept": "- Personalized LLMs are a key frontier in both academic and industrial NLP, and this paper addresses a major gap in standardized evaluation for this domain.\n- The PERSONAMEM dataset is rich, covering dynamic personas and temporally-evolving preferences, making it more realistic and comprehensive than prior static personalization datasets.\n- The use of structured prompts, chronological session generation, and multi-dimensional annotations enhances the dataset’s reliability and reproducibility.\n- The paper assesses 12 major LLMs under both discriminative and generative setups, analyzing not only accuracy but also performance variations across query types and memory positioning.\n- The results highlight challenges in integrating long-term user memory, particularly for novel recommendation or generalization tasks. These findings are useful for guiding future model design.",
+    "reasons_to_reject": "- Although the paper introduces a generative evaluation setting, it still relies on a multiple-choice framework that does not fully simulate open-ended real-world conversations. The \"generative\" evaluation ranks fixed candidate responses rather than assessing models’ ability to produce fully novel outputs.\n- The benchmark assesses personalized response selection but does not evaluate longer chains of personalized interactions or user satisfaction over time, which are crucial for end-user deployment.\n- While the results expose clear limitations of current models, the paper provides limited discussion on how models might be improved (e.g., via fine-tuning, memory augmentation, or explicit profiling techniques)."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 94,
+    "mixed_pct": 0,
+    "human_pct": 6,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 1599,
+    "words": 218,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3bb17551-9231-4abf-9dc1-def69eb7e36a",
+    "error": null,
+    "scored_chars": 1599
+  }
+}

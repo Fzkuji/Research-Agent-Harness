@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "x7AD0343Jz",
+  "reviewer": "qmuR",
+  "paper": {
+    "title": "Limits of Transformer Language Models on Learning to Compose Algorithms",
+    "authors": [
+      "Jonathan Thomm",
+      "Giacomo Camposampiero",
+      "Aleksandar Terzic",
+      "Michael Hersche",
+      "Bernhard Schölkopf",
+      "Abbas Rahimi"
+    ],
+    "abstract": "We analyze the capabilities of Transformer language models in learning compositional discrete tasks. To this end, we evaluate training LLaMA models and prompting GPT-4 and Gemini on four tasks demanding to learn a composition of several discrete sub-tasks. In particular, we measure how well these models can reuse primitives observable in the sub-tasks to learn the composition task. Our results indicate that compositional learning in state-of-the-art Transformer language models is highly sample inefficient: LLaMA requires more data samples than relearning all sub-tasks from scratch to learn the compositional task; in-context prompting with few samples is unreliable and fails at executing the sub-tasks or correcting the errors in multi-round code generation. Further, by leveraging complexity theory, we support these findings with a theoretical analysis focused on the sample inefficiency of gradient descent in memorizing feedforward models. We open source our code at https://github.com/IBM/limitations-lm-algorithmic-compositional-learning.",
+    "keywords": [
+      "Few-shot Compositional Learning",
+      "Compositionality",
+      "Sample Efficiency",
+      "Algorithmic Learning",
+      "Large Language Models",
+      "Transformers"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=x7AD0343Jz"
+  },
+  "review_fields": {
+    "summary": "The paper investigates the capabilities of Transformer-based language models in learning compositional discrete tasks. The authors evaluate both training LLaMA models and prompting GPT-4 and Gemini-Pro on tasks that require the learning of compositions of several discrete sub-tasks. The results indicate that these models exhibit significant sample inefficiency: LLaMA models require more data to learn compositional tasks than to relearn all sub-tasks from scratch, and in-context prompting with GPT-4 and Gemini is unreliable and often fails in multi-round code generation. The findings are supported by a theoretical analysis showing the sample inefficiency of gradient descent in memorizing feedforward models.",
+    "strengths": "- The paper evaluates both training from scratch and in-context prompting methods, providing a thorough analysis of the models' capabilities.\n- The authors introduce new algorithmic tasks designed to test compositional learning and providing a theoretical framework to support the empirical findings.\n- The study offers a deep dive into the limitations of current LLMs, supported by both empirical data and theoretical arguments, which can guide future research in learning compositional tasks.",
+    "weaknesses": "- The tasks and settings used in the experiments may not cover the full range of real-world applications, limiting the generalizability of the findings. \n- The performance and conclusions drawn are heavily dependent on the specific tasks designed by the authors, which might not fully represent other compositional learning scenarios.\n- Personally, it took me a while to understand how the given algorithmic tasks are designed and how they relate to the broader context of compositional learning. For instance, the `PERM' problem was not immediately intuitive to me.",
+    "questions": "- How well do the findings translate to practical, real-world applications beyond the synthetic tasks used in the experiments? Any specific reason to introduce new algorithmic tasks for evaluation?\n- Would the models perform differently on a broader variety of compositional tasks, particularly those that are more complex or domain-specific?\n- What specific modifications to model architecture or training strategies could be employed to enhance the sample efficiency of Transformer models in compositional learning?",
+    "limitations": "- The study focuses on a limited set of compositional tasks, which may not fully capture the diversity of problems faced in real-world applications."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 2,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 17,
+    "mixed_pct": 47,
+    "human_pct": 36,
+    "verdict": null,
+    "confidence": null,
+    "chars": 1730,
+    "words": 258,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/efe69bb4-104c-4504-bfb0-8b2e969bc0c5",
+    "error": null,
+    "scored_chars": 1731
+  }
+}

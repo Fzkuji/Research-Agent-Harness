@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "My7lkRNnL9",
+  "reviewer": "sGVa",
+  "paper": {
+    "title": "Forward Learning with Top-Down Feedback: Empirical and Analytical Characterization",
+    "authors": [
+      "Ravi Francesco Srinivasan",
+      "Francesca Mignacco",
+      "Martino Sorbaro",
+      "Maria Refinetti",
+      "Avi Cooper",
+      "Gabriel Kreiman",
+      "Giorgia Dellaferrera"
+    ],
+    "abstract": "\"Forward-only\" algorithms, which train neural networks while avoiding a backward pass, have recently gained attention as a way of solving the biologically unrealistic aspects of backpropagation. Here, we first address compelling challenges related to the \"forward-only\" rules, which include reducing the performance gap with backpropagation and providing an analytical understanding of their dynamics. To this end, we show that the forward-only algorithm with top-down feedback is well-approximated by an \"adaptive-feedback-alignment\" algorithm, and we analytically track its performance during learning in a prototype high-dimensional setting. Then, we compare different versions of forward-only algorithms, focusing on the Forward-Forward and PEPITA frameworks, and we show that they share the same learning principles. Overall, our work unveils the connections between three key neuro-inspired learning rules, providing a link between \"forward-only\" algorithms, i.e., Forward-Forward and PEPITA, and an approximation of backpropagation, i.e., Feedback Alignment.",
+    "keywords": [
+      "Forward-only learning",
+      "Biologically inspired learning",
+      "Artificial neural networks",
+      "Analytical characterization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=My7lkRNnL9"
+  },
+  "review_fields": {
+    "summary": "Forward-only learning algorithms are an alternative to backpropagation (BP), which are potentially more biologically plausible, more memory efficient, and more computationally efficient.\nTwo of these forward-only learning algorithms are Forward-Forward (FF) and PEPITA, the Present the Error to Perturb the Input To modulate the Activity learning rule; both algorithms rely on two forward passes to learn, rather than a forward and a backward pass.\nHowever, the learning dynamics of these algorithms are not well understood, and both still include components that are biologically implausible.\nIn this work, the authors offers an explanation of how PEPITA learns by connecting them to feedback alignment.\nThey then use their insight to improve the performance of PEPITA by combining it with weight mirroring, a technique to improve performance of feedback alignment, as well as weight decay and activity normalization.\nFinally, they propose PEPITA-time-local, an alternative learning rule that improves the biological plausibility of PEPITA by keeping updates local in time (in addition to space), at the cost of some accuracy.",
+    "strengths": "- This paper exposes a novel connection between feedback alignment and forward-only algorithms. This connection is particularly interesting because both type of algorithms have improving biological plausibility as a principal goal; exposing underlying relationships may mutually benefit researchers for both types of algorithms. In fact, the authors have already taken a step in this direction, by empirically showing that weight mirroring, a technique developed for feedback alignment, can also be used to improve the performance of PEPITA.\n- As the authors also point out, while forward-only learning algorithms have gained traction in recent years, and are gradually catching up to the performance of backpropagation on increasingly complex tasks, theoretical understanding of their learning dynamics is mostly lacking; work that shed light on how forward-only learning works is very welcome.\n- The experiments performed are extensive, and the results are convincing.",
+    "weaknesses": "- The theoretical analysis focuses only on shallow 2-layer networks, and I’m uncertain that the Adaptive Feedback rule can be easily extended to analyze deeper networks, as the error signal has to pass through multiple hidden layers either forwards (forward-only) or backwards (feedback alignment). This limits the applicability of the analysis, making it disjoint from the experimental results on multi-layer PEPITA networks.",
+    "questions": "- Figure 3 shows the performance of PEPITA-Hebbian, PEPITA + weight decay, and PEPITA + weight mirroring on CIFAR-10. Do the same trends hold for MNIST and CIFAR-100?\n\n- I’m a bit confused on how much the PEPITA-Hebbian approximation impacts the accuracy of the model. Figure 3a shows that the impact is very small on CIFAR-10, maintaining over 50% accuracy on CIFAR-10 for 1, 2, and 3 hidden layers, but in Figure S1 the accuracy of a 1-layer PEPITA-TL model drops to around 40%. Could you explain why this is? If this is due to hyperparameter differences, how well would a non-TL PEPITA model compare in performance under the same hypersparameters/conditions as those used for Figure S1?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "no_result",
+    "error": "extraction returned no ai_pct: {'ai_pct': None, 'mixed_pct': None, 'human_pct': None, 'verdict': None, 'confidence': None, 'chars': 2089, 'words': 319, 'ai_vocab': None, 'url': 'https://app.gptzero.me/documents/745818ec-319e-4ad7-a398-a512c50eb661'}",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": null,
+    "words": null,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/745818ec-319e-4ad7-a398-a512c50eb661",
+    "scored_chars": 2089
+  }
+}

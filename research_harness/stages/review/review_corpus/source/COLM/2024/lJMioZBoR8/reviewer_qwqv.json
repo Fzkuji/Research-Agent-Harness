@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "lJMioZBoR8",
+  "reviewer": "qwqv",
+  "paper": {
+    "title": "Rejection Improves Reliability: Training LLMs to Refuse Unknown Questions Using RL from Knowledge Feedback",
+    "authors": [
+      "Hongshen Xu",
+      "Zichen Zhu",
+      "Situo Zhang",
+      "Da Ma",
+      "Shuai Fan",
+      "Lu Chen",
+      "Kai Yu"
+    ],
+    "abstract": "Large Language Models (LLMs) often generate erroneous outputs, known as hallucinations, due to their limitations in discerning questions beyond their knowledge scope. While addressing hallucination has been a focal point in research, previous efforts primarily concentrate on enhancing correctness without giving due consideration to the significance of rejection mechanisms. In this paper, we conduct a comprehensive examination of the role of rejection, introducing the alignment goal of model reliability along with corresponding metrics. This goal requires the model to provide accurate responses while adeptly rejecting questions exceeding its knowledge boundaries, thereby minimizing hallucinations. To improve the inherent reliability of LLMs, we present a novel alignment framework called Reinforcement Learning from Knowledge Feedback (RLKF). RLKF leverages knowledge feedback to dynamically determine the model's knowledge boundary and trains a reliable reward model to encourage the rejection of out-of-knowledge questions. Experimental results on mathematical and question answering datasets affirm the substantial efficacy of RLKF in significantly enhancing LLM reliability.",
+    "keywords": [
+      "hallucination",
+      "alignment",
+      "RLKF"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=lJMioZBoR8"
+  },
+  "review_fields": {
+    "summary": "One of the big problems with LMs is that they constantly hallucinate. They do this a lot when given questions that they don't know the answer to. Some of these questions that are particularly hard for LMs are arithmetic questions where the inputs are more than just a digit or two long. \n\nThe authors here propose an RL framework to remedy this issue. This framework trains the model to prefer saying \"I don't know\" versus outputting an incorrect answer. \n\nThey have experiments on finetuned Llama-7b models, on two arithmetic datasets (GSM8K and another one they generate for this paper). They have a lot of good baselines including ICL and SFT. They show that their method is superior. \n\n\nNits: \n1. I feel like a bunch of the math was unnecessary and could've been explain in a few words: eq 1, equation at bottom of page 2, ...\n2. Legend font in Fig 5 could be better if it was bigger\n3. What does the highlighting in Tab 1/2 of the \"Rely\" column mean? Explain in caption.",
+    "reasons_to_accept": "1. Very interesting new solution for a very important problem in language modeling which might substantially improve LMs. \n2. Thorough baselines + analysis",
+    "reasons_to_reject": "1. The authors only show results on arithmetic datasets. Would this method also work for other subjects that lead to hallucination, such as asking about recent events? Maybe good to talk about that in the conclusion.\n2. I feel like this presented method would be just *part of* a real-life system, with the other part being the calculator that would actually compute the correct answer. Given that, I think it would be useful to show the performance of an LM+calculator system, with and without your method. It could actually be that a baseline LM, not finetuned with your method, but with access to a calculator and a few in-context examples, would be substantially better than an LM with calculator but finetuned with your method. Can you show that an LM+calculator+your method beats just LM+calculator?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:35:38Z",
+    "migrated_from_v1_at": "2026-04-27T15:35:38Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 961,
+    "words": 157,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/5755d51b-8b79-44b3-813d-4c72d509ac0b",
+    "error": null,
+    "scored_chars": 962
+  }
+}

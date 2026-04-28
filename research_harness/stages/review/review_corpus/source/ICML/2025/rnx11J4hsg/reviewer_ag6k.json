@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "rnx11J4hsg",
+  "reviewer": "ag6k",
+  "paper": {
+    "title": "HiRemate: Hierarchical Approach for Efficient Re-materialization of Neural Networks",
+    "authors": [
+      "Julia Gusak",
+      "Xunyi Zhao",
+      "Théotime Le Hellard",
+      "Zhe LI",
+      "Lionel Eyraud-Dubois",
+      "Olivier Beaumont"
+    ],
+    "abstract": "Training deep neural networks (DNNs) on memory-limited GPUs is challenging,  as storing intermediate activations often exceeds available memory. Re-materialization, a technique that preserves exact computations, addresses this by selectively recomputing activations instead of storing them. However, existing methods either fail to scale, lack generality, or introduce excessive execution overhead. We introduce ${\\mbox{HiRemate}}$ a ${\\textit hierarchical}$ re-materialization framework that recursively partitions  large computation graphs, applies optimized solvers at multiple levels, and merges solutions into a global efficient training schedule. This enables scalability to significantly larger graphs than prior ILP-based methods while keeping runtime overhead low. Designed for single-GPU models and activation re-materialization, HiRemate extends  the feasibility of training networks with thousands of graph nodes, surpassing  prior methods in both efficiency and scalability. Experiments on various types of networks yield up to 50-70%  memory reduction with only 10-15% overhead, closely matching optimal solutions while significantly reducing solver time. Seamlessly integrating with PyTorch Autograd, HiRemate requires almost no  code change to use,  enabling broad adoption in memory-constrained deep learning.",
+    "keywords": [
+      "Rematerialization",
+      "Checkpointing",
+      "Memory-Efficient Training",
+      "Neural Networks",
+      "PyTorch",
+      "Integer Linear Programming",
+      "Training"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rnx11J4hsg"
+  },
+  "review_fields": {
+    "summary": "This paper develops a procedure for hierarchically partitioning a data flow graph in order to find a schedule for selectively recomputing neural network activations so that memory usage during backpropagation fits within a specified budget.",
+    "claims_and_evidence": "The proposed method is a modular framework that delivers practical benefits over recent competing approaches.",
+    "methods_and_evaluation_criteria": "Experiments measure peak memory usage and iteration time during training for HiRemate in comparison to recent related work.  Across a variety of architectures and batch sizes, HiRemate appears to consistently outperform (faster iteration time at any fixed peak memory) TW-Remate and Rockmate.",
+    "experimental_designs_or_analyses": "See methods and evaluation above.",
+    "relation_to_broader_scientific_literature": "Appears to be a consistent, but incremental improvement over recent work.",
+    "other_strengths_and_weaknesses": "With HiRemate in use, scaling batch size appears to (approximately) linearly increase both iteration time and peak memory usage (e.g., as in Figures 11 and 12).  Within a limited regime, this same behavior would be expected of a naive strategy that simply reduces batch size in order to fit within a memory budget; i.e., to achieve the same effect of one large batch, two smaller batches could be run in series, accumulating gradients for both before updating parameters.  Such a strategy would not pay any penalty for recomputation, but effectiveness would depend on whether the smaller batches fill the available parallel computational resources.  How does this naive strategy compare to HiRemate?  Specifically, at what point (what batch size) does HiRemate become more efficient than treating a larger batch as multiple smaller batches?Understanding the trade-off in comparison to this naive strategy seems crucial to making a practical argument for using HiRemate.",
+    "other_comments_or_suggestions": "See strengths and weaknesses above.",
+    "questions_for_authors": "See strengths and weaknesses above."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

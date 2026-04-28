@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "B1xSperKvH",
+  "reviewer": "3",
+  "paper": {
+    "title": "Enabling Deep Spiking Neural Networks with Hybrid Conversion and Spike Timing Dependent Backpropagation",
+    "authors": [
+      "Nitin Rathi",
+      "Gopalakrishnan Srinivasan",
+      "Priyadarshini Panda",
+      "Kaushik Roy"
+    ],
+    "abstract": "Spiking Neural Networks (SNNs) operate with asynchronous discrete events (or spikes) which can potentially lead to higher energy-efficiency in neuromorphic hardware implementations. Many works have shown that an SNN for inference can be formed by copying the weights from a trained Artificial Neural Network (ANN) and setting the firing threshold for each layer as the maximum input received in that layer. These type of converted SNNs require a large number of time steps to achieve competitive accuracy which diminishes the energy savings. The number of time steps can be reduced by training SNNs with spike-based backpropagation from scratch, but that is computationally expensive and slow. To address these challenges, we present a computationally-efficient training technique for deep SNNs. We propose a hybrid training methodology: 1) take a converted SNN and use its weights and thresholds as an initialization step for spike-based backpropagation, and 2) perform incremental spike-timing dependent backpropagation (STDB) on this carefully initialized network to obtain an SNN that converges within few epochs and requires fewer time steps for input processing. STDB is performed with a novel surrogate gradient function defined using neuron's spike time. The weight update is proportional to the difference in spike timing between the current time step and the most recent time step the neuron generated an output spike. The SNNs trained with our hybrid conversion-and-STDB training perform at $10{\\times}{-}25{\\times}$ fewer number of time steps and achieve similar accuracy compared to purely converted SNNs. The proposed training methodology converges in less than $20$ epochs of spike-based backpropagation for most standard image classification datasets, thereby greatly reducing the training complexity compared to training SNNs from scratch. We perform experiments on CIFAR-10, CIFAR-100 and ImageNet datasets for both VGG and ResNet architectures. We achieve top-1 accuracy of $65.19\\%$ for ImageNet dataset on SNN with $250$ time steps, which is $10{\\times}$ faster compared to converted SNNs with similar accuracy.",
+    "keywords": [
+      "spiking neural networks",
+      "ann-snn conversion",
+      "spike-based backpropagation",
+      "imagenet"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=B1xSperKvH"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "This paper proposes methods to initialize and train spiking NNs (SNNs) as an alternative to ANNs, not driven primarily by improved loss or generalization, but by energy efficiency improvements derived from timing-event based sparse operation rather than asynchronous sweeps. The backpropagation method introduced is sensible, as are the experiments on known datasets to show its effectiveness. The paper is well written (apart from the miniscule Figure 3 containing the main result). \nI recommend acceptance, with caveats: the energy performance is actually not directly calculated, but speculatively estimated, it depends on the computational architecture chosen to implement the respective networks. I point out that ANNs need to be trained first to properly initialize an SNN, so the relative training effort claimed is less impressive, but energy performance does count in actual operational practice - training is (or should) be a small fraction of that."
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

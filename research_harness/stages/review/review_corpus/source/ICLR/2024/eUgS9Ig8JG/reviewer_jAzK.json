@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "eUgS9Ig8JG",
+  "reviewer": "jAzK",
+  "paper": {
+    "title": "SaNN: Simple Yet Powerful Simplicial-aware Neural Networks",
+    "authors": [
+      "Sravanthi Gurugubelli",
+      "Sundeep Prabhakar Chepuri"
+    ],
+    "abstract": "Simplicial neural networks (SNNs) are deep models for higher-order graph representation learning. SNNs learn low-dimensional embeddings of simplices in a simplicial complex by aggregating features of their respective upper, lower, boundary, and coboundary adjacent simplices. The aggregation in SNNs is carried out during training. Since the number of simplices of various orders in a simplicial complex is significantly large, the memory and training-time requirement in SNNs is enormous. In this work, we propose a scalable simplicial-aware neural network (SaNN) model with a constant run-time and memory requirements independent of the size of the simplicial complex and the density of interactions in it. SaNN is based on pre-aggregated simplicial-aware features as inputs to a neural network, so it has a strong simplicial-structural inductive bias. We provide theoretical conditions under which SaNN is provably more powerful than the Weisfeiler-Lehman (WL) graph isomorphism test and as powerful as the simplicial Weisfeiler-Lehman (SWL) test. We also show that SaNN is permutation and orientation equivariant and satisfies simplicial-awareness of the highest order in a simplicial complex. We demonstrate via numerical experiments that despite being computationally economical, the proposed model achieves state-of-the-art performance in predicting trajectories,  simplicial closures, and classifying graphs.",
+    "keywords": [
+      "Graph Neural Networks",
+      "Higher-order Representation Learning",
+      "Simplicial Complexes",
+      "Simplicial Neural Networks",
+      "Weisfeiler-Lehman Isomorphism Test"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=eUgS9Ig8JG"
+  },
+  "review_fields": {
+    "summary": "The paper describes an efficient, and effective approach for learning representations for simplices in a simplicial complex. The central idea is that of using injective functions for aggregating simplicial features, as it ensures that the embeddings are unique. The simplicial features are aggregated over upper, lower, boundary and co-boundary adjacencies. The paper provides precise definitions and theorems and statements on the properties of the networks. The proofs are summarized in the main body and provided in full detail in the appendices. The method is further experimentally validated and shows that the proposed model (SaNN) is both efficients (significantly faster than any of the other baselines) and effective (performance within the uncertainty intervals on accurcies, or above the baselines).",
+    "strengths": "1. I am impressed by the clarity of presentation in the paper. I find talking and reading about simplicial complex often a messy business given all the types of simplices and adjacencies, and the abstract notion in the first place. It is clear that the authors though well about how to present the math. This includes proper use of figures.\n2. The goal of the paper itself -efficiency whilst not compromising on expressivity- is relevant and important, and it is great to see the authors succeeding in reaching this goal.\n3. I appreciate the summary of the proofs after the formal statements.\n4. Next to a sound theoretical exposition, the experiments are thorough as well and include many ablation studies that are used to distill insightful take home messages.",
+    "weaknesses": "I only have 1 important concern:\n\n1. Although the main principles are clear, I am still confused about the actual architecture/predictive models. In the end we have equation 8, but it describes a representation for each of the $N$ sets of $k$-simplices, each consisting of the $N_k$ simplices. It is unclear how to distill a global prediction out of all these representations, as would be needed for e.g. the classification tasks. Details on how the architectural design for each of the benchmarks is missing.",
+    "questions": "Could you respond to the above concern, and additionally address the following questions/comments?\n\n2. On several occasions the notion of \"non-deep baselines\" is used. What is meant by this. Could you clarify what non-deep means here, which methods are these?\n\n3. In section 2 when presenting the symbols it is mentioned that $k=1,2,\\dots,N+1$. Does $k$ always run up all the way to $N+1$?\n\n4. In section 4. The sentence that starts with \"The theorem implies that any arbitrary ...\" is extremely long and hard to comprehend. I suggest to split it 2 or 3 sentence to improve readability.\n\n5. Just above property 1 it is mentioned \"other commonly used sum, mean, or max read-out functions are not injective\" I am not fully sure I understand it correctly. The paragraph above explains that sum aggregation is the best injective aggregator, in contrast to mean aggregation. I think the statement that I just quoted is about aggregating over the different $\\mathbf{Y}$'s? Perhaps this can be clarified.\n\n6. In the tables: since colors red and blue are used you might as well color the text in the caption as well. I.e. \"The {\\color{red}first} and {\\color{blue}second} best performances ...\"\n\n7. The insights section says \"The deep models are observed to perform exceptionally better than logistic regression\", where do I see this? Logistic regression taking what as input? Could this be clarified.\n\nThank you for considering my comments and questions."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2721,
+    "words": 448,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8ca1233a-84ee-42fc-895f-7c86f482ccc8",
+    "error": null,
+    "scored_chars": 2721
+  }
+}

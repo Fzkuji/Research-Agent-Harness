@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "gOG9Zoyn4R",
+  "reviewer": "hkNH",
+  "paper": {
+    "title": "KLASS: KL-Guided Fast Inference in Masked Diffusion Models",
+    "authors": [
+      "Seo Hyun Kim",
+      "Sunwoo Hong",
+      "Hojung Jung",
+      "Youngrok Park",
+      "Se-Young Yun"
+    ],
+    "abstract": "Masked diffusion models have demonstrated competitive results on various tasks including language generation. However, due to its iterative refinement process, the inference is often bottlenecked by slow and static sampling speed. To overcome this problem, we introduce `KL-Adaptive Stability Sampling' (KLASS), a fast yet effective sampling method that exploits token-level KL divergence to identify stable, high-confidence predictions. By unmasking multiple tokens in each iteration without any additional model training, our approach speeds up generation significantly while maintaining sample quality. On reasoning benchmarks, KLASS achieves up to $2.78\\times$ wall-clock speedups while improving performance over standard greedy decoding, attaining state-of-the-art results among diffusion-based samplers. We further validate KLASS across diverse domains, including text, image, and molecular generation, showing its effectiveness as a broadly applicable sampler across different models.",
+    "keywords": [
+      "Generative Models",
+      "Efficient Inference Methods"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=gOG9Zoyn4R"
+  },
+  "review_fields": {
+    "summary": "This paper introduces KL-Adaptive Stability Sampling (KLASS), a novel training-free sampler designed to accelerate inference in masked diffusion models. The method dynamically unmasks multiple \"stable\" tokens in each iteration by leveraging token-level Kullback-Leibler (KL) divergence and model confidence. The authors provide theoretical justification and extensive empirical validation across various domains, including reasoning, text generation, image synthesis, and molecular generation, demonstrating significant speedups and, in many cases, improved performance.",
+    "strengths_and_weaknesses": "**Strengths**\n\n* Novel and Intuitive Method: It intelligently exploits the internal dynamics of the diffusion process to identify which parts of the sequence have converged, allowing for more aggressive and efficient unmasking. This contrasts with more rigid, pre-defined scheduling or methods that require external \"planner\" models.\n\n* Strong and Broad Empirical Validation: The paper's most significant strength lies in its comprehensive experimental evaluation. The authors test KLASS across a remarkably diverse set of tasks and models:\n    1. Reasoning and Code Generation (GSM8K, MATH, HumanEval, MBPP): Demonstrates not just a 2x speedup but also an improvement in accuracy, which is a compelling result.\n    2. Open-Ended Text Generation: Shows improved MAUVE scores and reduced perplexity, indicating higher-quality text generation.\n    3. Image and Molecular Generation: The method's effectiveness is further solidified by its successful application to different modalities, achieving better FID/IS scores for images and higher reward metrics for molecules.\n\n* Training-Free and Efficient: KLASS is a plug-and-play sampler that requires no additional training or architectural modifications. This is a significant practical advantage over methods that require auxiliary models, making it easy to adopt and implement with existing masked diffusion models.\n\n* Theoretical Justification: The paper provides a theoretical argument to ground the heuristic. The theorem formally links suboptimal token choices to high KL divergence under context shifts, providing a principled reason why filtering by KL stability should lead to better and more robust generation.\n\n* Thorough Ablation Studies: The authors include valuable ablation studies that analyze the interplay between confidence and KL thresholds and the benefit of multi-token unmasking over single-token strategies.\n\n**Weaknesses**\n* Hyperparameter Sensitivity: The effectiveness of KLASS appears to be dependent on several key hyperparameters: the KL threshold, the confidence threshold, and the history length. The paper provides the values used for each experiment but could benefit from a more in-depth analysis of the sensitivity to these parameters. A more detailed discussion on how to select these values for new tasks or models would enhance the practical utility of the paper.\n\n* Computational Overhead of KL Divergence: While the paper argues that the overhead of computing KL divergence is minimal compared to the cost of a full diffusion step, this overhead is not zero. In scenarios with very large vocabularies, calculating KL divergence for every token at every step could become a non-trivial computational cost. A more detailed analysis of this overhead in practice, especially in relation to vocabulary size, would be beneficial.\n\n* Comparison to Other Adaptive Sampling Methods: While the paper compares against several strong baselines, the field of accelerating diffusion models is rapidly evolving. The \"Related Works\" section could be strengthened by a more direct comparison to other contemporary adaptive sampling techniques, even if they are for continuous diffusion, to better contextualize the contribution. For instance, methods that dynamically adjust the number of sampling steps based on other criteria could be relevant points of comparison.\n\n* Were the inference time costs measured in the experiments? It would be insightful to report wall clock times.\n\nTypo on line 142 (\"reasoining\")",
+    "final_justification": "updating score from 4 to 5 upon reading the rebuttal, but do note my low confidence in this topic."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 1,
+    "quality": 2,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

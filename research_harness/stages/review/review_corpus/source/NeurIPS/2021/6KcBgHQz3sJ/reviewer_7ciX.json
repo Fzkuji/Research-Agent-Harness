@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "6KcBgHQz3sJ",
+  "reviewer": "7ciX",
+  "paper": {
+    "title": "Risk Minimization from Adaptively Collected Data: Guarantees for Supervised and Policy Learning",
+    "authors": [
+      "Aurelien Bibaut",
+      "Nathan Kallus",
+      "Maria Dimakopoulou",
+      "Antoine Chambaz",
+      "Mark van der Laan"
+    ],
+    "abstract": "Empirical risk minimization (ERM) is the workhorse of machine learning, whether for classification and regression or for off-policy policy learning, but its model-agnostic guarantees can fail when we use adaptively collected data, such as the result of running a contextual bandit algorithm. We study a generic importance sampling weighted ERM algorithm for using adaptively collected data to minimize the average of a loss function over a hypothesis class and provide first-of-their-kind generalization guarantees and fast convergence rates. Our results are based on a new maximal inequality that carefully leverages the importance sampling structure to obtain rates with the good dependence on the exploration rate in the data. For regression, we provide fast rates that leverage the strong convexity of squared-error loss. For policy learning, we provide regret guarantees that close an open gap in the existing literature whenever exploration decays to zero, as is the case for bandit-collected data. An empirical investigation validates our theory.",
+    "keywords": [
+      "empirical risk minimization",
+      "maximal inequality",
+      "metric entropy",
+      "fast rates",
+      "policy learning",
+      "empirical process theory",
+      "adaptively collected data"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=6KcBgHQz3sJ"
+  },
+  "review_fields": {
+    "summary": "The paper considers empirical risk minimization when data is generated from a markov decision process.\nTheir particular framework, called stochastic-contextual-bandit, covers several applications such as e-commerce and policy making.\nThe paper is mostly theoretical: a uniform bound on empirical sums over classes of functions with controlled bracketing numbers is given. Then this general result is applied to two different loss functions (least squares regression and one other related to policy learning).  In both settings, slow and fast rates are obtained depending on certain assumptions on the model.",
+    "main_review": "Let me say from the start that I like this paper very much. It is well written, the results are interesting and novel, and the mathematics are well-educated. I have several questions and concerns that I hope will help the authors to improve their work.\n\n\n1. I am not sure the context of Markov decision process is useful in their proof of Theorem 1. Would it be possible to extend their results? In a more general context where the triplet O = (x,a,y) would no longer be necessary. In this way, (a) the proof’s arguments could become clearer  and (b) I also think that a more general framework could help in including more examples such as importance sampling (see for instance eq. (6) in Portier and Delyon. \"Asymptotic optimality of adaptive importance sampling.\" NeurIPS. 2018, which seems to fall in the authors framework). Finally, the application to the context of Markov decision process would become less obvious than in the current version where Theorem 2 and 3 are direct corollary of Theorem 1.\n\n2. It is difficult to see how the proposed bound compares with known basic results. For instance, if one is interested in the simple case when the class of functions is made of one single element, what would the authors recommend to use instead of their bound? How would it compare to their bound? In the same line of remarks, what is the closest results to their results in the iid setting?\n\n3. While the literature review seems to have been done seriously, it is difficult to understand because it is written at an expert level. The framework described by the authors seems to be valid to post-process the data. Is this context different from standard online policy estimation such as in the classical reinforce algorithm? Being not very familiar with the contextual bandit framework, I had some issues in understanding the context clearly. I would suggest the authors be more specific about the applications.\n\n4. The process xi_t is hard to understand and I believe it is not needed in the applications of their results. I would suggest simplifying the paper by removing to the supplement everything that is related to this process. If I am wrong and xi_t is useful then some remarks and examples should be given. In the event that xi_t is useless, then I would recommend simply writing f(O) rather than xi(f)(O).\n\n5. The statement of Th1 is a bit strange due to the definition (or rather assertion), concerning gamma_T tilde inside the theorem. I suppose another way is possible.\n \n6. Include a discussion about the validity of assumption 1. It seems to be related to the exploration in bandits algorithm but it is difficult to understand for non specialists. The behavior in T^beta of g^* / g_T is a claim that I cannot verify. Since this is used later in the paper to compare with the existing literature, I would recommend to give mode details;\n\n7. The simulation study shows an advantage of ISWERM (over competitor) when using the LASSO and no significant difference for other considered methods. ISWERM is implemented with g^* = 1 and the model is then evaluated with the same g^*, I wonder what the role of that choice is. More generally, I believe that the role of g^* could have an impact on the outcome. Could the authors comment on this point? In example 1 and 2, the choice of g^* seems to be arbitrary but it certainly influences the results. Is there any recommendation to choose it?\n\n8. The variance bound, Assumption 4, is given without any explanation or references, contrary to the margin assumptions.\n\nTypos:\nTH1 There is an epsilon in the bound of Th1 which should be an r I guess.\nline 156 the the\nline 151 classes of classes\n\n##############SUPLEMENT###############\n\nThe supplementary material is well organized.\nAs far as I can check, the proof is valid.\n\nI would suggest giving more details in some places such as:\n- at the beginning of the proof, the authors combine Markov inequality and some properties of their function psi without saying it.\n- Page 16, the given chaining decomposition is confusing because of the presence of two different index s and t (one of them seems to be useless).\n- The definition of u^{j,f} equal to v^{j,k(j,f)} is surprising as the index t has been removed. Is it a short cut?\n- The definition of Delta (indexed by t rather than s) is also surprising.\n- I think the authors could be clearer on the meaning of their inequalities between functions (such as in the definition of tau), I\n- Perhaps some explanations on the use of tau in the proof would be welcome\n- When adding up the bounds, check they all are correct.\n- At the beginning of the proof of Th2, there is some redundancy in saying that the diameter assumption is used."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

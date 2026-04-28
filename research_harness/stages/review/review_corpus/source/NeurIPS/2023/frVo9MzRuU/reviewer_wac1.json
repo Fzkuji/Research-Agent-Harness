@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "frVo9MzRuU",
+  "reviewer": "wac1",
+  "paper": {
+    "title": "Compositional Abilities Emerge Multiplicatively: Exploring Diffusion Models on a Synthetic Task",
+    "authors": [
+      "Maya Okawa",
+      "Ekdeep Singh Lubana",
+      "Robert P. Dick",
+      "Hidenori Tanaka"
+    ],
+    "abstract": "Modern generative models exhibit unprecedented capabilities to generate extremely realistic data. However, given the inherent compositionality of the real world, reliable use of these models in practical applications requires that they exhibit the capability to compose a novel set of concepts to generate outputs not seen in the training data set. Prior work demonstrates that recent diffusion models do exhibit intriguing compositional generalization abilities, but also fail unpredictably. Motivated by this, we perform a controlled study for understanding compositional generalization in conditional diffusion models in a synthetic setting, varying different attributes of the training data and measuring the model's ability to generate samples out-of-distribution. Our results show: (i) the order in which the ability to generate samples from a concept and compose them emerges is governed by the structure of the underlying data-generating process; (ii) performance on compositional tasks exhibits a sudden \"emergence\" due to multiplicative reliance on the performance of constituent tasks, partially explaining emergent phenomena seen in generative models; and (iii) composing concepts with lower frequency in the training data to generate out-of-distribution samples requires considerably more optimization steps compared to generating in-distribution samples. Overall, our study lays a foundation for understanding emergent capabilities and compositionality in generative models from a data-centric perspective.",
+    "keywords": [
+      "Diffusion model; Emergence; Emergent capabilities; Science of deep learning; Mechanistic interpretability"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=frVo9MzRuU"
+  },
+  "review_fields": {
+    "summary": "This paper proposes to empirically studied how compositional structure emerges in diffusion model. The paper proposes the abstraction of concept graphs, and illustrates how diffusion models first learn to fit the training data before compositionally generalizing. The paper illustrates how diffusion models have difficulty disentangling data and modeling low data concepts",
+    "strengths": "- The paper is clearly written and the color coding through the text and figures greatly helped comprehension of the paper\n- I enjoyed the introduction of concept graphs and the illustration of compositional distance with respect to graph\n- The analysis in the paper is quite enlightening, illustrating how diffusion models first fit in distribution before generalizing out of distribution, as well as its struggles on finding confounding factors between variable and low data variables.",
+    "weaknesses": "- The evaluation setting is rather simple and focuses on a single synthetic dataset with 3 classes of attributes\n- It would be good to study generalization both to more complex images (for instance photorealistic synthetic scenes rendered using something like Kubric) as well as to more factors larger than 3\n- In practice, a lot of concepts in the world follow the Zipf distribution -- it would be interesting to analyze that\n- It would also be interesting to see how syntatic form would effect compositional generalization\n- Some theoretical analysis on compositional generalization would also be interesting"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1099,
+    "words": 175,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/31a5f3b8-033c-40ca-8ebb-bb34e088dae3",
+    "error": null,
+    "scored_chars": 1099
+  }
+}

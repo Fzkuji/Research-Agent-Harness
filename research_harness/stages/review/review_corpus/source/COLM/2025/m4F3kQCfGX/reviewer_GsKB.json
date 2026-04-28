@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "m4F3kQCfGX",
+  "reviewer": "GsKB",
+  "paper": {
+    "title": "LLM Unlearning Without an Expert Curated Dataset",
+    "authors": [
+      "Xiaoyuan Zhu",
+      "Muru Zhang",
+      "Ollie Liu",
+      "Robin Jia",
+      "Willie Neiswanger"
+    ],
+    "abstract": "Modern large language models often encode sensitive, harmful, or copyrighted knowledge, raising the need for post-hoc unlearning—the ability to remove specific domains of knowledge from a model without full retraining. A major bottleneck in current unlearning pipelines is constructing effective forget sets—datasets that approximate the target domain and guide the model to forget it. In this work, we introduce a scalable, automated approach to generate high-quality forget sets using language models themselves. Our method synthesizes textbook-style data through a structured prompting pipeline, requiring only a domain name as input. Through experiments on unlearning biosecurity, cybersecurity, and Harry Potter novels, we show that our synthetic datasets consistently outperform the baseline synthetic alternatives and are comparable to the expert-curated ones. Additionally, ablation studies reveal that the multi-step generation pipeline significantly boosts data diversity, which in turn improves unlearning utility. Overall, our findings suggest that synthetic datasets offer a promising path toward practical, scalable unlearning for a wide range of emerging domains without the need for manual intervention. We release our code and dataset at [https://github.com/xyzhu123/Synthetic_Textbook](https://github.com/xyzhu123/Synthetic_Textbook).",
+    "keywords": [
+      "NLP",
+      "Machine Unlearning",
+      "Synthetic Data Generation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=m4F3kQCfGX"
+  },
+  "review_fields": {
+    "summary": "This study investigates how well \"unlearning\" (in particular, removing information about a particular topic from an LLM) can be accomplished using an automatically constructed dataset rather than a human-curated set.  The authors demonstrate the feasibility of their technique (called \"Synthetic Textbook Generation\") while comparing it to the human-curated forget set baseline and two other baselines: generation of sentences/facts from a keyword and extracting relevant data samples from a large corpus (in this case \"The Pile\") via filtering.  All the approaches use GPT-4o-mini to accomplish the generation or filtering.\n\nOverall, the biggest takeaway is that the synthetic techniques are comparable to the unlearning using an expert-curated dataset.  By choosing three top \"unlearning\" methods and two strong open source LLMs, the authors steer clear of trying to provide a \"best\" method/model overall, and instead show that their dataset leads to stronger performance than either of the baselines and usually is very close (or exceeding) the human dataset for each technique and model.  The authors cover a breadth of topics by choosing two technical topic areas and a literary topic.  They also perform an ablation study on their (somewhat complicated) textbook generation method to show that each step adds something.  And they even ablate the GPT model by using Mistral and Llama (their two models) to do the data generation, to good effect.\n\nThere are a few downsides to this paper.  The large tables of numbers (Tables 1-3) present so much information it is hard to digest them and the interpretation of the tables (part of sections 3.3 and 3.4) is much too brief.  They do offer an \"average\" (Unlearn Utility) which I think is a summary of the other metrics in the table, but the explanation of it is not fully clear (where do the two S values come from?).  They also discuss Pareto frontiers but the graphs in Figure 2 are quite hard to interpret as such, and their 3 line summary is not sufficient.\n\nI consider this paper a worthy addition to the conference and recommend it is accepted.",
+    "reasons_to_accept": "- strong results over reasonable baselines, competitive with a human baseline\n- a varied selection of methods, models, and topics\n- convincing ablation study",
+    "reasons_to_reject": "- explanations and interpretation of results are a bit meager in some places, though the numbers in general seem to show the right trends\n- reliance on GPT-4o-mini for the main technique (though this is mitigated by Section 4.3)",
+    "questions_to_authors": "- Is the unlearn utility (Equation 2) in fact a weighted average of the other metrics?  Can you give more details on how the S_f and S_r are calculated?\n- Figure 2 - I don't see the Pareto frontier --- is it defined by the hollow markers?  Are some missing?  It is very hard to see these... maybe the graphs are just too noisy?\n- what prompts are used for the filtering and keyword generation baselines?"
+  },
+  "review_metadata": {
+    "rating": 9,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 789,
+    "words": 139,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e0e6fc94-216f-4c1d-904e-468f9190357d",
+    "error": null,
+    "scored_chars": 792
+  }
+}

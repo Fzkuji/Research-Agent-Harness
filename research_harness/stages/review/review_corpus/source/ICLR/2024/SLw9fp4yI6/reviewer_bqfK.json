@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "SLw9fp4yI6",
+  "reviewer": "bqfK",
+  "paper": {
+    "title": "Controlled Text Generation via Language Model Arithmetic",
+    "authors": [
+      "Jasper Dekoninck",
+      "Marc Fischer",
+      "Luca Beurer-Kellner",
+      "Martin Vechev"
+    ],
+    "abstract": "As Large Language Models (LLMs) are deployed more widely, customization with respect to vocabulary, style, and character becomes more important. In this work, we introduce model arithmetic, a novel inference framework for composing and biasing LLMs without the need for model (re)training or highly specific datasets. In addition, the framework allows for more precise control of generated text than direct prompting and prior controlled text generation (CTG) techniques. Using model arithmetic, we can express prior CTG techniques as simple formulas and naturally extend them to new and more effective formulations. Further, we show that speculative sampling, a technique for efficient LLM sampling, extends to our setting. This enables highly efficient text generation with multiple composed models with only marginal overhead over a single model. Our empirical evaluation demonstrates that model arithmetic allows fine-grained control of generated text while outperforming state-of-the-art on the task of toxicity reduction. We release an open source easy-to-use implementation of our framework at https://github.com/eth-sri/language-model-arithmetic.",
+    "keywords": [
+      "Controlled text generation",
+      "LLM",
+      "Natural Language Processing"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=SLw9fp4yI6"
+  },
+  "review_fields": {
+    "summary": "This paper proposes an inference framework for composing and biasing LLMs without training on task-specific datasets, which may allow for more precise control of generate text. Speculative sampling, which is a popular technique for LLMs, can also extend to the proposed method. Experimental results demonstrate that the proposed method outperforms several baselines on the task of toxicity reduction.",
+    "strengths": "1. The proposed method based on model arithmetic is interesting and general.\n\n2. Experimental results show its effectiveness on toxicity reduction and fine-grained controlled text generation tasks.",
+    "weaknesses": "1. The proposed method needs heavy human design for specific tasks. The formulas for toxicity reduction (Table 5) and fine-grained control (Section 5.2) is not intuitive. I wonder whether there is a principle or a theoretically-supported method to choose operators and determine their coefficients for different tasks. If these are just empirical tries, the applicability of the proposed method may be largely degraded.\n\n2. The position of this paper needs to be further considered. In my view, the proposed method seems like a general form of existing works because the operators based on linear combinations and classifiers are not first proposed by this paper. They have been already studied in the line of work on controlled text generation. The current position may exaggerate the contribution and novelty of the proposed method.",
+    "questions": "I have included my questions in the weaknesses part."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1087,
+    "words": 167,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a8f0cf58-d015-4d40-92bd-6508efe32321",
+    "error": null,
+    "scored_chars": 1087
+  }
+}

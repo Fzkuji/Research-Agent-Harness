@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "x7AD0343Jz",
+  "reviewer": "Fa35",
+  "paper": {
+    "title": "Limits of Transformer Language Models on Learning to Compose Algorithms",
+    "authors": [
+      "Jonathan Thomm",
+      "Giacomo Camposampiero",
+      "Aleksandar Terzic",
+      "Michael Hersche",
+      "Bernhard Schölkopf",
+      "Abbas Rahimi"
+    ],
+    "abstract": "We analyze the capabilities of Transformer language models in learning compositional discrete tasks. To this end, we evaluate training LLaMA models and prompting GPT-4 and Gemini on four tasks demanding to learn a composition of several discrete sub-tasks. In particular, we measure how well these models can reuse primitives observable in the sub-tasks to learn the composition task. Our results indicate that compositional learning in state-of-the-art Transformer language models is highly sample inefficient: LLaMA requires more data samples than relearning all sub-tasks from scratch to learn the compositional task; in-context prompting with few samples is unreliable and fails at executing the sub-tasks or correcting the errors in multi-round code generation. Further, by leveraging complexity theory, we support these findings with a theoretical analysis focused on the sample inefficiency of gradient descent in memorizing feedforward models. We open source our code at https://github.com/IBM/limitations-lm-algorithmic-compositional-learning.",
+    "keywords": [
+      "Few-shot Compositional Learning",
+      "Compositionality",
+      "Sample Efficiency",
+      "Algorithmic Learning",
+      "Large Language Models",
+      "Transformers"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=x7AD0343Jz"
+  },
+  "review_fields": {
+    "comment": "Thanks for the response and clarifications.\n\n1. Using ideas like \"a few demonstrations\" is just not formal. And dressing this up as a formal hypothesis just seems to be misdirection when the experiments just choose some arbitrary number out of thin air. This is honestly a small part of the paper, and does not majorly impact my opinion, but it is bad practice.\n\n2. Thanks for the discussion here. I agree that it is a tricky issue for sure, but I am still not totally convinced that these must be the ways to decompose the tasks or that it is conclusive that the model is actually learning them in the way presented.\n\n3. Thanks for the figure. It is still not clear to me why the new task definitions are necessary.\n\n4. Thanks again for the clarification. Indeed adding the hints that get closer to showing how to do composition is maybe helpful. I guess my point was that maybe these synthetic tasks are missing the diversity of natural data that may have more examples of *how* to do composition in a general sense. And just training on narrow subtasks and expecting composition to arise seems unrealistic (and also not being suggested by people in the literature as being something that would occur, to my knowledge)\n\n5. Thanks for these extra experiments and investigation. This does seem to be better evidence that the tokenization is not a major issue. \n\nI will increase my score to a 4 to reflect the partial resolution of some of the issues I raised, but I think the remaining issues still leave the paper below the bar for acceptance in my mind, especially with several substantial changes to the paper being suggested."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1628,
+    "words": 287,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ad07d662-1d52-453c-a467-52110d98c7b3",
+    "error": null,
+    "scored_chars": 1629
+  }
+}

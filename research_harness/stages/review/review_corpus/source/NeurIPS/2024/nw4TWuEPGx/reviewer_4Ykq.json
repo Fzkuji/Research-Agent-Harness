@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "nw4TWuEPGx",
+  "reviewer": "4Ykq",
+  "paper": {
+    "title": "Discovering plasticity rules that organize and maintain neural circuits",
+    "authors": [
+      "David G Bell",
+      "Alison Duffy",
+      "Adrienne Fairhall"
+    ],
+    "abstract": "Intrinsic dynamics within the brain can accelerate learning by providing a prior scaffolding for dynamics aligned with task objectives. Such intrinsic dynamics would ideally self-organize and self-sustain in the face of biological noise including synaptic turnover and cell death. An example of such dynamics is the formation of sequences, a ubiquitous motif in neural activity. The sequence-generating circuit in zebra finch HVC provides a reliable timing scaffold for motor output in song and demonstrates a remarkable capacity for unsupervised recovery following perturbation. Inspired by HVC, we seek a local plasticity rule capable of organizing and maintaining sequence-generating dynamics despite continual network perturbations. We adopt a meta-learning approach introduced by Confavreux et al, which parameterizes a learning rule using basis functions constructed from pre- and postsynaptic activity and synapse size, with tunable time constants. Candidate rules are simulated within initially random networks, and their fitness is evaluated according to a loss function that measures the fidelity with which the resulting dynamics encode time. We use this approach to introduce biological noise, forcing meta-learning to find robust solutions. We first show that, in the absence of perturbations, meta-learning identifies a temporally asymmetric generalization of Oja's rule that reliably organizes sparse sequential activity. When synaptic turnover is introduced, the learned rule incorporates a form of homeostasis, better maintaining robust sequential dynamics relative to other previously proposed rules. Additionally, inspired by recent findings demonstrating that the strength of projections from inhibitory interneurons in HVC also dynamically responds to perturbations, we explore the role of inhibitory plasticity in sequence-generating circuits. We find that learned plasticity adjusts both excitation and inhibition in response to manipulations, outperforming rules applied only to excitatory connections. We demonstrate how plasticity acting on both excitatory and inhibitory synapses can better shape excitatory cell dynamics to scaffold timing representations.",
+    "keywords": [
+      "biologically plausible learning rules plasticity self-organization RNNs homeostasis meta-learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=nw4TWuEPGx"
+  },
+  "review_fields": {
+    "summary": "This work applies a meta-learning procedure for plasticity rule discovery to a neural network model of sequence generation. Plasticity rules are constructed from parameterized basis functions, and the parameters are found through evolutionary search based on a fitness function quantifying how accurately the plasticity rules train the network to represent elapsed time within episodic rollouts. The work analyzes the plasticity rules discovered in a variety of conditions: with noise, with synaptic turnover, and with plasticity enabled on excitatory and/or inhibitory neurons.",
+    "strengths": "**Significance**: Hand-tuning plasticity rules can be tedious and suboptimal, so automated methods are important for the more efficient and effective design of models. By applying this method to a neural network model of sequence generation (specifically, a model of HVC), this work tests the procedure in a new setting and also develops a more robust plasticity rule for sequence-generating dynamics.\n\n**Novelty**: It seems the novelty is in the application of this method to a HVC model and the evaluation of the learned plasticity rules under a variety of conditions. If there are other contributions, it would be helpful to be clearer about contextualizing this in the related work.\n\n**Technical quality**: This work provided an extensive evaluation of the model in a variety of conditions. The analysis of the discovered plasticity rules was particularly interesting.\n\n**Presentation clarity**: The methods and results are clearly explained.",
+    "weaknesses": "**Wiring vs plasticity**: It seems like an assumption of this work is that the sequence generating structure of HVC neural circuits emerges largely due to activity-dependent plasticity in a network with initially random connectivity. What is the role of activity-independent wiring that takes place during development? And how much of an effect does more structured initialization have on the discovered plasticity rules?\n\n**HVC predictions**: As a main contribution of this work is improving a model of HVC, what experimental predictions will result from this computational analysis?\n\n**Figures improvements**: The figures in general have pretty small text, inconsistency in formatting, and subpanels that are cramped. Fig 1 especially has a lot going on, uses a variety of fonts, and adopts a colorblind-unfriendly palette. Fig 2c, I didn't see why the 3 trials were needed; could it just show one and put other trials into the Supplementary? Fig 4d, use 45deg or 90deg xlabel angles instead?\n\n**Text improvements** (minor): (1) The neuron model notation on Line 77 took me a while to parse and seems non-standard according to colleagues; ultimately, it is a simple exponential decay and such neural dynamics are usually expressed in dv/dt notation. (2) The spacing on Page 11 is messed up due to the type of latex linebreak used.",
+    "limitations": "Yes, the authors adequately address the limitations in the Discussion section."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2360,
+    "words": 365,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/dd4cb1b4-f4d5-49fa-aef1-d27c2094c26c",
+    "error": null,
+    "scored_chars": 2360
+  }
+}

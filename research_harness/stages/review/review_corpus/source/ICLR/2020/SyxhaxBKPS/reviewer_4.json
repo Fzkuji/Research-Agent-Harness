@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "SyxhaxBKPS",
+  "reviewer": "4",
+  "paper": {
+    "title": "Smart Ternary Quantization",
+    "authors": [
+      "Gregoire Morin",
+      "Ryan Razani",
+      "Vahid Partovi Nia",
+      "Eyyub Sari"
+    ],
+    "abstract": "Neural network models are resource hungry. Low bit quantization such as binary and ternary quantization is a common approach to alleviate this resource requirements. Ternary quantization provides a more flexible model and often beats binary quantization in terms of accuracy, but doubles memory and increases computation cost. Mixed quantization depth models, on another hand, allows a trade-off between accuracy and memory footprint. In such models, quantization depth is often chosen manually (which is a tiring task), or is tuned using a separate optimization routine (which requires training a quantized network multiple times). Here, we propose Smart Ternary Quantization (STQ) in which we modify the quantization depth directly through an adaptive regularization function, so that we train a model only once. This method jumps between binary and ternary quantization while training. We show its application  on image classification.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=SyxhaxBKPS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "This paper studies mixed-precision quantization in deep networks where each layer can be either binarized or ternarized. The authors propose  an adaptive regularization function that can be pushed to either 2-bit or 3-bit through different parameterization, in order to automatically determine the precision of each layer. Experiments are performed on small-scale image classification data sets MNIST and CIFAR-10.\n\nThe proposed regularization method is simple and straightforward. However, many details are not stated clearly enough for reproduction. E.g, since the proposed regularization already promotes binary or ternary weights, whey is there still a thresholding operation at the end of Section 3? Is it because the proposed regularization can not provide strict binary or ternary weights? Does the method require one more hard binarization/ternarization step after \\beta is learned. Indeed, tan(x) is not well-defined when x=pi/2, and the derivative tan'(x)= 1+tan^2(x) can be large when x is near pi/2, and does gradient descent work well in this case?\n\nThe experiments are only performed on small-scale data sets. Thus it is hard to tell if the proposed method also works for larger networks or data sets? Moreover, it is not fair to use \"best validation accuracy\" for comparison with other methods since the validation set is seen during training and it is not clear if the hyper-parameters of the proposed methods are tuned for best performance on the seen validation set. It would be more fair to compare the test accuracy like in the BinaryConnect (BC) paper. Yet another concern is that many recent methods that can train mixed-precision networks are not compared. For instance, the HAQ method [1] searches for precision for each layer using the reinforcement learning method, how does the proposed method perform when compared with it?\n\n[1]. Wang, Kuan, et al. \"HAQ: Hardware-Aware Automated Quantization with Mixed Precision.\" Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory."
+  },
+  "review_metadata": {
+    "rating": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

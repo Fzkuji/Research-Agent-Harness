@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "HTJE5Krui0g",
+  "reviewer": "262g",
+  "paper": {
+    "title": "Softened Symbol Grounding for Neuro-symbolic Systems",
+    "authors": [
+      "Zenan Li",
+      "Yuan Yao",
+      "Taolue Chen",
+      "Jingwei Xu",
+      "Chun Cao",
+      "Xiaoxing Ma",
+      "Jian L\\\"{u}"
+    ],
+    "abstract": "Neuro-symbolic learning generally consists of two separated worlds, i.e., neural network training and symbolic constraint solving, \nwhose success hinges on symbol grounding, a fundamental problem in AI. This paper presents a novel, softened symbol grounding process, bridging the gap between the two worlds, and resulting in an effective and efficient neuro-symbolic learning framework. Technically, the framework features (1) modeling of symbol solution states as a Boltzmann distribution, which avoids expensive state searching and facilitates mutually beneficial interactions between network training and symbolic reasoning; (2) a new MCMC technique leveraging projection and SMT solvers, which efficiently samples from disconnected symbol solution spaces; (3) an annealing mechanism that can escape from sub-optimal symbol groundings. Experiments with three representative neuro-symbolic learning tasks demonstrate that, owing to its superior symbol grounding capability, our framework successfully solves problems well beyond the frontier of the existing proposals.",
+    "keywords": [
+      "neuro-symbolic learning",
+      "symbol grounding problem",
+      "projection-based sampling"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=HTJE5Krui0g"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper presents a neuro-symbolic learning framework with an explicit design for addressing the symbol grounding problem.  The key idea is softening symbol grounding by using a Boltzmann distribution to represent the entire symbol space, rather than a specific symbol grounding. Such a design achieves an efficient interaction between neural perception and symbolic reasoning. Then, a novel MCMC sampling method combined with SMT solving is proposed to facilitate learning the correct symbol grounding. Furthermore, an annealing mechanism with three different realizations is applied to avoid sub-optimal symbol groundings. Experimental evaluations show significant improvement over several state-of-the-art approaches.",
+    "strength_and_weaknesses": "Strengths:\n- the paper is very well-written; all necessary background  (either classic or recent work) is carefully introduced, and related work is organized in a systematic and insightful manner.\n- the paper addresses a fundamental problem in AI from a novel and promising angle -- view symbol grounding distribution as a mixed strategy in game playing; the combination of the MCMC sampling with SMT solving is both novel and elegant\n- the paper has extensive experimental evaluations and achieves superior performance over many state-of-the-art approaches\n- the paper also presents a formal analysis of the convergence guarantee (with some mild assumptions)\n\nWeaknesses:\n- the projection and inverse operations may be quite sensitive and require some non-trivial domain expertise\n- the visual Sudoku classification task seems to be a simplified version of the original one. The 4-by-4 Sudoku puzzle used in the evaluation is much simpler than a standard 9-by-9 Sudoku. SATNet should be the state-of-the-art for the Sudoku task, which is however not included",
+    "clarity,_quality,_novelty_and_reproducibility": "Each individual technique used in this paper is standard, but the particular combination has great novelty and elegance, especially the interaction between MCMC sampling and SMT solving. The symbol grounding problem studied in this paper is fundamental, and the result \nachieved in this paper significantly outperforms several state-of-the-art approaches, which are highly non-trivial. Detailed implementations and evaluation datasets have been shared publicly, so the results should be easily reproducible.",
+    "summary_of_the_review": "This paper makes significant progress toward addressing a fundamental problem in neuro-symbolic AI. The presented approach is novel, effective, and elegant, which is likely to have a great influence on future neuro-symbolic system design.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 10,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

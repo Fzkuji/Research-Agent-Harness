@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "rXEwxmnGQs",
+  "reviewer": "XUsW",
+  "paper": {
+    "title": "PhonATe: Impact of Type-Written Phonological Features of African American Language on Generative Language Modeling Tasks",
+    "authors": [
+      "Nicholas Deas",
+      "Jessica A Grieser",
+      "Xinmeng Hou",
+      "Shana Kleiner",
+      "Tajh Martin",
+      "Sreya Nandanampati",
+      "Desmond U. Patton",
+      "Kathleen McKeown"
+    ],
+    "abstract": "Current Large Language Models perform poorly on African American Language (AAL) texts in tasks like toxicity detection and sentiment analysis. AAL is underrepresented in both pre-training data and existing benchmarks for these tasks, hindering thorough evaluation and understanding of these biases. We introduce a novel approach to synthetically introduce type-written phonological features of AAL into text, a class of AAL features that has been overlooked in prior work. Our goal is to better understand how these features affect generative language models' performance on three tasks: toxicity detection, sentiment analysis, and masked span prediction. We find that fine-tuning with synthetic type-written phonological features lowers perceived biases on downstream tasks and our ablations reveal which features have particularly large negative impacts on model performance. Our results suggest that phonological features are vital to consider when designing bias mitigation techniques.",
+    "keywords": [
+      "data augmentation",
+      "african american language",
+      "bias and fairness",
+      "language generation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=rXEwxmnGQs"
+  },
+  "review_fields": {
+    "summary": "The paper presents an approach to enhance the performance of LLMs on texts with African American Language (AAL) features particularly focusing on type-written phonological features. They introduce an approach of generating synthetic typewritten phonological features that generates text with phonological transformations from a standard text. The paper investigates how injecting this synthetic AAL text into training datasets impacts the performance of LLMs on tasks such as toxicity detection, sentiment analysis, and masked span prediction.",
+    "reasons_to_accept": "The paper is very well written and the task is clearly explained. The idea of extending LLM data with synthetic ones is very interesting and I think this is an approach that could be extended to other related areas.The ablation study clearly shows what contributes to the improvements.",
+    "reasons_to_reject": "Perhaps the authors should have explained better why these phonological features make their way to text, no where in the paper transcription is mentioned, so I assume (from the cited papers) most of the time people write these phonologically transformed text on social media.\nI understand that the authors have resource constraints but the two main LLMs used in the experiments are quite old and even Mistral is considered a small model. One cannot generalize these results and assume larger language models would behave similarly.  \nApart from that, I really think this paper fits better in a conference like *CL as the linguistic content is quite rich but the LLM part is quite limited."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:33Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:33Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 973,
+    "words": 162,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/380daf51-efb2-4dd2-b05d-df33f505ab5d",
+    "error": null,
+    "scored_chars": 975
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "Syxi6grFwH",
+  "reviewer": "1",
+  "paper": {
+    "title": "HIPPOCAMPAL NEURONAL REPRESENTATIONS IN CONTINUAL LEARNING",
+    "authors": [
+      "Samia Mohinta",
+      "Rui Ponte Costa",
+      "Stephane Ciocchi"
+    ],
+    "abstract": "The hippocampus has long been associated with spatial memory and goal-directed\nspatial navigation. However, the region’s independent role in continual learning of\nnavigational strategies has seldom been investigated. Here we analyse populationlevel\nactivity of hippocampal CA1 neurons in the context of continual learning of\ntwo different spatial navigation strategies. Demixed Principal Component Analysis\n(dPCA) is applied on neuronal recordings from 612 hippocampal CA1 neurons\nof rodents learning to perform allocentric and egocentric spatial tasks. The components\nuncovered using dPCA from the firing activity reveal that hippocampal\nneurons encode relevant task variables such decisions, navigational strategies and\nreward location. We compare this hippocampal features with standard reinforcement\nlearning algorithms, highlighting similarities and differences. Finally, we\ndemonstrate that a standard deep reinforcement learning model achieves similar\naverage performance when compared to animal learning, but fails to mimic animals\nduring task switching. Overall, our results gives insights into how the hippocampus\nsolves reinforced spatial continual learning, and puts forward a framework\nto explicitly compare biological and machine learning during spatial continual\nlearning.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=Syxi6grFwH"
+  },
+  "review_fields": {
+    "experience_assessment": "I do not know much about this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I made a quick assessment of this paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "This paper describes an analysis of hippocampal neuronal activity in rodents during spatial navigation tasks. Features were extracted from the data using a component analysis technique, and these features were then compared to quantities which arise during training of the DQN reinforcement learning algorithm. \n\nUnfortunately I am not well versed enough in this literature to assess the merits of this submission. However, I could not find any glaring issues, unclear sentences or any other obvious sign of incompetence. \n\nMy apologies for the inadequacy or this review (and/or the paper assignment algorithm)."
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

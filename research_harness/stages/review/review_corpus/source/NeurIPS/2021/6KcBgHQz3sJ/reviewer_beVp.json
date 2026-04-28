@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "6KcBgHQz3sJ",
+  "reviewer": "beVp",
+  "paper": {
+    "title": "Risk Minimization from Adaptively Collected Data: Guarantees for Supervised and Policy Learning",
+    "authors": [
+      "Aurelien Bibaut",
+      "Nathan Kallus",
+      "Maria Dimakopoulou",
+      "Antoine Chambaz",
+      "Mark van der Laan"
+    ],
+    "abstract": "Empirical risk minimization (ERM) is the workhorse of machine learning, whether for classification and regression or for off-policy policy learning, but its model-agnostic guarantees can fail when we use adaptively collected data, such as the result of running a contextual bandit algorithm. We study a generic importance sampling weighted ERM algorithm for using adaptively collected data to minimize the average of a loss function over a hypothesis class and provide first-of-their-kind generalization guarantees and fast convergence rates. Our results are based on a new maximal inequality that carefully leverages the importance sampling structure to obtain rates with the good dependence on the exploration rate in the data. For regression, we provide fast rates that leverage the strong convexity of squared-error loss. For policy learning, we provide regret guarantees that close an open gap in the existing literature whenever exploration decays to zero, as is the case for bandit-collected data. An empirical investigation validates our theory.",
+    "keywords": [
+      "empirical risk minimization",
+      "maximal inequality",
+      "metric entropy",
+      "fast rates",
+      "policy learning",
+      "empirical process theory",
+      "adaptively collected data"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=6KcBgHQz3sJ"
+  },
+  "review_fields": {
+    "summary": "This paper considers a generic importance sampling weighted ERM algorithm for minimizing the loss over a hypothesis class when the data are adaptively collected (i.e., previous choices and their respective feedback received affect subsequent choices). Such adaptively collected data are the result of data collected from a contextual bandit algorithm, for example. The paper provides generalization guarantees for the proposed method and fast convergence rates under some extra assumptions. The technical derivations are based on a new maximal inequality that obtains a better dependence on the exploration rate of the data than prior work. The paper shows the applications of the method for the convergence rates on least squares and policy learning. Finally, it provides empirical results comparing the proposed method with related ones.",
+    "main_review": "===== After Rebuttal =====\n\nI'm thankful to the authors for their response and for providing clarifications to my questions! I remain positive towards the paper but would like to stress once more that, as a non-expert in the area, it was sometimes hard to evaluate the significance of the paper. Please incorporate the suggestions that myself and others included in their reviews, and hopefully, this will make the paper more accessible to non-experts.\n\n======================\n\n\nEvaluation.\nThe paper is pretty much outside of my area of expertise. Below is my best effort to evaluate whatever I could understand from the paper. \n* The method of reweighting the importance sampling in order to account for changes in the data looks like something that people have already thought about. I am not sure about prior work related to the present paper, but there are certainly bandits settings (even non contextual ones) where the better regret rates are obtained just by carefully reweighting with the appropriate distribution.\n* That said, it seems that the topic (i.e., identifying ways to reweigh the ERM so as to achieve generalization bounds when the data is adaptively collected) is very interesting and broadly applicable. It is also nice that the paper closes previous gaps existent in the literature and that it shows the applicability of the method in the regression and policy learning settings. \n* It was nice that the paper has remarks and explanations in various places that explain connections and differences with prior work. \n* One limitation that I see from the general setting is that it seems to require perfect knowledge of the algorithm (or at least the process) used to collect the data (see also my first question below). \n\nQuestions.\n* This is pretty fundamental and I am sorry if it is obvious but in order to do this reweighting don’t you need to know the density p^{(T)} but also the decomposition to p_X, \\tilde{g}, and p_Y? Why is this an okay assumption in this line of work? It would seem to me that it is restraining since you need to know exactly the process by which the dataset was generated. Or is the paper saying that just by having access to \\bar{O}_T you can compute p^{(T)}?\n* It is claimed in at least two places (see Lines 9 and 170) that the dependence on \\gamma_t from Theorem 1 is the “right” or the “optimal” one. But how do we know this? I could not find a lower bound in the paper. Is there a result in the literature that establishes it? Is it due to the lower bound of Zhan et al. [58]?\n* I understand that the paper acknowledges that the empirical results are not intended to provide state-of-the-art methods. That said, I am sorry to say that I am a bit confused regarding the usefulness of the method since it doesn’t outperform other methods dramatically. Also, could you please comment on the runtimes for the methods?\n\nAdditional comments.\n* What is \\tilde{g} referring to in Line 43? Is it the probability that action a_t was chosen given context x_t and the history of past outcome tuples?  \n* What is the “following” referring to in the citations in Line 301?\n* Is \\alpha also <=1 in Assumption 4? I was trying to figure out which one is the dominant term in the last equation of Page 5, to see the difference with Theorem 2. \n* Structurally, I think since Sections 4 and 5 are applications of the main theorems of section 3, I would suggest that you have them as subsections in Section 3, rather than standalone sections.\n* Regarding the limitations question in the checklist, you do list carefully all the assumptions under which your theorems work, but I think it would be nice to include a small paragraph about more model-specific/high-level limitations. For example, if indeed p^{(T)} is assumed to be known in this work, I would consider this a potential limitation.\n\nTypos.\n* Line 80: “biblioraphies” → “bibliographies”\n* Line 151: “of classes of classes” → “of classes”\n* Line 156: “rate of the the IS” → “rate of the IS”\n* Line 233: “withe envelope constant” → “with the envelope constant”\n* Line 300: “different mutli-calss classification dataset” → “different multi-class classification datasets”\n* Line 661: I think that the instantiation is on Theorem 3, not Theorem 6.",
+    "limitations_and_societal_impact": "Overall yes. I have added a comment regarding the limitations in my main review."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

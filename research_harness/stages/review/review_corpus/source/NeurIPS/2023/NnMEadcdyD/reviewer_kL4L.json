@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "NnMEadcdyD",
+  "reviewer": "kL4L",
+  "paper": {
+    "title": "Understanding Diffusion Objectives as the ELBO with Simple Data Augmentation",
+    "authors": [
+      "Diederik P Kingma",
+      "Ruiqi Gao"
+    ],
+    "abstract": "To achieve the highest perceptual quality, state-of-the-art diffusion models are optimized with objectives that typically look very different from the maximum likelihood and the Evidence Lower Bound (ELBO) objectives. In this work, we reveal that diffusion model objectives are actually closely related to the ELBO.\n\nSpecifically, we show that all commonly used diffusion model objectives equate to a weighted integral of ELBOs over different noise levels, where the weighting depends on the specific objective used. Under the condition of monotonic weighting, the connection is even closer: the diffusion objective then equals the ELBO, combined with simple data augmentation, namely Gaussian noise perturbation. We show that this condition holds for a number of state-of-the-art diffusion models. \n\nIn experiments, we explore new monotonic weightings and demonstrate their effectiveness, achieving state-of-the-art FID scores on the high-resolution ImageNet benchmark.",
+    "keywords": [
+      "Diffusion Model",
+      "Evidence Lower Bound",
+      "Maximum Likelihood"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=NnMEadcdyD"
+  },
+  "review_fields": {
+    "summary": "The paper tackles the loss function of diffusion models from a theoretical point of view. The paper studies the relationship between the weighted loss and the ELBO objective. The paper shows that the diffusion model objectives can be formulated as a special case of weighted loss. In addition to the theoretical contribution, the authors propose monotonic weightings and provide an empirical study of monotonic and non-monotonic weighting.",
+    "strengths": "- The problem studied is important\n- Formulating the different diffusion model loss as weighted loss is interesting\n- The paper presented a detailed theoretical analysis\n- Experimental results support the proposed method",
+    "weaknesses": "- Adding more experimental results could have been helpful but this is not a major point."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:26Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:26Z"
+  },
+  "ai_score": {
+    "status": "skipped",
+    "reason": "too_short:311"
+  }
+}

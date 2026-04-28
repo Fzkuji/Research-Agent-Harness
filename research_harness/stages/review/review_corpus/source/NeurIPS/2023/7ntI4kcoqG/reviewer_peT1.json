@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "7ntI4kcoqG",
+  "reviewer": "peT1",
+  "paper": {
+    "title": "AMAG: Additive, Multiplicative and Adaptive Graph Neural Network For Forecasting Neuron Activity",
+    "authors": [
+      "Jingyuan Li",
+      "Leo Scholl",
+      "Trung Le",
+      "Pavithra Rajeswaran",
+      "Amy L Orsborn",
+      "Eli Shlizerman"
+    ],
+    "abstract": "Latent Variable Models (LVMs) propose to model the dynamics of neural populations by capturing low-dimensional structures that represent features involved in neural activity. Recent LVMs are based on deep learning methodology where a deep neural network is trained to reconstruct the same neural activity given as input and as a result to build the latent representation. Without taking past or future activity into account such a task is non-causal. In contrast, the task of forecasting neural activity based on given input extends the reconstruction task. LVMs that are trained on such a task could potentially capture temporal causality constraints within its latent representation. Forecasting has received less attention than reconstruction due to recording challenges such as limited neural measurements and trials. In this work, we address modeling neural population dynamics via the forecasting task and improve forecasting performance by including a prior, which consists of pairwise neural unit interaction as a multivariate dynamic system. Our proposed model---Additive, Multiplicative, and Adaptive Graph Neural Network (AMAG)---leverages additive and multiplicative message-passing operations analogous to the interactions in neuronal systems and adaptively learns the interaction among neural units to forecast their future activity. We demonstrate the advantage of AMAG compared to non-GNN based methods on synthetic data and multiple modalities of neural recordings (field potentials from penetrating electrodes or surface-level micro-electrocorticography) from four rhesus macaques. Our results show the ability of AMAG to recover ground truth spatial interactions and yield estimation for future dynamics of the neural population.",
+    "keywords": [
+      "Neuroscience and Cognitive Science",
+      "Neural Activity Forecasting",
+      "Graph Neural Network"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7ntI4kcoqG"
+  },
+  "review_fields": {
+    "summary": "The authors introduce a graph neural network in their study to predict neural activity. This network comprises a temporal encoding and decoding layer specific to each channel, with a spatial interaction layer positioned in between. The inclusion of the explicit spatial interaction layer aids in capturing the underlying spatial relationships, as demonstrated using synthetic data. The proposed model exhibits state-of-the-art performance in both one-step and multi-step forecasting tasks when evaluated on actual neural data.\nIn terms of the model-readout, it incorporates both additive and multiplicative operations, with both being necessary to attain the demonstrated accuracy. This observation is supported by an ablation study.",
+    "strengths": "- impressive enhancements in one-step forecasting performance\n- notable improvements are observed in multi-step forecasting, although to a lesser extent\n- explicit spatial interactions aid interpretability",
+    "weaknesses": "- there is a presence of numerous non-standard acronyms in the paper that are not introduced upon their first mention\n- the utilization of graph neural networks for analyzing neural signals is not entirely novel, this study showcases somewhat incremental progress in this field",
+    "questions": "- What is PSID, what  is DCRNN? After the introduction section, subsequent acronyms are not explicitly introduced or defined.\n- TE and TR can be transformer or GRU. Which one did you use for the results in the paper?\n- Why is the improvement in multi-step forecasting comparatively moderate despite the impressive enhancements in one-step forecasting? Intuitively, one would expect the performance gap between methods to increase with an increasing number of forecasting steps.\n- How many steps are used in multi-step forecasting?\n- RoBERTa in Table 2 is not mentioned in the caption",
+    "limitations": "The authors have discussed limitations of their work."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1123,
+    "words": 172,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/083c91d0-5085-4f2c-8d73-c8e80af81fda",
+    "error": null,
+    "scored_chars": 1124
+  }
+}

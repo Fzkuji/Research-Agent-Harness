@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "nwKXyFvaUm",
+  "reviewer": "KjQr",
+  "paper": {
+    "title": "Diverse Client Selection for Federated Learning via Submodular Maximization",
+    "authors": [
+      "Ravikumar Balakrishnan",
+      "Tian Li",
+      "Tianyi Zhou",
+      "Nageen Himayat",
+      "Virginia Smith",
+      "Jeff Bilmes"
+    ],
+    "abstract": "In every communication round of federated learning, a random subset of clients communicate  their  model  updates  back  to  the  server  which  then  aggregates them all.  The optimal size of this subset is not known and several studies have shown that typically random selection does not perform very well in terms of convergence, learning efficiency and fairness. We, in this paper, propose to select a small diverse subset of clients, namely those carrying representative gradient information, and we transmit only these updates to the server.  Our aim is for updating via only a subset to approximate updating via aggregating all client information. We achieve this by choosing a subset that maximizes a submodular facility location function defined over gradient space. We introduce “federated averaging with diverse client selection (DivFL)”. We provide a thorough analysis of its convergence in the heterogeneous setting and apply it both to synthetic and to real datasets. Empirical results show several benefits to our approach including improved learning efficiency, faster convergence and also more uniform (i.e., fair) performance across clients. We further show a communication-efficient version of DivFL that can still outperform baselines on the above metrics.",
+    "keywords": [
+      "federated learning",
+      "submodularity",
+      "diversity"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=nwKXyFvaUm"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper studies the use of diversity sampling (based on submodular functions) for selecting clients who send updates to the server in a federated learning environment. As the authors show, this provides more efficient use of communication budget in terms of convergence and model accuracy.",
+    "main_review": "Subdmoularity-based subset selection is widely used in many contexts, but as far as I can tell, it's the first time in federated learning. Use of gradients in this context is not novel.\n\nTheoretical and empirical results are significant.",
+    "summary_of_the_review": "The paper proposes a new approach for diverse sampling of clients in each update round of federated learning. This significantly improves convergence rate and model accuracy. Though the idea is not particularly novel in the broader context, it does advance state of the art in federated learning.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 535,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/67bf65f5-cf5a-4485-a46e-bdab7bcb7e16",
+    "error": null,
+    "scored_chars": 535
+  }
+}

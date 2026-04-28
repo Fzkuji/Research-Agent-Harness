@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "qBL04XXex6",
+  "reviewer": "dFck",
+  "paper": {
+    "title": "Boosting of Thoughts: Trial-and-Error Problem Solving with Large Language Models",
+    "authors": [
+      "Sijia Chen",
+      "Baochun Li",
+      "Di Niu"
+    ],
+    "abstract": "The reasoning performance of Large Language Models (LLMs) on a wide range of problems critically relies on chain-of-thought prompting, which involves providing a few chain of thought demonstrations as exemplars in prompts. Recent work, e.g., Tree of Thoughts, has pointed out the importance of exploration and self-evaluation in reasoning step selection for complex problem solving. In this paper, we present Boosting of Thoughts (BoT), an automated prompting framework for problem solving with LLMs by iteratively exploring and self-evaluating many trees of thoughts in order to acquire an ensemble of trial-and-error reasoning experiences, which will serve as a new form of prompting to solve the complex problem. Starting from a simple prompt without requiring examples, BoT iteratively explores and evaluates a large collection of reasoning steps, and more importantly, uses error analysis obtained from the LLM on them to explicitly revise prompting, which in turn enhances reasoning step generation, until a final answer is attained. Our experiments with GPT-4 and Llama2 across extensive complex mathematical problems demonstrate that BoT consistently achieves higher or comparable problem-solving rates than other advanced prompting approaches.",
+    "keywords": [
+      "Large Language Models; Prompt Engineering; Boosting Mechanism;"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=qBL04XXex6"
+  },
+  "review_fields": {
+    "summary": "The paper presents an extension of the Chain of Thought (CoT) and Tree of Thoughts (ToT) method, named Boosting of Thoughts (BoT). BoT refines the problem-solving process in large language models (LLMs). BoT harnesses error analysis to improve the LLM's problem-solving accuracy iteratively. The \"Boosting of Thoughts\" (BoT) procedure is a two-step process that first generates a diversity of reasoning paths from a Large Language Model (LLM) in the form of a weighted binary tree, enhancing problem-solving by creating a hierarchy of potential solutions. Then, it employs a novel aggregation strategy that iteratively refines and combines these paths. Through best-first and greedy aggregations, BoT selects and optimizes the most promising chain of thought, using iterative feedback to progressively improve the LLM's performance on complex problem-solving tasks. The paper reports improved performance on complex mathematical problems when tested with GPT-4 and LLAMA2, compared to CoT and ToT.",
+    "strengths": "1. This is an innovative extension of the Chain-of-Thought (CoT) and Tree-of-Thought (ToT) methods. Compared to CoT and ToT, the author adopts the idea on leveraging error analysis to refine the LLM. This can be a limitation of CoT and ToT, as they do not conduct error analysis and more importantly, learn from errors. The motivation is intuitive and clear.\n\n2. Unlike ToT, which expands multiple reasoning tree branches, the BoT method iteratively refines a single line of thought. This focus on iteration rather than expansion allows for a more concentrated and efficient improvement of the reasoning path. The computation moves from exploring the tree into learning from erroneous trials. \n\n3. The Boosting of Thoughts (BoT) concept shows a clear advancement in problem-solving methodologies within large language models. It effectively combines generation and evaluation steps to progressively enhance reasoning, demonstrating a significant leap in the model's ability to handle complex tasks. \n\n4. The experiments are clear, the results are effective. And all experiments are classic experiments from CoT and ToT, so it is clear to compare BoT’s performance over CoT and ToT.",
+    "weaknesses": "The mauscript need polished in their figures' presentation, e.g., the authors need give more detailed examples in Fig1.",
+    "questions": "Q1: In the prompt, I wonder whether the “error input” are included, or only the “experience” is included? From figure 1, I only see “error report” like “step 1 is not closer to 24”, no “error input” like what is step 1, 2, 3. How the LLM know what step 1 mean, and how can LLM learn from error, if LLM does not know specific input?\nQ2: How about you consider the entire (input, error analysis) as an In-context Learning example? Then the entire method is similar to CoT, meaning that you can manually construct an exemplar consisting of (input, error analysis) pair. Then use the CoT idea to follow the strategy to generate analysis and think about the correct answer."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 5,
+    "human_pct": 95,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1970,
+    "words": 321,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/80fe5997-791e-4e71-a1ed-6c76b87d03f4",
+    "error": null,
+    "scored_chars": 1972
+  }
+}

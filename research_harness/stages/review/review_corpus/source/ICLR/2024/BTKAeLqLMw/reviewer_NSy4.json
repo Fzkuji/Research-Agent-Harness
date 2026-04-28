@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "BTKAeLqLMw",
+  "reviewer": "NSy4",
+  "paper": {
+    "title": "What Makes Good Data for Alignment? A Comprehensive Study of Automatic Data Selection in Instruction Tuning",
+    "authors": [
+      "Wei Liu",
+      "Weihao Zeng",
+      "Keqing He",
+      "Yong Jiang",
+      "Junxian He"
+    ],
+    "abstract": "Instruction tuning is a standard technique employed to align large language models to end tasks and user preferences after the initial pretraining phase. Recent research indicates the critical role of data engineering in instruction tuning -- when appropriately selected, only limited data is necessary to achieve superior performance. However, we still lack a principled understanding of what makes good instruction tuning data for alignment, and how we should select data automatically and effectively. In this work, we delve deeply into automatic data selection strategies for alignment. We start with controlled studies to measure data across three dimensions: complexity, quality, and diversity, along which we examine existing methods and introduce novel techniques for enhanced data measurement. Subsequently, we propose a simple strategy to select data samples based on the measurement. We present Deita (short for Data-Efficient Instruction Tuning for Alignment), a series of models fine-tuned from LLaMA models using data samples automatically selected with our proposed approach.  When assessed through both automatic metrics and human evaluation, Deita performs better or on par with the state-of-the-art open-source alignment models such as Vicuna and WizardLM with only 6K training data samples -- 10x less than the data used in the baselines. We anticipate this work to provide clear guidelines and tools on automatic data selection, aiding researchers and practitioners in achieving data-efficient alignment.",
+    "keywords": [
+      "data selection",
+      "instruction tuning",
+      "large language models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=BTKAeLqLMw"
+  },
+  "review_fields": {
+    "summary": "This paper presents a data selection algorithm for instruction tuning that selects data points where 1) the queries are complex (e.g.: in terms of the constraints in the request); 2) the responses are high quality (e.g.: helpfulness, creativity); and 3) the data points are diverse. For quantifying complexity and quality, a dataset is collected for each of the two aspects by prompting ChatGPT in the following way: a seed set of samples are taken from the original dataset, ChatGPT is prompted to iteratively improve the complexity or quality of each of those samples along relevant dimensions, ChatGPT is then asked to score these samples for complexity or quality, a separate model (Llama-7B) is trained to predict these scores and then used to score the entire instruction tuning dataset. For diversity, the selected pool (initialized to be empty) is iteratively grown by adding points only if they are beyond a certain distance to their nearest neighbors already in the pool.\n\nThe data selection procedure sorts the existing dataset by the product of quality and complexity scores, and uses the diversity based selection procedure to select the points from the sorted set to a prespecified size.\n\nThe algorithm is evaluated by comparing Llama-13B models trained using the data selection procedure against existing instruction tuned models (trained on other datasets), and random selection baselines (trained on the same datasets of the same sizes with points selected randomly). Comparisons are made in terms of AlpacaEval and MT-Bench, where GPT-4 evaluates the responses and human evaluation on a sample of 100 requests from LIMA's test set. The algorithm outperforms random selection, and also other instruction tuned models based on Llama-1 trained on more data.",
+    "strengths": "- The procedure used to quantify complexity and quality is innovative and can be used for other hard to quantify aspects of data quality in future work.\n- The results from the experiments clearly show that the proposed method is indeed selecting important data points (i.e., better than random selection) at least for improving performance on AlpacaEval and MT-Bench.",
+    "weaknesses": "The evaluation in this paper is limited and leaves some important questions unanswered:\n\n- The main evaluation is done in terms of AlpacaEval and MT-Bench alone. Since these are relatively small evaluation sets and it has been shown that GPT-4 evaluation can be biased (Wang et al., 2023; https://arxiv.org/abs/2306.04751), one wonders if the data selection does better than random only because it is aligned with those biases. Including further evaluation, possibly on targeted benchmarks covering abilities like reading comprehension, complex reasoning etc. can be helpful.\n- Related to the above point, since human evaluation was done on only 100 instances, it would be helpful to quantify the reliability of this assessment, e.g.: using inter-annotator agreement scores and significance, and perform a larger scale evaluation if needed.\n\nThe procedure used for quantifying complexity and quality can be validated and possibly improved further\n\n- Section 2.3 states that ChatGPT is shown multiple samples evolved from the same seed example are shown to ChatGPT at a time for scoring their complexity (and this is possibly true for quality as well). Are these scores comparable across evalved sets from different seed examples? This is necessary because all these data points are used together as training data for training the Llama-based scorer. If they are not comparable, it might help to randomize the sets shown to ChatGPT for scoring.\n- Relatedly, it would help to have humans also score data points in terms of complexity and quality and see if the scores correlate with  \nChatGPT's judgments.",
+    "questions": "- Is it possible for the diversity criterion to end up selecting outliers in the datasets? How can this issue be fixed?\n- Do you need to use the representations from the Llama-13B model for computing distances as well? Can you use a different (smaller?) model for computing distances than the one you instruction-tune?\n- DEITA-6K loses more to the random selection baseline than to the Vicuna model according to the human evaluation results in Table 4. This seems surprising. How does the random selection model perform compared to the Vicuna model in this case?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2534,
+    "words": 405,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/929c0415-1c68-4149-96a1-49576dd718a8",
+    "error": null,
+    "scored_chars": 2536
+  }
+}

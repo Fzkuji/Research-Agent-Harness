@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "UeE41VsK1KJ",
+  "reviewer": "WErS",
+  "paper": {
+    "title": "Subjective Learning for Open-Ended Data",
+    "authors": [
+      "Tianren Zhang",
+      "Yizhou Jiang",
+      "Xin Su",
+      "Shangqi Guo",
+      "Feng Chen"
+    ],
+    "abstract": "Conventional supervised learning typically assumes that the learning task can be solved by learning a single function since the data is sampled from a fixed distribution. However, this assumption is invalid in open-ended environments where no task-level data partitioning is available. In this paper, we present a novel supervised learning framework of learning from open-ended data, which is modeled as data implicitly sampled from multiple domains with the data in each domain obeying a domain-specific target function. Since different domains may possess distinct target functions, open-ended data inherently requires multiple functions to capture all its input-output relations, rendering training a single global model problematic. To address this issue, we devise an Open-ended Supervised Learning (OSL) framework, of which the key component is a subjective function that allocates the data among multiple candidate models to resolve the \"conflict'' between the data from different domains, exhibiting a natural hierarchy. We theoretically analyze the learnability and the generalization error of OSL, and empirically validate its efficacy in both open-ended regression and classification tasks.",
+    "keywords": [
+      "Open-ended data",
+      "machine learning",
+      "supervised learning",
+      "data conflict"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=UeE41VsK1KJ"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors present a novel framework for learning different target concepts. They argue that so far, a single classifier is supposed to learn mixed concepts but usually fail. Hence, they propose a framework for sampling instances according to only a single target concept and solving this problem with classical ERM and repeating for other concepts. They provide theoretical analyses and empirical insights.",
+    "main_review": "I like the general idea of the paper and appreciate the framework that I consider as novel and well suited for publication in general. I also find the technical part correct but did not check everything in detail. Concerns are caused by the baselines in the empirical comparison. The proposition of the framework clearly needs empirical support as the main argument is that a single classifier fails to learn all concepts properly. There need to be more information provided on the baselines to better understand whether they are appropriate or not. I am under the impression that the baselines may not be suitable to support the claims but this may be part of the rebuttal. \n\nI would appreciate a better differentiation to other ensemble learning approaches as well as learning with many classes/labels as well as transfer learning approaches in the discussion.",
+    "summary_of_the_review": "Conceptually and theoretically strong but line of argument needs empirical evidence to work out. Though evidence is provided in form of empirical results on three data sets, the baselines remain unclear. This problem need to be solved before publication would be OK (could be straight forward to do so)",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1165,
+    "words": 191,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/492ce6f5-f228-4f99-aa4d-8b955779ff67",
+    "error": null,
+    "scored_chars": 1166
+  }
+}

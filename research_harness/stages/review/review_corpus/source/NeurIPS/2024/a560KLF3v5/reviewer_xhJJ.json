@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "a560KLF3v5",
+  "reviewer": "xhJJ",
+  "paper": {
+    "title": "Unelicitable Backdoors via Cryptographic Transformer Circuits",
+    "authors": [
+      "Andis Draguns",
+      "Andrew Gritsevskiy",
+      "Sumeet Ramesh Motwani",
+      "Christian Schroeder de Witt"
+    ],
+    "abstract": "The rapid proliferation of open-source language models significantly increases the risks of downstream backdoor attacks. These backdoors can introduce dangerous behaviours during model deployment and can evade detection by conventional cybersecurity monitoring systems. In this paper, we introduce a novel class of backdoors in transformer models, that, in contrast to prior art, are unelicitable in nature. Unelicitability prevents the defender from triggering the backdoor, making it impossible to properly evaluate ahead of deployment even if given full white-box access and using automated techniques, such as red-teaming or certain formal verification methods. We show that our novel construction is not only unelicitable thanks to using cryptographic techniques, but also has favourable robustness properties.\nWe confirm these properties in empirical investigations, and provide evidence that our backdoors can withstand state-of-the-art mitigation strategies. Additionally, we expand on previous work by showing that our universal backdoors, while not completely undetectable in white-box settings, can be harder to detect than some existing designs. By demonstrating the feasibility of seamlessly integrating backdoors into transformer models, this paper fundamentally questions the efficacy of pre-deployment detection strategies. This offers new insights into the offence-defence balance in AI safety and security.",
+    "keywords": [
+      "Backdoor attacks",
+      "Transformers",
+      "handcrafting model parameters",
+      "cryptographic circuits"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=a560KLF3v5"
+  },
+  "review_fields": {
+    "summary": "This paper introduces a novel class of unelicitable backdoors in autoregressive transformer models. These backdoors, secured by cryptographic techniques, evade detection and cannot be triggered even with full white-box access. Empirical evidence confirms their robustness against current mitigation strategies, challenging existing pre-deployment defense methods in AI security",
+    "strengths": "1. The authors introduce a novel method for embedding unelicitable handcrafted backdoors into autoregressive transformer language models, which are resistant to elicitation even with full white-box access.\n\n2. The paper is well-written and easy to follow.",
+    "weaknesses": "1. Several repeated words and sentences appear, such as \"if if\" in line 7, and redundancy between lines 65 to 74.\n\n2. The threat model is unrealistic, as most commercial models only provide APIs, making it impossible for the authors to insert compiled transformer modules.\n\n3. Although the authors propose an encrypted backdoor with an unfeasible trigger, the backdoored behaviors can be mitigated through model fine-tuning.\n\n4. Experimental results on encrypted backdoor robustness are lacking, including defense effects such as fine-tuning or pruning.",
+    "questions": "1. What are the practical applications of encrypted backdoor attacks?\n\n2. What models and datasets were utilized in the experimental setup?"
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 8,
+    "mixed_pct": 0,
+    "human_pct": 92,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 951,
+    "words": 140,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d083b1dc-623b-40ed-840a-4fb921fc6130",
+    "error": null,
+    "scored_chars": 951
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "nZ4mFzCZIx",
+  "reviewer": "MPr4",
+  "paper": {
+    "title": "Towards Generalizable 3D Human Pose Estimation via Ensembles on Flat Loss Landscapes",
+    "authors": [
+      "Jumin Han",
+      "Jun-Hee Kim",
+      "Seong-Whan Lee"
+    ],
+    "abstract": "3D Human Pose Estimation (HPE) is a fundamental task in the computer vision. Generalization in 3D HPE task is crucial due to the need for robustness across diverse environments and datasets. Existing methods often focus on learning relationships between joints to enhance the generalization capability, but the role of the loss landscape, which is closely tied to generalization, remains underexplored. In this paper, we empirically visualize the loss landscape of the 3D HPE task, revealing its complexity and the challenges it poses for optimization. To address this, we first introduce a simple adaptive scaling mechanism that smooths the loss landscape. We further observe that different solutions on this smoothed loss landscape exhibit varying generalization behaviors. Based on this insight, we propose an efficient ensemble approach that combines diverse solutions on the smooth loss landscape induced by our adaptive scaling mechanism. Extensive experimental results demonstrate that our approach improves the generalization capability of 3D HPE models, and can be easily applied, regardless of model architecture, with consistent performance gains.",
+    "keywords": [
+      "Lifting-based 3D Human Pose Estimation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=nZ4mFzCZIx"
+  },
+  "review_fields": {
+    "summary": "This paper addresses the challenge of generalization in 3D Human Pose Estimation (HPE). The authors argue that the loss landscape of 3D HPE is highly complex and has multiple disconnected local minima, which can negatively impact model generalization. To address this, they propose a simple adaptive scaling mechanism that smooths the loss landscape, reducing the likelihood of high-loss barriers between local minima. Furthermore, they introduce an efficient ensemble approach that combines diverse solutions on the smoothed loss landscape. The method is designed to be model-agnostic and easy to implement. Experimental results on benchmark datasets such as Human3.6M and MPI-INF-3DHP demonstrate improvements in generalization performance across various network architectures.",
+    "strengths_and_weaknesses": "Strengths: \n\n1. The paper provides a novel analysis of the 3D HPE task from a loss landscape perspective, which is underexplored in previous research. This analysis offers valuable insights into the challenges of optimizing 3D HPE models and their generalization performance.\n\n2. The proposed adaptive scaling mechanism and ensemble approach are simple yet effective. They are designed to induce flatness in the loss landscape, which is associated with better generalization. The method shows consistent performance improvements across different model architectures and datasets.\n\n3. The experiments are comprehensive and well-designed. The authors demonstrate the effectiveness of their method on multiple benchmark datasets and compare it with various state-of-the-art architectures. The results show significant improvements in generalization performance, validating the practical utility of the proposed approach.\n\n4. The method can be easily integrated into existing 3D HPE frameworks regardless of the model architecture. This makes it a versatile enhancement for the community.\n\n\nWeaknesses: \n\n1. While the paper provides empirical evidence of the effectiveness of the proposed method, the theoretical understanding of why and how the adaptive scaling mechanism and ensemble approach work is somewhat limited. More in-depth theoretical analysis could strengthen the paper. \n\n2. The paper primarily focuses on the generalization performance within the context of benchmark datasets. It would be beneficial to discuss the applicability of the method in real-world scenarios where data distributions may vary more significantly.",
+    "questions": "1. How do you ensure the diversity of solutions when using different random seeds? Is there a risk of the models converging to similar local minima despite different initialization?\n\n2. Can you provide more insights into how the adaptive scaling mechanism affects the model's learning process? Are there any potential drawbacks or limitations to this mechanism?",
+    "limitations": "Yes, but it is in the supplementary material.",
+    "final_justification": "The rebuttal addressed most of my concerns. I would keep my original rating."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

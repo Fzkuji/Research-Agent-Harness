@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "7vVWiCrFnd",
+  "reviewer": "G9eq",
+  "paper": {
+    "title": "Rethinking and Extending the Probabilistic Inference Capacity of GNNs",
+    "authors": [
+      "Tuo Xu",
+      "Lei Zou"
+    ],
+    "abstract": "Designing expressive Graph Neural Networks (GNNs) is an important topic in graph machine learning fields. Despite the existence of numerous approaches proposed to enhance GNNs based on Weisfeiler-Lehman (WL) tests, what GNNs can and cannot learn still lacks a deeper understanding. This paper adopts a fundamentally different approach to examine the expressive power of GNNs from a probabilistic perspective. By establishing connections between GNNs' predictions and the central inference problems of probabilistic graphical models (PGMs), we can analyze previous GNN variants with a novel hierarchical framework and gain new insights into their node-level and link-level behaviors. Additionally, we introduce novel methods that can provably enhance GNNs' ability to capture complex dependencies and make complex predictions. Experiments on both synthetic and real-world datasets demonstrate the effectiveness of our approaches.",
+    "keywords": [
+      "graph neural networks",
+      "expressiveness",
+      "approximate inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7vVWiCrFnd"
+  },
+  "review_fields": {
+    "summary": "This paper delves into the expressive power of Graph Neural Networks (GNNs) within the context of approximate inference in graphical models, going beyond the common association of GNNs with graph convolutions and Weisfeiler-Lehman (WL) graph isomorphism tests. The paper challenges the prevailing notion that GNNs necessitate integration with graphical models to enhance their probabilistic inference capacity, asserting that GNNs intrinsically possess robust approximation capabilities for posterior distributions. The research introduces a new expressive power hierarchy using Markov Random Fields (MRFs) with increasingly complex distributions and inference targets, providing insights into various GNN variants, including MPNNs, higher-order GNNs, subgraph GNNs, and labeling tricks in the contexts of node classification and link prediction. Furthermore, the paper presents a systematic framework for extending the capabilities of GNNs in modeling complex distributions and inference targets, with a particular focus on phantom nodes and phantom edges, showcasing their empirical improvements in real-world applications of GNNs.",
+    "strengths": "* Theoretical analysis is solid and reasonable on the inference capacity of various GNNs.\n* The paper identifies that GNNs can do Probabilistic inference on its own, which has novelty than other methods combining GNN with graphical models.\n* The paper proposes methods like phantom nodes and edges based on their inference analysis framework and show experiments of their methods.",
+    "weaknesses": "* Experiments on large link prediction datasets are lacked.\n* While the theoretical analysis has included a lot of GNN methods, the experiments don't include them all.\n* Experiments on various node classification datasets(including homogeneous and heterogeneous graphs) are lacked.\n* Improvements of better GNNs(like GCNII) in node classification is limited.\n* Experiments details are lacked, like how to choose hyperparameters.",
+    "questions": "1. For link prediction tasks, how is the experiments done? Why don't choose metric of link prediction to be HITS@10 like in the BUDDY paper. Also, why not include other baselines in the BUDDY paper, especially the GNN ones? Also, maybe lack of other experiments on large link prediction datsets\n2. For node classification task, why not choose traditional homogeneous datasets and heterogeneous datasets like previous works. How will phantom nodes have impact when meeting graphs with different heterophily? Also, why For GCNII it hardly work better than SPN?\n3. What's the complexity of GNNs with phantom nodes or phantom edges, for node classification and link prediction ,respectively?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1499,
+    "words": 229,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/68a8da82-3d42-4f6b-9bf1-3f74e3c2354d",
+    "error": null,
+    "scored_chars": 1499
+  }
+}

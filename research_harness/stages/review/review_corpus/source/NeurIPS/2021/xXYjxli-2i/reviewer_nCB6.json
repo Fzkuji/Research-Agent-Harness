@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "xXYjxli-2i",
+  "reviewer": "nCB6",
+  "paper": {
+    "title": "Optimization-Based Algebraic Multigrid Coarsening Using Reinforcement Learning",
+    "authors": [
+      "Ali Taghibakhshi",
+      "Scott MacLachlan",
+      "Luke Olson",
+      "Matthew West"
+    ],
+    "abstract": "Large sparse linear systems of equations are ubiquitous in science and engineering, such as those arising from discretizations of partial differential equations. Algebraic multigrid (AMG) methods are one of the most common methods of solving such linear systems, with an extensive body of underlying mathematical theory. A system of linear equations defines a graph on the set of unknowns and each level of a multigrid solver requires the selection of an appropriate coarse graph along with restriction and interpolation operators that map to and from the coarse representation. The efficiency of the multigrid solver depends critically on this selection and many selection methods have been developed over the years. Recently, it has been demonstrated that it is possible to directly learn the AMG interpolation and restriction operators, given a coarse graph selection. In this paper, we consider the complementary problem of learning to coarsen graphs for a multigrid solver, a necessary step in developing fully learnable AMG methods. We propose a method using a reinforcement learning (RL) agent based on graph neural networks (GNNs), which can learn to perform graph coarsening on small planar training graphs and then be applied to unstructured large planar graphs, assuming bounded node degree. We demonstrate that this method can produce better coarse graphs than existing algorithms, even as the graph size increases and other properties of the graph are varied. We also propose an efficient inference procedure for performing graph coarsening that results in linear time complexity in graph size.",
+    "keywords": [
+      "Algebraic Multigrid",
+      "Reinforcement Learning",
+      "Graph Partitioning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=xXYjxli-2i"
+  },
+  "review_fields": {
+    "summary": "The authors in the article have made a contribution to Algebraic Multigrid Coarsening. The AMG method is used to solve sparse linear systems. They proposed to replace heuristic approach used in the coarsening process by an Reinforcement Learning scheme. They have used Duel Double DQN with TAGCN to implement the RL based scheme. The paper describes in detail the problem formulation in terms of RL and presents results of the proposed algorithms. There are some important issues of concern regarding the submission.",
+    "main_review": "- The presented algorithm is only tested on 2D Poisson problem and they admit that they do not know how the algorithm will behave on other systems. This is a big hurdle in the acceptance of the paper. The contributions in the abstract and in section 1 are not formulated to support the view described earlier. A normal reader is prone to believe that the algorithm \"...can coarsen arbitrary unstructured grids, including those much larger than the training grid\" or is able to \"...learn to perform graph coarsening on small training graphs and then be applied to unstructured large graphs\"\n- It is assumed that the structural bias learned by RL during the training will not allow it to be used in different scenarios. So the algorithm may have shown good result for one set of problems, but it may need to be trained from scratch for any other type of problem. \n- Although, the authors claim that the algorithm is faster than any other technique, but there is no performance comparison present in the article. \n- The code provided by the authors is not useful. It is hard to know the dependencies and even after that effort one comes to know that there are missing files in the code.\n- For example, this line produces error in \"from DuelingNet2 import Net as Net_MPNN\" in MG_Agent.py\n- I do not agree with the authors that the complexity of Algorithm 2 is O(n). The Complexity of Algorithm 2 depends on the structure of matrix A. Finding arg max could itself have a complexity of O(n) in normal circumstances. So the whole algorithm may have the complexity of O(n^2).\n- It is not mentioned how the accuracy of the result is affected after grid coarsening. More coarse graph may also lead to bad results."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "zzSVN5x8JiX1m",
+  "reviewer": "XaVR",
+  "paper": {
+    "title": "On the Role of Optimization in Double Descent: A Least Squares Study",
+    "authors": [
+      "Ilja Kuzborskij",
+      "Csaba Szepesvari",
+      "Omar Rivasplata",
+      "Amal Rannen-Triki",
+      "Razvan Pascanu"
+    ],
+    "abstract": "Empirically it has been observed that the performance of deep neural networks steadily improves with increased model size, contradicting the classical view on overfitting and generalization. Recently, the double descent phenomenon has been proposed to reconcile this observation with theory, suggesting that the test error has a second descent when the model becomes sufficiently overparameterized, as the model size itself acts as an implicit regularizer. In this paper we add to the growing body of work in this space, providing a careful study of learning dynamics as a function of model size for the least squares scenario. We show an excess risk bound for the gradient descent solution of the least squares objective. The bound depends on the smallest non-zero eigenvalue of the sample covariance matrix of the input features, via a functional form that has the double descent behaviour. This gives a new perspective on the double descent curves reported in the literature, as our analysis of the excess risk allows to decouple the effect of optimization and generalization error. In particular, we find that in the case of noiseless regression, double descent is explained solely by optimization-related quantities, which was missed in studies focusing on the Moore-Penrose pseudoinverse solution. We believe that our derivation provides an alternative view compared to existing works, shedding some light on a possible cause of this phenomenon, at least in the considered least squares setting. We empirically explore if our predictions hold for neural networks, in particular whether the spectrum of the sample covariance of features at intermediary hidden layers has a similar behaviour as the one predicted by our derivations in the least squares setting.",
+    "keywords": [
+      "Double Descent",
+      "Optimization Error",
+      "Excess Risk",
+      "Generalization",
+      "Least Squares"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=zzSVN5x8JiX1m"
+  },
+  "review_fields": {
+    "summary": "This paper studies the double descent phenomenon of linear least squares problems from an optimization point of view. Specifically,  the contributions of the paper lie in two parts: (1) for a linear least squares problem, an upper bound for the excess risk after T gradient descent iterations is derived by a contraction property of GD. The upper bound depends on the smallest non-zero singular value of the feature matrix, which is also related to the smallest nonzero eigenvalue of the Gram matrix. (2) The concentration of the smallest nonzero eigenvalue around its population counterpart is studied, and the discrepancy of the two is controlled. The control is provided separately for under-parameterized and over-parameterized cases, using existing random matrix theories. \n\nCombining the two components above, an upper bound of the excess risk is provided that shows a peak at the interpolation threshold. The bound depends on the number of parameters d, the number of data n, as well as the number of iterations T, hence it is optimization related. This bound only characterizes the peak at d=n, but does not characterize the first descent in the under parameterized regime. \n\nFinally, numerical experiments on nonlinear models such as neural networks are provided to show the similar double descent phenomenon and the behavior of the smallest singular value of the feature matrix. Here, the feature is taken to be the output of the second last layer.",
+    "main_review": "This paper tries to study and explain the double descent phenomenon from a new perspective. However, it does not provide much new insight for the phenomenon. The reasons are as follows:\n1. The object lying in the center of the analysis---the smallest nonzero eigenvalue of the Gram matrix---is the well known cause of the double descent phenomenon in linear least squares problems (including the random feature models), and is also extensively studied. In the works focusing on minimal norm solutions or ridge regression solutions, the same quantity is also studied and identified to be the factor that leads to the DD phenomenon. \n2. The upper bound for the excess risk only considers the smallest nonzero eigenvalue of the Gram matrix, which means it only controls the slowest component in the dynamics. Hence, the bound becomes tight only when the number of iterations, T, becomes large. Before this, the components corresponding to big eigenvalues dominate the dynamics and the DD phenomenon does not appear. This is showed by the empirical results in the paper. However, once T is sufficiently big such that the component of the smallest eigenvalue dominates the dynamics, the GD solution is already close to the minimal norm solution or the l2 regularized solutions studied in previous works. Therefore, the so-called \"the roll of optimization\" does not make much sense. Especially considering that the loss function is actually convex and any reasonable optimization algorithm will converge to a global minimum. \n3. For a linear least squares problem, the GD solutions and the corresponding population risk can be written down in close form. Hence, the reviewer does not see the necessity to derive the excess risk bounds via indirect approach such as (\\Delta, M)-admissible. Also, the (\\Delta, M)-admissible condition does not help extend the analysis to non-linear cases. \n\nSome other comments:\n1. Shown by numerical experiments on neural networks, it seems the peak of the generalization error happens when the width approximately equals the number of data. This is different that shown in Belkin et.al, in which the the generalization error peaks when the number of parameters = number of data * number of classes. Hence, this is like a different kind of \"double descent\". It is possible to provide more explanation on this phenomenon using the techniques employed in the paper?\n2. Some notations are confusing. For example, (a) the excess risk is denoted by E(w^*) while w^* is actually a fixed point. It is better to use E(A_S(W_0)) to highlight the dependence of the excess risk with the GD solution.  (b) the data us denoted by a capital X, which it is mentioned that vectors are denoted by boldface lower case letters. This causes confusion.",
+    "limitations_and_societal_impact": "The authors have addressed the limitations and societal impact of the work."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

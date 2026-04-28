@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "7vVWiCrFnd",
+  "reviewer": "jjG1",
+  "paper": {
+    "title": "Rethinking and Extending the Probabilistic Inference Capacity of GNNs",
+    "authors": [
+      "Tuo Xu",
+      "Lei Zou"
+    ],
+    "abstract": "Designing expressive Graph Neural Networks (GNNs) is an important topic in graph machine learning fields. Despite the existence of numerous approaches proposed to enhance GNNs based on Weisfeiler-Lehman (WL) tests, what GNNs can and cannot learn still lacks a deeper understanding. This paper adopts a fundamentally different approach to examine the expressive power of GNNs from a probabilistic perspective. By establishing connections between GNNs' predictions and the central inference problems of probabilistic graphical models (PGMs), we can analyze previous GNN variants with a novel hierarchical framework and gain new insights into their node-level and link-level behaviors. Additionally, we introduce novel methods that can provably enhance GNNs' ability to capture complex dependencies and make complex predictions. Experiments on both synthetic and real-world datasets demonstrate the effectiveness of our approaches.",
+    "keywords": [
+      "graph neural networks",
+      "expressiveness",
+      "approximate inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7vVWiCrFnd"
+  },
+  "review_fields": {
+    "summary": "The paper studies the expressivity of the Graph neural networks from the perspective of probabilistic graphical methods. Although multiple works have previously established connections between GNNs and PGMs, this paper studies it from the perspective of expressive power of the GNNs. After formulating the correspondence between WL power with PGMs, the authors present several results in providing a new perspective of seeing the expressivity of GNNs in its ability to learn the complex higher-order distributions formalized as clique based MRFs.",
+    "strengths": "1. The GNN’s connection to the PGMs is developed in an interesting and principled way.. Specifically, the formulation overcomes the permutation invariance inherent to the graph neural networks but missing in the PGMs.\n1. The results progressively elaborate on the connections between GNN’s expressive power in terms of the learnable capacity of node marginals. \n1. Some of the results are surprising although many of them are intuitively known. The correspondence between k-wl and clique orders is intuitive and is \n1. The paper is well written and the presentation flow is reasonably clear.",
+    "weaknesses": "1. The first paragraph is problematic. “implicitly assume that node representations learnt by GNNs are independent conditioned on node features and edges, thereby ignoring the joint dependency among nodes...” does not represent the related works accurately. These works do not ignore dependency among the nodes, which is captured via multiple rounds of message passing similar to loopy belief propagation. I find the first paragraph could be phrased in a different way to make the distinctions accurate.\n1. The introduction of phantom nodes and edges is not a novel development and closely resembles the other methods like CIN. However, the problem of inefficiency remains in such methods i.e. the computational complexity of finding maximal cliques which can be used for phantom nodes to guarantee the inferential capacity.\n1. Certain related works are missing in the paper. Recent works on Factor Graph Neural Networks (FGNN) [1] are highly related works in establishing connections between PGMs and GNNs. A small discussion on the relevance would be pertinent. \n1. The experimental section could be more elaborate to study the effectiveness of GNNs in learning higher-order distributions. For example, comparison with Zhen et al. (2023)  on inference of higher-order LDPC codes. \n\n**Overall,** \nI find the paper making a good contribution to the understanding of the GNN's expressivity in a new perspective from the lens of Probabilistic graphical models. Although, I haven't carefully checked all the proofs, the results are mostly not surprising.\n\n**References:**\n\n [1] Zhen Zhang, Mohammed Haroon Dupty, Fan Wu, Javen Qinfeng Shi, Wee Sun Lee. \"Factor Graph Neural Networks\" Journal of machine Learning research 24(181):1−54, 2023"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2322,
+    "words": 355,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8dbfb2b9-5bc1-444b-8986-746ab58e78da",
+    "error": null,
+    "scored_chars": 2329
+  }
+}

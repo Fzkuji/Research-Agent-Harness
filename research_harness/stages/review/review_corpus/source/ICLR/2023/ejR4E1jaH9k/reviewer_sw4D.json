@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "ejR4E1jaH9k",
+  "reviewer": "sw4D",
+  "paper": {
+    "title": "Solving stochastic weak Minty variational inequalities without increasing batch size",
+    "authors": [
+      "Thomas Pethick",
+      "Olivier Fercoq",
+      "Puya Latafat",
+      "Panagiotis Patrinos",
+      "Volkan Cevher"
+    ],
+    "abstract": "This paper introduces a family of stochastic extragradient-type algorithms for a class of nonconvex-nonconcave problems characterized by the weak Minty variational inequality (MVI). Unlike existing results on extragradient methods in the monotone setting, employing diminishing stepsizes is no longer possible in the weak MVI setting. This has led to approaches such as increasing batch sizes per iteration which can however be prohibitively expensive. In contrast, our proposed methods involves two stepsizes and only requires one additional oracle evaluation per iteration. We show that it is possible to keep one fixed stepsize while it is only the second stepsize that is taken to be diminishing, making it interesting even in the monotone setting. Almost sure convergence is established and we provide a unified analysis for this family of schemes which contains a nonlinear generalization of the celebrated primal dual hybrid gradient algorithm.",
+    "keywords": [
+      "Variational inequalities",
+      "stochastic first-order methods",
+      "nonconvex-nonconcave",
+      "minimax"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=ejR4E1jaH9k"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "For the first time, the authors introduces a family of stochastic extragradient-type algorithms that positively solves a class of nonconvex-nonconcave problems which can be cast as stochastic weak Minty variational inequality (MVI). In the monotone setting, extragradient methods adopt constant stepsizes and bounded batchsizes (both of which are critical in practical performances), and when extending to the weak MVI setting, only theories adopting expensive increasing batch sizes per iteration approaches are available.",
+    "strength_and_weaknesses": "Strength\n\nThis work answers affirmatively an open problem by proposing a *bias-corrected* stochastic extragradient (BCSEG+) algorithm that solves stochastic weak Minty variational inequalities without increasing the batch size. As the authors indicated, Pethick et al. (2022) \"suﬃces in the special case of unconstrained quadratic games but can fail even in the monotone case ...\". Also, earlier works such as Hsieh et al. (2020) adopt diminishing but larger exploration stepsize and smaller updating stepsize.\n\n\nWeakness\n\nThere is not much from my perspective, as long as the proof is correct (which I took a high-leve look at but did not go into all details). Two small comments:\n\n--MVI can be short for \"monotone\" variational inequality instead of \"Minty\" variational inequality. Adopting this shorthand as in some earlier work might cause unnecessary confusion. Therefore, I would suggest the authors avoid this shorthand as much as possible.\n\n--The authors should do more literature reviews. Missing reference includes but not limited to \"Bot et al., Minibatch Forward-Backward-Forward Methods for Solving Stochastic Variational Inequalities, 2021\"",
+    "clarity,_quality,_novelty_and_reproducibility": "The authors did a good job in all these given aspects.",
+    "summary_of_the_review": "This paper is theoretically strong in the sense that it made an important step in fixing SEG with constant extrapolation stepsize and diminishing updating stepsize. This makes an important step upon existing work (e.g. Hsieh et al., 2020; Diakonikolas et al., 2021; Pethick et al., 2022) even for the monotone case. This supports my high rating of this work. It would be even better if the authors have a chance to include richer empirical findings relative to this work.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

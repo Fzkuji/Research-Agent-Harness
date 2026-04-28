@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "bJ9aARjtBu",
+  "reviewer": "XbsE",
+  "paper": {
+    "title": "From Next-Token to Mathematics: The Learning Dynamics of Mathematical Reasoning in Language Models",
+    "authors": [
+      "Shubhra Mishra",
+      "Gabriel Poesia",
+      "Noah Goodman"
+    ],
+    "abstract": "Large Language Models (LLMs) solely trained on next-token prediction learn to solve a wide range of problems involving mathematical reasoning. How does this ability evolve during training? We show the first analysis of how mathematical reasoning abilities of several open-weight LLMs develop during pre-training and post-training. To this end, we construct MathCAMPS, a synthetic dataset of novel mathematical reasoning problems grounded in 44 fine-grained skills taken from the Common Core curriculum from K to 8th grades. In one experiment, we show that mathematical skills are learned during pre-training in an order that measurably correlates with the human-designed curriculum, even though training data are randomly ordered. We also show a detailed analysis of which mathematical abilities benefit from instruction-tuning, a widely used post-training method and, in contrast, which skills suffer. Our work paves the way for an empirical understanding of LLM training dynamics in relation to reasoning.",
+    "keywords": [
+      "math reasoning",
+      "training dynamics",
+      "reasoning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=bJ9aARjtBu"
+  },
+  "review_fields": {
+    "summary": "This paper investigates the learning dynamics of language model pre-training and instruction-tuning, with a particular focus on math reasoning. To avoid data contamination, this work introduces MathCAMPS, a synthetic benchmark of 4 900 grade-school math problems drawn from 44 Common Core standards. Problems are generated symbolically and verbalised with GPT-4. The authors then use MathCAMPS to analyse how three open-weight model families with public checkpoints (Amber, OLMo-2 7 B, Pythia-12 B) acquire mathematical skills during pre-training and how instruction-tuning perturbs those skills.",
+    "reasons_to_accept": "- Fine-grained, curriculum-grounded benchmark. By tying each item to an explicit Common Core skill, MathCAMPS enables analyses that GSM8K/MATH cannot—e.g., plotting learning curves per skill and grade cluster. \n\n- Fully automated generation with quality safeguards. The grammar-based sampling plus cycle-consistency filter removes ~83 % of unfaithful problems, yielding 97.7 % faithful items in a manual audit. \n\n- Transparent look at training dynamics. Using open checkpoints, the paper provides empirical evidence that skill acquisition is gradual and curriculum-aligned, offering data points for theorists of LLM learning.",
+    "reasons_to_reject": "- Incremental with respect to existing synthetic math resources. Recent work (e.g., GSMore [1], GSM-Symbolic [2], DyVal [3]) already synthesises or perturbs math problems for robustness studies; MathCAMPS differs mainly in being tied to Common Core standards, which feels like a change of packaging rather than a conceptual advance.\n\n- Heavy reliance on GPT-4 for both generation and back-translation. Although cycle consistency helps, GPT-4 can still hallucinate or encode hidden shortcuts, and no contamination check against GPT-4’s training data is provided.\n\n- Findings are unsurprising. Earlier-grade skills appearing earlier, decimals being easier than fractions, and instruction-tuning sometimes hurting accuracy are all intuitive and have been anecdotally reported before; the paper lacks a compelling theoretical insight.\n\n[1] Hong et al. Evaluating LLMs' Mathematical and Coding Competency through Ontology-guided Interventions.\n[2] Mirzadeh et al. GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in Large Language Models.\n[3] Zhu et al. DyVal: Dynamic Evaluation of Large Language Models for Reasoning Tasks.",
+    "questions_to_authors": "- The paper infers that OLMo’s accuracy drop after tuning is due to high-quality math data in its second pre-training stage.\nCan the authors provide controlled experiments that vary only the instruction-tuning corpus or objective to isolate which factor causes degradation?\n\n- Some CC standards involve prerequisite relationships (e.g., fraction addition before rational-number operations). Did the authors examine whether mastering one skill accelerates learning of a downstream skill, and could this be used to design better curricula for model training?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 100,
+    "mixed_pct": 0,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 2324,
+    "words": 322,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/21a04794-f5cf-4cb6-9a25-c69a6ca0189f",
+    "error": null,
+    "scored_chars": 2326
+  }
+}

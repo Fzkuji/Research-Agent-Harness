@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "Srt1hhQgqa",
+  "reviewer": "XRdH",
+  "paper": {
+    "title": "Cappy: Outperforming and Boosting Large Multi-Task LMs with a Small Scorer",
+    "authors": [
+      "Bowen Tan",
+      "Yun Zhu",
+      "Lijuan Liu",
+      "Eric Xing",
+      "Zhiting Hu",
+      "Jindong Chen"
+    ],
+    "abstract": "Large language models (LLMs) such as T0, FLAN, and OPT-IML excel in multi-tasking under a unified instruction-following paradigm, where they also exhibit remarkable generalization abilities to unseen tasks. Despite their impressive performance, these LLMs, with sizes ranging from several billion to hundreds of billions of parameters, demand substantial computational resources, making their training and inference expensive and inefficient. Furthermore, adapting these models to downstream applications, particularly complex tasks, is often unfeasible due to the extensive hardware requirements for finetuning, even when utilizing parameter-efficient approaches such as prompt tuning. Additionally, the most powerful multi-task LLMs, such as OPT-IML-175B and FLAN-PaLM-540B, are not publicly accessible, severely limiting their customization potential. To address these challenges, we introduce a pretrained small scorer, \\textit{Cappy}, designed to enhance the performance and efficiency of multi-task LLMs. With merely 360 million parameters, Cappy functions either independently on classification tasks or serve as an auxiliary component for LLMs, boosting their performance. Moreover, Cappy enables efficiently integrating downstream supervision without requiring LLM finetuning nor the access to their parameters. Our experiments demonstrate that, when working independently on 11 language understanding tasks from PromptSource, Cappy outperforms LLMs that are several orders of magnitude larger. Besides, on 45 complex tasks from BIG-Bench, Cappy boosts the performance of the advanced multi-task LLM, FLAN-T5, by a large margin. Furthermore, Cappy is flexible to cooperate with other LLM adaptations, including finetuning and in-context learning, offering additional performance enhancement.",
+    "keywords": [
+      "multi-task",
+      "large language models",
+      "pretrain model"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Srt1hhQgqa"
+  },
+  "review_fields": {
+    "summary": "Adapting SotA LLMs to novel tasks is difficult given their extreme size, yet is generally more effective than in-context learning alone. To address this, the authors propose “Cappy”, a scoring model (leveraging RoBERTa as a backbone) which is trained to score pairs of (instruction, response) for any task instruction and corresponding response. Cappy is pre-trained on many examples of ((instruction, response) -> score); after pre-training, Cappy can be easily fine-tuned (because of it’s small size) to a given task and then used as an augmentation to LLM generation by acting as a ranking mechanism atop several LLM generated responses.\n\nTo create pre-training data for Cappy, the authors use the PromptSource dataset, training the model to predict 1 for correct pairs of (prompt, response) and 0 for mismatched pairs. Additionally, the authors generate additional responses using a large LLM (e.g. FLAN) and use the Rouge-L between the generated response and gold response as the regression target for the pair (prompt, generated response). To test the validity of Cappy, the authors evaluate Cappy in isolation, with no additional fine-tuning, on 11 held-out classification tasks from PromptSource. They show that Cappy consistently ranks the correct answer higher than many instruction-tuned LLMs, including OPT-IML-175B.\n\nNext, the authors evaluate Cappy on LLM augmentation using the BIG-Bench benchmark. For each task, Cappy is first fine-tuned, then used as a scoring function for multiple generations from a frozen FLAN-T5 LLM. Cappy consistently outperforms the proposed sampling methods, most notably improving upon the LLMs own self-scoring and In-Context Learning. Moreover, the authors show that Cappy can improve upon a FLAN-T5 model’s performance even when the LLM parameters are fine-tuned as well.\n\nFinally, the authors present an ablation study of their proposed training strategy for Cappy, showing that both the overall pre-training strategy and using Rouge-L regression targets from LLM generations are important to Cappy’s success.",
+    "strengths": "- Cappy represents a light-weight option to adapt LLMs to a given target task which requires no updating of parameters to the LLM nor any back-propagation through the LLM whatsoever (e.g. this is not true for adapter layers or prompt tuning).\n- Moreover, even without adapting to a given task, Cappy presents some benefits over generic LLM sampling methods for task-specific predictions.\n-  Additionally, Cappy can ostensibly be added on top of any LLM without additional training (i.e. train once, use anywhere).\n- Cappy is a very simple idea, and is easy to understand, yet the usage of a scorer in this capacity, as well as the training and data augmentation scheme, is novel to the best of my knowledge.\n- The ablation study is helpful in demonstrating the benefits of the proposed pre-training and data-augmentation scheme.",
+    "weaknesses": "- Cappy is not compared to other parameter-efficient adaptation methods. While there is some justification given, because other methods require storing forward activations and back-propagating through LLM parameters, it nevertheless makes judging the effectiveness of Cappy difficult.\n- Moreover, Cappy’s improvements over a frozen LLM are comparatively small, e.g. while Cappy improves Flan-T5 Large performance by ~7%, fine-tuning alone increases performance by ~22%. It’s therefore unclear how significant Cappy’s benefit is without comparison to other adaptation methods.\n- In the zero-shot experiments (4.1) it is claimed that the improved performance of Cappy over much larger LLMs can be attributed to Cappy’s scoring-based learning strategy. However, T0 outperforms Cappy and T0 is significantly smaller than the OPT models; moreover, T0 is also trained on PromptSource only, similar to Cappy, and unlike the other LLMs. Thus, it seems that at least some of Cappy’s performance benefits compared to other LLMs may arise from domain mismatch between training and test domains, rather than the proposed scoring function.\n- While Cappy does only require a small number of parameters to train, inference requires a number of decoder forward passes to generate multiple candidate responses from an LLM (it's not clear how Cappy scales with the number of samples provided, also); to my knowledge, other adaptation methods such as Adapter Layers do not have the same limitation. So while it saves computation on one end, it does slightly increase computation on another end, and exploring this trade-off would be useful.",
+    "questions": "- I think it would be really helpful to understand how Cappy compares to other parameter efficient adaptation methods. Do you have any experiments that indicate that Cappy is e.g. comparable to prompt-tuning in terms of it's benefits?\n- Can you provide an analysis of how much additional computation is required to sample many generations for Cappy to score?\n- Also, do you know how Cappy's performance scales with the number of generated samples? e.g. does it's performance flatten out after only 4 samples, or can it's performance increase significantly if several generations are considered?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3046,
+    "words": 477,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3a78f7d7-d025-4080-88a6-a8d2cc9ceea4",
+    "error": null,
+    "scored_chars": 3047
+  }
+}

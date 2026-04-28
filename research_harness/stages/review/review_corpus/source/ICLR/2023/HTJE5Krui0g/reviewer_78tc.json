@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "HTJE5Krui0g",
+  "reviewer": "78tc",
+  "paper": {
+    "title": "Softened Symbol Grounding for Neuro-symbolic Systems",
+    "authors": [
+      "Zenan Li",
+      "Yuan Yao",
+      "Taolue Chen",
+      "Jingwei Xu",
+      "Chun Cao",
+      "Xiaoxing Ma",
+      "Jian L\\\"{u}"
+    ],
+    "abstract": "Neuro-symbolic learning generally consists of two separated worlds, i.e., neural network training and symbolic constraint solving, \nwhose success hinges on symbol grounding, a fundamental problem in AI. This paper presents a novel, softened symbol grounding process, bridging the gap between the two worlds, and resulting in an effective and efficient neuro-symbolic learning framework. Technically, the framework features (1) modeling of symbol solution states as a Boltzmann distribution, which avoids expensive state searching and facilitates mutually beneficial interactions between network training and symbolic reasoning; (2) a new MCMC technique leveraging projection and SMT solvers, which efficiently samples from disconnected symbol solution spaces; (3) an annealing mechanism that can escape from sub-optimal symbol groundings. Experiments with three representative neuro-symbolic learning tasks demonstrate that, owing to its superior symbol grounding capability, our framework successfully solves problems well beyond the frontier of the existing proposals.",
+    "keywords": [
+      "neuro-symbolic learning",
+      "symbol grounding problem",
+      "projection-based sampling"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=HTJE5Krui0g"
+  },
+  "review_fields": {
+    "comment": "Thank you for the clarifications and for pointing to the relevant ablations / experiments. Thank you also for making some of the wording more explicit, it's much easier to track if \"Stage I\" and \"Stage II\" are explicitly rather than implicitly defined.\n\nI still think that the overall exposition and method explanation are very difficult to parse for a reader not already familiar with this area. However, I think the experiments are strong and the scientific contribution seems solid, which is why I am increasing my score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

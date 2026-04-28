@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "e2M4CNa-UOS",
+  "reviewer": "cYew",
+  "paper": {
+    "title": "Efficient Sequence Packing without Cross-contamination: Accelerating Large Language Models without Impacting Performance",
+    "authors": [
+      "Mario Michael Krell",
+      "Matej Kosec",
+      "Sergio P. Perez",
+      "Mrinal Iyer",
+      "Andrew W Fitzgibbon"
+    ],
+    "abstract": "Effective training of today's large language models (LLMs) depends on large batches and long sequences for throughput and accuracy. To handle variable-length sequences on hardware accelerators, it is common practice to introduce padding tokens, so that all sequences in a batch have the same length. We show in this paper that the variation in sequence lengths in common NLP datasets is such that up to 50% of all tokens can be padding. In less common, but not extreme, cases (e.g. GLUE-COLA with sequence length 128), the ratio is up to 89%. Existing methods to address the resulting inefficiency are complicated by the need to avoid \"cross-contamination\" in self-attention, by a reduction in accuracy when sequence ordering information is lost, or by customized kernel implementations only valid for specific accelerators.\n\nThis paper introduces a new formalization of sequence packing in the context of the well-studied bin packing problem, and presents new algorithms based on this formulation which, for example, confer a 2x speedup for phase 2 pretraining in BERT while preserving downstream performance. We show how existing models can be adapted to ensure mathematical equivalence between the original and packed models, meaning that packed models can be trained with existing pre-training and fine-tuning practices.",
+    "keywords": [
+      "deep learning",
+      "BERT",
+      "IPU",
+      "GPU",
+      "hardware-acceleration",
+      "padding",
+      "Wikipedia",
+      "NLP",
+      "bin-packing"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=e2M4CNa-UOS"
+  },
+  "review_fields": {
+    "summary": "This paper proposes two methods for reducing the padding tokens when packing multiple sentences into a single sequence: shortest-pack-first histogram-packing and non-negative least squares histogram-packing. Both these packing methods alter the input sequences provided to NLP models. As a result, the paper proposes basic alterations for BERT models so they can interpret packed input sequences correctly. With these changes, the paper demonstrates that a nearly 2x acceleration can be achieved versus a model using a naive token padding approach without any effect on performance.",
+    "strengths_and_weaknesses": "Strengths:\n+ Potential broader applicability to many NLP tasks. While the paper mainly focuses the packing algorithms on BERT, it could also apply to nearly all transformer-related architectures.\n+ Multiple factors, such as packing efficiency, processing speed-up, load balancing, convergence behavior, are considered when analyzing the validity of packing algorithms.\n+ Clear writing and explanation; detailed background; helpful supplemental materials\n\nWeaknesses:\n- Incremental contribution. Bin packing is mature topic. While the specific context and constraints are different in the scope of this paper, it is unclear why many other existing bin packing algorithms cannot be applied (with reasonable modifications). The proposed two schemes are also very simple.\n- Results for SORT are a bit surprising and conflicting. Section 4 concludes that SORT “cause a major overhead that exceeds the benefits of avoiding the padding”, yet Section 1 mentions that sorted batching is being used in the “Faster Transformer , lingvo, fairseq, and RoBERTa”. The seems to imply that either the evaluation results are inaccurate,or SORT has other benefits that are not discussed explicitly/clearly in the paper.\n- Lack of supporting evidence for certain claims and not evaluating all parts of proposition thoroughly. For instance, on line 236, there is no provided data to support the claim that “the best speed-up is obtained with NNLSHP at depth 3”. Additionally, nearly no specifications for the training setup are provided, such as the specific GPU used. This makes the claim that the NNLSHP packing algorithm runs “out of memory for larger depth” on line 237 challenging to interpret. Also, a minor complaint is that Table 1 uses the notation >>100 and << 1.000; it would be more useful if actual numbers are provided (this is not a figure where very large/small data may not be represented well).",
+    "questions": "- The paper mentions that “The best speed-up is obtained with NNLSHP at depth 3 which required 28.4s for processing and ran out of memory for larger depth.”  Is there any data to support this claim? Are there circumstances where the approach would run out of memory when a depth of 3 is used?\n- On lines 288-290, the paper mentions that when not using an adjusted positional embedding calculation with one of its packing algorithms, “the accuracy stalls at 71.8% and does not reach the target accuracy of 72.1%.  So overall, both adjustments are crucial.”  However, when examining the percentages and Figure 4, this claim does not seem valid.  The need for the adjustment makes sense, but is there another reason why it is a crucial change? Additionally, in Figure 4, is there a reason the lines for “packed BERT baseline” and “no pos. emb. Adjustment” end before the line for “no mask adjustment” ends?\n- It feels as though an important metric is missing; for instance, why do “Faster Transformer [21], lingvo [28] fairseq [22], and RoBERTa” on line 40 all use sorted batching (SORT) to reduce padding tokens when it appears to be unviable given the results in Table 1?"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

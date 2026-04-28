@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "3PjCt4kmRx",
+  "reviewer": "X3Sy",
+  "paper": {
+    "title": "From Pixels to UI Actions: Learning to Follow Instructions via Graphical User Interfaces",
+    "authors": [
+      "Peter Shaw",
+      "Mandar Joshi",
+      "James Cohan",
+      "Jonathan Berant",
+      "Panupong Pasupat",
+      "Hexiang Hu",
+      "Urvashi Khandelwal",
+      "Kenton Lee",
+      "Kristina Toutanova"
+    ],
+    "abstract": "Much of the previous work towards digital agents for graphical user interfaces (GUIs) has relied on text-based representations (derived from HTML or other structured data sources), which are not always readily available. These input representations have been often coupled with custom, task-specific action spaces.  This paper focuses on creating agents that interact with the digital world using the same conceptual interface that humans commonly use — via pixel-based screenshots and a generic action space corresponding to keyboard and mouse actions. Building upon recent progress in pixel-based pretraining, we show, for the first time, that it is possible for such agents to outperform human crowdworkers on the MiniWob++ benchmark of GUI-based instruction following tasks.",
+    "keywords": [
+      "instruction following",
+      "web tasks",
+      "user interface tasks",
+      "vision and language",
+      "representation learning",
+      "reinforcement learning",
+      "imitation learning",
+      "tree search",
+      "language grounding",
+      "web agents",
+      "computer control"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=3PjCt4kmRx"
+  },
+  "review_fields": {
+    "comment": "Thanks for your response and sorry for the confusion. I made a typo there. The related work I would like to list is Seq2Act [1] rather than Pix2Act. Besides, there is another work for developing pixel-based agents, named Spotlight [2]. Please clarify the relations and differences compared to them.\n\n[1] Li, Yang, et al. \"Mapping natural language instructions to mobile UI action sequences.\" arXiv preprint arXiv:2005.03776 (2020).  \n[2] Li, Gang, and Yang Li. \"Spotlight: Mobile UI understanding using vision-language models with a focus.\" (2023)."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 546,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/cce05a5f-3197-4f70-a37b-616e57c49dd3",
+    "error": null,
+    "scored_chars": 548
+  }
+}

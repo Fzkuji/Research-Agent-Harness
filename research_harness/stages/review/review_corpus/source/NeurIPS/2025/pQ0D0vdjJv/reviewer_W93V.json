@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "pQ0D0vdjJv",
+  "reviewer": "W93V",
+  "paper": {
+    "title": "Neural Evolution Strategy for Black-box Pareto Set Learning",
+    "authors": [
+      "Chengyu LU",
+      "Zhenhua Li",
+      "Xi Lin",
+      "Ji Cheng",
+      "Qingfu Zhang"
+    ],
+    "abstract": "Multi-objective optimization problems (MOPs) are prevalent in numerous real-world applications. Recently, Pareto Set Learning (PSL) has emerged as a powerful paradigm for solving MOPs. PSL can produce a neural network for modeling the set of all Pareto optimal solutions. However, applying PSL to black-box objectives, particularly those exhibiting non-separability, high dimensionality, and/or other complex properties, remains very challenging. To address this issue, we propose leveraging evolution strategies (ESs), a class of specialized black-box optimization algorithms, within the PSL paradigm. Traditional ESs capture the complex dimensional dependencies less efficiently, which can significantly hinder their performance in PSL. To tackle this issue, we suggest encapsulating the dependencies within a neural network, which is then trained using a novel gradient estimation method. The proposed method, termed Neural-ES, is evaluated using a bespoke benchmark suite for black-box PSL. Experimental comparisons with other methods demonstrate the efficiency of Neural-ES, underscoring its ability to learn the Pareto sets of challenging black-box MOPs.",
+    "keywords": [
+      "evolution strategy",
+      "multi-objective optimization",
+      "black-box optimization",
+      "pareto set learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=pQ0D0vdjJv"
+  },
+  "review_fields": {
+    "summary": "This paper proposes Neural-ES, a black-box optimization algorithm for Pareto set learning in high-dimensional multi-objective problems. The method replaces explicit full covariance matrices with a neural network that outputs a low-rank covariance structure in an autoregressive sampling framework. The authors demonstrate the algorithm on the proposed BBO-PSL benchmark suite and a real-world trajectory planning problem, showing competitive or superior performance compared to state-of-the-art MOEAs.",
+    "strengths_and_weaknesses": "Strengths: \n\n1. The paper clearly articulates why existing methods fail to scale in high-dimensional multi-objective settings. The problem is well-motivated and practically relevant. \n\n2. The mathematical derivations, including the gradient estimation and the natural gradient correction, are rigorous and clearly presented. \n\n3. The authors designed the BBO-PSL benchmark, which covers a diverse set of challenging properties (nonseparability, scalability, known Pareto sets). \n\n\nWeaknesses:\n\n 1. The hyperparameters are fixed across experiments, without a sensitivity analysis. \n\n2. The paper does not include sufficient ablation experiments. This makes it harder to attribute performance gains to specific components. \n\n3. No runtime measurements are reported. It is unclear how much additional time the autoregressive sampling introduces compared to standard ES variants. This makes it hard to assess the method’s practical efficiency.\n\n 4. Most algorithmic components (low-rank approximation, natural gradient) are adaptations of prior work. The main novelty is in combining autoregressive sampling with ES.",
+    "questions": "1. Could the authors clarify why the results for EPSL-R1 are not reported in Figure 6(d)? \n\n2. Could the authors provide more details on how the BBO-PSL benchmark suite was designed and constructed?"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 2,
+    "quality": 2,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

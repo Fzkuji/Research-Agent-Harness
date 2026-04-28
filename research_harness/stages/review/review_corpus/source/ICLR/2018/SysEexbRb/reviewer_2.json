@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "SysEexbRb",
+  "reviewer": "2",
+  "paper": {
+    "title": "Critical Points of Linear Neural Networks: Analytical Forms and Landscape Properties",
+    "authors": [
+      "Yi Zhou",
+      "Yingbin Liang"
+    ],
+    "abstract": "Due to the success of deep learning to solving a variety of challenging machine learning tasks, there is a rising interest in understanding loss functions for training neural networks from a theoretical aspect. Particularly, the properties of critical points and the landscape around them are of importance to determine the convergence performance of optimization algorithms. In this paper, we provide a necessary and sufficient characterization of the analytical forms for the critical points (as well as global minimizers) of the square loss functions for linear neural networks. We show that the analytical forms of the critical points characterize the values of the corresponding loss functions as well as the necessary and sufficient conditions to achieve global minimum. Furthermore, we exploit the analytical forms of the critical points to characterize the landscape properties for the loss functions of linear neural networks and shallow ReLU networks. One particular conclusion is that: While the loss function of linear networks has no spurious local minimum, the loss function of one-hidden-layer nonlinear networks with ReLU activation function does have local minimum that is not global minimum.",
+    "keywords": [
+      "neural networks",
+      "critical points",
+      "analytical form",
+      "landscape"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SysEexbRb"
+  },
+  "review_fields": {
+    "review": "Authors of this paper provided full characterization of the analytical forms of the critical points for the square loss function of three types of neural networks: shallow linear networks, deep linear networks and shallow ReLU nonlinear networks. The analytical forms of the critical points have direct implications on the values of the corresponding loss functions, achievement of global minimum, and various landscape properties around these critical points.\n\nThe paper is well organized and well written. Authors exploited the analytical forms of the critical points to provide a new proof for characterizing the landscape around the critical points. This technique generalizes existing work under full relaxation of assumptions. In the linear network with one hidden layer, it generalizes the work Baldi & Hornik (1989) with arbitrary network parameter dimensions and any data matrices; In the deep linear networks, it generalizes the result in Kawaguchi (2016) under no assumptions on the network parameters and data matrices. Moreover, it also provides new characterization for shallow ReLU nonlinear networks, which is not discussed in previous work.\n\nThe results obtained from the analytical forms of the critical points are interesting, but one problem is that how to obtain the proper solution of equation (3)? In the Example 1, authors gave a concrete example to demonstrate both local minimum and local maximum do exist in the shallow ReLU nonlinear networks by properly choosing these matrices satisfying (12). It will be interesting to see how to choose these matrices for all the studied networks with some concrete examples."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

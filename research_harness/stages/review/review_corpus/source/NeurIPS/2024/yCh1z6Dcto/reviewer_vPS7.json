@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "yCh1z6Dcto",
+  "reviewer": "vPS7",
+  "paper": {
+    "title": "Stepping Forward on the Last Mile",
+    "authors": [
+      "Chen Feng",
+      "Shaojie Zhuo",
+      "Xiaopeng Zhang",
+      "Ramchalam Kinattinkara Ramakrishnan",
+      "Zhaocong Yuan",
+      "Andrew Zou Li"
+    ],
+    "abstract": "Continuously adapting pre-trained models to local data on resource constrained edge devices is the \\emph{last mile} for model deployment. However, as models increase in size and depth, backpropagation requires a large amount of memory, which becomes prohibitive for edge devices. In addition, most existing low power neural processing engines (e.g., NPUs, DSPs, MCUs, etc.) are designed as fixed-point inference accelerators, without training capabilities. Forward gradients, solely based on directional derivatives computed from two forward calls, have been recently used for model training, with substantial savings in computation and memory. However, the performance of quantized training with fixed-point forward gradients remains unclear. In this paper, we investigate the feasibility of on-device training using fixed-point forward gradients, by conducting comprehensive experiments across a variety of deep learning benchmark tasks in both vision and audio domains. We propose a series of algorithm enhancements that further reduce the memory footprint, and the accuracy gap compared to backpropagation. An empirical study on how training with forward gradients navigates in the loss landscape is further explored. Our results demonstrate that on the last mile of model customization on edge devices, training with fixed-point forward gradients is a feasible and practical approach.",
+    "keywords": [
+      "On-device model adaptation",
+      "Fixed-point forward gradient learning",
+      "Low memory",
+      "Edge devices"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=yCh1z6Dcto"
+  },
+  "review_fields": {
+    "comment": "Thanks for the authors' response! Some of my concerns haven't been addressed so I keep my score.\n\n**The memory cost of (BP, LP, fp16)**\n\nWill the authors provide the memory cost of (BP, LP, fp16)? How will the author modify their statements?\n\n**Ablation study for Section 4.1**\n\nWhy did the author only provide an ablation study in Section 4.2 and not include one in Section 4.1?\n\n**QZO-FF for larger models**\n\nThe authors haven't conducted experiments on models larger than 80M so I think the concept of \"pre-trained models\" in the abstract (line 1) and the introduction (line 20) is overclaimed."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 597,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c9d931f8-cdd8-49b9-9448-8394ca440598",
+    "error": null,
+    "scored_chars": 597
+  }
+}

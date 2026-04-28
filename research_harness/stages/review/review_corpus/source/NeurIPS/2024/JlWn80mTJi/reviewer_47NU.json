@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "JlWn80mTJi",
+  "reviewer": "47NU",
+  "paper": {
+    "title": "The Implicit Bias of Gradient Descent on Separable Multiclass Data",
+    "authors": [
+      "Hrithik Ravi",
+      "Clayton Scott",
+      "Daniel Soudry",
+      "Yutong Wang"
+    ],
+    "abstract": "Implicit bias describes the phenomenon where optimization-based training algorithms, without explicit regularization, show a preference for simple estimators even when more complex estimators have equal objective values. Multiple works have developed the theory of implicit bias for binary classification under the assumption that the loss satisfies an *exponential tail property*. However, there is a noticeable gap in analysis for multiclass classification, with only a handful of results which themselves are restricted to the cross-entropy loss. In this work, we employ the framework of Permutation Equivariant and Relative Margin-based (PERM) losses [Wang and Scott, 2024] to introduce a multiclass extension of the exponential tail property. This class of losses includes not only cross-entropy but also other losses. Using this framework, we extend the implicit bias result of Soudry et al. [2018] to multiclass classification. Furthermore, our proof techniques closely mirror those of the binary case, thus illustrating the power of the PERM framework for bridging the binary-multiclass gap.",
+    "keywords": [
+      "gradient descent",
+      "multiclass classification",
+      "hard-margin SVM",
+      "implicit bias"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JlWn80mTJi"
+  },
+  "review_fields": {
+    "summary": "This paper leverages the PERM (Permutation Equivariant and Relative Margin-based losses) framework proposed in [Wang and Scott, 2024], and extends the implicit bias result of binary classification to multiclass classification.\n\nSpecifically, the authors extend the exponential tail property to multiclass setting, and proved that for almost all linearly separable datasets with suitable PERM loss, with sufficiently small step size, the gradient descent iterates directionally converge towards the hard-margin multiclass SVM solution.",
+    "strengths": "This paper is strongly motivated, well structured and pleasant to read. It studies the problem of implicit bias for multiclass classification with losses not limited to cross-entropy, bridging the binary-multiclass gap.\n\nThe PERM framework provides an elegant tool for analyzing multiclass classification problems, and in my opinion, this paper is technically solid. I have not gone through the proofs of lemmas in the appendix, but the analysis in the main paper looks correct to me.",
+    "weaknesses": "As the authors have discussed in the Limitations section, it would also be interesting to consider beyond the asymptomatic setting and end tail property.\n\nSome typos:\n- It has been discussed in 4.3 that $\\mathcal{R}$ is $\\beta\\sigma_{\\textrm{max}}^2(X)$-smooth, and the learning rate should be $\\eta<\\frac{2}{\\beta\\sigma_{\\textrm{max}}^2(X)}$, but the upper bound is stated as $2\\beta^{-1}\\sigma_{\\textrm{max}}^2(X)$ in the statement of Theorem 3.4. \n- In page 3 line 85, the meaning of $[\\textbf{v}]\\sigma(j)$ doesn’t seem clear to me, is it $[\\textbf{v}]_{\\sigma(j)}$?\n- Line 116: from direct calculation ${{\\Upsilon}_y}\\textbf{Dv}$ is not  $(v_y-v_1,v_y-v_2,\\cdots,v_y-v_K)^T$ but its permutation. Although this difference should have no influence in the proofs under PERM loss assumptions, it could still be a bit misleading. \n- Line 200: in the RHS of the equation, $\\left\\|\\hat{\\textbf{w}}\\right\\|$ should be $\\|\\hat{\\textbf{w}}\\|^2t^{-2}$\n- Line 219: $\\hat{\\textrm{w}}^T\\mathcal{R}(\\textbf{w})$ should be $\\hat{\\textrm{w}}^T\\nabla\\mathcal{R}(\\textbf{w})$",
+    "questions": "- As the authors have mentioned in Section 5, it has been proved in [Shamir, 2021] that for gradient-based methods in binary classification, throughout entire training process, both empirical risk and generalization error decrease at an optimal rate, I am curious if similar phenomenon has been observed in numerical experiments for multiclass setting?\n\n- It seems to me that the condition learning rate $\\eta<\\frac{2}{\\beta\\sigma_{\\textrm{max}}^2(X)}$ could be strong for dataset $X$ with a large spectral norm. I’m curious if it is more of a necessity for the proof, or the numerical experiments do require this condition to have directional convergence?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2202,
+    "words": 304,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3c6477b1-516b-453c-aeae-c70edb845742",
+    "error": null,
+    "scored_chars": 2205
+  }
+}

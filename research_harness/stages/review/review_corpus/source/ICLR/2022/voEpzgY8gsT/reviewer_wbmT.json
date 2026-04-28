@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "voEpzgY8gsT",
+  "reviewer": "wbmT",
+  "paper": {
+    "title": "Additive Poisson Process: Learning Intensity of Higher-Order Interaction in Poisson Processes",
+    "authors": [
+      "Simon Luo",
+      "Feng Zhou",
+      "lamiae azizi",
+      "Mahito Sugiyama"
+    ],
+    "abstract": "We present the Additive Poisson Process (APP), a novel framework that can model the higher-order interaction effects of the intensity functions in Poisson processes using projections into lower-dimensional space. Our model combines the techniques in information geometry to model higher-order interactions on a statistical manifold and in generalized additive models to use lower-dimensional projections to overcome the effects from the curse of dimensionality. Our approach solves a convex optimization problem by minimizing the KL divergence from a sample distribution in lower-dimensional projections to the distribution modeled by an intensity function in the Poisson process. Our empirical results show that our model is able to use samples observed in the lower dimensional space to estimate the higher-order intensity function with extremely sparse observations.",
+    "keywords": [
+      "Poisson Process",
+      "Log-Linear Model",
+      "Energy-Based Model",
+      "Generalized Additive Models",
+      "Information Geometry"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=voEpzgY8gsT"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper propose to apply generalized additive models (GAM) to learn the intensity of the multi-dimensional Poisson processes (PP).",
+    "main_review": "This approach is interesting but it would deserve more works to further develop the idea. The paper is not motivated and clear enough which leaves the reader perplexed. Here are some remarks: \n\n\n- Several statements in the paper are not well-justified by references, e.g. on KDE in the introduction.\n\n- More details should be added on how GAM approximates the Kolmogorov-Arnold representation and how well it performs. For example, 'based on the K-A representation theorem, GAM are able to learn the intensity of the higher-order interaction between Poisson processes' It would be nice to add references and examples since it is the key of the paper.\n\n- Motivations for introducing APP are not well explained. Background on Poisson Processes are not clear enough and do not give any insight about PP.\n\n- The presentation of APP, in Section 2.2, should be clarified. It is not clear how to match the log-linear model (8) and the intensity defined in Sections 2 and 2.1, e.g. the taxi toy example at the top of page 5 makes things even more confusing. \n\n- I would like to see experiments on the computation time of the approach compared to existing methods as it could be an advantage of this approach.\n\nMinor comments:\n\n- The notation \\mathbf{t}_i in Section 2 is very confusing. \n\n- Figure 2 is cited in the text before Figure 1.\n\n- Section 2.2 The symbol $\\bot$ should be defined before, or just after,  using it. Furthermore,  $\\bot$ denotes the least element in the partial order structure but is used before 'partial order' definition. Also, I think $J$ belongs to $ 2^{|[D]|}$.\n\n- Equation (5) is weird since you basically inverse log-function on equation (4) but the index $k$ disappears and appears again in (6). \n\n- Figures are too small, it is difficult to see anything.\n\n- \"to arrive at\": \"to converge to\"",
+    "summary_of_the_review": "The paper is not motivated and clear enough. Furthermore, the proposed approach is empirically poorly studied while no theoretical guarantees are investigated. Several claims are not supported by references or proof.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2027,
+    "words": 341,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/82c0d233-dc84-4b6f-9ceb-619cf8ccc1ff",
+    "error": null,
+    "scored_chars": 2033
+  }
+}

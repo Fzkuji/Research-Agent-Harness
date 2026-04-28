@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "cG1EbmWiSs",
+  "reviewer": "LPg7",
+  "paper": {
+    "title": "Unified View of Grokking, Double Descent and Emergent Abilities: A Comprehensive Study on Algorithm Task",
+    "authors": [
+      "Yufei Huang",
+      "Shengding Hu",
+      "Xu Han",
+      "Zhiyuan Liu",
+      "Maosong Sun"
+    ],
+    "abstract": "Recent studies have uncovered intriguing phenomena in deep learning, such as *grokking*, *double descent*, and *emergent abilities* in large language models, which challenge human intuition and are crucial for a deeper understanding of neural models. In this paper, we present a comprehensive study on algorithm task to provide a unified view of these three phenomena, with a focus on the interplay between memorization and generalization. Through extensive experiments spanning a wide range of model sizes and training data quantities, we uncover four distinct training dynamics, each arising from unique combinations of model size and training data quantity, formulating a theoretical framework for further analysis. Utilizing this framework, we establish connections between *double descent* and *grokking* and propose two verifiable predictions regarding the occurrence of *double descent*, both substantiated by our experimental results. Moreover, we expand our experiments to the multi-task learning paradigm, demonstrating how algorithm tasks can be turned into emergent abilities by mixing some pure memorization data. This offers a novel perspective to understand *emergent abilities* in Large Language Models.",
+    "keywords": [
+      "Deep Learning",
+      "Grokking",
+      "Double Descent",
+      "Emergent Abilities"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=cG1EbmWiSs"
+  },
+  "review_fields": {
+    "summary": "This paper conducts an investigation into algorithmic tasks with a focus on the balance between memorization and generalization within deep neural networks. With a proposed theoretical framework grounded in two main hypotheses concerning the dataset size's criticality and the model's memorization capacity, the authors offer a graphical depiction of four training dynamics: progression, memorization, semi-grokking, and grokking. This framework is employed to illustraet the double descent phenomenon and link it with grokking, while also exploring multi-task learning, highlighting how generalization capabilities in algorithm tasks are significantly enhanced as model size increases.",
+    "reasons_to_accept": "The paper provides theoretical view that provides a fresh lens for examining model performance across different training dynamics, particularly illuminating the elusive double descent phenomenon and its association with grokking. Additionally, the extension of analysis into the multi-task learning paradigm offers critical insights into the implications of model size for emergent abilities in large language models—demonstrating considerable depth and novelty in its approach to understanding deep neural models.",
+    "reasons_to_reject": "Major one: The empirical substantiation of the framework's applicability across varied model architectures and dataset complexities, as the current examination might be perceived as somewhat constrained, and its real-world applicability and practical implications remain a bit unclear. Empirical validation, especially in more realistic situations and model families (e.g., LLMs), could provide a more robust underpinning for the theoretical claims made. Can you try to empirically verify this framework on small-size language models such as GPT-2 (124M) or small-size diffusion models?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:57Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:57Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 78,
+    "mixed_pct": 0,
+    "human_pct": 22,
+    "verdict": "We are moderately confident this text was originally AI, but rewritten by AI or a human",
+    "confidence": "moderately",
+    "chars": 1119,
+    "words": 150,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f0b99596-e188-497c-99e7-392ff278c9e9",
+    "error": null,
+    "scored_chars": 1119
+  }
+}

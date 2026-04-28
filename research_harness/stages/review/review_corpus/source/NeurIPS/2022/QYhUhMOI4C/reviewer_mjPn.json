@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "QYhUhMOI4C",
+  "reviewer": "mjPn",
+  "paper": {
+    "title": "Uniqueness and Complexity of Inverse MDP Models",
+    "authors": [
+      "Marcus Hutter",
+      "Steven Stenberg Hansen"
+    ],
+    "abstract": "What is the action sequence aa'a\" that was likely responsible for reaching state s\"' (from state s) in 3 steps?\nAddressing such questions is important in causal reasoning and in reinforcement learning.\nInverse \"MDP\" models p(aa'a\"|ss\"') can be used to answer them.\nIn the traditional \"forward\" view, transition \"matrix\" p(s'|sa) and policy π(a|s) uniquely determine \"everything\":\nthe whole dynamics p(as'a's\"a\"...|s), and with it, the action-conditional state process p(s's\"...|saa'a\"), \nthe multi-step inverse models p(aa'a\"...|ss^i), etc.\nIf the latter is our primary concern,  a natural question, analogous to the forward case\nis to which extent 1-step inverse model p(a|ss') plus policy π(a|s) \ndetermine the multi-step inverse models or even the whole dynamics.\nIn other words, can forward models be inferred from inverse models or even be side-stepped.\nThis work addresses this question and variations thereof,\nand also whether there are efficient decision/inference algorithms for this.",
+    "keywords": [
+      "inverse models",
+      "reinforcement learning",
+      "causality",
+      "theory",
+      "multi-step models",
+      "reasoning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=QYhUhMOI4C"
+  },
+  "review_fields": {
+    "summary": "The authors pose the question of whether or not the 1-step inverse model, along with the policy \\pi, determine the multi-step inverse model p(a | ss^i) - or if the forward dynamics of an environment can be inferred by the inverse model plus policy. Besides this question, the work also looks to analyze other cases of whether or not the 1-step inverse model and policy can determine other forms of inverse dynamics, such as the multi-step inverse models, and present analysis and empirical evidence for when these cases hold or when they do not hold.",
+    "strengths_and_weaknesses": "I believe that the authors make a meaningful and well-justified contribution towards understanding the theory behind inverse dynamics models and reinforcement learning as a whole. The authors present interesting theoretical insights into the realizability and limitations of inverse models, along with algorithms to potentially calculate both the two-step inverse model and forward dynamics model from the inverse model plus policy. \n\nIn terms of weaknesses, one weakness that comes to mind from the perspective of someone not too familiar with this form of reinforcement learning theory is the writing itself - the writing style is hard to follow in many parts, taking multiple passes for even some of the non-notation heavy parts - this seems to come from the somewhat informal tone the authors take in this manuscript, that sometimes adds a bit of cognitive burden for a reader of this paper. While the authors might be very familiar with the notation and work, I believe it would improve the polish of the paper quite a bit if the authors were a bit more careful and precise with their use of language and notation.\n\nFinally, I believe the experimental section has a decent amount to be desired. While I don’t think there’s anything wrong with the fundamental methodology of their experiments, the authors have left out quite a bit of experimental details and forego presenting actual statistics of experimental results - instead they simply present two examples in the main work. While they do show a plot detailing the effect of adding noise to the inverse dynamics models, my biggest question is with the grid world generation itself. It seems that most of the grid worlds generated would have very sparse dynamics (like in the second grid world presented) - many of the positions/states would be unreachable from many other states. It would be more clear if the authors presented more details on their experiments done to validate their theory.\n\nOverall, while I not intimately familiar with the theory presented in this paper, I do think this work provides a valuable contribution to the field in terms of understanding the limitations of inverse dynamics models.",
+    "questions": "As an aside, many of these questions will be clarification questions - hopefully these questions will help polish the paper so that it’s more clear for a more broad set of readers.\n\nSection 2:\nFor the end of section 2, could you give an example of how one of the 6 questions can be inferred from f(M) = f(W) -> M = W? I find it a bit hard to follow what this other MDP W relates to B^a and M^a.\n\nYour overloaded notation for EqIM is a bit confusing. You defined EqIM(ia) and EqIM(i+), but not EqIM(i).\n\nSection 4:\nFor the introduction to this section, it would be nice to relate back to the 6 questions the authors were trying to answer and how EqIM(1) and EqIM(2) relates to those questions. This also relates back to my question in Section 2 about your definition of EqIM and how it is another way of posing the questions.\n\nSection 5:\nAgain, it would be good to relate back to the questions. Correct me if I’m wrong but this section tries to answer (iii) to (vi)?\n\nSection 6:\nI don’t see the experimental details listed anywhere - how do you generate these randomized grid worlds? \n\nAlso instead of just showing samples of the true vs inferred forward dynamics matrices, I think it would be more prudent to show statistics gathered from experiments, instead of just one or two examples. See limitation for more suggestions for experimental section.",
+    "limitations": "One limitation of this approach is the scalability to large-scale environments. While this is a limitation, I don’t believe this is any issue in the analysis provided in this work, or with the claims made. That being said, it would be very interesting to see how well some of these theoretical claims hold in larger environments, with more complicated dynamics/inverse dynamics that can’t be feasibly represented with tensors.\n\nAnother limitation of this work is with the experiments and empirical results. While the do run experiments to back up the theory they develop, they don’t provide details of their experimental set up, nor do they present any meaningful statistics with regards to their main result - showing one or two examples from generated grid worlds in the main work (the first grid world does not match the canonical 4-room by the way - it is something akin to it), and presenting a few plots over noise added for noisy inverse models. There is also stochasticity from the grid world generation - was there a lot of variation in terms of inferred dynamics models in the deterministic case? How were the grid worlds generated? It seems that (based on the second grid world presented) the dynamics of the grid world would be quite sparse. As mentioned earlier, presenting a more detailed account and analysis of the experiments done would improve the paper."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

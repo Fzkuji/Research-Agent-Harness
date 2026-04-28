@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "BlF6CWzWKT7",
+  "reviewer": "Fvf9",
+  "paper": {
+    "title": "Estimating individual treatment effects under unobserved confounding using binary instruments",
+    "authors": [
+      "Dennis Frauen",
+      "Stefan Feuerriegel"
+    ],
+    "abstract": "Estimating individual treatment effects (ITEs) from observational data is relevant in many fields such as personalized medicine. However, in practice, the treatment assignment is usually confounded by unobserved variables and thus introduces bias. A remedy to remove the bias is the use of instrumental variables (IVs). Such settings are widespread in medicine (e.g., trials where compliance is used as binary IV). In this paper, we propose a novel, multiple robust machine learning framework, called MRIV, for estimating ITEs using binary IVs and thus yield an unbiased ITE estimator. Different from previous work for binary IVs, our framework estimates the ITE directly via a pseudo outcome regression. (1) We provide a theoretical analysis where we show that our framework yields multiple robust convergence rates: our ITE estimator achieves fast convergence even if several nuisance estimators converge slowly. (2) We further show that our framework asymptotically outperforms state-of-the-art plug-in IV methods for ITE estimation. (3) We build upon our theoretical results and propose a tailored neural network architecture called MRIV-Net for ITE estimation using binary IVs. Across various computational experiments, we demonstrate empirically that our \\modelname achieves state-of-the-art performance. To the best of our knowledge, our MRIV is the first multiple robust machine learning framework tailored to estimating ITEs in the binary IV setting.",
+    "keywords": [
+      "Causal machine learning",
+      "treatment effect estimation",
+      "instrumental variables"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=BlF6CWzWKT7"
+  },
+  "review_fields": {
+    "summary": "This paper presents a two-stage regression method: In stage 1, they estimates nuisance components $\\{\\pi(x), \\mu^Y_0, \\mu^A_0, \\delta_A(x)\\}$; In stage 2, given an arbitrary initial ITE estimator ${\\tau}_{\\text {init }}(x)$ and  nuisance estimates $\\{\\pi(x), \\mu^Y_0, \\mu^A_0, \\delta_A(x)\\}$  (obtained from stage 1), they define a pseudo outcome for ITE estimation.  Theoretically, the framework proposed in this paper yields multiple robust convergence rates. \n\n----\nI thank the authors for addressing my comments. I increase my score to 6.",
+    "strengths_and_weaknesses": "This paper builds upon the theoretical results and propose a deep neural network architecture called MRIV-Net for ITE estimation. However, the proof of the theory and Appendices A-G are missing, which I cannot find in the supplemental material. This makes me doubt the solidity of the method and results. I will adjust my score according to the authors’ responses to my comments.\n\n**Strengths**\n\n- This paper considers a very important and interesting problem in Treatment Effect and proposes a novel estimator using binary instruments. \n- The paper is very well written and provides extensive evaluation and discussion/comparison of past work. \n- Theoretically, I believe that Theorem 1 is correct, and MRIV has Multiple robustness properties. But I think it's necessary to give a brief description or simply express the process with an example: \n\n(1) Assuming $\\hat{\\mu}_0^Y=\\mu_0^Y, \\hat{\\mu}_0^A=\\mu_0^A, \\hat{\\delta}_A=\\delta_A, \\hat{\\pi}=0.5, \\hat{\\tau}=0$: \n\n$\\hat{Y}_0 \\leftarrow\\left(\\frac{Z-(1-Z)}{\\delta_A(X)}\\right)\\left({Y-{\\mu}_0^Y(X)}\\right)$;\n\n(2) Assuming $\\hat{\\mu}_0^Y=0, \\hat{\\mu}_0^A=0, \\hat{\\delta}_A=\\delta_A, \\hat{\\pi}=\\pi, \\text{and } \\hat{\\tau}=0$: \n\n$\\hat{Y}_0 \\leftarrow \\left(\\frac{Z-(1-Z)}{\\delta_A(X)}\\right)\\left(\\frac{Y}{Z {\\pi}(X)+(1-Z)(1-{\\pi}(X))}\\right)$;\n\n(3) Assuming $\\hat{\\mu}_0^Y=0, \\hat{\\mu}_0^A=0, $ $\\hat{\\delta}_A=1, \\hat{\\pi}=\\pi, \\text{and } \\hat{\\tau}=\\tau$: \n\n$\\hat{Y}_0 \\leftarrow\\left({Z-(1-Z)}\\right)\\left(\\frac{Y-A \\tau}{Z {\\pi}(X)+(1-Z)(1-{\\pi}(X))}\\right)+{\\tau}$. \n\n$\\mathbb{E}[\\hat{Y}^0∣X=x]=τ$. \n\n**Weaknesses**\n\n- For Eq. (3), at least two models need to be correctly specified to guarantee robust learning, which is a stronger condition than robust learning. The latter only requires either the propensity model or the potential outcome estimation model to be specified accurately. \n- The proof of the theory and Appendices A-G are missing, which I cannot find in the supplemental material. This makes me doubt the solidity of the method and results. \n- This paper should introduce the concept of multiple robust in the Introduction Section, and roughly explain that the original problem is simplified to 5 nuisance estimators —— the solution is still robust even if some models are misspecified.",
+    "questions": "In Figure 1, is it necessary to assume that X and U are independent? \n\nLines 79-82: Does this article focus on observational data or experiments data? \n\n$\\hat{Y}_0$ is usually used to denote $\\mathbb{E}[Y|T=0]$ instead of ITE $\\tau$, which is confusing. \n\nTypos: Line 157: “We then derive we derive …”\n\nMaybe the author can give a brief conclusion and future exploration.",
+    "limitations": "I do not foresee any major limitations and/or societal impacts."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

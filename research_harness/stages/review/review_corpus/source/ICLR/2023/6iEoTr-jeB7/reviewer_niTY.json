@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "6iEoTr-jeB7",
+  "reviewer": "niTY",
+  "paper": {
+    "title": "Learning Continuous Normalizing Flows For Faster Convergence To Target Distribution via Ascent Regularizations",
+    "authors": [
+      "Shuangshuang Chen",
+      "Sihao Ding",
+      "Yiannis Karayiannidis",
+      "Mårten Björkman"
+    ],
+    "abstract": "Normalizing flows (NFs) have been shown to be advantageous in modeling complex distributions and improving sampling efficiency for unbiased sampling. In this work, we propose a new class of continuous NFs, ascent continuous normalizing flows (ACNFs), that makes a base distribution  converge faster to a target distribution. As solving such a flow is non-trivial and barely possible, we propose a practical implementation to learn flexibly parametric ACNFs via ascent regularization and apply it in two learning cases: maximum likelihood learning for density estimation and minimizing reverse KL divergence for unbiased sampling and variational inference. The learned ACNFs demonstrate faster convergence towards the target distributions, therefore, achieving better density estimations, unbiased sampling and variational approximation at lower computational costs. Furthermore, the flows show to stabilize themselves to mitigate performance deterioration and are less sensitive to the choice of training flow length $T$.",
+    "keywords": [
+      "normalizing flows",
+      "gradient flows",
+      "density estimation",
+      "unbiased sampling",
+      "variational inference"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=6iEoTr-jeB7"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors  propose a new class of continuous Normalizing flows (NFs), ascent continuous normalizing flows (ACNFs), that makes a base distribution converge faster to a target distribution.  The learned ACNFs demonstrate faster convergence towards the target distributions, therefore, achieving better density estimations, unbiased sampling and variational approximation at lower computational cost.",
+    "strength_and_weaknesses": "Pros:The paper proposed ACNFs, a new class of CNFs, that define flows with monotonic convergence toward a target distribution. The authors derive the dynamics for the steepest ACNF and propose a practical implementation to learn parameteric ACNFs via ascent regularization. The learned ACNFs illustrate three beneficial behaviors: 1) faster convergence to the target distribution with less computation; 2) self-stabilization to mitigate performance deterioration; 3) insensitivity to flow training length T . Experiments on both toy distributions and real-world datasets demonstrate the effectiveness of ascent regularization on learning ACNFs for various purposes.\n\nCons: The definition of \\tilde p_t, at least in the main body of the paper, say in page 3, is not very clear. I would suggest the authors to make the derivation part before more clear, say those around prop. 1.",
+    "clarity,_quality,_novelty_and_reproducibility": "Most part of the paper is well-written with hight quality. The idea from this paper is too totally new, for instance similar ideas are in Stein Variational Gradient Descent method or other variational method. No problem in the reproducibility part.",
+    "summary_of_the_review": "This paper is above the average. I would suggest to accept this paper.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

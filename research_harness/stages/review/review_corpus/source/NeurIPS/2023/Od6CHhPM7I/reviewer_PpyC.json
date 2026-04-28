@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "Od6CHhPM7I",
+  "reviewer": "PpyC",
+  "paper": {
+    "title": "Red Teaming Deep Neural Networks with Feature Synthesis Tools",
+    "authors": [
+      "Stephen Casper",
+      "Tong Bu",
+      "Yuxiao Li",
+      "Jiawei Li",
+      "Kevin Zhang",
+      "Kaivalya Hariharan",
+      "Dylan Hadfield-Menell"
+    ],
+    "abstract": "Interpretable AI tools are often motivated by the goal of understanding model behavior in out-of-distribution (OOD) contexts. Despite the attention this area of study receives, there are comparatively few cases where these tools have identified previously unknown bugs in models. We argue that this is due, in part, to a common feature of many interpretability methods: they analyze model behavior by using a particular dataset. This only allows for the study of the model in the context of features that the user can sample in advance. To address this, a growing body of research involves interpreting models using feature synthesis methods that do not depend on a dataset. In this paper, we benchmark the usefulness of interpretability tools for model debugging. Our key insight is that we can implant human-interpretable trojans into models and then evaluate these tools based on whether they can help humans discover them. This is analogous to finding OOD bugs, except the ground truth is known, allowing us to know when a user's interpretation is correct. We make four contributions. (1) We propose trojan discovery as an evaluation task for interpretability tools and introduce a benchmark with 12 trojans of 3 different types. (2) We demonstrate the difficulty of this benchmark with a preliminary evaluation of 16 state-of-the-art feature attribution/saliency tools. Even under ideal conditions, given direct access to data with the trojan trigger, these methods still often fail to identify bugs. (3) We evaluate 7 feature-synthesis methods on our benchmark. (4) We introduce and evaluate 2 new variants of the best-performing method from the previous evaluation.",
+    "keywords": [
+      "interpretability",
+      "benchmarking",
+      "auditing",
+      "diagnostics",
+      "debugging",
+      "adversarial attacks",
+      "feature synthesis"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Od6CHhPM7I"
+  },
+  "review_fields": {
+    "summary": "This work focuses on uncovering a principled, objective approach to evaluating existing interpretability tools in identifying humanly interpretable attributes in image classification. They approach this via the following synthetic task:\n\n 1. A known, humanly interpretable trojan (a special patch, style transfer, a key object) is injected into a model's training pipeline, leading to a false classification by the model when the trojan is present in an image.\n 2. Different interpretability tools are applied to this model on an uncorrupted image to identify \"interpretable features\" that would lead to a misclassification. An interpretability tool that performs well should ideally output something about the underlying trojan scheme, since this is a clearly interpretable feature that changes the classification.\n 3. The quality of outputs from these interpretability tools are compared by seeing which tool's outputs best help humans identify the original trojan scheme from a multiple-choice set of possible options.\n\nA key challenge of this task is to find these trojan backdoors with access to the model alone and not to the adversarially corrupted examples.\n\nThe authors also propose two novel variants on the existing \"robust feature-level adversaries\" approach of [Casper and Nadeau et.al. Robust feature-level adversaries are interpretability tools] to solve this task.\n\nTheir main findings/contributions are:\n 1. The authors propose this trojan identification task as a synthetic benchmark for assessing the usefulness of human-level interpretability tools\n 2. They claim that naive approaches like saliency maps are not useful, even with access to the adversarial examples,\n 3. In a human study, robust feature-level adversaries and its variants are shown to be best at helping people identify the backdoor scheme, suggesting that these are the most effective interpretability tools.\n 4. No technique worked well for identifying style-transfer based, non-local backdoors. This suggests that current interpretability tools might not do a good job of explaining \"textural\" features.",
+    "strengths": "• The paper investigates a useful and important research question in the field of interpretability research: \"how do we objectively quantify and measure the quality of interpretable explanations?\".\n\n • The trojan task proposed by the authors is a clever proxy for measuring human interpretability of explanations.\n\n • The authors run an actual human study to measure the usefulness of interpretability tools to people, and their proposed evaluation is a solid measure of whether these tools provide utility.\n\n • The authors are upfront about the limitations of their work and the need for diverse techniques other than theirs to create an effectve benchmark for interpretability tools",
+    "weaknesses": "• The trojan tasks are fairly simplistic and might not measure the actually important capabilities needed by interpretability tools in the real world. For example, if a tool performs well on this benchmark, it's not clear what that would tell me about how to use it in interpreting my model outputs for a misclassified, nonadversarial image.  The trojan task is a proxy, and I would have loved to see how the \"best\" models under this proxy can actually be used for a useful interpretability task like identifying why a model is misclassifying certain images. I would have particularly liked to see how their proposed SNAFUE would work in a real interpretability task.\n\n • I'm not sure the authors' evidence for the ineffectiveness of saliency maps is well-founded. They use $\\ell_1$ error between the saliency map and the location of true patch, which seems like a strange objective. If the patch is small, the $\\ell_1$  distance of a perfect saliency map would decrease with patch size, meaning an all-zeros baseline would appear great. If you used a different metric like bounding box intersection you wouldn't get such a strong negative result. *This isn't a huge deal* because this entire section seems not incredibly relevant to the paper, since your main goal is to do this task without access to the adversarial examples.\n\n • It took me several reads to make sense of this paper. The writing is not completely clear and the figures took a while to interpret correctly. I would suggest really working on finding a better way to explain the human study task to your readers.",
+    "questions": "• On the first few reads of the paper, I thought the goal was to show which tools are best at identifying backdoors in DNNs (the title of the paper further corroborates this interpretation). If that is the case, I would have many questions about why we should care about these artificial tasks rather than, say, a cryptographic planted sequence that can't be inspected or interpreted visually. After several reads, I think what you actually care about is just evaluating how good these \"humanly interpretable\" tools are, and the trojan task is just a proxy for this. This was not obvious to me and I would suggest a better title and a clearer intro to better emphasize the goal of your paper.\n\n • I wasn't sure about the details of your human study. Was it 100 participants per method or 10 per method? It would also be great to see some error bars here.",
+    "limitations": "The authors have a healthy discussion about the limitations of their work. Namely that:\n\n 1. They do not cover all possible types of features that may cause model failures. \n\n 2. Evaluations are based only on multiple choice questions, which may be sensitive to aspects of survey and experimental design"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3418,
+    "words": 575,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f4dc227d-15c7-44a9-8ffe-95bcbb9b7988",
+    "error": null,
+    "scored_chars": 3426
+  }
+}

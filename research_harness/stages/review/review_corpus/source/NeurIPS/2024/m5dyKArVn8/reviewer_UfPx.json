@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "m5dyKArVn8",
+  "reviewer": "UfPx",
+  "paper": {
+    "title": "How many classifiers do we need?",
+    "authors": [
+      "Hyunsuk Kim",
+      "Liam Hodgkinson",
+      "Ryan Theisen",
+      "Michael W. Mahoney"
+    ],
+    "abstract": "As performance gains through scaling data and/or model size experience diminishing returns, it is becoming increasingly popular to turn to ensembling, where the predictions of multiple models are combined to improve accuracy. \nIn this paper, we provide a detailed analysis of how the disagreement and the polarization (a notion we introduce and define in this paper) among classifiers relate to the performance gain achieved by aggregating individual classifiers, for majority vote strategies in classification tasks.\nWe address these questions in the following ways. \n(1) An upper bound for polarization is derived, and we propose what we call a neural polarization law: most interpolating neural network models are 4/3-polarized. Our empirical results not only support this conjecture but also show that polarization is nearly constant for a dataset, regardless of hyperparameters or architectures of classifiers. \n(2) The error rate of the majority vote classifier is considered under restricted entropy conditions, and we present a tight upper bound that indicates that the disagreement is linearly correlated with the error rate, and that the slope is linear in the polarization.\n(3) We prove results for the asymptotic behavior of the disagreement in terms of the number of classifiers, which we show can help in predicting the performance for a larger number of classifiers from that of a smaller number. \nOur theoretical findings are supported by empirical results on several image classification tasks with various types of neural networks.",
+    "keywords": [
+      "ensemble",
+      "model aggregation",
+      "machine learning",
+      "computer vision"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=m5dyKArVn8"
+  },
+  "review_fields": {
+    "comment": "Thank you for your response. I remain unsure whether 4/3 is an intrinsic property of polarity of whether it is an artifact of the proof - I would need to spend more time with the paper, which unfortunately we are short on. I am satisfied with the new figures the authors have provided to address [Weakness 2] and I have updated my score to reflect this.\n\nOn question 1: If you look at Figure 1 it seems as though there is a positive correlation. I was asking what you would expect to happen if the x-axis is expanded to 0-0.5 and populated with additional points in those unseen regimes."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 587,
+    "words": 109,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/07273c92-49eb-49e2-adc5-624f28cfc7a5",
+    "error": null,
+    "scored_chars": 587
+  }
+}

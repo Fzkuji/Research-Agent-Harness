@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "SyxhaxBKPS",
+  "reviewer": "1",
+  "paper": {
+    "title": "Smart Ternary Quantization",
+    "authors": [
+      "Gregoire Morin",
+      "Ryan Razani",
+      "Vahid Partovi Nia",
+      "Eyyub Sari"
+    ],
+    "abstract": "Neural network models are resource hungry. Low bit quantization such as binary and ternary quantization is a common approach to alleviate this resource requirements. Ternary quantization provides a more flexible model and often beats binary quantization in terms of accuracy, but doubles memory and increases computation cost. Mixed quantization depth models, on another hand, allows a trade-off between accuracy and memory footprint. In such models, quantization depth is often chosen manually (which is a tiring task), or is tuned using a separate optimization routine (which requires training a quantized network multiple times). Here, we propose Smart Ternary Quantization (STQ) in which we modify the quantization depth directly through an adaptive regularization function, so that we train a model only once. This method jumps between binary and ternary quantization while training. We show its application  on image classification.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=SyxhaxBKPS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I carefully checked the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I did not assess the derivations or theory.",
+    "review": "The Paper talks about the Smart Ternary Quantization method that improves the quantization over binary and ternary quantizations by specifying an adaptive quantization. The proposed regularization function is covered in detail and the results are evaluated on MNIST and CIFAR10 datasets\n\nThe authors can improve the submission by \n1. evaluating more modern networks with bigger datasets, as opposed to the ones demonstrated.\n2. describing gamma (eq 10) , it wasn't clear why that parameter was introduced (in addition to the beta) and it's significance, what was more confusing is coverage for this instead of beta in the experimental setup\n3. why the LR needed to be modified for the described method"
+  },
+  "review_metadata": {
+    "rating": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "LsWxgJZpRl",
+  "reviewer": "wafk",
+  "paper": {
+    "title": "Near-optimal Distributional Reinforcement Learning towards Risk-sensitive Control",
+    "authors": [
+      "Hao Liang",
+      "Zhi-Quan Luo"
+    ],
+    "abstract": "We consider finite episodic Markov decision processes aiming at the entropic risk measure (ERM) of return for risk-sensitive control. We identify two properties of the ERM that enable risk-sensitive distributional dynamic programming. We propose two novel distributional reinforcement learning (DRL) algorithms, including a model-free one and a model-based one, that implement optimism through two different schemes. We prove that both of them attain $\\tilde{\\mathcal{O}}(\\frac{\\exp(|\\beta| H)-1}{|\\beta|H}H\\sqrt{HS^2AT})$ regret upper bound, where $S$ is the number of states, $A$ the number of states, $H$ the time horizon and $T$  the number of total time steps. It matches  RSVI2 proposed in \\cite{fei2021exponential} with a much simpler regret analysis. To the best of our knowledge, this is the first regret analysis of DRL,  which theoretically verifies the efficacy of  DRL for risk-sensitive control. Finally, we improve the existing lower bound by proving a tighter  bound of $\\Omega(\\frac{\\exp(\\beta H/6)-1}{\\beta H}H\\sqrt{SAT})$ for $\\beta>0$ case, which recovers the tight lower bound $\\Omega(H\\sqrt{SAT})$ in the risk-neutral setting.",
+    "keywords": [
+      "distributional reinforcement learning",
+      "risk-sensitive",
+      "sample complexity"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=LsWxgJZpRl"
+  },
+  "review_fields": {
+    "summary": "This paper considers finite episodic Markov decision processes aiming with risk-sensitivity. Two properties are identified to develop both the model-based and model-free algorithms for risk-sensitive distributional dynamic programming.  Both upper and lower bounds for regret haven been proved.",
+    "strengths_and_weaknesses": "Strengths:\n1. A specific entropic measure is used, enable the derivations of useful distributional Bellman optimality equation as well as risk-sensitive distributional dynamic programming. This contribution is very interesting. \n\n2. OFU principle has been used to develop deep RL algorithms with provable regret bounds. \n\n3. An improved lower bound has been obtained when beta is positive. \n\n4. The paper is well written. The presentation is clear.\n\n\nWeakness:\n1. This paper focuses on the episodic MDP setting. The most common setting in the risk-sensitive control literature is the setting with continuous state/action spaces (see Jacobson 1973 or Whittle 1990). Then stability also becomes an important issue. It is unclear how useful the results in this paper will be for continuous control applications. Maybe rephrase and focus on \"risk-sensitive MDP\"?\n\n2. This paper proposes two algorithms with provable regrets. However, it is unclear whether the proposed algorithms will really perform well on any MDP tasks. Numerical examples are needed in this case. This is different from analyzing existing algorithms which already perform well.\n\n3. CVaR vs Entropic Risk Measure (ERM):  CVaR has been used a lot in deep RL tasks and seems to be a better risk measure than ERM for deep RL. One reason why ERM was popular in some early risk-sensitive control literature is that for linear dynamics, ERM leads to a dynamical programming solution with relatively simple analytical form. In the deep RL setting, it is unclear whether ERM has any practical advantages over CVaR.\n\n4. The regret analysis technique is not that new (similar analysis has been used to study episodic MDPs (without ERM) before).",
+    "questions": "How does the performance of the proposed algorithms compare to that of DRL algorithms using CVaR? Is it possible to extend the proposed algorithms for continuous control tasks, such as Cartpole or more complicated robotic learning application? Can the authors clarify the unique novelty of the regret analysis technique?",
+    "limitations": "Yes, the authors have discussed the limitations of their theory. However, I mean some study on the actual performance is necessary for this paper. The proposed regret guarantees are meaningful only when the algorithms actually do perform well."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

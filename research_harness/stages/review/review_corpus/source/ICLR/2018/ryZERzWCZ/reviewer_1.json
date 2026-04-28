@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "ryZERzWCZ",
+  "reviewer": "1",
+  "paper": {
+    "title": "The Information-Autoencoding Family: A Lagrangian Perspective on Latent Variable Generative Modeling",
+    "authors": [
+      "Shengjia Zhao",
+      "Jiaming Song",
+      "Stefano Ermon"
+    ],
+    "abstract": "A variety of learning objectives have been recently proposed for training generative models. We show that many of them, including InfoGAN, ALI/BiGAN, ALICE, CycleGAN, VAE, $\\beta$-VAE, adversarial autoencoders, AVB, and InfoVAE, are Lagrangian duals of the same primal optimization problem. This generalization reveals the implicit modeling trade-offs  between flexibility and  computational requirements being made by these models. Furthermore, we characterize the class of all objectives that can be optimized under certain computational constraints.\nFinally, we show how this new Lagrangian perspective can explain undesirable behavior of existing methods and provide new principled solutions.",
+    "keywords": [
+      "Generative Models",
+      "Variational Autoencoder",
+      "Generative Adversarial Network"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryZERzWCZ"
+  },
+  "review_fields": {
+    "review": "EDIT: I have read the authors' rebuttals and other reviews. My opinion has not been changed. I recommend the authors significantly revise their work, streamlining the narrative and making clear what problems and solutions they solve. While I enjoy the perspective of unifying various paths, it's unclear what insights come from a simple reorganization. For example, what new objectives come out? Or given this abstraction, what new perspectives or analysis is offered?\n\n---\n\nThe authors propose an objective whose Lagrangian dual admits a variety of modern objectives from variational auto-encoders and generative adversarial networks. They describe tradeoffs between flexibility and computation in this objective leading to different approaches. Unfortunately, I'm not sure what specific contributions come out, and the paper seems to meander in derivations and remarks that I didn't understand what the point was.\n\nFirst, it's not clear what this proposed generalization offers. It's a very nuanced and not insightful construction (eq. 3) and with a specific choice of a weighted sum of mutual informations subject to a combinatorial number of divergence measure constraints, each possibly held in expectation (eq. 5) to satisfy the chosen subclass of VAEs and GANs; and with or without likelihoods (eq. 7). What specific insights come from this that isn't possible without the proposed generalization?\n\nIt's also not clear with many GAN algorithms that reasoning with their divergence measure in the limit of infinite capacity discriminators is even meaningful (e.g., Arora et al., 2017; Fedus et al., 2017). It's only true for consistent objectives such as MMD-GANs.\n\nSection 4 seems most pointed in explaining potential insights.  However, it only introduces hyperparameters and possible combinatorial choices with no particular guidance in mind. For example, there are no experiments demonstrating the usefulness of this approach except for a toy mixture of Gaussians and binarized MNIST, explaining what is already known with the beta-VAE and infoGAN. It would be useful if the authors could make the paper overall more coherent and targeted to answer specific problems in the literature rather than try to encompass all of them.\n\nMisc\n+ The \"feature marginal\" is also known as the aggregate posterior (Makhzani et al., 2015) and average encoding distribution (Hoffman and Johnson, 2016); also see Tomczak and Welling (2017)."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

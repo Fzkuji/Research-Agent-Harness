@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "aVh9KRZdRk",
+  "reviewer": "PjEW",
+  "paper": {
+    "title": "Learning to grok: Emergence of in-context learning and skill composition in modular arithmetic tasks",
+    "authors": [
+      "Tianyu He",
+      "Darshil Doshi",
+      "Aritra Das",
+      "Andrey Gromov"
+    ],
+    "abstract": "Large language models can solve tasks that were not present in the training set. This capability is believed to be due to in-context learning and skill composition. In this work, we study the emergence of in-context learning and skill composition in a collection of modular arithmetic tasks. Specifically, we consider a finite collection of linear modular functions $z = a  x + b  y \\text{ mod } p$ labeled by the vector $(a, b) \\in \\mathbb{Z}_p^2$. We use some of these tasks for pre-training and the rest for out-of-distribution testing. We empirically show that a GPT-style transformer exhibits a transition from in-distribution to out-of-distribution generalization as the number of pre-training tasks increases. We find that the smallest model capable of out-of-distribution generalization requires two transformer blocks, while for deeper models, the out-of-distribution generalization phase is *transient*, necessitating early stopping. Finally, we perform an interpretability study of the pre-trained models, revealing highly structured representations in both attention heads and MLPs; and discuss the learned algorithms. Notably, we find an algorithmic shift in deeper models, as we go from few to many in-context examples.",
+    "keywords": [
+      "In-Context Learning",
+      "Grokking",
+      "Modular Arithmetic",
+      "Interpretability"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=aVh9KRZdRk"
+  },
+  "review_fields": {
+    "summary": "* The authors propose a synthetic sequence learning problem that I would call\n  'in-context modular regression', an elegant generalisation of prior work\n  studying modular addition and in-context linear regression.\n* Using carefully constructed batches the authors are able to train\n  transformer models to perform regression for a subset of tasks (weights)\n  and a subset of inputs.\n* The authors show that under some conditions on the data distribution and\n  model architecture, the transformers not only achieve good performance on\n  tasks and inputs included during training, but they also generalise to new\n  tasks and/or new inputs. The authors document the conditions governing\n  these generalisation capabilities in detail including showing phase plots\n  and observing that in larger models, the generalisation properties are\n  transient (they appear and then disappear across the training process).\n* The authors postulate a breakdown of skills required to correctly perform\n  the task. They effectively isolate and examine the abilities of their\n  models to perform each component task. They also inspect the activations\n  of each head and identify patterns suggestive of partial mechanisms\n  underlying the generalising behaviour of the models.",
+    "strengths": "I thank the authors for submitting their excellent work which stands to have a substantial impact in the science of deep learning.\n\n* The work makes a meaningful contribution to an exceptionally important and\n  interesting topic of the emergence of capabilities and internal mechanisms\n  in deep learning.\n* The setting and experiments neatly isolate and clearly demonstrate several\n  interesting phenomena of emergence of capabilities and shifting in the\n  solutions found by deep networks throughout training, contributing to the\n  field's developing catalogue of examples of these phenomena.\n* Moreover, the proposed synthetic problem is both rich and elegant. I expect\n  this framework will become a fruitful test-best for follow-up work studying\n  emergence phenomena, helping the field to improve our empirical and\n  theoretical understanding of these phenomena.\n* The authors also offer a partial behavioural and mechanistic analysis which\n  is a solid starting point for a more detailed understanding of the learned\n  structures that emerge in this setting.\n* While some elements of the analysis are complex, the authors have done an\n  exceptional job of clearly presenting their findings. I feel careful study\n  of each section and figure in the main text was rewarded since there was no\n  question that occurred to me that was not addressed in the authors' clear\n  descriptions or figures.\n* The authors have acknowledged all of the related work that I am aware of.",
+    "weaknesses": "I have not noticed any weaknesses in the paper that would temper my overall\nrecommendation to accept. However, I note the following weaknesses, some of\nwhich the authors have already acknowledged, and others which they may like\nto take into consideration if they are interested to improve the paper\nfurther.\n\n1. **Delicate training set-up.** The authors explain that training\n   transformers on multiple modular addition tasks crucially relies on\n   following a delicately balanced batch construction methodology.\n   I am left wondering if this batch construction methodology, as a further\n   departure from the standard language modelling setting, has any other\n   implications for the learning process that may affect the generality of\n   the results.\n   Note: This weakness is not decisive because the authors clearly document\n   their training methodology and it's not *that* artificial anyway.\n\n2. **The mechanistic analysis is only partial.** The authors admit that they\n   have not been able to identify an end-to-end mechanistic model of how the\n   trained transformers perform the task. This leaves their posited skill\n   decomposition and partial mechanistic analysis open to the possibility\n   that they are incomplete.\n   Note: I think the contribution the authors have given in terms of the\n   setting, the generalisation phenomena, and the partial skill decomposition\n   and mechanistic analysis are already significant.\n\n3. **Relationship to prior work.** The related work section does a good job\n   of summarising the contributions of prior work in in-context linear\n   regression and modular arithmetic in the context of transformer models.\n   However, I feel that this section could be improved if the authors\n   attempted to offer greater insight into the relationship between these\n   prior works and the present work. For example, the authors have an\n   opportunity here to informally describe the in-context linear regression\n   and the modular addition problem settings that the newly proposed setting\n   generalises.\n\n4. I noticed some minor text errors as follows, which I expect the authors\n   can easily correct.\n\n    * Line 94: The notation $[1, p^2]$ to me suggests a closed continuous\n      interval, whereas you appear to mean $\\lbrace1, \\ldots, p^2\\rbrace$, also in some\n      cases denoted $[p^2]$.\n    * It seems that equation 2 should read $\\ldots = (z_1^t, z_2^2) \\mod p$\n      and the equation on line 203 should read $c_1x + c_2y \\mod p$. That is,\n      $x$ and $y$ should swap places with $z_1^t$ and $z_2^t$. Is this indeed\n      a mistake, or am I missing something?\n    * In figure 6 (top row) there is a typo: \"Qeury\" on the vertical axis.\n    * In line 445 there is a broken link.\n\nI have not studied all appendices in detail.",
+    "questions": "1. Why is the title 'learning to grok'?\n\n    * Is this meant in the sense that the grokking of a modular addition task\n      is occurring in-context? If so, this seems a little inaccurate, since\n      the phenomenon analogous to 'grokking' seems to still be occurring\n      during pre-training.\n    * To be honest this part of the title has puzzled me since I first looked\n      at the paper. Even if my understanding above is wrong and the title has\n      an accurate interpretation, that I have failed to notice it might be\n      one data point suggesting that if you are going for a title that is\n      both short *and* informative, this might not be the right choice.\n\n2. In the figure 1 caption, is it possible to offer a clearer summary of the\n   difference between in-distribution generalisation and out-of-distribution\n   memorisation? On my first read through, treating the figure and caption as\n   an overview of the work's main results, I had trouble distinguishing these\n   two concepts.",
+    "limitations": "The authors transparently acknowledge all of the limitations I was able to\nidentify within the paper itself."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:44Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:44Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 4101,
+    "words": 647,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d2386853-3f50-4a5c-95af-14a06020ac91",
+    "error": null,
+    "scored_chars": 4247
+  }
+}

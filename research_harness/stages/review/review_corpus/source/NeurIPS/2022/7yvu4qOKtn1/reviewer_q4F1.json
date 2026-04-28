@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "7yvu4qOKtn1",
+  "reviewer": "q4F1",
+  "paper": {
+    "title": "Computational Doob h-transforms for Online Filtering of Discretely Observed Diffusions",
+    "authors": [
+      "Nicolas Chopin",
+      "Andras Fulop",
+      "Jeremy Heng",
+      "Alexandre H. Thiery"
+    ],
+    "abstract": "This paper is concerned with online filtering of discretely observed nonlinear diffusion processes. We propose to approximate the Fully Adapted Particle Filter algorithm by solving a single auxiliary stochastic control problem prior to the data-assimilation procedure. The methodology relies on the non-linear Feynman-Kac approach to solving semi-linear partial differential equations. Numerical experiments suggest that the proposed approach can be orders of magnitude more efficient than the bootstrap particle filter in the regime when observations are highly informative.",
+    "keywords": [
+      "diffusion",
+      "filtering",
+      "monte-carlo",
+      "particle-filters",
+      "BSDE"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=7yvu4qOKtn1"
+  },
+  "review_fields": {
+    "summary": "The paper presents a novel method for online filtering where the latent process has a higher frequency than the observations. The authors define an algorithm, Computational Doob’s h-Transform, for iteratively learning a control function over the latent space and an observation to drive a stochastic process to a specific point at time T. The learned control function is then later applied in online filtering, where no further learning is required but the controlled dynamics can be applied to compute the particle filtering weights and to propagate the particles. CDT is applied to low-dimensional settings in the experiments section, where it is compared to bootstrap particle filtering for nonlinear dynamics, and to the exact analytical solution when available.",
+    "strengths_and_weaknesses": "Strengths\n1. An original method for learning a control function for particle filtering using a Doob’s h-transform\n2. Separation of learning the control and the filtering itself is an attractive idea for improving efficiency \n3. The work is reproducible (the code was provided and I was able to run it) \n\nWeaknesses\n1. Limitations and related work were not discussed enough, the paper would have benefited from a well-structured Conclusions/Discussion \n     section at the end instead of scattered remarks. It was not clear to me how the method presented compares to earlier work. \n2. While I agree that covering the theory in detail is well justified, having three pages of background section would have been more \n     comfortable to read if there was more text motivating why the topics covered are important or intuitive/heuristic explanations. \n3.   The convergence properties of the iterative scheme were not studied empirically or theoretically, I was not able to develop an intuition \n     into how the control behaves at iteration 1 versus iteration N.\n4.   Low dimensional experiments, only comparisons to a simple baseline method (bootstrap particle filter) and not to more recent work\n5.  The figures were focused on presenting error metrics, the behaviour of the learned control or the filtering distribution were hardly \n      visualized",
+    "questions": "Questions\n1. On the iterative method: how many iterations of the iterative method were required until satisfactory results/convergence? Can you \n      point to any theoretical results or give heuristics on the behaviour of the learned control through the iterative method? \n2. On dimensionality: How does the method scale when the dimensionality of the problem is changed? I’m concerned of the learning of \n       the control function, and how representative is the sampling scheme for observations during training when the problem is high- \n      dimensional\n3.  On experiments; Do they present a fair comparison? Is there some more recent work than bootstrap filters you could compare to in the \n        experiment settings where no analytical solution is available?\n4.  On training of neural networks; Did training the initial value and control networks simultaneously present any issues? \t\n5.   On the loss function: the loss function considers only the final state of the value function. Was no regularization needed on the \n         dynamics? Why, and are there some cases where it would be beneficial?\n6. On the observations: There is a comment in the experiments section (Line 242) that the results are not sensitive to choice of T as long \n        as the discretization has a small enough step size. What is small enough? A heuristic explanation/plot showing how long it takes the \n       control to steer to the observation would have been informative.\n7.   On clarity of text: (minor) some parts of the text had, to my knowledge, a number of typos and issues with grammar and notation. In \n      addition, there was some vague phrasing. Please consider going through the following lines\n\nLines to check:\nLine 13-14: applications listed, but no references provided\nLine 21: “is collected” while referring to multiple observations\nLine 29-30: “the goal of the article is…” This sentence felt too vague on my initial read\nLine 33: “these quantities” which quantities are you referring to here? Only the control function has been referred to so far \nLine 37: Efficient in what sense? \nLine 44: “an homogenous” should be “a”?\nLine 68: comma before while\nEquation 4: why p_T? It is confusing to the reader in the case k> 1. The notation makes sense after reading 88-90, but this equation is before that\nLine 136: “Ito lemma” should be “Ito’s lemma”\nLine 143: Period missing from the last sentence of the paragraph.\nEquation 15: t is used as time on the left-hand size, but it is the integrated variable on the right-hand side\nLine 217: why is the control evaluated at t-t_k?\nLine 238: odd to say that all experiments had 10 observations, when nearly all experiments vary K?\nLine 248: why was it required to grow the number of samples when the number of observations grows? Does this mean that when K=1000, there were 100k samples (since there were 1k samples for K=10)\nLine 255: “Analytically tractability” \nFigure 1: the figure text was quite vague, I didn’t get what I should be concluding based on the plots? I can see that they somewhat match, but was there some additional insight I’m missing here?\nFigure 2: The y-axis labels slightly overlap with the subplot borders",
+    "limitations": "1. Societal impact of the work was not discussed. As the paper is presenting theoretical work, it does not require a deeper investigation into such matters. \n2.  Scalability to higher dimensional problems and convergence of the iterative method were not sufficiently discussed or empirically tested, even though scalability to high-dimensional problems was explicitly stated as a motivating factor for not using standard numerical methods for solving PDEs (Line 126-128)"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

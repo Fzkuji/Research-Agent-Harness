@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "kBrHzFtwdp",
+  "reviewer": "nv8j",
+  "paper": {
+    "title": "Nested Variational Inference",
+    "authors": [
+      "Heiko Zimmermann",
+      "Hao Wu",
+      "Babak Esmaeili",
+      "Jan-Willem van de Meent"
+    ],
+    "abstract": "We develop nested variational inference (NVI), a family of methods that learn proposals for nested importance samplers by minimizing an forward or reverse KL divergence at each level of nesting. NVI is applicable to many commonly-used importance sampling strategies and provides a mechanism for learning intermediate densities, which can serve as heuristics to guide the sampler. Our experiments apply NVI to (a) sample from a multimodal distribution using a learned annealing path (b) learn heuristics that approximate the likelihood of future observations in a hidden Markov model and (c) to perform amortized inference in hierarchical deep generative models. We observe that optimizing nested objectives leads to improved sample quality in terms of log average weight and effective sample size.",
+    "keywords": [
+      "Variational Inference",
+      "Importance Sampling",
+      "Monte Carlo methods"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=kBrHzFtwdp"
+  },
+  "review_fields": {
+    "summary": "In this paper, authors present Nested Variational Inference (NVI)--a framework to create increasingly better variational approximations. NVI allows for several existing sampling techniques to be employed in a single framework and is well supported by empirical results.",
+    "main_review": "Recent years have seen several papers attempting to combing the Monte Carlo sampling methods and variational inference. I think this paper does a decent job of putting several of those work in a nice single framework. I found the paper to be very well written and easy to follow for the most part. The experiments and carefully carried out and visualizations are very informative. Overall, this is one of the better papers I have reviewed this season--a clear accept.",
+    "limitations_and_societal_impact": "The proposed methods are still pretty involved and I believe it might need more work for these advanced inference techniques to find there way into every practitioners toolbox."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

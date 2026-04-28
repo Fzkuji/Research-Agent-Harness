@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "BkeoaeHKDS",
+  "reviewer": "1",
+  "paper": {
+    "title": "Gradients as Features for Deep Representation Learning",
+    "authors": [
+      "Fangzhou Mu",
+      "Yingyu Liang",
+      "Yin Li"
+    ],
+    "abstract": "We address the challenging problem of deep representation learning -- the efficient adaption of a pre-trained deep network to different tasks. Specifically, we propose to explore gradient-based features. These features are gradients of the model parameters with respect to a task-specific loss given an input sample. Our key innovation is the design of a linear model that incorporates both gradient and activation of the pre-trained network. We demonstrate that our model provides a local linear approximation to an underlying deep model, and discuss important theoretical insights. Moreover, we present an efficient algorithm for the training and inference of our model without computing the actual gradients. Our method is evaluated across a number of representation-learning tasks on several datasets and using different network architectures. Strong results are obtained in all settings, and are well-aligned with our theoretical insights.",
+    "keywords": [
+      "representation learning",
+      "gradient features",
+      "deep learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=BkeoaeHKDS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I did not assess the derivations or theory.",
+    "review": "Summary: This paper considers the use of a neural network's Jacobian as additional features for semi-supervised, unsupervised, and transfer learning of representations. The idea is simple and the authors motivate this choice by connecting it to the literature on the neural tangent kernel (although nothing is proven in this paper). Some experiments are performed in which the authors demonstrate some improvements over the simple baseline of using the neural network's final layer alone.\n\nStrengths:\n- The idea is simple and motivated by the Fisher vector work (Jaakkola & Hausler, 1999), which the authors cite.\n\nWeaknesses:\n- Comparing to a baseline with half as many features (just using the final layer of the neural network) is not a compelling baseline. The authors could have considered other alternatives: just using the gradients when comparing against the current baseline, augmenting the baseline with random features of the data.\n- The discussion of the connection to theory added very little to the paper. This is not a theoretical paper, and the hand-wavy connections to the theoretical literature did not bolster the case. Instead, I found it distracting. I agree with the authors that this connection is important to point out, but a paragraph or two suffices.\n- The ablation study could be more compelling. I'm not particularly surprised that a model improves as one increases the number of parameters that are pre-trained on the same kind of data (even if the pre-trianing objective is somewhat distinct)."
+  },
+  "review_metadata": {
+    "rating": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

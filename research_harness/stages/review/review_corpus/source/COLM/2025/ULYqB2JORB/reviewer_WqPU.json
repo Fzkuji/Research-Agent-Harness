@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "ULYqB2JORB",
+  "reviewer": "WqPU",
+  "paper": {
+    "title": "Can a Crow Hatch a Falcon? Lineage Matters in Predicting Large Language Model Performance",
+    "authors": [
+      "Takuya Tamura",
+      "Taro Yano",
+      "Masafumi Enomoto",
+      "Masafumi Oyamada"
+    ],
+    "abstract": "Accurately forecasting the performance of Large Language Models (LLMs) before extensive fine-tuning or merging can substantially reduce both computational expense and development time. Although prior approaches like scaling laws account for global factors such as parameter size or training tokens, they often overlook explicit lineage relationships—i.e., which models are derived or merged from which parents. In this work, we propose a novel Lineage-Regularized Matrix Factorization (LRMF) framework that encodes ancestral ties among LLMs via a graph Laplacian regularizer. By leveraging multi-hop parent--child connections, LRMF consistently outperforms conventional matrix factorization and collaborative filtering methods in both instance-level and benchmark-level performance prediction. Our large-scale study includes 2,934 publicly available Hugging Face models and 21,000+ instances across 6 major benchmarks, \nshowing that the introduction of lineage constraints yields up to 0.15–0.30 higher correlation coefficients with actual performance compared to baseline methods.\nMoreover, LRMF effectively addresses the cold-start problem, providing accurate estimates for newly derived or merged models even with minimal data. This lineage-guided strategy thus offers a resource-efficient way to inform hyperparameter tuning, data selection, and model combination in modern LLM development.",
+    "keywords": [
+      "LLM",
+      "Performance Estimation",
+      "Matrix Factorization",
+      "Neural Collaborative Filtering"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ULYqB2JORB"
+  },
+  "review_fields": {
+    "summary": "This paper proposes **Lineage-Regularized Matrix Factorization (LRMF)**, which incorporates ancestral model information into a matrix factorization framework. LRMF models how well a particular model performs on a specific task using latent embeddings, but adds graph Laplacian regularization terms based on model lineage and instance similarity. \n\nI found the method to be well-grounded and novel enough to warrant publication. The experimental evaluation is comprehensive, covering different model sets, cold-start scenarios, and data sparsity impacts. The paper reads well and has a logical structure. Their results back up their claims nicely. The practical value here is significant. By showing how important lineage is, the paper offers a more efficient approach to model selection and tuning.",
+    "reasons_to_accept": "* This work addresses the high cost of LLM evaluation, a practical bottleneck faced by the LLM community, by developing tools to predict performance beforehand.\n* The core idea of leveraging lineage information through graph regularization is both novel for LLM performance prediction and intuitively makes sense. It fills a gap in existing work that typically ignores these relationships.\n* The research claims are adequately backed by experiments on representative datasets. I appreciate that they considered diverse scenarios including mixed model types, cold-starts, and varying data availability.\n* The gains shown over relevant baselines are meaningful - LRMF clearly outperforms both NCF with factors and their simpler lineage averaging method.\n* The methodology is explained clearly enough that I could probably reproduce this work if needed, with sufficient details on data, implementation, and hyperparameters.",
+    "reasons_to_reject": "* The NCF with factors baseline only uses a limited set of factors (architecture type, model type, param size). While I understand the challenges with collecting comprehensive factors (and they cite Zhang et al., 2024 on issues with dominant factors), I would've liked to see comparison against a baseline with richer factors where possible - things like training tokens, dataset mix, or detailed architecture information where available. This would give us a more confident sense of LRMF's advantage.\n\n* The quality of lineage information feels like a potential weak spot. The approach relies on lineage data extracted from Hugging Face metadata (using \"base model:\" tags and config files). How reliable and complete is this metadata? The authors acknowledge this limitation but don't really quantify how missing or incorrect lineage data might impact results.\n\n* The current LRMF model treats all lineage connections the same way - whether it's fine-tuning, merging, different degrees of fine-tuning - and handles different path lengths implicitly through the graph Laplacian. This seems like an oversimplification of what can be complex inheritance patterns. The authors do mention this as future work, but it's still a limitation of the current approach.\n\n* The negative correlation on GPQA needs addressed. LRMF consistently shows poor (negative) correlation on this benchmark in both experiments (Tables 1 & 2), even performing worse than their simple Model Lineage Averaging baseline. This suggests the LRMF assumptions might break down for certain task types. This deserved deeper discussion and analysis than just reporting the number.\n\n* The construction of the instance similarity graph (A^(X)) depends on a specific embedding model and a fixed k=20. I would've liked to see some exploration of how sensitive the results are to these choices.\n\n* The evaluation focuses on relative performance (using Pearson correlation) to rank models correctly. While this makes sense, I think some discussion on predicting absolute performance scores would be valuable for certain applications.\n\n* The paper is missing citations for several models they mention - Llama 2 (which they also capitalize incorrectly), Pythia, Qwen, etc. And when they mention specific models like Qwen-2.5-7B-Instruct, hyperlinks to the Hugging Face models would be helpful.",
+    "questions_to_authors": "* Why are we seeing negative correlation by LRMF on the GPQA benchmark across both experiments. Even the simpler Model Lineage Averaging baseline does better here. Do you have any insights into why LRMF might struggle specifically with this benchmark?\n\n* Could you tell us more about the specific factors used in the NCF baseline and how you chose them? Did you try incorporating potentially stronger factors, even if they were only available for some models, to further assess what lineage regularization uniquely contributes?\n\n* I'm wondering how sensitive the LRMF results are to how you constructed the instance similarity graph A^(X). Have you experimented with different embedding models for prompts or different values of k when defining neighbors?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 81,
+    "mixed_pct": 19,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 4028,
+    "words": 611,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a2535aed-d79e-4d23-8f4b-423809b0c2a3",
+    "error": null,
+    "scored_chars": 4028
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "QYhUhMOI4C",
+  "reviewer": "5AUZ",
+  "paper": {
+    "title": "Uniqueness and Complexity of Inverse MDP Models",
+    "authors": [
+      "Marcus Hutter",
+      "Steven Stenberg Hansen"
+    ],
+    "abstract": "What is the action sequence aa'a\" that was likely responsible for reaching state s\"' (from state s) in 3 steps?\nAddressing such questions is important in causal reasoning and in reinforcement learning.\nInverse \"MDP\" models p(aa'a\"|ss\"') can be used to answer them.\nIn the traditional \"forward\" view, transition \"matrix\" p(s'|sa) and policy π(a|s) uniquely determine \"everything\":\nthe whole dynamics p(as'a's\"a\"...|s), and with it, the action-conditional state process p(s's\"...|saa'a\"), \nthe multi-step inverse models p(aa'a\"...|ss^i), etc.\nIf the latter is our primary concern,  a natural question, analogous to the forward case\nis to which extent 1-step inverse model p(a|ss') plus policy π(a|s) \ndetermine the multi-step inverse models or even the whole dynamics.\nIn other words, can forward models be inferred from inverse models or even be side-stepped.\nThis work addresses this question and variations thereof,\nand also whether there are efficient decision/inference algorithms for this.",
+    "keywords": [
+      "inverse models",
+      "reinforcement learning",
+      "causality",
+      "theory",
+      "multi-step models",
+      "reasoning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=QYhUhMOI4C"
+  },
+  "review_fields": {
+    "summary": "This paper concerns the question of if and when the transition dynamics of an MDP can be determined based on a policy together with its corresponding inverse dynamics. In the case of single-step inverse dynamics, they find that this is not the case, unless the number of actions is greater than the number of states, and each action corresponds to a full-rank transition matrix. The paper also studies a number of similar questions.",
+    "strengths_and_weaknesses": "Originality:\n\nThis question has, to be best of my knowledge, not been examined previously (at least not as thoroughly as in this paper). However, some of the results seem to be reasonably straightforward (for example, the fact that the transition dynamics cannot necessarily be inferred from a given policy together with its corresponding one-step inverse model is immediately clear if one considers any policy that samples actions independently from the state).\n\n\nQuality:\n\nI have not checked most of the calculations carefully, but based on what I have checked, the maths appears to be sound.\n\n\nClarity:\n\nThe clarity of the writing is reasonable, but could be improved. For example, the text takes time to explain elementary notions from linear algebra, and other facts that I think the reader could reasonably be assumed to be familiar with (such as e.g. the fact that matrices form a ring under ordinary matrix addition and matrix multiplication, etc). I also think the paper could be better organised. For example, the introduction does not make it clear what are the main results of the paper, or what their significance is, and it takes some digging to get a full overview of things.\n\n\nSignificance:\n\nI think that the significance of the results is not well explained in the paper, and this is one of its main weak points, in my opinion. The introduction states that the presented results are relevant to causal inference, but the example that is given afterwards is just an instance of normal retrodiction, which doesn't engage with most of the issues discussed in the current literature on causal inference. It is also stated that these results could be of interest for automatic planning, but this seems unclear to me (at least in their current form). It is also stated that the inverse model could be much smaller than the forward model, but it is again not clear to me why that is (practically or theoretically) significant.\n\n\nSummary:\n\nI have not recommended this paper for publication. The main reason for this is that the problems which are studied here are fairly niche, and it is somewhat unclear what their significance is. Moreover, many of the problems which are stated in the paper are not solved, and some of the ones which are solved are somewhat straightforward. For this reason, I do unfortunately not think that these results will be of significant interest to the wider NeurIPS readership.",
+    "questions": "What is the main (practical or theoretical) significance of these results? Which result is the most important?",
+    "limitations": "The limitations are discussed, though this discussion is dispersed throughout the paper, rather than being collected in one place. There is no discussion of potential negative societal impacts (but I also do not think that is needed in this case)."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

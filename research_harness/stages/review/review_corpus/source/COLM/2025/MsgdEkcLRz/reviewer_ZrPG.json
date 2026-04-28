@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "MsgdEkcLRz",
+  "reviewer": "ZrPG",
+  "paper": {
+    "title": "LawFlow: Collecting and Simulating Lawyers’ Thought Processes on Business Formation Case Studies",
+    "authors": [
+      "Debarati Das",
+      "Khanh Chi Le",
+      "Ritik Sachin Parkar",
+      "Karin De Langis",
+      "Brendan Madson",
+      "Chad M. Berryman",
+      "Robin M Willis",
+      "Daniel H Moses",
+      "Brett McDonnell",
+      "Daniel Schwarcz",
+      "Dongyeop Kang"
+    ],
+    "abstract": "Legal practitioners, particularly those early in their careers, face complex, high-stakes tasks that require adaptive, context-sensitive reasoning. While AI holds promise in supporting legal work, current datasets and models are narrowly focused on isolated subtasks and fail to capture the end-to-end decision-making required in real-world practice. To address this gap, we introduce _LawFlow_, a dataset of complete end-to-end legal workflows collected from trained law students, grounded in real-world business entity formation scenarios. Unlike prior datasets focused on input-output pairs or linear chains of thought, _LawFlow_ captures dynamic, modular, and iterative reasoning processes that reflect the ambiguity, revision, and client-adaptive strategies of legal practice.\nUsing _LawFlow_, we compare human and LLM-generated workflows, revealing systematic differences in structure, reasoning flexibility, and plan execution. Human workflows tend to be modular and adaptive, while LLM workflows are more sequential, exhaustive, and less sensitive to downstream implications. Our findings also suggest that legal professionals prefer AI to carry out supportive roles, such as brainstorming, identifying blind spots, and surfacing alternatives, rather than executing complex workflows end-to-end. Our results highlight both the current limitations of LLMs in supporting complex legal workflows and opportunities for developing more collaborative, reasoning-aware legal AI systems. All data and code are available on our project page (https://minnesotanlp.github.io/LawFlow-website/)",
+    "keywords": [
+      "pretraining data; synthetic data; reasoning; legal perspectives; legal drafting; LLM; chain of thought"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=MsgdEkcLRz"
+  },
+  "review_fields": {
+    "summary": "The paper introduces Lawflow, capturing end-to-end worlkflows collected from trained law students on  business entity formation scenarios. Most of the prior datasets in legal NLP emphasize static input-output mappings or linear reasoning, LawFlow records the modular, iterative, and adaptive decision-making processes involved in real-world legal tasks mirroring how legal practitioners deal with ambiguity and revise plans over time.\n\nThe authors use law flow dataset to assess how human workflows with differ from LLM based workflows and observed differences in  identifying notable differences in structure, reasoning flexibility, and responsiveness to ambiguity. They notice while human workflows are modular and iterative, while LLMs follow rigid, linear sequences with limited capacity for revision. They also propose and demonstrate a workflow monitor that flags atypical steps based on deviance from human-like patterns, supporting reflective helpful behavior of these agents. They also identify decision points like early-stage note-taking and question-asking, where AI assistance is most impactful.\n\nThese insights can help further to developing interactive legal AI tools such as workflow visualizers and reflective agents to assist legal practitioners.",
+    "reasons_to_accept": "- The LawFlow dataset is a good contribution to legal NLP by moving beyond siloed tasks to capture holistic legal reasoning processes which are iterative, modular and adaptive. \n- It is a timely and innovative contribution to legal AI. It takes seriously the complexity of legal reasoning and offers a dataset that foregrounds process over outcome. \n- Empirical comparisons between human and LLM workflows highlight structural and cognitive differences in a convincing manner, such as rigidity in LLM reasoning or over-execution of branches.\n- The comparative analysis with LLMs reveals both current limitations and opportunities for symbiotic human-AI systems which are seeing to increasing with the trend. While some technical and evaluative details could be fleshed out more clearly for easy grasping, the conceptual and dataset contributions are highly valuable and will likely inspire follow-up work in legal NLP and workflow modeling.",
+    "reasons_to_reject": "There is no strong reasons, except some suggestions to improve the writing.",
+    "questions_to_authors": "- This paper is focused primarily on business formation, the domain scope is still narrow. This is completely fine, given the challenging set of tasks lawyers deal with. However, I suggest authors to reflect that in title as case study on this or specific use case in title rather the current title which seem to appear to deal with all use cases.\n- While the paper mentions that the diversity across humans is possible for a given task, some analysis on it could be helpful and insightful.\n- More concrete examples of the LawFlow dataset entries would be helpful (e.g., excerpts of workflows, annotations) and explaining an end-to-end example would be beneficial for readers (even in appendix)\n- A.4 seems to be missing details, it has to be elaborated either in figure or in text."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1799,
+    "words": 289,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4cbb4b66-5fdd-402f-b101-5423c12ea2df",
+    "error": null,
+    "scored_chars": 1801
+  }
+}

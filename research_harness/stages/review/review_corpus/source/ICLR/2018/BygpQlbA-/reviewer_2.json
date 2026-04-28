@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "BygpQlbA-",
+  "reviewer": "2",
+  "paper": {
+    "title": "Towards Provable Control for Unknown Linear Dynamical Systems",
+    "authors": [
+      "Sanjeev Arora",
+      "Elad Hazan",
+      "Holden Lee",
+      "Karan Singh",
+      "Cyril Zhang",
+      "Yi Zhang"
+    ],
+    "abstract": "We study the control of symmetric linear dynamical systems with unknown dynamics and a hidden state. Using a recent spectral filtering technique for concisely representing such systems in a linear basis, we formulate optimal control in this setting as a convex program. This approach eliminates the need to solve the non-convex problem of explicit identification of the system and its latent state, and allows for provable optimality guarantees for the control signal. We give the first efficient algorithm for finding the optimal control signal with an arbitrary time horizon T, with sample complexity (number of training rollouts) polynomial only in log(T) and other relevant parameters.",
+    "keywords": [
+      "optimal control",
+      "reinforcement learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=BygpQlbA-"
+  },
+  "review_fields": {
+    "review": "The paper presents a provable algorithm for controlling an unknown linear dynamical system (LDS). Given the recent interest in (deep) reinforcement learning (combined with the lack of theoretical guarantees in this space), this is a very timely problem to study. The authors provide a rigorous end-to-end analysis for the LDS setting, which is a mathematically clean yet highly non-trivial setup that has a long history in the controls field.\n\nThe proposed approach leverages recent work that gives a novel parametrization of control problems in the LDS setting. After estimating the values of this parametrization, the authors formulate the problem of finding optimal control inputs as a large convex problem. The time and sample complexities of this approach are polynomial in all relevant parameters. The authors also highlight that their sample complexity depends only logarithmically on the time horizon T. The paper focuses on the theoretical results and does not present experiments (the polynomials are also not elaborated further).\n\nOverall, I think it is important to study control problems from a statistical perspective, and the LDS setting is a very natural target. Moreover, I find the proposed algorithmic approach interesting. However, I am not sure if the paper is a good fit for ICLR since it is purely theoretical in nature and has no experiments. I also have the following questions regarding the theoretical contributions:\n\n(A) The authors emphasize the logarithmic dependence on T. However, the bounds also depend polynomially on L, and as far as I can tell, L can be polynomial in T for certain systems if we want to achieve a good overall cost. It would be helpful if the authors could comment on the dependence between T and L.\n\n(B) Why does the bound in Theorem 2.4 become worse when there are some directions that do not contribute to the cost (the lambda dependence)?\n\n(C) Do the authors expect that it will be straightforward to remove the assumption that A is symmetric, or is this an inherent limitation of the approach?\n\nMoreover, I have the following comments:\n\n(1) Theorem 3.3 is currently not self-contained. It would enhance readability of the paper if the results were more self-contained. (It is obviously good to cite results from prior work, but then it would be more clear if the results are invoked as is without modifications.)\n\n(2) In Theorem 1.1, the notation is slightly unclear because B^T is only defined later.\n\n(3) In Section 1.2 (Tracking a known system): \"given\" instead of \"give\"\n\n(4) In Section 1.2 (Optimal control): \"symmetric\" instead of \"symmetrics\"\n\n(5) In Section 1.2 (Optimal control): the paper says \"rather than solving a recursive system of equations, we provide a formulation of control as a one-shot convex program\". Is this meant as a contrast to the work of Dean et al. (2017)? Their abstract also claims to utilize a convex programming formulation.\n\n(6) Below Definition 2.3: What is capital X?\n\n(7) In Definition 2.3: What does the parenthesis in \\phi_j(1) denote?\n\n(8) Below Theorem 2.4: Why is Phi now nk x T instead of nk x nT as in Definition 2.3?\n\n(9) Lemma 3.2: Is \\hat{D} defined in the paper? I assume that it involves \\hat{M}, but it would be good to formally define this notation."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "AJBkfwXh3u",
+  "reviewer": "fzQP",
+  "paper": {
+    "title": "Causality-Inspired Spatial-Temporal Explanations for Dynamic Graph Neural Networks",
+    "authors": [
+      "Kesen Zhao",
+      "Liang Zhang"
+    ],
+    "abstract": "Dynamic Graph Neural Networks (DyGNNs) have gained significant popularity in the research of dynamic graphs, but are limited by the low transparency, such that human-understandable insights can hardly be drawn from their predictions. Although a number of existing research have been devoted to investigating the interpretability of graph neural networks (GNNs), achieving the interpretability of DyGNNs is pivotally challenging due to the complex spatial-temporal correlations in dynamic graphs. To this end, we propose an innovative causality-inspired generative model based on structural causal model (SCM), which explores the underlying philosophies of DyGNN predictions by identifying the trivial, static, and dynamic causal relationships. To reach this goal, two critical tasks need to be accomplished including (1) disentangling the complex causal relationships, and (2) fitting the spatial-temporal explanations of DyGNNs in the SCM architecture. To tackle these challenges, the proposed method incorporates a contrastive learning module to disentangle trivial and causal relationships, and a dynamic correlating module to disentangle dynamic and static causal relationships, respectively. A dynamic VGAE-based framework is further developed, which generates causal-and-dynamic masks for spatial interpretability, and recognizes dynamic relationships along the time horizon through causal invention for temporal interpretability. Comprehensive experiments have been conducted on both synthetic and real-world datasets, where our approach yields substantial improvements, thereby demonstrating significant superiority.",
+    "keywords": [
+      "Dynamic Graph",
+      "Graph Explanation",
+      "Graph Neural Network",
+      "Causal Inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=AJBkfwXh3u"
+  },
+  "review_fields": {
+    "summary": "This paper proposed a causality-inspired generative model to explain DyGNN predictions by identifying the trivial, static, and dynamic causal relationships. To experimentally evaluate the proposed approach, synthetic dynamic datasets are generated and provided. Evaluations on both synthetic datasets and real-world datasets demonstrate superior performance.",
+    "strengths": "Originality: this paper is aimed at explaining dynamic graphs by proposing a causal inspired framework. Existing works on the explanation of GNNs are on static graphs. This paper instead focuses on dynamic graphs. Disentangling spatial and temporal relationships can be very challenging. This paper explicitly constructs a structural causal model by considering trivial relationships and causal relationships (consisting of static relationships and dynamic relationships) to solve this problem, which is interesting.",
+    "weaknesses": "The presentation can be improved. It is hard for me to follow the paper well. For example, in the Introduction section, it is hard to straightforwardly understand the spatial interpretability and temporal interpretability. Illustrations can help readers understand better. Besides, it is not easy for me to understand the challenges for implementing the SCM (third paragraph in the Intro). Correspondingly, I didn’t see how the proposed approach addresses the challenges in the fourth paragraph. \n\nThe significance of the proposed approach is not clear. It is hard to judge the performance improvement achieved by DyGNNExplainer since other baselines are all for static graphs.",
+    "questions": "In Table 2, for Node classification task, OrphicX performs better than DyGNNExplainer on DTree-Grid dataset but is not bolded?\n\nCan you compare your model on static graphs to state-of-the-art explainers?\n\nHow sensitive the model is to the hyper parameters in Equation 15? What’s the computational complexity of solving Equation 15?",
+    "details_of_ethics_concerns": "The link to the code and the dataset benchmark of this submission is **not anonymized**.\n\nPost-rebuttal: this concern is addressed."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 2,
+    "soundness": 2,
+    "presentation": 1,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1527,
+    "words": 223,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f6fa0bc9-fa1b-4904-add8-6f2424c5f306",
+    "error": null,
+    "scored_chars": 1528
+  }
+}

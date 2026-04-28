@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "Dqp6IMI3gQ",
+  "reviewer": "ADJk",
+  "paper": {
+    "title": "When Will It Fail?: Anomaly to Prompt for Forecasting Future Anomalies in Time Series",
+    "authors": [
+      "Min-Yeong Park",
+      "Won-Jeong Lee",
+      "Seong Tae Kim",
+      "Gyeong-Moon Park"
+    ],
+    "abstract": "Recently, forecasting future abnormal events has emerged as an important scenario to tackle realworld necessities. However, the solution of predicting specific future time points when anomalies will occur, known as Anomaly Prediction (AP), remains under-explored. Existing methods dealing with time series data fail in AP, focusing only on immediate anomalies or failing to provide precise predictions for future anomalies. To address AP, we propose a novel framework called Anomaly to Prompt (A2P), comprised of Anomaly-Aware Forecasting (AAF) and Synthetic Anomaly Prompting (SAP). To enable the forecasting model to forecast abnormal time points, we adopt a strategy to learn the relationships of anomalies. For the robust detection of anomalies, our proposed SAP introduces a learnable Anomaly Prompt Pool (APP) that simulates diverse anomaly patterns using signal-adaptive prompt. Comprehensive experiments on multiple real-world datasets demonstrate the superiority of A2P over state-of-the-art methods, showcasing its ability to predict future anomalies.",
+    "keywords": [
+      "Time series forecasting",
+      "time series anomaly detection"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Dqp6IMI3gQ"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a novel framework, Anomaly to Prompt (A2P), to address the Anomaly Prediction (AP) task in time series analysis, which aims to predict future anomalies. The framework integrates two key components: Anomaly-Aware Forecasting (AAF) that learns relationships between anomalies and future signals, and Synthetic Anomaly Prompting (SAP) generates synthetic anomalies through signal-adaptive prompting. Experiments on real-world datasets demonstrate A2P’s superiority over SOTA methods.",
+    "methods_and_evaluation_criteria": "Yes, the proposed method and evaluation criteria makes sense.",
+    "theoretical_claims": "I think the theoretical claims of this paper are correct.",
+    "experimental_designs_or_analyses": "Yes, the experimental designs are reasonable.",
+    "relation_to_broader_scientific_literature": "The key contributions of this paper bridges the gap between time series forecasting and anomaly detection, which provides insights for future study in anomaly prediction rather than the popular anomaly detection tasks.",
+    "essential_references_not_discussed": "No. Related works are well discussed.",
+    "other_strengths_and_weaknesses": "Strengths:\n1. The paper fills a critical gap between traditional anomaly detection (AD) and forecasting by defining Anomaly Prediction (AP) as a distinct task requiring precise localization of future anomalies.\n2. The proposed A2P achieves state-of-the-art F1 scores across different datasets.\n3. The proposed model is easy to follow and codes are provided.\n\nWeaknesses:\n1. The initialization and optimization details of the the proposed APP are unclear. For instance, how are prompts initialized? \n2. Computational costs for pre-training AAF and APP are not quantified, which is critical for real-world deployment.",
+    "questions_for_authors": "1. Since the anomaly prediction (AP) task fundamentally differs from anomaly detection (AD) methods, the authors construct baselines with combinations of forecasting and anomaly detection models. Could the proposed model be compared with existing models that were specifically designed for AP tasks?\n2. Can the model detect precursors of impending anomalies? For example, before an anomaly occurs (the status of the device is still normal), the model can identify early warning signals in the data, enabling interpretable anomaly prediction."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

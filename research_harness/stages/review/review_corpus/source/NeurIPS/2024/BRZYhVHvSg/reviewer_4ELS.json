@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "BRZYhVHvSg",
+  "reviewer": "4ELS",
+  "paper": {
+    "title": "Multi-Group Proportional Representation in Retrieval",
+    "authors": [
+      "Alex Oesterling",
+      "Claudio Mayrink Verdun",
+      "Alexander Glynn",
+      "Carol Xuan Long",
+      "Lucas Monteiro Paes",
+      "Sajani Vithana",
+      "Martina Cardone",
+      "Flavio Calmon"
+    ],
+    "abstract": "Image search and retrieval tasks can perpetuate harmful stereotypes, erase cultural identities, and amplify social disparities. Current approaches to mitigate these representational harms balance the number of retrieved items across population groups defined by a small number of (often binary) attributes. However, most existing methods overlook intersectional groups determined by combinations of\ngroup attributes, such as gender, race, and ethnicity. We introduce Multi-Group Proportional Representation (MPR), a novel metric that measures representation across intersectional groups. We develop practical methods for estimating MPR, provide theoretical guarantees, and propose optimization algorithms to ensure MPR in retrieval. We demonstrate that existing methods optimizing for equal and proportional representation metrics may fail to promote MPR. Crucially, our work shows that optimizing MPR yields more proportional representation across multiple intersectional groups specified by a rich function class, often with minimal compromise in retrieval accuracy. Code is provided at https://github.com/alex-oesterling/multigroup-proportional-representation.",
+    "keywords": [
+      "Fairness",
+      "Proportional Representation",
+      "Multi-Group Fairness"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=BRZYhVHvSg"
+  },
+  "review_fields": {
+    "comment": "Thank you for the thorough explanation of the interpretation of the queries, it helped me much better to understand what is being measured here. While I still believe on a high level that there is room for improvement in the evaluation of these types of methods, I will concede that it is extremely nontrivial, making it the task of future work rather than this particular paper. As you highlight, there are still significant contributions to this work. The proposals to present more detailed individual results in the appendix and highlight the interpretation in the text I believe also make the work much more transparent to the reader.\n\nI am raising my rating from 6 to 7, as my primary concerns of runtime and significance have been adequately addressed.\n\nWhile I feel this is valuable work that should be shared with the community, I limit my score to Accept because of the complications in the evaluation at the individual level. Once again, I see that there are complications in providing results beyond the individual query level that go beyond the scope of this work and I see that the individual queries provide a clear and valuable measurement given this complicated setup, but I still find it fundamentally difficult to reliably compare two methods based on single (or very few) samples. Specifically, I am unconfident in the similarity comparisons, which are core to retreival quality.\n\nHowever, I would like to thank the authors once again for the thoughtful discussion in \"Further discussion of statistical significance\". Before this comment I was leaning towards lowering my rating, but have instead decided to raise it."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1636,
+    "words": 270,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/62005943-052e-4178-af2f-b95fca12e53f",
+    "error": null,
+    "scored_chars": 1636
+  }
+}

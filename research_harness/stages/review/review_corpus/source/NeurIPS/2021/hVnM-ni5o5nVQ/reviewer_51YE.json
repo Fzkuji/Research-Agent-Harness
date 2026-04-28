@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "hVnM-ni5o5nVQ",
+  "reviewer": "51YE",
+  "paper": {
+    "title": "Contextual Recommendations and Low-Regret Cutting-Plane Algorithms",
+    "authors": [
+      "Sreenivas Gollapudi",
+      "Guru Guruganesh",
+      "Kostas Kollias",
+      "Pasin Manurangsi",
+      "Renato Paes Leme",
+      "Jon Schneider"
+    ],
+    "abstract": "We consider the following variant of contextual linear bandits motivated by routing applications in navigational engines  and recommendation systems. We wish to learn a hidden $d$-dimensional value $w^*$. Every round, we are presented with a subset $\\mathcal{X}_t \\subseteq \\mathbb{R}^d$ of possible actions. If we choose (i.e. recommend to the user) action $x_t$, we obtain utility $\\langle x_t, w^* \\rangle$ but only learn the identity of the best action $\\arg\\max_{x \\in \\X_t} \\langle x, w^* \\rangle$.\n\nWe design algorithms for this problem which achieve regret $O(d\\log T)$ and $\\exp(O(d \\log d))$. To accomplish this, we design novel cutting-plane algorithms with low “regret” -- the total distance between the true point $w^*$ and the hyperplanes the separation oracle returns. \n\nWe also consider the variant where we are allowed to provide a list of several recommendations. In this variant, we give an algorithm with $O(d^2 \\log d)$ regret and list size $\\poly(d)$. Finally, we construct nearly tight algorithms for a weaker variant of this problem where the learner only learns the identity of an action that is better than the recommendation. Our results rely on new algorithmic techniques in convex geometry (including a variant of Steiner’s formula for the centroid of a convex set) which may be of independent interest.",
+    "keywords": [
+      "Online Learning",
+      "Convex Geometry",
+      "Separation Oracles",
+      "Linear Bandits",
+      "Contextual Bandits"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=hVnM-ni5o5nVQ"
+  },
+  "review_fields": {
+    "summary": "The authors formulate a novel variant of the contextual linear bandit problem where the feedback is the identity of the best arm instead of the output of the reward function. This leads to a harder optimization problem which is a reduced to a geometric online problem which the paper solves uses separation based oracle algorithms. They also show the connection to the recently considered contextual search problem. \nVarious regret bounds are provided in the case of strong and weak separation oracles.",
+    "main_review": "Overall, the paper is well-structured in presenting the problem and the proposed contributions. The problem is novel and would be of broad interest to the community and the geometric problem could be of interest to other machine learning models. \n\nPros:\n(A) The connection to the regret problem in cutting-plane methods is nice and then showing how it can solved by John ellipsoid queries and center of gravity of queries in general settings is nice. These lead to efficient algorithms in terms of T. \n(B) The contextual list recommendation problem is solved under a weak separation oracle setting and also shown to regret independent of T. \n\nCons/Questions:\n\n(1) The lack of experimental results on the intended applications in recommender systems weakens the strong contributions. \n(2) How resistant is the proposed algorithm to noisy feedback in terms of the identity of the best arm? Suppose it is corrupted in say 's' of the T rounds, would it still be able to recover?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

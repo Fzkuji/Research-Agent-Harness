@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "DomBynQsqt",
+  "reviewer": "H3jC",
+  "paper": {
+    "title": "3M-Diffusion: Latent Multi-Modal Diffusion for Language-Guided Molecular Structure Generation",
+    "authors": [
+      "Huaisheng Zhu",
+      "Teng Xiao",
+      "Vasant G Honavar"
+    ],
+    "abstract": "Generating molecular structures with desired properties is a critical task with broad applications in drug discovery and materials design. We propose 3M-Diffusion, a novel multi-modal molecular graph generation method, to generate diverse, ideally novel molecular structures with desired properties.  3M-Diffusion encodes molecular graphs into a graph latent space which it then aligns with the text space learned by encoder-based LLMs from textual descriptions. It then reconstructs the molecular structure and atomic attributes based on the given text descriptions using the molecule decoder. It then learns a probabilistic mapping from the text space to the latent molecular graph space using a diffusion model. The results of our extensive experiments on several datasets demonstrate that 3M-Diffusion can generate high-quality, novel and diverse molecular graphs that semantically match the textual description provided.",
+    "keywords": [
+      "Multi-modal",
+      "Molecule Generation",
+      "Diffusion Model"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=DomBynQsqt"
+  },
+  "review_fields": {
+    "comment": "I appreciate the authors' detailed responses. As the experimental results, the proposed method shows strong performance. The response to the technical novelty is not convincing and novelty cannot be addressed by the response unless there exists any misunderstanding. Although this paper has limited technical contributions, this is an early attempt for molecule generation, showing great performance. I raise my rating."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:57Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:57Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1515,
+    "words": 215,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fb040996-7c48-49e5-a649-b7305dd2bc0e",
+    "error": null,
+    "scored_chars": 1515
+  }
+}

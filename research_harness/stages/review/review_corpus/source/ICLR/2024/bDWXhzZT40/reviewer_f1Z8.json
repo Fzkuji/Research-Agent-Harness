@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "bDWXhzZT40",
+  "reviewer": "f1Z8",
+  "paper": {
+    "title": "Learning model uncertainty as variance-minimizing instance weights",
+    "authors": [
+      "Nishant Jain",
+      "Karthikeyan Shanmugam",
+      "Pradeep Shenoy"
+    ],
+    "abstract": "Predictive uncertainty--a model’s self-awareness regarding its accuracy on an input--is key for both building robust models via training interventions and for test-time applications such as selective classification. We propose a novel instance-conditional reweighting approach that captures predictive uncertainty using an auxiliary network, and unifies these train- and test-time applications. The auxiliary network is trained using a meta-objective in a bilevel optimization framework. A key contribution of our proposal is the meta-objective of minimizing dropout variance, an approximation of Bayesian predictive uncertainty, We show in controlled experiments that we effectively capture diverse specific notions of uncertainty through this meta-objective, while previous approaches only capture certain aspects. These results translate to significant gains in real-world settings–selective classification, label noise, domain adaptation, calibration–and across datasets–Imagenet, Cifar100, diabetic retinopathy, Camelyon, WILDs, Imagenet-C,-A,-R, Clothing-1.6M, etc. For Diabetic Retinopathy, we see upto 3.4\\%/3.3\\% accuracy & AUC gains over SOTA in selective classification. We also improve upon large-scale pretrained models such as PLEX.",
+    "keywords": [
+      "loss reweighting",
+      "epistemic uncertainty",
+      "bi-level optimization",
+      "model calibration",
+      "bayesian neural networks"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=bDWXhzZT40"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a method which learns a weighting function for the cross entropy loss, enabling re-weighting of the terms depending on how difficult (in an uncertainty sense) they are to classify. The method is learnt through a bi-level optimisation process, which is not dissimilar from a 'meta' training objective. The authors demonstrate their results on several datasets using ResNet-50 architectures.",
+    "strengths": "The strengths of this paper are it's:\n* Simplicity, the method seems very easy to implement and is intuitive to understand.\n* The experiments are reasonably conclusive and operate on a significant number of datasets.",
+    "weaknesses": "In terms of weaknesses:\n* The paper seems quite rough, there are many undefined terms and functions ($R^2$, $g(x)$, $G$), missing citations (MMCE), lack of error bars in Table 4 - 7, etc.\n* With a paper being set up the way it has, I would expect some proof, especially with the synthetic setup in Section 4\n* Moreover, I'm not entirely convinced on why this method works, my understanding is that you are simply training the network to produce low variance in its predictions, which is manifested by the network essential learning dirac distributions over the parameters in dropout. It would be nice to see some investigation into this, or at least an explanation.\n* Only performed on ResNet, there are many models available now which can be trained just as easily with similar compute.",
+    "questions": "* What is the definition of $g(x)$? And how does this relate to $\\theta$. I couldn't find this information when it was introduced, which made this paper very hard to grasp what was happening.\n* How do $w_i$ and $\\Theta$ relate?\n* What is the theory in Scenario 1?\n* What are the associated issues with this approach? I understand the objective of minimising uncertainty, but minimising the metric which provides the uncertainty is not the same thing. I'm concerned that all this is doing is simply collapsing the dropout distribution to all become the same parameters, i.e. it makes no difference on the prediction which parameters are selected. \n\n\nWhilst I think there is some contribution in this paper, I just don't think in it's current form it's ready for publication. I would suggest that the authors improve:\n* The quality of the paper to make it easier to understand what the method is, i.e. define $g(x)$ properly\n* A proof would strengthen the paper significantly. If you can prove why minimising the variance provides improved uncertainty you're onto a winner.\n* Add more architectures, using only ResNet-50 is not enough.\n* I would also suggest removing the empirical evaluation on the top set up. If you have a toy set up like this, it should turn into a proof."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2280,
+    "words": 391,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/adb52971-4258-4dc2-8595-cd0769ae8505",
+    "error": null,
+    "scored_chars": 2281
+  }
+}

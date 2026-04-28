@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "sZI1Oj9KBKy",
+  "reviewer": "gKo4",
+  "paper": {
+    "title": "TVSPrune - Pruning Non-discriminative filters via Total Variation separability of intermediate representations without fine tuning",
+    "authors": [
+      "Chaitanya Murti",
+      "Tanay Narshana",
+      "Chiranjib Bhattacharyya"
+    ],
+    "abstract": "Achieving structured, data-free sparsity of deep neural networks (DNNs) remains an open area of research.  In this work, we address the challenge of pruning filters without access to the original training set or loss function. We propose the discriminative filters hypothesis, that well-trained models possess discriminative filters, and any non-discriminative filters can be pruned without impacting the predictive performance of the classifier. Based on this hypothesis, we propose a new paradigm for pruning neural networks: distributional pruning, wherein we only require access to the distributions that generated the original datasets. Our approach to solving the problem of formalising and quantifying the discriminating ability of filters is through the total variation (TV) distance between the class-conditional distributions of the filter outputs. We present empirical results that, using this definition of discriminability, support our hypothesis on a variety of datasets and architectures. Next, we define the LDIFF score, a heuristic to quantify the extent to which a layer possesses a mixture of discriminative and non-discriminative filters. We empirically demonstrate that the LDIFF score is indicative of the performance of random pruning for a given layer, and thereby indicates the extent to which a layer may be pruned. Our main contribution is a novel one-shot pruning algorithm, called TVSPrune, that identifies non-discriminative filters for pruning. We extend this algorithm to IterTVSPrune, wherein we iteratively apply TVSPrune, thereby enabling us to achieve greater sparsity. Last, we demonstrate the efficacy of the TVSPrune on a variety of datasets, and show that in some cases, we can prune up to 60% of parameters with only a 2% loss of accuracy without any fine-tuning of the model, beating the nearest baseline by almost 10%.",
+    "keywords": [
+      "Structured pruning",
+      "model compression"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=sZI1Oj9KBKy"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors propose a training-data free structure pruning method to prune deep neural networks. Specifically, the authors propose to measure the discriminating ability of filters through the total variation (TV) distance between the class-conditional distributions of the feature maps outputs by the filters. Then, based on the above TV-distance, the authors define the LDIFF score to decide the pruning ratio of each layer. Last, the authors proposed IterTVSPrune, which iteratively prunes the model to achieve greater sparsity. Experimental results on CIFAR10/100 and ImageNet demonstrate the effectiveness of the proposed method. However, there are still some issues in the paper. Detailed comments are as follows.",
+    "strength_and_weaknesses": "## Strength:\n\n1. The authors propose a new paradigm called distributional pruning for pruning neural networks. It measures the discriminating ability of filters through the total variation (TV) distance between the class-conditional distributions of the feature maps outputs by the filters. \n\n2. Experiments on the image classification task demonstrate the effectiveness of the proposed method. \n\n3. The manuscript is easy to read and provides enough experimental details to reproduce.\n\n## Weakness:\n\n1. The proposed method may be hard to be applied in real data-free scenarios because it needs to assess thousands of images from the test set (3/4 of the training set) to calculate the distributions of feature maps. Can the proposed method use less number of images (or images from datasets with similar distribution) to calculate the distributions of feature maps? More explanations and experiments are required.\n\n2. In Algorithm 1, the authors set the weights of the pruned filters as zero rather than remove them directly. In this way, the pruned model may still cost the same storage space to store these zero weights and consume the same computation cost to forward with the zero weights. How does the pruned model reduce the storage space and the inference time? More explanations and experiments are required.\n\n3. In Section 5, the motivation of proposing LDIFF metric to identify which layers can be pruned is unclear. The authors claim that LDIFF metric tends to prune layers with a mixture of discriminative and non-discriminative filters and avoid pruning layers with a majority of discriminative filters or non-discriminative filters. Why should the LDIFF metric avoid pruning layers with a majority of non-discriminative filters? It would be better to visualize and analyze the fraction of discriminative filters $\\tao(\\eta)$ in each layer.\n\n4. In Definition 1, the meaning of the function \"sup|·|\" in the equation is confusing. It would be better for the authors to explain the meaning of \"sup|·|\".\n\n5. In Section 7, it would be better for the authors to provide the theoretical complexity measure and the time consumption of the proposed method.\n\n6. The authors only show the results on heavy-weight models such as ResNet. It would be better for the authors to conduct more experiments on light-weight models such as MobileNet-V2 [1].\n\n7. More ablations of the $\\eta$ are required because the influence of $\\eta$ is unclear. How does this hyper-parameter affect the performance of the proposed pruning method? \n\n8. The authors only present the experimental results on image classification task. It would be better for the authors to show the experimental results on more computer vision tasks such as object detection and semantic segmentation.\n\n## Minor Issues：\n1. Many references in this paper have been officially published, such as “Baykal et al. (2018)” and “Frankle & Carbin (2018)”. Please reference these papers in the formal format.\n\n2. There are some typos in this paper:\n(1) In Section 7.1, \"in order to reduce the test error\" should be \"in order to increase the test error\"?\n(2) In Section 6.1, \"Therefore, we use the LDIFF scores to decide We now present the TVSPRUNE algorithm.\" is an incomplete sentence.\n\n## Reference:\n[1] MobileNetV2: Inverted Residuals and Linear Bottlenecks. CVPR 2018.",
+    "clarity,_quality,_novelty_and_reproducibility": "The manuscript is easy to read and is of high quality but requires more experimental results and explanations. The proposed new pruning paradigm called distributional pruning is novel. The idea of data-free pruning is not very novel. The manuscript provides enough experimental details to reproduce.",
+    "summary_of_the_review": "The authors propose a training-data free structure pruning method to prune deep neural networks. The proposed new paradigm called distributional pruning for pruning neural networks is novel. The idea of data-free pruning is not very novel. The manuscript is easy to read and provides enough experimental details to reproduce. Experiments on the image classification task demonstrate the effectiveness of the proposed method. However, the manuscript still needs more experimental results and explanations.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "Dy8gq-LuckD",
+  "reviewer": "BHoa",
+  "paper": {
+    "title": "Recognizing and overcoming the greedy nature of learning in multi-modal deep neural networks",
+    "authors": [
+      "Nan Wu",
+      "Stanislaw Kamil Jastrzebski",
+      "Kyunghyun Cho",
+      "Krzysztof J. Geras"
+    ],
+    "abstract": "We hypothesize that due to the greedy nature of learning in multi-modal deep neural networks (DNNs), these models tend to rely on just one modality while under-utilizing the other modalities. We observe empirically that such behavior hurts its overall generalization. We validate our hypothesis by estimating the gain on the accuracy when the model has access to an additional modality. We refer to this gain as the conditional utilization rate of the modality. In the experiments, we consistently observe an imbalance in conditional utilization rate between modalities, across multiple tasks and architectures. Since conditional utilization rate cannot be computed efficiently during training, we introduce an efficient proxy based on the pace at which a DNN learns from each modality, which we refer to as conditional learning speed. We thus propose a training algorithm, balanced multi-modal learning, and demonstrate that it indeed addresses the issue of greedy learning. The proposed algorithm is found to improve the model’s generalization on three datasets: Colored MNIST (Kim et al., 2019), Princeton ModelNet40 (Wu et al., 2015), and NVIDIA Dynamic Hand Gesture Dataset (Molchanov et al., 2016).",
+    "keywords": [
+      "multi-modal learning",
+      "deep neural networks",
+      "multi-view learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=Dy8gq-LuckD"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper focuses on the multi-modal interaction problem, that multi-modal models tend to rely on just one modality while under-utilizing the other modalities. Since conditional utilization rate cannot be computed efficiently during training, they introduce an efficient proxy based on the pace at which a DNN learns from each modality, which we refer to as conditional learning speed. So they propose a training algorithm, balanced multi-modal learning, and demonstrate that it indeed addresses the issue of greedy learning. The proposed algorithm is found to improve the model’s generalization.",
+    "main_review": "1.\tThe topic of modal balance is interesting and has attracted much attention. The proposed method is direct and easy to follow.\n2.\tExperiments on several datasets verify the effectiveness.\n\n\nweakness\n1.\tHow to set the \\alpha at the bottom of page five? More parameter analyses are expected.\n2.\tAs introduced in the introduction and abstract, many related works about this topic have been proposed, e.g., “Rubi: Reducing unimodal biases in visual question answering”, “Removing bias in multi-modal classifiers: Regularization by maximizing functional entropies”. What are the improvements to the proposed methods? Why not compare these methods? The reviewer believes that the experiments are very lacking in comparison with the SOTA methods.",
+    "summary_of_the_review": "This paper focuses on the multi-modal interaction problem, that multi-modal models tend to rely on just one modality while under-utilizing the other modalities. Since conditional utilization rate cannot be computed efficiently during training, they introduce an efficient proxy based on the pace at which a DNN learns from each modality, which we refer to as conditional learning speed. So they propose a training algorithm, balanced multi-modal learning, and demonstrate that it indeed addresses the issue of greedy learning. The proposed algorithm is found to improve the model’s generalization. So I recommend weak accept.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1368,
+    "words": 205,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/40938d54-0e71-4d0d-a3c4-50ff94dd7cfe",
+    "error": null,
+    "scored_chars": 1368
+  }
+}

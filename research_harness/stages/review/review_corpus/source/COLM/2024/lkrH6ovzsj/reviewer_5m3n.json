@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "lkrH6ovzsj",
+  "reviewer": "5m3n",
+  "paper": {
+    "title": "Multi-FAct: Assessing Factuality of Multilingual LLMs using FActScore",
+    "authors": [
+      "Sheikh Shafayat",
+      "Eunsu Kim",
+      "Juhyun Oh",
+      "Alice Oh"
+    ],
+    "abstract": "Evaluating the factuality of long-form large language model (LLM)-generated text is an important challenge. Recently there has been a surge of interest in factuality evaluation for English, but little is known about the factuality evaluation of multilingual LLMs, specially when it comes to long-form generation.\nThis paper systematically evaluates multilingual LLMs' factual accuracy across languages and geographic regions.\nWe introduce a simple pipeline for multilingual factuality evaluation, by applying FActScore \\citep{min2023factscore} for diverse languages. In addition to evaluating multilingual factual generation, we evaluate the factual accuracy of long-form text generation in topics that reflect regional diversity. We also examine the feasibility of running the FActScore pipeline using non-English Wikipedia and provide comprehensive guidelines on multilingual factual evaluation for regionally diverse topics.",
+    "keywords": [
+      "multilinguality",
+      "factuality",
+      "knowledge representation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=lkrH6ovzsj"
+  },
+  "review_fields": {
+    "summary": "This paper the problem of factuality evaluation of multilingual LLMs. It introduces a pipeline, Multi-Fact, for multilingual factuality evaluation, adapting FactScore for diverse languages. This pipeline first translates texts in other language into English, and then using FactScore for evaluation. In experiments, this paper explores the potential and limitations of using non-English resources for factuality evaluation of long-form generation. The Multi-Fact tool can also be used to investigate cultural and geographic biases in LLMs.",
+    "reasons_to_accept": "- Factuality evaluation in multi-lingual LLMs is an interesting and important research problem.\n- The proposed method is simple yet effective.\n- There are some interesting findings in the experiments, which are inspiring for future research on building multi-lingual LLMs.\n- The paper is well-written, and the idea is easy to follow.",
+    "reasons_to_reject": "- The novelty and technical complexity of the proposed method are quite basic. It mainly translates texts from other languages into English and then uses the FactScore tool for evaluation. There is no innovative approach or model created specifically for multilingual scenarios.\n- The experiments do not compare the proposed method with any baseline methods. It is unclear whether the proposed method is effective, even though it seems reasonable.\n- The experiments only use Wikipedia as a data source, which limits how widely the proposed method can be applied."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:04Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:04Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 2,
+    "mixed_pct": 0,
+    "human_pct": 98,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 902,
+    "words": 142,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e400705b-9fef-4df0-b2f7-c7b7bd6ab308",
+    "error": null,
+    "scored_chars": 902
+  }
+}

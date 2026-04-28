@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "xS6zx1aBI9",
+  "reviewer": "w3HD",
+  "paper": {
+    "title": "CLIN: A Continually Learning Language Agent for Rapid Task Adaptation and Generalization",
+    "authors": [
+      "Bodhisattwa Prasad Majumder",
+      "Bhavana Dalvi Mishra",
+      "Peter Jansen",
+      "Oyvind Tafjord",
+      "Niket Tandon",
+      "Li Zhang",
+      "Chris Callison-Burch",
+      "Peter Clark"
+    ],
+    "abstract": "Language agents have shown some ability to interact with an external environment, e.g., a virtual world such as ScienceWorld, to perform complex tasks, e.g.,  growing a plant, without the startup costs of reinforcement learning. While recent work, e.g., Reflexion, has demonstrated how such agents can also self-improve by adding a textual memory of ''hints'' learned from prior experience, such improvements have been limited both in size and scope. In contrast, our goal is a language agent that can robustly improve performance over time, including when both the task and environment are varied. Our approach is to have the agent learn a textual representation of how the world works (rather than just isolated hints), expressed as a memory of causal abstractions, to guide future decision-making. In experiments, we find CLIN is able to continually improve on repeated trials on the same task and environment, outperforming state-of-the-art reflective language agents like Reflexion by 23 points in ScienceWorld and 1.4 points in ALFWorld benchmarks. CLIN can also transfer its learning to new environments and tasks, enhancing performance by 21 points in ScienceWorld and 11 points in ALFWorld. This suggests that language agents with a textual causal memory can play a significant role in interactive environments, including being able to rapidly improve over time.",
+    "keywords": [
+      "Language Agents",
+      "Memory",
+      "Causal Abstraction",
+      "Continual Learning",
+      "Memory-augmented Agents",
+      "Task Adaptation",
+      "Text-based Simulator",
+      "Virtual Environment"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=xS6zx1aBI9"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a general learning agent based on LLM to learn to act and adapt to within environments and across environments. The proposed agent is composed of memories, controller, executor, and memory generator. The four components build a pipeline for producing information necessary for interaction. The authors also adopts a special prompting template and claim causal abstraction is learned. The experiment results show a large boost over reflexion agents.",
+    "reasons_to_accept": "+ The paper shows strong results over previous method (reflexion). The authors demonstrate the performance advantage across various setups.\n\n+ The paper is clearly written with structured flows.\n\n+ The proposed prompting template seems to be very useful\n\n+ The idea of four components borrows the structure from RL community and makes sense.",
+    "reasons_to_reject": "+ The authors seem to have proposed a fairly complicated pipeline, making it difficult to understand which components actually contribute to the performance boost. It would be nice if the authors can thoroughly analyze, does the main boost come from new prompting template, executor design, etc.?\n\n+ Following the above point, the contribution and takeaways are not clear for readers\n\n+ Prompting agents are, interesting, useful, but a bit handwavy. I'm not sure how much of these tricks/methods can contribute in the long-term without sound statistical formulation for understanding and prompting LLMs."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:52Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:52Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 958,
+    "words": 147,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/96b42f76-5b0a-4271-948e-6d0f386f94bc",
+    "error": null,
+    "scored_chars": 958
+  }
+}

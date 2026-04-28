@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "IAoSG4Q2xC",
+  "reviewer": "rHdb",
+  "paper": {
+    "title": "Hyperparameter Loss Surfaces Are Simple Near their Optima",
+    "authors": [
+      "Nicholas Lourie",
+      "He He",
+      "Kyunghyun Cho"
+    ],
+    "abstract": "Hyperparameters greatly impact models' capabilities; however, modern models are too large for extensive search. Instead, researchers design recipes that train well across scales based on their understanding of the hyperparameters. Despite this importance, few tools exist for understanding the hyperparameter loss surface. We discover novel structure in it and propose a new theory yielding such tools. The loss surface is complex, but as you approach the optimum simple structure emerges. It becomes characterized by a few basic features, like its effective dimension and the best possible loss. To uncover this *asymptotic regime*, we develop a novel technique based on random search. Within this regime, the best scores from random search take on a new distribution we discover. Its parameters are exactly the features defining the loss surface in the asymptotic regime. From these features, we derive a new asymptotic law for random search that can explain and extrapolate its convergence. These new tools enable new analyses, such as confidence intervals for the best possible performance or determining the effective number of hyperparameters. We make these tools available at: https://github.com/nicholaslourie/opda.",
+    "keywords": [
+      "experimental design",
+      "hyperparameters",
+      "scaling laws"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=IAoSG4Q2xC"
+  },
+  "review_fields": {
+    "summary": "The paper introduces a noisy‑quadratic parametric model that captures how random search improves validation loss once hyper‑parameters are near the optimum. Experiments on three deep‑learning setups show that this simple model fits the tail distribution well and extrapolates tuning‑curve performance.",
+    "reasons_to_accept": "- The paper proposed a principled model for tuning‑curve forecasts with random search, with support of empirical validations.\n- The paper is well structured and clearly written.",
+    "reasons_to_reject": "In order to confirm the paper’s findings, additional experiments should be conducted to cover more diverse search spaces. Because the conference focuses on language modeling, extensive evaluations with recent language models of various sizes and types would be more appreciated.\n\nThe paper investigates only random search and claims that the proposed model can be used to build tools for analysis. However, because the analysis is limited to random search, other common HPO methods (e.g., Bayesian optimization, BOHB [1]) cannot benefit from it.\n\n[1] Falkner, Stefan, Aaron Klein, and Frank Hutter. \"BOHB: Robust and efficient hyperparameter optimization at scale.\" International conference on machine learning. PMLR, 2018."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 902,
+    "words": 132,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/50c879d0-f3e2-4c1d-a3cd-e4295aa6fee7",
+    "error": null,
+    "scored_chars": 902
+  }
+}

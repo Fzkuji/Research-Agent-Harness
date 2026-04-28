@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "SJf6BhAqK7",
+  "reviewer": "2",
+  "paper": {
+    "title": "Variadic Learning by Bayesian Nonparametric Deep Embedding",
+    "authors": [
+      "Kelsey R Allen",
+      "Hanul Shin",
+      "Evan Shelhamer",
+      "Josh B. Tenenbaum"
+    ],
+    "abstract": "Learning at small or large scales of data is addressed by two strong but divided frontiers: few-shot learning and standard supervised learning. Few-shot learning focuses on sample efficiency at small scale, while supervised learning focuses on accuracy at large scale. Ideally they could be reconciled for effective learning at any number of data points (shot) and number of classes (way). To span the full spectrum of shot and way, we frame the variadic learning regime of learning from any number of inputs. We approach variadic learning by meta-learning a novel multi-modal clustering model that connects bayesian nonparametrics and deep metric learning. Our bayesian nonparametric deep embedding (BANDE) method is optimized end-to-end with a single objective, and adaptively adjusts capacity to learn from variable amounts of supervision. We show that multi-modality is critical for learning complex classes such as Omniglot alphabets and carrying out unsupervised clustering. We explore variadic learning by measuring generalization across shot and way between meta-train and meta-test, show the first results for scaling from few-way, few-shot tasks to 1692-way Omniglot classification and 5k-shot CIFAR-10 classification, and find that nonparametric methods generalize better than parametric methods. On the standard few-shot learning benchmarks of Omniglot and mini-ImageNet, BANDE equals or improves on the state-of-the-art for semi-supervised classification.",
+    "keywords": [
+      "meta-learning",
+      "metric learning",
+      "bayesian nonparametrics",
+      "few-shot learning",
+      "deep learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SJf6BhAqK7"
+  },
+  "review_fields": {
+    "comment": "Thanks for clarification on many details. I'm glad you have planned a code release. I hope the revised manuscript also includes enough details that readers don't have to go look at code for every detail. \n\nI'm still not satisfied by the proposed hard-soft hybrid. I suppose it may be \"marginally more accurate in experiments\", though I only see one test on one dataset, where soft-soft accuracy is 98.4 and hard-soft accuracy is 99.0, a difference that seems too small to justify an approach that is more complicated and not very well founded compared to one that has a much better interpretation (and thus more confidence it will work on other datasets).\n\nIt's also not clear that a fair, correct experiment was done between \"soft-soft\", \"hard-hard\", and \"hard-soft\". Alg. 1 (hard-soft) can reassign both labeled and unlabeled data to new clusters. However, Alg. 2 (the hard-hard method) in A.4 only operates on unlabeled examples. (Also, the value of \\sigma_0 is unclear). No formal algorithm is given at all for the soft-soft method.  Note also that the condition for creating a new cluster in Alg. 1 is that the distance to the closest cluster exceeds some threshold. However, in the written hard-hard algorithm, the condition is different: distance to some \\mu_0 which is fixed to 0.0. The better approach would be to use the MARGINAL likelihood of x_i being assigned to a new cluster, as in the Gibbs sampler for DP mixtures (see Eq. 3.7 of Radford Neal's \"Sampling methods for Dirichlet Process Mixture Models\" (http://www.stat.columbia.edu/npbayes/papers/neal_sampling.pdf).\n\nGiven all these concerns, it's unclear if there's really a fair comparison here."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

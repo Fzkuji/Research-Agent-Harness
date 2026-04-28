@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "My7lkRNnL9",
+  "reviewer": "knnT",
+  "paper": {
+    "title": "Forward Learning with Top-Down Feedback: Empirical and Analytical Characterization",
+    "authors": [
+      "Ravi Francesco Srinivasan",
+      "Francesca Mignacco",
+      "Martino Sorbaro",
+      "Maria Refinetti",
+      "Avi Cooper",
+      "Gabriel Kreiman",
+      "Giorgia Dellaferrera"
+    ],
+    "abstract": "\"Forward-only\" algorithms, which train neural networks while avoiding a backward pass, have recently gained attention as a way of solving the biologically unrealistic aspects of backpropagation. Here, we first address compelling challenges related to the \"forward-only\" rules, which include reducing the performance gap with backpropagation and providing an analytical understanding of their dynamics. To this end, we show that the forward-only algorithm with top-down feedback is well-approximated by an \"adaptive-feedback-alignment\" algorithm, and we analytically track its performance during learning in a prototype high-dimensional setting. Then, we compare different versions of forward-only algorithms, focusing on the Forward-Forward and PEPITA frameworks, and we show that they share the same learning principles. Overall, our work unveils the connections between three key neuro-inspired learning rules, providing a link between \"forward-only\" algorithms, i.e., Forward-Forward and PEPITA, and an approximation of backpropagation, i.e., Feedback Alignment.",
+    "keywords": [
+      "Forward-only learning",
+      "Biologically inspired learning",
+      "Artificial neural networks",
+      "Analytical characterization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=My7lkRNnL9"
+  },
+  "review_fields": {
+    "summary": "This paper provides further analysis of the PEPITA learning rule, a biologically-inspired \"forward-only\" approach to train neural networks by replacing the backward pass with another forward pass. In connects PEPITA theoretically to two other biologically-inspired approaches, namely an adaptive version of Feedback Alignment and Forward-Forward. Additionally, the paper explores how the initialization of the feedback weights and applying techniques like weight decay, activation normalization, and weight mirroring can improve PEPITA's performance. The experimental findings demonstrate minor improvements through normalization and weight mirroring.",
+    "strengths": "- Biologically-inspired and forward-only training approaches are a relevant and timely topic. \n- It would be very useful to unify the multitude of different approaches into a common framework. By connecting three major biologically-inspired approaches, this paper takes an important step towards that goal. \n- Given the still-remaining gap between backpropagation and forward-only approaches, analyzing and improving their performance is essential for their practical relevance.\n- Section 4.2 gives a well-structured summary of the experimental results. It would have been nice, to include a discussion of the impact of weight decay, activation normalization, and weight mirroring",
+    "weaknesses": "- The experimental improvement and evaluation of PEPITA on their own offer only limited novelty. However, together with the analysis connecting PEPITA, FA, and Forward-Forward, this paper amounts to a considerable contribution.\n- experimental evaluation:\n - only small, fully-connected networks, not that suited to more complex vision datasets\n - only image classification (MNIST, CIFAR10, CIFAR100)\n - no experimental comparison to Forward-Forward\n - only minor improvements in accuracy\n- Minor Issues:\n - Figures can be a bit hard to read\n  - in Fig 2 (especially 2b) the overlap of PEPITA and AFA is hard to see without zooming in\n  - Fig 3 would benefit from more contrasting colors\n - the references to Figure 2c in the last paragraph of Section 3.2 seems to be mismatched with the actual order of subfigures in Figure 2\n - Table 1, line 1 seems to have the wrong citation for FA\n - Spelling:\n  - in contribution (vi) \"analitically\"\n  - in the last sentence of Section 1: \"gpus\" should probably be in uppercase, i.e. \"GPUs\"",
+    "questions": "- Which approach do the authors considers their primary contribution? Table 1 the authors refer to PEPITA-TL as \"ours\" yet this is only discussed briefly in Section 5.1 and left mostly to future work.\n- Why are the combinations \"weight-decay + normalization + WM\" and \"weight-decay + normalization + no WM\" missing in Table 2? Can weight decay and activation normalization not be combined?\n- In Figure 3c: shouldn't pre-mirroring increase the alignment (thus decreasing the angle) before the first epoch? Yet, in Figure 3c, all three lines seem to start at the same value."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2266,
+    "words": 360,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c0e4386c-76c1-497c-b92a-7a9b59f3e96a",
+    "error": null,
+    "scored_chars": 2284
+  }
+}

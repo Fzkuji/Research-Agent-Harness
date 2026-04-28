@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "iEeiZlTbts",
+  "reviewer": "Ns9r",
+  "paper": {
+    "title": "No Regrets: Investigating and Improving Regret Approximations for Curriculum Discovery",
+    "authors": [
+      "Alexander Rutherford",
+      "Michael Beukman",
+      "Timon Willi",
+      "Bruno Lacerda",
+      "Nick Hawes",
+      "Jakob Nicolaus Foerster"
+    ],
+    "abstract": "What data or environments to use for training to improve downstream performance is a longstanding and very topical question in reinforcement learning. \nIn particular, Unsupervised Environment Design (UED) methods have gained recent attention as their adaptive curricula promise to enable agents to be robust to in- and out-of-distribution tasks.\nThis work investigates how existing UED methods select training environments, focusing on task prioritisation metrics.\nSurprisingly, despite methods aiming to maximise regret in theory, the practical approximations do not correlate with regret but with success rate.\nAs a result, a significant portion of an agent's experience comes from environments it has already mastered, offering little to no contribution toward enhancing its abilities. Put differently, current methods fail to predict intuitive measures of *learnability*. Specifically, they are unable to consistently identify those scenarios that the agent can sometimes solve, but not always.\nBased on our analysis, we develop a method that directly trains on scenarios with high learnability. This simple and intuitive approach outperforms existing UED methods in several binary-outcome environments, including the standard domain of Minigrid and a novel setting closely inspired by a real-world robotics problem. \nWe further introduce a new adversarial evaluation procedure for directly measuring robustness, closely mirroring the conditional value at risk (CVaR).\nWe open-source all our code and present visualisations of final policies here: https://github.com/amacrutherford/sampling-for-learnability.",
+    "keywords": [
+      "MARL",
+      "UED",
+      "Robotics"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=iEeiZlTbts"
+  },
+  "review_fields": {
+    "summary": "This experimental paper proposes a UED method (SFL) for JaxNav, a continuous single- and multi-robot navigation task in a partially observable setting.  The authors document the shortcomings of UED methods, (Domain Randomisation, Prioritised Level Replay, and ACCEL) on this partially observed, continuous action, continuous state setting.  The authors provide a demonstration that the scoring mechanism used by the above UED methods is misguided.  Their method, SFL, uses a “learnability score” which focuses learning on levels for which agents achieve success rates closer to 50%.   To better focus on robustness and generalization, the authors develop an empirical CvaR measure of success for evaluation and comparison of methods.",
+    "strengths": "Scientists who are interested in developing and implementing the RL agents in real life will find this experimental paper important. \n\nThe paper is technically sound and provides simulation support for the claims.   The authors provide a nice discussion of the weaknesses of SFL (proposed version works only for binary outcome, deterministic environment).  I have not gone over the github site;  aside from the points made below, replicability is good. \n\nThe learnability score is original (obvious after reading the paper, but perhaps not before).  This score nicely takes advantage of the JaxNav environment which provides fast training of an RL agent.  Related work is adequately cited and it is very clear how SFL differs from the 3 UED methods discussed.",
+    "questions": "Lines 15-17.  Suggest to delete spurious statements such as “We had tried our best to make current UED methods work for our setting before going back to the basics and developing our new scoring function, which took a few days and worked out-of-the-box.  We hope our lessons and learnings will help others spend their time more wisely.”   Don’t complain!\n\nThe authors should make an effort to assist readers familiar with RL but not ACL methods by providing details in the appendix.  For example in line 175, Algorithm 1 does not provide information on how \\phi is updated.  The update algorithm could be provided in the appendix.\n\nFigure 2 includes statements about “learnability”  prior to a definition of learnability.  \n\nLines 154-157.  Learnability has not yet been defined so statements about slight/no correlation with learnability are vacuous.   It is not clear to reader whether learnability in these lines/Figure 2 is the same as the definition of learnability given later (and used by SLR).\n\nLines 133-135 might better go in the later section on weaknesses/limitations.\n\nLine 214.  The authors do not define “solvable.”  The reader needs to know how you are operationalizing this term.  \n\nLine 274-5.  Unclear what “perfect regret” means.",
+    "limitations": "Limitations are nicely discussed.  It would be cool if the authors could comment on how SFL might be generalized to continuous outcomes and stochastic environments."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2150,
+    "words": 342,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/efdb1968-66e7-4779-aed1-5462ee58d71d",
+    "error": null,
+    "scored_chars": 2176
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "xXYjxli-2i",
+  "reviewer": "hVW8",
+  "paper": {
+    "title": "Optimization-Based Algebraic Multigrid Coarsening Using Reinforcement Learning",
+    "authors": [
+      "Ali Taghibakhshi",
+      "Scott MacLachlan",
+      "Luke Olson",
+      "Matthew West"
+    ],
+    "abstract": "Large sparse linear systems of equations are ubiquitous in science and engineering, such as those arising from discretizations of partial differential equations. Algebraic multigrid (AMG) methods are one of the most common methods of solving such linear systems, with an extensive body of underlying mathematical theory. A system of linear equations defines a graph on the set of unknowns and each level of a multigrid solver requires the selection of an appropriate coarse graph along with restriction and interpolation operators that map to and from the coarse representation. The efficiency of the multigrid solver depends critically on this selection and many selection methods have been developed over the years. Recently, it has been demonstrated that it is possible to directly learn the AMG interpolation and restriction operators, given a coarse graph selection. In this paper, we consider the complementary problem of learning to coarsen graphs for a multigrid solver, a necessary step in developing fully learnable AMG methods. We propose a method using a reinforcement learning (RL) agent based on graph neural networks (GNNs), which can learn to perform graph coarsening on small planar training graphs and then be applied to unstructured large planar graphs, assuming bounded node degree. We demonstrate that this method can produce better coarse graphs than existing algorithms, even as the graph size increases and other properties of the graph are varied. We also propose an efficient inference procedure for performing graph coarsening that results in linear time complexity in graph size.",
+    "keywords": [
+      "Algebraic Multigrid",
+      "Reinforcement Learning",
+      "Graph Partitioning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=xXYjxli-2i"
+  },
+  "review_fields": {
+    "summary": "The authors propose using RL agent via a TAGCOnv network in DQN to select coarse points in the procedure of coarsening algebraic grids. Theoretical results are established for the integration of the RL into a convergent scheme, and the complexity of the algorithm is at O(n) via a Lloyd based aggregation to constrain the coarsening to an O(n) selection.",
+    "main_review": "Overall the paper clearly proposes a useful improvement of the AMG algorithm. The novelty here is in combining RL other AMG technique which Im not familiar with in prior work. The authors give sufficient empirical validation to the advantage of the suggested combination. The results are clearly of interest to practitioners who use AMG solvers in a variety of settings from solving pdes to other general systems in 2D grids. The authros clearly (and honestly) state that the generalization to other problems is still unknown.\nThere are still some details missing that I would be grateful if the authors could address in the rebuttal:\n1.\tI assume that the Lloyd based aggregation is a k-means essentially, hence the question is how to determine K so that the partition will still be O(n) but the size of each cluster will be approximately similar to that of the other clusters to allow faithful sampling from each.\n2.\tIn this context, For example, I would expect the family of Aspect ratio to be fairly challenging. For some reason (could be a typo) the blue points for that family are not given in Fig. 3-right. Can you please elaborate on what type of grids, (and most importantly why) the Lloyd could be a limiting factor? and please report the aspect ration location in Fig 3-right.\n3.\tFor fig 1 what is the greedy dominance factor?\n4.\tIn fig 2 can we also see the greedy baseline?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

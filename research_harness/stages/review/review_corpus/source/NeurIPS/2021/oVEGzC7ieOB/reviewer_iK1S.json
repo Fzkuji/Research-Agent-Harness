@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "oVEGzC7ieOB",
+  "reviewer": "iK1S",
+  "paper": {
+    "title": "Constrained Two-step Look-Ahead Bayesian Optimization",
+    "authors": [
+      "Duke Zhang",
+      "Xiangyu Zhang",
+      "Peter I. Frazier"
+    ],
+    "abstract": "Recent advances in computationally efficient non-myopic Bayesian optimization offer improved query efficiency over traditional myopic methods like expected improvement, with only a modest increase in computational cost. These advances have been largely limited to unconstrained BO methods with only a few exceptions which require heavy computation. For instance, one existing multi-step lookahead constrained BO method (Lam & Willcox, 2017) relies on computationally expensive unreliable brute force derivative-free optimization of a Monte Carlo rollout acquisition function. Methods that use the reparameterization trick for more efficient derivative-based optimization of non-myopic acquisition functions in the unconstrained setting, like sample average approximation and infinitesimal perturbation analysis, do not extend: constraints introduce discontinuities in the sampled acquisition function surface. Moreover, we argue here that being non-myopic is even more important in constrained problems because fear of violating constraints pushes myopic methods away from sampling the boundary between feasible and infeasible regions, slowing the discovery of optimal solutions with tight constraints. In this paper, we propose a computationally efficient two-step lookahead constrained Bayesian optimization acquisition function (2-OPT-C) supporting both sequential and batch settings. To enable fast acquisition function optimization, we develop a novel likelihood ratio-based unbiased estimator of the gradient of the two-step optimal acquisition function that does not use the reparameterization trick. In numerical experiments, 2-OPT-C typically improves query efficiency by 2x or more over previous methods, and in some cases by 10x or more.",
+    "keywords": [
+      "Bayesian optimization",
+      "Non-myopic",
+      "Gaussian processes",
+      "Derivative-free optimization"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=oVEGzC7ieOB"
+  },
+  "review_fields": {
+    "summary": "The paper is about a making computationally affordable a non-myopic (two step ahead) acquisition function for constrained Bayesian optimization. The contribution is relying on a likelihood ratio, akin to importance sampling, to obtain the required gradient. The instability of existing methods is detailed. Comparisons are offered against myopic, sequential, batch and rollout alternatives.",
+    "main_review": "The paper is clear overall. Still, clarifications are required on some statements, as well as some additional details. The empirical evaluations is limited to toy functions and a few alternatives methods.\n\nDetailed comments and questions:\n\n- Section 3: why not considering another batch at stage 1 after a batch at stage 0?\n\n- Page 6, line 220: “To the best of our knowledge, we are the first to adopt the likelihood ratio method to design a gradient estimator for BO algorithms.” while this is already done in [17, section 3.2]. This requires further discussion than just the paragraph in introduction (in addition to the similarity).\n\n- How do you find x_2^* in practice (in Algorithm 2), which is the “bottleneck” of the approach (A.3)?\n\n- The point made in [25] (authors and editors are swapped in the citation) is close to what is said at the beginning that non-feasible points can bring information. This makes it a very pertinent candidate to add to the empirical comparison and figure 1. Random search should be added as well for reference.\n\n- How to deal with equality constraints in this framework? What about failures (no observation possible in non feasible regions) or 0-1 constraints? See e.g., Bachoc, F., Helbert, C., & Picheny, V. (2020). Gaussian process optimization with failures: classification and convergence proof. Journal of Global Optimization, 78(3), 483-506.\n\n\nMinor:\n- two titles appear (Constrained Two-step Look-Ahead Bayesian Optimization and Two-step lookahead Bayesian optimization with inequality constraints)\n\n\nTypos : \nsection A: recomendation"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

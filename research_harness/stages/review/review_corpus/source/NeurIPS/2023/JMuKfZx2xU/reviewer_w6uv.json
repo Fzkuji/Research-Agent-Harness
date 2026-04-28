@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "JMuKfZx2xU",
+  "reviewer": "w6uv",
+  "paper": {
+    "title": "On Slicing Optimality for Mutual Information",
+    "authors": [
+      "Ammar Fayad",
+      "Majd Ibrahim"
+    ],
+    "abstract": "Measuring dependence between two random variables is of great importance in various domains but is difficult to compute in today's complex environments with high-dimensional data. Recently, slicing methods have shown to be a scalable approach to measuring mutual information (MI) between high-dimensional variables by projecting these variables into one-dimensional spaces. Unfortunately, these methods use uniform distributions of slicing directions, which generally discard informative features between variables and thus lead to inaccurate quantification of dependence. In this paper, we propose a principled framework that searches for an \\textit{optimal} distribution of slices for MI. Importantly, we answer theoretical questions about finding the optimal slicing distribution in the context of MI and develop corresponding theoretical analyses. We also develop a practical algorithm, connecting our theoretical results with modern machine learning frameworks. Through comprehensive experiments in benchmark domains, we demonstrate significant gains in our information measure than state-of-the-art baselines.",
+    "keywords": [
+      "Mutual information",
+      "Information Theory"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JMuKfZx2xU"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a new dependence measure based on the sliced mutual information with both the theoretical analysis and the modern machine learning experiments. This measure is not strictly the mutual information but still could capture the correlation between two distributions. \nThe experiments are done in several different domains in eluding image classification, reinforcement learning. Their main idea is to replace the original uniformly sampled slices to the one whose directions could be diversified over the whole sphere as well as mainly concentrates on the interested area.",
+    "strengths": "The article is well written, starting from an easy understanding toy example, followed by the motivation and explanation. The authors also clarify several important concepts that the reviewer will raise during the reading. The theoretical analysis is detailed and clearly written. \n- The observation of the the uniform distribution in sliced mutual information is insightful\n- Extensive experiments are done in different domains",
+    "weaknesses": "Have two minor concern and hope to hear from the authors,\n- In the theoretical part, the authors prove the existence of the optimal solution using the optimal transport's view. However, during the neural estimation, the problem is simplified to gradient descend with Lagrange constraints. The hyper parameters listed in equation (6) are not clearly described. \n - The efficiency is not as good as the previous methods (ten times comparing with SI. Which factors cause the computation speed to be slow?",
+    "questions": "- Could you please explain what is the definition of AUC that shown in this paper. Does the evaluation treat as a binary classification of dependence and independence? Since this metrics are used in at least two experiments, could you please put more words on this part? \n- Many different mutual information estimator are mentioned in the paper, including the discriminator-based form and variational representation learning. There are also many other mutual information estimator, why did the author choice MINE[1]? \n- What neural estimator do you use in Table 1 DIM(MI)? \n- How do you choose $\\lambda_1$, $\\lambda_2$, is there any ablation study on this part? \n\n\n\n[1] Mutual Information Neural Estimation, 2021"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1638,
+    "words": 256,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/81fce872-a189-40e3-a3fa-a1d81e014825",
+    "error": null,
+    "scored_chars": 1645
+  }
+}

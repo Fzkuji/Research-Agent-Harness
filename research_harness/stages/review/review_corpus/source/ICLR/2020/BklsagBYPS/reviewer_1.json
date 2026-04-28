@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "BklsagBYPS",
+  "reviewer": "1",
+  "paper": {
+    "title": "A GOODNESS OF FIT MEASURE FOR GENERATIVE NETWORKS",
+    "authors": [
+      "Lorenzo Luzi",
+      "Randall Balestriero",
+      "Richard Baraniuk"
+    ],
+    "abstract": "We define a goodness of fit measure for generative networks which captures how well the network can generate the training data, which is necessary to learn the true data distribution.\nWe demonstrate how our measure can be leveraged to understand mode collapse in generative adversarial networks and provide practitioners with a novel way to perform model comparison and early stopping without having to access another trained model as with Frechet Inception Distance or Inception Score. This measure shows that several successful, popular generative models, such as DCGAN and WGAN, fall very short of learning the data distribution. We identify this issue in generative models and empirically show that overparameterization via subsampling data and using a mixture of models improves performance in terms of goodness of fit.",
+    "keywords": [
+      "generative adversarial networks",
+      "goodness of fit",
+      "inception score",
+      "empirical approximation error",
+      "validation metric",
+      "frechet inception score"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=BklsagBYPS"
+  },
+  "review_fields": {
+    "comment": "Thanks for the detailed response. \n\nI think it is debatable to claim \"generative models should have F = 0\", especially when the generative models have covered the high-density areas. \n\nOn the other hand, it is crucial to distinguish models which only memorize the training data but generate randomly beyond that and models which cover the data manifold well and generate reasonably. The proposed metric seems to favor the first than the latter, which is counter-intuitive. Therefore, metrics that cover both precision and recall would be more sensible in evaluation."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

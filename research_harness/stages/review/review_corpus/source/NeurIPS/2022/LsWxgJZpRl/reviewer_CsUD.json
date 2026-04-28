@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "LsWxgJZpRl",
+  "reviewer": "CsUD",
+  "paper": {
+    "title": "Near-optimal Distributional Reinforcement Learning towards Risk-sensitive Control",
+    "authors": [
+      "Hao Liang",
+      "Zhi-Quan Luo"
+    ],
+    "abstract": "We consider finite episodic Markov decision processes aiming at the entropic risk measure (ERM) of return for risk-sensitive control. We identify two properties of the ERM that enable risk-sensitive distributional dynamic programming. We propose two novel distributional reinforcement learning (DRL) algorithms, including a model-free one and a model-based one, that implement optimism through two different schemes. We prove that both of them attain $\\tilde{\\mathcal{O}}(\\frac{\\exp(|\\beta| H)-1}{|\\beta|H}H\\sqrt{HS^2AT})$ regret upper bound, where $S$ is the number of states, $A$ the number of states, $H$ the time horizon and $T$  the number of total time steps. It matches  RSVI2 proposed in \\cite{fei2021exponential} with a much simpler regret analysis. To the best of our knowledge, this is the first regret analysis of DRL,  which theoretically verifies the efficacy of  DRL for risk-sensitive control. Finally, we improve the existing lower bound by proving a tighter  bound of $\\Omega(\\frac{\\exp(\\beta H/6)-1}{\\beta H}H\\sqrt{SAT})$ for $\\beta>0$ case, which recovers the tight lower bound $\\Omega(H\\sqrt{SAT})$ in the risk-neutral setting.",
+    "keywords": [
+      "distributional reinforcement learning",
+      "risk-sensitive",
+      "sample complexity"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=LsWxgJZpRl"
+  },
+  "review_fields": {
+    "summary": "The paper deals with a risk-sensitive reinforcement learning problem where the risk functional is the entropic risk. The authors provide both the regret upper bounds for a proposed model-based algorithm and a model-free algorithm and a tighter regret lower bound compared to prior works.",
+    "strengths_and_weaknesses": "Strength: The ideas in the paper are clearly explained. A tighter lower bound is presented in the paper. \n\nWeakness: Given that prior works, e.g., [22, 23], have also used optimism to solve the exact same problem and achieve similar regret guarantees, it is unclear how much novelty/significance the newly proposed algorithms are.",
+    "questions": "- The authors suggest that the lower bound proof in [22] has a mistake. Can the authors elaborate more on this?\n- Can the authors compare their proposed algorithms with that proposed in [22] in a more detailed way to explain how optimism may have been used differently in this paper and what that implies?\n\n\n----\n\nStylistic suggestions:\n\n- Using ERM to refer to entropic risk measure may be confusing since ERM is known to be Empirical Risk Minimization in standard ML literature.\n- \\citep should be used for the first two citations in L101.\n- In L168, (s,a)s may be confusing to the reader."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

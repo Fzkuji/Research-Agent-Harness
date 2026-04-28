@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "B1CQGfZ0b",
+  "reviewer": "1",
+  "paper": {
+    "title": "Learning to select examples for program synthesis",
+    "authors": [
+      "Yewen Pu",
+      "Zachery Miranda",
+      "Armando Solar-Lezama",
+      "Leslie Pack Kaelbling"
+    ],
+    "abstract": "Program synthesis is a class of regression problems where one seeks a solution, in the form of a source-code program, that maps the inputs to their corresponding outputs exactly. Due to its precise and combinatorial nature, it is commonly formulated as a constraint satisfaction problem, where input-output examples are expressed constraints, and solved with a constraint solver. A key challenge of this formulation is that of scalability: While constraint solvers work well with few well-chosen examples, constraining the entire set of example constitutes a significant overhead in both time and memory. In this paper we address this challenge by constructing a representative subset of examples that is both small and is able to constrain the solver sufficiently. We build the subset one example at a time, using a trained discriminator to predict the probability of unchosen input-output examples conditioned on the chosen input-output examples, adding the least probable example to the subset. Experiment on a diagram drawing domain shows our approach produces subset of examples that are small and representative for the constraint solver.",
+    "keywords": [
+      "program synthesis",
+      "program induction",
+      "example selection"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=B1CQGfZ0b"
+  },
+  "review_fields": {
+    "review": "This paper presents a method for choosing a subset of examples on which to run a constraint solver\nin order to solve program synthesis problems. This problem is basically active learning for\nprogramming by example, but the considerations are slightly different than in standard active\nlearning. The assumption here is that labels (aka outputs) are easily available for all possible\ninputs, but we don't want to give a constraint solver all the input-output examples, because it will\nslow down the solver's execution.\n\nThe main baseline technique CEGIS (counterexample-guided inductive synthesis) addresses this problem\nby starting with a small set of examples, solving a constraint problem to get a hypothesis program,\nthen looking for \"counterexamples\" where the hypothesis program is incorrect.\n\nThis paper instead proposes to learn a surrogate function for choosing which examples to select. The\npaper isn't presented in exactly these terms, but the idea is to consider a uniform distribution\nover programs and a zero-one likelihood for input-output examples (so observations of I/O examples\njust eliminate inconsistent programs). We can then compute a posterior distribution over programs\nand form a predictive distribution over the output for all the remaining possible inputs. The paper\nsuggests always adding the I/O example that is least likely under this predictive distribution\n(i.e., the one that is most \"surprising\").\n\nForming the predictive distribution explicitly is intractable, so the paper suggests training a\nneural net to map from a subset of inputs to the predictive distribution over outputs.  Results show\nthat the approach is a bit faster than CEGIS in a synthetic drawing domain.\n\nThe paper starts off strong. There is a start at an interesting idea here, and I appreciate the\nthorough treatment of the background, including CEGIS and submodularity as a motivation for doing\ngreedy active learning, although I'd also appreciate a discussion of relationships between this approach \nand what is done in the active learning literature.Once getting into the details of the proposed approach, \nthe quality takes a downturn, unfortunately. \n\nMain issues:\n- It's not generally scalable to build a neural network whose size scales with the number\nof possible inputs. I can't see how this approach would be tractable in more standard program\nsynthesis domains where inputs might be lists of arrays or strings, for example.  It seems that this\napproach only works due to the peculiarities of the formulation of the only task that is considered,\nin which the program maps a pixel location in 32x32 images to a binary value.\n\n- It's odd to write \"we do not suggest a specific neural network architecture for the\nmiddle layers, one should seelect whichever architecture that is appropriate for the domain at\nhand.\" Not only is it impossible to reproduce a paper without any architectural details, but the\nresult is then that Fig 3 essentially says inputs -> \"magic\" -> outputs. Given that I don't even\nthink the representation of inputs and outputs is practical in general, I don't see what the \ncontribution is here.\n\n- This paper is poor in the reproducibility category. The architecture is never described,\nit is light on details of the training objective, it's not entirely clear what the DSL used in the\nexperiments is (is Figure 1 the DSL used in experiments), and it's not totally clear how the random\nimages were generated (I assume values for the holes in Figure 1 were sampled from some\ndistribution, and then the program was executed to generate the data?).\n\n- Experiments are only presented in one domain, and it has some peculiarities relative to \nmore standard program synthesis tasks (e.g., it's tractable to enumerate all possible inputs).  It'd\nbe stronger if the approach could also be demonstrated in another domain.\n\n- Technical point: it's not clear to me that the training procedure as described is consistent\nwith the desired objective in sec 3.3. Question for the authors: in the limit of infinite training\ndata and model capacity, will the neural network training lead to a model that will reproduce the\nprobabilities in 3.3?\n\nTypos:\n- The paper needs a cleanup pass for grammar, typos, and remnants like \"Figure blah shows our \nneural network architecture\" on page 5.\n\nOverall: There's the start of an interesting idea here, but I don't think the quality is high enough\nto warrant publication at this time."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

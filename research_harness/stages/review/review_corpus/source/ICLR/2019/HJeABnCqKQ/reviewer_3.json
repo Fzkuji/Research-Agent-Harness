@@ -1,0 +1,36 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "HJeABnCqKQ",
+  "reviewer": "3",
+  "paper": {
+    "title": "Generative Adversarial Self-Imitation Learning",
+    "authors": [
+      "Junhyuk Oh",
+      "Yijie Guo",
+      "Satinder Singh",
+      "Honglak Lee"
+    ],
+    "abstract": "This paper explores a simple regularizer for reinforcement learning by proposing Generative Adversarial Self-Imitation Learning (GASIL), which encourages the agent to imitate past good trajectories via generative adversarial imitation learning framework. Instead of directly maximizing rewards, GASIL focuses on reproducing past good trajectories, which can potentially make long-term credit assignment easier when rewards are sparse and delayed. GASIL can be easily combined with any policy gradient objective by using GASIL as a learned reward shaping function. Our experimental results show that GASIL improves the performance of proximal policy optimization on 2D Point Mass and MuJoCo environments with delayed reward and stochastic dynamics.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=HJeABnCqKQ"
+  },
+  "review_fields": {
+    "comment": "The results provided on the ATARI games are not apples-to-apples with SIL[Oh et.al.], the baseline uses A2C and this paper uses PPO. Moreover, even in these comparisons, SIL[Oh et.al.] performs better on 4/6 games.\n\nUpon reviewing the author's responses and the update paper, I decided to keep my score the same. The paper may have good potential, but sufficient empirical evidence is needed to justify the proposed technique."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

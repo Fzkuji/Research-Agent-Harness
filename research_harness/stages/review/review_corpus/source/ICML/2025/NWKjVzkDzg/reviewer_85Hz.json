@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "NWKjVzkDzg",
+  "reviewer": "85Hz",
+  "paper": {
+    "title": "Scalable Meta-Learning via Mixed-Mode Differentiation",
+    "authors": [
+      "Iurii Kemaev",
+      "Dan A. Calian",
+      "Luisa M Zintgraf",
+      "Gregory Farquhar",
+      "Hado van Hasselt"
+    ],
+    "abstract": "Gradient-based bilevel optimisation is a powerful technique with applications in hyperparameter optimisation, task adaptation, algorithm discovery, meta-learning more broadly, and beyond. It often requires differentiating through the gradient-based optimisation process itself, leading to \"gradient-of-a-gradient\" calculations with computationally expensive second-order and mixed derivatives. While modern automatic differentiation libraries provide a convenient way to write programs for calculating these derivatives, they oftentimes cannot fully exploit the specific structure of these problems out-of-the-box, leading to suboptimal performance. In this paper, we analyse such cases and propose Mixed-Flow Meta-Gradients, or MixFlow-MG -- a practical algorithm that uses mixed-mode differentiation to construct more efficient and scalable computational graphs yielding over 10x memory and up to 25\\% wall-clock time improvements over standard implementations in modern meta-learning setups.",
+    "keywords": [
+      "meta-learning",
+      "bilevel optimization",
+      "second-order optimization",
+      "automatic differentiation",
+      "autodiff",
+      "mixed-mode differentiation",
+      "gradient-based methods",
+      "scalable algorithms"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NWKjVzkDzg"
+  },
+  "review_fields": {
+    "summary": "The paper introduces MixFlow-MG, an algorithm that uses mixed-mode differentiation for more efficient gradient-based bilevel optimization. It reduces memory consumption and computation time compared to standard methods.",
+    "methods_and_evaluation_criteria": "Yes, the proposed methods and evaluation criteria are appropriate for addressing the problem of high computational costs in gradient-based bilevel optimization.",
+    "experimental_designs_or_analyses": "The authors validated their approach through:\n\nInefficiency analysis of standard Truncated-BPTT implementations.\nReparameterization to expose problem symmetry.\nDemonstration of performance gains with mixed-mode differentiation.\nAnalysis of device memory footprint.\nEvaluation of optimizations (block rematerialization, saving inner gradients).\nScaling analysis of dynamic memory requirements.",
+    "relation_to_broader_scientific_literature": "The paper proposes an efficient gradient computation for BLO.",
+    "other_strengths_and_weaknesses": "Strengths\n\nThe paper provides a clear explanation of the problem and the proposed solution, and employs illustrative examples and visualizations to aid understanding.\n\nThe paper includes extensive experiments on the efficiency of the proposed method.\n\nWeaknesses\n\nWhile the experiments demonstrate the practical benefits of the proposed algorithm, the paper could be strengthened by including more experimental performance of the proposed method solving specific problems.",
+    "other_comments_or_suggestions": "It is interesting that the proposed method enables the application of BLO to LLM. However, the paper does not show the concrete problem formulation that can be solved by the proposed method. The paper can be strengthened by including the experiment result on the application of BLO on LLM.",
+    "questions_for_authors": "In application of MAML, how many inner-level steps are applied? If it is one, what is the benefit of the proposed approach?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

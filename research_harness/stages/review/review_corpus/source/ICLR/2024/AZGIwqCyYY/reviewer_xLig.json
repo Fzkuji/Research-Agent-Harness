@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "AZGIwqCyYY",
+  "reviewer": "xLig",
+  "paper": {
+    "title": "Towards Cross Domain Generalization of Hamiltonian Representation via Meta Learning",
+    "authors": [
+      "Yeongwoo Song",
+      "Hawoong Jeong"
+    ],
+    "abstract": "Recent advances in deep learning for physics have focused on discovering shared representations of target systems by incorporating physics priors or inductive biases into neural networks. While effective, these methods are limited to the system domain, where the type of system remains consistent and thus cannot ensure the adaptation to new, or unseen physical systems governed by different laws. For instance, a neural network trained on a mass-spring system cannot guarantee accurate predictions for the behavior of a two-body system or any other system with different physical laws.\nIn this work, we take a significant leap forward by targeting cross domain generalization within the field of Hamiltonian dynamics. \nWe model our system with a graph neural network (GNN) and employ a meta learning algorithm to enable the model to gain experience over a distribution of systems and make it adapt to new physics. Our approach aims to learn a unified Hamiltonian representation that is generalizable across multiple system domains, thereby overcoming the limitations of system-specific models. \nWe demonstrate that the meta-trained model captures the generalized Hamiltonian representation that is consistent across different physical domains.\nOverall, through the use of meta learning, we offer a framework that achieves cross domain generalization, providing a step towards a unified model for understanding a wide array of dynamical systems via deep learning.",
+    "keywords": [
+      "hamiltonian dynamics",
+      "cross domain generalization",
+      "learning physics",
+      "meta learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=AZGIwqCyYY"
+  },
+  "review_fields": {
+    "summary": "This paper proposed a novel meta-learning method aiming to learn a unified Hamiltonian representation such that it can be generalized to unseen physical systems. Hamiltonian Neural Networks were utilized as the backbone of the method for learning the unified Hamiltonian representations of different physical systems, via meta-learning pipelines of a variation of MAML. Experiments demonstrated the proposed methods achieved lower relative error of trajectories and energy when adapted to different systems.",
+    "strengths": "(1) Unlike many existing works that focus on learning system dynamics under similar physical law, the proposed methods aim to learn the unified representations across diverse system domains via meta-learning the Hamiltonian of the given system. This sounds significant and promising.\n\n(2) Both quantitative and qualitative results demonstrated the proposed method achieved better adaptation to various new systems compared with baselines.",
+    "weaknesses": "The evaluation can be strengthened by considering comparing the proposed methods with other Few-shot Learning and Physics-informed Neural Networks methods for system domain generalization under both \"consistent\" and \"different\" physical laws.",
+    "questions": "In Figure 4, why does a lower CKA value of the meta-trained model suggest it learned more similar representations during adaptation? As the authors mentioned, should a low CKA value indicate different representations?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 901,
+    "words": 125,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/05cbc36f-1b84-4ba5-93c4-e9825de0dea9",
+    "error": null,
+    "scored_chars": 901
+  }
+}

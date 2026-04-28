@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "e2M4CNa-UOS",
+  "reviewer": "51Ua",
+  "paper": {
+    "title": "Efficient Sequence Packing without Cross-contamination: Accelerating Large Language Models without Impacting Performance",
+    "authors": [
+      "Mario Michael Krell",
+      "Matej Kosec",
+      "Sergio P. Perez",
+      "Mrinal Iyer",
+      "Andrew W Fitzgibbon"
+    ],
+    "abstract": "Effective training of today's large language models (LLMs) depends on large batches and long sequences for throughput and accuracy. To handle variable-length sequences on hardware accelerators, it is common practice to introduce padding tokens, so that all sequences in a batch have the same length. We show in this paper that the variation in sequence lengths in common NLP datasets is such that up to 50% of all tokens can be padding. In less common, but not extreme, cases (e.g. GLUE-COLA with sequence length 128), the ratio is up to 89%. Existing methods to address the resulting inefficiency are complicated by the need to avoid \"cross-contamination\" in self-attention, by a reduction in accuracy when sequence ordering information is lost, or by customized kernel implementations only valid for specific accelerators.\n\nThis paper introduces a new formalization of sequence packing in the context of the well-studied bin packing problem, and presents new algorithms based on this formulation which, for example, confer a 2x speedup for phase 2 pretraining in BERT while preserving downstream performance. We show how existing models can be adapted to ensure mathematical equivalence between the original and packed models, meaning that packed models can be trained with existing pre-training and fine-tuning practices.",
+    "keywords": [
+      "deep learning",
+      "BERT",
+      "IPU",
+      "GPU",
+      "hardware-acceleration",
+      "padding",
+      "Wikipedia",
+      "NLP",
+      "bin-packing"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=e2M4CNa-UOS"
+  },
+  "review_fields": {
+    "summary": "The paper proposes speeding large-scale pre-training by constructing the data pipeline with the explicit goal of minimizing the need for padding tokens, which only lead to wasted computation. The approach is to consider the dataset as a whole and apply bin-packing algorithms to merge several short examples into one longer example, which is done up-front as part of preprocessing. Two bin packing strategies (SPFHP and NNLSHP) are proposed and evaluated. Pre-training may be sped up by up to 2x compared to a naive approach.",
+    "strengths_and_weaknesses": "The main strengths include, of course, the ability to achieve sizable speed-ups in practice. Moreover, the idea of having a whole-dataset preprocessing step aimed at optimizing it for accelerator use is a very general one. Bringing this to the attention of the community, and suggesting how to think about this in terms of concepts/terminology/abstractions, could lead to less computationally wasteful practices across the board in the field. It's especially helpful to see a quantitative analysis that reveals that padding is a big source of inefficiency in pre-training, where one might naively assume that it's not an issue because the underlying Wikipedia articles are actually quite long.\n\nIn terms of weaknesses, my immediate impression reading the paper for the first time is that many aspects of the idea of packing examples together are not, in fact, novel. The paper acknowledges that frameworks already concatenate short examples as a way to speed up training, and that this practice is commonly referred to as \"packing\". The claim in Sec 3.2.2 that the paper \"propose[s] directly masking the attention matrix\" is not novel either. (As prior art, see [tensor2tensor](https://github.com/tensorflow/tensor2tensor/commit/c9144dfa5f514cab529f487b069415daee5e211e#diff-3c271923bb62bdd35f3b0f6a2c94ea320825d834bbf51334a9acbc04fbea9763R538) for code essentially the same as Figure 2). Likewise for positional embedding and loss adjustment.\n\nIt seems that the actual novelty of the paper is in highlighting packing efficiency as a key criterion in designing a data pipeline, proposing to optimize this criterion at a whole-dataset level (instead of ad-hoc or streaming-based approaches), as well as showing that this can be done in a way that is scalable to large-scale datasets. At least for me, the writing of the paper did not succeed in delineating the scope of the contribution from what has been done in prior work. Additionally, the term \"packing\" has acquired a certain meaning in the context of modern transformer training, and I would recommend that the authors adopt distinct terminology to differentiate their approach. [Edit: to clarify, I am not referring to the use of the term \"packing\" in the title (which is fine), but usages like \"packed\" in Table 3 or even \"packed (our approach)\" in Figure 5. For example, looking at Table 3 / Figure 5 in isolation would be confusing to readers that have a different prior conception of what the term \"packing\" refers to].\n\nI also would have found it helpful if the paper had made explicit its assumption that packing takes place during an up-front pre-processing stage where the whole dataset is available for random access, and not in an on-line streaming manner. Approaches like padding and greedy concatenation would all work when streaming the data from storage one example at a time, while the proposed method does not. Even if engineering practice in the narrow area of pre-training does data processing up-front, the corresponding academic literature often doesn't necessarily go into this and sometimes presents a picture that leaves open an interpretation where padding/packing/batching or even tokenization are done via streaming processing.\n\nIn summary, the main weakness of the paper is how it frames the discussion for an academic audience, including how it contrasts its contributions from the literature as a whole."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

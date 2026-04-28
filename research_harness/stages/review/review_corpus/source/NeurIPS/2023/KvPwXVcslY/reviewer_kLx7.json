@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "KvPwXVcslY",
+  "reviewer": "kLx7",
+  "paper": {
+    "title": "Spatial-frequency channels, shape bias, and adversarial robustness",
+    "authors": [
+      "Ajay Subramanian",
+      "Elena Sizikova",
+      "Najib J. Majaj",
+      "Denis G. Pelli"
+    ],
+    "abstract": "What spatial frequency information do humans and neural networks use to recognize objects? In neuroscience, critical band masking is an established tool that can reveal the frequency-selective filters used for object recognition. Critical band masking measures the sensitivity of recognition performance to noise added at each spatial frequency. Existing critical band masking studies show that humans recognize periodic patterns (gratings) and letters by means of a spatial-frequency filter (or \"channel\") that has a frequency bandwidth of one octave (doubling of frequency). Here, we introduce critical band masking as a task for network-human comparison and test 14 humans and 76 neural networks on 16-way ImageNet categorization in the presence of narrowband noise. We find that humans recognize objects in natural images using the same one-octave-wide channel that they use for letters and gratings, making it a canonical feature of human object recognition. Unlike humans, the neural network channel is very broad, 2-4 times wider than the human channel. This means that the network channel extends to frequencies higher and lower than those that humans are sensitive to. Thus, noise at those frequencies will impair network performance and spare human performance. Adversarial and augmented-image training are commonly used to increase network robustness and shape bias. Does this training align network and human object recognition channels? Three network channel properties (bandwidth, center frequency, peak noise sensitivity) correlate strongly with shape bias (51% variance explained) and robustness of adversarially-trained networks (66% variance explained). Adversarial training increases robustness but expands the channel bandwidth even further beyond the human bandwidth. Thus, critical band masking reveals that the network channel is more than twice as wide as the human channel, and that adversarial training only makes it worse. Networks with narrower channels might be more robust.",
+    "keywords": [
+      "object recognition",
+      "critical band masking",
+      "spatial-frequency channels",
+      "shape bias",
+      "adversarial robustness"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=KvPwXVcslY"
+  },
+  "review_fields": {
+    "summary": "I have read the authors' rebuttal and will maintain my already very high rating.\n\nThis paper discovers a new fact (which should be replicated by others) about human vision: That we use the same frequency band for objects as we do for words and gratings. It seems remarkable that this has not been tested before, but a cursory google search didn’t turn up any previous result like this. Second, the paper shows that 76 deep network vision systems use a much wider band of frequencies than humans. Finally, the paper shows that aspects of these frequencies predict both shape bias and robustness against adversarial examples.",
+    "strengths": "-This is one of those papers that one wishes one had written. The result about the human bandwidth is *Nature*-worthy! \n\n-The sequence of experiments: First human psychophysics, then network “psychophysics”, then showing that these measurements of noise-sensitivity (mean, std dev., and peak noise sensitivity) account for fairly large amounts of variance in the networks’ adversarial robustness and shape-sensitivity are both logical and surprisingly revealing. \n\n-The fact that these measurements account for 53% of the variance in shape-bias is remarkable, given that these are relatively low-level, and don’t have any necessary relationship to shape.",
+    "weaknesses": "Just a few comments here:\nInclude the heat map key in the supplementary material (figure 2).\nYou should run some more experiments with adversarially-trained networks (see below).",
+    "questions": "The x axis for peak noise sensitivity in Figure 6 seems incorrect, based on the definition in Figure 2F, For example, for humans, it looks to be 1/(0.03), or about 33. It’s only after checking the supplementary material that this is made clear. It’s actually 1/(0.02*2^A), where A is the fitted parameter. This should be made clearer in the main text.\n\nDid you use MTurk’s ratings of workers? It seems like subjects 9 and 13 were only marginally engaged in the task. I would have thrown them out. \n\nI think you should reverse Figures 1 and 2. Also (if possible) 5 & 6. In both cases, you refer to the later one before the other.",
+    "limitations": "Despite using 76 different networks, they only use ResNet50 for the adversarially-trained networks. It would be good to add a couple of other networks of different types (e.g., ViT, etc.) to see that this still holds. This could be added to the supplementary material."
+  },
+  "review_metadata": {
+    "rating": 10,
+    "confidence": 5,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:12Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:12Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 832,
+    "words": 120,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e5a98d68-fa51-4297-b7d8-f00a4ebf8f7a",
+    "error": null,
+    "scored_chars": 834
+  }
+}

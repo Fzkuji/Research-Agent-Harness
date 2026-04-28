@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "XOAjcE5GerI",
+  "reviewer": "dmUb",
+  "paper": {
+    "title": "On learning sparse vectors from mixture of responses",
+    "authors": [
+      "Nikita Polyanskii"
+    ],
+    "abstract": "In this paper, we address two learning problems. Suppose a family of $\\ell$ unknown sparse vectors is fixed, where each vector has at most $k$ non-zero elements. In the first problem, we concentrate on robust learning the supports of all vectors from the family using a sequence of noisy responses. Each response to a query vector shows the sign of the inner product between a randomly chosen vector from the family and the query vector. In the second problem, we aim at designing queries such that all sparse vectors from the family can be approximately reconstructed based on the error-free responses.  This learning model was introduced in the work of Gandikota et al., 2020, and these problems can be seen as generalizations of support recovery and approximate recovery problems, well-studied under the framework of  1-bit compressed sensing.  As the main contribution of the paper, we prove the existence of learning algorithms for the first problem which work without any assumptions. Under a mild structural assumption on the unknown vectors, we also show the existence of learning algorithms for the second problem and rigorously analyze their query complexity.",
+    "keywords": [
+      "sparse vectors",
+      "mixture of binary linear classifiers",
+      "1-bit compessed sensing",
+      "query complexity",
+      "noisy measurements"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=XOAjcE5GerI"
+  },
+  "review_fields": {
+    "summary": "The paper studies the problem of learning a family of $l$ unknown $k$-sparse vectors. For any query point, we are given the sign of the inner product between a vector from the family (chosen uniformly at random) and the query point. In this setting they consider two problems. In the first problem, they propose a procedure along with guarantees (see Theorem 1) for estimating the supports of each vector in the family where the query responses can be noisy (the signs can be flipped). For the second problem, they consider estimating each vector in the family albeit in a noiseless setting. For this problem, they propose a two-stage algorithm for approximately recovering the vectors in the family, with performance guarantees (in Theorem 2). The performance guarantee for a single-stage algorithm has also been provided in Theorem 3.",
+    "main_review": "The problem considered can be viewed as a generalization of 1-bit CS. One issue that I have is the main motivation for studying this generalization. While it is interesting from a theoretical standpoint, I am not entirely sure whether there are concrete existing practical applications where this setup can be applied currently. Regarding the results, an important point is that the algorithms are not polynomial time; in fact, the running time appears to be exponential in the number of queries which is not satisfactory. The presentation of the results is clear for the first half of the paper, and in general the main ideas underlying the proofs are not difficult to follow. However, there are important aspects in this regard that need polishing. For e.g., none of the algorithms are outlined explicitly anywhere which is strange and inconvenient for the reader. Moreover, the single stage recovery algorithm (for Theorem 3) is never described, nor is a proof sketch provided for this result in the main text. Some additional remarks related to typos/clarifications are detailed below. At present, I am not convinced that the results in this paper are strong enough for acceptance.\n\n1.\tLine 104: $d_H$ should be defined. In lines 113-114: it should be $\\tau \\in [0,1]$? Also in  “..reconstruct the length.. “ its not clear what you mean by length, it should just be magnitude? In fact, even if we fix the scale to say unit norm, we still cannot recover the vector exactly so this could be mentioned for clarity. In Problem 1, the norm needs to be clarified.\n\n2.\tTypos in Theorems 2,3 : “..to recovery..” --> “..to recover…”. The algorithms corresponding to all theorems should be outlined explicitly in the main text. There should be a proof sketch for Theorem 3 as well in the main text. Its also not clear to me what the benefit of Theorem 3 is (other than being single-stage) since the sample complexity seems to be strictly worse than the two stage method in Theorem 2?\n\n3.\tLine 167: it should be “Proof of Lemma 1” to avoid confusion. In Lemma 2: it should be clarified somewhere for completeness how the reconstruction of $\\tilde{z}$ will be done, and also the running time of this step. In general, the running times are not discussed properly anywhere (for the proposed algorithms and corresponding sub-routines) in the main text and it will be helpful to do so.\n\n4.\tIn line 195: $m(n,l,k,\\alpha)$ is introduced, but it is referred to as $m$ from thereon.\n\n5.\tThe construction of robust resolvable matrices (def. 1) is the key to the algorithm for support recovery, and it is shown that they are related to robust cover free matrices (Def. 2). But how do we construct such matrices? Lemmas 6, 7 are only existential results. In line 250, it says that $H_{\\mathcal{B}}$ can be uniquely reconstructed, but how? Also, the notation $[I]$ in definition 2 is unclear.\n\n6.\tMy comments in Section 5 are mostly notational. In Lemma 8, the vectors are considered to be in $\\mathbb{R}^k$ and not $\\mathbb{R}^n$ as before. In Lemma 9, it should be: “…it holds that for any given $i \\in [l]$,..”. In line 273: are the Gaussian vectors in $\\mathbb{R}^{kl}$ or $\\mathbb{R}^k$? In fact, once you recover the supports of the vectors, shouldn’t the subsequent queries comprise of vectors with support restricted to the union of individual supports of the vectors? Then I am not sure why $n$ should appear for the second stage analysis since the dimensionality reduction has already been done in the first stage. Finally, in line 276: it’s technically not a set since the values therein are not distinct.\n\n------------------------ Post author response ---------------\n\nI thank the authors for their response to some of my concerns. However, I am not convinced about the motivation for studying this particular problem and the significance of the results in the paper. I also feel that a lot of work is needed towards polishing the presentation of the paper. Therefore, I will stick with my original score of 4.",
+    "limitations_and_societal_impact": "The limitations could be addressed more clearly in my opinion, especially with regards to the computational complexity of the algorithms."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

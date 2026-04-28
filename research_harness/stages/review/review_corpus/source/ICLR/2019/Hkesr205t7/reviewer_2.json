@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "Hkesr205t7",
+  "reviewer": "2",
+  "paper": {
+    "title": "Learning shared manifold representation of images and attributes for generalized zero-shot learning",
+    "authors": [
+      "Masahiro Suzuki",
+      "Yusuke Iwasawa",
+      "Yutaka Matsuo"
+    ],
+    "abstract": "Many of the zero-shot learning methods have realized predicting labels of unseen images by learning the relations between images and pre-defined class-attributes. However, recent studies show that, under the more realistic generalized zero-shot learning (GZSL) scenarios, these approaches severely suffer from the issue of biased prediction, i.e., their classifier tends to predict all the examples from both seen and unseen classes as one of the seen classes.  The cause of this problem is that they cannot properly learn a mapping to the representation space generalized to the unseen classes since the training set does not include any unseen class information. To solve this, we propose a concept to learn a mapping that embeds both images and attributes to the shared representation space that can be generalized even for unseen classes by interpolating from the information of seen classes, which we refer to shared manifold learning.  Furthermore, we propose modality invariant variational autoencoders, which can perform shared manifold learning by training variational autoencoders with both images and attributes as inputs. The empirical validation of well-known datasets in GZSL shows that our method achieves the significantly superior performances to the existing relation-based studies.",
+    "keywords": [
+      "zero-shot learning",
+      "variational autoencoders"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Hkesr205t7"
+  },
+  "review_fields": {
+    "review": "This paper proposes a multimodal VAE model for the problem of generalized zero shot learning (GZSL). In GZSL, the test classes can contain examples from both seen as well as unseen classes, and due to the bias of the model towards the seen classes, the standard GZSL approaches tend to predict the majority of the inputs to belong to seen classes. The paper proposes a multimodal VAE model to mitigate this issue where a shared manifold learning learn for the inputs and the class attribute vectors.\n\nThe problem of GZSL is indeed important. However, the idea of using multimodal VAE for ZSL isn't new or surprising and has been used in earlier papers too. In fact, multimodal VAEs are natural to apply for such problems. The proposed multimodal VAE model is very similar to the existing ones, such as Vedantam et al (2017), who proposed a broad framework with various types of regularizers in the multimodal VAE framework. Therefore, the methodological novelty of the work is somewhat limited.\n\nThe other key issue is that the experimental results are quite underwhelming. The paper doesn't compare with several recent ZSL and GZSL approaches, some of which have reported accuracies that look much better than the accuracies achieved by the proposed method. The paper does cite some of these papers (such as those based on synthesized examples) but doesn't provide any comparison. Given that the technical novelty is somewhat limited, the paper falls short significantly on the experimental analysis."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "cNqMAmpZh4",
+  "reviewer": "3XHw",
+  "paper": {
+    "title": "From Euler to AI: Unifying Formulas for Mathematical Constants",
+    "authors": [
+      "Tomer Raz",
+      "Michael Shalyt",
+      "Elyasheev Leibtag",
+      "Rotem Kalisch",
+      "Shachar Weinbaum",
+      "Yaron Hadad",
+      "Ido Kaminer"
+    ],
+    "abstract": "The constant $\\large \\pi$ has fascinated scholars throughout the centuries, inspiring numerous formulas for its evaluation, such as infinite sums and continued fractions. Despite their individual significance, many of the underlying connections among formulas remain unknown, missing unifying theories that could unveil deeper understanding. The absence of a unifying theory reflects a broader challenge across math and science: knowledge is typically accumulated through isolated discoveries, while deeper connections often remain hidden. In this work, we present an automated framework for the unification of mathematical formulas. Our system combines large language models (LLMs) for systematic formula harvesting, an LLM-code feedback loop for validation, and a novel symbolic algorithm for clustering and eventual unification. We demonstrate this methodology on the hallmark case of $\\large \\pi$, an ideal testing ground for symbolic unification. Applying this approach to 455,050 arXiv papers, we validate 385 distinct formulas for $\\large \\pi$ and prove relations between 360 (94\\%) of them, of which 166 (43\\%) can be derived from a single mathematical object—linking canonical formulas by Euler, Gauss, Brouncker, and newer ones from algorithmic discoveries by the Ramanujan Machine.\n  Our method generalizes to other constants, including $e$, $\\zeta(3)$, and Catalan’s constant, demonstrating the potential of AI-assisted mathematics to uncover hidden structures and unify knowledge across domains.",
+    "keywords": [
+      "AI for Science",
+      "AI for Math",
+      "LLM-Tool Integration",
+      "Mathematical Constants",
+      "Continued Fractions",
+      "Recurrences",
+      "Number Theory",
+      "Pi"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=cNqMAmpZh4"
+  },
+  "review_fields": {
+    "summary": "This work searches a large mathematical literature (drawn from arXiv) and extracts convergent sequence representations of standard mathematical constants such as $\\pi$ and $e$, then uses LLMs to bring them to a standard form.  Then, several mathematical techniques are used to find relations between superficially different sequence representations: computation of invariants (\"dynamical metrics\") such as convergence rate and irrationality measure, clustering, then an algorithm for locating recurrence relations within a more general structure called a \"conservative matrix field\".  The search step uses LLMs and several evaluations and comparisons between LLMs are given.  Many relations between sequence representations are found.  For $\\pi$ the fraction of representations satisfying relations is quantified and many canonical forms listed.",
+    "strengths_and_weaknesses": "Strengths: the paper asks and studies an interesting \"meta-mathematical\" question about the many solutions to a well known problem (convergent sequence representations of standard constants) by automated literature search and canonicalization.  Most automated literature searches are fairly superficial and I know of few if any other works which automate such a mathematically interesting analysis.\n\nWeaknesses: I find the mathematical part of the paper poorly written, explaining the concepts and methods in a very disjointed way.  The relation to previous work other than O. David's or the authors is unclear, and the invention of new terminology for standard mathematical concepts, such as \"conservative matrix field\" for a flat connection, is not reassuring.",
+    "questions": "In section 3 describing the literature extraction, the fraction which lead to validated formulas, while large, seems small enough (maybe 15%) to wonder how representative the final results are of the full range of sequence representations in the literature.  For example, it is stated that there are 3389 computations of $\\pi$, which are categorized by type as series, continued fraction, or neither, resulting in 1678 formula candidates.  How many of these 1678 formula candidates were continued fractions?  What are the other formulas, are they just explicit series with no other apparent structure?  Then in 3.2 which verifies that the sequences represent $\\pi$, it is said that \"Out of the 682 candidates, 407 were validated as $\\pi$ formulas and passed on for canonicalization.\"   Where did these numbers come from?  In 3.3 it says \"Out of the 407 validated formulas, 402 are found to have 146 representations as order-2 recurrences, and 5 as order-3 recurrences.\"   Is this to say that almost all of the validated formulas were in fact continued fractions? \n\nThe biggest question the results raised in my mind was to what extent the authors believe the \"conservative matrix field\" approach unifies all sequence representations or not.  In the final table 10 many conjectures are stated about such relations.  Are there representations of $\\pi$ which the authors believe are *not* instances of the 3d CMF of D.2 ?  I suppose the CMF concept could be generalized to Z^D for higher D, is it possible that any recurrence relation could be accommodated this way, or are there constraints which prevent combining some pairs of recurrences into the same CMF ?  The simplest such constraints might be relations between the \"dynamical metrics,\" is this so and where is it mentioned in the text?",
+    "final_justification": "The method and results of this paper are interesting to mathematicians and the quality of the writing and analysis, while not great, is adequate.  The authors addressed my most pressing concerns.  I feel the other reviewers are just not very interested in this topic and are rejecting it for this reason.  Perhaps it should go to a different conference focused on AI for mathematics."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 2,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

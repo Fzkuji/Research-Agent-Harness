@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "GKZySvM2t9",
+  "reviewer": "zE4M",
+  "paper": {
+    "title": "KGMark: A Diffusion Watermark for Knowledge Graphs",
+    "authors": [
+      "Hongrui Peng",
+      "Haolang Lu",
+      "Yuanlong Yu",
+      "WeiYe Fu",
+      "Kun Wang",
+      "Guoshun Nan"
+    ],
+    "abstract": "Knowledge graphs (KGs) are ubiquitous in numerous real-world applications, and watermarking facilitates protecting intellectual property and preventing potential harm from AI-generated content. Existing watermarking methods mainly focus on static plain text or image data, while they can hardly be applied to dynamic graphs due to spatial and temporal variations of structured data. This motivates us to propose KGMark, the first graph watermarking framework that aims to generate robust, detectable, and transparent diffusion fingerprints for dynamic KG data. Specifically, we propose a novel clustering-based alignment method to adapt the watermark to spatial variations. Meanwhile, we present a redundant embedding strategy to harden the diffusion watermark against various attacks, facilitating the robustness of the watermark to the temporal variations. Additionally, we introduce a novel learnable mask matrix to improve the transparency of diffusion fingerprints. By doing so, our KGMark properly tackles the variation challenges of structured data. Experiments on various public benchmarks show the effectiveness of our proposed KGMark.",
+    "keywords": [
+      "Watermarking",
+      "Knowledge Graph",
+      "Diffusion Models",
+      "Generative Models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GKZySvM2t9"
+  },
+  "review_fields": {
+    "summary": "The paper presents KGMark, a watermarking framework designed for Knowledge Graphs (KGs), which are widely used in applications like semantic search, question answering, and recommendation systems. The primary goal of KGMark is to embed robust, detectable, and transparent watermarks into dynamic KGs to protect intellectual property and ensure data integrity, especially in the context of AI-generated content.",
+    "claims_and_evidence": "The claims made in the submission are well-supported by experimental results and case studies. However, to further strengthen the claims, the authors could consider additional experiments on testing against more extreme or adaptive attacks such as attacks specifically designed to remove watermarks.",
+    "methods_and_evaluation_criteria": "Standard metrics such as FPR (False Positive Rate) and TPR (True Positive Rate) for detectability and cosine similarity for transparency have been used.",
+    "theoretical_claims": "The theoretical claims have been checked and to the best of my knowledge seem valid.",
+    "experimental_designs_or_analyses": "The authors use three datasets (Last-FM, MIND, and Alibaba-iFashion) representing diverse real-world scenarios. These datasets are appropriate for evaluating the generalizability and effectiveness of KGMark across different domains.",
+    "relation_to_broader_scientific_literature": "This work is quite innovative and to the best of my knowledge, there are no other watermarking techniques for knowledge graphs.",
+    "essential_references_not_discussed": "To the best of my knowledge, there are no essential references that are not discussed.",
+    "other_strengths_and_weaknesses": "Strengths:\n-  The document appears to be well-structured and comprehensive.\n-  This is an innovative work related to the watermarking of KGs\n\n\nWeaknesses: \n- Additional experiments on testing against more extreme or adaptive attacks such as attacks specifically designed to remove watermarks.",
+    "questions_for_authors": "1. What are some limitations of this work? \n2. Are there any privacy concerns that need to be discussed when the KG contains sensitive data?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

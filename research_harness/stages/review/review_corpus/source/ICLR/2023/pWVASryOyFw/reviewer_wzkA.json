@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "pWVASryOyFw",
+  "reviewer": "wzkA",
+  "paper": {
+    "title": "Learning Uncertainty for Unknown Domains with Zero-Target-Assumption",
+    "authors": [
+      "Yu Yu",
+      "Hassan Sajjad",
+      "Jia Xu"
+    ],
+    "abstract": "We introduce our Maximum-Entropy Rewarded Reinforcement Learning (MERRL) framework that selects training data for more accurate Natural Language Processing (NLP). Because conventional data selection methods select training samples based on the test domain knowledge and not on real life data,  they frequently fail in unknown domains like patent and Twitter. \nOur approach selects training samples that maximize information uncertainty measured by entropy, including observation entropy like empirical Shannon entropy, Min-entropy, R\\'enyi entropy, and prediction entropy using mutual information, to cover more possible queries that may appear in unknown worlds. Our MERRL using regularized A2C and SAC achieves up to -99.7 perplexity decrease (-43.4\\% relatively) in language modeling, +25.0 accuracy increase (+40.0\\% relatively) in sentiment analysis, and +5.0 F1 score increase (+30.8\\% relatively) in named entity recognition over various domains, demonstrating strong generalization power on unknown test sets.",
+    "keywords": [],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=pWVASryOyFw"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "In this paper, the authors introduce a novel framework, called Maximum-Entropy Rewarded Reinforcement Learning (MERRL), which can select training data to cover more possible queries that may appear in unknown worlds.",
+    "strength_and_weaknesses": "Strengths:\nIn INTRODUCTION, the authors first proved the relationship between `training set entropy’ and `f1 score and oov’ through experiments, and explained the importance of training set entropy to model generalization. The motivation and logic of the paper is clear.\n\nWeaknesses:\nThe authors only proved the role of entropy in selecting data, but this paper does not elaborate on the motivation and advantages of introducing complex reinforcement learning to train a policy network.\n\nFurther Comments:\n1.\tThe authors use training set entropy as a reward to train a policy network for data selection. How is it different from directly using entropy and selecting data through threshold? What are their advantages and disadvantages?\n2.\tIn the code provided in the supplementary materials, the policy network is first trained on the data set to be selected. Does the policy network need to be retrained on the data set to be selected each time? Considering the generalization of reinforcement learning, this will limit the universality of the algorithm.\n3.\tIn Figure 5, the initial reward of SCA is much higher than A2C and VPG, and the trend is different from that of A2C and VPG. What is the reason for these phenomena?  Is the value of reward related to the quality of data selection?\n4.\tThere are some clerical errors in the paper. For example, in second page, it should be “Pr(“nor”) = 1/2”. It is recommended that the author read the full text to correct such problems.",
+    "clarity,_quality,_novelty_and_reproducibility": "The writing is good while the novelty is not enough.",
+    "summary_of_the_review": "The authors only proved the role of entropy in selecting data, but this paper does not elaborate on the motivation and advantages of introducing complex reinforcement learning to train a policy network.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

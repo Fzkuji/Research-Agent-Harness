@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "elMKXvhhQ9",
+  "reviewer": "RZbU",
+  "paper": {
+    "title": "Consistency Training with Learnable Data Augmentation for Graph Anomaly Detection with Limited Supervision",
+    "authors": [
+      "Nan Chen",
+      "Zemin Liu",
+      "Bryan Hooi",
+      "Bingsheng He",
+      "Rizal Fathony",
+      "Jun Hu",
+      "Jia Chen"
+    ],
+    "abstract": "Graph Anomaly Detection (GAD) has surfaced as a significant field of research, predominantly due to its substantial influence in production environments. Although existing approaches for node anomaly detection have shown effectiveness, they have yet to fully address two major challenges: operating in settings with limited supervision and managing class imbalance effectively. In response to these challenges, we propose a novel model, ConsisGAD, which is tailored for GAD in scenarios characterized by limited supervision and is anchored in the principles of consistency training. Under limited supervision, ConsisGAD effectively leverages the abundance of unlabeled data for consistency training by incorporating a novel learnable data augmentation mechanism, thereby introducing controlled noise into the dataset. Moreover, ConsisGAD takes advantage of the variance in homophily distribution between normal and anomalous nodes to craft a simplified GNN backbone, enhancing its capability to distinguish effectively between these two classes. Comprehensive experiments on several benchmark datasets validate the superior performance of ConsisGAD in comparison to state-of-the-art baselines. Our code is available at https://github.com/Xtra-Computing/ConsisGAD.",
+    "keywords": [
+      "Graph anomaly detection",
+      "consistency training",
+      "learnable data augmentation"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=elMKXvhhQ9"
+  },
+  "review_fields": {
+    "summary": "This paper delves into the challenge of graph anomaly detection with limited supervision. To address this, the authors introduce ConsisGAD, a novel model rooted in consistency training. ConsisGAD leverages variance in homophily distribution between normal and anomalous nodes to craft an effective GNN backbone. The authors also propose a learnable data augmentation mechanism for consistency training using unlabeled data. The paper presents comprehensive experiments on benchmark datasets to validate the effectiveness of the proposed model.",
+    "strengths": "1. The paper is well-structured and presented in a clear manner. It effectively communicates the motivation behind the proposed model, making it accessible to readers. \n\n2. The proposed model, comprising homophily-aware neighborhood aggregation and consistency training with learnable data augmentation, is innovative. The homophily-aware aggregation method is straightforward yet effective, especially for edge-level homophily representation, enhancing the anomaly detection process. The proposed label consistency and distribution diversity concepts are intriguing, guiding the optimization of learnable data augmentation.\n\n3. The paper demonstrates a thorough evaluation through extensive experiments, which strengthens the empirical foundation and validates the performance across different datasets.",
+    "weaknesses": "Weaknesses:\n\n1. The paper should acknowledge related works that are pertinent to the proposed learnable data augmentation, such as [a] and [b]. It is crucial to cite and discuss the distinctions between these works and the proposed approach, providing readers with a clear understanding of the novel contributions made by this study.\n\n2. The paper predominantly explores the concept of applying learnable data augmentation for graph anomaly detection. While this is valuable, investigating its applicability in broader graph learning tasks, such as node classification with contrastive learning, could significantly expand its scope. For example, how about its benefits to generic graph contrastive learning tasks, compared to existing contrastive techniques?\n\n3. While consistency training might usually be deployed on unlabeled data, I wonder if it would be beneficial to utilize labeled data for consistency training as well. Specifically, labeled data has exact labels, which might provide effective information for consistency training the model in dealing with the taks of graph anomaly detection.\n\n\n[a] Graph Contrastive Learning Automated. Yuning You, Tianlong Chen, Yang Shen, Zhangyang Wang. ICML 2021\n[b] Graph Contrastive Learning with Adaptive Augmentation. Yanqiao Zhu, Yichen Xu, Feng Yu, Qiang Liu, Shu Wu, Liang Wang. WWW 2021."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 64,
+    "human_pct": 35,
+    "verdict": "We are moderately confident this text human written and polished with AI",
+    "confidence": "moderately",
+    "chars": 2149,
+    "words": 296,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4a9e162b-32a7-47e6-9924-a3fdaf718449",
+    "error": null,
+    "scored_chars": 2150
+  }
+}

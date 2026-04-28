@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "JDoA6admhv",
+  "reviewer": "kZpV",
+  "paper": {
+    "title": "Adversarial Examples Might be Avoidable: The Role of Data Concentration in Adversarial Robustness",
+    "authors": [
+      "Ambar Pal",
+      "Jeremias Sulam",
+      "Rene Vidal"
+    ],
+    "abstract": "The susceptibility of modern machine learning classifiers to adversarial examples has motivated theoretical results suggesting that these might be unavoidable. However, these results can be too general to be applicable to natural data distributions. Indeed, humans are quite robust for tasks involving vision. This apparent conflict motivates a deeper dive into the question: Are adversarial examples truly unavoidable? \nIn this work, we theoretically demonstrate that a key property of the data distribution -- concentration on small-volume subsets of the input space -- determines whether a robust classifier exists. We further demonstrate that, for a data distribution concentrated on a union of low-dimensional linear subspaces, utilizing structure in data naturally leads to classifiers that enjoy data-dependent polyhedral robustness guarantees, improving upon methods for provable certification in certain regimes.",
+    "keywords": [
+      "Adversarial Robustness",
+      "Geometry in Data",
+      "Low Dimensional Modeling"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JDoA6admhv"
+  },
+  "review_fields": {
+    "summary": "This paper gives a theoretical insight into the existence of robust classifiers for avoiding adversarial examples, which may be a potential direction for bridging the gap between human perception and machine intelligence. Specifically, this paper reveals the sufficiency and necessity of data concentration for robust classification. The authors conclude that concentration on small-volume subsets of the input space is the key to avoiding adversarial examples for machine learning. In two experiments, the proposed theoretical results are shown to be effective in improving projected robust accuracy and certified accuracy.",
+    "strengths": "- The research problem is quite interesting, and is significant for the development of machine robustness and safety.\n- This paper is well-organized. The analyses are rigorous and solid.",
+    "weaknesses": "- The main theoretical results are based on $\\ell_2$-normed adversarial training, whether the conclusions are still applicable on $\\ell_\\inf$ norm is unknown.\n\n- The empirical results are insufficient. The experiments are only conducted on every small dataset, whether the theoretical conclusion still holds on larger natural datasets is unknown. \n\n- the conclusion related to subspace training is similar to some existing adversarial training methods, such as [1], [2], which shows that adversarial training on subspace can help alleviate overfitting and improve generalization performance. Is there any difference between these works?  \n[1] Li et al., Subspace adversarial training, CVPR 2022.  \n[2] Li et al., On the adversarial robustness of subspace learning, TIP 2020.\n\n- Another question is that whether the subspace preserve training could be applied to transferred adversarial attacks. Could you make several discussions to justify this?",
+    "limitations": "Limitations are well-discussed. No potential negative societal impact is found."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1210,
+    "words": 176,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7da6ce8c-d706-4434-8988-035b0bf15df2",
+    "error": null,
+    "scored_chars": 1215
+  }
+}

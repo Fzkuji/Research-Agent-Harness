@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "1CqEAuRzHc",
+  "reviewer": "gb9n",
+  "paper": {
+    "title": "CVGL: Causal Learning and Geometric Topology",
+    "authors": [
+      "Songsong Ouyang",
+      "Yingying Zhu"
+    ],
+    "abstract": "Cross-view geo-localization (CVGL) aims to estimate the geographic location of a street image by matching it with a corresponding aerial image. This is critical for autonomous navigation and mapping in complex real-world scenarios. However, the task remains challenging due to significant viewpoint differences and the influence of confounding factors. To tackle these issues, we propose the Causal Learning and Geometric Topology (CLGT) framework, which integrates two key components: a Causal Feature Extractor (CFE) that mitigates the influence of confounding factors by leveraging causal intervention to encourage the model to focus on stable, task-relevant semantics; and a Geometric Topology Fusion (GT Fusion) module that injects Bird’s Eye View (BEV) road topology into street features to alleviate cross-view inconsistencies caused by extreme perspective changes. Additionally, we introduce a Data-Adaptive Pooling (DA Pooling) module to enhance the representation of semantically rich regions. Extensive experiments on CVUSA, CVACT, and their robustness-enhanced variants (CVUSA-C-ALL and CVACT-C-ALL) demonstrate that CLGT achieves state-of-the-art performance, particularly under challenging real-world corruptions.",
+    "keywords": [
+      "cross-view",
+      "casual learning",
+      "BEV"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=1CqEAuRzHc"
+  },
+  "review_fields": {
+    "summary": "The paper tackles cross-view geo-localization which consists in matching street view images to aerial images. This is a challenging task due to the large viewpoint changes between street and aerial images, significant illumination changes as well as potential occlusions. To deal with condition variations and the dynamic nature of the scenes, the authors introduce a causal feature extractor that isolates features relevant for localization such as structural elements while removing distracting features. The causal feature extractor predicts a content aware frequency mask to separate relevant/non-relevant features in the frequency space. Furthermore, street view images are lifted to bird eye view and the respective features from both perspectives are merged through the geometric topology fusion module which creates more robust and discriminative feature maps through. Subsequently, global descriptors are pooled from the fused feature maps through a data-adaptative pooling layer which focuses on semantically rich regions. The resulting localization pipeline is evaluated on two cross-view datasets and their variants which include.",
+    "strengths_and_weaknesses": "### Strengths\n1) The causal learning mechanism is an effective way of injecting causal information in the feature representation. In addition, the causal feature extraction is an elegant way of dissociating semantically important features from distractors without relying on third party pretrained models for detection or condition correction. Its effectiveness is supported by ablation studies. \n2) Augmenting street features with BEV features gives a complementary perspective and makes the resulting representation more robust wrt viewpoint changes and more discriminative which is particularly relevant in the context of cross-view geo-localization. \n3) The proposed representation shows consistent accuracy improvements over prior cross-view geo-localization baselines across all datasets.\n\n### Weaknesses\n1) The causal feature extraction comes from [21] which limits the contributions of the proposed method. The authors state that the difference lies in their content aware frequency mask as opposed to the fixed thresholds used in [21]. However no explanation is provided as to how the content aware mask is predicted. As it is an important part of the paper, this ought to be explained and the benefits of the content aware mask compared to a fixed bandwidth should be shown.     \n\n2) I am skeptical about the benefits of the proposed data-adaptive pooling layer. The geometric mean pooling is already a generalization of global average and max pooling layers, where the learnable parameter balances between max and average pooling behaviors (as such GeM is already “data-adaptive”). I do not see any ablation study to justify the design choice of the proposed data-adaptive pooling layer. \n\n3) While I understand the motivation behind fusing street/BEV features I find the following sentences confusing and it is hard to tie them to the GT fusion module’s architecture.\nl.113 “A multi-head attention-based fusion module integrates BEV features into street features, enforcing geometric consistency constraints”, how can multi-head attention enforce geometric constraints?\nl.151 “effectively leverages the BEV geometric consistency constraints”, what does the geometric consistency constraints refer to here?\nl.152 “dynamically injecting road geometric topology information”, is geometric topology the right term to describe scene layout, doesn’t street view image then also contain geometric topology information?\nDescription of Fig. 4 “ DFF to inject BEV’s geometric topology”, isn’t the BEV features already integrated through the MHA layers\nThe GT fusion module should be more ablated and tied to the textual explanations. Ablations could include, w/o DDF, w/o OCR, maybe basic fusion mechanisms (MHA, concatenation, summation).    \n\n4) Missing reference for InfoNCE: Oord, Aaron van den, Yazhe Li, and Oriol Vinyals. \"Representation learning with contrastive predictive coding.\"",
+    "questions": "Overall the motivation behind introducing the street/BEV fusion and the causal mechanism are sound and the resulting method is effective and brings small accuracy gains. However given the high accuracy of the baseline method (EP-BEV) this paper is based upon and the limited novelty, some more explanations and ablations would be required to better grasp the significance of the contributions. (cf weaknesses 2 and 3).  \n\nl144.  “our method dynamically adapts to each input by generating a content-aware frequency mask”, does this refer to the radius of the band-pass mask, how is r predicted?\n\nWhat is the benefit of aligning the street and BEV features through the contrastive loss since the street/BEV features are fused anyway in the subsequent GT fusion module? Also this loss would be applied on the pixel level for dense features, do you randomly sample negative features in the image space?\n\nCould you provide a run time comparison with other baselines both for training and inference?\n\nCf. weakness 3)",
+    "final_justification": "Overall I find the justification/formulation around \"geometric topology\" and \"causality\" to be overly pompous at time and make it hard to identify where the contributions come from. For example, the CFE module was introduced in [21] (the overall causal framework was also established in prior works and ends up being a type of image augmentation) and the authors contribution lies in modifying the frequency threshold. Similarly, the representation learning framework follows EP-Bev and the authors introduce the GTFusion module to merge street and BEV features before the contrastive learning objectives.  \nHowever these incremental contributions are well motivated and, in the rebuttal, the authors provided additional ablations to support the effectiveness of the GTFusion / CFE and data pooling modules. \nThe resulting pipeline ends up achieving SOTA accuracy with similar computational efficiency as prior baselines. As such, I believe the reasons to accept the papers outweigh the reasons to reject and I have upgraded my score to \"borderline accept\"."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4,
+    "quality": 2,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

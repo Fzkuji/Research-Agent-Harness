@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "Hlcek7AYgP",
+  "reviewer": "f3GE",
+  "paper": {
+    "title": "Neural Embeddings Rank: Aligning 3D latent dynamics with movements",
+    "authors": [
+      "Chenggang Chen",
+      "Zhiyu Yang",
+      "Xiaoqin Wang"
+    ],
+    "abstract": "Aligning neural dynamics with movements is a fundamental goal in neuroscience and brain-machine interfaces. However, there is still a lack of dimensionality reduction methods that can effectively align low-dimensional latent dynamics with movements. To address this gap, we propose Neural Embeddings Rank (NER), a technique that embeds neural dynamics into a 3D latent space and contrasts the embeddings based on movement ranks. NER learns to regress continuous representations of neural dynamics (i.e., embeddings) on continuous movements. We apply NER and six other dimensionality reduction techniques to neurons in the primary motor cortex (M1), dorsal premotor cortex (PMd), and primary somatosensory cortex (S1) as monkeys perform reaching tasks. Only NER aligns latent dynamics with both hand position and direction, visualizable in 3D. NER reveals consistent latent dynamics in M1 and PMd across sixteen sessions over a year. Using a linear regression decoder, NER explains 86\\% and 97\\% of the variance in velocity and position, respectively. Linear models trained on data from one session successfully decode velocity, position, and direction in held-out test data from different dates and cortical areas (64\\%, 88\\%, and 90\\%). NER also reveals distinct latent dynamics in S1 during consistent movements and in M1 during curved reaching tasks. The code is available at https://github.com/NeuroscienceAI/NER.",
+    "keywords": [
+      "Dimensionality reduction",
+      "Latent dynamics",
+      "Brain-machine interfaces",
+      "Neural decoding",
+      "Contrastive learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Hlcek7AYgP"
+  },
+  "review_fields": {
+    "summary": "The paper introduces a novel dimensionality reduction method called Neural Embedding Ranks (NER) for aligning neural dynamics with movement in brain-computer interfaces. NER uses a ranking loss to embed neural dynamics into a 3D latent space that aligns with continuous movement parameters. The authors apply NER to neural recordings from primary motor cortex (M1), dorsal premotor cortex (PMd), and primary somatosensory cortex (S1) in monkeys performing reaching tasks, comparing it with six other dimensionality reduction techniques.The paper finds that NER out-performs all other methods to align latent dynamics with both hand position and direction.",
+    "strengths": "1. The experimental design is comprehensive, covering multiple brain areas (M1, PMd, S1), multiple monkeys, and a variety of task conditions including curved reaching movements, and the statistical rigor is evident in the consistent performance across multiple sessions and conditions.\n\n2. The benchmarking against six other dimensionality reduction techniques provides a thorough evaluation of NER's performance.\n\n3. Extensive figures and graphs were used to illustrate the statistical results of the paper, most of which were informative and well-designed.\n\n4. The effectiveness of NER is significant and proven to exceed the performance of multiple other methods under different tasks.",
+    "weaknesses": "1. The explanation of the method is too limited. Only a very small portion of the paper is dedicated to the Model/Method section, which makes it difficult to understand the fundamental algorithm of NER. \n\n2. It is also reasonable to suspect the main method of the paper is the application of the existing method RNC, which limits the contribution of the paper.\n\n3. It is empirically evident that the method works well in the setting of the paper, but there is limited discussion on what could be the cause of such an improvement over other methods (such as CEBRA), which by the formulation of the loss function, is very similar in nature.",
+    "questions": "1. Why is the Rank and Contrast loss effective in this task? Specifically, how does it differ from other contrastive-loss-based methods like CEBRA?\n2. I believe the paper would benefit if a more detailed description were given to the method section, especially a description of RNC and how your method adapted it and could be different from it.",
+    "limitations": "The limitations are adequately addressed."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 2,
+    "mixed_pct": 4,
+    "human_pct": 94,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1716,
+    "words": 273,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/94c5df02-5ec0-4649-b63a-3300d2b9d159",
+    "error": null,
+    "scored_chars": 1717
+  }
+}

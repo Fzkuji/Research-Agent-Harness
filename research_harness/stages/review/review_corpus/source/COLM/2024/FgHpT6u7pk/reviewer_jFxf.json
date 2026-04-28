@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "FgHpT6u7pk",
+  "reviewer": "jFxf",
+  "paper": {
+    "title": "CoCA: Regaining Safety-awareness of Multimodal Large Language Models with Constitutional Calibration",
+    "authors": [
+      "Jiahui Gao",
+      "Renjie Pi",
+      "Tianyang Han",
+      "Han Wu",
+      "Lanqing HONG",
+      "Lingpeng Kong",
+      "Xin Jiang",
+      "Zhenguo Li"
+    ],
+    "abstract": "The deployment of multimodal large language models (MLLMs) has demonstrated remarkable success in engaging in conversations involving visual inputs, thanks to the superior power of large language models (LLMs). Those MLLMs are typically built based on the LLMs, with an image encoder to process images into the token embedding space of the LLMs. However, the integration of visual modality has introduced a unique vulnerability: the MLLM becomes susceptible to malicious visual inputs and prone to generating sensitive or harmful responses, even though the LLM has been trained on textual dataset to align with human value. In this paper, we first raise the following question: ``Do the MLLMs possess safety-awareness against malicious image inputs?\". We find that after adding a principle that specifies the safety requirement into the input of the MLLM, the model's safety awareness becomes boosted. This phenomenon verifies the existence of MLLM's safety-awareness against image inputs, it is only weakened by the modality gap. We then introduce a simple yet effective technique termed CoCA, which amplifies the safety-awareness of the MLLM by calibrating its output distribution. Our proposed strategy helps the model reclaim its original safety awareness without losing its original capabilities. We verify the effectiveness of our approach on both multimodal safety and understanding benchmarks.",
+    "keywords": [
+      "Multimodal Large Language Model",
+      "Safety"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=FgHpT6u7pk"
+  },
+  "review_fields": {
+    "summary": "This paper explores whether LLMs retain their safety-awareness against malicious image inputs. The authors observe that LLMs’ safety awareness could be enhanced by providing an additional guideline explicitly stating the safety requirement. Therefore, the authors explore amplifying the impact of the safety prompt and calibrate the output distribution by Constitutional Calibration for MLLM.",
+    "reasons_to_accept": "The experimental results add evidence that a proper approach could enhance safety awareness of MLLM, which aligns well with real-world scenarios.",
+    "reasons_to_reject": "The table description is not very clear.\nLack of analysis: In Figure 3, it only presented 3 amplified coefficients and concluded that increasing it leads to more significant safety improvements.",
+    "questions_to_authors": "In Table 1, are Vallina LLaVA and LLaVA identical? What distinguishes LLaVA-1.5 in Table 6 from the others? Is \"Vallina\" a typo, or does it have a specific meaning?\nWhat is the difference between CoCA in Table 1 and 6, the results of Hate Speech are different."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:05Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:05Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 603,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b882f1c2-2bfa-442e-97de-23721b459f87",
+    "error": null,
+    "scored_chars": 603
+  }
+}

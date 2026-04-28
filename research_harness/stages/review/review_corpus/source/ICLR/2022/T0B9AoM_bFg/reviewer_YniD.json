@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "T0B9AoM_bFg",
+  "reviewer": "YniD",
+  "paper": {
+    "title": "Improving Mutual Information Estimation with Annealed and Energy-Based Bounds",
+    "authors": [
+      "Rob Brekelmans",
+      "Sicong Huang",
+      "Marzyeh Ghassemi",
+      "Greg Ver Steeg",
+      "Roger Baker Grosse",
+      "Alireza Makhzani"
+    ],
+    "abstract": "Mutual information (MI) is a fundamental quantity in information theory and machine learning. However, direct estimation of MI is intractable, even if the true joint probability density for the variables of interest is known, as it involves estimating a potentially high-dimensional log partition function. In this work, we present a unifying view of existing MI bounds from the perspective of importance sampling, and propose three novel bounds based on this approach. Since a tight MI bound without density information requires a sample size exponential in the true MI, we assume either a single marginal or the full joint density information is known. In settings where the full joint density is available, we propose Multi-Sample Annealed Importance Sampling (AIS) bounds on MI, which we demonstrate can tightly estimate large values of MI in our experiments. In settings where only a single marginal distribution is known, we propose Generalized IWAE (GIWAE) and MINE-AIS bounds. Our GIWAE bound unifies variational and contrastive bounds in a single framework that generalizes InfoNCE, IWAE, and Barber-Agakov bounds. Our MINE-AIS method improves upon existing energy-based methods such as MINE-DV and MINE-F by directly optimizing a tighter lower bound on MI. MINE-AIS uses MCMC sampling to estimate gradients for training and Multi-Sample AIS for evaluating the bound. Our methods are particularly suitable for evaluating MI in deep generative models, since explicit forms of the marginal or joint densities are often available. We evaluate our bounds on estimating the MI of VAEs and GANs trained on the MNIST and CIFAR datasets, and showcase significant gains over existing bounds in these challenging settings with high ground truth MI.",
+    "keywords": [
+      "mutual information estimation",
+      "annealed importance sampling",
+      "energy-based models"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=T0B9AoM_bFg"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This work combines the technique of Annealed Importance Sampling (AIS) with Importance Weighted Autoencoder (IWAE) bounds on mutual information to obtain new and significantly tighter bounds. They examine the situations where the joint distribution $p(x, z)$ is known via $p(z)$ and $p(x | z)$, and the situation where only $p(z)$ is known. In the former case, they obtain exact bounds (or asymptotically exact given large enough sample sizes), and in the latter case they find approximate bounds by learning an energy function to approximate $p(x |z)$. Their experiments show the utility of their proposed method. In particular, they obtain impressively tight lower and upper bounds for complex latent variable generative models (VAE and GAN) on complex data such as CIFAR-10.",
+    "main_review": "Strengths:\n* The authors present a comprehensive framework for mutual information bounds, called GIWAE, that unifies many existing approaches.\n* Combining AIS with IWAE is elegant, especially when one can define a sensible approximation for $p(z | x)$ in the form of either a prior $p(z)$ or approximate posterior $q(z | x)$ as with a VAE. The MINE-AIS extension is also intriguing due to its potential to extend the proposed techniques far beyond the VAE and GAN scenarios considered in this work.\n* The experimental results are quite impressive and convincingly demonstrate the utility of the proposed method.\n* The authors provide a comprehensive presentation of their method and an exhaustive review and comparison with other methods.\n\nWeaknesses:\n* The MINE-AIS technique is not fully explored. It would be interesting to see MINE-AIS applied in a scenario where the IWAE-type AIS bounds are not applicable (i.e. when $p( x | z )$ is unknown) but this is not investigated.\n* The core of the proposed method is previously suggested in a blog post by Sobolev. I believe this is not a significant weakness because the impressive effectiveness of this approach was not previously demonstrated.\n\nOther Comments:\n* I am unsure of why a single $z$ is used in the numerator but multiple $z$ are used in the denominator of (7) and other IWAE-type equations. A brief explanation would aid my understanding.",
+    "summary_of_the_review": "Overall, this is an impressive work both in terms of its comprehensive mathematical presentation and its high-quality experimental results. Personally, I find the experimental results to be the most interesting aspect, because it opens the possibility of accurate MI estimation in complex scenarios studied in contemporary generative modeling. I recommend this work be accepted.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1781,
+    "words": 285,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f0f194be-6e80-424d-b58b-543ee5760515",
+    "error": null,
+    "scored_chars": 1781
+  }
+}

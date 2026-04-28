@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "KtGsJm8bOC",
+  "reviewer": "Witb",
+  "paper": {
+    "title": "MSRS: Evaluating Multi-Source Retrieval-Augmented Generation",
+    "authors": [
+      "Rohan Phanse",
+      "Ej Zhou",
+      "Kejian Shi",
+      "WENCAI ZHANG",
+      "Yixin Liu",
+      "Yilun Zhao",
+      "Arman Cohan"
+    ],
+    "abstract": "Retrieval-augmented systems are typically evaluated in settings where information required to answer the query can be found within a single source or the answer is short-form or factoid-based. However, many real-world applications demand the ability to integrate and summarize information scattered across multiple sources, where no single source is sufficient to respond to the user's question. In such settings, the retrieval component of a RAG pipeline must recognize a variety of relevance signals, and the generation component must connect and synthesize information across multiple sources. We present a scalable framework for constructing evaluation benchmarks that challenge RAG systems to integrate information across distinct sources and generate long-form responses. Using our framework, we build two new benchmarks on Multi-Source Retrieval and Synthesis: MSRS-Story and MSRS-Meet, representing narrative synthesis and summarization tasks, respectively, that require retrieval from large collections. Our extensive experiments with various RAG pipelines—including sparse and dense retrievers combined with frontier LLMs—reveal that generation quality is highly dependent on retrieval effectiveness, which varies greatly by task. While multi-source synthesis proves challenging even in an oracle retrieval setting, we find that reasoning models significantly outperform standard LLMs at this distinct step.",
+    "keywords": [
+      "Retrieval-Augmented Generation",
+      "Retrieval",
+      "Summarization",
+      "Evaluation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=KtGsJm8bOC"
+  },
+  "review_fields": {
+    "summary": "The paper introduces ODSUM, a set of benchmarks designed to evaluate Retrieval-Augmented Generation (RAG) systems that require multi-document reasoning and synthesis capabilities. Traditional RAG systems typically operate on single-document retrieval and generation, but many real-world applications demand the integration of information from multiple sources. The authors propose a scalable approach for constructing multi-source RAG datasets from query-focused summarization datasets, resulting in two new benchmarks: ODSUM-STORY and ODSUM-MEET, that test retrieving complementary information from large data sources based on given queries. These benchmarks require systems to retrieve and synthesize information from large corpora in response to realistic queries that reflect users' information needs. The paper outlines the construction process, experimental setup, and results, highlighting significant variations in retrieval effectiveness across different tasks and methods.",
+    "reasons_to_accept": "- The proposed datasets that setup real world queries that actually require collecting information across multiple documents is a very valuable resource and thus the introduction of ODSUM-STORY and ODSUM-MEET provides new, challenging benchmarks for evaluating multi-document RAG systems, addressing a gap in existing benchmarks that often use unrealistic queries and datasets.\n\n- The proposed method for constructing multi-source RAG datasets from query-focused summarization datasets is scalable and ensures the integrity of gold summaries while making them applicable in broader open-domain scenarios. This may help inspire other multi-document setups beyond summarization for further research.\n\n- The paper has a rigorous and extensive set experiments on various recent models, RAG system components, including retrieval and generation, providing valuable insights into their capabilities and limitations.",
+    "reasons_to_reject": "- While there is a fair attempt made to provide some data on the data quality through data annotation, 40 random examples may not be representative of the quality of the entirety of the dataset which is order of magnitudes larger. This also makes the validation of the quality of future datasets generated using this framework not as scalable as they are always limited by human annotation\n\n- It may have also been insightful to see an error analysis of what the models are most challenged in attempting successfully as this may shed light on what the model's current capabilities are able to achieve compared to what is something newer models need to work towards"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 7,
+    "mixed_pct": 0,
+    "human_pct": 93,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1575,
+    "words": 238,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/40467037-c8cd-4398-bf28-b25116a445ed",
+    "error": null,
+    "scored_chars": 1575
+  }
+}

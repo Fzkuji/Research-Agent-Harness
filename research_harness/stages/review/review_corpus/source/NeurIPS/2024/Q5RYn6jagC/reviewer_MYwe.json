@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "Q5RYn6jagC",
+  "reviewer": "MYwe",
+  "paper": {
+    "title": "Understanding the Limits of Vision Language Models Through the Lens of the Binding Problem",
+    "authors": [
+      "Declan Iain Campbell",
+      "Sunayana Rane",
+      "Tyler Giallanza",
+      "C. Nicolò De Sabbata",
+      "Kia Ghods",
+      "Amogh Joshi",
+      "Alexander Ku",
+      "Steven M Frankland",
+      "Thomas L. Griffiths",
+      "Jonathan D. Cohen",
+      "Taylor Whittington Webb"
+    ],
+    "abstract": "Recent work has documented striking heterogeneity in the performance of state-of-the-art vision language models (VLMs), including both multimodal language models and text-to-image models. These models are able to describe and generate a diverse array of complex, naturalistic images, yet they exhibit surprising failures on basic multi-object reasoning tasks -- such as counting, localization, and simple forms of visual analogy -- that humans perform with near perfect accuracy. To better understand this puzzling pattern of successes and failures, we turn to theoretical accounts of the binding problem in cognitive science and neuroscience, a fundamental problem that arises when a shared set of representational resources must be used to represent distinct entities (e.g., to represent multiple objects in an image), necessitating the use of serial processing to avoid interference. We find that many of the puzzling failures of state-of-the-art VLMs can be explained as arising due to the binding problem, and that these failure modes are strikingly similar to the limitations exhibited by rapid, feedforward processing in the human brain.",
+    "keywords": [
+      "visual reasoning",
+      "foundation models",
+      "multi-object reasoning",
+      "cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Q5RYn6jagC"
+  },
+  "review_fields": {
+    "summary": "This work investigates the performance of the vision language model (VLM) GPT-4v and text-to-image model DALL-E-3 on multi-object reasoning tasks. According to the literature, humans perform well on multi-object tasks because they learn a compositional representation of the world and use serial processing to dynamically combine object features, overcoming the binding problem. However, in time-constrained tasks, they fail to use serial processing and rely on parallel processing, leading to illusory conjunction. In this work, the authors hypothesize, without testing, that VLMs learn a compositional representation for the sake of generalization but are not compelled to develop a serial-processing mechanism. According to the authors, this leads to failure in multi-object reasoning tasks, thus exhibiting the same limitations as humans in time-constrained tasks. The authors test these limitations on four multi-object reasoning tasks: counting, visual search, scene description, and visual analogy. In these tasks, the authors show that the performance of VLMs decreases as the number of objects increases, supporting the conclusion that VLMs are not able to solve the binding problem because they lack the mechanism to perform serial processing.",
+    "strengths": "- The paper is straightforward and easy to understand. The authors did a good job making it accessible, and the presentation and sectioning help in grasping the content.\n- This work seeks to understand the limitations of VLMs through the lens of human cognition, which could provide valuable insights. \n- Originality in the problem statement: In terms of performance, VLMs in their normal regime are equivalent to humans in time-limited tasks.\n- The investigation utilizes various types of experiments, each guided by studies conducted on humans, and they look easy to redo and the empirical results seem relevant.",
+    "weaknesses": "My score would increase if the following weaknesses were addressed:\n- The hypothesis that VLMs learn a compositional representation for generalization purposes could benefit from a reference if possible, since the discussion depends on that hypothesis.\n- Despite conducting various types of experiments (four in total), each individual experiment lacks sufficient variability. For instance, in the counting experiment, although they vary the colors of the circles, they do not vary their sizes or shapes. Another example, for the poppout task it would have been nice to also alternate the color of target and distractors.\n- The authors carried out the experiment on a very small group of language models (two).\n\nSome typos: \n- Figure 1, top right: the x-axis should be integers in the plot of GPT-4v counting performance\n- Line 156, 188: should be ‘Figure 2’ and not ‘Figure 1’",
+    "questions": "If we carefully engineer prompts for VLMs to sequentially focus and analyze each object in an image, considering they can learn a compositional representation as claimed, thus they should theoretically possess all the elements necessary to solve the binding problem? Can you elaborate on that?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1787,
+    "words": 284,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6644854b-95ea-40a8-a1e7-302df7ab5ac0",
+    "error": null,
+    "scored_chars": 1788
+  }
+}

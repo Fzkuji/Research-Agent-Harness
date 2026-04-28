@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "FjqBs4XKe87",
+  "reviewer": "AvLV",
+  "paper": {
+    "title": "Prompt Injection: Parameterization of Fixed Inputs",
+    "authors": [
+      "Eunbi Choi",
+      "Yongrae Jo",
+      "Joel Jang",
+      "Minjoon Seo"
+    ],
+    "abstract": "Recent works have shown that attaching prompts to the input is effective at conditioning Language Models (LM) to perform specific tasks. However, prompts are always included in the input text during inference, thus incurring substantial computational and memory overhead. Also, there is currently no straightforward method of utilizing prompts that are longer than the maximum input length of the LMs without incurring additional costs during inference. We propose Prompt Injection (PI), a novel formulation of injecting the prompt into the parameters of an LM to be an efficient alternative to attaching fixed prompts to the input. We show that in scenarios with long fixed prompts, PI can be up to 280 times more efficient in terms of total FLOPs than previous approaches. We further explore methodologies for PI and show promising results in persona-dependent conversation, semantic parsing, and zero-shot learning with task instructions. Through these explorations, we show that PI can be a promising direction for conditioning language models, especially in scenarios with long and fixed prompts.",
+    "keywords": [
+      "Prompt",
+      "Injection",
+      "Parameterization",
+      "Language Model",
+      "Inference Efficiency",
+      "Distillation"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=FjqBs4XKe87"
+  },
+  "review_fields": {
+    "summary": "This paper addresses the problem in prompt learning that prompts are always included in the input text, which can cause computational and memory overhead.\nTo this end, this paper proposes prompt injection, a method that injects the prompt into the parameters of a pre-trained language model (PLM).\nThey show that the prompt injection method can be 280 times more efficient compared with previous approaches.",
+    "strengths_and_weaknesses": "Strength:\n1. This paper proposes an interesting question that many conditional text generation tasks usually include an instance-specific prompt for each data, for example the persona profile for persona dialogue generation.\nHowever, such prompt can cause computational costs and make it difficult for models to capture the key information during inference, in particular when the prompt is very long.\nTherefore, this paper proposes a new method call Prompt Inject (PI) to store the prompts in the PLM instead of concating it to the input.\nTo my knowledge, the idea is very novel and interesting.\n\n2. The experiments are solid.\nThis paper conducts experiments on persona dialogue generation, Text-2-SQL and zero-shot task generalization.\nThe experiments show that the PI can speed up the inference time and improve the lower bound of the models.\n\n3. This paper is well written with proper citation and clarification\n\nWeakness:\nA minor note would be that the prompt in this paper is different from the prompt in most sense in other NLP paper, such prefix tuning, prompt tuning, etc.\nSo I  would suggest that the authors could give a more clear explanation on this issue in the introduction."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

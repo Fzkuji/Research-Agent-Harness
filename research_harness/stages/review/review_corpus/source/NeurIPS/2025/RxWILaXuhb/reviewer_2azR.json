@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "RxWILaXuhb",
+  "reviewer": "2azR",
+  "paper": {
+    "title": "Time-o1: Time-Series Forecasting Needs Transformed Label Alignment",
+    "authors": [
+      "Hao Wang",
+      "Licheng Pan",
+      "Zhichao Chen",
+      "Xu Chen",
+      "Qingyang Dai",
+      "Lei Wang",
+      "Haoxuan Li",
+      "Zhouchen Lin"
+    ],
+    "abstract": "Training time-series forecasting models poses unique challenges in loss function design. Most existing approaches adopt temporal mean squared error, but this study reveals two critical limitations: (1) it ignores the presence of label autocorrelation, which biases it from the true label sequence likelihood;  (2) it involves excessive number of tasks, which complicates optimization, especially for long-term forecasting. To address these issues, we introduce Time-o1, a transform-enhanced loss function for time-series forecasting. The central idea is to transform the label sequence into decorrelated components with discriminated significance. Models are then trained to align the most significant components, thereby effectively mitigating label autocorrelation and reducing task amount. Experiments demonstrate that Time-o1 achieves state-of-the-art performance and is compatible with various forecast models. Code is available at https://github.com/Master-PLC/Time-o1.",
+    "keywords": [
+      "Time-Series",
+      "Label Autocorrelation",
+      "Orthogonalization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=RxWILaXuhb"
+  },
+  "review_fields": {
+    "summary": "TransDF proposes a novel training objective that decorrelates the label space and aligns the most informative components to mitigate label autocorrelation and reduce the task amount. It can be plugged into existing time-series forecasting (TSF) models by reformulating the loss objective and applying an SVD-based label transformation.",
+    "strengths_and_weaknesses": "Strengths\n- The paper clearly formulates the bias issue of the TMSE objective in Theorem 3.1 and addresses it by aligning fully decorrelated label components through SVD-based transformation.\n- While FreDF relies on the assumption of decorrelation between frequency bases,which only holds under infinite forecast horizons, TransDF removes label autocorrelation bias under realistic finite horizons and simultaneously reduces the number of forecasting tasks.\n\nWeaknesses\n- The proposed method applies a global projection matrix derived from SVD uniformly across all forecast steps. However, real-world time-series data often contain local pattern shifts or nonlinear/dynamic structures. Thus, a static global projection may fail to capture such local dynamics, which might explain smaller improvements on certain datasets (e.g., PEMS or Traffic).",
+    "questions": "Why does even TransDF† (which uses a random projection and only partial component alignment) outperform the canonical DF objective, especially on the Weather dataset?",
+    "limitations": "The SVD-based label transformation relies solely on label-side prior statistics, making it less suitable for fully online or streaming scenarios. This limitation may hinder deployment in real-time TSF systems, where adaptive behavior and incremental updates are often required.",
+    "final_justification": "Overall, I appreciate the author's detailed responses and additional experiments, which have clarified my main concerns on local projection strategies and partial component alignment. My raised issues are largely addressed, and I find my original assessment remains appropriate, so I maintain it as it is. Although I could not engage more actively in the discussion phase, I found the author's rebuttal convincing and believe my initial review and score remain appropriate."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

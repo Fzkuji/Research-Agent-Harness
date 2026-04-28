@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "5BD4_awH4Fd",
+  "reviewer": "4Wbd",
+  "paper": {
+    "title": "A Stochastic Newton Algorithm for Distributed Convex Optimization",
+    "authors": [
+      "Brian Bullins",
+      "Kumar Kshitij Patel",
+      "Ohad Shamir",
+      "Nathan Srebro",
+      "Blake Woodworth"
+    ],
+    "abstract": "We propose and analyze a stochastic Newton algorithm for homogeneous distributed stochastic convex optimization, where each machine can calculate stochastic gradients of the same population objective, as well as stochastic Hessian-vector products (products of an independent unbiased estimator of the Hessian of the population objective with arbitrary vectors), with many such stochastic computations performed between rounds of communication.  We show that our method can reduce the number, and frequency, of required communication rounds, compared to existing methods without hurting performance, by proving convergence guarantees for quasi-self-concordant objectives (e.g., logistic regression), alongside empirical evidence.",
+    "keywords": [
+      "Distributed Optimization",
+      "Stochastic Optimization",
+      "Federated Learning",
+      "Newton's Method"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=5BD4_awH4Fd"
+  },
+  "review_fields": {
+    "summary": "This work studies a distributed Newton-type algorithm for unconstrained convex optimization.",
+    "main_review": "1. The least squares step in the Newton step can be solved using sketching based methods as well. There are published papers in the literature that focus on “distributed Newton sketch” type of algorithms where computing the exact Hessian is avoided and the Newton update is approximate. The algorithm presented in this paper seems to work very similarly to distributed Newton sketch and address the same problem. I think it would be great to compare the presented algorithm with the distributed Newton sketch approach so that the contributions of this paper can be better understood.\n\n2. Is “sub-optimality” (y-axis of figure 1) defined somewhere in the paper?\n\n3. I agree that comparing the performance with respect to the number of communication rounds is a good idea. But I think this, by itself, does not show the whole picture, since time complexity and required memory are important considerations as well. For instance, how does the performance look with respect to runtime?\n\n4. Also, related to my point in 1; it has been known for a while that least-squares objectives can be optimized to high accuracy with a single round of communication, i.e. averaging sketched solutions. Authors, in fact, cite the work by Wang et al., 2018, which is one of the papers that study the concept of averaging sketched solutions. It might justify/clarify the motivation of this work to further comment on how “local-SGD for least squares” and “averaging sketched solutions” compare."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

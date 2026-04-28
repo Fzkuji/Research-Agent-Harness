@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "aVh9KRZdRk",
+  "reviewer": "rwBm",
+  "paper": {
+    "title": "Learning to grok: Emergence of in-context learning and skill composition in modular arithmetic tasks",
+    "authors": [
+      "Tianyu He",
+      "Darshil Doshi",
+      "Aritra Das",
+      "Andrey Gromov"
+    ],
+    "abstract": "Large language models can solve tasks that were not present in the training set. This capability is believed to be due to in-context learning and skill composition. In this work, we study the emergence of in-context learning and skill composition in a collection of modular arithmetic tasks. Specifically, we consider a finite collection of linear modular functions $z = a  x + b  y \\text{ mod } p$ labeled by the vector $(a, b) \\in \\mathbb{Z}_p^2$. We use some of these tasks for pre-training and the rest for out-of-distribution testing. We empirically show that a GPT-style transformer exhibits a transition from in-distribution to out-of-distribution generalization as the number of pre-training tasks increases. We find that the smallest model capable of out-of-distribution generalization requires two transformer blocks, while for deeper models, the out-of-distribution generalization phase is *transient*, necessitating early stopping. Finally, we perform an interpretability study of the pre-trained models, revealing highly structured representations in both attention heads and MLPs; and discuss the learned algorithms. Notably, we find an algorithmic shift in deeper models, as we go from few to many in-context examples.",
+    "keywords": [
+      "In-Context Learning",
+      "Grokking",
+      "Modular Arithmetic",
+      "Interpretability"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=aVh9KRZdRk"
+  },
+  "review_fields": {
+    "summary": "The paper studies the emergence of the in-context ability of the GPT-style transformer model trained using autoregressive loss and arithmetic modular datasets. It analyzes the influence of the number of tasks, number of in-context examples, model capacity, etc., on the ICL capability of an appropriately trained model (i.e., using early stopping). It also provides a persuasive “task decomposition hypothesis”, which is well supported by the ablation study and various experiments. The white-box analysis on the attention heads provides convincing evidence of the proposed explanation. Although there is a gap between the grokking settings (i.e., small model and toy dataset) and practical systems, the paper does a good job of explaining many important trends and concepts related to the emergence of compositional in-context ability. I enjoy reading this paper and suggest an acceptance.",
+    "strengths": "- The paper is easy to follow. Good presentation!\n- The experiments are well-designed, providing compelling support for the claims.\n    - The results in Figure 5 are cool.\n    - The skill decomposition discussed in section 5 is great. The clear pattern in attention heads verifies it very well. (The hypotheses could be further verified if the author can link the values of $c_1, c_2$ to some weights in the network, see the question part.)",
+    "weaknesses": "- The emergent ability (or grokking) usually refers to a phenomenon in the model “got stuck” in a non-generalization region and suddenly gained the generalization ability. Hence some discussion about the learning dynamics, i.e., how the accuracy, loss, representation, ability, attention pattern, etc., gradually evolve during training would make the paper stronger.\n- The task and batch sample selection in this paper have many constraints (e.g., the rectangular rule, the balanced number of samples in each batch, etc.). However, the practical systems usually cannot strictly satisfy all these assumptions. Hence a more detailed analysis of how these assumptions influence the generalization ability would provide more insights to practical systems.",
+    "questions": "- The paper claims in line 147 that “As the o.o.d. performance increases, the pre-training performance simultaneously degrades “. However, it is hard to read this information from Figure 3-a panel 1. Maybe a different color mapping or adding numbers on these patches would be helpful.\n- Equation 2 is a bit hard to understand. How does it correlate to $z = ax+by$ ? (Although, from the latter explanations, I know the model relies on $c_1z_1^t + c_2z_2^t$ to get $z$, but it might be helpful to claim how it is derived.)\n- Better to define $GF(p)$, i.e., the Galois field, before using it.\n- Are the results in Figure 6 coming from $d=2$ or $d=4$? I can find the figure for all 8 attention heads for $d=2$ in the appendix, what about the $d=4$ case? It might be helpful to see if the pattern in later layers (i.e., attention focusing on different $z_i$) exists in shallow layers, and vice versa.\n- In line 264, the paper claims that the pattern depends on $(a,b)$, but it is hard to read that from Figure 6b.\n- As also mentioned in the strength part, is it possible to find some specific value in the weight space (e.g., attention weights, readout layers, etc.) that is highly correlated to $c_1, c_2$? If so, the hypothesis that the model first learns skill 2 (scale each example) and then skill 3 (weighted combine different examples) would be further verified.\n- The OOD settings studied in grokking or emergent ability setting are quite related to the compositional generalization and systematic generalization. It would be helpful to discuss them in the related works, here are some of them:\n    \n    [1]  Schott, Lukas, et al. \"Visual representation learning does not generalize strongly within the same domain.\" ICLR 2022\n    \n    [2] Xu, Zhenlin, Marc Niethammer, and Colin A. Raffel. \"Compositional generalization in unsupervised compositional representation learning: A study on disentanglement and emergent language.\" NeurIPS 2022\n    \n    [3] Ren, Yi, et al. \"Improving compositional generalization using iterated learning and simplicial embeddings.\" NeurIPS 2023",
+    "limitations": "Discussions on how the findings help the practical system."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:46Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:46Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1185,
+    "words": 183,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/82d13d41-6de6-45e5-94f3-9d597f9177e9",
+    "error": null,
+    "scored_chars": 1193
+  }
+}

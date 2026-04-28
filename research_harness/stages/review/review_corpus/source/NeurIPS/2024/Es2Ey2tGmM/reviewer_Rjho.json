@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "Es2Ey2tGmM",
+  "reviewer": "Rjho",
+  "paper": {
+    "title": "Constrained Diffusion Models via Dual Training",
+    "authors": [
+      "Shervin Khalafi",
+      "Dongsheng Ding",
+      "Alejandro Ribeiro"
+    ],
+    "abstract": "Diffusion models have attained prominence for their ability to synthesize a probability distribution for a given dataset via a diffusion process,  enabling the generation of new data points with high fidelity. However, diffusion processes are prone to generating samples that reflect biases in a training dataset. To address this issue, we develop constrained diffusion models by imposing diffusion constraints based on desired distributions that are informed by requirements. Specifically, we cast the training of diffusion models under requirements as a constrained distribution optimization problem that aims to reduce the distribution difference between original and generated data while obeying constraints on the distribution of generated data. We show that our constrained diffusion models generate new data from a mixture data distribution that achieves the optimal trade-off among objective and constraints. To train constrained diffusion models, we develop a dual training algorithm and characterize the optimality of the trained constrained diffusion model. We empirically demonstrate the effectiveness of our constrained models in two constrained generation tasks: (i) we consider a dataset with one or more underrepresented classes where we train the model with constraints to ensure fairly sampling from all classes during inference; (ii) we fine-tune a pre-trained diffusion model to sample from a new dataset while avoiding overfitting.",
+    "keywords": [
+      "Constrained diffusion model",
+      "constrained optimization",
+      "Lagrangian method",
+      "dual algorithm"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Es2Ey2tGmM"
+  },
+  "review_fields": {
+    "summary": "This paper studies the constrained diffusion models, motivated by customizing the generation by specific tasks. The idea is to formulate KL divergence-constrained optimization problem (U-KL), which is shown to have zero duality gap. The convergence (rate) of the sampling process is given by assuming a mixture initial distribution. Several experiments have been conducted, e.g., on MNIST and on the fairness.",
+    "strengths": "The paper provides a thorough study on the KL-constrained diffusion models: both optimization and sampling aspects are considered. The paper is overall interesting (methodologically). I also checked most proofs, and they are correct.",
+    "weaknesses": "There are several weaknesses (and questions):\n\n(1) The problem (U-KL) is still abstract. It is not clear how to choose $b_i$ to represent desired properties, or what are the right interpretations of the KL constraints (e.g., Section 3.2 on the fairness).\n\n(2) Theorem 7: the authors may emphasize that Theorem 7 is valid under the assumption that the initial distribution is a mixture. Also I think DDPM is used. The authors may also compare Theorem 7 with the results in [28].\n\n(3) Experiments: the authors consider MNIST, CIFAR 10 and Celeb-A. However, the FID obtained seems to be large compared to the existing results. For instance, for MNIST the FID is typically less than 1 while the paper reports ~20-40; for CIFAR 10 the FID is less than 3 (the best is around 1.8) while the paper reports ~50. The authors may explain why this happens, otherwise the experiment results are not so convincing. \n\n(4) Literature and comments: There have also been a line of work on the SDE-based diffusion models (see ref. a), which show good empirical results. Related to (3), ref b. reports the FID 1.8 for CIFAR 10, and ref c. reports the FID 0.8 for MNIST (both without constraints). The authors may refer to these results on the continuous-time (SDE-based) models, and explain why there is so large difference in the empirical results. Another suggestion is that the authors may consider fine-tuning in the continuous framework, as in [45] and ref d.\n\na.  Score-Based Generative Modeling through Stochastic Differential Equations, Song et al., arXiv:2011.13456.\n\nb.  Elucidating the Design Space of Diffusion-Based Generative Models, Karras, Aittala, Aila and Laine, arXiv:2206.00364.\n\nc.  Contractive Diffusion Probabilistic Models, Tang and Zhao, arXiv:2401.13115.\n\nd.  Fine-tuning of diffusion models via stochastic control: entropy regularization and beyond, Tang, arXiv:2403.06279.\n\nI would be happy to raise the score if some (or all) of the above concerns are addressed."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 5,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2201,
+    "words": 347,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/14032100-2302-43ff-93b3-d27d25f6233e",
+    "error": null,
+    "scored_chars": 2206
+  }
+}

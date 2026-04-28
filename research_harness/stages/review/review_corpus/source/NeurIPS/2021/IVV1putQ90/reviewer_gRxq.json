@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "IVV1putQ90",
+  "reviewer": "gRxq",
+  "paper": {
+    "title": "Latent Equilibrium: A unified learning theory for arbitrarily fast computation with arbitrarily slow neurons",
+    "authors": [
+      "Paul Haider",
+      "Benjamin Ellenberger",
+      "Laura Kriener",
+      "Jakob Jordan",
+      "Walter Senn",
+      "Mihai A. Petrovici"
+    ],
+    "abstract": "The response time of physical computational elements is finite, and neurons are no exception. In hierarchical models of cortical networks each layer thus introduces a response lag. This inherent property of physical dynamical systems results in delayed processing of stimuli and causes a timing mismatch between network output and instructive signals, thus afflicting not only inference, but also learning. We introduce Latent Equilibrium, a new framework for inference and learning in networks of slow components which avoids these issues by harnessing the ability of biological neurons to phase-advance their output with respect to their membrane potential. This principle enables quasi-instantaneous inference independent of network depth and avoids the need for phased plasticity or computationally expensive network relaxation phases. We jointly derive disentangled neuron and synapse dynamics from a prospective energy function that depends on a network's generalized position and momentum. The resulting model can be interpreted as a biologically plausible approximation of error backpropagation in deep cortical networks with continuous-time, leaky neuronal dynamics and continuously active, local plasticity. We demonstrate successful learning of standard benchmark datasets, achieving competitive performance using both fully-connected and convolutional architectures, and show how our principle can be applied to detailed models of cortical microcircuitry. Furthermore, we study the robustness of our model to spatio-temporal substrate imperfections to demonstrate its feasibility for physical realization, be it in vivo or in silico.",
+    "keywords": [
+      "dynamical systems",
+      "cortical microcircuits",
+      "deep learning",
+      "prospective coding",
+      "noise robustness",
+      "synaptic plasticity"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=IVV1putQ90"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a biologically motivated mechanism that could allow a network of slow-responding neurons (primarily due to the response lag) to perform computation at a much faster timescale. The key modeling idea is to assume that the neurons compute a \"prospective\" latent state, by linearly extrapolating from the current position in the phase space, by the current momentum and a specific timescale. The authors then assume that neural dynamics is along the extrema of an energy function in the latent state space; hence called the \"Latent Equilibrium\" framework. Using synthetic data, the authors demonstrate that the proposed model can indeed lead to fast computation and learning; they also apply the model to real data from cortical microcircuits. The authors also go further and discuss how the model can be modified to self-correct timescale mismatches.",
+    "main_review": "This is a really interesting paper. The paper addresses a long-standing problem of fundamental importance, namely the timescale mismatch between the need for fast computation and the biophysical limits that makes each computational element inherently \"slow\". The key idea of the proposed model is that the neurons compute a \"prospective\" latent state, predicting its future state by a fixed timescale; this is motivated by the phase-advancing ability of biological neurons, keeping the model biologically plausible.\n\nThe paper recognizes previous works that addressed the same problem, then identifies the novel elements in the proposed approach. In particular, the authors highlight that the key assumption of prospective coding, combined with a continuous gradient-descent learning resolves an issue that made learning difficult in previous approaches.\n\nThe work seems to be technically sound; key modeling assumptions are clearly stated, claims are nicely demonstrated and supported by the results. Methods were first validated on synthetic and benchmark datasets, before begin applied to real data. The presentation is also exceedingly clear and well-motivated.\n\nI believe that this paper will be a valuable contribution to the field, and I strongly recommend acceptance. Below I have a few questions and comments for the authors.\n\n- Fig 4a: I am not sure if I understand this figure. Why is the dashed orange line so high up? Can any other curve be compared to this one? In general, which pairs of curves are we supposed to compare, and which pairs are apples and oranges?\n\n- Could you comment on the biological plausibility of the latent equilibrium hypothesis in real neurons? Is this testable?\n\n- Could you comment on how the proposed principle of prospective coding (predicting its own future state) is related to what is generally known as predictive coding (predicting the future input), in this context?\n\n- Fig 3: It was not immediately clear what \"original model\" meant; it might help to say \"lag-free model\" or anything that is more descriptive of the difference.\n\n- In the description of the model, it is not explicitly stated how the energy function is constructed, in particular what (Wr-b) corresponds to. It would help to have an additional sentence, although the form is fairly standard.\n\n**EDIT**: The author response addressed all my questions and provided additional context. I remain enthusiastic about this paper and I will keep my original rating of 8.",
+    "limitations_and_societal_impact": "The authors discuss the potential societal impact of the AI models that might derive from this framework, in the Broader impact section.\n\nIt would be helpful to have a separate discussion on the limitations of the model itself."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

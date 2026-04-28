@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "N0n_QyQ5lBF",
+  "reviewer": "hzHn",
+  "paper": {
+    "title": "Unsupervised Vision-Language Grammar Induction with Shared Structure Modeling",
+    "authors": [
+      "Bo Wan",
+      "Wenjuan Han",
+      "Zilong Zheng",
+      "Tinne Tuytelaars"
+    ],
+    "abstract": "We introduce a new task, unsupervised vision-language (VL) grammar induction. Given an image-caption pair, the goal is to extract a shared hierarchical structure for both image and language simultaneously.  We argue that such structured output, grounded in both modalities, is a clear step towards the high-level understanding of multimodal information. Besides challenges existing in conventional visually grounded grammar induction tasks, VL grammar induction requires a model to capture contextual semantics and perform a fine-grained alignment. To address these challenges, we propose a novel method, CLIORA, which constructs a shared vision-language constituency tree structure with context-dependent semantics for all possible phrases in different levels of the tree. It computes a matching score between each constituent and image region, trained via contrastive learning.  It integrates two levels of fusion, namely at feature-level and at score-level, so as to allow fine-grained alignment. We introduce a new evaluation metric for VL grammar induction, CCRA, and show a 3.3% improvement over a strong baseline on Flickr30k Entities. We also evaluate our model via two derived tasks, i.e., language grammar induction and phrase grounding, and improve over the state-of-the-art for both.",
+    "keywords": [
+      "Grammar Induction",
+      "Vision-Language Matching",
+      "Unsupervised Learning"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=N0n_QyQ5lBF"
+  },
+  "review_fields": {
+    "comment": "Thanks authors for your response! I appreciate that most of my comments have been addressed. I'm now inclined to raise my rating -- will update it after the discussion period concludes. Below are the points on which I am still not convinced:\n\n--- \n**Unified Grammar** \n\nWhile I agree with the authors that this work is the first one proposing a \"unified\" vision-language grammar, if \"unified\" means that an image and parallel text have exactly the same parsing structure, I am not sure if it is an advantage (or disadvantage) to have a fully synchronous vision-language grammar. \n\nConsider an image that has several semantically equivalent captions with different syntactic structures, the image would have different parsings associated with different captions. This is very unnatural to me on the vision side, especially when linking to how humans acquire language: we arguably don't parse the visual scene in exactly the same way as how we parse text. The visual parses in this work are therefore less meaningful than text parses. \n\nTo clarify, I do not mean that modeling the visual structures in the current way is bad: it provides ways to better understand which visual part each text span corresponds to, and, from the engineering perspective, it enables easier fusion with text features. However, the current paper and ablation study did not convince me that such the \"unified\" VL setting should be claimed as an advantage compared to existing work, instead of just one choice among many possibilities. \n\n--- \n**Author Response**: \"Recent SOTA approaches, e.g. VC-PCFG and DIORA, have not mentioned if they select their checkpoint according to the annotations from the dev data.\" \n\n**R #hzHn**: While I'm happy to see the authors have done experiments with (fully unsupervised) loss based model selection and have clarified in Appendix F, I would like to emphasize that existing work in a problematic setting, especially when it has been concerned for years, should never be an excuse for conducting additional work in the setting. \n\nDIORA does select the best model based on the annotated dev data (https://aclanthology.org/N19-1116.pdf; Appendix A.1 Early Stopping). At the meantime, I am slightly worried about the hyperparameter settings (Appendix F): DIORA uses the PTB dev set for choosing the best parameters, while the authors choose their tuned hyperparameters, and only do unsupervised model selection. \nIdeally, the hyperparameters should also be tuned based on the current development loss. \n\n--- \n\nThere are still some words that refer to part-of-speech tags as nonterminals (e.g., Section 3.2, Appendix E). \nI'm looking forward to seeing these fixed."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:36Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 5199,
+    "words": 783,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1f8f03ab-5005-4dd2-89d9-5542bb9fa1eb",
+    "error": null,
+    "scored_chars": 5224
+  }
+}

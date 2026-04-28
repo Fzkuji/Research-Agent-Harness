@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "sJvhwDtFhQ",
+  "reviewer": "ZvuT",
+  "paper": {
+    "title": "TPD: Enhancing Student Language Model Reasoning via Principle Discovery and Guidance",
+    "authors": [
+      "Haorui Wang",
+      "Rongzhi Zhang",
+      "Yinghao Li",
+      "Lingkai Kong",
+      "Yuchen Zhuang",
+      "Xiusi Chen",
+      "Chao Zhang"
+    ],
+    "abstract": "Large Language Models (LLMs) have recently showcased remarkable reasoning abilities. However, larger models often surpass their smaller counterparts in reasoning tasks, posing the challenge of effectively transferring these capabilities from larger models. Existing approaches heavily rely on extensive fine-tuning data or continuous interactions with a superior teacher LLM during inference. We introduce a principle-based teacher-student framework called Teaching via Principle Discovery (TPD) to address these limitations. Inspired by human learning mechanisms, TPD mimics the interaction between a teacher and a student using a principle-based approach. The teacher LLM generates problem-solving instructions and corrective principles based on the student LLM's errors. These principles guide the refinement of instructions and the selection of instructive examples from a validation set. This enables the student model to learn from both the teacher's guidance and its own mistakes. Once the student model begins making inferences, TPD requires no further intervention from the teacher LLM. Through extensive experiments across eight reasoning tasks, we demonstrate the effectiveness of TPD. Compared to standard chain-of-thought prompting, TPD significantly improves the student model's performance, achieving an average improvement of 6.2\\%.",
+    "keywords": [
+      "Principle discovery",
+      "Teacher-student framework",
+      "Reasoning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=sJvhwDtFhQ"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a simple method to improve the performance of the student model. Specifically, the teacher model generates problem-solving instructions and corrective principles based on the student LLM's errors. Then during inference, the student model can guide the inference process without the help from the teacher model.",
+    "reasons_to_accept": "1. The proposed method is intuitive which imitates the real teaching scenarios in schools. \n2. The analysis of the experiments is detailed and convincing.",
+    "reasons_to_reject": "1. The method involves the labeling process of both large teacher model and human reviewers, which is complex and resource-consuming. \n2. The experimental result on some arithmetic reasoning tasks achieves a very subtle improvement. More seriously, it seems that some important baselines are missing, such as Automate-CoT. \n3. The experiments are only conducted on GPT-3.5, which is a relatively weak LLM. It would be better if the authors could provide the experimental results on other LLMs.",
+    "questions_to_authors": "Please refer to the reasons to reject."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:44Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:44Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 686,
+    "words": 107,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/82768f14-983e-4809-a530-1b4544a3a0ce",
+    "error": null,
+    "scored_chars": 689
+  }
+}

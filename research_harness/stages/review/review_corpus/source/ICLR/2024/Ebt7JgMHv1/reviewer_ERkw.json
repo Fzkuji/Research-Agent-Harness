@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "Ebt7JgMHv1",
+  "reviewer": "ERkw",
+  "paper": {
+    "title": "Is This the Subspace You Are Looking for? An Interpretability Illusion for Subspace Activation Patching",
+    "authors": [
+      "Aleksandar Makelov",
+      "Georg Lange",
+      "Atticus Geiger",
+      "Neel Nanda"
+    ],
+    "abstract": "Mechanistic interpretability aims to attribute high-level model behaviors to specific, interpretable learned features. It is hypothesized that these features manifest as directions or low-dimensional subspaces within activation space. Accordingly, recent studies have explored the identification and manipulation of such subspaces to reverse-engineer computations, employing methods such as activation patching. In this work, we demonstrate that naïve approaches to subspace interventions can give rise to interpretability illusions.\n\nSpecifically, even if patching along a subspace has the intended end-to-end causal effect on model behavior, this effect may be achieved by activating \\emph{a dormant parallel pathway} using a component that is \\textit{causally disconnected} from the model output.\nWe demonstrate this in a mathematical example, realize the example empirically in two different settings (the Indirect Object Identification (IOI) task and factual recall), and argue that activating dormant pathways ought to be prevalent in practice.\nIn the context of factual recall, we further show that the illusion is related to rank-1 fact editing, providing a mechanistic explanation for previous work observing an inconsistency between fact editing performance and fact localisation.\n\nHowever, this does not imply that activation patching of subspaces is intrinsically unfit for interpretability.\nTo contextualize our findings, we also show what a success case looks like in a task (IOI) where prior manual circuit analysis allows an understanding of the location of the ground truth feature. We explore the additional evidence needed to argue that a patched subspace is faithful.",
+    "keywords": [
+      "Mechanistic Interpretability",
+      "Natural Language Processing",
+      "Large Language Models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Ebt7JgMHv1"
+  },
+  "review_fields": {
+    "comment": "Your response is helpful for thinking about experimentally testing for the validity of your theory.  You describe a test\n\n> A key experiment to check for the illusion is to patch only [a]long $v_{rowspace}$ and compare the effect to patching along $v$.\n\nWhich I agree would be practical, and could be used to quantify the prevalence of the effect in various networks.  Do you think this experiment could be operationalized into a method for detecting interpretability illusions?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 476,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/35ae25bc-8ebb-497e-8697-c883907048e0",
+    "error": null,
+    "scored_chars": 478
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "DWf4vroKWJ",
+  "reviewer": "f8xo",
+  "paper": {
+    "title": "Router-R1: Teaching LLMs Multi-Round Routing and Aggregation via Reinforcement Learning",
+    "authors": [
+      "Haozhen Zhang",
+      "Tao Feng",
+      "Jiaxuan You"
+    ],
+    "abstract": "The rapid emergence of diverse large language models (LLMs) has spurred the development of LLM routers that assign user queries to the most suitable model. However, existing LLM routers typically perform a single-round, one-to-one mapping (\\textit{i.e.}, assigning each query to a single model in isolation), which limits their capability to tackle complex tasks that demand the complementary strengths of multiple LLMs. In this paper, we present \\textbf{Router-R1}, a reinforcement learning (RL)-based framework that formulates multi-LLM routing and aggregation as a sequential decision process. Router-R1 instantiates the router itself as a capable LLM, leveraging its reasoning ability to interleave \"think\" actions (internal deliberation) with \"route\" actions (dynamic model invocation), and integrates each response into its evolving context. To facilitate learning, we employ a lightweight rule-based reward comprising format rewards, final outcome rewards, and a novel cost reward for optimizing the balance between performance and cost, opening a pathway toward enhancing performance-cost trade-offs via RL. Router-R1 also conditions only on simple model descriptors such as pricing, latency, and example performance, enabling strong generalization to unseen model selection. Experiments on seven general and multi-hop QA benchmarks show that Router-R1 outperforms several strong baselines, achieving superior performance while maintaining robust generalization and cost management.",
+    "keywords": [
+      "Large Language Models",
+      "LLM Routers",
+      "LLM Selection",
+      "Reinforcement Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=DWf4vroKWJ"
+  },
+  "review_fields": {
+    "comment": "Thank you for uploading the complete table! I have mixed feelings about the full set of results: it seems that for very low cost or very high cost, your routing method works the best. However, for intermediate costs, Mixtral offers the best results; in theory you should be doing at least as well as individual models, correct? I think this is a point you should look and try to improve. Anyways, because this works offers a new approach to routing, which can handle multi-turn interactions (which is novel), I will increase my rating to 4."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

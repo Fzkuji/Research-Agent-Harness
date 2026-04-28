@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "DWf4vroKWJ",
+  "reviewer": "7Web",
+  "paper": {
+    "title": "Router-R1: Teaching LLMs Multi-Round Routing and Aggregation via Reinforcement Learning",
+    "authors": [
+      "Haozhen Zhang",
+      "Tao Feng",
+      "Jiaxuan You"
+    ],
+    "abstract": "The rapid emergence of diverse large language models (LLMs) has spurred the development of LLM routers that assign user queries to the most suitable model. However, existing LLM routers typically perform a single-round, one-to-one mapping (\\textit{i.e.}, assigning each query to a single model in isolation), which limits their capability to tackle complex tasks that demand the complementary strengths of multiple LLMs. In this paper, we present \\textbf{Router-R1}, a reinforcement learning (RL)-based framework that formulates multi-LLM routing and aggregation as a sequential decision process. Router-R1 instantiates the router itself as a capable LLM, leveraging its reasoning ability to interleave \"think\" actions (internal deliberation) with \"route\" actions (dynamic model invocation), and integrates each response into its evolving context. To facilitate learning, we employ a lightweight rule-based reward comprising format rewards, final outcome rewards, and a novel cost reward for optimizing the balance between performance and cost, opening a pathway toward enhancing performance-cost trade-offs via RL. Router-R1 also conditions only on simple model descriptors such as pricing, latency, and example performance, enabling strong generalization to unseen model selection. Experiments on seven general and multi-hop QA benchmarks show that Router-R1 outperforms several strong baselines, achieving superior performance while maintaining robust generalization and cost management.",
+    "keywords": [
+      "Large Language Models",
+      "LLM Routers",
+      "LLM Selection",
+      "Reinforcement Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=DWf4vroKWJ"
+  },
+  "review_fields": {
+    "summary": "Router-R1 is a multi-round collaborative routing and aggregation framework for LLMs, designed to overcome the limitations of existing routing approaches that assign each query to a single model in a one-shot manner. It formulates multi-model collaboration as a sequential decision process and introduces a *think–route* alternating mechanism: the router itself is an LLM with reasoning capabilities, which iteratively alternates between internal reasoning (*Think*) and model invocation (*Route*) across multiple rounds to progressively construct the final answer. To enhance training efficiency, Router-R1 employs a lightweight regularized reward function composed of format rewards, answer correctness rewards, and model invocation cost penalties, effectively guiding the model to balance accuracy and computational cost.",
+    "strengths_and_weaknesses": "**Strengths**\n\n1. The introduction of the cost reward is interesting and aligns well with the motivation for routing methods.\n2. Experiments are comprehensive, but multi-run repetition experiments to validate stability appear lacking.\n3. The paper is well written and clearly presented.\n\n**Weaknesses**\n\n1. The LLM routing pool lacks some state-of-the-art models, such as GPT-4o and DeepSeek-v3.\n2. Although NeurIPS does not require reviewers to check arXiv versions of papers, I found a version of this paper on arXiv. I would like the authors to explain the discrepancy between the experimental results in the two versions, where the results are very different. If the paper is accepted, which version’s experimental results will be used in the camera-ready submission? (This will not affect my evaluation of the paper.)\n3. In Section 5.3, the authors demonstrate the effect of introducing new models at test time for Router-R1. I am curious how Router-R1 would perform if new models, such as LLaMA3-ChatQA-1.5-8B, were incorporated during training.\n4. Router-R1 requires multiple calls to LLMs, but Figure 2 shows that the average LLM API call count is only slightly above 1.0. This is puzzling because it implies most queries require only one call. Is multi-round calling really necessary? Does the current dataset adequately demonstrate the effectiveness of the proposed method? Additionally, how does Router-R1’s runtime efficiency compare with single-round invocation models?\n5. The novelty of the paper is limited (though the introduction of the cost reward is commendable). While Router-R1 is presented as a routing method, from a modeling perspective, it resembles tool learning. For example, the authors mention search r1. The main difference here is that the authors treat the models in the LLM routing pool as callable tools. Although the distinction between these two approaches is discussed in Section 2.2, I find it not fundamentally different. The authors may consider modifying search r1 to better fit the routing scenario as a new baseline."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 5,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

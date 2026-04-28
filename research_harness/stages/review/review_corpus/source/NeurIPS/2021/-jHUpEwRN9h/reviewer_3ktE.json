@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "-jHUpEwRN9h",
+  "reviewer": "3ktE",
+  "paper": {
+    "title": "Row-clustering of a Point Process-valued Matrix",
+    "authors": [
+      "Lihao Yin",
+      "Ganggang Xu",
+      "Huiyan Sang",
+      "Yongtao Guan"
+    ],
+    "abstract": "Structured point process data harvested from various platforms poses new challenges to the machine learning community. To cluster repeatedly observed marked point processes, we propose a novel mixture model of multi-level marked point processes for identifying potential heterogeneity in the observed data. Specifically, we study a matrix whose entries are marked log-Gaussian Cox processes and cluster rows of such a matrix.  An efficient semi-parametric Expectation-Solution (ES) algorithm combined with functional principal component analysis (FPCA) of point processes is proposed for model estimation. The effectiveness of the proposed framework is demonstrated through simulation studies and real data analyses.",
+    "keywords": [
+      "Expectation-Solution Algorithm",
+      "Functional Principal Component Analysis",
+      "Marked Point Processes",
+      "Model-based Clustering",
+      "Semiparametric Model"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=-jHUpEwRN9h"
+  },
+  "review_fields": {
+    "summary": "This paper studies an interesting problem, which aims to identify potential heterogeneity in the observed data where structured event data are harvested from various platforms. The authors imposes a matrix structure to repeatedly observed marked point processes, and propose a mixture model of multi-level marked point processes. In particular, the data is structured into a matrix, where each entry contains a sequence of events; these events are modeled by marked log-Gaussian Cox processes; the ultimate goal is to cluster rows of such a matrix. They also propose an efficient semi-parametric Exponential-Solution (ES) algorithm combined with functional principal component analysis of point processes for model estimation.",
+    "main_review": "The paper is clearly written and easy to follow. The main contribution of this paper is introducing the ES algorithm, which is similar to EM algorithm, aiming to facilitate the computation in estimating the latent variables by adopting the kernel method.",
+    "limitations_and_societal_impact": "- I don't quite understand how the event data can be divided by days? Would this separation cause discontinuity to the original sequence? And how to evaluate the influence of such data preprocessing to the final results?\n- Since the entire paper is based on a key assumption that event sequences from each cluster are realizations of a multi-level log-Gaussian Cox process, can the authors add more explanation why this assumption applies to the most of the applications?\n- The choices of the bandwidth is significant to the performance of the proposed model. The author mentioned the bandwidth is determined adaptively at each iteration via MLE. It seems to be expensive to carry out in practice."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

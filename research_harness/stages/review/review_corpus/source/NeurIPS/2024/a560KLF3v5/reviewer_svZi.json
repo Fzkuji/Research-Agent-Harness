@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "a560KLF3v5",
+  "reviewer": "svZi",
+  "paper": {
+    "title": "Unelicitable Backdoors via Cryptographic Transformer Circuits",
+    "authors": [
+      "Andis Draguns",
+      "Andrew Gritsevskiy",
+      "Sumeet Ramesh Motwani",
+      "Christian Schroeder de Witt"
+    ],
+    "abstract": "The rapid proliferation of open-source language models significantly increases the risks of downstream backdoor attacks. These backdoors can introduce dangerous behaviours during model deployment and can evade detection by conventional cybersecurity monitoring systems. In this paper, we introduce a novel class of backdoors in transformer models, that, in contrast to prior art, are unelicitable in nature. Unelicitability prevents the defender from triggering the backdoor, making it impossible to properly evaluate ahead of deployment even if given full white-box access and using automated techniques, such as red-teaming or certain formal verification methods. We show that our novel construction is not only unelicitable thanks to using cryptographic techniques, but also has favourable robustness properties.\nWe confirm these properties in empirical investigations, and provide evidence that our backdoors can withstand state-of-the-art mitigation strategies. Additionally, we expand on previous work by showing that our universal backdoors, while not completely undetectable in white-box settings, can be harder to detect than some existing designs. By demonstrating the feasibility of seamlessly integrating backdoors into transformer models, this paper fundamentally questions the efficacy of pre-deployment detection strategies. This offers new insights into the offence-defence balance in AI safety and security.",
+    "keywords": [
+      "Backdoor attacks",
+      "Transformers",
+      "handcrafting model parameters",
+      "cryptographic circuits"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=a560KLF3v5"
+  },
+  "review_fields": {
+    "summary": "This paper introduces a novel approach to creating unelicitable backdoors in language models using cryptographic techniques. The authors develop two main designs: an NP-complete backdoor and an encrypted backdoor, both implemented within transformer architectures. These backdoors are designed to be extremely difficult or impossible to detect or trigger without specific knowledge, even with full access to the model. The researchers empirically verify the robustness of their constructions against state-of-the-art backdoor elicitation methods like latent adversarial training. They also propose a hardness scale for backdoor elicitation techniques.",
+    "strengths": "- Quantitative evaluations of the method's robustness against elicitation and comparison to previous methods\n- Clear demonstration and visualization of the backdoor insertion and encryption process\n- Clear exposition of previous works on attack and defense to motivate the work (Section 3 and Figure 4)",
+    "weaknesses": "- Lack of qualitative examples to more intuitively understand implications of what the backdoors can do and when they might be useful\n- Not addressing fully robustness against mitigation methods (the paper mostly focused on elicitation)\n- Lack more variety of evaluations (e.g. impact to model behavior, robustness against mitigations)",
+    "questions": "- More evaluations on the methods's robustness against mitigations mentioned in section 5.2 limitations would be helpful to understand the method's implication of LLM safety area.\n- In the same section, the author mentions that adding noises to weights or change weights by finetuning can mitigate the issue. One potential way of showing the method's effectiveness is measuring how much weight change is needed for the method to fail, and how much model performance reduction will the mitigations result in.\n- In section 4 line 186, the paper claims that the addition of backdoor modules cannot be detected from looking at computational graph. Can the authors elaborate more on why it cannot be detected?\n- Does the backdoor insertion alter original model behavior/quality? More evaluation on that would be helpful.\n- Does the backdoor insertion effectiveness depend on type of trigger message and harmful message?",
+    "limitations": "The paper discusses limitation in section 6.2 on potential mitigation to the proposed attack."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1650,
+    "words": 254,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/bd573a03-d77c-49ae-91fa-2f217975fbe5",
+    "error": null,
+    "scored_chars": 1650
+  }
+}

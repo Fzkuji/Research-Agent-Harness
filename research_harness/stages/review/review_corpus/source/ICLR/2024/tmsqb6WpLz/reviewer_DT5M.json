@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "tmsqb6WpLz",
+  "reviewer": "DT5M",
+  "paper": {
+    "title": "Dissecting learning and forgetting in language model finetuning",
+    "authors": [
+      "Xiao Zhang",
+      "Ji Wu"
+    ],
+    "abstract": "Finetuning language models on domain-specific corpus is a common approach to enhance their domain knowledge and capability. While improving performance on domain tasks, it often brings a side-effect of forgetting of the model's general abilities. In this study, we analyze the effects of finetuning on language models by dissecting its impacts on the modeling of topic, style, and factual knowledge in text. Our method uses instruction-following LLMs such as ChatGPT to auto-generate controlled-variable text examples which we use to probe the model. Our findings reveal that finetuning results in significant shifts in the language model's topic and style priors, while actual knowledge learning only contributes to a small fraction of the total probability change. Analysis shows that the adaptation of topic and style priors behave akin to learning simple features: they are learned rapidly and require little model capacity. They are also learned independently and primarily at the beginning of a text sequence. In contrast, factual knowledge is learned stably but slowly and requires significant model capacity to learn. The research offers insights and understanding into the finer dynamics of learning and forgetting in language models, and can potentially inform future research on improving domain adaptation and addressing the challenges of forgetting in continual learning of language models.",
+    "keywords": [
+      "language models",
+      "domain adaptation",
+      "catastrophic forgetting"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=tmsqb6WpLz"
+  },
+  "review_fields": {
+    "summary": "- This paper presents a detailed analysis of the effects of fine-tuning of large language models on domain-specific downstream tasks/datasets.\n- In doing so, authors break down the probability distribution of a text into its fundamental factors i.e., topic, style and factual knowledge, and study the effects of fine-tuning on the probability distribution over these three factors.\n- It has been shown that in the early cycles of fine-tuning, the language model easily captures the topic and style information of the underlying text data thus introducing learning bias, which ultimately leads to an increase in the forgetting of the previous knowledge. However, the model is able to capture the factual knowledge in the later cycles of fine-tuning and also requires significant model capacity as compared to the model capacity required for capturing topic and style information.\n- Extensive experimental evaluation asserts the claims made by authors and opens a new research direction in continual learning research.",
+    "strengths": "- Quality\n\t- The motivation is well-founded and the claims are sound.\n\t- Experimental analysis is very detailed and explanatory.\n- Clarity\n\t- Paper is clearly presented and easy to follow.",
+    "weaknesses": "- Quality\n\t- As the topic of a document can be determined by the factual knowledge it contains then it might be redundant to keep the topic as a relevant factor in the text generation process and only style and factual knowledge might suffice which then could directly align with the syntax and semantics of the underlying text respectively.\n- Significance\n\t- This paper presents a detailed technical analysis of the fine-tuning process of a language model on domain-specific downstream tasks/datasets. However, the outcomes of the study conform with the expected outcomes of fine-tuning a model on domain-specific data and hence this paper misses to provide any significant gainful insight into the fine-tuning process due to the following reasons:\n\t\t- In the PubMed dataset, as academic style is present across all abstracts with different factual knowledge, it is expected that the model will readily adapt to the academic style first before capturing the diverse type of factual knowledge.\n\t\t- Just like in topic modeling, the topic of a document is a broad sentiment and can be easily determined using a set of keywords. So, it will be easy for the model to detect/understand the topic of a document before reading the whole document and capturing the factual knowledge inside it. Therefore, it is expected for the model to easily understand the topic and style factors before capturing the factual knowledge inside it.\n\t- I am keen to hear the response of the authors on this and hope that they can change my point of view.",
+    "questions": "- The C4 dataset could possibly contain the documents written in the \"academic\" style although in a different domain. Similarly, the C4 dataset could also contain documents related to the biomedical domain although having different factual information. So, it is possible that the model is adapting fast to the academic style and biomedical domain topic because it has already seen them in the pretraining data, but the diverse factual information in the PubMed dataset is new for the model, and that is why model is possibly taking time to capture that knowledge. Have authors taken this into consideration in their analysis of the finetuning process?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2363,
+    "words": 391,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/caeabff0-ca8c-41d6-8dd9-07bdc9264478",
+    "error": null,
+    "scored_chars": 2373
+  }
+}

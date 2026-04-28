@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "rXEwxmnGQs",
+  "reviewer": "JF8K",
+  "paper": {
+    "title": "PhonATe: Impact of Type-Written Phonological Features of African American Language on Generative Language Modeling Tasks",
+    "authors": [
+      "Nicholas Deas",
+      "Jessica A Grieser",
+      "Xinmeng Hou",
+      "Shana Kleiner",
+      "Tajh Martin",
+      "Sreya Nandanampati",
+      "Desmond U. Patton",
+      "Kathleen McKeown"
+    ],
+    "abstract": "Current Large Language Models perform poorly on African American Language (AAL) texts in tasks like toxicity detection and sentiment analysis. AAL is underrepresented in both pre-training data and existing benchmarks for these tasks, hindering thorough evaluation and understanding of these biases. We introduce a novel approach to synthetically introduce type-written phonological features of AAL into text, a class of AAL features that has been overlooked in prior work. Our goal is to better understand how these features affect generative language models' performance on three tasks: toxicity detection, sentiment analysis, and masked span prediction. We find that fine-tuning with synthetic type-written phonological features lowers perceived biases on downstream tasks and our ablations reveal which features have particularly large negative impacts on model performance. Our results suggest that phonological features are vital to consider when designing bias mitigation techniques.",
+    "keywords": [
+      "data augmentation",
+      "african american language",
+      "bias and fairness",
+      "language generation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=rXEwxmnGQs"
+  },
+  "review_fields": {
+    "summary": "The authors study if introducing synthetic data mimicking African-American English dialects into model training can narrow the gap in performance on AAE evaluation sets. They first develop a framework to transform text into AAE based on typed phonological features of AAE derived from sociolinguistics literature. They then present results showing that finetuning on this synthetic language lowers false positive rates in toxicity detection with AAE and leads to fewer model predictions of negative sentiment on AAE text. They also conduct a masked span prediction experiment where they find mixed results in terms of perplexity after synthetic AAE finetuning, though it can lower perplexity in some cases.",
+    "reasons_to_accept": "- I found this to be an interesting paper, which tackles a relatively known problem in NLP (lack of robustness to AAE) with an approach that is novel within this area (synthetically introducing phonological features). This is a important area of AI ethics, with recent work finding widespread LLM discrimination against AAE speakers, even leading to a higher likelihood of AAE speakers being sentenced to death by LLM judges [1]. \n\n- The authors do an excellent job in both the main body of the paper, limitations and ethics statement to address potential concerns around mimicking actual AAE speakers. I thought the ethics statement in particular was very thoughtful, calling for representation of affected communities in LLM application development. \n\n- They analyze performance across multiple tasks and models. While I found there to be flaws in evaluation (see reasons to reject), I did think that their breakdown of effects on task performance from each of the phonological features was thorough, and potentially useful for informing future research on safe/non-discriminatory deployment of LLMs. \n\n- I appreciated that they conduct a human evaluation to verify the quality of synthetic data with AAE speakers, which absolutely should be done in a study like this \n\n[1] Hofmann, Valentin, Pratyusha Kalluri, Dan Jurafsky and Sharese King. “Dialect prejudice predicts AI decisions about people's character, employability, and criminality.” ArXiv abs/2403.00742 (2024).",
+    "reasons_to_reject": "- The writing is unclear in many places and should be revised before publication. For example, in the section on augmentation quality it states “both annotators are self-identified AAL speakers,” but it isn't stated explicitly that there are two annotators judging each example and how the final rating is derived. The description of the data subsets used on pg 6 (\"5000 non-toxic texts and 5000 texts for the sentiment dataset\") is also confusing. \n\n- The sentiment detection eval seems very odd, given that there is no ground-truth for the sentiment. Presumably if an example is labeled positive in WME, it shouldn't become negative just from a transformation into AAE, however this experiment could be conducted in a cleaner way to make it clear the outcome is a result of bias. \n\n-   The paper never really motivates the use of synthetic AAE instead of finetuning on a larger corpus of real AAE",
+    "questions_to_authors": "1. What was the error rate in the phonological transformations?\n\n2. Why do you think finetuning works for lowering perplexity with Flan-T5 and not T5?\n\n3. Figures 2/3 are hard to decipher"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:30Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:30Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2554,
+    "words": 407,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f281526a-18f8-490b-9a8a-de341d894a4a",
+    "error": null,
+    "scored_chars": 2562
+  }
+}

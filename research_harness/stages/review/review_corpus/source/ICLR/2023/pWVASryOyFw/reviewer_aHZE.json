@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "pWVASryOyFw",
+  "reviewer": "aHZE",
+  "paper": {
+    "title": "Learning Uncertainty for Unknown Domains with Zero-Target-Assumption",
+    "authors": [
+      "Yu Yu",
+      "Hassan Sajjad",
+      "Jia Xu"
+    ],
+    "abstract": "We introduce our Maximum-Entropy Rewarded Reinforcement Learning (MERRL) framework that selects training data for more accurate Natural Language Processing (NLP). Because conventional data selection methods select training samples based on the test domain knowledge and not on real life data,  they frequently fail in unknown domains like patent and Twitter. \nOur approach selects training samples that maximize information uncertainty measured by entropy, including observation entropy like empirical Shannon entropy, Min-entropy, R\\'enyi entropy, and prediction entropy using mutual information, to cover more possible queries that may appear in unknown worlds. Our MERRL using regularized A2C and SAC achieves up to -99.7 perplexity decrease (-43.4\\% relatively) in language modeling, +25.0 accuracy increase (+40.0\\% relatively) in sentiment analysis, and +5.0 F1 score increase (+30.8\\% relatively) in named entity recognition over various domains, demonstrating strong generalization power on unknown test sets.",
+    "keywords": [],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=pWVASryOyFw"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "In this paper, the authors propose to use a Maximum-Entropy Rewarded Reinforcement Learning framework to select training data for NLP tasks, the goal of which is to maximize generalization. The authors experiment with A2C and SAC and experimental results show that the proposed framework could outperform several baseline approaches.",
+    "strength_and_weaknesses": "Strength: In general this paper is clearly written and easy to follow. The experimental results seem to confirm the validity of proposed method.\n\nWeakness: I suggest the authors include more justifications when selecting certain models of NLP tasks. For example, in sentiment analysis experiments, why the authors choose to use a CNN classifier as the model?",
+    "clarity,_quality,_novelty_and_reproducibility": "This paper is easy to follow. The authors provide the detailed information for reproduce the experiments.",
+    "summary_of_the_review": "I think the authors propose a novel method of using entropy in selecting data.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

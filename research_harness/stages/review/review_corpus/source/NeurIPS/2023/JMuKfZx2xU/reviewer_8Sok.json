@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "JMuKfZx2xU",
+  "reviewer": "8Sok",
+  "paper": {
+    "title": "On Slicing Optimality for Mutual Information",
+    "authors": [
+      "Ammar Fayad",
+      "Majd Ibrahim"
+    ],
+    "abstract": "Measuring dependence between two random variables is of great importance in various domains but is difficult to compute in today's complex environments with high-dimensional data. Recently, slicing methods have shown to be a scalable approach to measuring mutual information (MI) between high-dimensional variables by projecting these variables into one-dimensional spaces. Unfortunately, these methods use uniform distributions of slicing directions, which generally discard informative features between variables and thus lead to inaccurate quantification of dependence. In this paper, we propose a principled framework that searches for an \\textit{optimal} distribution of slices for MI. Importantly, we answer theoretical questions about finding the optimal slicing distribution in the context of MI and develop corresponding theoretical analyses. We also develop a practical algorithm, connecting our theoretical results with modern machine learning frameworks. Through comprehensive experiments in benchmark domains, we demonstrate significant gains in our information measure than state-of-the-art baselines.",
+    "keywords": [
+      "Mutual information",
+      "Information Theory"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JMuKfZx2xU"
+  },
+  "review_fields": {
+    "summary": "The paper estalishes a new quantity for measuring the dependence between random variables. The definition is similar to mutual information and sliced mutual information. As (for rather obvious reasons) it takes values between these two existing measures, it has some desireable properties. A variational representation further makes it better compatible with neural estimators.",
+    "strengths": "The paper is well written, provides good references and approaches the challenging gap between theory of information measures and their estimation in practice.",
+    "weaknesses": "It is difficult to see the benefit of the specific definition (2). There is no convincing argument why (2) is better than (1). Also an optimization over a set of prabability measures appears to be much more difficult to approximate than the comparatively \"simple\" integration over the uniform measure.\nMany details are in appendices that I unfortunately have no time to read in the limited time given for the review process of many papers.",
+    "questions": "Are there methods that try to approximate (1) by other means than uniform sampling? There are many methods for numerical integration that might also use the fact that not all directions are equally useful in approximating the integral.\nWhy is it necessary to change the definition of (1) and not simply try to use a better method to approximate (1) numerically?\nDoes there exist a one-dimensional MI estimator with finite \\delta(n)? If not, can the supremum in the characterizing property of \\delta(n) be restricted to a class where it is finite and all further results hold for this class?",
+    "limitations": "Limitations were not addressed in the paper but discussed in an appendix."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1267,
+    "words": 208,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/5e6bca6b-3bb8-44cf-8a54-6abb739e743a",
+    "error": null,
+    "scored_chars": 1267
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "1OUEnfusEd",
+  "reviewer": "9Hxr",
+  "paper": {
+    "title": "How Compositional Generalization and Creativity Improve as Diffusion Models are Trained",
+    "authors": [
+      "Alessandro Favero",
+      "Antonio Sclocchi",
+      "Francesco Cagnetta",
+      "Pascal Frossard",
+      "Matthieu Wyart"
+    ],
+    "abstract": "Natural data is often organized as a hierarchical composition of features. How many samples do generative models need in order to learn the composition rules, so as to produce a combinatorially large number of novel data? What signal in the data is exploited to learn those rules? We investigate these questions in the context of diffusion models both theoretically and empirically. Theoretically, we consider a simple probabilistic context-free grammar - a tree-like graphical model used to represent the hierarchical and compositional structure of data such as language and images. We demonstrate that diffusion models learn the grammar's composition rules with the sample complexity required for clustering features with statistically similar context, a process similar to the word2vec algorithm. However, this clustering emerges hierarchically: higher-level features associated with longer contexts require more data to be identified. This mechanism leads to a sample complexity that scales polynomially with the said context size. As a result, diffusion models trained on an intermediate dataset size generate data coherent up to a certain scale, but lacking global coherence. We test these predictions across different domains and find remarkable agreement:  both generated texts and images achieve progressively larger coherence lengths as the training time or dataset size grows. We discuss connections between the hierarchical clustering mechanism we introduce here and the renormalization group in physics.",
+    "keywords": [
+      "Science of deep learning",
+      "compositionality",
+      "diffusion models",
+      "probabilistic graphical models",
+      "sample complexity",
+      "generalization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=1OUEnfusEd"
+  },
+  "review_fields": {
+    "summary": "This paper shows empirically that diffusion models learn compositional rules in increasing depth. They then provide an analytic computation of the sample complexities of learning different levels of rules and show that the empirical sample complexities align with these predictions. Finally they define local and global coherence connected to these notions of compositionality and show that models learner deeper compositional rules with more training and data.\n\n## update after rebuttal\nAfter the rebuttal, in which I mainly asked the authors to clarify the limitations in the results, I increase my score to a weak accept.",
+    "claims_and_evidence": "I believe that the claims are solid and true for the particular kind of model of data (RHM) that this paper considers. I also think the experiments demonstrating local then global coherence are great and clearly support the main points. However, I have some concerns about the writing and framing; the paper sometimes unjustifiably extends these claims to much more general models of data.\n\nIn the contributions, they state \"that the learning process of diffusion models is hierarchical, progressively capturing compositional rules of increasing depth.\" This follows a discussion on the viewpoint of data as PCFG grammars, but they only exhibit this result for RHM, a form of PCFG. This distinction is extremely important and should be mentioned in the abstract and introduction. \n\nAnother example, in the conclusion, they state that \"if data consists of hierarchical combinations of features, U-Nets can lower the data dimension by giving identical representations to groups of features that have similar contexts.\" The previous sentence acknowledges that this is for a certain distribution, but this sentence is somewhat misleading because it seems to imply that you proved the statement for **all** data distributions that consist of hierarchical combinations of features. The writing should be modified to highlight the extent of the results.\n\nI think the paper would also benefit from a longer discussion on the applicability of the RHM. The authors should explain their choice of this model. In particular, I would appreciate exposition of the assumption of random production rules, which on face value seems pretty unrealistic.",
+    "methods_and_evaluation_criteria": "Yes, the methods and evaluation criteria seem to confirm their theoretical predictions.",
+    "theoretical_claims": "I checked the computations in Section 4, but I may have overlooked some small details.",
+    "experimental_designs_or_analyses": "I checked the experimental design for the different experiments on text and vision diffusion models, and they seem reasonable.",
+    "relation_to_broader_scientific_literature": "The key contribution of this paper is that they were able to show the diffusion models learns compositional rules in increasing depth under the RHM, building on the work of hierarchies and phase transitions from papers (Sclocchi et al. 2024 2023). They provide estimates of sample complexities for learning different levels of rules on RHM and verify these predictions empirically on both synthetic settings and real-world diffusion models. To the best of my knowledge, previous papers did not explore the local then global coherence for diffusion models.",
+    "essential_references_not_discussed": "There are a few citations that are missing that are necessary to understand the contributions of the paper. For example, Park et al. 2024 (https://arxiv.org/abs/2406.19370) also explored compositional generalization over training for diffusion models, Li et al. 2024 (https://arxiv.org/abs/2403.01633) also discussed the notion of a phase transition if data are hierarchical, and Allen-Zhu and Li 2020 (https://arxiv.org/abs/2001.04413) theoretically studied how deep learning performed hierarchical learning. I think it is necessary to explain the contributions to the study of hierarchies in this paper in relation to the extensive literature on hierarchies.",
+    "other_strengths_and_weaknesses": "Overall, I would rate the paper to be decently original and significant. Its contribution to diffusion models \ngenerating hierarchical data is clear and adds to the existing literature on phase transitions in diffusion models.\n \nHowever, I think in several places the clarity and writing of the manuscript could be improved. As I mentioned before, the authors need to clarify the extend of the contributions and limitations with respect to the choice of the model of data throughout the manuscript.",
+    "other_comments_or_suggestions": "I thought that the presentation in Section 3.3 on sample complexities could be made clearer. This might not be necessary, but I would appreciate that the authors revise the claims in that section in terms of Theorems/Lemmas and formally state the sample complexities there. This would help clarify some of the assumptions that these arguments use, i.e. the central limit argument means that it is true in the the limit, and it would be nice to explicitly see what is going to infinity. Alternatively, the paper could carefully distinguish between what is a heuristic argument, what is a rigorous result, and what is an empirical fact before introducing a given result.",
+    "questions_for_authors": "1. How realistic is the RHM? Why is it a reasonable model of data? \n\n2. How sensitive is your theory about local then global coherence to changes in the underlying model of data? Could alternative models of data explain that empirical behavior?\n\n3. How does your theory extend to the learning of hierarchical structures for other models beyond diffusion? It seems like autoregressive models also learn CFG languages (Allen-Zhu and Li) but it seems the RHM which does not describe data generation in an autoregressive way explain this learning?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

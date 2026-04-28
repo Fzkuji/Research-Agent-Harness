@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "O-fOgeI_D-B",
+  "reviewer": "1KsL",
+  "paper": {
+    "title": "Active Learning of Convex Halfspaces on Graphs",
+    "authors": [
+      "Maximilian Thiessen",
+      "Thomas Gärtner"
+    ],
+    "abstract": "We systematically study the query complexity of learning geodesically convex halfspaces on graphs. Geodesic convexity is a natural generalisation of Euclidean convexity and allows the definition of convex sets and halfspaces on graphs. We prove an upper bound on the query complexity linear in the treewidth and the minimum hull set size but only logarithmic in the diameter. We show tight lower bounds along well-established separation axioms and identify the Radon number as a central parameter of the query complexity and the VC dimension. While previous bounds typically depend on the cut size of the labelling, all parameters in our bounds can be computed from the unlabelled graph. We provide evidence that ground-truth communities in real-world graphs are often convex and empirically compare our proposed approach with other active learning algorithms.",
+    "keywords": [
+      "active learning",
+      "learning theory",
+      "semi-supervised learning",
+      "transduction",
+      "vertex classification",
+      "graphs",
+      "convexity theory",
+      "geodesic convexity",
+      "shortest paths",
+      "halfspaces",
+      "query complexity"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=O-fOgeI_D-B"
+  },
+  "review_fields": {
+    "summary": "This paper presents novel bounds on the query complexity of learning halfspaces on graphs\nvia convex analysis.\nTwo general upper-bounds were derived along with a simple general lower bound based on\nextreme vertices. Based on these bounds, the authors developed two querying strategies\nbased on greedy and selective sampling approaches.\nOne interesting practical aspect of the proposed active learning algorithm is the evidence\nthat ground-truth communities in real-world graphs are typically convex.\nThe proposed bounds are compared to previous results based on the cut-size,\nwhich show that the halfspace assumption enables learning with large cuts, whereas previous\nbounds become less applicable.",
+    "main_review": "The paper is original and significant in the sense that it provides novel bounds on the query complexity\nof learning halfspaces on graphs, an outstanding, challenging task. The proposed query\nstrategies are require a considerably smaller number of queries than previous active learning\nstrategies on halfspace separable datasets. However, the O(n^3) computational complexity\nis indeed prohibitive.  On this sense, it would be interesting if the authors could point\nout more detailed directions on how they intend to alleviate this issue. On another\nside, it was helpful to see that the authors generally discussed how to adapt their bounds\nto weakly convex sets.\n\nOn the predictive performance experiment (Figure 2), it would be beneficial to\nsee confidence bands around the accuracy measurements. More precisely, given that the authors\nbypass the greedy maximization step for each query (due to computational complexity issues),\nand their strategy picks a vertex uniformly at random (as mentioned in line 3 of Algorithm 1), then\nI would like to see the accuracy measurements over different choices of such initial vertex.\nIn addition, for the Moons dataset you could generate the dataset with different noise levels\nand compute the average accuracy (and confidence bands) over those levels.",
+    "limitations_and_societal_impact": "Yes, the authors reasonably mention expectations on the usage of their technique in reducing the number of labelled datapoints in graph-based learning settings."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

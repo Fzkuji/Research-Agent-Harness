@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "0rEJx5QAxt",
+  "reviewer": "gXac",
+  "paper": {
+    "title": "Convex-Concave Zero-Sum Markov Stackelberg Games",
+    "authors": [
+      "Denizalp Goktas",
+      "Arjun Prakash",
+      "Amy Greenwald"
+    ],
+    "abstract": "Zero-sum Markov Stackelberg games can be used to model myriad problems, in domains ranging from economics to human robot interaction. In this paper, we develop policy gradient methods that solve these games in continuous state and action settings using noisy gradient estimates computed from observed trajectories of play. When the games are convex-concave, we prove that our algorithms converge to Stackelberg equilibrium in polynomial time. We also show that reach-avoid problems are naturally modeled as convex-concave zero-sum Markov Stackelberg games, and that Stackelberg equilibrium policies are more effective than their Nash counterparts in these problems.",
+    "keywords": [
+      "Stackelberg games",
+      "Equilibrium Computation",
+      "Policy Gradient"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=0rEJx5QAxt"
+  },
+  "review_fields": {
+    "summary": "The paper considers the setting of convex-concave zero-sum stochastic Stackelberg games. In these games, there are two players, a leader and a follower. The leader's strategies constrain the feasible strategy set of the follower. First, the leader commits to a certain strategy, and then, the follower best-responds to that strategy using a strategy that is feasible.\n\nPrevious work mainly focuses on the static version of that game where the utility of the two players is monotone (convex-concave games). The authors define what is a convex-concave stochastic zero-sum stochastic Stackelberg game and then use some machinery from min-max optimization to solve the problem of computing a Stackelberg equilibrium.\n\n---\n\nI acknowledge that I have read and evaluated the rebuttal. The rebuttal answered my concerns and reinforced with my initial positive assessment.",
+    "strengths": "* The exposition of previous work and motivation is clear.\n* The paper uses standard methods and indicates a good understanding of the min-max optimization and constrained optimization literature.\n* The guarantees are for the stochastic setting (i.e., no full information gradient is needed.)",
+    "weaknesses": "* Assumption on convexity concavity seems restrictive. Is there any other way to ensure the existence of Stackelberg equilibria AND convergence?\n* The results seem a little straightforward given the existing machinery in the literature of min-max optimization.",
+    "questions": "* Is the assumption of convexity-concavity necessary to prove convergence? Could some other assumption guarantee it?\n* Do you believe that the convergence rates are optimal? Could you use some other optimization method to get better rates?",
+    "limitations": "* The main limitation in my opinion is the fact that convexity-concavity is assumed. I think the authors could elaborate more on the justification of such an assumption. (It could also be the case that this assumption is a necessity though.)"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1038,
+    "words": 160,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/44aeb00d-b6df-4e23-8769-eec1edc544bf",
+    "error": null,
+    "scored_chars": 1038
+  }
+}

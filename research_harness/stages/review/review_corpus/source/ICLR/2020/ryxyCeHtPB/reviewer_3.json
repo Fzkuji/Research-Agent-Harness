@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "ryxyCeHtPB",
+  "reviewer": "3",
+  "paper": {
+    "title": "Pay Attention to Features, Transfer Learn Faster CNNs",
+    "authors": [
+      "Kafeng Wang",
+      "Xitong Gao",
+      "Yiren Zhao",
+      "Xingjian Li",
+      "Dejing Dou",
+      "Cheng-Zhong Xu"
+    ],
+    "abstract": "Deep convolutional neural networks are now widely deployed in vision applications, but a limited size of training data can restrict their task performance. Transfer learning offers the chance for CNNs to learn with limited data samples by transferring knowledge from models pretrained on large datasets. Blindly transferring all learned features from the source dataset, however, brings unnecessary computation to CNNs on the target task. In this paper, we propose attentive feature distillation and selection (AFDS), which not only adjusts the strength of transfer learning regularization but also dynamically determines the important features to transfer. By deploying AFDS on ResNet-101, we achieved a state-of-the-art computation reduction at the same accuracy budget, outperforming all existing transfer learning methods. With a 10x MACs reduction budget, a ResNet-101 equipped with AFDS transfer learned from ImageNet to Stanford Dogs 120, can achieve an accuracy 11.07% higher than its best competitor.",
+    "keywords": [
+      "transfer learning",
+      "pruning",
+      "faster CNNs"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ryxyCeHtPB"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "This paper proposes a method called attentive feature distillation and selection (AFDS) to improve the performance of transfer learning for CNNs. The authors argue that the regularization should constrain the proximity of feature maps, instead of pre-trained model weights. Specifically, the authors proposes two modifications of loss functions: 1) Attentive feature distillation (AFD), which modifies the regularization term to learn different weights for each channel and 2) Attentive feature selection (AFS), which modifies the ConvBN layers by predicts unimportant channels and suppress them. \n\nOverall, this is a good work in terms of theory and experimentation, thus I would recommend to accept it. The approach is well motivated, and the literature is complete and relevant. The author's argument is validated by experiments comparing the proposed AFDS method and other existing transfer learning methods. \n\nTo improve this paper, the authors are suggested to address the following issues:\n1.  Section 3.5 is not well organized. Besides, it is not mentioned what value the threshold hyper-parameter delta_m is set. \n2. In page 9, \"MACs\" is missing in the sentence \"In Figure 3, ...the number of vs. the target...\""
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

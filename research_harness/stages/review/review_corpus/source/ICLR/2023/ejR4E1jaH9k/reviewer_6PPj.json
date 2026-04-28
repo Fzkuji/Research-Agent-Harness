@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "ejR4E1jaH9k",
+  "reviewer": "6PPj",
+  "paper": {
+    "title": "Solving stochastic weak Minty variational inequalities without increasing batch size",
+    "authors": [
+      "Thomas Pethick",
+      "Olivier Fercoq",
+      "Puya Latafat",
+      "Panagiotis Patrinos",
+      "Volkan Cevher"
+    ],
+    "abstract": "This paper introduces a family of stochastic extragradient-type algorithms for a class of nonconvex-nonconcave problems characterized by the weak Minty variational inequality (MVI). Unlike existing results on extragradient methods in the monotone setting, employing diminishing stepsizes is no longer possible in the weak MVI setting. This has led to approaches such as increasing batch sizes per iteration which can however be prohibitively expensive. In contrast, our proposed methods involves two stepsizes and only requires one additional oracle evaluation per iteration. We show that it is possible to keep one fixed stepsize while it is only the second stepsize that is taken to be diminishing, making it interesting even in the monotone setting. Almost sure convergence is established and we provide a unified analysis for this family of schemes which contains a nonlinear generalization of the celebrated primal dual hybrid gradient algorithm.",
+    "keywords": [
+      "Variational inequalities",
+      "stochastic first-order methods",
+      "nonconvex-nonconcave",
+      "minimax"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=ejR4E1jaH9k"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for the detailed response to my comments and for improving the paper. The problematic parts became much easier to follow (including Section 8) and almost all of my questions/concerns are resolved. In general, I am satisfied with the changes. Therefore, I am increasing my score from 6 to 8: as I explained in the original review, the paper fully deserves this.\n\nHowever, I still have few minor comments/questions. I hope that the authors will have a chance to reply to them and modify the paper accordingly.\n\n1. **On strong assumptions.** I believe, there is a misunderstanding. In my review, I mean that it is restrictive to assume both bounded variance (Assumption II (iii)) + Lipschitzness in mean (Assumption III). As I explained in my original review, I believe that this is the key trick allowing the authors to get rid of the large batchsizes (see the second point in the \"Weaknesses\" section). In contrast, other works either assume bounded variance without Lipschitzness in mean (Jusidtsky et al., 2011) or Lipschitzness in mean/almost surely without bounded variance (Mishchenko et al., 2020; Gorbunov et al., 2022). I believe that such a discussion about the differences between the setups will improve the paper and help the reader to clearly see the difference.\n\n2. **Regarding the experiments.** It is still unclear why SEG+ does not converge for the bilinear problem. I guess the main reason is in the choice of the stepsizes. The authors write that they are interested whether the method converges or not, not in the tuning. However, currently the answer to this question is unclear from the experiments: SEG+ achieves some value of the operator norm and then it stops. This experiment is conducted with fixed stepsize as far as I get (at least for Figure 1). Such a behavior is completely natural, we know it from the standard stochastic optimization literature. *However, it does not mean that the method will not achieve better accuracy with the smaller stepsize, i.e., it does not mean that SEG+ is not converging.* To numerically verify the authors' claim, one needs to show that SEG+ does not improve the accuracy of the solution when the stepsizes are reduced. Only in this case one can conclude that SEG+ is not converging. That is why I asked the authors to tune the stepsizes: this is the way to check whether methods converge or not. I believe this is perfectly aligned with the authors' goal to check whether SEG+ converges without large batchsizes or not.\n\nI am also curious why the oscillations of BC-PSEG+ in Figure 1 are so significant?\n\n3. The firs step in (E.2): I guess one should have $\\gamma Fz - \\gamma Fz'$ in the inner product.\n\n4. The first inequality \"0 \\leq ...\" in (E.16): I believe it should not be there, since the goal is to show the opposite.\n\n5. **Regarding the claim about the result from (Pethick et al., 2022).** Theorem 3.1 from (Pethick et al., 2022) does not say that $\\gamma$ has to be large to have convergence. It says only that if the extrapolation stepsize is large enough (satisfies a certain inequality), then the method converges. To the best of my knowledge, there is no result saying that if $\\gamma$ does not satisfy this condition, then the method diverges."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

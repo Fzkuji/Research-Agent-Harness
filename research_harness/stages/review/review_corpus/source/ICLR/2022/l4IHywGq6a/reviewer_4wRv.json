@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "l4IHywGq6a",
+  "reviewer": "4wRv",
+  "paper": {
+    "title": "Data-Efficient Graph Grammar Learning for Molecular Generation",
+    "authors": [
+      "Minghao Guo",
+      "Veronika Thost",
+      "Beichen Li",
+      "Payel Das",
+      "Jie Chen",
+      "Wojciech Matusik"
+    ],
+    "abstract": "The problem of molecular generation has received significant attention recently. Existing methods are typically based on deep neural networks and require training on large datasets with tens of thousands of samples. In practice, however, the size of class-specific chemical datasets is usually limited (e.g., dozens of samples) due to labor-intensive experimentation and data collection. Another major challenge is to generate only physically synthesizable molecules. This is a non-trivial task for neural network-based generative models since the relevant chemical knowledge can only be extracted and generalized from the limited training data. In this work, we propose a data-efficient generative model that can be learned from datasets with orders of magnitude smaller sizes than common benchmarks. At the heart of this method is a learnable graph grammar that generates molecules from a sequence of production rules. Without any human assistance, these production rules are automatically constructed from training data. Furthermore, additional chemical knowledge can be incorporated into the model by further grammar optimization. Our learned graph grammar yields state-of-the-art results on generating high-quality molecules for three monomer datasets that contain only ${\\sim}20$ samples each. Our approach also achieves remarkable performance in a challenging polymer generation task with $only$ $117$ training samples and is competitive against existing methods using $81$k data points.",
+    "keywords": [
+      "molecular generation",
+      "graph grammar",
+      "data efficient generative model"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=l4IHywGq6a"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper introduces a new grammar-based generative model for the molecule generation task. The graph grammar is defined as a set of production rules that operate on module graphs (i.e. the molecule graphs are not linearized as done in some previous work). The graph grammar is learned by iteratively contracting hyperedges (i.e.  edges that can connect multiple nodes, defined by simple chemistry-inspired rules) into non-terminal nodes and the submission proposes to learn how to sample the hyperedges by a REINFORCE algorithm that optimizes for several molecule generation metrics. \n\nThe evaluation is done both on small and large molecule generation datasets. Notably, the proposed method achieves strong performance while being very data-efficient.",
+    "main_review": "The proposed method is novel and opens potential for new line of research in graph grammar. I personally find the submission to be clear and well-written. Overall, I am positive and would like to give a \"accept\". \n\nHowever, I have few more comments that I hope to help improve the paper. Several of them are around the modeling choices and some of them are to clarify my understanding of the practical usefulness of the proposed method.\n\n1. The proposed method uses pretrained graph neural network to generate the sampling weights and claim that this can be replaced by any plug-and-play feature extractor. Can the authors provide data to support this claim? If this is actually true, I would suggest to use the simplest feature extractor to keep the proposed method clean.\n2. Is the REINFORCE algorithm stable across random seeds? My hunch is that they are not. Can the authors provide error bars in for their data? Can the authors provide convergence curves to demonstrate the learning? \n3. While the proposed method is efficient, I have the impression that it does not scale up well to more data (the authors have to subsample the training set for the experiments in Table 3). My first request is for the authors to report the actual computation time for the proposed method on the experiments they have done. Second, aside from the computational challenge, can the proposed algorithm benefit from more data? If so, can we estimate how much we can gain by including the whole training set of the large polymer dataset?",
+    "summary_of_the_review": "I find the proposed method to be novel and effective. the paper is clear and well-written. I have a few comments around modeling designs but I think the comments are addressable.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:49Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:49Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1519,
+    "words": 260,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ef784792-ae1a-4df0-863d-24f7c45343a7",
+    "error": null,
+    "scored_chars": 1521
+  }
+}

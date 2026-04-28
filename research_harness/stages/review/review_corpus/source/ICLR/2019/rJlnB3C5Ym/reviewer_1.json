@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "rJlnB3C5Ym",
+  "reviewer": "1",
+  "paper": {
+    "title": "Rethinking the Value of Network Pruning",
+    "authors": [
+      "Zhuang Liu",
+      "Mingjie Sun",
+      "Tinghui Zhou",
+      "Gao Huang",
+      "Trevor Darrell"
+    ],
+    "abstract": "Network pruning is widely used for reducing the heavy inference cost of deep models in low-resource settings. A typical pruning algorithm is a three-stage pipeline, i.e., training (a large model), pruning and fine-tuning. During pruning, according to a certain criterion, redundant weights are pruned and important weights are kept to best preserve the accuracy. In this work, we make several surprising observations which contradict common beliefs. For all state-of-the-art structured pruning algorithms we examined, fine-tuning a pruned model only gives comparable or worse performance than training that model with randomly initialized weights. For pruning algorithms which assume a predefined target network architecture, one can get rid of the full pipeline and directly train the target network from scratch. Our observations are consistent for multiple network architectures, datasets, and tasks, which imply that: 1) training a large, over-parameterized model is often not necessary to obtain an efficient final model, 2) learned ``important'' weights of the large model are typically not useful for the small pruned model, 3) the pruned architecture itself, rather than a set of inherited ``important'' weights, is more crucial to the efficiency in the final model, which suggests that in some cases pruning can be useful as an architecture search paradigm. Our results suggest the need for more careful baseline evaluations in future research on structured pruning methods.  We also compare with the \"Lottery Ticket Hypothesis\" (Frankle & Carbin 2019), and find that with optimal learning rate, the \"winning ticket\" initialization as used in Frankle & Carbin (2019) does not bring improvement over random initialization.",
+    "keywords": [
+      "network pruning",
+      "network compression",
+      "architecture search",
+      "train from scratch"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rJlnB3C5Ym"
+  },
+  "review_fields": {
+    "comment": "Thanks for the detailed reply and additional experiments. Just had more comments and questions\n\n#1#2 It would be great if the authors can make it clear that training is not the always the first step and the value of pruning in introduction rather than mentioning in conclusion. Saving training time is still an important factor when training from scratch is expensive. \n\n#5 “fine-tuning with enough epochs”. \nI understand that the authors are mainly questioning about whether training from scratch is necessarily bad than pruning and fine-tuning. The author do find that “training from scratch is better when the number of epochs is large enough”. But we see that fine-tuning ResNet-56 A/B with 20 epochs does outperform (or is equivalent to) scratch training for the first 160 epochs, which validates “fine-tuning is faster to converge”.  However, training 320 epochs (16x more comparing to 20 epochs fine-tuning and 2x comparing with normal training from scratch) is not quite coherent with the setting of “scratch B”, as ResNet-56 B just reduce 27% FLOPs. \n\nThe other part of the question is still unclear, i.e., the author claimed that the accuracy of an architecture is determined by the architecture itself, but not the initialization, then both fine-tuning and scratch training should reach equivalent solution if they are well trained enough, regardless of the initialization or pruning method. The learning rate for scratch training is already well known (learning rate drop brings boost the accuracy). However, learning rate schedule for fine-tuning (especially for significantly pruned model as for reply#6) is not well explored. I wonder whether that a carefully tuned learning rate/hyperparameters for fine-tuning may get the same or better performance as scratch training.\n\nQuestions:\n- Are both methods using the same learning rate schedule between epoch 160 and epoch 320?\n- The ResNets-56 A/B results in the reply#8 does not match the reported performance in reply#5. e.g., it shows 92.67(0.09) for ResNet-56-B with 40-epochs fine-tuning in reply5,  but it turns out to be 92.68(±0.19) in reply#8.\n- It would be great if the authors can add convergence curves for fine-tuning and scratch training for easier comparison.\n\n\n#6 The failure case for sparse pruning on ImageNet is interesting and it would be great to have the imageNet result reported and discussed. \n\nThe authors find that “when the pruned ratio is large enough, training from scratch is better by a even larger margin than fine-tuning”.  This could be due to following reasons: \n      1. When the pruning ratio is large, the pruned model with preserved weights is significantly different from the original model, and fine-tuning with small learning rate and limited number of epochs is not enough to recover the accuracy. As mentioned earlier, tuning the hyperparameters for fine-tuning based on pruning ratio might improve the performance of fine-tuning. \n      2. Though the pruning ratio is large, the model used in this experiment may still have large capacity to reach good performance. How about pruning ResNet-56 with significant pruning ratios? \n\nFinally, based on above observations, it seems to me that the preserved weights is more essential for fast fine-tuning but less useful for significant pruning ratios."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "I3HCE7Ro78H",
+  "reviewer": "gFkW",
+  "paper": {
+    "title": "Finding Actual Descent Directions for Adversarial Training",
+    "authors": [
+      "Fabian Latorre",
+      "Igor Krawczuk",
+      "Leello Tadesse Dadi",
+      "Thomas Pethick",
+      "Volkan Cevher"
+    ],
+    "abstract": "Adversarial Training using a strong first-order adversary (PGD) is the gold standard for training Deep Neural Networks that are robust to adversarial examples. We show that, contrary to the general understanding of the method, the gradient at an optimal adversarial example may increase, rather than decrease, the adversarially robust loss. This holds independently of the learning rate. More precisely, we provide a counterexample to a corollary of Danskin's Theorem presented in the seminal paper of Madry et al. (2018) which states that a solution of the inner maximization problem can yield a descent direction for the adversarially robust loss. Based on a correct interpretation of Danskin's Theorem, we propose Danskin's Descent Direction (DDi) and we verify experimentally that it provides better directions than those obtained by a PGD adversary. Using the CIFAR10 dataset we further provide a real world example showing that our method achieves a steeper increase in robustness levels in the early stages of training, and is more stable than the PGD baseline. As a limitation, PGD training of ReLU+BatchNorm networks still performs better, but current theory is unable to explain this.",
+    "keywords": [
+      "Adversarial Training",
+      "Adversarial Examples",
+      "non-convex optimization",
+      "robustness"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=I3HCE7Ro78H"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper pays attention to the computation of adversarial training, by pointing out that even in the simple case (nonsmooth), the descent direction is not given by the worst-case perturbation, as opposed to common practice in the AT community. The paper then proposes a method that, under the assumption of a finite number of worst-case perturbations, computes the correct descent direction.",
+    "strength_and_weaknesses": "Strength:\n\nI appreciate the conceptual idea of this paper a lot. The starting point of the paper is the observation that the descent direction not necessarily corresponds to the worst-case perturbation. Given the fact that this is typically assumed always be the case in the AT community, this paper has provided a refreshing perspective on how should we do AT correctly. The constructed counterexamples are also easy to understand. \n\nWeakness:\n\nThe potential downside of this paper is that the proposed method (DDD) is inherently computationally expensive. As the authors advocate the usage of multiple worst-case perturbations, adopting DDD would require at least several times of computational effort compared to the already expensive standard AT procedure. \n\nAnother concern that I have is the similar final performance achieved by both AT and DDD. It seems that their performance differs by some margin only in the initial stage of the training, but is getting much closer to the final stage. This to some extent, has limited the potential practical impact of the proposed method.",
+    "clarity,_quality,_novelty_and_reproducibility": "Quality: \nThe paper is very well written. Delivers a simple yet interesting observation clearly. The observation is to the best of my knowledge novel in the literature of AT. \n\nClarity: \nThe paper is well organized. The constructive counter-examples are well explained and the authors have done a good job maintaining their simplicity. \n\nOriginality: The main claim and the proposed methods are novel. I appreciate the paper being bold and challenging the mainstream practices.",
+    "summary_of_the_review": "This paper focuses on the bring forward the issue that (a single) adversarial example might not give the descent direction, challenging a common belief adopted in the practice of this field. It did this with simple examples making its arguments. This is the strongest point of this paper. The proposed method, on the other hand, is computationally expensive compared to the original AT, and the final performance is comparable to AT, which is to some extent surprising given the fact that AT is supposedly not a correct method, the main theoretical claim made by this paper. The practical side of the claim and method proposed in this paper seems a little bit limited by its current shape.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

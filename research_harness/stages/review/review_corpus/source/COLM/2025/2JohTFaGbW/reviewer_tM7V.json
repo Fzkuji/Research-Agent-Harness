@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "2JohTFaGbW",
+  "reviewer": "tM7V",
+  "paper": {
+    "title": "Language models align with brain regions that represent concepts across modalities",
+    "authors": [
+      "Maria Ryskina",
+      "Greta Tuckute",
+      "Alexander Fung",
+      "Ashley Malkin",
+      "Evelina Fedorenko"
+    ],
+    "abstract": "Cognitive science and neuroscience have long faced the challenge of disentangling representations of language from representations of conceptual meaning. As the same problem arises in today's language models (LMs), we investigate the relationship between LM--brain alignment and two neural metrics: (1) the level of brain activation during processing of sentences, targeting linguistic processing, and (2) a novel measure of meaning consistency across input modalities, which quantifies how consistently a brain region responds to the same concept across paradigms (sentence, word cloud, image) using an fMRI dataset (Pereira et al., 2018). Our experiments show that both language-only and language-vision models predict the signal better in more meaning-consistent areas of the brain, even when these areas are not strongly sensitive to language processing, suggesting that LMs might internally represent cross-modal conceptual meaning.",
+    "keywords": [
+      "LM–brain alignment",
+      "fMRI",
+      "conceptual meaning",
+      "cognitive neuroscience"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=2JohTFaGbW"
+  },
+  "review_fields": {
+    "comment": "Thank you for the clarifications and detailed responses, I am satisfied with the answers, although I do think the title can be further polished by focusing more on the \"alignment of concept across modalities\", perhaps something like \"Across Modality Concept Alignment between Language Model and Human Brain Region\". Nonetheless, I am still convinced that the paper quality has been adequately improved and I will increase the score to 6."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 437,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/80a677bb-1a8c-4b36-8a98-7bdba1650d6f",
+    "error": null,
+    "scored_chars": 437
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "7QFmZ7i7sr",
+  "reviewer": "2fVD",
+  "paper": {
+    "title": "GPEN: Global Position Encoding Network for Enhanced Subgraph Representation Learning",
+    "authors": [
+      "Nannan Wu",
+      "Yuming Huang",
+      "Yiming Zhao",
+      "Jie Chen",
+      "Wenjun Wang"
+    ],
+    "abstract": "Subgraph representation learning has attracted growing interest due to its wide applications in various domains. However, existing methods primarily focus on local neighborhood structures while overlooking the significant impact of global structural information, in particular the influence of multi-hop neighbors beyond immediate neighborhoods. This presents two key challenges: how to effectively capture the structural relationships between distant nodes, and how to prevent excessive aggregation of global structural information from weakening the discriminative ability of subgraph representations.\nTo address these challenges, we propose GPEN (Global Position Encoding Network). GPEN leverages a hierarchical tree structure to encode each node's global position based on its path distance to the root node, enabling a systematic way to capture relationships between distant nodes. Furthermore, we introduce a boundary-aware convolution module that selectively integrates global structural information while maintaining the unique structural patterns of each subgraph. Extensive experiments on eight public datasets identify that GPEN significantly outperforms state-of-the-art methods in subgraph representation learning.",
+    "keywords": [
+      "Subgraph Representation Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7QFmZ7i7sr"
+  },
+  "review_fields": {
+    "summary": "This paper presents GPEN (Global Position Encoding Network), a novel approach for subgraph representation learning that addresses the limitation of existing methods which primarily focus on local neighborhood structures while overlooking global structural information. GPEN implements two key modules: (1) global position encoding, which leverages hierarchical tree structure to encode each node's global position, enabling the capture of structural relationships between distant nodes; and (2) boundary-aware convolution, which computes difference vectors between nodes to control information flow, selectively integrating global structural information while maintaining the unique structural patterns of each subgraph. Experiments show that GPEN achieves competitive or superior performance compared to state-of-the-art methods on eight public datasets.",
+    "claims_and_evidence": "The main claims of the paper are well-supported by theoretical analysis and experimental results. The authors claim that GPEN can effectively capture global structural information while preserving the unique features of subgraphs, which is supported by multiple theoretical analyses and relatively comprehensive experimental validation. Theoretically, the authors provide four theorems with proofs that analyze the bounded representation discrepancy, global position encoding distinctness, noise robustness of boundary-aware convolution, and generalization guarantees for tree perturbation. Experimentally, results on four real-world datasets and four synthetic datasets show that GPEN performs well on subgraph representation learning tasks. The ablation study (Table 4) demonstrates the contribution of each component, validating the complementary nature of the three modules: Global Position Encoding (GPE), Boundary-Aware Convolution (BWC), and Optional Tree Perturbation (OTP).",
+    "methods_and_evaluation_criteria": "The proposed methods and evaluation criteria are appropriate for the research problem. The authors use the same datasets and data splits as previous work, ensuring comparability of results. The evaluation uses micro-F1 scores as metrics, which is a common measure for subgraph classification tasks. Experiments are conducted on various datasets with different characteristics, including molecular biology, clinical diagnostics, and user profiling datasets from real-world scenarios, as well as synthetic datasets designed to test the ability to recognize different structural features. Notably, the authors explore the impact of different tree construction algorithms (Table 6), demonstrating the superiority of the Maximum Spanning Tree algorithm, which enhances the credibility of their method selection.",
+    "theoretical_claims": "The theoretical claims in the paper are supported by sound mathematical proofs. Section 4 provides four core theorems: Theorem 4.1 proves that the discrepancy between GPEN representations and standard GNN representations is bounded; Theorem 4.2 establishes that global position encoding effectively distinguishes nodes with different connectivity patterns; Theorem 4.3 analyzes the noise robustness of boundary-aware convolution, proving it achieves higher signal-to-noise ratio compared to standard GNN aggregation; and Theorem 4.4 provides generalization bounds for the tree perturbation technique. The proofs are elaborated in Appendix A.1 with rigorous derivations using appropriate mathematical tools such as Lipschitz continuity, Perron-Frobenius theorem, and PAC-Bayes framework.",
+    "experimental_designs_or_analyses": "The experimental design is reasonably sound. The authors adopt the same datasets and data splits as the baselines, facilitating fair comparison. The experiments cover multiple aspects: performance comparison on real-world datasets (Table 1), controlled experiments on synthetic datasets (Table 3), ablation studies (Table 4), and hyperparameter analysis. The authors explore the impact of different tree construction algorithms (Table 6), comparing Breadth-First Search Tree, Depth-First Search Tree, Minimum Spanning Tree, and Maximum Spanning Tree algorithms.",
+    "relation_to_broader_scientific_literature": "The paper has connections to the scientific literature. In Section 6, the authors review related work, including the development of Graph Neural Networks and advances in subgraph representation learning. The paper discusses existing methods such as SubGNN, GLASS, SSNP, and S2N, and explains how GPEN attempts to address some of the challenges faced by these methods from the perspectives of global structural information and selective information integration. This literature connection helps to understand the research background and contributions of GPEN.",
+    "essential_references_not_discussed": "The paper discusses most of the relevant important references. The authors' review of related work covers the progression from fundamental work on Graph Neural Networks to advances in subgraph representation learning methods.",
+    "other_strengths_and_weaknesses": "Strengths:\n1. The global position encoding proposed in GPEN is a novel approach that systematically captures multi-hop relationships between nodes in a graph.\n2. The paper provides comprehensive and rigorous theoretical analysis, proving the effectiveness and stability of the method.\n3. Experiments are conducted on multiple datasets, validating various aspects of the method through ablation studies and hyperparameter analysis.\n4. The paper mentions using COO-formatted sparse adjacency matrices to calculate difference vectors of node representations, demonstrating consideration for memory efficiency.\n\nWeaknesses:\n1. Some figures' labels and color choices could be clearer, particularly the visualizations in Figure 4.\n2. The paper discusses the impact of threshold c but lacks methods for automatically determining the optimal threshold.",
+    "other_comments_or_suggestions": "Some figures in the paper could be improved, such as the y-axis labels and line colors in Figure 4. Consider adding grid lines or using different line types to distinguish different data series, which would help readers better interpret the results.",
+    "questions_for_authors": "Among the different tree construction algorithms, the Maximum Spanning Tree performs relatively well. Is this advantage consistent across all types of graph structures, or is it more significant for certain types of graphs (such as sparse or dense graphs)?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

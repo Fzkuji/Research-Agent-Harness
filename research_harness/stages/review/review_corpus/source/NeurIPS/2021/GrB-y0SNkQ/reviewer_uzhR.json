@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "GrB-y0SNkQ",
+  "reviewer": "uzhR",
+  "paper": {
+    "title": "CobBO: Coordinate Backoff Bayesian Optimization with Two-Stage Kernels",
+    "authors": [
+      "Jian Tan",
+      "Niv Nayman",
+      "MengChang WANG",
+      "Rong Jin"
+    ],
+    "abstract": "Bayesian optimization is a popular method for optimizing expensive black-box functions. Yet it oftentimes struggles in high dimensions where a sufficient estimation of the global landscape requires more observations and the computation cost becomes prohibitively expensive.\nWe introduce Coordinate backoff Bayesian optimization (CobBO) with two-stage kernels to alleviate this problem.\nIn each iteration, a promising subset of coordinates is selected in the first stage, as past observed points in the full space are projected to the selected subspace adopting a simple kernel that sacrifices the approximation accuracy for computational efficiency.\nThen in the second stage of the same iteration a more sophisticated kernel is applied for estimating the landscape in the selected low dimensional subspace where the computational cost becomes affordable. Effectively, this second stage kernel refines the approximation of the global landscape estimated by the first stage kernel through a sequence of observations in the local subspace. This refinement lasts until a stopping rule is met determining when to back off from a certain subspace and switch to another coordinate subset.\nThis decoupling significantly reduces the computational burden in high dimensions, while the two-stage kernels of the Gaussian process regressions fully leverage the observations in the whole space rather than only relying on observations in each coordinate subspace.\nExtensive evaluations show that CobBO finds solutions comparable to or better than other state-of-the-art methods for dimensions ranging from tens to hundreds, while reducing the trial complexity and computational costs.",
+    "keywords": [
+      "Bayesian Optimization"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=GrB-y0SNkQ"
+  },
+  "review_fields": {
+    "comment": "Thank you for your detailed reply. I have gone through the other reviews and all the rebuttals. Even after reading them, I still feel the paper has potential, however, I agree on several points made by other reviewers. I feel the paper needs work in terms of exposition, especially algorithm description and also on the theoretical analysis which is not very insightful. It would be beneficial for the paper if these points are addressed in the updated version of the paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "NWKjVzkDzg",
+  "reviewer": "ZDJP",
+  "paper": {
+    "title": "Scalable Meta-Learning via Mixed-Mode Differentiation",
+    "authors": [
+      "Iurii Kemaev",
+      "Dan A. Calian",
+      "Luisa M Zintgraf",
+      "Gregory Farquhar",
+      "Hado van Hasselt"
+    ],
+    "abstract": "Gradient-based bilevel optimisation is a powerful technique with applications in hyperparameter optimisation, task adaptation, algorithm discovery, meta-learning more broadly, and beyond. It often requires differentiating through the gradient-based optimisation process itself, leading to \"gradient-of-a-gradient\" calculations with computationally expensive second-order and mixed derivatives. While modern automatic differentiation libraries provide a convenient way to write programs for calculating these derivatives, they oftentimes cannot fully exploit the specific structure of these problems out-of-the-box, leading to suboptimal performance. In this paper, we analyse such cases and propose Mixed-Flow Meta-Gradients, or MixFlow-MG -- a practical algorithm that uses mixed-mode differentiation to construct more efficient and scalable computational graphs yielding over 10x memory and up to 25\\% wall-clock time improvements over standard implementations in modern meta-learning setups.",
+    "keywords": [
+      "meta-learning",
+      "bilevel optimization",
+      "second-order optimization",
+      "automatic differentiation",
+      "autodiff",
+      "mixed-mode differentiation",
+      "gradient-based methods",
+      "scalable algorithms"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NWKjVzkDzg"
+  },
+  "review_fields": {
+    "summary": "This paper proposes to smartly combine forward-mode and reverse-mode differentiations to efficiently perform JVP/HVP in bi-level optimization. This is motivated by the observation that different differentiation methods can show massively different performance in practice, despite their potentially same theoretical memory/compute complexity. The proposed MixFlow-MG achieves over 10x memory and up to 25% wall-clock time improvements over previous implementations of meta-learning algorithms in multiple benchmarks.",
+    "methods_and_evaluation_criteria": "The main focus of the paper is improving the implementation of meta-learning (or bi-level optimization) algorithms. I believe all proposed implementation tricks intuitively make sense and smartly designed.",
+    "theoretical_claims": "N/A: The paper doesn't make any theoretical claims besides providing derivations of their MixFlow-MG algorithm.",
+    "experimental_designs_or_analyses": "Given that the main focus of the paper is improving practical implementation efficiency of meta-learning algorithms, I appreciated that authors have provided extensive analyses on run-time and memory usage. The only issue I see is a lack of the meta learning performance analysis. As far as I know, different meta learning algorithms lead to (sometimes vastly) different final results. Traditionally, it's known that scaling iterative-differentiation (as opposed to implicit differentiation) meta learning algorithms to large models/datasets is bottlenecked by prohibitive compute/memory costs. Since this paper addresses this issue, it would be nice if meta-learning algorithm implemented with their method actually improves the final performance.",
+    "relation_to_broader_scientific_literature": "Bi-level optimization with recent large models, despite having lots of useful applications like hyper-parameter optimization, is largely limited by its compute/memory complexity. This paper tackles this issue, potentially providing new research opportunities.",
+    "other_strengths_and_weaknesses": "Using HVP or JVP to enable efficient bi-level optimization is a popular idea itself. However, the key contributions of this paper are practical implementation tricks for efficient HVP/JVP.",
+    "other_comments_or_suggestions": "I believe this paper sits between ML and systems paper. Given that ICML has been traditionally closer to ML conference, I am not sure how system contributions are received in this avenue."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

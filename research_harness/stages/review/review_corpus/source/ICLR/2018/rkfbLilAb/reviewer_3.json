@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "rkfbLilAb",
+  "reviewer": "3",
+  "paper": {
+    "title": "Improving Search Through A3C Reinforcement Learning Based Conversational Agent",
+    "authors": [
+      "Milan Aggarwal",
+      "Aarushi Arora",
+      "Shagun Sodhani",
+      "Balaji Krishnamurthy"
+    ],
+    "abstract": "We develop a reinforcement learning based search assistant which can assist users through a set of actions and sequence of interactions to enable them realize their intent. Our approach caters to subjective search where the user is seeking digital assets such as images which is fundamentally different from the tasks which have objective and limited search modalities. Labeled conversational data is generally not available in such search tasks and training the agent through human interactions can be time consuming. We propose a stochastic virtual user which impersonates a real user and can be used to sample user behavior efficiently to train the agent which accelerates the bootstrapping of the agent. We develop A3C algorithm based context preserving architecture which enables the agent to provide contextual assistance to the user. We compare the A3C agent with Q-learning and evaluate its performance on average rewards and state values it obtains with the virtual user in validation episodes. Our experiments show that the agent learns to achieve higher rewards and better states.",
+    "keywords": [
+      "Subjective search",
+      "Reinforcement Learning",
+      "Conversational Agent",
+      "Virtual user model",
+      "A3C",
+      "Context aggregation"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rkfbLilAb"
+  },
+  "review_fields": {
+    "review": "The paper \"IMPROVING SEARCH THROUGH A3C REINFORCEMENT LEARNING BASED CONVERSATIONAL AGENT\" proposes to define an agent to guide users in information retrieval tasks. By proposing refinements of the query, categorizations of the results or some other bookmarking actions, the agent is supposed to help the user in achieving his search. The proposed agent is learned via reinforcement learning. \n\nMy concern with this paper is about the experiments that are only based on simulated agents, as it is the case for learning. While it can be questionable for learning (but we understand why it is difficult to overcome), it is very problematic for the experiments to not have anything that demonstrates the usability of the approach in a real-world scenario. I have serious doubts about the performances of such an artificially learned approach for achieving real-world search tasks. Also, for me the experimental section is not sufficiently detailed, which lead to not reproducible results. Moreover, authors should have considered baselines (only the two proposed agents are compared which is clearly not sufficient). \n\nAlso, both models have some issues from my point of view. First, the Q-learning methods looks very complex: how could we expect to get an accurate model with 10^7 states ? No generalization about the situations is done here, examples of trajectories have to be collected for each individual considered state, which looks very huge (especially if we think about the number of possible trajectories in such an MDP). The second model is able to generalize from similar situations thanks to the neural architecture that is proposed. However, I have some concerns about it: why keeping the history of actions in the inputs since it is captured by the LSTM cell ? It is a redondant information that might disturb the process. Secondly, the proposed loss looks very heuristic for me, it is difficult to understand what is really optimized here. Particularly, the loss entropy function looks strange to me. Is it classical ? Are there some references of such a method to maintain some exploration ability. I understand the need of exploration, but including it in the loss function reduces the interpretability of the objective (wouldn't it be preferable to use a more classical loss but with an epsilon greedy policy?).\n\n\nOther remarks: \n   - In the begining of \"varying memory capacity\" section, what is \"100, 150 and 250\" ? Time steps ? What is the unit ? Seconds ?   \n   - I did not understand the \"Capturing seach context at local and global level\" at all\n   - In the loss entropy formula, the two negation signs could be removed"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

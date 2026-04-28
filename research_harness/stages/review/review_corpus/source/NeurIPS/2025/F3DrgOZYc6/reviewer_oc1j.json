@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "F3DrgOZYc6",
+  "reviewer": "oc1j",
+  "paper": {
+    "title": "Improved Algorithms for Overlapping and Robust Clustering of Edge-Colored Hypergraphs: An LP-Based Combinatorial Approach",
+    "authors": [
+      "Changyeol Lee",
+      "Yongho Shin",
+      "Hyung-Chan An"
+    ],
+    "abstract": "Clustering is a fundamental task in both machine learning and data mining. Among various methods, edge-colored clustering (ECC) has emerged as a useful approach for handling categorical data. Given a hypergraph with (hyper)edges labeled by colors, ECC aims to assign vertex colors to minimize the number of edges where the vertex color differs from the edge's color. However, traditional ECC has inherent limitations, as it enforces a nonoverlapping and exhaustive clustering. To tackle these limitations, three versions of ECC have been studied: Local ECC and Global ECC, which allow overlapping clusters, and Robust ECC, which accounts for vertex outliers. For these problems, both linear programming (LP) rounding algorithms and greedy combinatorial algorithms have been proposed. While these LP-rounding algorithms provide high-quality solutions, they demand substantial computation time; the greedy algorithms, on the other hand, run very fast but often compromise solution quality. In this paper, we present a family of algorithms that combines the strengths of LP with the computational efficiency of combinatorial algorithms. Both experimental and theoretical analyses show that our algorithms efficiently produce high-quality solutions for all three problems: Local, Global, and Robust ECC. We complement our algorithmic contributions with complexity-theoretic inapproximability results and integrality gap bounds, which suggest that significant theoretical improvements are unlikely. Our results also answer two open questions previously raised in the literature.",
+    "keywords": [
+      "overlapping edge-colored clustering",
+      "robust edge-colored clustering",
+      "edge-colored clustering",
+      "hypergraph clustering",
+      "primal-dual methods",
+      "approximation algorithms"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=F3DrgOZYc6"
+  },
+  "review_fields": {
+    "summary": "The authors consider several variants of edge coloring clustering (ECC) in hypergraphs. The goal\nof the problem is to given colored edges, color vertices minimizing disagreements. The variants are\nwhere we allow multiple colors for vertices but restricting the number of allowed colors. The authors\npropose approximation algorithms for their LP-based problems, and provide inapproximability results.\nThe authors also combine additional experiments.",
+    "strengths_and_weaknesses": "+ The approximation results are interesting, and the inapproximability results provide a more complete results.\n+ The paper is well-written, though relatively dense.\n- As the algorithms are LP-based, the running times are not clear. Are these \n  algorithms scalable? What is the running time for these?  Can one do a combinatorial algorithm derived from LP?\n- The practical impact of these problems may be limited, nevertheless the relaxation variants are worth studying.",
+    "questions": "What is the computational complexity of the original ECC?\nCan we develop combinatorial algorithms for the proposed variants?",
+    "final_justification": "In my view, this is a good submission, and the upsides outweigh downsides."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 4,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

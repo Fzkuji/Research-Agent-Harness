@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "eHzIwAhj06",
+  "reviewer": "kRBT",
+  "paper": {
+    "title": "The Group Robustness is in the Details: Revisiting Finetuning under Spurious Correlations",
+    "authors": [
+      "Tyler LaBonte",
+      "John Collins Hill",
+      "Xinchen zhang",
+      "Vidya Muthukumar",
+      "Abhishek Kumar"
+    ],
+    "abstract": "Modern machine learning models are prone to over-reliance on spurious correlations, which can often lead to poor performance on minority groups. In this paper, we identify surprising and nuanced behavior of finetuned models on worst-group accuracy via comprehensive experiments on four well-established benchmarks across vision and language tasks. We first show that the commonly used class-balancing techniques of mini-batch upsampling and loss upweighting can induce a decrease in worst-group accuracy (WGA) with training epochs, leading to performance no better than without class-balancing. While in some scenarios, removing data to create a class-balanced subset is more effective, we show this depends on group structure and propose a mixture method which can outperform both techniques. Next, we show that scaling pretrained models is generally beneficial for worst-group accuracy, but only in conjunction with appropriate class-balancing. Finally, we identify spectral imbalance in finetuning features as a potential source of group disparities --- minority group covariance matrices incur a larger spectral norm than majority groups once conditioned on the classes. Our results show more nuanced interactions of modern finetuned models with group robustness than was previously known. Our code is available at https://github.com/tmlabonte/revisiting-finetuning.",
+    "keywords": [
+      "spurious correlations",
+      "group robustness",
+      "distribution shift",
+      "class balancing"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=eHzIwAhj06"
+  },
+  "review_fields": {
+    "summary": "The authors propose a class balancing scheme that both discards samples from the majority classes and upsamples majority classes as a way to improve worst group accuracy/robustness.",
+    "strengths": "The authors propose a simple yet effective method that provides good performance for all of the datasets tested. The over-parametrization and spectral imbalance empirical analysis are of independent interest.",
+    "weaknesses": "Limited empirical Evidence: Although the benchmark datasets are taken from prior work (Idrissi et. al)  and indeed popular,  most of the claims are substantiated by experiments on only three settings, in which the two baseline methods show a different behaviour. The claim that their method works better on a wider range of settings (without hyperparameter tuning) could be supported by more empirical evidence.\n\nRelevance of the Feature Spectral Analysis: Although it is interesting and informative/insightful, there is no discussion on how the spectral features change between the proposed method and baseline  methods (subsetting/upsampling) - i.e. , how the balanced is achieved. Thus it seems unrelated to the discussion about the proposed method.\n\nRatio ablation and choice: There is not much discussion about the choice of mixture ratio  (again this is important because there is emphasis in this method performing well *without* hyperparameter tuning). The ratio ablation included in the supplementary (figure 7) only includes two values per dataset (apart from the baselines). The two values shown do have similar performance so if this holds with more points, this could better illustrate the robustness of the method w.r.t this hyperparameter.",
+    "questions": "Did you tune the mixture ratio? Why don't you compare to other class balancing techniques apart from subsetting and oversampling?\nHave you tried other datasets or other group-imbalance settings?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 2,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1656,
+    "words": 247,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ada84550-64e6-495c-bf24-79125ff11ad5",
+    "error": null,
+    "scored_chars": 1660
+  }
+}

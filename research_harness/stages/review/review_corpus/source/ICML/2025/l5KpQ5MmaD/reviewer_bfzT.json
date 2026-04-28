@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "l5KpQ5MmaD",
+  "reviewer": "bfzT",
+  "paper": {
+    "title": "Scalable Non-Equivariant 3D Molecule Generation via Rotational Alignment",
+    "authors": [
+      "Yuhui Ding",
+      "Thomas Hofmann"
+    ],
+    "abstract": "Equivariant diffusion models have achieved impressive performance in 3D molecule generation. These models incorporate Euclidean symmetries of 3D molecules by utilizing an SE(3)-equivariant denoising network. However, specialized equivariant architectures limit the scalability and efficiency of diffusion models. In this paper, we propose an approach that relaxes such equivariance constraints. Specifically, our approach learns a sample-dependent SO(3) transformation for each molecule to construct an aligned latent space. A non-equivariant diffusion model is then trained over the aligned representations. Experimental results demonstrate that our approach performs significantly better than previously reported non-equivariant models. It yields sample quality comparable to state-of-the-art equivariant diffusion models and offers improved training and sampling efficiency. Our code is available at: https://github.com/skeletondyh/RADM",
+    "keywords": [
+      "Non-equivariant diffusion",
+      "3D molecule generation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=l5KpQ5MmaD"
+  },
+  "review_fields": {
+    "summary": "This paper proposes Aligned Latent Diffusion Model (ALDM) to improve 3D molecule generation by relaxing SE(3) equivariance constraints in diffusion models. Instead of enforcing equivariance, ALDM learns a sample-dependent SO(3) transformation using an autoencoder to align molecular representations, enabling the use of non-equivariant diffusion models like vanilla GNNs and transformers. This approach significantly improves scalability and efficiency while maintaining state-of-the-art sample quality, outperforming previous non-equivariant models and matching equivariant baselines in molecule stability and validity.",
+    "claims_and_evidence": "The claims made in the submission are supported by clear and convincing evidence",
+    "methods_and_evaluation_criteria": "The proposed method is evaluated on appropriate datasets with other baselines.",
+    "theoretical_claims": "Algorithms in this paper is correct.",
+    "experimental_designs_or_analyses": "Yes, The proposed method is evaluated on appropriate datasets with other baselines.",
+    "other_strengths_and_weaknesses": "Strengths:\n1. Improved Efficiency & Scalability – By removing SE(3) equivariance constraints, ALDM enables the use of simpler, more scalable architectures (e.g., GNNs, transformers), reducing computational costs and improving sampling speed.  \n2. Flexible Model Design – Unlike equivariant models that require specialized architectures (e.g., EGNNs), ALDM allows for standard non-equivariant GNNs and transformers, making implementation and optimization more accessible.  \n3. Well-Motivated Theoretical Insight – The paper challenges the necessity of equivariance in 3D molecule generation, providing a principled alignment-based approach that removes redundancy while maintaining symmetry-aware representations.  \n\nWeakness & Questions:  \n1.\tThe performance compromises. ALDM does not achieve the SOTA performance in each column on QM9 in Table 1.  \n2.\tWhat’s the difference between Eq. 17 and regular message-passing GNNs? EGNN mainly convert positions to distance to achieve the equivariance. Without this design, Eq. 17 becomes a regular GNN.   \n3.\tAlignment Quality Uncertainty – The autoencoder-based alignment is learned in an unsupervised manner, making it unclear whether the learned SO(3) transformations always provide an optimal latent representation for downstream diffusion modeling.  \n4.\tLimited Theoretical Justification on Performance Trade-offs – While the paper argues against the necessity of equivariance, it does not provide a rigorous theoretical analysis explaining why non-equivariant models can fully match or surpass equivariant ones under all conditions.  \n5.\tNo code available. No appendix showing more information. E.g. the dataset information, the detailed experimental settings, the optimal hyperparameters…."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

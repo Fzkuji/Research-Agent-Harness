@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "KS8mIvetg2",
+  "reviewer": "FS83",
+  "paper": {
+    "title": "Proving Test Set Contamination in Black-Box Language Models",
+    "authors": [
+      "Yonatan Oren",
+      "Nicole Meister",
+      "Niladri S. Chatterji",
+      "Faisal Ladhak",
+      "Tatsunori Hashimoto"
+    ],
+    "abstract": "Large language models are trained on vast amounts of internet data, prompting concerns that they have memorized public benchmarks. Detecting this type of contamination is challenging because the pretraining data used by proprietary models are often not publicly accessible.\n\nWe propose a procedure for detecting test set contamination of language models with exact false positive guarantees and without access to pretraining data or model weights. Our approach leverages the fact that when there is no data contamination, all orderings of an exchangeable benchmark should be equally likely. In contrast, the tendency for language models to memorize example order means that a contaminated language model will find certain canonical orderings to be much more likely than others. Our test flags potential contamination whenever the likelihood of a canonically ordered benchmark dataset is significantly higher than the likelihood after shuffling the examples.\n\nWe demonstrate that our procedure is sensitive enough to reliably detect contamination in challenging situations, including models as small as 1.4 billion parameters, on small test sets only 1000 examples, and datasets that appear only a few times in the pretraining corpus. Finally, we evaluate LLaMA-2 to apply our test in a realistic setting and find our results to be consistent with existing contamination evaluations.",
+    "keywords": [
+      "language modeling",
+      "memorization",
+      "dataset contamination"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=KS8mIvetg2"
+  },
+  "review_fields": {
+    "summary": "This paper targets the problem of detecting test set contamination of black-box language models. The proposed method is based on two hypotheses: (1) the exchangeability of many datasets (distribution won't be affected after shuffling); and (2) if a language model is contaminated, it is more likely to find certain orderings of data samples than other orderings. Then a statistical test is proposed to compare the log probability of the dataset under the original ordering to the log probability under random permutations on sharded datasets. Experiments are conducted with one 1.4B-gpt2 model trained from scratch on 10 test sets, and the results prove the effectiveness of the proposed framework.",
+    "strengths": "- This paper targets an interesting and exciting problem in the community, test set contamination. \n- Based on the hypothesis, this paper proposed a contamination detection method, which is intuitive and easy to deploy in other settings.\n- The method is verified with a 1.4B language model trained from scratch, and the existing Llama2 model, both showing promising results even when the test set only appears a few times in the pre-training corpus.",
+    "weaknesses": "- I'm most concerned about the definition of contamination used in this paper. Currently, the most popular definition of contamination follows the n-gram analysis. In real-world scenarios when training large language models, it's hardly seen to directly feed original data samples in their original ordering as shown in Figure 1. The application of this work could be greatly limited.\n- From Figure 3, it seems that the parameters for shards and permutations are sensitive and have to be carefully selected when being applied to other test sets.\n- The paper only targets direct sentence appearance in the pre-training stage. What about instruction-tuning data in the SFT stage?",
+    "questions": "- Could you further explain \"high false positives\" in existing n-gram-based analyses?\n- How did you deal with the labels for the data samples in test sets?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:11Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:11Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1127,
+    "words": 180,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2c9aae19-42a6-4635-9e78-ae1562250c72",
+    "error": null,
+    "scored_chars": 1128
+  }
+}

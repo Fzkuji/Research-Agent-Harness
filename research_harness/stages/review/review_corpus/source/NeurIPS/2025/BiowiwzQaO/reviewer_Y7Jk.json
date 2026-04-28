@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "BiowiwzQaO",
+  "reviewer": "Y7Jk",
+  "paper": {
+    "title": "GoalLadder: Incremental Goal Discovery with Vision-Language Models",
+    "authors": [
+      "Alexey Zakharov",
+      "Shimon Whiteson"
+    ],
+    "abstract": "Natural language can offer a concise and human-interpretable means of specifying reinforcement learning (RL) tasks. The ability to extract rewards from a language instruction can enable the development of robotic systems that can learn from human guidance; however, it remains a challenging problem, especially in visual environments. Existing approaches that employ large, pretrained language models either rely on non‑visual environment representations, require prohibitively large amounts of feedback, or generate noisy, ill‑shaped reward functions. In this paper, we propose a novel method, GoalLadder, that leverages vision-language models (VLMs) to train RL agents from a single language instruction in visual environments. GoalLadder works by incrementally discovering states that bring the agent closer to completing a task specified in natural language. To do so, it queries a VLM to identify states that represent an improvement in agent's task progress and to rank them using pairwise comparisons. Unlike prior work, GoalLadder does not trust VLM's feedback completely; instead, it uses it to rank potential goal states using an ELO-based rating system, thus reducing the detrimental effects of noisy VLM feedback. Over the course of training, the agent is tasked with minimising the distance to the top-ranked goal in a learned embedding space, which is trained on unlabelled visual data. This key feature allows us to bypass the need for abundant and accurate feedback typically required to train a well-shaped reward function. We demonstrate that GoalLadder outperforms existing related methods on classic control and robotic manipulation environments with the average final success rate of $\\sim$95\\% compared to only $\\sim$45\\% of the best competitor.",
+    "keywords": [
+      "reinforcement learning",
+      "vision-language models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=BiowiwzQaO"
+  },
+  "review_fields": {
+    "summary": "This paper presents GoalLadder, a RL framework for solving robotics control tasks from a single natural language intruction (without using the dense reward function). The method incrementally discovers goal states using pairwise comparisons from a vision-language model (VLM) and ranks these states using an Elo style rating system. The top-ranked goals are then used to define a reward function based on euclidean distance in a learned latent space. Experimental results show good performance on classical control and and simple manipulation tasks (drawer open, window close etc).",
+    "strengths_and_weaknesses": "## Strengths:\n- No handcrafted or dense reward required: As far as I understood, this approach does not require a dense reward, not requires training a reward model\n- The writing is clear and the method seems sound.\n- Good performance results.\n\n## Weaknesses:\n- I'm not fully up-to-date with the SOT in this line of work, but I know some existing baselines in language-conditioned RL such as SayCan [1], Code-as-Policies [2], Language-to-Reward [3]. My general feeling is that these are strongly related work and that should be included as a comparison.\n- Text version of RoboCLIP is used even though it also provides a video-level alignment capability.\n- This method assues the task completion can be inferred from a single image (it may not work for more complex tasks).\n- Reward is defined as euclidean distance in the latent space. This assumes that visual proximity in this space corresponds to task progress and this can be a weak reward proxy in more complex environments.\n- No real world experiments.\n\n\n\n\n[1] - https://say-can.github.io/\n\n[2] - https://arxiv.org/pdf/2209.07753\n\n[3] - https://arxiv.org/pdf/2306.08647",
+    "questions": "- How did you robustly verify that the latent space aligns with actual task progress? Did you test whether visually close but semantically different states are rewarded the same? as in doing any edge-case testing.\n- What are the compute/runtime implications of GoalLadder vs. preference-based methods? Can the method run efficiently in real-time or on physical robots?",
+    "limitations": "- This method only works on tasks where success is clearly apparent from a single image frame.\n- Visual similarity is not always equivalent to task completion, this assumption can fail in tasks with subtle state changes.\n- This method's robustness is also tied to the accuracy of the VAE learned representation."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 2,
+    "quality": 3,
+    "clarity": 4,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

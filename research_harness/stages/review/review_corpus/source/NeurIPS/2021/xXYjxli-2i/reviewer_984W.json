@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "xXYjxli-2i",
+  "reviewer": "984W",
+  "paper": {
+    "title": "Optimization-Based Algebraic Multigrid Coarsening Using Reinforcement Learning",
+    "authors": [
+      "Ali Taghibakhshi",
+      "Scott MacLachlan",
+      "Luke Olson",
+      "Matthew West"
+    ],
+    "abstract": "Large sparse linear systems of equations are ubiquitous in science and engineering, such as those arising from discretizations of partial differential equations. Algebraic multigrid (AMG) methods are one of the most common methods of solving such linear systems, with an extensive body of underlying mathematical theory. A system of linear equations defines a graph on the set of unknowns and each level of a multigrid solver requires the selection of an appropriate coarse graph along with restriction and interpolation operators that map to and from the coarse representation. The efficiency of the multigrid solver depends critically on this selection and many selection methods have been developed over the years. Recently, it has been demonstrated that it is possible to directly learn the AMG interpolation and restriction operators, given a coarse graph selection. In this paper, we consider the complementary problem of learning to coarsen graphs for a multigrid solver, a necessary step in developing fully learnable AMG methods. We propose a method using a reinforcement learning (RL) agent based on graph neural networks (GNNs), which can learn to perform graph coarsening on small planar training graphs and then be applied to unstructured large planar graphs, assuming bounded node degree. We demonstrate that this method can produce better coarse graphs than existing algorithms, even as the graph size increases and other properties of the graph are varied. We also propose an efficient inference procedure for performing graph coarsening that results in linear time complexity in graph size.",
+    "keywords": [
+      "Algebraic Multigrid",
+      "Reinforcement Learning",
+      "Graph Partitioning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=xXYjxli-2i"
+  },
+  "review_fields": {
+    "summary": "The authors try to use reinforcement learning to investigate large sparse linear systems of equations. Meanwhile, they introduce the graph model here.",
+    "main_review": "Using reinforcement learning to solve large sparse linear systems of equations is a very interesting problem. The authors introduce the graph and GNN as the tools to investigate them. However, the quality is not enough and the content is not clear. The experiments look very good, but the theories are not very clear. If the authors can show strong theories, I would like to change my grade. Furthermore, the authors still need to show the significance of their work to the readers.",
+    "limitations_and_societal_impact": "Theories related to their experiments still need to improve."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

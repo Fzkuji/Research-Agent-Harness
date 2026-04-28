@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "KvPwXVcslY",
+  "reviewer": "QrRK",
+  "paper": {
+    "title": "Spatial-frequency channels, shape bias, and adversarial robustness",
+    "authors": [
+      "Ajay Subramanian",
+      "Elena Sizikova",
+      "Najib J. Majaj",
+      "Denis G. Pelli"
+    ],
+    "abstract": "What spatial frequency information do humans and neural networks use to recognize objects? In neuroscience, critical band masking is an established tool that can reveal the frequency-selective filters used for object recognition. Critical band masking measures the sensitivity of recognition performance to noise added at each spatial frequency. Existing critical band masking studies show that humans recognize periodic patterns (gratings) and letters by means of a spatial-frequency filter (or \"channel\") that has a frequency bandwidth of one octave (doubling of frequency). Here, we introduce critical band masking as a task for network-human comparison and test 14 humans and 76 neural networks on 16-way ImageNet categorization in the presence of narrowband noise. We find that humans recognize objects in natural images using the same one-octave-wide channel that they use for letters and gratings, making it a canonical feature of human object recognition. Unlike humans, the neural network channel is very broad, 2-4 times wider than the human channel. This means that the network channel extends to frequencies higher and lower than those that humans are sensitive to. Thus, noise at those frequencies will impair network performance and spare human performance. Adversarial and augmented-image training are commonly used to increase network robustness and shape bias. Does this training align network and human object recognition channels? Three network channel properties (bandwidth, center frequency, peak noise sensitivity) correlate strongly with shape bias (51% variance explained) and robustness of adversarially-trained networks (66% variance explained). Adversarial training increases robustness but expands the channel bandwidth even further beyond the human bandwidth. Thus, critical band masking reveals that the network channel is more than twice as wide as the human channel, and that adversarial training only makes it worse. Networks with narrower channels might be more robust.",
+    "keywords": [
+      "object recognition",
+      "critical band masking",
+      "spatial-frequency channels",
+      "shape bias",
+      "adversarial robustness"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=KvPwXVcslY"
+  },
+  "review_fields": {
+    "summary": "This work presents an empirical analysis of the sensitivity of humans and neural networks to critical band masking. This is the process of perturbing specific spatial frequencies, and determining which frequencies and at what magnitude, will lead to recognition errors. This in turns identifies the frequencies/magnitudes that a visual system “filters out” or “relies on” when performing recognition. The main finding is that neural networks are sensitive to a larger set of noise frequencies/magnitudes than human participants. Further, the paper presents evidence that adversarial-trained networks are sensitive to an even bigger set of frequencies/magnitudes, and correlation-based analyses indicating that more human-like networks that are sensitive to a narrow set of frequencies (smaller bandwidth) have a bigger shape bias.",
+    "strengths": "Originality\n- Critical band masking-based analysis has previously been done to analyze recognition of letters and gratings. The novelty for this paper comes from its critical band masking-based for ImageNet-like object recognition for 16 humans and 76 different neural networks.\n\nQuality\n- The design of the study is mostly sound: 1100 images from 16 categories of ImageNet with various kinds of added noise are used as the test set. Careful steps were taken to avoid clipping as a result of added noise. 16 participants are sufficient due to the small variability between subjects (Figure 2 in supplement).\n- The evidence for the claims of bigger channel bandwidth than humans, inverse correlation of bandwidth and shape bias, and increased bandwidth with, are sound regarding the 76 networks evaluated in this paper. Figures 4 5 6 contain clear evidence of these claims\n\nClarity\n- The paper is well written and mostly easy to follow. The plots in Figure 5 and 6 are quite condensed, containing a lot of information, but with the text and captions the reader can mostly parse them well.",
+    "weaknesses": "Quality\n- The practical motivation behind using grayscale images reduced to 20% contrast makes sense, however, this represents a testing condition outside of the training data domain of these neural networks. A control experiment where the performance discrepancy between testing on standard RGB data and contrast reduced grayscale is quantified would justify this choice of test setting.\n- While the paper does investigate a diverse set of networks, one confounding factor that at least should be mentioned and ideally should be investigated in an analysis paper like this is the effect of training data and data augmentation on spatial frequency sensitivity. The design of the neural network itself is not the only factor. \n    * The neural networks used in this paper are primarily trained on ImageNet, but there are other datasets, for example Office-Home, with images from different domains for each object, and therefore different spatial frequency characteristics. Training on such data will likely result in different spatial frequency sensitivity. \n    * There might be straightforward steps like band-pass filtering or adding noise to the input data at training time, that might effectively reduce the range of frequencies a model is sensitive to.\n- The paper lacks a related work section. While it does mention a variety of prior work throughout the draft, it would be beneficial to include a separate section that would cover prior work on topics like: spatial frequency sensitivity of humans and neural networks, shape bias, adversarial robustness, and comparing humans and neural networks more broadly. The main benefit is to help the reader understand exactly where the proposed work lies relative to prior methods.\n\nSignificance\n- While it is interesting to see a comparison of spatial frequency sensitivity of networks to humans for object recognition, and to identify it as an emerging phenomenon for a variety of ImageNet-trained models, I’m concerned about what exactly is the significance of these findings for deep learning practitioners. How should researchers rethink their work going forward as a result of these findings?\n- As mentioned in the quality section, after reading this paper there is a sense of it not going quite far enough in the analysis. How pervasive is the phenomenon of a wider spatial frequency sensitivity of neural networks? It would be more impactful if it is demonstrated that this is a general phenomenon despite training data or simple mitigation strategies.\n- The observations about adversarial robustness are focused on one type of white-box adversarial attack, which is the least practically plausible.",
+    "questions": "- What exactly is the significance of the findings presented in this work? What should be the main takeaway for researchers working on deep learning methodology for visual recognition, regarding how their future work should be affected by these findings? Is it necessarily better if the \"channel\" (as defined in this paper) is more human-like, and if so, why?\n- Given that filtered noise perturbation significantly alters the visual appearance of an image, so much so that it appears to be quite easy to identify images with such an attack, what is the significance of identifying the susceptibility to such attacks of adversarial-trained models (described in L298)?\n- What is the significance of the current findings abound frequency sensitivity, in light of the fact that the effect of training dataset choice and some basic techniques could be used to improve it?. How pervasive is this emerging phenomenon of a wider spatial frequency sensitivity of neural networks?",
+    "limitations": "The authors have adequately addressed the limitations."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:02Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:02Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3735,
+    "words": 594,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a046487c-7e93-422e-82dc-4b75f7907335",
+    "error": null,
+    "scored_chars": 3745
+  }
+}

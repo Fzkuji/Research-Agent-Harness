@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "BAakY1hNKS",
+  "reviewer": "sCwk",
+  "paper": {
+    "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversations",
+    "authors": [
+      "Qingyun Wu",
+      "Gagan Bansal",
+      "Jieyu Zhang",
+      "Yiran Wu",
+      "Beibin Li",
+      "Erkang Zhu",
+      "Li Jiang",
+      "Xiaoyun Zhang",
+      "Shaokun Zhang",
+      "Jiale Liu",
+      "Ahmed Hassan Awadallah",
+      "Ryen W White",
+      "Doug Burger",
+      "Chi Wang"
+    ],
+    "abstract": "We present AutoGen, an open-source framework that allows developers to build LLM applications by composing multiple agents to converse with each other to accomplish tasks. AutoGen agents are customizable, conversable, and can operate in various modes that employ combinations of LLMs, human inputs, and tools. It also enables developers to create flexible agent behaviors and conversation patterns for different applications using both natural language and code. AutoGen serves as a generic infrastructure and is widely used by AI practitioners and researchers to build diverse applications of various complexities and LLM capacities. We demonstrate the framework’s effectiveness with several pilot applications, with domains ranging from mathematics and coding to question-answering, supply-chain optimization, online decision-making, and entertainment.",
+    "keywords": [
+      "Large Language Model",
+      "Multi-Agent Conversation Framework",
+      "Open-Source Library"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=BAakY1hNKS"
+  },
+  "review_fields": {
+    "summary": "This paper proposes an open-source framework that allows developers to build LLM applications by composing multiple agents to converse with each other to accomplish tasks. AutoGen provides a few default agents with preset behaviors and it also provides users the ability to create flexible agent behaviors and conversation patterns for different applications using both natural language and code. Autogen and their preset agents are tested in multiple applications covering various knowledge domains. Results show that autogen’s performance is always better  than single LLM methods.",
+    "reasons_to_accept": "1. Research-wise it serves as another piece of evidence suggesting that multi-agent collaboration might be an effective method to build successful LLM applications.\n\n2. A solid open-source system that allows users to not only adopt pre-defined agents freely, but also to contribute more types of agents to potentially form an ecosystem.\n\n3. Solid experiments covering multiple applications and various knowledge domains.",
+    "reasons_to_reject": "My only concern is I don’t know how easy it is for the multi-agent system to achieve the reported superior performance compared to single LLM solutions. Do you have to try a lot of different designs to make it happen or your first several intuitive designs would work? Are there difficulty level differences between domains for autogen? In other words, have you observed that for some applications, you really have to try very hard and try a lot of different designs to make it work better than GPT-4 while for other apps it was very easy? Analysis towards this direction can be very helpful."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:53Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:53Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1014,
+    "words": 165,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/27c071ff-9e64-4415-a6d9-c3ddd93d1c99",
+    "error": null,
+    "scored_chars": 1014
+  }
+}

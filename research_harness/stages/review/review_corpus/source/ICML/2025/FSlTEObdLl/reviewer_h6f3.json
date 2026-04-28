@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "FSlTEObdLl",
+  "reviewer": "h6f3",
+  "paper": {
+    "title": "CombiMOTS: Combinatorial Multi-Objective Tree Search for Dual-Target Molecule Generation",
+    "authors": [
+      "Thibaud Southiratn",
+      "Bonil Koo",
+      "Yijingxiu Lu",
+      "Sun Kim"
+    ],
+    "abstract": "Dual-target molecule generation, which focuses on discovering compounds capable of interacting with two target proteins, has garnered significant attention due to its potential for improving therapeutic efficiency, safety and resistance mitigation.\nExisting approaches face two critical challenges.\nFirst, by simplifying the complex dual-target optimization problem to scalarized combinations of individual objectives, they fail to capture important trade-offs between target engagement and molecular properties. \nSecond, they typically do not integrate synthetic planning into the generative process.\nThis highlights a need for more appropriate objective function design and synthesis-aware methodologies tailored to the dual-target molecule generation task.\nIn this work, we propose CombiMOTS, a Pareto Monte Carlo Tree Search (PMCTS) framework that generates dual-target molecules.\nCombiMOTS is designed to explore a synthesizable fragment space while employing vectorized optimization constraints to encapsulate target affinity and physicochemical properties.\nExtensive experiments on real-world databases demonstrate that CombiMOTS produces novel dual-target molecules with high docking scores, enhanced diversity, and balanced pharmacological characteristics, showcasing its potential as a powerful tool for dual-target drug discovery.\nThe code and data is accessible through \\url{https://github.com/Tibogoss/CombiMOTS}.",
+    "keywords": [
+      "Dual-target Molecule Generation",
+      "Fragment-based Drug Discovery",
+      "Monte-Carlo Tree Search",
+      "Pareto Optimization",
+      "Search Space Reduction"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=FSlTEObdLl"
+  },
+  "review_fields": {
+    "summary": "The paper introduces CombiMOTS, a Pareto Monte Carlo Tree Search (PMCTS) framework for generating dual-target molecules, which are molecules that can interact with two target proteins simultaneously. The authors argue that existing methods often simplify the dual-target optimization problem by linearly combining objectives and neglecting synthetic planning. CombiMOTS addresses these challenges by exploring a synthesizable fragment space and using vectorized optimization constraints to encapsulate target affinity and physicochemical properties. The authors claim that experiments on real-world datasets demonstrate that CombiMOTS generates novel dual-target molecules with high docking scores, enhanced diversity, and balanced pharmacological characteristics. The core idea combines PMCTS with a fragment-based approach and a focus on synthesizability using the Enamine REAL Space.",
+    "claims_and_evidence": "CombiMOTS is able to perform dual-target optimization. The authors claim that there are intricacies in dual-target optimization that cannot be captured due to simplification by \"linear combination of individual objectives\", but there are other scalarizing methods (by hypervolume, or distance to utopia point). \n\nThe results in Table 1 seem to indicate the metrics used there are not particularly useful, with almost all models achieving scores of >99%. Evaluating generative model quality by validity, uniqueness, novelty, and diversity have been noted as problematic (https://www.sciencedirect.com/science/article/pii/S1740674920300159).",
+    "methods_and_evaluation_criteria": "It would strengthen the claims of the pareto MCTS being superior if the optimal tradeoffs were quantified, rather than in distribution plots of Figure 3 and 6. A score that quantifies the optimality of the pareto-optimal point? From the plots, it looks like RationaleRL is quite successful as well in the multi-objective task.",
+    "theoretical_claims": "There are no theoretical claims made.",
+    "experimental_designs_or_analyses": "The design is logical and sound, however, may be limited in novelty. The authors used a fragment-based tree search to generate synthesizable molecules, and added multi-objective Pareto optimal score, with no significant advancements in either methods. However, I appreciate the non-triviality of implementing this workflow. Additionally, tt is also not clear that CombiMOTs are better than the models presented.",
+    "relation_to_broader_scientific_literature": "The work builds upon tree search generation methods for objective oriented molecular generation.",
+    "essential_references_not_discussed": "- Multiobjective benchmarking for generative models\n  - PMO (https://arxiv.org/abs/2206.12411)\n- Pareto-optimal generation (https://openreview.net/pdf?id=sWRZxIcR8qK)\n\nTree-search methods based on fragments and rules based generation have been explored before. \n- https://arxiv.org/pdf/2110.06389\n- https://proceedings.neurips.cc/paper_files/paper/2020/file/4cc05b35c2f937c5bd9e7d41d3686fff-Paper.pdf\n- https://www.nature.com/articles/s42004-024-01133-2",
+    "other_strengths_and_weaknesses": "Strengths:\n- Clear problem definition and motivation.\n- Focus on synthesizability is key for molecular generation\n- Easy to read and follow\n\nWeakness:\n- It is not clear that the claims of CombiMOTs producing dual-target molecules is better than other methods. For example, is it possible to perform a similar case study with a candidate generated by RationaleRL?  A metric to distinguish the pareto-optimal solution being better from CombiMOTS would be beneficial.\n- The idea of using synthesizability routes and fragments to give realistic molecules is not new, particular the combination of tree-search methods with retrosynthetic routes (see early response). \n- Limited novelty\n- Other scalarizing methods that consider pareto-optimization are not considered.",
+    "other_comments_or_suggestions": "The discussion on pareto optimization can be shortened. The comparison to scalarized results CombiMCTS are important to demonstrate the effect of PUCB optimization, and should be in the main text."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

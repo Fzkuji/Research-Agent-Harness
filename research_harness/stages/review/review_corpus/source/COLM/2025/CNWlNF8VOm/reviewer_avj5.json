@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "CNWlNF8VOm",
+  "reviewer": "avj5",
+  "paper": {
+    "title": "The Surprising Effectiveness of Membership Inference with Simple N-Gram Coverage",
+    "authors": [
+      "Skyler Hallinan",
+      "Jaehun Jung",
+      "Melanie Sclar",
+      "Ximing Lu",
+      "Abhilasha Ravichander",
+      "Sahana Ramnath",
+      "Yejin Choi",
+      "Sai Praneeth Karimireddy",
+      "Niloofar Mireshghallah",
+      "Xiang Ren"
+    ],
+    "abstract": "Membership inference attacks serves as useful tool for fair use of language models, such as detecting potential copyright infringement and auditing data leakage. However, many current state-of-the-art attacks require access to models' hidden states or probability distribution, which prevents investigation into more widely-used, API-access only models like GPT-4. In this work, we introduce N-Gram Coverage Attack, a membership inference attack that relies **solely** on text outputs from the target model, enabling attacks on completely black-box models. We leverage the observation that models are more likely to memorize and subsequently generate text patterns that were commonly observed in their training data. Specifically, to make a prediction on a candidate member, N-Gram Coverage Attack first obtains multiple model generations conditioned on a prefix of the candidate. It then uses n-gram overlap metrics to compute and aggregate the similarities of these outputs with the ground truth suffix; high similarities indicate likely membership. We first demonstrate on a diverse set of existing benchmarks that N-Gram Coverage Attack outperforms other black-box methods while also impressively achieving comparable or even better performance to state-of-the-art white-box attacks --- despite having access to only text outputs.  Interestingly, we find that the success rate of our method scales with the attack compute budget --- as we increase the number of sequences generated from the target model conditioned on the prefix, attack performance tends to improve. Having verified the accuracy of our method, we use it to investigate previously unstudied closed OpenAI models on multiple domains. We find that more recent models, such as GPT-4o, exhibit increased robustness to membership inference, suggesting an evolving trend toward improved privacy protections.",
+    "keywords": [
+      "membership inference",
+      "membership inference attack",
+      "privacy",
+      "memorization"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=CNWlNF8VOm"
+  },
+  "review_fields": {
+    "summary": "This paper studies an interesting problem, but there are flaws in the contribution, method, related works, etc.",
+    "reasons_to_accept": "(1) The focus on the full black-box MIAs requires fewer assumptions than previous methods.\n(2) This work is the first to explore the effectiveness of N-GRAM attack on post-training data, a very interesting perspective.",
+    "reasons_to_reject": "(1) One major contribution of this paper is the collection of a new benchmark, WIKIMIA-2024, which, however, is almost identical to the benchmark WIKIMIA-24 released in [1]. Both benchmarks are based on WIKIMIA but adapted to up-to-date LLMs by setting a new cut-off date. The paper should discuss in detail the essential differences between these two benchmarks, if they exist. Additionally, evaluating the proposed method and baselines on WIKIMIA-24 is also necessary.\n(2) What is the meaning of edit distance (Line 210)? Why should we ensure a sufficient distance between the member and non-member? The necessity of this operation is not justified.\n(3) The related works/preliminaries can benefit from a thorough revision, especially since the discussion of MIAs and Memorization is not comprehensive and up-to-date enough. Please include a detailed discussion of more up-to-date works [1-5].\n(4) As established by Carlini et al. [6], membership inference attacks should be evaluated by computing their true-positive rate at low (e.g., ≤ 0.1%) false-positive rates, rather than using average-case metrics like AUC. Such evaluation metrics have become the de facto standard in evaluating membership inference attacks and are used by many existing works [5] [7] [8]. I suggest using two metrics: the Full Log-scale Receiver Operating Characteristic (ROC) Curve to highlight low false-positive rates, and the TPR at a low FPR, which measures attack performance at specific FPRs (e.g., 0.1%, 0.01%).\n\n\n[1]\tFu, Wenjie, et al. \"MIA-Tuner: Adapting Large Language Models as Pre-training Text Detector.\" arXiv e-prints (2024): arXiv-2408.\n[2]\tGarg, Isha, et al. “Memorization through the Lens of Curvature of Loss Function around Samples.” Proceedings of the 41st International Conference on Machine Learning, PMLR, 2024.\n[3]\tRavikumar, Deepak, et al. “Unveiling Privacy, Memorization, and Input Curvature Links.” Proceedings of the 41st International Conference on Machine Learning, PMLR, 2024.\n[4]\tZhang, Jingyang, et al. Min-K%++: Improved Baseline for Detecting Pre-Training Data from Large Language Models. arXiv:2404.02936, arXiv, 23 May 2024.\n[5]\tFu, Wenjie, et al. \"Membership Inference Attacks against Fine-tuned Large Language Models via Self-prompt Calibration.\" The Thirty-eighth Annual Conference on Neural Information Processing Systems. 2024.\n[6]\tCarlini, Nicholas, et al. \"Membership inference attacks from first principles.\" 2022 IEEE Symposium on Security and Privacy (2022).\n[7]\tBertran, Martin, et al. \"Scalable membership inference attacks via quantile regression.\" Advances in Neural Information Processing Systems (2023).\n[8]\tWen, Yuxin, et al. \"Canary in a Coalmine: Better Membership Inference with Ensembled Adversarial Queries.\" International Conference on L",
+    "questions_to_authors": "Additional comment: A random-guess baseline is not necessary; please consider removing it from the results. It is obvious that the AUC of a random guess is 0.5."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3162,
+    "words": 462,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/415ca0f1-3478-40d3-85cf-220b362b22f6",
+    "error": null,
+    "scored_chars": 3162
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "BkN_r2lR-",
+  "reviewer": "1",
+  "paper": {
+    "title": "Identifying Analogies Across Domains",
+    "authors": [
+      "Yedid Hoshen",
+      "Lior Wolf"
+    ],
+    "abstract": "Identifying analogies across domains without supervision is a key task for artificial intelligence. Recent advances in cross domain image mapping have concentrated on translating images across domains. Although the progress made is impressive, the visual fidelity many times does not suffice for identifying the matching sample from the other domain. In this paper, we tackle this very task of finding exact analogies between datasets i.e. for every image from domain A find an analogous image in domain B. We present a matching-by-synthesis approach: AN-GAN, and show that it outperforms current techniques. We further show that the cross-domain mapping task can be broken into two parts: domain alignment and learning the mapping function. The tasks can be iteratively solved, and as the alignment is improved, the unsupervised translation function reaches quality comparable to full supervision.",
+    "keywords": [
+      "unsupervised mapping",
+      "cross domain mapping"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=BkN_r2lR-"
+  },
+  "review_fields": {
+    "review": "The paper presents a method for finding related images (analogies) from different domains based on matching-by-synthesis. The general idea is interesting and the results show improvements over previous approaches, such as CycleGAN (with different initializations, pre-learned or not). The algorithm is tested on three datasets.\n\nWhile the approach has some strong positive points, such as good experiments and theoretical insights (the idea to match by synthesis and the proposed loss which is novel, and combines the proposed concepts), the paper lacks clarity and sufficient details.\n\nInstead of the longer intro and related work discussion, I would prefer to see a Figure with the architecture and more illustrative examples to show that the insights are reflected in the experiments. Also, the matching part, which is discussed at the theoretical level, could be better explained and presented at a more visual level. It is hard to understand sufficiently well what the formalism means without more insight.\n\nAlso, the experiments need more details. For example, it is not clear what the numbers in Table 2 mean."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ryxjH3R5KQ",
+  "reviewer": "1",
+  "paper": {
+    "title": "Single Shot Neural Architecture Search Via Direct Sparse Optimization",
+    "authors": [
+      "Xinbang Zhang",
+      "Zehao Huang",
+      "Naiyan Wang"
+    ],
+    "abstract": "Recently Neural Architecture Search (NAS) has aroused great interest in both academia and industry, however it remains challenging because of its huge and non-continuous search space. Instead of applying evolutionary algorithm or reinforcement learning as previous works, this paper proposes a Direct Sparse Optimization NAS (DSO-NAS) method. In DSO-NAS, we provide a novel model pruning view to NAS problem. In specific, we start from a completely connected block, and then introduce scaling factors to scale the information flow between operations. Next, we impose sparse regularizations to prune useless connections in the architecture. Lastly, we derive an efficient and theoretically sound optimization method to solve it. Our method enjoys both advantages of differentiability and efficiency, therefore can be directly applied to large datasets like ImageNet. Particularly, On CIFAR-10 dataset, DSO-NAS achieves an average test error 2.84%, while on the ImageNet dataset DSO-NAS achieves 25.4% test error under 600M FLOPs with 8 GPUs in 18 hours.",
+    "keywords": [
+      "Neural Architecture Search",
+      "Sparse Optimization"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryxjH3R5KQ"
+  },
+  "review_fields": {
+    "comment": "Thank you for your detailed response.\n\nI am satisfied with your answers to my questions, and I think this work deserves to be seen by the wider community as a good comparison point to other architecture search schemes, such as DARTS.\n\nAs such, I will bump my score up to 7, but I implore the authors to do another rewrite as the grammar still leaves much to be desired; you don't want to put people off reading your work because of something so trivial."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

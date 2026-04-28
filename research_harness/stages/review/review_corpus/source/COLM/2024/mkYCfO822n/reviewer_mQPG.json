@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "mkYCfO822n",
+  "reviewer": "mQPG",
+  "paper": {
+    "title": "AmbigDocs: Reasoning across Documents on Different Entities under the Same Name",
+    "authors": [
+      "Yoonsang Lee",
+      "Xi Ye",
+      "Eunsol Choi"
+    ],
+    "abstract": "Different entities with the same name can be difficult to distinguish. Handling confusing entity mentions is a crucial skill for language models (LMs). For example, given the question “Where was Michael Jordan educated?” and a set of documents discussing different people named Michael Jordan, can LMs distinguish entity mentions to generate a cohesive answer to the question? To test this ability, we introduce a new benchmark, AmbigDocs. By leveraging Wikipedia’s disambiguation pages, we identify a set of documents, belonging to different entities who share an ambiguous name. From these documents, we generate questions containing an ambiguous name\nand their corresponding sets of answers. Our analysis reveals that current state-of-the-art models often yield ambiguous answers or incorrectly merge information belonging to different entities. We establish an ontology categorizing four types of incomplete answers and automatic evaluation metrics to identify such categories. We lay the foundation for future work on reasoning across multiple documents with ambiguous entities.",
+    "keywords": [
+      "multi-document reasoning",
+      "entity disambiguation",
+      "ambiguous QA"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=mkYCfO822n"
+  },
+  "review_fields": {
+    "summary": "The paper defines a methodology for analysing entity disambiguation performance of LLMs. A part of the methodology is the creation of a large scale data set that leverages Wikipedia for entity disambiguation.\n\nI have concerns about this paper because it misses a baseline. There are many Wikipedia based tools that allow entity disambiguation, e.g.\nhttps://www.dbpedia-spotlight.org/\n\nIn addition also since several years, in industry NLP libraries there are tools to create entity linking based on custom data, e.g.\n\nhttps://github.com/explosion/projects/blob/master/nel-emerson/scripts/notebook_video.ipynb\n\nWithout a baseline using existing tools or an existing language model data set (e.g. based on Spacy), the usefulness of the new benchmark is hard to evalute.",
+    "reasons_to_accept": "A novel benchmark about entity disambiguation for LLMs is introduced.",
+    "reasons_to_reject": "The benchmark misses a baseline against which the LLMs are compared. I am withdrawing this concern, the authors explained in the rebuttal that they have something else in mind."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:21Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:21Z"
+  },
+  "ai_score": {
+    "status": "skipped",
+    "reason": "too_short:247"
+  }
+}

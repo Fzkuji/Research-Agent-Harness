@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "GKZySvM2t9",
+  "reviewer": "dihZ",
+  "paper": {
+    "title": "KGMark: A Diffusion Watermark for Knowledge Graphs",
+    "authors": [
+      "Hongrui Peng",
+      "Haolang Lu",
+      "Yuanlong Yu",
+      "WeiYe Fu",
+      "Kun Wang",
+      "Guoshun Nan"
+    ],
+    "abstract": "Knowledge graphs (KGs) are ubiquitous in numerous real-world applications, and watermarking facilitates protecting intellectual property and preventing potential harm from AI-generated content. Existing watermarking methods mainly focus on static plain text or image data, while they can hardly be applied to dynamic graphs due to spatial and temporal variations of structured data. This motivates us to propose KGMark, the first graph watermarking framework that aims to generate robust, detectable, and transparent diffusion fingerprints for dynamic KG data. Specifically, we propose a novel clustering-based alignment method to adapt the watermark to spatial variations. Meanwhile, we present a redundant embedding strategy to harden the diffusion watermark against various attacks, facilitating the robustness of the watermark to the temporal variations. Additionally, we introduce a novel learnable mask matrix to improve the transparency of diffusion fingerprints. By doing so, our KGMark properly tackles the variation challenges of structured data. Experiments on various public benchmarks show the effectiveness of our proposed KGMark.",
+    "keywords": [
+      "Watermarking",
+      "Knowledge Graph",
+      "Diffusion Models",
+      "Generative Models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GKZySvM2t9"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a watermarking method for knowledge graphs (KGs) using diffusion models. The authors claim their method embeds watermarks into KGs via diffusion-based encoding, ensuring traceability, integrity, and copyright protection. The method primarily relies on diffusion encoding, subgraph preservation principles, and loss functions aimed at robustness against certain graph-based attacks. Experimental evaluations were conducted on datasets such as AliF and MIND to validate the effectiveness of watermark embedding, extraction accuracy, and impact on downstream tasks.",
+    "claims_and_evidence": "The authors' key empirical claims lack strong evidence. The claim of robustness against graph-based attacks is weak, as the evaluations do not compare against advanced adversarial attacks. Similarly, the claim of preserving graph integrity and traceability is undermined by significant performance drops in downstream tasks like MIND and Alif. These issues reveal major gaps in empirical support, further compounded by the absence of baseline comparisons on diffusion watermarking [1,2].\n[1] Gaussian Shading: Provable Performance-Lossless Image Watermarking for Diffusion Models\n[2] Tree-Ring Watermarks: Fingerprints for Diffusion Images that are Invisible and Robust",
+    "methods_and_evaluation_criteria": "The proposed methods and evaluation criteria have several fundamental issues. Primarily, the choice to use diffusion models for watermark encoding on graphs is not well-justified, especially given significant drops in Hit@10 performance on downstream tasks (MIND and Alif) observed even with reconstruction alone. Furthermore, essential evaluations against more advanced attack methods prevalent in recent graph attack literature are missing such as [3,4].\n[3] Adversarial attacks on knowledge graph embeddings via instance attribution methods\n[4] Adversarial attacks and defenses on graphs",
+    "theoretical_claims": "The paper contains inconsistencies and ambiguities in its theoretical formulations, particularly in equations (4) and (9), where the definition of variable S changes without clarification. Additionally, critical conceptual misunderstandings or mislabeling, such as referring to objectives as \"principles\" add to the confusion.",
+    "experimental_designs_or_analyses": "The experimental design has several critical flaws. The evaluation fails to compare with state-of-the-art diffusion-based watermarking methods [1,2]. Additionally, the significant performance drop on the AliF and MIND datasets, as shown in previous sections, raises serious concerns about its paradigm suitability.",
+    "relation_to_broader_scientific_literature": "The paper is mainly related to diffusion-based watermarking methods, graph watermarking, graph robustness and graph embedding techniques.",
+    "essential_references_not_discussed": "The paper does not discuss significant recent advances in diffusion-based watermarking methods [1,2], and graph robustness [3,4].",
+    "other_strengths_and_weaknesses": "While the idea of integrating diffusion models with watermarking in graphs is promising, poor execution and writing severely limit its impact. The paper lacks a clear motivation for using diffusion models for watermarking, and inconsistent, confusing technical explanations further weaken its clarity. Sections 3.3 and 3.5 are particularly unclear, making it difficult to understand what is being optimized, how different loss terms interact, or how watermark extraction works in practice. Additionally, the challenges posed by heterogeneous nodes and relations in knowledge graphs are not addressed.",
+    "other_comments_or_suggestions": "Statements like \"potentially introducing harmful content that compromises analyses or even facilitates the exploitation of real-world systems\" and discussions such as \"unnerves large corporations, let alone individual researchers\" in page 1 are vague or inaccurate.\nIn Figure 2, community detection and alignment correspond to Section 4.4, and Section 4.3 relates to extraction. However, since these are experimental sections, shouldn't they reference Sections 3.5 and 3.3 instead?",
+    "questions_for_authors": "Please refer to the weakness mentioned above."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

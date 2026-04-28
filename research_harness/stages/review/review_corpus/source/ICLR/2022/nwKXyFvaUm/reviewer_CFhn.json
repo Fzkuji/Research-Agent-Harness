@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "nwKXyFvaUm",
+  "reviewer": "CFhn",
+  "paper": {
+    "title": "Diverse Client Selection for Federated Learning via Submodular Maximization",
+    "authors": [
+      "Ravikumar Balakrishnan",
+      "Tian Li",
+      "Tianyi Zhou",
+      "Nageen Himayat",
+      "Virginia Smith",
+      "Jeff Bilmes"
+    ],
+    "abstract": "In every communication round of federated learning, a random subset of clients communicate  their  model  updates  back  to  the  server  which  then  aggregates them all.  The optimal size of this subset is not known and several studies have shown that typically random selection does not perform very well in terms of convergence, learning efficiency and fairness. We, in this paper, propose to select a small diverse subset of clients, namely those carrying representative gradient information, and we transmit only these updates to the server.  Our aim is for updating via only a subset to approximate updating via aggregating all client information. We achieve this by choosing a subset that maximizes a submodular facility location function defined over gradient space. We introduce “federated averaging with diverse client selection (DivFL)”. We provide a thorough analysis of its convergence in the heterogeneous setting and apply it both to synthetic and to real datasets. Empirical results show several benefits to our approach including improved learning efficiency, faster convergence and also more uniform (i.e., fair) performance across clients. We further show a communication-efficient version of DivFL that can still outperform baselines on the above metrics.",
+    "keywords": [
+      "federated learning",
+      "submodularity",
+      "diversity"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=nwKXyFvaUm"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper presents a new client selection strategy for federated learning. The key idea is to view the client selection problem as a facility location problem, where the objective is to approximate the aggregation of gradients of all the clients with that of a subset of selected clients. A greedy solution to the problem is derived, and the theoretical convergence analysis is also provided. Although the proposed algorithm ideally requires the gradients of all clients, the paper also introduces its practical extension that instead leverages gradients collected in previous rounds. Experimental results on synthesized and real datasets show the effectiveness of the proposed approach.",
+    "main_review": "### Strengths\n\n- Overall, the paper is very well written. The proposed work is well-motivated, as developing better client sampling techniques is one important direction in FL. \n- Proposed approach is technically solid and seems novel enough. Although formulating client selection in FL by a combinatorial optimization problem is not completely new (e.g., Nishio and Yonetani 2019), the objective of approximating the aggregation of gradients of all clients by that from a client subset is novel, as far as I can check. I think that this is a reasonable objective for both data iid and non-iid settings and indeed worked well as shown in the experiments.\n- With some reasonable assumptions, the convergence analysis for the proposed approach is provided.\n\n### Weaknesses\nAlthough the proposed approach is technically sound, requiring the local gradients of all clients becomes a critical limitation to adopt the approach to practical problems, as also pointed out in the manuscript. Utilizing updates collected in previous rounds would be one possible approach, but it was not fully evaluated in the experiments in my opinion.\n\nSpecifically, using previous gradients will inevitably come with a stale gradient problem (as also noted in the paper). If I understand it correctly, this problem was mitigated in the experiments by limiting the number of local updates to be one for each client so as not to make model weights change dramatically over rounds. However, this is against a previous finding of federated learning where asking each client to update models multiple times leads to efficient training, as confirmed in FedAvg (McMahan et al, 2017). Even though limiting the number of local epochs could result in no significant loss when using previous gradients, does it make the overall learning procedure inefficient compared to when clients perform multiple local updates before aggregation? This is not obvious in the current manuscript. To address this concern, I'd like to see how training curves and final performances change depending on the number of local updates (\\tau parameter in the experiment).\n\n### Minor comments\n- The text size of the plot labels and ticks should be a bit larger.\n- The left margin of Algorithm 1 needs to be a bit larger.",
+    "summary_of_the_review": "Overall, I think this is a nice paper that addresses an important aspect of federated learning: improving a client sampling strategy. Experimental results are promising, though I would like to see how not limiting the number of local updates will affect the performances. If this brings a considerable gap between DivFL (ideal) and DivFL (no overhead), that implies the limitation of the proposed approach for practical settings.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2692,
+    "words": 431,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/602f9b40-a5e7-4811-8647-4f738036d898",
+    "error": null,
+    "scored_chars": 2693
+  }
+}

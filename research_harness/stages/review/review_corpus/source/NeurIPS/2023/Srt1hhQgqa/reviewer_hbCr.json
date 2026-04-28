@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "Srt1hhQgqa",
+  "reviewer": "hbCr",
+  "paper": {
+    "title": "Cappy: Outperforming and Boosting Large Multi-Task LMs with a Small Scorer",
+    "authors": [
+      "Bowen Tan",
+      "Yun Zhu",
+      "Lijuan Liu",
+      "Eric Xing",
+      "Zhiting Hu",
+      "Jindong Chen"
+    ],
+    "abstract": "Large language models (LLMs) such as T0, FLAN, and OPT-IML excel in multi-tasking under a unified instruction-following paradigm, where they also exhibit remarkable generalization abilities to unseen tasks. Despite their impressive performance, these LLMs, with sizes ranging from several billion to hundreds of billions of parameters, demand substantial computational resources, making their training and inference expensive and inefficient. Furthermore, adapting these models to downstream applications, particularly complex tasks, is often unfeasible due to the extensive hardware requirements for finetuning, even when utilizing parameter-efficient approaches such as prompt tuning. Additionally, the most powerful multi-task LLMs, such as OPT-IML-175B and FLAN-PaLM-540B, are not publicly accessible, severely limiting their customization potential. To address these challenges, we introduce a pretrained small scorer, \\textit{Cappy}, designed to enhance the performance and efficiency of multi-task LLMs. With merely 360 million parameters, Cappy functions either independently on classification tasks or serve as an auxiliary component for LLMs, boosting their performance. Moreover, Cappy enables efficiently integrating downstream supervision without requiring LLM finetuning nor the access to their parameters. Our experiments demonstrate that, when working independently on 11 language understanding tasks from PromptSource, Cappy outperforms LLMs that are several orders of magnitude larger. Besides, on 45 complex tasks from BIG-Bench, Cappy boosts the performance of the advanced multi-task LLM, FLAN-T5, by a large margin. Furthermore, Cappy is flexible to cooperate with other LLM adaptations, including finetuning and in-context learning, offering additional performance enhancement.",
+    "keywords": [
+      "multi-task",
+      "large language models",
+      "pretrain model"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Srt1hhQgqa"
+  },
+  "review_fields": {
+    "summary": "This paper introduces an auxiliary module called Cappy, which aims to enhance the performance of large language models. Cappy operates by taking a task instruction and a proposed response as input, and it estimates the quality score for the response. The training process involves creating a dataset that combines correct and mismatched answers with various instructions, and the Cappy scorer is then trained using a regression objective. In downstream adaptation, the small scorer, Cappy, is fine-tuned on a small dataset that follows the same approach as the training set. During testing, predictions are determined by selecting the answer choice with the highest score. In essence, Cappy acts as a valuable filter that enhances the overall quality of generated responses.",
+    "strengths": "The idea of leveraging a lightweight scorer as a ‘’filter’’ is interesting. Fine-tuning the filters on downstream tasks can be efficient and practical.",
+    "weaknesses": "Cappy itself is only a filter for in-domain responses and can not impact the intrinsic ability of a pre-trained LLM. This method cannot handle tasks outside the LLM's expertise, emphasizing the need for a sufficiently general and powerful LLM. Alternatively, fine-tuning LLMs, as shown in Table 3, may be necessary but costly. By comparing able 2 and Table 3, fine-tuning is still very essential for task adaptation.",
+    "questions": "Please refer to the weaknesses."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 602,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/01f56925-6550-4460-91cf-bba007204b24",
+    "error": null,
+    "scored_chars": 602
+  }
+}

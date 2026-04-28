@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "JD4eHocSPi",
+  "reviewer": "Dmkx",
+  "paper": {
+    "title": "Symmetry-Aware GFlowNets",
+    "authors": [
+      "Hohyun Kim",
+      "Seunggeun Lee",
+      "Min-hwan Oh"
+    ],
+    "abstract": "Generative Flow Networks (GFlowNets) offer a powerful framework for sampling graphs in proportion to their rewards. However, existing approaches suffer from systematic biases due to inaccuracies in state transition probability computations. These biases, rooted in the inherent symmetries of graphs, impact both atom-based and fragment-based generation schemes. To address this challenge, we introduce Symmetry-Aware GFlowNets (SA-GFN), a method that incorporates symmetry corrections into the learning process through reward scaling. By integrating bias correction directly into the reward structure, SA-GFN eliminates the need for explicit state transition computations. Empirical results show that SA-GFN enables unbiased sampling while enhancing diversity and consistently generating high-reward graphs that closely match the target distribution.",
+    "keywords": [
+      "GFlowNet",
+      "graph generation",
+      "molecule optimization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JD4eHocSPi"
+  },
+  "review_fields": {
+    "summary": "This paper addresses the equivalent action problem in GFlowNets for graph generation, providing a theoretical foundation and solution to a bias previously identified in Ma et al. (2024). While the paper offers valuable theoretical insights and formal proofs, the core solution (reward scaling based on automorphism counts) appears to be fundamentally the same as what was previously proposed. The paper's novelty is therefore primarily in its theoretical analysis rather than in the proposed method itself, raising questions about sufficient contribution for publication.",
+    "claims_and_evidence": "The paper's claims are mathematically proven in the appendix. The authors establish that:\n\n- GFlowNets without correction exhibit systematic bias toward graphs with fewer symmetries in atom-based generation and toward symmetric components in fragment-based generation.\n- This bias can be corrected by scaling rewards based on the automorphism group size.\n- This correction is sufficient for both TB and DB objectives.\n\nThese claims are supported by mathematical proofs and experimental validation.",
+    "methods_and_evaluation_criteria": "The proposed reward scaling method is mathematically sound and the evaluation metrics used are relevant:\n\n- L1 error for synthetic experiments\n- Diversity, Top K diversity, reward metrics for molecule generation\n\nThese are appropriate for measuring both the theoretical correctness and practical utility of the approach.",
+    "theoretical_claims": "These claims are supported by mathematical proofs that seem correct",
+    "experimental_designs_or_analyses": "The illustrative example with uniform reward is particularly effective at visualizing the bias. The experimental settings span synthetic graphs and molecule generation tasks, providing good coverage of potential applications.\n\nOne weakness is the lack of direct experimental comparison with the positional encoding approach from Ma et al. (2024), which would have strengthened the paper's positioning.",
+    "relation_to_broader_scientific_literature": "The paper's relationship to Ma et al. (2024) is the most critical aspect to evaluate. The authors acknowledge that Ma et al. (2024) was the first to identify the equivalent action problem in GFlowNets and propose methods to address it.\n\nHowever, the core solution in both papers appears to be fundamentally the same: accounting for graph automorphisms to correct the sampling bias. While this paper provides a more rigorous theoretical foundation and generalizes to fragment-based generation, the central mechanism of the solution is not novel.\n\nThe paper states: \"our work provides the first rigorous theoretical foundation for the correction,\" which is accurate, but the actual solution method appears to be a formalization of what was already proposed rather than a new approach.",
+    "other_strengths_and_weaknesses": "Appendix C contains an unclear explanation. The statement \"permuting nodes 3 and 4 yields the same graph\" doesn't seem accurate for the example shown. A more complex permutation (e.g., 1→4, 2→5, 3→1, 4→3, 5→6, 6→2) would be needed to map between the two graphs.\n\nOtherwise, the paper is well-written and easy to follow"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

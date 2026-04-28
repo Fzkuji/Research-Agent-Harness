@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "w2QNIkcwWw",
+  "reviewer": "Qyh8",
+  "paper": {
+    "title": "Fast Min-$\\epsilon$ Segmented Regression using Constant-Time Segment Merging",
+    "authors": [
+      "Ansgar Lößer",
+      "Max Schlecht",
+      "Florian Schintke",
+      "Joel Witzke",
+      "Matthias Weidlich",
+      "Björn Scheuermann"
+    ],
+    "abstract": "Segmented regression is a statistical method that approximates a function $f$ by a piecewise function $\\hat{f}$ using noisy data samples.\n*Min-$\\epsilon$* approaches aim to reduce the regression function's mean squared error (MSE) for a given number of $k$ segments.\nAn optimal solution for *min-$\\epsilon$* segmented regression is found in $\\mathcal{O}(n^2)$ time (Bai & Perron, 1998; Yamamoto & Perron, 2013) for $n$ samples. For large datasets, current heuristics improve time complexity to $\\mathcal{O}(n\\log{n})$ (Acharya et al., 2016) but can result in large errors, especially when exactly $k$ segments are used.\nWe present a method for *min-$\\epsilon$* segmented regression that combines the scalability of top existing heuristic solutions with a statistical efficiency similar to the optimal solution. This is achieved by using a new method to merge an initial set of segments using precomputed matrices from samples, allowing both merging and error calculation in constant time.\nOur approach, using the same samples and parameter $k$, produces segments with up to 1,000 times lower MSE compared to Acharya et al. (2016) in about 100 times less runtime on data sets over $10^4$ samples.",
+    "keywords": [
+      "Regression",
+      "Segmented Regression",
+      "Time-Series Analysis"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=w2QNIkcwWw"
+  },
+  "review_fields": {
+    "summary": "The paper addresses min-epsilon segmented regression, where the goal is to minimize the mean squared error (MSE) for a given number of segments. While the optimal solution has O(n^2)complexity (Bai & Perron, 1998), heuristics like Acharya et al. (2016) improve efficiency to O(n) but often introduce significant errors. The authors propose a method that merges segments using precomputed matrices, achieving 1,000 times lower MSE and 100 times faster runtime on large datasets. While promising, further clarification on theoretical guarantees and comparisons with recent heuristics would strengthen the evaluation.",
+    "claims_and_evidence": "The claims are supported by clear and convincing evidence.",
+    "methods_and_evaluation_criteria": "The proposed method and evaluation criteria make sense for the problem considered in the paper",
+    "theoretical_claims": "I reviewed them, but I didn't check the details.",
+    "experimental_designs_or_analyses": "More comprehensive comparision results with the exisintg method shoud be provided and discussed",
+    "other_strengths_and_weaknesses": "Strengths\n\n- The paper appears to be novel.\n- The paper is well-organized.\n\n\nWeaknesses\n\n- A more comprehensive comparison with existing methods should be provided and discussed, as the current results are relatively weak.\n\n- The authors state that the state-of-the-art (SOTA) method is Acharya et al. (2016), which seems unusual given that it was proposed nine years ago. Why have no more recent approaches been considered? Are there other baselines that could be included?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

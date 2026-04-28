@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "TPZRq4FALB",
+  "reviewer": "kzfx",
+  "paper": {
+    "title": "Test-time Adaptation against Multi-modal Reliability Bias",
+    "authors": [
+      "Mouxing Yang",
+      "Yunfan Li",
+      "Changqing Zhang",
+      "Peng Hu",
+      "Xi Peng"
+    ],
+    "abstract": "Test-time adaptation (TTA) has emerged as a new paradigm for reconciling distribution shifts across domains without accessing source data. However, existing TTA methods mainly concentrate on uni-modal tasks, overlooking the complexity of multi-modal scenarios.\nIn this paper, we delve into the multi-modal test-time adaptation and reveal a new challenge named reliability bias. Different from the definition of traditional distribution shifts, reliability bias refers to the information discrepancies across different modalities derived from intra-modal distribution shifts. To solve the challenge, we propose a novel method, dubbed REliable fusion and robust ADaptation (READ). On the one hand, unlike the existing TTA paradigm that mainly repurposes the normalization layers, READ employs a new paradigm that modulates the attention between modalities in a self-adaptive way, supporting reliable fusion against reliability bias. On the other hand, READ adopts a novel objective function for robust multi-modal adaptation, where the contributions of confident predictions could be amplified and the negative impacts of noisy predictions could be mitigated. Moreover, we introduce two new benchmarks to facilitate comprehensive evaluations of multi-modal TTA under reliability bias. Extensive experiments on the benchmarks verify the effectiveness of our method against multi-modal reliability bias. The code and benchmarks are available at https://github.com/XLearning-SCU/2024-ICLR-READ.",
+    "keywords": [
+      "Test-time adaption",
+      "Imbalanced multi-modal learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=TPZRq4FALB"
+  },
+  "review_fields": {
+    "summary": "This paper studies the problem of multi-modal test-time adaption (TTA) under the challenge of reliability bias, which refers to the information discrepancies across different modalities due to the distribution shifts between domains. The paper proposes a novel method, RFRA, which consists of two modules: a self-adaptive attention module for reliable fusion across modalities, and a confidence-aware loss function for robust adaption. The paper also provides two new benchmarks for multi-modal TTA with reliability bias based on Kinetics and VGGSound datasets. The paper shows that RFRA outperforms several state-of-the-art TTA methods on these benchmarks under various corruptions.",
+    "strengths": "1. This paper is well-written, well-organized, and easy to follow.\n2. The paper addresses a novel and important problem, i.e.,  multi-modal TTA with reliability bias, which has not been well-studied in the literature.  Accordingly, the paper proposes an effective method, RFRA, which leverages self-adaptive attention and confidence-aware loss to achieve reliable fusion and robust adaption across modalities.   Moreover, the confidence-aware loss is simple but effective and enjoy the non-monotonous gradient property.\n3. The paper provides two new benchmarks for multi-modal TTA with reliability bias, which could facilitate future research on this topic. The paper conducts extensive experiments and ablation studies on these benchmarks to demonstrate the effectiveness and superiority of RFRA over existing TTA methods.",
+    "weaknesses": "1. The paper lacks some experimental details, such as clarifying the terms “Statical” and “Dynamic” in Table 1 and explaining the distinctions between the proposed Self-Adaptive Attention and traditional self-attention. It is unclear what these terms mean and how they affect the performance of different methods. The paper should provide more definitions and discussions on these terms. Moreover, the paper should elaborate on how the Self-Adaptive Attention differs from the conventional self-attention in terms of design, implementation, and advantages.\n2. The confidence threshold $gamma$ work as the important parameter in the confidence-aware loss.  However, the influence of the confidence threshold $\\gamma$ on TTA performance is not explored, and it would be beneficial to understand its role more explicitly. The paper could conduct more experiments and analysis to show how different values of $\\gamma$ affect the accuracy and robustness of TTA. The paper could provide provide some insights on how to choose an appropriate value of $\\gamma$.\n3. How does the attention value in Figure 4 calculated? Some explanation is needed. The paper should provide more details on how to compute the attention value for each modality pair in Figure 4.\n4. An outlying problem, how does the audio information used in autonomous vehicle? As most scenarios of autonomous vehicle might use the visual sensor and could your method used in such case? \n5. There is a typographical error in Eq. (4); “A” should be bold. This is a minor mistake that can be easily corrected.",
+    "questions": "The primary questions for the rebuttal primarily arise from the \"weaknesses\" section. It would be highly appreciated if the authors could provide further explanations regarding the experiments and address the raised concerns, which will strengthen the paper. Overall, I recommend accepting this paper."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 5,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2684,
+    "words": 403,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/18d279a8-cac0-4376-afda-b256405d0919",
+    "error": null,
+    "scored_chars": 2690
+  }
+}

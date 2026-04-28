@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "B1gTShAct7",
+  "reviewer": "3",
+  "paper": {
+    "title": "Learning to Learn without Forgetting by Maximizing Transfer and Minimizing Interference",
+    "authors": [
+      "Matthew Riemer",
+      "Ignacio Cases",
+      "Robert Ajemian",
+      "Miao Liu",
+      "Irina Rish",
+      "Yuhai Tu",
+      "and Gerald Tesauro"
+    ],
+    "abstract": "Lack of performance when it comes to continual learning over non-stationary distributions of data remains a major challenge in scaling neural network learning to more human realistic settings. In this work we propose a new conceptualization of the continual learning problem in terms of a temporally symmetric trade-off between transfer and interference that can be optimized by enforcing gradient alignment across examples. We then propose a new algorithm, Meta-Experience Replay (MER), that directly exploits this view by combining experience replay with optimization based meta-learning. This method learns parameters that make interference based on future gradients less likely and transfer based on future gradients more likely. We conduct experiments across continual lifelong supervised learning benchmarks and non-stationary reinforcement learning environments demonstrating that our approach consistently outperforms recently proposed baselines for continual learning. Our experiments show that the gap between the performance of MER and baseline algorithms grows both as the environment gets more non-stationary and as the fraction of the total experiences stored gets smaller.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=B1gTShAct7"
+  },
+  "review_fields": {
+    "review": "The authors frame continual learning as a meta-learning problem that balances catastrophic forgetting against the capacity to learn new tasks. They propose an algorithm (MER) that combines a meta-learner (Reptile) with experience replay for continual learning. MER is evaluated on variants of MNIST (Permutated, Rotations, Many) and Omniglot against GEM and EWC. It is further tested in two reinforcement learning environments, Catcher and FlappyBird. In all cases, MER exhibits significant gains in terms of average retained accuracy.\n\nPro's\n\nThe paper is well structured and generally well written. The argument is both easy to follow and persuasive. In particular, the proposed framework for trading off catastrophic forgetting against positive transfer is enlightening and should be of interest to the community. \n\nWhile the idea of aligning gradients across tasks has been proposed before (Lopez-Paz & Ranzato, 2017), the authors make a non-trivial connection to Reptile that allows them to achieve the same goal in a surprisingly simple algorithm. That the algorithm does not require tasks to be identified makes it widely applicable and reported results are convincing. \n\nThe authors have taken considerable care to tease out various effects, such as how MER responds to the degree of non-stationarity in the data, as well as the buffer size.  I’m particularly impressed that MER can achieve such high retention rates using only a buffer size of 200. Given that multiple batches are sampled from the buffer for every input from the current task, I’m surprised MER doesn’t suffer from overfitting. How does the train-test accuracy gap change as the buffer size varies?\n\nThe paper is further strengthened by empirically verifying that MER indeed does lead to a gradient alignment across tasks, and by an ablation study delineating the contribution from the ER strategy and the contribution from including Reptile. Notably, just using ER outperforms previous methods, and for a sufficient large buffer size, ER is almost equivalent to MER. This is not surprising given that, in practice, the difference between MER and ER is an additional decay rate ( \\gamma) applied to gradients from previous batches. \n\nCon's\n\nI would welcome a more thorough ablation study to measure the difference between ER and MER. In particular, how sensitive is MER is to changes in \\gamma? And could ER + an adaptive optimizer (e.g. Adam) emulate the effect of \\gamma and perform on par with MER. Similarly, given that DQN already uses ER,  it would be valuable to report how a DQN with reservoir sampling performs.\n\nI am not entirely convinced though that MER maximizes for forward transfer. It turns continual learning into multi-task learning and if the new task is sufficiently different from previous tasks, MER’s ability to learn the current task would be impaired. The paper only reports average retained accuracy, so the empirical support for the claim is ambiguous.\n\nThe FlappyBird experiment could be improved. As tasks are defined by making the gap between pipes smaller, a good policy for task t is a good policy for task t-1 as well, so the trade-off between backward and forward transfer that motivates MER does not arise. Further, since the baseline DQN never finds a good policy, it is essentially a pseudo-random baseline. I suspect the only reason DQN+MER learns to play the game is because it keeps \"easy\" experiences with a lot of signal in the buffer for a longer period of time. That both the baseline and MER+DQN seems to unlearn from tasks 5 and 6 suggests further calibration might be needed."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

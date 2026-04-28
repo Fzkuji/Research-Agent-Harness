@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "SJe9rh0cFX",
+  "reviewer": "3",
+  "paper": {
+    "title": "On the Universal Approximability and Complexity Bounds of Quantized ReLU Neural Networks",
+    "authors": [
+      "Yukun Ding",
+      "Jinglan Liu",
+      "Jinjun Xiong",
+      "Yiyu Shi"
+    ],
+    "abstract": "Compression is a key step to deploy large neural networks on resource-constrained platforms. As a popular compression technique, quantization constrains the number of distinct weight values and thus reducing the number of bits required to represent and store each weight. In this paper, we study the representation power of quantized neural networks. First, we prove the universal approximability of quantized ReLU networks on a wide class of functions. Then we provide upper bounds on the number of weights and the memory size for a given approximation error bound and the bit-width of weights for function-independent and function-dependent structures. Our results reveal that, to attain an approximation error bound of $\\epsilon$, the number of weights needed by a quantized network is no more than $\\mathcal{O}\\left(\\log^5(1/\\epsilon)\\right)$ times that of an unquantized network. This overhead is of much lower order than the lower bound of the number of weights needed for the error bound, supporting the empirical success of various quantization techniques. To the best of our knowledge, this is the first in-depth study on the complexity bounds of quantized neural networks.",
+    "keywords": [
+      "Quantized Neural Networks",
+      "Universial Approximability",
+      "Complexity Bounds",
+      "Optimal Bit-width"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SJe9rh0cFX"
+  },
+  "review_fields": {
+    "review": "The paper deals with the expressibility of quantized neural network, meaning where all weights come from a finite and small sized set. It proves that functions satisfying standard assumptions can be represented by quantized ReLU networks with certain size bounds, which are comparable to the bounds available in prior literature for general ReLU networks, with an overhead that depends on the level of quantization and on the target error.\n\nThe proofs generally go by simulating non-quantized ReLU networks with quantized ones, by means of replacing their basic operations with small quantized networks (\"sub-networks\") that simulate those same operations with a small error. Then the upper bounds follow from known results on function approximation with (non-quantized) ReLU networks, with the overhead incurred by introducing the sub-networks.\nNotably, this approach means that the topology of the network changes. As such it not compatible with quantizing the weights of a given network structure, which is the more common scenario, but rather with choosing the network structure under a given level of quantization. This issue is discussed directly and clearly in the paper.\n\nOverall, while the paper is technically quite simple, it forms an interesting study and blends well into recent literature on an important topic. It is also well written and clear to follow."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "5BD4_awH4Fd",
+  "reviewer": "Huyz",
+  "paper": {
+    "title": "A Stochastic Newton Algorithm for Distributed Convex Optimization",
+    "authors": [
+      "Brian Bullins",
+      "Kumar Kshitij Patel",
+      "Ohad Shamir",
+      "Nathan Srebro",
+      "Blake Woodworth"
+    ],
+    "abstract": "We propose and analyze a stochastic Newton algorithm for homogeneous distributed stochastic convex optimization, where each machine can calculate stochastic gradients of the same population objective, as well as stochastic Hessian-vector products (products of an independent unbiased estimator of the Hessian of the population objective with arbitrary vectors), with many such stochastic computations performed between rounds of communication.  We show that our method can reduce the number, and frequency, of required communication rounds, compared to existing methods without hurting performance, by proving convergence guarantees for quasi-self-concordant objectives (e.g., logistic regression), alongside empirical evidence.",
+    "keywords": [
+      "Distributed Optimization",
+      "Stochastic Optimization",
+      "Federated Learning",
+      "Newton's Method"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=5BD4_awH4Fd"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors introduced a stochastic Newton-type algorithm for distributed quasi-self-concordant convex optimization. The high level idea is to reduce the problem into approximately solving for a sequence of trust-region constrained quadratic subproblems. The subproblems are in turn solved by binary search on the optimal regularization parameter $\\lambda^*$, followed by calling for unconstrained stochastic local SGD solver with a single round of communication. The algorithm assumes access to stochastic hessian-vector product, in addition to stochastic gradient. Numerical experiments are conducted on a more practical variant of the algorithm for the logistic objective.",
+    "main_review": "The relevant literature is adequately surveyed, although I'd add that the idea of solving the inner quadratic problem using stochastic gradient method has been considered before, see e.g., Corollary 18 in Carmon et al: https://proceedings.neurips.cc/paper/2020/file/dba4c1a117472f6aca95211285d0587e-Paper.pdf. The claims do look right and the writing is pretty clear. The analysis itself is a combination of somewhat standard techniques/building blocks from the optimization literature.\n\nThe improvement seems to be quite tied to the parameter regime however, and it's a bit elusive with the somewhat non-standard oracle/assumptions/missing evidence of lower bound how applicable/relevant the algorithm really is in practice. It would be good to know how the proposed algorithm work on common objectives on real data with (potentially unknown) quantities defined in the assumptions.\n\n====================== post author-response ========================\nThank you for the given example and I'd like to keep the positive score."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

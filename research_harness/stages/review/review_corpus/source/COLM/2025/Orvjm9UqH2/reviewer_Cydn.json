@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "Orvjm9UqH2",
+  "reviewer": "Cydn",
+  "paper": {
+    "title": "Epistemic Alignment: A Mediating Framework for User-LLM Knowledge Delivery",
+    "authors": [
+      "Nicholas Clark",
+      "Hua Shen",
+      "Bill Howe",
+      "Tanu Mitra"
+    ],
+    "abstract": "Large Language Models (LLMs) increasingly serve as tools for knowledge acquisition, yet users cannot effectively specify how they want information presented. When users request that LLMs \"cite reputable sources,\" \"express appropriate uncertainty,\" or \"include multiple perspectives,\" they discover that current interfaces provide no structured way to articulate these preferences. The result is prompt sharing folklore: community-specific copied prompts passed through trust relationships rather than based on measured efficacy. We propose the Epistemic Alignment Framework, a set of ten challenges in knowledge transmission derived from the philosophical literature of epistemology, concerning issues such as uncertainty expression, evidence quality assessment, and calibration of testimonial reliance. The framework serves as a structured intermediary between user needs and system capabilities, creating a common vocabulary to bridge the gap between what users want and what systems deliver. Through a thematic analysis of custom prompts and personalization strategies shared on online communities where these issues are actively discussed, we find users develop elaborate workarounds to address each of the challenges. We then apply our framework to two prominent model providers, OpenAI and Anthropic, through structured content analysis of their documented policies and product features. Our analysis shows that while these providers have partially addressed the challenges we identified, they fail to establish adequate mechanisms for specifying epistemic preferences, lack transparency about how preferences are implemented, and offer no verification tools to confirm whether preferences were followed. For AI developers, the Epistemic Alignment Framework offers concrete guidance for supporting diverse approaches to knowledge; for users, it works toward information delivery that aligns with their specific needs rather than defaulting to one-size-fits-all approaches.",
+    "keywords": [
+      "epistemology of AI",
+      "language model behavior",
+      "human-AI interaction"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Orvjm9UqH2"
+  },
+  "review_fields": {
+    "summary": "This paper draws from theories of social epistemology and epistemic cognition and uses them as a principled framework to address how LLMs should present information in a structured interface when interacting with the user, when used as a knowledge acquisition tool. It is written clearly, with detailed outlines of the framework and concrete analysis of existing LLMs and recommendations. The language and jargons/terminologies of the framework can be convoluted and hard to follow at times; but I believe they are able to get the point across. It certainly provides an original way of thinking about how LLMs should present information and knowledge, even though the framework itself is pre-existing and well established in other disciplines that are non technical. It may prove to be of significance in terms of shaping the high level directions that LLMs might take, and governing the evaluation of LLM-like tools at large.",
+    "reasons_to_accept": "Even though this paper is not a typical technical paper with experiments and novel quantitative methods, I encourage the community to be open minded in accepting this type of interdisciplinary work, as it provides a structured way to think about the high level behaviors of LLMs as a tool of knowledge acquisition that otherwise may be elusive in a rapidly evolving field that may seem chaotic and unscientific at times, which is full of ad-hoc methodologies at analyzing the behaviors of LLMs and governing/evaluating how it should be like.",
+    "reasons_to_reject": "It is also possible that after all these philosophically inspired theoretical jargon and framework to look at LLMs, there is little practical value and impact in terms of how users will interact with the LLMs - i.e., it largely remains a theoretical construct that has no practical significance."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 838,
+    "words": 137,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c2fcef6c-8d37-4b65-8285-c2a2563304e7",
+    "error": null,
+    "scored_chars": 838
+  }
+}

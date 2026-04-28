@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "GdYg0Ohx0k",
+  "reviewer": "ZpA3",
+  "paper": {
+    "title": "LSCD: Lomb--Scargle Conditioned Diffusion for Time series Imputation",
+    "authors": [
+      "Elizabeth Fons",
+      "Alejandro Sztrajman",
+      "Yousef El-Laham",
+      "Luciana Ferrer",
+      "Svitlana Vyetrenko",
+      "Manuela Veloso"
+    ],
+    "abstract": "Time series with missing or irregularly sampled data are a persistent challenge in machine learning. Many methods operate on the frequency-domain, relying on the Fast Fourier Transform (FFT) which assumes uniform sampling, therefore requiring prior interpolation that can distort the spectra. To address this limitation, we introduce a differentiable Lomb--Scargle layer that enables a reliable computation of the power spectrum of irregularly sampled data.\nWe integrate this layer into a novel score-based diffusion model (LSCD) for time series imputation conditioned on the entire signal spectrum. \nExperiments on synthetic and real-world benchmarks demonstrate that our method recovers missing data more accurately than purely time-domain baselines, while simultaneously producing consistent frequency estimates. Crucially, our method can be easily integrated into learning frameworks, enabling broader adoption of spectral guidance in machine learning approaches involving incomplete or irregular data.",
+    "keywords": [
+      "time series",
+      "diffusion models",
+      "frequency spectrum"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GdYg0Ohx0k"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a novel method designed for performing time series imputation when the input data either has missing data of is not measured at equal intervals.  The use of discrete Fourier transform in this case often leads to serious artifacts in the power density spectrum.  In contrast, the power density spectrum can be more accurately estimated using the Lomb-Scargle methods.  This paper shows how this can be incorporated into a diffusion-based method to ensure the frequency information is well captured in imputed time series.  The technique is thoroughly tested and compared against strong baseline models.",
+    "claims_and_evidence": "The claim is that this novel approach provides better imputation of this type of time series data.  The empirical evidence appears compelling.",
+    "methods_and_evaluation_criteria": "As far as I can see the evaluations are fair and rigorous.",
+    "relation_to_broader_scientific_literature": "The paper appears to be well versed in the literature around time series.",
+    "other_strengths_and_weaknesses": "The paper is very well written and accessible.  The contribution is novel and substantial."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

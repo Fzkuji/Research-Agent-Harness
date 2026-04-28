@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "Dy8gq-LuckD",
+  "reviewer": "ndMY",
+  "paper": {
+    "title": "Recognizing and overcoming the greedy nature of learning in multi-modal deep neural networks",
+    "authors": [
+      "Nan Wu",
+      "Stanislaw Kamil Jastrzebski",
+      "Kyunghyun Cho",
+      "Krzysztof J. Geras"
+    ],
+    "abstract": "We hypothesize that due to the greedy nature of learning in multi-modal deep neural networks (DNNs), these models tend to rely on just one modality while under-utilizing the other modalities. We observe empirically that such behavior hurts its overall generalization. We validate our hypothesis by estimating the gain on the accuracy when the model has access to an additional modality. We refer to this gain as the conditional utilization rate of the modality. In the experiments, we consistently observe an imbalance in conditional utilization rate between modalities, across multiple tasks and architectures. Since conditional utilization rate cannot be computed efficiently during training, we introduce an efficient proxy based on the pace at which a DNN learns from each modality, which we refer to as conditional learning speed. We thus propose a training algorithm, balanced multi-modal learning, and demonstrate that it indeed addresses the issue of greedy learning. The proposed algorithm is found to improve the model’s generalization on three datasets: Colored MNIST (Kim et al., 2019), Princeton ModelNet40 (Wu et al., 2015), and NVIDIA Dynamic Hand Gesture Dataset (Molchanov et al., 2016).",
+    "keywords": [
+      "multi-modal learning",
+      "deep neural networks",
+      "multi-view learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=Dy8gq-LuckD"
+  },
+  "review_fields": {
+    "comment": "Thank you for the responses. \n\nI've read all of the other reviews and their responses including mine.\nWhile the revised manuscript has been improved with respect to experiments, writing and readability, the supports of main claims still seems not to be so strong and convincing. \nFor example, Table 1 is augmented with the results of RUBi. \nHowever, some other numbers and bolded ones in Table 1 are changed in ModelNet40 and NVGesture-scratch without any changes on experimental settings in the manuscript. \nWhich one is correct between the first version and the revised one?\n\nAlso, I still think that it needs more concrete and connected chains verified among the claims. \nEven though we observe some positive cases in real worlds, we should validate postulated arguments to be true. \nEven though this manuscript provides some promising tendency with experimental results, I believe that they are not enough to be validation. \nI tend to keep my score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 946,
+    "words": 154,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2bafbb9a-1e5f-45ab-a1f7-87d2c03255be",
+    "error": null,
+    "scored_chars": 953
+  }
+}

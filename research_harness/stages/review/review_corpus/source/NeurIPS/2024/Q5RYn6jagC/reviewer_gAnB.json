@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "Q5RYn6jagC",
+  "reviewer": "gAnB",
+  "paper": {
+    "title": "Understanding the Limits of Vision Language Models Through the Lens of the Binding Problem",
+    "authors": [
+      "Declan Iain Campbell",
+      "Sunayana Rane",
+      "Tyler Giallanza",
+      "C. Nicolò De Sabbata",
+      "Kia Ghods",
+      "Amogh Joshi",
+      "Alexander Ku",
+      "Steven M Frankland",
+      "Thomas L. Griffiths",
+      "Jonathan D. Cohen",
+      "Taylor Whittington Webb"
+    ],
+    "abstract": "Recent work has documented striking heterogeneity in the performance of state-of-the-art vision language models (VLMs), including both multimodal language models and text-to-image models. These models are able to describe and generate a diverse array of complex, naturalistic images, yet they exhibit surprising failures on basic multi-object reasoning tasks -- such as counting, localization, and simple forms of visual analogy -- that humans perform with near perfect accuracy. To better understand this puzzling pattern of successes and failures, we turn to theoretical accounts of the binding problem in cognitive science and neuroscience, a fundamental problem that arises when a shared set of representational resources must be used to represent distinct entities (e.g., to represent multiple objects in an image), necessitating the use of serial processing to avoid interference. We find that many of the puzzling failures of state-of-the-art VLMs can be explained as arising due to the binding problem, and that these failure modes are strikingly similar to the limitations exhibited by rapid, feedforward processing in the human brain.",
+    "keywords": [
+      "visual reasoning",
+      "foundation models",
+      "multi-object reasoning",
+      "cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Q5RYn6jagC"
+  },
+  "review_fields": {
+    "summary": "**Summary:**\n\tThe paper investigates the counting abilities of VLMs. It puts forward a cognitive science inspired perspective, where VLMs are fundamentally constrained in their processing of multi-object scenes due to a lack of serial processing mechanisms.\n\n**Decision:**\n\tThe paper is well structured and investigates an interesting (albeit a bit constrained) question concerning VLMs object reasoning abilities. While some of the conclusions seem overstated to me, I nonetheless recommend accept, since the authors present novel findings that improve the research community's understanding of VLMs visual reasoning abilities.",
+    "strengths": "*Originality*\n\t\tThe underlying question is timely and well motivated. The cognitive science derived approach is principled and the authors perform a number of interesting experiments to further delineate the issues underlying counting in VLMs.\n\n*Quality*\n\t\tThe submission is technically sound. I don't agree with all resulting claims, but the methods are appropriate.\n\n*Clarity*\n\t\tThe submission is clearly written and follows a good outline.\n\n*Significance*\n\t\tThe paper yields new data which allows for unique conclusions, however the scope of the investigation is somewhat limited.",
+    "weaknesses": "I have brought it up in the questions sections.",
+    "questions": "- Figure 1: There is a spike at 9 objects for both models. Do you have an idea on why this might be the case? [1] (which you already cite) also find the same spike and offer some potential explanations for this (see Figure 5).\n- Answer parsing is again conducted by a large language model. I am wondering how accurate this parsing is. Did you compute any metrics to check the accuracy of the final parsed output or run some qualitative checks?\n-  In line 189 you write \"GPT-4v demonstrates human-like capacity constraints in its ability to perform visual search in multi-object settings.\" I was wondering what human level performance is in this task? It would be nice to have some more information to compare the model performance to. The same is true for line 127, where I'm not sure this is a fair comparison. Sure, the number of objects the models can count well are somewhat similar to the subitizing limit of humans, but this task should not require rapid estimation of the number of objects and therefore we would expect humans to be able to count well above 6 objects here anyways.\n- The sentence in line 303 reads a bit odd, it should probably read \"facilitate generalization\" instead of facilitation and there might be a comma missing before?\n- If I understand correctly you describe a different measure for the model performance for the last task in Section 4.2, would it not be possible to again report the proportion of correct answers here? I find it hard to compare this experiment with the previous experiments.\n- To me the take aways seem overstated. What does lack of serial processing for VLMs mean? I don't think VLMs are fundamentally unable to sequentially process an image and therefore they should in theory be able to \"selectively attend to individual objects one at a time\". This is also why I don't completely follow the conclusion that the VLMs show \"human-like capacity constraints\". I would argue they should be able to do sequential processing and should therefore not be measured against the human subitizing limit anyways. Maybe you can offer some more details on this argument.\n\n[1] Rane, S., Ku, A., Baldridge, J., Tenney, I., Griffiths, T., & Kim, B. (2024). Can Generative Multimodal Models Count to Ten? Proceedings of the Annual Meeting of the Cognitive Science Society, 46. Retrieved from https://escholarship.org/uc/item/8kz5787g",
+    "limitations": "The paper is well structured and investigates an interesting (albeit a bit constrained) question concerning VLMs object reasoning abilities. While some of the conclusions seem overstated to me, I nonetheless recommend accept, since the authors present novel findings that improve the research community's understanding of VLMs visual reasoning abilities."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3350,
+    "words": 543,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/59b8c67b-fe1d-4fe5-9d6b-f894eac22570",
+    "error": null,
+    "scored_chars": 3359
+  }
+}

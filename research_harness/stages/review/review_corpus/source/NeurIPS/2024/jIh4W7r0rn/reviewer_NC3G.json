@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "jIh4W7r0rn",
+  "reviewer": "NC3G",
+  "paper": {
+    "title": "Autoregressive Image Diffusion: Generation of Image Sequence and Application in MRI",
+    "authors": [
+      "Guanxiong Luo",
+      "Shoujin Huang",
+      "Martin Uecker"
+    ],
+    "abstract": "Magnetic resonance imaging (MRI) is a widely used non-invasive imaging modality. However, a persistent challenge  lies in balancing image quality with imaging speed. This trade-off is primarily constrained by k-space measurements, which traverse specific trajectories in the spatial Fourier domain (k-space). These measurements are often undersampled to shorten acquisition times, resulting in image artifacts and compromised quality. Generative models learn image distributions and can be used to reconstruct high-quality images from undersampled k-space data. In this work, we present the autoregressive image diffusion (AID) model for image sequences and use it to sample the posterior for accelerated MRI reconstruction. The algorithm incorporates both undersampled k-space and pre-existing information. Models trained with fastMRI dataset are evaluated comprehensively. The results show that the AID model can robustly generate sequentially coherent image sequences. In MRI applications, the AID can outperform the standard diffusion model and reduce hallucinations, due to the learned inter-image dependencies. The project code is available at https://github.com/mrirecon/aid.",
+    "keywords": [
+      "Autoregressive models",
+      "Diffusion models",
+      "Inverse problems",
+      "Medical imaging",
+      "MRI"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=jIh4W7r0rn"
+  },
+  "review_fields": {
+    "summary": "This paper introduces an autoregressive image diffusion (AID) model for generating image sequences and accelerating MRI reconstruction. The model combines autoregressive and diffusion approaches to leverage inter-image dependencies, aiming to improve reconstruction from undersampled k-space data in MRI. It was trained on the fastMRI dataset using 4 NVIDIA A100 GPUs for 440,000 iterations with the Adam optimizer. The model architecture incorporates several key components, including DiTBlock, DDIM, and VQVAE.\n\nExperiments demonstrate that AID outperforms standard diffusion models in terms of PSNR and NRMSE metrics, particularly for twelve-times undersampled data. The model shows a reduction in hallucinations in reconstructed images compared to standard models. The paper provides a detailed explanation of the model's theoretical foundations, describing the autoregressive factorization of the joint distribution of image sequences and how the diffusion process is applied to each conditional probability in the factorization.\n\nThe authors derive the training loss for the AID model from a common diffusion loss and present an algorithm for sampling the posterior for accelerated MRI reconstruction using AID. The model is evaluated on its ability to generate images with varying amounts of initial information, including both retrospective and prospective sampling approaches. The paper demonstrates the model's effectiveness in unfolding aliased single-coil images and shows improved reconstruction quality across various sampling masks and undersampling factors. The authors discuss the potential applications of the model in other medical imaging tasks and acknowledge limitations, proposing future work to address them.",
+    "strengths": "The paper presents a novel combination of autoregressive and diffusion models for image sequence generation, which is well-motivated, particularly for medical imaging applications like MRI reconstruction. The authors provide a comprehensive set of experiments demonstrating improved performance over standard diffusion models, effectively leveraging inter-image dependencies to enhance reconstruction quality. There is a clear demonstration of reduced hallucinations in reconstructed images using the AID model.\n\nThe paper offers a detailed theoretical foundation for the proposed model, deriving the training loss and sampling algorithm in a clear and reproducible manner. The experimental methodology is robust, using appropriate datasets and metrics for evaluation across various sampling patterns and undersampling factors. The authors include both qualitative and quantitative assessments of the model's performance, providing visual examples that effectively illustrate the improvements in image quality.\n\nThe model's ability to generate coherent image sequences is demonstrated through retrospective and prospective sampling. The paper discusses the potential broader impact of the model on medical imaging applications and acknowledges limitations, proposing future work and showing scientific integrity. The model architecture is clearly explained and illustrated with helpful diagrams, demonstrating flexibility in handling different types of undersampled k-space data. The authors provide a thorough comparison with a standard diffusion model baseline and discuss the model's potential for incorporating pre-existing information from other imaging modalities. The paper explores the model's performance in both image space and latent space and provides insights into the model's uncertainty estimation capabilities.",
+    "weaknesses": "The evaluation is primarily limited to medical imaging datasets, lacking comparison on standard image datasets. While the theoretical justification for the model is provided, it could be expanded further. The paper does not thoroughly discuss potential negative societal impacts or ethical considerations of the technology, and computational requirements and efficiency compared to standard methods are not extensively discussed.\n\nThe paper lacks comparison with other state-of-the-art approaches beyond standard diffusion models and does not provide standard generative model metrics like FID or Inception Score. The model's sensitivity to hyperparameter choices, particularly sequence length, is not thoroughly explored, and there is limited discussion on the model's scalability to larger or more diverse datasets.\n\nThe paper does not explore the model's performance on other medical imaging modalities beyond MRI and lacks a detailed analysis of the model's failure cases or limitations. There is no discussion on the interpretability of the model's decisions or outputs and no exploration of the model's robustness to adversarial attacks or noise in the input data. The authors do not discuss the potential privacy implications of using the model in medical settings or provide a comparison of training times or computational resources required versus other methods.\n\nThe paper lacks discussion on the model's ability to handle multi-modal or multi-contrast imaging data. It does not explore the potential for transfer learning or fine-tuning the model on different datasets. There is limited discussion on the model's performance in low-resource or edge-computing scenarios and no exploration of the model's ability to handle out-of-distribution or rare pathological cases. The authors do not discuss the potential integration of their model with existing clinical workflows or systems.",
+    "questions": "1. What is the computational cost of the proposed method compared to standard diffusion models, both in training and inference?\n2. How sensitive is the model to the choice of hyperparameters, particularly the sequence length?\n3. Can the model be extended to handle multi-modal or multi-contrast imaging data?\n4. What are the privacy implications of using this model in clinical settings? How does the model's performance scale with increasing dataset size or diversity? Can the model be adapted for other medical imaging modalities beyond MRI?\n5. What is the potential for integrating this model into existing clinical workflows or systems? How does the model handle cases where there are significant anatomical variations between sequential images?\n6. Can the model be extended to generate 3D volumetric data or time-series data? How do different k-space sampling patterns impact the model's performance? How does the model perform when there are motion artifacts or other types of image degradation?\n7. Can the model be used for other tasks, such as image segmentation or anomaly detection in medical imaging?",
+    "limitations": "The authors acknowledge the limitation of not evaluating the model on common image datasets like ImageNet or CIFAR-10 and note the lack of standard generative model metrics like FID and Inception Score in their evaluation. The paper does not explicitly discuss potential negative societal impacts of the technology. The evaluation is primarily focused on MRI reconstruction, limiting insights into the model's generalizability, and the authors do not provide a comprehensive comparison with other state-of-the-art methods in image generation.\n\nThe paper lacks a detailed analysis of the model's computational efficiency and resource requirements. There is limited exploration of the model's performance on diverse pathological cases or rare conditions, and the authors do not discuss the potential limitations of the autoregressive approach in certain scenarios. The paper does not address the interpretability of the model's decision-making process or its robustness to adversarial attacks or input perturbations.\n\nThe authors do not explore the privacy implications of using the model in clinical settings or analyze the model's performance in low-resource or edge computing environments. There is no discussion on the potential for transfer learning or domain adaptation of the trained model, and the authors do not address the scalability of the model to larger or more diverse datasets. The paper does not explore the model's ability to handle multi-modal or multi-contrast imaging data or discuss the integration of the model with existing clinical workflows or systems.\n\nThe authors do not provide an analysis of the model's failure cases or edge scenarios, and the paper lacks exploration of the model's performance on other medical imaging modalities beyond MRI. There is no discussion on the potential ethical considerations of using AI-generated medical images, and the authors do not address the model's ability to handle out-of-distribution or anomalous cases in medical imaging."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 6827 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 6827,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 6827
+  }
+}

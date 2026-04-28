@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "CB8jwNE2vV",
+  "reviewer": "H1AQ",
+  "paper": {
+    "title": "CADGrasp: Learning Contact and Collision Aware General Dexterous Grasping in Cluttered Scenes",
+    "authors": [
+      "Jiyao Zhang",
+      "Zhiyuan Ma",
+      "Tianhao Wu",
+      "Zeyuan Chen",
+      "Hao Dong"
+    ],
+    "abstract": "Dexterous grasping in cluttered environments presents substantial challenges due to the high degrees of freedom of dexterous hands, occlusion, and potential collisions arising from diverse object geometries and complex layouts. To address these challenges, we propose CADGrasp, a two-stage algorithm for general dexterous grasping using single-view point cloud inputs. In the first stage, we predict a scene-decoupled, contact- and collision-aware representation—sparse IBS—as the optimization target. Sparse IBS compactly encodes the geometric and contact relationships between the dexterous hand and the scene, enabling stable and collision-free dexterous grasp pose optimization. To enhance the prediction of this high-dimensional representation, we introduce an occupancy-diffusion model with voxel-level conditional guidance and force closure score filtering. In the second stage, we develop several energy functions and ranking strategies for optimization based on sparse IBS to generate high-quality dexterous grasp poses. Extensive experiments in both simulated and real-world settings validate the effectiveness of our approach, demonstrating its capability to mitigate collisions while maintaining a high grasp success rate across diverse objects and complex scenes.",
+    "keywords": [
+      "Dexterous Hand",
+      "General Grasping"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=CB8jwNE2vV"
+  },
+  "review_fields": {
+    "summary": "CADGrasp tackles dexterous grasping in highly cluttered scenes by splitting the problem into two stages. Stage 1 is representation prediction. A conditional occupancy-diffusion model, guided voxel-wise by the canonicalised scene point cloud, predicts a sparse Interaction-Bisector Surface (IBS) that is both contact-aware and collision-aware. Stage 2 is for pose optimization. Several energy terms are minimised to recover a full 25-DoF hand pose that realises the predicted sparse IBS. Extensive experiments on 670 simulated cluttered scenes (≈1300 objects) and on five real scenes with 30 diverse household objects show higher success rates than regression and diffusion baselines.",
+    "strengths_and_weaknesses": "**Strengths**\n1. IBS is a conceptually well-motivated intermediate representation. By predicting a sparse IBS that is decoupled from complete scene geometry, the method avoids the brittle requirement for full object reconstruction.\n2. CADGrasp outperforms state-of-the-art baselines across loose, random and dense clutter, and maintains competitive accuracy on unseen ShapeNet objects.\n3. The provided supplementary video organizes the contents clearly.\n4. The paper explicitly explores the benefit of each design choice.\n\n**Weakness**\n1. All success-rate tables should provide variance across random seed.\n2. The diffusion sampling plus gradient-based optimisation could be slow; yet runtimes per grasp are absent.\n3. Comparison to some recent contact-based two-stage graspers in clutter may be ommited, such as UniDexGrasp++ and UniDexGrasp in cluttered settings.\n4. Some typos are found. For example, in line 296, the \".\" should be \",\".",
+    "questions": "1. Could the authors report standard deviations over multiple random scene orderings?\n2. Could the authors provide average test time for Stage 1 sampling (per IBS candidate) and Stage 2 optimisation (per initialisation) on the hardware used. if possible, the authors are also encouraged to discuss feasibility for real-time grasp planning.\n3. Will the implementation and trained models be open-sourced upon acceptance, and if so under which licence?",
+    "limitations": "The paper discusses the limitations of the work performed by the authors yet not directly addresses it.",
+    "paper_formatting_concerns": "No major formatting issues in this paper.",
+    "final_justification": "I will maintain the original score."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

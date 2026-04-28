@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "eUgS9Ig8JG",
+  "reviewer": "4crX",
+  "paper": {
+    "title": "SaNN: Simple Yet Powerful Simplicial-aware Neural Networks",
+    "authors": [
+      "Sravanthi Gurugubelli",
+      "Sundeep Prabhakar Chepuri"
+    ],
+    "abstract": "Simplicial neural networks (SNNs) are deep models for higher-order graph representation learning. SNNs learn low-dimensional embeddings of simplices in a simplicial complex by aggregating features of their respective upper, lower, boundary, and coboundary adjacent simplices. The aggregation in SNNs is carried out during training. Since the number of simplices of various orders in a simplicial complex is significantly large, the memory and training-time requirement in SNNs is enormous. In this work, we propose a scalable simplicial-aware neural network (SaNN) model with a constant run-time and memory requirements independent of the size of the simplicial complex and the density of interactions in it. SaNN is based on pre-aggregated simplicial-aware features as inputs to a neural network, so it has a strong simplicial-structural inductive bias. We provide theoretical conditions under which SaNN is provably more powerful than the Weisfeiler-Lehman (WL) graph isomorphism test and as powerful as the simplicial Weisfeiler-Lehman (SWL) test. We also show that SaNN is permutation and orientation equivariant and satisfies simplicial-awareness of the highest order in a simplicial complex. We demonstrate via numerical experiments that despite being computationally economical, the proposed model achieves state-of-the-art performance in predicting trajectories,  simplicial closures, and classifying graphs.",
+    "keywords": [
+      "Graph Neural Networks",
+      "Higher-order Representation Learning",
+      "Simplicial Complexes",
+      "Simplicial Neural Networks",
+      "Weisfeiler-Lehman Isomorphism Test"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=eUgS9Ig8JG"
+  },
+  "review_fields": {
+    "summary": "This paper considers the design of neural networks for simplicial complexes, which are more general combinatorial structures than graphs, but less general than hypergraphs. The authors propose to use multihop aggregation schemes to build an architecture that is more expressive than the simplicial Weisfeiler-Lehman isomorphism test, while satisfying useful invariance, equivariance, and expressivity properties. They also demonstrate the efficientcy of their proposed method, and its performance for a few different tasks in simplicial data processing.",
+    "strengths": "1. For the most part, this paper is well-written, and is easy to digest for someone who is familiar with graph neural networks. I don't think the intended audience of this paper includes someone not familiar with GNNs, but this is fine in my opinion.\n\n2. The proposed method is demonstrated to be quite efficient in comparison to existing ones, with similar performance as well.",
+    "weaknesses": "1. Certain definitions regarding the types of operators and features are not laid out clearly enough, which leads to ambiguity in the paper on a technical level. As noted in the list of questions and suggestions, the claimed properties of the proposed models are not clearly true, possibly due to this misunderstanding.",
+    "questions": "My most important concern is summarized in point 1 -- in particular, the ambiguities around orientation equivariance and the use of oriented operators built from the incidence matrices are what cause me to suggest this paper be rejected. If the authors are to focus on either of the two points in order to change my mind on this paper, it should be the first one.\n\n1. There are some details missing regarding the type of data being handled. In particular, the incidence matrices are not defined in a way sufficient for the discussion following in the paper. Normally, the incidence matrices have values of +-1 depending on a chosen reference orientation (usually given by some ordering of the nodes). Coupled to this, the signs of the features on the simplices are determined relative to the same reference orientation -- this gives meaning to the notion of orientation equivariance. Without discussing these things, orientation equivariance is not a meaningful concept within the context of the paper. \n\na. This calls into question the validity of the example in Section 4.1. You say that all simplices are given a feature value given by some scalar $a$ -- yet, the matrices acting on these feature vectors/matrices have an orientation associated to them. It seems as if you are using an *oriented operator* to act on *unoriented features*. Property 1 in this example is thus difficult to claim, as the property of orientation equivariance is one describing the action of *oriented operators* acting on *oriented features*, and how the choice of orientation to begin with is irrelevant to the computation. \n\nb. Furthermore, this problem yields a comparison for isomorphism testing incorrect, as the erroneous imposition of differently-oriented features relative to the chosen orientations could be used by SaNN to yield a \"false negative,\" i.e., saying that two isomorphic complexes are different. \n\nc. A more minor comment in this direction comes from the **Insights** section of Section 5.1. It is not correct to say that \"the superior performance of SaNN also proves the orientation equivariance of SaNN experimentally.\" Orientation equivariance is a simple mathematical property, and does not guarantee good performance, nor are all performant architectures on a given dataset orientation equivariant. These properties are possibly linked, but the claim that one proves the other in some way is not justified. \n\nd. Moreover, based on my reading of the appendix, many of their experimental setups for tasks other than trajectory prediction use \"unoriented data\" by simply assigning scalar values to high-order simplices, which is again incompatible with the use of oriented operators. Perhaps something in the implementation of SaNN in these examples does not use oriented operators such as the incidence matrices, but this is not clear to me. \n\nPlease either justify, clarify, or revise the paper's discussion regarding orientation equivariance.\n\n2. Related to the above point, the claims in Section 4.2 seem reasonable at first glance, but are not explained well enough. Permutation equivariance is easily seen to hold, so is not much of a concern. Orientation equivariance is subject to the problems noted above, so more clarification on the type of simplicial features and relevant operators needs to be made. That is not to say that the result proved in the appendix is wrong, but it needs to be clarified in order to be understood in a way that acts on oriented features. Simplicial awareness is more subtle than the other two, based on the definition from (Roddenberry et. al., 2021). For instance, some of the existing convolutional-type SNNs in the literature fail to satisfy simplicial awareness if they are implemented without nonlinear activation functions, due to the fact that the square of the (co)boundary operator is the zero operator. Perhaps it is the case that the assumptions of Theorem 4.2 are sufficient to exclude such methods, but a clearer connection is needed. It would be very helpful for the authors to briefly survey some of the methods they compare to, and clarify whether Theorems 4.1 and 4.2 apply or don't apply to them.\n\n---\n\nThank you for addressing my questions -- I have raised my suggested score."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 4935,
+    "words": 801,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/43fe65d1-1c73-40a5-a745-b7ca223596ad",
+    "error": null,
+    "scored_chars": 4940
+  }
+}

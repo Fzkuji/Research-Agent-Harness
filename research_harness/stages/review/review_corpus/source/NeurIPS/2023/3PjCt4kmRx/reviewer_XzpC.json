@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "3PjCt4kmRx",
+  "reviewer": "XzpC",
+  "paper": {
+    "title": "From Pixels to UI Actions: Learning to Follow Instructions via Graphical User Interfaces",
+    "authors": [
+      "Peter Shaw",
+      "Mandar Joshi",
+      "James Cohan",
+      "Jonathan Berant",
+      "Panupong Pasupat",
+      "Hexiang Hu",
+      "Urvashi Khandelwal",
+      "Kenton Lee",
+      "Kristina Toutanova"
+    ],
+    "abstract": "Much of the previous work towards digital agents for graphical user interfaces (GUIs) has relied on text-based representations (derived from HTML or other structured data sources), which are not always readily available. These input representations have been often coupled with custom, task-specific action spaces.  This paper focuses on creating agents that interact with the digital world using the same conceptual interface that humans commonly use — via pixel-based screenshots and a generic action space corresponding to keyboard and mouse actions. Building upon recent progress in pixel-based pretraining, we show, for the first time, that it is possible for such agents to outperform human crowdworkers on the MiniWob++ benchmark of GUI-based instruction following tasks.",
+    "keywords": [
+      "instruction following",
+      "web tasks",
+      "user interface tasks",
+      "vision and language",
+      "representation learning",
+      "reinforcement learning",
+      "imitation learning",
+      "tree search",
+      "language grounding",
+      "web agents",
+      "computer control"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=3PjCt4kmRx"
+  },
+  "review_fields": {
+    "summary": "This work explores the possibility of building an agent that can complete tasks for users solely based on pixel-level visual representations of the GUI state and generic low-level actions, without relying on structured or task-specific representations. The authors demonstrate the effectiveness of their approach on two benchmarks, MiniWob++ and WebShop, adapted to their general Chrome-based environment framework.",
+    "strengths": "This submission demonstrates significant strength in several key areas. Firstly, it presents a clear and compelling motivation for developing an agent capable of directly interacting with pixel-level GUI interfaces, aligning with a more natural and human-like manner. This aspect alone distinguishes the submission and makes it particularly appealing to the readers.\n\nMoreover, the use of well-crafted illustrations enhances the understanding of the content and effectively communicates the main ideas, further solidifying its strength. Readers can easily grasp the concepts presented, adding to the submission's overall impact.\n\nFurthermore, the proposed framework is rigorously validated on two datasets, and the comparison with baselines using DOM/HTML as input is conducted in great detail. This thorough analysis strengthens the submission's credibility and highlights its robustness.",
+    "weaknesses": "I have several concerns regarding the experimental design in the submission:\n\n(1) One notable issue is the absence of certain ablations that would provide valuable insights into the effectiveness of each component in the proposed agent framework. Specifically, the authors should address the bottleneck of the framework, whether it lies in the visual encoder or the text decoder. Additionally, it would be beneficial to explore the potential performance improvements by utilizing alternative variants of visual encoders or text decoders. Furthermore, since the visual encoder plays a crucial role in extracting and understanding instructions embedded in the interface, it is essential to verify the effectiveness of using ViT in OCR accuracy.\n\n(2) The rationale behind embedding instructions into the UI screenshot instead of providing them directly as input remains unclear. The submission should elaborate on this choice and justify its benefits. Moreover, considering the availability of open-source Visual Language Models (VLMs) like mPLUG-Owl [1], OpenFlamingo [2], and Otter [3], which natively support instruction following and accept multimodal input, it would be valuable to include these VLMs as baselines in the revised version. This addition would offer a more comprehensive evaluation and better contextualize the proposed method's unique contribution in comparison to existing approaches.\n\n[1] https://github.com/X-PLUG/mPLUG-Owl\n[2] https://github.com/mlfoundations/open_flamingo\n[3] https://github.com/Luodian/Otter\n\nAddressing these concerns would significantly enhance the experimental design and strengthen the submission's overall validity and contribution to the field.",
+    "questions": "(1) In Figure 2, step 3, why are there two overlapping ‘+’? Does it mean the mouse is pressed down?\n\n(2) This is not a serious issue, but some Figures are quite blurry (e.g., MiniWob++ examples in Figure1 and top row in Figure 2), is this due to the way the dataset is constructed?",
+    "limitations": "The authors have included discussions of the limitations."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 95,
+    "human_pct": 5,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 2923,
+    "words": 411,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/92b49d2b-cabe-4040-a0f1-13a246d4671f",
+    "error": null,
+    "scored_chars": 2923
+  }
+}

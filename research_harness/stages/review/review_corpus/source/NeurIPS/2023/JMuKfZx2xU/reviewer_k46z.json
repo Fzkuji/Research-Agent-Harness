@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "JMuKfZx2xU",
+  "reviewer": "k46z",
+  "paper": {
+    "title": "On Slicing Optimality for Mutual Information",
+    "authors": [
+      "Ammar Fayad",
+      "Majd Ibrahim"
+    ],
+    "abstract": "Measuring dependence between two random variables is of great importance in various domains but is difficult to compute in today's complex environments with high-dimensional data. Recently, slicing methods have shown to be a scalable approach to measuring mutual information (MI) between high-dimensional variables by projecting these variables into one-dimensional spaces. Unfortunately, these methods use uniform distributions of slicing directions, which generally discard informative features between variables and thus lead to inaccurate quantification of dependence. In this paper, we propose a principled framework that searches for an \\textit{optimal} distribution of slices for MI. Importantly, we answer theoretical questions about finding the optimal slicing distribution in the context of MI and develop corresponding theoretical analyses. We also develop a practical algorithm, connecting our theoretical results with modern machine learning frameworks. Through comprehensive experiments in benchmark domains, we demonstrate significant gains in our information measure than state-of-the-art baselines.",
+    "keywords": [
+      "Mutual information",
+      "Information Theory"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JMuKfZx2xU"
+  },
+  "review_fields": {
+    "summary": "This work based on existing ideas of providing a tractable independence metric for high dimensional random variables, the proposed metric named \"Optimal sliced mutual information\" (SI*) improves upon existing method of uniform slicing to an adaptive optimal slicing with scalability design in mind. It has been shown that the proposed method has desirable properties to be a dependency metric. The estimator is shown to be faster converging than previous MI both theoretically and empirically. In addition, this method is applied on several machine learning tasks to show its effectiveness.",
+    "strengths": "This work discovers weakness in previous work in terms of slicing efficiency. The idea is well motivated and explained well in introductory sections. The properties of the proposed metric is well explained with easy to understand examples and visualization. Examples in the empirical study showcases various in field applications which implies wide impact upon adoption.",
+    "weaknesses": "The scalability of the NN estimator of SI* is only studied at slicing size level. A remark about the scalability with $d_x, d_y$ similar to convergence analysis can be beneficial.",
+    "questions": "There are multiple places where SI and $\\mathcal{SI}$ are used interchangeably. e.g. l.50 l.282 Table 1, l.331 and more.\nThe provided implementation is short scaffolding code and missing many important pieces which prevents further cross-check of the implementation against the claim in the paper.",
+    "limitations": "Limitations are well addressed."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 883,
+    "words": 133,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/efb2c679-e527-4183-be70-66eb68cd5ebe",
+    "error": null,
+    "scored_chars": 883
+  }
+}

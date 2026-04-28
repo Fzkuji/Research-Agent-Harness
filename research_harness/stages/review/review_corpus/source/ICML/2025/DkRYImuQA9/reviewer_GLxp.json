@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "DkRYImuQA9",
+  "reviewer": "GLxp",
+  "paper": {
+    "title": "ShieldAgent: Shielding Agents via Verifiable Safety Policy Reasoning",
+    "authors": [
+      "Zhaorun Chen",
+      "Mintong Kang",
+      "Bo Li"
+    ],
+    "abstract": "Autonomous agents powered by foundation models have seen widespread adoption across various real-world applications. However, they remain highly vulnerable to malicious instructions and attacks, which can result in severe consequences such as privacy breaches and financial losses. More critically, existing guardrails for LLMs are not applicable due to the complex and dynamic nature of agents. To tackle these challenges, we propose ShieldAgent, the first guardrail agent designed to enforce explicit safety policy compliance for the action trajectory of other protected agents through logical reasoning. Specifically, ShieldAgent first constructs a safety policy model by extracting verifiable rules from policy documents and structuring them into a set of action-based probabilistic rule circuits. Given the action trajectory of the protected agent, ShieldAgent retrieves relevant rule circuits and generates a shielding plan, leveraging its comprehensive tool library and executable code for formal verification. In addition, given the lack of guardrail benchmarks for agents, we introduce ShieldAgent-Bench, a dataset with 3K safety-related pairs of agent instructions and action trajectories, collected via SOTA attacks across 6 web environments and 7 risk categories. Experiments show that ShieldAgent achieves SOTA on ShieldAgent-Bench and three existing benchmarks, outperforming prior methods by 11.3% on average with a high recall of 90.1%. Additionally, ShieldAgent reduces API queries by 64.7% and inference time by 58.2%, demonstrating its high precision and efficiency in safeguarding agents. Our project is available and continuously maintained here: https://shieldagent-aiguard.github.io/",
+    "keywords": [
+      "LLM Agent Safety",
+      "LLM Guardrail Agent",
+      "Policy Compliance",
+      "Automated Logic Reasoning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=DkRYImuQA9"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a guardrail/shielding scaffold for LLM-based agents. The core idea is to parse safety documentation such as policies into atomic rules, which are then encoded as probabilistic circuits. The use of probabilistic circuits thus allows for efficient marginal inference of the likelihood that a rule will be violated given some action being taken by the agent. In addition to this main contribution, the paper also contributes an extensive benchmark containing over a thousand examples of unsafe agent trajectories. Empirically, the method proposed in the paper achieves higher accuracies (in terms of predicting whether an action is safe or not, and which rule it is that will be violated) compared to previous work.\n\n## update after rebuttal\nI have kept my original score of 4 - Accept. I believe the additional experiments and discussion provided by the authors during the rebuttal, including an additional set of ablations, to be very valuable; my reason for not raising my score further is that this is not my area of expertise, and other reviewers, in particular tHcj, have voiced concerns that appear to be valid. I am not sure I share them, for example I do not find the overall framework to be unclear, but nonetheless the concerns of the other reviewers should be taken into account when making the final recommendation.",
+    "claims_and_evidence": "I believe the claims to be clear and well supported by the given evidence. However, I would have liked to see more discussion of the impact of the hyperparameters, of which there appears to be many (e.g. the rule similarity threshold $\\theta$ and $\\epsilon_\\text{tol}$), as this appears to be a crucial part of trading off the accuracy and runtime of the safety harness.",
+    "methods_and_evaluation_criteria": "Yes, the methods and criteria makes sense. The additional contribution of a new benchmark for this task strengthens the paper (since to be honest there is not--to the extent of my knowledge--many existing benchmarks out there to evaluate these methods on), and it does not appear to be constructed in a way that would unfairly favor the author's proposed approach.\n\nMy only critique in the terms of the criteria is that in the context of ensuring safety, false negatives are much worse than false positives. I would thus have liked to see an evaluation in terms of the false negative rate, in addition to the accuracy and false positive rate.",
+    "theoretical_claims": "N/A; no theoretical claims made.",
+    "experimental_designs_or_analyses": "The experiments appear to be both sound and thorough. The benchmarks aren't huge, but given the complexity of constructing such datasets this does not feel like a fair criticism of the work, especially as the authors already supplement their main methodological contribution with a novel benchmark themselves.",
+    "relation_to_broader_scientific_literature": "The paper appears to be a significant contribution to the agent literature. Not only is this type of work very important, but the methodological decisions are themselves very interesting and (to my knowledge) novel, such as the use of probabilistic circuits to make exact safety inference tractable. Previous works which I am familiar with, such as ShieldLM by Zhang et al. (2024), were much more limited in scope and largely relied on the LLM to implicitly evaluate the risk of a rule violation; in particular, framing the guardrail problem as an MDP and using exact probabilistic inference to compute the probability of a rule being violated appears to be a much more well-founded approach to the problem.",
+    "other_strengths_and_weaknesses": "The paper is very clearly written. While the methodology is not particularly technically involved, it does have a lot of moving parts, and yet they are presented in a way that (in my opinion) is very easy to follow. Besides that, I applaud the authors for focusing their efforts on an issue which will be very important as agentic systems are likely to become more and more popular over the next few years.",
+    "other_comments_or_suggestions": "There is a minor type on line 191.",
+    "questions_for_authors": "1. Have you carried out an ablation for the different parts of your system; for example, how often does your system fail because of a poorly tuned probabilistic circuit vs. a misformulated rule?\n2. How do you set the hyperparameters for your method? (I didn't see any discussion of this in the appendix, but please correct me if I am wrong.)"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

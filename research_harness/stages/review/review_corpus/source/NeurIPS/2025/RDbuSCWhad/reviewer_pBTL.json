@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "RDbuSCWhad",
+  "reviewer": "pBTL",
+  "paper": {
+    "title": "Structured Sparse Transition Matrices to Enable State Tracking in State-Space Models",
+    "authors": [
+      "Aleksandar Terzic",
+      "Nicolas Menet",
+      "Michael Hersche",
+      "Thomas Hofmann",
+      "Abbas Rahimi"
+    ],
+    "abstract": "Modern state-space models (SSMs) often utilize structured transition matrices\nwhich enable efficient computation but pose restrictions on the model’s expressivity,\nas measured in terms of the ability to emulate finite-state automata (FSA). While\nunstructured transition matrices are optimal in terms of expressivity, they come\nat a prohibitively high compute and memory cost, even for moderate state sizes.\nWe propose a structured sparse parametrization of transition matrices in SSMs\nthat enables FSA state tracking with provably optimal state size and depth, while\nkeeping the computational cost of the recurrence comparable to that of diagonal\nSSMs. Our method, \\emph{PD-SSM}, parametrizes the transition matrix as the product\nof a column one-hot matrix ($P$) and a complex-valued diagonal matrix ($D$). As\na result, the computational cost of parallel scans scales linearly with the state\nsize. Theoretically, the model is BIBO-stable and can emulate any $N$-state FSA\nwith one layer of dimension $N$ and a linear readout of size $N ×N$, significantly\nimproving on all current structured SSM guarantees. Experimentally, the model\nsignificantly outperforms a wide collection of modern SSM variants on various FSA\nstate tracking tasks. On multivariate time-series classification, it outperforms neural\ncontrolled differential equations, a paradigm explicitly built for time-series analysis.\nFinally, we integrate PD-SSM into a hybrid Transformer-SSM architecture and\ndemonstrate that the model can effectively track the states of a complex FSA in\nwhich transitions are encoded into sets of variable-length English sentences. The\ncode is available at https://github.com/IBM/expressive-sparse-state-space-model.",
+    "keywords": [
+      "State-Space Models",
+      "Expressiveness",
+      "Efficiency",
+      "Matrix Parametrisation",
+      "State-Tracking",
+      "Finite-State Automata"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=RDbuSCWhad"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a novel parameterization of the transition matrices in selective state-space models (SSMs). Specifically, the authors replace diagonal transition matrices with a product of a column one-hot matrix (P) and a complex-valued diagonal matrix (D). Through both theoretical and empirical analysis, they argue that this new parameterization effectively models arbitrary finite-state automata (FSA). They also demonstrate improved efficiency by comparing the empirical runtime of their method against SD-SSM and Diagonal SSM baselines.",
+    "strengths_and_weaknesses": "**Strengths**\n\n1. The paper is clearly written and easy to follow.\n2. It presents a strong theoretical foundation, supported by empirical improvements in both performance and efficiency.\n3. The work addresses an important problem in the expressivity and computational efficiency of SSMs.\n4. The proposed changes are simple to implement yet yield meaningful benefits.\n\n**Weaknesses**\n\nThe analysis is centered entirely around finite-state automata. While FSAs are a useful proxy, state-space models are increasingly applied in real-world tasks such as natural language processing and computer vision. It remains unclear whether the proposed parameterization would translate into practical benefits in these broader domains.",
+    "questions": "How does the FSA-based analysis inform real-world applications? Do FSAs share structural or behavioral similarities with typical use cases of SSMs in NLP or vision tasks?",
+    "final_justification": "Overall, I recommend the acceptance of the paper because:\n* The paper presents a strong theoretical foundation, supported by empirical improvements in both performance and efficiency.\n* The work addresses an important problem in the expressivity and computational efficiency of SSMs.\n* The proposed changes are simple to implement yet yield meaningful benefits.\n* Effectiveness in realistic scenarios were addressed in the rebuttals with time-series classification."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

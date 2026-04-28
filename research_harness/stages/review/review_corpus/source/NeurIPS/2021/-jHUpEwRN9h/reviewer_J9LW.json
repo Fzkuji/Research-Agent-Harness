@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "-jHUpEwRN9h",
+  "reviewer": "J9LW",
+  "paper": {
+    "title": "Row-clustering of a Point Process-valued Matrix",
+    "authors": [
+      "Lihao Yin",
+      "Ganggang Xu",
+      "Huiyan Sang",
+      "Yongtao Guan"
+    ],
+    "abstract": "Structured point process data harvested from various platforms poses new challenges to the machine learning community. To cluster repeatedly observed marked point processes, we propose a novel mixture model of multi-level marked point processes for identifying potential heterogeneity in the observed data. Specifically, we study a matrix whose entries are marked log-Gaussian Cox processes and cluster rows of such a matrix.  An efficient semi-parametric Expectation-Solution (ES) algorithm combined with functional principal component analysis (FPCA) of point processes is proposed for model estimation. The effectiveness of the proposed framework is demonstrated through simulation studies and real data analyses.",
+    "keywords": [
+      "Expectation-Solution Algorithm",
+      "Functional Principal Component Analysis",
+      "Marked Point Processes",
+      "Model-based Clustering",
+      "Semiparametric Model"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=-jHUpEwRN9h"
+  },
+  "review_fields": {
+    "summary": "This paper studies clustering based on multi-dimensional data array that can be represented by a point process, which is motivated by Twitter activity data. It proposes a mixture model, where each mixture is a multivariate Gaussian process plus noise and addition structure. In order to identify the mixtures and the components, this paper uses the E-S algorithm, together with several approximation and sampling tricks. Experiments on the Twitter activity data show that the universities under study can be grouped into three clusters, which has meaningful interpretations.",
+    "main_review": "This paper seems to provide a useful statistical methodology for a complex heterogeneous dataset. While I do not claim expertise in this field, this paper does seem to present a practical E-S algorithm for statistical analysis. One drawback of this paper is that the motivating data example looks quite limiting, and that the data example does not reveal interesting discoveries beyond obvious facts (universities can be grouped according to their tiers, etc). I am not criticizing but I feel that a better data example would lead to a much wider appeal to the general audience."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "dJgYhYKvr1",
+  "reviewer": "BLwe",
+  "paper": {
+    "title": "The Slingshot Mechanism: An Empirical Study of Adaptive Optimizers and the \\emph{Grokking Phenomenon}",
+    "authors": [
+      "Vimal Thilak",
+      "Etai Littwin",
+      "Shuangfei Zhai",
+      "Omid Saremi",
+      "Roni Paiss",
+      "Joshua M. Susskind"
+    ],
+    "abstract": "The \\emph{grokking phenomenon} as reported by Power et al.~\\cite{power2021grokking} refers to a regime where a long period of overfitting is followed by a seemingly sudden transition to perfect generalization. In this paper, we attempt to reveal the underpinnings of Grokking via a series of empirical studies. Specifically, we uncover an optimization anomaly plaguing adaptive optimizers at extremely late stages of training, referred to as the \\emph{Slingshot Mechanism}. A prominent artifact of the Slingshot Mechanism can be measured by the cyclic phase transitions between stable and unstable training regimes, and can be easily monitored by the cyclic behavior of the norm of the last layers weights. We empirically observe that without explicit regularization, Grokking as reported in \\cite{power2021grokking} almost exclusively happens at the onset of \\emph{Slingshots}, and is absent without it. \n    While common and easily reproduced in more general settings, the Slingshot Mechanism does not follow from any known optimization theories that we are aware of, and can be easily overlooked without an in depth examination. Our work points to a surprising and useful inductive bias of adaptive gradient optimizers at late stages of training, calling for a revised theoretical analysis of their origin.",
+    "keywords": [
+      "optimization",
+      "adam",
+      "adamw",
+      "adaptive optimizers",
+      "grokking",
+      "training instability",
+      "instability",
+      "empirical",
+      "empirical science of deep learning",
+      "double descent"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=dJgYhYKvr1"
+  },
+  "review_fields": {
+    "comment": "I would like to thank the authors for adding additional numerical experiments that may help future theorists investigate the phenomenon. I have a few additional questions regarding the authors' response on the numerical diagnoses that I requested in my previous comment:\n\n1. The authors claimed that \"from the spiking loss the local curvature in the direction of the update trivially cannot accommodate the effective learning rate.\" Could you clarify what \"accommodate\" refers to in this context? Also, how does the spiking loss directly relate to the local curvature? \n2. Could the authors elaborate on why \"estimating the Lipschitz constant would not provide much insight\"? As mentioned in my previous comment, the Lipschitz constant of the gradient would provide a sufficient condition for the learning rate/step size to induce a decrease in the loss. \n3. The authors claimed that examining effective step size \"does not explain the training dynamics which give rise to such a sudden curvature spike.\" Could you elaborate on why? From my perspective, if the effective step size is too large (compated to $2/L$, where $L$ is the local Lipschitz constant of the gradient), then the next iterate can be very far away from the current iterate and may land somewhere with high loss by chance. That was why I believed comparing the effective step size with the local Lipschitz constant of the gradient would be useful."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

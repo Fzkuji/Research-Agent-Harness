@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "B7ZbqNLDn-_",
+  "reviewer": "X8h7",
+  "paper": {
+    "title": "Recycling Model Updates in Federated Learning: Are Gradient Subspaces Low-Rank?",
+    "authors": [
+      "Sheikh Shams Azam",
+      "Seyyedali Hosseinalipour",
+      "Qiang Qiu",
+      "Christopher Brinton"
+    ],
+    "abstract": "In this paper, we question the rationale behind propagating large numbers of parameters through a distributed system during federated learning. We start by examining the rank characteristics of the subspace spanned by gradients (i.e., the gradient-space) in centralized model training, and observe that the gradient-space often consists of a few leading principal components accounting for an overwhelming majority (95-99%) of the explained variance. Motivated by this, we propose the \"Look-back Gradient Multiplier\" (LBGM) algorithm, which utilizes this low-rank property of the gradient-space in federated learning. Operationally, LBGM recycles the gradients between model update rounds to significantly reduce the number of parameters to be propagated through the system. We analytically characterize the convergence behavior of LBGM, revealing the nature of the trade-off between communication savings and model performance. Our subsequent experimental results demonstrate the improvement LBGM obtains on communication overhead compared to federated learning baselines. Additionally, we show that LBGM is a general plug-and-play algorithm that can be used standalone or stacked on top of existing sparsification techniques for distributed model training.",
+    "keywords": [
+      "Distributed Machine Learning",
+      "Federated Learning",
+      "Gradient Subspace",
+      "SGD"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=B7ZbqNLDn-_"
+  },
+  "review_fields": {
+    "comment": "Thanks for the authors' response. I would consider using a subspace that spans a series of updates to be a relatively straightforward extension of approximating a single update. In addition, storing all clients' gradients at the server is a key limitation of this work. Although it can be argued that such a method may be possible in certain scenarios, considering that future cross-device federated learning applications can have over billions of devices, it is quite unlikely that a service provider would consume such a large amount of storage for a marginal performance improvement (most of the accuracy vs # parameters plots in Figure 7 only show a marginal improvement). For these reasons, I would keep my current score, but if another reviewer strongly feels that this paper should be accepted, I would not argue against it either.\n\nIt would be useful if the methodology used for hyperparameter search (at the end of the second response) could be included in the appendix.\n\nAn additional minor comment is: there are fluctuations in many of the plots, even for vanilla FL in Figures 5 and 6. It would be good to investigate and explain why these fluctuations happen. In many cases, this may be due to improper choice of learning rate or model architecture, which should be fixed if possible."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1297,
+    "words": 217,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7e1a461d-39d9-4cd4-a359-2e6e9e0479ea",
+    "error": null,
+    "scored_chars": 1297
+  }
+}

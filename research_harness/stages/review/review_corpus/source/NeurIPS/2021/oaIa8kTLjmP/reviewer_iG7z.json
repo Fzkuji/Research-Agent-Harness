@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "oaIa8kTLjmP",
+  "reviewer": "iG7z",
+  "paper": {
+    "title": "Asymptotics of the Bootstrap via Stability with Applications to Inference with Model Selection",
+    "authors": [
+      "Morgane Austern",
+      "Vasilis Syrgkanis"
+    ],
+    "abstract": "One of the most commonly used methods for forming confidence intervals is the empirical bootstrap, which is especially expedient when the limiting distribution of the estimator is unknown. However, despite its ubiquitous role in machine learning, its theoretical properties are still not well understood. Recent developments in probability have provided new tools to study the bootstrap method. However, they have been applied only to specific applications and contexts, and it is unclear whether these techniques are applicable to the understanding of the consistency of the bootstrap in machine learning pipelines. In this paper, we derive general stability conditions under which the empirical bootstrap estimator is consistent and quantify the speed of convergence. Moreover, we propose alternative ways to use the bootstrap method to build confidence intervals with coverage guarantees. Finally, we illustrate the generality and tightness of our results by examples of interest for machine learning including for two-sample kernel tests after kernel selection and the empirical risk of stacked estimators.",
+    "keywords": [
+      "bootstrap",
+      "asymptotics",
+      "confidence intervals",
+      "model selection"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=oaIa8kTLjmP"
+  },
+  "review_fields": {
+    "summary": "The authors derive general stability conditions under which the empirical bootstrap estimator is consistent and quantify the speed of convergence. These results are illustrated for two-sample kernel tests after kernel selection and the empirical risk of stacked estimators. These two applications are relevant due to the recent interest in kernel tests with learnt deep kernels and the popularity of ensemble models in practice.",
+    "main_review": "The paper is highly technical and theoretical, and it still reads quite well. Although I am not very familiar with the statistical approaches and therefore not qualified to comment on its soundness, I am convinced that its originality and contribution is definitely very strong.\nAs mentioned above, the application of the general theorem to kernel tests with learnt kernels and model ensembles is very relevant to current machine learning challenges. While I am keen to see numerical results corroborating the theoretical ones, they are not a must for this paper, rather for a follow-up.\nFinally, I would have appreciate a concluding section highlighting the limitations of the current approach and a recommendation on where to focus future research.\n\nOther comments:\n- Please use a spell-checker to review the paper as there are few typos here and there.\n- Lines 82-84: p, p_n and n are used before being defined.\n- The two equations after lines 123 and 127 are identical: should they?\n- Page 4, please define C^{\\alpha, n} and C^{\\alpha, n}_\\epsilon\n- Page 8, Proposition 2: why is the result obtain using the L1-norm instead of just d_F \\to 0 in probability, as d_F is a real number anyway?",
+    "limitations_and_societal_impact": "Limitations have not been fully explained (or maybe I missed them).\nThis contribution does not have potential negative societal impact.",
+    "ethical_concerns": "This work does not reaise any ethical concerns."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

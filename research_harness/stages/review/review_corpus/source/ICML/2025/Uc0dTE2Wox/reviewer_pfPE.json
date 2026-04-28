@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "Uc0dTE2Wox",
+  "reviewer": "pfPE",
+  "paper": {
+    "title": "Rethinking Benign Overfitting in Two-Layer Neural Networks",
+    "authors": [
+      "Ruichen Xu",
+      "Kexin Chen"
+    ],
+    "abstract": "Recent theoretical studies (Kou et al., 2023; Cao et al., 2022) revealed a sharp phase transition from benign to harmful overfitting when the\nnoise-to-feature ratio exceeds a threshold—a situation common in long-tailed data distributions where atypical data is prevalent. However, such harmful overfitting rarely happens in overparameterized neural networks. Further experimental results suggested that memorization is necessary for achieving near-optimal generalization error in long-tailed data distributions (Feldman & Zhang, 2020). We argue that this discrepancy between theoretical predictions and empirical observations arises because previous feature-noise data models overlook the heterogeneous nature of noise across different data classes. In this paper, we refine the feature-noise data model by incorporating class-dependent heterogeneous noise and re-examine the overfitting phenomenon in neural networks. Through a comprehensive analysis of the training dynamics, we establish test loss bounds for the refined model. Our findings reveal that neural networks can leverage \"data noise\" to learn implicit features that improve the classification accuracy for long-tailed data. Our analysis also provides a training-free metric for evaluating data influence on test performance. Experimental validation on both synthetic and real-world datasets supports our theoretical results.",
+    "keywords": [
+      "Benign overfitting",
+      "long-tailed data",
+      "two-layer neural networks"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Uc0dTE2Wox"
+  },
+  "review_fields": {
+    "summary": "This paper explores overfitting in neural networks, challenging the common belief that it harms generalization. Specifically, the authors argue that certain forms of overfitting can be benign and demonstrate—both mathematically and empirically—that benign overfitting can enhance performance on long-tailed data.",
+    "methods_and_evaluation_criteria": "Yes. But analysis on more complex dataset such as ImageNet would further strengthen the claim made by the paper.",
+    "relation_to_broader_scientific_literature": "The paper is trying to explore the phenomenon of overfitting where it helps the model's performance. This is quite broad topic and can be applied to many research area.",
+    "other_strengths_and_weaknesses": "## Strengths\n- The paper is well-written and easy to follow.\n- It presents a novel perspective on overfitting, challenging conventional wisdom in the field.\n- The claims are rigorously supported through both mathematical analysis and empirical validation, strengthening the arguments.\n\n## Weaknesses\n- The experimental section could be strengthened by evaluating more complex datasets, such as ImageNet, rather than relying solely on MNIST and CIFAR-10.",
+    "questions_for_authors": "One of the major concern is regarding the dataset used for evaluation. Is there any reason for not performing experiments on more complex dataset?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

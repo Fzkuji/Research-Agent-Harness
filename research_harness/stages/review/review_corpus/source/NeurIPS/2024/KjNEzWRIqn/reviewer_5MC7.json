@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "KjNEzWRIqn",
+  "reviewer": "5MC7",
+  "paper": {
+    "title": "Synatra: Turning Indirect Knowledge into Direct Demonstrations for Digital Agents at Scale",
+    "authors": [
+      "Tianyue Ou",
+      "Frank F. Xu",
+      "Aman Madaan",
+      "Jiarui Liu",
+      "Robert Lo",
+      "Abishek Sridhar",
+      "Sudipta Sengupta",
+      "Dan Roth",
+      "Graham Neubig",
+      "Shuyan Zhou"
+    ],
+    "abstract": "LLMs can now act as autonomous agents that interact with digital environments and complete specific objectives (e.g., arranging an online meeting). However, accuracy is still far from satisfactory, partly due to a lack of large-scale, direct demonstrations for digital tasks. Obtaining supervised data from humans is costly, and automatic data collection through exploration or reinforcement learning relies on complex environmental and content setup, resulting in datasets that lack comprehensive coverage of various scenarios. On the other hand, there is abundant knowledge that may indirectly assist task completion, such as online tutorials that were created for human consumption. In this work, we present Synatra, an approach that effectively transforms this indirect knowledge into direct supervision at scale. We define different types of indirect knowledge, and carefully study the available sources to obtain it, methods to encode the structure of direct demonstrations, and finally methods to transform indirect knowledge into direct demonstrations. We use 100k such synthetically-created demonstrations to finetune a 7B CodeLlama, and demonstrate that the resulting agent surpasses all comparably sized models on three web-based task benchmarks Mind2Web, MiniWoB++ and WebArena, as well as surpassing GPT-3.5 on WebArena and Mind2Web. In addition, while synthetic demonstrations prove to be only 3% the cost of human demonstrations (at $0.031 each), we show that the synthetic demonstrations can be more effective than an identical number of human demonstrations collected from limited domains.",
+    "keywords": [
+      "AI agents",
+      "sythetic data",
+      "web navigation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=KjNEzWRIqn"
+  },
+  "review_fields": {
+    "summary": "This paper studies the problem of dataset generation for the digital task in the context of LLM. The motivation is that the current data collection process often requires human annotation, which is very costly and not scalable. As a result, the paper proposes using large language models (LLMs) to generate a synthetic dataset based on indirect knowledge. The indirect knowledge often refers to tutorials designed for human consumption and observation trajectories that lack associated tasks and actions. In contrast, \"direction\" knowledge consists of complete states and actions. To generate synthetic data based on indirect knowledge, the paper proposes several methods: (1) writing a prompt to let LLMs imagine their missing actions or states given partial trajectories, and (2) randomly sampling the context from the external large-scale dataset such as webpages. Table 1 shows the results that the proposed approach achieves the best performance among the baselines.",
+    "strengths": "1. The paper is easy to follow and read.\n2. The method seems to solve the common lack of demonstration data issue in the current LLM fine-tuned paradigm.\n3. The method seems to be novel.",
+    "weaknesses": "1. The method falls into the category of the perpetual data machine, in which one uses LLMs to generate its own training dataset. In addition, the proposed method is similar to self-refine paper (https://arxiv.org/pdf/2303.17651), in which LLMs iteratively fine-tune itself based on the generated dataset. \n2. Table 1 does not compare the proposed method to the existing methods that use their own dataset to fine-tune such as self-refine paper. For instance, the paper could add a baseline in which the model is fine-tuned based on the other iterative fine-tuned procedure on the same dataset used in the paper. This will further verify the proposed method",
+    "questions": "1. I am curious to learn more about the author's thoughts on perpetual data machines, and the comparison to self-refine papers.\n2. Please answer the weakness section"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1011,
+    "words": 167,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/71825666-876a-4d57-a07f-836ef239cf79",
+    "error": null,
+    "scored_chars": 1012
+  }
+}

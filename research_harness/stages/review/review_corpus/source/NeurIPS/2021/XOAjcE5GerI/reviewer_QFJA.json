@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "XOAjcE5GerI",
+  "reviewer": "QFJA",
+  "paper": {
+    "title": "On learning sparse vectors from mixture of responses",
+    "authors": [
+      "Nikita Polyanskii"
+    ],
+    "abstract": "In this paper, we address two learning problems. Suppose a family of $\\ell$ unknown sparse vectors is fixed, where each vector has at most $k$ non-zero elements. In the first problem, we concentrate on robust learning the supports of all vectors from the family using a sequence of noisy responses. Each response to a query vector shows the sign of the inner product between a randomly chosen vector from the family and the query vector. In the second problem, we aim at designing queries such that all sparse vectors from the family can be approximately reconstructed based on the error-free responses.  This learning model was introduced in the work of Gandikota et al., 2020, and these problems can be seen as generalizations of support recovery and approximate recovery problems, well-studied under the framework of  1-bit compressed sensing.  As the main contribution of the paper, we prove the existence of learning algorithms for the first problem which work without any assumptions. Under a mild structural assumption on the unknown vectors, we also show the existence of learning algorithms for the second problem and rigorously analyze their query complexity.",
+    "keywords": [
+      "sparse vectors",
+      "mixture of binary linear classifiers",
+      "1-bit compessed sensing",
+      "query complexity",
+      "noisy measurements"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=XOAjcE5GerI"
+  },
+  "review_fields": {
+    "summary": "This paper studies the problem of learning multiple sparse signals from a mixture of 1-bit measurements, also referred to as mixture of linear classifiers. It proposes algorithms for both support recovery (with corrupted measurements) and value recovery (with noiseless measurements), which come with theoretical guarantees.",
+    "main_review": "This work provides some valuable theoretical insights for learning a mixture of sparse signals. It considers a setting of non-adaptive queries (which is different from most prior work on this topic), and also makes milder assumption on the signals' supports. The overall structure of the paper is clear. I cannot comment much on the technical parts, which are out of my expertise.\n\nHowever, one big concern is that, all theoretical results in Section 3 require query complexities that are **exponential** in sparsity $k$ and the number of signals $l$. I think further work need to be done for publication, such as (a) proposing better algorithms that have (quasi-)polynomial query complexity, (b) proving an exponential lower bound, or (c) identifying natural and mild assumptions that make the problem more easily solvable. \n\nA minor comment on writing: it might be better to keep the order of (1) support recovery and (2) signal reconstruction (i.e. support and value recovery) fixed throughout the paper. In the current version, the order is (2) -> (1) in abstract and Section 2 (definition of Problem 1 and 2), while the order becomes (1) -> (2) in Sections 3, 4, 5, which can be confusing for readers.\n\n\n--------\nAfter rebuttal:\nThanks for the authors' response. I decide to keep my score."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

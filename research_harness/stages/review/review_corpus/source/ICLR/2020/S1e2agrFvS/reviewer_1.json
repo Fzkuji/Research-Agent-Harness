@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "S1e2agrFvS",
+  "reviewer": "1",
+  "paper": {
+    "title": "Geom-GCN: Geometric Graph Convolutional Networks",
+    "authors": [
+      "Hongbin Pei",
+      "Bingzhe Wei",
+      "Kevin Chen-Chuan Chang",
+      "Yu Lei",
+      "Bo Yang"
+    ],
+    "abstract": "Message-passing neural networks (MPNNs) have been successfully applied in a wide variety of applications in the real world. However, two fundamental weaknesses of MPNNs' aggregators limit their ability to represent graph-structured data: losing the structural information of nodes in neighborhoods and lacking the ability to capture long-range dependencies in disassortative graphs. Few studies have noticed the weaknesses from different perspectives. From the observations on classical neural network and network geometry, we propose a novel geometric aggregation scheme for graph neural networks to overcome the two weaknesses.  The behind basic idea is the aggregation on a graph can benefit from a continuous space underlying the graph. The proposed aggregation scheme is permutation-invariant and consists of three modules, node embedding, structural neighborhood, and bi-level aggregation. We also present an implementation of the scheme in graph convolutional networks, termed Geom-GCN, to perform transductive learning on graphs. Experimental results show the proposed Geom-GCN achieved state-of-the-art performance on a wide range of open datasets of graphs.",
+    "keywords": [
+      "Deep Learning",
+      "Graph Convolutional Network",
+      "Network Geometry"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=S1e2agrFvS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published in this field for several years.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "This work proposes geometric aggregation scheme for GCNs, which aims to overcome the limitations in traditional GCNs; those are lacking long distance dependencies and structure information in nodes. In particular, each node is transformed into a latent space. To overcome the first limitation, some nodes that are not directly connected but fall in a near range are also used in aggregation. A relational operator is used to provide position information for each pair of nodes. In this way, the structure information in graph can be used.\n\nThe method proposed in this work is novel and interesting. However, I am confused how this method can overcome the two limitations faced by previous GCNs. To my understanding, GEOM-GCN maps all node in to a 2D latent space. This can be treated as a lower-dimension representation for each node. Based on this, some similar nodes are clustered together. The relational operator is a kind of ranking operator that can rank two nodes based on latent space representations. If my understanding is wrong, please correct me.\n\nBased on this understanding, I didn't find this method can solve the two limitations.\n \n1. To overcome the long-term dependency limitation, GEOM-GCN selects some nodes that are close but not directly connected for aggregation. However, the selected nodes in this way may not connect to the center node. This is a issue that if two nodes that are not connected should be aggregated. The authors should clarify this.\n\n2. The relational operator is used to provide a ranking between two nodes. However, how such kind of operators can be used to aggregate the structure information as described in GIN. For example, how to distinguish those example graphs using this work. I think it would be a plus if authors can make this clear in the paper.\n\n3. The experimental studies are quite weak. Some ablation studies should be done to evaluate the contribution of each proposed methods. For example, how N_{s}(v) contributes to the performance. This is very important for fully evaluating your methods.\n\n4. More tasks and datasets can be added such as graph classification and social networks.\n\n5. Some notations are quite confusing. Like in eq.(1), why m is bold but W is not.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory."
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

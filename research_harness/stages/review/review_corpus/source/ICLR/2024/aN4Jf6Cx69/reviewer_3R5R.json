@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "aN4Jf6Cx69",
+  "reviewer": "3R5R",
+  "paper": {
+    "title": "The mechanistic basis of data dependence and abrupt learning in an in-context classification task",
+    "authors": [
+      "Gautam Reddy"
+    ],
+    "abstract": "Transformer models exhibit in-context learning: the ability to accurately predict the response to a novel query based on illustrative examples in the input sequence, which contrasts with traditional in-weights learning of query-output relationships. What aspects of the training data distribution and architecture favor in-context vs in-weights learning? Recent work has shown that specific distributional properties inherent in language, such as burstiness, large dictionaries and skewed rank-frequency distributions, control the trade-off or simultaneous appearance of these two forms of learning. We first show that these results are recapitulated in a minimal attention-only network trained on a simplified dataset. In-context learning (ICL) is driven by the abrupt emergence of an induction head, which subsequently competes with in-weights learning. By identifying progress measures that precede in-context learning and targeted experiments, we construct a two-parameter model of an induction head which emulates the full data distributional dependencies displayed by the attention-based network. A phenomenological model of induction head formation traces its abrupt emergence to the sequential learning of three nested logits enabled by an intrinsic curriculum. We propose that the sharp transitions in attention-based networks arise due to a specific chain of multi-layer operations necessary to achieve ICL, which is implemented by nested nonlinearities sequentially learned during training.",
+    "keywords": [
+      "in-context learning",
+      "mechanistic interpretability",
+      "language models",
+      "induction heads"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=aN4Jf6Cx69"
+  },
+  "review_fields": {
+    "summary": "Expanding on the seminal contributions of Chan et al and Olsson et al, this paper investigates the hugely important topic of the emergence of in-context learning in supervised learning via transformers. Specifically, it starts with experiments about the concurrence of in-context (IC) and in-weight (IW) learning, in the spirit of Chan et al, but systematically deconstructs their findings in such a way as to expose several potential hypotheses for the mechanism responsible for the ICL transition. The paper's main contribution is then to replicate and explain empirical phenomena via a three-parameter nested logits ansatz (based off a two-layer attention network and a linear classifier), with the appearance of an induction head controlled by a main parameter \\xi seen as the difference between overlaps in on-diagonal and off-diagonal dot products feeding the final softmax.",
+    "strengths": "The paper is excellently written and fairly easy to follow despite the depth of insights proven. The scientific investigation is very well conducted : of note is that it alternates particularly well between empirical elements, formulating subsequent hypotheses (section \"Induction head formation drives the abrupt transition during ICL\"), disproving some of those, and finally introducing a theory that accounts for those findings, replicating empirical stylized facts, whilst much simplifying the problem. In particular, the phenomenological model Equation 10 (and its illustration Figure 7) is a standout novel contribution, and clearly worthy of publication, in our view.",
+    "weaknesses": "In a sense, the paper is tantalizing, as it invites further work, for instance on the interplay of overlap difference \\xi and data Zipfianity parameter \\alpha.",
+    "questions": "What are the authors' intuition as to why does \\xi undergo a phase transition driving ICL ? And how to, ideally, accelerate it using insights derived here ?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:20Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:20Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 835,
+    "words": 122,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ffa33c9a-a7b7-407b-8daa-ca427df1b371",
+    "error": null,
+    "scored_chars": 835
+  }
+}

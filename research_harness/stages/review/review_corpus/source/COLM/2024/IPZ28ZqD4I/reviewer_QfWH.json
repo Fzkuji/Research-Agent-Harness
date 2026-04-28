@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "IPZ28ZqD4I",
+  "reviewer": "QfWH",
+  "paper": {
+    "title": "Faithful and Unfaithful Error Recovery in Chain of Thought",
+    "authors": [
+      "Evelyn Yee",
+      "Alice Li",
+      "Chenyu Tang",
+      "Yeon Ho Jung",
+      "Ramamohan Paturi",
+      "Leon Bergen"
+    ],
+    "abstract": "Large language models (LLMs) often improve their performance in downstream tasks when they generate Chain of Thought reasoning text before producing an answer. We investigate how LLMs recover from errors in Chain of Thought. Through analysis of error recovery behaviors, we find evidence for unfaithfulness in Chain of Thought, which occurs when models arrive at the correct answer despite invalid reasoning text. We identify factors that shift LLM recovery behavior: LLMs recover more frequently from obvious errors and in contexts that provide more evidence for the correct answer. Critically, these factors have divergent effects on faithful and unfaithful recoveries. \nOur results indicate that there are distinct mechanisms driving faithful and unfaithful error recoveries. Selective targeting of these mechanisms may be able to drive down the rate of unfaithful reasoning and improve model interpretability.",
+    "keywords": [
+      "chain of thought",
+      "error recovery",
+      "reasoning",
+      "faithfulness"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=IPZ28ZqD4I"
+  },
+  "review_fields": {
+    "summary": "This paper studies error recovery in chain of thought, focusing mainly on GPT-4. When errors are introduced in its CoT generations, what kind of errors is it more likely to correct, and is it likely to correct them silently or point out the prior mistake? The paper presents the results of several experiments, varying the location & propagation of the error in the explanation, the magnitude of the error, and features in the input that may indicate to the LM an increased likelihood of errors.\n\nThe study is interesting and reasonable. The results should be heavily contingent on the way the model is trained in RLHF — it's easy to imagine small differences in the annotation methodology (i.e., do you train it to correct mistakes, and do you train it to point out such corrections? Think analogs of scheduled sampling, or whether perturbed/mistaken inputs are sampled during RLHF annotation) having big effects on the results. So I don't know how the results will generalize per se. However, the paper's point about faithful versus unfaithful recoveries is a good one, and seems interesting and relevant to study. Having this evaluation out there as a benchmark on frontier LMs seems pretty reasonable too, though requiring human annotation does make the situation a bit more difficult.",
+    "reasons_to_accept": "The experiments are clever and strong.\n* Measuring recovery rates for different kinds of errors (copying, calculation, etc.) is interesting and well-motivated.\n* Looking at error magnitude is a more obvious choice but also a good one, and the effect on faithful/unfaithful recoveries is interesting.\n* Prompting the model to expect mistakes is also something that definitely should've been tried, glad it was.\n\nOverall it seems like a strong study of a focused phenomenon.",
+    "reasons_to_reject": "I feel like there is not as much content in the paper as I would've expected for a 9 page paper but I think it might just be the COLM format. And my MO for reviewing is to score based on soundness, so I won't dock the paper for this.\n\nMy biggest complaint is probably that I'm left with lots of questions about how the outcomes measured here vary with different model training methodologies. I feel it would've been more useful to do this on, e.g., an open-source model, so that follow-up studies would be able to measure the effect of new training regimes (e.g., to explicitly encourage faithful error recovery).\n\nEDIT: I actually agree with Reviewer kvJb's criticism that the study only focuses on these artificial/constructed errors, which may not resemble LLM errors in the wild, and that it feels more immediately important and impactful to study the kinds of errors that LLMs actually make. But I feel that would require a pretty different kind of study than the current one, and wouldn't afford nearly as much control to study specific questions like the authors did in this case. So it seems to me like it'd just be a different paper, and that sort of study would be hard to fit in as an extra with the work already presented here. Perhaps a compromise would be to report some kind of aggregate of the likelihood ratios of your edits to the CoTs — i.e., when you insert the error, how does the likelihood of the CoT that you're prompting it with change from the original one? If the likelihood doesn't go down by much, that is some evidence that the mistake is \"plausible\" (i.e., could happen by sampling).",
+    "questions_to_authors": "Minor comments:\n* Check for \"Shapely values\" typo (should be Shapley)\n* On Page 4, you mention that you sample CoTs where the final answer was correct, \"indicating that the chain of thought was correct\". Doesn't this assume the models have a 0% error recovery rate by default? Or at least 0% unfaithful recovery. If this is true, then does that undermine the original motivation for the work? I'd at least like to see this assumption validated to see properly how much it's bent in the data.\n\nEDIT: As a side note, I agree with Reviewer METV's comments on the use of the words \"faithful\" and \"unfaithful\" and also encourage the authors to adopt different terminology. I acknowledge that some previous work has used these terms to refer to the connection between the CoT explanation and answer rather than the model's decision process, but I think this created a lot of confusion and we should all try and stick with the latter."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:19Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:19Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3017,
+    "words": 525,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7f225f9d-887d-459a-b9ed-f4a302ac07b0",
+    "error": null,
+    "scored_chars": 3017
+  }
+}

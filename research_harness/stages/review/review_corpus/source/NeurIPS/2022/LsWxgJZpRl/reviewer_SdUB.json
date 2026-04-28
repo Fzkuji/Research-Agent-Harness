@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "LsWxgJZpRl",
+  "reviewer": "SdUB",
+  "paper": {
+    "title": "Near-optimal Distributional Reinforcement Learning towards Risk-sensitive Control",
+    "authors": [
+      "Hao Liang",
+      "Zhi-Quan Luo"
+    ],
+    "abstract": "We consider finite episodic Markov decision processes aiming at the entropic risk measure (ERM) of return for risk-sensitive control. We identify two properties of the ERM that enable risk-sensitive distributional dynamic programming. We propose two novel distributional reinforcement learning (DRL) algorithms, including a model-free one and a model-based one, that implement optimism through two different schemes. We prove that both of them attain $\\tilde{\\mathcal{O}}(\\frac{\\exp(|\\beta| H)-1}{|\\beta|H}H\\sqrt{HS^2AT})$ regret upper bound, where $S$ is the number of states, $A$ the number of states, $H$ the time horizon and $T$  the number of total time steps. It matches  RSVI2 proposed in \\cite{fei2021exponential} with a much simpler regret analysis. To the best of our knowledge, this is the first regret analysis of DRL,  which theoretically verifies the efficacy of  DRL for risk-sensitive control. Finally, we improve the existing lower bound by proving a tighter  bound of $\\Omega(\\frac{\\exp(\\beta H/6)-1}{\\beta H}H\\sqrt{SAT})$ for $\\beta>0$ case, which recovers the tight lower bound $\\Omega(H\\sqrt{SAT})$ in the risk-neutral setting.",
+    "keywords": [
+      "distributional reinforcement learning",
+      "risk-sensitive",
+      "sample complexity"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=LsWxgJZpRl"
+  },
+  "review_fields": {
+    "summary": "This work proposes to build a distributional dynamic programming framework to optimize the entropic risk measure of the return. Under the new framework, both model-based and model-free algorithms are proposed, which achieve regret bound that matches one of the existing works in risk sensitive control. The lower bound of rish sensitive control problem is also improved using the new framework.",
+    "strengths_and_weaknesses": "Strengths: \n\n1. The proposed distributional dynamics programming framework is novel to my best knowledge. Differences in the analysis between distributional RL and previous work [22] are discussed, which shows that the distributional analysis can avoid the explode factor and shows the significance of the proposed framework in theory.\n\n2. The presentation of the paper is clear. Key steps in the analysis are highlighted, with detailed discussion on how they would affect the final regret bound. Algorithm designs are also explained in detail.\n\nWeaknesses: \n\n1. Since this work is highly relevant to [22], the significance of the work can benefit from a more comprehensive comparison  w.r.t. to previous work [22]; See Questions 1 and 2. Also, further discussion on another relevant work [1] can also improve the significance. \n\n2. The novelty of the proposed algorithms can benefit from further discussion. The equivalence of the proposed model-based algorithm to ROVI is discussed, which raises a natural question: if distributional RL is somewhat equivalent to the existing algorithms, existing analysis could also apply to DRL, then is the claim in line 10 \"this is the first regret analysis of DRL\" still valid?\n\n[22] Yingjie Fei, Zhuoran Yang, Yudong Chen, and Zhaoran Wang. Exponential bellman equation and improved regret bounds for risk-sensitive reinforcement learning. Advances in Neural Information Processing Systems, 34, 2021.",
+    "questions": "1. In Appendix A of [22], they also provide connections between risk-sensitive RL and distributional RL through the exponential Bellman equation. How is the proposed framework related to theirs? It would be helpful if there's a section dedicated to explain the relation and potential difference w.r.t. their analysis.\n\n2. If Alg. 2 is actually equivalent to Alg. 3, what is the benefit of distributional framework over existing risk sensitive control approaches? E.g., what are the cases when the proposed framework is more favourable, either theoretically or empirically? \n\n3. Does the improvement in the lower bound in Section 5.3 come from the newly proposed framework, or just different proof techniques?",
+    "limitations": "The limitation of the proposed method are discussed, but not adequately."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

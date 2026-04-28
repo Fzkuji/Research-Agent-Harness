@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "l4IHywGq6a",
+  "reviewer": "Qrrj",
+  "paper": {
+    "title": "Data-Efficient Graph Grammar Learning for Molecular Generation",
+    "authors": [
+      "Minghao Guo",
+      "Veronika Thost",
+      "Beichen Li",
+      "Payel Das",
+      "Jie Chen",
+      "Wojciech Matusik"
+    ],
+    "abstract": "The problem of molecular generation has received significant attention recently. Existing methods are typically based on deep neural networks and require training on large datasets with tens of thousands of samples. In practice, however, the size of class-specific chemical datasets is usually limited (e.g., dozens of samples) due to labor-intensive experimentation and data collection. Another major challenge is to generate only physically synthesizable molecules. This is a non-trivial task for neural network-based generative models since the relevant chemical knowledge can only be extracted and generalized from the limited training data. In this work, we propose a data-efficient generative model that can be learned from datasets with orders of magnitude smaller sizes than common benchmarks. At the heart of this method is a learnable graph grammar that generates molecules from a sequence of production rules. Without any human assistance, these production rules are automatically constructed from training data. Furthermore, additional chemical knowledge can be incorporated into the model by further grammar optimization. Our learned graph grammar yields state-of-the-art results on generating high-quality molecules for three monomer datasets that contain only ${\\sim}20$ samples each. Our approach also achieves remarkable performance in a challenging polymer generation task with $only$ $117$ training samples and is competitive against existing methods using $81$k data points.",
+    "keywords": [
+      "molecular generation",
+      "graph grammar",
+      "data efficient generative model"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=l4IHywGq6a"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper presents a data-efficient graph grammar-based approach to molecular generation (with a focus on polymer generation). The model requires that the molecule be represented as a hyper-graph. The productions of the grammar are basically rules for contracting connected nodes into a single node (a non-terminal symbol), which are later expanded during generation. Each rule is essentially derived from a random sample of the hyper-graph edges: the grammar is produced by iteratively contracting the nodes incident to the edges into non-terminal nodes until the hyper-graph consists of a single non-terminal node. This procedure is applied simultaneously to all the graphs of the training set. Once a grammar is obtained, it is optimized by maximizing some desired metrics (such as diversity). The optimization is non-differentiable since it requires generated graphs to evaluate the objective function, and thus the authors resort to approximate the gradient's expectation using MC sampling and the REINFORCE score function estimator.\nThe experiments aim at showing that the proposed model is data-efficient (achieving strong performances using a small fraction of the molecules used by competitors), capable of extrapolation (since it can produce molecules outside of the training set), and explainable (since it is shown to identify functional groups which characterize the family of generated molecules).",
+    "main_review": "This is a pretty solid contribution. Although the paper is written clearly, I admit I had trouble trying to understand the method initially, but once I got the big picture, everything lined up nicely. The methodology in itself (generative learning through graph grammars) is not new, and the proposed model presents some similarities to the HMG model of Kajino. However, it draws from previous methods in a clever way and addresses most of their limitations (for example, the production rules involve substructures instead of single atoms). This, in my opinion, is a plus. The main advantage of this model is its data efficiency, which the experiments corroborate nicely. Nonetheless, I have a few points I would like the authors to address before I give complete acceptance. \n\n1) It is unclear to me what is the computational cost of constructing the grammar and training the model since generating the production rules involves graph matching (and although you affirm this isn't an issue). How does your training/grammar inference cost compares to other approaches? \n\n2) \"we also show that with more training data (0.3% of the whole dataset), our method can achieve better performance\". I might have missed it, but where is this shown?\n\n3) Why are some results in the tables underlined? You should explain it in the captions.\n\n4) This is more of a request for clarification. How is the final set of grammar rules chosen? If I understood correctly, the bottom-up construction process generates a lot of near-duplicates, as well as potentially useless production rules, especially during the initial iterations. Is there any pruning process after the optimization has been performed, or just everything is kept?\n\n5) How many rules does the grammar construction process produce in the datasets you evaluated?",
+    "summary_of_the_review": "I am decidedly leaning towards acceptance. In my opinion, this is a strong contribution that deserves to appear at ICLR. I will most likely raise my score to an 8 after the authors will answer my questions and modify the text accordingly where needed.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:54Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:54Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1805,
+    "words": 291,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/348da6a1-a373-4e82-92b4-e8c1a7930436",
+    "error": null,
+    "scored_chars": 1807
+  }
+}

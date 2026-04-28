@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "JxFgJbZ-wft",
+  "reviewer": "RjVA",
+  "paper": {
+    "title": "Variational Predictive Routing with Nested Subjective Timescales",
+    "authors": [
+      "Alexey Zakharov",
+      "Qinghai Guo",
+      "Zafeirios Fountas"
+    ],
+    "abstract": "Discovery and learning of an underlying spatiotemporal hierarchy in sequential data is an important topic for machine learning. Despite this, little work has been done to explore hierarchical generative models that can flexibly adapt their layerwise representations in response to datasets with different temporal dynamics. Here, we present Variational Predictive Routing (VPR) – a neural probabilistic inference system that organizes latent representations of video features in a temporal hierarchy, based on their rates of change, thus modeling continuous data as a hierarchical renewal process. By employing an event detection mechanism that relies solely on the system’s latent representations (without the need of a separate model), VPR is able to dynamically adjust its internal state following changes in the observed features, promoting an optimal organisation of representations across the levels of the model’s latent hierarchy.  Using several video datasets, we show that VPR is able to detect event boundaries, disentangle spatiotemporal features across its hierarchy, adapt to the dynamics of the data, and produce accurate time-agnostic rollouts of the future. Our approach integrates insights from neuroscience and introduces a framework with high potential for applications in model-based reinforcement learning, where flexible and informative state-space rollouts are of particular interest.",
+    "keywords": [
+      "Hierarchical temporal abstraction",
+      "event discovery",
+      "hierarchical generative models",
+      "variational inference"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=JxFgJbZ-wft"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "Variational Predictive Routing (VPR) models continuous data as a hierarchical renewal process. More specficially, it is a hierarchical generative model that organizes the temporal hierarchy based on the rates of change of its latent representations. The core contribution hereby is that event detection is formulated as a comparison between semantically consistent KL divergences (or, in the case of CU, a moving average of KL divergences). VPR is time agnostic and can model a wide variety of temporal structures. Compared to a baseline method (VTA), VPR detects changes in synthetic datasets with high accuracy.",
+    "main_review": "I like the general idea of modeling change detection as the difference in divergences, I think this indirection is novel.\nI miss some more details on the following things:\n* What is the generative model for the change detection? To my understanding, change detection is modeled as an interplay between the inference  model and the generative model, but shouldn't there be some part in the generative model alone that is handling 'changes'?\n* Can you expand on the \"non markovian property' of the model (paragraph before eq 5)? I assume this makes s_t independent from all x_t', t' > t?\n* A pseudo algorithm would be very helpful to see exactly where/how the decision to stop propagating information upwards happens.\n* It would be great (but admittingly hard) to have more expressive datasets.\n* Related to datasets: In a real world setting, I believe that one can have maybe a bit of time to look at a prefix part of a sequence to be handled, and needs to 'extract' the core properties of that sequence with respect to event onsets. How could that be handled? I assume this becomes some sort of meta learning?\n* I think you should cite \"Neural Sequnce Chunker\" by J. Schmidhuber and Unsupervised Real-Time Control through Variational Empowerment  by M. Karl et al.",
+    "summary_of_the_review": "I believe the paper has a very nice core idea, and a well thought out 'harness' around that idea. I miss more conceptualized explanations, and would have loved more experiments (and also more comparisons to comparable models).",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1490,
+    "words": 255,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d5477a63-f494-438e-b47a-a54814a9b246",
+    "error": null,
+    "scored_chars": 1492
+  }
+}

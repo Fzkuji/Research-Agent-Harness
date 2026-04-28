@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "2oHnsM9M9D",
+  "reviewer": "RR4D",
+  "paper": {
+    "title": "ACORN: Aspect-wise Commonsense Reasoning Explanation Evaluation",
+    "authors": [
+      "Ana Brassard",
+      "Benjamin Heinzerling",
+      "Keito Kudo",
+      "Keisuke Sakaguchi",
+      "Kentaro Inui"
+    ],
+    "abstract": "Evaluating the quality of free-text explanations is a multifaceted, subjective, and labor-intensive task. Large language models (LLMs) present an appealing alternative due to their potential for consistency, scalability, and cost-efficiency. In this work, we present ACORN, a new dataset of 3,500 free-text explanations and aspect-wise quality ratings, and use it to evaluate how LLMs rate explanations. We observed that larger models outputted labels that maintained or increased the inter-annotator agreement, suggesting that they are within the expected variance between human raters. However, their correlation with majority-voted human ratings varied across different quality aspects, indicating that they are not a complete replacement. In turn, using LLMs as a supplement to a smaller group of human raters in some cases improved the correlation with the original majority labels. However, the effect was limited to cases where human raters were scarce, and an additional human rater had a more pronounced effect in all cases. Overall, we recommend against using LLMs as a complete replacement for human raters but encourage using them in configurations that end with targeted human involvement.",
+    "keywords": [
+      "commonsense reasoning",
+      "free-text explanations",
+      "LLM-as-a-judge",
+      "human alignment"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=2oHnsM9M9D"
+  },
+  "review_fields": {
+    "summary": "This work studies the problem that whether LLM can serve to evaluate free-text reasoning explanations. First of all this work constructs a dataset with 3.5k examples, and by conduction experiments on this dataset, this paper reveals that the inter-annotator agreement is decreased when LLM-generated ratings are used to replace human ratings. More fine-grained results conclude that while LLMs can provide ratings moderately consistent with an average crowdworker, but they are not reliable enough for complete replacement.",
+    "reasons_to_accept": "1. The conclusion in this work can inspire futher works on using LLM for automatic evaluations. \n\n2. A dataset with 3500 examples is constructed and can be used for futher research on this task.",
+    "reasons_to_reject": "Although this work studies whether LLM can be used for evaluating the quality of free-text explanations, the conclusions in this work are a bit weak. First of all the scale of 3500 examples is not large, and meanwhile, with the conclusion that LLMs are not reliable for explanation evaluation, how LLMs can be used for this task are less discussed in this work. For example, whether evaluating on each criteria and later gathering can help the performance.",
+    "questions_to_authors": "1. Why not also compare open-sourced LLMs like Mistral/Llama in this work? The numbers on the open-sourced models are also meaningful."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:32Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:32Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 787,
+    "words": 132,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ad0716e0-5bd3-4013-b2d7-9f4ded4dd075",
+    "error": null,
+    "scored_chars": 788
+  }
+}

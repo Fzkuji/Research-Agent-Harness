@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "lK2V2E2MNv",
+  "reviewer": "zAaX",
+  "paper": {
+    "title": "Bridging Vision and Language Spaces with Assignment Prediction",
+    "authors": [
+      "Jungin Park",
+      "Jiyoung Lee",
+      "Kwanghoon Sohn"
+    ],
+    "abstract": "This paper introduces VLAP, a novel approach that bridges pretrained vision models and large language models (LLMs) to make frozen LLMs understand the visual world. VLAP transforms the embedding space of pretrained vision models into the LLMs' word embedding space using a single linear layer for efficient and general-purpose visual and language understanding. Specifically, we harness well-established word embeddings to bridge two modality embedding spaces. The visual and text representations are simultaneously assigned to a set of word embeddings within pretrained LLMs by formulating the assigning procedure as an optimal transport problem. We predict the assignment of one modality from the representation of another modality data, enforcing consistent assignments for paired multimodal data. This allows vision and language representations to contain the same information, grounding the frozen LLMs' word embedding space in visual data. Moreover, a robust semantic taxonomy of LLMs can be preserved with visual data since the LLMs interpret and reason linguistic information from correlations between word embeddings. Experimental results show that VLAP achieves substantial improvements over the previous linear transformation-based approaches across a range of vision-language tasks, including image captioning, visual question answering, and cross-modal retrieval. We also demonstrate the learned visual representations hold a semantic taxonomy of LLMs, making visual semantic arithmetic possible.",
+    "keywords": [
+      "Multimodal learning",
+      "vision-language tasks",
+      "frozen LLMs",
+      "optimal transport",
+      "assignment prediction"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=lK2V2E2MNv"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a method to align the visual representations of pretrained visual encoders into the input space of pretrained language models, using a linear projection layer. The linear layer is the only trainable part in the system, which is supervised by two losses: (a) assignment consistency - the visual features and text features are assigned to the word, and a similarity loss between the assignment results is applied (b) an image captioning objective. Using this method, experiments are done on 3 tasks, including image captioning, VQA, image-text retrieval to show that the method outperforms existing methods. Different variations of visual and text models are studied in the experiments. Additionally, some qualitative visual semantic arithmetic results are provided.",
+    "strengths": "1. The method is simple and clear - train a linear layer with two losses including the newly proposed assignment prediction loss. \n2. Intensive experiments are provided on 3 tasks using different visual backbones (CLIP, BeiT) and text backbones (OPT-1.3B and T5-base), where results consistently outperforms existing methods.\n3. The paper is well-written and easy to follow.",
+    "weaknesses": "My major concern is (a) the lack of ablations and feature space visualizations to show the effectiveness of the proposed loss and (b) the contribution over existing works like MAGMA is not enough. \n1. The paper is an extension of MAGMA (Merullo et. al. Linearly mapping from image to text space. In ICLR, 2023.). While MAGMA is discussed in the paper, the difference is that this paper with MAGMA is the proposed assignment prediction loss. However, the effectiveness of the proposed loss is not shown clearly in the paper.\n2. No ablation results are provided to show the effectiveness of the proposed loss - this is related to weakness-1. Since the major contribution lies in this loss, an ablation to show the contribution of this loss in the final results is very critical.\n3. The finding that a linear layer can transform visual representations into language models is not surprising, given existing works LLaVA (“Visual Instruction Tuning”, as in its first training stage), which is not discussed in this paper, and MAGMA as discussed. Therefore, the contribution of this work is weakened.\n4. The authors motivate the work by criticizing the “distance-preserving nature of the linear layer”. However, the proposed method is still a linear layer, which doesn’t solve this problem. While Fig-4 provides several examples to show the visual semantic arithmetic, a visualization of feature space would be preferred to show the effects of the assignment loss\n5. The paper would be easier to read if the method names (abbreviations) in the results tables come with citations next to them, or are described in texts to show which is which.",
+    "questions": "1. Could abalations with and without the assignment loss be provided to show its effectiveness?\n2. Could visualizations (e.g. t-SNE) over the feature space with and without the assignment loss be provided, to show its effects in aligning the features?\n3. The difference/contribution over LLaVA or MAGMA can be more clearly discussed."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2345,
+    "words": 380,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/54550459-041c-482b-bb93-e70b862492fa",
+    "error": null,
+    "scored_chars": 2347
+  }
+}

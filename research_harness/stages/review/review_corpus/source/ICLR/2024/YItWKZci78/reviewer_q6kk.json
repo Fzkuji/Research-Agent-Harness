@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "YItWKZci78",
+  "reviewer": "q6kk",
+  "paper": {
+    "title": "Symmetric Mean-field Langevin Dynamics for Distributional Minimax Problems",
+    "authors": [
+      "Juno Kim",
+      "Kakei Yamamoto",
+      "Kazusato Oko",
+      "Zhuoran Yang",
+      "Taiji Suzuki"
+    ],
+    "abstract": "In this paper, we extend mean-field Langevin dynamics to minimax optimization over probability distributions for the first time with symmetric and provably convergent updates. We propose \\emph{mean-field Langevin averaged gradient} (MFL-AG), a single-loop algorithm that implements gradient descent ascent in the distribution spaces with a novel weighted averaging, and establish average-iterate convergence to the mixed Nash equilibrium. We also study both time and particle discretization regimes and prove a new uniform-in-time propagation of chaos result which accounts for the dependency of the particle interactions on all previous distributions. Furthermore, we propose \\emph{mean-field Langevin anchored best response} (MFL-ABR), a symmetric double-loop algorithm based on best response dynamics with linear last-iterate convergence. Finally, we study applications to zero-sum Markov games and conduct simulations demonstrating long-term optimality.",
+    "keywords": [
+      "mean-field Langevin dynamics",
+      "minimax optimization",
+      "zero-sum games",
+      "Markov games"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=YItWKZci78"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their detailed explanation of my questions and concerns. I believe most of my concerns are well-addressed. \n\nFor the propagation of chaos results for the MFL-AG algorithm, the interpretation of  Theorem 3.7 as the bias of the \" propagation of chaos \" is valid to me, and I understand the dependence of dimensionality for variance term might be inevitable technically. However, I'm still a bit concerned about whether the propagation of chaos in $W_1$ is strong enough to interpret the utility of the mean-field minimax problem. \n\nFor example,  consider the problem of training a two-layer network as discussed in [1, section 2.1 example 1], the propagation of chaos results will imply $ \\mathbb{E}_{\\mathscr{ X}\\_k } [ | f(z;\\mu\\_{\\mathscr{ X}\\_k } ) -   f(z;\\mu\\_*) |^2 ] \\leq \\mathcal{O}(  \\frac{1}{N} + e^{- \\eta k} ), \\quad \\forall z$  as discussed in [1, section \"Conversion to a Wasserstein distance bound\"].  This gave a good interpretation that the output of the finite-width network is close to the optimal infinite-width neural network in expectation as $N$ is large and training sufficiently long. Thus, in this case, the propagation of chaos results in $W_2$ is good enough.\n\nIn mean-field minimax problems, especially in mean-field game settings, it seems to me that people are more interested in interpreting the closeness to MNE by measuring $ NI( \\mu\\_{\\mathscr{ X}\\_k }, \\nu\\_{\\mathscr{ X}\\_k } ) $ for example. Since from Theorem 3.7, it is not obvious to see whether it will imply an upper bound on  $ NI( \\mu\\_{\\mathscr{ X}\\_k }, \\nu\\_{\\mathscr{ X}\\_k } ) $,  I'm still not convinced whether the propagation of chaos in $W_1^2$ is strong enough.\n\n\nNevertheless, now I believe that Theorem 3.7 is indeed a valid propagation of chaos results which is new in the literature and the techniques are novel from the explanations of the authors."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1870,
+    "words": 307,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6fe0026f-b533-463c-a234-1f083d059fb2",
+    "error": null,
+    "scored_chars": 1881
+  }
+}

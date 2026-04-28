@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "rhgIgTSSxW",
+  "reviewer": "Ly5o",
+  "paper": {
+    "title": "TabR: Tabular Deep Learning Meets Nearest Neighbors",
+    "authors": [
+      "Yury Gorishniy",
+      "Ivan Rubachev",
+      "Nikolay Kartashev",
+      "Daniil Shlenskii",
+      "Akim Kotelnikov",
+      "Artem Babenko"
+    ],
+    "abstract": "Deep learning (DL) models for tabular data problems (e.g. classification, regression) are currently receiving increasingly more attention from researchers.\nHowever, despite the recent efforts, the non-DL algorithms based on gradient-boosted decision trees (GBDT) remain a strong go-to solution for these problems.\nOne of the research directions aimed at improving the position of tabular DL involves designing so-called retrieval-augmented models.\nFor a target object, such models retrieve other objects (e.g. the nearest neighbors) from the available training data and use their features and labels to make a better prediction.\n\nIn this work, we present TabR -- essentially, a feed-forward network with a custom k-Nearest-Neighbors-like component in the middle.\nOn a set of public benchmarks with datasets up to several million objects, TabR marks a big step forward for tabular DL: it demonstrates the best average performance among tabular DL models, becomes the new state-of-the-art on several datasets, and even outperforms GBDT models on the recently proposed \"GBDT-friendly\" benchmark (see Figure 1).\nAmong the important findings and technical details powering TabR, the main ones lie in the attention-like mechanism that is responsible for retrieving the nearest neighbors and extracting valuable signal from them.\nIn addition to the higher performance, TabR is simple and significantly more efficient compared to prior retrieval-based tabular DL models.",
+    "keywords": [
+      "tabular",
+      "tabular data",
+      "architecture",
+      "deep learning",
+      "neural networks"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rhgIgTSSxW"
+  },
+  "review_fields": {
+    "summary": "The paper introduces TabR, a retrieval-augmented tabular deep learning model that outperforms gradient-boosted decision trees (GBDT) on various datasets. TabR incorporates a novel retrieval module that is similar to the attention mechanism, which helps the model achieve the best average performance among tabular deep learning models and is more efficient compared to prior retrieval-based models.",
+    "strengths": "1. TabR demonstrates superior performance compared to GBDT and other retrieval-based tabular deep learning models on multiple datasets.\n2. The new similarity module in TabR has a reasonable intuitive motivation, allowing it to find and exploit natural hints in the data for better predictions.",
+    "weaknesses": "1. Some aspects are not clear, see the questions section.",
+    "questions": "1.  What's the reason for choosing m to be 96? How does m affect the performance of TabR?\n2.  What's the inference efficiency of TabR and how does it compare with other baselines (e.g., GBDT)?\n3.  Is TabR applicable to categorical features? It seems like the paper only considers continuous features."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 651,
+    "words": 105,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/5acab730-44b9-4738-bd2b-e96c2a31ea45",
+    "error": null,
+    "scored_chars": 654
+  }
+}

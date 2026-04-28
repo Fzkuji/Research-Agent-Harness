@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "BTKAeLqLMw",
+  "reviewer": "zdke",
+  "paper": {
+    "title": "What Makes Good Data for Alignment? A Comprehensive Study of Automatic Data Selection in Instruction Tuning",
+    "authors": [
+      "Wei Liu",
+      "Weihao Zeng",
+      "Keqing He",
+      "Yong Jiang",
+      "Junxian He"
+    ],
+    "abstract": "Instruction tuning is a standard technique employed to align large language models to end tasks and user preferences after the initial pretraining phase. Recent research indicates the critical role of data engineering in instruction tuning -- when appropriately selected, only limited data is necessary to achieve superior performance. However, we still lack a principled understanding of what makes good instruction tuning data for alignment, and how we should select data automatically and effectively. In this work, we delve deeply into automatic data selection strategies for alignment. We start with controlled studies to measure data across three dimensions: complexity, quality, and diversity, along which we examine existing methods and introduce novel techniques for enhanced data measurement. Subsequently, we propose a simple strategy to select data samples based on the measurement. We present Deita (short for Data-Efficient Instruction Tuning for Alignment), a series of models fine-tuned from LLaMA models using data samples automatically selected with our proposed approach.  When assessed through both automatic metrics and human evaluation, Deita performs better or on par with the state-of-the-art open-source alignment models such as Vicuna and WizardLM with only 6K training data samples -- 10x less than the data used in the baselines. We anticipate this work to provide clear guidelines and tools on automatic data selection, aiding researchers and practitioners in achieving data-efficient alignment.",
+    "keywords": [
+      "data selection",
+      "instruction tuning",
+      "large language models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=BTKAeLqLMw"
+  },
+  "review_fields": {
+    "summary": "This work shows that complexity, quality, and diversity are all important for data selection in instruction tuning. Based on the studies, it proposes a score-first, diversity-aware approach called DEITA to select the “good” data samples. With their proposed learning-based enhanced data measures, DEITA shows better or on par performance with state-of-the-art LLMs with only 6K training samples.",
+    "strengths": "- The paper provides in-depth controlled studies to show the proposed scoring measurements are better than baselines in terms of complexity and quality.\n- With fine-tuned LLaMA-7B models on the 20K Alpaca dataset with the scores from GPT, the measurements can score unseen instructions at a cheap cost.\n- The proposed diversity-aware selection method is efficient and easy to implement.\n- Clear presentation and easy-to-follow writing.",
+    "weaknesses": "Limited evaluation\n- No evaluation result on benchmarks like MMLU and Big-Bench-Hard, which allows verification of commonsense knowledge and reasoning with ground-truth answers. GPT4-based evaluation often includes errors or bias, so not enough.\n- Marginal performance improvement. In Table 3, DEITA is worse than Vicuna-13B on AlpacaEval dataset. Also, In Table 4 with human evaluation, Vicuna performs almost similar to DEITA.\n- Limited baselines; recent instruction selection works including LIMA and Alpagasus are missing in the evaluation.",
+    "questions": "Why the complexity measurement is obtained from “instruction”, and the quality measurement is obtained from “response”? Is there any intuition of this?\n\nTypo: “large margine” should be“large margin” in the last sentence of the introduction."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1223,
+    "words": 178,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/41220bfa-7ced-4009-b0c0-6bea56536004",
+    "error": null,
+    "scored_chars": 1223
+  }
+}

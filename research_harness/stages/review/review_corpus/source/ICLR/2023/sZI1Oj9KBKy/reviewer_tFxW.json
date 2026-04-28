@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "sZI1Oj9KBKy",
+  "reviewer": "tFxW",
+  "paper": {
+    "title": "TVSPrune - Pruning Non-discriminative filters via Total Variation separability of intermediate representations without fine tuning",
+    "authors": [
+      "Chaitanya Murti",
+      "Tanay Narshana",
+      "Chiranjib Bhattacharyya"
+    ],
+    "abstract": "Achieving structured, data-free sparsity of deep neural networks (DNNs) remains an open area of research.  In this work, we address the challenge of pruning filters without access to the original training set or loss function. We propose the discriminative filters hypothesis, that well-trained models possess discriminative filters, and any non-discriminative filters can be pruned without impacting the predictive performance of the classifier. Based on this hypothesis, we propose a new paradigm for pruning neural networks: distributional pruning, wherein we only require access to the distributions that generated the original datasets. Our approach to solving the problem of formalising and quantifying the discriminating ability of filters is through the total variation (TV) distance between the class-conditional distributions of the filter outputs. We present empirical results that, using this definition of discriminability, support our hypothesis on a variety of datasets and architectures. Next, we define the LDIFF score, a heuristic to quantify the extent to which a layer possesses a mixture of discriminative and non-discriminative filters. We empirically demonstrate that the LDIFF score is indicative of the performance of random pruning for a given layer, and thereby indicates the extent to which a layer may be pruned. Our main contribution is a novel one-shot pruning algorithm, called TVSPrune, that identifies non-discriminative filters for pruning. We extend this algorithm to IterTVSPrune, wherein we iteratively apply TVSPrune, thereby enabling us to achieve greater sparsity. Last, we demonstrate the efficacy of the TVSPrune on a variety of datasets, and show that in some cases, we can prune up to 60% of parameters with only a 2% loss of accuracy without any fine-tuning of the model, beating the nearest baseline by almost 10%.",
+    "keywords": [
+      "Structured pruning",
+      "model compression"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=sZI1Oj9KBKy"
+  },
+  "review_fields": {
+    "comment": "I want to thank the authors for their responses. However, I still have some concerns.\n\nThe setting of this paper did not use any training samples, but you need samples from the same data distribution. From Table.2 in the appendix, you need 7500~40000 samples for different datasets. Compared to directly using training samples, does this setting really more practical? \n\nStructural pruning without training data is actually studied in \"Dreaming to Distill\" [1]. In section 4.3 and Table.5 of [1], they show the results of structural pruning without using any data. Instead, they use synthetic samples generated from their method. Their pruning method is based on [2], and it achieves 74.0% Top-1 accuracy by pruning more than 25% FLOPs. The whole process, according to their paper, does not require the training dataset. \n\nIn the setting of this paper, if removing access to the training dataset, IterTVSPrune prunes 25% of parameters with 31.3% Top-1 accuracy lost, which is much lower than the results reported in [1].\n\n[1] Yin, Hongxu, et al. \"Dreaming to distill: Data-free knowledge transfer via deepinversion.\" Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2020.\n\n[2] Molchanov, Pavlo, et al. \"Importance estimation for neural network pruning.\" Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2019."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

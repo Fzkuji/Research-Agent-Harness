@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "B1CQGfZ0b",
+  "reviewer": "3",
+  "paper": {
+    "title": "Learning to select examples for program synthesis",
+    "authors": [
+      "Yewen Pu",
+      "Zachery Miranda",
+      "Armando Solar-Lezama",
+      "Leslie Pack Kaelbling"
+    ],
+    "abstract": "Program synthesis is a class of regression problems where one seeks a solution, in the form of a source-code program, that maps the inputs to their corresponding outputs exactly. Due to its precise and combinatorial nature, it is commonly formulated as a constraint satisfaction problem, where input-output examples are expressed constraints, and solved with a constraint solver. A key challenge of this formulation is that of scalability: While constraint solvers work well with few well-chosen examples, constraining the entire set of example constitutes a significant overhead in both time and memory. In this paper we address this challenge by constructing a representative subset of examples that is both small and is able to constrain the solver sufficiently. We build the subset one example at a time, using a trained discriminator to predict the probability of unchosen input-output examples conditioned on the chosen input-output examples, adding the least probable example to the subset. Experiment on a diagram drawing domain shows our approach produces subset of examples that are small and representative for the constraint solver.",
+    "keywords": [
+      "program synthesis",
+      "program induction",
+      "example selection"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=B1CQGfZ0b"
+  },
+  "review_fields": {
+    "review": "The paper proposes a method for identifying representative examples for program\nsynthesis to increase the scalability of existing constraint programming\nsolutions. The authors present their approach and evaluate it empirically.\n\nThe proposed approach is interesting, but I feel that the experimental section\ndoes not serve to show its merits for several reasons. First, it does not\ndemonstrate increased scalability. Only 1024 examples are considered, which is\nby no means large. Even then, the authors approach selects the highest number of\nexamples (figure 4). CEGIS both selects fewer examples and has a shorter median\ntime for complete synthesis. Intuitively, the authors' method should scale\nbetter, but they fail to show this -- a missed opportunity to make the paper\nmuch more compelling. This is especially true as a more challenging benchmark\ncould be created very easily by simply scaling up the image.\n\nSecond, there is no analysis of the representativeness of the found sets of\nconstraints. Given that the results are very close to other approaches, it\nremains unclear whether they are simply due to random variations, or whether the\nproposed approach actually achieves a non-random improvement.\n\nIn addition to my concerns about the experimental evaluation, I have concerns\nabout the general approach. It is unclear to me that machine learning is the\nbest approach for modeling and solving this problem. In particular, the\nselection probability of any particular example could be estimated through a\nheuristic, for example by simply counting the number of neighbouring examples\nthat have a different color, weighted by whether they are in the set of examples\nalready, to assess its \"borderness\", with high values being more important to\nachieve a good program. The border pixels are probably sufficient to learn the\nprogram perfectly, and in fact this may be exactly what the neural net is\nlearning. The above heuristic is obviously specific to the domain, but similar\nheuristics could be easily constructed for other domains. I feel that this is\nsomething the authors should at least compare to in the empirical evaluation.\n\nAnother concern is that the authors' approach assumes that all parameters have\nthe same effect. Even for the example the authors give in section 2, it is\nunclear that this would be true.\n\nThe text says that rand+cegis selects 70% of examples of the proposed approach,\nbut figure 4 seems to suggest that the numbers are very close -- is this initial\nexamples only?\n\nOverall the paper appears rushed -- the acknowledgements section is left over\nfrom the template and there is a reference to figure \"blah\". There are typos and\ngrammatical mistakes throughout the paper. The reference to \"Model counting\" is\nincomplete.\n\nIn summary, I feel that the paper cannot be accepted in its current form."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

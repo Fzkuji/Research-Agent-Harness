@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "KntaNRo6R48",
+  "reviewer": "snhT",
+  "paper": {
+    "title": "L0-Sparse Canonical Correlation Analysis",
+    "authors": [
+      "Ofir Lindenbaum",
+      "Moshe Salhov",
+      "Amir Averbuch",
+      "Yuval Kluger"
+    ],
+    "abstract": "Canonical Correlation Analysis (CCA) models are powerful for studying the associations between two sets of variables. The canonically correlated representations, termed \\textit{canonical variates} are widely used in unsupervised learning to analyze unlabeled multi-modal registered datasets. Despite their success, CCA models may break (or overfit) if the number of variables in either of the modalities exceeds the number of samples. Moreover, often a significant fraction of the variables measures modality-specific information, and thus removing them is beneficial for identifying the \\textit{canonically correlated variates}. Here, we propose $\\ell_0$-CCA, a method for learning correlated representations based on sparse subsets of variables from two observed modalities.\nSparsity is obtained by multiplying the input variables by stochastic gates, whose parameters are learned together with the CCA weights via an $\\ell_0$-regularized correlation loss. \nWe further propose $\\ell_0$-Deep CCA for solving the problem of non-linear sparse CCA by modeling the correlated representations using deep nets. We demonstrate the efficacy of the method using several synthetic and real examples. Most notably, by gating nuisance input variables, our approach improves the extracted representations compared to other linear, non-linear and sparse CCA-based models.",
+    "keywords": [],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=KntaNRo6R48"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "I have seen this manuscript before. The main contribution of this paper is to combine two existing works, Gaussian-based continuous relaxation of Bernoulli random variables, gates (Yamada et al., 2020), and sparse CCA (Suo et al., 2017).",
+    "main_review": "It is very critical to select relevant features from high dimensional multimodal data and such method is very demanding in lots of real cases. \n\nOne key strength of the presented method is that it is able to sub-select relevant features from high dimensional inputs and it showed better performance compared to others for predictive purpose. \n\nThe paper is well written, and the overall presentation of the paper is good.\n\nQuestions:\n\n1. How to select the most relevant features in the multimodal learning field is crucial for model interpretation and downstream analysis and it will have wide applications in biology or human genetics. For those fields, researchers are more interested to select which gene, protein, or biomarkers are most important for disease development. Even though the paper showed it’s outperformed predictive performance, however, it missed the detailed model interpretation part, feature selection. I would be interested to see one biology dataset application for model interpretability on this method. \n\n2. In figure 2, the wide range of lambda showed around 40 coefficients. Please comment on how could the algorithm avoid the wrong number of coefficients?\n\n3. How does the proposed method compare to other methods regarding accuracy vs sparsity?",
+    "summary_of_the_review": "I like the paper overall. However, I think the model interpretation is more important than the prediction for multimodal learning/CCA, specifically, the key strength of this proposed paper is feature selection.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1483,
+    "words": 228,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f9753797-40aa-4ea7-8017-61eb8a2fdb17",
+    "error": null,
+    "scored_chars": 1486
+  }
+}

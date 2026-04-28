@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "0rEJx5QAxt",
+  "reviewer": "yZL6",
+  "paper": {
+    "title": "Convex-Concave Zero-Sum Markov Stackelberg Games",
+    "authors": [
+      "Denizalp Goktas",
+      "Arjun Prakash",
+      "Amy Greenwald"
+    ],
+    "abstract": "Zero-sum Markov Stackelberg games can be used to model myriad problems, in domains ranging from economics to human robot interaction. In this paper, we develop policy gradient methods that solve these games in continuous state and action settings using noisy gradient estimates computed from observed trajectories of play. When the games are convex-concave, we prove that our algorithms converge to Stackelberg equilibrium in polynomial time. We also show that reach-avoid problems are naturally modeled as convex-concave zero-sum Markov Stackelberg games, and that Stackelberg equilibrium policies are more effective than their Nash counterparts in these problems.",
+    "keywords": [
+      "Stackelberg games",
+      "Equilibrium Computation",
+      "Policy Gradient"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=0rEJx5QAxt"
+  },
+  "review_fields": {
+    "summary": "The authors propose a policy gradient method to solve the zero-sum stochastic Stackelberg game from noisy gradient estimates computed from observed trajectories of play. When the games are convex-concave, the authors prove that the proposed algorithms converge to Stackelberg equilibrium in polynomial time.",
+    "strengths": "The authors have completed a thorough theoretical analysis of the proposed policy gradient method and prove it converges to Stackelberg equilibrium in polynomial time assuming the game is convex-concave.",
+    "weaknesses": "1. The authors claim they solved the convex-concave zero-sum Stackelberg problem but also restrict the application to a reach-avoid problem. The authors mention that \"We also prove that reach-avoid problems are naturally modeled as convex-concave zero-sum stochastic Stackelberg games.\" in the abstract but in fact do not really PROVE it in the manuscript.\n\n2. Besides, as the author mentioned, the reach-avoid game is usually formulated as a single-agent problem and there exist some works formulating it as a two-player zero-sum game.  Why do the authors not address standard zero-sum problems like pricing or allocating goods across agents and time as in reference [25]? Experimenting merely on a reach-avoid game is not enough to demonstrate the effectiveness or superiority of the proposed approach compared to existing methods like Nash equilibrium.\n\n3. The authors make several critical assumptions like convex-concave, convergence assumptions, etc. How feasible these assumptions are in reality and how to validate them are missing. The authors should address these limitations and discuss potential extensions to more realistic scenarios."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1351,
+    "words": 198,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f54ee9ac-b342-4c4d-8d17-ff3fc64bd371",
+    "error": null,
+    "scored_chars": 1352
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "Dqp6IMI3gQ",
+  "reviewer": "Xvbm",
+  "paper": {
+    "title": "When Will It Fail?: Anomaly to Prompt for Forecasting Future Anomalies in Time Series",
+    "authors": [
+      "Min-Yeong Park",
+      "Won-Jeong Lee",
+      "Seong Tae Kim",
+      "Gyeong-Moon Park"
+    ],
+    "abstract": "Recently, forecasting future abnormal events has emerged as an important scenario to tackle realworld necessities. However, the solution of predicting specific future time points when anomalies will occur, known as Anomaly Prediction (AP), remains under-explored. Existing methods dealing with time series data fail in AP, focusing only on immediate anomalies or failing to provide precise predictions for future anomalies. To address AP, we propose a novel framework called Anomaly to Prompt (A2P), comprised of Anomaly-Aware Forecasting (AAF) and Synthetic Anomaly Prompting (SAP). To enable the forecasting model to forecast abnormal time points, we adopt a strategy to learn the relationships of anomalies. For the robust detection of anomalies, our proposed SAP introduces a learnable Anomaly Prompt Pool (APP) that simulates diverse anomaly patterns using signal-adaptive prompt. Comprehensive experiments on multiple real-world datasets demonstrate the superiority of A2P over state-of-the-art methods, showcasing its ability to predict future anomalies.",
+    "keywords": [
+      "Time series forecasting",
+      "time series anomaly detection"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Dqp6IMI3gQ"
+  },
+  "review_fields": {
+    "summary": "This paper formulates the abnormal prediction problem in time series, aiming to forecast specific future time points where anomalies will occur. Accordingly, the authors propose Anomaly-Aware Forecasting and Synthetic Anomaly Prompting to address the problem.\n\n## update after rebuttal\nThe authors adequately addressed my concerns, so I raised the score to 3.",
+    "claims_and_evidence": "I think the results mostly support the claim.",
+    "methods_and_evaluation_criteria": "Yes. The paper employs some commonly used datasets, but more datasets and more baselines are expected.\n\nDataset: \n- TimeSeAD: Benchmarking Deep Multivariate Time-Series Anomaly Detection\n\nBaselines: \n- TranAD: deep transformer networks for anomaly detection in multivariate time series data\n- BeatGAN\n- TimeMixer\n- DiffusionAD:  Imputation-based time-series anomaly detection with conditional weight incremental diffusion models",
+    "theoretical_claims": "There are no theoretical claims. It would be better to include some but not mandatory to me.",
+    "experimental_designs_or_analyses": "Yes, I checked. The numerical results do not seem very high to me. I am not sure if it is caused by the nature of the task, but anyway, the overall gain looks very substantial.\n\nI am curious about how the authors split the datasets. Do they use non-overlapping windows or overlapping windows to generate samples? \n\nI am also curious about the average anomalies for each sample. As shown in Fig.8, it seems only one animal pattern per sample.",
+    "relation_to_broader_scientific_literature": "The paper builds upon prior works in time series forecasting and anomaly detection.",
+    "other_strengths_and_weaknesses": "The Synthetic Anomaly Prompting seems like a retrieve-based approach for anomaly detection, while integrating it in the framework looks novel to me.\n\nMy main concern is that the problem is very naive in real-world applications, and it can be very common in trajectory modeling in automount driving. The cross-attention design is also very intuitive, as one input is a query, and one is a key/value.\n\nAnother limitation is that there are too many loss terms and hyper-parameters, making tuning and optimization more complex.",
+    "questions_for_authors": "- How does the method determine the threshold for the abnormal pattern?\n- Can you clarify at which stage which parameters are trainable? Are AFFN trainable at the second stage?  I feel like all components can be trained simultaneously. If this is not optimal, what is the potential reason for that? \n- What is [cls] token used for? Is there any specific reason for employing it?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

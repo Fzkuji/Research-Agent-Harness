@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "JeP0lpusYw",
+  "reviewer": "TWdc",
+  "paper": {
+    "title": "HM3: Hierarchical Multi-Objective Model Merging for Pretrained Models",
+    "authors": [
+      "Yu Zhou",
+      "Xingyu Wu",
+      "Jibin Wu",
+      "Liang Feng",
+      "KC Tan"
+    ],
+    "abstract": "Model merging is a technique that combines multiple large pretrained models into a single model, enhancing performance and broadening task adaptability without original data or additional training. However, most existing model merging methods focus primarily on exploring the parameter space, merging models with identical architectures. Despite its potential, merging in the architecture space remains in its early stages due to the vast search space and challenges related to layer compatibility. This paper designs a hierarchical model merging framework named HM3, formulating a bilevel multi-objective model merging problem across both parameter and architecture spaces. At the parameter level, HM3 integrates existing merging methods to quickly identify optimal parameters. Based on these, an actor-critic strategy with efficient policy discretization is employed at the architecture level to explore inference paths with Markov property in the layer-granularity search space for reconstructing these optimal models. By training reusable policy and value networks, HM3 learns Pareto optimal models to provide customized solutions for various tasks. Experimental results on language and vision tasks demonstrate that HM3 outperforms methods focusing solely on the parameter or architecture space.",
+    "keywords": [
+      "Large language model",
+      "model merging",
+      "multi-objective optimization",
+      "architecture-level merging"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=JeP0lpusYw"
+  },
+  "review_fields": {
+    "summary": "This paper proposes HM3, a hierarchical model merging framework that jointly optimizes both the parameter space and the architecture space. To address the complexity of the combined search space, the authors formulate the problem as a bilevel optimization task, incorporating actor-critic reinforcement learning with policy discretization. Additionally, a multi-objective optimization setup is introduced to support user preferences and task-specific trade-offs. Experiments demonstrate the framework’s ability to generate diverse, reusable, and high-performing merged models under limited resources.",
+    "strengths_and_weaknesses": "Strengths:\n\n1, Innovative idea of merging models across both parameter and architecture spaces.\n\n2, Clear formulation of the problem using bilevel optimization.\n\n3, Use of reinforcement learning improves efficiency in the large search space.\n\nWeaknesses:\n\n1, Lacks comparison with recent state-of-the-art model merging methods (e.g., PCB-Merging, CAT Merging), which limits the empirical strength of the work.\n\n2, Hyperparameter optimization is under-discussed; related works such as Model Evolver and GENOME are not analyzed.\n\n3, Experiments are conducted on relatively narrow model and task settings, which may reduce the generalizability of the findings.\n\nReference: \\\n1), ACL24, Model Evolver: Knowledge Fusion By Evolving Weights of Language Models \\\n2), NeurIPS24, PCB-Merging: Parameter Competition Balancing for Model Merging \\\n3), ICML25 CAT Merging: A Training-Free Approach for Resolving Conflicts in Model Merging \\\n4), GENOME, Nature-Inspired Population-Based Evolution of Large Language Models",
+    "questions": "1, How does HM3 perform when merging models with significantly different architectures or diverse tasks?\n\n2, HM3 retrains and generates different merged models for each task preference vector. Have the authors evaluated whether the learned strategies (e.g., actor-critic policies) can generalize to unseen tasks or new preference vectors without re-optimization from scratch?\n\n3, Since HM3 performs merging across both parameter and architecture spaces, the resulting models and inference paths may vary significantly. Have the authors analyzed the consistency and performance variance of the merged models across multiple runs? Does the stochastic nature of the search lead to unstable final results?",
+    "limitations": "1, No direct comparison with recent SOTA merging baselines weakens empirical validation.\n\n2, The role of hyperparameter tuning is not thoroughly addressed despite its importance in merging.\n\n3, The evaluation scope is narrow, focusing on limited model types and task domains.",
+    "paper_formatting_concerns": "This paper is well-writen and no formatting concerns.",
+    "final_justification": "The quality of this paper is improved and I had misunderstand some key contributions of this work before. The idea about bilevel optimization is quite novel."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 5,
+    "quality": 4,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

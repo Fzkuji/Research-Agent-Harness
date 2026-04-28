@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "BygpQlbA-",
+  "reviewer": "1",
+  "paper": {
+    "title": "Towards Provable Control for Unknown Linear Dynamical Systems",
+    "authors": [
+      "Sanjeev Arora",
+      "Elad Hazan",
+      "Holden Lee",
+      "Karan Singh",
+      "Cyril Zhang",
+      "Yi Zhang"
+    ],
+    "abstract": "We study the control of symmetric linear dynamical systems with unknown dynamics and a hidden state. Using a recent spectral filtering technique for concisely representing such systems in a linear basis, we formulate optimal control in this setting as a convex program. This approach eliminates the need to solve the non-convex problem of explicit identification of the system and its latent state, and allows for provable optimality guarantees for the control signal. We give the first efficient algorithm for finding the optimal control signal with an arbitrary time horizon T, with sample complexity (number of training rollouts) polynomial only in log(T) and other relevant parameters.",
+    "keywords": [
+      "optimal control",
+      "reinforcement learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=BygpQlbA-"
+  },
+  "review_fields": {
+    "review": "This paper studies the control of symmetric linear dynamical systems with unknown dynamics. Typically this problem is split into a (non-convex) system ID step followed by a derivation of an optimal controller, but there are few guarantees about this combined process.  This manuscript formulates a convex program of optimal control without the separate system ID step, resulting in provably optimality guarantees and efficient algorithms (in terms of the sample complexity).  The paper is generally pretty well written.\n\nThis paper leans heavily on Hazan 2017 paper (https://arxiv.org/pdf/1711.00946.pdf). Where the Hazan paper concerns itself with the system id portion of the control problem, this paper seems to be the controls extension of that same approach.   From what I can tell, Hazan's paper introduces the idea of wave filtering (convolution of the input with eigenvectors of the Hankel matrix); the filtered output is then passed through another matrix that is being learned online (M). That matrix is then mapped back to system id (A,B,C,D).  The most novel contribution of this ICLR paper seems to be equation (4), where the authors set up an optimization problem to solve for optimal inputs; much of that optimization set-up relies on Hazan's work, though. However, the authors do prove their work, which increases the novelty. The novelty would be improved with clearer differentiation from the Hazan 2017 paper.\n\nMy biggest concerns that dampen my enthusiasm are some assumptions that may not be realistic in most controls settings:\n\n- First, the most concerning assumption is that of a symmetric LDS matrix A (and Lyapunov stability).  As far as I know, symmetric LDS models are not common in the controls community.  From a couple of quick searches it seems like there are a few physics / chemistry applications where a symmetric A makes sense, but the authors don't do a good enough job setting up the context here to make the results compelling. Without that context it's hard to tell how broadly useful these results are.  In Hazan's paper they mention that the system id portion, at least, seems to work with non-symmetric, and even non-linear dynamical systems (bottom of page 3, Hazan 2017). Is there any way to extend the current results to non-symmetric systems?\n\n- Second, it appears that the proposed methods may rely on running the dynamical system several times before attempting to control it.  Am I misunderstanding something?  If so this seems like it may be a significant constraint that would shrink the application space and impact even further."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

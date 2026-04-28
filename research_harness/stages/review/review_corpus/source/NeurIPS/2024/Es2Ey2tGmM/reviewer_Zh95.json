@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "Es2Ey2tGmM",
+  "reviewer": "Zh95",
+  "paper": {
+    "title": "Constrained Diffusion Models via Dual Training",
+    "authors": [
+      "Shervin Khalafi",
+      "Dongsheng Ding",
+      "Alejandro Ribeiro"
+    ],
+    "abstract": "Diffusion models have attained prominence for their ability to synthesize a probability distribution for a given dataset via a diffusion process,  enabling the generation of new data points with high fidelity. However, diffusion processes are prone to generating samples that reflect biases in a training dataset. To address this issue, we develop constrained diffusion models by imposing diffusion constraints based on desired distributions that are informed by requirements. Specifically, we cast the training of diffusion models under requirements as a constrained distribution optimization problem that aims to reduce the distribution difference between original and generated data while obeying constraints on the distribution of generated data. We show that our constrained diffusion models generate new data from a mixture data distribution that achieves the optimal trade-off among objective and constraints. To train constrained diffusion models, we develop a dual training algorithm and characterize the optimality of the trained constrained diffusion model. We empirically demonstrate the effectiveness of our constrained models in two constrained generation tasks: (i) we consider a dataset with one or more underrepresented classes where we train the model with constraints to ensure fairly sampling from all classes during inference; (ii) we fine-tune a pre-trained diffusion model to sample from a new dataset while avoiding overfitting.",
+    "keywords": [
+      "Constrained diffusion model",
+      "constrained optimization",
+      "Lagrangian method",
+      "dual algorithm"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Es2Ey2tGmM"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors introduce a novel approach termed `Dual Training` for training constrained diffusion models, particularly focusing on scenarios involving `biased data generation`. Initially, the authors adeptly derive the learning objectives for diffusion models within a constrained optimization framework. Subsequently, they develop corresponding learning methodologies based on the principles of Lagrangian duality and propose an innovative training procedure. The effectiveness of their approach is rigorously validated through experiments on two distinct generative tasks.",
+    "strengths": "1. **Robust Derivation Procedure**: The authors present a thorough and well-founded derivation procedure throughout the manuscript, which stands out as particularly compelling. This rigorous approach significantly strengthens the theoretical foundation of their work.\n\n2. **Relevant Application Scenario**: The authors explore a critical yet underrepresented field in their research. This focus not only highlights the relevance of their study but also underscores its potential impact in areas that have previously received limited attention.",
+    "weaknesses": "**Major Issues:**\n\n1. The authors state, \"Compared with the loss re-weighting method [9], our constrained formulation provides an optimal trade-off between matching given data distribution and following reference distribution.\" It would be helpful if the authors could clarify whether the re-weighting-based approach can be considered a special case of the proposed method in this manuscript.\n\n2. The discussion on diffusion models appears to focus predominantly on the DDPM model. Could the authors explore whether this proposed approach can be extended to other diffusion processes, such as the Variance Exploding Stochastic Diffusion?\n\n3. There seems to be an unclear transition from (U-KL) to (U-LOSS). Can the authors directly justify this conversion? It would be beneficial to include a derivation or a more detailed explanation, especially how it relates to equations (6) and (U-MIX).\n\n4. The manuscript lacks comparative results with baseline models. Given that the authors suggest this approach provides a more general framework for generative models, could comparisons be made with other methods mentioned in reference [1]?\n\n5. Could the authors discuss whether this approach can be interpreted from the perspective of partial optimal transport? The constraints discussed appear to share similarities with those in unbalanced optimal transport approaches, such as those outlined in equation 3 of reference [2].\n\n6. The paper discusses a dual training procedure involving primal-dual optimization. In the context of augmented direction multiplier methods used in directed acyclic graph learning, batch size is known to significantly influence model efficacy. Could the authors provide a sensitivity analysis regarding batch size effects?\n\n**Minor Issue:**\n\n1. Under Assumption 1, should the range of $\\zeta \\in (0, b_i)$, considering that KL divergence cannot be negative? \n\n2. Regarding the term (U-LOSS), should the subject be revised to $\\nabla{\\log{q^i(x_t)}}$? Additionally, it would be helpful if the authors could provide a detailed explanation or derivation of how the constraint term is converted into the (U-LOSS) term.\n\n---\n\n**References**  \n[1] Choi, Kristy, et al. \"Fair generative modeling via weak supervision.\" International Conference on Machine Learning. PMLR, 2020.  \n[2] Duque, Andrés F., Guy Wolf, and Kevin R. Moon. \"Diffusion transport alignment.\" International Symposium on Intelligent Data Analysis. Cham: Springer Nature Switzerland, 2023.",
+    "limitations": "1. **Organization:** The manuscript lacks a dedicated section for related work, which is essential for contextualizing the study within the existing literature. The absence of this section diminishes the foundational motivation of the manuscript, potentially limiting the reader's understanding of its contributions relative to prior research.\n\n2. **Baseline Comparison:** The authors did not include experiments comparing their methods against established baselines. Such comparisons are crucial for demonstrating the efficacy and advancements of the proposed approach over existing techniques.\n\n3. **Hyper-parameter Sensitivity Analysis:** The manuscript does not address hyper-parameter sensitivity. Including such analysis is important to evaluate the robustness and reliability of the model across various parameter settings."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 20,
+    "mixed_pct": 80,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 3846,
+    "words": 536,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/799807ff-45c9-4eb4-aec3-6093a60817e1",
+    "error": null,
+    "scored_chars": 3851
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "rkONG0xAW",
+  "reviewer": "2",
+  "paper": {
+    "title": "Recursive Binary Neural Network Learning Model  with 2-bit/weight Storage Requirement",
+    "authors": [
+      "Tianchan Guan",
+      "Xiaoyang Zeng",
+      "Mingoo Seok"
+    ],
+    "abstract": "This paper presents a storage-efficient learning model titled Recursive Binary Neural Networks for embedded and mobile devices having a limited amount of on-chip data storage such as hundreds of kilo-Bytes. The main idea of the proposed model is to recursively recycle data storage of weights (parameters) during training. This enables a device with a given storage constraint to train and instantiate a neural network classifier with a larger number of weights on a chip, achieving better classification accuracy. Such efficient use of on-chip storage reduces off-chip storage accesses, improving energy-efficiency and speed of training. We verified the proposed training model with deep and convolutional neural network classifiers on the MNIST and voice activity detection benchmarks. For the deep neural network, our model achieves data storage requirement of as low as 2 bits/weight, whereas the conventional binary neural network learning models require data storage of 8 to 32 bits/weight. With the same amount of data storage, our model can train a bigger network having more weights, achieving 1% less test error than the conventional binary neural network learning model. To achieve the similar classification error, the conventional binary neural network model requires 4× more data storage for weights than our proposed model. For the convolution neural network classifier, the proposed model achieves 2.4% less test error for the same on-chip storage or 6× storage savings to achieve the similar accuracy.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rkONG0xAW"
+  },
+  "review_fields": {
+    "review": "There could be an interesting idea here, but the limitations and applicability of the proposed approach are not clear yet. More analysis should be done to clarify its potential. Besides, the paper seriously needs to be reworked. The text in general, but also the notation, should be improved.\n\nIn my opinion, the authors should explain how to apply their algorithm to more general network architectures, and test it, in particular to convnets. An experiment on a modern dataset beyond MNIST would also be a welcome addition.\n\nSome comments:\n- The method is present as a fully-connected network training procedure. But the resulting network is not really fully-connected, but modular. This is clear in Fig. 1 and in the explanation in Sect. 3.1. The newly added hidden neurons at every iteration do not project to the previous pool of hidden neurons. It should be stressed that the networks end up with this non-conventional “tiled” architecture. Are there studies where the capacity of such networks is investigated, when all the weights are trained concurrently.\n\n- It wasn’t clear to me whether the memory reallocation could be easily implemented in hardware. A few references or remarks on this issue would be welcome.\n\n- The work “Efficient supervised learning in networks with binary synapses” by Baldassi et al. (PNAS 2007) should be cited. Although usually ignored by the deep learning community, it actually was a pioneering study on the use of low resolution weights during inference while allowing for auxiliary variables during learning.\n\n- Coming back my main point above, I didn’t really get the discussion on Sect. 5.3. Why didn’t the authors test their algorithm on a convnet? Are there any obstacles in doing so? It seems quite important to understand this point, as the paper appeals to technical applications and convolution seems hard to sidestep currently.\n\n- Fig. 3: xx-axis: define storage efficiency and storage requirement.\n\n- Fig. 4: What’s an RSBL? Acronyms should be defined.\n\n- Overall, language and notation should really be refined. I had a hard time reading Algorithm 1, as the notation is not even defined anywhere. And this problem extends throughout the paper.\nFor example, just looking at Sect. 4.1, “training and testing data x is normalized…”, if x is not properly defined, it’s best to omit it;  “… 2-dimentonal…”, at least major typos should be scanned and corrected."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

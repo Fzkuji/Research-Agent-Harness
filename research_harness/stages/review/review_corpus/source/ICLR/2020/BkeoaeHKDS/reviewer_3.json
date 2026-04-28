@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "BkeoaeHKDS",
+  "reviewer": "3",
+  "paper": {
+    "title": "Gradients as Features for Deep Representation Learning",
+    "authors": [
+      "Fangzhou Mu",
+      "Yingyu Liang",
+      "Yin Li"
+    ],
+    "abstract": "We address the challenging problem of deep representation learning -- the efficient adaption of a pre-trained deep network to different tasks. Specifically, we propose to explore gradient-based features. These features are gradients of the model parameters with respect to a task-specific loss given an input sample. Our key innovation is the design of a linear model that incorporates both gradient and activation of the pre-trained network. We demonstrate that our model provides a local linear approximation to an underlying deep model, and discuss important theoretical insights. Moreover, we present an efficient algorithm for the training and inference of our model without computing the actual gradients. Our method is evaluated across a number of representation-learning tasks on several datasets and using different network architectures. Strong results are obtained in all settings, and are well-aligned with our theoretical insights.",
+    "keywords": [
+      "representation learning",
+      "gradient features",
+      "deep learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=BkeoaeHKDS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I carefully checked the derivations and theory.",
+    "review": "The key idea in this paper is to generate a feature vector based on a Fisher information idea for intermediary levels of a deep neural network. I liked the idea of using some form of linearization of the Fisher information matrix to learn a feature vector. The connection to tangent plane ideas in terms of robustness also made sense. The issue I have is what layer to apply this idea to and formally relating this idea to the variational VAE type framework. Using the top layer seems arbitrary. Also using one layer seems arbitrary. Is there a way to argue via a perturbation analysis of the variational problem of what makes the most sense. I feel the paper hints at this but does not make this idea explicit."
+  },
+  "review_metadata": {
+    "rating": 8
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

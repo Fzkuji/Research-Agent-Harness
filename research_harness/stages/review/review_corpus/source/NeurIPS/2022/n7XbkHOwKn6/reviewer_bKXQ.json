@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "n7XbkHOwKn6",
+  "reviewer": "bKXQ",
+  "paper": {
+    "title": "CogVideo: Large-scale Pretraining for Text-to-Video Generation via Transformers",
+    "authors": [
+      "Wenyi Hong",
+      "Ming Ding",
+      "Wendi Zheng",
+      "Xinghan Liu",
+      "Jie Tang"
+    ],
+    "abstract": "Large-scale pretrained transformers have created milestones in text (GPT-3) and text-to-image (DALL-E) generation. Its application on video generation is still faced difficulties: The huge computation makes training from scratch unaffordable; The scarcity and weak relevance of text-video datasets hinder the model understanding complex movements. In this work, we present 9-billion-parameter CogVideo, which is trained by inheriting the knowledge from the pretrained large-scale text-to-image model, CogView2. We also propose multi-frame-rate hierarchical training strategy to better align text and video clips. As (probably) the first open-source large-scale pretrained text-to-video model, the CogVideo outperforms the previous public available models at a large margin in both machine and human evaluation.",
+    "keywords": [
+      "pretraining"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=n7XbkHOwKn6"
+  },
+  "review_fields": {
+    "summary": "This paper proposed a large-scale pretrained text-to-video model and multi-frame-rate hierarchical training strategy to better align text and video clips.",
+    "strengths_and_weaknesses": "The strengths of this paper are as follows:\n\n1. This paper is well written and easy to follow.\n2. The proposed model is the largest and the first open-source pre-trained transformer for text-to-video generation in the general domain.\n3. The experimental results show that the proposed methods can outperform a number of existing baselines.\n\nThe weaknesses of this paper are as follows:\n\n1. The main limitation of the work is the huge consumption of GPU memory, but the related information (type and number of GPU) is not provided. I hope this information can be given.\n\n\nI am not an expert in this field and do not tap into DALL-E and CogView, I will adjust the final score with other reviewers' comments and the response from the author.",
+    "questions": "1. Is there a gap between the generated video and the ground truth, so ground truth is not placed in human evaluation for comparison?\n\n2. I wonder whether the mixture factor /alpha will finally converge to 0 or 1, making the dual-channel attention block useless."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

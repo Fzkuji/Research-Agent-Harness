@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "qfLJBJf_DnH",
+  "reviewer": "W1np",
+  "paper": {
+    "title": "Brain insights improve RNNs' accuracy and robustness for hierarchical control of continually learned autonomous motor motifs",
+    "authors": [
+      "Laureline Logiaco",
+      "G Sean Escola"
+    ],
+    "abstract": "We study the problem of learning dynamics that can produce hierarchically organized continuous outputs consisting of the flexible chaining of re-usable motor ‘motifs’ from which complex behavior is generated. Can a motif library be efficiently and extendably learned without interference between motifs, and can these motifs be chained in arbitrary orders without first learning the corresponding motif transitions during training? This requires (i) parameter updates while learning a new motif that do not interfere with the parameters used for the previously acquired ones; and (ii) successful motif generation when starting from the network states reached at the end of any of the other motifs, even if these states were not present during training (a case of out-of-distribution generalization). We meet the first requirement by designing recurrent neural networks (RNNs) with specific architectures that segregate motif-dependent parameters (as customary in continual learning works), and try a standard method to address the second by training with random initial states. We find that these standard RNNs are very unreliable during zero-shot transfer to motif chaining. We then use insights from the motor thalamocortical circuit, featuring a specific module that shapes motif transitions. We develop a method to constrain the RNNs to function similarly to the thalamocortical circuit during motif transitions, while preserving the large expressivity afforded by gradient-based training of non-analytically tractable RNNs. We then show that this thalamocortical inductive bias not only acts in synergy with gradient-descent RNN training to improve accuracy during in-training-distribution motif production, but also leads to zero-shot transfer to new motif chains with no performance cost. Besides proposing an efficient, robust and flexible RNN architecture, our results shed new light on the function of motor preparation in the brain.",
+    "keywords": [
+      "neuroscience",
+      "dynamical systems",
+      "thalamocortical architecture",
+      "motor preparation",
+      "continual learning",
+      "hierarchical continuous motor control",
+      "out-of-distribution generalization",
+      "robustness"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=qfLJBJf_DnH"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper considers the problem of RNNs learning arbitrary sequences of “motifs” (continuous time functions, discretized) after having learned the individual motifs separately. Inspired by some previous work, it proposes an architectural approach to deal with interference by introducing a motif-dependent low-rank perturbation to the recurrent weights of the RNN, following Schuessler et al. (2020). To this end, the paper introduces a new evaluation task (motif generation), which is used to compare that architecture and sensible baselines. It then moves to propose a new model inspired in thalamocortical interactions in the brain: an RNN equipped with a preparatory module that imposes a beneficial bias when following a specific training protocol.",
+    "main_review": "**Strengths**\n\nContinual learning is specially relevant as a setting for the purposes of this paper, partly given that learning from non-stationary distributions is closer in many aspects to the way humans learn. As such, the problem of catastrophic forgetting and generalization in continual learning are important research topics that are quite relevant for this venue. In this sense, the study of some of the architectures presented here (e.g. inspired on Schuessler et al. 2020) are interesting. Also welcomed are explicit addressing of the continuous time problem, which is relevant for many fields including control. Finally, the attempt to connect with Neuroscience by introducing a model inspired by thalamocortical interactions with the preparatory module is also acknowledged.\n \n**Weaknesses**\n\t\n- **Technical**: At the technical level, I found a couple of issues that affects the task described in section 1. First, there are references to the continual learning setup, but I can’t find the specifics, such as figures and detailed comments about the task structure etc., apart from mentioning the inclusion of all the motifs vs a sequential presentation (for which results are not shown). If the models are to be analyzed in this setting, it is important to see a robust description of the task and the metrics (see, for example, Chaudhry et al. 2019). Also, although I recognize the value of synthetic tasks, I also would have preferred to see in addition a task that encodes a “naturalistic” dataset, specially given that the authors are interested in a general noise-robust solution.\n\n\tSecond, there is a problem that the authors seems to be well aware of as per the second to last paragraph in section 3. If I understood it correctly, the task described in section 2 admits a trivial solution, that of a hard resetting to an initialization state before processing a motif. This raises some considerations, including importantly that point (i) in that paragraph should be demonstrated empirically, regarding to different possible initialization schemes.\n\t\n\n- **Writing** In my opinion this article suffers a series of important defects in its writing that ultimately have a strong negative impact in the communication of its scientific ideas. Please note that the intended feedback here is not about writing style. We acknowledge that not all papers are meant to be written the same way. However, I found reading this paper to be somewhat arduous and the presentation confusing. It also contains many questionable decisions into what constitutes the main text versus what goes in the appendix (e.g. presenting the numeric values of the hyperparameters for Adam in the first paragraph of the task description, while no formal description of the problem is included in the main text). \n\n\tBeing constructive, I think this situation could be alleviated by introducing a better formalization of the task and the optimization problem in a simpler manner.\n\t- *Description of the problem*:\n\tThe description of the problem in section A.1 could be improved by stating the optimization problem in simple terms. This can be done collecting information that is scattered in section 2, and introducing the statements with a notation consistent with the rest of the paper (I found strange that uses other notation from the main text). Please note that in section A.1 some terms are not defined (“descriptor vectors”) or introduced but seemingly not used later (N_V is stated to be as small as possible). Also, no discretization method is specified, for example, and the information about initialization is scattered.\n\n\t\tA beautiful example in this domain that you cite is Schuessler et al. (2020), which targets a similar conference in section 2: the equation of evolution of the RNN seen as a dynamical system (e.g. what you have in your first equation), followed by a clear specification of each of the terms (input, output, parameters, target function, etc.), parameters specific for each task, details about training and initialization, etc. \n\t\n\t- *Description of the task*:\n\tSection 2 in the paper is devoted to the description of the task and introduces the three architectures that are used in the rest of the paper. However, after reading the section, it is not clear what the essential components are. Given that the introduction of the task is a core contribution of the paper, a more structured description would be really appreciated, especially the details concerning continual learning. This should also go in the main section of the paper (it could be short, but it should be complete). Also as a good example of what I mean is Schuessler et al. (2020), which opens section 2 with a very concise description of the task.\n\n\t**Minor presentation issues**\n\tAt a different level, the paper would benefit from:\n\t- less strange wording in many cases (e.g “more powerful performance-optimized continuously nonlinear RNNs”),\n\t- other small fixes (numbering equations, normalizing the references (use \\citep in latex), fix a number of typos (e.g. “gradient decent” last paragraph in Section 1), etc). \n\n**References**\n\nChaudhry, Arslan, Marc’Aurelio Ranzato, Marcus Rohrbach and Mohamed Elhoseiny (2019) Efficient Lifelong Learning with A-GEM. *ICLR 2019*\n\nSchuessler, Friedrich, Francesca Mastrogiuseppe, Alexis Dubreuil, Srdjan Ostojic, and Omri Barak (2020) The interplay between randomness and structure during learning in RNNs. *NeurIPS 2020*",
+    "summary_of_the_review": "The general topic of this paper is relevant, but I found the presentation confusing and difficult to understand. Overall, given the current state of the presentation, some issues with the details of the continual learning experiments, and some concerns related to the existence of a trivial solution that would need to be addressed, the contributions of this paper remains unclear to me and I suggest a rejection.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 5867 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 5867,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 5867
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "7yvu4qOKtn1",
+  "reviewer": "mpC8",
+  "paper": {
+    "title": "Computational Doob h-transforms for Online Filtering of Discretely Observed Diffusions",
+    "authors": [
+      "Nicolas Chopin",
+      "Andras Fulop",
+      "Jeremy Heng",
+      "Alexandre H. Thiery"
+    ],
+    "abstract": "This paper is concerned with online filtering of discretely observed nonlinear diffusion processes. We propose to approximate the Fully Adapted Particle Filter algorithm by solving a single auxiliary stochastic control problem prior to the data-assimilation procedure. The methodology relies on the non-linear Feynman-Kac approach to solving semi-linear partial differential equations. Numerical experiments suggest that the proposed approach can be orders of magnitude more efficient than the bootstrap particle filter in the regime when observations are highly informative.",
+    "keywords": [
+      "diffusion",
+      "filtering",
+      "monte-carlo",
+      "particle-filters",
+      "BSDE"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=7yvu4qOKtn1"
+  },
+  "review_fields": {
+    "comment": "The response to the reviews has been very thorough. The proposed changes lead to a considerably stronger paper with a much better performance evaluation. In my view, most of the concerns raised by other reviewers have been addressed, leading to improvements and better explanations concerning the proposed method. One consideration is that the changes from the original submission are substantial and the revised paper almost needs to go through another thorough review. My questions have been satisfactorily addressed and I have raised my score to a 6."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

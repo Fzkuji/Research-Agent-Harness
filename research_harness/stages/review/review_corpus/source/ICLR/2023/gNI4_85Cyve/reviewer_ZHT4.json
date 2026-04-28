@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "gNI4_85Cyve",
+  "reviewer": "ZHT4",
+  "paper": {
+    "title": "QAID: Question Answering Inspired Few-shot Intent Detection",
+    "authors": [
+      "Asaf Yehudai",
+      "Matan Vetzler",
+      "Yosi Mass",
+      "Koren Lazar",
+      "Doron Cohen",
+      "Boaz Carmeli"
+    ],
+    "abstract": "Intent detection with semantically similar fine-grained intents is a challenging task. To address it, we reformulate intent detection as a question-answering retrieval task by treating utterances and intent names as questions and answers. To that end, we utilize a question-answering retrieval architecture and adopt a two stages training schema with batch contrastive loss. In the pre-training stage, we improve query representations through self-supervised training. Then, in the fine-tuning stage, we increase contextualized token-level similarity scores between queries and answers from the same intent. Our results on three few-shot intent detection benchmarks achieve state-of-the-art performance.",
+    "keywords": [
+      "Intent Detection",
+      "Question Answering",
+      "Contrastive Learning",
+      "Passage Retrieval"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=gNI4_85Cyve"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "In this work, the authors reformulate the problem of intent detection as a question-answering task by treating utterances and labels as questions and answers. A two stage training schema is employed by utilizing question-answering retrieval architecture and batch contrastive loss. The first of the training stages is for learning better query representations, while the second stage is for optimizing the contextualized token-level similarity scores between queries and answers from the same intent. State-of-the-art results are reported on three few-shot intent detection benchmarks.",
+    "strength_and_weaknesses": "Strengths\n\nS1: It is an interesting idea to treat ID problem as a question-answering task.\n\nS2: Utilization of Token level domain knowledge in a self-supervised fashion along with queries adaptation to dialogue domain is interesting.\n\nS3: Masked language modeling has also been employed as auxiliary loss.\n\nS4: Intent names have been employed for generating extra supervision signals.\n\nS5: There are detailed experiments in this work, with an interesting insight that ColBERT triplet loss with batch contrastive loss leads to a considerable improvement.\n\nS6: The paper is well written and easy to follow.\n\n\nWeaknesses\nW1: Why a balanced dataset is the requirement for this work. If the dataset is imbalanced, how will the proposed method behave?\n\nW2: Typos: In abstract: “self supervise manner.”",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is well written and the results are good. This work is for balanced few-shot datasets. It will be interesting to see if the proposed techniques work on imbalanced datasets as well.",
+    "summary_of_the_review": "Overall, this is an interesting paper and addresses the challenging intent detection task in a question-answering setting.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

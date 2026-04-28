@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "o3Q4m8jg4BR",
+  "reviewer": "GvAu",
+  "paper": {
+    "title": "LS-IQ: Implicit Reward Regularization for Inverse Reinforcement Learning",
+    "authors": [
+      "Firas Al-Hafez",
+      "Davide Tateo",
+      "Oleg Arenz",
+      "Guoping Zhao",
+      "Jan Peters"
+    ],
+    "abstract": "Recent methods for imitation learning directly learn a $Q$-function using an implicit reward formulation rather than an explicit reward function. However, these methods generally require implicit reward regularization to improve stability and often mistreat absorbing states. Previous works show that a squared norm regularization on the implicit reward function is effective, but do not provide a theoretical analysis of the resulting properties of the algorithms. In this work, we show that using this regularizer under a mixture distribution of the policy and the expert provides a particularly illuminating perspective: the original objective can be understood as squared Bellman error minimization, and the corresponding optimization problem minimizes a bounded $\\chi^2$-Divergence between the expert and the mixture distribution. This perspective allows us to address instabilities and properly treat absorbing states. We show that our method, Least Squares Inverse Q-Learning (LS-IQ), outperforms state-of-the-art algorithms, particularly in environments with absorbing states. Finally, we propose to use an inverse dynamics model to learn from observations only. Using this approach, we retain performance in settings where no expert actions are available.",
+    "keywords": [
+      "Inverse Reinforcement Learning",
+      "Imitation Learning",
+      "Reward Regularization",
+      "Deep Reinforcement Learning"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=o3Q4m8jg4BR"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper studies the problem of imitation learning, building on the recent IQ-learn framework. Instead of an adversarial reward-policy loss like GAIL, IQ-learn instead parameterizes the Q-function so that the policy can be directly extracted. While IQ-learn works fine, the paper notes that some of the practical tricks don't match the analysis, e.g. regularizing both the expert and the imitator (which also should prevent direct extraction of policy in theory).\n\nIn this paper, the authors present Least Squares Inverse Q Learning (LS-IQ). LS-IQ patches some of the gap described above with IQ-learn. \n\n- First, LS-IQ shows that the mixture regularizer is, naturally, regularizing a chi-squared divergence between the expert and the mixture of expert/policy occupancies. In practice this is good because the mixture ensures that the divergence is bounded.\n- Second, they use a least-squares RL perspective to figure out how to properly treat absorbing states.\n- Third, they propose using a regularization critic, to account for the additional regularizer term in the objective.\n- A few more tips and tricks, e.g., replacing bootstrapping target with fixed target, learning from observations (with no action information) by training an IDM.",
+    "strength_and_weaknesses": "Strengths\n- the biggest strength of the paper is that it is very practical: it identifies many tips and tricks for making IQ-learn better. This is a great contribution, given the already strong results of the base IQ-learn algorithm.\n- some of these tricks are somewhat theoretically grounded. Though (as the paper notes itself) some parts are not super convincing, e.g. fixed Q target, it is still useful for future work.\n- the experiments have ablations of using different subsets of the proposed tricks.\n\nWeaknesses\nThe first few pages were find to read, but the rest of the paper (esp section 3) was poorly structured in my opinion. It reads like a laundry list A, B, C, and the reader has no idea what to anticipate next. Some of the insights feel like offhand remarks that have little relevance to the rest of the paper, and are hard to distinguish from the actual important insights. I would try to restructure the paper so that the most important parts are emphasized (even repeated), and move more minor details to the appendix.",
+    "clarity,_quality,_novelty_and_reproducibility": "Clarity is subpar. Quality, novelty, and reproducibility are great.",
+    "summary_of_the_review": "In summary the authors improve on IQ-learn, the current SOTA imitation learning algorithm on many tasks.\nThe paper presents a laundry list of tips and tricks, which was hard to read, but shows good practical improvements that should be very valuable to the community.\n\n--------\n\nUpdate: I have read the author response, and am keeping my evaluation.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

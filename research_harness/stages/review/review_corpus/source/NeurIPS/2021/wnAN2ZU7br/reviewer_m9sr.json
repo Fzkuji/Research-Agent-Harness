@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "wnAN2ZU7br",
+  "reviewer": "m9sr",
+  "paper": {
+    "title": "Pipeline Combinators for Gradual AutoML",
+    "authors": [
+      "Guillaume Baudart",
+      "Martin Hirzel",
+      "Kiran Kate",
+      "Parikshit Ram",
+      "Avraham Shinnar",
+      "Jason Tsay"
+    ],
+    "abstract": "Automated machine learning (AutoML) can make data scientists more productive.  But if machine learning is totally automated, that leaves no room for data scientists to apply their intuition.  Hence, data scientists often prefer not total but gradual automation, where they control certain choices and AutoML explores the rest.  Unfortunately, gradual AutoML is cumbersome with state-of-the-art tools, requiring large non-compositional code changes.  More concise compositional code can be achieved with combinators, a powerful concept from functional programming.  This paper introduces a small set of orthogonal combinators for composing machine-learning operators into pipelines.  It describes a translation scheme from pipelines and associated hyperparameter schemas to search spaces for AutoML optimizers.  On that foundation, this paper presents Lale, an open-source sklearn-compatible AutoML library, and evaluates it with a user study.",
+    "keywords": [
+      "AutoML",
+      "scikit-learn",
+      "programming models",
+      "functional programming"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=wnAN2ZU7br"
+  },
+  "review_fields": {
+    "summary": "This work presents a software system for AutoML based on ML pipelines that:\n+ Uses 3 \"combinators\" to construct pipelines.\n+ Abstracts AutoML search using a \"translation scheme\".\n\nA second part of this work focuses on user adoption, backed by usability studies.\nThe user study described in the supplementary material is valuable.",
+    "main_review": "The contribution of this work as an AutoML system, to the automated composition of complex models, is incremental.\nThis work may benefit by focusing on the user study, specifically on human-model interaction.\n\nThe work is missing:\n- Comparisons with other types of AutoML systems that are not pipeline oriented, such as\n* AutoGluon which focuses on generating complex ensembles and stacking\n* OBOE which focuses on collaborative filtering and fast recommendations.\n- Computation times of the system.\n\nThe work may reference the D3M project which is composed of three tiers:\n(i) TA1 ML primitives, (ii) TA2 AutoML systems, and (iii) TA3 human in the loop and user studies.\nThe paper is missing multiple references to work on the interface between (ii) and (iii) and systems which focus on user studies:\nSee https://datadrivendiscovery.org/d3m-interfaces"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

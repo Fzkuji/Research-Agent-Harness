@@ -1,0 +1,35 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "pWVASryOyFw",
+  "reviewer": "xud3",
+  "paper": {
+    "title": "Learning Uncertainty for Unknown Domains with Zero-Target-Assumption",
+    "authors": [
+      "Yu Yu",
+      "Hassan Sajjad",
+      "Jia Xu"
+    ],
+    "abstract": "We introduce our Maximum-Entropy Rewarded Reinforcement Learning (MERRL) framework that selects training data for more accurate Natural Language Processing (NLP). Because conventional data selection methods select training samples based on the test domain knowledge and not on real life data,  they frequently fail in unknown domains like patent and Twitter. \nOur approach selects training samples that maximize information uncertainty measured by entropy, including observation entropy like empirical Shannon entropy, Min-entropy, R\\'enyi entropy, and prediction entropy using mutual information, to cover more possible queries that may appear in unknown worlds. Our MERRL using regularized A2C and SAC achieves up to -99.7 perplexity decrease (-43.4\\% relatively) in language modeling, +25.0 accuracy increase (+40.0\\% relatively) in sentiment analysis, and +5.0 F1 score increase (+30.8\\% relatively) in named entity recognition over various domains, demonstrating strong generalization power on unknown test sets.",
+    "keywords": [],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=pWVASryOyFw"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for answering my questions and for making appropriate adjustments to paper to address several of them. However, the lack of comparisons to the previous method proposed by Ren et al, on learning to re-weight training samples was a major concern of mine, which the authors have not addressed. This concern is also echoed in wzkA's comments about the lack of justification for the use an RL-based approach to optimize entropy versus using other more efficient approaches such as meta-learning. Hence, I have lowered by score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

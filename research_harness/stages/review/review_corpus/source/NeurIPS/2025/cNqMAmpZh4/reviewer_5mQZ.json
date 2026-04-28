@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "cNqMAmpZh4",
+  "reviewer": "5mQZ",
+  "paper": {
+    "title": "From Euler to AI: Unifying Formulas for Mathematical Constants",
+    "authors": [
+      "Tomer Raz",
+      "Michael Shalyt",
+      "Elyasheev Leibtag",
+      "Rotem Kalisch",
+      "Shachar Weinbaum",
+      "Yaron Hadad",
+      "Ido Kaminer"
+    ],
+    "abstract": "The constant $\\large \\pi$ has fascinated scholars throughout the centuries, inspiring numerous formulas for its evaluation, such as infinite sums and continued fractions. Despite their individual significance, many of the underlying connections among formulas remain unknown, missing unifying theories that could unveil deeper understanding. The absence of a unifying theory reflects a broader challenge across math and science: knowledge is typically accumulated through isolated discoveries, while deeper connections often remain hidden. In this work, we present an automated framework for the unification of mathematical formulas. Our system combines large language models (LLMs) for systematic formula harvesting, an LLM-code feedback loop for validation, and a novel symbolic algorithm for clustering and eventual unification. We demonstrate this methodology on the hallmark case of $\\large \\pi$, an ideal testing ground for symbolic unification. Applying this approach to 455,050 arXiv papers, we validate 385 distinct formulas for $\\large \\pi$ and prove relations between 360 (94\\%) of them, of which 166 (43\\%) can be derived from a single mathematical object—linking canonical formulas by Euler, Gauss, Brouncker, and newer ones from algorithmic discoveries by the Ramanujan Machine.\n  Our method generalizes to other constants, including $e$, $\\zeta(3)$, and Catalan’s constant, demonstrating the potential of AI-assisted mathematics to uncover hidden structures and unify knowledge across domains.",
+    "keywords": [
+      "AI for Science",
+      "AI for Math",
+      "LLM-Tool Integration",
+      "Mathematical Constants",
+      "Continued Fractions",
+      "Recurrences",
+      "Number Theory",
+      "Pi"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=cNqMAmpZh4"
+  },
+  "review_fields": {
+    "comment": "I thank authors for this reply.\n\nI would like to stress the fact that, although this work can generate infinite equivalent formulas for $\\pi$, it's not true that some of them are interesting, or that we discover new math, or you can transfer some learning across different formulas. Did you have any expert in the loop to validate that the novel formulas are, indeed, interesting?\n\nFor Q1, I'm happy to see this improvement. Is it possible to have more details?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

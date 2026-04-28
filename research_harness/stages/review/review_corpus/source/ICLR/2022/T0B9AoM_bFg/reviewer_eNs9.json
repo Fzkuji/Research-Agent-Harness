@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "T0B9AoM_bFg",
+  "reviewer": "eNs9",
+  "paper": {
+    "title": "Improving Mutual Information Estimation with Annealed and Energy-Based Bounds",
+    "authors": [
+      "Rob Brekelmans",
+      "Sicong Huang",
+      "Marzyeh Ghassemi",
+      "Greg Ver Steeg",
+      "Roger Baker Grosse",
+      "Alireza Makhzani"
+    ],
+    "abstract": "Mutual information (MI) is a fundamental quantity in information theory and machine learning. However, direct estimation of MI is intractable, even if the true joint probability density for the variables of interest is known, as it involves estimating a potentially high-dimensional log partition function. In this work, we present a unifying view of existing MI bounds from the perspective of importance sampling, and propose three novel bounds based on this approach. Since a tight MI bound without density information requires a sample size exponential in the true MI, we assume either a single marginal or the full joint density information is known. In settings where the full joint density is available, we propose Multi-Sample Annealed Importance Sampling (AIS) bounds on MI, which we demonstrate can tightly estimate large values of MI in our experiments. In settings where only a single marginal distribution is known, we propose Generalized IWAE (GIWAE) and MINE-AIS bounds. Our GIWAE bound unifies variational and contrastive bounds in a single framework that generalizes InfoNCE, IWAE, and Barber-Agakov bounds. Our MINE-AIS method improves upon existing energy-based methods such as MINE-DV and MINE-F by directly optimizing a tighter lower bound on MI. MINE-AIS uses MCMC sampling to estimate gradients for training and Multi-Sample AIS for evaluating the bound. Our methods are particularly suitable for evaluating MI in deep generative models, since explicit forms of the marginal or joint densities are often available. We evaluate our bounds on estimating the MI of VAEs and GANs trained on the MNIST and CIFAR datasets, and showcase significant gains over existing bounds in these challenging settings with high ground truth MI.",
+    "keywords": [
+      "mutual information estimation",
+      "annealed importance sampling",
+      "energy-based models"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=T0B9AoM_bFg"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper investigates annealed importance sampling (AIS) techniques and multi-sample bounds to improve mutual information estimation. Assuming the knowledge of extract likelihood (joint or marginal), this paper shows the mutual information bound can be tightened via exploiting a series of intermediate distributions interpolating between a (convenient) proposal and the joint density. An energy-based perspective was presented and discussed, revealing interesting insights. The effectiveness of this proposal is demonstrated with generative modeling applications on real-world datasets.",
+    "main_review": "First I identify myself as Reviewer cNMQ from the last round of peer review of this paper. I see the author(s) have carefully revised their manuscript to address the concerns from the reviews. In particular, the current draft has made clear the distinction between parametric and non-parametric MI estimation, both are important research topics and they are fitted for different application scenarios. Not only that, the presentation has been improved. Better visualization of the bounds has been provided to help understand the relationship between different estimators, and there are many in-place remarks and discussions on the connection to existing bounds. I believe this is a piece of solid work and enthusiastically recommend acceptance. \n\nStrength \n* Importance sampling is a key technique in statistical inference and its application to MI estimation constructs a promising direction for research. Such motivated, this paper has derived a family of multi-sample novel bounds with annealed proposals.\n* The connection between the InfoNCE bound and the generalized multi-sample IWAE MI bound is quite fascinating. The author(s) have made an interesting point in the statement that the naive choice of proposal p(z) has led to the well-known log-K cap of InfoNCE bound, which I believe is critical for improving MI estimation. The current presentation is underselling its significance, so I would encourage the author(s) to enrich the discussions and give more concrete examples for easier understanding.\n* Clarity of presentation. I am glad to see the significant improvements made compared to the last submission. \n\n\nBelow are some minor suggestions that might help the author(s) to further improve the quality of this manuscript. \n\nTechnical points:\n\nA. While the importance sampling perspective for MI estimation is novel, this is not new in the broader context of variational inference. The following works [1-3] are highly relevant: they all follow an annealed path to tighten the bound. The discussions on these works are currently missing from the manuscript, which I think would significantly boost the significance of this work by making strong connections. \n\n[1] T Salimans, et al. Markov Chain Monte Carlo and Variational Inference: Bridging the Gap. ICML 2015\n[2] L Maaloe, et al. Auxiliary Deep Generative Models. ICML 2016\n[3] V Masrani, et al. The Thermodynamic Variational Objective. NeurIPS 2019\n\nB. Another major missing piece is the discussion of whether this strategy may inadvertently harm learning. This point is related to the seminal work of [4], which analyzed a particular scenario that tight multi-sample VI bounds actually harm inference. Intuitively, the inference arm is the approximate posterior (i.e., proposal distribution), and since tighter bounds are less sensitive to the quality of approximate posterior, the algorithm is less incentivized to improve it. Related to my technical point A, [3] has provided some perspectives on additional tradeoffs involved. Nonetheless, a careful analysis is beyond the scope of this study, so I only encourage the author(s) to give some thoughts and make some remarks in the paper. \n\n[4] T Rainforth. Tighter Variational Bounds are Not Necessarily Better. ICML 2018\n\nC. The derivation of GIWAE is one of the key contributions of this paper, but there is no intuition provided in the main text on how this is derived. The author(s) simply say \"we define GIWAE lower bound\". At least the probabilistic interpretation should appear in the main paper. Also, the author(s) should mention the disadvantage relative to the InfoNCE estimator. In particular, InfoNCE admits an efficient bi-linear implementation [5], because the z is sampled from the prior. I think the difference between IWAE and GIWAE should be further emphasized, say using a table comparing what is needed for both of them, and changing the order of the first two sentences of Sec 2.3 \n\n[5] T Chen, et al. A Simple Framework for Contrastive Learning of Visual Representations. ICML 2020\n\nD. Sorry to see the section \"Energy-based Bounds\" in the original writing moved to Sec 4, personally, I think it can be presented earlier.  And I do not fully appreciate the importance of Sec 3.3, could the author(s) elaborate?\n\nE. Selecting K, T is a joint optimization problem, but the discussion in Sec 3.4 is singled threaded: it only talks about suggestions when either K ot T is fixed. \n\nNon-technical points:\n\nF. Please add runtime analysis, and highlight the tradeoff between computation/memory and bound tightness. \n\nG. Please give the explicit expression of I_{IWAE} in the paper. \n\nH. Please use the booktab package to format the Tables. Follow the practice of minimalism, remove unnecessary horizontal lines and all vertical lines in the tables. Actually, for Table 1 a figure might be more intuitive. \n\nI. Figure 2 (b) is excellent. I think it is better to present it earlier in the text, right where the bounds are discussed.",
+    "summary_of_the_review": "This is an interesting work and my major concerns from the last round of paper reviews have been adequately addressed. As such I recommend acceptance.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 5120 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 5120,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 5120
+  }
+}

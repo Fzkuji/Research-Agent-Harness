@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "O-fOgeI_D-B",
+  "reviewer": "q1b7",
+  "paper": {
+    "title": "Active Learning of Convex Halfspaces on Graphs",
+    "authors": [
+      "Maximilian Thiessen",
+      "Thomas Gärtner"
+    ],
+    "abstract": "We systematically study the query complexity of learning geodesically convex halfspaces on graphs. Geodesic convexity is a natural generalisation of Euclidean convexity and allows the definition of convex sets and halfspaces on graphs. We prove an upper bound on the query complexity linear in the treewidth and the minimum hull set size but only logarithmic in the diameter. We show tight lower bounds along well-established separation axioms and identify the Radon number as a central parameter of the query complexity and the VC dimension. While previous bounds typically depend on the cut size of the labelling, all parameters in our bounds can be computed from the unlabelled graph. We provide evidence that ground-truth communities in real-world graphs are often convex and empirically compare our proposed approach with other active learning algorithms.",
+    "keywords": [
+      "active learning",
+      "learning theory",
+      "semi-supervised learning",
+      "transduction",
+      "vertex classification",
+      "graphs",
+      "convexity theory",
+      "geodesic convexity",
+      "shortest paths",
+      "halfspaces",
+      "query complexity"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=O-fOgeI_D-B"
+  },
+  "review_fields": {
+    "summary": "The paper considers the problem of actively learning the (binary) labels of the vertices of a graph, under abstract convexity assumptions. The main results are upper bounds and lower bounds on the number of label queries needed, expressed as a function of various graph-theoretical quantities.",
+    "main_review": "POST-DISCUSSION EDIT: After taking the authors' response to the technical discussion into careful consideration, I am raising my score to 5. Should the paper be accepted, I trust the authors to fix all presentation issues as thoroughly as possible.\n\n==========\n\nTLDR: I believe the formal results are good, but the paper needs a thorough rewriting before being accepted at a conference such as NeurIPS.\n\n------------------\n\nRelevance: the problem is relevant to active learning and thus to the NeurIPS audience.\n\nOriginality: the results are mostly original. However, two of them (Proposition 2 and Theorem 11) already appeared in a recent workshop (MLG 2020). In fact, Proposition 2 is identical to the main result of that paper. If the authors are the same as that paper, then this can be considered as bad practice; otherwise, it is clearly plagiarism, in which case the paper should be rejected.\n\nQuality: questionable, not in the results themselves, but in how they are (not) presented and explained. Essentially all results and bounds are given without an intuition, a proof sketch, or a guiding example; one cannot understand where the paper is heading to, or what it wants to achieve. For these reasons I could not perform any sanity check of the claims and techniques. There are also some inaccuracies; for instance, the definition of query complexity (the main object of study here) is not formal at all, being described just as \"the least number of queries required to identify any halfspace separable labelling in the worst-case\".\n\nClarity: low. There is no introduction to the problem, its motivations, and the state of the art. The first two pages are an avalanche of technical terms and notation, spanning abstract convex spaces, hulls, rays, separation axioms, and so on, but without any direction or guideline, and with most terms used before having defined them. The main results are stated in formal terms, without an explanation of their meaning, significance, and limitations. What type of inputs (input classes) are captured by the proposed notions of convexity? Aren't they captured by existing definitions? Do the upper bounds developed in this paper improve on existing ones? By how much, and in which cases? What is the main idea behind the algorithms? How does it differ from previous ideas?\n\nSignificance: hard to assess.\n\n\nDETAILED COMMENTS\n\n1. The very first page of the work (i.e., Section 1 \"Introduction\") is mostly obscure to me, despite the fact that I have expertise in active learning. The first paragraph starts abruptly by talking of abstract convexity spaces, geodesic convexity, hull sets. There is no indication of the field or the topic at hand (active learning on graphs), and not even a definition or introduction to the problem. The second paragraph talks about some separation axioms for graphs, of which I do not have the slightest idea, culminating in an observation that these axioms (which we do not know) hold in all linear spaces. This section certainly needs a total rewriting from scratch.\n\n2. Section 2 is equally frustrating. It introduces dozens of definitions and concepts in just one page, accompanied by almost no intuition or anticipation of their use. Some of the concepts are used without a definition (e.g., the concept of nested union). After reading this section I was very confused, as I do not know what are the central points that I should keep in mind.\n\n3. The result given by Proposition 2 is a corollary of Theorem 1 in a paper appeared at the MLG workshop 2020 (http://www.mlgworkshop.org).\n\n4. The meaning of the bounds is not clear. In particular, Corollary 7 says that the query complexity of labelling G is at most  h(G) + log d(G) + 2 tw(G). The last two terms are just the diameter and the treewidth and that's fine. My perplexity is in the first term, h(G), which is defined as the size of the smallest subset of V(G) whose convex hull coincides with V(G). Howe large is this quantity? Isn't it at least the sum of the shortest path covers of the two classes? Is it in fact coinciding with that quantity? In this case, for instance, the bound is interesting because it gives an additive (and thus better) version of Proposition 2. Without an explanation it is very hard to grasp what's going on here.\n\n5. The rest of Section 3 lacks intuition and explanation. It just enumerates a series of upper bounds and lower bounds, involving several different quantities (the number of extremal vertices of G, the shortest path cover of G, and so on).\n\n6. Theorem 11 seems again to come from the paper that I mentioned above.\n\n\nTitle: Either \"Active Learning OF ...\" or \"Actively Learning ...\", but not \"Active Learning ...\".\nL13, L30: \"active\" -> \"actively\", since it is an adverb to \"learning\"\nL42: \"tuple\" is just a pair\nL23: what is a nested union? I can't even find it on Google.\nL93: what does \"iterative vertex queries\" mean? Perhaps \"active\" or \"adaptive\"?\nL114: what is a \"fully connected graph\"? what are \"edges independent of each other\"?\nL118: what does it mean for the labels of two paths to be \"independent\"? Just that the two paths are edge-disjoint?\nL119: first it is said \"with edge length l\", which means that every edge has weight l, and then \"paths with l vertices each\"; this is confusing.\nL121: why are 1+log(kl) queries sufficient? I would say something like k log(l), with one binary search along each dimension.\nCorollary 7: the statement invokes H but the bound does not use it (since you already use h(G)).",
+    "limitations_and_societal_impact": "The limitations are not clearly addressed. There is no foreseeable societal impact."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

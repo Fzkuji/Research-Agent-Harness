@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "HJeYalBKvr",
+  "reviewer": "3",
+  "paper": {
+    "title": "Attention over Phrases",
+    "authors": [
+      "Wanyun Cui"
+    ],
+    "abstract": "How to represent the sentence ``That's the last straw for her''? The answer of the self-attention is a weighted sum of each individual words, i.e. $$semantics=\\alpha_1Emb(\\text{That})+\\alpha_2Emb(\\text{'s})+\\cdots+\\alpha_nEmb(\\text{her})$$. But the weighted sum of ``That's'', ``the'', ``last'', ``straw'' can hardly represent the semantics of the phrase. We argue that the phrases play an important role in attention.\nIf we combine some words into phrases, a more reasonable representation with compositions is \n$$semantics=\\alpha_1Emb(\\text{That's})+Emb_2(\\text{the last straw})+\\alpha_3Emb(\\text{for})+\\alpha_4Emb(\\text{her})$$.\nWhile recent studies prefer to use the attention mechanism to represent the natural language, few noticed the word compositions. In this paper, we study the problem of representing such compositional attentions in phrases. In this paper, we proposed a new attention architecture called HyperTransformer. Besides representing the words of the sentence, we introduce hypernodes to represent the candidate phrases in attention. \nHyperTransformer has two phases. The first phase is used to attend over all word/phrase pairs, which is similar to the standard Transformer. The second phase is used to represent the inductive bias within each phrase. Specially, we incorporate the non-linear attention in the second phase. The non-linearity represents the the semantic mutations in phrases. The experimental performance has been greatly improved. In WMT16 English-German translation task, the BLEU increases from 20.90 (by Transformer) to 34.61 (by HyperTransformer).",
+    "keywords": [
+      "representation learning",
+      "natural language processing",
+      "attention"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=HJeYalBKvr"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "I think the paper needs a deep review in the English part. For example, in the abstract, they repeat \"In this paper\" a couple of time and it is complicated to understand the introduction and methodology. Also, I think the paper needs a better structure. The related work should be first in order to understand the relevance of this paper. \n\nFrom the experiment point of view, it is necessary a better explanation about the hyperparameters or the experiments which were carried out. In addition, the single database was used to evaluate the technology which is not enough to show the big different respect to the transformed paper. Also, the comparison is not really fair. In each \"layer\" of the proposed phrase transformer, it has actually two self-attention layers, but the baseline has only one self-attention layer. In addition more methodologies should be necessary to compare the results of the experiment. \n\nThe architecture part is complicated to follow and I don't understand the big contribution of this paper. \n\nFor that reason, I recommend a reject the paper and work more for the final version"
+  },
+  "review_metadata": {
+    "rating": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

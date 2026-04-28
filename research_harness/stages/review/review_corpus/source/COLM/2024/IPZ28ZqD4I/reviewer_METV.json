@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "IPZ28ZqD4I",
+  "reviewer": "METV",
+  "paper": {
+    "title": "Faithful and Unfaithful Error Recovery in Chain of Thought",
+    "authors": [
+      "Evelyn Yee",
+      "Alice Li",
+      "Chenyu Tang",
+      "Yeon Ho Jung",
+      "Ramamohan Paturi",
+      "Leon Bergen"
+    ],
+    "abstract": "Large language models (LLMs) often improve their performance in downstream tasks when they generate Chain of Thought reasoning text before producing an answer. We investigate how LLMs recover from errors in Chain of Thought. Through analysis of error recovery behaviors, we find evidence for unfaithfulness in Chain of Thought, which occurs when models arrive at the correct answer despite invalid reasoning text. We identify factors that shift LLM recovery behavior: LLMs recover more frequently from obvious errors and in contexts that provide more evidence for the correct answer. Critically, these factors have divergent effects on faithful and unfaithful recoveries. \nOur results indicate that there are distinct mechanisms driving faithful and unfaithful error recoveries. Selective targeting of these mechanisms may be able to drive down the rate of unfaithful reasoning and improve model interpretability.",
+    "keywords": [
+      "chain of thought",
+      "error recovery",
+      "reasoning",
+      "faithfulness"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=IPZ28ZqD4I"
+  },
+  "review_fields": {
+    "comment": "Thank you for your clarifications. I'm glad to hear CoT correctness was determined manually. Please make that clear in the paper too. \n\nRegarding this:\n\n> Faithful recovery and unfaithful recovery are reported as absolute quantities, not as a proportion of all recoveries. 1 - (faithful + unfaithful) is the rate of non-recovery responses.\n\nYou label y-axis with \"Faithful Recovery **(%)**\" and \"Unfaithful Recovery **(%)**\" (emphasis mine). Using the percentage symbols for absolute quantities, especially when the total count per error is 100, is misleading. (Also in Table 2). The absolute values also make it hard to compare these faithful recovery rates across error types. This should be improved."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:17Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:17Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 702,
+    "words": 108,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d2f00447-f36e-4615-a8f4-f1dd934d3d0c",
+    "error": null,
+    "scored_chars": 703
+  }
+}

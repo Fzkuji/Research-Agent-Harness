@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "r1RQdCg0W",
+  "reviewer": "1",
+  "paper": {
+    "title": "MACH: Embarrassingly parallel $K$-class classification in $O(d\\log{K})$ memory and $O(K\\log{K} + d\\log{K})$ time, instead of $O(Kd)$",
+    "authors": [
+      "Qixuan Huang",
+      "Anshumali Shrivastava",
+      "Yiqiu Wang"
+    ],
+    "abstract": "We present Merged-Averaged Classifiers via Hashing (MACH) for $K$-classification with large $K$. Compared to traditional one-vs-all classifiers that require $O(Kd)$ memory and inference cost, MACH only need $O(d\\log{K})$ memory while only requiring $O(K\\log{K} + d\\log{K})$ operation for inference. MACH is the first generic $K$-classification algorithm, with provably theoretical guarantees, which requires $O(\\log{K})$ memory without any assumption on the relationship between classes. MACH uses universal hashing to reduce classification with a large number of classes to few independent classification task with very small (constant) number of classes. We provide theoretical quantification of accuracy-memory tradeoff by showing the first connection between extreme classification and heavy hitters. With MACH we can train ODP dataset with 100,000 classes and 400,000 features on a single Titan X GPU (12GB), with the classification accuracy of 19.28\\%, which is the best-reported accuracy on this dataset. Before this work, the best performing baseline is a one-vs-all classifier that requires 40 billion parameters (320 GB model size) and achieves 9\\% accuracy.  In contrast, MACH can achieve 9\\% accuracy with 480x reduction in the model size (of mere 0.6GB). With MACH, we also demonstrate complete training of fine-grained imagenet dataset (compressed size 104GB), with 21,000 classes, on a single GPU.",
+    "keywords": [
+      "Extreme Classification",
+      "Large-scale learning",
+      "hashing",
+      "GPU",
+      "High Performance Computing"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=r1RQdCg0W"
+  },
+  "review_fields": {
+    "comment": "Thanks for your feedback. \n\nThe results above were for DiSMEC and not PPDSparse. Since it trains One-versus-rest in a parallel way, the memory requirements on a single node are quite moderate, something around 8GB for training a batch of 1,000 labels on a single node. Each batch of labels is trained on a separate node.\n\nYou are absolutely right that sparsity does not make sense in case of Imagenet and the results for OAA in Figure 1(right) will hold. In both cases OAA seems to be better than MACH.\n\nI completely agree that MACH has computational advantages. However, at the same time, the performance is also lost in the speedup gain, i.e. 25% versus 19%. The impact of MACH would be substantial if similar levels of accuracy at much lower computational cost.\n\nIt is important that authors could verify these, and update the manuscript appropriately thereby mentioning the pros and cons of each scheme, which is missing from the current version."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

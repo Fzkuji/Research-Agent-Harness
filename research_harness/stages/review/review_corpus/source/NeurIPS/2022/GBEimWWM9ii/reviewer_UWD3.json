@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "GBEimWWM9ii",
+  "reviewer": "UWD3",
+  "paper": {
+    "title": "MMRR: Unsupervised Anomaly Detection through Multi-Level Masking and Restoration with Refinement",
+    "authors": [
+      "Jaesung Ahn",
+      "Janghyeon Lee",
+      "Hanbyel Cho",
+      "Yooshin Cho",
+      "HyeongGwon Hong",
+      "Junmo Kim"
+    ],
+    "abstract": "Recent state-of-the-art anomaly detection algorithms mainly adopt generative models or approaches based on deep one-class classification. These approaches have hyperparameters to balance the adversarial framework of the generative adversarial network and to determine the decision boundary of the classifier. Both methods show good performance, but their performance suffers from hyperparameter sensitivity. A new category of anomaly detection methods has been proposed that utilizes prior knowledge about abnormal data or pretrained features, but it is more generic not to use such side information. In this study, we propose \"Multi-Level Masking and Restoration with Refinement (MMRR)\", an unsupervised-learning-based anomaly detection method based on a generative model that overcomes hyperparameter sensitivity and the need for side information. MMRR learns the salient features of normal data distributions through  restoration from restricted information via masking, resulting in a better restoration of in-distribution data than out-of-distribution data. To overcome hyperparameter sensitivity, we ensemble restoration results from information restricted to predefined multiple levels instead of finding a single optimal restriction level, and propose a novel mask generation and refinement method to achieve hyperparameter robustness. Extensive experimental evaluation on common benchmarks (i.e. MNIST, FMNIST, CIFAR10, MVTecAD) demonstrates the efficacy of the MMRR.",
+    "keywords": [
+      "Deep Learning",
+      "Computer Vision",
+      "Anomaly Detection"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=GBEimWWM9ii"
+  },
+  "review_fields": {
+    "summary": "This paper presents an unsupervised learning based anomaly detection method, which masks the images at multi-levels for restoration and then refine the restored images with refinement network. To overcome hyperparameter sensitivity, this work ensembles multiple restoration results from different level of masks and propose a novel mask generation and refinement method to achieve hyperparameter robustness.  Experiments are conducted on  several  benchmarks",
+    "strengths_and_weaknesses": "Strengths \n1.This work proposed a multi-level masking scheme for image restoration and ensemble restoration results to overcome hyperparameter sensitivity. \n2.The experiments are evaluated on multiple datasets.\n\nWeaknesses\n1.The novelty of this work is very limited. The mask-based restoration has been studied by search works, and they employed the ensembles of restoration results of different scale masks or different pattern masks.\n2.Some important related works are missing in the paper, and this work does not compare the AD performance with these works. E.g. “CFLOW-AD: Real-Time Unsupervised Anomaly Detection with Localization via Conditional Normalizing Flows”, “Learning Semantic Context from Normal Samples for Unsupervised Anomaly Detection” etc.\n3.The proposed method adopts a complicated framework including multiple restoration and refinement networks, but the AD performance on MVTEC and Cifar-10 dataset is far below the state-of-the-art.",
+    "questions": "What is the advantage of the proposed mask design method in comparison with the masking design in other works? Although the hypermeter issue is relieved to some degree, the restoration quality of designed mask scheme is worse than the peer works.",
+    "limitations": "The paper didn't address the limitation and potential negative societal impact of the work."
+  },
+  "review_metadata": {
+    "rating": 2,
+    "confidence": 5,
+    "soundness": 1,
+    "presentation": 2,
+    "contribution": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

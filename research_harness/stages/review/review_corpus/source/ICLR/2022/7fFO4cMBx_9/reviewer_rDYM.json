@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "7fFO4cMBx_9",
+  "reviewer": "rDYM",
+  "paper": {
+    "title": "Variational Neural Cellular Automata",
+    "authors": [
+      "Rasmus Berg Palm",
+      "Miguel González Duque",
+      "Shyam Sudhakaran",
+      "Sebastian Risi"
+    ],
+    "abstract": "In nature, the process of cellular growth and differentiation has lead to an amazing diversity of organisms --- algae, starfish, giant sequoia, tardigrades, and orcas are all created by the same generative process.\nInspired by the incredible diversity of this biological generative process, we propose a generative model, the Variational Neural Cellular Automata (VNCA), which is loosely inspired by the biological processes of cellular growth and differentiation. Unlike previous related works, the VNCA is a proper probabilistic generative model, and we evaluate it according to best practices. We find that the VNCA learns to reconstruct samples well and that despite its relatively few parameters and simple local-only communication, the VNCA can learn to generate a large variety of output from information encoded in a common vector format. While there is a significant gap to the current state-of-the-art in terms of generative modeling performance, we show that the VNCA can learn a purely self-organizing generative process of data. Additionally, the self-organizing nature bestows the VNCA with some inherent robustness against perturbations in the early stages of growth.",
+    "keywords": [
+      "Neural Cellular Automata",
+      "Cellular Automata",
+      "Self-Organization",
+      "Generative Models"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=7fFO4cMBx_9"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes variational extension of Neural Cellular Automata for image generation. It performs experiments on MNIST, Noto Emoji and CelebA. The likelihood results are shown to be significantly behind SOTA on CelebA and also behind on other datasets. The paper provides qualitative analysis of the self-organized generation process and shows robustness to early-stage perturbations of latents.",
+    "main_review": "Pros:\n\n1. The paper is very well-written, I could clearly follow the ideas and the experimental setting (modulo a few minor points mentioned at the end of this review). It should be reproducible.\n2. It is interesting to see how good NCAs are in terms of likelihoods. Even the knowledge that they are not so good is valuable for the community (although I would prefer to see a few independent attempts like this to draw such a conclusion).\n3. This is a very honest paper, it reveals all the shortcomings upfront and doesn't hide anything between the lines.\n\n##########################################################################\n\nCons:\n\n1. The experimental results are underwhelming. There is little evidence that the method actually works, except on MNIST.\n2. The motivation of this work is not fully clear to me. What problem of prior work is this paper solving? I see that it introduces additional architectural limitations, and that's probably why the quality is much lower than SOTA. But what could we potentially gain?\n\n##########################################################################\n\nQuestions during rebuttal period: \n\nSignificantly improving experimental results would make me reconsider the rating - not sure if this is feasible during rebuttal though.\n\n#########################################################################\n\nMinor suggestions and typos: \n\n(1) \"and several methods have been proposed.\" - maybe \"several classes of methods\", generative modeling is quite a vast field.\n\n(2) \"The Variational Auto-Encoder (VAE) is a seminal probabilistic generative model\" - I would suggest citing both Kingma & Welling and Rezende et al., both papers appeared roughly at the same time. Up to you though.\n\n(3) Van Oord -> van den Oord\n\n(4) convolution based -> convolution-based\n\n(5) \"It achieves log p(x) >= -84.23\" - is it in bits or nats? why not report bpd?\n\n(6) \"state-of-the-art, which is around -78.6\" - assuming bits, it's not sota. See here: https://paperswithcode.com/sota/image-generation-on-mnist\n\n(7) \"Note: this shows the likelihood probabilities instead of samples from the likelihood for clarity.\" - likelihood probabilities sounds strange, why not just \"probabilities\"?\n\n(8) \"This is far from state-of-the-art which is around 2 bits per dimension\" - what are the dimensions? Looking at https://paperswithcode.com/sota/image-generation-on-celeba-64x64, I assume it's 64x64?",
+    "summary_of_the_review": "I am slightly leaning towards rejecting this paper. While the writing is high-quality and the analysis is interesting, the practical results are underwhelming, both in sample quality (see Figure 7) and in likelihoods.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "no_result",
+    "error": "no result tab appeared (possibly rate-limited or captcha shown); current input page url=https://gptzero.me/",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": null,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 2632
+  }
+}

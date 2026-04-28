@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "0Kj5mhn6sw",
+  "reviewer": "aN3z",
+  "paper": {
+    "title": "Gesture2Vec: Clustering Gestures using  Representation Learning Methods for Co-speech Gesture Generation",
+    "authors": [
+      "Payam Jome Yazdian",
+      "Mo Chen",
+      "Angelica Lim"
+    ],
+    "abstract": "Co-speech gestures are a principal component in conveying messages and enhancing interaction experiences between humans. Similarly, the co-speech gesture is a key ingredient in human-agent interaction including both virtual agents and robots. Existing machine learning approaches have yielded only marginal success in learning speech-to-motion at the frame level. Current methods generate repetitive gesture sequences that lack appropriateness with respect to the speech context. In this paper, we propose a Gesture2Vec model using representation learning methods to learn the relationship between semantic features and corresponding gestures. We propose a vector-quantized variational autoencoder structure as well as training techniques to learn a rigorous representation of gesture sequences. Furthermore, we use a machine translation model that takes input text and translates it into a discrete sequence of associated gesture chunks in the learned gesture space. Ultimately, we use translated quantized gestures from the input text as an input to the autoencoder’s decoder to produce gesture sequences. The resulting gestures can be applied to both virtual agents and humanoid robots. Subjective and objective evaluations confirm the success of our approach in terms of appropriateness, human-likeness, and diversity.",
+    "keywords": [
+      "representation learning",
+      "gesture generation",
+      "vector quantization",
+      "machine translation"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=0Kj5mhn6sw"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper tackles with co-speech gesture generation. First a denoising autoencoder is applied to the body pose detected at each frame. Then, a Vector Quantized Denoising Variational Autoencoder learns to create a motion vocabulary by parameterizing the posterior distribution of discrete latents. As the third step,  a two-layered bidirectional gated recurrent neural network with a soft attention mechanism is used for translation from text to gesture vocabulary. The decoder of Vector Quantized Denoising Variational Autoencoder is used to reproduce the entire gesture sequence.",
+    "main_review": "Strengths:\n- I appreciate that the related work section which discusses each prior art very well with their cons and pros.\n- The proposed method brings some improvements over the baseline methods for metric jerk, velocity and accelerarion when tested on Trinity dataset.\n\nWeaknesses:\n-  The technical novelty of the proposed method is questionable. It is important to highlight that this is not the first time variational autoencoders are adapted for this task. I found the proposed method incremental, such as adding the denoising property to the existing Vector Quantized Denoising Variational Autoencoder architecture.\n- The paper should include ablation study showing the effectiveness of the components compared to the other possibilities. For example, the authors claim that “….we consolidated a denoising characteristic to the variational autoencoder framework (DVAE), presenting a more flexible and robust posterior distribution approximation than the standard VAE”. However the correctness of this argument was not empirically justified.\n - I found the experimental analysis limited. The proposed method should be validated also on other datasets and following that, it should be compared with other state of the arts too (e.g., \"MoGlow: Probabilistic and Controllable Motion Synthesis Using Normalising Flows, ACM Trans. Graph., code available\"). \nI am aware that prior art, for example, Yoon et al. 2019 was used TED gesture dataset, which is a larger scale dataset compared to Trinity. Another dataset is Gesture-speech dataset collected by Takeuchi et al. Gesture-speech dataset include audio in which one can obtain the transcriptions. Authors should include these datasets into their analysis, to show that the findings generalize across various conditions.\n- It is also an important limitation that the proposed method was tested on a dataset having only monologues. The interaction scenarios is perhaps much more challenging and also more realistic, assuming that such a system can be deployed to social robots which interact with other social agents.\n- “Although our system showed a significant improvement over baseline….” this argument should be justified by a significance test.\n-  The applied human study should be better described in the main paper, it is not clear to me what is the reliability score of the human annotations.\n- Figure captions require a better explanation. E.g., in Fig 1, x, x\\tilde, x\\head should be described as well as Loss should be precisely mentioned as MSE Loss. The similar comment applies for Fig.2.\n- My understating is that the proposed method is not end-to-end. Can you confirm? If so, this fact should be included to the discussions as some of the baseline methods are end-to-end.",
+    "summary_of_the_review": "- limited technical novelty\n- limited experimental analysis",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "1: The contributions are neither significant nor novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "details_of_ethics_concerns": "I do not have a concern. It is stated in the paper that the authors were required participants to be located in Canada due to ethical review board policies."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2793,
+    "words": 431,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/313d2e51-449d-4792-9751-d4933f237ee3",
+    "error": null,
+    "scored_chars": 2797
+  }
+}

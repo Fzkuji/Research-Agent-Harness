@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "ZeFMtRBy4Z",
+  "reviewer": "rHPq",
+  "paper": {
+    "title": "REVE: A Foundation Model for EEG - Adapting to Any Setup with Large-Scale Pretraining on 25,000 Subjects",
+    "authors": [
+      "Yassine El Ouahidi",
+      "Jonathan Lys",
+      "Philipp Thölke",
+      "Nicolas Farrugia",
+      "Bastien Pasdeloup",
+      "Vincent Gripon",
+      "Karim Jerbi",
+      "Giulia Lioi"
+    ],
+    "abstract": "Foundation models have transformed AI by reducing reliance on task-specific data through large-scale pretraining. While successful in language and vision, their adoption in EEG has lagged due to the heterogeneity of public datasets, which are collected under varying protocols, devices, and electrode configurations. Existing EEG foundation models struggle to generalize across these variations, often restricting pretraining to a single setup, resulting in suboptimal performance, in particular under linear probing.\nWe present REVE (Representation for EEG with Versatile Embeddings), a pretrained model explicitly designed to generalize across diverse EEG signals. REVE introduces a novel 4D positional encoding scheme that enables it to process signals of arbitrary length and electrode arrangement. Using a masked autoencoding objective, we pretrain REVE on over 60,000 hours of EEG data from 92 datasets spanning 25,000 subjects, representing the largest EEG pretraining effort to date.\nREVE achieves state-of-the-art results on 10 downstream EEG tasks, including motor imagery classification, seizure detection, sleep staging, cognitive load estimation, and emotion recognition. With little to no fine-tuning, it demonstrates strong generalization, and nuanced spatio-temporal modeling. We release code, pretrained weights, and tutorials to support standardized EEG research and accelerate progress in clinical neuroscience.",
+    "keywords": [
+      "Foundation Model",
+      "EEG",
+      "SSL",
+      "BCI"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZeFMtRBy4Z"
+  },
+  "review_fields": {
+    "summary": "REVE is a foundation model for EEG data that generalizes across diverse setups. It uses 4D positional encoding and was pretrained on 60,000+ hours of EEG data from 92 datasets (25,000 subjects). The model achieves SOTA performance on 10 tasks, including motor imagery, seizure detection, and emotion recognition.",
+    "strengths_and_weaknesses": "Strengths: The paper demonstrates outstanding model performance and achieves state-of-the-art results in 10 different downstream EEG tasks. The paper provides particularly detailed experimental methodology, including thorough implementation specifics that ensure transparency. Importantly, the author ensured the repeatability of the model by publicly releasing all the code and pre-trained weights.\nWeaknesses: While the paper emphasizes REVE’s advantages in linear probing and limited fine-tuning scenarios, its core experimental design exhibits notable gaps. Specifically: \n1.\tAbstract (lines 5-7) critiques existing EEG foundation models for their poor linear probing performance, and (lines 15-16) claim REVE’s strong generalization with “little to no fine-tuning.”\n2.\tThe introduction (lines 41-42) further argues that current models require “full fine-tuning” for transfer.\n3.\tResults and Discussion (lines 319-322) highlight REVE’s “key advantage” in “producing high-quality latent spaces without heavy fine-tuning”.\nYet, the primary results (Table 2) rely on a two-stage fine-tuning strategy (Section 3.3 Downstream Tasks). Only limited validation for the above statement is provided (“w/PT” and “Frozen” settings in Table 3), tested on just one dataset, failing to generalize the “lightweight fine-tuning” advantage.\nThis inconsistency weakens the paper’s argument for REVE’s “lightweight fine-tuning benefits”, potentially undermining the conclusions’ credibility. To substantiate this argument, comparisons of all pre-trained baselines under linear probing across all downstream datasets are essential—a gap the current experiments leave unaddressed. Such validation is critical: if pre-trained models still require two full fine-tuning stages despite their pre-training, REVE’s position in the performance-simplicity tradeoff becomes significantly less competitive.",
+    "questions": "1. The introduction (lines 37-39) criticizes existing models for issues such as being trained solely on the TUH dataset, leading to poor generalization to EEG data with different electrode layouts. However, among the pretrained models cited in lines 35-36, none actually suffer from this limitation—for example, CBraMod, despite being trained only on TUH dataset, has been successfully applied to downstream tasks with varying electrode configurations. Could the authors clarify the basis for this claim? \n2. Did the pretrained baseline models use the same two-stage fine-tuning strategy as the proposed method in this paper? If the results were directly taken from the original baseline papers without adopting the two-stage fine-tuning strategy, such a comparison might be unfair. \n3. As mentioned in the weaknesses, could the author provide more results of the linear probing experiment to prove the performance of REVE under lightweight finetuning?"
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

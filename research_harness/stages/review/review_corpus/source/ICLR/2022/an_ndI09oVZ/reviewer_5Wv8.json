@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "an_ndI09oVZ",
+  "reviewer": "5Wv8",
+  "paper": {
+    "title": "Deep banach space kernels",
+    "authors": [
+      "Mrityunjay Bhardwaj"
+    ],
+    "abstract": "The recent success of deep learning has encouraged many researchers to explore the deep/concatenated variants of classical kernel methods. Some of which includes MLMKL, DGP and DKL. Although, These methods have proven to be quite useful in various real-world settings. They still suffer from the limitations of only utilizing kernels from Hilbert spaces. In this paper, we address these shortcomings by introducing a new class of concatenated kernel learning methods that use the kernels from the reproducing kernel Banach spaces(RKBSs). These spaces turned out to be one of the most general spaces where a reproducing Kernel exists. We propose a framework of construction for these Deep RKBS models and then provide a representer theorem for regularized learning problems. We also describe the relationship with its deep RKHS variant as well as standard Deep Gaussian Processes. In the end, we construct and implement a two-layer deep RKBS model and demonstrate it on a range of machine learning tasks.",
+    "keywords": [
+      "RKBS",
+      "RKHS",
+      "concatenated kernel learning",
+      "representation learning",
+      "deep learning",
+      "MLMKL",
+      "Deep Gaussian Processes",
+      "gaussian processes",
+      "kernel machines"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=an_ndI09oVZ"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper proposes to use kernels from a reproducing kernel Banach space, instead of a reproducing Hilbert space in tasks such as deep kernel learning.",
+    "main_review": "There isn't a clear division between a background and contributions section, so it is difficult to see the distinction between the background and the contributions.  Nonetheless, it appears that the only contributions are to notice that deep kernel learning can be understood within their framework (Sec. 3.2) and to do a toy experiment on 2D data (Sec. 4).  This is simply not sufficient for a paper at a major machine learning conference, so I am forced to recommend rejection.",
+    "summary_of_the_review": "Very limited theoretical and empirical results.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "1: The contributions are neither significant nor novel.",
+    "empirical_novelty_and_significance": "1: The contributions are neither significant nor novel."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 526,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e6d4e0cd-4031-407a-a6a8-a996ca6aa6c3",
+    "error": null,
+    "scored_chars": 528
+  }
+}

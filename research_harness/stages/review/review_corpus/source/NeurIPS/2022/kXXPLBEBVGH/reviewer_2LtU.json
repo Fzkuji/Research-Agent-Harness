@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "kXXPLBEBVGH",
+  "reviewer": "2LtU",
+  "paper": {
+    "title": "Context-enriched molecule representations improve few-shot drug discovery",
+    "authors": [
+      "Johannes Schimunek",
+      "Philipp Seidl",
+      "Lukas Friedrich",
+      "Daniel Kuhn",
+      "Friedrich Rippmann",
+      "Sepp Hochreiter",
+      "Günter Klambauer"
+    ],
+    "abstract": "A central task in computational drug discovery is to construct models from known active molecules to find further promising molecules for subsequent screening. However, typically only very few active molecules are known. Therefore, few-shot learning methods have the potential to improve the effectiveness of this critical phase of the drug discovery process. We introduce a new method for few-shot drug discovery. Its main idea is to enrich a molecule representation by knowledge about known context or reference molecules. Our novel concept for molecule representation enrichment is to associate molecules from both the support set and the query set with a large set of reference (context) molecules through a modern Hopfield network. Intuitively, this enrichment step is analogous to a human expert who would associate a given molecule with familiar molecules whose properties are known. The enrichment step reinforces and amplifies the covariance structure of the data and simultaneously removes spurious correlations arising from the decoration of molecules. We analyze our novel method on FS-Mol, which is the only established few-shot learning benchmark dataset for drug discovery. An ablation study shows that the enrichment step of our method is key to improving the predictive quality. In a domain shift experiment, our new method is more robust than other methods. On FS-Mol, our new method achieves a new state-of-the-art and outperforms all other few-shot methods.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=kXXPLBEBVGH"
+  },
+  "review_fields": {
+    "comment": "[1] Minor question, in Figure A2, I was wondering why the initial validation loss (epoch0) is much greater than that in training (~1.1 vs ~0.22 CE loss)? And the loss difference remains large as training continues. The predicted likelihood associated with the validation set looks a bit concerning given this CE loss.\n\n[2] Table A9 looks good. I don't have much concern about the validity of the proposed method, my main concerns are about the originality of the network architecture (again, everything can be explained using the key, value, query example, where the associative memories are key and value embeddings) and how significant the performance metric improvements are to the community.\n\n[3] It's interesting to see in Figure A5 that the context-enriched repr. is like a scaled version of the initial embedding. My understanding is that some insignificant feature dimensions are ignored/compressed during learning. For PCA, the scale itself does not matter much (the eigen vectors can be arbitrarily scaled), thus, after all these non-linear NN transformations, the final embedding space is somewhat similar to the original one. Would you please help me understand the what is going on here?\n\n[4] Very minor, in the new abstract, \"state-of-the-art\", missing hyphen."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "pQ0D0vdjJv",
+  "reviewer": "evfh",
+  "paper": {
+    "title": "Neural Evolution Strategy for Black-box Pareto Set Learning",
+    "authors": [
+      "Chengyu LU",
+      "Zhenhua Li",
+      "Xi Lin",
+      "Ji Cheng",
+      "Qingfu Zhang"
+    ],
+    "abstract": "Multi-objective optimization problems (MOPs) are prevalent in numerous real-world applications. Recently, Pareto Set Learning (PSL) has emerged as a powerful paradigm for solving MOPs. PSL can produce a neural network for modeling the set of all Pareto optimal solutions. However, applying PSL to black-box objectives, particularly those exhibiting non-separability, high dimensionality, and/or other complex properties, remains very challenging. To address this issue, we propose leveraging evolution strategies (ESs), a class of specialized black-box optimization algorithms, within the PSL paradigm. Traditional ESs capture the complex dimensional dependencies less efficiently, which can significantly hinder their performance in PSL. To tackle this issue, we suggest encapsulating the dependencies within a neural network, which is then trained using a novel gradient estimation method. The proposed method, termed Neural-ES, is evaluated using a bespoke benchmark suite for black-box PSL. Experimental comparisons with other methods demonstrate the efficiency of Neural-ES, underscoring its ability to learn the Pareto sets of challenging black-box MOPs.",
+    "keywords": [
+      "evolution strategy",
+      "multi-objective optimization",
+      "black-box optimization",
+      "pareto set learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=pQ0D0vdjJv"
+  },
+  "review_fields": {
+    "comment": "Thanks for the authors' responses. From a mathematical perspective, after reformulating the original problem using Eq. 4 (regardless of whether the parametric distribution is a Gaussian distribution), we should discuss whether the two optimization problems are equivalent, thereby demonstrating the reliability of optimizing the reformulated problem. Based on the authors' response, the current version of the paper lacks such a discussion. My concerns have been addressed, and I believe this paper meets the acceptance bar of NeurIPS, so I maintain my positive score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

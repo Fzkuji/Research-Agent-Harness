@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "RDbuSCWhad",
+  "reviewer": "XSo7",
+  "paper": {
+    "title": "Structured Sparse Transition Matrices to Enable State Tracking in State-Space Models",
+    "authors": [
+      "Aleksandar Terzic",
+      "Nicolas Menet",
+      "Michael Hersche",
+      "Thomas Hofmann",
+      "Abbas Rahimi"
+    ],
+    "abstract": "Modern state-space models (SSMs) often utilize structured transition matrices\nwhich enable efficient computation but pose restrictions on the model’s expressivity,\nas measured in terms of the ability to emulate finite-state automata (FSA). While\nunstructured transition matrices are optimal in terms of expressivity, they come\nat a prohibitively high compute and memory cost, even for moderate state sizes.\nWe propose a structured sparse parametrization of transition matrices in SSMs\nthat enables FSA state tracking with provably optimal state size and depth, while\nkeeping the computational cost of the recurrence comparable to that of diagonal\nSSMs. Our method, \\emph{PD-SSM}, parametrizes the transition matrix as the product\nof a column one-hot matrix ($P$) and a complex-valued diagonal matrix ($D$). As\na result, the computational cost of parallel scans scales linearly with the state\nsize. Theoretically, the model is BIBO-stable and can emulate any $N$-state FSA\nwith one layer of dimension $N$ and a linear readout of size $N ×N$, significantly\nimproving on all current structured SSM guarantees. Experimentally, the model\nsignificantly outperforms a wide collection of modern SSM variants on various FSA\nstate tracking tasks. On multivariate time-series classification, it outperforms neural\ncontrolled differential equations, a paradigm explicitly built for time-series analysis.\nFinally, we integrate PD-SSM into a hybrid Transformer-SSM architecture and\ndemonstrate that the model can effectively track the states of a complex FSA in\nwhich transitions are encoded into sets of variable-length English sentences. The\ncode is available at https://github.com/IBM/expressive-sparse-state-space-model.",
+    "keywords": [
+      "State-Space Models",
+      "Expressiveness",
+      "Efficiency",
+      "Matrix Parametrisation",
+      "State-Tracking",
+      "Finite-State Automata"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=RDbuSCWhad"
+  },
+  "review_fields": {
+    "summary": "This paper addresses a fundamental limitation in State Space Models (SSMs): the trade-off between expressiveness and computational efficiency. While diagonal SSM blocks are computationally tractable, they suffer from limited expressive power. Conversely, unstructured transition matrices offer full expressiveness but at prohibitive computational costs. The authors propose a novel middle-ground approach using structured matrices with a PD parameterization, where P is a one-hot matrix computed via a complex procedure and D is diagonal. This parameterization maintains efficiency while forming a monoid under multiplication, enabling parallel scan algorithms.\n\nThe paper establishes theoretical foundations by measuring expressive power through the class of Finite State Automata that SSMs can emulate (without post-SSM nonlinearity). \nTo address the non-trivial computations required for P, which present differentiation challenges, the authors provide implementation strategies and circumvention methods.\nThe theoretical claims are empirically validated through testing on state tracking problems.",
+    "strengths_and_weaknesses": "## Strengths\n\n1. **Clear Problem Formulation**: The paper tackles one of the most important open problems in the SSM literature with a well-motivated theoretical framework.\n2. **Theoretical Rigor**: The proposed architecture is theoretically grounded and addresses fundamental expressiveness limitations of diagonal SSMs.\n3. **Practical Considerations**: The authors provide detailed analysis of training difficulties and propose concrete solutions for implementation challenges.\n4. **Novel Contribution**: The PD parameterization represents a principled approach to balancing expressiveness and computational efficiency.\n\n## Weaknesses\n\n1. **Insufficient Experimental Validation**: The experimental section has significant gaps that undermine the paper's contributions:\n    - **Missing experimental setup details**: Critical information about hyperparameter selection, training procedures, and experimental configurations is absent. Specifically: How were hyperparameters chosen? Were hyperparameter sweeps conducted? How was fair comparison between different models ensured? The learning rate appears constant across S2 and S3, and hyperparameter choices for Mamba are not visible.\n    - **Lack of comparison with recent models**: No benchmarking against important recent SSM variants including Mamba2, DeltaNet, GatedDnet, and RWKV-7, which are essential baselines for evaluating the proposed method\n    - **Limited scope of experiments**: While the focus on toy models and limited language modeling experiments may be acceptable for an initial architecture introduction (following similar literature precedents), the current experimental validation is insufficient to demonstrate the method's practical advantages\n2. **Presentation Issues**: Appendix A (Algebra and FSA) contains poorly organized algebraic content with numerous inconsistencies and unclear definitions that require substantial polishing for clarity. For example, Appendix A2 inconsistently switches between Z/nZ, Zn, and Cn to denote the same group. The mathematical exposition suffers from such notation inconsistencies, missing quantifications, and terminological confusion that hinder comprehension.",
+    "questions": "## Minor Issues and Suggestions\n\n- **Lines 34-36**: The universal approximation claim is correct and actually supports your arguments even more strongly. Consider clarifying that in the cited result, the approximation is actually achieved by the neural network after the SSM, while the SSM itself primarily reconstructs the input. Since your approach focuses on the SSM without post-processing nonlinearity, making this distinction explicit would better highlight the significance of your theoretical contribution.\n- **Lines 79-82**: The invertibility of A, while implied by perturbation arguments, should be stated more explicitly.\n- **Lines 86-87**: (Pedantic comment) in addition to the stated condition the matrices need to be all diagonalizable by themselves as well.\n- **Lines 144-148**: The choice of P through post-processed mixture seems convoluted. Please elaborate on:\n    - Whether this was the original design choice\n    - Alternative approaches considered (e.g., input-dependent low-rank followed by hardmax)\n    - Comparative analysis of different parameterization strategies\n- **Line 165**: (Pedantic comment) Property 2 alone is insufficient to justify associative scan usage. A remark after line 157 demonstrating that matrices in H can be written as PD would improve rigor.\n- **Section 4.2**: Consider expanding the analysis with additional comparisons that would strengthen the paper's impact. I assume only SSM blocks are compared here - it would be valuable to explore whether including MLPs afterwards changes the relative performance. Additionally, reporting how many layers Mamba requires to reach 100% accuracy would provide an extremely compelling addition to demonstrate the efficiency gains of your approach.\n- **Lines 227-231**: The architecture description needs expansion, potentially in an appendix.\n\n\n### Appendix Issues \n\n- **Notation Consistency**: Inconsistent use of Z/nZ, Zn, and C_n for the same group throughout\n- **Lines 40-41**: T(A) notation unclear; specify the second element of delta in Q and define σ₁,...,T\n- **Lines 53-57**: Quantify all mathematical objects\n- **Lines 66-67**: Inconsistent switching between \"group\" and \"automaton\" terminology\n- **Line 141**: Verify if C₄/C₂ × C₄ should be (C₂ × C₄)/C₄; inconsistent Z₄ and C₄ usage\n- **Lines 144-146**: Notation {e}/C₄, {e}/Z₄, {e}/G should be reversed\n- **Line 173**: Reference Definition 12 when first using \"Uniform\" in Definition 10\n- **Line 181**: There appears to be an inconsistency regarding fan-in restrictions. The text states that \"NC1 allows for logarithmic depth, but restricts the fan-in of the gates to 2,\" while the definition only mentions that fan-in is bounded. Please clarify this discrepancy.\n- **Line 231**: Use standard notation instead of ∂⁺ for total derivative\n- **Line 267**: In the equation \"xₖ = Aₖ xₖ₋₁ + bₖ\", the subscript of A and b should be \"k-1\" for consistency with both the proof and the results presented below.\n- **Line 273**: Quantify P appropriately\n- **Equation below 269**: (Pedantic comment) Specify that α and β are not all zero in summation equalities\n\n\n\n## Recommendation\n\nThis paper addresses an important problem in the SSM literature with a theoretically sound and well-motivated approach. The core contribution—finding a middle ground between diagonal SSMs and unstructured matrices through the PD parameterization—is valuable and tackles a fundamental limitation in the field. However, the current submission has notable gaps that prevent clear acceptance at this stage.\n\nI would genuinely like to accept this paper as it shows strong theoretical promise and addresses a central problem in the SSM literature. However, it requires multiple small but targeted improvements: the appendix and proofs need polishing, the experiments need improvement, and experimental details must be included to ensure fair comparisons with competing models. With proper revision addressing these specific issues, this work would clearly merit acceptance.",
+    "final_justification": "I recommend acceptance. The authors have addressed all raised concerns, expanded the experimental evaluation, and clarified the theoretical framework. The work tackles a fundamental limitation of modern SSMs and represents a meaningful contribution that merits publication."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 5,
+    "quality": 3,
+    "clarity": 2,
+    "significance": 4,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

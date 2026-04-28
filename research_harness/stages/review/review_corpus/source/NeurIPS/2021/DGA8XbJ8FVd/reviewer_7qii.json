@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "DGA8XbJ8FVd",
+  "reviewer": "7qii",
+  "paper": {
+    "title": "Skipping the Frame-Level: Event-Based Piano Transcription With Neural Semi-CRFs",
+    "authors": [
+      "Yujia Yan",
+      "Frank Cwitkowitz",
+      "Zhiyao Duan"
+    ],
+    "abstract": "Piano transcription systems are typically optimized to estimate pitch activity at each frame of audio. They are often followed by carefully designed heuristics and post-processing algorithms to estimate note events from the frame-level predictions. Recent methods have also framed piano transcription as a multi-task learning problem, where the activation of different stages of a note event are estimated independently. These practices are not well aligned with the desired outcome of the task, which is the specification of note intervals as holistic events, rather than the aggregation of disjoint observations. In this work, we propose a novel formulation of piano transcription, which is optimized to directly predict note events. Our method is based on Semi-Markov Conditional Random Fields (semi-CRF), which produce scores for intervals rather than individual frames. When formulating piano transcription in this way, we eliminate the need to rely on disjoint frame-level estimates for different stages of a note event. We conduct experiments on the MAESTRO dataset and demonstrate that the proposed model surpasses the current state-of-the-art for piano transcription. Our results suggest that the semi-CRF output layer, while still quadratic in complexity, is a simple, fast and well-performing solution for event-based prediction, and may lead to similar success in other areas which currently rely on frame-level estimates.",
+    "keywords": [
+      "Music",
+      "Audio",
+      "Piano Transcrition",
+      "Music Transcription",
+      "Semi-Markov",
+      "CRFs",
+      "Sound Event Detection",
+      "Music Information Retrieval"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=DGA8XbJ8FVd"
+  },
+  "review_fields": {
+    "summary": "This paper presents an event-based polyphonic piano transcription model using neural semi-CRFs. Unlike the state-of-the-art \"onset and frame\" model and its variations, which rely on frame-level note state predictions, this work is based on segmenting a long sequence into a set of intervals which correspond to notes and silences. They also propose a forward-backward learning algorithm for computing the score functions of the intervals and, as a result, it enables to compute the partition function. This new approach achieved comparable performance to previous state-of-the-arts and it has a great potential to audio event detection tasks.",
+    "main_review": "General Comments:\n\nI have been working on polyphonic piano transcription about 10 years. To my knowledge, the event-based algorithm in this paper is the first attempt beyond the frame-level note-state prediction approach, since deep learning became popular. Segmenting intervals and scoring it with event types to find note events is a great idea. With this new approach, the performance reached those of the state-of-the art models. In particular, note-level accuracy with offset is very high. This makes sense considering that this event-based method see a note event as a whole to compute the score and this note offset estimation can be better than frame-level approaches. I read the paper with a great fun. I am not sure if the semi-CRF algorithms (Algorithm 1 and 2) are very novel in terms of the NeurIPS standard, but this event-based approach will have a strong impact on automatic music transcription in the field of Music Information Retrieval (MIR) and acoustic event detection in the field of Detection and Classification of Acoustic Scenes and Events (DCASE). I strongly argue for accepting this paper.  \n\nDetailed Comments:\n- line 49: \"400-1600 frames with around 90 labeling channels\" --> This was hard to understand until I read the experiment section. What is \"labeling channel\"? \n\n- line 88 - 90: The differences of semi-CRF layer from previous works are addressed in two aspects. On top of that, the \"polyphonic nature\" where note event (or segmented intervals) can overlapped over different notes (but not over time), could be also added as a difference?\n\n- line 191-192: the element-wise multiplication hi ⊙ hj , and the first three moments for the contextual embeddings are concatenated as input of the MLP module. Why are they added?  Without the element-wise multiplication and the three moments, the performance significantly decreases?  The authors did not explain the motivation to add the multiplication and moments.  \n\n- line 199: \"We also experimented with scaling the intervalic score by the length of the interval.\" --> The length scale was part of the ablation study in Table 2 but this short sentence is very hard for me to understand what it is and why it works.\n\n- Section 4: more details of \"eventType\" will be necessary to fully understand the model. \n\n- Section 4.5: it is nice to have a section that address the time complexity.\n\n- Page 9: the last page has a lot of room to put more detailed analysis of the results. For example, some visualizations of predicted pianoroll representation and its comparison to those from the onset-and-frame models (Hawthorne et al.) and its variant (Kong et al.) with respect to the ground truth will provide insight about their difference (I expect to see the improved note-off prediction)",
+    "limitations_and_societal_impact": "This paper did not address the limitations and I also cannot find any specific one in the task and experiment scope of this paper."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

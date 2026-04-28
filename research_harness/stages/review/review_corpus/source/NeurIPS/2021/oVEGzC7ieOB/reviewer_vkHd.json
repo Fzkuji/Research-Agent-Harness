@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "oVEGzC7ieOB",
+  "reviewer": "vkHd",
+  "paper": {
+    "title": "Constrained Two-step Look-Ahead Bayesian Optimization",
+    "authors": [
+      "Duke Zhang",
+      "Xiangyu Zhang",
+      "Peter I. Frazier"
+    ],
+    "abstract": "Recent advances in computationally efficient non-myopic Bayesian optimization offer improved query efficiency over traditional myopic methods like expected improvement, with only a modest increase in computational cost. These advances have been largely limited to unconstrained BO methods with only a few exceptions which require heavy computation. For instance, one existing multi-step lookahead constrained BO method (Lam & Willcox, 2017) relies on computationally expensive unreliable brute force derivative-free optimization of a Monte Carlo rollout acquisition function. Methods that use the reparameterization trick for more efficient derivative-based optimization of non-myopic acquisition functions in the unconstrained setting, like sample average approximation and infinitesimal perturbation analysis, do not extend: constraints introduce discontinuities in the sampled acquisition function surface. Moreover, we argue here that being non-myopic is even more important in constrained problems because fear of violating constraints pushes myopic methods away from sampling the boundary between feasible and infeasible regions, slowing the discovery of optimal solutions with tight constraints. In this paper, we propose a computationally efficient two-step lookahead constrained Bayesian optimization acquisition function (2-OPT-C) supporting both sequential and batch settings. To enable fast acquisition function optimization, we develop a novel likelihood ratio-based unbiased estimator of the gradient of the two-step optimal acquisition function that does not use the reparameterization trick. In numerical experiments, 2-OPT-C typically improves query efficiency by 2x or more over previous methods, and in some cases by 10x or more.",
+    "keywords": [
+      "Bayesian optimization",
+      "Non-myopic",
+      "Gaussian processes",
+      "Derivative-free optimization"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=oVEGzC7ieOB"
+  },
+  "review_fields": {
+    "summary": "The paper studies look-ahead Bayesian optimization (BO) under inequality constraints. The authors\ndevelop a principled acquisitions for two-step look-ahead and motivate why it is necessary, especially\nin the constrained setting. They propose a method to optimize the acquisition based on an importance\nsampling strategy and evaluate the approach against other methods on 3 synthetic problems.\n\nWhile this direction of research is promising, I do not believe the paper is ready for publication\nyet at Neurips.",
+    "main_review": "1. The paper does not do a good job of motivating the problem. The authors mention two applications\nin passing in lines 26/27, without sufficient explanation. For instance, can you give some concrete\ninstances where people have maximized model accuracy under run time and fairness constraints? What\nwould the fairness constraints look like?\nIn any case, you should delve deep into one or two of these examples, explain the reasons for the\nconstraints clearly, and cite other sources which have used such methods. **\n\n2. My main concern with the paper is its empirical evaluation. For a paper where the focus is on\nmethod and evaluation (as opposed to theory), one expects a more beefed up empirical evaluation.\nThis includes 1-3 real benchmarks which ideally arise out of motivating applications, more baselines,\nand ablation studies.\n- The authors have cited a bunch of papers in 2.1 and you should evaluate your method against them.\n  It is also usually a good idea to compare against random search when evaluating BO methods. Right\n  now, the paper has just 2 myopic baselines and 1 non-myopic baseline.\n- It is hard to make sense of Table 1 where all results except for 2-OPTC is obtained from another\n  paper. BO methods tend to be quite sensitive to hyperparameter choices so it is not clear if the\n  hyperparameters were set the same way. On the same note, how did you choose your GP\n  hyperparameters?\nIn its current form, the empirical evaluation does not make a strong case for its use in practice.\nHaving one or two compelling real benchmarks would also address 1 above, as it will motivate the\nsetting well.\n\n3. The claim that all BO methods are myopic is misleading. While EI is admittedly myopic,\nmethods such as UCB and Thompson sampling are known to optimally balance exploration and exploitation\nto optimize a function over several rounds. The authors' method essentially corrects the EI\ncriterion to work in this setting. I acknowledge that UCB methods are trickier to apply in the\nconstrained setting, there is a simple and intuitive TS implementation (simply sample from f and g\nconditioned on the posterior, say f', g', and choose the maximizer of f' under the g'>0 constraint).\n- On this note, you could also include TS as a potential baseline in your evaluation.\n\nOther comments/suggestions\n- I liked Figure 1 and the explanation that follows on why look-ahead is especially important in\n  constrained BO. It would recommend bringing this early on to motivate the method.\n- You might want to consider including a separate Related work section. Right now, parts of it is\n  included in the middle of the introduction, and parts in Section 2.1. A separate Related work\n  section, allows a reader to quickly locate and identify how your work is different from prior\n  work.\n- Don't use citations as nouns in a sentence. E.g. in line 90, use \"XYZ et al. propose ..\" instead\n  of \"[5] proposes ..\". This can be achieved via the \\citet latex command.\n- Do you have only one inequality constraint or multiple? Line 24 says multiple, but later on in the\n  text, you use only 1.\n\nPS:\n** One application that I have encountered in practice where such it is necessary to handle\ninequality constraints is drug discovery, where you wish to maximize potency, subject to constraints\non the specificity and toxicity. Ideally, you would motivate the problem set up with an application\nyou use in your experimental evaluation. If this is something that interests you, you could check\nout the ChemBL or PubChem databases."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

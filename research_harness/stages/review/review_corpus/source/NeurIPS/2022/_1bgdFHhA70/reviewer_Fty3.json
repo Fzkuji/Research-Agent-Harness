@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "_1bgdFHhA70",
+  "reviewer": "Fty3",
+  "paper": {
+    "title": "Evident: a Development Methodology and a Knowledge Base Topology for Data Mining, Machine Learning and General Knowledge Management",
+    "authors": [
+      "Mingwu Gao",
+      "Samer Haidar"
+    ],
+    "abstract": "Software has been developed for knowledge discovery, prediction and management for over 30 years. However, there are still unresolved pain points when using existing project development and artifact management methodologies. Historically, there has been a lack of applicable methodologies. Further, methodologies that have been applied, such as Agile, have several limitations including scientific unfalsifiability that reduce their applicability. Evident, a development methodology rooted in the philosophy of logical reasoning and EKB, a knowledge base topology, are proposed. Many pain points in data mining, machine learning and general knowledge management are alleviated conceptually. Evident can be extended potentially to accelerate philosophical exploration, science discovery, education as well as knowledge sharing & retention across the globe. EKB offers one solution of storing information as knowledge, a granular level above data. Related topics in computer history, software engineering, database, sensing hardware, philosophy, and project & organization & military managements are also discussed.",
+    "keywords": [
+      "Data Mining",
+      "Machine Learning",
+      "Knowledge Management",
+      "Computer History",
+      "Software Engineering",
+      "Database",
+      "Sensing Hardware",
+      "Philosophy",
+      "Knowledge Sharing & Retention",
+      "Project Management"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=_1bgdFHhA70"
+  },
+  "review_fields": {
+    "summary": "The paper discusses problems (called pain points in the paper) in using the agile methodology for Data mining/Machine learning/knowledge management. It then presents a software development methodology for data mining tasks that can also be used for machine learning and knowledge management. Activities in a project are broken down into observations, hypotheses and tests that denote facts, knowledge and evaluation respectively. These serve as containers that can also used for storing and managing project related artefacts.",
+    "strengths_and_weaknesses": "Strength:\n\n- The paper identifies the need for having a software development methodology for DM/ML/KM\n- The paper presents a summary of pain points for DM/ML/KM \n\nWeaknesses:\n\n- The paper lacks scientific rigor. Although some of the ideas are interesting, there is no experimentation/evaluation to substantiate the proposed methodology\n- The paper does not present any literature review of the area, that raises questions about whether the work in the paper is indeed a novel contribution",
+    "questions": "- The authors have discussed the agile methodology and problems in its application for software development and artefact management for dm/ml/km. However, why compare with agile only? It would be better to compare with other DM methodologies that have been proposed. For example, the paper talks about the CRISP-DM, but lists limitations of this methodology briefly. No other methodology is mentioned. \n\n- How have goals and approaches been differentiated? For example, how is Individuals and interactions over processes and tools an approach and Responding to change over following a plan a goal\n\n- The paper says only four principles are actionable, but lists only three\n\n- The fact that agile is unfalsifiable is mentioned, and treated as a drawback. However, it is not clear which development methodologies  (if any) are falsifiable\n\n- The paper says the scope of Agile is not defined. Again,  it would be good to mention whether all other methodologies have scope defined\n\n- How have the pain points in Table 2 been identified? What is the last column?\n\n- How do the  Fig 3 a), b) and c) represent induction, abduction and deduction? Some explanation is required\n\n- Were experiments not carried out using Evident? At least something concrete is required, perhaps a case study with examples. Otherwise, the claims about alleviation of pain points in section 5 are not justified.\n\n- The paper title mentions topology. Where is this discussed subsequently? \n\n- I am not sure I understand what is meant by the following:\n\n\"This paper discusses limitations in agile as a scientific claim\"\n\"Beyond software development, Evident is illustrated to be applicable in many aspects of society\"\n\"Although control experiment challenges or absence of quantitative project Agility measurements may explain no measurable scientific evidence,....\"\n\"DM has not been regarded highly collaborative and scalable activities to deliver high throughput Knowledge\"\n\"resulting in the under performance of production Algo\"",
+    "limitations": "As far as sections are concerned, the authors have mentioned pain points not alleviated under section 6.3."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 3,
+    "soundness": 1,
+    "presentation": 2,
+    "contribution": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

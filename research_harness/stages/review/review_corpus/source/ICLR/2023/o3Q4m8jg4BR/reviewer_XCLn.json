@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "o3Q4m8jg4BR",
+  "reviewer": "XCLn",
+  "paper": {
+    "title": "LS-IQ: Implicit Reward Regularization for Inverse Reinforcement Learning",
+    "authors": [
+      "Firas Al-Hafez",
+      "Davide Tateo",
+      "Oleg Arenz",
+      "Guoping Zhao",
+      "Jan Peters"
+    ],
+    "abstract": "Recent methods for imitation learning directly learn a $Q$-function using an implicit reward formulation rather than an explicit reward function. However, these methods generally require implicit reward regularization to improve stability and often mistreat absorbing states. Previous works show that a squared norm regularization on the implicit reward function is effective, but do not provide a theoretical analysis of the resulting properties of the algorithms. In this work, we show that using this regularizer under a mixture distribution of the policy and the expert provides a particularly illuminating perspective: the original objective can be understood as squared Bellman error minimization, and the corresponding optimization problem minimizes a bounded $\\chi^2$-Divergence between the expert and the mixture distribution. This perspective allows us to address instabilities and properly treat absorbing states. We show that our method, Least Squares Inverse Q-Learning (LS-IQ), outperforms state-of-the-art algorithms, particularly in environments with absorbing states. Finally, we propose to use an inverse dynamics model to learn from observations only. Using this approach, we retain performance in settings where no expert actions are available.",
+    "keywords": [
+      "Inverse Reinforcement Learning",
+      "Imitation Learning",
+      "Reward Regularization",
+      "Deep Reinforcement Learning"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=o3Q4m8jg4BR"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper provides a theoretical analysis of Inverse soft Q-Learn (IQ-Learn) and proposes a novel algorithm named Least Squares Inverse Q-learning (LS-IQ), which outperforms state-of-the-art algorithms such as GAIL, VAIL, IQ, and SQIL. At first, the authors show that the maximum entropy IR objective with the regularizer proposed by Garg et al. (2021) is identical to a minimization of a $\\chi^2$ divergence between the expert state-action distribution and a mixture of expert and learner. Then, the authors formulate the IRL objective using the regularizer as the entropy-regularized least-squares problem, which is related to LSGAN. To derive the practical algorithm, the authors modify the loss function for the Q-function to incorporate the term added by the regularizer.",
+    "strength_and_weaknesses": "Strength\n1. The paper is well-written, and I found the main contributions of this study to be novel.\n2. The proposed method provides the correct way to deal with absorbing states in inverse reinforcement learning.\n3. Show the relation between the proposed method, IQ-Learn, and SQIL. \n\nWeakness\n1. The proposed method is evaluated on the MuJoCo benchmarks, but they are relatively easy for modern IRL methods. It is unclear whether the proposed method is robust to distribution shifts between the expert and agent distributions. \n2. As described below, some technical details are not shown in the manuscript. In particular, $r_{\\min}(s)$ in Equation (20) should be explained.",
+    "clarity,_quality,_novelty_and_reproducibility": "1. The original regularizer $\\psi_{\\pi_E}(r)$ is recovered when $\\alpha = 1$. In this case, $r_{\\min}$ defined in Proposition 3.1 goes to negative infinity. Is it the main reason the original regularizer causes instabilities in continuous action spaces? \n\n2. The difference between Equations (13) and (14) is interesting. However, I am unsure whether $\\tilde{Q}(s, a)$ converges or not when the agent policy converges to the expert policy. Although Figure 1 shows that the proposed method deals with absorbing states correctly, it would be better to discuss the convergence of $\\tilde{Q}(s, a)$ at the absorbing states. \n\n3. In practice, sampling from $d_{\\pi_E}$ or $d_{\\pi}$ is infeasible. Would you explain how the training data, especially $\\mathcal{D}_\\pi$ is collected?\n\n4. I do not fully understand the discussions given in Section 3.5. For example, if the minimization of Equation (13) is challenging, minimizing $E_{d_\\pi}[(r_Q(s, a) – r_{\\min})^2]$ is also challenging. In addition, $r_{\\min}(s)$ is introduced in Equation (20), but it is not defined before. Is it a parameterized function of the state?",
+    "summary_of_the_review": "I think this paper studies an important problem and has some interesting theoretical results. Moreover, this paper is well-written, and the contribution is quite impressive.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "Q5RYn6jagC",
+  "reviewer": "Ga5j",
+  "paper": {
+    "title": "Understanding the Limits of Vision Language Models Through the Lens of the Binding Problem",
+    "authors": [
+      "Declan Iain Campbell",
+      "Sunayana Rane",
+      "Tyler Giallanza",
+      "C. Nicolò De Sabbata",
+      "Kia Ghods",
+      "Amogh Joshi",
+      "Alexander Ku",
+      "Steven M Frankland",
+      "Thomas L. Griffiths",
+      "Jonathan D. Cohen",
+      "Taylor Whittington Webb"
+    ],
+    "abstract": "Recent work has documented striking heterogeneity in the performance of state-of-the-art vision language models (VLMs), including both multimodal language models and text-to-image models. These models are able to describe and generate a diverse array of complex, naturalistic images, yet they exhibit surprising failures on basic multi-object reasoning tasks -- such as counting, localization, and simple forms of visual analogy -- that humans perform with near perfect accuracy. To better understand this puzzling pattern of successes and failures, we turn to theoretical accounts of the binding problem in cognitive science and neuroscience, a fundamental problem that arises when a shared set of representational resources must be used to represent distinct entities (e.g., to represent multiple objects in an image), necessitating the use of serial processing to avoid interference. We find that many of the puzzling failures of state-of-the-art VLMs can be explained as arising due to the binding problem, and that these failure modes are strikingly similar to the limitations exhibited by rapid, feedforward processing in the human brain.",
+    "keywords": [
+      "visual reasoning",
+      "foundation models",
+      "multi-object reasoning",
+      "cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Q5RYn6jagC"
+  },
+  "review_fields": {
+    "summary": "Vision Language Models (VLMs), including models that are able to describe images, such as GPT-4v, and models that generate images given a text description, such as DALL-E, display several failures in tasks that humans are able to perform effortlessly. Such tasks include counting, localizing a given object in an image, and visual analogy. This paper interprets these failures as resulting from a trade-off between representational flexibility (the ability to generalize compositionally to novel combinations of features) and channel capacity (the number of entities that can be represented simultaneously). This trade-off corresponds to a well-established phenomenon in cognitive science, the binding problem. The binding problem identifies a series of failures in human visual perception, that arise in many situations in which human subjects need to process multi-object scenes under time constraints. Such constraints prevent them from processing those scenes in a sequential way, and force them to rely on parallel processing, which incurs into capacity limits. This leads to phenomena such as illusory conjunctions, in which a feature is bound to the wrong object: for example, a green triangle might be falsely detected in a scene comprising red triangles, green circles and red circles. The failures shown by VLMs are remarkably similar, suggesting that they might result from the lack of a serial processing mechanism like the one humans can rely on in the absence of time constraints. To test this hypothesis, in this work VLMs are tested on two classic cognitive tasks (counting and visual search), showing error patterns similar to time-constrained human subjects. In counting, a sharp drop in performance is observed with scenes comprising more than 4 to 6 objects, a similar range to that beyond which humans are unable to “subitize” (reliably count objects in parallel, without serial processing). In visual search, conjunctive search, in which a unique combination of features needs to be detected, led to a sharp drop in performance with increasing numbers of objects, while disjunctive search, in which targets can be detected based on a single feature, did not. These results are remarkably similar to the symptoms of the binding problem in humans. The authors further posit that these failures result from interference between target and distractor objects, and not by the number of objects alone. They test this hypothesis by parametrically generating scenes that vary in their feature entropy: the amount of variation in the two features, shape and color, across all objects. Using a scene description task, they find that errors were most frequent when the feature entropy was intermediate, leading to a combination of diversity in features and sharing of features between objects. Finally, the VLMs are tested on a visual analogy task. The known failures of these models in solving these tasks is hypothesized to also depend on limitations in the number of objects that can be processed in parallel. To alleviate this problem, the authors propose a simple “decomposed condition”: feeding the target stimuli (pairs of objects) to the models in sequence, rather than as part of a single image (”unified condition”). The decomposed condition mimicks the serial processing that humans adopt in similar tasks. In both the analogy task and extraction of individual object features, VLMs perform better in the decomposed condition than the unified condition, providing further evidence that VLMs’ failures are due to capacity limits in binding features to multiple objects in parallel.",
+    "strengths": "- The paper presents a simple framework to explain failure cases of VLMs, directly inspired by a long tradition of research in cognitive science. It is a great example of how cognitive science research can inform the study of widespread deep learning models, with many potential applications in evaluating and improving such models.\n- The research methods are sound: the link between the theoretical question and the experiments is clear, and models are tested across multiple tasks and conditions (e.g. 2D and 3D scenes, different object categories) to ensure that results are robust.\n- Creative, but at the same time simple and elegant, ways to measure the relation between the binding problem and VLM failures (feature entropy) and to alleviate the binding problem in VLMs (decomposed condition) are proposed.\n- The interpretation of the results is fair and clear.",
+    "weaknesses": "The weaknesses are mostly related to the lack of detail concerning some of the methods, or the lack of explanations about certain choices. No major shortcoming was found by this reviewer.\n\n- In some of the prompts used to run experiments on the models (e.g. for counting), the model is first prompted to describe every object in the image, and then to perform the task. In others (e.g. disjunctive visual search) the model is directly asked to answer the question of interest (e.g. whether a target object is present in the image or not). Moreover, prompts from some tasks (e.g. 2D conjunctive search) include a form of role-playing \"You have perfect vision and pay great attention to detail...\". Since it is well known that similar techniques can have a great impact on the quality of language models' responses, the authors should provide an explanation of why these techniques were used in certain conditions and not others. Otherwise, performance comparisons between conditions (e.g. conjunctive vs. disjunctive search) can become harder to interpret.\n- In the scene description task, a language model is used to parse the descriptions. These are, I suppose, harder to parse than the simple answers provided in other tasks, such as the number of objects in the counting task or True or False in the visual search task. The authors should show that the language model was accurate in parsing these descriptions. Manually validating all of them would be infeasible, but at least a few examples to show the language models' accuracy should be provided in the supplementary materials.\n- Also in the scene description task, the generation of scenes with different feature entropies should be explained in more detail. Did the feature entropy manipulation simply consist in setting a particular number of shapes and features, and assigning them to a fixed number of objects? Or was the feature entropy computed in a different way? Making this clear would also help interpreting the values on the feature entropy that are shown in Figure 3.\n- In Figure 3, it is a bit hard to tell how many levels of feature entropy each number of objects has. For example, the 10 objects condition has two small bends that make it look like there are only three levels. For visualization purposes, I would recommend adding markers to the plot. Additionally, the values on the x-axis don't seem to align with the actual levels of feature entropy that were used. I understand that different number of objects had different levels, making it impossible to accomodate all possible levels, but if at least some of them could be aligned that would make the plot easier to read.\n- Also related to the scene description task, an explanation should be added of how the \"edit distance between the true description of the scene and the model's description\", the measure of errors, was computed. Does this mean that, for each (ground-truth) object in the scene, the most similar object (in terms of shape and color) in the description was chosen, and differences between that object and the ground truth were counted (e.g. color different = 1 error, shape different = 1 error)? How was, for example, a missing object in the description counted? As 2 errors, as both the color and shape were missing? A detailed explanation should be added.\n- The visual analogy task is similarly missing a detailed explanation of the pair generation process. In particular, what were the relations included in the task? Figure 4 apparently shows a \"sameness\" relation, in which target pair 2 is more similar to the source pair as they both feature objects that differ in color. Was this the only relation included? Also, on page 8, line 272 you write that the incorrect target \"shared only one of the relations\" with the source pair. I assume that this means that in figure 4, for example, TP2 shares both the \"same shape\" and the \"different color\" relation with the source pair, while TP1 only shares \"same shape\". Making this explicit and clarifying with an example would make this part easier for the reader.\n- The decomposed condition was only applied to the analogy task: was there a reason for this? As it's proposed as a general recipe for alleviating feature binding problems in VLMs, it would be more convincing if it was shown to work on a variety of tasks. The other tasks in the paper, in particular, seem to me like they would be amenable to be presented sequentially to the models. For example, a sequence of images containing only a few items at a time could be presented in visual search, simulating the way in which human participants serially scan such displays with eye movements in visual search experiments. If I am missing some practical reasons why conducting these experiments with a decomposed condition would be infeasible, or uninformative, I would be grateful to the authors if they could explain them.",
+    "questions": "No particular questions. I have mentioned a few points that I believe should be clarified in the \"weaknesses\" section, as I believe the paper would benefit from the addition of their answers.",
+    "limitations": "One limitation which has not been acknowledged is the use of closed-source models. This could compromise the reproducibility of this work, and will limit the ability of follow-up works to investigate the mechanisms underlying these findings."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 6187 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 6187,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 6187
+  }
+}

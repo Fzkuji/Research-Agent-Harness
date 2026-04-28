@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "XOAjcE5GerI",
+  "reviewer": "aD1b",
+  "paper": {
+    "title": "On learning sparse vectors from mixture of responses",
+    "authors": [
+      "Nikita Polyanskii"
+    ],
+    "abstract": "In this paper, we address two learning problems. Suppose a family of $\\ell$ unknown sparse vectors is fixed, where each vector has at most $k$ non-zero elements. In the first problem, we concentrate on robust learning the supports of all vectors from the family using a sequence of noisy responses. Each response to a query vector shows the sign of the inner product between a randomly chosen vector from the family and the query vector. In the second problem, we aim at designing queries such that all sparse vectors from the family can be approximately reconstructed based on the error-free responses.  This learning model was introduced in the work of Gandikota et al., 2020, and these problems can be seen as generalizations of support recovery and approximate recovery problems, well-studied under the framework of  1-bit compressed sensing.  As the main contribution of the paper, we prove the existence of learning algorithms for the first problem which work without any assumptions. Under a mild structural assumption on the unknown vectors, we also show the existence of learning algorithms for the second problem and rigorously analyze their query complexity.",
+    "keywords": [
+      "sparse vectors",
+      "mixture of binary linear classifiers",
+      "1-bit compessed sensing",
+      "query complexity",
+      "noisy measurements"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=XOAjcE5GerI"
+  },
+  "review_fields": {
+    "summary": "The paper considers the problem of recovering a mixture of unknown sparse vectors from noisy and noiseless sign responses. A response is the sign of the inner product between a randomly sampled unknown sparse vector from the mixture and a query vector (designed or random), up to some noise. The main contribution of the paper is to show existence of an algorithm that can recovery the support of the unknown vectors in the presence of noise. In the noiseless case and under mild assumptions on the uniqueness of the support set of the unknown sparse vectors and a bound on the size of the non-zero entries in these unknown vectors, the authors show existence of an algorithm that can estimate the sparse vector up to an arbitrary precision. The precision of the estimation depends inversely on the number of queries.",
+    "main_review": "The paper shows that the support of the unknown vectors can be recovered with high probability if there are $O(kl^3 \\max(2el,2ek)^{\\min(l,k)}\\log^2n)$ queries, where $k$ is the sparsity of unknown vectors, $l$ is the number of unknown vectors, and $e$ is the Euler's number. Is this sample complexity optimal in $k$ and $l$? A discussion on this would be useful.\n\nLooking at section 5.2 and Theorem 2, the queries that correspond to the result in Theorem 2 are random gaussian. It would be useful to include this in Theorem 2.\n\nSome parts of the paper are well-written, and some are hard to follow. For example, the authors state that the their \"main contribution lies in a new support recovery algorithm\" (line 48) however to my understanding the paper primarily focuses on proving existence of an algorithm. Robust-resolvable matrices is used in line 58 without a reference to its definition provided in the paper later. Also, the paper will benefit from a notation section. The norm in problem 1 is unclear.\n\nThe paper does not provide a significant comparison to prior and related works.",
+    "limitations_and_societal_impact": "The limitations of the paper is mentioned in the concluding section and in the last paragraph of section 1.1."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

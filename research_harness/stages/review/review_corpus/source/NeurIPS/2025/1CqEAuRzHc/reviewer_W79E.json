@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "1CqEAuRzHc",
+  "reviewer": "W79E",
+  "paper": {
+    "title": "CVGL: Causal Learning and Geometric Topology",
+    "authors": [
+      "Songsong Ouyang",
+      "Yingying Zhu"
+    ],
+    "abstract": "Cross-view geo-localization (CVGL) aims to estimate the geographic location of a street image by matching it with a corresponding aerial image. This is critical for autonomous navigation and mapping in complex real-world scenarios. However, the task remains challenging due to significant viewpoint differences and the influence of confounding factors. To tackle these issues, we propose the Causal Learning and Geometric Topology (CLGT) framework, which integrates two key components: a Causal Feature Extractor (CFE) that mitigates the influence of confounding factors by leveraging causal intervention to encourage the model to focus on stable, task-relevant semantics; and a Geometric Topology Fusion (GT Fusion) module that injects Bird’s Eye View (BEV) road topology into street features to alleviate cross-view inconsistencies caused by extreme perspective changes. Additionally, we introduce a Data-Adaptive Pooling (DA Pooling) module to enhance the representation of semantically rich regions. Extensive experiments on CVUSA, CVACT, and their robustness-enhanced variants (CVUSA-C-ALL and CVACT-C-ALL) demonstrate that CLGT achieves state-of-the-art performance, particularly under challenging real-world corruptions.",
+    "keywords": [
+      "cross-view",
+      "casual learning",
+      "BEV"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=1CqEAuRzHc"
+  },
+  "review_fields": {
+    "comment": "Dear Authors, Thank you for the detailed response and addressing my comments about: (1) Systematic comparison of (a) Causal Features Extractor vs Features using an off-the-shelf pre-trained encoder, (b) GT fusion vs normal cross-attention based fusion, and (c) data-adaptive pooling vs traditional global average/max pooling; (2) Important Hyper-parameters, and (3) Adding recent baselines. \n\nThe paper achieves strong results on popular cross-view geo-localization benchmarks by consistently performing better than existing open-source models, and the three-fold novelties proposed in this paper (GT Fusion, the CFE, and DA Pooling) can contribute to the community. \n\nThere are two important issues the paper still misses out: (1) A non-cherry-picked qualitative comparison with baselines, showing a broad variety of samples where the model performs better than existing models, (2) a honest error analysis, describing where the proposed system fail, and some discussion on future works. \n\nHowever, since both issues can be included in the final manuscript (or, can be analyzed by future researchers if the source code and pre-trained checkpoints are released), I decide to raise my score to a 'borderline accept'."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

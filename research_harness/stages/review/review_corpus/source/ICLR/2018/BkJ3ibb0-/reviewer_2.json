@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "BkJ3ibb0-",
+  "reviewer": "2",
+  "paper": {
+    "title": "Defense-GAN: Protecting Classifiers Against Adversarial Attacks Using Generative Models",
+    "authors": [
+      "Pouya Samangouei",
+      "Maya Kabkab",
+      "Rama Chellappa"
+    ],
+    "abstract": "In recent years, deep neural network approaches have been widely adopted for machine learning tasks, including classification. However, they were shown to be vulnerable to adversarial perturbations: carefully crafted small perturbations can cause misclassification of legitimate images. We propose Defense-GAN, a new framework leveraging the expressive capability of generative models to defend deep neural networks against such attacks. Defense-GAN is trained to model the distribution of unperturbed images. At inference time, it finds a close output to a given image which does not contain the adversarial changes. This output is then fed to the classifier. Our proposed method can be used with any classification model and does not modify the classifier structure or training procedure. It can also be used as a defense against any attack as it does not assume knowledge of the process for generating the adversarial examples. We empirically show that Defense-GAN is consistently effective against different attack methods and improves on existing defense strategies.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=BkJ3ibb0-"
+  },
+  "review_fields": {
+    "review": "This paper presents Defense-GAN: a GAN that used at test time to map the input generate an image (G(z)) close (in MSE(G(z), x)) to the input image (x), by applying several steps of gradient descent of this MSE. The GAN is a WGAN trained on the train set (only to keep the generator). The goal of the whole approach is to be robust to adversarial examples, without having to change the (downstream task) classifier, only swapping in the G(z) for the x.\n\n+ The paper is easy to follow.\n+ It seems (but I am not an expert in adversarial examples) to cite the relevant litterature (that I know of) and compare to reasonably established attacks and defenses.\n+ Simple/directly applicable approach that seems to work experimentally, but\n- A missing baseline is to take the nearest neighbour of the (perturbed) x from the training set.\n- Only MNIST-sized images, and MNIST-like (60k train set, 10 labels) datasets: MNIST and F-MNIST.\n- Between 0.043sec and 0.825 sec to reconstruct an MNIST-sized image.\n? MagNet results were very often worse than no defense in Table 4, could you comment on that?\n- In white-box attacks, it seems to me like L steps of gradient descent on MSE(G(z), x) should be directly extended to L steps of (at least) FGSM-based attacks, at least as a control."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

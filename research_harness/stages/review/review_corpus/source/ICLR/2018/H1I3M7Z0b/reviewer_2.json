@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "H1I3M7Z0b",
+  "reviewer": "2",
+  "paper": {
+    "title": "WSNet: Learning Compact and Efficient Networks with Weight Sampling",
+    "authors": [
+      "Xiaojie Jin",
+      "Yingzhen Yang",
+      "Ning Xu",
+      "Jianchao Yang",
+      "Jiashi Feng",
+      "Shuicheng Yan"
+    ],
+    "abstract": "We present a new approach and a novel architecture, termed WSNet, for learning compact and efficient deep neural networks. Existing approaches conventionally learn full model parameters independently and then compress them via \\emph{ad hoc} processing such as model pruning or filter factorization. Alternatively, WSNet proposes learning model parameters by sampling from a compact set of learnable parameters, which naturally enforces {parameter sharing} throughout the learning process. We demonstrate that such a novel weight sampling approach (and induced WSNet) promotes both weights and computation sharing favorably. By employing this method, we can more efficiently learn much smaller networks with competitive performance compared to baseline networks with equal numbers of convolution filters. Specifically, we consider learning compact and efficient 1D convolutional neural networks for audio classification. Extensive experiments on multiple audio classification datasets verify the effectiveness of WSNet. Combined with weight quantization, the resulted models are up to \\textbf{180$\\times$} smaller and theoretically up to \\textbf{16$\\times$} faster than the well-established baselines, without noticeable performance drop.",
+    "keywords": [
+      "Deep learning",
+      "model compression"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H1I3M7Z0b"
+  },
+  "review_fields": {
+    "review": "This paper presents a method for reducing the number of parameters of neural networks by sharing the set of weights in a sliding window manner, and replicating the channels, and finally by quantising weights. The paper is clearly written and results seem compelling but on a pretty restricted domain which is not well known. This could have significance if it applies more generally.\n\nWhy does it work so well? Is this just because it acts on audio and these filters are phase shifted?\nWhat happens with 2D convnets on more established datasets and with more established baselines?\nWould be interesting to get wall clock speed ups for this method?\n\nOverall I think this paper lacks the breadth of experiments, and to really understand the significance of this work more experiments in more established domains should be performed.\n\nOther points:\n- You are missing a related citation \"Speeding up Convolutional Neural Networks with Low Rank Expansions\" Jaderberg et al 2014\n- Eqn 2 should be m=m* x C\n- Use \\citep rather than \\cite"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

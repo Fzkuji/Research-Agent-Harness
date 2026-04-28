@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "1OUEnfusEd",
+  "reviewer": "SjY7",
+  "paper": {
+    "title": "How Compositional Generalization and Creativity Improve as Diffusion Models are Trained",
+    "authors": [
+      "Alessandro Favero",
+      "Antonio Sclocchi",
+      "Francesco Cagnetta",
+      "Pascal Frossard",
+      "Matthieu Wyart"
+    ],
+    "abstract": "Natural data is often organized as a hierarchical composition of features. How many samples do generative models need in order to learn the composition rules, so as to produce a combinatorially large number of novel data? What signal in the data is exploited to learn those rules? We investigate these questions in the context of diffusion models both theoretically and empirically. Theoretically, we consider a simple probabilistic context-free grammar - a tree-like graphical model used to represent the hierarchical and compositional structure of data such as language and images. We demonstrate that diffusion models learn the grammar's composition rules with the sample complexity required for clustering features with statistically similar context, a process similar to the word2vec algorithm. However, this clustering emerges hierarchically: higher-level features associated with longer contexts require more data to be identified. This mechanism leads to a sample complexity that scales polynomially with the said context size. As a result, diffusion models trained on an intermediate dataset size generate data coherent up to a certain scale, but lacking global coherence. We test these predictions across different domains and find remarkable agreement:  both generated texts and images achieve progressively larger coherence lengths as the training time or dataset size grows. We discuss connections between the hierarchical clustering mechanism we introduce here and the renormalization group in physics.",
+    "keywords": [
+      "Science of deep learning",
+      "compositionality",
+      "diffusion models",
+      "probabilistic graphical models",
+      "sample complexity",
+      "generalization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=1OUEnfusEd"
+  },
+  "review_fields": {
+    "summary": "This paper studies the sample complexity of learning hierarchical structures, mainly through theoretical analysis of RHMs accompanied by some experiments on synthetic RHMs as well as simple text and and image experiments. For the RHM, their theoretical analysis predicts that the production rules at a given level $\\ell$ of the tree can be learned with sample complexity proportional to $vm^{\\ell + 1}$ where $m$ is the number of production rules -- which in particular is better than exponential, and implies that the levels of the tree of learned sequentially from lowest to highest (i.e. higher-order/global structure is learned later later).\n\n**Update after rebuttal**\nThank you for the detailed responses to my questions and comments. I remain supportive of acceptance.",
+    "theoretical_claims": "I read the theory in section 4 and don't have any major objections. I didn't follow up on the results quoted from prior work e.g. L270.\n\nCould the authors comment on the justification for the assumption that $m \\gg s$ (L263)? Actually I don't see how $s$ enters the bounds at -- was it dropped or absorbed into a constant, or does it not appear?",
+    "experimental_designs_or_analyses": "This paper makes reasonable choices of D3PM and standard learning settings for the RHM experiment. I think the text and ImageNet experiments also made sense, particularly the approach measuring hierarchical structure in images using different depths of ResNet embeddings.\n\nA question: In section 3.1 you describe a model architecture that seems to closely depend on the known parameters of the RHM (L, s, etc). How important is this choice? I understand needing sufficiently capacity to represent the RHM but is something special happening by not providing excess capacity? (i.e. could it be forcing the model to learn the correct RHM because it doesn't have sufficient capacity to overfit or learn an alternative incorrect model?) Would appreciate clarification.",
+    "relation_to_broader_scientific_literature": "RHMs have been used as a theoretical tool in many prior works. As the paper states on L55 it extends the findings (Cagnetta&Wyart, 2024) of polynomial sample complexity for learning RHM models via next token prediction to diffusion. Although the theoretical gap may not be huge, I feel that the analysis of diffusions models to complement the prior analysis of autoregressive models is still worthwhile.",
+    "other_strengths_and_weaknesses": "Overall I found this paper interesting. The main weakness I see is the question of whether the RHM is a realistic model for real-world data. I would appreciate further discussion from the authors on how well the RHM really represents the compositional structure of data like text, image, video, etc.",
+    "other_comments_or_suggestions": "Would be helpful to explicitly define the term \"synonym\" before you start using it. Reader has to figure out the meaning from \"m\".\n\nI also found the use of the very-overloaded term \"compositional\" be somewhat vague and would appreciate a more concrete clarification of what is meant by it in this case, particularly with regard to hierarchical structure."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

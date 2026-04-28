@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "TXoZiUZywf",
+  "reviewer": "LyTZ",
+  "paper": {
+    "title": "Improved Algorithms for Stochastic Linear Bandits Using Tail Bounds for Martingale Mixtures",
+    "authors": [
+      "Hamish Flynn",
+      "David Reeb",
+      "Melih Kandemir",
+      "Jan Peters"
+    ],
+    "abstract": "We present improved algorithms with worst-case regret guarantees for the stochastic linear bandit problem. The widely used \"optimism in the face of uncertainty\" principle reduces a stochastic bandit problem to the construction of a confidence sequence for the unknown reward function. The performance of the resulting bandit algorithm depends on the size of the confidence sequence, with smaller confidence sets yielding better empirical performance and stronger regret guarantees. In this work, we use a novel tail bound for adaptive martingale mixtures to construct confidence sequences which are suitable for stochastic bandits. These confidence sequences allow for efficient action selection via convex programming. We prove that a linear bandit algorithm based on our confidence sequences is guaranteed to achieve competitive worst-case regret. We show that our confidence sequences are tighter than competitors, both empirically and theoretically. Finally, we demonstrate that our tighter confidence sequences give improved performance in several hyperparameter tuning tasks.",
+    "keywords": [
+      "Linear bandits",
+      "confidence sequences",
+      "martingales",
+      "convex optimization",
+      "cumulative regret",
+      "regret analysis"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=TXoZiUZywf"
+  },
+  "review_fields": {
+    "comment": "I appreciate the authors addressing my concerns. Based on my understanding, while your meta-algorithm may have tighter UCBs than OFUL through appropriate parameter selection, this doesn't necessarily demonstrate that the current approach achieves tighter (asymptotic) worst-case regrets than OFUL (e.g., removing the  $\\ln T$ factor from the regret). However, I concur that the \"adaptive\" strategy outlined in Appendix E appears to be a promising route for attaining a tight dependency on $T$.\n\nI agree that the current work is significant enough to justify acceptance, and I'm happy to recommend it for acceptance."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:30Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:30Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 45,
+    "mixed_pct": 0,
+    "human_pct": 55,
+    "verdict": null,
+    "confidence": null,
+    "chars": 969,
+    "words": 139,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/50a62210-183c-4400-be8f-fcef63e6c4e6",
+    "error": null,
+    "scored_chars": 971
+  }
+}

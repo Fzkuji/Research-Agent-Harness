@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "YkBDJWerKg",
+  "reviewer": "3aRk",
+  "paper": {
+    "title": "STEVE-1: A Generative Model for Text-to-Behavior in Minecraft",
+    "authors": [
+      "Shalev Lifshitz",
+      "Keiran Paster",
+      "Harris Chan",
+      "Jimmy Ba",
+      "Sheila A. McIlraith"
+    ],
+    "abstract": "Constructing AI models that respond to text instructions is challenging, especially for sequential decision-making tasks. This work introduces a methodology, inspired by unCLIP, for instruction-tuning generative models of behavior without relying on a large dataset of instruction-labeled trajectories. Using this methodology, we create an instruction-tuned Video Pretraining (VPT) model called STEVE-1, which can follow short-horizon open-ended text and visual instructions in Minecraft. STEVE-1 is trained in two steps: adapting the pretrained VPT model to follow commands in MineCLIP's latent space, then training a prior to predict latent codes from text. This allows us to finetune VPT through self-supervised behavioral cloning and hindsight relabeling, reducing the need for costly human text annotations, and all for only $60 of compute. By leveraging pretrained models like VPT and MineCLIP and employing best practices from text-conditioned image generation, STEVE-1 sets a new bar for open-ended instruction following in Minecraft with low-level controls (mouse and keyboard) and raw pixel inputs, far outperforming previous baselines and robustly completing 12 of 13 tasks in our early-game evaluation suite. We provide experimental evidence highlighting key factors for downstream performance, including pretraining, classifier-free guidance, and data scaling. All resources, including our model weights, training scripts, and evaluation tools are made available for further research.",
+    "keywords": [
+      "minecraft",
+      "instruction following",
+      "foundation models",
+      "sequence models",
+      "reinforcement learning",
+      "sequential decision making",
+      "goal conditioned reinforcement learning",
+      "text conditioned reinforcement learning",
+      "transformers",
+      "deep learning"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=YkBDJWerKg"
+  },
+  "review_fields": {
+    "comment": "Thank you for the reply. Some of my concerns have been addressed. But after reading other reviews as well, some additional questions pop up. Here are some follow-ups:\n\n-It would be much better off if you can pull some results from [10] and compare them with yours in the current submission. It seems to be a very recent and close counterpart (goal-conditioned control in Minecraft), and these numbers will help readers understand how open-world control can be improved with your techniques, especially with modern neural network architectures. Some additional discussions might be needed as well.\n\n-It's interesting to know you think of long-term tasks with steve-1, we may have to use visual instruction instead. Why is this the case? I suppose specifying a long-term task with text should be simpler, no? Also, what do you think is the bottleneck of steve-1 solving long-term tasks? I understand you've made it clear on the capacity of steve-1, which is mostly about short-term but I'm sure some analysis & prospect about solving long-term goals (this could be relevant to the prompt-chaining experiments in the main paper as well) in the limitation section should be of interest to reviewers and potential future readers.\n\n-I've read other reviews and I agree with Reviewer 7QfK that saying \"STEVE-1 can follow nearly any short-horizon open-ended text and visual task in Minecraft\" is improper given the current state of evaluation. I don't even think \"a wide range of tasks\" seems to be appropriate either. My suggestion is to make it clear what kind of tasks steve-1 is able to robustly accomplish by adding a table to the main paper, even better, putting it here in the comment section for the reviewer to examine as your code&model is also provided, and change your statement to something like \"steve-1 is able to robustly complete <number of tasks> of tasks in Minecraft\". Please avoid using vague and non-academic terms."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1929,
+    "words": 318,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8fce3a13-fb9b-4e7c-b3d6-04c6e0243090",
+    "error": null,
+    "scored_chars": 1929
+  }
+}

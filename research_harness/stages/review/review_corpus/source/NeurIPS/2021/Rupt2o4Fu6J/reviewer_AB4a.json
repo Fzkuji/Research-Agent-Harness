@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "Rupt2o4Fu6J",
+  "reviewer": "AB4a",
+  "paper": {
+    "title": "Machine learning structure preserving brackets for forecasting irreversible processes",
+    "authors": [
+      "Kookjin Lee",
+      "Nathaniel Trask",
+      "Panos Stinis"
+    ],
+    "abstract": "Forecasting of time-series data requires imposition of inductive biases to obtain predictive extrapolation, and recent works have imposed Hamiltonian/Lagrangian form to preserve structure for systems with \\emph{reversible} dynamics. In this work we present a novel parameterization of dissipative brackets from metriplectic dynamical systems appropriate for learning \\emph{irreversible} dynamics with unknown a priori model form. The process learns generalized Casimirs for energy and entropy guaranteed to be conserved and nondecreasing, respectively. Furthermore, for the case of added thermal noise, we guarantee exact preservation of a fluctuation-dissipation theorem, ensuring thermodynamic consistency. We provide benchmarks for dissipative systems demonstrating learned dynamics are more robust and generalize better than either \"black-box\" or penalty-based approaches.",
+    "keywords": [
+      "structure preserving machine learning",
+      "neural odes",
+      "forecasting",
+      "dissipative systems"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Rupt2o4Fu6J"
+  },
+  "review_fields": {
+    "comment": "Like previously repeated, I'd like to see:\n\n- More explanation of how broad the scope of GENERIC is, especially in terms of what kind of systems satisfy the degeneracy condition. \n\"Take my question about the degeneracy condition for instance. $L\\frac{\\partial S}{\\partial x}=0$ is a system of $d$ PDEs that $d$-by-$d$ skew-symmetric Poisson matrix $L$ and scalar valued $S$ have to satisfy. A similar requirement is on $M$ and $E$. It is important to understand how easy it is to satisfy those, especially if the latent system is a genuinely high-dimensional one (meaning that different degrees of freedom are coupled). Let me give a specific example: the Hamiltonian dynamics in Remark 3.1 correspond to $S=0$ and $M=\\textbf{0}$ (matrix), so the degeneracy condition is satisfied, but this is a trivial case for which one doesn't even need GENERIC. What if none of $S$, $E$, $M$, $L$ is zero?\"\nThis question is about the mathematical formulation. Its answer should not be about machine precision, your algorithm, or the fact that there are 950+ references. Could you give three fundamentally distinct examples of physically relevant and genuinely high-dimensional systems, in which $S$, $E$, $M$ and $L$ are all nontrivial?\n\n- In my 2nd round I wrote \"my suggestion on reducing the error and bias of the list of existing work was perhaps missed, but I still think this is important.\" I already gave concrete suggestions in the 1st round, and these suggestions can certainly be discussed, but I haven't seen any response in all the rounds."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

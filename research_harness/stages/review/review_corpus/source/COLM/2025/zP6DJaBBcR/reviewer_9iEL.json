@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "zP6DJaBBcR",
+  "reviewer": "9iEL",
+  "paper": {
+    "title": "REFA: Reference Free Alignment with Fine-Grained Length Control",
+    "authors": [
+      "Taneesh Gupta",
+      "Rahul Madhavan",
+      "Xuchao Zhang",
+      "Chetan Bansal",
+      "Saravan Rajmohan"
+    ],
+    "abstract": "To mitigate reward hacking from response verbosity, modern preference optimization methods are increasingly adopting length normalization (e.g., SimPO, ORPO, LN-DPO). While effective against this bias, we demonstrate that length normalization itself introduces a failure mode: the **URSLA shortcut**. Here models learn to satisfy the alignment objective by prematurely truncating low-quality responses rather than learning from their semantic content. To address this, we introduce **REFA**, a new alignment framework that proposes probabilistic control on a structural token that controls termination. Our core innovation is a new class of regularizers that operate directly on the probability of the End-of-Sequence (EOS) token, a previously unexploited control lever. This token-level intervention provides a principled solution to the URSLA shortcut, ensuring genuine quality improvements. Furthermore, it unlocks a versatile mechanism for managing the alignment-efficiency tradeoff, enabling practitioners to fine-tune models that adhere to specific token budgets. Empirically, REFA achieves a **60.29\\%** win rate and a **52.17\\%** length-controlled win rate on AlpacaEval2 with Llama-3-8B-Instruct, demonstrating the power of our token-level control paradigm.",
+    "keywords": [
+      "Model Alignment",
+      "RLHF",
+      "Preference Optimization"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=zP6DJaBBcR"
+  },
+  "review_fields": {
+    "summary": "The paper proposed an interesting alignment method which can control for various dataset biases.\n\nThe experiment setup is good and clean in the paper. However, it makes some wrong assumptions (bias towards brevity) and makes some unnecessary SOTA claims which led to my overall score.",
+    "reasons_to_accept": "Mathematically interesting approach which is explicitly designed to tackle biases present in preference data.\nGood list of related methods to which authors compared their approach.\nGood experiment setup: same starting model, same data, vary only approaches.",
+    "reasons_to_reject": "Two main concerns:\n1) The authors start with assumption that existing preference datasets have bias towards brevity. In my experience it is quite the opposite - the longer response is often preferred by humans and, especially by models from GPT-4 family. This has been extensively shown in the literature as well: https://arxiv.org/pdf/2407.01085 (Figure 7) and https://arxiv.org/pdf/2410.16184 (Figure 2).\n\nThis is especially true for UltraFeedback dataset which is used in this work. In that data, longer responses are typically preferred.\n\n2) SOTA claims.  Authors claim that they get SOTA. But https://huggingface.co/jieliu/Storm-7B from “Iterative Length-Regularized Direct Preference Optimization: A Case Study on Improving 7B Language Models to GPT-4 Level” is based on Mistral-7B and has 50.5% - 50.3% on AlpacaEval 2 https://tatsu-lab.github.io/alpaca_eval/ (Community) and https://huggingface.co/FuseAI/FuseChat-Gemma-2-9B-Instruct has even higher scores"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1222,
+    "words": 163,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/72f588a3-53c1-4ed7-9437-385620a53ad2",
+    "error": null,
+    "scored_chars": 1223
+  }
+}

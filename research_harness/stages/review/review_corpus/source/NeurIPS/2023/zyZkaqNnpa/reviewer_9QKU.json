@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "zyZkaqNnpa",
+  "reviewer": "9QKU",
+  "paper": {
+    "title": "Don’t blame Dataset Shift! Shortcut Learning due to Gradients and Cross Entropy",
+    "authors": [
+      "Aahlad Manas Puli",
+      "Lily H Zhang",
+      "Yoav Wald",
+      "Rajesh Ranganath"
+    ],
+    "abstract": "Common explanations for shortcut learning assume that the shortcut improves prediction only under the training distribution. Thus, models trained in the typical way by minimizing log-loss using gradient descent, which we call default-ERM, should utilize the shortcut. However, even when the stable feature determines the label in the training distribution and the shortcut does not provide any additional information, like in perception tasks, default-ERM exhibits shortcut learning. Why are such solutions preferred when the loss can be driven to zero when using the stable feature alone? By studying a linear perception task, we show that default-ERM’s preference for maximizing the margin, even without overparameterization, leads to models that depend more on the shortcut than the stable feature. This insight suggests that default-ERM’s implicit inductive bias towards max-margin may be unsuitable for perception tasks. Instead, we consider inductive biases toward uniform margins. We show that uniform margins guarantee sole dependence on the perfect stable feature in the linear perception task and suggest alternative loss functions, termed margin control (MARG-CTRL), that encourage uniform-margin solutions. MARG-CTRL techniques mitigate shortcut learning on a variety of vision and language tasks, showing that changing inductive biases can remove the need for complicated shortcut-mitigating methods in perception tasks.",
+    "keywords": [
+      "shortcut learning",
+      "spurious correlations",
+      "perfect stable feature",
+      "perception tasks",
+      "implicit bias in optimization",
+      "improving inductive biases"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=zyZkaqNnpa"
+  },
+  "review_fields": {
+    "comment": "Thanks for replysing my questions,.\nMy quettions about the theory are totally answered and clear. \nHowever, it still seems that the scope of application is limited compared to the complexity of the theory.\nIf you demonstrate the importance of the theory in the current problem setting, it would be better to explain specific examples of the problem setting used in the theory analysis, as well as confirm the findings from the theory for deep neural networks.\nFor example, after a linear approximation like NTK, I would like to know if your setting for shortcut learning could occur in real world image data. \nTherefore, we would like to keep the score as it is now."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 664,
+    "words": 114,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/345853de-7df3-4cf6-8712-cdc258d9e993",
+    "error": null,
+    "scored_chars": 666
+  }
+}

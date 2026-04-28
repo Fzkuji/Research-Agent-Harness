@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "S1x6TlBtwB",
+  "reviewer": "3",
+  "paper": {
+    "title": "Mixture Distributions for Scalable Bayesian Inference",
+    "authors": [
+      "Pranav Poduval",
+      "Hrushikesh Loya",
+      "Rajat Patel",
+      "Sumit Jain"
+    ],
+    "abstract": "Bayesian Neural Networks (BNNs) provides a mathematically grounded framework to quantify uncertainty. However BNNs are computationally inefficient,\nthus are generally not employed on complicated machine learning tasks. Deep\nEnsembles were introduced as a Bootstrap inspired frequentist approach to the\ncommunity, as an alternative to BNN’s. Ensembles of deterministic and stochastic networks are a good uncertainty estimator in various applications (Although,\nthey are criticized for not being Bayesian). We show Ensembles of deterministic\nand stochastic Neural Networks can indeed be cast as an approximate Bayesian\ninference. Deep Ensembles have another weakness of having high space complexity, we provide an alternative to it by modifying the original Bayes by Backprop (BBB) algorithm to learn more general concrete mixture distributions over\nweights. We show our methods and its variants can give better uncertainty estimates at a significantly lower parametric overhead than Deep Ensembles. We\nvalidate our hypothesis through experiments like non-linear regression, predictive\nuncertainty estimation, detecting adversarial images and exploration-exploitation\ntrade-off in reinforcement learning.",
+    "keywords": [
+      "uncertainty estimation",
+      "Deep Ensembles",
+      "Adverserial Robustness"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=S1x6TlBtwB"
+  },
+  "review_fields": {
+    "comment": "\"Since in VI framework all we need are samples that seem to come from the true posterior.\" \nThis statement is somewhat incorrect - although it is the case that very broadly you only need to come up with an approximation distribution that is \"close\" to the true posterior, it's not clear if the solution to the optimization problem itself is reasonable in any way.\n\n\"...rather than minimization of the negative log evidence\" Instead, I believe you'd need to be minimizing KL(posterior || g) and would have to justify everything in that sense.\n\n\"But due to the nature of the bound, the bias will decrease to zero ...\" Would it be possible to show this numerically - e.g. via a set of Gaussians?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

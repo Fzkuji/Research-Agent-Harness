@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "ucASPPD9GKN",
+  "reviewer": "YLxN",
+  "paper": {
+    "title": "Is Homophily a Necessity for Graph Neural Networks?",
+    "authors": [
+      "Yao Ma",
+      "Xiaorui Liu",
+      "Neil Shah",
+      "Jiliang Tang"
+    ],
+    "abstract": "Graph neural networks (GNNs) have shown great prowess in learning representations suitable for numerous graph-based machine learning tasks. When applied to semi-supervised node classification,  GNNs are widely believed to work well due to the homophily assumption (``like attracts like''), and fail to generalize to heterophilous graphs where dissimilar nodes connect. Recent works design new architectures to overcome such heterophily-related limitations, citing poor baseline performance and new architecture improvements on a few heterophilous graph benchmark datasets as evidence for this notion. In our experiments, we empirically find that standard graph convolutional networks (GCNs) can actually achieve better performance than such carefully designed methods on some commonly used heterophilous graphs. This motivates us to reconsider whether homophily is truly necessary for good GNN performance.  We find that this claim is not quite true, and in fact, GCNs can achieve strong performance on heterophilous graphs under certain conditions. Our work carefully characterizes these conditions and provides supporting theoretical understanding and empirical observations.  Finally, we examine existing heterophilous graphs benchmarks and reconcile how the GCN (under)performs on them based on this understanding.",
+    "keywords": [],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ucASPPD9GKN"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors characterize the conditions and provide supporting theoretical understanding and empirical observations of the conditions that GCNs can achieve strong performance on heterophilous graphs.",
+    "main_review": "Strength:\n\nThe authors provide some valuable arguments about the performance of GCN on heterophilous graphs and verify the claims with some empirical results.\n\nWeakness&Advice:\n\n1. In the last line of page 2, where is $X$ in the equation?\n\n2. The results in table 1 is not consistent with my personal experience even with the hyperparameter tuning range provided in appendix D. Could you please provide more details about the settings for table 1?\n\n3. Kenta’s work does not drop non-linearity in their analysis.\n\n4.  Could you please clarify the significance of theorem 1? What is its relation with heterophily and homophily in definition 1?\n\n5. Why do you use cosine similarity to define inter-class distance? What is its advantages over other metrics?\n\n6. Font size in figure 5 is too small. The dark blue background make it hard to read the value on it.\n\n7. The writing of this paper is not satisfying. I suggest the authors to cut the long paragraphs into smaller pieces, e.g. section 3.3.1, so that it is more reader friendly. It’s better to re-organize the paper, especially for the content after section 3.1.\n\n8. Can your theoretical analysis on CSBM generalize to multiple classes or to more general graphs.",
+    "summary_of_the_review": "The novelty and significance are OK but the writing is not satisfactory. I'll consider raising my score if the authors can address my concerns properly.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "error",
+    "error": "TimeoutError: Page.goto: Timeout 20000ms exceeded.\nCall log:\n  - navigating to \"https://gptzero.me/\", waiting until \"domcontentloaded\"\n",
+    "ai_pct": null,
+    "scored_chars": 1369
+  }
+}

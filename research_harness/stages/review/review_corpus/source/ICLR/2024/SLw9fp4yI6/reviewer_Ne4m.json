@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "SLw9fp4yI6",
+  "reviewer": "Ne4m",
+  "paper": {
+    "title": "Controlled Text Generation via Language Model Arithmetic",
+    "authors": [
+      "Jasper Dekoninck",
+      "Marc Fischer",
+      "Luca Beurer-Kellner",
+      "Martin Vechev"
+    ],
+    "abstract": "As Large Language Models (LLMs) are deployed more widely, customization with respect to vocabulary, style, and character becomes more important. In this work, we introduce model arithmetic, a novel inference framework for composing and biasing LLMs without the need for model (re)training or highly specific datasets. In addition, the framework allows for more precise control of generated text than direct prompting and prior controlled text generation (CTG) techniques. Using model arithmetic, we can express prior CTG techniques as simple formulas and naturally extend them to new and more effective formulations. Further, we show that speculative sampling, a technique for efficient LLM sampling, extends to our setting. This enables highly efficient text generation with multiple composed models with only marginal overhead over a single model. Our empirical evaluation demonstrates that model arithmetic allows fine-grained control of generated text while outperforming state-of-the-art on the task of toxicity reduction. We release an open source easy-to-use implementation of our framework at https://github.com/eth-sri/language-model-arithmetic.",
+    "keywords": [
+      "Controlled text generation",
+      "LLM",
+      "Natural Language Processing"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=SLw9fp4yI6"
+  },
+  "review_fields": {
+    "comment": "I increased the rating to 6 because, during the discussion period, the authors' answers and their revised version mitigated some of my concerns:\n\n* The toxicity reduction comparison in Table 5 is limited, omitting works like Liu et al. 2021, despite its relevance mentioned on page 16. (In the discussion period, the authors pointed out that work of Liu et al. 2021 relies on expensive fine-tuning with training data, which is different from their zero-shot regime.)\n\n* The evaluation is restricted to toxicity reduction, whereas other CTG studies often explore sentiment or topic control as well. It is recommended to broaden the evaluation scope to these areas as well. (In the discussion period, the revised version added an extra experiment evaluating model arithmetic on sentiment control in Appendix F, showing that their method also outperforms existing work.)"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 7,
+    "mixed_pct": 0,
+    "human_pct": 93,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 867,
+    "words": 137,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/16dab6af-d22f-48c3-9baf-2227a8781c35",
+    "error": null,
+    "scored_chars": 867
+  }
+}

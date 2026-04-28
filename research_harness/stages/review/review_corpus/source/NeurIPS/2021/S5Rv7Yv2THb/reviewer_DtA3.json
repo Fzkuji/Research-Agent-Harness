@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "S5Rv7Yv2THb",
+  "reviewer": "DtA3",
+  "paper": {
+    "title": "Efficient Learning of Discrete-Continuous Computation Graphs",
+    "authors": [
+      "David Friede",
+      "Mathias Niepert"
+    ],
+    "abstract": "Numerous models for supervised and reinforcement learning benefit from combinations of discrete and continuous model components. End-to-end learnable discrete-continuous models are compositional, tend to generalize better, and are more interpretable. A popular approach to building discrete-continuous computation graphs is that of integrating discrete probability distributions into neural networks using stochastic softmax tricks. Prior work has mainly focused on computation graphs with a single discrete component on each of the graph's execution paths. We analyze the behavior of more complex stochastic computations graphs with multiple sequential discrete components. We show that it is challenging to optimize the parameters of these models, mainly due to small  gradients and local minima. We then propose two new strategies to overcome these challenges. First, we show that increasing the scale parameter of the Gumbel noise perturbations during training improves the learning behavior. Second, we propose dropout residual connections specifically tailored to stochastic, discrete-continuous computation graphs. With an extensive set of experiments, we show that we can train complex discrete-continuous models which one cannot train with standard stochastic softmax tricks. We also show that complex discrete-stochastic models generalize better than their continuous counterparts on several benchmark datasets.",
+    "keywords": [
+      "Discrete-Continuous Learning",
+      "Stochastic Computation Graphs",
+      "Gumbel-softmax Trick"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=S5Rv7Yv2THb"
+  },
+  "review_fields": {
+    "summary": "Motivated by the vanishing gradient problem of multiple discrete operations that leverage the Gumbel Softmax trick for training, this paper proposes two new tricks.  First, the scale parameter of the Gumbel distribution is annealed across training rather than annealing the temperature parameter as is common in most prior works.  Second, residual connections are stochastically dropped via another annealing strategy so that gradients are non-vanishing in the beginning but eventually the residual connections are removed. Multiple empirical experiments demonstrate that the method is better at extrapolating than the baselines.",
+    "main_review": "**Summary of review**\nThis paper introduces two novel tricks for complex discrete-continuous networks and shows strong results for extrapolation. While some writing could be improved and more explanation added, the paper seems to make useful contributions.\n\n**Strengths:**\n- The paper connects the interplay between the scale parameter of the Gumbel distribution and the temperature parameter of the softmax operation. In particular, it seems that annealing the Gumbel $\\beta$ parameter may be better than annealing the temperature parameter $\\tau$.\n\n- The paper introduces a simple but interesting modification to residual connections that combines the idea of residual networks and dropout.\n\n- The empirical results demonstrate superior performance for extrapolation on multiple experiments.\n\n**Weaknesses:**\n- It seems that the annealing schedules for both proposed tricks is quite important. Could more discussion be given to the selection of annealing schedules?\n\n- The problem with overfitting that motivates DropRes is not clearly explained.  It seems to merely be an empirical observation.  This should be explained more carefully and any intiution or explanation should be provided.\n\n- Related to above, how does the Gumbel scale parameter directly affect things?  It doesn't seem to be connected theoretically in say equations 3-5.  Is this just an empirical observation and basic intuition that they are related?  Is there a more fundamental or mathematical relationship between these parameters? \n\n**Other comments or questions**\n- How do these two tricks work for a single discrete operator?  The paper seems to emphasize multiple times that a sequence of discrete operations is the key problem being tackled in the paper.  Thus, I'm wondering how much it makes a difference for the simpler cases."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

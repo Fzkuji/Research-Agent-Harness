@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "TN9gQ4x0Ep3",
+  "reviewer": "DVba",
+  "paper": {
+    "title": "Don’t fear the unlabelled: safe semi-supervised learning via debiasing",
+    "authors": [
+      "Hugo Schmutz",
+      "Olivier HUMBERT",
+      "Pierre-Alexandre Mattei"
+    ],
+    "abstract": "Semi-supervised learning (SSL) provides an effective means of leveraging unlabelled data to improve a model’s performance. Even though the domain has received a considerable amount of attention in the past years, most methods present the common drawback of lacking theoretical guarantees. Our starting point is to notice that the estimate of the risk that most discriminative SSL methods minimise is biased, even asymptotically. This bias impedes the use of standard statistical learning theory and can hurt empirical performance. We propose a simple way of removing the bias. Our debiasing approach is straightforward to implement and applicable to most deep SSL methods.  We provide simple theoretical guarantees on the trustworthiness of these modified methods, without having to rely on the strong assumptions on the data distribution that SSL theory usually requires. In particular, we provide generalisation error bounds for the proposed methods. We evaluate debiased versions of different existing SSL methods, such as the Pseudo-label method and Fixmatch, and show that debiasing can compete with classic deep SSL techniques in various settings by providing better calibrated models. Additionally, we provide a theoretical explanation of the intuition of the popular SSL methods.  An implementation of a debiased version of Fixmatch is available at\nhttps://github.com/HugoSchmutz/DeFixmatch",
+    "keywords": [
+      "Semi-supervised learning",
+      "deep learning",
+      "empirical risk minimisation",
+      "control variate",
+      "variance reduction",
+      "asymptotic statistics"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=TN9gQ4x0Ep3"
+  },
+  "review_fields": {
+    "comment": "Thanks authors for the additional experiments to evaluate the theoretical arguments. I believe my comments regarding missing intrinsic evaluation and theoretical comments are reasonably addressed.\n\nA minor follow-up point (as this has surfaced in some other reviewers' comments): since the name \"safe SSL\" can carry alternative definitions (e.g., as that pointed out by [6iPj](https://openreview.net/forum?id=TN9gQ4x0Ep3&noteId=t2FAwx7HQc)). Maybe to avoid confusing readers and more to appropriately highlight the core contribution of the work, it is helpful to update the core positioning of the paper from \"safe SSL\" to something like \"unbiased SSL\"? I wonder do the authors think? Thanks."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

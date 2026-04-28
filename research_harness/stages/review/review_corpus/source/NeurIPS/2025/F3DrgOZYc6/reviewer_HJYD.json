@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "F3DrgOZYc6",
+  "reviewer": "HJYD",
+  "paper": {
+    "title": "Improved Algorithms for Overlapping and Robust Clustering of Edge-Colored Hypergraphs: An LP-Based Combinatorial Approach",
+    "authors": [
+      "Changyeol Lee",
+      "Yongho Shin",
+      "Hyung-Chan An"
+    ],
+    "abstract": "Clustering is a fundamental task in both machine learning and data mining. Among various methods, edge-colored clustering (ECC) has emerged as a useful approach for handling categorical data. Given a hypergraph with (hyper)edges labeled by colors, ECC aims to assign vertex colors to minimize the number of edges where the vertex color differs from the edge's color. However, traditional ECC has inherent limitations, as it enforces a nonoverlapping and exhaustive clustering. To tackle these limitations, three versions of ECC have been studied: Local ECC and Global ECC, which allow overlapping clusters, and Robust ECC, which accounts for vertex outliers. For these problems, both linear programming (LP) rounding algorithms and greedy combinatorial algorithms have been proposed. While these LP-rounding algorithms provide high-quality solutions, they demand substantial computation time; the greedy algorithms, on the other hand, run very fast but often compromise solution quality. In this paper, we present a family of algorithms that combines the strengths of LP with the computational efficiency of combinatorial algorithms. Both experimental and theoretical analyses show that our algorithms efficiently produce high-quality solutions for all three problems: Local, Global, and Robust ECC. We complement our algorithmic contributions with complexity-theoretic inapproximability results and integrality gap bounds, which suggest that significant theoretical improvements are unlikely. Our results also answer two open questions previously raised in the literature.",
+    "keywords": [
+      "overlapping edge-colored clustering",
+      "robust edge-colored clustering",
+      "edge-colored clustering",
+      "hypergraph clustering",
+      "primal-dual methods",
+      "approximation algorithms"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=F3DrgOZYc6"
+  },
+  "review_fields": {
+    "summary": "The edge-coloring clustering problem is given a hypergraph $(V,E)$ along with a coloring of the edges $c:E\\rightarrow [C]$. Given a coloring of the nodes $\\sigma: V\\rightarrow [2^C]$, we say that $\\sigma(v)$ induces a mistake on $e\\in E$ if $v\\in e$ and $c(e)\\notin \\sigma(v)$.\n\nThe goal is to find $\\sigma$ such that the number of mistakes are minimized. Since a trivial solution making no mistakes colors all nodes with all colors, the authors consider constrained versions of the problem where each node can have at most $b$ many colors (LECC) or the total number of colors is at most $|V|+b$ (GECC). Finally, the authors also consider a variant where $\\sigma: V\\rightarrow [C]$, but nodes may be removed from the graph (RECC).\n\nFor all of these problems, the authors design approximation algorithms. Specifically for LECC, the authors propose a primal dual algorithm that with an approximation ratio of $b+1$, which is optimal assuming the unique games conjecture and nearly optimal assuming $P\\neq NP$. For the other two algorithms the authors devise approximation algorithms that match the integrality gap of their proposed linear program.",
+    "strengths_and_weaknesses": "I am not sure how to rate a paper like this in the context of NeurIPS. To me this is a classic approximation algorithms paper that belongs at a theory conference. The connection to clustering or machine learning is fairly strenuous, in my opinion, regardless of whether or not this problem has been previously in a paper published at similar conferences.\n\nAs is often the case with theory papers submitted to NeurIPS, nearly all technical details are in the appendix. While it is hard to fault the authors for this, they might want to consider how to distribute the pages that the reviewers are expected to read. I read the LECC algorithms and lower bounds, as well as the RECC algorithm as this was the chronological order in which they were presented in the main body and also seemed to be how the authors themselves valued the results. If for some reason the GECC result was the most important one (which I didn't read), the authors may want to consider revising the paper.\n\nI would also encourage the authors to not \"waste\" three pages of main body on experiments with a rather dubious quality. The main take-away message seems to be that the previous greedy algorithm (that algorithm is never specified), is worse than the LP-based algorithm. I would have believed that with significantly less space, and preferred more theoretical content in the main body. If the authors did this because some previous reviewer did not engage with the proofs and instead complained about a lack of experiments, then they have my sympathies, but the criticism remains.\n\nIn any case, as far as approximation algorithms go, the algorithm for LECC is technically fairly basic, being a standard primal dual algorithm that commits to colors when complimentary slackness conditions are satisfied. People familiar with similar algorithms for set cover and facility location should be able to derive these results very quickly without looking at this paper. The hardness results for LECC are also standard reductions to vertex cover in hypergraphs. The RECC problem is likewise solved with a primal dual approach. I did not read [19,20], but apparently it is based on the same LP relaxation save for adding the constraint that encodes that every node is assigned at most one color or it is removed. Why the previous algorithms did not consider this constraint is puzzling, as without it the integer linear program can assign multiple colors to a node. Then even the ILP will have an unbounded gap to the value of the optimal solution. In any case, including both LP formulations in the main body would have been nice as while it is not to difficult for the reader familiar with primal dual algorithms to formulate the LPs, I do not believe that merely stating the dual in the main body will be of much use to readers that are not familiar.\n\nIf I were to rate this paper for a top algorithms conference, it would be a reject as the techniques are well known. The problem has been studied previously, so it seems that there might be some interest in having a solution, though I still doubt that this algorithm or for that matter the problem are practically viable. I eventually talked myself into a minor positive rating for this paper, as it is a thorough treatment of the problem.",
+    "final_justification": "Nothing changed, so my opinion also has not changed."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5,
+    "quality": 3,
+    "clarity": 4,
+    "significance": 3,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

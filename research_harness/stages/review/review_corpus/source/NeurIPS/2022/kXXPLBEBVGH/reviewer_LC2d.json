@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "kXXPLBEBVGH",
+  "reviewer": "LC2d",
+  "paper": {
+    "title": "Context-enriched molecule representations improve few-shot drug discovery",
+    "authors": [
+      "Johannes Schimunek",
+      "Philipp Seidl",
+      "Lukas Friedrich",
+      "Daniel Kuhn",
+      "Friedrich Rippmann",
+      "Sepp Hochreiter",
+      "Günter Klambauer"
+    ],
+    "abstract": "A central task in computational drug discovery is to construct models from known active molecules to find further promising molecules for subsequent screening. However, typically only very few active molecules are known. Therefore, few-shot learning methods have the potential to improve the effectiveness of this critical phase of the drug discovery process. We introduce a new method for few-shot drug discovery. Its main idea is to enrich a molecule representation by knowledge about known context or reference molecules. Our novel concept for molecule representation enrichment is to associate molecules from both the support set and the query set with a large set of reference (context) molecules through a modern Hopfield network. Intuitively, this enrichment step is analogous to a human expert who would associate a given molecule with familiar molecules whose properties are known. The enrichment step reinforces and amplifies the covariance structure of the data and simultaneously removes spurious correlations arising from the decoration of molecules. We analyze our novel method on FS-Mol, which is the only established few-shot learning benchmark dataset for drug discovery. An ablation study shows that the enrichment step of our method is key to improving the predictive quality. In a domain shift experiment, our new method is more robust than other methods. On FS-Mol, our new method achieves a new state-of-the-art and outperforms all other few-shot methods.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=kXXPLBEBVGH"
+  },
+  "review_fields": {
+    "comment": "Hi, I have read all the reviewing comments and the authors' reply. \nMost of my concerns are cleared. For experimental analysis, I still think the current version is not satisfactory.  \n\nReviewer ZhVh wrote that `` I agree FS-Mol is newer and less established than some other datasets, although I wouldn't go as far as saying that the only available results there are naive baselines``. I also think FS-Mol is a valuable benchmark dataset for few-shot molecular property prediction. But I insist that only comparing with naive baselines provided by FS-Mol. As shown in the updated draft, \nthe proposed MHNfs cannot beat [a3] in Table 1. \n\nBesides, please note that the claim``[a1] had already been included as 'GNN-MAML', but unfortunately we cited the original MAML paper instead of [a1]`` is wrong. \nIn the original paper of FS-Mol, the authors wrote that ``Concretely, we consider Model-Agnostic Meta-Learning [18] procedure on top of a GNN operating on the molecular graph as a representative optimization-based approach and refer to it as GNN- MAML``. While Meta-MGNN [a1] further constructs attribute based self-supervised modules and incorporates self-attentive task weights during the episodic training of MAML. In short, Meta-MGNN is not equal to ``a GNN encoder+ MAML``. \n\n\n[a3] Meta-learning feature representations for adaptive Gaussian processes via implicit differentiation."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "JlWn80mTJi",
+  "reviewer": "AJJ5",
+  "paper": {
+    "title": "The Implicit Bias of Gradient Descent on Separable Multiclass Data",
+    "authors": [
+      "Hrithik Ravi",
+      "Clayton Scott",
+      "Daniel Soudry",
+      "Yutong Wang"
+    ],
+    "abstract": "Implicit bias describes the phenomenon where optimization-based training algorithms, without explicit regularization, show a preference for simple estimators even when more complex estimators have equal objective values. Multiple works have developed the theory of implicit bias for binary classification under the assumption that the loss satisfies an *exponential tail property*. However, there is a noticeable gap in analysis for multiclass classification, with only a handful of results which themselves are restricted to the cross-entropy loss. In this work, we employ the framework of Permutation Equivariant and Relative Margin-based (PERM) losses [Wang and Scott, 2024] to introduce a multiclass extension of the exponential tail property. This class of losses includes not only cross-entropy but also other losses. Using this framework, we extend the implicit bias result of Soudry et al. [2018] to multiclass classification. Furthermore, our proof techniques closely mirror those of the binary case, thus illustrating the power of the PERM framework for bridging the binary-multiclass gap.",
+    "keywords": [
+      "gradient descent",
+      "multiclass classification",
+      "hard-margin SVM",
+      "implicit bias"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JlWn80mTJi"
+  },
+  "review_fields": {
+    "summary": "This paper investigates the implicit bias of gradient descent on separable multiclass data using a broad class of losses termed Permutation Equivariant and Relative Margin-based (PERM) losses, which include cross-entropy loss, multiclass exponential loss, and PairLogLoss. The main contribution is the extension of the concept of the exponential tail property, commonly used in the analysis of implicit bias in binary classification, to multiclass classification with PERM losses. The proof techniques (and main results) are analogous to those used in the binary case, suggesting that PERM losses can bridge the theoretical gap between binary and multiclass classification.",
+    "strengths": "1. The paper is very well-written and well-organized, making it easy to follow.\n2. While the implicit bias of gradient descent has been widely studied for binary classification, its extension to multiclass classification is relatively sparse and mainly restricted to cross-entropy loss. This paper addresses a broad class of PERM losses, extending the concept of the exponential tail through the \"template\" of the loss. The result is both interesting and significant.\n3. The theoretical results are convincing. While the proof largely follows Soudry et al. [2018], the analysis is nontrivial. Additionally, the proof idea is laid out in a clear manner.",
+    "weaknesses": "1. The main weakness is the lack of numerical results to verify the theoretical claims. While this is understandable given that the convergence is exponentially slow, some simulations could be presented to illustrate the gap between theory and practice (where networks are not trained to achieve zero loss).",
+    "questions": "Maybe a minor typo: in Assumption 3.3, line 171, $k$ should not be there."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1036,
+    "words": 163,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8d980850-356c-4cbf-a569-d1ec3a4d8800",
+    "error": null,
+    "scored_chars": 1036
+  }
+}

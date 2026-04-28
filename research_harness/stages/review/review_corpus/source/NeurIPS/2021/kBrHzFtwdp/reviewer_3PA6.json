@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "kBrHzFtwdp",
+  "reviewer": "3PA6",
+  "paper": {
+    "title": "Nested Variational Inference",
+    "authors": [
+      "Heiko Zimmermann",
+      "Hao Wu",
+      "Babak Esmaeili",
+      "Jan-Willem van de Meent"
+    ],
+    "abstract": "We develop nested variational inference (NVI), a family of methods that learn proposals for nested importance samplers by minimizing an forward or reverse KL divergence at each level of nesting. NVI is applicable to many commonly-used importance sampling strategies and provides a mechanism for learning intermediate densities, which can serve as heuristics to guide the sampler. Our experiments apply NVI to (a) sample from a multimodal distribution using a learned annealing path (b) learn heuristics that approximate the likelihood of future observations in a hidden Markov model and (c) to perform amortized inference in hierarchical deep generative models. We observe that optimizing nested objectives leads to improved sample quality in terms of log average weight and effective sample size.",
+    "keywords": [
+      "Variational Inference",
+      "Importance Sampling",
+      "Monte Carlo methods"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=kBrHzFtwdp"
+  },
+  "review_fields": {
+    "summary": "The author proposes a nested variational inference (NVI) framework that combines nested importance sampling and variational inference. This framework allows the training of the important sampling proposal by minimizing KL divergences at each level of nesting. This also provides us a way to learn intermediate densities, which serves as a heuristics for guiding the importance sampler. Empirically, the author evaluates NVI by (1) sampling from a multimodal distribution with a learned annealing path; (2) learn heuristics for future observations in the state-space model; (3) perform amortized inference in the hierarchical deep generative model.",
+    "main_review": "### Original\nThe NVI framework combines variational inference with the nested importance sampler. The idea of combining importance sampling with variational inference is not new, but the novelty of NVI is that it minimizes the KL divergence at each level of nesting and some of the existing work are special cases of NVI. To the best of my knowledge, this seems to be new. In appendix A, the author also discusses the related work. \n\n### Quality and Clarity\nThe overall idea of NVI is easy to understand. However, I still think some parts are not explained clearly, and I found them quite confusing when I first read them. I have checked the derivations for the gradient estimate, they seem to be correct. Empirically, the author conducts extensive experiments to confirm the effectiveness of the proposed method.\n\n### Significance\nCombining variational inference and importance sampling has recently attracted many research interests. This NVI framework seems to include many existing methods as special cases. Empirically, it seems to outperform the baselines in terms of ESS.\n\n### Questions\n1. In the beginning of section 3, I understand why you define a sequence that interpolates between initial $\\pi_0$ and target $\\pi_K$, and why you define the forward proposal $q_k(z_k|z_{k-1})$. I am not sure I fully understand the role of the reverse kernel $r_k(z_{k-1}|z_k)$. Why do you introduce this? In practice, how do you use this reverse kernel?\n\n2. A follow-up for question 1: why do you want the forward density $\\hat{\\pi_k}$ to be as close as possible to the reverse density $\\check{\\pi_k}$ at each level k? What does this objective actually mean? My intuition: If am the one that designs the objective, I will make sure the samples after the proposal $q_k$ should be as close as possible to the intermediate target $\\pi_k$, namely the KL divergence between the density of $z_k$ and $\\pi_k$. What is the problem of this alternative objective?\n What do you mean \n3. I am not sure I understand the meaning of line 127-130. Why it increases the probability of low-weight samples?\n4. Why AVO cannot learn the annealing parameter $\\beta$? I thought AVO also minimize KL at each level of nesting.\n5. Maybe the author can consider adding more background in the appendix to make the paper more self-contained? For example,  the reweight wake-sleep estimator. \n**Minor**:\n1. Better to add a paragraph to summarize the contributions of this paper. \n2. How do you obtain the third equality from the second equality in line 540? Why it becomes $\\frac{\\partial q_k}{\\partial \\hat{\\phi_k}}$?\n3. Maybe consider adding an overall algorithm for easier understanding. \n\n---\nI appreciate the author's response. They managed to clarify most of my concerns, especially about the KL objective. Hence, I raise my score.",
+    "limitations_and_societal_impact": "This paper should not have any negative societal impact as this is mainly a methodology paper."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

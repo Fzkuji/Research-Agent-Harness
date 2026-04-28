@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "Syx6bz-Ab",
+  "reviewer": "2",
+  "paper": {
+    "title": "Seq2SQL: Generating Structured Queries From Natural Language Using Reinforcement Learning",
+    "authors": [
+      "Victor Zhong",
+      "Caiming Xiong",
+      "Richard Socher"
+    ],
+    "abstract": "Relational databases store a significant amount of the worlds data. However, accessing this data currently requires users to understand a query language such as SQL. We propose Seq2SQL, a deep neural network for translating natural language questions to corresponding SQL queries. Our model uses rewards from in the loop query execution over the database to learn a policy to generate the query, which contains unordered parts that are less suitable for optimization via cross entropy loss. Moreover, Seq2SQL leverages the structure of SQL to prune the space of generated queries and significantly simplify the generation problem. In addition to the model, we release WikiSQL, a dataset of 80654 hand-annotated examples of questions and SQL queries distributed across 24241 tables fromWikipedia that is an order of magnitude larger than comparable datasets. By applying policy based reinforcement learning with a query execution environment to WikiSQL, Seq2SQL outperforms a state-of-the-art semantic parser, improving execution accuracy from 35.9% to 59.4% and logical form accuracy from 23.4% to 48.3%.",
+    "keywords": [
+      "deep learning",
+      "reinforcement learning",
+      "dataset",
+      "natural language processing",
+      "natural language interface",
+      "sql"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Syx6bz-Ab"
+  },
+  "review_fields": {
+    "review": "The authors have addressed the problem of translating natural language queries to SQL queries. They proposed a deep neural network based solution which combines the attention based neural semantic parser and pointer networks. They also released a new dataset WikiSQL for the problem. The proposed method outperforms the existing semantic parsing baselines on WikiSQL dataset.\n\nPros:\n1. The idea of using pointer networks for reducing search space of generated queries is interesting. Also, using extrinsic evaluation of generated queries handles the possibility of paraphrasing SQL queries.\n2. A new dataset for the problem.\n3. The experiments report a significant boost in the performance compared to the baseline. The ablation study is helpful for understanding the contribution of different component of the proposed method.\n\nCons:\n1. It would have been better to see performance of the proposed method in other datasets (wherever possible). This is my main concern about the paper.\n2. Extrinsic evaluation can slow down the overall training. Comparison of running times would have been helpful.\n3. More details about training procedure (specifically for the RL part) would have been better."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

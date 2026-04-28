@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "RxWILaXuhb",
+  "reviewer": "nczu",
+  "paper": {
+    "title": "Time-o1: Time-Series Forecasting Needs Transformed Label Alignment",
+    "authors": [
+      "Hao Wang",
+      "Licheng Pan",
+      "Zhichao Chen",
+      "Xu Chen",
+      "Qingyang Dai",
+      "Lei Wang",
+      "Haoxuan Li",
+      "Zhouchen Lin"
+    ],
+    "abstract": "Training time-series forecasting models poses unique challenges in loss function design. Most existing approaches adopt temporal mean squared error, but this study reveals two critical limitations: (1) it ignores the presence of label autocorrelation, which biases it from the true label sequence likelihood;  (2) it involves excessive number of tasks, which complicates optimization, especially for long-term forecasting. To address these issues, we introduce Time-o1, a transform-enhanced loss function for time-series forecasting. The central idea is to transform the label sequence into decorrelated components with discriminated significance. Models are then trained to align the most significant components, thereby effectively mitigating label autocorrelation and reducing task amount. Experiments demonstrate that Time-o1 achieves state-of-the-art performance and is compatible with various forecast models. Code is available at https://github.com/Master-PLC/Time-o1.",
+    "keywords": [
+      "Time-Series",
+      "Label Autocorrelation",
+      "Orthogonalization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=RxWILaXuhb"
+  },
+  "review_fields": {
+    "summary": "Existing methods predominantly utilize the temporal mean squared error, which faces two critical challenges: (1) label autocorrelation, which leads to bias from the label sequence likelihood; (2) excessive amount of tasks, which increases with the forecast horizon and complicates optimization. In this work, the authors propose Transform-enhanced Direct Forecast (TransDF), which transforms the label sequence into decorrelated components with discriminated significance. Models are trained to align the most significant components, thereby effectively mitigating label autocorrelation and reducing task amount.",
+    "strengths_and_weaknesses": "Strengths:\n1. The core idea of applying PCA-like transformations to the label space to mitigate autocorrelation bias and reduce task complexity is novel and impactful. The use of SVD to generate decorrelated components ranked by significance provides a theoretically grounded solution. This approach effectively bridges a gap in objective design, which has been underexplored compared to architectural advancements.\n2. The paper validates TransDF rigorously across 8+ datasets, 11+ SOTA baselines, and multiple forecasting models (Transformers, MLPs, etc.). Ablation studies clearly dissect the contributions of decorrelation and task reduction, while sensitivity analyses justify design choices. The consistent improvements (e.g., Fredformer + TransDF reduces MSE by 0.016 on ETTh1) demonstrate broad applicability.\n\nWeaknesses:\n1. While Theorem 3.1 states the bias of TMSE under autocorrelation, its proof is relegated to Appendix without intuitive explanation in the main text. The connection between SVD-based decorrelation (Lemma 3.2) and bias elimination (§3.2) lacks formal derivation. A corollary linking Lemma 3.2 to Theorem 3.1’s bias term would strengthen theoretical rigor.\n2. TransDF introduces SVD on label sequences during training. While §E.1 (Appendix) mentions efficiency, the main text does not quantify its cost relative to forecast horizon T or compare it to FreDF/Fourier transforms. For long horizons, this could be non-trivial. A complexity analysis for SVD) and wall-clock time comparisons would clarify practical trade-offs.",
+    "final_justification": "The author provided more detailed experimental results, which addressed my concerns."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

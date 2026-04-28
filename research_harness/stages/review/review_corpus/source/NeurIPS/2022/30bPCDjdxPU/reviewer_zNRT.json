@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "30bPCDjdxPU",
+  "reviewer": "zNRT",
+  "paper": {
+    "title": "Faster Reinforcement Learning with Value Target Lower Bounding",
+    "authors": [
+      "Le Zhao",
+      "Wei Xu"
+    ],
+    "abstract": "We show that an arbitrary lower bound of the maximum achievable value can be used to improve the Bellman value target during value learning.  In the tabular case, value learning using the lower bounded Bellman operator converges to the same optimal value as using the original Bellman operator, at a potentially faster speed.  In practice, discounted episodic return in episodic tasks and n-step bootstrapped return in continuing tasks can serve as lower bounds to improve the value target.  We experiment on Atari games, FetchEnv tasks and a challenging physically simulated car push and reach task.  We see large gains in sample efficiency as well as converged performance over common baselines such as TD3, SAC and Hindsight Experience Replay (HER) in most tasks, and observe a reliable and competitive performance against the stronger n-step methods such as td-lambda, Retrace and optimality tightening.  Prior works have already successfully applied a special case of lower bounding (using episodic return), but are limited to a small number of episodic tasks.  To the best of our knowledge, we are the first to propose the general method of value target lower bounding (with possibly bootstrapped return), to demonstrate its optimality in theory, and effectiveness in a wide range of tasks over many strong baselines.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=30bPCDjdxPU"
+  },
+  "review_fields": {
+    "summary": "The paper proposes value target lower bounding, where a function lower bounds the maximum achievable value is used as the target value.  Such a function admits the same convergence with the original Bellman operator but converges faster. The proposed value target lower bounding is claimed to be general and can be combined with any off-policy RL algorithms. The experiments verify this on SAC and DDPG.",
+    "strengths_and_weaknesses": "**Strengths**\n\n- The proposed method appears to be simple and effective empirically.  \n- The proposed method is evaluated in several configurations. \n- The writing is clear and easy to follow. \n\n**Weaknesses**\n\n- The main concern is why the proposed method is not evaluated on DQN. The proposed method is claimed to be general (\"The value target lower bounds can be readily plugged into RL algorithms that regress value to a target, e.g. DQN, DDPG or SAC.\"), but only evaluated on off-policy actor-critic style methods, like SAC and DDPG. Is this because it does not work well on DQN?\n- Currently, the empirical return (or n-step return) is taken as the lower bounding function, which limits the proposed method to only valid when the environment is deterministic. This is one limitation of this work. \n- *Faster learning* is only shown empirically and intuitively. Are there theoretical results to support this claim?\n- It will be better to show the difference between the lower bounding and upper bounding (He et al., 2017).\n\n**originality and significance**\n- It is not totally new to use the bounding of target value. \n\n---\nAFTER REBUTTAL\n\nI thank the authors for the response. After reading the response and other reviews, I think the paper still has a few weaknesses/limitations: (1) limited to deterministic environments. It is better to show how to extend it to stochastic environments; (2) better to compare it with other methods, like upper bounding. \n\nNevertheless, I still enjoy seeing such a simple method works well empirically. So, I keep my score.",
+    "limitations": "Limitations are discussed in Section 7."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

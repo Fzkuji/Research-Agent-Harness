@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "BlF6CWzWKT7",
+  "reviewer": "biU1",
+  "paper": {
+    "title": "Estimating individual treatment effects under unobserved confounding using binary instruments",
+    "authors": [
+      "Dennis Frauen",
+      "Stefan Feuerriegel"
+    ],
+    "abstract": "Estimating individual treatment effects (ITEs) from observational data is relevant in many fields such as personalized medicine. However, in practice, the treatment assignment is usually confounded by unobserved variables and thus introduces bias. A remedy to remove the bias is the use of instrumental variables (IVs). Such settings are widespread in medicine (e.g., trials where compliance is used as binary IV). In this paper, we propose a novel, multiple robust machine learning framework, called MRIV, for estimating ITEs using binary IVs and thus yield an unbiased ITE estimator. Different from previous work for binary IVs, our framework estimates the ITE directly via a pseudo outcome regression. (1) We provide a theoretical analysis where we show that our framework yields multiple robust convergence rates: our ITE estimator achieves fast convergence even if several nuisance estimators converge slowly. (2) We further show that our framework asymptotically outperforms state-of-the-art plug-in IV methods for ITE estimation. (3) We build upon our theoretical results and propose a tailored neural network architecture called MRIV-Net for ITE estimation using binary IVs. Across various computational experiments, we demonstrate empirically that our \\modelname achieves state-of-the-art performance. To the best of our knowledge, our MRIV is the first multiple robust machine learning framework tailored to estimating ITEs in the binary IV setting.",
+    "keywords": [
+      "Causal machine learning",
+      "treatment effect estimation",
+      "instrumental variables"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=BlF6CWzWKT7"
+  },
+  "review_fields": {
+    "summary": "The authors propose an algorithm for estimating ITE for binary instrument and binary treatment. The procedure has three steps.\n-implement some initial estimator of ITE\n-construct pseudo-outcome as sum of the initial estimator and a term combining several nuisances\n-regress the pseudo-outcome on covariates\nFor this algorithm, the authors prove excess risk that scales as the sum of an oracle rate and several product rates.",
+    "strengths_and_weaknesses": "Originality\n\nI will raise the score if the authors improve the framing of the contribution in the context of previous work.\n\n1. The pseudo-outcome technique is relatively popular in causal inference; see e.g. Kennedy et al.’s work on dose response (2019) which Semenova and Chernozhukov (2021) extend to ITE. This paper extends those techniques, so I would like them to be cited.\n\n2. The main theoretical result extends an analogous result by Kennedy (2020), which somehow doesn’t get mentioned until Section 4.2. Moreover, citations for ITE without unobserved confounding could be more generous; it is a vast literature.\n\n3. To distinguish the originality of this paper relative to Syrgkanis et al (2019), I would like to see a discussion that compares the estimation procedures and their guarantees. If I understand correctly, the Syrgkanis et al (2019) estimator proposes a Neyman orthogonal loss while this work used the pseudo-outcome technique, yet both provide excess risk rates that involve products of nuisance rates. \n\n4. Estimation that uses the efficient influence function to study ITE in the IV setting has been proposed by Ogburn et al (2015). Estimation that combines the efficient influence function with sample splitting and machine learning has been analyzed in the semiparametric IV setting, e.g. Singh and Sun (2019). This paper goes further than these previous works in proposing an ML estimator for ITE. I would like these previous works to be cited as well.\n\nQuality\n\n1. I will raise the score if the experiments are made to align more closely with the theory.\n\n-line 284. Is there any sense in which the proposed nuisance estimators would satisfy Assumption 3?\n\n-line 294. I would like to see the experiments with sample splitting since that is the proposal in the theory section\n\n-line 313. The comparisons are hard to understand. The various estimators have different estimands. For example, DeepIV estimates a function that is not the ITE. So what is being reported here? These comparison estimators also involve sample splitting in some cases, to align with their theory, while the proposed estimator is not implemented with sample splitting (though its theory requires it)\n\n2. I would like more discussion in the case study. In line 386, at what values are these variables fixed? Simply fixing values means that the quantity visualized in Figure 1 is not the ITE. Nor is it the ITE conditional on some subset of covariates. Please interpret what is being displayed.\n\n3. The theoretical result, stated in Section 4.2 and explained in Section 4.3, is well written and interesting. I would like to see the additional assumptions of Theorem 2 stated in the main text, rather than pointing to another paper. Then the reader can assess whether they are “mild” or not.\n\nClarity\n\n1. There were several instances in which the authors made statements that were either unclear or untrue as written. I will increase the score when these are addressed.\n\n-line 25. The definition of unconfoundedness is incorrect. The given definition is an example of when unconfoundedness holds.\n-line 92. Exclusion is not unrestrictive.\n\n-line 107. The descriptions in Assumption 2 are misleading. The assumptions state that U can essentially be differenced out. It is an additive equi-confounding.  \n\n-line 117 (footnote). The definition of compliers is incorrect. It is the subpopulation for whom A(1)>A(0).\n\n-line 142. This statement is misleading. Arguably this paper requires a type of additive separability of confounding as well; see the comment above.\n\n-line 223. This is a misleading citation. Cross-fitting is a type of sample splitting that has the same theoretical analysis. It is not a practical shortcut. The cited paper does not advocate fitting all nuisances on the same data set; that approach is only valid when the function spaces have limited complexity.\n\n2. Please provide some intuition for the first term in equation 3. It helps to group \\hat{\\tau}_{init} and look at what residual is being extracted from Y before being reweighted.\n\nSignificance\n\nMy assessment of significance will hinge upon the authors’ improvements described above. There are currently too many issues for this paper to be a significant contribution, but I am optimistic that these issues can be addressed in the revision.",
+    "questions": "Please address the items in Originality, Quality, and Clarity and I will increase the score"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

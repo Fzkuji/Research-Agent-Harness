@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "oaIa8kTLjmP",
+  "reviewer": "FFbw",
+  "paper": {
+    "title": "Asymptotics of the Bootstrap via Stability with Applications to Inference with Model Selection",
+    "authors": [
+      "Morgane Austern",
+      "Vasilis Syrgkanis"
+    ],
+    "abstract": "One of the most commonly used methods for forming confidence intervals is the empirical bootstrap, which is especially expedient when the limiting distribution of the estimator is unknown. However, despite its ubiquitous role in machine learning, its theoretical properties are still not well understood. Recent developments in probability have provided new tools to study the bootstrap method. However, they have been applied only to specific applications and contexts, and it is unclear whether these techniques are applicable to the understanding of the consistency of the bootstrap in machine learning pipelines. In this paper, we derive general stability conditions under which the empirical bootstrap estimator is consistent and quantify the speed of convergence. Moreover, we propose alternative ways to use the bootstrap method to build confidence intervals with coverage guarantees. Finally, we illustrate the generality and tightness of our results by examples of interest for machine learning including for two-sample kernel tests after kernel selection and the empirical risk of stacked estimators.",
+    "keywords": [
+      "bootstrap",
+      "asymptotics",
+      "confidence intervals",
+      "model selection"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=oaIa8kTLjmP"
+  },
+  "review_fields": {
+    "summary": "The paper discusses very general conditions on estimators under which the empirical bootstrap is asymptotically consistent. Explicit applications to two difficult inference problems, including two-sample tests using kernels with (approximate) kernel selection and on estimating the risk of ensemble learners.",
+    "main_review": "The conditions discussed in the paper under which consistency can be achieved are impressively general, and it is clearly advantageous to consider general conditions rather than specific problems as is common. The paper is well written, and for the most part clear, although there are places in which the notation becomes slightly challenging (see later).\n\nI do not have any significant reservations about the paper, and my main comments are editorial suggestions:\n- I recommend being explicit in the abstract that the examples covered are slightly modified; especially in the case of the kernel two-sample test, where a softmax variant is substantially different from a discrete selection, which is what (at least I) expected.\n- I would recommend mentioning earlier on that the adjustment for the \"centering\" can actually be easily handled in practice. As I read through the first part of Section 3 I was bugged by the persistent presence of the centered processes, and it was only patently clear how this is handled when I got to line 214. This only bears mentioning earlier; it is not necessary that the details be given, but the ubiquity of the basic CLT as being the way around it will make less expert readers feel more at ease.\n- Am I missing something in the final statement in Theorem 2? Should it not be P(E[g_n(Y^n)] \\not \\in [interval]) \\leq \\beta?\n- The notation in Section 4 is challenging, since now the second subscript refers to the identity of the process and not the index of the component in the corresponding observation. While when the permutation test starts to be discussed, if I understand correctly, this becomes a little clearer since then the two processes (samples) are just stacked next to one another as one array of higher dimensional processes, but I think it is worth mentioning earlier on. Otherwise, the expression above line 224 is confusing if you interpret X_{1,1}^n as the first element of the first observation in X^n, and not as the entire first observation in (X^n_{i,1}).\n\nTo conclude, I have some minor comments/queries/typos, etc.\n- The word \"each\" in line 17 seems out of place\n- line 77: space between [14] and .\n- line 83: Recommend either \"A series of works has strengthened...\" or \"A series of work has strengthened...\"\n- lines 84 and 86: should not the dimension, p, explicitly depend on n as previously?\n- line 86: \"...conditions THAT log(...\"\n- line 94: \"...specific STATISTIC or...\"\n- Although not ambiguous, the metric d_{\\mathcal{F}} is defined between probability measures, but is evaluated on random variables.\n- line 124: \"same mean AS X^{n}_1\n- Aren't lines 126-127 just repeating what lies above in line 123?\n- In Proposition 1, recommend \"Let \\epsilon > 0 be constant, then...\"\n- line 164: missing subscript n in g(0X^n_{2:n})\n- Although not ambiguous, I don't think the L_{p} spaces of RVs are not explicitly defined; only the norm is.\n- this is purely cosmetic, but in the statement of assumption H_3, the parentheses in g(Y^n + x/sqrt{n}) would look better if larger\n- line 224: should not \"opposite\" better be replaced with \"converse\"?\n- What does (a) above equality mean? Should this be d?\n-  What is the metric d_W?\n- The font in Proposition 2 is inconsistent\n- Why is sometimes max()/min() and other times join/meet used?",
+    "limitations_and_societal_impact": "Limitations are not explicitly discussed. There is no apparent potential negative societal impact."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

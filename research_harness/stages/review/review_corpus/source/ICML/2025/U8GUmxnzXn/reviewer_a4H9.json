@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "U8GUmxnzXn",
+  "reviewer": "a4H9",
+  "paper": {
+    "title": "UnHiPPO: Uncertainty-aware Initialization for State Space Models",
+    "authors": [
+      "Marten Lienen",
+      "Abdullah Saydemir",
+      "Stephan Günnemann"
+    ],
+    "abstract": "State space models are emerging as a dominant model class for sequence problems with many relying on the HiPPO framework to initialize their dynamics. However, HiPPO fundamentally assumes data to be noise-free; an assumption often violated in practice. We extend the HiPPO theory with measurement noise and derive an uncertainty-aware initialization for state space model dynamics. In our analysis, we interpret HiPPO as a linear stochastic control problem where the data enters as a noise-free control signal. We then reformulate the problem so that the data become noisy outputs of a latent system and arrive at an alternative dynamics initialization that infers the posterior of this latent system from the data without increasing runtime. Our experiments show that our initialization improves the resistance of state-space models to noise both at training and inference time.",
+    "keywords": [
+      "state space",
+      "uncertainty",
+      "hippo",
+      "mamba",
+      "kalman",
+      "noise",
+      "filter"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=U8GUmxnzXn"
+  },
+  "review_fields": {
+    "summary": "The paper proposes to extend high-order polynomial projection operators (HiPPO) that are used to initialise the dynamics of recent state space models. HiPPO theory is agnostic to measurement noise. The paper extends HiPPO operators to capture uncertainty arising from measurement noise.   Specifically, the paper proposes to infer the posterior pdf of the HiPPO coefficients conditional on the noisy observations. The parameters of the pdf are estimated using a Kalman filter.  The updated Kalman state (i.e., the mean of the posterior) itself is a first-order difference equation, where the transition of states from time step t-1 to t is captured by a transition matrix, and where the excitation is projected into state-space by an input vector. The transition matrix and input vector are therefore synonymous to the HiPPO matrices, but – owing to their Bayesian formulation – capture uncertainty in the measurement noise. The paper embeds the proposed matrices within LSSL (Gu & Dao 2021). The results of the resulting uncertainty-aware LSSL are compared against LSSL for a 10-class subset of the Speech Commands dataset. Results indicate improvements of up to approximately 1.5 percentage points  of the proposed model over the baseline.\n\n## Update after rebuttal:\nI thank the authors for their rebuttal. I particularly appreciate their effort in providing new results for different datasets to address my concerns. In my opinion, the idea of capturing uncertainty to improve robustness to noise is interesting and very promising. Unfortunately, similar to the results in the paper, the new results provided during the rebuttal also demonstrate only small improvements (< ~3%) compared to the LSSL baseline. In my opinion, more convincing results are required to evidence the paper's claim, i.e., that the proposed initialisation improves robustness against noise. I therefore maintain my score. Again, I think this is a promising approach and I would encourage the authors to undertake a more thorough experimental investigation with the aim to identify scenarios in which the proposed approach clearly outperforms LSSL.",
+    "claims_and_evidence": "The main claim of the paper is that the performance and noise robustness of models initialised with HiPPO can be improved by capturing explicitly uncertainty in the measurement noise. The mathematical formulation is presented in a clear and concise manner. Convincing examples are provided in Section 5 to illustrate the benefits of the proposed method.",
+    "methods_and_evaluation_criteria": "In my opinion, the proposed method provides an elegant and simple approach to embed measurement uncertainty in HiPPO. The dataset that was selected is appropriate to validate the proposed methodology, given the inherent challenges arising from speech in noise. While the results in the presented in the paper are sufficient for *validation*, the results showcase only small improvements in accuracy. To help identify the benefits (and potential limitations) of the proposed model, I would have expected a more thorough study involving different tasks and datasets for *evaluation*. For example, most SSMs since LSSL are evaluated on the LRA benchmark.",
+    "experimental_designs_or_analyses": "In general, the experimental design provides the necessary information about the models to reproduce the studies. However, there is some information missing about the distortion of the speech signals:\n\n1)\tBased on the information provided in Section 6, I gather that the authors added noise to Speech Commands to investigate performance under varying conditions. Is this correct? If so, my main concern is that Speech Commands was recorded in varying acoustic conditions, i.e., the clips already include background noise at varying noise levels. The results in Figure 6 seem to indicate LSSL actually performs equally well as UnLSSL at low noise levels (i.e., when no additional noise was added to the noisy Speech Commands utterances). This seems contradictory to the main claim of the paper.\n2)\tIt is unclear how noise was added. Were the signals normalised to a particular level prior to adding noise? What is the target SNR? How is this handled considering that clips often contain long periods of silence / background noise with very short speech utterances?\n3)\tIt is unclear what type of noise was added. The type of noise will have a significant impact on the results. For example, white noise is relatively easy to remove. However, realistic noise sources are rarely white. Have the signals been distorted with realistic noise sources, such as speech-like noise or music? Which noise dataset was used?\n\nProvided that my understanding of the noise experiments is correct, I recommend to repeat the experiments with a dataset that is recorded in anechoic or studio conditions (e.g., TIMIT, VCTK). It would also be possible to estimate the noise levels in Speech Commands from periods of speech inactivity.",
+    "relation_to_broader_scientific_literature": "A timely paper that fits will within recent work on the initialisation of SSMs, including, e.g., [1] below. In my opinion, the novel contribution of the paper is the extension of HiPPO to a framework that embeds uncertainty. \n\n[1] Liu & Li, “Autocorrelation Matters: Understanding the Role of Initialization Schemes for State Space Models”, ICLR 2025",
+    "other_strengths_and_weaknesses": "*Strengths:* This is a very well written paper, that provides clear motivation and justification for assumptions, coherent and linear explanations, and helpful illustrative examples. I particularly appreciated the concise summary of HiPPO in Section 3. \n\n*Weaknesses:* The Figures in Section 6 provide nice visualisations of the general trend of accuracy and error curves. However, considering the small differences in performance between UnLSSL and LSSL, Tables are required to provide a precise comparison in performance. For example, in Figure 7 at \\sigma^2 = 10^{10}, I struggle to determine if the difference in accuracy is 1 percentage point, more or less.",
+    "questions_for_authors": "1. P. 6, paragraph following (29): “In contrast to LSSL where we can get the discretized dynamics at any t directly, for UnLSSL we compute them for all integer steps t ∈ [tmax] and then select a subset.” – I assume that this is necessary since the uncertainty-aware transition matrix and input vector are obtained from the discrete-time update equation in (24). Please can you clarify this point?\n2. Same paragraph: “Instead, we also compute all intermediate steps, which mirrors the more realistic setting where we also observe data at 1, 2, . . . , t − 1.” – Is the initialization of UnLSSL therefore data dependent?\n3. How were the noise experiments conducted? What type of noise was added? At what SNR?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "SJf6BhAqK7",
+  "reviewer": "1",
+  "paper": {
+    "title": "Variadic Learning by Bayesian Nonparametric Deep Embedding",
+    "authors": [
+      "Kelsey R Allen",
+      "Hanul Shin",
+      "Evan Shelhamer",
+      "Josh B. Tenenbaum"
+    ],
+    "abstract": "Learning at small or large scales of data is addressed by two strong but divided frontiers: few-shot learning and standard supervised learning. Few-shot learning focuses on sample efficiency at small scale, while supervised learning focuses on accuracy at large scale. Ideally they could be reconciled for effective learning at any number of data points (shot) and number of classes (way). To span the full spectrum of shot and way, we frame the variadic learning regime of learning from any number of inputs. We approach variadic learning by meta-learning a novel multi-modal clustering model that connects bayesian nonparametrics and deep metric learning. Our bayesian nonparametric deep embedding (BANDE) method is optimized end-to-end with a single objective, and adaptively adjusts capacity to learn from variable amounts of supervision. We show that multi-modality is critical for learning complex classes such as Omniglot alphabets and carrying out unsupervised clustering. We explore variadic learning by measuring generalization across shot and way between meta-train and meta-test, show the first results for scaling from few-way, few-shot tasks to 1692-way Omniglot classification and 5k-shot CIFAR-10 classification, and find that nonparametric methods generalize better than parametric methods. On the standard few-shot learning benchmarks of Omniglot and mini-ImageNet, BANDE equals or improves on the state-of-the-art for semi-supervised classification.",
+    "keywords": [
+      "meta-learning",
+      "metric learning",
+      "bayesian nonparametrics",
+      "few-shot learning",
+      "deep learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SJf6BhAqK7"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their clarification. However, I am still not very convinced about the use of the terminology made in this work.\n\nThe proposed scheme builds upon an algorithm which was obtained as the zero variance limit of a Bayesian mixture model.\nThis does not justify the term Bayesian non-paramteric for the proposed method. As stated in my first review, the framework does not present any property of the Bayesian methodology such as the possibility of inference over parameters, uncertainty quantification, or model comparison. Even the very standard k-means clustering, or a linear model, can be seen as the limit of Bayesian counterparts, but it would be awkward, and not justified, to present a work using these tools as Bayesian.\n\nI stil think that there is a substantial problem of novelty and clarity. As also noted by reviewer 3, the difference with respect to the state of the art resides in the use of algorithm 1 for adaptively adding new centres if needed. While being of interest, this part deserves further clarifications on the many critical aspects: stability, dependence on the parameter \\lambda, uniqueness of the solution. In the current version of the manuscript these aspects are lightly mentioned and not discussed. The fact that the authors “ have not found the method to be sensitive to this in practice” does not represent a strong motivation in favour of the method. Moreover, as already mentioned in my previous review, the proposed use of the method is different from the original formulation of [Kulis 2012], as it is not iterated (“In this clustering scheme a single pass is sufficient …”). This raises further concerns about stability and robustness of the proposed procedure.\n\nFinally, I apologise for the previous use of the term “uni-modal distribution”. I acknowledge that the proposed method is explicitly built to account for multi-modal ones, and I made a mistake while typing my previous review."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "bDWXhzZT40",
+  "reviewer": "1jLE",
+  "paper": {
+    "title": "Learning model uncertainty as variance-minimizing instance weights",
+    "authors": [
+      "Nishant Jain",
+      "Karthikeyan Shanmugam",
+      "Pradeep Shenoy"
+    ],
+    "abstract": "Predictive uncertainty--a model’s self-awareness regarding its accuracy on an input--is key for both building robust models via training interventions and for test-time applications such as selective classification. We propose a novel instance-conditional reweighting approach that captures predictive uncertainty using an auxiliary network, and unifies these train- and test-time applications. The auxiliary network is trained using a meta-objective in a bilevel optimization framework. A key contribution of our proposal is the meta-objective of minimizing dropout variance, an approximation of Bayesian predictive uncertainty, We show in controlled experiments that we effectively capture diverse specific notions of uncertainty through this meta-objective, while previous approaches only capture certain aspects. These results translate to significant gains in real-world settings–selective classification, label noise, domain adaptation, calibration–and across datasets–Imagenet, Cifar100, diabetic retinopathy, Camelyon, WILDs, Imagenet-C,-A,-R, Clothing-1.6M, etc. For Diabetic Retinopathy, we see upto 3.4\\%/3.3\\% accuracy & AUC gains over SOTA in selective classification. We also improve upon large-scale pretrained models such as PLEX.",
+    "keywords": [
+      "loss reweighting",
+      "epistemic uncertainty",
+      "bi-level optimization",
+      "model calibration",
+      "bayesian neural networks"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=bDWXhzZT40"
+  },
+  "review_fields": {
+    "summary": "The authors propose ReVar technique for predicting model uncertainty at train and test time. In particular, ReVar is notable for aiming to capture various different sources of uncertainty, including covariance shift and high label noise. ReVar uses bi-level optimization to learn both a primary model f(x) and auxiliary uncertainty model g(x), which serves as an instance-dependent weight function for training data and an uncertainty score. The technique is evaluated favorably against prior works, both on synthetic data and on real datasets for many tasks including calibration, data with label noise and selective classification.",
+    "strengths": "- The general premise of an all-purpose uncertainty evaluation tool, useful for both train and test time and adaptive to various sources of uncertainty, is a significant and original contribution that would be very useful\n- The evaluation against prior works on a variety of uncertainty-related tasks is very comprehensive\n- In section 4, the classifications into types 1-3 uncertainty and discussion of how instance weights should respond to these types was a useful step towards putting these different uncertainty problems under one theoretical framework",
+    "weaknesses": "- Section 4's work with synthetic data has good potential to be interesting and illustrative of how ReVaR works differently in desired ways for different uncertainty types. However, I found it unclear how the \"theoretical ideal for the instance dependent weights\" listed in table 1 were determined. Some more information on their derivation might be helpful.\n- Occasional minor notational things: Equation 3, definition of $\\theta^*$, should $g_\\Theta$ might instead be $g_{\\Theta^*}$. The text following/explaining equation 6 introduces variables not used in equation 6; some minor rewriting could be useful here. Missing reference to a theory in section 4, scenario 1.",
+    "questions": "- How were the targets in table 1 derived; why are these targets desirable?\n- In distribution shift settings where we assume access to a validation set from the test distribution, is it not better sometimes to just fine-tune on the validation set (or a portion of it)? It could potentially be a good baseline comparison."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1551,
+    "words": 242,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/37bcce5a-d213-4ff4-9834-147023cdcec1",
+    "error": null,
+    "scored_chars": 1551
+  }
+}

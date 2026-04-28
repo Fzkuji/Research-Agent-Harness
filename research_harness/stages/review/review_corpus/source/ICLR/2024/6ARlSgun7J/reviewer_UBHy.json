@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "6ARlSgun7J",
+  "reviewer": "UBHy",
+  "paper": {
+    "title": "Enhancing Tail Performance in Extreme Classifiers by Label Variance Reduction",
+    "authors": [
+      "Anirudh Buvanesh",
+      "Rahul Chand",
+      "Jatin Prakash",
+      "Bhawna Paliwal",
+      "Mudit Dhawan",
+      "Neelabh Madan",
+      "Deepesh Hada",
+      "Vidit Jain",
+      "SONU MEHTA",
+      "Yashoteja Prabhu",
+      "Manish Gupta",
+      "Ramachandran Ramjee",
+      "Manik Varma"
+    ],
+    "abstract": "Extreme Classification (XC) architectures, which utilize a massive One-vs-All (OvA) classifier layer at the output, have demonstrated remarkable performance on problems with large label sets. Nonetheless, these architectures falter on tail labels with few representative samples. This phenomenon has been attributed to factors such as classifier over-fitting and missing label bias, and solutions involving regularization and loss re-calibration have been developed. This paper explores the impact of label variance - a previously unexamined factor - on the tail performance in extreme classifiers. It also develops a method to systematically reduce label variance in XC by transferring the knowledge from a specialized tail-robust teacher model to the OvA classifiers. For this purpose, it proposes a principled knowledge distillation framework, LEVER, which enhances the tail performance in extreme classifiers with formal guarantees on generalization. Comprehensive experiments are conducted on a diverse set of XC datasets, demonstrating that LEVER can enhance tail performance by around 5\\% and 6\\% points in PSP and coverage metrics, respectively, when integrated with leading extreme classifiers. Moreover, it establishes a new state-of-the-art when added to the top-performing Renee classifier. Extensive ablations and analyses substantiate the efficacy of our design choices. Another significant contribution is the release of two new XC datasets that are different from and more challenging than the available benchmark datasets, thereby encouraging more rigorous algorithmic evaluation in the future. Code for LEVER is available at: aka.ms/lever.",
+    "keywords": [
+      "Extreme Classification",
+      "Extreme Multi-Label Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=6ARlSgun7J"
+  },
+  "review_fields": {
+    "summary": "This paper investigates a novel factor, label variance, in the context of tail performance in extreme classifiers. To address this issue, the authors propose LEVER, a knowledge distillation framework that leverages a robust teacher model to reduce label variance. Experimental results demonstrate that LEVER significantly improves tail performance, achieving approximately 5% and 6% increases in PSP and Coverage metrics, respectively, when integrated with state-of-the-art extreme classifiers.",
+    "strengths": "1. The paper give a proof of the correlation between the generalization performance of a classifier and the variance in labels.\n2. Use a Siamese- style model as a teacher to help reduce the label variance effects.\n3. The extensive experiment results are promising.\n4. The paper contribute two new datasets to the field.",
+    "weaknesses": "1. The readability of the paper is not strong, and the formatting is uncomfortable. For example, the abstract should generally be a single paragraph, there are too many blank spaces before and after Section 2 Related Work, and the spacing of equations is large. With ample space in the appendix, the full text does not fill up the nine pages. Improvements are needed in basic writing formatting and readability.\n2. The paper has limited novelty. From a personal perspective, the innovation lies in using a teacher model to predict probabilities. The rest of the paper mainly demonstrates the significant impact of tail classes. From the perspective of innovative design, it is not convincing. It is also unclear why the teacher model can provide accurate estimates of $p_x$.\n3. There is limited description regarding fair comparisons. After introducing the teacher model, the training process and time will be affected. The main part should devote more space to introducing the teacher model, analyzing its performance, and comparing the training time with other models.",
+    "questions": "1. Can the teacher model be adapted to the current task? How does its performance compare? What are the differences between directly using a better model for distillation and utilizing the results of other models as auxiliary information in this paper?\n2. Refer to the weaknesses mentioned."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 1,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1683,
+    "words": 272,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6b8ed861-e168-4b08-a5b4-ad44f34f5545",
+    "error": null,
+    "scored_chars": 1683
+  }
+}

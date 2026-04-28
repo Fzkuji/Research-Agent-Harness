@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "AZGIwqCyYY",
+  "reviewer": "jozM",
+  "paper": {
+    "title": "Towards Cross Domain Generalization of Hamiltonian Representation via Meta Learning",
+    "authors": [
+      "Yeongwoo Song",
+      "Hawoong Jeong"
+    ],
+    "abstract": "Recent advances in deep learning for physics have focused on discovering shared representations of target systems by incorporating physics priors or inductive biases into neural networks. While effective, these methods are limited to the system domain, where the type of system remains consistent and thus cannot ensure the adaptation to new, or unseen physical systems governed by different laws. For instance, a neural network trained on a mass-spring system cannot guarantee accurate predictions for the behavior of a two-body system or any other system with different physical laws.\nIn this work, we take a significant leap forward by targeting cross domain generalization within the field of Hamiltonian dynamics. \nWe model our system with a graph neural network (GNN) and employ a meta learning algorithm to enable the model to gain experience over a distribution of systems and make it adapt to new physics. Our approach aims to learn a unified Hamiltonian representation that is generalizable across multiple system domains, thereby overcoming the limitations of system-specific models. \nWe demonstrate that the meta-trained model captures the generalized Hamiltonian representation that is consistent across different physical domains.\nOverall, through the use of meta learning, we offer a framework that achieves cross domain generalization, providing a step towards a unified model for understanding a wide array of dynamical systems via deep learning.",
+    "keywords": [
+      "hamiltonian dynamics",
+      "cross domain generalization",
+      "learning physics",
+      "meta learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=AZGIwqCyYY"
+  },
+  "review_fields": {
+    "summary": "The paper reports the performance of MAML applied to domain generalization over different Hamiltonian dynamics. The performance gain by MAML is analyzed with multiple indices over different combinations of meta-training and meta-test data. The key findings include the superiority of the meta-trained models compared to the pre-trained and randomly initialized models and an implication that by meta-learning, the representations obtained by the models tend to be more specific to each system.",
+    "strengths": "The experiments clearly show the superiority of meta-learning, at least within the limited number of Hamiltonian systems. \n\nThe paper is well written. The motivation, the method, and the experimental results are very clearly reported.",
+    "weaknesses": "The limitation of meta-learning for (Hamiltonian) dynamics is not clearly investigated. This makes it difficult to assess the range where the claims made in the paper should be valid. In other words, the claims are rather weak because their applicability seems unbounded with the current set of experiments. When the meta-learning approaches for dynamics may not be beneficial? For example, what happens if you meta-train a model only with conservative systems and try to adapt it to a dissipative system? Such experiments to investigate the limitations of the empirical findings would strengthen the paper.\n\nThe paper only reports the performance of a well-known method (MAML) merely applied to a particular setting. This could certainly be a kind of contribution in which ICLR audience may be interested, but I think that in such a paper, with a purely experimental point of view, the claims should be made more carefully. Specifically, as stated above, the cases where meta-learning is not necessarily beneficial should also be revealed, with which the claims would become more falsifiable and convincing.",
+    "questions": "I don't have particular questions. It would be great if the authors could additionally report the results of some experiments to investigate the limitation of meta-learning in this context, although this is not a question."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1567,
+    "words": 243,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/5ab449db-c157-4647-a9e5-395e8a49e408",
+    "error": null,
+    "scored_chars": 1568
+  }
+}

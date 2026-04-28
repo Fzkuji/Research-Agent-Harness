@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "GByP03IitA",
+  "reviewer": "zRtW",
+  "paper": {
+    "title": "ITFormer: Bridging Time Series and Natural Language for Multi-Modal QA with Large-Scale Multitask Dataset",
+    "authors": [
+      "Yilin wang",
+      "Peixuan Lei",
+      "Jie Song",
+      "Yuzhe Hao",
+      "Tao Chen",
+      "Yuxuan Zhang",
+      "LEI JIA",
+      "Yuanxiang Li",
+      "zhongyu wei"
+    ],
+    "abstract": "Time-series data are critical in diverse applications, such as industrial monitoring, medical diagnostics, and climate research. However, effectively integrating these high-dimensional temporal signals with natural language for dynamic, interactive tasks remains a significant challenge. To address this, we introduce the Time-Series Question Answering (Time-Series QA) task and release EngineMT-QA, the first large-scale, multi-task, temporal-textual QA dataset designed to capture complex interactions between time-series signals and natural language. Building on this resource, we propose the Instruct Time Transformer (ITFormer), a novel framework that bridges time-series encoders with frozen large language models (LLMs). ITFormer effectively extracts, aligns, and fuses temporal and textual features, achieving a strong improvement in QA accuracy over strong baselines with fewer than 1\\% additional trainable parameters. By combining computational efficiency with robust cross-modal modeling, our work establishes a adaptable paradigm for integrating temporal data with natural language, paving the way for new research and applications in multi-modal AI. More details about the project, including datasets and code, are available at: https://pandalin98.github.io/itformer_site/.",
+    "keywords": [
+      "Time Series Analysis",
+      "Time-Series Question Answering",
+      "Time-Series-Textual Alignment",
+      "Time-Series-Textual Fusion"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GByP03IitA"
+  },
+  "review_fields": {
+    "summary": "The paper presents ITFormer, a novel framework that bridges time series and natural language for multi-modal temporal-textual question answering. Specifically, ITFormer uses time token position encoding (TPE) to encode the time series, then uses learnable instruct tokens (LIT) to facilitate the alignment between temporal and textual modalities, and finally uses instruct time attention, enabling efficient and robust cross-modal fusion to align and fuse temporal and textual representations. Experiments on the self-constructed EngineMT-QA dataset demonstrate that ITFormer achieves better performance than existing methodologies.",
+    "claims_and_evidence": "The claims in the paper are well supported by clear and convincing evidence.",
+    "methods_and_evaluation_criteria": "The proposed methods and evaluation criteria make sense for the problem.",
+    "theoretical_claims": "No Theorems proposed in the paper.",
+    "experimental_designs_or_analyses": "The experimental designs listed in Section 5.2 to 5.5 (including ablation studies) make sense.",
+    "relation_to_broader_scientific_literature": "Multi-modal, multi-dimensional time series question answering is a well-established problem in many real-world scenarios, where the integration of time series QA with LLMs could have wide application.",
+    "other_strengths_and_weaknesses": "Strength\n\n1. This paper focuses on the problem of multi-task, temporal-textual time series reasoning and question-answering, which is of high importance yet not well explored by existing research works.\n2. The ablation study in Section 5.4 and the efficiency study in Section 5.5 show that the proposed ITFormer framework consistently achieves better performance than existing methodologies, where larger LLMs always lead to better ITFormer performance, demonstrating the scalability of the proposed framework.\n3. ITFormer is a lightweight framework with only ~1% of parameters needing to be tuned with frozen LLMs, which is easy to deploy in real-world applications.\n4. The paper is well-written, easy to follow, and understand.\n\nDisadvantage:\n1. Although the paper provides an anonymous GitHub for the code and models, the dataset cannot be accessed with specific VPNs.\n2. The experiments are solely on the self-created EngineMT-QA dataset. More experiments on existing datasets could help to better demonstrate the performance of the proposed method.",
+    "ethical_review_flag": "Flag this paper for an ethics review."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

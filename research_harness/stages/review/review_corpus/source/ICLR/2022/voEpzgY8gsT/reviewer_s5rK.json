@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "voEpzgY8gsT",
+  "reviewer": "s5rK",
+  "paper": {
+    "title": "Additive Poisson Process: Learning Intensity of Higher-Order Interaction in Poisson Processes",
+    "authors": [
+      "Simon Luo",
+      "Feng Zhou",
+      "lamiae azizi",
+      "Mahito Sugiyama"
+    ],
+    "abstract": "We present the Additive Poisson Process (APP), a novel framework that can model the higher-order interaction effects of the intensity functions in Poisson processes using projections into lower-dimensional space. Our model combines the techniques in information geometry to model higher-order interactions on a statistical manifold and in generalized additive models to use lower-dimensional projections to overcome the effects from the curse of dimensionality. Our approach solves a convex optimization problem by minimizing the KL divergence from a sample distribution in lower-dimensional projections to the distribution modeled by an intensity function in the Poisson process. Our empirical results show that our model is able to use samples observed in the lower dimensional space to estimate the higher-order intensity function with extremely sparse observations.",
+    "keywords": [
+      "Poisson Process",
+      "Log-Linear Model",
+      "Energy-Based Model",
+      "Generalized Additive Models",
+      "Information Geometry"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=voEpzgY8gsT"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes a new model, called additive Poisson process, for estimating the intensity of a high dimensional Poisson process. By representing the intensity as a sum of lower dimensional projections, the method can deal with sparse data while allowing for an efficient inference scheme based on the information geometric structure of the distribution space. The assumed intensity form is motivated by the Kolmogorov-Arnold theorem while the estimation procedure has some formal guarantees of convergence.",
+    "main_review": "I found the main idea of the paper novel and interesting. I believe the paper is well written and easy to read even for someone not familiar with information geometry. I particularly appreciated the theoretical guarantees that come with this model and inference scheme. The experimental section is extensive but could be improved (see comments below). Addressing the following comments could help clarify the benefits and contributions of the proposed approach:\n\n1) It seems to me that the point of this paper is not to model multiple correlated poisson processes but rather to learn the intensity of a single poisson process by “decomposing” it into sub processes over lower dimensional input spaces. Can you confirm this is correct?\n2) The authors speak about general high dimensional input spaces in the introduction also making the example of space-time locations. However, the input definition is not clear in Section 2. From Section 2, the authors speak only about timestamps where each time step seems to have a D dimensionality. This is confusing. It would be useful to repeat your initial example when you define $\\mathbf{t}_1, …. \\mathbf{t}_N$ to give examples of what these time stamps are. Ultimately it seems to me that you could just call $\\mathbf{x}_i = [x_i^1, …., x_i^{D-1}, t_i ] $ the input vector in a D dimensional space which also includes the time stamp. \n3)Section 2.3. In terms of computational complexity, what is generally the cardinality of $\\mathcal{S}$? Is this not given by the number of terms considered in Eq (6)? In other words the number of lower dimensional projections in Eq 4? If this is the case it does not seem the computational complexity is significantly lower compared to the methods mentioned in Section A.1 in the appendix. \n4) I believe the authors should comment an important approximation introduced when discretising the input space thus getting rid of the intractable integral in the likelihood? There are indeed approaches in the literature that avoid that and despite resorting to variational inference (thus no guarantees) are scalable and seem to be working fine in experimental settings (see [1] and [2] below).\n5) Figure 4. It seems like there is a typo in the captions. For the sparse case N should be 1000? Also it does not seem like the observations are sparse in the two left plots of the second row.   \n6) Experimental comparison. Given the number of approaches existing in the literature and using GP to model the intensity function (and same link function used in Eq (2)) I think the authors should compare the proposed method to one of them (one example could be the LGCP model) especially cause for some of them the approximated inference scheme is fast and stochastic gradient descent method can be used to reduce the computational complexity. In addition there exist out of the box tools that can be used to train such models making it a fast default choice. They would probably fail in sparse settings but I think the paper would significantly benefit from that comparison. \n\n\n**Minor comments**\n1) Just above Eq (6) I believe the authors refer to Eq (3) and not Eq (1)\n2) The figures are very scatters in the paper and I would prefer to have them reorganised in order to have them closer to the point where they are discussed in the text. In addition it would be useful to see Fig 4 together with fig 3 and fig 5 together with fig 6 as they refer to the same experiment. \n\n[1] Aglietti, Virginia, et al. \"Structured variational inference in continuous cox process models.\" arXiv preprint arXiv:1906.03161 (2019).\n\n[2] Lloyd, Chris, et al. \"Latent point process allocation.\" Artificial Intelligence and Statistics. PMLR, 2016.",
+    "summary_of_the_review": "I found the main idea of the paper novel and interesting. I believe the paper is well written and I particularly appreciated the theoretical guarantees that come with this model and inference scheme. However there are some parts of the paper that are confusing, even in the basic formulation section. Therefore, I believe the paper is borderline and could be significantly improved by clarifying the points above.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 4103,
+    "words": 685,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/febd3ced-5290-48a4-adb2-9854f3e47ea8",
+    "error": null,
+    "scored_chars": 4110
+  }
+}

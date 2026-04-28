@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "sJvhwDtFhQ",
+  "reviewer": "R4tU",
+  "paper": {
+    "title": "TPD: Enhancing Student Language Model Reasoning via Principle Discovery and Guidance",
+    "authors": [
+      "Haorui Wang",
+      "Rongzhi Zhang",
+      "Yinghao Li",
+      "Lingkai Kong",
+      "Yuchen Zhuang",
+      "Xiusi Chen",
+      "Chao Zhang"
+    ],
+    "abstract": "Large Language Models (LLMs) have recently showcased remarkable reasoning abilities. However, larger models often surpass their smaller counterparts in reasoning tasks, posing the challenge of effectively transferring these capabilities from larger models. Existing approaches heavily rely on extensive fine-tuning data or continuous interactions with a superior teacher LLM during inference. We introduce a principle-based teacher-student framework called Teaching via Principle Discovery (TPD) to address these limitations. Inspired by human learning mechanisms, TPD mimics the interaction between a teacher and a student using a principle-based approach. The teacher LLM generates problem-solving instructions and corrective principles based on the student LLM's errors. These principles guide the refinement of instructions and the selection of instructive examples from a validation set. This enables the student model to learn from both the teacher's guidance and its own mistakes. Once the student model begins making inferences, TPD requires no further intervention from the teacher LLM. Through extensive experiments across eight reasoning tasks, we demonstrate the effectiveness of TPD. Compared to standard chain-of-thought prompting, TPD significantly improves the student model's performance, achieving an average improvement of 6.2\\%.",
+    "keywords": [
+      "Principle discovery",
+      "Teacher-student framework",
+      "Reasoning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=sJvhwDtFhQ"
+  },
+  "review_fields": {
+    "comment": "Thank you for the response. \n\nAns to Q7  -- future work where the student model could self-discover and summarize principles using the true labels from the practice questions -- at that point, it becomes very close to LEAP [1] method. You can include this in the future work may be.\nAns to Q6 -- strong baseline -- yes, I would be curious to find out in your next version. \nAns to other questions -- thank you. Your responses have given me more clarity now. I will very likely increase my score today. Obviously it would be under the assumption that the authors would include the suggested studies, analysis, baselines, and also try out the method updates (this part, if it is possible to do so). That should make the paper stronger (supporting the claims, and making the method more robust). \n\n*One final question*: how much human intervention (for quality checks on principles) was needed across different tasks. I am looking for a ballpark quantitative answer. Also, what instruction did you give the human on what a good principle is."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:38Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:38Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1034,
+    "words": 179,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/74a00949-2076-44ff-aed9-6b25a384b369",
+    "error": null,
+    "scored_chars": 1038
+  }
+}

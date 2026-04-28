@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "BRZYhVHvSg",
+  "reviewer": "XQou",
+  "paper": {
+    "title": "Multi-Group Proportional Representation in Retrieval",
+    "authors": [
+      "Alex Oesterling",
+      "Claudio Mayrink Verdun",
+      "Alexander Glynn",
+      "Carol Xuan Long",
+      "Lucas Monteiro Paes",
+      "Sajani Vithana",
+      "Martina Cardone",
+      "Flavio Calmon"
+    ],
+    "abstract": "Image search and retrieval tasks can perpetuate harmful stereotypes, erase cultural identities, and amplify social disparities. Current approaches to mitigate these representational harms balance the number of retrieved items across population groups defined by a small number of (often binary) attributes. However, most existing methods overlook intersectional groups determined by combinations of\ngroup attributes, such as gender, race, and ethnicity. We introduce Multi-Group Proportional Representation (MPR), a novel metric that measures representation across intersectional groups. We develop practical methods for estimating MPR, provide theoretical guarantees, and propose optimization algorithms to ensure MPR in retrieval. We demonstrate that existing methods optimizing for equal and proportional representation metrics may fail to promote MPR. Crucially, our work shows that optimizing MPR yields more proportional representation across multiple intersectional groups specified by a rich function class, often with minimal compromise in retrieval accuracy. Code is provided at https://github.com/alex-oesterling/multigroup-proportional-representation.",
+    "keywords": [
+      "Fairness",
+      "Proportional Representation",
+      "Multi-Group Fairness"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=BRZYhVHvSg"
+  },
+  "review_fields": {
+    "comment": "Thank you for the detailed and thoughtful rebuttal. I appreciate the effort you have put into addressing the concerns raised in my review.\n\nComputational Complexity:\nI appreciate the additional benchmarks provided in the rebuttal that demonstrate the competitiveness of your method in terms of runtime. The theoretical discussion on the efficiency of MAPR, particularly with modern optimization techniques, has also clarified the potential scalability of your approach. This helps address my concerns regarding the computational complexity, especially in high-dimensional feature spaces.\n\nGenerality of the MPR Metric:\nYour explanation of how the MPR metric could be adapted to other domains such as text retrieval and recommendation systems is convincing. The argument that your method is applicable to any setting involving vector embeddings broadens the potential impact of your work. The potential for adaptation to other domains strengthens the significance of your contribution.\n\nHandling Dataset Bias:\nYour acknowledgment of the challenges posed by biased datasets, along with the explanation of how MPR flags deviations in representation when retrieval datasets are biased, provides a clearer understanding of how your approach handles these issues. This reassures me that you have considered the implications of biased datasets, even if further exploration in future work is necessary.\n\nReproducibility:\nI appreciate the commitment to enhancing the reproducibility of your results by extending the GitHub code, creating a tutorial, and documenting the experimental setups in more detail. These steps will undoubtedly aid other researchers in replicating and building upon your work.\n\nEthical Considerations:\nThe expanded discussion on the ethical implications of the MPR metric, including the potential for a false sense of fairness, legal risks, and the importance of human oversight, adds significant depth to your work. This addition addresses the ethical concerns I mentioned and contributes to a more comprehensive understanding of the societal impact of your research.\n\nGiven your thorough and thoughtful responses, I believe the paper has demonstrated robustness, applicability, and a high potential for impact. The clarifications and additional details provided in the rebuttal address many of the concerns I had, and I am inclined to improve my rating of the paper. I appreciate the effort you have put into making these improvements, and I believe your work makes a substantial contribution to the field."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 100,
+    "mixed_pct": 0,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 2523,
+    "words": 371,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/10682d3c-e03f-4047-b84d-a72b5760076d",
+    "error": null,
+    "scored_chars": 2523
+  }
+}

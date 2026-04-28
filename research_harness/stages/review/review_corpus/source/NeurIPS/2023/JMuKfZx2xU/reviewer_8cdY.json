@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "JMuKfZx2xU",
+  "reviewer": "8cdY",
+  "paper": {
+    "title": "On Slicing Optimality for Mutual Information",
+    "authors": [
+      "Ammar Fayad",
+      "Majd Ibrahim"
+    ],
+    "abstract": "Measuring dependence between two random variables is of great importance in various domains but is difficult to compute in today's complex environments with high-dimensional data. Recently, slicing methods have shown to be a scalable approach to measuring mutual information (MI) between high-dimensional variables by projecting these variables into one-dimensional spaces. Unfortunately, these methods use uniform distributions of slicing directions, which generally discard informative features between variables and thus lead to inaccurate quantification of dependence. In this paper, we propose a principled framework that searches for an \\textit{optimal} distribution of slices for MI. Importantly, we answer theoretical questions about finding the optimal slicing distribution in the context of MI and develop corresponding theoretical analyses. We also develop a practical algorithm, connecting our theoretical results with modern machine learning frameworks. Through comprehensive experiments in benchmark domains, we demonstrate significant gains in our information measure than state-of-the-art baselines.",
+    "keywords": [
+      "Mutual information",
+      "Information Theory"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JMuKfZx2xU"
+  },
+  "review_fields": {
+    "summary": "Recently, sliced mutual information ($\\mathcal{SI}$) has been proposed as a statistical dependence measure that is scalable to high dimensions (Goldfeld and Greenewald, 2021). However, due to the use of uniform sampling for the slicing directions, $\\mathcal{SI}$ generally requires many slices for accurate estimation. This is because it doesn’t prioritize informative features about the variables and introduces noisy slices by treating both relevant and irrelevant regions of the variable space equally. This paper aims to improve $\\mathcal{SI}$ by finding an optimal distribution of slicing directions that satisfies two criteria: 1) slices are distributed over maximally informative regions, and 2) slices are scattered over the unit sphere. This new dependence measure is called optimal sliced mutual information, $\\mathcal{SI}^*$. The two criteria are then formalized as a regularized optimization problem in the definition of $\\mathcal{SI}^*$.\n\nThe contributions of this paper are as follows: (i) The authors introduce an improved version of $\\mathcal{SI}$ known as $\\mathcal{SI}^*$ and discuss its theoretical properties. In particular, they show that an optimal slicing policy exists, allowing them to treat the regularized optimization problem as a reward-maximizing optimal transport problem. (ii) The authors show that the convergence rate of the optimal estimator of  $\\mathcal{SI}^*$ depends on the dimensions only up to a constant factor. In addition, they develop a neural estimator for $\\mathcal{SI}^*$ which can be used in various machine learning problems. (iii) The authors perform several experiments to show the effectiveness and applications of $\\mathcal{SI}^*$. In particular, they show that: (a) $\\mathcal{SI}^*$ outperforms state-of-the-art measures in discerning structure from noise, (b) $\\mathcal{SI}^*$ is more sample- and slice-efficient compared to $\\mathcal{SI}$, and (c) $\\mathcal{SI}^*$ performs well on representation and reinforcement learning problems.",
+    "strengths": "The paper improves $\\mathcal{SI}$ by challenging the uniform sampling assumption in the original definition. The paper is original as it proposes a novel, improved measure of $\\mathcal{SI}$ that can capture statistical dependency better by retaining as much relevant information as possible. The theoretical result on the existence of the “optimal” slicing policy is interesting and non-trivial. The experiments clearly showcase the effectiveness of $\\mathcal{SI}^*$ as a dependence measure and how it can be applied to various machine learning tasks. The paper shows how $\\mathcal{SI}^*$ is an effective statistical dependence measure that works well in high dimensions. As many machine learning tasks involve high-dimensional variables, this measure will prove useful in practice. Overall, the paper is well-structured and was an interesting read.",
+    "weaknesses": "While the paper has some interesting points, there are several weaknesses that should be addressed to make the paper more readable.\n\n1. While the definition is $\\mathcal{SI}^*$ is intriguing, the justification for the two criteria for “optimality” that motivated the definition is inadequate. (i) Why is it relevant or important to consider the maximally informative regions? (ii) If we accept that the maximally informative regions are important, why do we need criterion 2? The authors should explain more clearly why diversity of slices is important when measuring dependence between random variables.\n\n1. From the definition of $\\mathcal{SI}^*$, wouldn’t it be better to call it something like “maximum $\\mathcal{SI}$”?\n\n1. In Figure 2, the experiments are done for variables in $\\mathbb{R}^3$. However, $\\mathcal{SI}^*$, like $\\mathcal{SI}$, should continue to be scalable to high dimensions. Thus, the experiments should be done in higher dimensions (> 100), so we can test if the three neural networks involved in the estimation of $\\mathcal{SI}^*$ scale well with larger dimensions of inputs. \n\n1. Parts of the paper were hard to understand and could have been explained more clearly. (i) For example, the terms in the neural network estimator (Section 4) need more details and better explanation. (ii) In the motivating example (Section 3.1), it is not clear what the AUC of the ROC refers to or how it is computed in this case. The Appendix provides some details for another experiment but it is not clear if that applies here. Also, it seems that Fig. 1 is not an ROC AUC curve despite the caption stating as such. (iii) The setup and assumptions for the experiments require more details beyond that given in the paper and appendix. \n\n1. Since one claim in the paper is better sample and slice efficiency of $\\mathcal{SI}^*$, is it possible to provide theoretical results along this direction? The results in the paper seem to indicate that $\\mathcal{SI}^*$ has a similar convergence rate as $\\mathcal{SI}$, thus reducing its significance. \n\n1. Another claim in the paper is the potential of $\\mathcal{SI}^*$ to bring the approach to more complex machine learning scenarios. In this context, more experimental evaluation is necessary for both the representation learning and reinforcement learning scenarios. The current evaluation (e.g., Table 1) is not to the state of the art, in fact, a shallow vanilla CNN without data augmentation has 86% accuracy on CIFAR-10. This makes it difficult to interpret the significance of the results.",
+    "questions": "In addition to the list of weaknesses above, below are some questions and general suggestions for the authors to address:\n\n1. In Goldfeld and Greenewald’s paper, they show that $\\mathcal{SI}$ can increase with more processing of the random variables. Can $\\mathcal{SI}^*$ increase with more processing as well?\nCan we apply chain rule to $\\mathcal{SI}^*$?\n\n1. In Appendix B.1, the authors computed the RMSE between the ground truth and empirical values of MI and $\\mathcal{SI}^*$ as a function of the number of samples and slices (where applicable). Please include the relevant results for $\\mathcal{SI}$ as well.\n1. In Appendix B.1, the authors computed the RMSE between the ground truth $\\mathcal{SI}^*$ and the estimated $\\mathcal{SI}^*$. It is not clear how the ground truth $\\mathcal{SI}^*$ is computed in this case. In Goldfeld and Greenewald’s paper, they provided an expression for Gaussian $\\mathcal{SI}$ (Example 1). Is it possible to come up with similar expression for $\\mathcal{SI}^*$?\n\n1. In Appendix C, it seems that the algorithm is lacking in detail and clarity. For example, the authors should make it clear that $m$ number of random slices are being sampled. It is also not clear in the algorithm what the loss functions used for training the various neural networks are. Overall, the description of the algorithm seems a bit scattered and could be significantly made clearer.\n\n1. Goldfeld and Greenewald have considered extending $\\mathcal{SI}$ to $k-\\mathcal{SI}$ where instead of projecting to 1 dimension, the random variables are projected to $k$ dimensions. Can $\\mathcal{SI}^*$ be easily extended to the $k$ dimensions case?\n\n1. Minor comments: (i) Fix caption of Fig. 1 to not refer to the ROC curve. (ii) In Appendix D.1, $\\phi$ should be $\\varphi$.",
+    "limitations": "The limitations are discussed in Appendix E."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 5223 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 5223,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 5223
+  }
+}

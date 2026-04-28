@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "N0n_QyQ5lBF",
+  "reviewer": "cvGw",
+  "paper": {
+    "title": "Unsupervised Vision-Language Grammar Induction with Shared Structure Modeling",
+    "authors": [
+      "Bo Wan",
+      "Wenjuan Han",
+      "Zilong Zheng",
+      "Tinne Tuytelaars"
+    ],
+    "abstract": "We introduce a new task, unsupervised vision-language (VL) grammar induction. Given an image-caption pair, the goal is to extract a shared hierarchical structure for both image and language simultaneously.  We argue that such structured output, grounded in both modalities, is a clear step towards the high-level understanding of multimodal information. Besides challenges existing in conventional visually grounded grammar induction tasks, VL grammar induction requires a model to capture contextual semantics and perform a fine-grained alignment. To address these challenges, we propose a novel method, CLIORA, which constructs a shared vision-language constituency tree structure with context-dependent semantics for all possible phrases in different levels of the tree. It computes a matching score between each constituent and image region, trained via contrastive learning.  It integrates two levels of fusion, namely at feature-level and at score-level, so as to allow fine-grained alignment. We introduce a new evaluation metric for VL grammar induction, CCRA, and show a 3.3% improvement over a strong baseline on Flickr30k Entities. We also evaluate our model via two derived tasks, i.e., language grammar induction and phrase grounding, and improve over the state-of-the-art for both.",
+    "keywords": [
+      "Grammar Induction",
+      "Vision-Language Matching",
+      "Unsupervised Learning"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=N0n_QyQ5lBF"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper proposed a new method CLIORA to do unsupervised parsing and vision-language grounding. \nCLIORA is based on DIORA model. \nBut different from previous unsupervised parsing methods, CLIORA also induces alignment between constituents and image regions. \nIn order to train the model, the author introduces a contrastive loss.\nExperiment results show that the proposed method outperforms baseline unsupervised parsing methods and it also induces meaningful alignment between image regions and constituents.",
+    "main_review": "Strengths:\nThe idea of jointly inducing structure in natural language and grounding the constituents with real-world images is intuitively correct.\nThe ablation study also shows that both feature-level fusion and score-level fusion (including the contrastive loss, if I understand correctly) helps in improving the parsing results.\n\nWeakness:\n1) The image features are only used for computing the inside pass. The image feature should contain information that can help predict the missing word, such that it could be used in the outside pass too. Selecting the best image region for predicting the missing word is also an intuitively correct way to build the vision-language alignment.\n2) The compute of sim(I, c_ij) includes a max operator, this could lead to a biased gradient.\n3) As the author mentioned in the discussion section, the model doesn't consider the latent hierarchical structure of the image. For example, the sentence describes the entire image, while each phrase describes part of the image.",
+    "summary_of_the_review": "Overall, the proposed method is interesting and inspiring. \nThe idea should be interesting to both unsupervised parsing and multimodel communities.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:33Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:33Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1067,
+    "words": 157,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/db80e0b7-974a-4e36-9aae-e432cb7a07b9",
+    "error": null,
+    "scored_chars": 1009
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "gNI4_85Cyve",
+  "reviewer": "73BF",
+  "paper": {
+    "title": "QAID: Question Answering Inspired Few-shot Intent Detection",
+    "authors": [
+      "Asaf Yehudai",
+      "Matan Vetzler",
+      "Yosi Mass",
+      "Koren Lazar",
+      "Doron Cohen",
+      "Boaz Carmeli"
+    ],
+    "abstract": "Intent detection with semantically similar fine-grained intents is a challenging task. To address it, we reformulate intent detection as a question-answering retrieval task by treating utterances and intent names as questions and answers. To that end, we utilize a question-answering retrieval architecture and adopt a two stages training schema with batch contrastive loss. In the pre-training stage, we improve query representations through self-supervised training. Then, in the fine-tuning stage, we increase contextualized token-level similarity scores between queries and answers from the same intent. Our results on three few-shot intent detection benchmarks achieve state-of-the-art performance.",
+    "keywords": [
+      "Intent Detection",
+      "Question Answering",
+      "Contrastive Learning",
+      "Passage Retrieval"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=gNI4_85Cyve"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper presents a Question-Answering inspired Intent Detection System (QAID). The paper treats the intent identification task as a Question-Answering retrieval task by treating the utterances and the intent names as queries and answers respectively. QAID adapts ColBERT architecture from prior work and replaces the loss function with batch contrastive loss. The novelty of this work is in converting intent id task to Question-Answering form and using the intent names as answer, and using supervised batch contrastive training for finetuning LM on this task.",
+    "strength_and_weaknesses": "Strengths: \n\n1. The paper reports SOTA results in three benchmark intent identification tasks for both 5-shot and 10-shot setting. \n\n2. The paper shows ablations to support the claims on supervised batch contrastive training and late interaction scores. \n\n3. The paper is well written and easy to understand \n\n \nWeakness: \n\n1. The ablations can be improved. The paper can show ablation to understand the component of each component and the impact it has on the intent id task. The missing ablations are: QAID – batch contrastive,  QAID – intent names (not sure if this is possible) and QAID – data augmentation. But it would be good to show results by removing one component at a time.",
+    "clarity,_quality,_novelty_and_reproducibility": "1. Where are the ablation results for \"data augmentation\". The paper says that data augmentation results are inconsistent but the results are not shown in Table 3.",
+    "summary_of_the_review": "Overall, this paper builds on top of prior work (especially ColBERT and CPFT) but uses intent names for retrieval. The paper shows the benefit of combining these techniques and presents SOTA results and shows good ablations.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "XZp1uP0hh2",
+  "reviewer": "JbFK",
+  "paper": {
+    "title": "Semi-Random Matrix Completion via Flow-Based Adaptive Reweighting",
+    "authors": [
+      "Jonathan Kelner",
+      "Jerry Li",
+      "Allen Liu",
+      "Aaron Sidford",
+      "Kevin Tian"
+    ],
+    "abstract": "We consider the well-studied problem of completing a rank-$r$, $\\mu$-incoherent matrix $\\mathbf{M} \\in \\mathbb{R}^{d \\times d}$ from incomplete observations. We focus on this problem in the semi-random setting where each entry is independently revealed with probability at least $p = \\frac{\\textup{poly}(r, \\mu, \\log d)}{d}$. \nWhereas multiple nearly-linear time algorithms have been established in the more specialized fully-random setting where each entry is revealed with probablity exactly $p$, the only known nearly-linear time algorithm in the semi-random setting is due to [CG18], whose sample complexity has a polynomial dependence on the inverse accuracy and condition number and thus cannot achieve high-accuracy recovery. \nOur main result is the first high-accuracy nearly-linear time algorithm for solving semi-random matrix completion, and an extension to the noisy observation setting.\nOur result builds upon the recent short-flat decomposition framework of [KLLST23a, KLLST23b] and leverages fast algorithms for flow problems on graphs to solve adaptive reweighting subproblems efficiently.",
+    "keywords": [
+      "matrix completion",
+      "semi-random model",
+      "flow solver",
+      "short-flat decomposition",
+      "adaptive reweighting"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=XZp1uP0hh2"
+  },
+  "review_fields": {
+    "summary": "This paper considers the semi-random matrix completion problem. Given an unknown rank-r matrix M, each entry of the matrix Is observed independently with a probability  p_{ij} at least p.  The goal is to find a matrix close the matrix M. \n\nThe sap-based algorithm can achieve the nearly-optimal sample complexity, but is not fast compared to iterative method. The previous work shows an iterative method which has a sample complexity and runtime has a polynomial dependence on epsilon.\n\nThis paper provides a fast iterative method that achieves the sample complexity and runtime with polylogrithmic dependence on the accuracy epsilon. It has no dependence on the condition number and can also handle noise in observations.",
+    "strengths": "1 This paper provides a clear motivation to consider the semi-random matrix completion problem and clearly explains the limitations of previous methods. \n2 This paper provides an interesting fast iterative method for this problem and shows that it achieves improved sample complexity and runtime.\n3 This paper utilizes the techniques by Kelner, Li, Liu, Sidford, and Tian and make interesting modifications based on new sights on this semi-random problem."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 454,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0e438409-83df-403b-9175-06b6eac2f062",
+    "error": null,
+    "scored_chars": 455
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "AOKU4nRw1W",
+  "reviewer": "GWNd",
+  "paper": {
+    "title": "Linguistic Binding in Diffusion Models: Enhancing Attribute Correspondence through Attention Map Alignment",
+    "authors": [
+      "Royi Rassin",
+      "Eran Hirsch",
+      "Daniel Glickman",
+      "Shauli Ravfogel",
+      "Yoav Goldberg",
+      "Gal Chechik"
+    ],
+    "abstract": "Text-conditioned image generation models often generate incorrect associations between entities and their visual attributes. This reflects an impaired mapping between linguistic binding of entities and modifiers in the prompt and visual binding of the corresponding elements in the generated image. As one example, a query like ``a pink sunflower and a yellow flamingo'' may incorrectly produce an image of a yellow sunflower and a pink flamingo. To remedy this issue, we propose SynGen, an approach which first syntactically analyses the prompt to identify entities and their modifiers, and then uses a novel loss function that encourages the cross-attention maps to agree with the linguistic binding reflected by the syntax. Specifically, we encourage large overlap between attention maps of entities and their modifiers, and small overlap with other entities and modifier words. The loss is optimized during inference, without retraining or fine-tuning the model. Human evaluation on three datasets, including one new and challenging set, demonstrate significant improvements of SynGen compared with current state of the art methods. This work highlights how making use of sentence structure during inference can efficiently and substantially improve the faithfulness of text-to-image generation.",
+    "keywords": [
+      "syntax",
+      "diffusion",
+      "stable diffusion",
+      "attribute",
+      "attention"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=AOKU4nRw1W"
+  },
+  "review_fields": {
+    "summary": "This paper approaches the binding problem in text to image diffusion models that is marked by the inability of the models to appropriately identify which modifiers are attached to which nouns in the input text. This often results either in images that mix up the attributes of the different nouns that are mentioned in the text or in images that completely disregard some of the attributes or fall back to statistically likely combinations that are not mentioned in the text. The paper proposes an inference time optimization based on first identifying which modifiers are associated with which nouns, and then optimizing a loss function that explicitly enforces the cross attention matrices of corresponding (i.e. related by modifier-noun relationship) tokens in the text to be similar, while those of every other pair in the sentence to be dissimilar. This results in a diffusion model that adheres more faithfully to the input text and produces images that are deemed better more often than competing baseline approaches that attack the same problem.",
+    "strengths": "## Originality, Quality, Significance\n* The paper provides a novel lightweight method using off the shelf syntactic parsers to enforce better binding of modifiers to nouns in text to image diffusion models. The qualitative results seem promising and the human evaluation results suggest that the proposed method outperforms previous approaches to mitigate the binding issue.  \n\n## Clarity\nThe paper is easy to follow. The qualitative examples demonstrate the different kind of issues faced by the baselines and the improvements brought by the proposed approach.",
+    "weaknesses": "* Some qualitative examples on the collected DVMP dataset with some categorization on failure cases based on having uncommon modifiers vs different number (performance on 1,2,3 and more modifiers) of modifiers would have been good to see.",
+    "questions": "## Clarifications\n* The metric used in the human evaluation in Table 1 is not sufficiently clear. Aren't the values in each column supposed to sum to 100? \n* What is the Complex Concepts Prompts dataset mentioned in Fig 5?\n\n## Suggestions\n* It would be easier for the reader to follow if the examples in Figure 4,5,6 are reorganized such that the references to them in the text are chronological. Currently it requires the reader to keep going back and forth across the figures."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:52Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:52Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 799,
+    "words": 121,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8e377d68-fb7e-4ae3-a4d7-0e5b3177f765",
+    "error": null,
+    "scored_chars": 801
+  }
+}

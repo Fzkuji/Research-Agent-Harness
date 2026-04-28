@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "rkHCHI5H5W",
+  "reviewer": "iydz",
+  "paper": {
+    "title": "Compositional Generalization via Forced Rendering of Disentangled Latents",
+    "authors": [
+      "Qiyao Liang",
+      "Daoyuan Qian",
+      "Liu Ziyin",
+      "Ila R Fiete"
+    ],
+    "abstract": "Composition—the ability to generate myriad variations from finite means—is believed to underlie powerful generalization. However, compositional generalization remains a key challenge for deep learning. A widely held assumption is that learning disentangled (factorized) representations naturally supports this kind of extrapolation. Yet, empirical results are mixed, with many generative models failing to recognize and compose factors to generate out-of-distribution (OOD) samples. In this work, we investigate a controlled 2D Gaussian \"bump\" generation task with fully disentangled $(x,y)$ inputs, demonstrating that standard generative architectures still fail in OOD regions when training with partial data, by re-entangling latent representations  in subsequent layers. By examining the model's learned kernels and manifold geometry, we show that this failure reflects a \"memorization\" strategy for generation via data superposition rather than via composition of the true factorized features. We show that when models are forced—through architectural modifications with regularization or curated training data—to render the disentangled latents into the full-dimensional representational (pixel) space, they can be highly data-efficient and effective at composing in OOD regions. These findings underscore that disentangled latents in an abstract representation are insufficient and show that if models can represent disentangled factors directly in the output representational space, it can achieve robust compositional generalization.",
+    "keywords": [
+      "Factorization",
+      "Compositionality",
+      "Compositional Generalization",
+      "Data Efficiency"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rkHCHI5H5W"
+  },
+  "review_fields": {
+    "summary": "The authors investigate why disentanglement is not sufficient for compositional generalization. First they observe that models are unable to reconstruct simple bumps in unseen locations in visual space from fully factorized latents. They use this as evidence that disentanglement alone is not enough for compositional generalization. They then proceed to show how different forms of regularization and data augmentation can help models to achieve better generalization. These include penalizing the entropy and variance of the singular value of filters in the transformation from representation to input and modifying how data is presented so that models learn about each factor independently.",
+    "claims_and_evidence": "Yes, the claims made in the article are well supported by empirical simulations.",
+    "methods_and_evaluation_criteria": "They do, though as is often the case in ML/DL, there is a hope to see insights in toy datasets translated to more complex datasets. In this case the datasets used are very simple (just gaussian bumps), so it is unclear if these insights translate to other settings.",
+    "theoretical_claims": "There were no proofs in the manuscript.",
+    "experimental_designs_or_analyses": "The experimental design and analysis is sound.",
+    "relation_to_broader_scientific_literature": "They are, but also not very novel. My feeling is that the authors put too much emphasis on what they have found (which is not novel) when they should put more emphasis on their analysis. Specifically, the idea that just having fully disentangled representations does not help compositional generalization was already pointed out in Montero et al., 2021 (which they discuss, making this omission a bit puzzling. See the last section in that article.). Additionally, their design where a central pattern is excluded from reconstruction was already explored in [1], though admittedly it appears in the appendix. Finally, the insight that enforcing some factorization in output space is required to perform compositional generalization was already hypothesized in [2] (final section). Thus the article sits in a weird position where it retreads some points that have already been made, reaching similar conclusions even if they do so via different methods and perspectives (which I believe is still valuable).\n\n\n- [1] Watters, N., Matthey, L., Burgess, C. P., & Lerchner, A. (2019). Spatial broadcast decoder: A simple architecture for learning disentangled representations in vaes. arXiv preprint arXiv:1901.07017.\n- [2] Montero, M., Bowers, J., Ponte Costa, R., Ludwig, C., & Malhotra, G. (2022). Lost in Latent Space: Examining failures of disentangled models at combinatorial generalisation. Advances in Neural Information Processing Systems, 35, 10136-10149.",
+    "other_strengths_and_weaknesses": "The main strength of the article is that it provides a more thorough account of some findings/insights that have been previously found. Specifically, I believe that viewing compositional generalization failures in generative models from the perspective of transport operators is a valuable one. But since both the findings and insights are not novel it is unclear how useful this will ultimately be.",
+    "other_comments_or_suggestions": "I think my main suggestion is to shift the tone of the article from one where the authors claim to make this fundamental discovery (which for better or worse has already been done), to one where they characterize it based on transport perspective. Specifically, they can ask how layer depth and the like affect this issue and then discuss their regularization techniques/data augmentation. I would actually say that this last part feels more like curriculum learning, which has some interesting links to cognitive science and how we learn about concepts in isolation before learning how the interact with each other. Then I would try to translate their insights to more sophisticated datasets (We don't need ImageNet, but there are plenty of datasets that are used to explore disentangled representations out there). Be aware though, this idea of regularization has been tried before and in general does not lead to good results (see references), so the authors need to make a clear case as to why their approach is fundamentally different instead of just mathematically. Finally, I agree that architectural constraints are good, as shown in [4]. The question would be, are the general architectural motifs that apply across modalities/concepts?\n\n\n[1] Kim, H., & Mnih, A. (2018, July). Disentangling by factorising. In International conference on machine learning (pp. 2649-2658). PMLR.\n[2] Burgess, C. P., Higgins, I., Pal, A., Matthey, L., Watters, N., Desjardins, G., & Lerchner, A. (2018). Understanding disentangling in $\\beta $-VAE. arXiv preprint arXiv:1804.03599.\n[3] Zhu, X., Xu, C., & Tao, D. (2021, July). Commutative lie group vae for disentanglement learning. In International Conference on Machine Learning (pp. 12924-12934). PMLR.\n[4] Montero, M. L., Bowers, J. S., & Malhotra, G. (2024). Successes and Limitations of Object-centric Models at Compositional Generalisation. arXiv preprint arXiv:2412.18743.",
+    "questions_for_authors": "I have no questions apart from the ones above."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "GIlsH0T4b2",
+  "reviewer": "fJtW",
+  "paper": {
+    "title": "Two-Stage Learning to Defer with Multiple Experts",
+    "authors": [
+      "Anqi Mao",
+      "Christopher Mohri",
+      "Mehryar Mohri",
+      "Yutao Zhong"
+    ],
+    "abstract": "We study a two-stage scenario for learning to defer with multiple experts, which is crucial in practice for many applications.  In this scenario, a predictor is derived in a first stage by training with a common loss function such as cross-entropy.  In the second stage, a deferral function is learned to assign the most suitable expert to each input.  We design a new family of surrogate loss functions for this scenario both in the score-based and the predictor-rejector settings and prove that they are supported by $H$-consistency bounds, which implies their Bayes-consistency.  Moreover, we show that, for a constant cost function, our two-stage surrogate losses are realizable $H$-consistent. While the main focus of this work is a theoretical analysis, we also report the results of several experiments on CIFAR-10 and SVHN datasets.",
+    "keywords": [
+      "learning to defer",
+      "learning theory"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GIlsH0T4b2"
+  },
+  "review_fields": {
+    "summary": "The paper proposes two stage learning algorithms for learning to defer framework. Learning to defer framework consists of two components, a rejector and a classifier. Previous literature has focussed on jointly training both the classifier and the rejector. This paper, instead, focuses on the two stage setup in designing learning to defer systems where a pre-trained classifier is provided and the rejector is to be trained in the second stage. This is a promising and more practical use case scenario of the deferral systems. To this end, the paper makes a series of contributions: 1. a simple and elegant formulation of the the said two stage setup 2. Proposing a family of surrogate loss functions for this setup as well as providing risk control guarantees based on $\\mathcal{H}$-consistency bounds that builds upon the consistency bounds for the loss employed in both the stages. 3. The paper then prove a more general result on the $\\mathcal{H}$ consistency bounds for general surrogate losses for classification problem which is augmented with some additional instance dependent hypothesis. 4. The paper uses this result to establish $\\mathcal{H}$ consistency as well as the Bayes consistency of the proposed two stage surrogates. Additionally, the paper also establishes the realizable $\\mathcal{H}$ consistency of the two stage surrogates which is a more stronger property. The focus of the paper is general where multiple experts are possible.",
+    "strengths": "1. The paper investigates a question of practical relevance to the machine learning community. Deferral systems have appealing properties as they foster trust and transparency, as well as monitoring behaviour by introducing experts into the system. However, it was not possible based on the prior work how to adapt any pre-trained system to experts. This paper fills this gap by devising theoretically sound algorithms.\n\n2. While the paper builds heavily on the previous works on rejection learning, the proposed algorithms are sufficiently novel. The paper also fills a gap in the literature for deriving $\\bar{\\mathcal{H}}$-consistency bounds for a general rejection learning problem. As a plus point, the proposed surrogates are simple and intuitive which makes it easier for adoption in the community. \n\n3. The paper proposes first of its kind $\\mathcal{H}$-realizable consistent algorithms for learning to defer with multiple experts. I believe this is a significant contribution as generally building deferral systems considering multiple experts from scratch would be prohibitively expensive. \n\n4. Although there are some minor typos in the text, the paper is clearly written and is super easy to read.",
+    "weaknesses": "1. While theoretical results is the main focus of this paper, I believe experimental section could have been more insightful. Currently, the experimental section says that the overall system performance gets better on inclusion of more experts. However, this is intuitive and already known. Could authors add one more column in Table 4 to mention the performance of the originally trained classifier? I am curious to learn how the second stage adoption affects the originally trained classifier. While one can lower the estimation error of the first classifier by $\\epsilon_{1}$, it is not clear (to me) where such bound still holds True after the adoption in the second stage. I agree that this is certainly not the focus of the paper, I believe it is important to know if this second-stage training degrades the already trained classifier. I assume not, right?\n\n2. This might be a misunderstanding on my side, but I believe the proposed formulation can only work when $\\alpha_{j}, \\beta_{j} > 0,  \\forall j$ (line 104). However, there are no guidelines on how to define these two quantities, or what is their nature. \n\n3. One of the most promising appeal of the two stage training is preventing costly design from scratch. However, it is not clear whether it also has some disadvantages or not. Consider a single stage training approach where one wants to bound the estimation error by $\\epsilon$? Would it be cheaper / expensive to achieve the same bound using the two-stage approach? Could some quantitative results be given to this end to guide the practitioners?",
+    "questions": "1. $\\mathcal{H}$ realizable consistent surrogates have not been proposed in the literature for single stage learning to defer with multiple experts. Is it possible to utilise the results in this paper for that? For example, maybe using iterative training procedure."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3042,
+    "words": 482,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4e2d46ea-8cc4-4e35-ab59-3f9695a20461",
+    "error": null,
+    "scored_chars": 3046
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "Ske5r3AqK7",
+  "reviewer": "2",
+  "paper": {
+    "title": "Poincare Glove: Hyperbolic Word Embeddings",
+    "authors": [
+      "Alexandru Tifrea*",
+      "Gary Becigneul*",
+      "Octavian-Eugen Ganea*"
+    ],
+    "abstract": "Words are not created equal. In fact, they form an aristocratic graph with a latent hierarchical structure that the next generation of unsupervised learned word embeddings should reveal. In this paper, justified by the notion of delta-hyperbolicity or tree-likeliness of a space, we propose to embed words in a Cartesian product of hyperbolic spaces which we theoretically connect to the Gaussian word embeddings and their Fisher geometry. This connection allows us to introduce a novel principled hypernymy score for word embeddings. Moreover, we adapt the well-known Glove algorithm to learn unsupervised word embeddings in this type of Riemannian manifolds. We further explain how to solve the analogy task using the Riemannian parallel transport that generalizes vector arithmetics to this new type of geometry. Empirically, based on extensive experiments, we prove that our embeddings, trained unsupervised, are the first to simultaneously outperform strong and popular baselines on the tasks of similarity, analogy and hypernymy detection. In particular, for word hypernymy, we obtain new state-of-the-art on fully unsupervised WBLESS classification accuracy.",
+    "keywords": [
+      "word embeddings",
+      "hyperbolic spaces",
+      "poincare ball",
+      "hypernymy",
+      "analogy",
+      "similarity",
+      "gaussian embeddings"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Ske5r3AqK7"
+  },
+  "review_fields": {
+    "comment": "Thank you very much for the revision.\n\nI am willing to improve my score to weak acceptance based on (1) improved presentation; (2) extensive experimental study. Overall this contribution is very experimental and practical (rather than being theoretical). I have overlooked the empirical results as I am not an expert in word embeddings from the practical perspective.\n\nIf there are specific points that need to be discussed. Please follow up here."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

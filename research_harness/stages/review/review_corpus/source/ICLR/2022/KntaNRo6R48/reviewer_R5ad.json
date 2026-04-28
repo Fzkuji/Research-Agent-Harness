@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "KntaNRo6R48",
+  "reviewer": "R5ad",
+  "paper": {
+    "title": "L0-Sparse Canonical Correlation Analysis",
+    "authors": [
+      "Ofir Lindenbaum",
+      "Moshe Salhov",
+      "Amir Averbuch",
+      "Yuval Kluger"
+    ],
+    "abstract": "Canonical Correlation Analysis (CCA) models are powerful for studying the associations between two sets of variables. The canonically correlated representations, termed \\textit{canonical variates} are widely used in unsupervised learning to analyze unlabeled multi-modal registered datasets. Despite their success, CCA models may break (or overfit) if the number of variables in either of the modalities exceeds the number of samples. Moreover, often a significant fraction of the variables measures modality-specific information, and thus removing them is beneficial for identifying the \\textit{canonically correlated variates}. Here, we propose $\\ell_0$-CCA, a method for learning correlated representations based on sparse subsets of variables from two observed modalities.\nSparsity is obtained by multiplying the input variables by stochastic gates, whose parameters are learned together with the CCA weights via an $\\ell_0$-regularized correlation loss. \nWe further propose $\\ell_0$-Deep CCA for solving the problem of non-linear sparse CCA by modeling the correlated representations using deep nets. We demonstrate the efficacy of the method using several synthetic and real examples. Most notably, by gating nuisance input variables, our approach improves the extracted representations compared to other linear, non-linear and sparse CCA-based models.",
+    "keywords": [],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=KntaNRo6R48"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper proposes a sparse canonical correlation analysis method based on l_0 norm. A continuous relaxation scheme is adopted for solving sparse CCA. The proposed model is then extended to nonlinear function estimation and combined with deep neural networks. Experimental results on synthetic and real-world datasets demonstrate the effectiveness of the proposed methods.",
+    "main_review": "This paper is technically sound and interesting, in that the authors demonstrate how sparse CCA with l_0 norm can be effectively solved, and how the sparsity constraint can be integrated into the deep CCA model. My concerns lie mainly in the experimental section.\n\nIn the supplementary material, the authors mention that the parameters are optimized to maximize the correlation for the cancer classification task. Why don’t choose parameters based on accuracy instead of correlation? Does high correlation guarantee better accuracy or vice versa? Are the parameters of all compared methods chosen in the same manner?\n\n2. How are lambda_x and lambda_y selected since they directly control the sparsity of variables?\n\n3. The authors claim that the proposed method is efficient in C.2 (Run Time Analysis), it seems that the model scales when k increases. Besides, training a DCCA model for classification seems to be time-consuming. Therefore, it is also important to compare the time complexity and running time (or training time) of compared methods.\n\n4.  In Table 2, why don’t the authors include the results of the proposed sparse CCA method?\n\n5. The datasets included are mainly for vector-based applications. Recently, there are several tensor-based CCA methods, it is interesting to also report results on some high-dimensional datasets, for example, Gait and JAFFE.",
+    "summary_of_the_review": "The paper is technically sound, but the authors should carefully revise their experimental section to address my concerns.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1493,
+    "words": 231,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/df5ad1be-8f3e-4870-9c83-d7d2791149a7",
+    "error": null,
+    "scored_chars": 1494
+  }
+}

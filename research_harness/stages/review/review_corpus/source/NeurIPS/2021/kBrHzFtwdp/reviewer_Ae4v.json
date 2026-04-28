@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "kBrHzFtwdp",
+  "reviewer": "Ae4v",
+  "paper": {
+    "title": "Nested Variational Inference",
+    "authors": [
+      "Heiko Zimmermann",
+      "Hao Wu",
+      "Babak Esmaeili",
+      "Jan-Willem van de Meent"
+    ],
+    "abstract": "We develop nested variational inference (NVI), a family of methods that learn proposals for nested importance samplers by minimizing an forward or reverse KL divergence at each level of nesting. NVI is applicable to many commonly-used importance sampling strategies and provides a mechanism for learning intermediate densities, which can serve as heuristics to guide the sampler. Our experiments apply NVI to (a) sample from a multimodal distribution using a learned annealing path (b) learn heuristics that approximate the likelihood of future observations in a hidden Markov model and (c) to perform amortized inference in hierarchical deep generative models. We observe that optimizing nested objectives leads to improved sample quality in terms of log average weight and effective sample size.",
+    "keywords": [
+      "Variational Inference",
+      "Importance Sampling",
+      "Monte Carlo methods"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=kBrHzFtwdp"
+  },
+  "review_fields": {
+    "summary": "The paper describes a framework for learning and inference in probabilistic models with structured latent spaces. It operates in the tradition of IWAE and VSMC-like methods that use importance sampling to tighten a variational bound (or equivalently, uses a variational bound as an objective for learning importance sampler proposals). Unlike methods that optimize a single global bound, NVI is defined in terms of local pairwise divergences between a sequence of target distributions, which acts to decouple the stochastic optimization, reducing gradient variance and potentially offering a strategy for parallel inference.",
+    "main_review": "I struggled with this paper. On the one hand, I think it likely contains an interesting and valuable technical contribution. On the other hand, the experiments are not particularly compelling, and while that's not a dealbreaker if the idea itself is obviously worthwhile *a priori* (as I sense that the authors understand it to be), I don't think the paper as written is effective at communicating that understanding.\n\nStarting with the abstract and intro, I didn't feel that they conveyed a very clear motivation for the work, beyond 'combine nested importance sampling and variational inference', which is not by itself a goal that anyone knew they had. What useful properties do each of those ideas (NIS and VI) brings to the table, and what do we hope to get by combining them? What kind of tasks, that existing methods are poorly suited for, do we hope to be able to solve? (inference in temporal or spatiotemporal models? multimodal posteriors? high-dimensional state spaces? fitting really deep VAEs? all of the above?) Who should consider using this method? There is a lot of technical detail to get through in this paper, and the introduction could do more to give the reader a sense of why it will be worth it. \n\nI was perplexed by the choice of background material to focus on. The contribution is framed as VI + nested importance sampling, and the paper provides a nice intro to stochastic VI, but no clear definition of nested importance sampling beyond referring to Naesseth et al. 2015/2019. This seems backwards to me. The VAE paper (Kingma and Welling 2013) has 14870 Google Scholar citations, while Naesseth et al. 2015 has just 68; I would suggest that most readers (myself included) are much more likely to need an intro to the latter than the former. \n\nThe technical presentation itself is rather abstract and not straightforward to follow. There is reference to an 'NVI objective', but not a clear description of what this objective is --- is it intended to be eqn (6)? I would have expected that an importance sampling objective would at some point ground out to a procedure involving weighted samples, but the concept of weights isn't even introduced until the next section. It also wasn't clear to me how the approach relates to the concept of nested sampling, which I understand from the Naesseth papers to refer to using an 'inner' sampler to generate proposals for an 'outer' sampler. Could this work have been developed in a simpler formalism, like SMC, or is the sampler-within-a-sampler aspect crucial?\n\nOverall I think the presentation tries too hard to be general, at the expense of concreteness and intuition. It might help to frame things in terms of a specific running example, like the multimodal annealing setup from section 4.1 (introducing this earlier would also help give a sense of what kind of problems the approach is hoping to tackle). This would allow you to walk the reader concretely through the steps of applying NVI, and hopefully in the process give some intuition for why it works and where it differs from other methods.\n\nIt's not immediately obvious whether the NVI objective is a (stochastic) lower bound on the marginal likelihood, or some similar such property. Is it? If so, I think that'd be a useful argument to include.\n\nI would have liked to see some discussion of implementation, and its ease or lack thereof. As I understand it, the 'juice' of the method comes from estimating gradients using only locally random variables, and an entire page of the paper is about explicitly computing these gradients. This seems to cut against the dominant paradigm of 'just write down the computation graph and let autodiff do its thing'. How straightforward is it to implement all of this in modern DL frameworks? Are there any tricks? You could limit this discussion to the case where all gradients are reparameterizable, since handling discrete variables seems like a somewhat orthogonal (and well-studied) issue.\n\nThere's a lot of ink spilled about handling both forward and reverse KL (it's in the abstract even!), but it wasn't clear to me why this is worth focusing on. Does forward KL have any nice properties in this setting that would make up for how much of a pain it is to estimate?\n\nAs mentioned above, I didn't find the experiments compelling enough to carry the paper of their own accord. The application to deep generative modeling doesn't contain any quantitative results, or compare to any baselines (except for a reference to RWS in a 'Figure 9' that doesn't seem to have made it into the paper). The multimodal sampling problem is quite toy (though an effective illustration), and the gains over AVO are not super striking. I do appreciate that the experiments seem quite carefully done and are nicely presented, especially figures 3 and 4. In the state-space model experiment, is there any explanation for why optimizing the reverse kernel made things worse?\n\nnits:\nline 41: typo 'revserse'\nlines 101-103: SMC is listed twice as a special case.\n\n*********************************\nUpdated: thanks to the authors for your thorough response. I'm convinced that the technical contribution of the paper is solid, and in light of this am raising my score by a point. I encourage the authors to include their clarifications in a revised version of the paper---I think there's likely a much stronger paper here if well explained. The surrogate objective in particular seems worth mentioning and possibly presenting in the supplement (would it make sense to describe it as an extension/generalization of DiCE (https://arxiv.org/abs/1802.05098)?).",
+    "limitations_and_societal_impact": "There are no direct societal impact concerns for this work, since the contribution is purely technical and not focused on a particular application.\n\nI do wish there were a bit more discussion of limitations. Have we finally solved probabilistic inference? Is this framework appropriate for all problems? (assuming not, then why?) What improvements or future directions would be worth exploring?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

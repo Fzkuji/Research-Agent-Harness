@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "8puv3c9CPg",
+  "reviewer": "NSpf",
+  "paper": {
+    "title": "Beyond the Doors of Perception: Vision Transformers Represent Relations Between Objects",
+    "authors": [
+      "Michael A. Lepori",
+      "Alexa R. Tartaglini",
+      "Wai Keen Vong",
+      "Thomas Serre",
+      "Brenden Lake",
+      "Ellie Pavlick"
+    ],
+    "abstract": "Though vision transformers (ViTs) have achieved state-of-the-art performance in a variety of settings, they exhibit surprising failures when performing tasks involving visual relations. This begs the question: how do ViTs attempt to perform tasks that require computing visual relations between objects? Prior efforts to interpret ViTs tend to focus on characterizing relevant low-level visual features. In contrast, we adopt methods from mechanistic interpretability to study the higher-level visual algorithms that ViTs use to perform abstract visual reasoning. We present a case study of a fundamental, yet surprisingly difficult, relational reasoning task: judging whether two visual entities are the same or different. We find that pretrained ViTs fine-tuned on this task often exhibit two qualitatively different stages of processing despite having no obvious inductive biases to do so: 1) a perceptual stage wherein local object features are extracted and stored in a disentangled representation, and 2) a relational stage wherein object representations are compared. In the second stage, we find evidence that ViTs can learn to represent somewhat abstract visual relations, a capability that has long been considered out of reach for artificial neural networks. Finally, we demonstrate that failures at either stage can prevent a model from learning a generalizable solution to our fairly simple tasks. By understanding ViTs in terms of discrete processing stages, one can more precisely diagnose and rectify shortcomings of existing and future models.",
+    "keywords": [
+      "visual reasoning",
+      "mechanistic interpretability",
+      "transformers",
+      "cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=8puv3c9CPg"
+  },
+  "review_fields": {
+    "summary": "This paper examines how vision transformers (ViTs) process visual relations, focusing on same-different tasks. The paper finds that pretrained ViTs fine-tuned on these tasks often develop a two-stage processing pipeline: a perceptual stage that extracts object features into separate representations, followed by a relational stage that compares these representations. Using interpretability techniques, they show that the perceptual stage creates disentangled object representations, while the relational stage implements somewhat abstract comparisons. The paper demonstrates that failures in either stage can prevent models from learning generalizable solutions. By analyzing ViTs in terms of these processing stages, the authors suggest we can better understand and improve how models handle relational reasoning tasks.",
+    "strengths": "- Addresses an important drawback of supposedly generalist vision models\n- Clear demonstration and definition of tasks that the paper focus on (e.g. Figure 1)\n- Thorough analysis, both in terms of performance metrics and model mechanism, of results\n- Abundant visualization of results\n- Constructed dataset and tasks that can benefit future studies of this topic",
+    "weaknesses": "- Focus on more toy settings. Lack evaluation on more advanced/real world tasks.\n- While the central claim of dividing ViT perception into perception and relation stage is inspired by infant and animal abstract concept (line 71), there's the risk of confirmation bias from this analogy. \n- Plots in the paper requires clearer annotations and explanations (e.g. Figure 2 has too many acronyms, and it's difficult to understand what conclusion is for the plot)\n- Lacks qualitative example of more intuitively describe how model processes relational examples \n- While the abstract claims that understanding the relational reasoning help rectify short comings of existing and futures models (line 19), the paper doesn't discuss much what can be done to improve model relational reasoning (especially empirical experiments for improvements).",
+    "questions": "- What would the same analysis methods result when applied on real world images or more complex reasoning tasks such as ARC-AGI?\n- Can you compare the mechanistic interpretation result with other text-based interpretability methods such as logic lens?\n- How to improve relational reasoning capability in vision models? What are implications of such potential improvements?\n- How would success or failure in relational reasoning impact CLIP in terms of embedding's alignment with text descriptions?",
+    "limitations": "The author doesn't discuss limitations (although the paper checklist claims that limitations are discussed in Section 8)."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1820,
+    "words": 276,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9d3dc03c-3e87-454a-8ed9-6fc123de9d22",
+    "error": null,
+    "scored_chars": 1822
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "Hkesr205t7",
+  "reviewer": "1",
+  "paper": {
+    "title": "Learning shared manifold representation of images and attributes for generalized zero-shot learning",
+    "authors": [
+      "Masahiro Suzuki",
+      "Yusuke Iwasawa",
+      "Yutaka Matsuo"
+    ],
+    "abstract": "Many of the zero-shot learning methods have realized predicting labels of unseen images by learning the relations between images and pre-defined class-attributes. However, recent studies show that, under the more realistic generalized zero-shot learning (GZSL) scenarios, these approaches severely suffer from the issue of biased prediction, i.e., their classifier tends to predict all the examples from both seen and unseen classes as one of the seen classes.  The cause of this problem is that they cannot properly learn a mapping to the representation space generalized to the unseen classes since the training set does not include any unseen class information. To solve this, we propose a concept to learn a mapping that embeds both images and attributes to the shared representation space that can be generalized even for unseen classes by interpolating from the information of seen classes, which we refer to shared manifold learning.  Furthermore, we propose modality invariant variational autoencoders, which can perform shared manifold learning by training variational autoencoders with both images and attributes as inputs. The empirical validation of well-known datasets in GZSL shows that our method achieves the significantly superior performances to the existing relation-based studies.",
+    "keywords": [
+      "zero-shot learning",
+      "variational autoencoders"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Hkesr205t7"
+  },
+  "review_fields": {
+    "review": "The paper considers the problem of (Generalized) Zero-Shot Learning. Most zero-shot learning methods embed images and text/attribute representations into a common space. The main difference here seems to be that Variational AutoEncoder (VAEs) are used to learn the mappings that take different sources as input (images and attributes). \nAs in JMVAE (Suzuki et al., 2016) (which was not proposed for zero-shot learning), decoders are then used to reconstruct objects from the latent space to the input sources.\n\nMy main concerns are about novelty. The contribution of the paper is limited or not clear at all, even when reading Section C in the appendix. The proposed approach is a straightforward extension of JMVAE (Suzuki et al., 2016) where a loss function is added (Eq. (3)) to minimize the KL divergence between the outputs of the encoders (which corresponds to optimizing the same problem as most zero-shot learning approaches).\nThe theoretical aspect of the method is then limited since the proposed loss function actually corresponds to optimize the same problem as most zero-shot learning approaches but with VAEs.\n\nConcerning experiments, Generalized Zero shot learning (GZSL) experiments seem to significantly outperform other methods, whereas results on the standard zero-shot learning task perform as well as state-of-the-art methods. \nDo the authors have an explanation of why the approach performs significantly better only on the GZSL task?\n\nIn conclusion, the contributions of the paper are mostly experimental. Most arguments in the model section are actually simply intuitions.\n\n\nafter the rebuttal:\nAfter reading the different reviews, the replies of the authors and the updated version, my opinion that the \"explanations\" are simply intuitions (which is related to AnonReviewer3's concern \"Regarding advantages of learning a joint model as opposed to unidirectional mappings\") has not been completely addressed by the authors. Fig. 4 does address this concern by illustrating their point experimentally. However, I agree with AnonReviewer3 that the justification remains unclear."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

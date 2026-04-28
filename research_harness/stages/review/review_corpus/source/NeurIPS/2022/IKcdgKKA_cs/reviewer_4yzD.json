@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "IKcdgKKA_cs",
+  "reviewer": "4yzD",
+  "paper": {
+    "title": "Mathematically Modeling the Lexicon Entropy of Emergent Language",
+    "authors": [
+      "Brendon Boldt",
+      "David R Mortensen"
+    ],
+    "abstract": "We formulate a stochastic process, FiLex, as a mathematical model of lexicon entropy in deep learning-based emergent language systems. Defining a model mathematically allows it to generate clear predictions which can be directly and decisively tested. We empirically verify across four different environments that FiLex predicts the correct correlation between hyperparameters (training steps, lexicon size, learning rate, rollout buffer size, and Gumbel-Softmax temperature) and the emergent language's entropy in $20$ out of $20$ environment-hyperparameter combinations. Furthermore, our experiments reveal that different environments show diverse relationships between their hyperparameters and entropy which demonstrates the need for a model which can make well-defined predictions at a precise level of granularity.",
+    "keywords": [
+      "emergent language",
+      "emergent communication",
+      "stochastic process",
+      "modeling"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=IKcdgKKA_cs"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a stochastic process, FILEX, to abstract out the essence of deep learning based emergent language systems. FILEX follows the intuition that the more a word is used, the more it will be used in the future. On four experimental settings, the authors show that the correlation between parameters of FILEX and the lexicon entropy is similar to the correlation between hyper parameters of neural networks and the lexicon entropy.",
+    "strengths_and_weaknesses": "strength \n\n- This work attempts to construct a simple enough theory for understanding emergent language. Such attempt is generally valuable for the overall community as the filed of emergent language itself is, emerging.\n- The proposed method is simple enough to mimic the model behavior thus providing a level of abstraction/ simplification for understanding. Additionally, I believe similar observation is also discussed in the previous VAE literature, just for the authors information[1].\n- This work is inspiring to me and I believe such work should also be inspiring to future work. Though I am not fully convinced with the existing experiments (see below), I am happy to see either future work may reinforce its conclusion or turn them over.\n\nweakness \n\n- The proposed methods is too simple to miss important details of many aspects of neural networks. When the authors link the parameters to of FILEX to the neural network hyper parameters, their reasons are more about intuition rather than rigorously mathematically discussions.\n- The experimental settings are too simple and may be hard to generalize to more complicated setting. One direct generalization is whether the conclusion will hold if the vocabulary size is large (say 10K) and compositional (say a sentence of length 10).\n\n[1] Alemi et. al. ICML 2018. Fixing a Broken ELBO",
+    "questions": "How would the conclusion generalize to setting when the vocabulary is large and when the setting is compositional?",
+    "limitations": "The authors have properly discussed the limitations"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "yJS1eZSNUv",
+  "reviewer": "CwLe",
+  "paper": {
+    "title": "Novel Exploration via Orthogonality",
+    "authors": [
+      "Andreas Theophilou",
+      "Özgür Şimşek"
+    ],
+    "abstract": "Efficient exploration remains one of the most important open problems in reinforcement learning. Discovering novel states or transitions requires policies that efficiently direct the agent away from the regions of the state space that are already well explored. We introduce Novel Exploration via Orthogonality (NEO), an approach that automatically uncovers not only which regions of the environment are novel but also how to reach them by leveraging Laplacian representations. NEO uses the eigenvectors of a modified graph Laplacian to induce gradient flows from states that are frequently visited (less novel) to states that are seldom visited (more novel). We show that NEO's modified  Laplacian yields eigenvectors whose extreme values align with the most novel regions of the state space. We provide bounds for the eigenvalues of the modified Laplacian; and we show that the smoothest eigenvectors with real eigenvalues below certain thresholds provide guaranteed gradients to novel states for both undirected and directed graphs. In an empirical evaluation in online, incremental settings, NEO outperformed related state-of-the-art approaches, including eigen-options and cover options, in a large collection of undirected and directed environments with varying connectivity structures.",
+    "keywords": [
+      "Laplacian",
+      "Novelty",
+      "Reinforcement Learning",
+      "Exploration",
+      "Eigenvectors",
+      "Spectral Methods"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=yJS1eZSNUv"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a technique to improve exploration in reinforcement learning by using global signals from structures like the eigenspectrum of the graph to guide exploration. The key idea is to use the eigenvectors to construct options by following the gradient of the eigenvector to move in the state space. Starting with this intuition the proposed approach takes into account visitation counts to make the options more effective with respect to exploration. Extensive evaluation across multiple domains and other spectral baselines bear out this improvement in exploration performance.",
+    "strengths_and_weaknesses": "+ Conceptually the method is quite elegant and simple\n+ Seems to work very well in practice\n+ The paper does a good job of spelling out all the implementation nuances in sufficient detail\n+ The paper has a strong set of theoretical results showing that the proposed approach will take us towards more novel states\n\nWeaknesses\n\n- It would be interesting to explore how the method might generalize to scenarios beyond tabular RL and high dimensional inputs, and scenarios where the state transition graph might not be known in advance and have to be constructed e.g. in a partially observable setting. Would be interesting if the paper discussed some of these practical issues that practitioners often care about in practice."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 1,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 4,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

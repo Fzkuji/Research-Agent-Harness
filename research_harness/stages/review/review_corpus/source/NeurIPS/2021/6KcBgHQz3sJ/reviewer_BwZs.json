@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "6KcBgHQz3sJ",
+  "reviewer": "BwZs",
+  "paper": {
+    "title": "Risk Minimization from Adaptively Collected Data: Guarantees for Supervised and Policy Learning",
+    "authors": [
+      "Aurelien Bibaut",
+      "Nathan Kallus",
+      "Maria Dimakopoulou",
+      "Antoine Chambaz",
+      "Mark van der Laan"
+    ],
+    "abstract": "Empirical risk minimization (ERM) is the workhorse of machine learning, whether for classification and regression or for off-policy policy learning, but its model-agnostic guarantees can fail when we use adaptively collected data, such as the result of running a contextual bandit algorithm. We study a generic importance sampling weighted ERM algorithm for using adaptively collected data to minimize the average of a loss function over a hypothesis class and provide first-of-their-kind generalization guarantees and fast convergence rates. Our results are based on a new maximal inequality that carefully leverages the importance sampling structure to obtain rates with the good dependence on the exploration rate in the data. For regression, we provide fast rates that leverage the strong convexity of squared-error loss. For policy learning, we provide regret guarantees that close an open gap in the existing literature whenever exploration decays to zero, as is the case for bandit-collected data. An empirical investigation validates our theory.",
+    "keywords": [
+      "empirical risk minimization",
+      "maximal inequality",
+      "metric entropy",
+      "fast rates",
+      "policy learning",
+      "empirical process theory",
+      "adaptively collected data"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=6KcBgHQz3sJ"
+  },
+  "review_fields": {
+    "summary": "The paper studies the excess-risk rate of (importance weighted) ERM when data is collected adaptively (e.g. by a bandit algorithm). The authors argue that current excess-risk bounds are sub-optimal when the exploration rate of the data-collection process converges to zero. They then derive tighter bounds for this problem using a new maximal inequality for an importance-weighted empirical process. The results are instantiated for least-squares regression where it is shown that fast rates are achievable due to the properties of the square loss. Excess risk rates of the importance weighted ERM are also presented for policy learning, closing an open question around achievable rates in this setting. Illustrative experiments are also presented.",
+    "main_review": "In many modern applications, data is indeed collected adaptively (using a bandit algorithm for example) and it is important to be able to learn from such data. Therefore, this paper's topic is very important in machine learning. The paper also strengthens our theoretical understanding of generalization when learning from adaptively collected data by providing \"state of the art\" excess risk rates of importance weighted ERM (ISWERM). From a practical standpoint, this justifies the use of ISWERM instead of other alternatives. \n\nThe results of the paper are based on a new maximal inequality for Martingale Difference Sequences (MDS) in Theorem 1. I wonder if the same type of result---with the right dependence in \\gamma---can be derived more easily using concentration inequalities for MDS; for example, using Freedman's inequality (e.g. see Lemma 12 in http://proceedings.mlr.press/v125/wei20a/wei20a.pdf). The fact that Freedman's inequality has a variance term in the bound, would also allow the cancellation of the g_t(A_t |X_t) in the denominator of the importance weight. Freedman's inequality can be extended to the case where the process is index by f, where f is in some function class F. Can you explain why such a method would not work?\n\nThe paper is in general well written and has only minor typos.",
+    "limitations_and_societal_impact": "The discussion provided in the paper seems adequate."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

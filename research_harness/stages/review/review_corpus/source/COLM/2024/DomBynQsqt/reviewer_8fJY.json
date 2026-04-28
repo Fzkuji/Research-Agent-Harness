@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "DomBynQsqt",
+  "reviewer": "8fJY",
+  "paper": {
+    "title": "3M-Diffusion: Latent Multi-Modal Diffusion for Language-Guided Molecular Structure Generation",
+    "authors": [
+      "Huaisheng Zhu",
+      "Teng Xiao",
+      "Vasant G Honavar"
+    ],
+    "abstract": "Generating molecular structures with desired properties is a critical task with broad applications in drug discovery and materials design. We propose 3M-Diffusion, a novel multi-modal molecular graph generation method, to generate diverse, ideally novel molecular structures with desired properties.  3M-Diffusion encodes molecular graphs into a graph latent space which it then aligns with the text space learned by encoder-based LLMs from textual descriptions. It then reconstructs the molecular structure and atomic attributes based on the given text descriptions using the molecule decoder. It then learns a probabilistic mapping from the text space to the latent molecular graph space using a diffusion model. The results of our extensive experiments on several datasets demonstrate that 3M-Diffusion can generate high-quality, novel and diverse molecular graphs that semantically match the textual description provided.",
+    "keywords": [
+      "Multi-modal",
+      "Molecule Generation",
+      "Diffusion Model"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=DomBynQsqt"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a language model on molecule generation, well combining the existing practices in multi-modal generation: (1) train a VAE model for molecule graph generation and text descriptor generation; (2) align the representation of molecule graph and text descriptors; (3) introduce a latent diffusion model for mapping the text spaces to the latent molecular graph spaces, which then can be decoded to a molecular graph.\nExperiment results show the proposed method is effective, outperforming SOTA methods for both text-guided and unconditional molecule generation.",
+    "reasons_to_accept": "1. Effectiveness: The proposed method is effective and shows strong performances in both text-guided and unconditional molecule generation.\n2. Well-motivated: Introducing molecular graph modeling in text-guided molecule generation is well-motivated.\n3. Well writing.",
+    "reasons_to_reject": "1. Aligning the concept of molecular to text generation is useful, which will help us to understand the properties of unknown or new molecules. In such a case, it is more natural for me to understand the necessity of molecule-to-text generation instead of text-guided molecular generation.\n2. The technical novelty is limited, but it is acceptable.",
+    "questions_to_authors": "1. How about using the 3D geometry for molecular modeling and introducing the protein or pocket information as a prompt for drug discovery?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:55Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:55Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 757,
+    "words": 112,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9e9578c4-8522-464f-8d7c-05e706443c71",
+    "error": null,
+    "scored_chars": 757
+  }
+}

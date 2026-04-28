@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "EfTuzTijDo",
+  "reviewer": "yN5X",
+  "paper": {
+    "title": "NoWag: A Unified Framework for Shape Preserving Com- pression of Large Language Models",
+    "authors": [
+      "Lawrence Ray Liu",
+      "Inesh Chakrabarti",
+      "Yixiao Li",
+      "Mengdi Wang",
+      "Tuo Zhao",
+      "Lin Yang"
+    ],
+    "abstract": "Large language models (LLMs) exhibit remarkable performance across various natural language processing tasks but suffer from immense computational and memory demands, limiting their deployment in resource-constrained environments. To address this challenge, we propose NoWag (Normalized Weight and Activation Guided Compression), a unified framework for one-shot shape preserving compression algorithms. We apply NoWag to compress Llama-2 (7B, 13B, 70B) and Llama-3 (8B, 70B) models using two popular shape-preserving techniques: vector quantization (NoWag-VQ) and unstructured/semi-structured pruning (NoWag-P). Our results show that NoWag-VQ significantly outperforms state-of-the-art one-shot vector quantization methods, while NoWag-P performs competitively against leading pruning techniques. These findings highlight underlying commonalities between these compression paradigms and suggest promising directions for future research. Our code is available at https://github.com/LawrenceRLiu/NoWag",
+    "keywords": [
+      "Quantization",
+      "Vector Quantization LLMs",
+      "Compression",
+      "Sparsity",
+      "Pruning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=EfTuzTijDo"
+  },
+  "review_fields": {
+    "summary": "This paper studies the model compression. The paper clearly states the problem of model compression using calibrated datasets and the proposed approach. The main idea to to normalize the weight and then using the calibration dataset's activation as a weight to guide the VQ approach to compress the model weight more efficiently. The paper is well written and with a discussion section describing why the proposed approach works.",
+    "reasons_to_accept": "1. The paper is very well written and the problem statement is very clear.\n2. The proposed approach makes a lot of sense and has illustration and explanation for why the proposed approach works.\n3. The model achieves quite good performance for compressing the small size model.",
+    "questions_to_authors": "This paper is so well and clearly written. It's a pleasure to read from the beginning to the end. Although I am not an expert in model compression, this paper is quite strong by providing both empirical results and discussions for describing why the proposed approach works. The figure 3 helps quite a lot for understanding the approach.\n\nJust one quick question, how sensitive of the approach to the calibration dataset?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 700,
+    "words": 118,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/518ab3ca-5c83-4d7d-ad7c-d19c493d3ba6",
+    "error": null,
+    "scored_chars": 700
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "nZ4mFzCZIx",
+  "reviewer": "s6cb",
+  "paper": {
+    "title": "Towards Generalizable 3D Human Pose Estimation via Ensembles on Flat Loss Landscapes",
+    "authors": [
+      "Jumin Han",
+      "Jun-Hee Kim",
+      "Seong-Whan Lee"
+    ],
+    "abstract": "3D Human Pose Estimation (HPE) is a fundamental task in the computer vision. Generalization in 3D HPE task is crucial due to the need for robustness across diverse environments and datasets. Existing methods often focus on learning relationships between joints to enhance the generalization capability, but the role of the loss landscape, which is closely tied to generalization, remains underexplored. In this paper, we empirically visualize the loss landscape of the 3D HPE task, revealing its complexity and the challenges it poses for optimization. To address this, we first introduce a simple adaptive scaling mechanism that smooths the loss landscape. We further observe that different solutions on this smoothed loss landscape exhibit varying generalization behaviors. Based on this insight, we propose an efficient ensemble approach that combines diverse solutions on the smooth loss landscape induced by our adaptive scaling mechanism. Extensive experimental results demonstrate that our approach improves the generalization capability of 3D HPE models, and can be easily applied, regardless of model architecture, with consistent performance gains.",
+    "keywords": [
+      "Lifting-based 3D Human Pose Estimation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=nZ4mFzCZIx"
+  },
+  "review_fields": {
+    "summary": "This paper poses the critical issue of generalization in 3D Human Pose Estimation (HPE) by shifting focus from network architecture design to the loss landscape geometry. The authors first analyze the complex and fragmented loss landscapes present in HPE, particularly those arising from depth ambiguities. They introduce an adaptive scaling mechanism that encourages flatness in the local minima of the loss surface and propose an efficient ensembling framework based on multiple regression heads. This approach allows the model to explore and average diverse but high-performing solutions within a smoothed loss region. Experiments on Human3.6M and MPI-INF-3DHP demonstrate consistent improvements across multiple architectures (MLP, CNN, GCN, Transformer), both in-domain and cross-dataset.",
+    "strengths_and_weaknesses": "1. Novel perspective on generalization in 3D HPE: The paper introduces an underexplored but highly relevant perspective by analyzing the loss landscape of 3D HPE. The findings are well-motivated and supported by visualizations and eigenvalue analysis.\n2. Simple yet Effective Adaptive Scaling: The adaptive scaling mechanism is elegant, architecture-agnostic, and incurs minimal additional computational cost. \n3. Thorough Experimental Validation: The paper conducts extensive experiments with multiple architectures and benchmarks, including cross-dataset evaluations, noise robustness, and comparison with SAM. Ablation studies clearly isolate the contribution of each component.",
+    "questions": "The paper focuses on 3D HPE. Could the proposed method be applied to other tasks with similarly complex loss landscapes, such as 2D pose estimation or object detection?",
+    "final_justification": "Thank you for your response. I will keep the original score."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 2,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "te6VagJf6G",
+  "reviewer": "KtaJ",
+  "paper": {
+    "title": "Learning to Reason via Program Generation, Emulation, and Search",
+    "authors": [
+      "Nathaniel Weir",
+      "Muhammad Khalifa",
+      "Linlu Qiu",
+      "Orion Weller",
+      "Peter Clark"
+    ],
+    "abstract": "Program synthesis with language models (LMs) has unlocked a large set of reasoning abilities; code-tuned LMs have proven adept at generating programs that solve a wide variety of algorithmic symbolic manipulation tasks (e.g. word concatenation). However, not all reasoning tasks are easily expressible as code, e.g. tasks involving commonsense reasoning, moral decision-making, and sarcasm understanding. Our goal is to extend a LM’s program synthesis skills to such tasks and evaluate the results via pseudo-programs, namely Python programs where some leaf function calls are left undefined. To that end, we propose, Code Generation and Emulated EXecution (COGEX). COGEX works by (1) training LMs to generate pseudo-programs and (2) teaching them to emulate their generated program’s execution, including those leaf functions, allowing the LM’s knowledge to fill in the execution gaps; and (3) using them to search over many programs to find an optimal one. To adapt the COGEX model to a new task, we introduce a method for performing program search to find a single program whose pseudo-execution yields optimal performance when applied to all the instances of a given dataset. We show that our approach yields large improvements compared to standard in-context learning approaches on a battery of tasks, both algorithmic and soft reasoning. This result thus demonstrates that code synthesis can be applied to a much broader class of problems than previously considered.",
+    "keywords": [
+      "language models",
+      "instruction tuning",
+      "code generation",
+      "reasoning",
+      "program search",
+      "program emulation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=te6VagJf6G"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors present a fine-tuned LLM that reasons by generating pythonic code and executes it through the model rather than passing it to an external interpreter (CoGEX). They also use the model to generate a set of candidate programs from a training set, among which the top-k performing programs are selected and subsequently used to evaluate the test set (CoTACS). The model shows improved performance on several datasets against benchmark models without the pretraining, including with in-context learning and chain-of-thought reasoning. Several additional analyses are provided for model efficacy, including the number of training items and sampled programs.",
+    "strengths": "1. Paper is well-written and easy to follow. All the analyses and results are clearly presented.\n2. The CoGEX model provides a useful datapoint on understanding how well LLMs can benefit from program-like planning without relying on an external program interpreter.\n3. Allowing the model to use ‘primitive’ functions that are difficult to define programmatically offers greater flexibility than relying on interpreters and the ability to query for factual information.",
+    "weaknesses": "1. The ideas do not strike me as particularly novel. As noted in the paper, using LLMs to generate code is not new, and neither is using language models to simulate program executors. CoTACS is simply a top-k search.\n2. It isn’t clear to me what advantage this method has over just passing the code to Python Interpreter. Moreover, what advantage is there to using CoGEX to just using GPT4 given that the dataset was created using GPT4 in the first place?\n3. While I appreciate the completeness of the presented results (for the sake of good science), even for experiments where the improvements are marginal, the results are often marginal at best, and it is unclear in what circumstances this approach is favorable and when it is not. Likewise, the authors use 0-shot CoT as their comparison model (Line 236), which is the weakest CoT baseline possible. Given that using an actual program interpreter is a viable alternative, I would be hesitant to adopt CoGEX without having a clearer understanding of when it outperforms simpler alternatives. In my opinion, the paper would strongly benefit from the following:\n    A. A fair comparison with CoT, either controlling for the number of examples or showing at how many examples the models achieve parity. Since this is the simplest thing to try for most ML practitioners, even parity would have me favor CoT over most alternatives.\n    B. A comparison, if applicable, to actual interpreters (e.g. Python). If this is not possible (e.g. due to calls to undefined functions), how often is that the case? Alternatively, if the model was forced to use predefined functions, how much better is it to use undefined functions?\n    C. I really was hoping for a more extensive Qualitative Analysis section (S 3.4) to get a better understanding of when CoGEX strongly outperforms the baselines. The results in Table 1 demand too much prior knowledge about the individual tasks/datasets from the readers without some guidance on how to think about them.",
+    "questions": "1. (Table 1): Could you define what BM25 means? It wasn’t clear to me from the paper exactly how you performed the benchmarks and how you chose the benchmark settings to ensure fair comparison.\n2. (Line 91): What does silver-quality mean?\n3. (Table 3 and Figure 2): It wasn’t clear from the paper whether the model generated meaningfully different programs. Footnote 3 (from Line 231) suggests that the model likely generated very similar outputs (assuming lower temperature means more deterministic outputs).\n4. (Line 103): Few questions about ‘fuzzy’ premitives. \n    A. Does the model come up with its own fuzzy primitive operations, or do they all need to be predefined by the engineer or GPT4? \n    B. How did you determine what level of granularity was appropriate for the dataset? \n    C. Does the model ever produce fuzzy primitives that were not included in the dataset by GPT4 and if so, how does the model deal with it? \n5. (Line 187) Could you provide the actual SD or the 95% interval?\n6. (Figure 2) Could you include baselines for these tasks, e.g. results from the off-the-shelf Llama-2 13B on these problems. (It’s hard to tell if the linear trends are misguiding for me or not because the x-axis is in log-scale while the y-axis is in raw percentages. Logit-scale for y-axis could potentially be more informative.)\n7. (S3.4) Do you observe instances where the generated program is incorrect but the model still gets the problems correct? In other words, does the model actually follow the incorrect program or does the model ignore it?",
+    "limitations": "The authors provide no guarantee of safety (this is acknowledged in the supplements), but not addressed."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 4094,
+    "words": 678,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/38d53bf1-051b-4278-92aa-1e1b86517e89",
+    "error": null,
+    "scored_chars": 4122
+  }
+}

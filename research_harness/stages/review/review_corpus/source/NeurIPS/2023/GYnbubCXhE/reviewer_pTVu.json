@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "GYnbubCXhE",
+  "reviewer": "pTVu",
+  "paper": {
+    "title": "Conditional Matrix Flows for Gaussian Graphical Models",
+    "authors": [
+      "Marcello Massimo Negri",
+      "Fabricio Arend Torres",
+      "Volker Roth"
+    ],
+    "abstract": "Studying conditional independence among many variables with few observations is a challenging task.\nGaussian Graphical Models (GGMs) tackle this problem by encouraging sparsity in the precision matrix through $l_q$ regularization with $q\\leq1$.\nHowever, most GMMs rely on the $l_1$ norm because the objective is highly non-convex for sub-$l_1$ pseudo-norms.\nIn the frequentist formulation, the $l_1$ norm relaxation provides the solution path as a function of the shrinkage parameter $\\lambda$.\nIn the Bayesian formulation, sparsity is instead encouraged through a Laplace prior, but posterior inference for different $\\lambda$ requires repeated runs of expensive Gibbs samplers.\nHere we propose a general framework for variational inference with matrix-variate Normalizing Flow in GGMs, which unifies the benefits of frequentist and Bayesian frameworks.\nAs a key improvement on previous work, we train with one flow a continuum of sparse regression models jointly for all regularization parameters $\\lambda$ and all $l_q$ norms, including non-convex sub-$l_1$ pseudo-norms.\nWithin one model we thus have access to (i) the evolution of the posterior for any $\\lambda$ and any $l_q$ (pseudo-) norm, (ii) the marginal log-likelihood for model selection, and (iii) the frequentist solution paths through simulated annealing in the MAP limit.",
+    "keywords": [
+      "normalizing flow",
+      "variational inference",
+      "graphical lasso",
+      "gaussian graphical model",
+      "bayesian inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GYnbubCXhE"
+  },
+  "review_fields": {
+    "summary": "This paper targets the structure learning problem in Gaussian Graphical Models via (Normalising) Flow-based Variational approximation of the elements of weight metrics that correspond to the Gaussian Bayesian network. \nThey use sub-l1 pseudo norms to penalize dense precision metrics (which correspond to graphs with numerous links) without imposing an extra high penalty for large non-zero values (which typically occurs if $l_{\\geq1}$ is used).",
+    "strengths": "1. Up to my knowledge, this is the first time flows are applied to the space of positive definite matrices. \n2. The proposed approach is flexible meaning the class of applicable prior and likelihood functions is quite large.\n3. Using sub-l1 norm is suitable for structure learning. \n4. The proposed algorithm is mathematically sound (as far as I can follow) and is quite interesting. \n5. The paper is well-written, and the relevant work is sufficiently discussed.    \n6. Due to its flexibility, the proposed method has the potential of having a large impact.",
+    "weaknesses": "Due to the factors mentioned in the previous section, I find this work impressive and beautiful. However, unfortunately, the carried out experiments are minimal. Most notably, the algorithm is compared to no alternative work (neither in the main paper nor in the supplementary material). With no quantitative comparisons, it is impossible to evaluate the performance of the proposed algorithm compared to the existing methods. \n\nNOTE: In the Rebuttal, some experiments are carried out (though the code is still not accessible).    \n\nMinor suggestion: \n1. Though it is clear in the context, I suggest that the authors do not use the same letter \"p\" (with the same font) for both probability density and norm parameter.  \n2. Fix minor typos e.g. the end sentence period in line 214.",
+    "questions": "* In line 141, what do you mean by \"contradiction\"?",
+    "limitations": "The authors should compare their method with the relevant structure learning lierature and reveal its points of strength as well as its limitations. \n\nThis work is theoretical/methodological and does not have any positive or negative social/ethical impact on its own."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1646,
+    "words": 267,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/33e277cb-37b6-4948-9d14-a9b4822e56db",
+    "error": null,
+    "scored_chars": 1662
+  }
+}

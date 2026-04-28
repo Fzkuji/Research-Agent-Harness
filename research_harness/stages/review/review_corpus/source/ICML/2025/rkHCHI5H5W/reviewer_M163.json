@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "rkHCHI5H5W",
+  "reviewer": "M163",
+  "paper": {
+    "title": "Compositional Generalization via Forced Rendering of Disentangled Latents",
+    "authors": [
+      "Qiyao Liang",
+      "Daoyuan Qian",
+      "Liu Ziyin",
+      "Ila R Fiete"
+    ],
+    "abstract": "Composition—the ability to generate myriad variations from finite means—is believed to underlie powerful generalization. However, compositional generalization remains a key challenge for deep learning. A widely held assumption is that learning disentangled (factorized) representations naturally supports this kind of extrapolation. Yet, empirical results are mixed, with many generative models failing to recognize and compose factors to generate out-of-distribution (OOD) samples. In this work, we investigate a controlled 2D Gaussian \"bump\" generation task with fully disentangled $(x,y)$ inputs, demonstrating that standard generative architectures still fail in OOD regions when training with partial data, by re-entangling latent representations  in subsequent layers. By examining the model's learned kernels and manifold geometry, we show that this failure reflects a \"memorization\" strategy for generation via data superposition rather than via composition of the true factorized features. We show that when models are forced—through architectural modifications with regularization or curated training data—to render the disentangled latents into the full-dimensional representational (pixel) space, they can be highly data-efficient and effective at composing in OOD regions. These findings underscore that disentangled latents in an abstract representation are insufficient and show that if models can represent disentangled factors directly in the output representational space, it can achieve robust compositional generalization.",
+    "keywords": [
+      "Factorization",
+      "Compositionality",
+      "Compositional Generalization",
+      "Data Efficiency"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rkHCHI5H5W"
+  },
+  "review_fields": {
+    "summary": "The paper develops theoretical and empirical results as to why a disentangled representation in\ninput does not necessarily lead to OOD compositional generalization.\nFirst, the paper demonstrates the failure of common generative architectures (decoder-only CNN / MLP) to\nperform compositional generalization, even when given disentangled input. This is demonstrated on a task of\ngenerating synthetic images of a 2D Gaussian bump, centered at the (x, y) input coordinates. They then suggest\nand test an explanation for this failure - that the input becomes re-entangled in deeper layers. This is shown\nquantitatively using kernels and manifold. The paper suggests that instead, the models memorize training data.\nFinally, two methods are suggested to improve the compositional generalization: architectural modifications with\nregularization, and additional training on curated data.",
+    "claims_and_evidence": "Strengths:\n* Studying the impact of factorization is a very important task, since a breakthrough in compositional embedding can break many limits in current learnable approaches.\n* The toy example is analyzed extensively and thoroughly, in terms of memorization, manifold analysis, and augmentation.\n* The paper’s demonstration of the memorization of the in-distribution training data is presented clearly and is\njustified using the binary kernel factorization. Likewise, the presentation of the re-entanglement using the Jacobian\ntensor is valid.\n* The low-rank approach is an interesting way to force factorized structure and prevent memorization. In addition,\naugmenting the training data allows improving compositional generalization of current models without the need\nto modify architecture.\n\n\nWeaknesses:\n* It appears problematic to generalize into holistic and general insights out of a single and limited toy example (it is indeed mentioned in the Limitation section, however this may not be a simple limitation but a biased *general* insight). Experiments may be biased due to various reasons, such as: 1) the relationship between the size of the network and the amount/variability of the learning data may extremely bias the network into memorization instead of generalization. 2) relying on CNN based network for a task containing locality, and hence spatial aware network is preferable, may also be problematic. It can shift the network into memorization, since the architecture is less adequate to solve the problem. For instance, it may be that more complicated networks, specifically spatial aware ones (like transformer containing positional encoding phase) may lead to different conclusions.\n* The authors show that subsequent layers re-entangle the representation, however it is not proven to be the cause\nof failure for OOD generation. The paper does not test the less constrained hypothesis, that it is sufficient for the\nrepresentation to be merely invertible into the original factors. The requirement of strict factorization seems too\nconstraining.\n* The generality and applicability of the suggest methods are unclear without tests on more complicated datasets.\nIn addition, generating additional curated data is domain-specific and can be very expensive and demanding \nfor real dataset.\n* The paper’s claim - that standard architectures fail to achieve compositional generalization despite being pro-\nvided with explicitly factorized inputs — implicitly assumes that a factorized input should be sufficient for such\ngeneralization. However, prior work (e.g. Montero 2021) has already shown that compositional generalization depends on more than\njust disentanglement at the input level. Consequently, the paper refutes a weaker claim than what is typically\nasserted.",
+    "methods_and_evaluation_criteria": "* Nowadays VAEs fall short in terms of generative capabilities, way beyond diffusion models. I think that theoretically it is important to understand compositional generalization in general, but investigate it on CNNs is reducing the impact of the findings. (Also here I noticed that it mentioned in the Limitation section as well, I agree with this limitation and mention it here as a weakness that it is not \"cancel\" the insights but tone them down).\n* The ablation study is done on various combinations of the loss terms but all on the same architecture. If the tuning is only on the learned loss it can easily be applied to other architectures (which is a pro in fact), then I would expect this type of ablation study.",
+    "theoretical_claims": "The methodolgy and reasoning here seems not to take into account all possible cases for their final conclusions. see above.",
+    "experimental_designs_or_analyses": "Insufficient, toy, single architecture that is not optimal for the problem, see above.",
+    "essential_references_not_discussed": "Related Work should contain a section on loss terms for compositionality.",
+    "other_strengths_and_weaknesses": "Minor weaknesses:\n* The paper does not list the architectures used for the CNN and MLP used in section 3.1.\n* VAE play a central role in generation in general and compositionality research in particular, and hence the paper\nis lacking by not including it in its tested architectures.\n* The visualizations contain too small font size and information. An extreme example is in (e) in Fig. 4.\n* Line 309 right column, a sentence started but not finished, \"both results show\"\n* Not clear that MSE loss for this task is preferable. What if the network required to set a bump in (x,y) and set it in (x+d,y+d). The same MSE loss will be reached regardless the distance from the required. I think that earthmovers metric (optimal transport loss in general) would be more appropriate here.\n* Why do the authors decide on this specific task? Why generative task, and under generative ones, why this specific bump task? I did not find intuitive explanation in the paper why this task is preferable for some reason.\n* Inconsistencies in capitalizing. For example subsection 3.4 contains capital letter only for the first word, while subsections 4.1, 4.2 and more capitalize each of the words."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

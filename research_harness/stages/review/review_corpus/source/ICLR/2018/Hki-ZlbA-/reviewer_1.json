@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "Hki-ZlbA-",
+  "reviewer": "1",
+  "paper": {
+    "title": "Ground-Truth Adversarial Examples",
+    "authors": [
+      "Nicholas Carlini",
+      "Guy Katz",
+      "Clark Barrett",
+      "David L. Dill"
+    ],
+    "abstract": "The ability to deploy neural networks in real-world, safety-critical systems is severely limited by the presence of adversarial examples: slightly perturbed inputs that are misclassified by the network. In recent years, several techniques have been proposed for training networks that are robust to such examples; and each time stronger attacks have been devised, demonstrating the shortcomings of existing defenses. This highlights a key difficulty in designing an effective defense: the inability to assess a network's robustness against future attacks. We propose to address this difficulty through formal verification techniques. We construct ground truths: adversarial examples with a provably-minimal distance from a given input point. We demonstrate how ground truths can serve to assess the effectiveness of attack techniques, by comparing the adversarial examples produced by those attacks to the ground truths; and also of defense techniques, by computing the distance to the ground truths before and after the defense is applied, and measuring the improvement. We use this technique to assess recently suggested attack and defense techniques.",
+    "keywords": [
+      "adversarial examples",
+      "neural networks",
+      "formal verification",
+      "ground truths"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Hki-ZlbA-"
+  },
+  "review_fields": {
+    "review": "The paper describes a method for generating so called ground truth adversarial examples: adversaries that have minimal (L1 or L_inf) distance to the training example used to generate them. The technique uses the recently developed reluplex, which can be used to verify certian properties of deep neural networks that use ReLU activations. The authors show how the L1 distance can be formulated using a ReLU and therefore extend the reluplex also work with L1 distances. The experiments on MNIST suggest that the C&W attack produces close to optimal adversarial examples, although it is not clear if these findings would transfer to larger more complex networks. The evaluation also suggests that training with iterative adversarial examples does not overfit and does indeed harden the network to attacks in many cases.\n\nIn general, this is a nice idea, but it seems like the inherent computational cost will limit the applicability of this approach to small networks and datasets for the time being. Incidentally, it would have been useful if the authors provided indicative information on the computational cost (e.g. in the form of time on a standard GPU) for generating these ground truths and carrying out experiments.\n\nThe experiments are quite small scale, which I expect is due to the computational cost of generating the adversarial examples. It is difficult to say how far the findings can be generalized from MNIST to more realistic situations. Tests on another dataset would have been welcomed.\n\nAlso, while interesting, are adversarial examples that have minimal L_p distance from training examples really that useful in practice? Of course, it's nice that we can find these, but it could be argued that L_p norms are not a good way of judging the similarity of an adversarial example to a true example. I think it would be more useful to investigate attacks that are perceptually insignificant, or attacks that operate in the physical world, as these are more likely to be a concern for real world systems. \n\nIn summary, while I think the paper is interesting, I suspect that the applicability of this technique is possibly limited at present, and I'm unsure how much we can really read into the findings of the paper when the experiments are based on MNIST alone."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

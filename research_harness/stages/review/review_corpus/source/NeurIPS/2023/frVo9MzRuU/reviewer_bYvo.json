@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "frVo9MzRuU",
+  "reviewer": "bYvo",
+  "paper": {
+    "title": "Compositional Abilities Emerge Multiplicatively: Exploring Diffusion Models on a Synthetic Task",
+    "authors": [
+      "Maya Okawa",
+      "Ekdeep Singh Lubana",
+      "Robert P. Dick",
+      "Hidenori Tanaka"
+    ],
+    "abstract": "Modern generative models exhibit unprecedented capabilities to generate extremely realistic data. However, given the inherent compositionality of the real world, reliable use of these models in practical applications requires that they exhibit the capability to compose a novel set of concepts to generate outputs not seen in the training data set. Prior work demonstrates that recent diffusion models do exhibit intriguing compositional generalization abilities, but also fail unpredictably. Motivated by this, we perform a controlled study for understanding compositional generalization in conditional diffusion models in a synthetic setting, varying different attributes of the training data and measuring the model's ability to generate samples out-of-distribution. Our results show: (i) the order in which the ability to generate samples from a concept and compose them emerges is governed by the structure of the underlying data-generating process; (ii) performance on compositional tasks exhibits a sudden \"emergence\" due to multiplicative reliance on the performance of constituent tasks, partially explaining emergent phenomena seen in generative models; and (iii) composing concepts with lower frequency in the training data to generate out-of-distribution samples requires considerably more optimization steps compared to generating in-distribution samples. Overall, our study lays a foundation for understanding emergent capabilities and compositionality in generative models from a data-centric perspective.",
+    "keywords": [
+      "Diffusion model; Emergence; Emergent capabilities; Science of deep learning; Mechanistic interpretability"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=frVo9MzRuU"
+  },
+  "review_fields": {
+    "comment": "Thank you for the interesting experiments and thorough answers to my feedback. The new data seems to support the claims of the paper.\n\nI acknowledge that testing your hypotheses using large scale real world data is challenging because controlling the attributes existing in the training data becomes more difficult. I found the experiment on CelebA an important step towards that direction and potential future work may extend your work to this direction. Additionally, the exploration of various diffusion architectures provide valuable insights of the learning dynamics and that the observations are not specific only to the initial model architecture selected in the paper.\n\nIn my opinion, these experiments, rewriting the concluding paragraph, and improving the presentation quality of figures improve the submission significantly. I am happy to update my score accordingly."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 878,
+    "words": 131,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/731d7b76-72f0-47bb-9d28-d0328b0071b2",
+    "error": null,
+    "scored_chars": 878
+  }
+}

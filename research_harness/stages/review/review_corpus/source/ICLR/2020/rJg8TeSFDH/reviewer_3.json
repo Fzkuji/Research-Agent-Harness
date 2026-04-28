@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "rJg8TeSFDH",
+  "reviewer": "3",
+  "paper": {
+    "title": "An Exponential Learning Rate Schedule for Deep Learning",
+    "authors": [
+      "Zhiyuan Li",
+      "Sanjeev Arora"
+    ],
+    "abstract": "Intriguing empirical evidence exists that deep learning can work well with exotic schedules for varying the learning rate. This paper suggests that the phenomenon may be due to Batch Normalization or BN(Ioffe & Szegedy, 2015), which is ubiq- uitous and provides benefits in optimization and generalization across all standard architectures. The following new results are shown about BN with weight decay and momentum (in other words, the typical use case which was not considered in earlier theoretical analyses of stand-alone BN (Ioffe & Szegedy, 2015; Santurkar et al., 2018; Arora et al., 2018)\n• Training can be done using SGD with momentum and an exponentially in- creasing learning rate schedule, i.e., learning rate increases by some (1 + α) factor in every epoch for some α > 0. (Precise statement in the paper.) To the best of our knowledge this is the first time such a rate schedule has been successfully used, let alone for highly successful architectures. As ex- pected, such training rapidly blows up network weights, but the net stays well-behaved due to normalization.\n• Mathematical explanation of the success of the above rate schedule: a rigor- ous proof that it is equivalent to the standard setting of BN + SGD + Standard Rate Tuning + Weight Decay + Momentum. This equivalence holds for other normalization layers as well, Group Normalization(Wu & He, 2018), Layer Normalization(Ba et al., 2016), Instance Norm(Ulyanov et al., 2016), etc.\n• A worked-out toy example illustrating the above linkage of hyper- parameters. Using either weight decay or BN alone reaches global minimum, but convergence fails when both are used.",
+    "keywords": [
+      "batch normalization",
+      "weight decay",
+      "learning rate",
+      "deep learning theory"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=rJg8TeSFDH"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review": "UPDATE TO MY EARLIER REVIEW\n===========================\n\nThe authors improved the writing of the paper substantially relative to the first version they submitted, and fixed minor issues. I am changing my rating from \"Weak accept\" to \"Strong accept\". It is now a must-read paper for anyone doing research on deep learning. \n\n\n\nMY EARLIER REVIEW\n=================\n\nThis exciting and insightful paper presents theorems (and illustrating examples and experiments) describing an equivalence of commonly used learning rate schedules and weight decay settings with an exponentially increasing learning rate schedule and no weight decay, for neural networks with scale-invariant weights. Hence, the results apply to a large set of commonly employed settings. The paper contains an interesting example of a neural network for which gradient descent converges if with batch normalization as well as with L2 regularization, but not when both are used. \n\nFrom a theory viewpoint, the paper offers new insights into Batch normalization and other normalization schemes. From a practical viewpoint, the paper suggests a way to speed up hyper-parameter search, effectively allowing to consider learning rate and weight decay as one parameter. \n\nA small gripe: this paper is a bit rough around the edges, and reads a bit like a draft (see comments on details below). \n\n\nDetailed Comments / advice / questions\n==================================\n\n- It often takes a bit of searching to figure out what proof goes with what theorem / fact. I recommend to add to each occurrence of “Proof.” (before a proof) with a reference to the theorem or fact that is being proved, e.g. “Proof of Theorem 2.6”. \n\n- The authors state that theorem B2 applies to “general deep nets”. In this theorem, the limit R_\\infty could very well be zero (e.g. for networks with weights that are not scale-invariant), in which case the statement contains a division by zero. I wonder if the authors overlooked this or forgot to state an assumption in the theorem. Maybe I am missing something. Since this theorem does not appear to be critical to the main contributions of the paper, it may be easiest to remove the theorem if the division by zero is indeed a problem. \n\n\n- On page 6, if c_w(x) is independent of w, would c(x) be more suitable? \n\n- At the bottom of page 6, the authors state that “As a result, for any fixed learning rate, ||w_{t+1}|| ^4= …”. It appears that the authors get the expression for  ||w_{t+1}||^4 from the expression for ||w_{t+1}||^2 above (maybe by multiplying by ||w_{t+1}||^2?), but I don’t see how. Could the authors explain this? Maybe authors mixed up w_t and w_{t+1} by accident? \n\n- The authors claim to “constrict better Exponential learning rate schedules”. Since the authors only perform a limited evaluation of their proposed learning rate schedule on CIFAR10, I suggest qualifying this statement. \n\n- Theorem 1.1 does not introduce what \\tilde{\\gamma} is. It’s somewhat obvious, but I would state it nonetheless. \n\n- The authors state that “…the exponent trumps the effect of initial lr very fast, which serves as another explanation of the standard wisdom that initial lr is unimportant when training with BN”. I don’t think that this constitutes a full explanation without further argument. I am also wondering if “another” is appropriate here: I am not aware of any (other) mathematically precise explanations of why initial learning rates do not matter in this set-up. If the authors are, they should cite it. \n\n- The authors often forgot spaces before \\cite commands. If you are trying to avoid a line break before the \\cite command, you can use a tilde ~ , like this “Group Normalization~\\cite{somepaper}”. \n\n- Please introduce the abbreviation LR for “Learning Rate”, and always use the all-upper-case version (not “lr”). \n\n- Definition 1.2 has a broken \\cite . \n\n- Theorem 2.7 should introduce \\hat{eta}_t, but it doesn’t. \n\n- Appendix A.1 contains a broken sentence (“as a function of…”)\n\n- It’s odd that the proof for theorems B1 and B2 appear before theorems B1 and B2. I would restructure the appendices to improve this. \n\n- Theorem B2 contains a stray “when”, and “exists” should be “exist”\n\n- What the authors call “Proof of Theorem 2.4” in the appendix is really a proof of the rigorous version of Theorem 2.4 - Theorem 2.7! The proof should in my opinion be labeled “Proof of Theorem 2.7”\n\n- The typo “eventsequation” should be replaced with something like “the events from equations”\n\n- Replace the colloquialism “nets” with “networks”. \n\n- Replace “BatchNorm” with “Batch Normalization”\n\n- “COvariate” has casing issues\n\n- “Riemmanian” should be “Riemannian”\n\n- “BNhas” should be “BN has”\n\n- The paper’s title states that the results are for batch-normalized networks, while the analysis appears to be more generally for networks with scale-invariant weights, which as the authors point out can arise from mechanisms other than batch normalization. Have the authors considered changing the paper’s title to better capture what their work applies to? In terms of discoverability, the authors would do the community a service by titling the paper in such a way that it captures the set-up well.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I carefully checked the derivations and theory."
+  },
+  "review_metadata": {
+    "rating": 8
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

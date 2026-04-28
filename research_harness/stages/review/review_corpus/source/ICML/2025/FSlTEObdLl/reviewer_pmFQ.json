@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "FSlTEObdLl",
+  "reviewer": "pmFQ",
+  "paper": {
+    "title": "CombiMOTS: Combinatorial Multi-Objective Tree Search for Dual-Target Molecule Generation",
+    "authors": [
+      "Thibaud Southiratn",
+      "Bonil Koo",
+      "Yijingxiu Lu",
+      "Sun Kim"
+    ],
+    "abstract": "Dual-target molecule generation, which focuses on discovering compounds capable of interacting with two target proteins, has garnered significant attention due to its potential for improving therapeutic efficiency, safety and resistance mitigation.\nExisting approaches face two critical challenges.\nFirst, by simplifying the complex dual-target optimization problem to scalarized combinations of individual objectives, they fail to capture important trade-offs between target engagement and molecular properties. \nSecond, they typically do not integrate synthetic planning into the generative process.\nThis highlights a need for more appropriate objective function design and synthesis-aware methodologies tailored to the dual-target molecule generation task.\nIn this work, we propose CombiMOTS, a Pareto Monte Carlo Tree Search (PMCTS) framework that generates dual-target molecules.\nCombiMOTS is designed to explore a synthesizable fragment space while employing vectorized optimization constraints to encapsulate target affinity and physicochemical properties.\nExtensive experiments on real-world databases demonstrate that CombiMOTS produces novel dual-target molecules with high docking scores, enhanced diversity, and balanced pharmacological characteristics, showcasing its potential as a powerful tool for dual-target drug discovery.\nThe code and data is accessible through \\url{https://github.com/Tibogoss/CombiMOTS}.",
+    "keywords": [
+      "Dual-target Molecule Generation",
+      "Fragment-based Drug Discovery",
+      "Monte-Carlo Tree Search",
+      "Pareto Optimization",
+      "Search Space Reduction"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=FSlTEObdLl"
+  },
+  "review_fields": {
+    "summary": "The paper proposes CombiMOTS, a combinatorial multi-objective tree search framework for dual-target molecule generation. It integrates Pareto Monte Carlo Tree Search (PMCTS) with fragment-based synthesis-aware generation. Key contributions include: (1) A reduced synthesizable fragment space via target-aware building blocks; (2) A Pareto-optimized MCTS algorithm for balancing conflicting objectives (target affinity, QED, SA); (3) Empirical validation showing superior performance in generating diverse, synthesizable molecules with balanced properties compared to baselines.",
+    "claims_and_evidence": "Claims about \"superior diversity\" (Table 1) lack statistical significance tests (e.g., p-values).\n\nToxicity prediction (Section 6.2) uses an ensemble of Chemprop models trained on a small dataset (1,478 molecules), risking overfitting.",
+    "methods_and_evaluation_criteria": "Use of industry-ready Enamine REAL Space ensures practical synthesizability. Pareto optimization aligns with multi-objective drug design.\nHowever, docking scores are prioritized over QED/SA without justification. This may bias results toward unrealistic molecules.",
+    "theoretical_claims": "The Pareto UCB formula (Equation 8) combines scalar exploration terms with vectorized rewards. This lacks theoretical grounding—how does it guarantee Pareto optimality?",
+    "experimental_designs_or_analyses": "Concern: Baseline implementations (e.g., REINVENT) use different objectives (QED-only vs. docking scores), making comparisons unfair.\n\nIssue: Computational cost of CombiMOTS (25s/rollout for 6 objectives) is not compared to baselines.",
+    "relation_to_broader_scientific_literature": "The work builds on Swanson et al. (2024) but extends MCTS to multi-objective settings. However, recent Pareto MCTS variants (e.g., Yang et al., 2024a) are not discussed.",
+    "essential_references_not_discussed": "Pareto optimization in drug design: Medina-Franco et al. (2013) proposed multi-target optimization frameworks.\n\nMulti-objective RL: Yang et al. (2024a) applied Pareto MCTS to molecule generation but is uncited.",
+    "other_strengths_and_weaknesses": "Weaknesses: Methods are well-described, but theoretical justification for Pareto UCB is unclear.",
+    "other_comments_or_suggestions": "Page 2: \"Fromer & Coley, 2023; Luukkonen & Maagdenberg, 2023\" lack full references.\n\nAlgorithm 1: Line 16 uses \"max(v, selected.P)\"—unclear if \"max\" applies to vectors.",
+    "questions_for_authors": "How does the Pareto UCB formula ensure convergence to Pareto-optimal solutions? A theoretical analysis is needed.\n\nWhy prioritize docking scores over QED/SA in objectives? Would including all metrics (as in Appendix C.1.2) improve practicality?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

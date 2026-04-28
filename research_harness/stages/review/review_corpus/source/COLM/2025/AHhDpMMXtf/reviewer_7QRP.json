@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "AHhDpMMXtf",
+  "reviewer": "7QRP",
+  "paper": {
+    "title": "Understanding and Improving Noisy Embedding Techniques in Instruction Finetuning",
+    "authors": [
+      "Abhay Yadav"
+    ],
+    "abstract": "Recent advancements in instructional fine-tuning have injected noise into embeddings, with NEFTune (Jain et al., 2024) setting benchmarks using uniform noise. Despite NEFTune’s empirical findings that uniform noise outperforms Gaussian noise, the reasons for this remain unclear. This paper aims to clarify this by offering a thorough analysis, both theoretical and empirical, indicating comparable performance among these noise types. Additionally, we introduce a new fine-tuning method for language models, utilizing symmetric noise in embeddings. This method aims to enhance the model’s function by more stringently regulating its local curvature, demonstrating superior performance over the current method, NEFTune. When fine-tuning the LLaMA-2-7B model using Alpaca, standard techniques yield a 29.79% score on AlpacaEval. However, our approach, SymNoise, increases this score significantly to 69.04%, using symmetric noisy embeddings. This is a 6.7% improvement over the state-of-the-art method, NEFTune (64.69%). Furthermore, when tested on various models and stronger baseline instruction datasets, such as Evol-Instruct, ShareGPT, OpenPlatypus, SymNoise consistently outperforms NEFTune. The current literature, including NEFTune, has underscored the importance of more in-depth research into the application of noise-based strategies in the fine-tuning of language models. Our approach, SymNoise, is another significant step towards this direction, showing notable improvement over the existing state-of-the-art method.",
+    "keywords": [
+      "Instruction Finetuning",
+      "LLM",
+      "Domain Adaptation",
+      "Multi-Task Learning",
+      "Language Models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=AHhDpMMXtf"
+  },
+  "review_fields": {
+    "summary": "This paper presents a well-motivated and technically sound study on noise injection methods in instruction fine-tuning for large language models. It offers both theoretical insights and practical contributions by (1) demystifying the relative effectiveness of uniform vs. Gaussian noise in embedding perturbation, and (2) introducing SymNoise, a novel symmetric Bernoulli-based noise method.\n\nThe idea is novel.\n\nThe empirical results are compelling: SymNoise outperforms NEFTune consistently across multiple datasets and models (including LLaMA-1/2 and OPT), and delivers notable gains on AlpacaEval. The ablation studies, theoretical derivations, and performance consistency across tasks strengthen the validity of the work.",
+    "reasons_to_accept": "The paper is clearly written, well-structured, and addresses a timely problem in instruction fine tuning. The insights into curvature regularization via symmetric noise are novel and could inspire further exploration in noise-based LLM training.\n\nThe contributions are meaningful, the empirical results are strong, and the paper is likely to be of interest to both academic and applied ML communities."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 100,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 401,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d6982b35-76ba-458a-833f-21d8b7f9bb71",
+    "error": null,
+    "scored_chars": 401
+  }
+}

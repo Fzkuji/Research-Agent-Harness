@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "youe3QQepVB",
+  "reviewer": "X2gh",
+  "paper": {
+    "title": "Generative Modeling for Multitask Visual Learning",
+    "authors": [
+      "Zhipeng Bao",
+      "Yu-Xiong Wang",
+      "Martial Hebert"
+    ],
+    "abstract": "Generative modeling has recently shown great promise in computer vision, but it has mostly focused on synthesizing visually realistic images. In this paper, motivated by multi-task learning of shareable feature representations, we consider a novel problem of learning a shared generative model that is useful across various visual perception tasks. Correspondingly, we propose a general multi-task oriented generative modeling (MGM) framework, by coupling a discriminative multi-task network with a generative network. While it is challenging to synthesize both RGB images and pixel-level annotations in multi-task scenarios, our framework enables us to use synthesized images paired with only weak annotations (i.e., image-level scene labels) to facilitate multiple visual tasks. Experimental evaluation on challenging multi-task benchmarks, including NYUv2 and Taskonomy, demonstrates that our MGM framework improves the performance of all the tasks by large margins, especially in the low-data regimes, and our model consistently outperforms state-of-the-art multi-task approaches.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=youe3QQepVB"
+  },
+  "review_fields": {
+    "comment": "I would like to thank the authors for their replies. However, I found my concerns only partially addressed. \n1. My main concern is about the claim on 'low data' regime. I have no doubt that the proposed method is better than the baselines in the absolute sense, across different data percentage. It would make more sense if the authors simply claim that using a generative model is just better than baseline, regardless of data abundance. Since this 'low data' regime is a major narrative, I'm not sure if the experiments supports that claim. Though it is perfectly fine for the authors to change the narrative and suit that to the experiments, I don't think this indicates that the paper is ready enough for publication. \n\n2. \n> Second, for the performance gap between MGM/G and MGM, we think it is because MGM/G is already a strong model with the refinement network and the self-supervision network -- it is relatively hard for MGM to further improve the performance with a stronger model.\n\nI find this argument way too weak to prove the design choice of this generative model. Given the qualitative results shown, I don't think the few points in the result is significant enough to prove that the generative model is essential.\n\n3. \nI found fig 6 still have border artifacts, and with rgb images as background overlay. I don't think the authors addressed this issue properly\n\n4. \nI don't find the necessity of keeping a consistent metrics with taskonomy given the specific task of depth/normal/semantic prediction. Taskonomy has various tasks, but since major evaluation is done on those three specific tasks, it makes more sense to report consistent metrics on theses tasks. \n\nGiven those considerations, I vote for rejection for this paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1739,
+    "words": 292,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e3baa44a-6986-4788-b05f-e4fd19ffa561",
+    "error": null,
+    "scored_chars": 1745
+  }
+}

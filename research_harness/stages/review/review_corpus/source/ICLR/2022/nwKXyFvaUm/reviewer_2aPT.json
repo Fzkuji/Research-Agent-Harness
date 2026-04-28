@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "nwKXyFvaUm",
+  "reviewer": "2aPT",
+  "paper": {
+    "title": "Diverse Client Selection for Federated Learning via Submodular Maximization",
+    "authors": [
+      "Ravikumar Balakrishnan",
+      "Tian Li",
+      "Tianyi Zhou",
+      "Nageen Himayat",
+      "Virginia Smith",
+      "Jeff Bilmes"
+    ],
+    "abstract": "In every communication round of federated learning, a random subset of clients communicate  their  model  updates  back  to  the  server  which  then  aggregates them all.  The optimal size of this subset is not known and several studies have shown that typically random selection does not perform very well in terms of convergence, learning efficiency and fairness. We, in this paper, propose to select a small diverse subset of clients, namely those carrying representative gradient information, and we transmit only these updates to the server.  Our aim is for updating via only a subset to approximate updating via aggregating all client information. We achieve this by choosing a subset that maximizes a submodular facility location function defined over gradient space. We introduce “federated averaging with diverse client selection (DivFL)”. We provide a thorough analysis of its convergence in the heterogeneous setting and apply it both to synthetic and to real datasets. Empirical results show several benefits to our approach including improved learning efficiency, faster convergence and also more uniform (i.e., fair) performance across clients. We further show a communication-efficient version of DivFL that can still outperform baselines on the above metrics.",
+    "keywords": [
+      "federated learning",
+      "submodularity",
+      "diversity"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=nwKXyFvaUm"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper studies the selection of clients for federated learning under the assumption of full participation via submodular function maximization. Specifically, the goal is to obtain a subset of the clients such that the aggregation of the gradients of their loss functions approximates the full aggregated gradient. The authors show that the error defined by the difference between both aggregations (the full one and the one defined by the subset) can be upper bounded by a supermodular function. Therefore, minimizing this function (subject to a single cardinality constraint, which is motivated by communication costs) gives an upper bound for the problem of minimizing the error. The minimization of this particular supermodular function can be equivalently posed as the maximization of a submodular function, which has been previously studied in the literature (e.g. [1] below). Given this, the authors propose a variant of the federated averaging scheme, called *DivFL*, which uses the standard greedy algorithm to select $K$ clients to communicate the current value $w_t$. They show that under the “gradient approximation error” assumption, the error between $w_t$ and $w^*$ decreases as $O(1/t)+O(\\epsilon)$, where $\\epsilon$ is a parameter of the assumption. Finally, they test their scheme in synthetic and real-data sets against other methods in the literature.\n\n\n[1] Ryan Gomes and Andreas Krause. Budgeted Nonparametric Learning from Data Streams, 2015.",
+    "main_review": "The paper is overall well-written and somehow easy to follow (see minor comments). I checked most of the math in the Appendix and it seems correct, but standard. The authors could emphasize more on the key differences between their analysis and the previous literature.\n\nMain questions:\n-\tI understand the use of the standard greedy algorithm for the selection of clients in DivFL, however, the role of submodularity doesn’t seem to give an advantage, at least theoretically speaking. In other words, which role does submodularity play in the analysis of the algorithm? Is there any connection between Assumption 1 and submodularity? \n-\tAssumption 1 seems rather strong. The authors should motivate more this. For example, which classes of functions satisfy this? How large is $\\epsilon$ in that case or in the worst-case?\n-\tThe authors focus on the full communication case, can this approach be adapted to the partial case?\n-\tExperiments: the authors should discuss Assumption 1 for the objectives used in this section, at least to have a sense of how large is $\\epsilon$ for these applications. Also, it would be great to have an idea of the of time that each method spends.\n\nMinor comments:\n-\tAssumption 4 and 5 are for all t? \n-\tPage 5: in the definition of $\\overline{v}_t$, it is $v^k_t$.\n-\tThe Setup paragraph in Page 5 is a bit confusing, it would be great if the authors could explain more the role of $\\overline{v}$ and $\\overline{w}$, in particular, why they are needed for the analysis in Theorem 1.\n-\tAppendix: $g_t$ and $\\Delta v^k_t$ are not defined.",
+    "summary_of_the_review": "The paper is interesting and well-written. The convergence analysis seems to be correct. However, the theoretical role of submodularity is not quite clear, besides the use of the greedy algorithm for the selection of clients. Assumption 1 seems quite strong, the authors should motivate this part more in detail. The experiments clearly show the advantage of DivFL over previous approaches in the literature.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1973,
+    "words": 329,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7c52a0df-1c17-4c82-9ef4-4e0db67fc54a",
+    "error": null,
+    "scored_chars": 1975
+  }
+}

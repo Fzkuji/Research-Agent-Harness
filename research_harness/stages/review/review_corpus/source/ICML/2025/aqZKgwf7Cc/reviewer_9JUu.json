@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "aqZKgwf7Cc",
+  "reviewer": "9JUu",
+  "paper": {
+    "title": "Time to Spike? Understanding the Representational Power of Spiking Neural Networks in Discrete Time",
+    "authors": [
+      "Duc Anh Nguyen",
+      "Ernesto Araya",
+      "Adalbert Fono",
+      "Gitta Kutyniok"
+    ],
+    "abstract": "Recent years have seen significant progress in developing spiking neural networks (SNNs) as a potential solution to the energy challenges posed by conventional artificial neural networks (ANNs). However, our theoretical understanding of SNNs remains relatively limited compared to the ever-growing body of literature on ANNs. In this paper, we study a discrete-time model of SNNs based on leaky integrate-and-fire (LIF) neurons, referred to as discrete-time LIF-SNNs, a widely used framework that still lacks solid theoretical foundations. We demonstrate that discrete-time LIF-SNNs realize piecewise constant functions defined on polyhedral regions, and more importantly, we quantify the network size required to approximate continuous functions. Moreover, we investigate the impact of latency (number of time steps) and depth (number of layers) on the complexity of the input space partitioning induced by discrete-time LIF-SNNs. Our analysis highlights the importance of latency and contrasts these networks with ANNs that use piecewise linear activation functions. Finally, we present numerical experiments to support our theoretical findings.",
+    "keywords": [
+      "Spiking neural networks",
+      "Linear regions",
+      "Approximation theory"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=aqZKgwf7Cc"
+  },
+  "review_fields": {
+    "summary": "This paper analyzes the representational power of discrete-time leaky integrate-and-fire spiking neural networks (LIF-SNNs) as function approximators. It demonstrates that LIF-SNNs realize piecewise constant functions over polyhedral regions, establishes their universal approximation capabilities, quantifies the required network size, and provides supporting numerical experiments.",
+    "claims_and_evidence": "I appreciate the theoretical focus of this work, which is relatively rare in the SNN literature. However, given the complexity of the proofs, even after reviewing parts of the appendix, I am not fully certain that I have grasped all the details. I outline a few key concerns below.\n\n1. Distinction from activation quantization studies: In Section 3.1, the paper acknowledges that for $T=1$, LIF-SNNs are equivalent to Heaviside ANNs, effectively performing 0-1 binarization. This raises the question of whether Section 3.2 primarily builds upon existing results on Heaviside ANNs. Similarly, could the theoretical results in Section 4 be interpreted as an extension to $T$-level quantization? From an ANN-to-SNN conversion perspective, an SNN can be viewed as a higher-order quantized ANN, which seems to suggest potential overlaps with prior work.\n\n2. Modeling of multi-step SNNs and its implications: The theoretical framework in Section 4 appears largely independent of Section 3. Moreover, the modeling of $T$-step SNNs raises concerns. In line 271, the paper claims that an LIF-SNN with $T>1$ can be represented as a binary ANN with a block-diagonal weight matrix and varying bias terms. However, this claim is not entirely rigorous, as the bias terms are not arbitrary but rather determined by the input and weight parameters. This simplification significantly reduces the temporal dependencies that characterize multi-step SNN dynamics, potentially underestimating the complexity introduced by temporal correlations.\n\n3. Assumptions on temporal constraints and their impact: Due to the aforementioned simplification, the subsequent analysis in Section 4 seems to model each time step as an independent network. This implicitly assumes a weak constraint: that at step $t−1$, the firing patterns of neurons are arbitrary and can freely modify the hyperplane structure at step $t$. The combinatorial arguments then proceed based on this assumption. However, in reality, there exist strong temporal constraints between steps $t$ and $t−1$ (e.g., for the first layer, each step $i$ contributes a bias term given by $input \\times i \\mod Threshold$. These constraints could limit the network's expressiveness and might explain certain periodic behaviors observed in Section 5.2 that were not explicitly addressed in the theoretical discussion.",
+    "methods_and_evaluation_criteria": "Given the theoretical nature of the paper, the use of toy experiments for numerical validation is reasonable.",
+    "theoretical_claims": "The theoretical results are complex. While I grasp the general ideas, I have not thoroughly verified the appendix proofs.",
+    "experimental_designs_or_analyses": "The experiments are well-structured and systematically explore low-latency effects in SNNs. The findings in Section 5.3 align directly with the theoretical results on quantization, whereas certain observations in Section 5.2 do not appear to have been anticipated in the theory. This might be related to the assumptions discussed in Question 3.",
+    "relation_to_broader_scientific_literature": "This paper adopts an ANN-to-SNN conversion perspective, interpreting SNNs as a form of quantized ANNs and extending this view beyond binary quantization. This is an interesting and relatively novel approach in the SNN literature.",
+    "essential_references_not_discussed": "No additional references need to be suggested.",
+    "questions_for_authors": "My primary questions correspond to the points 1-3 discussed above. Overall, I find this work valuable and insightful, but I would appreciate further clarification on these theoretical assumptions in the rebuttal."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

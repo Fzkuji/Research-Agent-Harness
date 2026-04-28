@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "rJg8TeSFDH",
+  "reviewer": "1",
+  "paper": {
+    "title": "An Exponential Learning Rate Schedule for Deep Learning",
+    "authors": [
+      "Zhiyuan Li",
+      "Sanjeev Arora"
+    ],
+    "abstract": "Intriguing empirical evidence exists that deep learning can work well with exotic schedules for varying the learning rate. This paper suggests that the phenomenon may be due to Batch Normalization or BN(Ioffe & Szegedy, 2015), which is ubiq- uitous and provides benefits in optimization and generalization across all standard architectures. The following new results are shown about BN with weight decay and momentum (in other words, the typical use case which was not considered in earlier theoretical analyses of stand-alone BN (Ioffe & Szegedy, 2015; Santurkar et al., 2018; Arora et al., 2018)\n• Training can be done using SGD with momentum and an exponentially in- creasing learning rate schedule, i.e., learning rate increases by some (1 + α) factor in every epoch for some α > 0. (Precise statement in the paper.) To the best of our knowledge this is the first time such a rate schedule has been successfully used, let alone for highly successful architectures. As ex- pected, such training rapidly blows up network weights, but the net stays well-behaved due to normalization.\n• Mathematical explanation of the success of the above rate schedule: a rigor- ous proof that it is equivalent to the standard setting of BN + SGD + Standard Rate Tuning + Weight Decay + Momentum. This equivalence holds for other normalization layers as well, Group Normalization(Wu & He, 2018), Layer Normalization(Ba et al., 2016), Instance Norm(Ulyanov et al., 2016), etc.\n• A worked-out toy example illustrating the above linkage of hyper- parameters. Using either weight decay or BN alone reaches global minimum, but convergence fails when both are used.",
+    "keywords": [
+      "batch normalization",
+      "weight decay",
+      "learning rate",
+      "deep learning theory"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=rJg8TeSFDH"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "%%% Update to the review %%%\nThanks for your clarification and the revision - the paper looks good! With regards to your comment on accelerating hyper-parameter search, note that there are fairly subtle issues owing to the use of SGD - refer to a recent work of Ge et al \"The Step Decay Schedule: A Near Optimal, Geometrically Decaying Learning Rate Procedure For Least Squares\" (2019). \n%%%\n\nThe paper makes an interesting observation connecting the use of weight decay + normalization to training the same network (without regularization) using an exponentially increasing learning rate schedule, under an assumption of scale invariance that is satisfied by normalization techniques including batch norm, layer norm and other variants. An example is also provided where the joint use of batch norm and weight decay can lead to non-convergence to a global minimum whereas the use of one (without the other) converges to a global minimum - serving to indicate various interdependencies between the hyper-parameters that one needs to be careful about.\n\nWhile the connection of scale invariant models to novel schemes of learning rates is interesting (and novel), the paper will benefit quite a bit in its contributions through attempting a convergence analysis towards a stationary point even for solving a routine smooth non-convex stochastic optimization problem. Owing to the equivalence described in the paper, this enables us to understand the behavior of the combination of batch norm (or some scale invariance property) + weight decay + momentum (+ step decay of the learning rate), which, to my knowledge isn’t present in the literature of non-convex optimization. \n\nThe paper is reasonably written (the proof of the main claim is fairly easy to follow), but needs to be carefully read through because I see typos and ill-formed sentences that should be rectified - e.g. see point 3. in appendix A.1 - some facts about equation 4, missing citation in definition 1.2 amongst others. I went over the proof of the main result and this appears to be correct. Furthermore, I find the connections to other learning rates (such as the cosine learning rate) to be rather hard to understand/interpret, in the current shape of the paper.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory."
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

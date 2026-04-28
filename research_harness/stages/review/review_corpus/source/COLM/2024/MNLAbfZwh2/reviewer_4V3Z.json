@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "MNLAbfZwh2",
+  "reviewer": "4V3Z",
+  "paper": {
+    "title": "ScenicNL: Generating Probabilistic Scenario Programs from Natural Language",
+    "authors": [
+      "Karim Elmaaroufi",
+      "Devan Shanker",
+      "Ana Cismaru",
+      "Marcell Vazquez-Chanlatte",
+      "Alberto Sangiovanni-Vincentelli",
+      "Matei Zaharia",
+      "Sanjit A. Seshia"
+    ],
+    "abstract": "For cyber-physical systems, including robotics and autonomous vehicles, mass deployment has been hindered by fatal errors that occur when operating in rare events. To better understand failure modes, companies meticulously recreate rare crash events in simulation, but current methods do not easily allow for exploring ”what if” scenarios which could reveal how accidents might have been avoided. We present ScenicNL, an AI system that generates probabilistic scenario programs from natural language. Given the abundance of documented failures of autonomous vehicles due to regulatory requirements, we apply ScenicNL to police crash reports, providing a data-driven approach to capturing and understanding these failures. By using a probabilistic language such as Scenic, we can clearly and concisely represent such scenarios of interest and easily ask “what if” questions. We demonstrate how commonplace prompting techniques with Large Language Models are incapable of generating code for low-resource languages such as Scenic. We propose an AI system via the composition of several prompting techniques to extract the reasoning abilities needed to model probability distributions around the uncertainty in the crash events. Our system then uses Constrained Decoding and tools such as a compiler and simulator to produce scenario programs in this low-resource setting. We evaluate our system on publicly available autonomous vehicle crash reports in California from the last five years and share insights into how we generate code that is both semantically meaningful and syntactically correct. Finally, we release our code and a collection of over 500 crash reports from the California Department of Motor Vehicles.",
+    "keywords": [
+      "probabilistic programming languages",
+      "cyber physical systems",
+      "autonomous vehicles",
+      "scenarios",
+      "domain specific languages",
+      "low resource languages"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=MNLAbfZwh2"
+  },
+  "review_fields": {
+    "summary": "This paper describes a system to generate a 3D animated scene of vehicle accidents from written descriptions. The processing pipeline take a description as input, passes it to a large large language model that generates a program to control the CARLA visualization system that produces the animation.\n\nThe authors collected a corpus of accident narratives that they classified according to their interpretation difficulty. Given a text input, the authors used a LLM and a sequence of prompting strategies to identify the actors in the text, infer some unknown conditions like the weather if not described in the text, and generate the code to create the scene and animate the actors. The authors used an SQL-like LLM language to create this code from a set of constraints on the actors. Finally, the code serves as input to the CARLA API to produce the animation.\n\nThe authors evaluated their system on the easy part of their dataset with a few metrics, but not the final visualization",
+    "reasons_to_accept": "* Interesting and ambitious application\n* Smart aggregation of tools: LLMs and CARLA visualization to produce a 3D generation\n* Partial evaluation that hints at a promising performance",
+    "reasons_to_reject": "* The system seems to be at an early development stage\n* The part describing the generation of code with LMQL and HyDE would be impossible to reproduce from the description in the article\n* The authors contribution is sometimes difficult to evaluate as they merely glue together existing programs and resources\n* The system is only partially evaluated. The authors notably do not address the validity of the end visualization\n* The authors used a curious wording in the introduction to describe the problem they solve. See the paragraph starting with Given the critical need for simulation based testing...",
+    "questions_to_authors": "* Did you think of an evaluation of the final generation?\n* Will you release your code or instructions, especially the part involving LMQL?\n* How did you create the example scenic programs from Fig. 1?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:27Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:27Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 995,
+    "words": 164,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b6859838-3414-49e5-8b4c-f1c2a4e8e4ee",
+    "error": null,
+    "scored_chars": 995
+  }
+}

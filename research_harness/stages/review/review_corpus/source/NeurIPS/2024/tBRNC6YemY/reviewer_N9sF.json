@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "tBRNC6YemY",
+  "reviewer": "N9sF",
+  "paper": {
+    "title": "Gorilla: Large Language Model Connected with Massive APIs",
+    "authors": [
+      "Shishir G Patil",
+      "Tianjun Zhang",
+      "Xin Wang",
+      "Joseph E. Gonzalez"
+    ],
+    "abstract": "Large Language Models (LLMs) have seen an impressive wave of advances, with\nmodels now excelling in a variety of tasks, such as mathematical reasoning and\nprogram synthesis. However, their potential to effectively use tools via API calls\nremains unfulfilled. This is a challenging task even for today’s state-of-the-art\nLLMs such as GPT-4 largely due to their unawareness of what APIs are available\nand how to use them in a frequently updated tool set. We develop Gorilla, a\nfinetuned LLaMA model that surpasses the performance of GPT-4 on writing API\ncalls. Trained with the novel Retriever Aware Training (RAT), when combined\nwith a document retriever, Gorilla demonstrates a strong capability to adapt to\ntest-time document changes, allowing flexible user updates or version changes.\nIt also substantially mitigates the issue of hallucination, commonly encountered\nwhen prompting LLMs directly. To evaluate the model’s ability, we introduce\nAPIBench, a comprehensive dataset consisting of HuggingFace, TorchHub, and\nTensorHub APIs. The successful integration of the retrieval system with Gorilla\ndemonstrates the potential for LLMs to use tools more accurately, keep up with\nfrequently updated documentation, and consequently increase the reliability and\napplicability of their outputs. Gorilla’s code, model, data, and demo are available\nat: https://gorilla.cs.berkeley.edu",
+    "keywords": [
+      "LLM",
+      "Tool Use",
+      "APIs",
+      "Function Calling"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=tBRNC6YemY"
+  },
+  "review_fields": {
+    "comment": "Thank you for your reply. Your explanation has mostly addressed my concerns. \n\nI hope you can incorporate some of the above content into the revised paper, such as the contributions and impact to the community, comparisons with other methods based on LLMs for tool calling, and some grammar issues. However, since there are still some experimental phenomena whose causes have not been fully explained, I suggest the author conduct a more in-depth analysis and investigation. Therefore, I have decided to keep my scores."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 518,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1dca0202-ec3d-4bea-b928-5918ba3ab284",
+    "error": null,
+    "scored_chars": 519
+  }
+}

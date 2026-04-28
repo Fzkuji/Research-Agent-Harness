@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "7yvu4qOKtn1",
+  "reviewer": "AjSG",
+  "paper": {
+    "title": "Computational Doob h-transforms for Online Filtering of Discretely Observed Diffusions",
+    "authors": [
+      "Nicolas Chopin",
+      "Andras Fulop",
+      "Jeremy Heng",
+      "Alexandre H. Thiery"
+    ],
+    "abstract": "This paper is concerned with online filtering of discretely observed nonlinear diffusion processes. We propose to approximate the Fully Adapted Particle Filter algorithm by solving a single auxiliary stochastic control problem prior to the data-assimilation procedure. The methodology relies on the non-linear Feynman-Kac approach to solving semi-linear partial differential equations. Numerical experiments suggest that the proposed approach can be orders of magnitude more efficient than the bootstrap particle filter in the regime when observations are highly informative.",
+    "keywords": [
+      "diffusion",
+      "filtering",
+      "monte-carlo",
+      "particle-filters",
+      "BSDE"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=7yvu4qOKtn1"
+  },
+  "review_fields": {
+    "summary": "This paper develops an approximation to the locally optimal particle filter in discretely observed diffusion processes under the assumption of a constant measurement rate.",
+    "strengths_and_weaknesses": "S1 - The method compares favourably to baseline solutions. \n\nW1 - Experiments are not entirely convincing. More specifically, only low-dimensional examples re considered (d <= 2), which undermines the rationale for their method in that we are not in a high-dimensional regime where numerical  solutions of PDEs become infeasible (paragraph 1 of sec 2.5). \n\nW2 - The method relies on fixed SDE dynamics so is not applicable to parameter inference. \n\nW3 - The method relies on constant sample rate, which is many times infeasible in practice due to e.g. missing measurements.",
+    "questions": "Q1 - The difference between CDT static scheme and bootstrap proposals needs to be elucidated. Choosing c = 0 yield the original SDE dynamics, i.e. bootstrap proposals, no?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

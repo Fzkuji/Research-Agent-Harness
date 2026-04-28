@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "m5dyKArVn8",
+  "reviewer": "ueod",
+  "paper": {
+    "title": "How many classifiers do we need?",
+    "authors": [
+      "Hyunsuk Kim",
+      "Liam Hodgkinson",
+      "Ryan Theisen",
+      "Michael W. Mahoney"
+    ],
+    "abstract": "As performance gains through scaling data and/or model size experience diminishing returns, it is becoming increasingly popular to turn to ensembling, where the predictions of multiple models are combined to improve accuracy. \nIn this paper, we provide a detailed analysis of how the disagreement and the polarization (a notion we introduce and define in this paper) among classifiers relate to the performance gain achieved by aggregating individual classifiers, for majority vote strategies in classification tasks.\nWe address these questions in the following ways. \n(1) An upper bound for polarization is derived, and we propose what we call a neural polarization law: most interpolating neural network models are 4/3-polarized. Our empirical results not only support this conjecture but also show that polarization is nearly constant for a dataset, regardless of hyperparameters or architectures of classifiers. \n(2) The error rate of the majority vote classifier is considered under restricted entropy conditions, and we present a tight upper bound that indicates that the disagreement is linearly correlated with the error rate, and that the slope is linear in the polarization.\n(3) We prove results for the asymptotic behavior of the disagreement in terms of the number of classifiers, which we show can help in predicting the performance for a larger number of classifiers from that of a smaller number. \nOur theoretical findings are supported by empirical results on several image classification tasks with various types of neural networks.",
+    "keywords": [
+      "ensemble",
+      "model aggregation",
+      "machine learning",
+      "computer vision"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=m5dyKArVn8"
+  },
+  "review_fields": {
+    "summary": "This paper focuses on quantifying the impact of number of classifiers on the error rate of majority vote decision strategy for ensemble classifiers. They define the notion of “polarity” of an ensemble and use this notion to characterize the relationship between majority vote error rate and disagreement between classifiers in any relevant ensemble. Empirical analysis over CIFAR and MNIST datasets shows that the paper’s method provides a tighter bound for majority error vote than other prior methods.",
+    "strengths": "1. Overall, the paper is well-written, concise, and would be valuable to the wide audience working on predictive optimization and ensemble models.\n2. The use of the notion of polarity is novel and seems to capture two relevant properties simultaneously: (a) whether a large fraction of classifiers are making an incorrect prediction, and (b) whether the predictions of large groups of classifiers differ from each other. This characterization specially seems to assist in handling the presence of multiple classes as well. The conjectured upper bound on polarity is also independently interesting.  \n3. I liked the focus on entropy-restricted ensembles. The focus on ensembles with quantifiable “disagreement properties“ (as in Thms 3, 4) allows for stronger bounds on majority vote error rate, although it does seem difficult to then derive bounds for these “disagreement properties” (like the parameter $\\delta$). Nevertheless, the approach of bounding majority vote error rate using disagreement notions is intuitively appealing and, as the paper shows, it does provide reasonable theoretical bounds.",
+    "weaknesses": "1. Some of the terms used in the paper could use additional descriptions. For example, I don’t see the description of “interpolation” or “interpolating models” anywhere. Considering that it is important in interpreting Figure 1 and also determining when the conjectured polarity upper bound is likely to hold, I would suggest spending a paragraph on prior work around interpolation.  \n\n2. Related to the above point, some more details around the Remark in Lines 139-145 would be helpful. It looks like for the non-constant term in the maximum of Thm 1, the numerator and denominator are empirical approximations of the numerator and denominator of $\\eta$. Given that, could these converge to $\\eta$ itself as $m \\rightarrow \\infty$? And if so, isn’t it possible for the Conjecture 1 to be violated as even values of $\\eta > 4/3$ could satisfy the condition in Theorem 1? Let me know if I am misinterpreting something here.  \n3. More details of empirical analysis would be good to include in the main body. For instance, details about number of classifiers in each ensemble and whether the classifiers only differed in starting points (or other parameters as well) would be good to know while reading the figures themselves",
+    "questions": "1. On the point of polarity, it would be good to get more details around the discussion in the Remark on Lines 139-145. The specific questions I have on this are noted in the point above. \n2. Regarding my point on empirical analysis, did the trained classifier ensemble consist of classifiers with just different starting points or were other training details/parameters changed?\n3. Minor point, but $\\delta$ notation is used in both Theorem 1 (for probability) and Theorems 3, 4 (for disagreement). And it looks like this notation is used in different contexts in these different results. Might be good to use different notations at different places if they are not related.",
+    "limitations": "Some limitations discussed in the conclusion section."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3058,
+    "words": 484,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9dba4424-4d94-4667-8c5a-8d35d00b91f3",
+    "error": null,
+    "scored_chars": 3059
+  }
+}

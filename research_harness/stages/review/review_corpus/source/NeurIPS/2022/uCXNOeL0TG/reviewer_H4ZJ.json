@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "uCXNOeL0TG",
+  "reviewer": "H4ZJ",
+  "paper": {
+    "title": "Fairness for Workers Who Pull the Arms: An Index Based Policy for Allocation of Restless Bandit Tasks",
+    "authors": [
+      "Arpita Biswas",
+      "Jackson A. Killian",
+      "Paula Rodriguez-Diaz",
+      "Susobhan Ghosh",
+      "Milind Tambe"
+    ],
+    "abstract": "Motivated by applications such as machine repair, project monitoring, and anti-poaching patrol scheduling, we study intervention planning of stochastic processes under resource constraints. This planning problem has previously been modeled as restless multi-armed bandits (RMAB), where each arm is an intervention-dependent Markov Decision Process. However, the existing literature assumes all intervention resources belong to a single uniform pool, limiting their applicability to real-world settings where interventions are carried out by a set of workers, each with their own costs, budgets, and intervention effects. In this work, we consider a novel RMAB setting, called multi-worker restless bandits (MWRMAB) with heterogeneous workers. The goal is to plan an intervention schedule that maximizes the expected reward while satisfying budget constraints on each worker as well as fairness in terms of the load assigned to each worker. Our contributions are two-fold: (1)~we provide a multi-worker extension of the Whittle index to tackle heterogeneous costs and per-worker budget and (2)~ we develop an index-based scheduling policy to achieve fairness. Further, we evaluate our method on various cost structures and show that our method significantly outperforms other baselines in terms of fairness without sacrificing much in reward accumulated.",
+    "keywords": [
+      "sequential planning",
+      "load balancing",
+      "Whittle indices",
+      "markov decision processes"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=uCXNOeL0TG"
+  },
+  "review_fields": {
+    "summary": "The authors study the problem of multi-worker restless bandits, that extends the standard restless bandits having different costs and fairness constraints on different actions. The authors propose a scheme that at first decouples the problem and than, using the decoupled solutions, introduce the interaction with other workers. Finally, some experiments comparing the proposed algorithm to the ones present in the literature (which do not include the fairness constraint) are provided.",
+    "strengths_and_weaknesses": "The paper is well structured and the definition of the steps taken to get to the solution is helping the reader to understand the idea behind the paper. There are a few ortographic mistakes. The topic is interesting and the solution is well motivated empirically.\n\nI have some doubts about the real formulation of some of the results and the strenght of the theoretical results provided.\n\n\nMinor:\nLine 99: \"M=1\" I got the idea, but i think that the more formal statement would be c_ij = c_ih=1 \\forall j,h \\in [M]\nLine 130: It is not clear the statement. Is it \"by relying on the work by qian et al.\"? Or is it a derivation from the previous work?\nLine 283: Please provide the rationale behind the choice of B)18.\nLine 297: The -> the\nFigure 4: I suggest to rearrange the subplots and the table, to better explain the results therein.",
+    "questions": "It is not clear to me if the solution you provided is solving the original problem or if it is an approximate solution. In the former case, I would like to have a formal statement about that, in the latter case a study on the approximation gap.\n\nIs Theorem 3 only predicating on those instances having that all the workers are of the same type? I would like to understand if in this theorem we are restricting to a specific case or not.",
+    "limitations": "I do not foresee limitations and potential negative societal impacts. The paper is focused on the idea to make the work allocation task fair, therefore at the moment i only see positive impacts on society."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

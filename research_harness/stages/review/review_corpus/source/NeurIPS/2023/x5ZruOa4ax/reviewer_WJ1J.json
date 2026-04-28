@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "x5ZruOa4ax",
+  "reviewer": "WJ1J",
+  "paper": {
+    "title": "Improving *day-ahead* Solar Irradiance Time Series Forecasting by Leveraging Spatio-Temporal Context",
+    "authors": [
+      "Oussama Boussif",
+      "Ghait Boukachab",
+      "Dan Assouline",
+      "Stefano Massaroli",
+      "Tianle Yuan",
+      "Loubna Benabbou",
+      "Yoshua Bengio"
+    ],
+    "abstract": "Solar power harbors immense potential in mitigating climate change by substantially reducing CO$_{2}$ emissions. Nonetheless, the inherent variability of solar irradiance poses a significant challenge for seamlessly integrating solar power into the electrical grid. While the majority of prior research has centered on employing purely time series-based methodologies for solar forecasting, only a limited number of studies have taken into account factors such as cloud cover or the surrounding physical context.\nIn this paper, we put forth a deep learning architecture designed to harness spatio-temporal context using satellite data, to attain highly accurate day-ahead time-series forecasting for any given station, with a particular emphasis on forecasting Global Horizontal Irradiance (GHI). We also suggest a methodology to extract a distribution for each time step prediction, which can serve as a very valuable measure of uncertainty attached to the forecast. When evaluating models, we propose a testing scheme in which we separate particularly difficult examples from easy ones, in order to capture the model performances in crucial situations, which in the case of this study are the days suffering from varying cloudy conditions. Furthermore, we present a new multi-modal dataset gathering satellite imagery over a large zone and time series for solar irradiance and other related physical variables from multiple geographically diverse solar stations. Our approach exhibits robust performance in solar irradiance forecasting, including zero-shot generalization tests at unobserved solar stations, and holds great promise in promoting the effective integration of solar power into the grid.",
+    "keywords": [
+      "Time series forecasting",
+      "multi-modal learning",
+      "solar irradiance",
+      "context-enriched learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=x5ZruOa4ax"
+  },
+  "review_fields": {
+    "comment": "> We thank the reviewer for the suggestion. We think, however, that given that all the models are compared on the same setups and the same unobserved years for each station, the improvement of one model should be interpretable with respect to the others. However, if the reviewer means that normalizing would be helpful in order to compare the results across stations as well, we agree that it is a valid point. Yet, since the different stations have different patterns, we believe it is better to compare models for each station and not compare between stations, so that we keep in mind the order of magnitude of the values which can differ greatly from one station to another.\n\n> Indeed, MAPE could be a good choice, but unfortunately it is problematic in our cases given that we are also considering nights through our sliding window training process, which involves ground truth values of 0, which cannot be handled by the MAPE by definition.\n\nIt seems that reviewer and the authors have a different view on reporting numbers in regression tasks. For the reviewer, it is more meaningful to report a relative performance/improvement of a predictor rather than the absolute scale. This enables better judgment for individual stations, but also across the stations. This ties into the desire for a normalization/standardization of the scales as well as the the request to report the MAPE. While the later is challenging for small values, one can use typical numerical tricks like dividing by a very small epsilon.\n\n> The goal of the radar plots on Fig 4 is to compare the three models appearing on them, regarding each of the metrics we present. This, in our opinion, is easily doable using the plots. What would be the advantage of showing the minimum value 0?\n\nNot including a zero value for a bounded range allows to visually overly enhance improvements.\n\n> However, we feel that we wanted to build an architecture that only uses “basic” building blocks [...]. Furthermore, since we are not doing directly video prediction (although it would have been possible to predict the context as an auxiliary target, but we chose not to at first), we do not think fourier layers were necessarily first in line among all recent methods to improve our forecasting performance.\n\nThe reviewer acknowledged the reasoning of the author for making a more focused study on basic building blocks. Nevertheless, Fourier layers have shown better predictive performance compared to standard blocks for networks such as ForecastNet. The authors may consider looking at them in the future.\n\n> We apply CrossViViT to a real-world problem of forecasting solar-irradiance which can be useful for mitigating climate change by encouraging the use of solar energy. We also mentioned in the introduction that CrossViViT can in principle be used to forecast any other physical variables.\n\nThe reviewer would like to point out that the authors have only demonstrated a model with better predictive performance. Yet, what would it take to get this model in production? Can the possible effects for the climate be quantified? Is there a cost-use breakeven point? It would be meaningful to at least roughly reason about these or related aspects.  \n\n> When making the plots, we tried to make sure that they were color-blind friendly as one of our co-authors is color-blind as well (and they made the plots). Can you give suggestions of colors we can use instead?\n\nThere are several dedicated color palettes, e.g. to be found here: https://www.nceas.ucsb.edu/sites/default/files/2022-06/Colorblind%20Safe%20Color%20Schemes.pdf. To the personal taste of the reviewer Tol Muted works well, but others will probably also do.\n\nAll other points: thanks you for incorporating them in the manuscript."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3758,
+    "words": 612,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/cf31b913-510c-4920-b292-eb7d0f5bfe9f",
+    "error": null,
+    "scored_chars": 3760
+  }
+}

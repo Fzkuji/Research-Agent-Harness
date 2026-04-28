@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "lkrH6ovzsj",
+  "reviewer": "a4f9",
+  "paper": {
+    "title": "Multi-FAct: Assessing Factuality of Multilingual LLMs using FActScore",
+    "authors": [
+      "Sheikh Shafayat",
+      "Eunsu Kim",
+      "Juhyun Oh",
+      "Alice Oh"
+    ],
+    "abstract": "Evaluating the factuality of long-form large language model (LLM)-generated text is an important challenge. Recently there has been a surge of interest in factuality evaluation for English, but little is known about the factuality evaluation of multilingual LLMs, specially when it comes to long-form generation.\nThis paper systematically evaluates multilingual LLMs' factual accuracy across languages and geographic regions.\nWe introduce a simple pipeline for multilingual factuality evaluation, by applying FActScore \\citep{min2023factscore} for diverse languages. In addition to evaluating multilingual factual generation, we evaluate the factual accuracy of long-form text generation in topics that reflect regional diversity. We also examine the feasibility of running the FActScore pipeline using non-English Wikipedia and provide comprehensive guidelines on multilingual factual evaluation for regionally diverse topics.",
+    "keywords": [
+      "multilinguality",
+      "factuality",
+      "knowledge representation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=lkrH6ovzsj"
+  },
+  "review_fields": {
+    "summary": "This paper explores multilingual LLM evaluation by adapting existing factual evaluation method FActScore. The paper also studies the potential and limitations of using non-English resources such as non-English wikipedia and geographic biases in LLM.",
+    "reasons_to_accept": "The paper adapts FActScore to a multi-lingual factuality evaluation framework, and experiment the method using 8 languages\n\nProviding insight about reasonably large non-English wikipedia articles can also serve as a viable source.",
+    "reasons_to_reject": "Overall, the originality of the work is limited, it uses GPT3.5 for language translation then adapts an existing factuality method.\n\nThe paper can be improved by providing more details about FActScore, it is hard for readers to understand the approach with no knowledge of the method.\n\nExperiments only use GPT3.5 and GPT4 for evaluation, it is better to have more baseline methods such as llama, mistral, etc."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:07Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:07Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 642,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c20b4698-8d31-4715-bd60-a66c767e74b9",
+    "error": null,
+    "scored_chars": 642
+  }
+}

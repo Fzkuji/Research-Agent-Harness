@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "Ebt7JgMHv1",
+  "reviewer": "8jAi",
+  "paper": {
+    "title": "Is This the Subspace You Are Looking for? An Interpretability Illusion for Subspace Activation Patching",
+    "authors": [
+      "Aleksandar Makelov",
+      "Georg Lange",
+      "Atticus Geiger",
+      "Neel Nanda"
+    ],
+    "abstract": "Mechanistic interpretability aims to attribute high-level model behaviors to specific, interpretable learned features. It is hypothesized that these features manifest as directions or low-dimensional subspaces within activation space. Accordingly, recent studies have explored the identification and manipulation of such subspaces to reverse-engineer computations, employing methods such as activation patching. In this work, we demonstrate that naïve approaches to subspace interventions can give rise to interpretability illusions.\n\nSpecifically, even if patching along a subspace has the intended end-to-end causal effect on model behavior, this effect may be achieved by activating \\emph{a dormant parallel pathway} using a component that is \\textit{causally disconnected} from the model output.\nWe demonstrate this in a mathematical example, realize the example empirically in two different settings (the Indirect Object Identification (IOI) task and factual recall), and argue that activating dormant pathways ought to be prevalent in practice.\nIn the context of factual recall, we further show that the illusion is related to rank-1 fact editing, providing a mechanistic explanation for previous work observing an inconsistency between fact editing performance and fact localisation.\n\nHowever, this does not imply that activation patching of subspaces is intrinsically unfit for interpretability.\nTo contextualize our findings, we also show what a success case looks like in a task (IOI) where prior manual circuit analysis allows an understanding of the location of the ground truth feature. We explore the additional evidence needed to argue that a patched subspace is faithful.",
+    "keywords": [
+      "Mechanistic Interpretability",
+      "Natural Language Processing",
+      "Large Language Models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Ebt7JgMHv1"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their detailed response. While I carefully read the updated paper and rebuttal, I want to clarify the following aspects:\n\n**Re: falsifiable hypothesis**: Note that a falsifiable hypothesis does not require specifying the precise conditions under which the illusion occurs. In this case, a hypothesis can also be stated as \"there exist pre-trained ML models such that the following property holds with their activations: ...\". I believe that presenting a falsifiable hypothesis falls well within the scope of this work and, in general, any scientific work. The key idea is to present a concrete test to validate the hypothesis (i.e., the provided explanation) BEFORE looking at the experimental evidence. \n\n**Re: definition of dormant directions**: The paper defines a dormant direction as \"We say U is dormant if $M_{U_c ←u_y} (x) ≈ M(x)$ with high probability over x, y ∼ D, but not over any x, y\". This definition critically relies upon having access to in-distribution and out-of-distribution inputs \"x\". Yet the rebuttal states that \"While the reviewer’s concern would be true in the case of full component activation patching, it is possible for subspace activation patching between in-distribution data to result in out-of-distribution activations when the subspace is a proper subspace of activation space\". \n\n(1) This is a contradiction: does the definition apply to inputs or patched activations, or likely, both? (If so, please clarify in the main text)\n\n(2) The presented arguments are circular. The authors state that patching creates OOD activations, yet the definition is about model output invariance in the presence of patching. Can you please clarify? \n\n(3) Why doesn't full activation patching, similar to subspace patching, also result in OOD activations? Both these techniques create \"synthetic\" activations, and thus, there is a high chance of both being OOD."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1901,
+    "words": 296,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ffbe567b-cc27-4a93-9328-b381b3d76ab2",
+    "error": null,
+    "scored_chars": 1904
+  }
+}

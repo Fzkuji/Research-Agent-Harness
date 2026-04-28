@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "My7lkRNnL9",
+  "reviewer": "uKzr",
+  "paper": {
+    "title": "Forward Learning with Top-Down Feedback: Empirical and Analytical Characterization",
+    "authors": [
+      "Ravi Francesco Srinivasan",
+      "Francesca Mignacco",
+      "Martino Sorbaro",
+      "Maria Refinetti",
+      "Avi Cooper",
+      "Gabriel Kreiman",
+      "Giorgia Dellaferrera"
+    ],
+    "abstract": "\"Forward-only\" algorithms, which train neural networks while avoiding a backward pass, have recently gained attention as a way of solving the biologically unrealistic aspects of backpropagation. Here, we first address compelling challenges related to the \"forward-only\" rules, which include reducing the performance gap with backpropagation and providing an analytical understanding of their dynamics. To this end, we show that the forward-only algorithm with top-down feedback is well-approximated by an \"adaptive-feedback-alignment\" algorithm, and we analytically track its performance during learning in a prototype high-dimensional setting. Then, we compare different versions of forward-only algorithms, focusing on the Forward-Forward and PEPITA frameworks, and we show that they share the same learning principles. Overall, our work unveils the connections between three key neuro-inspired learning rules, providing a link between \"forward-only\" algorithms, i.e., Forward-Forward and PEPITA, and an approximation of backpropagation, i.e., Feedback Alignment.",
+    "keywords": [
+      "Forward-only learning",
+      "Biologically inspired learning",
+      "Artificial neural networks",
+      "Analytical characterization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=My7lkRNnL9"
+  },
+  "review_fields": {
+    "comment": "Thank you for the response. Some of my questions are addressed, e.g., the comparison with DFA and the magnitude of $Fe$, and I raise my score to 5. I have some additional comments.\n\n1. In PEPITA, there is also a traveling of error from top to input, while DFA propagates errors to each layer. To what extent the error traveling you think is more acceptable? From the neuroscience perspective, three-factor learning rules with a top-down signal are valid and have been verified [1]. And considering biological spiking neural networks, errors from DFA can be combined with local eligibility traces [2] (the presynaptic activities and derivatives of the nonlinearity of postsynaptic neurons can be maintained in the trace), not necessarily breaking locality. On the other hand, a two stage of “clean” and “modulated” passes poses challenges for neural systems to distinguish the stage for update rules, and while PEPITA-TL is considered temporally local, it requires some temporal information to distinguish the stage for Hebbian or anti-Hebbian, so it is still not fully local.\n\n2. If PEPITA-Hebbian mainly differs from previous Hebbian and anti-Hebbian methods considering the weight transport problem, there seems some previous works also consider this problem with random feedback [3].\n\n[1] Control of synaptic plasticity in deep cortical networks. Nature Reviews Neuroscience, 2018\n\n[2] A solution to the learning dilemma for recurrent networks of spiking neurons. Nature Communications, 2020.\n\n[3] Contrastive Hebbian learning with random feedback weights. Neural Networks, 2019."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1582,
+    "words": 241,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fa2e5836-838d-4df5-9963-ec200d97771e",
+    "error": null,
+    "scored_chars": 1582
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "RxWILaXuhb",
+  "reviewer": "G79D",
+  "paper": {
+    "title": "Time-o1: Time-Series Forecasting Needs Transformed Label Alignment",
+    "authors": [
+      "Hao Wang",
+      "Licheng Pan",
+      "Zhichao Chen",
+      "Xu Chen",
+      "Qingyang Dai",
+      "Lei Wang",
+      "Haoxuan Li",
+      "Zhouchen Lin"
+    ],
+    "abstract": "Training time-series forecasting models poses unique challenges in loss function design. Most existing approaches adopt temporal mean squared error, but this study reveals two critical limitations: (1) it ignores the presence of label autocorrelation, which biases it from the true label sequence likelihood;  (2) it involves excessive number of tasks, which complicates optimization, especially for long-term forecasting. To address these issues, we introduce Time-o1, a transform-enhanced loss function for time-series forecasting. The central idea is to transform the label sequence into decorrelated components with discriminated significance. Models are then trained to align the most significant components, thereby effectively mitigating label autocorrelation and reducing task amount. Experiments demonstrate that Time-o1 achieves state-of-the-art performance and is compatible with various forecast models. Code is available at https://github.com/Master-PLC/Time-o1.",
+    "keywords": [
+      "Time-Series",
+      "Label Autocorrelation",
+      "Orthogonalization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=RxWILaXuhb"
+  },
+  "review_fields": {
+    "summary": "The paper tackles a fundamental but underexplored aspect of neural time‑series forecasting, i.e., the choice of learning objective. Building on the standard direct‑forecast paradigm (which minimizes pointwise temporal MSE), the authors identify two critical shortcomings of this objective in the forecasting setting, Label autocorrelation bias and Excessive multitask complexity. To address these, the authors propose TransDF, which can be dropped in to any existing architecture without structural changes. Extensive experiments across multiple benchmark datasets (ETT, ECL, Weather, M4) and forecasting models (Transformers, MLPs, GNNs) demonstrate that TransDF outperforms both the canonical TMSE loss and a variety of shape‑alignment or frequency‑domain objectives, achieving new state‑of‑the‑art results. An ablation study further isolates the benefits of decorrelation versus task reduction, confirming that their combination is key to TransDF’s success .",
+    "strengths_and_weaknesses": "## Strengths:\n1. The proposed transformation is grounded in sound linear‑algebraic principles, which directly targets the source of bias and task redundancy.\n2. The method is model‑agnostic and “drop‑in”—it requires no architectural changes and gracefully extends to any direct‑forecasting network, as evidenced by consistent improvements on FredFormer, iTransformer, FreTS, DLinear, etc.\n3. TransDF’s randomized, data‑adapted projections guarantee full decorrelation at finite horizons and discriminate component importance, which is novel to me.\n\n## Weaknesses:\n1. The paper could more deeply explore or theoretically characterize when and why certain projection strategies might outperform the randomized approach.\n2. The Limitations section is concise but could better discuss potential failure modes, e.g., cases where label autocorrelation structure is nonstationary or when small-variance components carry critical signals (anomaly forecasting).\n3. The core idea of transforming labels into another basis has precedents in frequency‑domain losses (FreDF) and shape‑alignment objectives; the manuscript could more explicitly delineate how TransDF’s theoretical guarantees and practical gains substantially surpass these earlier approaches beyond empirical metrics.",
+    "limitations": "The Limitations section is concise but could better discuss potential failure modes, e.g., cases where label autocorrelation structure is nonstationary or when small-variance components carry critical signals (anomaly forecasting).",
+    "final_justification": "The rebuttal has well addressed my concerns."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

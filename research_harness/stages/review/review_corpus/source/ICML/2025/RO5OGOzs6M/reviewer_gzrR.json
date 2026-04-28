@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "RO5OGOzs6M",
+  "reviewer": "gzrR",
+  "paper": {
+    "title": "PINNsAgent: Automated PDE Surrogation with Large Language Models",
+    "authors": [
+      "Qingpo Wuwu",
+      "Chonghan Gao",
+      "Tianyu Chen",
+      "Yihang Huang",
+      "Yuekai Zhang",
+      "Jianing Wang",
+      "Jianxin Li",
+      "Haoyi Zhou",
+      "Shanghang Zhang"
+    ],
+    "abstract": "Solving partial differential equations (PDEs) using neural methods has been a long-standing scientific and engineering research pursuit. Physics-Informed Neural Networks (PINNs) have emerged as a promising alternative to traditional numerical methods for solving PDEs. However, the gap between domain-specific knowledge and deep learning expertise often limits the practical application of PINNs. Previous works typically involve manually conducting extensive PINNs experiments and summarizing heuristic rules for hyperparameter tuning. In this work, we introduce PINNsAgent, a novel surrogation framework that leverages large language models (LLMs) to bridge the gap between domain-specific knowledge and deep learning. PINNsAgent integrates Physics-Guided Knowledge Replay (PGKR) for efficient knowledge transfer from solved PDEs to similar problems, and Memory Tree Reasoning for exploring the search space of optimal PINNs architectures. We evaluate PINNsAgent on 14 benchmark PDEs, demonstrating its effectiveness in automating the surrogation process and significantly improving the accuracy of PINNs-based solutions.",
+    "keywords": [
+      "pinns",
+      "llm-agent"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=RO5OGOzs6M"
+  },
+  "review_fields": {
+    "summary": "This paper introduces PINNsAgent, a framework that uses large language models (LLMs) to automate the development and optimization of Physics-Informed Neural Networks (PINNs) for solving partial differential equations (PDEs). The key components are:\n1. Physics-Guided Knowledge Replay (PGKR) – encodes PDE characteristics and associated PINN configurations into a structured format to enable knowledge transfer between similar PDEs.\n2. Memory Tree Reasoning Strategy (MTRS) – abstracts the hyperparameter optimization process as MCTS.\n\nThe framework is evaluated on 14 benchmark PDEs and demonstrates strong performance compared to random search and Bayesian optimization.",
+    "claims_and_evidence": "Convincing evidence is provided for the benefits of PINNsAGents for PINN hyperparameter search:\n* Performance improvements are demonstrated through comprehensive experiments on 14 diverse PDEs. PINNsAgent consistently outperforms random search and Bayesian optimization on most benchmark problems. Results are also averaged over 10 runs to account for randomness. It also outperforms the best PINNacle MSEs on a number of tasks, with especially promising results on Heat-ND.\n* Ablation studies validate the contributions of both PGKR and MTRS components.",
+    "methods_and_evaluation_criteria": "The methods and evaluation approach appear mostly sound, though more details about the evaluation setup and baselines would be helpful (see questions below):\n* The benchmark set (PINNacle) includes a diverse range of PDEs with varying characteristics. Furthermore, this is a standard benchmark used in the PINN literature.\n* Performance is measured using a reasonable metric (MSE), although it would also be helpful to report relative error metrics.\n* Baselines include both simple (random search) and sophisticated (Bayesian optimization) approaches. However, details about the baseline methods, including compute budget vs. performance, seem to be missing.",
+    "theoretical_claims": "N/A, no theoretical claims made.",
+    "experimental_designs_or_analyses": "The experimental analyses seem sound, though details about the baselines are missing. See questions below.",
+    "relation_to_broader_scientific_literature": "The paper builds on several research directions:\n* Physics-informed neural networks (PINNs) for solving PDEs\n* LLM-based automation of machine learning pipelines\n* Neural architecture search / AutoML for scientific computing\n\nPrior work finds that the performance of PINNs depends crucially on the choice of architecture (e.g. activation function) and optimizer. This positions hyperparameter optimization for PINNs as an important problem for improving the performance of ML methods on PDEs.",
+    "essential_references_not_discussed": "The discussion of related work is generally thorough. A couple missing references regarding the intersection of LLMs and Bayesian optimization or Neural Architecture Search are:\n* Large Language Models to Enhance Bayesian Optimization. Liu et al, ICLR 2024.\n* EvoPrompting: Language Models for Code-Level Neural Architecture Search. Chen et al, NeurIPS 2023.\n* LLMatic: Neural Architecture Search via Large Language Models and Quality Diversity Optimization. Nasir et al, GECCO 2024.",
+    "questions_for_authors": "1. Standard hyperparameter optimization papers show the tradeoffs between performance and time/compute/number of HPO iterations. However, these evaluations seem to be missing, and the “random search” and “Bayesian search” baselines seem to only report one point along this performance-cost tradeoff curve. Could the authors describe the baselines in more detail, including number of iterations or compute cost? This is crucial for understanding the main results (Table 2).\n  * Furthermore, could the authors clarify the total computational cost of running PINNsAgent compared to baselines? This is important for understanding practical trade-offs.\n\n2. How much do the optimal hyperparameters vary across the different PDEs, and how much do they depend on all of the PDE features encoded within the PGKR scheme? This information would clarify whether an HPO method like PINNsAgent is necessary for different PDEs, vs. if existing PINN architectures/hyperparameters are simply undertuned.\n  * Intuitively, I might expect the optimal hyperparameters should depend mostly on a few features, e.g. equation type and time-dependence. Did the authors conduct any investigation about which features are the most important?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

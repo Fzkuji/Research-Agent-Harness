@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "gNI4_85Cyve",
+  "reviewer": "rUR4",
+  "paper": {
+    "title": "QAID: Question Answering Inspired Few-shot Intent Detection",
+    "authors": [
+      "Asaf Yehudai",
+      "Matan Vetzler",
+      "Yosi Mass",
+      "Koren Lazar",
+      "Doron Cohen",
+      "Boaz Carmeli"
+    ],
+    "abstract": "Intent detection with semantically similar fine-grained intents is a challenging task. To address it, we reformulate intent detection as a question-answering retrieval task by treating utterances and intent names as questions and answers. To that end, we utilize a question-answering retrieval architecture and adopt a two stages training schema with batch contrastive loss. In the pre-training stage, we improve query representations through self-supervised training. Then, in the fine-tuning stage, we increase contextualized token-level similarity scores between queries and answers from the same intent. Our results on three few-shot intent detection benchmarks achieve state-of-the-art performance.",
+    "keywords": [
+      "Intent Detection",
+      "Question Answering",
+      "Contrastive Learning",
+      "Passage Retrieval"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=gNI4_85Cyve"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper reformulates intent detection as a retrieval task, by treating utterances and intent names as questions and answers respectively. The authors leverage a dual-encoder based retrieval architecture for few-shot intent detection, with late-interaction scores (as used in ColBERT) and batch contrastive training.",
+    "strength_and_weaknesses": "Strengths:\n\nFormulating as a retrieval task helps make use of current SOTA techniques in retrieval such as late interaction scores and batch contrastive loss. The idea of using a retrieval-based dual encoder for this task is interesting from an efficiency perspective too, since the intent names (which are the answers) can be pre-computed during inference. This overcomes the high latency of cross-attention based approaches for which the processing time scales with the number of intents.\n\nWeaknesses:\n\n1) It's not entirely clear why augmentation is needed and what is the motivation for / benefit from using the data augmentation module\n\n2) Since CPFT seems to be most similar to this paper, the authors need to highlight better what the main differences are with CPFT. From reading the paper, the impression I get is that the authors just incorporate the few-shot intent detection methodologies used in CPFT (such as self-supervised contrastive pre-training and fine-tuning) into a dual-encoder based retrieval formulation (by using ColBERT)\n\n3) It is not surprising to see benefits from using late-interaction scores and batch contrastive training (which is one of proposed contributions). ColBERT/ColBERT-V2, which are based on late-interaction scores, have already been shown to outperform cosine similarity based matching in dual encoder models. Further, batch contrastive loss is already a popularly used training technique for dual-encoder based retrieval models (such as DPR, RocketQA)",
+    "clarity,_quality,_novelty_and_reproducibility": "The writing in the paper can be improved with a better description of the two-stage contrastive training subsection. (Some terminologies in there, such as anchor/pivot, are hard to understand). A more comprehensive schematic illustration (compared to Figure 1) will help. Further, adding some qualitative examples showing why the proposed changes show improvements can help strengthen the motivation.\n\nThe main originality in the paper is the reformulation intent detection as a retrieval task. Other proposed contributions are mainly about combining ideas from retrieval literature with those recently proposed for few-shot intent detection in the CPFT paper.",
+    "summary_of_the_review": "Overall the paper shows good (and statistically significant) improvements over existing methods for few-shot intent detection. However, the novelty in the paper is limited as it mainly involves combining existing techniques in a retrieval-based formulation (such as batch contrastive loss and late-interaction scores) with methodologies for few-shot intent detection proposed in CPFT (such as self-supervised contrastive pre-training and fine-tuning)",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

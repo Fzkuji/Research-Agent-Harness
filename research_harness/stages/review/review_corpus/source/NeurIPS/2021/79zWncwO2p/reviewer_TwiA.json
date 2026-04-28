@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "79zWncwO2p",
+  "reviewer": "TwiA",
+  "paper": {
+    "title": "Collaborating with Humans without Human Data",
+    "authors": [
+      "DJ Strouse",
+      "Kevin R. McKee",
+      "Matthew Botvinick",
+      "Edward Hughes",
+      "Richard Everett"
+    ],
+    "abstract": "Collaborating with humans requires rapidly adapting to their individual strengths, weaknesses, and preferences. Unfortunately, most standard multi-agent reinforcement learning techniques, such as self-play (SP) or population play (PP), produce agents that overfit to their training partners and do not generalize well to humans. Alternatively, researchers can collect human data, train a human model using behavioral cloning, and then use that model to train \"human-aware\" agents (\"behavioral cloning play\", or BCP). While such an approach can improve the generalization of agents to new human co-players, it involves the onerous and expensive step of collecting large amounts of human data first. Here, we study the problem of how to train agents that collaborate well with human partners without using human data. We argue that the crux of the problem is to produce a diverse set of training partners. Drawing inspiration from successful multi-agent approaches in competitive domains, we find that a surprisingly simple approach is highly effective. We train our agent partner as the best response to a population of self-play agents and their past checkpoints taken throughout training, a method we call Fictitious Co-Play (FCP). Our experiments focus on a two-player collaborative cooking simulator that has recently been proposed as a challenge problem for coordination with humans. We find that FCP agents score significantly higher than SP, PP, and BCP when paired with novel agent and human partners. Furthermore, humans also report a strong subjective preference to partnering with FCP agents over all baselines.",
+    "keywords": [
+      "multi-agent",
+      "zero-shot coordination",
+      "collaboration",
+      "cooperation",
+      "common-payoff",
+      "human-ai interaction",
+      "reinforcement learning",
+      "deep reinforcement learning"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=79zWncwO2p"
+  },
+  "review_fields": {
+    "summary": "This paper seeks to build agents that can effectively collaborate with humans when playing \"common payoff games.\" They propose to modify Fictitious Self-Play (FSP) methods to work in this setting, hence the name Fictitious Co-Play (FCP). Specifically, a final agent is trained to collaborate with a diverse range of agents (generated w/ varying random seed) alongside *earlier checkpoints* of those agents. This simulates a self-play pool with varying skill levels and varying strategies. Thanks to this more diverse training experience, the final FCP agent is more robust to unseen strategies and more amenable to human interaction.",
+    "main_review": "The idea is strikingly simple and presented in an easy to follow manner. Furthermore, it shows significant gains when compared to prior work that relies simply on self-play or examples of optimal human behavior. The ablations due a good job justifying the use of previous model checkpoints, as well as the network architectures changes made v.s. prior work. Finally, the human study convincingly shows that this agent excels (v.s. baselines) at its stated goal - collaborating with humans.",
+    "limitations_and_societal_impact": "The authors do a good job discussing their method's limitations as well as the potential negative social implications. However, I believe they should also mention that the computational/time burden of training N separate agents could prove overwhelming in more complicated settings than grid world (e.g. real world robotics, Atari, etc.). Future work should definitely focus on more efficiently learning a diverse agent set.",
+    "ethical_concerns": "I believe this work is exploratory and thus has limited ethical concerns at this time. The authors did a good job discussing potential long term side effects."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "XsBzmJzJ2l",
+  "reviewer": "svzd",
+  "paper": {
+    "title": "The Structure of Relation Decoding Linear Operators in Large Language Models",
+    "authors": [
+      "Miranda Anna Christ",
+      "Adrián Csiszárik",
+      "Gergely Becsó",
+      "Dániel Varga"
+    ],
+    "abstract": "This paper investigates the structure of linear operators introduced in Hernandez et al. [2023] that decode specific relational facts in transformer language models. We extend their single-relation findings to a collection of relations and systematically chart their organization. We show that such collections of relation decoders can be highly compressed by simple order-3 tensor networks without significant loss in decoding accuracy. To explain this surprising redundancy, we develop a cross-evaluation protocol, in which we apply each linear decoder operator to the subjects of every other relation. Our results reveal that these linear maps do not encode distinct relations, but extract recurring, coarse-grained semantic properties (e.g., country of capital city and country of food are both in the country-of-X property). This property-centric structure clarifies both the operators' compressibility and highlights why they generalize only to new relations that are semantically close. Our findings thus interpret linear relational decoding in transformer language models as primarily property-based, rather than relation-specific.",
+    "keywords": [
+      "large language models",
+      "relations",
+      "tensor networks",
+      "interpretability"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=XsBzmJzJ2l"
+  },
+  "review_fields": {
+    "summary": "The manuscript investigates the collection of Linear Relation Embedding (LRE) matrices within Transformer language models—principally GPT-J-6B.\nThe authors (i) visualize the latent structure of hundreds of relation-specific decoders through a novel semantic proximity metric, and (ii) show that the entire set of matrices can be compressed to a rank-3 tensor network with negligible loss of faithfulness.\nExperiments span three datasets—original (47 relations), expanded (≈100 relations), and a newly constructed mathematical set (hundreds of relations). Despite a reduction of several orders of magnitude in parameter count, the compressed model preserves or even improves faithfulness and acts as a coarse “property extractor.” Generalisation remains narrow: strong transfer occurs mainly for arithmetically well-structured relations, while performance on semantically distant or one-to-many relations is limited.",
+    "strengths_and_weaknesses": "Strengths\n- Treating relation decoders as a family and clustering them by property similarity is an original perspective that sharpens our understanding of relational structure in LMs.\n- A rank-3 tensor network attains equal or higher faithfulness than individual matrices while reducing parameters by several orders of magnitude.\n\nWeaknesses\n- Limited model diversity – Only a single GPT-J checkpoint is analysed; applicability to other architectures (e.g., Llama-2, Falcon) and languages remains untested.",
+    "questions": "- Have you benchmarked rank-4 or TT-SVD variants, and how do they trade off compression versus fidelity?\n- Could the compressed tensor serve as a base for LoRA-style fine-tuning to further cut memory?",
+    "limitations": "- One-to-many and many-to-many relations remain challenging.\n- Scaling to the full diversity of real-world relations is not yet feasible."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 4,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

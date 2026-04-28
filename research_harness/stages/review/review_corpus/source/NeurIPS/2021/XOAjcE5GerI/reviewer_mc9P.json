@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "XOAjcE5GerI",
+  "reviewer": "mc9P",
+  "paper": {
+    "title": "On learning sparse vectors from mixture of responses",
+    "authors": [
+      "Nikita Polyanskii"
+    ],
+    "abstract": "In this paper, we address two learning problems. Suppose a family of $\\ell$ unknown sparse vectors is fixed, where each vector has at most $k$ non-zero elements. In the first problem, we concentrate on robust learning the supports of all vectors from the family using a sequence of noisy responses. Each response to a query vector shows the sign of the inner product between a randomly chosen vector from the family and the query vector. In the second problem, we aim at designing queries such that all sparse vectors from the family can be approximately reconstructed based on the error-free responses.  This learning model was introduced in the work of Gandikota et al., 2020, and these problems can be seen as generalizations of support recovery and approximate recovery problems, well-studied under the framework of  1-bit compressed sensing.  As the main contribution of the paper, we prove the existence of learning algorithms for the first problem which work without any assumptions. Under a mild structural assumption on the unknown vectors, we also show the existence of learning algorithms for the second problem and rigorously analyze their query complexity.",
+    "keywords": [
+      "sparse vectors",
+      "mixture of binary linear classifiers",
+      "1-bit compessed sensing",
+      "query complexity",
+      "noisy measurements"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=XOAjcE5GerI"
+  },
+  "review_fields": {
+    "summary": "This paper considers learning a family of \\ell unknown k-sparse n-dimensional vectors from mixture of 1-bit repsonses.  In particular, the authors propose a novel robust support recovery algorithm that works without any additional assumption. For robust support recovery, they try to reduce the problem to a problem of quantitative group testing, and they make use of a notion that generalizes cover-free families, which are previously used in the context of various 1-bit compressed sensing problems in [1,12,13]. Based on the reconstructed support of all unknown vectors in the family, the authors provide noiseless approximate vector recovery guarantees under the assumptions that the support of any unknown vector is not fully contained in the support of any other unknown vector from the family and the magnitude of each entry can be bounded from below and above.",
+    "main_review": "While some of the results seem potentially valuable (e.g., a non-trivial extension to [12] for robust support recovery), I feel that the techniques used in this paper are somewhat standard (such as cover-free families), and the derived sample complexity for both support and vector recovery are likely  far from optimal (this is particularly true for the case of vector recovery). The following are some specific comments:\n\nWhat is the purpose of presenting Theorem 3? The settings of Theorem 3 are the same as those of Theorem 2, but the sample complexity of Theorem 3 seems to be always worse than the sample complexity of Theorem 2. \n\nThe term max(2e\\ell, 2ek)^{min(\\ell,k)} in the sample complexity is quite bad when both k and \\ell are large. To compare with the results in [12], the authors discuss the case that \\tau = 0, fixed k and large \\ell. When k < 4, the sample complexity in this paper is better than that in [12]. However, I think the case that \\tau = 0, fixed \\ell and large k is more practically interesting to compare. For this case, only when \\ell = 2, the sample complexity in this paper is not worse than the sample complexity in [12]. However, for \\ell = 2, the authors of [12] have mentioned that they do not need the restrictive separability assumption either. Therefore, my impression is that for support recovery, although this paper does not need the restrictive separability assumption, it, in general, requires a larger sample complexity compared to [12]. \n\nFor standard 1-bit compressed sensing, support and vector recovery can be two separate problems and the sample complexity of vector recovery (depends linearly on k) is usually smaller than for that of support recovery (e.g., depends at least quadratically on k as in [13]). However, in this paper, the results for vector recovery are based on support recovery and thus the sample complexity for vector recovery cannot be smaller than that for support recovery, which is undesirable considering the results for standard 1-bit compressed sensing with \\ell = 1. In addition, for the sample complexities of mixtures of sparse linear regressions provided in [18,20], the dependence on k is usually linear and is much better than that in Theorem 2 of this paper. Therefore, I think the most valuable part of this paper is only Theorem 1. Providing vector recovery guarantees based on support recovery guarantees (see Theorem 2) seems to be a bad strategy. Perhaps beyond the scope of this work, but I hope the authors can provide vector recovery guarantees with much smaller sample complexity requirements. \n\nA minor issue: Line 103, in the definition of the Hamming ball, d_H is used without definition.",
+    "limitations_and_societal_impact": "Yes. As mentioned in the Checklist, the limitations have been addressed and there is no potential negative societal impact of this work."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

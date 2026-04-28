@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "jwOg8J1yZ-a",
+  "reviewer": "FjcX",
+  "paper": {
+    "title": "Adversarially Robust Learning with Tolerance",
+    "authors": [
+      "Hassan Ashtiani",
+      "Vinayak Pathak",
+      "Ruth Urner"
+    ],
+    "abstract": "We initiate the study of tolerant adversarial PAC learning with respect to metric perturbation sets. In adversarial PAC learning, an adversary is allowed to replace a test point $x$ with an arbitrary point in a closed ball of radius $r$ centered at $x$. In the tolerant version, the error of the learner is compared with the best achievable error with respect to a slightly larger perturbation radius $(1+\\gamma)r$. This simple tweak helps us bridge the gap between theory and practice and obtain the first PAC-type guarantees for algorithmic techniques that are popular in practice. Furthermore, our sample complexity bounds improve exponentially over best known (non-tolerant) bounds in terms of the VC dimension of the hypothesis class. In particular, for perturbation sets with doubling dimension $d$, we show that a variant of the  ``perturb-and-smooth'' algorithm PAC learns any hypothesis class $H$ with VC dimension $v$ in the $\\gamma$-tolerant adversarial setting with $O\\left(\\frac{v(1+1/\\gamma)^{O(d)}}{\\varepsilon}\\right)$ samples. This guarantee holds in the tolerant robust realizable setting. We extend this to the agnostic case by designing a novel sample compression scheme based on the perturb-and-smooth approach. This compression-based algorithm has a linear dependence on the doubling dimension as well as the VC-dimension.",
+    "keywords": [
+      "Statistical Learning Theory",
+      "PAC Learning",
+      "Adversarial Learning",
+      "Compression",
+      "Perturb and Smooth"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=jwOg8J1yZ-a"
+  },
+  "review_fields": {
+    "comment": "Hi,\n\nyes, it is very common not including experiments for these types of results of sample complexity in a PAC setting.\nI will explain why I don't think that experiments would be useful here. The results in this paper hold for a general case of any function class and any perturbation set that is a ball in some metric space (capturing the interesting case of Euclidean space).\nIf the results were more limited, maybe conducting experiments to show a more general phenomenon would be enlightening in my point of view.\n\nI would like to give the context of this paper to the current literature. \nFor the setting of any function class and any perturbation set (not necessarily in a metric space),\nwe know that a finite VC dimension is sufficient for learning, with a sample complexity of roughly VC(H)2^VC(H).\nWe also know that it is not necessary, there exists a class with infinite VC that is learnable, as opposed to the standard PAC setting with 0-1 loss. We are aware of some other dimensions that play a role (in the lower bound), but this is an open question to characterize learnability in this setting. \n\nI think that this paper contributes to this line of work. \nAssuming a perturbation set in a metric space is quite general and captures interesting scenarios.\nWe should note that the tolerance parameter (gamma) is only in a log factor in Thm 2.\nAlso, given a known reduction from agnostic the realizable, the results in this paper hold for the agnostic case as well."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

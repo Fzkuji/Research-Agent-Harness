@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "9zV2OXCrVF",
+  "reviewer": "5iV1",
+  "paper": {
+    "title": "k-Median Clustering via Metric Embedding: Towards Better Initialization with Differential Privacy",
+    "authors": [
+      "Chenglin Fan",
+      "Ping Li",
+      "Xiaoyun Li"
+    ],
+    "abstract": "In clustering algorithms, the choice of initial centers is crucial for the quality of the learned clusters. We propose a new initialization scheme for the $k$-median problem in the general metric space (e.g., discrete space induced by graphs), based on the construction of metric embedding tree structure of the data. We propose a novel and efficient search algorithm, for good initial centers that can be used subsequently for the local search algorithm. The so-called HST initialization method can produce initial centers achieving lower error than those from another popular method $k$-median++, also with higher efficiency when $k$ is not too small. Our HST initialization can also be easily extended to the setting of differential privacy (DP) to generate private initial centers. We show that the error of applying DP local search followed by our private HST initialization improves previous results on the approximation error, and approaches the lower bound within a small factor. Experiments demonstrate the effectiveness of our proposed methods.",
+    "keywords": [
+      "privacy",
+      "clustering"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=9zV2OXCrVF"
+  },
+  "review_fields": {
+    "summary": "The submitted paper considers fast initializations for k-median. They proceed in a fairly natural manner:\n\n(1) Do tree embedding.\n(2) Run simple constant-factor approximation on the tree embedding.\n\nA cool advantage with their simple algorithm on the tree embedding is that the authors show that they can make the initialization differentially private (DP); to me that's the main additive value of the paper.\n\nThey can then combine the above algorithm to with a DP local search to shave off a log(n) factor in the additive error of the the previous best results for DP k-median algorithms under general metrics. (The improved bound is basically obtained because they can now run the local search algorithm with fewer number of iterations).\n\nThey also perform an experimental comparison with their method compared to k-means++ where they perform favorably.",
+    "strengths": "- The simplicity and nice algorithm that is easy to implement is a clear positive.\n\n- Nice adaptation to differentially private clustering.",
+    "weaknesses": "- The paper lacks a little bit in a big and impressive contribution. Yes the DP bound is improved but it is still quite far from the lower bound...\n\n- Somewhat similar to prior works.\n\n- Extending the ideas to k-means would be very interesting as then the tree embedding would be trickier to use?",
+    "questions": "- k-median++ (at least k-means++) initialization is known to be not always great empirically. That's why the authors already in the first paper proposed a greedy variant (which is the one that is the default in the scikit implementation). Why not compare with this one?\n\n- Can you elaborate a little more what the main differences are between this and the cited work by Cohen Added et al? They also use tree embeddings for fast initialization if I remember correctly.\n\n\nSmall things:\n\n- Intro l 35: wouldn't a naive adaptation of Lloyd work in general metrics?\n\n- l 117: \"in\"\n\n- l 130-132: the choice of alpha should show up in the approximation guarantee (it is not exactly 5 right?)\n\n- l 280: \"Following previous work, \""
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1161,
+    "words": 204,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/976e2d17-a12d-4abb-a623-b6608aee9dcf",
+    "error": null,
+    "scored_chars": 1161
+  }
+}

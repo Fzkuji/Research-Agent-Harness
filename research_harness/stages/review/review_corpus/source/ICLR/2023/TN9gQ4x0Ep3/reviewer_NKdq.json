@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "TN9gQ4x0Ep3",
+  "reviewer": "NKdq",
+  "paper": {
+    "title": "Don’t fear the unlabelled: safe semi-supervised learning via debiasing",
+    "authors": [
+      "Hugo Schmutz",
+      "Olivier HUMBERT",
+      "Pierre-Alexandre Mattei"
+    ],
+    "abstract": "Semi-supervised learning (SSL) provides an effective means of leveraging unlabelled data to improve a model’s performance. Even though the domain has received a considerable amount of attention in the past years, most methods present the common drawback of lacking theoretical guarantees. Our starting point is to notice that the estimate of the risk that most discriminative SSL methods minimise is biased, even asymptotically. This bias impedes the use of standard statistical learning theory and can hurt empirical performance. We propose a simple way of removing the bias. Our debiasing approach is straightforward to implement and applicable to most deep SSL methods.  We provide simple theoretical guarantees on the trustworthiness of these modified methods, without having to rely on the strong assumptions on the data distribution that SSL theory usually requires. In particular, we provide generalisation error bounds for the proposed methods. We evaluate debiased versions of different existing SSL methods, such as the Pseudo-label method and Fixmatch, and show that debiasing can compete with classic deep SSL techniques in various settings by providing better calibrated models. Additionally, we provide a theoretical explanation of the intuition of the popular SSL methods.  An implementation of a debiased version of Fixmatch is available at\nhttps://github.com/HugoSchmutz/DeFixmatch",
+    "keywords": [
+      "Semi-supervised learning",
+      "deep learning",
+      "empirical risk minimisation",
+      "control variate",
+      "variance reduction",
+      "asymptotic statistics"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=TN9gQ4x0Ep3"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This work identifies that the existing approaches in semi-supervised learning minimize a biased risk and hence, are devoid of theoretical guarantees unless there are strong assumptions. This works gives a method to de-bias the loss with a simple estimator which also allows them to give theoretical guarantees on the risk. They also evaluate their debiased versions of existing semi supervised learning approaches on various datasets and show that they lead to improved calibration and improved accuracy in certain settings.",
+    "strength_and_weaknesses": "Semi-supervised learning is an interesting area and coming up with theoretically sounds methods is an important problem. The idea of debasing the risk is simple and interesting and also leads to an unbiased estimator of the risk with theoretical guarantees. The toy example provided is appealing. Their method also leads to improved calibration and better accuracy on certain subgroups.\n\nThe main weakness is that their method does not lead to improved accuracy on many of the datasets. It would be nice to have some discussion of the properties of the dataset which leads this method to outperform others in terms of accuracy.  They also show that the debiased version of Fixmatch leads to better accuracy but not the debased version of Pseudolabels. Is there some reason for why this is the case? It would also be good to discuss why their method leads to better accuracy on certain subgroups when using Fixmatch.",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is well written and clear. They have included the relevant prior work. The idea of computing the entropy term on the labelled data as well to make the loss estimator unbiased is novel in this context to the best of my knowledge. \n\nThey have also released the code for their experiments.",
+    "summary_of_the_review": "The idea is interesting, simple and natural with theoretical guarantees. The paper is very well written. But, I think the experimental section is weak as discussed above.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

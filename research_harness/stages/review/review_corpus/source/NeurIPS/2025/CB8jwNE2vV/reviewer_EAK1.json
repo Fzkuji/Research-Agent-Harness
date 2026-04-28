@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "CB8jwNE2vV",
+  "reviewer": "EAK1",
+  "paper": {
+    "title": "CADGrasp: Learning Contact and Collision Aware General Dexterous Grasping in Cluttered Scenes",
+    "authors": [
+      "Jiyao Zhang",
+      "Zhiyuan Ma",
+      "Tianhao Wu",
+      "Zeyuan Chen",
+      "Hao Dong"
+    ],
+    "abstract": "Dexterous grasping in cluttered environments presents substantial challenges due to the high degrees of freedom of dexterous hands, occlusion, and potential collisions arising from diverse object geometries and complex layouts. To address these challenges, we propose CADGrasp, a two-stage algorithm for general dexterous grasping using single-view point cloud inputs. In the first stage, we predict a scene-decoupled, contact- and collision-aware representation—sparse IBS—as the optimization target. Sparse IBS compactly encodes the geometric and contact relationships between the dexterous hand and the scene, enabling stable and collision-free dexterous grasp pose optimization. To enhance the prediction of this high-dimensional representation, we introduce an occupancy-diffusion model with voxel-level conditional guidance and force closure score filtering. In the second stage, we develop several energy functions and ranking strategies for optimization based on sparse IBS to generate high-quality dexterous grasp poses. Extensive experiments in both simulated and real-world settings validate the effectiveness of our approach, demonstrating its capability to mitigate collisions while maintaining a high grasp success rate across diverse objects and complex scenes.",
+    "keywords": [
+      "Dexterous Hand",
+      "General Grasping"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=CB8jwNE2vV"
+  },
+  "review_fields": {
+    "comment": "Thank you for your clarifications and the additional benchmarking results.\n\n1. The ablation study on voxel size is informative. Voxel resolution of 5mm seems to strike a good balance between precision and computational cost regular sized objects.\n2. The benchmarking results alleviate my concerns regarding the method's speed for robotic tasks. Compared to other optimization-based approaches, the runtime is quite reasonable. In the field, optimization-based methods combined with motion planning are often somewhat isolated from end-to-end learning approaches. I look forward to future work that explores ways to bridge this gap and leverage the strengths of both paradigms.\n\nI will keep my original score at this stage."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

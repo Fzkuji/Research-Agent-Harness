@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "QYhUhMOI4C",
+  "reviewer": "SKHG",
+  "paper": {
+    "title": "Uniqueness and Complexity of Inverse MDP Models",
+    "authors": [
+      "Marcus Hutter",
+      "Steven Stenberg Hansen"
+    ],
+    "abstract": "What is the action sequence aa'a\" that was likely responsible for reaching state s\"' (from state s) in 3 steps?\nAddressing such questions is important in causal reasoning and in reinforcement learning.\nInverse \"MDP\" models p(aa'a\"|ss\"') can be used to answer them.\nIn the traditional \"forward\" view, transition \"matrix\" p(s'|sa) and policy π(a|s) uniquely determine \"everything\":\nthe whole dynamics p(as'a's\"a\"...|s), and with it, the action-conditional state process p(s's\"...|saa'a\"), \nthe multi-step inverse models p(aa'a\"...|ss^i), etc.\nIf the latter is our primary concern,  a natural question, analogous to the forward case\nis to which extent 1-step inverse model p(a|ss') plus policy π(a|s) \ndetermine the multi-step inverse models or even the whole dynamics.\nIn other words, can forward models be inferred from inverse models or even be side-stepped.\nThis work addresses this question and variations thereof,\nand also whether there are efficient decision/inference algorithms for this.",
+    "keywords": [
+      "inverse models",
+      "reinforcement learning",
+      "causality",
+      "theory",
+      "multi-step models",
+      "reasoning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=QYhUhMOI4C"
+  },
+  "review_fields": {
+    "comment": "Upon reading the revision, some questions have been clarified, but unfortunately I still find the text very unclear. At the very least, I strongly believe the notation should be overhauled and the recurring questions should be consolidated, as I genuinely find the text to be extremely difficult to parse. That said, the authors' responses (to my comments and those of the other reviewers) has helped clear up some of my confusions, and I have slightly increased my score as a result.\n\nI still believe the text suffers from the following main issues (in addition to the notation / organization):\n\n1. Many of the results are fairly predictable / evident. It is not surprising that in many (most?) cases, inverse models cannot be recovered. As I see it, the only condition for which the paper asserts that an inverse model can be found (rank >= d) is a fairly simple fact from linear algebra.\n1. Some of the logical arguments still seem askew. Particularly, lots of the dimensional analysis arguments are imprecise and/or speculative (particularly, I still find those starting on line 202 of the revision to be very hand-wavy). Lots of these arguments include phrases like \"gives hope\" and \"the solution may be unique\", and introduce ad-hoc assumptions, which makes it difficult to assess what, if any, conclusion actually follows from the premises.\n1. Many of the questions are imprecise / confusing, and it's never clear to me what the answers are. In the revised paper, it says \"One way to rephrase the questions is whether $f(M) = f(W)$ or $g(M) = g(W)$ for all (or most or some) $M$ and $W$\". How do you quantify \"most or some\", and how does that fit in to the original question? Doesn't the quantifier (all, most, some) drastically change the implications of the question? Where are each of these questions answered? Moreover, while I think I understand what these $f,g$ functions are supposed to represent now after seeing the authors' response, it should be stated much more explicitly.\n1. It is never clear to me what the answers to the original questions are. Perhaps this is because each question is broken down into a bunch of sub-questions each having their own assumptions downstream, and the answers are never consolidated or clearly linked back to the original questions.\n1. Related to the previous point, it's not clear to me what the takeaways of this paper are supposed to be.\n\nAltogether, I do think inverse models can be quite useful and are interesting objects to study. Ultimately, however, I am struggling to assess the significance of many of the results in this paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

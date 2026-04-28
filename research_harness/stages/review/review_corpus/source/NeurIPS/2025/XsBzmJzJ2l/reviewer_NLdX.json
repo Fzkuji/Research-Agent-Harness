@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "XsBzmJzJ2l",
+  "reviewer": "NLdX",
+  "paper": {
+    "title": "The Structure of Relation Decoding Linear Operators in Large Language Models",
+    "authors": [
+      "Miranda Anna Christ",
+      "Adrián Csiszárik",
+      "Gergely Becsó",
+      "Dániel Varga"
+    ],
+    "abstract": "This paper investigates the structure of linear operators introduced in Hernandez et al. [2023] that decode specific relational facts in transformer language models. We extend their single-relation findings to a collection of relations and systematically chart their organization. We show that such collections of relation decoders can be highly compressed by simple order-3 tensor networks without significant loss in decoding accuracy. To explain this surprising redundancy, we develop a cross-evaluation protocol, in which we apply each linear decoder operator to the subjects of every other relation. Our results reveal that these linear maps do not encode distinct relations, but extract recurring, coarse-grained semantic properties (e.g., country of capital city and country of food are both in the country-of-X property). This property-centric structure clarifies both the operators' compressibility and highlights why they generalize only to new relations that are semantically close. Our findings thus interpret linear relational decoding in transformer language models as primarily property-based, rather than relation-specific.",
+    "keywords": [
+      "large language models",
+      "relations",
+      "tensor networks",
+      "interpretability"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=XsBzmJzJ2l"
+  },
+  "review_fields": {
+    "summary": "This paper builds on prior work showcasing that the computation involved in relations like \"The capital of France is___\" (relation=capital, subject=france, object=paris) is well approximated by linear (or affine) maps that generalize across instances of that relation (e.g., the same map works on capital of spain). This work shows that relation decoders can be compressed across different relations that share similar properties, thus viewing these decoders as property extractors rather than single relation decoders. The authors present a novel architecture for training a parameter efficient version of these extractors with tensor networks. The experiments show promising results, but are a little thin in areas. The findings are novel and interesting to the interpretability community.",
+    "strengths_and_weaknesses": "# Strengths\n* The Hernandez et al., 2023 work is very interesting, and related to a body of interpretability work on related structures (both preceding Hernandez, and currently growing). The property centric view on these relations that allows the compression of what were previously collections of individual relation decoders proposed by this paper would be of great interest to this research community. \n* Shared representational structure within models is an important finding in any domain. This paper provides a nice example with relational structures beyond the single relation level\n\n# Weaknesses\n* Figures 2 and 3 both being devoted to large (slightly illegible) heatmaps is an unfortunate use of space. I think this could be used for more results or visualization that better show the results. Perhaps Figures 2b and 3b become one figure and the 'a' sections go to the appendix?\n* Besides the math dataset, the held out relations don't actually seem to get much benefit from the heldout relations. I count about 8 that look to be substantially far above the majority decision and most underperform the single relation linear decoder. As the authors mention, this result isn't surprising. I think it was worth trying it, but since the result is so strongly expected (this was an extremely hard setup), I feel like it's not the best use of space. The result showing the generalization for math capabilities is very interesting\n\n# Missing citations\n* The authors should provide the proper citations when discussing prototype theory (Rosch, 1971), as well as provide a citation for Wittgenstein when discussing these ideas, although they are so widely known.\n* The authors should cite [Chanin et al., 2024](https://arxiv.org/abs/2311.08968) which extends LREs to concept embeddings. While not redundant with the current work, I think these findings are pretty relevant to this paper. **Specifically, I view the LRCs as property extractors for single relations**, the current paper makes the property extractor idea more salient and introduces compression across relations. Is this a fair account?",
+    "final_justification": "See review. I feel positively about this paper"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "mEV0nvHcK3",
+  "reviewer": "jwAu",
+  "paper": {
+    "title": "Towards Practical Defect-Focused Automated Code Review",
+    "authors": [
+      "Junyi Lu",
+      "Lili Jiang",
+      "Xiaojia Li",
+      "Jianbing Fang",
+      "Fengjun Zhang",
+      "Li Yang",
+      "Chun Zuo"
+    ],
+    "abstract": "The complexity of code reviews has driven efforts to automate review comments, but prior approaches oversimplify this task by treating it as snippet-level code-to-text generation and relying on text similarity metrics like BLEU for evaluation. These methods overlook repository context, real-world merge request evaluation, and defect detection, limiting their practicality. To address these issues, we explore the full automation pipeline within the online recommendation service of a company with nearly 400 million daily active users, analyzing industry-grade C++ codebases comprising hundreds of thousands of lines of code. We identify four key challenges: 1) capturing relevant context, 2) improving key bug inclusion (KBI), 3) reducing false alarm rates (FAR), and 4) integrating human workflows. To tackle these, we propose 1) code slicing algorithms for context extraction, 2) a multi-role LLM framework for KBI, 3) a filtering mechanism for FAR reduction, and 4) a novel prompt design for better human interaction. Our approach, validated on real-world merge requests from historical fault reports, achieves a 2× improvement over standard LLMs and a 10× gain over previous baselines. While the presented results focus on C++, the underlying framework design leverages language-agnostic principles (e.g., AST-based analysis), suggesting potential for broader applicability.",
+    "keywords": [
+      "Automated Code Review",
+      "Merge Request Analysis",
+      "Large Language Models (LLMs)",
+      "Defect Detection",
+      "Evaluation Metrics for Code Review",
+      "Code Context Extraction",
+      "Multi-Agent LLM Collaboration"
+    ],
+    "decision": "Accept (spotlight poster)",
+    "openreview_url": "https://openreview.net/forum?id=mEV0nvHcK3"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors proposed a framework for automated code review. More specifically, the authors first used code slicing to enable the Multi-Agent Code Review System to obtain sufficient context fragments of the code. Then, the Multi-Agent Code Review System conducted code reviews, filters, aggregates, and ranks the reviews. Finally, the proposed approach localized the issues mentioned in the reviews. The authors created a dataset at the merge request level using data from four repositories. The authors experimentally validated the performance  using Key Bug Inclusion, False Alarm Rate, Comprehensive Performance Index, and Line Localization Success Rate. The proposed approach performed better on both the Left Flow and Full Flow slicing algorithms, showing effective localization capability in the Inline representation.",
+    "claims_and_evidence": "The authors pointed out that current evaluations rely excessively on textual similarity metrics (e.g., BLEU, ROUGE), which fails to measure real-world effectiveness. Is there a connection between metrics like BLEU and the evaluation metrics used by the authors? The authors could compare the proposed approach and baselines with BLEU and ROUGE.",
+    "methods_and_evaluation_criteria": "The authors have established criteria based on key issues; however, it is unclear how the key issues are defined. Is there a specific set of evaluation criteria, and are these standards reasonable? Regarding the Dataset, a C++ dataset was conducted by using requests. The authors categorized errors into logic errors, code security errors, and performance-related errors. Does the dataset comprehensively cover the majority of error types encountered in C++? Is it feasible to report the performance of the proposed method across these different error categories?",
+    "theoretical_claims": "The paper does not contain proofs for theoretical claims.",
+    "experimental_designs_or_analyses": "The authors evaluated the performance of different LLMs; however, further analysis was needed to examine the performance differences resulting from various combinations of LLMs. Additionally, did different tasks yield performance variations when different LLMs were employed? For instance, using LLaMA 3.1 (405B) as the Reviewer and LLaMA 3.1 (70B) as the Validator. For Time Cost in Appendix M, Experimental Setups in Detail, the authors mentioned that one round of automated code review took approximately 9 hours. In the context of code review, were such time and resource overheads acceptable?",
+    "essential_references_not_discussed": "There are some more recent related work. For example:\n\n[1] Wang L, Zhou Y, Zhuang H, et al. Unity Is Strength: Collaborative LLM-Based Agents for Code Reviewer Recommendation[C]. IEEE/ACM International Conference on Automated Software Engineering. 2024: 2235-2239.\n\n[2] Wei Tao, Yucheng Zhou, et al., 2024. KADEL: Knowledge-Aware Denoising Learning for Commit Message Generation. ACM Trans. Softw. Eng. Methodol. 33, 5, Article 133 (June 2024), 32 pages. \n\n[3] Yu Y, Rong G, Shen H, et al. Fine-tuning large language models to improve accuracy and comprehensibility of automated code review[J]. ACM transactions on software engineering and methodology, 2024, 34(1): 1-26.",
+    "other_strengths_and_weaknesses": "Strengths: \n1. The proposed merge-request-based code review could be useful for real-world applications. \n2. The authors introduce code localization based on the review, which could help quickly determine whether the issues are genuine.\n\nWeakness: \n1. The proposed approach does not validate the combination of different LLMs. \n2. The authors do not discuss whether the time and resource costs of the multi-agent code review system are acceptable.\n3. In the LLM prompts, the authors can discuss the effectiveness of Retrieval-Augmented Generation in LLM-generated outputs. \n4. The authors evaluate the comments based on certain issues. However, the evaluation should be improved. For instance, the authors should assess whether the answers are vague.",
+    "other_comments_or_suggestions": "Section 2.1 is mentioned in Appendix A, but where is it in the paper?",
+    "questions_for_authors": "Can the authors provide more information about the dataset? Does the dataset comprehensively cover the majority of error types? How were the 45 fault reports selected? Are they representative of common code review scenarios (e.g., edge cases vs. typical defects)?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

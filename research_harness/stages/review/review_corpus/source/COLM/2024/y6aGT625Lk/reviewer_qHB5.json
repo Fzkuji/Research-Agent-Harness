@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "y6aGT625Lk",
+  "reviewer": "qHB5",
+  "paper": {
+    "title": "PairEval: Open-domain Dialogue Evaluation Metric with Pairwise Comparisons",
+    "authors": [
+      "ChaeHun Park",
+      "Minseok Choi",
+      "Dohyun Lee",
+      "Jaegul Choo"
+    ],
+    "abstract": "Building a reliable and automated evaluation metric is a necessary but challenging problem for open-domain dialogue systems. \nRecent studies proposed evaluation metrics that assess generated responses by considering their relevance to previous dialogue histories. \nAlthough effective, these metrics evaluate individual responses directly rather than considering their relative quality compared to other responses.  To handle this, we propose  PairEval, a novel dialogue evaluation metric for assessing responses by comparing their quality against responses in different conversations.  Our metric is built on top of open-sourced and moderate-size language models, and we make them specialized in pairwise comparison between dialogue responses. Extensive experiments on multiple benchmarks demonstrate that our metric exhibits a higher correlation with human judgments than baseline metrics. We also find that the proposed comparative metric is more robust in detecting common failures from open-domain dialogue systems, including repetition and speaker insensitivity. The codes and models will be publicly available after the paper is accepted.",
+    "keywords": [
+      "Open-domain dialogue",
+      "Dialogue evaluation",
+      "Evaluation metric"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=y6aGT625Lk"
+  },
+  "review_fields": {
+    "summary": "The authors propose a new metric to evaluate open-domain dialogue via pairwise comparisons of responses in different dialogues. They use an LLM to judge the system's response along with a number of randomly sampled utterance-response examples (with different context) and use the scores to calculate a final score for the system response.",
+    "reasons_to_accept": "This is an interesting methodology to judge open-ended responses that can be useful to the community\n\nThe paper is clear and easy to replicate\n\nThe metric is thoroughly evaluated including against human raters, outperforming metrics from related work (except LLMEval)",
+    "reasons_to_reject": "May not be very generalizable since it requires training (e.g. the authors use human-written negative responses)",
+    "questions_to_authors": "If you need to fine-tune a model for Pairwise evaluation, how different is this to reference-free / LLM as a judge approaches? I understand the need to bypass proprietary LLMs but we now have access to very powerful open-source LLMs that can be used as judges. It would be nice to see a comparison against PairEval.\n\nHow do you handle topic switches, humour, sarcasm, or other cases where the response may not seem to match but could be actually good, funny, etc?\n\nHow difficult is it to design the LLM prompt (Section 3.2)? If one needs to replace the LLM with a newer / different model, how much effort is it to re-design the prompt?\n\nDo you think this approach could work on other domains e.g. math or coding? What adjustments would need to be made?\n\nGiven that your metric needs to be trained, have you tried using a larger LLM or training with more data?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:37:01Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:01Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1242,
+    "words": 212,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/30a3cb06-aa82-4ba2-8f94-03c6db7b1d6a",
+    "error": null,
+    "scored_chars": 1242
+  }
+}

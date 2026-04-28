@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "MhWaMOkoN3",
+  "reviewer": "hU8n",
+  "paper": {
+    "title": "Universality in Transfer Learning for Linear Models",
+    "authors": [
+      "Reza Ghane",
+      "Danil Akhtiamov",
+      "Babak Hassibi"
+    ],
+    "abstract": "We study the problem of transfer learning and fine-tuning in linear models for both regression and binary classification. In particular, we consider the use of stochastic gradient descent (SGD) on a linear model initialized with pretrained weights and using a small training data set from the target distribution. In the asymptotic regime of large models, we provide an exact and rigorous analysis and relate the generalization errors (in regression) and classification errors (in binary classification) for the pretrained and fine-tuned models. In particular, we give conditions under which the fine-tuned model outperforms the pretrained one. An important aspect of our work is that all the results are \"universal\", in the sense that they depend only on the first and second order statistics of the target distribution. They thus extend well beyond the standard Gaussian assumptions commonly made in the literature. Furthermore, our universality results extend beyond standard SGD training to the test error of a classification task trained using ridge regression.",
+    "keywords": [
+      "Gaussian Universality",
+      "Transfer Learning",
+      "Linear Regression",
+      "Binary Classification"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=MhWaMOkoN3"
+  },
+  "review_fields": {
+    "comment": "I am still not fully convinced of the current explanation. I understand (3) and (4) in the sense that for any fixed $x$, the LHS converges in probability to the RHS. However, equation (2) is a separate minimization problem for every $\\mu$, and there is no guarantee that for a given $\\mu$, equations (3) and (4) hold for all relevant values of $x$. Please let me know if there are any details I missed."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 20,
+    "mixed_pct": 80,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 402,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b2cad3b8-a0cb-45b9-bde8-e0040e47fe94",
+    "error": null,
+    "scored_chars": 402
+  }
+}

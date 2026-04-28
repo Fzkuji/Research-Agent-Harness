@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "Q5RYn6jagC",
+  "reviewer": "N3JA",
+  "paper": {
+    "title": "Understanding the Limits of Vision Language Models Through the Lens of the Binding Problem",
+    "authors": [
+      "Declan Iain Campbell",
+      "Sunayana Rane",
+      "Tyler Giallanza",
+      "C. Nicolò De Sabbata",
+      "Kia Ghods",
+      "Amogh Joshi",
+      "Alexander Ku",
+      "Steven M Frankland",
+      "Thomas L. Griffiths",
+      "Jonathan D. Cohen",
+      "Taylor Whittington Webb"
+    ],
+    "abstract": "Recent work has documented striking heterogeneity in the performance of state-of-the-art vision language models (VLMs), including both multimodal language models and text-to-image models. These models are able to describe and generate a diverse array of complex, naturalistic images, yet they exhibit surprising failures on basic multi-object reasoning tasks -- such as counting, localization, and simple forms of visual analogy -- that humans perform with near perfect accuracy. To better understand this puzzling pattern of successes and failures, we turn to theoretical accounts of the binding problem in cognitive science and neuroscience, a fundamental problem that arises when a shared set of representational resources must be used to represent distinct entities (e.g., to represent multiple objects in an image), necessitating the use of serial processing to avoid interference. We find that many of the puzzling failures of state-of-the-art VLMs can be explained as arising due to the binding problem, and that these failure modes are strikingly similar to the limitations exhibited by rapid, feedforward processing in the human brain.",
+    "keywords": [
+      "visual reasoning",
+      "foundation models",
+      "multi-object reasoning",
+      "cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Q5RYn6jagC"
+  },
+  "review_fields": {
+    "summary": "The paper puts forth the hypothesis that VLMs suffer from similar constraints as humans in multi-object visual processing, especially\nwith respect to \"binding\".  Results from cognitive science show human constraints in numerical estimation, visual search, and relation\nidentification when not able to do serial processing, which is required for \"binding\" different object features together. The paper hypothesizes that lack of serial processing and binding in VLMs is responsible for failures in these tasks.  The paper gives experimental\nresults that support this hypothesis.",
+    "strengths": "This is a good paper -- it gives a cognitive-science-based approach to understanding VLM behavior. It is well-written and has a mostly clear discussion of hypotheses, experiments, and results.",
+    "weaknesses": "The paper leaves out some important information.  For each task, the authors prompted GPT-4v to describe the input images, but as far as I can tell, they did not give any evaluation of how well GPT-4v was able to describe them.  Other work (e.g., http://www.arxiv.org/abs/2407.06581) has shown that GPT-4v has trouble describing such synthetic images and often will hallucinate.\n\nHere, the authors should include the results on how well GPT-4v can even parse what is in the images (including shapes, colors, etc.) and the authors should assess whether that failure to describe simple images is related to its failure on these tasks.  To what extent are the failures a matter of lack of binding features, or of missing or hallucinating features?\n\nA couple of typos/corrections:\n\nIn Section 3, \"Figure 1\" should be \"Figure 2\".\n\nIn the caption for Figure 2, \"blue column\" should be \"red column\" and \"red column\" should be \"blue column\".",
+    "questions": "Figure 2 caption: \"Performance for 2D and 3D task variants\" -- performance of what?  GPT-4v?  I also suggest in that caption that you\nshould say what the targets are for each search (red circle, red \"L\", red sphere, red sphere).\n\nIn Section 3.1., explain what the task is for GPT-4V: \"Is there a red circle?\" \"Is there a red L?  This is explained in the appendix (A.2) but should be explained here in the main paper.\n\nLooking at the visual search task as described in A.2, it seems that the task wasn't actually \"search\" in the sense that, unlike humans, GPT-4V doesn't have to localize the target object.  In these kinds of tasks, aren't humans asked to localize the target?  How does this affect the comparability of the results between GPT-4V and humans on this task?\n\nIn Section 3.1, explain why in half the images, targets were left out. This doesn't make sense unless readers know what the specific task is.\n\nIn Section 3.1 you say \"VLMs demonstrate similar capacity constraints to humans.\"  What do you mean by \"similar\"?  Do humans show a similar success/failure curve as those in Figure 2? Or is the similarity just that humans perform well on disjunctive search and badly on\nconjunctive search (if not enough time for serial processing)?\n\nIn Section 3.2, explain how the \"accuracy\" of the model is calculated.\n\nIn Section 4.2 you refer to \"the true description of the scene\". Where did this \"true description\" come from?  Also, define \"edit\ndistance\".  I was also confused because each scene could have different correct descriptions with different levels of detail.  Was it possible that the VLM gave one version of a correct description but it was counted as wrong because it included details that the \"true description\" didn't contain?\n\nI was also confused by the visual analogy task in Figure 4.  It seems to me that both Target Pair 1 and Target Pair 2 could be considered\nthe correct answer.  The source pair has two obvious relations: \"same star shape\" and \"different color\".  The former would map to Target 1 and the latter would map to Target 2.  Which Target did you consider correct, and why?",
+    "limitations": "The authors do a good job of discussing limitations."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3279,
+    "words": 554,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/279f7960-1f24-480a-88cd-ba2d385d2bcb",
+    "error": null,
+    "scored_chars": 3296
+  }
+}

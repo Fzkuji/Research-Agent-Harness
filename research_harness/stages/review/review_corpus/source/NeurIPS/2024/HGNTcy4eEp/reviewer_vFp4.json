@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "HGNTcy4eEp",
+  "reviewer": "vFp4",
+  "paper": {
+    "title": "Learning Group Actions on Latent Representations",
+    "authors": [
+      "Yinzhu Jin",
+      "Aman Shrivastava",
+      "Tom Fletcher"
+    ],
+    "abstract": "In this work, we introduce a new approach to model group actions in autoencoders. Diverging from prior research in this domain, we propose to learn the group actions on the latent space rather than strictly on the data space. This adaptation enhances the versatility of our model, enabling it to learn a broader range of scenarios prevalent in the real world, where groups can act on latent factors. Our method allows a wide flexibility in the encoder and decoder architectures and does not require group-specific layers. In addition, we show that our model theoretically serves as a superset of methods that learn group actions on the data space. We test our approach on five image datasets with diverse groups acting on them and demonstrate superior performance to recently proposed methods for modeling group actions.",
+    "keywords": [
+      "group action",
+      "representation learning",
+      "image rendering"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=HGNTcy4eEp"
+  },
+  "review_fields": {
+    "comment": "Thank you. I must have misinterpreted that g is not a learned transformation in the latent space as the authors correctly point out that this was addressed in the original submission. It was a bit unclear to me so cleaning that up for broadest access to all readers may help. I share the thought now of another reviewer that the impact is somewhat limited by the requirement that the ground truth group action must be known. However, the authors appropriately point out that this is the current state of this niche area of research and cite other methods (that they already compared in the paper) also requiring ground truth action in the original data space. As responded to another reviewer, this addresses my main question:\n\n\"We agree that requiring ground truth is a limitation, as we discuss in the paper. However, we would also like to point out that most of the existing works that is applied to model latent group actions, regardless of addressing the problem in terms of group actions or not, are also supervised. This includes both of our comparison models for the two 3D rendered datasets\""
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1100,
+    "words": 190,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8cb824cc-b997-48f8-8fd2-ca10a401336f",
+    "error": null,
+    "scored_chars": 1100
+  }
+}

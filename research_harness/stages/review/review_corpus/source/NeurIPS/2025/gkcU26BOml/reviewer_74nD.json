@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "gkcU26BOml",
+  "reviewer": "74nD",
+  "paper": {
+    "title": "Cross-modal Associations in Vision and Language Models: Revisiting the Bouba-Kiki Effect",
+    "authors": [
+      "Tom Kouwenhoven",
+      "Kiana Shahrasbi",
+      "Tessa Verhoef"
+    ],
+    "abstract": "Recent advances in multimodal models have raised questions about whether vision-and-language models (VLMs) integrate cross-modal information in ways that reflect human cognition. One well-studied test case in this domain is the bouba-kiki effect, where humans reliably associate pseudowords like ‘bouba’ with round shapes and ‘kiki’ with jagged ones. Given the mixed evidence found in prior studies for this effect in VLMs, we present a comprehensive re-evaluation focused on two variants of CLIP, ResNet and Vision Transformer (ViT), given their centrality in many state-of-the-art VLMs. We apply two complementary methods closely modelled after human experiments: a prompt-based evaluation that uses probabilities as a measure of model preference, and we use Grad-CAM as a novel approach to interpret visual attention in shape-word matching tasks. Our findings show that these model variants do not consistently exhibit the bouba-kiki effect. While ResNet shows a preference for round shapes, overall performance across both model variants lacks the expected associations. Moreover, direct comparison with prior human data on the same task shows that the models’ responses fall markedly short of the robust, modality-integrated behaviour characteristic of human cognition. These results contribute to the ongoing debate about the extent to which VLMs truly understand cross-modal concepts, highlighting limitations in their internal representations and alignment with human intuitions.",
+    "keywords": [
+      "Cross-modal associations",
+      "Vision-and-Language Models",
+      "bouba-kiki effect",
+      "Cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=gkcU26BOml"
+  },
+  "review_fields": {
+    "summary": "This paper addresses previous inconsistencies in evaluating whether VLMs can capture cross-modal associations. It presents a comparative analysis of two CLIP variants across two experiments, using a more comprehensive and diverse set of pseudowords. To probe the models’ behavior, the authors apply a gradient-based explainability method to assess the influence of visual features. Their findings reveal that the cross-modal associations learned by VLMs diverge significantly from those observed in humans.",
+    "strengths_and_weaknesses": "Strengths:\n\n- This work offers a novel and systematic investigation into cross-modal associations between language and vision. It clearly differentiates itself from prior work with relevant citations.\n- It uncovers Insightful findings, e.g., that model predictions often collapse to a few labels despite a large candidate set.\n- It introduces the use of GradCAM to interpret which visual features influence the model’s decisions, adding novelty to the analysis.\n\nWeaknesses:\n\n- The analysis focuses solely on the image encoder, without exploring the multimodal layers responsible for aligning text and vision in VLMs. Applying interpretability techniques across the full model could offer a more comprehensive understanding of cross-modal associations.\n- While the study is original, its significance is limited. It largely confirms existing suspicions about inconsistencies across models rather than investigating the reasons behind those. A deeper investigation into the causes of this misalignment (e.g., the surprising lack of symbolic alignment in Japanese) would have added more impactful insight.\n\nMinor: on line 333, the claim that the ViT variant underperforms compared to ResNet is unclear. Figure 4 suggests that ViT yields more consistent results and performs better on English adjectives. Clarification is needed here.",
+    "questions": "**Reflection on the reasons behind misalignment**: the results showing that English adjectives lead to consistent cross-modal associations are compelling, especially since they suggest that VLMs can connect semantic meanings to visual features. However, this pattern does not extend to sound-symbolic associations like bouba-kiki. Do the authors attribute this discrepancy to the nature of CLIP's training data? Since image captions rarely reflect symbolic or phonetic associations, it seems plausible that such mappings are simply not represented during pretraining. Could the authors elaborate on this potential limitation and whether alternative datasets or finetuning could help reveal such associations?\n\n**Clarification on tokenization effects**. The claim that tokenization hinders the analysis of sound-symbolic effects deserves further clarification. While tokenization may segment words, syllabic structures are often preserved, especially in pseudowords designed to evoke phonetic patterns. Therefore, it is not immediately clear how tokenization alone would disrupt bouba-kiki-like associations. Could the authors specify more precisely how tokenization interferes with these effects?",
+    "final_justification": "We believe that this score is adapted to the quality of the work, and our concerns were addressed. I would keep my current ratings."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

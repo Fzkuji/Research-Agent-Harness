@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "QzJRtz8HNx",
+  "reviewer": "swDn",
+  "paper": {
+    "title": "Can LLMs Handle WebShell Detection? Overcoming Detection Challenges with Behavioral Function-Aware Framework",
+    "authors": [
+      "Feijiang Han",
+      "Jiaming Zhang",
+      "Chuyi Deng",
+      "Jianheng Tang",
+      "Yunhuai Liu"
+    ],
+    "abstract": "WebShell attacks, where malicious scripts are injected into web servers, pose a significant cybersecurity threat. Traditional machine learning and deep learning methods are often hampered by challenges such as the need for extensive training data, catastrophic forgetting, and poor generalization. Recently, Large Language Models (LLMs) have emerged as a powerful alternative for code-related tasks, but their potential in WebShell detection remains underexplored. In this paper, we make two major contributions: (1) a comprehensive evaluation of seven LLMs, including GPT-4, LLaMA 3.1 70B, and Qwen 2.5 variants, benchmarked against traditional sequence- and graph-based methods using a dataset of 26.59K PHP scripts, and (2) the Behavioral Function-Aware Detection (BFAD) framework, designed to address the specific challenges of applying LLMs to this domain. Our framework integrates three components: a Critical Function Filter that isolates malicious PHP function calls, a Context-Aware Code Extraction strategy that captures the most behaviorally indicative code segments, and Weighted Behavioral Function Profiling (WBFP) that enhances in-context learning by prioritizing the most relevant demonstrations based on discriminative function-level profiles. Our results show that, stemming from their distinct analytical strategies, larger LLMs achieve near-perfect precision but lower recall, while smaller models exhibit the opposite trade-off. However, all baseline models lag behind previous State-Of-The-Art (SOTA) methods. With the application of BFAD, the performance of all LLMs improves significantly, yielding an average F1 score increase of 13.82%. Notably, larger models like GPT-4, LLaMA-3.1-70B, and Qwen-2.5-Coder-14B now outperform SOTA benchmarks, while smaller models such as Qwen-2.5-Coder-3B achieve performance competitive with traditional methods. This work is the first to explore the feasibility and limitations of LLMs for WebShell detection and provides solutions to address the challenges in this task.",
+    "keywords": [
+      "WebShell detection",
+      "Large Language Models",
+      "Code Analysis",
+      "Cybersecurity",
+      "In-Context Learning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=QzJRtz8HNx"
+  },
+  "review_fields": {
+    "summary": "This paper explores the use of Large Language Models (LLMs) for WebShell detection, presenting a new framework called Behavioral Function-Aware Detection (BFAD). The framework addresses key challenges such as context length limitations and suboptimal in-context learning (ICL) demonstration selection through three components: Critical Function Filtering, Context-Aware Code Extraction (CACE), and Weighted Behavioral Function Profiling (WBFP). The authors conduct a thorough empirical evaluation using seven LLMs and demonstrate consistent performance improvements across all scales. While the contributions are notable and the empirical results are comprehensive, several methodological and evaluative aspects could benefit from further clarification and extension.",
+    "reasons_to_accept": "- The paper tackles an important and relatively underexplored problem by investigating the capabilities of LLMs in detecting WebShells, a practical and impactful cybersecurity challenge.\n\n- The proposed BFAD framework is thoughtfully designed and addresses specific LLM limitations in this domain.\n\n- Experimental results are extensive, and the improvements observed with BFAD, particularly for smaller models, are encouraging.\n\n- The use of behavior-weighted similarity to select ICL demonstrations is well-motivated and shows promising empirical gains.",
+    "reasons_to_reject": "- Generalization: The paper would be strengthened by evaluating model robustness to unseen attack types, such as zero-day or out-of-distribution samples at inference time.\n\n- Algorithm Clarity: Algorithm 1 could be clearer, especially regarding how the “additional non-overlapping code segments” are selected, which affects reproducibility.\n\n- Comparative Baselines: A direct comparison with fine-tuned LLMs on the classification task would provide useful context and help isolate the benefits of the prompting-based approach.\n\n- Ablation Studies: Including ablations (e.g., varying the number of ICL examples or isolating the contribution of each BFAD module) would offer deeper insight into where the gains come from.\n\n- Unexpected Model Behavior: In Table 4, the smaller Qwen-2.5-0.5B model achieves higher precision than the 1.5B variant, which is counterintuitive and not discussed.\n\n- Component Evaluation: Table 5 shows that the critical region extraction performs quite well independently. It would be helpful to more clearly quantify the added value of the hybrid approach.\n\n- Presentation: Table 4 presents key results and would be better placed in the main body for accessibility.",
+    "questions_to_authors": "- Have you considered testing the models under zero-day or inference-only attack scenarios without ICL examples?\n\n- Could you clarify the procedure used to select the additional non-overlapping code segments in Algorithm 1?\n\n- What is the rationale for not including a fine-tuned LLM baseline, given that such models are commonly used for classification tasks?\n\n- Would you consider adding an ablation study that varies the number of ICL examples or removes components like WBFP or CACE?\n\n- Can you comment on the performance discrepancy between Qwen-2.5-1.5B and 0.5B in Table 4?\n\n- Given that CACE alone yields strong performance improvements, how much additional value does the hybrid strategy offer?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 99,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 2452,
+    "words": 358,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/55e02e68-4d00-4db9-9e17-590d502a62b1",
+    "error": null,
+    "scored_chars": 2452
+  }
+}

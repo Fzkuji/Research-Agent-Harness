@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "Uc0dTE2Wox",
+  "reviewer": "NBdR",
+  "paper": {
+    "title": "Rethinking Benign Overfitting in Two-Layer Neural Networks",
+    "authors": [
+      "Ruichen Xu",
+      "Kexin Chen"
+    ],
+    "abstract": "Recent theoretical studies (Kou et al., 2023; Cao et al., 2022) revealed a sharp phase transition from benign to harmful overfitting when the\nnoise-to-feature ratio exceeds a threshold—a situation common in long-tailed data distributions where atypical data is prevalent. However, such harmful overfitting rarely happens in overparameterized neural networks. Further experimental results suggested that memorization is necessary for achieving near-optimal generalization error in long-tailed data distributions (Feldman & Zhang, 2020). We argue that this discrepancy between theoretical predictions and empirical observations arises because previous feature-noise data models overlook the heterogeneous nature of noise across different data classes. In this paper, we refine the feature-noise data model by incorporating class-dependent heterogeneous noise and re-examine the overfitting phenomenon in neural networks. Through a comprehensive analysis of the training dynamics, we establish test loss bounds for the refined model. Our findings reveal that neural networks can leverage \"data noise\" to learn implicit features that improve the classification accuracy for long-tailed data. Our analysis also provides a training-free metric for evaluating data influence on test performance. Experimental validation on both synthetic and real-world datasets supports our theoretical results.",
+    "keywords": [
+      "Benign overfitting",
+      "long-tailed data",
+      "two-layer neural networks"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Uc0dTE2Wox"
+  },
+  "review_fields": {
+    "summary": "This paper establishes an enhanced feature-noise model by considering class-dependent heterogeneous noise across classes. Under this model, the paper demonstrates how memorization of long-tailed data boosts model performance. Additionally, it provides a phase transition of test error between benign and harmful overfitting.",
+    "claims_and_evidence": "Yes, the analysis is clear, rigorous, and thorough. Additionally, experiments are provided for further support.",
+    "methods_and_evaluation_criteria": "Yes, the model is more reasonable and closer to real-world applications than previous work. The experiment covers both synthetic data generated from the model and real-world datasets.",
+    "theoretical_claims": "I didn't check the correctness of the proofs, but I am familiar with the proof technique, and the results look reasonable to me. So, it is very likely to be correct.",
+    "experimental_designs_or_analyses": "Yes, I checked the experimental design section.",
+    "relation_to_broader_scientific_literature": "The generalization to heterogeneous data is good. For me, the interesting part is the results for long-tailed data, where the authors show that the classification accuracy of long-tailed data increases with the noise correlation ratio. This provides a theoretical explanation for the empirical observation of the necessity of long-tailed data in the training dataset.",
+    "other_strengths_and_weaknesses": "Strength:\n1. Novel Generalization: The paper extends the feature-noise model to class-dependent heterogeneous noise, making it more applicable to real-world scenarios.\n2. Theoretical Insights: It provides a rigorous analysis demonstrating how memorization of long-tailed data boosts model performance.\n\nWeaknesses:\n1. Definition of Long-Tailed Data: The conditioning of the L-long-tailed data distribution on the neural network model at time step T may introduce a recursive or non-intuitive aspect. It is unclear why conditioning on W_T is justified when no new data is generated after optimization begins. Please refer to questions for detail.",
+    "questions_for_authors": "I have questions about the definition of long-tailed data. The L-long-tailed data distribution (Definition 1) is defined by conditioning on the neural network model at time step T. I feel there might be an intrinsic tricky part, like a recursive definition, because the training data is generated first, and the neural network parameters are then optimized using this data. It seems odd to condition on W_T because no new data is generated after the optimization process starts. This is different from using SGD, where new data is introduced in each iteration. It would make more sense to me if a long-tailed data subset of the entire training dataset were defined independently of the distribution, and then this subset’s specific role throughout the training dynamics were analyzed. Please correct me if I have any misunderstanding."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

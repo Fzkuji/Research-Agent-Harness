@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "ljFgX6A8NL",
+  "reviewer": "Dwyh",
+  "paper": {
+    "title": "Automatic Pseudo-Harmful Prompt Generation for Evaluating False Refusals in Large Language Models",
+    "authors": [
+      "Bang An",
+      "Sicheng Zhu",
+      "Ruiyi Zhang",
+      "Michael-Andrei Panaitescu-Liess",
+      "Yuancheng Xu",
+      "Furong Huang"
+    ],
+    "abstract": "Safety-aligned large language models (LLMs) sometimes falsely refuse pseudo-harmful prompts, like \"how to kill a mosquito,\" which are actually harmless. Frequent false refusals not only frustrate users but also provoke public backlash against the very values alignment seeks to protect. In this paper, we propose the first method to auto-generate diverse, content-controlled, and model-dependent pseudo-harmful prompts. Using this method, we construct an evaluation dataset called PHTest, which is ten times larger than existing datasets, covers more false refusal patterns, and separately labels controversial prompts. We evaluate 20 LLMs on PHTest, uncovering new insights due to its scale and labeling. Our findings reveal a trade-off between minimizing false refusals and improving safety against jailbreak attacks. Moreover, we show that many jailbreak defenses significantly increase the false refusal rates, thereby undermining usability. Our method and dataset can help developers evaluate and fine-tune safer and more usable LLMs. Our code and dataset are available at \\href{https://github.com/umd-huang-lab/FalseRefusal}{https://github.com/umd-huang-lab/FalseRefusal}",
+    "keywords": [
+      "safety alignment",
+      "false refusals",
+      "pseudo-harmful prompts",
+      "controllable text generation",
+      "usability-safety trade-off",
+      "LLM"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ljFgX6A8NL"
+  },
+  "review_fields": {
+    "summary": "This paper presents an investigation about the False Refusals in defending harmful prompt. The authors propose a method to generate a pseudo-harmful dataset, and use it to evaluate several popular LLMs. Analysis are presented to show the tradeoff between false refusals and successful defendings.",
+    "reasons_to_accept": "1. While many work improve the successful defending rate, much less work put false refusal in an important position. This work brings out an interesting direction.\n\n2. A dataset are created for evaluating the above problem, with detailed labeling of the type and reason of false refusal, which may be potentially helpful for further study. \n\n3. The authors present analysis to help understand the different categories of false refusal (including newly identified categories), as well as the balance between false refusals and successful defendings.",
+    "reasons_to_reject": "1. The generation process of the dataset seems pretty standard.\n\n2. It is interesting to find new categories of fasle refusal. However, even with the listed 10 categories, there might still be other cases that have not been studied yet. I am wondering how it is useful to reveal these detailed categories. For example, is it possbile to improve the alignment/defence on a given category"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:35:55Z",
+    "migrated_from_v1_at": "2026-04-27T15:35:55Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 935,
+    "words": 149,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7f168734-c5cf-48a0-bfc8-b2627d817c70",
+    "error": null,
+    "scored_chars": 936
+  }
+}

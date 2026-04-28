@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "elMKXvhhQ9",
+  "reviewer": "tbTo",
+  "paper": {
+    "title": "Consistency Training with Learnable Data Augmentation for Graph Anomaly Detection with Limited Supervision",
+    "authors": [
+      "Nan Chen",
+      "Zemin Liu",
+      "Bryan Hooi",
+      "Bingsheng He",
+      "Rizal Fathony",
+      "Jun Hu",
+      "Jia Chen"
+    ],
+    "abstract": "Graph Anomaly Detection (GAD) has surfaced as a significant field of research, predominantly due to its substantial influence in production environments. Although existing approaches for node anomaly detection have shown effectiveness, they have yet to fully address two major challenges: operating in settings with limited supervision and managing class imbalance effectively. In response to these challenges, we propose a novel model, ConsisGAD, which is tailored for GAD in scenarios characterized by limited supervision and is anchored in the principles of consistency training. Under limited supervision, ConsisGAD effectively leverages the abundance of unlabeled data for consistency training by incorporating a novel learnable data augmentation mechanism, thereby introducing controlled noise into the dataset. Moreover, ConsisGAD takes advantage of the variance in homophily distribution between normal and anomalous nodes to craft a simplified GNN backbone, enhancing its capability to distinguish effectively between these two classes. Comprehensive experiments on several benchmark datasets validate the superior performance of ConsisGAD in comparison to state-of-the-art baselines. Our code is available at https://github.com/Xtra-Computing/ConsisGAD.",
+    "keywords": [
+      "Graph anomaly detection",
+      "consistency training",
+      "learnable data augmentation"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=elMKXvhhQ9"
+  },
+  "review_fields": {
+    "summary": "This paper has addressed the challenge of graph anomaly detection under limited supervision by introducing a novel model, which effectively leverages the abundance of unlabeled data for consistency training by incorporating a novel learnable data augmentation mechanism. Furthermore, CONSISGAD exploits the disparity in homophily distribution between normal and anomalous nodes, enabling the formulation of a refined GNN backbone that enhances its discriminatory power between the two classes.",
+    "strengths": "1. The logic of the whole paper is relatively clear and there are no obvious grammatical errors.\n\n2. There are quite sufficient experiments to verify the proposed method.",
+    "weaknesses": "1) why Eq4 can achieve the edge-level homophily representation? where does it differ from GCN aggregation? \n\n2) as you said, GAD has low homophily distribution, whether  the homophily-aware neighbourhood aggregation you propose will be effective for abnormal nodes, I deeply doubt it.\n\n3) I don't find  the definition of Vhq in Section 2,  whiat is the meaning of Vun?\n\n4) please compare  your learnable augmentation with other augmentation methods  \n\n5) please give complexity analysis"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 651,
+    "words": 102,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/37aa41e9-95c1-4b97-801f-542a034650da",
+    "error": null,
+    "scored_chars": 658
+  }
+}

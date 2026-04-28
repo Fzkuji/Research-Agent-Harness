@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "NVDrWBwJTV",
+  "reviewer": "j4Va",
+  "paper": {
+    "title": "The Good, the Bad and the Ugly: Meta-Analysis of Watermarks, Transferable Attacks and Adversarial Defenses",
+    "authors": [
+      "Grzegorz Gluch",
+      "Berkant Turan",
+      "Sai Ganesh Nagarajan",
+      "Sebastian Pokutta"
+    ],
+    "abstract": "We formalize and analyze the trade-off between backdoor-based watermarks and adversarial defenses, framing it as an interactive protocol between a verifier and a prover. While previous works have primarily focused on this trade-off, our analysis extends it by identifying transferable attacks as a third, counterintuitive but necessary option. Our main result shows that for all learning tasks, at least one of the three exists: a _watermark_, an _adversarial defense_, or a _transferable attack_. By transferable attack, we refer to an efficient algorithm that generates queries indistinguishable from the data distribution and capable of fooling _all_ efficient defenders. Using cryptographic techniques, specifically fully homomorphic encryption, we construct a transferable attack and prove its necessity in this trade-off. Finally, we show that tasks of bounded VC-dimension allow adversarial defenses against all attackers, while a subclass allows watermarks secure against fast adversaries.",
+    "keywords": [
+      "Interactive Proof Systems",
+      "Cryptography",
+      "Backdoors",
+      "Game Theory",
+      "Learning Theory",
+      "Transferable Attacks",
+      "Adversarial Robustness"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NVDrWBwJTV"
+  },
+  "review_fields": {
+    "summary": "This paper extends prior work exploring provable properties of learning tasks and tradeoffs between backdoor attacks and adversarial robustness. It proves that, for any learning task, a watermark, adversarial defense, or transferable task must exist. This result is rigorously derived through a series of proofs.",
+    "strengths_and_weaknesses": "Strengths: \n- Strong mathematical formalism of complex ideas. Proofs are communicated clearly and concisely. \n- Establishes novel results on transferable attacks and their connection to the computational complexity of the learning task. Side note on this - the statement on lines 257-258 (\"One can interpret this as showing that Transferable Attacks exist\nonly for complex learning tasks, in the sense of computational complexity theory\") made me think of the Platonic Representation Hypothesis (PRH) paper (https://arxiv.org/pdf/2405.07987), which claims that increasingly complex models will become more similar (e.g. more transferable properties between the models). A key limitation of the PRH paper is that it does not back up this claim, but rather derives it from intuition. I wonder if your result here about transferability as a result of task complexity could provide some theoretical basis for this claim. Interesting future work, perhaps. \n\nWeaknesses:\n- Paper claims that result holds for any learning task, but proofs and definitions appear specific to classifiers. Claims should be adjusted appropriately. \n- Paper lacks discussion to connect findings to any real-world impacts. The theoretical result is interesting, but I finished the paper wondering why the result matters.",
+    "questions": "- It seems the only type of watermark considered in this paper is a backdoor-based watermark. If this is the case, why don't the authors generalize their result to showing that \"for every learning task, at least one of the three must exist: a backdoor, an adversarial defense, or a transferable attack\"? There are many proposed types of watermarks now, particularly for LLMs (lines 993-1026 of supplementary), so making a broad claim about \"watermarks\" when in fact what is meant is a backdoor was confusing. \n\n- In Figure 1, who ``owns'' the model? It seems like model ownership transfers back and forth between Alice and Bob -- in \"watermark\" setting, Alice owns the model and proves ownership by embedding a strong watermark; in the \"defense\" setting, Bob owns the model and is defending it; and in the \"transferable\" setting, Bob again owns the model and is defending it. A simple but helpful change to the model would be updating the protocol so one player is always the attacker and one is always the defender. \n\n- Can these results generalize beyond classifiers?",
+    "limitations": "The paper provides an interesting theoretical result but fails to connect this result to important real-world use cases. The paper would be greatly improved by the inclusion of a discussion setting that contextualizes the theoretical finding and helps the reader understand its significance.",
+    "final_justification": "The rebuttal adequately addressed my concerns. Assuming the promised changes are made to the paper, I remain in favor of acceptance and am updating my score to a 5."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

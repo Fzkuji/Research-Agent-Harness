@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "HGNTcy4eEp",
+  "reviewer": "yBaK",
+  "paper": {
+    "title": "Learning Group Actions on Latent Representations",
+    "authors": [
+      "Yinzhu Jin",
+      "Aman Shrivastava",
+      "Tom Fletcher"
+    ],
+    "abstract": "In this work, we introduce a new approach to model group actions in autoencoders. Diverging from prior research in this domain, we propose to learn the group actions on the latent space rather than strictly on the data space. This adaptation enhances the versatility of our model, enabling it to learn a broader range of scenarios prevalent in the real world, where groups can act on latent factors. Our method allows a wide flexibility in the encoder and decoder architectures and does not require group-specific layers. In addition, we show that our model theoretically serves as a superset of methods that learn group actions on the data space. We test our approach on five image datasets with diverse groups acting on them and demonstrate superior performance to recently proposed methods for modeling group actions.",
+    "keywords": [
+      "group action",
+      "representation learning",
+      "image rendering"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=HGNTcy4eEp"
+  },
+  "review_fields": {
+    "comment": "Thank you for your response and for conducting the extra experiments. I believe the experiments on Prop 4.3. and latent swapping very fascinating, and can strengthen the paper. The experiments demonstrate that the autoencoder is learning some principled representation of what should and should not be invariant. \n\nI will raise my score, and I hope that these experiments are included in a revised version of the paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 418,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a6102d81-e614-4101-ba78-b6d39db24665",
+    "error": null,
+    "scored_chars": 419
+  }
+}

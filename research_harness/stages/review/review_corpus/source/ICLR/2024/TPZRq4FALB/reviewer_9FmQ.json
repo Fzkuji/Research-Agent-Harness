@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "TPZRq4FALB",
+  "reviewer": "9FmQ",
+  "paper": {
+    "title": "Test-time Adaptation against Multi-modal Reliability Bias",
+    "authors": [
+      "Mouxing Yang",
+      "Yunfan Li",
+      "Changqing Zhang",
+      "Peng Hu",
+      "Xi Peng"
+    ],
+    "abstract": "Test-time adaptation (TTA) has emerged as a new paradigm for reconciling distribution shifts across domains without accessing source data. However, existing TTA methods mainly concentrate on uni-modal tasks, overlooking the complexity of multi-modal scenarios.\nIn this paper, we delve into the multi-modal test-time adaptation and reveal a new challenge named reliability bias. Different from the definition of traditional distribution shifts, reliability bias refers to the information discrepancies across different modalities derived from intra-modal distribution shifts. To solve the challenge, we propose a novel method, dubbed REliable fusion and robust ADaptation (READ). On the one hand, unlike the existing TTA paradigm that mainly repurposes the normalization layers, READ employs a new paradigm that modulates the attention between modalities in a self-adaptive way, supporting reliable fusion against reliability bias. On the other hand, READ adopts a novel objective function for robust multi-modal adaptation, where the contributions of confident predictions could be amplified and the negative impacts of noisy predictions could be mitigated. Moreover, we introduce two new benchmarks to facilitate comprehensive evaluations of multi-modal TTA under reliability bias. Extensive experiments on the benchmarks verify the effectiveness of our method against multi-modal reliability bias. The code and benchmarks are available at https://github.com/XLearning-SCU/2024-ICLR-READ.",
+    "keywords": [
+      "Test-time adaption",
+      "Imbalanced multi-modal learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=TPZRq4FALB"
+  },
+  "review_fields": {
+    "summary": "This paper introduces a novel approach for addressing reliability bias in multi-modal test-time adaptation (TTA), a challenge arising from information disparities between modalities due to distribution shifts. To investigate the impact of reliability bias, the authors conduct comprehensive analyses involving various multi-modal fusion strategies and state-of-the-art TTA methods. The results underscore two pivotal aspects of effective TTA against reliability bias: dynamic information integration across modalities and noise-resilient adaptation across domains. To tackle these challenges, the authors devise a self-adaptive attention module to facilitate reliable cross-modal fusion and a confidence-aware loss function to ensure robustness against noisy predictions. Furthermore, this paper contributes two benchmark datasets focusing on multi-modal action recognition and event classification. Extensive comparison experiments against existing TTA methods and imbalanced multi-modal learning methods validate the effectiveness of the proposed method.",
+    "strengths": "1. This paper studies a new challenge (i.e., reliability bias) for multi-modal test-time adaption. Test-time adaption methods aim at adopting the pre-trained model from the source domain to the target domain in real-time and most existing of them focus on single-modality tasks against domain shifts. On the one hand, this paper takes the more complex multi-modal scenarios into consideration. On the other hand, the authors study and tackle the reliability bias challenge. \n\n2. The authors conduct extensive experiments to validate the importance of developing robust TTA methods against reliability bias. On the one hand, the existing cross-modal fusion methods (late fusion, attention-based fusion, etc.) would suffer from reliability bias and cannot achieve reliable cross-modal fusion. On the other hand, the existing TTA method cannot completely reconcile the distribution shifts by updating the parameters of normalization layers, leading to surviving reliability bias across modalities. Furthermore, the authors show that simply handling reliability bias during test time takes more superiority compared to the imbalanced multi-modal learning methods that alter the training process to handle the problem.\n\n3. The proposed method is novel and technically sound. First, the authors focus on the characteristics of multi-modal TTA and design the self-adaptive attention module that repurposes the attention layers during test time for achieving reliable cross-modal fusion. I think the design would inspire the community to design task-specific parameter modulation instead of solely updating the parameters of normalization layers following most existing methods. Second, to achieve robustness against heavy noise during adaption, the authors propose the robust loss function which not only eliminates the influence of noisy predictions but also boosts utilization of the clean predictions with theoretical guarantees.",
+    "weaknesses": "Although this paper is well-motivated and extensively validated, I still have the following concerns or suggestions, hoping to make the paper more clear and solid.\n\n1. The experiment results are mainly obtained under the setting of severity 5. To establish the method's generality, it is encouraged to expand the empirical results across a spectrum of scenarios, including different severity levels. A broader array of experiments, encompassing various severity levels, would not only fortify the method's reliability but also enhance the comprehensiveness of this study. Moreover,  it would be beneficial to evaluate how the method performs in the context of test-time adaptation (TTA) under unbiased reliability conditions. Specifically, investigating the method's effectiveness in both (i.d.d. and non-i.d.d. scenarios would render it more practical and versatile.\n2. The paper contains extensive analysis and experiments, but some settings require further clarification. For instance, it's not entirely clear what \"Attention A-V\" means in Figure 4 and how the results demonstrate the method's robustness. In the analysis of Figure 5, claims are made about the importance of maintenance between audio and video modalities, but the contrast with clean results is not evident. Additional clarification or supplementary results are needed to support these claims.\n3. There are a few typos and vague statements in the paper, such as \"trafﬁc noise in the audio modality\" in the caption of Figure 1, \"information bias\" on Page 2, and inconsistent notations like \"(Stat. LN) & AF\" or \"Stat. (LN & AF)\" in Tables 1-3. These should be corrected for clarity and consistency.",
+    "questions": "My questions mainly lie in some unclear experiment analysis and  the generalizability of the proposed approach to a broader range of severity levels."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 5,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 12,
+    "mixed_pct": 0,
+    "human_pct": 88,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3742,
+    "words": 550,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b19b079a-df74-4b0c-b7ad-bf821c3b5eab",
+    "error": null,
+    "scored_chars": 3745
+  }
+}

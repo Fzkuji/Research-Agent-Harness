@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "SkeATxrKwH",
+  "reviewer": "3",
+  "paper": {
+    "title": "Generative Hierarchical Models for Parts, Objects, and Scenes",
+    "authors": [
+      "Fei Deng",
+      "Zhuo Zhi",
+      "Sungjin Ahn"
+    ],
+    "abstract": "Hierarchical structure such as part-whole relationship in objects and scenes are the most inherent structure in natural scenes. Learning such representation via unsupervised learning can provide various benefits such as interpretability, compositionality, and transferability, which are important in many downstream tasks. In this paper, we propose the first hierarchical generative model for learning multiple latent part-whole relationships in a scene. During inference, taking top-down approach, our model infers the representation of more abstract concept (e.g., objects) and then infers that of more specific concepts (e.g., parts) by conditioning on the corresponding abstract concept. This makes the model avoid a difficult problem of routing between parts and whole. In experiments on images containing multiple objects with different shapes and part compositions, we demonstrate that our model can learn the latent hierarchical structure between parts and wholes and generate imaginary scenes.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=SkeATxrKwH"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "Contributions: this submission proposes a generative framework which employs a hierarchical decomposition of scene, objects and parts. It modifies the SPAIR framework (Crawford & Pineau) and replaces the recurrent generation with parallel generation, by assuming the number of objects is known and fixed. Results are presented on two synthetic datasets with 2D or 3D shapes.\n\nAssessment:\n- The proposed model and learning framework are closely related to previous work (AIR, SPAIR). The authors replaced the \"sequential processing ... with single forward pass\", which requires the number of objects to be fixed.\n- In the proposed model, there is no constraint on the part-object hierarchy, and it is unclear whether it can learn to discover such hierarchies directly by reconstructing single static images. It is also not evaluated in the submission.\n- There are no comparisons with AIR or SPAIR on the two datasets the authors created.\n- The authors are recommended to compare with previous work on hierarchical generative modelings with objects and parts, such as (Xu et al, ICLR 2019), and other related work, such as SPIRAL (Ganin et al.)\n\nDue to the limited contribution, lack of comparison with related work and limited empirical evaluation, I recommend rejection of the submission.\n\n[1] Xu el al, Unsupervised Discovery of Parts, Structure, and Dynamics, ICLR 2019.\n[2] Ganin et al., Synthesizing Programs for Images using Reinforced Adversarial Learning.\n\n\n--------------------------------\nPost-rebuttal:\nThank you for your detailed answers to my questions and updated manuscript. The writing has indeed significantly improved and some questions (e.g. varying number of objects) have been addressed. After reading the rebuttal, my concerns remain that: (1) lack of empirical evaluation on more complex real / synthetic datasets; (2) it is still unclear to me how such hierarchy is inferred from single images.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory."
+  },
+  "review_metadata": {
+    "rating": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

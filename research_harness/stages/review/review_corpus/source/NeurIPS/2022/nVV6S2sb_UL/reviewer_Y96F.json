@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "nVV6S2sb_UL",
+  "reviewer": "Y96F",
+  "paper": {
+    "title": "Securing Secure Aggregation: Mitigating Multi-Round Privacy Leakage in Federated Learning",
+    "authors": [
+      "Jinhyun So",
+      "Ramy E. Ali",
+      "Basak Guler",
+      "Jiantao Jiao",
+      "Salman Avestimehr"
+    ],
+    "abstract": "Secure aggregation is a critical component in federated learning, which enables the server to learn the aggregate model of the users without observing their local models. Conventionally, secure aggregation algorithms focus only on ensuring the privacy of individual users in a single training round. We contend that such designs can lead to significant privacy leakages over multiple training rounds, due to partial user selection/participation at each round of FL. In fact, we show that the conventional random user selection strategies in FL may lead to leaking users' individual models within a number of rounds that is linear in the number of users. To address this challenge, we introduce a secure aggregation framework, Multi-RoundSecAgg, with multi-round privacy guarantees. In particular, we introduce a new metric to quantify the privacy guarantees of FL over multiple training rounds, and develop a structured user selection strategy that guarantees the long-term privacy of each user (over any number of training rounds). Our framework also carefully accounts for the fairness and the average number of participating users at each round. Our experiments on MNIST, CIFAR-$10$ and CIFAR-$100$ datasets in the IID and the non-IID settings demonstrate the performance improvement over the baselines, both in terms of privacy protection and test accuracy.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=nVV6S2sb_UL"
+  },
+  "review_fields": {
+    "summary": "The paper explores the question of multi-round privacy leakage in federated learning with secure aggregation. To this end, the paper proposes a novel metric for multi-round privacy in FL. Existing FL secure aggregation protocols guarantee that the server can only learn the sum of N local models in any single round. The proposed multi-round privacy metric extends this guarantee to all training rounds. The paper motivates the need for multi-round privacy guarantees by demonstrating theoretically and experimentally that, under the assumption of partial user participation, existing secure aggregation protocols are vulnerable to attacks that aggregate models across multiple training rounds. To address this vulnerability, the paper proposes Multi-RoundSecAgg, a novel algorithm that provides a multi-round privacy guarantee. Theoretical analyses of the multi-round privacy, aggregation fairness gap and average aggregation cardinality guarantees of the proposed method are presented, as well as a convergence analysis. Finally, the proposed method is validated experimentally over range of FL settings and image datasets.",
+    "strengths_and_weaknesses": "# Strengths\n\nA. The writing and figures are very clear.\n\nB. Strong motivation. The paper demonstrates that, under the assumption of partial user participation, existing secure aggregation protocols are vulnerable to attacks that aggregate models across multiple training rounds. This is an important limitation of existing methods, which merits attention from the community.\n\nC. Strong novelty. The paper presents a novel multi-round attack on existing secure aggregation protocols. The paper proposes a novel metric for multi-round privacy in FL. The paper proposes a novel secure aggregation method that provides a multi-round privacy guarantee. The paper provides novel theoretical results for both existing secure aggregation methods and the proposed method. All of these are important contributions.\n\nD. Strong theoretical results. The paper provides the theoretical guarantees of the proposed Multi-RoundSecAgg method in terms of multi-round privacy, aggregation fairness gap and average aggregation cardinality. The paper also provides a convergence analysis of the proposed Multi-RoundSecAgg method. These results provide important insights about the proposed method and its functioning.\n\nE. Strong experimental results. Relevant baselines are compared against over a range of FL settings and datasets. Across all evaluations, the proposed method shows a better multi-round privacy guarantee, yet comparable test accuracy compared to the baselines.\n \n\n # Weaknesses\n\nF. Experimental evaluations with real-world datasets and SOA model architectures would strengthen the paper. That said, this is not a major issue given the novelty of the work and breadth of theoretical results.\n\nG. Given the focus on reconstruction attacks, the paper is missing a discussion of differentially private federated learning as a potential solution to the multi-round privacy vulnerability.",
+    "questions": "H. Given that T=4 is not a very strong privacy guarantee and that for T=6 the convergence rate already starts to take a significant hit, I wonder whether you're not better off adding noise to the gradients as in DP-FedAvg to protect the local data. Did you consider this option?",
+    "limitations": "The authors adequately address the limitations and potential negative societal impact of their work."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

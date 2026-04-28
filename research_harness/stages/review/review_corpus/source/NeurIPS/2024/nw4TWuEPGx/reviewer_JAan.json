@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "nw4TWuEPGx",
+  "reviewer": "JAan",
+  "paper": {
+    "title": "Discovering plasticity rules that organize and maintain neural circuits",
+    "authors": [
+      "David G Bell",
+      "Alison Duffy",
+      "Adrienne Fairhall"
+    ],
+    "abstract": "Intrinsic dynamics within the brain can accelerate learning by providing a prior scaffolding for dynamics aligned with task objectives. Such intrinsic dynamics would ideally self-organize and self-sustain in the face of biological noise including synaptic turnover and cell death. An example of such dynamics is the formation of sequences, a ubiquitous motif in neural activity. The sequence-generating circuit in zebra finch HVC provides a reliable timing scaffold for motor output in song and demonstrates a remarkable capacity for unsupervised recovery following perturbation. Inspired by HVC, we seek a local plasticity rule capable of organizing and maintaining sequence-generating dynamics despite continual network perturbations. We adopt a meta-learning approach introduced by Confavreux et al, which parameterizes a learning rule using basis functions constructed from pre- and postsynaptic activity and synapse size, with tunable time constants. Candidate rules are simulated within initially random networks, and their fitness is evaluated according to a loss function that measures the fidelity with which the resulting dynamics encode time. We use this approach to introduce biological noise, forcing meta-learning to find robust solutions. We first show that, in the absence of perturbations, meta-learning identifies a temporally asymmetric generalization of Oja's rule that reliably organizes sparse sequential activity. When synaptic turnover is introduced, the learned rule incorporates a form of homeostasis, better maintaining robust sequential dynamics relative to other previously proposed rules. Additionally, inspired by recent findings demonstrating that the strength of projections from inhibitory interneurons in HVC also dynamically responds to perturbations, we explore the role of inhibitory plasticity in sequence-generating circuits. We find that learned plasticity adjusts both excitation and inhibition in response to manipulations, outperforming rules applied only to excitatory connections. We demonstrate how plasticity acting on both excitatory and inhibitory synapses can better shape excitatory cell dynamics to scaffold timing representations.",
+    "keywords": [
+      "biologically plausible learning rules plasticity self-organization RNNs homeostasis meta-learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=nw4TWuEPGx"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a conceptually simple set-up to learn plasticity rules that result in neural networks that perform a specific task. The set-up of the paper is elegant and made up of simple but effective elements, such as linear-threshold neurons and evolutionary optimisation. The authors obtain some intriguing results, e.g. that their method discovers plasticity rules well-known in experimental neuroscience.",
+    "strengths": "The paper tackles an interesting problem with a relatively straightforward set-up, which makes it easily understandable. It has a very high density of results, which are technically sophisticated as well as relevant for many questions in neuroscience.",
+    "weaknesses": "One of the main limitations of the paper is that this very promising and flexible set-up is only applied to one very idiosyncratic task of elapsed time decoding. This is a very specific task, and not one that brains do spontaneously (see next paragraph), so although it yields interesting results it seems a bit lacking. It would be tremendously useful to see the results in a broad range of tasks, to see e.g. under what conditions other common plasticity rules (Hebbian, anti-Hebbian, perhaps some dopamine-like reward-modulated plasticity) emerge.\n\nThe motivation of the system set-up is somewhat dubious. The authors point out the importance of \"intrinsic, self-organised dynamics\" but then include as the primary component of their loss function the performance of an external decoder that predicts simulation time. Neither the decoder nor the ground truth time values are in any way intrinsic to neural activity, so I would argue this is not representative of self-organisation.\n\nOn a separate note, the paper sorely lacks any demonstration of the \"downstream\" effects of these plasticity rules. For example, the author's motivation is that \"self-organized computations provide scaffolds for solving difficult tasks\". However, the authors don't actually show that the networks evolved with their discovered plasticity rules can actually solve any difficult task.\n\nThe paper gets really hard to follow towards the end, particularly Sections 2.3.2 and 2.3.3. The intervention to increase or decrease E afferents in Sec. 2.3.2, as well as the analysis metrics in Fig. 6a-c aren't very clear. It also surprising to see Sec. 2.3.3, the final results subsection of the paper, introducing a whole new model and a different plasticity rule, which are only partially related to the model and plasticity rules studied elsewhere. Overall, I could not understand well the set-up or results in either of these subsections.\n\nThe details of the meta-learning procedure should be explained more thoroughly in Sec. 2.1.1. Figures are quite busy and in general hard to parse.",
+    "questions": "The p-values in Sec. 2.2.1 are somewhat meaningless, because one can always run more simulations to decrease the p-value. I would recommend quantifying effect size (with e.g. Cohen's $d$) instead.\n\nPlease define important terms at first use (e.g. HVC).\n\nWhat is $\\mathcal{P}(\\textbf{C})$ in L. 103?\n\nReferences 4, 5, 11 and 28 are misformatted.",
+    "limitations": "The \"Discussion and limitations\" section is very short and should be expanded."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2742,
+    "words": 425,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fc4e2b99-75fd-4493-b8e3-79960a06af04",
+    "error": null,
+    "scored_chars": 2742
+  }
+}

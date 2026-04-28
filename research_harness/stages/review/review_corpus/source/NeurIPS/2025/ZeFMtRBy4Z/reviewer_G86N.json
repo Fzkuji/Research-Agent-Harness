@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "ZeFMtRBy4Z",
+  "reviewer": "G86N",
+  "paper": {
+    "title": "REVE: A Foundation Model for EEG - Adapting to Any Setup with Large-Scale Pretraining on 25,000 Subjects",
+    "authors": [
+      "Yassine El Ouahidi",
+      "Jonathan Lys",
+      "Philipp Thölke",
+      "Nicolas Farrugia",
+      "Bastien Pasdeloup",
+      "Vincent Gripon",
+      "Karim Jerbi",
+      "Giulia Lioi"
+    ],
+    "abstract": "Foundation models have transformed AI by reducing reliance on task-specific data through large-scale pretraining. While successful in language and vision, their adoption in EEG has lagged due to the heterogeneity of public datasets, which are collected under varying protocols, devices, and electrode configurations. Existing EEG foundation models struggle to generalize across these variations, often restricting pretraining to a single setup, resulting in suboptimal performance, in particular under linear probing.\nWe present REVE (Representation for EEG with Versatile Embeddings), a pretrained model explicitly designed to generalize across diverse EEG signals. REVE introduces a novel 4D positional encoding scheme that enables it to process signals of arbitrary length and electrode arrangement. Using a masked autoencoding objective, we pretrain REVE on over 60,000 hours of EEG data from 92 datasets spanning 25,000 subjects, representing the largest EEG pretraining effort to date.\nREVE achieves state-of-the-art results on 10 downstream EEG tasks, including motor imagery classification, seizure detection, sleep staging, cognitive load estimation, and emotion recognition. With little to no fine-tuning, it demonstrates strong generalization, and nuanced spatio-temporal modeling. We release code, pretrained weights, and tutorials to support standardized EEG research and accelerate progress in clinical neuroscience.",
+    "keywords": [
+      "Foundation Model",
+      "EEG",
+      "SSL",
+      "BCI"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZeFMtRBy4Z"
+  },
+  "review_fields": {
+    "summary": "The paper introduces REVE (Representation for EEG with Versatile Embeddings), a foundation model for electroencephalogram (EEG) designed to address the heterogeneity of EEG datasets by enabling generalization across diverse recording setups, electrode configurations, and task types. The core challenge addressed is the limited generalizability of existing EEG foundation models, which often rely on homogeneous datasets and fixed positional encodings. Key Contributions:\n\nNovel 4D Positional Encoding: REVE uses a Fourier-based 4D encoding that integrates spatial (3D electrode coordinates) and temporal (patch indices) dimensions, allowing flexibility in processing signals of arbitrary length and electrode arrangements. This addresses the rigidity of prior absolute or convolutional encodings.\n\nLarge-Scale Heterogeneous Pretraining: REVE is pretrained on 60,000+ hours of EEG data from 92 datasets spanning 25,000 subjects, the largest such effort to date. This diversity enhances generalization to unseen setups.\n\nSpatio-Temporal Block Masking: A joint masking strategy disrupts contiguous regions in both spatial and temporal dimensions during pretraining, improving representation learning for robust feature extraction.\n\nState-of-the-Art Performance: REVE achieves superior results on 10 downstream tasks, including motor imagery classification, seizure detection, and sleep staging, outperforming prior models like CBraMod and LaBraM.",
+    "strengths_and_weaknesses": "Strengths\n\nQuality:\n\nThe experimental design is rigorous, with comprehensive evaluations across diverse tasks and datasets. The use of linear probing and fine-tuning protocols ensures fairness against baselines.\nThe large pretraining corpus and clear ablation studies (e.g., masking ratio, secondary loss impact) validate the method’s robustness.\n\nClarity:\n\nThe paper is well-structured, with detailed explanations of the 4D encoding, masking strategy, and training pipeline. Technical details (e.g., hyperparameters, dataset composition) are provided in appendices.\nVisualizations (e.g., pretraining framework diagram) and tables (performance metrics) aid comprehension.\n\nSignificance:\n\nREVE advances EEG foundation modeling by addressing long-standing challenges in data heterogeneity, which could accelerate progress in brain-computer interfaces (BCIs) and clinical diagnostics.\nThe focus on generalizable representations reduces reliance on task-specific fine-tuning, making it accessible for low-data scenarios.\n\nOriginality:\n\nThe 4D positional encoding is a novel approach for EEG, enabling true cross-setup generalization. The scale of pretraining and integration of spatial-temporal masking are also innovative.\n\nWeaknesses\n\nQuality:\n\nWhile the dataset is large, the preprocessing (e.g., z-score normalization, clipping) might introduce biases. The impact of data cleaning on downstream tasks is not fully explored.\nSome ablation results (e.g., Table 18) show inconsistent performance across masking ratios, leaving questions about optimal configurations for specific tasks.\n\nClarity:\n\nThe 4D encoding’s mathematical derivation (Section 2.2) could be more transparent, especially regarding how Fourier frequencies are selected and truncated to match embedding dimensions.\nThe secondary loss function’s design (attention pooling across layers) is briefly described; more intuition on its effectiveness in preventing over-specialization is needed.\n\nSignificance:\n\nThe clinical impact is implied but not directly validated (e.g., case studies in real-world diagnostics). The model’s utility in resource-constrained settings remains unaddressed.\n\nOriginality:\n\nWhile the 4D encoding is novel, the use of masked autoencoding (MAE) follows prior work in vision. The contribution lies more in adaptation than radical architectural innovation.",
+    "questions": "Question1: How does the 4D encoding perform with extremely sparse electrode setups (e.g., <4 channels) or non-standard montages not seen in pretraining? Are there limitations in capturing fine-grained spatial patterns with low channel counts?\n\n\nQuestion2: The pretraining corpus includes clinical, BCI, and cognitive data, but how is data quality ensured? Are there biases in dataset selection (e.g., overrepresentation of certain demographics)?\n\nQuestion3: How does REVE perform in zero-shot or few-shot scenarios, where minimal task-specific data is available? The current evaluation focuses on fine-tuning, but real-world applications often have limited labels.\n\n\nQuestion4: Does the 4D encoding incur higher computational costs than prior methods? How does it scale with increasing channel counts and signal length?"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

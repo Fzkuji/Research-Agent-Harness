@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "bB-l0cnS3E",
+  "reviewer": "zPDw",
+  "paper": {
+    "title": "Evaluation of Human-AI Teams for Learned and Rule-Based Agents in Hanabi",
+    "authors": [
+      "Ho Chit Siu",
+      "Jaime Daniel Pena",
+      "Edenna Chen",
+      "Yutai Zhou",
+      "Victor Lopez",
+      "Kyle Palko",
+      "Kimberlee Chestnut Chang",
+      "Ross Emerson Allen"
+    ],
+    "abstract": "Deep reinforcement learning has generated superhuman AI in competitive games such as Go and StarCraft. Can similar learning techniques create a superior AI teammate for human-machine collaborative games? Will humans prefer AI teammates that improve objective team performance or those that improve subjective metrics of trust? In this study, we perform a single-blind evaluation of teams of humans and AI agents in the cooperative card game Hanabi, with both rule-based and learning-based agents. In addition to the game score, used as an objective metric of the human-AI team performance, we also quantify subjective measures of the human's perceived performance, teamwork, interpretability, trust, and overall preference of AI teammate. We find that humans have a clear preference toward a rule-based AI teammate (SmartBot) over a state-of-the-art learning-based AI teammate (Other-Play) across nearly all subjective metrics, and generally view the learning-based agent negatively, despite no statistical difference in the game score. This result has implications for future AI design and reinforcement learning benchmarking, highlighting the need to incorporate subjective metrics of human-AI teaming rather than a singular focus on objective task performance.",
+    "keywords": [
+      "Human-AI Teaming",
+      "Deep Learning",
+      "Reinforcement Learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=bB-l0cnS3E"
+  },
+  "review_fields": {
+    "summary": "The paper describes an experiment where humans were playing against bots in the game of Hanabi, a cooperative card game. There were two types of bots: rule based, and reinforcement learning based. Even though the two types played equally strong, the humans, when asked, strongly preferred the rule based bots.\nThis result holds implications for design of future human-computer interaction bots.",
+    "main_review": "The paper is very well written. The English is perfect, the text is very clear.\nThe originality of the paper is high: this is a social science experiment with 29 human participants to see if they like a rule based bot or a reinforcement learning based bot. No algorithms were developed for this paper by the authors. The outcome may be surprising, and is certainly interesting.\nThe qulaity of the work is good, the statistical analysis is elaborate, and enough details are provided about setup and analysis.\nThe paper is significant, as so far as results based on a single card game can be considered significant. The results are certainly refreshing.",
+    "limitations_and_societal_impact": "Ethical and limitations are dealt with in an appropriate manner in this paper. The limitations are used to show future work.",
+    "ethical_concerns": "There appear to be no ethical concerns. Human subjects have given their consent."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

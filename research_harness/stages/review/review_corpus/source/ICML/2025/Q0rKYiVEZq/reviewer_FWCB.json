@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "Q0rKYiVEZq",
+  "reviewer": "FWCB",
+  "paper": {
+    "title": "Emoji Attack: Enhancing Jailbreak Attacks Against Judge LLM Detection",
+    "authors": [
+      "Zhipeng Wei",
+      "Yuqi Liu",
+      "N. Benjamin Erichson"
+    ],
+    "abstract": "Jailbreaking techniques trick Large Language Models (LLMs) into producing restricted output, posing a potential threat. One line of defense is to use another LLM as a Judge to evaluate the harmfulness of generated text. However, we reveal that these Judge LLMs are vulnerable to token segmentation bias, an issue that arises when delimiters alter the tokenization process, splitting words into smaller sub-tokens. This alters the embeddings of the entire sequence, reducing detection accuracy and allowing harmful content to be misclassified as safe. In this paper, we introduce Emoji Attack, a novel strategy that amplifies existing jailbreak prompts by exploiting token segmentation bias. Our method leverages in-context learning to systematically insert emojis into text before it is evaluated by a Judge LLM, inducing embedding distortions that significantly lower the likelihood of detecting unsafe content. Unlike traditional delimiters, emojis also introduce semantic ambiguity, making them particularly effective in this attack. Through experiments on state-of-the-art Judge LLMs, we demonstrate that Emoji Attack substantially reduces the unsafe prediction rate, bypassing existing safeguards.",
+    "keywords": [
+      "LLM safety; Jailbreaking Attacks; Judge LLMs; Token Segmentation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Q0rKYiVEZq"
+  },
+  "review_fields": {
+    "summary": "This paper introduces \"Emoji Attack,\" a technique that exploits token segmentation bias to enhance jailbreak attacks against Judge LLMs. The authors demonstrate that inserting emojis into text can disrupt the tokenization process, causing embedding distortions that lead Judge LLMs to misclassify harmful content as safe. Through experiments on multiple state-of-the-art Judge LLMs, they show that their approach substantially reduces unsafe prediction rates, and bypassing existing safeguards.",
+    "claims_and_evidence": "Yes, the claims made in the submission are generally supported by clear and convincing evidence.",
+    "theoretical_claims": "EmojiAttack does not contain formal mathematical proofs that require verification. The paper is primarily empirical in nature, focusing on experimental demonstrations of the token segmentation bias vulnerability and the effectiveness of the Emoji Attack.\n\nAs for theoretical claims, it includes several theoretical formulations and algorithms:\n\n1. Problem formulation in Section 3.1: The authors provide mathematical notation for how target LLMs and Judge LLMs operate, defining the prediction of tokens and the filtering process. These are standard formulations.\n2. Definition 3.1 of Token Segmentation Bias: A formula definition.\n3. Equation 3 for computing cosine similarities:  a straightforward application of cosine similarity.",
+    "experimental_designs_or_analyses": "1. Token Segmentation Bias Experiments (Section 3.2): Here the authors test mid-split and cs-split on 402 offensive phrases. They compare baseline performance against two increasingly sophisticated segmentation methods, providing a clear progression of effectiveness. And Figure 2 appropriately visualizes results across four Judge LLMs, Figure 3 effectively demonstrates the correlation between cosine similarity and classification probability.\n2. Enhancement of Existing Jailbreak Techniques (Section 4.2):  Integrate of Emoji Attack with four established jailbreak methods.\n3. White-Box Emoji Attack (Section 4.3): Test token segmentation bias and emoji insertion on a dataset of 1,432 harmful responses.",
+    "relation_to_broader_scientific_literature": "1. Jailbreaking techniques: While previous work like GCG  focused on optimizing tokens to bypass content generation LLMs, this paper uniquely targets Judge LLMs through token manipulation with emojis.\n2. Tokenization vulnerabilities: The paper builds on on character-level attacks, but identifies a new \"token segmentation bias\" specifically affecting Judge LLMs when delimiters alter tokenization.\n3. Judge LLM biases: This extends research on biases in evaluation modelsby discovering a previously unknown vulnerability affecting even commercial models like GPT-4.\n\nIn terms of the findings, this paper has proved that their methodology effectiveness compared with other methods",
+    "other_strengths_and_weaknesses": "Pros:\n1. Unlike many jailbreak techniques requiring complex optimization algorithms, the Emoji Attack is relatively simple to implement using in-context learning, making it particularly concerning from a security perspective.\n2. The authors demonstrate that token segmentation bias affects multiple Judge LLM architectures, suggesting this is a fundamental vulnerability rather than an implementation-specific issue.\n\nCons:\n1. There's limited information about the composition of the 402 offensive phrases and 1,432 harmful responses used for evaluation, making it difficult to assess how representative they are.",
+    "questions_for_authors": "1. In the black-box Emoji Attack implementation, how do you address position selection when you lack direct access to embedding functions? The paper demonstrates that emoji position significantly impacts effectiveness, but it's unclear how optimal positioning is achieved in the black-box scenario where you can't compute cosine similarities. Would a response detailing your approach for black-box position optimization change my assessment of the method's practical applicability?\n2. Does token segmentation bias persist when Judge LLMs evaluate text in languages other than English, particularly those with different tokenization patterns (e.g., character-based languages like Chinese or Japanese)? Evidence of cross-lingual vulnerability (or lack thereof) would enhance my understanding of how fundamental this vulnerability is to LLM architecture."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

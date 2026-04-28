@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "tmIiMPl4IPa",
+  "reviewer": "Uuaf",
+  "paper": {
+    "title": "Factorized Fourier Neural Operators",
+    "authors": [
+      "Alasdair Tran",
+      "Alexander Mathews",
+      "Lexing Xie",
+      "Cheng Soon Ong"
+    ],
+    "abstract": "We propose the Factorized Fourier Neural Operator (F-FNO), a learning-based approach for simulating partial differential equations (PDEs). Starting from a recently proposed Fourier representation of flow fields, the F-FNO bridges the performance gap between pure machine learning approaches to that of the best numerical or hybrid solvers. This is achieved with new representations – separable spectral layers and improved residual connections – and a combination of training strategies such as the Markov assumption, Gaussian noise, and cosine learning rate decay. On several challenging benchmark PDEs on regular grids, structured meshes, and point clouds, the F-FNO can scale to deeper networks and outperform both the FNO and the geo-FNO, reducing the error by 83% on the Navier-Stokes problem, 31% on the elasticity problem, 57% on the airfoil flow problem, and 60% on the plastic forging problem. Compared to the state-of-the-art pseudo-spectral method, the F-FNO can take a step size that is an order of magnitude larger in time and achieve an order of magnitude speedup to produce the same solution quality.",
+    "keywords": [
+      "fourier transform",
+      "fourier operators",
+      "pde",
+      "navier stokes"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=tmIiMPl4IPa"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "In this paper, the author proposee Factorized Fourier Neural Operator (F-FNO), a learning-based approach for simulating partial differential equations (PDEs). This work is seen as an improvement of the work by [Li2021] in which the Fourier Neural Operator was introduced. In this work, the author aims at improving the stability of the algorithm under complex geometries and noisy data by introducing more regularizations in the neural operator. The proposed F-FNO method is able to reduce the size of parameter by an order of magnitude while improving the performance over FNO significantly.\n\n\n[Li2021] Zongyi Li, Nikola B. Kovachki, K. Azizzadenesheli, Burigede Liu, K. Bhattacharya, Andrew Stuart, and Anima Anandkumar. Fourier neural operator for parametric partial differential equations. In International Conference on Learning Representations, 2021a.",
+    "strength_and_weaknesses": "This paper has several aspects of strength:\n\n1. Compared to [Li2021], the F-FNO framework has several changes: 1) a residual connection after the feedforward connection; 2) a spatial factorization; and 3) during the training, instead of unrolling the model, the F-FNO use teacher forcing and make online update based on Markov assumption;\n\n2. The performance improvement of F-FNO over FNO is significant. Under several synthesis dataset  and using deep architectures, the reduction on MSE and time until correlation are both significant. \n\n3. The introduction of forcing function in the F-FNO allows the model to take additional contextual information that helps to solve the equation. \n\nThis paper has several aspects for improvement:\n\n1. While claiming to improve over the state-of-the-art algorithm, the experiments in the main paper only compare with FNO while the comparison with other methods are left in appendix. This is a missed opportunities since it is important to provide a comprehensive review on the related methods in both the parameter size, the MSE and time until correlation, as in [Li2021].  It is suggested to put some of the comprehensive study in the early main page.\n\n2. The spatial factorization is a significant simplification for the model while it may over introduce additional bias since it implicitly assumes that the solution also factorizes spatially. Does it make sense physically in the scenario when the Navier-Stokes equations are applied ? What is the tradeoff for this factorization ? \n\n3. As a PDE solver in the spectral domain, it is expected to discuss some tradeoff on the choice of spatial and spectral resolution (i.e. the design of the wavelength number vs. the dimension of input). It is known from Sampling Theorem that this choice of sampling rate would affect the performance of the system when the complex geometries require more detailed information to be kept after the discretization. This practical issue seems not discussed but it is interesting to have some thoughts on that.",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is clearly written and the code provided has been structured well with good comment and documentation.",
+    "summary_of_the_review": "This paper has proposed an important update over existing Fourier Neural Operator and has brought it closer to practical use. With additional factorization, the F-FNO framework reduces the parameter size while attaining a great improvement in stability and performance when the layer of the neural network goes deep. This justifies my decision to accept this paper.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

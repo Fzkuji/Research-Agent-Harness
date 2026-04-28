@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "lJMioZBoR8",
+  "reviewer": "tasN",
+  "paper": {
+    "title": "Rejection Improves Reliability: Training LLMs to Refuse Unknown Questions Using RL from Knowledge Feedback",
+    "authors": [
+      "Hongshen Xu",
+      "Zichen Zhu",
+      "Situo Zhang",
+      "Da Ma",
+      "Shuai Fan",
+      "Lu Chen",
+      "Kai Yu"
+    ],
+    "abstract": "Large Language Models (LLMs) often generate erroneous outputs, known as hallucinations, due to their limitations in discerning questions beyond their knowledge scope. While addressing hallucination has been a focal point in research, previous efforts primarily concentrate on enhancing correctness without giving due consideration to the significance of rejection mechanisms. In this paper, we conduct a comprehensive examination of the role of rejection, introducing the alignment goal of model reliability along with corresponding metrics. This goal requires the model to provide accurate responses while adeptly rejecting questions exceeding its knowledge boundaries, thereby minimizing hallucinations. To improve the inherent reliability of LLMs, we present a novel alignment framework called Reinforcement Learning from Knowledge Feedback (RLKF). RLKF leverages knowledge feedback to dynamically determine the model's knowledge boundary and trains a reliable reward model to encourage the rejection of out-of-knowledge questions. Experimental results on mathematical and question answering datasets affirm the substantial efficacy of RLKF in significantly enhancing LLM reliability.",
+    "keywords": [
+      "hallucination",
+      "alignment",
+      "RLKF"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=lJMioZBoR8"
+  },
+  "review_fields": {
+    "comment": "1. Thank you for the new results on TriviaQA! How did you construct the preference data for the reward model? Moreover, this only compares RLKF to using a system prompt. Do you compare RLKF to regular RLHF?\n\n2. It remains unclear to me why examples of \"rejection > incorrect\" preferences would not naturally be present in existing methods for preference data collection. However if these preferences are sampled from the LM, I buy the authors' argument that models do not naturally know how to decline unless explicitly taught.\n\n3. Thank you for clarifying!\n\n4. The statement that \"*existing LLMs such as Llama-2 initialize their reward models for RLHF from these generic preference pairs*\" is untrue, to the best of my understanding. I believe the reward model is initialized using responses sampled from (variants of) Llama2 (and continuously updated using the latest iteration of the finetuned model). It is not initialized from a static dataset of preference data.\n\nFor reference, I share a snippet from the Llama 2 tech report below:\n> We ask annotators to first write a prompt, then choose between **two sampled model responses**, based on provided criteria. In order to maximize the diversity, the two responses to a given prompt are sampled from **two different model variants**, and varying the temperature hyper-parameter.\n\n[...]\n\n> Human annotations were **collected in batches on a weekly basis**. As we collected more preference data, our reward models improved, and we were able to train progressively better versions for Llama 2-Chat (see the results in Section 5, Figure 20). Llama 2-Chat improvement also shifted the model’s data distribution. Since reward model accuracy can quickly degrade if not exposed to this new sample distribution, i.e., from hyper-specialization (Scialom et al., 2020b), **it is important before a new Llama 2-Chat tuning iteration to gather new preference data using the latest Llama 2-Chat iterations**. This step helps keep the reward model on-distribution and maintain an accurate reward for the latest model."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:35:47Z",
+    "migrated_from_v1_at": "2026-04-27T15:35:47Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3316,
+    "words": 491,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/de161915-e795-4630-9508-6a75d71dbe20",
+    "error": null,
+    "scored_chars": 3333
+  }
+}

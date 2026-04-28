@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "9zV2OXCrVF",
+  "reviewer": "JWq6",
+  "paper": {
+    "title": "k-Median Clustering via Metric Embedding: Towards Better Initialization with Differential Privacy",
+    "authors": [
+      "Chenglin Fan",
+      "Ping Li",
+      "Xiaoyun Li"
+    ],
+    "abstract": "In clustering algorithms, the choice of initial centers is crucial for the quality of the learned clusters. We propose a new initialization scheme for the $k$-median problem in the general metric space (e.g., discrete space induced by graphs), based on the construction of metric embedding tree structure of the data. We propose a novel and efficient search algorithm, for good initial centers that can be used subsequently for the local search algorithm. The so-called HST initialization method can produce initial centers achieving lower error than those from another popular method $k$-median++, also with higher efficiency when $k$ is not too small. Our HST initialization can also be easily extended to the setting of differential privacy (DP) to generate private initial centers. We show that the error of applying DP local search followed by our private HST initialization improves previous results on the approximation error, and approaches the lower bound within a small factor. Experiments demonstrate the effectiveness of our proposed methods.",
+    "keywords": [
+      "privacy",
+      "clustering"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=9zV2OXCrVF"
+  },
+  "review_fields": {
+    "summary": "The paper considers the problem of finding good initializations for k-median clustering algorithms with and without differential privacy. To this end, the authors propose NDP-HST and DP-HST, two methods based on Hierarchically Well-Separated Trees to find a good initialization of k points. The theoretical approximation guarantees are analyzed and compared to existing works. HST methods are then compared to kmedian++ and random initialization on MNIST and random graph-based datasets.",
+    "strengths": "- Contains extensive theoretical analysis of approximation guarantees\n- The paper is written in clear language\n- The proposed method is relatively simple and therefore more likely to be useful in practice",
+    "weaknesses": "- The figures with performance comparisons only show estimates of the means while differential privacy requires algorithms to be random and thus often have large variations in scores. To understand whether the proposed method is better instead of 'lucky' the results must include some measure of variation.\n- HST does not improve results after running the k-median algorithm except for (seemingly) in the differentially private setting, see previous point.\n- It is not clear to me that Algorithm 4 guarantees differential privacy and the proof in the appendix only states that this is \"straightforward, by using the composition theorem\". See question 1\n\nMinor:\n- Line 117 is \"tn\" a typo?\n- Line 301 is missing a citation/reference.\n- On line 304 it is stated that \"For non-DP tasks, we set L = 6. For DP clustering, we use L = 8\". This choice should be motivated, if these values have been chosen by tuning then the other methods should be tuned as well.",
+    "questions": "1. Why does Algorithm 4 guarantee differential privacy? From my understanding, $\\hat{N_v}$ constitutes a count query that should be protected with the Laplace mechanism (or Geometric mechanism). I don't understand why $2^{(L−h_v)}$ is the sensitivity. \n2. How were the parameters for the algorithms selected? (e.g. line 304)",
+    "limitations": "The authors do not address limitations. It might be necessary to discuss the ethical implications regarding Example 2.3."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1607,
+    "words": 260,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2fa8f971-1a6e-4fdb-acc3-2f842779e790",
+    "error": null,
+    "scored_chars": 1608
+  }
+}

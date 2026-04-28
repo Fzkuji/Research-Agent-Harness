@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "36DxONZ9bA",
+  "reviewer": "CgC3",
+  "paper": {
+    "title": "Representational Strengths and Limitations of Transformers",
+    "authors": [
+      "Clayton Sanford",
+      "Daniel Hsu",
+      "Matus Telgarsky"
+    ],
+    "abstract": "Attention layers, as commonly used in transformers, form the backbone of modern deep learning, yet there is no mathematical description of their benefits and deficiencies as compared with other architectures. In this work we establish both positive and negative results on the representation power of attention layers, with a focus on intrinsic complexity parameters such as width, depth, and embedding dimension. On the positive side, we present a sparse averaging task, where recurrent networks and feedforward networks all have complexity scaling polynomially in the input size, whereas transformers scale merely logarithmically in the input size; furthermore, we use the same construction to show the necessity and role of a large embedding dimension in a transformer. On the negative side, we present a triple detection task, where attention layers in turn have complexity scaling linearly in the input size; as this scenario seems rare in practice, we also present natural variants that can be efficiently solved by attention layers. The proof techniques emphasize the value of communication complexity in the analysis of transformers and related models, and the role of sparse averaging as a prototypical attention task, which even finds use in the analysis of triple detection.",
+    "keywords": [
+      "self-attention",
+      "approximation theory",
+      "communication complexity"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=36DxONZ9bA"
+  },
+  "review_fields": {
+    "summary": "This paper investigates the representation power of attention layers in transformer networks and compares them with other neural network architectures. The authors establish both positive and negative results on the benefits and limitations of attention layers, focusing on intrinsic complexity parameters such as width, depth, and embedding dimension. The positive results include the demonstration of a sparse averaging task where transformers scale logarithmically in the input size, compared to polynomial scaling in recurrent networks and feedforward networks. They also show the necessity and role of a large embedding dimension in transformers. On the negative side, they present a triple detection task where attention layers have linear complexity in the input size. However, they also provide variants of the task that can be efficiently solved by attention layers. The paper's contributions include the formalization of computational limits using communication complexity, the establishment of the representational capabilities and limitations of self-attention units, and the demonstration of the impossibility of computing Match3 using standard multi-headed attention layers in an efficient manner.",
+    "strengths": "- This paper brings some original contributions to the understanding of attention layers in transformer networks. It provides a mathematical analysis of the representation power of attention layers and compares them to other neural network architectures. The paper introduces some interesting tasks, such as sparse averaging, pair matching, and triple matching, to evaluate the capabilities and limitations of attention layers. This approach introduces fresh perspectives on the benefits and deficiencies of attention layers and offers valuable insights into their role in deep learning.\n\n- The paper demonstrates a high level of quality in terms of its analysis and proofs. It presents rigorous mathematical formulations and provides formal definitions for the tasks and architectures under study. The proposed theorems and conjectures are well-supported and backed by detailed proofs, showcasing the authors' expertise in the subject matter. The use of communication complexity techniques adds depth and reliability to the analysis. The paper also includes supplementary proofs and explanations in the appendices, further enhancing the quality and comprehensiveness of the work.\n\n- The paper addresses an important gap in the literature by providing a mathematical analysis of the benefits and limitations of attention layers in transformers. The findings have implications for the design and optimization of deep learning models, especially in natural language processing and other sequential tasks. The identification of tasks that highlight the strengths and weaknesses of attention layers can guide future research in developing more efficient and effective architectures. The paper also raises intriguing conjectures, such as the impossibility of efficiently computing Match3, which can inspire further investigations and spark valuable discussions in the research community.",
+    "weaknesses": "- While the paper provides rigorous mathematical analysis and proofs, it lacks empirical evaluation of the proposed tasks and architectures. Including experiments using real-world datasets could provide practical validation of the theoretical findings and further strengthen the paper's conclusions. Empirical evaluation could also provide insights into the computational efficiency and generalization performance of attention layers compared to other architectures.\n\n- Providing concrete examples of how the theoretical findings can be applied to practical deep learning problems, such as natural language processing or computer vision tasks, would enhance the paper's relevance and impact.\n\n- While the paper is generally well-written, the mathematical formulations and proofs can be complex and challenging to follow for readers without a strong background in the subject area. Simplifying and clarifying the presentation of the mathematical concepts and providing more intuitive explanations or examples could improve the accessibility of the paper for a wider audience."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 100,
+    "mixed_pct": 0,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 2958,
+    "words": 414,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e66b0823-6ee2-4eed-8443-0d5a6514d6c0",
+    "error": null,
+    "scored_chars": 2958
+  }
+}

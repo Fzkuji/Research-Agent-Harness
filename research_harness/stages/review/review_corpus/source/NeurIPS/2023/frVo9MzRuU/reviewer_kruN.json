@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "frVo9MzRuU",
+  "reviewer": "kruN",
+  "paper": {
+    "title": "Compositional Abilities Emerge Multiplicatively: Exploring Diffusion Models on a Synthetic Task",
+    "authors": [
+      "Maya Okawa",
+      "Ekdeep Singh Lubana",
+      "Robert P. Dick",
+      "Hidenori Tanaka"
+    ],
+    "abstract": "Modern generative models exhibit unprecedented capabilities to generate extremely realistic data. However, given the inherent compositionality of the real world, reliable use of these models in practical applications requires that they exhibit the capability to compose a novel set of concepts to generate outputs not seen in the training data set. Prior work demonstrates that recent diffusion models do exhibit intriguing compositional generalization abilities, but also fail unpredictably. Motivated by this, we perform a controlled study for understanding compositional generalization in conditional diffusion models in a synthetic setting, varying different attributes of the training data and measuring the model's ability to generate samples out-of-distribution. Our results show: (i) the order in which the ability to generate samples from a concept and compose them emerges is governed by the structure of the underlying data-generating process; (ii) performance on compositional tasks exhibits a sudden \"emergence\" due to multiplicative reliance on the performance of constituent tasks, partially explaining emergent phenomena seen in generative models; and (iii) composing concepts with lower frequency in the training data to generate out-of-distribution samples requires considerably more optimization steps compared to generating in-distribution samples. Overall, our study lays a foundation for understanding emergent capabilities and compositionality in generative models from a data-centric perspective.",
+    "keywords": [
+      "Diffusion model; Emergence; Emergent capabilities; Science of deep learning; Mechanistic interpretability"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=frVo9MzRuU"
+  },
+  "review_fields": {
+    "comment": "I would like to thank the authors for the detailed response and the additional experiments. I will respond here to their general comments and to their specific response to my original comment over there.\n\nFirst, I would like some further clarification for Figure R4. It seems from the plot that the advantage in performance lies with the U-Net with Global Attention, not the Transformer. In fact it's not clear to me (at least from this plot) that the Transformer has a substantial advantage over the vanilla U-Net outside of the the training data (it does train faster so I guess there is that). Maybe a better way to plot this is to have one plot per condition (blue, pink and red) and for each of these plot the three models together. For a final version you may need to run more seeds if the results do not show a clear effect (which can admittedly be a bit subjective even if using things like t-tests and the like).\n\nI like the plots in Figure R3, but the caption needs be clearer, or in the case of the bottom panel of b) actually there, as it doesn't even say what those three colours stand for. While I agree that the measure you propose is more consistent with accuracy, I would still like to see the plots with cross entropy. My insistence is based on an analogous reasoning found in [1]. Slightly different topic, but I think the reasoning applies here as well.\n\n[1] Schaeffer, R., Miranda, B., & Koyejo, S. (2023). Are emergent abilities of Large Language Models a mirage?. arXiv preprint arXiv:2304.15004."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1519,
+    "words": 271,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/014204b1-59d6-4f1f-b4ff-d17c0ffff954",
+    "error": null,
+    "scored_chars": 1519
+  }
+}

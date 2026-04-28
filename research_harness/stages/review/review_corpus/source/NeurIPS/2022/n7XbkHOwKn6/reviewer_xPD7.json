@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "n7XbkHOwKn6",
+  "reviewer": "xPD7",
+  "paper": {
+    "title": "CogVideo: Large-scale Pretraining for Text-to-Video Generation via Transformers",
+    "authors": [
+      "Wenyi Hong",
+      "Ming Ding",
+      "Wendi Zheng",
+      "Xinghan Liu",
+      "Jie Tang"
+    ],
+    "abstract": "Large-scale pretrained transformers have created milestones in text (GPT-3) and text-to-image (DALL-E) generation. Its application on video generation is still faced difficulties: The huge computation makes training from scratch unaffordable; The scarcity and weak relevance of text-video datasets hinder the model understanding complex movements. In this work, we present 9-billion-parameter CogVideo, which is trained by inheriting the knowledge from the pretrained large-scale text-to-image model, CogView2. We also propose multi-frame-rate hierarchical training strategy to better align text and video clips. As (probably) the first open-source large-scale pretrained text-to-video model, the CogVideo outperforms the previous public available models at a large margin in both machine and human evaluation.",
+    "keywords": [
+      "pretraining"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=n7XbkHOwKn6"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors propose a large-scale pre-training model for text-to-video generation, called CogVideo, which is trained by inheriting a pre-trained text-to-image model CogView2. A multi-frame-rate hierarchical training strategy is designed to better align text and video clips. The proposed method is validated on standard benchmarks such as UCF-101 and Kinetics-600.",
+    "strengths_and_weaknesses": "Strengths:\n1.This work explores an important topic - text-conditional video generation, and presents an effective method for it.\n2.A multi-frame-rate hierarchical training strategy is proposed to improve the generation quality and control the intensity of changes during generation.\n3.The authors verified the proposed model through both quantitative experiments and qualitative analyses.\n\n\nWeaknesses:\n1.The novelty and technical contributions of this work are quite limited. It simply assembles several existing algorithms, such as CogView2 [6] and Swin Transformer [14].\n2.The performance of the proposed CogVideo is not as strong as the authors claimed. As shown in Tab. 1, the metrics of CogVideo (IS and FVD) fall behind previous methods. It is not acceptable to only compare with publicly available models.\n3.The authors trained the CogVideo on a large dataset of 5.4 million captioned videos, but did not give any detailed information regarding this dataset. What are the sources of the videos and captions? How are they collected? Will the dataset be released? \n4.The authors claimed that they greatly enhance parallelism and accelerate inference, but no results about inference speed of the CogVideo model are provided.\n5.In Sec. 5.1, the authors \"fine-tune CogVideo on the whole dataset (UCF-101) for 10,000 iterations\". Is it appropriate in this field?",
+    "questions": "1.The authors should explain the novelty and contributions of the proposed CogVideo.\n2.The performance of CogVideo is not as competitive as claimed. The authors should give more discussions and analyses.\n3.More details about the dataset with 5.4 million captioned videos are expected.",
+    "limitations": "Yes, the authors adequately addressed the limitations and potential negative societal impact of the work."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

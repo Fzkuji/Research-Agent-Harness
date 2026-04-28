@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "7ntI4kcoqG",
+  "reviewer": "BP1k",
+  "paper": {
+    "title": "AMAG: Additive, Multiplicative and Adaptive Graph Neural Network For Forecasting Neuron Activity",
+    "authors": [
+      "Jingyuan Li",
+      "Leo Scholl",
+      "Trung Le",
+      "Pavithra Rajeswaran",
+      "Amy L Orsborn",
+      "Eli Shlizerman"
+    ],
+    "abstract": "Latent Variable Models (LVMs) propose to model the dynamics of neural populations by capturing low-dimensional structures that represent features involved in neural activity. Recent LVMs are based on deep learning methodology where a deep neural network is trained to reconstruct the same neural activity given as input and as a result to build the latent representation. Without taking past or future activity into account such a task is non-causal. In contrast, the task of forecasting neural activity based on given input extends the reconstruction task. LVMs that are trained on such a task could potentially capture temporal causality constraints within its latent representation. Forecasting has received less attention than reconstruction due to recording challenges such as limited neural measurements and trials. In this work, we address modeling neural population dynamics via the forecasting task and improve forecasting performance by including a prior, which consists of pairwise neural unit interaction as a multivariate dynamic system. Our proposed model---Additive, Multiplicative, and Adaptive Graph Neural Network (AMAG)---leverages additive and multiplicative message-passing operations analogous to the interactions in neuronal systems and adaptively learns the interaction among neural units to forecast their future activity. We demonstrate the advantage of AMAG compared to non-GNN based methods on synthetic data and multiple modalities of neural recordings (field potentials from penetrating electrodes or surface-level micro-electrocorticography) from four rhesus macaques. Our results show the ability of AMAG to recover ground truth spatial interactions and yield estimation for future dynamics of the neural population.",
+    "keywords": [
+      "Neuroscience and Cognitive Science",
+      "Neural Activity Forecasting",
+      "Graph Neural Network"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7ntI4kcoqG"
+  },
+  "review_fields": {
+    "summary": "This paper presents AMAG — a graph neural network for modeling and forecasting neural population dynamics. The graph neural network has mechanism to describe the additive and multiplicative interactions between neurons, and a sample-dependent matrix to adjust the additive component. Experiments are carried out on both synthetic data and real neural signals, in comparison with several baselines.",
+    "strengths": "This paper is well written and easy to follow. The rationale behind AMAG design is clearly described, especially the basis of utilizing prior knowledge about additive and multiplicative processes. \n\nThe results overall show an improvement of forecasting performance by AMAG, and the experimental results especially those on actual monkey data are very interesting. \n\nThe selected results on visualization of interaction strength and the neural population trajectory embedding, i.e, those in Fig 4, are also very informative and interesting.",
+    "weaknesses": "1. The quantitative results listed (e.g., Table 2) lack sufficient statistics, especially considering that the margin of improvements in some metrics are quite small. Some measure of std would be necessary.\n\n2. Other than the quantitative improvements (as shown in Table 1/Fig 3), the significance of such improvements can be better explained. E.g., in Fig 3, indeed it is evident that AMAG showed closer results to the true trajectory in the highlighted areas of the curve, however, in the remaining parts of the curve, it also falls short of capturing the true trajectories by a quite large margin (similar to the other methods), such as the big deflection in front of the highlighted area in the first curve of panel 2, or the deflection following the highlighted area in the second curve of the same panel -- Overall, it would seem that the improvements over other baselines are less significant or on par with the other major errors of the results. For signals that have a lot of temporal fluctuations, it would be good to understand what are the significance in minor to moderate level improvements in signal details when there are still substantial errors in the rest of the signals. \n\n 3. While the key innovation of the paper is motivated by leveraging prior knowledge about the additive and multiplicative interaction among neurons, the results provided limited insights into whether this modeling hypothesis could be verified from the results. There are ablation studies to show that both components are important (which is a strength of the paper), but there lack additional analyses into what are the different interactions being learned (e.g., by looking into the two adjacency matrices).\n\n4. Effect of the initialization on the two adjacency matrices should be elaborated with additional results (what happens when different correlation matrix is being used). What are the differences between the A_a and A_m after being initialized by the same matri?",
+    "questions": "In addition to address the comments raised in the weakness section above, please also considering clarifying the following questions. \n\n1. For the synthetic dataset presented in 4.1, what type of interaction mechanisms is used in the ground truth generation of data, i.e.., the function of G? Is it only additive, or multiplicative? The adjacency matrix A defines which interaction?\n\n2. Similarly, in the investigations based on the adjacency matrix in 4.2, which A's are being examined (A_a for additive interaction, or A_m for multiplicative interaction)? \n\n3. Overall, as mentioned in the weakness section, since the use of these two different interaction mechanisms is a key contribution in this paper, the authors should not only make it clear which A's are being considered (both in generation of data and in results), but it'd also be interesting if the authors add more analyses and results on how A_a and A_m may look like, and what are the underlying insights such differences or commonality could offer.",
+    "limitations": "The authors discussed briefly the limitations associated with the study and future works necessary to address these limitations."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 2,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3648,
+    "words": 578,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7cc5e65c-8fa7-491d-9d52-3a4355825956",
+    "error": null,
+    "scored_chars": 3654
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "Ve0Wth3ptT_",
+  "reviewer": "eChJ",
+  "paper": {
+    "title": "DEGREE: Decomposition Based Explanation for Graph Neural Networks",
+    "authors": [
+      "Qizhang Feng",
+      "Ninghao Liu",
+      "Fan Yang",
+      "Ruixiang Tang",
+      "Mengnan Du",
+      "Xia Hu"
+    ],
+    "abstract": "Graph Neural Networks (GNNs) are gaining extensive attention for their application in graph data. However, the black-box nature of GNNs prevents users from understanding and trusting the models, thus hampering their applicability. Whereas explaining GNNs remains a challenge, most existing methods fall into approximation based and perturbation based approaches with suffer from faithfulness problems and unnatural artifacts respectively. To tackle these problems, we propose DEGREE (Decomposition based Explanation for GRaph nEural nEtworks) to provide a faithful explanation for GNN predictions. By decomposing the information generation and aggregation mechanism of GNNs, DEGREE allows tracking the contributions of specific components of the input graph to the final prediction. Based on this, we further design a subgraph level interpretation algorithm to reveal complex interactions between graph nodes that are overlooked by previous methods. The efficiency of our algorithm can be further improved by utilizing GNN characteristics. Finally, we conduct quantitative and qualitative experiments on synthetic and real-world datasets to demonstrate the effectiveness of DEGREE on node classification and graph classification tasks.",
+    "keywords": [
+      "XAI",
+      "GNN"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Ve0Wth3ptT_"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper provides DEGREE, which decomposes the feedforward propagation mechanism of a GNN to understand it. They give realistic decomposition techniques for those typically used layers in GNNs after presenting the key guidelines for developing decomposition-based explanations. They also devise an approach for providing subgraph-level explanation via agglomeration, which makes effective use of graph topology. DEGREE surpasses baselines in terms of fidelity and can capture important structures in graph data, according to experimental results.",
+    "main_review": "The paper focuses on the explanation of GNN performance, which is an interesting and critical problem. The paper proposes a reasonable method for the problem to decomposite the graph. The experiments are also comprehensive. However, there are still some points required to be clarified.\n\n1,  The new scoring function proposed in the paper uses a random walk process, so will the calculation process has a high time complexity and space complexity (storing sample graphs)?\n\n2, In q · maxv′ r(v′), what is the impact of the hyper-parameter q on the subgraph expansion?\n\n3, The AUC used in the experiments should be explained in detail. For me, I have to search previous works to understand how to use it in GNN explanation issue. It is not friendly to common readers.",
+    "summary_of_the_review": "The paper is easy to follow and has a reasonable method. Besides, the comprehensive experiments, especially the visualization of results, verify the effectiveness of the proposed method. I surely recommend acceptance after my above doubt is solved.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1014,
+    "words": 166,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/bfcf94ba-ddef-4f1b-9a47-a90dab08f328",
+    "error": null,
+    "scored_chars": 1015
+  }
+}

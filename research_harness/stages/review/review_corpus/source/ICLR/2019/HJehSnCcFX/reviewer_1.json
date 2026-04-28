@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "HJehSnCcFX",
+  "reviewer": "1",
+  "paper": {
+    "title": "Inference of unobserved event streams with neural Hawkes particle smoothing",
+    "authors": [
+      "Hongyuan Mei",
+      "Guanghui Qin",
+      "Jason Eisner"
+    ],
+    "abstract": "Events that we observe in the world may be caused by other, unobserved events. We consider sequences of discrete events in continuous time. When only some of the events are observed, we propose particle smoothing to infer the missing events. Particle smoothing is an extension of particle filtering in which proposed events are conditioned on the future as well as the past. For our setting, we develop a novel proposal distribution that is a type of continuous-time bidirectional LSTM. We use the sampled particles in an approximate minimum Bayes risk decoder that outputs a single low-risk prediction of the missing events. We experiment in multiple synthetic and real domains, modeling the complete sequences in each domain with a neural Hawkes process (Mei & Eisner, 2017). On held-out incomplete sequences, our method is effective at inferring the ground-truth unobserved events. In particular, particle smoothing consistently improves upon particle filtering, showing the benefit of training a bidirectional proposal distribution.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=HJehSnCcFX"
+  },
+  "review_fields": {
+    "review": "The paper presents an inference method (implicit distribution particle smoothing) for neural Hawkes processes that accounts for latent sequences of events that influence the observed trajectories.\n\nQuality\n+ The paper combines ideas from multiple areas of machine learning to tackle a challenging task of inference in multivariate continuous-time settings.\n- The figures reported from the paper are comparative graphs with respect to particle filtering, and so the absolute level of performance of the methods is not characterized.  Reporting of distribution of sample weights and or run-times/complexity would strengthen the paper.\n\nClarity\n- notation is complex replete with symbols \"@\" and text in math formulas\n- It's not clear what p (\"the data model\") and p_miss (\"the missingness mechanism\") represent, and therefore why in equation 1: p(x,z) = p(xvz)p_miss(z| xvz) where v is the union symbol.  In addition, how it's related to MAR and MNAR is unclear. If e.g. following Murphy, one writes MAR as: p(r|x_u, x_o) = p(r|x_o), r is a missingness vector, x_u is x unobserved, and x_o is x observed, then r corresponds to observation or not, whereas in the manuscript p_miss is on the values themselves, i.e. on the space where z={k_{i,j}@t_{i,j}} resides.  We know, from the definition of MNAR that we can't use only the observed data to correctly infer the distributions of the missing values, and so while one can probabilistically predict in MNAR setting, their quality remains unknown.  If none of the experiments touch upon MNAR data, perhaps it is possible to omit this part.\n\nOriginality\n+ the work is rich, complex, original, and uses leading methods from multiple areas of ML.\n\nSignificance\n+ the significance of this work could be high, as it may provide a way to conduct difficult inference in an effective way to produce increasingly flexible modeling of trajectories amidst partial observation.\n- however the exposition (particularly the experiments) does not fully demonstrate this."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

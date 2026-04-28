@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "KtGsJm8bOC",
+  "reviewer": "JeWr",
+  "paper": {
+    "title": "MSRS: Evaluating Multi-Source Retrieval-Augmented Generation",
+    "authors": [
+      "Rohan Phanse",
+      "Ej Zhou",
+      "Kejian Shi",
+      "WENCAI ZHANG",
+      "Yixin Liu",
+      "Yilun Zhao",
+      "Arman Cohan"
+    ],
+    "abstract": "Retrieval-augmented systems are typically evaluated in settings where information required to answer the query can be found within a single source or the answer is short-form or factoid-based. However, many real-world applications demand the ability to integrate and summarize information scattered across multiple sources, where no single source is sufficient to respond to the user's question. In such settings, the retrieval component of a RAG pipeline must recognize a variety of relevance signals, and the generation component must connect and synthesize information across multiple sources. We present a scalable framework for constructing evaluation benchmarks that challenge RAG systems to integrate information across distinct sources and generate long-form responses. Using our framework, we build two new benchmarks on Multi-Source Retrieval and Synthesis: MSRS-Story and MSRS-Meet, representing narrative synthesis and summarization tasks, respectively, that require retrieval from large collections. Our extensive experiments with various RAG pipelines—including sparse and dense retrievers combined with frontier LLMs—reveal that generation quality is highly dependent on retrieval effectiveness, which varies greatly by task. While multi-source synthesis proves challenging even in an oracle retrieval setting, we find that reasoning models significantly outperform standard LLMs at this distinct step.",
+    "keywords": [
+      "Retrieval-Augmented Generation",
+      "Retrieval",
+      "Summarization",
+      "Evaluation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=KtGsJm8bOC"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their very clear and patient explanations. Just to politely reply, my concerns about the ground truth for the retrieval task remain: for OdSum-Story, the assumption that the all and only relevant chapters are those of the original document -- some of the chapters in the document may not be relevant to the query at all, and other relevant chapters may be in other documents; for OdSum-Meet, that the union set of the ground truth of the constituent queries can be regarded as the ground truth for the merged query.\nI acknowledge that all the other reviewers have had much more positive ratings than my own (6, 7, 8 currently) and I am glad to increase mine, because the paper is really well executed and documented."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 740,
+    "words": 130,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/54aec610-a6da-4ec8-97d0-5aa41bb68fd6",
+    "error": null,
+    "scored_chars": 740
+  }
+}

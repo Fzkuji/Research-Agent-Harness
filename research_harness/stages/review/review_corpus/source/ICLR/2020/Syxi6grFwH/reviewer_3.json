@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "Syxi6grFwH",
+  "reviewer": "3",
+  "paper": {
+    "title": "HIPPOCAMPAL NEURONAL REPRESENTATIONS IN CONTINUAL LEARNING",
+    "authors": [
+      "Samia Mohinta",
+      "Rui Ponte Costa",
+      "Stephane Ciocchi"
+    ],
+    "abstract": "The hippocampus has long been associated with spatial memory and goal-directed\nspatial navigation. However, the region’s independent role in continual learning of\nnavigational strategies has seldom been investigated. Here we analyse populationlevel\nactivity of hippocampal CA1 neurons in the context of continual learning of\ntwo different spatial navigation strategies. Demixed Principal Component Analysis\n(dPCA) is applied on neuronal recordings from 612 hippocampal CA1 neurons\nof rodents learning to perform allocentric and egocentric spatial tasks. The components\nuncovered using dPCA from the firing activity reveal that hippocampal\nneurons encode relevant task variables such decisions, navigational strategies and\nreward location. We compare this hippocampal features with standard reinforcement\nlearning algorithms, highlighting similarities and differences. Finally, we\ndemonstrate that a standard deep reinforcement learning model achieves similar\naverage performance when compared to animal learning, but fails to mimic animals\nduring task switching. Overall, our results gives insights into how the hippocampus\nsolves reinforced spatial continual learning, and puts forward a framework\nto explicitly compare biological and machine learning during spatial continual\nlearning.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=Syxi6grFwH"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "This work focuses on the problem of continual learning. It first proposes an analysis of neural recordings from rodents hippocampus that perform a task related to continual learning. The authors then claim to identify similarities in representations of behaviorally relevant variables between biological networks and standard artificial RL systems. Finally the authors propose a DQN implementation of the task reaching performance similar to rodents, although the implementation fail to perform continual learning.\n\nI have found the results of the analysis of neural data interesting and well explained. However I haven’t been able to judge positively the main part of the manuscript pertaining to the comparison with artificial agents, maybe because of the lack of clarity in the exposition of the results (see detailed comments below). As such I think this manuscript is not ready yet for publication in ICLR. \n\nDetailed comments:\n\nIntroduction:\nThe introduction reads well, it would be useful to have a short paragraph explaining the vast problem of continual learning, and situating the approach of the authors in this vast field. In particular it would be useful to explain in what sense the task considered is related to continual learning (switches between allocentric and egocentric tasks that are not informed by experimenter, but that the rodent has to figure out), because for now it is only briefly stated in the legend of figure 1.\n\nAnalysis of neural data: \nAnalysis of neural data using dPCA reveals interesting results regarding the representations of correct/incorrect trials, allocentric/egocentric tasks, temporal structure. Globally these results are well presented. Regarding figure 3, it would be nice to define what are early and late trials, is it a distinction inside a block where late trials are just before a switch. Or are late trials after weeks of training, in which case I do not really see the link with continual learning ?\n\n\nComparison between standard RL and hippocampal representations:\n\nThe idea to compare hippocampal representations and standard RL implementations is original and interesting. The exposition of the results, however, lacks important information for me to assess the relevance of these comparisons:\n\nFig4A(i): could the author explain what is on the x-axis ? What is the 1-D environment mentioned in the caption (in SM a 5*5 grid world is mentioned) ? Why not run TD on the same setting as Q-learning ? What is the black curve « value after learning » ? Why value depends on the x-axis ?\nFig4C: How are the two curves obtained ? As both tasks share the same Q function, it might be worth explaining how the two curves are obtained. \n\nThe authors mention that « policy information is override as starting location changes over » ? Could this fact be explained ? It would seem to me that starting points north s_north and south s_south would have distinct Q(s_north,.) and Q(s_south,.) avoiding overriding.\n\nAlso I am quite surprised that Q-learning fails on such a simple task (cf Fig5B), could the authors explain how many trials would be required to reach perfect performance by focusing on either of the two tasks ?\n\nIn this section a natural extension could be to use hierarchical RL, or options to model behavioral strategies such as allocentric and egocentric and compare with the hippocampal recordings.\n\n\nComparing DQN and animal performance:\n\nA first crucial point to clarify is whether the DQN receives information about what task to perform (it is mentioned: « task-specific information provided to the neural network as input«, «this network with task-specific memory«, then a DQN « without task-specific information » is mentioned). This seems rather crucial, because if information about allocentric VS egocentric task is provided, contrary to the behavioral task for rats, then the network is asked to do strategy switches based on some cues, which is a different problem than continual learning.\n\nIf the DQN receives information about whether it is in a allocentric or egocentric trial, I am very surprised it is not able to perform this simple task. \nCould the authors explain why the DQN has similar performance as the animal while it is shown to relearn slower than animals (is it because it learns better before task switch). \nIn figure 7, the curves for the model are very noisy and hence difficult to interpret, it would be nice to show averages over many same task switches, to get a clearer picture."
+  },
+  "review_metadata": {
+    "rating": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

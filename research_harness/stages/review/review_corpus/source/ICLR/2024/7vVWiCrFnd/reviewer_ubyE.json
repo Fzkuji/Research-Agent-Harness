@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "7vVWiCrFnd",
+  "reviewer": "ubyE",
+  "paper": {
+    "title": "Rethinking and Extending the Probabilistic Inference Capacity of GNNs",
+    "authors": [
+      "Tuo Xu",
+      "Lei Zou"
+    ],
+    "abstract": "Designing expressive Graph Neural Networks (GNNs) is an important topic in graph machine learning fields. Despite the existence of numerous approaches proposed to enhance GNNs based on Weisfeiler-Lehman (WL) tests, what GNNs can and cannot learn still lacks a deeper understanding. This paper adopts a fundamentally different approach to examine the expressive power of GNNs from a probabilistic perspective. By establishing connections between GNNs' predictions and the central inference problems of probabilistic graphical models (PGMs), we can analyze previous GNN variants with a novel hierarchical framework and gain new insights into their node-level and link-level behaviors. Additionally, we introduce novel methods that can provably enhance GNNs' ability to capture complex dependencies and make complex predictions. Experiments on both synthetic and real-world datasets demonstrate the effectiveness of our approaches.",
+    "keywords": [
+      "graph neural networks",
+      "expressiveness",
+      "approximate inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7vVWiCrFnd"
+  },
+  "review_fields": {
+    "summary": "The authors report a slate of new theoretical results regarding the expressive power of a variety of GNNs w.r.t. MRFs. Utilizing this theoretical basis, they then propose a novel extension of MPNNs utilizing so-called \"phantom nodes/edges\". These proposed algorithms are tested using synthetic and real world data, comparing against state-of-the-art algorithms. \n\nIn node classification tasks, the phantom node lifting method improved state of the art when applied on GCN, and compared well to recent works when utilized with SAGE and GCNII methodologies. In link prediction, phantom edges proved to improve all compared results using standard datasets and metrics.\n\nIn summary, recasting GNN's expressibility via MRF, the authors were able to improve the understanding of MPNNs and used this probabilistic viewpoint to introduce a novel methodology that matches or outperforms the current state-of-the-art in standard tests.",
+    "strengths": "The paper makes two contributions: (1) improving the theoretical understanding of GNNs utilizing a probabilistic viewpoint to classify expressibility with respect to (and beyond) Weisfeiler-Lehman tests and (2) utilizing this probabilistic viewpoint to propose a novel methodology to lift the expressive power of MPNNs.\n\nRecasting the question of expressiveness from limited WL tests into a probabilistic frame is natural in the setting of ML, and as shown, lucrative.",
+    "weaknesses": "While the results are compelling - I find the exposition of the novel phantom node/edge methodology lacking. While proofs are given on their approximation power, and one can assume motivation from framed previous works, the paper would be strengthened with the motivation driving the methodology.\n\nFurther, after the long theoretical exposition, the analysis of the proposed method is brief, and restricted mainly to results. A longer discussion of the modified properties (and potential limitations) of the graph would allow more informed adoption.",
+    "questions": "1. Question: It seems that DropGNN (perhaps applied to a slightly modified graph) is closely related to the proposed PN method. How do the two compare in inference tasks?\n\n2. Suggestion: I find the paper would be strengthened by a more direct discussion of the origins of the methodology (i.e., how does this differ/extend from previous works? E.g. node labeling)"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1384,
+    "words": 210,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a9f9b34c-e715-402d-8d93-b0ca43ef314e",
+    "error": null,
+    "scored_chars": 1384
+  }
+}

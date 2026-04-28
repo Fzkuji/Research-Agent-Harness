@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "rJl3S2A9t7",
+  "reviewer": "3",
+  "paper": {
+    "title": "Policy Optimization via Stochastic Recursive Gradient Algorithm",
+    "authors": [
+      "Huizhuo Yuan",
+      "Chris Junchi Li",
+      "Yuhao Tang",
+      "Yuren Zhou"
+    ],
+    "abstract": "In this paper, we propose the StochAstic Recursive grAdient Policy Optimization (SARAPO) algorithm which is a novel variance reduction method on Trust Region Policy Optimization (TRPO). The algorithm incorporates the StochAstic Recursive grAdient algoritHm(SARAH) into the TRPO framework. Compared with the existing Stochastic Variance Reduced Policy Optimization (SVRPO), our algorithm is more stable in the variance. Furthermore, by theoretical analysis the ordinary differential equation and the stochastic differential equation (ODE/SDE) of SARAH, we analyze its convergence property and stability. Our experiments demonstrate its performance on a variety of benchmark tasks. We show that our algorithm gets better improvement in each iteration and matches or even outperforms SVRPO and TRPO.",
+    "keywords": [
+      "reinforcement learning",
+      "policy gradient",
+      "variance reduction",
+      "stochastic recursive gradient algorithm"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rJl3S2A9t7"
+  },
+  "review_fields": {
+    "review": "The paper extends Sarah to policy optimization with theoretical analysis and experimental study. \n\n1) The theoretical analysis under certain assumption seems novel. But the significance is unknown compared to similar analysis. \n\n2) The analysis demonstrates the advantage of Sarah over SVRG, as noted in Remark 1. It would be better to give explicit equations for SVRG in order for comparison.\n\n3) Experimental results seem to show empirically that the SARAH is only comparable to SVRG.\n\n4) Presentation needs to be improved."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

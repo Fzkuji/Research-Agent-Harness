@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "MsgdEkcLRz",
+  "reviewer": "dgKy",
+  "paper": {
+    "title": "LawFlow: Collecting and Simulating Lawyers’ Thought Processes on Business Formation Case Studies",
+    "authors": [
+      "Debarati Das",
+      "Khanh Chi Le",
+      "Ritik Sachin Parkar",
+      "Karin De Langis",
+      "Brendan Madson",
+      "Chad M. Berryman",
+      "Robin M Willis",
+      "Daniel H Moses",
+      "Brett McDonnell",
+      "Daniel Schwarcz",
+      "Dongyeop Kang"
+    ],
+    "abstract": "Legal practitioners, particularly those early in their careers, face complex, high-stakes tasks that require adaptive, context-sensitive reasoning. While AI holds promise in supporting legal work, current datasets and models are narrowly focused on isolated subtasks and fail to capture the end-to-end decision-making required in real-world practice. To address this gap, we introduce _LawFlow_, a dataset of complete end-to-end legal workflows collected from trained law students, grounded in real-world business entity formation scenarios. Unlike prior datasets focused on input-output pairs or linear chains of thought, _LawFlow_ captures dynamic, modular, and iterative reasoning processes that reflect the ambiguity, revision, and client-adaptive strategies of legal practice.\nUsing _LawFlow_, we compare human and LLM-generated workflows, revealing systematic differences in structure, reasoning flexibility, and plan execution. Human workflows tend to be modular and adaptive, while LLM workflows are more sequential, exhaustive, and less sensitive to downstream implications. Our findings also suggest that legal professionals prefer AI to carry out supportive roles, such as brainstorming, identifying blind spots, and surfacing alternatives, rather than executing complex workflows end-to-end. Our results highlight both the current limitations of LLMs in supporting complex legal workflows and opportunities for developing more collaborative, reasoning-aware legal AI systems. All data and code are available on our project page (https://minnesotanlp.github.io/LawFlow-website/)",
+    "keywords": [
+      "pretraining data; synthetic data; reasoning; legal perspectives; legal drafting; LLM; chain of thought"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=MsgdEkcLRz"
+  },
+  "review_fields": {
+    "comment": "Thank you for your response.\n\n>We mistakenly used a modified COLM style from another project. The camera-ready version will strictly follow the official template.\n\nCould you summarize the changes when using the official template (or better, if the system allows, upload a reformatted copy)? I appreciate that a camera-ready version can be reformatted, however my concern here is that with presented formatting (which appears to have smaller font and margins), a non-trivial amount of content will not fit within the allotted space for the main paper. and therefor the submitted and final papers will have significant changes."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 625,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8faa9213-a522-4429-bbee-2adaa901bb43",
+    "error": null,
+    "scored_chars": 625
+  }
+}

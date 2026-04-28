@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "AFMGbq39bQ",
+  "reviewer": "NYqh",
+  "paper": {
+    "title": "Readability ≠ Learnability: Rethinking the Role of Simplicity in Training Small Language Models",
+    "authors": [
+      "Ivan Lee",
+      "Taylor Berg-Kirkpatrick"
+    ],
+    "abstract": "Recent studies suggest that very small language models (SLMs) can generate surprisingly coherent text when trained on simplified, child-directed corpora such as TinyStories. These findings have been interpreted as evidence that readability—characterized by accessible vocabulary, familiar narrative structure, and simple syntax—plays a key role in enabling such capabilities to emerge. In this paper, we challenge that interpretation. We construct synthetic datasets with matched structure but varied readability, and find that readability alone does not predict coherence or learning efficiency in SLMs. Models trained on complex, adult-level text perform comparably to those trained on simplified language, and even exhibit faster development of coherence during training. Instead, we show that statistical simplicity, as measured by n-gram diversity, is a stronger predictor of learnability. Our findings caution against the growing trend of anthropomorphizing language model training—drawing parallels to human cognitive development without empirical basis—and argue for more precise reasoning about what properties actually support capability emergence in small models.",
+    "keywords": [
+      "child-directed language",
+      "developmentally inspired data",
+      "small language models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=AFMGbq39bQ"
+  },
+  "review_fields": {
+    "summary": "The paper aims to relate readability and statistical complexity with learnability. It provides evidence that learnability stems from statistical complexity rather than from the readability of the training dataset. Such result dilutes previously claimed similarities between human and LLM learning dynamics.\n\nTo test such hypothesis, the authors generate synthetic datasets which vary the readability while maintaining the quality of the dataset (measured by \"coherence\"). To accomplish such level of granularity, the datasets are generated using prompted LLMs and restricting their output vocabulary. Then SLMs (Small Language Models) are trained on such datasets and evaluated on readability and coherence.\nBoth readability and coherence scores are obtained from a prompted LLM evaluating the generated text of the SLMs.\n\nThe paper provides 3 main results as evidence that readability $\\neq$ learnability. \n\n1) High coherence can be achieved by training on less readable data, without resulting in coherence for more readable data.\n2) Coherence is negatively correlated with the number of unique trigrams in the dataset.\n3) The time of coherence emergence through training does not depend on the readability of the training data.\n\nFurthermore, the paper includes a final figure to show that the SLMs are not simply memorizing/overfitting the training dataset. Instead they are able to generate new n-grams (especially higher order ones).",
+    "reasons_to_accept": "1) The goal of the paper is well written and the experiments address the paper's claims.\n2) It is a technically demanding paper as it involved pre-training many SLMs. The training and evaluation of models seems to be well performed.\n3) The findings could potentially change the community's view on learnability and generalization of transformer-based LMs.",
+    "reasons_to_reject": "## Figure 4b, not convincing emergence\n\nI would like to see a more dense sampling of the checkpoints for figure 4b. \nFor the score to be comparable across datasets/domains, I would expect the score to be similar early in training.\nIn the figure we see very different vertical offsets (for more readable vs less readable). If a more dense sampling does not solve that, it is likely that the coherence score is biased.\n\n---\n\n## Figure 5, not convincing baseline\n\nLlama-70B cannot be really compared here, since its training data is not known. It is not clear to me how this model can be used as a baseline.\n\n---\n\n## Generating and evaluating with LLMs\n\nIt is a bit odd to both generate training data and evaluate the generated text from SLMs with LLMs. This could introduce biases in the coherence and readability scores, therefore, limiting the generality of the findings.\n\n---\n\nI would like to see more links with previous work on learnability:\n(Nguyen, 2024) Understanding Transformers via N-gram Statistics\n(Kallini, 2024) Mission: Impossible language models",
+    "questions_to_authors": "In Figure 5, it seems like smaller models (trained on synthetic data) tend to produce more n-grams that are not in the training data than larger ones. Do you have any intuition on that?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1603,
+    "words": 267,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9e8b1f19-9f9a-49f2-b2a1-657e80a588b3",
+    "error": null,
+    "scored_chars": 1604
+  }
+}

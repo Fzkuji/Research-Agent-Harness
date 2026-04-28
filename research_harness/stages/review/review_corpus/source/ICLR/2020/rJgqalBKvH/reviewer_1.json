@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "rJgqalBKvH",
+  "reviewer": "1",
+  "paper": {
+    "title": "Deceptive Opponent Modeling with Proactive Network Interdiction for Stochastic Goal Recognition Control",
+    "authors": [
+      "Junren Luo",
+      "Wei Gao",
+      "Zhiyong Liao",
+      "Weilin Yuan",
+      "Wanpeng Zhang",
+      "Shaofei Chen"
+    ],
+    "abstract": "Goal recognition based on the observations of the behaviors collected online has been used to model some potential applications. Newly formulated problem of goal recognition design aims at facilitating the online goal recognition process by performing offline redesign of the underlying environment with hard action removal.\nIn this paper, we propose the stochastic goal recognition control (S-GRC) problem with two main stages: (1) deceptive opponent modeling based on maximum entropy regularized Markov decision processes (MDPs) and (2) goal recognition control under proactively static interdiction.\nFor the purpose of evaluation, we propose to use the worst case distinctiveness (wcd) as a measure of the non-distinctive path without revealing the true goals, the task of S-GRC is to interdict a set of actions that improve or reduce the wcd.\nWe empirically demonstrate that our proposed approach control the goal recognition process based on opponent's deceptive behavior.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=rJgqalBKvH"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "This paper proposes to use reinforcement learning to model an agent that is reaching goal that it is intended to reach. The authors consider the case where the agent is (1) indifferent to being observed, (2) trying to help an observer reach its goal, and (3) trying to fool the observer into not reach its goal. The paper propose to use a value function to quantify how easy it is to predict where the agent is going (\"worst case distinctiveness\"). The authors propose to then train an agent to modify the action space to make it difficult for an agent to fool the observer.\n\nWhile this is an interesting idea, the paper is clearly incomplete. The experiment section is missing, and much of the method section is partly written."
+  },
+  "review_metadata": {
+    "rating": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

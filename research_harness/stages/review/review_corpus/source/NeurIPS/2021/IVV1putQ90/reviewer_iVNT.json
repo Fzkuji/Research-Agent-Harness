@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "IVV1putQ90",
+  "reviewer": "iVNT",
+  "paper": {
+    "title": "Latent Equilibrium: A unified learning theory for arbitrarily fast computation with arbitrarily slow neurons",
+    "authors": [
+      "Paul Haider",
+      "Benjamin Ellenberger",
+      "Laura Kriener",
+      "Jakob Jordan",
+      "Walter Senn",
+      "Mihai A. Petrovici"
+    ],
+    "abstract": "The response time of physical computational elements is finite, and neurons are no exception. In hierarchical models of cortical networks each layer thus introduces a response lag. This inherent property of physical dynamical systems results in delayed processing of stimuli and causes a timing mismatch between network output and instructive signals, thus afflicting not only inference, but also learning. We introduce Latent Equilibrium, a new framework for inference and learning in networks of slow components which avoids these issues by harnessing the ability of biological neurons to phase-advance their output with respect to their membrane potential. This principle enables quasi-instantaneous inference independent of network depth and avoids the need for phased plasticity or computationally expensive network relaxation phases. We jointly derive disentangled neuron and synapse dynamics from a prospective energy function that depends on a network's generalized position and momentum. The resulting model can be interpreted as a biologically plausible approximation of error backpropagation in deep cortical networks with continuous-time, leaky neuronal dynamics and continuously active, local plasticity. We demonstrate successful learning of standard benchmark datasets, achieving competitive performance using both fully-connected and convolutional architectures, and show how our principle can be applied to detailed models of cortical microcircuitry. Furthermore, we study the robustness of our model to spatio-temporal substrate imperfections to demonstrate its feasibility for physical realization, be it in vivo or in silico.",
+    "keywords": [
+      "dynamical systems",
+      "cortical microcircuits",
+      "deep learning",
+      "prospective coding",
+      "noise robustness",
+      "synaptic plasticity"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=IVV1putQ90"
+  },
+  "review_fields": {
+    "summary": "This paper asks an important question, proposes novel ideas, and presents compelling contributions. The problem being addressed is fundamental and yet has received not much attention,  with no existing good solution. The problem is that physical and biological elements in the brain are slow. Computations propagating through a neural network hierarchy with such elements will introduce time lag.  The mismatch between teaching signals and the current state of the system,  when the input is constantly changing, presents a problem for learning.  The two existing solutions involve (1) separating inference and learning into the \"relaxation\" phase for the computation to complete and the \"learning\" phase for weight update, or (2) use a very slow weight update rate. Both of these are suboptimal.  They proposed a prospective energy function in which the membrane potential of a neuron is trained to map onto a latent equilibrium space where during the relaxation state, the instantaneous outputs of the neurons are the prospective target membrane potentials of the neurons with those recurrent computations. This will allow weight update to be done concurrently with relaxation and solving a problem of achieving arbitrary fast computation with arbitrarily slow neurons.  The resulting model can be interpreted as a biologically plausible approximation of error backpropagation in deep cortical networks with continuous-time leaky neuronal dynamics and continuous active local plasticity. They showed this method work in MINST and CIFAR100, and in fact, the method works better than BP during the early epochs of training.",
+    "main_review": "Since the ideas in the paper are new and complex, the paper is rather difficult to understand at places that might not be well explained. For example, what is the second term L(u) in equation 2 for? At first glance, I thought it is a regularization term. Then, I thought this term might be related to the teaching loss, where the supervision signal is imposed? If it is the teaching loss, shouldn't it be relevant only for the output layer and not for the hidden layers?    I also have troubles relating the energy mismatch term (1st term) of equation 2 (which suggests W is recurrent connection weight of the same layer), to  Figure 1a (which suggests W is the feedforward weight from the previous layer) and Figure 1f  (how is that E related to the E in equation 2, or the latent space? Is the jump from one plane to another plane due to a change in the input as in Figure 1c?)  Despite these uncertainties in my understanding and interpretation, I like the big picture.  They are solving a real and important problem with a novel creative solution.  The impressive performance results in Figure 2 also convinces me that this model works."
+  },
+  "review_metadata": {
+    "rating": 9,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

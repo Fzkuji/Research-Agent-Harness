@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "YXjhRGvqfFN",
+  "reviewer": "HjX3",
+  "paper": {
+    "title": "Learnable Fourier Features for Multi-dimensional Spatial Positional Encoding",
+    "authors": [
+      "Yang Li",
+      "Si Si",
+      "Gang Li",
+      "Cho-Jui Hsieh",
+      "Samy Bengio"
+    ],
+    "abstract": "Attentional mechanisms are order-invariant. Positional encoding is a crucial component to allow attention-based deep model architectures such as Transformer to address sequences or images where the position of information matters. In this paper, we propose a novel positional encoding method based on learnable Fourier features. Instead of hard-coding each position as a token or a vector, we represent each position, which can be multi-dimensional, as a trainable encoding based on learnable Fourier feature mapping, modulated  with  a  multi-layer perceptron. The representation is particularly advantageous for a spatial multi-dimensional position, e.g., pixel positions on an image, where $L_2$ distances or more complex positional relationships need to be captured. Our experiments based on several public benchmark tasks show that our learnable Fourier feature representation for multi-dimensional positional encoding outperforms existing methods by both improving the accuracy and allowing faster convergence.",
+    "keywords": [
+      "Positional encoding",
+      "Transformer",
+      "Fourier features",
+      "multi-dimensional spatial tasks",
+      "image classification",
+      "image generation",
+      "object detection",
+      "widget captioning",
+      "UI modeling"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=YXjhRGvqfFN"
+  },
+  "review_fields": {
+    "comment": "Thanks for this further explanation.\nI saw that more experiments are used to show the efficacy, only large sizes are retained to report results for object detection.\nHowever, the improvement is still slight. Moreover, could this deliberate setting introduces new domain gap, e.g., only small objects are seen during training. This trick(learnable fourier) surprisingly delivers domain adaptation(for unknown reason) to beat the baseline. To be honest, I really like the idea and and it seems plausible, but (surprising to me) it is not that effective on the chosen tasks. To only validate the bias of position, maybe toy dataset is an option. What happens if a specific pattern appears in one of the eight direction (N,S,W,E, NW, NE...), and validate on the other. As mentioned by the author \"Position bias is important for widget captioning as shown in Appendix F Table 6 in the Widget Captioning paper\". If the position bias has been proved as in the captioning task, then the improvement by (Learnable-Fourier-2/2) is not that clear(this is also very strange to me). Again, \"For the image generation and object detection (with position normalization in DETR), there are currently no unseen positions involved.\" If this task not suitable to validate the idea, then it might be better to apply other suitable tasks for next submission.\nI really like the idea of this study, and I look forward to seeing the improved version in the near future."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

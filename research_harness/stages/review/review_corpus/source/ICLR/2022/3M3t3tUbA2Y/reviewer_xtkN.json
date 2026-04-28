@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "3M3t3tUbA2Y",
+  "reviewer": "xtkN",
+  "paper": {
+    "title": "DreamerPro: Reconstruction-Free Model-Based Reinforcement Learning with Prototypical Representations",
+    "authors": [
+      "Fei Deng",
+      "Ingook Jang",
+      "Sungjin Ahn"
+    ],
+    "abstract": "In model-based reinforcement learning (MBRL) such as Dreamer, the approaches based on observation reconstruction\noften fail to discard task-irrelevant details, thus struggling to handle visual distractions or generalize to unseen distractions. To address this issue, previous work has proposed to contrastively learn the latent representations and its temporal dynamics, but showed inconsistent performance, often worse than Dreamer. Although, in computer vision, an alternative prototypical approach has often shown to be more accurate and robust, it is elusive how this approach can be combined best with the temporal dynamics learning in MBRL. In this work, we propose a reconstruction-free MBRL agent, called DreamerPro, to achieve this goal. Similar to SwAV, by encouraging uniform cluster assignment across the batch, we implicitly push apart the embeddings of different observations. Additionally, we let the temporal latent state to 'reconstruct' the cluster assignment of the observation, thereby relieving the world model from modeling low-level details. We evaluate our model on the standard setting of DeepMind Control Suite, and also on a natural background setting, where the background is replaced by natural videos irrelevant to the task. The results show that the proposed model is consistently better than the previous models.",
+    "keywords": [
+      "model-based reinforcement learning",
+      "representation learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=3M3t3tUbA2Y"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper presents DreamerPro, a method for learning a latent dynamics model from image observations without a pixel-based reconstruction loss.  The model combines the clustering approach of SwAV with an additional temporal consistency loss.  Experimental results show improved performance over baselines in distraction-free and natural-video-background settings on DeepMind Control Suite tasks.",
+    "main_review": "###  Strengths\n\n- The approach is clear and well motivated, and a natural extension of representation learning for MBRL\n- Related work section is thorough and well written\n- Experimental results show an increased robustness to visual distractions compared to dreamer\n\n###  Areas to improve\n\nThe experiments are not as thorough as they could be.\n- Several baselines are cited but not included in experiments (ie PSE, CURL, many of the model-free temporal prediction models).  I understand that the paper is not attempting to contribute a model-free vs model-based comparison, but it makes the results seem thin.\n- Three random seeds seems too few\n- One of the main stated motivations of using a non-contrastive representation approach was to reduce the required batch size, but there is little evidence here with which to evaluate that claim.\n- I like the ablation study comparing the different terms of the additional loss (Figure 4).  The paper would be stronger with some additional exploration of the design space of the presented idea.  For example, is the approach sensitive to the hyperparameters in Table 3?  Another example, for the temporal consistency loss, could you also include terms for enforcing the consistency across timesteps and augmentations simultaneously, eg w^(1)log u^(2)?\n\nI found the diagram in Figure 1 a bit unclear because it ignores the augmentation index i, and has AUG(o_t) repeated twice.  What do the two augmentations in the diagram represent, if both sets of augmentations are actually passed through all paths of the diagram?\n\n\n## Update after rebuttal\n\nThank you for addressing my concerns.  I will maintain my score that this paper is above the acceptance threshold.",
+    "summary_of_the_review": "Overall, I found the paper to be a novel exploration of a natural combination of two methods from MBRL and SSL.  The paper makes modest claims, and supports them with good evidence and a well-written explanation.  Although the results show empirical improvements, the paper could do more to contribute to a more general understanding of these improvements and the approach itself.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2077,
+    "words": 334,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/575b2573-e57a-4ec6-a09b-692a0eb17b4a",
+    "error": null,
+    "scored_chars": 2087
+  }
+}

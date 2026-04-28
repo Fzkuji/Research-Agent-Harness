@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "rkfbLilAb",
+  "reviewer": "1",
+  "paper": {
+    "title": "Improving Search Through A3C Reinforcement Learning Based Conversational Agent",
+    "authors": [
+      "Milan Aggarwal",
+      "Aarushi Arora",
+      "Shagun Sodhani",
+      "Balaji Krishnamurthy"
+    ],
+    "abstract": "We develop a reinforcement learning based search assistant which can assist users through a set of actions and sequence of interactions to enable them realize their intent. Our approach caters to subjective search where the user is seeking digital assets such as images which is fundamentally different from the tasks which have objective and limited search modalities. Labeled conversational data is generally not available in such search tasks and training the agent through human interactions can be time consuming. We propose a stochastic virtual user which impersonates a real user and can be used to sample user behavior efficiently to train the agent which accelerates the bootstrapping of the agent. We develop A3C algorithm based context preserving architecture which enables the agent to provide contextual assistance to the user. We compare the A3C agent with Q-learning and evaluate its performance on average rewards and state values it obtains with the virtual user in validation episodes. Our experiments show that the agent learns to achieve higher rewards and better states.",
+    "keywords": [
+      "Subjective search",
+      "Reinforcement Learning",
+      "Conversational Agent",
+      "Virtual user model",
+      "A3C",
+      "Context aggregation"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rkfbLilAb"
+  },
+  "review_fields": {
+    "review": "This paper proposes to use RL (Q-learning and A3C) to optimize the interaction strategy of a search assistant. The method is trained against a simulated user to bootstrap the learning process. The algorithm is tested on some search base of assets such as images or videos. \n\nMy first concern is about the proposed reward function which is composed of different terms. These are very engineered and cannot easily transfer to other tasks. Then the different algorithms are assessed according to their performance w.r.t. to these rewards. They of course improve with training since this is the purpose of RL to optimize these numbers. Assessment of a dialogue system should be done according to metrics obtained through actual interactions with users, not according to auxiliary tasks etc. \n\nBut above all, this paper incredibly lacks of context in both RL and dialogue systems. The authors cite a 2014 paper when it comes to refer to Q-learning (Q-learning was first published in 1989 by Watkins). The first time dialogue has been casted into a RL problem is in 1997 by E. Levin and R. Pieraccini (although it has been suggested before by M. Walker). User simulation has been proposed at the same time and further developed in the early 2000 by Schatzmann, Young, Pietquin etc. Using LSTMs to build user models has been proposed in 2016 (Interspeech) by El Asri et al. Buiding efficient reward functions for RL-based conversational systems has also been studied for more than 20 years with early work by M. Walker on PARADISE (@ACL 1997) but also via inverse RL by Chandramohan et al (2011). A2C (which is a single-agent version of A3C) has been used by Strub et al (@ IJCAI 2017) to optimize visually grounded dialogue systems. RL-based recommender systems have also been studied before (e.g. Shani in JMLR 2005).   \n\nI think the authors should first read the state of the art in the domain before they suggest new solutions."
+  },
+  "review_metadata": {
+    "rating": 2,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

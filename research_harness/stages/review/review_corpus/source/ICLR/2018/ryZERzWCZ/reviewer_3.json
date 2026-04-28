@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "ryZERzWCZ",
+  "reviewer": "3",
+  "paper": {
+    "title": "The Information-Autoencoding Family: A Lagrangian Perspective on Latent Variable Generative Modeling",
+    "authors": [
+      "Shengjia Zhao",
+      "Jiaming Song",
+      "Stefano Ermon"
+    ],
+    "abstract": "A variety of learning objectives have been recently proposed for training generative models. We show that many of them, including InfoGAN, ALI/BiGAN, ALICE, CycleGAN, VAE, $\\beta$-VAE, adversarial autoencoders, AVB, and InfoVAE, are Lagrangian duals of the same primal optimization problem. This generalization reveals the implicit modeling trade-offs  between flexibility and  computational requirements being made by these models. Furthermore, we characterize the class of all objectives that can be optimized under certain computational constraints.\nFinally, we show how this new Lagrangian perspective can explain undesirable behavior of existing methods and provide new principled solutions.",
+    "keywords": [
+      "Generative Models",
+      "Variational Autoencoder",
+      "Generative Adversarial Network"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryZERzWCZ"
+  },
+  "review_fields": {
+    "review": "Thank you for the feedback, I have read it.\n\nI do think that developing unifying frameworks is important. But not all unifying perspective is interesting; rather, a good unifying perspective should identify the behaviour of existing algorithms and inspire new algorithms.\n\nIn this perspective, the proposed framework might be useful, but as noted in the original review, the presentation is not clear, and it's not convincing to me that the MI framework is indeed useful in the sense I described above.\n\nI think probably the issue is the lack of good evaluation methods for generative models. Test-LL has no causal relationship to the quality of the generated data. So does MI. So I don't think the argument of preferring MI over MLE is convincing.\n\nSo in summary, I will still keep my original score. I think the paper will be accepted by other venues if the presentation is improved and the advantage of the MI perspective is more explicitly demonstrated.\n\n==== original review ====\n\nThank you for an interesting read.\n\nThe paper presented a unifying framework for many existing generative modelling techniques, by first considering constrained optimisation problem of mutual information, then addressing the problem using Lagrange multipliers.\n\nI see the technical contribution to be the three theorems, in the sense that it gives a closure of all possible objective functions (if using the KL divergences). This can be useful: I'm tired of reading papers which just add some extra \"regularisation terms\" and claim they work. I did not check every equation of the proof, but it seems correct to me.\n\nHowever, an imperfection is, the paper did not provide a convincing explanation on why their view should be preferred compared to the original papers' intuition.  For example in VAE case, why this mutual information view is better than the traditional view of approximate MLE, where q is known to be the approximate posterior? A better explanation on this (and similarly for say infoGAN/infoVAE) will significantly improve the paper.\n\nContinuing on the above point, why in section 4 you turn to discuss relationship between mutual information and test-LL?  How does that relate to the main point you want to present in the paper, which is to prefer MI interpretation if I understand it correctly?\n\nTerm usage: we usually *maximize* the ELBO and *minimise* the variational free-energy (VFE)."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "ZdWTN2HOie",
+  "reviewer": "GyYk",
+  "paper": {
+    "title": "Stochastic Amortization: A Unified Approach to Accelerate Feature and Data Attribution",
+    "authors": [
+      "Ian Connick Covert",
+      "Chanwoo Kim",
+      "Su-In Lee",
+      "James Zou",
+      "Tatsunori Hashimoto"
+    ],
+    "abstract": "Many tasks in explainable machine learning, such as data valuation and feature attribution, perform expensive computation for each data point and are intractable for large datasets. These methods require efficient approximations, and although amortizing the process by learning a network to directly predict the desired output is a promising solution, training such models with exact labels is often infeasible. We therefore explore training amortized models with noisy labels, and we find that this is inexpensive and surprisingly effective. Through theoretical analysis of the label noise and experiments with various models and datasets, we show that this approach tolerates high noise levels and significantly accelerates several feature attribution and data valuation methods, often yielding an order of magnitude speedup over existing approaches.",
+    "keywords": [
+      "Amortization",
+      "feature attribution",
+      "data valuation",
+      "stochastic optimization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZdWTN2HOie"
+  },
+  "review_fields": {
+    "comment": "I appreciate the authors' response. I would encourage the authors to at least add a remark after Theorem 1 clarifying the gap between Theorem 1 and the main claims of the advantage of the proposed method (which are evaluated empirically). This will help avoid potential confusions by readers like myself. \n\nPS: Part of the confusion comes from the paper abstract: \"Through theoretical analysis of the label noise and experiments with various models and datasets, we show that this approach significantly accelerates several feature attribution and data valuation methods\", which sets up an expectation that Theorem 1 is directly about the advantage of the proposed method.\n\nOverall I think this is a solid paper worth publication at NeurIPS. And this assessment has already been reflected by my previous rating."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 810,
+    "words": 128,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/529c6113-9f90-4c6c-bf45-d0dc40c6a097",
+    "error": null,
+    "scored_chars": 811
+  }
+}

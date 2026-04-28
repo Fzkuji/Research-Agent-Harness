@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "RDbuSCWhad",
+  "reviewer": "DCmS",
+  "paper": {
+    "title": "Structured Sparse Transition Matrices to Enable State Tracking in State-Space Models",
+    "authors": [
+      "Aleksandar Terzic",
+      "Nicolas Menet",
+      "Michael Hersche",
+      "Thomas Hofmann",
+      "Abbas Rahimi"
+    ],
+    "abstract": "Modern state-space models (SSMs) often utilize structured transition matrices\nwhich enable efficient computation but pose restrictions on the model’s expressivity,\nas measured in terms of the ability to emulate finite-state automata (FSA). While\nunstructured transition matrices are optimal in terms of expressivity, they come\nat a prohibitively high compute and memory cost, even for moderate state sizes.\nWe propose a structured sparse parametrization of transition matrices in SSMs\nthat enables FSA state tracking with provably optimal state size and depth, while\nkeeping the computational cost of the recurrence comparable to that of diagonal\nSSMs. Our method, \\emph{PD-SSM}, parametrizes the transition matrix as the product\nof a column one-hot matrix ($P$) and a complex-valued diagonal matrix ($D$). As\na result, the computational cost of parallel scans scales linearly with the state\nsize. Theoretically, the model is BIBO-stable and can emulate any $N$-state FSA\nwith one layer of dimension $N$ and a linear readout of size $N ×N$, significantly\nimproving on all current structured SSM guarantees. Experimentally, the model\nsignificantly outperforms a wide collection of modern SSM variants on various FSA\nstate tracking tasks. On multivariate time-series classification, it outperforms neural\ncontrolled differential equations, a paradigm explicitly built for time-series analysis.\nFinally, we integrate PD-SSM into a hybrid Transformer-SSM architecture and\ndemonstrate that the model can effectively track the states of a complex FSA in\nwhich transitions are encoded into sets of variable-length English sentences. The\ncode is available at https://github.com/IBM/expressive-sparse-state-space-model.",
+    "keywords": [
+      "State-Space Models",
+      "Expressiveness",
+      "Efficiency",
+      "Matrix Parametrisation",
+      "State-Tracking",
+      "Finite-State Automata"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=RDbuSCWhad"
+  },
+  "review_fields": {
+    "comment": "Thanks for your response! I appreciate the new empirical results and maintain my high score.\n\nOne clarification regarding the discussion of RWKV-7 in the rebuttal:\n\n> However, the provided construction relies on MLP layers which implement lookup tables whose sizes are exponential in the size of the state set\n\nI don't think this is correct - A lookup table should be polynomial (not exponential) size in the number of states, since it maps each (state, token) pair to a state, and thus takes size roughly $\\lvert Q \\rvert^2 \\cdot \\lvert \\Sigma \\rvert$. However, it is possible for RNNs to do better than this, which is perhaps the intuition you're alluding to. See: https://arxiv.org/html/2402.15814v2"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

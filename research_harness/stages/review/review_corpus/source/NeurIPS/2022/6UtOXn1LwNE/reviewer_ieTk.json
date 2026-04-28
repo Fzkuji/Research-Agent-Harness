@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "6UtOXn1LwNE",
+  "reviewer": "ieTk",
+  "paper": {
+    "title": "Models of human preference for learning reward functions",
+    "authors": [
+      "W. Bradley Knox",
+      "Stephane Hatgis-Kessell",
+      "Serena Booth",
+      "Scott Niekum",
+      "Peter Stone",
+      "Alessandro G Allievi"
+    ],
+    "abstract": "The utility of reinforcement learning is limited by the alignment of reward functions with the interests of human stakeholders. One promising method for alignment is to learn the reward function from human-generated preferences between pairs of trajectory segments. These human preferences are typically assumed to be informed solely by partial return, the sum of rewards along each segment. We find this assumption to be flawed and propose modeling preferences instead as arising from a different statistic: each segment's regret, a measure of a segment's deviation from optimal decision-making. Given infinitely many preferences generated according to regret, we prove that we can identify a reward function equivalent to the reward function that generated those preferences. We also prove that the previous partial return model lacks this identifiability property without preference noise that reveals rewards' relative proportions, and we empirically show that our proposed regret preference model outperforms it with finite training data in otherwise the same setting. Additionally, our proposed regret preference model better predicts real human preferences and also learns reward functions from these preferences that lead to policies that are better human-aligned. Overall, this work establishes that the choice of preference model is impactful, and our proposed regret preference model provides an improvement upon a core assumption of recent research.",
+    "keywords": [
+      "reinforcement learning",
+      "learning reward functions",
+      "reward design",
+      "alignment",
+      "learning from preferences",
+      "regret",
+      "advantage",
+      "successor features"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=6UtOXn1LwNE"
+  },
+  "review_fields": {
+    "summary": "The paper deals with the problem of modeling human preferences in a setting where they are presented with two segments and choose to compare the two. Importantly, the authors propose that people compare the segments in terms of their values (measured by a notion of regret) instead of the total reward achieved by each segment. A regret notion---the sum of the negative advantage function value of the segment---is used to summarize the value of a segment. The advantage function is defined under an optimal policy pi^* (optimal wrt the true reward r) and the reward of interest \\tilde{r}.",
+    "strengths_and_weaknesses": "Strength: The paper provides a key insight that preferences are not just a function of the (instantaneous) reward of the segment of interest. Given that humans may care about the goal of a task, their preference towards different segments will necessarily be influenced by their long-term value, i.e., how these segments perform in terms of achieving the goal. The identification results presented in Section 3 nicely summarized the proposed insight. \n\n\nWeakness: The biggest weakness to me is how one can utilize this insight in practice. In particular, calculating the regret requires one to know the optimal policy under the true reward r (or at least the value and q-value function of that optimal policy under any reward \\tilde{r}). In general, even if one provides an optimal policy \\pi^*, the planning problem (and possibly learning problem when the transition matrix is unknown) will make the estimation of the regret very hard. As a related note, in the general framework, the regret definition under a particular optimal policy and L150 (\"And regret(\\sigma|r) > 0 if and only if \\sigma is suboptimal\") in the proof seem to only hold if one assumes there is one single optimal policy \\pi^*. What if there is a set of optimal policies under the true reward r? How should one adjust the regret notion for that?",
+    "questions": "Could the authors elaborate more on the setting when there are multiple optimal policies, how one should define regret in such cases, and how the results in Section 3 look like when one chooses different optimal policies to define ther regret?\n\n\n-----\n\nL63: typo in the mathematical expression",
+    "limitations": "Yes, the authors have discussed the limitations and societal impact of their work in Appendix A. (When writing the above reviews, I have not read Appendix A of their paper yet.)"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

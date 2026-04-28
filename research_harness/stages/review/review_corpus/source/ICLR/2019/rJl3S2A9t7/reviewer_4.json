@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "rJl3S2A9t7",
+  "reviewer": "4",
+  "paper": {
+    "title": "Policy Optimization via Stochastic Recursive Gradient Algorithm",
+    "authors": [
+      "Huizhuo Yuan",
+      "Chris Junchi Li",
+      "Yuhao Tang",
+      "Yuren Zhou"
+    ],
+    "abstract": "In this paper, we propose the StochAstic Recursive grAdient Policy Optimization (SARAPO) algorithm which is a novel variance reduction method on Trust Region Policy Optimization (TRPO). The algorithm incorporates the StochAstic Recursive grAdient algoritHm(SARAH) into the TRPO framework. Compared with the existing Stochastic Variance Reduced Policy Optimization (SVRPO), our algorithm is more stable in the variance. Furthermore, by theoretical analysis the ordinary differential equation and the stochastic differential equation (ODE/SDE) of SARAH, we analyze its convergence property and stability. Our experiments demonstrate its performance on a variety of benchmark tasks. We show that our algorithm gets better improvement in each iteration and matches or even outperforms SVRPO and TRPO.",
+    "keywords": [
+      "reinforcement learning",
+      "policy gradient",
+      "variance reduction",
+      "stochastic recursive gradient algorithm"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rJl3S2A9t7"
+  },
+  "review_fields": {
+    "review": "This paper investigates how the SARAH stochastic recursive gradient algorithm can be applied to Trust Region Policy Optimization. The authors analyze the SARAH algorithm using its approximating ordinary and stochastic differential equations. The empirical performance of SARAPO is then compared with SVRPO and TRPO on several benchmark problems.\n\nAlthough the idea of applying SARAH to reduce the variance of gradient estimates in policy gradient algorithms is interesting and potentially quite significant (variance of gradient estimates is a major problem in policy gradient algorithms), I recommend rejecting this paper at the present time due to issues with clarity and quality, particularly of the experiments.\n\nNot enough of the possible values for experimental settings were tested to say anything conclusive about the performance of the algorithms being compared. For the values that were tested, no measures of the variability of performance or statistical significance of the results were given. This is important because the performance of the algorithms is similar on many of the environments, and it is important to know if the improved performance of SARAPO observed on some of the environments is statistically significant or simply due to the small sample size.\n\nThe paper also needs improvements in clarity. Grammatical errors and sentence fragments make it challenging to understand at times. Section 2.3 seemed very brief, and did not include enough discussion of design decisions made in the algorithm. For example, the authors say ``\"the Fisher Information Matrix can be approximated by Hessian matrix of the KL divergence when the current distribution exactly matches that of the base distribution\" but then suggest using the Hessian of the KL of the old parameters and the new parameters which are not the same. What are the consequences of this approximation? Are there alternative approaches?\n\nThe analysis in section 3 is interesting, but the technique has been applied to SGD before and the results only seem to confirm findings from the original SARAH paper.\n\nTo improve the paper, I would suggest moving section 3 to an appendix and using the extra space to further explain details and conduct additional simpler experiments. Additional experiments on simpler environments and policy gradient algorithms (REINFORCE, REINFORCE with baseline) would allow the authors to try more possible values for experimental settings and do enough runs to obtain more conclusive results about performance. Then the authors can present their results applying SARAH to TRPO with some measure of statistical significance."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

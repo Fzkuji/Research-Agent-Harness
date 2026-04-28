@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "yjybfsIUdNu",
+  "reviewer": "rJ7u",
+  "paper": {
+    "title": "Multifidelity Reinforcement Learning with Control Variates",
+    "authors": [
+      "Sami Khairy",
+      "Prasanna Balaprakash"
+    ],
+    "abstract": "In many computational science and engineering applications, the output of a system of interest corresponding to a given input can be queried at different levels of fidelity with different costs. Typically, low-fidelity data is cheap and abundant, while high-fidelity data is expensive and scarce. In this work we study the reinforcement learning (RL) problem in the presence of multiple environments with different levels of fidelity for a given control task. We focus on improving the RL agent's performance with multifidelity data. Specifically, a multifidelity estimator that exploits the cross-correlations between the low- and high-fidelity returns is proposed to reduce the variance in the estimation of the state-action value function. The proposed estimator, which is based on the method of control variates, is used to design a multifidelity Monte Carlo RL (MFMCRL) algorithm that improves the learning of the agent in the high-fidelity environment. The impacts of variance reduction on policy evaluation and policy improvement are theoretically analyzed by using probability bounds. Our theoretical analysis and numerical experiments demonstrate that for a finite budget of high-fidelity data samples, our proposed MFMCRL agent attains  superior performance compared with that of a standard RL agent that uses only  the high-fidelity environment data for learning the optimal policy.",
+    "keywords": [
+      "Reinforcement learning",
+      "multifidelity environments",
+      "multifidelity estimation"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=yjybfsIUdNu"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for the feedback. I have read it together with the other reviews.\n\nI think that my concerns, apart from [About Correlation of the Rewards], are properly addressed by the authors. However, the one about the [Estimation of $Q^{lo}_{\\pi}$ ]  and its role in the analysis represents a limitation that should be properly discolosed in the paper.\n\nFor what concerns my issue [About Correlation of the Rewards], I think the authors' response is not satisfactory. My concern is about the fact that the assumption is that low-fidelity returns (not reward, as I was previously mentioning) are statistically correlated with high-fidelity returns. The authors, in the rebuttal, state that \"the only case in which our approach does not make sense is when the MDP admits a deterministic transition function, a deterministic reward function, and the agent follows a deterministic policy\". However, one can easily imagine settings where the transition function, the reward, and the policy are stochastic, and still low-fidelity and high-fidelity samples are not correlated. What if the high-fidelity and low-fidelity environments generate statistically independent trajectories? They can be arbitrarily similar in distribution (they can even be identically distributed), but this is not relevant. What is relevant for the analysis of Section 3.2 is the statistical correlation between the samples. If such a correlation (in the statistical sense) is not present, the whole approach loses its purpose. \n\nThis represents, at present, a severe limitation of the work since assuming a statistical correlation between low and high-fidelity environments seems to me quite unrealistic, and the authors did not motivate it."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "SkBYYyZRZ",
+  "reviewer": "1",
+  "paper": {
+    "title": "Searching for Activation Functions",
+    "authors": [
+      "Prajit Ramachandran",
+      "Barret Zoph",
+      "Quoc V. Le"
+    ],
+    "abstract": "The choice of activation functions in deep networks has a significant effect on the training dynamics and task performance. Currently, the most successful and widely-used activation function is the Rectified Linear Unit (ReLU). Although various hand-designed alternatives to ReLU have been proposed, none have managed to replace it due to inconsistent gains. In this work, we propose to leverage automatic search techniques to discover new activation functions. Using a combination of exhaustive and reinforcement learning-based search, we discover multiple novel activation functions. We verify the effectiveness of the searches by conducting an empirical evaluation with the best discovered activation function. Our experiments show that the best discovered activation function, f(x) = x * sigmoid(beta * x), which we name Swish, tends to work better than ReLU on deeper models across a number of challenging datasets. For example, simply replacing ReLUs with Swish units improves top-1 classification accuracy on ImageNet by 0.9% for Mobile NASNet-A and 0.6% for Inception-ResNet-v2. The simplicity of Swish and its similarity to ReLU make it easy for practitioners to replace ReLUs with Swish units in any neural network.",
+    "keywords": [
+      "meta learning",
+      "activation functions"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SkBYYyZRZ"
+  },
+  "review_fields": {
+    "review": "This paper is utilizing reinforcement learning to search new activation function. The search space is combination of a set of unary and binary functions. The search result is a new activation function named Swish function. The authors also run a number of ImageNet experiments, and one NTM experiment.\n\nComments:\n\n1. The search function set and method is not novel. \n2. There is no theoretical depth in the searched activation about why it is better.\n3. For leaky ReLU, use larger alpha will lead better result, eg, alpha = 0.3 or 0.5. I suggest to add experiment to leak ReLU with larger alpha. This result has been shown in previous work.\n\nOverall, I think this paper is not meeting ICLR novelty standard. I recommend to submit this paper to ICLR workshop track."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

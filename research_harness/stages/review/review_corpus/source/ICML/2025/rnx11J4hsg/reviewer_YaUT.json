@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "rnx11J4hsg",
+  "reviewer": "YaUT",
+  "paper": {
+    "title": "HiRemate: Hierarchical Approach for Efficient Re-materialization of Neural Networks",
+    "authors": [
+      "Julia Gusak",
+      "Xunyi Zhao",
+      "Théotime Le Hellard",
+      "Zhe LI",
+      "Lionel Eyraud-Dubois",
+      "Olivier Beaumont"
+    ],
+    "abstract": "Training deep neural networks (DNNs) on memory-limited GPUs is challenging,  as storing intermediate activations often exceeds available memory. Re-materialization, a technique that preserves exact computations, addresses this by selectively recomputing activations instead of storing them. However, existing methods either fail to scale, lack generality, or introduce excessive execution overhead. We introduce ${\\mbox{HiRemate}}$ a ${\\textit hierarchical}$ re-materialization framework that recursively partitions  large computation graphs, applies optimized solvers at multiple levels, and merges solutions into a global efficient training schedule. This enables scalability to significantly larger graphs than prior ILP-based methods while keeping runtime overhead low. Designed for single-GPU models and activation re-materialization, HiRemate extends  the feasibility of training networks with thousands of graph nodes, surpassing  prior methods in both efficiency and scalability. Experiments on various types of networks yield up to 50-70%  memory reduction with only 10-15% overhead, closely matching optimal solutions while significantly reducing solver time. Seamlessly integrating with PyTorch Autograd, HiRemate requires almost no  code change to use,  enabling broad adoption in memory-constrained deep learning.",
+    "keywords": [
+      "Rematerialization",
+      "Checkpointing",
+      "Memory-Efficient Training",
+      "Neural Networks",
+      "PyTorch",
+      "Integer Linear Programming",
+      "Training"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rnx11J4hsg"
+  },
+  "review_fields": {
+    "summary": "The paper presents a novel hierarchical framework to optimize memory usage during neural network training. They recursively partitions large computation graphs and apply optimized solvers at multiple levels to significantly reduces memory consumption while maintaining efficient training performance.",
+    "claims_and_evidence": "The claims are well-supported by experimental results. The paper provides empirical evidence demonstrating significant memory savings with minimal computational overhead across multiple neural network architectures.",
+    "methods_and_evaluation_criteria": "The proposed HiRemate framework and its evaluation criteria are well-aligned with the problem of optimizing memory usage in deep learning training.",
+    "theoretical_claims": "The paper provides a rigorous theoretical analysis of its algorithm",
+    "experimental_designs_or_analyses": "The paper includes exhaustive comparisons with state-of-the-art baselines, demonstrating its effectiveness across multiple architectures and hierarchy depths.",
+    "relation_to_broader_scientific_literature": "HiRemate extends prior work on ILP-based re-materialization methods such as Checkmate and TW-Remat, which optimize memory usage by selectively recomputing activations. Unlike these approaches, which struggle with large computation graphs due to scalability issues, HiRemate introduces a hierarchical partitioning strategy that allows it to efficiently scale to larger models.",
+    "essential_references_not_discussed": "The related work seems exhaustive.",
+    "other_strengths_and_weaknesses": "Strength\n- The paper provides a rigorous theoretical analysis of its algorithm\n- The paper includes exhaustive comparisons with state-of-the-art baselines, demonstrating its effectiveness across multiple architectures and hierarchy depths.\n- The proposed method is easily integrable with PyTorch, enhancing usability and enabling practical adoption with minimal modifications.\n- The intuition behind the scheduling algorithm design is well-explained and easy to follow\n\nWeakness \n- While the hierarchical ILP solver improves scalability, it still incurs significant computational overhead for very large graphs. The reliance on multiple ILP optimizations per subgraph introduces bottlenecks, making it less practical for real-time or iterative optimization scenarios.\n\n- The framework primarily targets static computational graphs, limiting its applicability to modern AI applications that involve dynamic graphs, such as reinforcement learning, adaptive architectures, and some transformer-based models."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

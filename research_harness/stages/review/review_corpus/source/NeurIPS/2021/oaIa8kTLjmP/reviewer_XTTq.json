@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "oaIa8kTLjmP",
+  "reviewer": "XTTq",
+  "paper": {
+    "title": "Asymptotics of the Bootstrap via Stability with Applications to Inference with Model Selection",
+    "authors": [
+      "Morgane Austern",
+      "Vasilis Syrgkanis"
+    ],
+    "abstract": "One of the most commonly used methods for forming confidence intervals is the empirical bootstrap, which is especially expedient when the limiting distribution of the estimator is unknown. However, despite its ubiquitous role in machine learning, its theoretical properties are still not well understood. Recent developments in probability have provided new tools to study the bootstrap method. However, they have been applied only to specific applications and contexts, and it is unclear whether these techniques are applicable to the understanding of the consistency of the bootstrap in machine learning pipelines. In this paper, we derive general stability conditions under which the empirical bootstrap estimator is consistent and quantify the speed of convergence. Moreover, we propose alternative ways to use the bootstrap method to build confidence intervals with coverage guarantees. Finally, we illustrate the generality and tightness of our results by examples of interest for machine learning including for two-sample kernel tests after kernel selection and the empirical risk of stacked estimators.",
+    "keywords": [
+      "bootstrap",
+      "asymptotics",
+      "confidence intervals",
+      "model selection"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=oaIa8kTLjmP"
+  },
+  "review_fields": {
+    "comment": "Reg 1: Ok. Of course, this is absolutely correct what you write.\n\nBut you will certainly agree that both examples in Section 4 and 5 involve some sort of weighting reminiscent to the smooth max. Why do you do this? Well, I suspect that you do this because this the only way in which you can satisfy the strong stability condition (Assumption 1.2), which requires that the sum over the partial derivatives are of order $o(n^{-1/3})$ and smaller. This is an extremely strong assumption because the sum over the first partial derivatives comprises $d_n$ summands, the sum over the second partial derivatives $d_n^2$ summands, etc.. Thus, if $d_n \\gg n$ this is extremely difficult to satisfy. Notably, three out of the four examples in the supplementary materials are in fact low-dimensional with $d_n = 1$  (examples 3,4,5) while the fourth example (example 6) has $d_n = n$ which also does not qualify as high-dimensional. Moreover, example 6 is again some sort of smooth max function. Besides, at least in the case of example 3, we could use CLT and D̶e̶l̶t̶a̶-̶M̶e̶t̶h̶o̶d̶  Slutzky's Theorem to obtain [an implicit characterization of] the asymptotic distribution under weaker moment conditions.\n\nThis seems to suggest that your theory will most likely only be applicable either to low-dimensional settings (which to a large extend could also be dealt with by existing bootstrap theory) or to some sort of maximum statistics that involve some version of the smooth max (which may or may not be dealt with by existing theory for the max-statistic). All in all, your general framework seems to have a rather narrow scope with regard to applications. (See also reviewer iK1w for a similar concern.)\n\nQuestion: Do your assumptions actually allow the analysis of the max-statistic $\\max_{1 \\leq k \\leq d_n}  n^{-1/2}\\sum_{i=1}^n X_{ik}$? I don't know whether the smooth max approximation of this statistic satisfy your assumption 1.2 (see also Lemma A.2 in CCK 2013, AOS).\n\nReg 3: I think that if your argument under 2 (i.e. convergence in $d_F$ implies convergence in Kolmogorov distance) extends to the case in which the limit distribution does not exist, then this is your most interesting contribution. If this was true, Theorem 1 would immediately allow you to compute p-values and construct asymptotically exact CIs and thus sharpen all theoretical results in your paper. However, note that even if the argument under 2 can be extended, it will not give a rate on the Kolmogorov distance. Therefore you cannot compare your rate on $d_F$ with the rates of CCK (2013-2020) and Deng & Zhang (2020) on the Kolmogorov distance."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "qBL04XXex6",
+  "reviewer": "pKnK",
+  "paper": {
+    "title": "Boosting of Thoughts: Trial-and-Error Problem Solving with Large Language Models",
+    "authors": [
+      "Sijia Chen",
+      "Baochun Li",
+      "Di Niu"
+    ],
+    "abstract": "The reasoning performance of Large Language Models (LLMs) on a wide range of problems critically relies on chain-of-thought prompting, which involves providing a few chain of thought demonstrations as exemplars in prompts. Recent work, e.g., Tree of Thoughts, has pointed out the importance of exploration and self-evaluation in reasoning step selection for complex problem solving. In this paper, we present Boosting of Thoughts (BoT), an automated prompting framework for problem solving with LLMs by iteratively exploring and self-evaluating many trees of thoughts in order to acquire an ensemble of trial-and-error reasoning experiences, which will serve as a new form of prompting to solve the complex problem. Starting from a simple prompt without requiring examples, BoT iteratively explores and evaluates a large collection of reasoning steps, and more importantly, uses error analysis obtained from the LLM on them to explicitly revise prompting, which in turn enhances reasoning step generation, until a final answer is attained. Our experiments with GPT-4 and Llama2 across extensive complex mathematical problems demonstrate that BoT consistently achieves higher or comparable problem-solving rates than other advanced prompting approaches.",
+    "keywords": [
+      "Large Language Models; Prompt Engineering; Boosting Mechanism;"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=qBL04XXex6"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a new framework called Boosting of Thoughts (BoT) for complex problem solving with large language models. BoT aims to iteratively explore many possible trees of thoughts and learn from ineffective thoughts/errors to progressively refine the prompt and elicit effective reasoning from LLMs. It aggregates the best reasoning chains from the trees and analyzes them with the LLM to gain experience on errors and revisions. Experiments on mathematical reasoning show BoT matches or exceeds previous SOTA approaches without needing human annotations.",
+    "strengths": "1. The paper proposes a novel framework, Boosting of Thoughts (BoT), that utilizes an iterative trial-and-error approach to refine prompting and elicit complex reasoning from LLMs. The key idea of learning from errors/ineffective thoughts is creative and mimics human problem-solving.\n2. Authors involve interesting techniques like weighted binary trees and heterogeneous growth strategies to generate diverse, shallow thought structures from a simple prompt.\n3. Evaluations on mathematical reasoning benchmarks demonstrate effectiveness of BoT. It matches or exceeds state-of-the-art methods without needing human annotated prompts. Also, the authors conduct ablation studies to further explain the mechanisms.",
+    "weaknesses": "1. Although this article proposes several practical strategies, its reasoning framework remains inherently reliant on the Tree-of-thoughts model, thereby limiting its novelty. BoT's structure is restricted to binary trees. Expanding to more complex graph structures will further improve reasoning but is not explored.\n2. For analysis, the prompts used to seed BoT could introduce biases and variances. More evaluations on OOD data would be useful to assess the robustness and generalizability of the improvements.\n3. The evaluations are mainly limited to mathematical reasoning. For generality, testing BoT's performance on other domains like commonsense reasoning or symbolic reasoning is needed.\n4. In the 'Competitors' paragraph, authors mentioned incorporating CoT-SC and Complex CoT as  baselines, yet CoT-SC is not shown in the 'mathematical reasoning' part. I hold the view that comparing the proposed method with prevailing baselines like SC(5) or SC(10) will offer a more direct reflection of BoT's efficacy. If it can outperform Complexity-based SC with fewer resources, it would make the work more solid.",
+    "questions": "1. As for the statement on page 3, 'Our paper embraces ToT due to its high ability and leaves GoT and BoT for future work,' is 'BoT' a typo error here? Or you mean combining BoT method with GoT? Regardless, I believe that including GoT in the comparison would make this work more interesting and informative.\n2. In the 'Competitors' paragraph in experiments, could you clarify how many reasoning chains are sampled for Complex-CoT and PHP respectively?\n3. The study conducts experiments based on GPT-4, which can lead to substantially high experimentation costs. Have the authors considered or utilized more cost-effective options like GPT-3.5-turbo? I'm aware of the recent variability in performance of this model. However, if there are experimental results showing that GPT-3.5 combined with BoT can outperform GPT-4 with CoT/CoT-SC, it would render the study's findings more convincing."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2719,
+    "words": 399,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2f1f9791-0d55-48b4-9cec-d70949d2089d",
+    "error": null,
+    "scored_chars": 2720
+  }
+}

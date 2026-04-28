@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "pQm66IPmeE",
+  "reviewer": "WuoZ",
+  "paper": {
+    "title": "Traceable and Explainable Multimodal Large Language Models: An Information-Theoretic View",
+    "authors": [
+      "Zihan Huang",
+      "Junda Wu",
+      "Rohan Surana",
+      "Raghav Jain",
+      "Tong Yu",
+      "Raghavendra Addanki",
+      "David Arbour",
+      "Sungchul Kim",
+      "Julian McAuley"
+    ],
+    "abstract": "Existing multimodal large language models (MLLMs) often lack traceable and explainable mechanisms for visual-textual alignment, making it challenging to understand how textual instructions shape multimodal representations. To address this shortcoming, we propose an information-theoretic framework that clarifies how MLLMs handle and transform both text and visual inputs. In particular, we measure the visual information gain that arises from textual instructions and multimodal encodings, thereby illuminating how different modalities interact and contribute to the model’s overall processing.\nOur framework decomposes the multimodal encoding process into layer-wise mutual information measures for better explainability, quantifying the visual contribution as the difference between unconditional and text-conditional mutual information. Specifically, inspired by the Information Bottleneck framework, we introduce a Concept Bottleneck that maps high-dimensional multimodal representations into an interpretable space, enabling tractable variational upper bounds on the mutual information between visual inputs and the model’s internal states. Furthermore, we quantify the contextual contribution introduced by textual cues via an InfoNCE mechanism that contrasts multimodal representations computed with and without text guidance. This dual perspective, facilitated by tractable variational upper bounds, provides insight into how visual information is encoded and filtered by textual instructions, while also highlighting the contextual information induced and enhanced by MLLMs. \nEmpirical findings demonstrate underexplored dynamics of visual-textual interaction within MLLMs, \nunderscoring how textual instructions distinctly shape visual representations and demonstrating how visual prompts, \nwhen effectively paired with instructions, enhance multimodal understanding.",
+    "keywords": [
+      "multimodal LLM",
+      "information theory"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=pQm66IPmeE"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a new IB-based framework for analyzing multimodal LLMs. The key idea is to leverage the concept bottleneck [1] to quantify the layer-wise visual information proportion and obtain the concept vector, which can be utilized for MLLM analysis. Experiments have been conducted to answer various interesting questions, and some useful insights have been obtained.\n\n[1] Koh, Pang Wei, Thao Nguyen, Yew Siang Tang, Stephen Mussmann, Emma Pierson, Been Kim, and Percy Liang. \"Concept bottleneck models.\" In International conference on machine learning, pp. 5338-5348. PMLR, 2020.",
+    "reasons_to_accept": "- The idea of utilizing the IB-based theory and concept bottleneck to analyze MLLMs is novel to me, and the theory looks sound.\n- This paper studies several important research questions, which is a good contribution to the community.",
+    "reasons_to_reject": "- The method is built upon previous work [1], which impacts the technical contributions to some degree.\n- Some research questions may be too vague and difficult to answer. Though the paper uses the proposed framework to reach some conclusions, it may still be hard to answer the proposed questions. A suggestion would be modifying the questions into some smaller questions, instead of in the current form.\n- The used model is LLaVA1.5, which is old and may not be powerful enough. The authors should consider using more advanced MLLMs such as Qwen-VL. The evaluation is conducted on benchmarks that may be too simple. Please also consider more advanced benchmarks such as MM-Vet 2."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 916,
+    "words": 153,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/54d89eae-0704-4816-ae69-1dec761e44cd",
+    "error": null,
+    "scored_chars": 916
+  }
+}

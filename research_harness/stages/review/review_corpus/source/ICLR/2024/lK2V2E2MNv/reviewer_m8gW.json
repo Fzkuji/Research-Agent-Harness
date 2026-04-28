@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "lK2V2E2MNv",
+  "reviewer": "m8gW",
+  "paper": {
+    "title": "Bridging Vision and Language Spaces with Assignment Prediction",
+    "authors": [
+      "Jungin Park",
+      "Jiyoung Lee",
+      "Kwanghoon Sohn"
+    ],
+    "abstract": "This paper introduces VLAP, a novel approach that bridges pretrained vision models and large language models (LLMs) to make frozen LLMs understand the visual world. VLAP transforms the embedding space of pretrained vision models into the LLMs' word embedding space using a single linear layer for efficient and general-purpose visual and language understanding. Specifically, we harness well-established word embeddings to bridge two modality embedding spaces. The visual and text representations are simultaneously assigned to a set of word embeddings within pretrained LLMs by formulating the assigning procedure as an optimal transport problem. We predict the assignment of one modality from the representation of another modality data, enforcing consistent assignments for paired multimodal data. This allows vision and language representations to contain the same information, grounding the frozen LLMs' word embedding space in visual data. Moreover, a robust semantic taxonomy of LLMs can be preserved with visual data since the LLMs interpret and reason linguistic information from correlations between word embeddings. Experimental results show that VLAP achieves substantial improvements over the previous linear transformation-based approaches across a range of vision-language tasks, including image captioning, visual question answering, and cross-modal retrieval. We also demonstrate the learned visual representations hold a semantic taxonomy of LLMs, making visual semantic arithmetic possible.",
+    "keywords": [
+      "Multimodal learning",
+      "vision-language tasks",
+      "frozen LLMs",
+      "optimal transport",
+      "assignment prediction"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=lK2V2E2MNv"
+  },
+  "review_fields": {
+    "summary": "The paper aims to align the LLMs (encoder/decoder or just decoder) with image encoders such that the LLMs can comprehend visual input better. It further restricts the design space to freeze the original LLM and visual encoder, just relying on a cheap learned linear transformation. To adapt such a transformation, the paper presents two learning objectives -- assignment prediction and image captioning. Empirical results are presented on 3 different tasks -- image captioning, VQA and cross-modal retrieval (I2T, T2I).",
+    "strengths": "* The problem is well motivated with wide applications.\n\n* The paper is mostly well written and explained.\n\n* The empirical results show a big delta which demonstrates the effectiveness of the approach. The studies are also conducted on wide range of problem settings.",
+    "weaknesses": "* The motivation for restricting the learned parameter space to just linear layers is unclear -- it would have been more interesting to see more analysis around different learned parameter space including non-linear layers.",
+    "questions": "-- Can the authors show ablation studies for the L_map and L_cap objectives to develop better understanding of each component?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 621,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/739877dd-d5ab-4195-8c9c-4899d1cb0a44",
+    "error": null,
+    "scored_chars": 621
+  }
+}

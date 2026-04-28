@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "2RNpZ8S4alJ",
+  "reviewer": "nqXG",
+  "paper": {
+    "title": "KINet: Keypoint Interaction Networks for Unsupervised Forward Modeling",
+    "authors": [
+      "Alireza Rezazadeh",
+      "Changhyun Choi"
+    ],
+    "abstract": "Object-centric representation is an essential abstraction for physical reasoning and forward prediction. Most existing approaches learn this representation through extensive supervision (e.g, object class and bounding box) although such ground-truth information is not readily accessible in reality. To address this, we introduce KINet (Keypoint Interaction Network)---an end-to-end unsupervised framework to reason about object interactions in complex systems based on a keypoint representation. Using visual observations, our model learns to associate objects with keypoint coordinates and discovers a graph representation of the system as a set of keypoint embeddings and their relations. It then learns an action-conditioned forward model using contrastive estimation to predict future keypoint states. By learning to perform physical reasoning in the keypoint space, our model automatically generalizes to scenarios with a different number of objects, and novel object geometries. Experiments demonstrate the effectiveness of our model to accurately perform forward prediction and learn plannable object-centric representations which can also be used in downstream model-based control tasks.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=2RNpZ8S4alJ"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors introduce Keypoint Interaction Network, an unsupervised framework for keypoint-based representation learning and forward modelling.\nThis framework is accompanied by auxiliary algorithms for training and quantitative experiments for evaluation.",
+    "main_review": "Strengths:\n- The paper is well-organized\n- The problem motivation in the introduction is clearly explained and analysis of related work is quite thorough\n- I appreciate that the experiment section includes not only experiments on reconstruction and future prediction, but also a simple control task. This is important to show the applicability of the proposed method.\n\nI am generally positive about this paper. However, the main weakness is the characterization of the method in section 3. While reading, I could not find the justification for some claims and/or could not match the textual description with the notation in the formulas. Here is a list of major points in order of appearance:\n- Section 3.2 (and following): how is the adjacency matrix defined? If no external information about the environment is used, then $\\[A_t\\]_ij=1\\ \\forall t,i,j$, i.e. the graph is assumed fully-connected. If this is the case, why focussing on reconstructing the graph structure (likelihood maximization in eq5). All adjacency matrices, both initial and reconstructed, will be full of ones anyway, right? It should be noted that this was not an issue in Kipf&Welling 2016, which the paper indicates as the base for KINet, since the VGAEs were applied to graphs with a non-trivial adjacency matrix.\n- KINet remains rather inflexible wrt the number of keypoints, even though the paper tries to present it as more flexible and generalizable than other baselines and related works:\n  - Section 3.2: \"Note that the graph representation is built on keypoints coordinates and, hence, we do not impose any prior assumption on the number of objects in the system.\" but actually the number of keypoints is fixed by the number of feature maps K in $f_{kp}$.\n  - Section 5.3: \"baseline models are not able to generalize to a different number of objects because this number is hard-coded in their formulation (i.e, in the number of feature channels or the number of graph nodes)\". Actually, KINet uses a constant K in this exact way, the only difference is that K is set to 6 which is greater than the max number of objects used in the experiments.\n- The method is strongly related to Kipf&Welling 2016, as mentioned often in the paper, but at the same time there are strong inconsistencies. For example, why is the node-level prior (eq 1) conditioned on $G_t$? In Kipf&Welling the prior is a zero-centered unit-variance normal distribution that does not depend on the graph. The same definition of prior, including the dubious dependency on the graph, is repeated in section 3.5.\n- Also related to the point above, eq2 uses the graph at the next timestep $G_{t+1}$ to obtain $Z_t$. Since the training is based on predicting the next graph based on the current, how is this choice justified? Why doesn't it interfere with training? Also, if eq2 is used during training as mentioned in the text above the equation, what is the behavior during inference when the future is not accessible?\n- The neighborhood aggregation mechanism that appears in eq4 is portrayed as a main contribution of the paper (see introduction). However, I could find neither a definition nor an ablation study of such a component. The only vague explanation is at the end of section 3.3: \"Our model, however, learns to dynamically sample the neighborhood of each node at each timestep conditioned on the latent variable\". To be considered a main contribution, I would expect a more detailed description of what $N(k)$ means and how it affects the model.\n- Since the method focuses strongly on defining a graph representation for the keypoints it's weird that in the experiment section this graph structure is not inspected at all. Considering that a key component of the method is inferring the adjacency matrix $\\tilde{A}_t$, it would be good to analyze the learned matrices, characterize them in terms of sparsity, and verify whether they capture semantic information about the environment.\n- How are negative samples $G^-$ for the contrastive loss (eq7) defined? On the same topic, how is the claim \"The contrastive loss is an essential element in our approach to ensure the learned forward model is action conditional\" in 5.4 justified? How does the contrastive loss relate to the model being action conditional?\n- Also on the contrastive loss, can S be considered a graph matching algorithm? First, the algorithm assumes the same number and order of nodes between the two graphs. Isn't it possible that the encoder network outputs two isomorphic graphs that are identical expect in the order of the nodes? It would be enough for the feature maps $\\phi_k$ to specialize in specific regions of the input image. Also, the graph matching algorithm S completely disregards the adjacency matrices. The two graphs could have similar node embeddings but very different connectivity and they would be considered similar. This further shows how the graph representation and the probabilistic inference of the adjacency matrix might not be a key component of the method.\n\nOther weaknesses:\n- Using L2 distance as a reconstruction loss in image space will not scale well to higher-dimensional domains such as natural images. Of course, this paper doesn't have to solve every problem with representation learning, but since this limits the applicability of the method it should at least be mentioned.\n\nOther questions:\n- Why does the keypoint detector take as input the pair $(I_0, I_t)$ as opposed to $(I_{t-1}, I_t)$? What is the advantage in using the initial state of the system? Since the simulated tasks start from random configurations with no inherent initial state, how does the choice of $I_0$ affect the detection of keypoints, the reconstruction, and the forward model? How far in the future can the forward model run?\n- Is the dataset of 10K episodes described in 4.1 available for reproducibility?\n- Is the test set of 1000 control tasks used in 5.2 released?\n- What is the size (e.g. side length) of the simulation used in the experiments? This is important to understand if the mean position errors reported in the tables are small or large in absolute terms.\n\nMinor points:\n- Figure 1: repeated word \"are are\"\n- Section 2: \"relate work\" -> \"related work\"\n- Figure 2: x axis labels \"timetep\" -> \"timestep\", also improve font size\n- Section 5.2: is \"converging\" the right word here? Convergence sounds like a model being trained, but my understanding is that the MPC algorithm uses the learned forward model to predict the outcome of future actions and take one step. I suggest replacing with \"reaching\" that gives the idea of achieving the desired state following a trajectory.\n- Section 5.3: \"i.e. in the number of feature channels or the number of graph nodes\" should be \"e.g.\"\n- Figure 3: the reader might benefit from a little more details in caption. What does each row represent? What are the dots and arrows in the images?",
+    "summary_of_the_review": "The paper gives much importance to a graph-based representation of interacting systems. However, the proposed formulation doesn't seem to leverage the graph in full. Actually, it might even be possible to describe the entire method without discussing nodes and adjacency matrices.\n\nSome elements of the method are not convincing, e.g. prior function, graph matching, reconstruction loss. Other components, e.g. the contrastive loss, are under-specified. Some claims are not well supported: flexibility of KINet wrt the parameter K and effect of the contrastive loss.\n\nOverall, the method of the paper sounds promising, but I don't recommend it for acceptance in its present form. I suggest polishing the method, re-evaluating the role of the graph representation, revising some vague claims, clarifying some definitions and formulas, and incorporating more experiments and ablation studies.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 7780 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 7780,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 7780
+  }
+}

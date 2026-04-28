@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "nVV6S2sb_UL",
+  "reviewer": "2oqH",
+  "paper": {
+    "title": "Securing Secure Aggregation: Mitigating Multi-Round Privacy Leakage in Federated Learning",
+    "authors": [
+      "Jinhyun So",
+      "Ramy E. Ali",
+      "Basak Guler",
+      "Jiantao Jiao",
+      "Salman Avestimehr"
+    ],
+    "abstract": "Secure aggregation is a critical component in federated learning, which enables the server to learn the aggregate model of the users without observing their local models. Conventionally, secure aggregation algorithms focus only on ensuring the privacy of individual users in a single training round. We contend that such designs can lead to significant privacy leakages over multiple training rounds, due to partial user selection/participation at each round of FL. In fact, we show that the conventional random user selection strategies in FL may lead to leaking users' individual models within a number of rounds that is linear in the number of users. To address this challenge, we introduce a secure aggregation framework, Multi-RoundSecAgg, with multi-round privacy guarantees. In particular, we introduce a new metric to quantify the privacy guarantees of FL over multiple training rounds, and develop a structured user selection strategy that guarantees the long-term privacy of each user (over any number of training rounds). Our framework also carefully accounts for the fairness and the average number of participating users at each round. Our experiments on MNIST, CIFAR-$10$ and CIFAR-$100$ datasets in the IID and the non-IID settings demonstrate the performance improvement over the baselines, both in terms of privacy protection and test accuracy.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=nVV6S2sb_UL"
+  },
+  "review_fields": {
+    "summary": "Secure aggregation-based protocols can leak privacy over multiple training rounds in FL and do not provide long-term privacy guarantees. The partial user selection enables the reconstruction of the client's models. The authors propose a user-selection strategy that will provide long-term privacy guarantees and provide theoretical and convergence analysis. New metrics are proposed to capture the privacy guarantees.",
+    "strengths_and_weaknesses": "Strengths:\n- The paper is well-written and clear.\n- Multi-RoundSecAgg is a novel scheme that provides privacy in FL in long term. It also ensures a fair selection of clients and shows tradeoffs between convergence and privacy.\n- Proposed metrics are interesting, they allow for comparison between different user selection schemes in terms of privacy and that all clients participate in an equal number of rounds.\n- Comparison with baseline experiments demonstrates the effectiveness of the metrics proposed.\n- The remarks and assumptions provided are a plus.\n\nWeaknesses:\n- The privacy leakage of the aggregated models over multiple rounds is not addressed. This may be considered as future work.\n- Applicability to cross-device only is missing.",
+    "questions": "1- Will multi-secagg work for cross-silo setup with partial user selection?\n2- Will experiments with N=K show any deviation?\n\nminor edits:\nLine 113: \"their.\"\nLine 41-42: Refer/Cite the basis\nLine 224: \"number of selected at each\"",
+    "limitations": "Limitations are discussed in form of assumptions and remarks."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

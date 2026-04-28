@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "nw4TWuEPGx",
+  "reviewer": "6oGR",
+  "paper": {
+    "title": "Discovering plasticity rules that organize and maintain neural circuits",
+    "authors": [
+      "David G Bell",
+      "Alison Duffy",
+      "Adrienne Fairhall"
+    ],
+    "abstract": "Intrinsic dynamics within the brain can accelerate learning by providing a prior scaffolding for dynamics aligned with task objectives. Such intrinsic dynamics would ideally self-organize and self-sustain in the face of biological noise including synaptic turnover and cell death. An example of such dynamics is the formation of sequences, a ubiquitous motif in neural activity. The sequence-generating circuit in zebra finch HVC provides a reliable timing scaffold for motor output in song and demonstrates a remarkable capacity for unsupervised recovery following perturbation. Inspired by HVC, we seek a local plasticity rule capable of organizing and maintaining sequence-generating dynamics despite continual network perturbations. We adopt a meta-learning approach introduced by Confavreux et al, which parameterizes a learning rule using basis functions constructed from pre- and postsynaptic activity and synapse size, with tunable time constants. Candidate rules are simulated within initially random networks, and their fitness is evaluated according to a loss function that measures the fidelity with which the resulting dynamics encode time. We use this approach to introduce biological noise, forcing meta-learning to find robust solutions. We first show that, in the absence of perturbations, meta-learning identifies a temporally asymmetric generalization of Oja's rule that reliably organizes sparse sequential activity. When synaptic turnover is introduced, the learned rule incorporates a form of homeostasis, better maintaining robust sequential dynamics relative to other previously proposed rules. Additionally, inspired by recent findings demonstrating that the strength of projections from inhibitory interneurons in HVC also dynamically responds to perturbations, we explore the role of inhibitory plasticity in sequence-generating circuits. We find that learned plasticity adjusts both excitation and inhibition in response to manipulations, outperforming rules applied only to excitatory connections. We demonstrate how plasticity acting on both excitatory and inhibitory synapses can better shape excitatory cell dynamics to scaffold timing representations.",
+    "keywords": [
+      "biologically plausible learning rules plasticity self-organization RNNs homeostasis meta-learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=nw4TWuEPGx"
+  },
+  "review_fields": {
+    "summary": "The authors investigate the development and persistence of intrinsic connectivity structures within a\nneural region without external input. They propose that a local plasticity rule can lead to self-organising connectivity motifs, creating inductive biases beneficial for subsequent information processing. The study focuses on sparse and sequential dynamics, as observed in the HVC region of zebra finches. The paper explores which plasticity rules can organise and maintain these sequential dynamics using meta-learning.The space of plasticity rules is parameterised using terms based on activations and synapse size.\nThe coefficients and their time constants are adjusted to minimise the loss, which comprises three\ncomponents: encouraging sparsity in activation, synaptic change, and improving the accuracy of time decoding. Initially, excitatory-excitatory rules are considered, followed by inhibitory-excitatory and excitatory-inhibitory rules. The study evaluates the efficiency of these rules under synaptic turnover and compares them to established Hebbian plasticity rules. Evolutionary algorithms identified a rule resembling a temporally generalised Oja’s rule, which\noutperformed a multiplicative asymmetric Hebbian rule in the context of synaptic turnover.",
+    "strengths": "This paper is conceptually significant, presenting the novel idea that local synaptic plasticity\ncould be crucial for maintaining inductive biases in the form of intrinsically-maintained\ncomputational motifs. These internally generated dynamics must interact with synaptic\nchanges induced by supervised learning—they need to support this form of learning without\nbeing overwhelmed by it. This perspective introduces a fresh angle to the\nunderstanding of the function and origin of local plasticity rules.\nThe authors primarily focus on identifying synaptic rules that can create stable inductive\nmotifs resilient to perturbations. The analyses presented are thorough and convincingly\nsupport this point. The use of meta-learning to estimate these plasticity rules is an innovative\napproach. Additionally, the detailed examination of the estimated rule offers an interpretable\noutcome from a complex machine learning technique - a rare occurrence in the field.\nA particular strength of the paper is its exploration of not only E-E but also E-I and I-E rules.\nFurthermore, the authors again analyse the estimated rule in a manner that provides interpretable\noutcomes.",
+    "weaknesses": "The manuscript occasionally feels unfinished and rushed, particularly in section 2.3.1.\nThe references to Figure 3 (blue circles, green stars?) and the lack of references to Figure 4\nin the text were often frustrating. Additionally, I was keen to understand why the second term\nestimated without noise lost its significance when noise was introduced, but the authors did\nnot address this point.\nFurthermore, it was somewhat anticlimactic that the authors did not explicitly explore the\ninteraction of the estimated plasticity rule with subsequent supervised learning, as this was\nstrongly hinted at in the introduction. For instance, are networks with the estimated rule better\nat reproducing songs than models with a traditional Hebbian rule?\nLastly, I found it odd that the decoding of time was not reported throughout the paper. Since\nthe reduction of loss can be attributed to three factors, this omission is noteworthy.",
+    "questions": "- Why does the second term, which was estimated without noise, lose its importance when noise\nis introduced? The authors did not address this point.\n- Why did the authors not explicitly explore the interaction between the estimated plasticity rule and\na subsequent supervised learning procedure, despite strongly hinting at this in the introduction?\n- Are networks using the estimated rule more effective at reproducing songs than those employing a\ntraditional Hebbian rule?\n- Why was the decoding of time not reported throughout the paper, given that the reduction of loss\ncould be influenced by three different factors?\n- Could you clarify why the estimated rule is considered a temporally generalised Oja’s rule?",
+    "limitations": "The authors were aware of the limitations of the methods used in the paper and addressed\nthem accordingly."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 4,
+    "mixed_pct": 0,
+    "human_pct": 96,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2916,
+    "words": 444,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e75fc9cc-d843-4c87-9dda-f4a8347fc59f",
+    "error": null,
+    "scored_chars": 2916
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "DkRYImuQA9",
+  "reviewer": "tHcj",
+  "paper": {
+    "title": "ShieldAgent: Shielding Agents via Verifiable Safety Policy Reasoning",
+    "authors": [
+      "Zhaorun Chen",
+      "Mintong Kang",
+      "Bo Li"
+    ],
+    "abstract": "Autonomous agents powered by foundation models have seen widespread adoption across various real-world applications. However, they remain highly vulnerable to malicious instructions and attacks, which can result in severe consequences such as privacy breaches and financial losses. More critically, existing guardrails for LLMs are not applicable due to the complex and dynamic nature of agents. To tackle these challenges, we propose ShieldAgent, the first guardrail agent designed to enforce explicit safety policy compliance for the action trajectory of other protected agents through logical reasoning. Specifically, ShieldAgent first constructs a safety policy model by extracting verifiable rules from policy documents and structuring them into a set of action-based probabilistic rule circuits. Given the action trajectory of the protected agent, ShieldAgent retrieves relevant rule circuits and generates a shielding plan, leveraging its comprehensive tool library and executable code for formal verification. In addition, given the lack of guardrail benchmarks for agents, we introduce ShieldAgent-Bench, a dataset with 3K safety-related pairs of agent instructions and action trajectories, collected via SOTA attacks across 6 web environments and 7 risk categories. Experiments show that ShieldAgent achieves SOTA on ShieldAgent-Bench and three existing benchmarks, outperforming prior methods by 11.3% on average with a high recall of 90.1%. Additionally, ShieldAgent reduces API queries by 64.7% and inference time by 58.2%, demonstrating its high precision and efficiency in safeguarding agents. Our project is available and continuously maintained here: https://shieldagent-aiguard.github.io/",
+    "keywords": [
+      "LLM Agent Safety",
+      "LLM Guardrail Agent",
+      "Policy Compliance",
+      "Automated Logic Reasoning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=DkRYImuQA9"
+  },
+  "review_fields": {
+    "summary": "This paper proposes SHIELDAGENT, an LLM-based guardrail agent, to enforce explicit safety policy compliance of the action sequences of other LLM agents via automated probabilistic reasoning. SHIELDAGENT constructs an action-based probabilistic safety model (APSM) by extracting verifiable rules from policy documents, refining and clustering them into action-conditioned probabilistic circuits, and learning rule weights. During inference, it localizes relevant rule circuits, generates shielding plans, and performs probabilistic inference to assign safety labels and report violations. To evaluate it, the SHIELDAGENT-WEB dataset is introduced, which contains 2K safety-related instructions across various risk categories and web environments with paired risky trajectories. Experiments show that SHIELDAGENT achieves state-of-the-art performance on SHIELDAGENT-WEB and existing benchmarks.",
+    "claims_and_evidence": "The methodology and evaluations presented in this paper lack important running examples for readers to understand. \n\nPlease refer to Weaknesses for more details.",
+    "methods_and_evaluation_criteria": "The methods proposed in the paper is relevant to safeguarding LLM agents, which face the challenge of security threats in simulated environments. SHIELDAGENT's approach of constructing an action-based probabilistic safety model (APSM) seems to be a working solution compared with traditional static approaches, and the four key shielding operations of SHIELDAGENT work in concert with the APSM. \n\nPlease refer to Weaknesses for more details.",
+    "theoretical_claims": "In terms of the safety certification, the use of control barrier function (CBF)-inspired conditions $|P_s(a∣o)|<\\epsilon_{tol}$ and $P_s(a∣o)-P_{s}(o)<\\epsilon_{tol}$ to determine action safety seems to be a valid approach. \n\nDespite the multiple equations used to model the policy model decision process, it seems to be a linear classifier based on the rules extracted. Since no rigorous proof or theory has been provided in the paper, I take this certification as empirical.",
+    "experimental_designs_or_analyses": "In this paper, the authors constructed a dataset, named ShieldAgent-Web, consisting of AgentPoison and AdvWeb attacks to evaluate the robustness of the proposed ShieldAgent framework. \n\nHowever, no sample in the dataset has been given in the paper or the supplementary material, making it hard to understand to what extent the proposed dataset can represent threats against agent systems in real-world applications. \n\nPlease refer to Weaknesses for more details.",
+    "relation_to_broader_scientific_literature": "- The composition of the probabilistic safety certification module highly resembles [1], [2]. It is suggested that the authors can discuss the relationship to these works and the key contribution of this work. \n\n[1] Knowledge Enhanced Machine Learning Pipeline Against Diverse Adversarial Attacks. ICML 2021. \n\n[2] Improving Certified Robustness Via Statistical Learning with Logical Reasoning. NeurIPS 2022.",
+    "essential_references_not_discussed": "Please see relation to broader literature above.",
+    "other_strengths_and_weaknesses": "### Strengths\n\n- SHIELDAGENT offers a comprehensive approach to safeguarding LLM agents.\n- The SHIELDAGENT-WEB dataset is proposed for evaluation.\n\n### Weaknesses\n\n- The presentation of this paper can be improved. \n  - In terms of the methodology, the overall framework is an RAG-based linear classifier which uses safety rules extracted by LLMs to ensure safe operations of LLM-based agents. The authors put much effort in modeling the linear classifier with the term \"Action-based Probabilistic Safety Model\", but did not provide essential examples of the rules and the verification and pruning process. It is also not clear how the policy optimization contribute to the safety performance. \n  - In terms of the figures, for instance, there are too many elements in Figure 1 that the fonts of each text is small to recognize. The caption of the figure also does not provide enough substantial information to help me understand what operations are to be performed. \n- The evaluation of the paper is confusing, maybe questionable. \n  - No sample has been provided in the ShieldAgent-Web dataset. It is hard to imagine how realistic are the attacks considered in the paper. It is suggested that the dataset should be open-sourced, or at least typical samples should be provided for reviewing. \n  - Although SHIELDAGENT performs well on the datasets used in the experiments, its generalization to new and unseen scenarios may be limited. The evaluation on diverse scenarios is expected.",
+    "other_comments_or_suggestions": "Please refer to weaknesses and questions.",
+    "questions_for_authors": "- Could you provide a more detailed explanation of Figure 1(Top)? Now that rules are clustered in the Redundancy Pruning process, but the graph shows that it is clustering the conditional predicates? Moreover, what does the arrow from one grey circle to another represent? Does it mean the split of a rule into two rules, or a logical context between the two rules? It seems that its meaning in Redundancy Pruning and Action-based Probabilistic Circuit is different. A clearer explanation to the figure and these questions would be very helpful.\n- In the Probabilistic-Constrained Safety Certification part, is the condition $P_s(a∣o)-P_s(o)<\\epsilon_{tol}$ a necessary and sufficient condition for action safety? Could you provide more theoretical basis or experimental evidence?\n- In the baselines, why Rule Traverse will exhibit high FPR? Sequentially verifying rules one by one seems to have a low FPR result. Could you explain this baseline in more detail?\n- As stated in Sec. 3.2.1, the policy blocks are extracted by GPT-4o. How do the authors ensure that rules extracted by LLMs align with human values?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

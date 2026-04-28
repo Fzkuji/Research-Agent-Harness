@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "B2iPEX5A9c",
+  "reviewer": "pwj1",
+  "paper": {
+    "title": "Information-Theoretic Discrete Diffusion",
+    "authors": [
+      "Moongyu Jeon",
+      "Sangwoo Shin",
+      "Dongjae Jeon",
+      "Albert No"
+    ],
+    "abstract": "We present an information-theoretic framework for discrete diffusion models \nthat yields principled estimators of log-likelihood using score-matching losses.\nInspired by the I-MMSE identity for the Gaussian setup, we derive analogous results for the discrete setting.\nSpecifically, we introduce the Information–Minimum Denoising Score Entropy (I-MDSE) relation,\nwhich links mutual information between data and its diffused version to the minimum denoising score entropy (DSE) loss.\nWe extend this theory to masked diffusion and establish the Information–Minimum Denoising Cross-Entropy (I-MDCE) relation,\nconnecting cross-entropy losses to mutual information in discrete masked processes.\nThese results provide a time-integral decomposition of the log-likelihood of the data in terms of optimal score-based losses,\nshowing that commonly used losses such as DSE and DCE are not merely variational bounds \nbut tight and principled estimators of log-likelihood.\nThe I-MDCE decomposition further enables practical extensions, including time-free formula,\nconditional likelihood estimation in prompt–response tasks, and coupled Monte Carlo estimation of likelihood ratios.\nExperiments on synthetic and real-world data confirm the accuracy, variance stability, and utility of our estimators.\nThe code is publicly available at https://github.com/Dongjae0324/infodis.",
+    "keywords": [
+      "Discrete Diffusion Models",
+      "Information Theory",
+      "Score Matching",
+      "Denoising Score Entropy (DSE)",
+      "Denoising Cross-Entropy (DCE)"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=B2iPEX5A9c"
+  },
+  "review_fields": {
+    "summary": "I-MMSE relations in information theory establish exact connections between density estimation and denoising in a Gaussian channel. \nThis paper generalizes these ideas to consider discrete random variables and discrete noise channels (like masking), demonstrating the existence of exact relations between probability and optimal denoising in these discrete channels, using the correct objective. \nDenoising with discrete noise channels has become popular recently in the discrete diffusion literature. This paper establishes that variational objectives that were previously understood as bounds on probability are actually tight. \nThe authors use their results to express probability estimates in different forms, and apply these estimates to synthetic and real-world examples.",
+    "strengths_and_weaknesses": "related): \n## Strengths: \n\n- I thought the summary of discrete diffusion and I-MMSE connections were nicely presented. \n- Even though the result is functionally the same as the variational bound, I like the point that Eq. 11 shows that it \"fully captures the log-likelihood\".  To me, this is quite important as it shows that it is not possible/necessary to tighten the variational bound by outputting higher order moments. \n- I appreciate the effort to make synthetic experiments with known ground truth that are somewhat interesting (DNA-like, higher order Markov). \n\n\n## Weaknesses: \n\n### Significance of time-free formulation\n\n> In contrast, we derive a surprising result: a time-free expression for the NLL based solely on randomly selected masked positions. To the best of our knowledge, such a time-free formulation has not been established in any diffusion model, whether discrete or continuous.\n\n$$ - \\log p_0\\left( \\mathbf{x}_0^{I_1} \\mid \\mathbf{x}_0^{I_2} \\right) = H_{|I_1|} \\, \\mathbb{E}_{p(J)} \\left[ \\sum_{i \\in I_1 \\setminus J} \\log \\frac{1}{p_0\\left(x^i \\mid \\mathbf{x}_0^{J \\cup I_2} \\right)} \\right] $$ \n\nThis seems like an over-statement, or needs more context about what the surprising new claim is. Many papers have recognized that NLL can be written in terms of random order autoregression. \n\n- E. Hoogeboom, A. A. Gritsenko, J. Bastings, B. Poole, R. v. d. Berg, and T. Salimans,\n“Autoregressive diffusion models,” arXiv preprint arXiv:2110.02037, 2021.\n- A. Pannatier, E. Courdier, and F. Fleuret, “σ-gpts: A new approach to autoregressive models,”\nin Joint European Conference on Machine Learning and Knowledge Discovery in Databases,\npp. 143–159, Springer, 2024.\n- Z. Yang, Z. Dai, Y. Yang, J. Carbonell, R. R. Salakhutdinov, and Q. V. Le, “Xlnet: Generalized\nautoregressive pretraining for language understanding,” Advances in neural information\nprocessing systems, vol. 32, 2019.\n\n\nThis paper explicitly is about how time-dependence for masked diffusion models is not needed. \n\n- K. Zheng, Y. Chen, H. Mao, M.-Y. Liu, J. Zhu, and Q. Zhang, “Masked diffusion models are\nsecretly time-agnostic masked models and exploit inaccurate categorical sampling,” arXiv\npreprint arXiv:2409.02908, 2024.\n\nYou also cite RADD, which says something similar in Eq. 3.8. Maybe the difference between your statement and RADD is that they sample the masks based on sampling a continuous \"time variable\", while you sample directly from a discrete mask distribution? \nEven so, the regular any-order AR decomposition is \"time-free\" in the same way. Given a random permutation, $i_1, ...,i_T = \\pi(1, ... T)$\n\n$$-\\log p(x_{i_T:i_k} \\mid x_{i_{k-1}:i_1}) =   \\sum_{j =k}^T \\log \\frac{1}{p\\left(x_{i_j} \\mid x_{i_{j-1}:i_1} \\right)}$$\n\nBy averaging over random orders, you can get the same result as yours - arguably more general, as we could weight this to allow for different mask distributions.\n\n### Experimental results missing useful comparisons\n\nMy main concern is that the experimental section is not very useful and may even be misleading. \nWe already have many ways to estimate the NLL, using cross entropy with random order autoregressive and masked models and with variational bounds. \nWhat would be useful to know is whether the results in this paper help us to do this easier or better. \n\nThe reason it seems misleading is that your estimator may be giving identical results to existing estimators. But because baselines are not presented, it seems as if these tasks were enabled by your results. \n\nTypes of baselines for bounding NLL I would have expected to see: \n- Random order Autoregressive (one sample, or averaged over orders) \n- Variational bounds like DSE\n\nTypes of results I would have expected to see: \n- Bias and variance of various estimators \n- Computational cost, if relevant\n\nThe random tasks like OOD are neat demos, but I'd expect any of the existing NLL bounds would be just as good for these.",
+    "questions": "My main question is related to the discussed weaknesses. Is there anything about your NLL estimator that makes it significantly different in implementation or performance compared to existing methods, and are there any experiments that demonstrate this?",
+    "final_justification": "Several reviewers found the experiments to be limited, because of lack of comparisons to other methods. The authors discussed comparisons and gave some more variance estimates in the rebuttal. I raised my score to borderline accept, but I do still consider this a borderline submission with the current evaluation."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5,
+    "quality": 3,
+    "clarity": 4,
+    "significance": 2,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

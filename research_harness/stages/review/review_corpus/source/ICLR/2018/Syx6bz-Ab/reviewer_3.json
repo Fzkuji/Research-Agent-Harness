@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "Syx6bz-Ab",
+  "reviewer": "3",
+  "paper": {
+    "title": "Seq2SQL: Generating Structured Queries From Natural Language Using Reinforcement Learning",
+    "authors": [
+      "Victor Zhong",
+      "Caiming Xiong",
+      "Richard Socher"
+    ],
+    "abstract": "Relational databases store a significant amount of the worlds data. However, accessing this data currently requires users to understand a query language such as SQL. We propose Seq2SQL, a deep neural network for translating natural language questions to corresponding SQL queries. Our model uses rewards from in the loop query execution over the database to learn a policy to generate the query, which contains unordered parts that are less suitable for optimization via cross entropy loss. Moreover, Seq2SQL leverages the structure of SQL to prune the space of generated queries and significantly simplify the generation problem. In addition to the model, we release WikiSQL, a dataset of 80654 hand-annotated examples of questions and SQL queries distributed across 24241 tables fromWikipedia that is an order of magnitude larger than comparable datasets. By applying policy based reinforcement learning with a query execution environment to WikiSQL, Seq2SQL outperforms a state-of-the-art semantic parser, improving execution accuracy from 35.9% to 59.4% and logical form accuracy from 23.4% to 48.3%.",
+    "keywords": [
+      "deep learning",
+      "reinforcement learning",
+      "dataset",
+      "natural language processing",
+      "natural language interface",
+      "sql"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Syx6bz-Ab"
+  },
+  "review_fields": {
+    "review": "This paper presents a new approach to support the conversion from natural language to database queries. \n\nOne of the major contributions of the work is the introduction of a new real-world benchmark dataset based on questions over Wikipedia. The scale of the data set is significantly larger than any existing ones. However, from the technical perspective, the reviewer feels this work has limited novelty and does not advance the research frontier by much. The detailed comments are listed below.\n\n1) Limitation of the dataset: While the authors claim this is a general approach to support seq2sql, their dataset only covers simple queries in form of aggregate-where-select structure. Therefore, their proposed approach is actually an advanced version of template filling, which considers the expression/predicate for one of the three operators at a time, e.g., (Giordani and Moschitti, 2012).\n\n2) Limitation of generalization: Since the design of the algorithms is purely based on their own WikiSQL dataset, the reviewer doubts if their approach could be generalized to handle more complicated SQL queries, e.g., (Li and Jagadish, 2014). The high complexity of real-world SQL stems from the challenges on the appropriate connections between tables with primary/foreign keys and recursive/nested queries. \n\n3) Comparisons to existing approaches: Since it is a template-based approach in nature, the author should shrink the problem scope in their abstract/introduction and compare against existing template approaches. While there are tons of semantic parsing works, which grow exponentially fast in last two years, these works are actually handling more general problems than this submission does. It thus makes sense when the performance of semantic parsing approaches on a constrained domain, such as WikiSQL, is not comparable to the proposal in this submission. However, that only proves their method is fully optimized for their own template.\n\nAs a conclusion, the reviewer believes the problem scope they solve is much smaller than their claim, which makes the submission slightly below the bar of ICLR. The authors must carefully consider how their proposed approach could be generalized to handle wider workload beyond their own WikiSQL dataset. \n\nPS, After reading the comments on OpenReview, the reviewer feels recent studies, e.g., (Guu et al., ACL 2017), (Mou et al, ICML 2017) and (Yin et al., IJCAI 2016), deserve more discussions in the submission because they are strongly relevant and published on peer-reviewed conferences."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

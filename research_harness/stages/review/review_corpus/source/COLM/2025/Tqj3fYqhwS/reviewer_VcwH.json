@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "Tqj3fYqhwS",
+  "reviewer": "VcwH",
+  "paper": {
+    "title": "Fleurs-SLU: A Massively Multilingual Benchmark for Spoken Language Understanding",
+    "authors": [
+      "Fabian David Schmidt",
+      "Ivan Vulić",
+      "Goran Glavaš",
+      "David Ifeoluwa Adelani"
+    ],
+    "abstract": "Spoken language understanding (SLU) is indispensable for half of all living languages that lack a formal writing system, since these languages cannot pair automatic speech recognition (ASR) with language models to benefit from language technology. Even if low-resource languages possess a writing system, ASR for these languages remains unreliable due to limited bimodal speech and text training data. However, the evaluation of multilingual SLU remains limited to shallow tasks such as intent classification or language identification. To address this, we present Fleurs-SLU, a multilingual SLU benchmark that encompasses (i) 692 hours of speech for topical utterance classification in 102 languages and (ii) multiple-choice question answering through listening comprehension spanning 944 hours of speech across 92 languages. We extensively evaluate both end-to-end speech classification models and cascaded systems that combine speech-to-text transcription with subsequent classification by large language models on Fleurs-SLU. Our results show that cascaded systems exhibit greater robustness in multilingual SLU tasks, though speech encoders can achieve competitive performance in topical speech classification when appropriately pre-trained. We further find a strong correlation between robust multilingual ASR, effective speech-to-text translation, and strong multilingual SLU, highlighting the mutual benefits between acoustic and semantic speech representations.",
+    "keywords": [
+      "spoken language understanding",
+      "multilingual benchmarks",
+      "multilingual evaluation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Tqj3fYqhwS"
+  },
+  "review_fields": {
+    "comment": "Thanks for the detailed responses and new experiments! I’d keep my stance that this paper is ok to be accepted for its contributions of datasets and many experimental data points. The observations are interesting and help model selection, but they could be more useful if the authors conducted variable-controlled experiments/training on selected models (Whisper, SeamlessM4T, Qwen, etc.) to derive and deduce more straight and convincing conclusions. I.e., testing the hypotheses on strong baselines."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 501,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e5b21421-7834-4e62-95f3-c0dcb601d227",
+    "error": null,
+    "scored_chars": 501
+  }
+}

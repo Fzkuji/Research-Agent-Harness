@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "hlPk6Hi43e",
+  "reviewer": "xTH1",
+  "paper": {
+    "title": "Tight analyses of first-order methods with error feedback",
+    "authors": [
+      "Daniel Berg Thomsen",
+      "Adrien Taylor",
+      "Aymeric Dieuleveut"
+    ],
+    "abstract": "Communication between agents often constitutes a major computational bottleneck in distributed learning. One of the most common mitigation strategies is to compress the information exchanged, thereby reducing communication overhead. To counteract the degradation in convergence associated with compressed communication, error feedback schemes---most notably EF and EF21---were introduced. In this work, we provide a tight analysis of both of these methods. Specifically, we find the Lyapunov function that yields the best possible convergence rate for each method---with matching lower bounds.  This principled approach yields sharp performance guarantees and enables a rigorous, apples-to-apples comparison between EF, EF21, and compressed gradient descent. Our analysis is carried out in the simplified single-agent setting, which allows for clean theoretical insights and fair comparison of the underlying mechanisms.",
+    "keywords": [
+      "distributed optimization",
+      "distributed learning",
+      "error feedback",
+      "EF",
+      "EF21",
+      "tight analysis",
+      "performance estimation",
+      "convex optimization",
+      "large-scale machine learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=hlPk6Hi43e"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for addressing points 1 and 2. After checking this, I have reconsidered my evaluation. Regarding point 3, it would be interesting to understand if there are any implications of this fact that the Lyapunov function using the function value is not optimal in this sense. E.g., does it mean it is always better to use a different analysis (coming from this PEP formulation) instead of a standard function value-based analysis (when possible)?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

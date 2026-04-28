@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "ZZ4tcxJvux",
+  "reviewer": "ZyFk",
+  "paper": {
+    "title": "E$^2$-RAG: Towards Editable Efficient RAG by Editing Compressed KV Caches",
+    "authors": [
+      "Tongxu Luo",
+      "Wenyu Du",
+      "HanWen Hao",
+      "Min Zhang",
+      "Hao Yang",
+      "Benyou Wang"
+    ],
+    "abstract": "Retrieval-Augmented Generation (RAG) demonstrates remarkable capabilities for enhancing the performance of Large Language Models (LLMs) by integrating external knowledge.\nStandard RAG introduces additional computations due to the extra retrieved context.\nTo improve efficiency, recent studies propose compressing chunk tokens into compact forms, such as key-value (KV) caches.\nHowever, maintaining these compressed KV caches in an updated state presents a significant challenge, undermining the primary goal of RAG: acquiring up-to-date knowledge.\nIn this work, we propose **E$^{2}$-RAG**, the first **E**ditable **E**fficient-**RAG** method designed to efficiently edit compressed KV caches for knowledge updates.\nE$^2$-RAG features an encoder-decoder architecture similar to efficient RAG methods, along with an additional editor.\nThe encoder-decoder compresses chunk tokens into KV caches and generates responses.\nThe editor takes old KV caches and new knowledge tokens as inputs, enabling efficient updates to the KV caches.\nTo formalize knowledge updating, we define three operations: INSERT, DELETE, and UPDATE.\nWe create three sets of datasets for each operation.\nThrough extensive experiments, E$^2$-RAG achieves nearly **40x faster** editing compared to recomputing KV caches while maintaining **3x faster** generation efficiency than standard RAG, with a performance downgrade of 1%-5%.\nWe also conduct various ablation studies, including multi-turn editing, multi-chunk capability, and knowledge conflicts, to explore the capabilities of E$^2$-RAG.",
+    "keywords": [
+      "Retrieval Augmented Generation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ZZ4tcxJvux"
+  },
+  "review_fields": {
+    "summary": "The paper introduces E²-RAG, an Editable Efficient Retrieval-Augmented Generation (RAG) method for efficiently updating compressed knowledge caches (KV caches). The proposed approach integrates an encoder-decoder architecture for efficient generation and an editor module that performs direct updates on KV caches through operations like INSERT, DELETE, and UPDATE.",
+    "reasons_to_accept": "* Paper is well written and easy to follow.\n* The paper is written clearly, with well-structured arguments, polished figures, and well-explained datasets and tasks, making it reader-friendly.\n* This research could have impact for LLM Training\n* The paper provides detailed theoretical with attention map explanations the introduced methodology.",
+    "reasons_to_reject": "The study lacks experiments with larger-scale models (e.g., 14B or 32B), which would significantly strengthen the generalizability and practical relevance of the results."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 516,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/05ea7232-1bd9-437e-a300-64749872cbc2",
+    "error": null,
+    "scored_chars": 516
+  }
+}

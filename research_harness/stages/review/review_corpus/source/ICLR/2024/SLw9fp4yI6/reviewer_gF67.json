@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "SLw9fp4yI6",
+  "reviewer": "gF67",
+  "paper": {
+    "title": "Controlled Text Generation via Language Model Arithmetic",
+    "authors": [
+      "Jasper Dekoninck",
+      "Marc Fischer",
+      "Luca Beurer-Kellner",
+      "Martin Vechev"
+    ],
+    "abstract": "As Large Language Models (LLMs) are deployed more widely, customization with respect to vocabulary, style, and character becomes more important. In this work, we introduce model arithmetic, a novel inference framework for composing and biasing LLMs without the need for model (re)training or highly specific datasets. In addition, the framework allows for more precise control of generated text than direct prompting and prior controlled text generation (CTG) techniques. Using model arithmetic, we can express prior CTG techniques as simple formulas and naturally extend them to new and more effective formulations. Further, we show that speculative sampling, a technique for efficient LLM sampling, extends to our setting. This enables highly efficient text generation with multiple composed models with only marginal overhead over a single model. Our empirical evaluation demonstrates that model arithmetic allows fine-grained control of generated text while outperforming state-of-the-art on the task of toxicity reduction. We release an open source easy-to-use implementation of our framework at https://github.com/eth-sri/language-model-arithmetic.",
+    "keywords": [
+      "Controlled text generation",
+      "LLM",
+      "Natural Language Processing"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=SLw9fp4yI6"
+  },
+  "review_fields": {
+    "summary": "The authors present a framework during inference time that can compose models together using arithmetic for controllable text generation without the need for additional fine-tuning. They present proofs that seem to simplify prior controllable text generation algorithms and provide regions or ways to extend them effectively. They show performance gains for 3 large models on toxicity.",
+    "strengths": "1) I think the motivation here is clear. It'd be great to do this kind of a thing with already trained models. You really do want to compose them and do arithmetic with them, especially as these models become more expensive to train and impossible for the vast majority of us to do any development or even significant fine-tuning, instruction-tuning, rlhf etc. on them.\n\n2) The empirical results on toxicity are nice; the methods seem to reduce them in so far as the perspective api can adjudicate.",
+    "weaknesses": "1) Experimentation seems a little weak. It'd be great to compare with some of the work that's come out of UW/AI2 in the past couple of years like DExperts, which you cite but dont compare with, and Quark (Lu et al. 2022). It'd also be great to compare with GeDi and a few other baselines. That'd strengthen the experimental component.\n\n2) On the experimentation side again, it'd be great to have a section on using human eval to evaluate a small subset of the generations to see if humans agree that it indeed is reducing toxicity or whether its an artifact or oddity of the perspective api evaluation.\n\n3) On the experimentation side, it'd be nice to see how well these methods work for smaller models (e.g. GPT2, GPT2-large)",
+    "questions": "1) How do you think model averaging via output distributions could compare with weight averaging of the model parameters? Would be curious to know your thoughts here.\n\n2) How straight forward and performant would it be to swap in different models for each part here and capture the output distribution, if the vocabulary was shared?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1560,
+    "words": 271,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/714ab811-b4da-41db-94c6-c3510f99ee3f",
+    "error": null,
+    "scored_chars": 1560
+  }
+}

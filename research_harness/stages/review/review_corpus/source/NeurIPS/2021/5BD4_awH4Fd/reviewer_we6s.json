@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "5BD4_awH4Fd",
+  "reviewer": "we6s",
+  "paper": {
+    "title": "A Stochastic Newton Algorithm for Distributed Convex Optimization",
+    "authors": [
+      "Brian Bullins",
+      "Kumar Kshitij Patel",
+      "Ohad Shamir",
+      "Nathan Srebro",
+      "Blake Woodworth"
+    ],
+    "abstract": "We propose and analyze a stochastic Newton algorithm for homogeneous distributed stochastic convex optimization, where each machine can calculate stochastic gradients of the same population objective, as well as stochastic Hessian-vector products (products of an independent unbiased estimator of the Hessian of the population objective with arbitrary vectors), with many such stochastic computations performed between rounds of communication.  We show that our method can reduce the number, and frequency, of required communication rounds, compared to existing methods without hurting performance, by proving convergence guarantees for quasi-self-concordant objectives (e.g., logistic regression), alongside empirical evidence.",
+    "keywords": [
+      "Distributed Optimization",
+      "Stochastic Optimization",
+      "Federated Learning",
+      "Newton's Method"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=5BD4_awH4Fd"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a federated stochastic Newton algorithm for optimizing quasi-self-concordant objectives,\nwith concrete theoretical analysis showing this algorithm can outperform other existing first-order stocahstic optimization algorithms and numerical experiments to support the analysis.",
+    "main_review": "* Originality\n\nThis work is novel because it approximates a Newton step by solving a local optimization problem using stochastic gradient descent and provides extensive theoretical analysis,\nwhich are not well-explored in prior literature.\n\n* Quality\n\nFED-SN reaches a convergence rate that dominates other algorithms in certain regimes.\nThe proof is detailed and well-written, lists most assumptions and important steps.\nHowever, the assumptions in this paper is too strong, but it is understandable since the analysis of FED-SN is challenging.\n\n* Clarity\n\nThis paper is clearly written, well-organized and reproducible.\n\n* Significance\n\nThe results obtained in this paper is novel, and improves upon current state-of-the art results in certain settings.",
+    "limitations_and_societal_impact": "The biggest limitation of this paper is how to compute the hessian. This paper avoids computing the inverse of hessian, which is a great improvement over the original Newton algorithm. However, it is not fair to say it uses less communication because the hessian is communicated, when the dimension is moderately big, the communication overhead will be significant."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

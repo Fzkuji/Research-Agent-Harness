@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "98ekcwQqb7",
+  "reviewer": "Jppb",
+  "paper": {
+    "title": "Latent Causal Probing: A Formal Perspective on Probing with Causal Models of Data",
+    "authors": [
+      "Charles Jin"
+    ],
+    "abstract": "As language models (LMs) deliver increasing performance on a range of NLP tasks, *probing classifiers* have become an indispensable technique in the effort to better understand their inner workings. A typical setup involves (1) defining an auxiliary task consisting of a dataset of text annotated with labels, then (2) supervising small classifiers to predict the labels from the representations of a pretrained LM as it processes the dataset. A high probing accuracy is interpreted as evidence that the LM has learned to perform the auxiliary task as an unsupervised byproduct of its original pretraining objective. Despite the widespread usage of probes, however, the robust design and analysis of probing experiments remains a challenge. We develop a formal perspective on probing using *structural causal models* (SCM). Specifically, given an SCM which explains the distribution of tokens observed during training, we frame the central hypothesis as whether the LM has learned to represent the latent variables of the SCM. Empirically, we extend a recent study of LMs in the context of a synthetic grid-world navigation task, where having an exact model of the underlying causal structure allows us to draw strong inferences from the result of probing experiments. Our techniques provide robust empirical evidence for the ability of LMs to induce the latent concepts underlying text.",
+    "keywords": [
+      "probing",
+      "causality",
+      "interpretability",
+      "understanding",
+      "world models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=98ekcwQqb7"
+  },
+  "review_fields": {
+    "summary": "The paper proposes integrating Structural Causal Models (SCM) with the existing probing techniques in NLP. This method aims to refine how we interpret probing results, providing insights into the information that language models (LMs) encode from their training data.\n\nOne key contribution of this paper is its focus on the probe's capacity, addressing a common shortcoming in traditional probing studies. By using causal mediation analysis, the paper effectively distinguishes the information genuinely encoded by the LM from what is learned independently by the probe. This approach is crucial as it aims to ensure that high probing accuracy reflects the LM's capabilities rather than the probe's.\n\nThe paper also advances beyond merely associating high probing accuracy with an LM's ability to understand causal structures. Instead, it uses causal models to rigorously test hypotheses about the causal information that LMs might capture, providing a more nuanced interpretation of probing results.\n\nHowever, the reliance on SCMs assumes clear causal relationships within the training data, which may not always be evident, especially in natural language settings where such relationships can be complex and less defined. This assumption is a significant limitation and could restrict the method's application to more naturalistic datasets where causal relationships are not explicitly outlined.\n\nThe paper demonstrates its approach in controlled experimental setups. However, extending this framework to broader, real-world datasets and demonstrating its effectiveness in these contexts could further validate its practicality and impact.",
+    "reasons_to_accept": "1. **Methods**: Integrating Structural Causal Models (SCM) with language model probing is both novel and interesting. This methodology introduces a new way to interpret what language models learn from data, focusing on understanding causal relationships rather than accuracy metrics. \n\n2. **Tackling limitations of probing**: The paper tackles the limitations of current probing practices by focusing on the probe's capacity to learn independently of the language model. This is important for obtaining more accurate interpretations of model behaviors and capabilities, addressing a gap in how probes are currently used.",
+    "reasons_to_reject": "1. **Assumptions on causal relationships**: The method assumes clear causal relationships within the training data for language models. In practice, especially with complex real-world data, these relationships are often unclear or confounded by other factors. \n\n2. **Limited experiments**: The paper primarily validates its approach in controlled settings. To strengthen the case for publication, it would need to demonstrate effectiveness with real-world datasets, which are generally less structured.\n\n3. **Overfitting**: There is a concern that the causal models could be overfitted to specific characteristics of the training data, given the high dimensionality of language model embeddings. This risk could lead to incorrect conclusions about what the language models are learning."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:40Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:40Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 100,
+    "mixed_pct": 0,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 1406,
+    "words": 197,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c5fe9d42-1bcc-4570-a0e8-2ffa16aa7933",
+    "error": null,
+    "scored_chars": 1408
+  }
+}

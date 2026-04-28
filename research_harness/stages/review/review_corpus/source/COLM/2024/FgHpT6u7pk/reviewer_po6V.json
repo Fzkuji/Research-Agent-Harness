@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "FgHpT6u7pk",
+  "reviewer": "po6V",
+  "paper": {
+    "title": "CoCA: Regaining Safety-awareness of Multimodal Large Language Models with Constitutional Calibration",
+    "authors": [
+      "Jiahui Gao",
+      "Renjie Pi",
+      "Tianyang Han",
+      "Han Wu",
+      "Lanqing HONG",
+      "Lingpeng Kong",
+      "Xin Jiang",
+      "Zhenguo Li"
+    ],
+    "abstract": "The deployment of multimodal large language models (MLLMs) has demonstrated remarkable success in engaging in conversations involving visual inputs, thanks to the superior power of large language models (LLMs). Those MLLMs are typically built based on the LLMs, with an image encoder to process images into the token embedding space of the LLMs. However, the integration of visual modality has introduced a unique vulnerability: the MLLM becomes susceptible to malicious visual inputs and prone to generating sensitive or harmful responses, even though the LLM has been trained on textual dataset to align with human value. In this paper, we first raise the following question: ``Do the MLLMs possess safety-awareness against malicious image inputs?\". We find that after adding a principle that specifies the safety requirement into the input of the MLLM, the model's safety awareness becomes boosted. This phenomenon verifies the existence of MLLM's safety-awareness against image inputs, it is only weakened by the modality gap. We then introduce a simple yet effective technique termed CoCA, which amplifies the safety-awareness of the MLLM by calibrating its output distribution. Our proposed strategy helps the model reclaim its original safety awareness without losing its original capabilities. We verify the effectiveness of our approach on both multimodal safety and understanding benchmarks.",
+    "keywords": [
+      "Multimodal Large Language Model",
+      "Safety"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=FgHpT6u7pk"
+  },
+  "review_fields": {
+    "comment": "I would like to thank the authors for addressing my questions and providing additional results. Overall, these empirical results provide greater clarification; particularly, human evaluation results. I would strongly urge the authors to include them in the paper. Additionally, a more elaborate discussion along the lines of a more signifcant safety vector in larger models, would be helpful in encouraging future research on the topic. I have increased my score accordingly."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:07Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:07Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1712,
+    "words": 268,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/5a178d3c-1ac1-4155-bc8a-4ee4b1efd553",
+    "error": null,
+    "scored_chars": 1716
+  }
+}

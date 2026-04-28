@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "p4ujQsKmPV",
+  "reviewer": "CeCr",
+  "paper": {
+    "title": "PrefPalette: Personalized Preference Modeling with Latent Attributes",
+    "authors": [
+      "Shuyue Stella Li",
+      "Melanie Sclar",
+      "Hunter Lang",
+      "Ansong Ni",
+      "Jacqueline He",
+      "Puxin Xu",
+      "Andrew Cohen",
+      "Chan Young Park",
+      "Yulia Tsvetkov",
+      "Asli Celikyilmaz"
+    ],
+    "abstract": "Personalizing AI systems requires understanding not just what users prefer, but the reasons that underlie those preferences—yet current preference models typically treat human judgment as a black box. We introduce PrefPalette, a framework that decomposes preferences into attribute dimensions and tailors its preference prediction to distinct social community values in a human-interpretable way. PrefPalette operationalizes a cognitive science principle known as multi-attribute decision making in two ways: (1) a scalable counterfactual attribute synthesis step that involves generating synthetic training data to isolate for individual attribute effects (e.g., formality, humor, cultural values), and (2) attention-based preference modeling that learns how different social communities dynamically weight these attributes. This approach moves beyond aggregate preference modeling to capture the diverse evaluation frameworks that drive human judgment. When evaluated on 45 social communities from the online platform Reddit, PrefPalette outperforms GPT-4o by 46.6% in average prediction accuracy. Beyond raw predictive improvements, PrefPalette also shed light on intuitive, community-specific profiles: scholarly communities prioritize verbosity and stimulation, conflict-oriented communities value sarcasm and directness, and support-based communities emphasize empathy. By modeling the attribute-mediated structure of human judgment, PrefPalette delivers both superior preference modeling\nand transparent, interpretable insights, and serves as a first step toward\nmore trustworthy, value-aware personalized applications.",
+    "keywords": [
+      "Social Reasoning",
+      "Preference Modeling",
+      "Explainability"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=p4ujQsKmPV"
+  },
+  "review_fields": {
+    "comment": "Thank you for your detailed response!\n- I just want to clarify that my concern was not that LAVA would not generalize to other attributes, it was but that the particular attributes you select need to be specified beforehand and not discovered automatically in a data driven manner. \n- I appreciate the pilot study on the human validation of the predictive nature of attributes. I think it's reasonable that correlation of any particular attribute to preference is low. Perhaps a better way to set this up might be to instead collect a set of annotations on pairwise comparison of attributes i.e. you might get higher agreement that verbosity is more important than a cultural value. \n\nIn any case, my concerns are relatively minor as is reflected in my positive review score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 773,
+    "words": 131,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d19a8acf-f7ee-469f-bbcc-3d3e06d91120",
+    "error": null,
+    "scored_chars": 775
+  }
+}

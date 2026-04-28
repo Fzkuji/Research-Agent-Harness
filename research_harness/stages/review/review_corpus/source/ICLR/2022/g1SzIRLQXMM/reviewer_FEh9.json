@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "g1SzIRLQXMM",
+  "reviewer": "FEh9",
+  "paper": {
+    "title": "Wiring Up Vision: Minimizing Supervised Synaptic Updates Needed to Produce a Primate Ventral Stream",
+    "authors": [
+      "Franziska Geiger",
+      "Martin Schrimpf",
+      "Tiago Marques",
+      "James J. DiCarlo"
+    ],
+    "abstract": "After training on large datasets, certain deep neural networks are surprisingly good models of the neural mechanisms of adult primate visual object recognition. Nevertheless, these models are considered poor models of the development of the visual system because they posit millions of sequential, precisely coordinated synaptic updates, each based on a labeled image.  While ongoing research is pursuing the use of unsupervised proxies for labels, we here explore a complementary strategy of reducing the required number of supervised synaptic updates to produce an adult-like ventral visual stream (as judged by the match to V1, V2, V4, IT, and behavior). Such models might require less precise machinery and energy expenditure to coordinate these updates and would thus move us closer to viable neuroscientific hypotheses about how the visual system wires itself up. Relative to standard model training on labeled images in ImageNet, we here demonstrate that the total number of supervised weight updates can be substantially reduced using three complementary strategies: First, we find that only 2% of supervised updates (epochs and images) are needed to achieve 80% of the match to adult ventral stream. Specifically, training benefits predictions of higher visual cortex the most whereas early visual cortex predictions only improve marginally over the course of training. Second, by improving the random distribution of synaptic connectivity, we find that 54% of the brain match can already be achieved “at birth\" (i.e. no training at all). Third, we find that, by training only 5% of model synapses, we can still achieve nearly 80% of the match to the ventral stream. This approach further improves on ImageNet performance over previous attempts in computer vision of minimizing trained components without substantially increasing the relative number of trained parameters. These results reflect first steps in modeling not just primate adult visual processing during inference, but also how the ventral visual stream might be \"wired up\" by evolution (a model's \"birth\" state) and by developmental learning (a model's updates based on visual experience).",
+    "keywords": [
+      "computational neuroscience",
+      "primate visual ventral stream",
+      "convolutional neural networks",
+      "biologically plausible learning"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=g1SzIRLQXMM"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper is concerned with closing the gap between the amount of training in deep networks and in developing brains, as the current deep learning models use an unrealistically large number of synaptic updates. The authors address that with three strategies: less training, weight clustering and training in a subset of layers. All methods are tested individually and in combination with each other on primate ventral stream data.",
+    "main_review": "## Strengths\nThe paper addresses an important problem in theoretical neuroscience: while trained deep networks appear to be good models of the visual stream, the amount of training they need to get there is incompatible with biology. \n\nTwo of the proposed approaches to reduce the amount of training are somewhat straightforward: training for fewer epochs and freezing the amount of trained layers. However, I think the provided results are important as they show good fit to brain data can be achieved without closely following the training procedures of deep learning.\n\nThe last approach, weight clustering, is perhaps more interesting to the theoretical neuro community, as it works in the same way as genomically encoding the network (the “at birth” state). \n\nImportantly, the proposed ways to reduce the amount of training are tested not only using ImageNet performance, but also ventral stream data, which is arguably more important for neuroscience. \n\nOverall, the paper presents a novel set of results for an important problem, and supports its claims with a significant number of experiments.\n \n## Weaknesses\nAs mentioned before, I think the weight compression part is the most valuable one, and therefore it should receive more attention in the paper.\n1. Clustering should be better explained in the main text. Especially how the number of clusters was chosen.\n2. In the beginning of Sec. 4, you discuss how many bits it would take to encode different networks. I think the same should be done for your experiments. E.g. what is the size of CORnet-S vs. the size of a compressed network?\n3. I think similar weight compression techniques have been used before, see http://proceedings.mlr.press/v80/wu18h.html for example\n4. In general, it’d be interesting to see how at-birth performance changes with the amount of “genetically encoded” information, i.e. the number of clusters passed through compression. E.g., would doubling the amount of clusters you use drastically improve performance? I’m not expecting this experiment to appear in the paper, but perhaps it’s worth discussing.\n\nThe majority of results is limited to one architecture, CORnet-S, which is not a very standard deep learning model. However, I think it is OK as repeating the experiments on something like ResNet50 would be very resource-consuming, and CORnet-S appears to be a better model of the visual stream anyway.\n\n## Recommendation\nAs the paper addresses an important problem with a novel approach and extensive experiments, I recommend to accept the paper.\n\n## Minor points\nIn Fig.1, were learning rates tuned individually for each length of training, or were short runs just snapshots of the longer ones? If it’s the latter, I’d imagine you can get better results by cranking up the learning rate and later decreasing it before you hit a plateau (e.g., by spacing out the same three LR decreases within a shorter run). I guess doing it for each point in Fig.1A is too much training, but repeating all points in Fig.1B-C should be possible?\n\n> For instance, the fully trained model’s 55 million supervised updates translate to 5.5 updates every second, whereas the model with 1 million updates and 76% relative brain predictivity translates to one labeled image update every 10 seconds which appears more plausible given the upper limit of 2-3 saccades per second in humans\n\nI would say that a more correct conclusion is that supervised learning is a bad concept for development, but I also think your results are applicable beyond supervised learning. Basically, you show that reducing the amount of updates in backprop retains good Brain-Score performance. But that probably tells more about SGD dynamics in deep networks rather than a specific loss function, and might easily translate to, say, more realistic self-supervised learning. (I guess you briefly mention this point in the discussion.)\n\n> Abstract\n\n> First, we find that only 2% of supervised updates (epochs and images) are needed to achieve ∼80% of the match to adult ventral stream.\n\n80% of the best performing network -- currently it reads as 80% of absolute performance, which would presumably be 1.0 Brain-Score?\n\nThe caption of Fig.3C-D should better explain what exactly is trained in each setting\n\nIn Sec.6, you should specify that you used MobileNet V1 and ResNet-50.",
+    "summary_of_the_review": "The paper provides novel results and important evaluations. There are some methodological issues, but they are not critical to the main point. I therefore favor acceptance.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 4495,
+    "words": 720,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7f3164d6-c6e3-4b2d-8727-830b746d10ce",
+    "error": null,
+    "scored_chars": 4499
+  }
+}

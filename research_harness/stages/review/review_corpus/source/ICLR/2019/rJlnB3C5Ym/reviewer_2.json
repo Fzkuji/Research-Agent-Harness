@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "rJlnB3C5Ym",
+  "reviewer": "2",
+  "paper": {
+    "title": "Rethinking the Value of Network Pruning",
+    "authors": [
+      "Zhuang Liu",
+      "Mingjie Sun",
+      "Tinghui Zhou",
+      "Gao Huang",
+      "Trevor Darrell"
+    ],
+    "abstract": "Network pruning is widely used for reducing the heavy inference cost of deep models in low-resource settings. A typical pruning algorithm is a three-stage pipeline, i.e., training (a large model), pruning and fine-tuning. During pruning, according to a certain criterion, redundant weights are pruned and important weights are kept to best preserve the accuracy. In this work, we make several surprising observations which contradict common beliefs. For all state-of-the-art structured pruning algorithms we examined, fine-tuning a pruned model only gives comparable or worse performance than training that model with randomly initialized weights. For pruning algorithms which assume a predefined target network architecture, one can get rid of the full pipeline and directly train the target network from scratch. Our observations are consistent for multiple network architectures, datasets, and tasks, which imply that: 1) training a large, over-parameterized model is often not necessary to obtain an efficient final model, 2) learned ``important'' weights of the large model are typically not useful for the small pruned model, 3) the pruned architecture itself, rather than a set of inherited ``important'' weights, is more crucial to the efficiency in the final model, which suggests that in some cases pruning can be useful as an architecture search paradigm. Our results suggest the need for more careful baseline evaluations in future research on structured pruning methods.  We also compare with the \"Lottery Ticket Hypothesis\" (Frankle & Carbin 2019), and find that with optimal learning rate, the \"winning ticket\" initialization as used in Frankle & Carbin (2019) does not bring improvement over random initialization.",
+    "keywords": [
+      "network pruning",
+      "network compression",
+      "architecture search",
+      "train from scratch"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rJlnB3C5Ym"
+  },
+  "review_fields": {
+    "comment": "Thanks to the authors for answering to all my questions and doubts. Now I am more convinced about the validity of the obtained results.\nRegarding the comparison with [1], I checked the last version of the paper. In Fig.8 they show that with their initialization and a special initialization they are able to obtain good performance even with very strong pruning (>80%), while the random initialization obtain lower results. However, also in this case, the reason can be a not sufficient training of the random initialization.\nGlobally, I consider the obtained results very interesting and I think that the paper deserves publication."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

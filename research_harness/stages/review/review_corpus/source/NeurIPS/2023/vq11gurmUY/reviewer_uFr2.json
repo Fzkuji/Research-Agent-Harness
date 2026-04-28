@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "vq11gurmUY",
+  "reviewer": "uFr2",
+  "paper": {
+    "title": "Online PCA in Converging Self-consistent Field Equations",
+    "authors": [
+      "Xihan Li",
+      "Xiang Chen",
+      "Rasul Tutunov",
+      "Haitham Bou Ammar",
+      "Lei Wang",
+      "Jun Wang"
+    ],
+    "abstract": "Self-consistent Field (SCF) equation is a type of nonlinear eigenvalue problem in which the matrix to be eigen-decomposed is a function of its own eigenvectors. It is of great significance in computational science for its connection to the Schrödinger equation. Traditional fixed-point iteration methods for solving such equations suffer from non-convergence issues. In this work, we present a novel perspective on such SCF equations as a principal component analysis (PCA) for non-stationary time series, in which a distribution and its own top principal components are mutually updated over time, and the equilibrium state of the model corresponds to the solution of the SCF equations. By the new perspective, online PCA techniques are able to engage in so as to enhance the convergence of the model towards the equilibrium state, acting as a new set of tools for converging the SCF equations. With several numerical adaptations, we then develop a new algorithm for converging the SCF equation, and demonstrated its high convergence capacity with experiments on both synthesized and real electronic structure scenarios.",
+    "keywords": [
+      "Self-consistent Field Equation",
+      "Computational Science",
+      "Online PCA"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=vq11gurmUY"
+  },
+  "review_fields": {
+    "summary": "This paper explores online PCA methods for a certain type of non-linear eigenvalue problem.",
+    "strengths": "This is a well-written paper on an interesting problem in computational science.",
+    "weaknesses": "My main critique is that, as presented, the contribution of this paper appears not as much to machine learning or data science, rather to computational science.",
+    "questions": "Could you please expand the last paragraph of the conclusion section on how this is a contribution to machine learning?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 363,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2d3c983a-9576-404a-b5b6-d6764efbc729",
+    "error": null,
+    "scored_chars": 363
+  }
+}

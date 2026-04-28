@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "H196sainb",
+  "reviewer": "3",
+  "paper": {
+    "title": "Word translation without parallel data",
+    "authors": [
+      "Guillaume Lample",
+      "Alexis Conneau",
+      "Marc'Aurelio Ranzato",
+      "Ludovic Denoyer",
+      "Hervé Jégou"
+    ],
+    "abstract": "State-of-the-art methods for learning cross-lingual word embeddings have relied on bilingual dictionaries or parallel corpora. Recent studies showed that the need for parallel data supervision can be alleviated with character-level information. While these methods showed encouraging results, they are not on par with their supervised counterparts and are limited to pairs of languages sharing a common alphabet. In this work, we show that we can build a bilingual dictionary between two languages without using any parallel corpora, by aligning monolingual word embedding spaces in an unsupervised way. Without using any character information, our model even outperforms existing supervised methods on cross-lingual tasks for some language pairs. Our experiments demonstrate that our method works very well also for distant language pairs, like English-Russian or English-Chinese. We finally describe experiments on the English-Esperanto low-resource language pair, on which there only exists a limited amount of parallel data, to show the potential impact of our method in fully unsupervised machine translation. Our code, embeddings and dictionaries are publicly available.",
+    "keywords": [
+      "unsupervised learning",
+      "machine translation",
+      "multilingual embeddings",
+      "parallel dictionary induction",
+      "adversarial training"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H196sainb"
+  },
+  "review_fields": {
+    "review": "An unsupervised approach is proposed to build bilingual dictionaries without parallel corpora, by aligning the monolingual word embeddings spaces, i.a. via adversarial learning.\n\nThe paper is very well-written and makes for a rather pleasant read, save for some need for down-toning the claims to novelty as voiced in the comment re: Ravi & Knight (2011) or simply in general: it's a very nice paper, I enjoy reading it *in spite*, and not *because* of the text sales-pitching itself at times.\n\nThere are some gaps in the awareness of the related work in the sub-field of bilingual lexicon induction, e.g. the work by Vulic & Moens (2016).\n\nThe evaluation is for the most part intrinsic, and it would be nice to see the approach applied downstream beyond the simplistic task of English-Esperanto translation: plenty of outlets out there for applying multilingual word embeddings. Would be nice to see at least some instead of the plethora of intrinsic evaluations of limited general interest.\n\nIn my view, to conclude, this is still a very nice paper, so I vote clear accept, in hope to see these minor flaws filtered out in the revision."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

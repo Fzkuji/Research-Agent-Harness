@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "NnMEadcdyD",
+  "reviewer": "bjDS",
+  "paper": {
+    "title": "Understanding Diffusion Objectives as the ELBO with Simple Data Augmentation",
+    "authors": [
+      "Diederik P Kingma",
+      "Ruiqi Gao"
+    ],
+    "abstract": "To achieve the highest perceptual quality, state-of-the-art diffusion models are optimized with objectives that typically look very different from the maximum likelihood and the Evidence Lower Bound (ELBO) objectives. In this work, we reveal that diffusion model objectives are actually closely related to the ELBO.\n\nSpecifically, we show that all commonly used diffusion model objectives equate to a weighted integral of ELBOs over different noise levels, where the weighting depends on the specific objective used. Under the condition of monotonic weighting, the connection is even closer: the diffusion objective then equals the ELBO, combined with simple data augmentation, namely Gaussian noise perturbation. We show that this condition holds for a number of state-of-the-art diffusion models. \n\nIn experiments, we explore new monotonic weightings and demonstrate their effectiveness, achieving state-of-the-art FID scores on the high-resolution ImageNet benchmark.",
+    "keywords": [
+      "Diffusion Model",
+      "Evidence Lower Bound",
+      "Maximum Likelihood"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=NnMEadcdyD"
+  },
+  "review_fields": {
+    "summary": "The paper takes a systematic approach to address two important aspects of the implementation of diffusion-based generative models: the objective function and the noise schedule, both of which have been conventionally set in a relatively empirical fashion ($i.e.$, based on sample quality).\n\nThe paper first frames the noise schedule in terms of the log SNR $\\lambda_t$ as a function of time $t$, then writes the diffusion model objective in the form of a weighted denoising score matching objective, Eq. (6). By doing so, the paper unifies the existing works as special cases under a generic form of the objective function with its corresponding noise schedule.\n\nThe paper continues with a theoretical analysis of the diffusion model objective, by first revealing the ELBO objective as one particular realization of the weighted objective, then provides the key theoretical result via Theorem 1, which states that **under the assumption of a monotonically increasing weighting function $w(\\lambda_t)$, the generic diffusion model objective Eq. (6) is equivalent to a negative ELBO objective of noise-perturbed data (a form of data augmentation, controlled by the noise schedule $\\lambda_t$)**. This result has recast the ELBO as the class of objective functions for training diffusion models that are capable of producing high-quality samples.\n\nWith the theoretical results, the paper proposes several new monotonic weighting functions, and demonstrates through experiments that monotonic weighting enables the trained diffusion models to generate high quality samples (competitive with the best diffusion models) for image tasks in terms of FID and IS, including a new SOTA FID score of $1.75$ on class-conditional $128\\times 128$ ImageNet dataset.",
+    "strengths": "* Among all degrees of freedom for the implementation of a diffusion-based generative model, setting the weights at each noise level for the objective function, and noise scheduling, are two crucial aspects for its success that have traditionally been mainly based on empirical choices. By addressing these two aspects with a systematic and rigorous approach, this work fills an important gap for the diffusion model research community, thus is a well-motivated and potentially very beneficial work.\n* By recasting the diffusion model objective under the restriction of the weighting function as an ELBO objective, the work can bring back this important class of objective functions along with the existing literature on training with an ELBO objective.\n* The paper proposes several new monotonic weighting functions for the weighted diffusion objective.\n* The paper is overall well-organized and clearly written: it can be viewed as a good reference that introduces the diffusion-based generative modeling framework collectively; the color-coding for different components of the objective functions is a good design for presenting derivations.",
+    "weaknesses": "* The part of the paper that derives the main conclusion of the paper (the diffusion objective is equivalent to the ELBO with data augmentation), specifically Line 181-185, went a little bit too fast-paced and might lack of some details to facilitate understanding; some descriptions don’t exactly match the mathematical expressions:\n    * The KL divergence $D_{KL}(q(z_{t,\\dots,1}\\vert x)\\vert\\vert p(z_{t,\\dots,1}))$ being “the negative ELBO of noise-perturbed data, plus a constant” is not immediately clear. It perhaps would be nice for the authors to provide the derivations, to establish $D_{KL}(q(z_{t,\\\\dots,1}| x)|\\vert p(z_{t,\\\\dots,1})) =-\\\\mathbb{E}_{q(z_t|x)}[\\\\text{ELBO of }\\\\log p(z_t)]-\\\\mathcal{H}(q(z_t|x))$, where\n\n   \t $\\text{ELBO of }\\\\log p(z_t)=\\\\mathbb{E}_{q(y | z_t, x)}[\\\\log p(z_t, y)-\\\\log q(y | z_t, x)],$ in which $y=z\\_{t+\\\\triangle t,\\dots,1},$ and $\\\\triangle t$ is the time increment.\n\n    \tSimilarly, the inequality in Eq. (9), $D_{KL}(q(z_{t,\\\\dots,1}| x)|\\vert p(z_{t,\\\\dots,1})) = D\\_{KL}(q(z_t | x)|\\vert p(z_t)) + \\\\mathbb{E}_{q(z_t | x)}\\big[D\\_{KL} (q(y | z_t,x)||p(y | z_t))\\big]\\\\ \\geq D\\_{KL}(q(z_t | x)|\\vert p(z_t))$.\n\n    \tIt might be helpful to clarify these terms, since Line 181-182 seems to be the very part that constructs the main claim of the paper $s.t.$ the diffusion objective can be viewed as the (negative) ELBO of noise-perturbed data.\n    * Line 184-185 says that minimizing $\\mathcal{L}\\_w(\\\\theta)$ with a monotonic weighting “is equivalent to maximizing the ELBO of noise-perturbed data”. The expression is a bit strange as it indicates there is only one ELBO term to be optimized, while the objective function is shown in this section to be viewed as a collection of different ELBO terms. Therefore, this simplified description might cause some misinterpretation.\n    * The underbracket text for Eq. (9) and (10) are both “Neg. log-likelihood of noise-perturbed data”, while the expressions are different expectations of $-\\\\log p(z_t)$.\n* The authors mentioned that re-establishing the diffusion objective as an ELBO “allows for a direct apples-to-apples comparison … with other likelihood-based models” (Line 63-64), but it’s unclear on how such comparison can be made: \n    * Does it refer to the training loss when the autoregressive transformer is trained *with the same data augmentation scheme*? If so, it would only make sense if the adaptation of the data augmentation scheme would not worsen the autoregressive transformer’s performance in the first place. \n    * Or does it refer to the computation and comparison of the exact likelihood?\n\n    It would be nice for the authors to elaborate more on how such comparisons can be made, as it occurs noticeably at the end of both the Introduction and the Conclusion section.\n\n> Minor Issues\n* Line 10 in the Abstract says that the weighted loss “equals the ELBO”. Based on Section 3.1, would it be more accurately described as “equivalent to optimizing the ELBO”?\n* Line 39 “This has has led”.\n* Line 42 “training objective” might be “training objectives”.\n* Section 2.5 has both forms for the score network,  “$s_{\\theta}(z;\\lambda)$” and “$s_{\\theta}(z,\\lambda)$”.\n* Line 142 comma between “$x$-prediction” and “$v$-prediction”.\n* Eq. (8) 2nd and 3rd line: the expectation has “$t\\sim U(0,1))$”.\n* Table 5 text box ends with two periods.\n* Line 62 & 295 the expression “The newfound equivalence between monotonic weighting and the ELBO with data augmentation” seems odd; do the authors mean “The newfound equivalence between monotonically weighted diffusion objective and the ELBO with data augmentation”?\n* It’s a bit confusing to first define $\\lambda$ as the log SNR (Line 86), then call it the noise level (Line 91): the sentence in Line 93-94, “At timestep t = 0 the noise level … $\\lambda$ is high, meaning very little noise; at t = 1 the noise level $\\lambda$ is low, meaning a lot of noise”, sounds a bit odd.\n* The term “noise schedule” is overloaded: in the paper, it simultaneously means the log SNR term $\\lambda_t$ itself (Line 149), the function $f_{\\lambda}$ (Line 90), and the distribution $p(\\lambda)$ (Line 510). It’s clear to me that each “noise schedule” would result in a particular value of the variance ${\\sigma_{\\lambda}}^2$ at each timestep, but I’m not sure if such overloading would create any issue in the future, thusI’ll just point it out here.\n* Line 179-180 the weighting function $w$ is simultaneously a function of $\\lambda_t$ and of $t$.",
+    "questions": "* Could the authors provide some explanation for the following sentences:\n    * Line 108-109, “During sampling, $p(\\lambda)$ provides the relative amount of time the sampler spends at different noise levels.” It’s not immediately clear what it means, as it seems that by sampling $t\\sim U(0,1)$, each noise level has an equal chance of being sampled.\n    * Line 179-180, “The probability distribution $p_w(t)$ has Dirac delta peak of typically very small mass $w(0)$ at $t = 0$.” Does this mean that the almost noiseless sample contributes very little to the objective computation?\n* Line 262-265: have the authors run experiments for a $v$-prediction model combined with a non-monotonic weighting function?\n* In Figure 1 Right, only the “EDM sampling” noise schedule has $p(\\lambda)$ monotonically decreasing as a function of $\\lambda$. Is there any interpretation of that, $e.g.$, advantages for the EDM sampling scheme to monotonically decrease?\n* It’s a bit confusing on why the noise schedule is casted as a probability distribution $p(\\lambda_t)$ (besides the importance sampling interpretation): $e.g.$, the cosine schedule has the variance at each timestep as a deterministic function of time. Why does $\\lambda$ need to be sampled – is it because timesteps need to be sampled during training?",
+    "limitations": "The authors have discussed both limitations and potential negative social impact via Appendix H and I from Supplementary Material, which speak for the community well."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:22Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:22Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 5601,
+    "words": 855,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f43600f6-9443-44d0-b33e-25846182ff5f",
+    "error": null,
+    "scored_chars": 5643
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "cNqMAmpZh4",
+  "reviewer": "7riT",
+  "paper": {
+    "title": "From Euler to AI: Unifying Formulas for Mathematical Constants",
+    "authors": [
+      "Tomer Raz",
+      "Michael Shalyt",
+      "Elyasheev Leibtag",
+      "Rotem Kalisch",
+      "Shachar Weinbaum",
+      "Yaron Hadad",
+      "Ido Kaminer"
+    ],
+    "abstract": "The constant $\\large \\pi$ has fascinated scholars throughout the centuries, inspiring numerous formulas for its evaluation, such as infinite sums and continued fractions. Despite their individual significance, many of the underlying connections among formulas remain unknown, missing unifying theories that could unveil deeper understanding. The absence of a unifying theory reflects a broader challenge across math and science: knowledge is typically accumulated through isolated discoveries, while deeper connections often remain hidden. In this work, we present an automated framework for the unification of mathematical formulas. Our system combines large language models (LLMs) for systematic formula harvesting, an LLM-code feedback loop for validation, and a novel symbolic algorithm for clustering and eventual unification. We demonstrate this methodology on the hallmark case of $\\large \\pi$, an ideal testing ground for symbolic unification. Applying this approach to 455,050 arXiv papers, we validate 385 distinct formulas for $\\large \\pi$ and prove relations between 360 (94\\%) of them, of which 166 (43\\%) can be derived from a single mathematical object—linking canonical formulas by Euler, Gauss, Brouncker, and newer ones from algorithmic discoveries by the Ramanujan Machine.\n  Our method generalizes to other constants, including $e$, $\\zeta(3)$, and Catalan’s constant, demonstrating the potential of AI-assisted mathematics to uncover hidden structures and unify knowledge across domains.",
+    "keywords": [
+      "AI for Science",
+      "AI for Math",
+      "LLM-Tool Integration",
+      "Mathematical Constants",
+      "Continued Fractions",
+      "Recurrences",
+      "Number Theory",
+      "Pi"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=cNqMAmpZh4"
+  },
+  "review_fields": {
+    "summary": "This paper is a step towards automation of mathematical discovery and includes the use of machine learning techniques. The paper focuses on the extraction of specific recurrences that describe the mathematicl constant pi from the mathematical literature.\n\nThe method includes the use of scraping, various extraction and validation steps (confusingly some of which are called \"retrieval\") and an approach to classify and unify the formulas found. Starting from about 278m formulas scraped from arxiv, the formulas are filtered down to 402 that fit the criteria.\n\nI cannot judge whether the recurrences extracted here are interesting to mathematicians in any form. There seem to be some recent papers out there (from the list of references) where mathematicians have explore such formulas. So perhaps there is some interest, but the paper does not explain the significance of this field in mathematics.\n\nAs far as I can tell, the only machine learning techniques used are prompting (Appendix F.2 and G.5).\n\nThe paper discusses some validation of the methodology in section 4.2, but the \"ground truth\" is just an unspecified \"merging\" of the output of 3 language models. The paper does not answer the question whether any of the formulas found bear any resemblance to the original formulas found in papers.\n\nThe \"retrieval\" or \"clustering\" methods described in in the paper appear to be classical algorithms that are very specific to this kind of recurrence the authors explore. It is unclear to me how these methods generalize to other mathematical discovery methods or whether there is any interesting conclusions for AI research in these methods.",
+    "strengths_and_weaknesses": "Strengths:\n- Automatic discovery of mathematical knowledge is a very interesting topic in AI.\n\nWeaknesses:\n- It is unclear whether the concrete output of this paper is interesting to mathematicians.\n- the paper does seem to contain new methods or insights for AI research\n- The paper does not discuss much in terms of validation - How accurate are any of the processing steps? Does the overall pipeline produce the expected formulas?\n- The code is not available so I could not dive deeper to clarify the many questions I encountered. The authors promise, however, to release some code in the future.",
+    "questions": "PSLQ seems to play an important role. It is used to \"fix\" the formulas extracted by GPT-4o. Could you explain how the process works and how often it is required?\n\nThe example in section 5.1 states \"This equivalence demonstrates how two previously distinct mathematical expressions, discovered\nover a century apart, are now proven to be equivalent by an automated process.\" To me this reads like an overstatement, as the paper they cite did very explicitly point out the relation to Ramanujan's earlier work. Could you please point out what exactly was discovered here that hasn't been discovered before? It is also okay to state that your method automatically rediscovered some knowledge, which validates the approach.\n\nFrom how many different papers do your 402 final formulas originate?",
+    "paper_formatting_concerns": "This paper relies very heavily on the very long appendix. Many methods are only described in the appendix, and in total, the paper is 66 pages long."
+  },
+  "review_metadata": {
+    "rating": 2,
+    "confidence": 4,
+    "quality": 2,
+    "clarity": 2,
+    "significance": 1,
+    "originality": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

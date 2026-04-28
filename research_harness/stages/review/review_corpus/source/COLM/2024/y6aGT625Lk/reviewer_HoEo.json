@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "y6aGT625Lk",
+  "reviewer": "HoEo",
+  "paper": {
+    "title": "PairEval: Open-domain Dialogue Evaluation Metric with Pairwise Comparisons",
+    "authors": [
+      "ChaeHun Park",
+      "Minseok Choi",
+      "Dohyun Lee",
+      "Jaegul Choo"
+    ],
+    "abstract": "Building a reliable and automated evaluation metric is a necessary but challenging problem for open-domain dialogue systems. \nRecent studies proposed evaluation metrics that assess generated responses by considering their relevance to previous dialogue histories. \nAlthough effective, these metrics evaluate individual responses directly rather than considering their relative quality compared to other responses.  To handle this, we propose  PairEval, a novel dialogue evaluation metric for assessing responses by comparing their quality against responses in different conversations.  Our metric is built on top of open-sourced and moderate-size language models, and we make them specialized in pairwise comparison between dialogue responses. Extensive experiments on multiple benchmarks demonstrate that our metric exhibits a higher correlation with human judgments than baseline metrics. We also find that the proposed comparative metric is more robust in detecting common failures from open-domain dialogue systems, including repetition and speaker insensitivity. The codes and models will be publicly available after the paper is accepted.",
+    "keywords": [
+      "Open-domain dialogue",
+      "Dialogue evaluation",
+      "Evaluation metric"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=y6aGT625Lk"
+  },
+  "review_fields": {
+    "summary": "The authors introduce PairEval a dialogue evaluation metric for assessing responses by comparing their quality against responses in different conversations. For this purpose they fine-tune a LLM to conduct the specific pair-wise dialogue evaluation task proposed. Evaluation results show better correlation with human evaluations than other metrics used in the evaluation. I think this paper presents an interesting idea and pushes forward the state of the art in open dialogue evaluations. COLM participants and the research community will benefit from the ideas and results presented here. However, I still feel additional work is needed to get a much better assessment of the benefits of the proposed technique. For instance, it would be interesting to understand the range of variability of achieved results by changing the comparative examples used in the evaluations, as well as the training data used to fine-tune the LLM. How much semantic similarity and/or topic overlap are there between the data used for fine-tuning and the evaluation data sets? Also, how human evaluations correlate to other human evaluations? I think an opportunity is missed here to understand better the complexity of the task for humans and get a better sense on how far or how close the proposed technique is bringing us to human evaluations.",
+    "reasons_to_accept": "I think this paper presents an interesting idea and pushes forward the state of the art in open dialogue evaluations. COLM participants and the research community will benefit from the ideas and results presented here.",
+    "reasons_to_reject": "I would probably want to see more exploratory analysis on the items described in the questions to authors, although I do not feel this is actually a reason to reject, given that this is a conference paper.",
+    "questions_to_authors": "It would be interesting to understand the range of variability of achieved results by changing the comparative examples used in the evaluations, as well as the training data used to fine-tune the LLM. How much semantic similarity and/or topic overlap are there between the data used for fine-tuning and the evaluation data sets? Also, how human evaluations correlate to other human evaluations? I think an opportunity is missed here to understand better the complexity of the task for humans and get a better sense on how far or how close the proposed technique is bringing us to human evaluations."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:55Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:55Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1025,
+    "words": 171,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1d22cbbe-85fb-490b-b972-7291513acd60",
+    "error": null,
+    "scored_chars": 1025
+  }
+}

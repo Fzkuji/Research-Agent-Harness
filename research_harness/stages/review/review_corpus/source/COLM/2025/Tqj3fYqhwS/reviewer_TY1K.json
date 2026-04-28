@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "Tqj3fYqhwS",
+  "reviewer": "TY1K",
+  "paper": {
+    "title": "Fleurs-SLU: A Massively Multilingual Benchmark for Spoken Language Understanding",
+    "authors": [
+      "Fabian David Schmidt",
+      "Ivan Vulić",
+      "Goran Glavaš",
+      "David Ifeoluwa Adelani"
+    ],
+    "abstract": "Spoken language understanding (SLU) is indispensable for half of all living languages that lack a formal writing system, since these languages cannot pair automatic speech recognition (ASR) with language models to benefit from language technology. Even if low-resource languages possess a writing system, ASR for these languages remains unreliable due to limited bimodal speech and text training data. However, the evaluation of multilingual SLU remains limited to shallow tasks such as intent classification or language identification. To address this, we present Fleurs-SLU, a multilingual SLU benchmark that encompasses (i) 692 hours of speech for topical utterance classification in 102 languages and (ii) multiple-choice question answering through listening comprehension spanning 944 hours of speech across 92 languages. We extensively evaluate both end-to-end speech classification models and cascaded systems that combine speech-to-text transcription with subsequent classification by large language models on Fleurs-SLU. Our results show that cascaded systems exhibit greater robustness in multilingual SLU tasks, though speech encoders can achieve competitive performance in topical speech classification when appropriately pre-trained. We further find a strong correlation between robust multilingual ASR, effective speech-to-text translation, and strong multilingual SLU, highlighting the mutual benefits between acoustic and semantic speech representations.",
+    "keywords": [
+      "spoken language understanding",
+      "multilingual benchmarks",
+      "multilingual evaluation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Tqj3fYqhwS"
+  },
+  "review_fields": {
+    "comment": "Thank you for the response.\n\n> That the pre-training regime seems more crucial than this specific architectural detail generally aligns with your concern regarding the difficulty of isolating the length adaptor's impact in pre-trained models.\n\nYes, that is what I meant. The length adaptor, which is a temporal convolution layer, is pre-trained along with other layers in the SeamlessM4Tv2 model. What I suggest is adding a length adaptor layer but keep it uninitialized for fine-tuning, and compare it with the model which excludes the length adaptor. With this setting I think it will be a fair comparison."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 4,
+    "mixed_pct": 96,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text is a mix of AI and human",
+    "confidence": "highly",
+    "chars": 608,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/05782894-8a00-4fbc-8ede-683c2b0025c8",
+    "error": null,
+    "scored_chars": 608
+  }
+}

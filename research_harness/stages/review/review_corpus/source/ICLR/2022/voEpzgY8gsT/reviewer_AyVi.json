@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "voEpzgY8gsT",
+  "reviewer": "AyVi",
+  "paper": {
+    "title": "Additive Poisson Process: Learning Intensity of Higher-Order Interaction in Poisson Processes",
+    "authors": [
+      "Simon Luo",
+      "Feng Zhou",
+      "lamiae azizi",
+      "Mahito Sugiyama"
+    ],
+    "abstract": "We present the Additive Poisson Process (APP), a novel framework that can model the higher-order interaction effects of the intensity functions in Poisson processes using projections into lower-dimensional space. Our model combines the techniques in information geometry to model higher-order interactions on a statistical manifold and in generalized additive models to use lower-dimensional projections to overcome the effects from the curse of dimensionality. Our approach solves a convex optimization problem by minimizing the KL divergence from a sample distribution in lower-dimensional projections to the distribution modeled by an intensity function in the Poisson process. Our empirical results show that our model is able to use samples observed in the lower dimensional space to estimate the higher-order intensity function with extremely sparse observations.",
+    "keywords": [
+      "Poisson Process",
+      "Log-Linear Model",
+      "Energy-Based Model",
+      "Generalized Additive Models",
+      "Information Geometry"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=voEpzgY8gsT"
+  },
+  "review_fields": {
+    "comment": "Thank you for the clarification; I had thought that the taxi example was three dimensional (x-axis, y-axis, day of the week), but I had overlooked the fact that the intensity function is inhomogeneous. Now my understanding is that the dimension in the taxi example is 4, but D = 3. It would be helpful to clarify more explicitly that D and the dimension are different.\n\nThe method is stated for general D, but only evaluated for D <= 4. This is fine, but it would be helpful to tell the reader early that the intent is to use it on small D and therefore focus the evaluation on this regime. In some sense you already do this with the running example, but being more explicit would help. Otherwise, if the writing is for general D, then the evaluation should reflect this.\n\nTo clarify: my suggestion of “direct comparison” of \\lambda with the estimators meant comparing them as functions, using some function norm.\n\nFigure 2 (a): To clarify, I don’t understand the explanatory purpose of writing \\eta = \\hat{\\eta}.\n\nThe proposed methodology is interesting, but the empirical evaluation is a weakness in my opinion. First, empirical execution times are missing. Second, it seems that an important comparison was not included; reviewer cFZz raised the point that the approach should be compared with the GAM + tensor product bases."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1328,
+    "words": 227,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7c1112ff-9642-496d-a779-6764a42950b7",
+    "error": null,
+    "scored_chars": 1328
+  }
+}

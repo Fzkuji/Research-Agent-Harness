@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "98ekcwQqb7",
+  "reviewer": "nisC",
+  "paper": {
+    "title": "Latent Causal Probing: A Formal Perspective on Probing with Causal Models of Data",
+    "authors": [
+      "Charles Jin"
+    ],
+    "abstract": "As language models (LMs) deliver increasing performance on a range of NLP tasks, *probing classifiers* have become an indispensable technique in the effort to better understand their inner workings. A typical setup involves (1) defining an auxiliary task consisting of a dataset of text annotated with labels, then (2) supervising small classifiers to predict the labels from the representations of a pretrained LM as it processes the dataset. A high probing accuracy is interpreted as evidence that the LM has learned to perform the auxiliary task as an unsupervised byproduct of its original pretraining objective. Despite the widespread usage of probes, however, the robust design and analysis of probing experiments remains a challenge. We develop a formal perspective on probing using *structural causal models* (SCM). Specifically, given an SCM which explains the distribution of tokens observed during training, we frame the central hypothesis as whether the LM has learned to represent the latent variables of the SCM. Empirically, we extend a recent study of LMs in the context of a synthetic grid-world navigation task, where having an exact model of the underlying causal structure allows us to draw strong inferences from the result of probing experiments. Our techniques provide robust empirical evidence for the ability of LMs to induce the latent concepts underlying text.",
+    "keywords": [
+      "probing",
+      "causality",
+      "interpretability",
+      "understanding",
+      "world models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=98ekcwQqb7"
+  },
+  "review_fields": {
+    "summary": "This paper proposes latent causal probing, a new probing framework that leverages latent causal structure to design auxiliary tasks. In particular, the task is to assess whether the language model has learned to represent the latent variables of the structural causal model (SCM). A method is proposed to disentangle the causal effects using the causal mediation analysis framework. Theoretical justifications are provided, and empirical results also support the claims of the paper. Overall, the proposed idea is novel, and the paper is well motivated and clearly written.",
+    "reasons_to_accept": "1. This paper presents a new probing framework from the perspective of causality. The idea is well motivated. The proposed latent probing framework helps address some limitations in existing work. \n\n2. The authors introduced the background of structural causal model in Section 2. Some motivating examples and use cases are discussed and explained. \n\n3. The authors proposed a very interesting idea, i.e., causal mediation analysis of probing.",
+    "reasons_to_reject": "1. This work only focuses on causal structure of programming languages. It is unclear whether it is easy to extend the proposed latent probing framework to natural language. Additional discussions should be provided in the paper.\n\n2. Experiments only involve an LM trained from scratch. It would be helpful to include evaluations on pretrained LMs.\n\n3. There are some typos in the paper, such as \"we refer the ready to\" in Section 2.1."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:43Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:43Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 878,
+    "words": 140,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7e09938f-6b6b-4f0b-abcc-83dcf2a7922e",
+    "error": null,
+    "scored_chars": 880
+  }
+}

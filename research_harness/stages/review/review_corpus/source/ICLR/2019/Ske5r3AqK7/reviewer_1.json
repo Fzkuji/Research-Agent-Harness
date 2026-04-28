@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "Ske5r3AqK7",
+  "reviewer": "1",
+  "paper": {
+    "title": "Poincare Glove: Hyperbolic Word Embeddings",
+    "authors": [
+      "Alexandru Tifrea*",
+      "Gary Becigneul*",
+      "Octavian-Eugen Ganea*"
+    ],
+    "abstract": "Words are not created equal. In fact, they form an aristocratic graph with a latent hierarchical structure that the next generation of unsupervised learned word embeddings should reveal. In this paper, justified by the notion of delta-hyperbolicity or tree-likeliness of a space, we propose to embed words in a Cartesian product of hyperbolic spaces which we theoretically connect to the Gaussian word embeddings and their Fisher geometry. This connection allows us to introduce a novel principled hypernymy score for word embeddings. Moreover, we adapt the well-known Glove algorithm to learn unsupervised word embeddings in this type of Riemannian manifolds. We further explain how to solve the analogy task using the Riemannian parallel transport that generalizes vector arithmetics to this new type of geometry. Empirically, based on extensive experiments, we prove that our embeddings, trained unsupervised, are the first to simultaneously outperform strong and popular baselines on the tasks of similarity, analogy and hypernymy detection. In particular, for word hypernymy, we obtain new state-of-the-art on fully unsupervised WBLESS classification accuracy.",
+    "keywords": [
+      "word embeddings",
+      "hyperbolic spaces",
+      "poincare ball",
+      "hypernymy",
+      "analogy",
+      "similarity",
+      "gaussian embeddings"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Ske5r3AqK7"
+  },
+  "review_fields": {
+    "review": "Summary: \nWords have implicit hierarchy among themselves in a text. Hyperbolic geometry due to the negative curvature and the delta-hyperbolicity is more suitable for representing hierarchical data in the continuous space. As a result it is natural to learn word representations/embeddings in the hyperbolic space. This paper proposes a promising approach that extends the approach presented in [1] to implement a GLOVE based hyperbolic word embedding model. The embeddings are optimized by using the Riemannian Optimization methods presented in [2]. Authors provide results on word-similarity and word-analogy tasks.\n\n\nQuestions: \nWhat are the reasons for choosing a Poincare Ball model of the hyperbolic space instead of hyperboloid or other models of the hyperbolic space?\nCan you expand on the role of gyr[.,.] in Equations 6 and 7.\nBesides the tasks that are presented in this paper including word-analogy and the word-similarity tasks. Have you considered using the embeddings learned in hyperbolic space in a down-stream task such as NLI? \n\nPros:\nThe paper is very well-written, the motivation and the goals are quite clear.\nThe relationship between the Gaussian embeddings and the product spaces is interesting and neat. The paper is theoretically strong and consistent.\nThe idea of learning word-embeddings in hyperbolic space with the proposed approach is novel and relevant.\n\nCons:\n\nThe weakest point of this paper is the experiments. Unfortunately the results reported are underwhelming on WBLESS and the Hyperlex tasks compared to other published results. The paper presents convincing results on Word-analogy and Word-similarity tasks. However they do not compare against the published results on those tasks.\n\n[1] Ganea, O. E., Bécigneul, G., & Hofmann, T. (2018). Hyperbolic Neural Networks. arXiv preprint arXiv:1805.09112.\n[2] Bécigneul, Gary, and Octavian-Eugen Ganea. \"Riemannian Adaptive Optimization Methods.\" arXiv preprint arXiv:1810.00760 (2018)."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

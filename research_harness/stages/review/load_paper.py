@@ -109,24 +109,108 @@ def _load_pdf(path: str, runtime: Optional[Runtime]) -> str:
     if os.path.exists(cached) and os.path.getsize(cached) > MIN_USABLE_LENGTH:
         return _read_text(cached)
 
-    if runtime is None:
-        raise ValueError(
-            f"PDF input requires a runtime (to invoke pdf_to_markdown). "
-            f"Path: {path}"
-        )
-
-    from research_harness.stages.review.pdf_to_markdown import pdf_to_markdown
-    pdf_to_markdown(pdf_path=path, runtime=runtime)
-
-    if not os.path.exists(cached):
-        # pdf_to_markdown is allowed to suffix .v2 etc on collision; pick newest .md sibling.
+    # Run PyMuPDF directly. The previous implementation delegated to an
+    # LLM-driven pdf_to_markdown stage, but that's brittle (codex sometimes
+    # echoes the prompt instead of executing it) and has no upside —
+    # font-size-based heading detection is purely deterministic.
+    md = _convert_pdf_to_markdown(path)
+    if len(md) < MIN_USABLE_LENGTH:
+        # Fall back to the LLM-driven stage for unusual layouts (encrypted,
+        # heavily scanned, etc.) when we got too little text.
+        if runtime is None:
+            raise RuntimeError(
+                f"PyMuPDF extracted only {len(md)} chars from {path}; "
+                f"pass a runtime to fall back to LLM extraction."
+            )
+        from research_harness.stages.review.pdf_to_markdown import pdf_to_markdown
+        pdf_to_markdown(pdf_path=path, runtime=runtime)
+        if os.path.exists(cached):
+            return _read_text(cached)
         sibling = _newest_sibling_md(path)
         if sibling is None:
             raise RuntimeError(
-                f"pdf_to_markdown did not produce {cached} or any .md sibling."
+                f"PyMuPDF + pdf_to_markdown both failed for {path}."
             )
         return _read_text(sibling)
-    return _read_text(cached)
+
+    with open(cached, "w", encoding="utf-8") as f:
+        f.write(md)
+    return md
+
+
+def _convert_pdf_to_markdown(pdf_path: str) -> str:
+    """Font-size-based heading extraction. Validated on real ACL papers."""
+    import re
+    from collections import Counter
+
+    try:
+        import fitz  # PyMuPDF
+    except ImportError as e:
+        raise RuntimeError(
+            "PyMuPDF not installed (pip install pymupdf)") from e
+
+    doc = fitz.open(pdf_path)
+    all_lines = []
+    for page in doc:
+        for blk in page.get_text("dict")["blocks"]:
+            if blk.get("type") != 0:
+                continue
+            for line in blk["lines"]:
+                text = " ".join(s["text"] for s in line["spans"]).strip()
+                if not text:
+                    continue
+                max_size = max(s["size"] for s in line["spans"])
+                all_lines.append((text, max_size))
+    if not all_lines:
+        return ""
+
+    size_counter = Counter(round(l[1], 1) for l in all_lines)
+    body_size = size_counter.most_common(1)[0][0]
+    title_size = max(size_counter)
+
+    HEADING_MIN_DELTA = 0.8
+    heading_sizes = {
+        sz for sz, cnt in size_counter.items()
+        if sz >= body_size + HEADING_MIN_DELTA and sz < title_size and cnt >= 2
+    }
+
+    title_lines = [l[0] for l in all_lines if round(l[1], 1) == title_size]
+    title = re.sub(r"\s+", " ", " ".join(title_lines)).strip()
+
+    out = []
+    if title:
+        out.append(f"# {title}")
+    buf: list[str] = []
+
+    def flush() -> None:
+        if buf:
+            joined = " ".join(buf)
+            joined = re.sub(r"(\w)-\s+(\w)", r"\1\2", joined)  # de-hyphenate
+            joined = re.sub(r"\s+", " ", joined).strip()
+            if joined:
+                out.append(joined)
+            buf.clear()
+
+    for txt, sz in all_lines:
+        sz_r = round(sz, 1)
+        if sz_r == title_size:
+            continue
+        if sz_r in heading_sizes:
+            flush()
+            out.append(f"## {txt.strip()}")
+            continue
+        buf.append(txt.strip())
+    flush()
+
+    md = "\n\n".join(out)
+
+    # Drop References / Bibliography section and everything after.
+    m = re.search(
+        r"(?im)^##\s+(?:\d+\s+)?(References?|Bibliography)\s*$", md)
+    if m:
+        md = md[:m.start()].rstrip() + "\n"
+
+    return md
 
 
 def _load_docx(path: str, runtime: Optional[Runtime]) -> str:

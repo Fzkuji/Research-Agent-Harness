@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "nVV6S2sb_UL",
+  "reviewer": "moUb",
+  "paper": {
+    "title": "Securing Secure Aggregation: Mitigating Multi-Round Privacy Leakage in Federated Learning",
+    "authors": [
+      "Jinhyun So",
+      "Ramy E. Ali",
+      "Basak Guler",
+      "Jiantao Jiao",
+      "Salman Avestimehr"
+    ],
+    "abstract": "Secure aggregation is a critical component in federated learning, which enables the server to learn the aggregate model of the users without observing their local models. Conventionally, secure aggregation algorithms focus only on ensuring the privacy of individual users in a single training round. We contend that such designs can lead to significant privacy leakages over multiple training rounds, due to partial user selection/participation at each round of FL. In fact, we show that the conventional random user selection strategies in FL may lead to leaking users' individual models within a number of rounds that is linear in the number of users. To address this challenge, we introduce a secure aggregation framework, Multi-RoundSecAgg, with multi-round privacy guarantees. In particular, we introduce a new metric to quantify the privacy guarantees of FL over multiple training rounds, and develop a structured user selection strategy that guarantees the long-term privacy of each user (over any number of training rounds). Our framework also carefully accounts for the fairness and the average number of participating users at each round. Our experiments on MNIST, CIFAR-$10$ and CIFAR-$100$ datasets in the IID and the non-IID settings demonstrate the performance improvement over the baselines, both in terms of privacy protection and test accuracy.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=nVV6S2sb_UL"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a framework for sampling clients in each round of a Federated Learning training session. The proposed framework balances a notion of privacy (essentially a lower bound on number of sumands of any partial sum a server my reconstruct via linear combination of model updates retrieved throughout training), fairness gap (average gap in client participation across all rounds), and aggregation cardinality (average number of sumands in each round). The paper studies the relationship between these metrics, in relation to the convergence of the training. This is done by proposing new client sampling strategies, studying their properties, and comparing with naural baselines. The authors also provide experiments to support the analytical findings.",
+    "strengths_and_weaknesses": "- I am unsure about the practical relevance of the assumptions regarding values of K and N.\n- There does not seem to exist a lot of literature in client selection in FL with the purpose of improving privacy with respect to the server. The framework of differential privacy seeems important in that discussion, but the submission does not discuss that.\n- The privacy guarantee is defined with respect to a particular time of reconstruction attack.\n- The technical results give a good intuition on how the different metrics interact, even with baseline client selection strategies, which might be useful to practitioners. However, the assumption that dropout probability is the same across all clients seems unrealistic (although hard to avoid).",
+    "questions": "- I am unsure about the practical relevance of the assumptions regarding values of K and N. For example, See Table 1 in https://arxiv.org/pdf/1912.04977.pdf. This seems to suggest that in practice N is huge with respect to K (several orders of magnitude), and that the number of training rounds is also smaller than N. I am thinking: K in the 100s, N in the millions, and number of training rounds L in the thousands. With this in my opinion more relevant setting in mind, a given client will participate in no more than 2 sums. The results in appendix H, as refelected in the experiments section, seems to rely on N and L being of the same order. It be useful for the paper to state upfront some examples of values of N, K, L of relevance to the paper, and found in practice.\n- The privacy guarantee is defined with respect to a particular time of reconstruction attack. In fact the sort of differentiation attacks that you describe motivates differential privacy. Using DP, one could ensure that a particular sumand does not alter the sum too much. Of course, if a user participates in many rounds this guarantee will degrade quickly, but that goes back to the choice of N, K.\n- How does one implement your proposed mechanim at the scale of the above numbers (and the ones in the referenced paper)? Are there any challenges there? The experiments use small values of K and N."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

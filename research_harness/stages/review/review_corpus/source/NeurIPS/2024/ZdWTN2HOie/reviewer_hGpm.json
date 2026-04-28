@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "ZdWTN2HOie",
+  "reviewer": "hGpm",
+  "paper": {
+    "title": "Stochastic Amortization: A Unified Approach to Accelerate Feature and Data Attribution",
+    "authors": [
+      "Ian Connick Covert",
+      "Chanwoo Kim",
+      "Su-In Lee",
+      "James Zou",
+      "Tatsunori Hashimoto"
+    ],
+    "abstract": "Many tasks in explainable machine learning, such as data valuation and feature attribution, perform expensive computation for each data point and are intractable for large datasets. These methods require efficient approximations, and although amortizing the process by learning a network to directly predict the desired output is a promising solution, training such models with exact labels is often infeasible. We therefore explore training amortized models with noisy labels, and we find that this is inexpensive and surprisingly effective. Through theoretical analysis of the label noise and experiments with various models and datasets, we show that this approach tolerates high noise levels and significantly accelerates several feature attribution and data valuation methods, often yielding an order of magnitude speedup over existing approaches.",
+    "keywords": [
+      "Amortization",
+      "feature attribution",
+      "data valuation",
+      "stochastic optimization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZdWTN2HOie"
+  },
+  "review_fields": {
+    "comment": "Thank you for the clarification. I encourage the authors to make that connection with prior work clear in the paper (i.e. that the key observation is that stochastic amortization can tolerate more noise than previous methods assumed). I believe, already, a lot of the empirical tests in the current is aimed at studying how much noise can be tolerated.\n\nBecause you have committed to a more direct comparison with prior work, and have shown empirical tests of prior baselines, I will raise my score accordingly."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 511,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c8907bd1-0d43-45ea-a14e-6600c2b2d668",
+    "error": null,
+    "scored_chars": 511
+  }
+}

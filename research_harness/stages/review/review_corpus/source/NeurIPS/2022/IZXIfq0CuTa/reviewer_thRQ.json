@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "IZXIfq0CuTa",
+  "reviewer": "thRQ",
+  "paper": {
+    "title": "Highly Parallel Deep Ensemble Learning",
+    "authors": [
+      "Xiao-Yang Liu",
+      "Zeliang Zhang",
+      "Xiaodong Wang"
+    ],
+    "abstract": "In this paper, we propose a novel highly parallel deep ensemble learning, which leads to highly compact and  parallel deep neural networks. The main idea is to first represent the data in tensor form, apply a linear transform along certain dimension and split the transformed data into different independent spectral data sets; then the matrix product in conventional neural networks is replaced by tensor product, which in effect imposes certain transformed-induced structure on the original weight matrices, e.g., a block-circulant structure.  The key feature of the proposed spectral tensor network is that it consists of parallel branches with each branch being an independent neural network trained using one spectral subset of the training data. Besides, the joint data/model parallel amiable for GPU implementation. The outputs of the parallel branches, which are trained on different independent spectral, are combined for ensemble learning to produce an overall network with substantially stronger generalization capability than that of those parallel branches. Moreover, benefiting from the reducing size of inputs,  the proposed spectral tensor network exhibits an inherent network compression, and as a result, reduction in computation complexity, which leads to the acceleration of training process.  The high parallelism from the massive independent operations of the parallel spectral subnetworks enable a further acceleration  in training and inference process. We evaluate the proposed spectral tensor networks on the MNIST, CIFAR-10 and ImageNet data sets, to highlight that they simultaneously achieve network compression, reduction in computation and parallel speedup.",
+    "keywords": [
+      "parallel",
+      "deep ensemble learning",
+      "spectral tensor"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=IZXIfq0CuTa"
+  },
+  "review_fields": {
+    "comment": "I would like to appreciate the reply and the effort for further explanation. However, there are still some concerns about the significance of the proposed methodology. The provided experimental results show that the advantage of the parallel structure (speed up) is sometimes traded by model performance. There are other forms of parallel/compression algorithms that obtain faster runtime with similar or less performance drop. The proposed method does not indicate why it stands out from its counterparts. And it would be better if the authors provide more justification or insights for the design. Overall, the proposed architecture shade light on some interesting angles of parallelization/data-side ensemble, but could be in better shape and may not be ready for publication."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

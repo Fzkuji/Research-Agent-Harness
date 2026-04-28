@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "eepoE7iLpL",
+  "reviewer": "PoVi",
+  "paper": {
+    "title": "Enhancing Neural Subset Selection: Integrating Background Information into Set Representations",
+    "authors": [
+      "Binghui Xie",
+      "Yatao Bian",
+      "Kaiwen Zhou",
+      "Yongqiang Chen",
+      "Peilin Zhao",
+      "Bo Han",
+      "Wei Meng",
+      "James Cheng"
+    ],
+    "abstract": "Learning neural subset selection tasks, such as compound selection in AI-aided drug discovery, have become increasingly pivotal across diverse applications. The existing methodologies in the field primarily concentrate on constructing models that capture the relationship between utility function values and subsets within their respective supersets. However, these approaches tend to overlook the valuable information contained within the superset when utilizing neural networks to model set functions. In this work, we address this oversight by adopting a probabilistic perspective. Our theoretical findings demonstrate that when the target value is conditioned on both the input set and subset, it is essential to incorporate an invariant sufficient statistic of the superset into the subset of interest for effective learning. This ensures that the output value remains invariant to permutations of the subset and its corresponding superset, enabling identification of the specific superset from which the subset originated. Motivated by these insights, we propose a simple yet effective information aggregation module designed to merge the representations of subsets and supersets from a permutation invariance perspective. Comprehensive empirical evaluations across diverse tasks and datasets validate the enhanced efficacy of our approach over conventional methods, underscoring the practicality and potency of our proposed strategies in real-world contexts.",
+    "keywords": [
+      "Neural Set Function",
+      "Hierarchical Structure",
+      "Invariance",
+      "Subset Selection"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=eepoE7iLpL"
+  },
+  "review_fields": {
+    "comment": "Thanks for a quick response and for letting me know of the revisions. Here are additional clarification questions and comments:\n- Regarding Comment 1: Wouldn't it be more natural to write $V = S_1 \\cup \\cdots \\cup S_m$ with $S_i \\cap S_j = \\emptyset$ when $i \\neq j$, which I believe is indeed the form used in Section 3.2?\n- Regarding Comments 2 and 3: I think the description that $Y$ is a *distribution* is misleading. Clearly, $Y$ itself is not a distribution since it need not be the case that $\\sum_{i} Y_i = 1$, and by the definitions given here, $P(S|V)$ and $q(Y|S,V)$ are distributions over different objects. Rather, shouldn't it be the case that the probabilities of each element being selected in the optimal subset are the outputs from the variational distribution $q$? In this case, it seems more appropriate to describe it as $q(S|V)$? Please let me know if I am misunderstanding something here. Meanwhile, since $Y$ is used throughout the main text, I think it should be very clearly defined as part of the main text before it is used, instead of appearing in a footnote (if appropriate, discussed along with concrete examples that readers can immediately understand)."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1185,
+    "words": 202,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e357483e-ad6d-47d8-a05b-7effe7e59c20",
+    "error": null,
+    "scored_chars": 1185
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "-jHUpEwRN9h",
+  "reviewer": "DpLt",
+  "paper": {
+    "title": "Row-clustering of a Point Process-valued Matrix",
+    "authors": [
+      "Lihao Yin",
+      "Ganggang Xu",
+      "Huiyan Sang",
+      "Yongtao Guan"
+    ],
+    "abstract": "Structured point process data harvested from various platforms poses new challenges to the machine learning community. To cluster repeatedly observed marked point processes, we propose a novel mixture model of multi-level marked point processes for identifying potential heterogeneity in the observed data. Specifically, we study a matrix whose entries are marked log-Gaussian Cox processes and cluster rows of such a matrix.  An efficient semi-parametric Expectation-Solution (ES) algorithm combined with functional principal component analysis (FPCA) of point processes is proposed for model estimation. The effectiveness of the proposed framework is demonstrated through simulation studies and real data analyses.",
+    "keywords": [
+      "Expectation-Solution Algorithm",
+      "Functional Principal Component Analysis",
+      "Marked Point Processes",
+      "Model-based Clustering",
+      "Semiparametric Model"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=-jHUpEwRN9h"
+  },
+  "review_fields": {
+    "summary": "The problem is equivalent to a marked point process, i.e. a set of times with associated categorical marks. In the main application of Twitter data modelling, the times represent when a tweet was made, and the marks are the cartesian product of twitter handle and tweet type (tweet, retweet, reply).\n\nThe data is split by day and by twitter handle, yielding a 2D matrix of marked point processes with the time (without date) and tweet type for each element of the matrix (so each element of this matrix is a sequence of random length). A heirarchical model is fit to this data, where the intensity for any element of this matrix is a linear combination of that for the day, for the twitter handle, and a third term for the interaction between both, with latent GP for each such term. So far this model comes mainly from [26]. Then, a cluster assignment variable omega is introduced which selects from multiple GP models for the twitter handle component of the intensity function, thereby yielding a mixture model with mixture parameters being GP distributed and capturing the intensity of tweets throughout the day, for different clusters of users.\n\nInference is performed with a form of EM, namely ES or Expectation Solution. This is rather non-trivial and involves significant analytical and numerical adeptness to execute. The paper is therefore technically impressive, and demonstrates excellent technical prowess in probabilistic inference.",
+    "main_review": "The paper is interesting and the model seems interesting for an ML audience, given the rise of social media and associated data.\n\nThe main contribution is in the form of a non-trivial inference scheme. Given the depth of numerical challenges here, it is hard to evaluate the paper. It would have been nice to have received code. At the very least, failing providing the code, it is essential that the experimental setup be reproducible so that subsequent authors can compare. Also, it is a slight disappointment that the paper includes just one significant real-world  numerical evaluation, on a dataset which is somewhat arbitrary in construction and evaluation. However, it remains impressive that the authors could put together this non-trivial scheme and ostensibly make it work.\n\nSome literature is missing. On line 40: \"most existing work rely on strong parametric assumptions\" is questionable. Much recent work uses latent GP intensities for Poisson models and also for latent GP Hawkes' process triggerring kernels. Please cite these works and remove this misleading statement.\n\nThe model is fun but has some strong assumptions, chiefly it is US centric given the segmentation by \"day\". \n\nThe title is a little obfuscated and might make the paper easy to miss."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "TPZRq4FALB",
+  "reviewer": "r3k4",
+  "paper": {
+    "title": "Test-time Adaptation against Multi-modal Reliability Bias",
+    "authors": [
+      "Mouxing Yang",
+      "Yunfan Li",
+      "Changqing Zhang",
+      "Peng Hu",
+      "Xi Peng"
+    ],
+    "abstract": "Test-time adaptation (TTA) has emerged as a new paradigm for reconciling distribution shifts across domains without accessing source data. However, existing TTA methods mainly concentrate on uni-modal tasks, overlooking the complexity of multi-modal scenarios.\nIn this paper, we delve into the multi-modal test-time adaptation and reveal a new challenge named reliability bias. Different from the definition of traditional distribution shifts, reliability bias refers to the information discrepancies across different modalities derived from intra-modal distribution shifts. To solve the challenge, we propose a novel method, dubbed REliable fusion and robust ADaptation (READ). On the one hand, unlike the existing TTA paradigm that mainly repurposes the normalization layers, READ employs a new paradigm that modulates the attention between modalities in a self-adaptive way, supporting reliable fusion against reliability bias. On the other hand, READ adopts a novel objective function for robust multi-modal adaptation, where the contributions of confident predictions could be amplified and the negative impacts of noisy predictions could be mitigated. Moreover, we introduce two new benchmarks to facilitate comprehensive evaluations of multi-modal TTA under reliability bias. Extensive experiments on the benchmarks verify the effectiveness of our method against multi-modal reliability bias. The code and benchmarks are available at https://github.com/XLearning-SCU/2024-ICLR-READ.",
+    "keywords": [
+      "Test-time adaption",
+      "Imbalanced multi-modal learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=TPZRq4FALB"
+  },
+  "review_fields": {
+    "summary": "This paper delves into test-time adaption under the multi-modal setting and reveals an interesting and practical challenge, namely, reliability bias. In the wild, it is common that some modalities would suffer from distribution shifts compared to their counterparts in the source domain. As a result, the task-specific information across the modalities would be more inconsistent, thus contributing to the reliability differences for different modalities. Extensive empirical studies have been conducted to investigate the impact of the reliability bias using different cross-modal fusion strategies. To achieve robust multi-modal TTA against reliability bias,  the authors propose a novel method, dubbed reliable fusion and robust adaption (RFRA). Different from the existing TTA methods that mainly repurpose the normalization layers to achieve adaption, RFRA modulates the attention module to achieve reliable cross-modal fusion during test time. Besides, RFRA adopts a new objective function with desirable mathematical properties to combat with noise during adaption. To highlight the necessity of developing reliability-bias robust multi-modal TTA, the authors construct two new benchmarks with different settings of reliability bias based on the Kinetics and VGGSound datasets. Finally, the authors validate the effectiveness of the proposed method and give a deep analysis of the reliability bias challenge.",
+    "strengths": "1. Revealing a new problem. This paper studies a new and practical challenge in the context of multi-modal test-time adaptation, namely, reliability bias. In the wild, it is evitably to introduce distribution shifts in some modalities.  As a result, the task-specific information across the modalities would be more inconsistent, thus contributing to the reliability differences for different modalities. The authors design extensive experiments to investigate the influence of reliability bias under different multi-modal fusion manners and the results validate the necessity of handling reliability bias for multi-modal TTA. I think the revealed challenge would bring some insights to the TTA community.\n2. Constructing meaningful benchmarks. To highlight the necessity of developing reliability-bias robust multi-modal TTA, the authors construct two new benchmarks with different settings of reliability bias based on the Kinetics and VGGSound datasets. Concretely, the benchmarks consist of both video and audio modalities and each modality is with corruptions of different levels so that the reliability bias is simulated. On the one hand, the corruption on video modality follows ImageNet-C, which ensures comparison fairness. On the other hand, the incorporation of audio corruption types extends the utility of this research to the audio domain with TTA. Besides,  the benchmarks encompass diverse multi-modal tasks, including action recognition and event classification, thus providing a comprehensive evaluation and supplementing existing multi-modal test-time adaptation tasks. \n3. Innovative paradigm for TTA. This paper proposes a new paradigm for TTA, namely, repurposing the attention layers during test time. Intuitively, the parameter updating of normalization layers like most existing TTA methods can only handle the distribution shifts between domains. In contrast, the parameter modulation of attention layers would help learn the importance difference between modalities, resulting in the reliable fusion for multi-modal TTA. The authors perform extensive experiments to show the superiority of the proposed new paradigm against reliability bias.",
+    "weaknesses": "1. While the paper is well-written, it lacks essential details about CAV-MAE, such as the number of attention layers used for fusion. As many evaluations rely on the CAV-MAE framework, providing this information is crucial for the readers and reviewers to fully grasp the methodology. Additionally, visualizing the corruption types on both video and audio modalities would enhance the paper's clarity and help readers better understand the benchmarks.\n2. The paper introduces the modulation of Q, K, and V parameters to address reliability bias. However, it's not clear why the authors chose to update all parameters of Q, K, and V simultaneously. Explaining this choice and discussing the possibility of updating only the MLP parameters of Q and K would provide valuable insights. Furthermore, while the novel attention layer repurposing is effective for reliability bias, the paper should address whether this approach comes at the cost of efficiency for test-time adaptation.\n3. The paper introduces a crucial hyper-parameter, the confidence threshold ($\\gamma$) in Equation 6. While this threshold is fixed in all experiments, it's essential to include ablation studies to explore the sensitivity of the proposed method to variations in this hyper-parameter. A more comprehensive analysis would provide a deeper understanding of the method's robustness.\n\nMinor: Some of the figures, such as Figure 1c and Figure 3b, suffer from low image clarity. Improving the quality of these figures would enhance the paper's visual presentation and make the findings more accessible to readers.\n\nOverall evaluation, I think this paper is above the bar of ICLR, regarding motivation and novelty.\n\n\n----------------------------------\n\nUpon reviewing the response, I note that my concerns have been effectively addressed. Considering the consensus of other reviewers, I wholeheartedly recommend this work with a high level of approval.",
+    "questions": "My primary concerns revolve around the lack of comprehensive experiment details and the design of the modulation strategies, as highlighted in the weaknesses."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 19,
+    "mixed_pct": 0,
+    "human_pct": 81,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 4250,
+    "words": 616,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/32c46106-b225-479d-be78-d9d3ba6e4cad",
+    "error": null,
+    "scored_chars": 4253
+  }
+}

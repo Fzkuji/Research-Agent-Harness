@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "KS8mIvetg2",
+  "reviewer": "jRLi",
+  "paper": {
+    "title": "Proving Test Set Contamination in Black-Box Language Models",
+    "authors": [
+      "Yonatan Oren",
+      "Nicole Meister",
+      "Niladri S. Chatterji",
+      "Faisal Ladhak",
+      "Tatsunori Hashimoto"
+    ],
+    "abstract": "Large language models are trained on vast amounts of internet data, prompting concerns that they have memorized public benchmarks. Detecting this type of contamination is challenging because the pretraining data used by proprietary models are often not publicly accessible.\n\nWe propose a procedure for detecting test set contamination of language models with exact false positive guarantees and without access to pretraining data or model weights. Our approach leverages the fact that when there is no data contamination, all orderings of an exchangeable benchmark should be equally likely. In contrast, the tendency for language models to memorize example order means that a contaminated language model will find certain canonical orderings to be much more likely than others. Our test flags potential contamination whenever the likelihood of a canonically ordered benchmark dataset is significantly higher than the likelihood after shuffling the examples.\n\nWe demonstrate that our procedure is sensitive enough to reliably detect contamination in challenging situations, including models as small as 1.4 billion parameters, on small test sets only 1000 examples, and datasets that appear only a few times in the pretraining corpus. Finally, we evaluate LLaMA-2 to apply our test in a realistic setting and find our results to be consistent with existing contamination evaluations.",
+    "keywords": [
+      "language modeling",
+      "memorization",
+      "dataset contamination"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=KS8mIvetg2"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a statistical test that given certain assumptions can indicate whether a black-box language model has been trained on certain datasets. This is a topic of increasing interest and importance given the prevalence of pretrained models that are trained on very large amounts of data.  The authors first propose a simple permutation test and identify some weaknesses with it. They then propose a more sophisticated sharded test. The authors show 2 kinds of experiments:\n\n(1) They test on a dataset where they have injected a small amount of certain test sets to see if their approach can detect them.\n\n(2) They apply their test to existing models such as Lllama-2 showing their approach can scale.",
+    "strengths": "-Topic of large importance in the community given the direction of the field. \n\n-Novel approach with thorough empirical results. I have some questions about the definition of test set contamination below.\n\n-Well written and interesting.",
+    "weaknesses": "I have some questions about the definition of test set contamination below.",
+    "questions": "In Figure 1 the authors show test set contamination for BoolQ. But the examples there are unlabeled. Are the authors targeting unlabeled test set contamination i.e. the input is present in the pretraining data but not the label? \n\nWould be great to have some justification and explanation of this setting."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:18Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:18Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 618,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4537e507-fb5f-406a-a3ab-236d2c883666",
+    "error": null,
+    "scored_chars": 620
+  }
+}

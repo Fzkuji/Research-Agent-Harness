@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "Hvq9RtSoHG",
+  "reviewer": "cm3f",
+  "paper": {
+    "title": "Chain-of-Symbol Prompting For Spatial Reasoning in Large Language Models",
+    "authors": [
+      "Hanxu Hu",
+      "Hongyuan Lu",
+      "Huajian Zhang",
+      "Yunze Song",
+      "Wai Lam",
+      "Yue Zhang"
+    ],
+    "abstract": "While conventional Chain-of-Thought prompting shows promising performance on various language tasks for LLMs, the spatial scenarios are nearly unexplored. In this paper, we first investigate the performance of LLMs on complex spatial planning and understanding tasks that require LLMs to understand a virtual spatial environment simulated via natural language and act or reason correspondingly in text. By evaluating on classic spatial planning scenarios through natural language descriptions, we found that current popular LLMs still lack abilities to handle spatial relationships in texts. This arises a question -- do the natural language is the best way to represent complex spatial environments for LLMs, or maybe other alternatives such as symbolic representations are both more efficient and effective for LLMs? To this end, we propose a novel method called CoS (Chain-of-Symbol Prompting) that represents the spatial relationships with condensed symbols during the chained intermediate thinking steps. CoS is easy to use and does not need additional training on LLMs. Extensive experiments indicate that CoS clearly surpasses the performance of the Chain-of-Thought (CoT) Prompting described in natural langauge in all three spatial planning tasks and existing spatial QA benchmark, with even fewer tokens used in the inputs compared with CoT. The performance gain is strong, by up to 60.8% accuracy (from 31.8% to 92.6%) on Brick World scenarios for GPT-3.5-Turbo. CoS also reduces the number of tokens in the prompt obviously, by up to 65.8% of the tokens (from 407 to 139) for the intermediate steps from demonstrations on the Brick World task. Interestingly, we also observed emergent ability of abstract symbols understanding when the size of models scales up.",
+    "keywords": [
+      "In-Context Learning",
+      "Chain-of-Thought Prompting",
+      "Spatial Reasoning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Hvq9RtSoHG"
+  },
+  "review_fields": {
+    "summary": "The work proposed the new in-context learning method called Chain of Symbol (CoS)  which utilizes symbolic representations for spatial relation objects rather than natural language representations.  They claim the proposed technique is more effective and reliable than commonly used CoT techniques.  They prove the claim using four tasks involving spatial understanding of various dimensions (1D, 2D, and 3D spatial relations) with closed-source and open-source LLMs.  The results indicate that CoS completely outperformed in performance and resources on all tasks.",
+    "reasons_to_accept": "The proposed technique provides another strong representation for performing spatial reasoning on LLMs. \n The notable reasons are stated below:\n - The proposed method outperforms CoT in several benchmarks including both simple and complex spatial relations as well as resource-saving\n - The benchmarks used in the experiment have a good coverage of application regarding spatial relations\n - Provide the results that support the performance of the model on both open-source and close-source LLMs \n - Based on analysis of one of the benchmarks, the proposed method is effective in different language setting\n - Easy to apply in-context learning",
+    "reasons_to_reject": "- The improvement rapidly drops on the complex tasks compared to simple ones, which may show indifference between symbolic representation and natural representation in the complex setting\n - Applying to the realistic scenario will be challenging because the symbolic representation is not straightforward to obtain with reasonable coverage of concepts\n - According to LLama2 results, the proposed techniques only out-performed CoT with the largest model",
+    "questions_to_authors": "- You provided the result of GPT-4 on the SPARTUN dataset; what are the results of GPT-4 on the other benchmarks? \n - Can you visualize the Llama2 results in the same format and details of the GPT results? More details will be helpful since the figure 4 plots is not very conclusive. \n - Would it be possible to apply CoS approach to the other types of reasoning beyond spatial?\n- In the analysis part of BrickWorld, did you experiment with different symbolic representations? What would be the expected results in more complex setting if the symbolic representations are changed? The extreme case would be using <- to represent left instead of right. Would the model still understand it?\n- Can you justify using GPT for creating the initial explanation compared to manually crafting CoS? is the motivation reducing the human annotation effort?\n- For CoT, the experiment is performed using manually crafted CoT. What about the results from CoT if you follow the same steps as CoS?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:13Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:13Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2066,
+    "words": 328,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f893e1bf-3d6e-4b0b-aef2-77332c99743c",
+    "error": null,
+    "scored_chars": 2080
+  }
+}

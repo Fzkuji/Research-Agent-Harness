@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "voEpzgY8gsT",
+  "reviewer": "cFZz",
+  "paper": {
+    "title": "Additive Poisson Process: Learning Intensity of Higher-Order Interaction in Poisson Processes",
+    "authors": [
+      "Simon Luo",
+      "Feng Zhou",
+      "lamiae azizi",
+      "Mahito Sugiyama"
+    ],
+    "abstract": "We present the Additive Poisson Process (APP), a novel framework that can model the higher-order interaction effects of the intensity functions in Poisson processes using projections into lower-dimensional space. Our model combines the techniques in information geometry to model higher-order interactions on a statistical manifold and in generalized additive models to use lower-dimensional projections to overcome the effects from the curse of dimensionality. Our approach solves a convex optimization problem by minimizing the KL divergence from a sample distribution in lower-dimensional projections to the distribution modeled by an intensity function in the Poisson process. Our empirical results show that our model is able to use samples observed in the lower dimensional space to estimate the higher-order intensity function with extremely sparse observations.",
+    "keywords": [
+      "Poisson Process",
+      "Log-Linear Model",
+      "Energy-Based Model",
+      "Generalized Additive Models",
+      "Information Geometry"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=voEpzgY8gsT"
+  },
+  "review_fields": {
+    "comment": "1. \"We disagree with this comment. Our proposed approach has advantages over some of the existing approaches as it provides a convenient graph structure in the form of a partial order to systematically allow the interactions between the features and time to be represented. Such modeling is not possible in existing approaches. The decomposition into lower dimensional space is meaningful as it represents a poisson process for each of the features in the interaction effects between features.\"\n\nResponse: I am not saying decomposition into lower dimensional space is not meaningful. I was saying that this can be done using existing tools such as tensor product bases.\n\n2. \"Our comparison with RKHS is still meaningful as it is a well-established baseline known by many people in the ICLR community.\"\n\nResponse: anything you can do with RKHS, you can also do it with tensor product bases, which is very close to RKHS.\n\n3. The problem of selecting the M and h is not addressed. The synthetic experiments should adopt the same strategy as those will be used in real applications for an honest assessment of the proposed approach.\n\n4. \"You are correct that the day of the week is a discrete variable. But, a continuous-time component t is associated with each (x, y, W) as we have introduced in the Introduction. So in fact in this example, there are two spatial coordinates and two temporal coordinates, a discrete one which represents the day of the week and a continuous one which represents the time in each day.\"\n\nResponse: Regardless of it is four-dimension or three-dimension, having a discrete coordinate dimension violates the basic assumption of a Poisson process.\n\n5. If there is no problem with equation (6), where is the summation index $i$  reflected in the summands?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1778,
+    "words": 295,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/247a89d2-ca9b-40fe-a73b-7ab23c59fcd8",
+    "error": null,
+    "scored_chars": 1779
+  }
+}

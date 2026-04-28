@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "tmsqb6WpLz",
+  "reviewer": "xGn4",
+  "paper": {
+    "title": "Dissecting learning and forgetting in language model finetuning",
+    "authors": [
+      "Xiao Zhang",
+      "Ji Wu"
+    ],
+    "abstract": "Finetuning language models on domain-specific corpus is a common approach to enhance their domain knowledge and capability. While improving performance on domain tasks, it often brings a side-effect of forgetting of the model's general abilities. In this study, we analyze the effects of finetuning on language models by dissecting its impacts on the modeling of topic, style, and factual knowledge in text. Our method uses instruction-following LLMs such as ChatGPT to auto-generate controlled-variable text examples which we use to probe the model. Our findings reveal that finetuning results in significant shifts in the language model's topic and style priors, while actual knowledge learning only contributes to a small fraction of the total probability change. Analysis shows that the adaptation of topic and style priors behave akin to learning simple features: they are learned rapidly and require little model capacity. They are also learned independently and primarily at the beginning of a text sequence. In contrast, factual knowledge is learned stably but slowly and requires significant model capacity to learn. The research offers insights and understanding into the finer dynamics of learning and forgetting in language models, and can potentially inform future research on improving domain adaptation and addressing the challenges of forgetting in continual learning of language models.",
+    "keywords": [
+      "language models",
+      "domain adaptation",
+      "catastrophic forgetting"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=tmsqb6WpLz"
+  },
+  "review_fields": {
+    "summary": "This paper dissects the effect of fine-tuning on learning and forgetting of language style, topic, and factual knowledge. The authors use instruction-following LLMs to automatically construct corpus with controlled factors above. The authors performed extensive analysis across different LM types and summarized several empirical findings, among which they show topic and style priors are easy to learn but factual knowledge is not.",
+    "strengths": "- The method how the analysis is performed is novel. Creating training and evaluation corpora with controlled differences (topics, style, factual knowledge) by prompting instruction following LLMs is interesting and inspiring.  \n- The analysis is extensive and is performed under various configurations (like the choice of LM, size of the training corpora)\n- The outcomes of analysis are interesting and relevant to future research that study lifelong learning of LMs.",
+    "weaknesses": "- Although other configurations are very extensive, the choice of training and evaluation corpora and exclusively original or variants of PubMed and C4. \n- The three text-generating factors (styles, topics, facts) may not always be clearly separable of extensive enough in every corpora. The authors discussed this limitation in their limitation section.\n- Clarity issue: I feel the plots very hard to read because the captions are too generic and not self-contained. I suggest to briefly summarize the findings or implications in the captions.\n- Clarity issue: some legends in plots such as Figure 4 are not explained in text (e.g. readers may be confused about \"C4 -factuals\" before they associate them with \"C4-counterfactual\" in Table 1)\n- Though the authors pointed out the hardness of learning factual knowledge without learning style and topic bias, the authors' attempts failed to improve such performance at the end of Sec. 3. I suggest to provide some future directions about how the analysis will be beneficial the challenge of learning factual knowledge above.\n- The authors focused on evaluation of LM loss throughout the paper. I think this is fine for style and topics, but factual knowledge, evaluating LM loss is not clean enough because only a few tokens in a sentence are related to facts. The authors could create cloze-style  or question answering evaluation sets that focus exclusively on generation of factual knowledge.",
+    "questions": "- There is a \"side note\" in page 7: \"When capacity is limited, the topic ratio and factual ratio simultaneously reduce on Pubmed in Figure 6.\" I did not see topic ratio reduces in Figure 6. Is this information supposed to be told by Figure 6?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2153,
+    "words": 347,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fabd0790-2583-464a-822e-221243c52276",
+    "error": null,
+    "scored_chars": 2157
+  }
+}

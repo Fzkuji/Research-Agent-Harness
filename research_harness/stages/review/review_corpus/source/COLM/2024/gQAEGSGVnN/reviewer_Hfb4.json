@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "gQAEGSGVnN",
+  "reviewer": "Hfb4",
+  "paper": {
+    "title": "UniMem: Towards a Unified View of Long-Context Large Language Models",
+    "authors": [
+      "Junjie Fang",
+      "Likai Tang",
+      "Hongzhe Bi",
+      "Yujia Qin",
+      "Si Sun",
+      "Zhenyu Li",
+      "Haolun Li",
+      "Yongjian Li",
+      "Xin Cong",
+      "Yankai Lin",
+      "Yukun Yan",
+      "Xiaodong Shi",
+      "Sen Song",
+      "Zhiyuan Liu",
+      "Maosong Sun"
+    ],
+    "abstract": "Long-context processing is a critical ability that constrains the applicability of large language models (LLMs). Although there exist various methods devoted to enhancing the long-context processing ability of LLMs, they are developed in an isolated manner and lack systematic analysis and integration of their strengths, hindering further developments. In this paper, we introduce UniMem, a Unified framework that reformulates existing long-context methods from the view of Memory augmentation of LLMs.  Distinguished by its four core dimensions—Memory Management, Memory Writing, Memory Reading, and Memory Injection, UniMem empowers researchers to conduct systematic exploration of long-context methods. We re-formulate 16 existing methods based on UniMem and analyze four representative methods: Transformer-XL, Memorizing Transformer, RMT, and Longformer into equivalent UniMem forms to reveal their design principles and strengths. Based on these analyses, we propose UniMix, an innovative approach that integrates the strengths of these algorithms. Experimental results show that UniMix achieves superior performance in handling long contexts with significantly lower perplexity than baselines. The code is publicly available at https://github.com/thunlp/UniMem.",
+    "keywords": [
+      "long-context",
+      "large language models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=gQAEGSGVnN"
+  },
+  "review_fields": {
+    "summary": "This paper focused on extending the context length of large language models. It firstly reviewed several common existing context modeling approaches in Transformer-based LLMs, including Memory Management, Memory Writing, Memory Reading, and Memory Injection. Then it proposed an unified framework that reformulates existing long-context methods from the view of Memory augmentation of LLMs. It also proposed UniMix, an innovative approach that integrates the strengths of these algorithms. Experimental results show that UniMix achieves superior performance in handling long contexts with significantly lower perplexity than baselines.",
+    "reasons_to_accept": "1. The unified framework for existing long-context methods is elegant in math.\n2. The proposed approach has some advantage on metric of perplexity.",
+    "reasons_to_reject": "1. The baselines can be supplemented. There are quite a lot of recent works on extending context of LLMs [1][2][3], I would suggest this paper should compare with them.\n\n[1] Pal et al, Giraffe: Adventures in Expanding Context Lengths in LLMs, https://arxiv.org/pdf/2308.10882\n\n[2] Peng et al, YaRN: Efficient Context Window Extension of Large Language Models, https://arxiv.org/pdf/2309.00071\n\n[3] Tworkowski et al, Focused Transformer: Contrastive Training for Context Scaling, https://arxiv.org/pdf/2307.03170\n\n2. The evaluation method can be enhanced. The paper only considered evaluating perplexity of differenct models, however, it ignored some popular downstream tasks tailored for long-context LLMs, such as Needles in a Haystack [4], Document-based Q&A task [5]. I would suggest the author can evaluate their approach in those benchmarks.\n\n[4] Kuratov et al, In Search of Needles in a 11M Haystack: Recurrent Memory Finds What LLMs Miss, https://arxiv.org/pdf/2402.10790\n\n[5] Ma et al, MEGALODON: Efficient LLM Pretraining and Inference with Unlimited Context Length, https://arxiv.org/pdf/2404.08801"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:35:09Z",
+    "migrated_from_v1_at": "2026-04-27T15:35:09Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1269,
+    "words": 177,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/40b8eab4-56a7-476a-acf8-210de812d9cc",
+    "error": null,
+    "scored_chars": 1269
+  }
+}

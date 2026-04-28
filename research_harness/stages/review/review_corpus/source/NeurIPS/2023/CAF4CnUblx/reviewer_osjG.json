@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "CAF4CnUblx",
+  "reviewer": "osjG",
+  "paper": {
+    "title": "Information Maximization Perspective of Orthogonal Matching Pursuit with Applications to Explainable AI",
+    "authors": [
+      "Aditya Chattopadhyay",
+      "Ryan Pilgrim",
+      "Rene Vidal"
+    ],
+    "abstract": "Information Pursuit (IP) is a classical active testing algorithm for predicting an output by sequentially and greedily querying the input in order of information gain. However, IP is computationally intensive since it involves estimating mutual information in high-dimensional spaces. This paper explores Orthogonal Matching Pursuit (OMP) as an alternative to IP for greedily selecting the queries. OMP is a classical signal processing algorithm for sequentially encoding a signal in terms of dictionary atoms chosen in order of correlation gain. In each iteration, OMP selects the atom that is most correlated with the signal residual (the signal minus its reconstruction thus far). Our first contribution is to establish a fundamental connection between IP and OMP, where we prove that IP with random projections of dictionary atoms as queries ``almost'' reduces to OMP, with the difference being that IP selects atoms in order of normalized correlation gain. We call this version IP-OMP and present simulations indicating that this difference does not have any appreciable effect on the sparse code recovery rate of IP-OMP compared to that of OMP for random Gaussian dictionaries. Inspired by this connection, our second contribution is to explore the utility of IP-OMP for generating explainable predictions, an area in which IP has recently gained traction. More specifically, we propose a simple explainable AI algorithm which encodes an image as a sparse combination of semantically meaningful dictionary atoms that are defined as text embeddings of interpretable concepts. The final prediction is made using the weights of this sparse combination, which serve as an explanation. Empirically, our proposed algorithm is not only competitive with existing explainability methods but also computationally less expensive.",
+    "keywords": [
+      "Information Maximization",
+      "Sparse Coding",
+      "Orthogonal Matching Pursuit",
+      "Explainable AI",
+      "Information Pursuit"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=CAF4CnUblx"
+  },
+  "review_fields": {
+    "summary": "This paper analyzes IP in active testing and OMP in sparse signal processing, and establishes connections between the two algorithms. Specifically, IP with a specific configuration can be reduced to OMP up to a normalization, called IP-OMP, and has similar performances as OMP. The paper also proposes to use the IP-OMP algorithm to reduce the computational complexity of IP, and demonstrates its efficiency improvement over variational IP in explainable visual classification,",
+    "strengths": "- Provides a novel perspective for bridging two existing techniques in different domains. \n- Analysis is sound and creative.\n- The presentation of the paper is very clear.",
+    "weaknesses": "- As the authors acknowledged, the proposed IP-OMP is limited by the need to place signals and queries into the same domain, which is an intrinsic limitation of the proposed method.\n- It would be interesting to see the performance of the proposed IP-OMP on same-modality query problems, such as words-only or images-only, which can eliminate the CLIP module and better demonstrate the performance of IP-OMP itself.",
+    "limitations": "The authors addressed the limitations."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 626,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/bdf6eec6-74c5-43f3-a281-49a559a9ec6d",
+    "error": null,
+    "scored_chars": 627
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "KHoV9zn1jLE",
+  "reviewer": "xxYn",
+  "paper": {
+    "title": "Implicitly regularized interaction between SGD and the loss landscape geometry",
+    "authors": [
+      "Sungyoon Lee",
+      "Cheongjae Jang"
+    ],
+    "abstract": "We study unstable dynamics of stochastic gradient descent (SGD) and its impact on generalization in neural networks. We find that SGD induces an implicit regularization on the interaction between the gradient distribution and the loss landscape geometry. Moreover, based on the analysis of a concentration measure of the batch gradient, we propose a more accurate scaling rule, Linear and Saturation Scaling Rule (LSSR), between batch size and learning rate.",
+    "keywords": [
+      "SGD",
+      "learning rate",
+      "batch size",
+      "optimization",
+      "generalization",
+      "implicit bias",
+      "implicit regularization",
+      "sharpness",
+      "scaling rule"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=KHoV9zn1jLE"
+  },
+  "review_fields": {
+    "summary": "The paper studies the instability in SGD optimization dynamics (edge of stability) and how that impacts generalization. In particular, the authors propose the idea of interaction-aware sharpness, which I believe is original. Based on a definition of implicit interaction regularization, the authors propose the linear and saturation learning rate scaling rule (LSSR). Most of the findings are supported by empirical evidences but theoretical support is at an intuitive level.",
+    "strengths_and_weaknesses": "Strengths:\n * The idea of interaction-aware sharpness seems to be original.\n * Empirical evidence to support the self-regulation of interaction-aware sharpness around the edge of stability.\n * Intuituive argument for learning rate scaling.\n\nWeaknesses:\n * Learning rate scaling only supported by a vague argument and empirical evidence.\n * Weak connection between the concepts proposed in the paper and generalization.\n * Nothing in the theory related to neural networks.",
+    "questions": "* My feeling is that the current theoretical setup may explain the gap between batch optimization and minibatch optimization but that is not the same as explaining generalization because generalization depends on the model class size. Can you agree or disagre?\n* More specifically, do I understand correctly that the theoretical setup does not assume anywhere that the model is a neural network? Then why are all the experiments on neural networks?\n* Can we motivate the linear and saturation scaling rule better? I am not sure why keeping the right-hand side of Eq. (11) constant leads to optimal scaling."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

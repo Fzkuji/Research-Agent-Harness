@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "aVh9KRZdRk",
+  "reviewer": "Jerg",
+  "paper": {
+    "title": "Learning to grok: Emergence of in-context learning and skill composition in modular arithmetic tasks",
+    "authors": [
+      "Tianyu He",
+      "Darshil Doshi",
+      "Aritra Das",
+      "Andrey Gromov"
+    ],
+    "abstract": "Large language models can solve tasks that were not present in the training set. This capability is believed to be due to in-context learning and skill composition. In this work, we study the emergence of in-context learning and skill composition in a collection of modular arithmetic tasks. Specifically, we consider a finite collection of linear modular functions $z = a  x + b  y \\text{ mod } p$ labeled by the vector $(a, b) \\in \\mathbb{Z}_p^2$. We use some of these tasks for pre-training and the rest for out-of-distribution testing. We empirically show that a GPT-style transformer exhibits a transition from in-distribution to out-of-distribution generalization as the number of pre-training tasks increases. We find that the smallest model capable of out-of-distribution generalization requires two transformer blocks, while for deeper models, the out-of-distribution generalization phase is *transient*, necessitating early stopping. Finally, we perform an interpretability study of the pre-trained models, revealing highly structured representations in both attention heads and MLPs; and discuss the learned algorithms. Notably, we find an algorithmic shift in deeper models, as we go from few to many in-context examples.",
+    "keywords": [
+      "In-Context Learning",
+      "Grokking",
+      "Modular Arithmetic",
+      "Interpretability"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=aVh9KRZdRk"
+  },
+  "review_fields": {
+    "summary": "This paper studies the emergence of in context learning and skill composition in autoregressive models. They create an algorithmic dataset to probe how autoregressive models use tasks learned during training to solve new tasks. They find that more training tasks lead to a generalizing / algorithmic approach instead of memorization.",
+    "strengths": "- This work introduces a new algorithmic dataset (with modular arithmetic tasks) that force models to learn a variety of tasks. The work finds that when the number of tasks goes from small to large, the model transitions from memorization to generalization.\n- This work has many interesting experiments. I found Section 5.2 (Attention Heads Implement Essential Skills) pretty interesting.",
+    "weaknesses": "- The definition of task diversity is not well defined. Is the number of pretraining tasks truly indicative of task diversity? I think the paper could benefit from some justification of this assumption.\n- The paper claims that for larger models, early stopping is necessary (line 52). While I appreciate that the authors used GPT-like architectures to reflect realistic settings, the architectures in the experiments are not that large. Even amongst popular open source models, the smallest are usually around 7B parameters.\n- Many works in the continual learning and meta learning literature suggest that training on multiple tasks at once leads to better generalization. Perhaps it is worth including brief discussion on the connections between this point and the model’s ability to generalize ood which is predominantly determined by the number of pre-training tasks.",
+    "questions": "Since multiplication can be viewed as repeated addition, isn’t skill 2 an extension of skill 3 (or can even be viewed as skill 3 composed with itself multiple times)? Is hierarchy of skills important here?",
+    "limitations": "As acknowledged by the authors, this work is limited to particular algorithmic datasets."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:42Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:42Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1260,
+    "words": 195,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3f16afe5-7d24-4105-83ab-085f35ada1cd",
+    "error": null,
+    "scored_chars": 1260
+  }
+}

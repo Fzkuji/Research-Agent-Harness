@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "Hvq9RtSoHG",
+  "reviewer": "ST4m",
+  "paper": {
+    "title": "Chain-of-Symbol Prompting For Spatial Reasoning in Large Language Models",
+    "authors": [
+      "Hanxu Hu",
+      "Hongyuan Lu",
+      "Huajian Zhang",
+      "Yunze Song",
+      "Wai Lam",
+      "Yue Zhang"
+    ],
+    "abstract": "While conventional Chain-of-Thought prompting shows promising performance on various language tasks for LLMs, the spatial scenarios are nearly unexplored. In this paper, we first investigate the performance of LLMs on complex spatial planning and understanding tasks that require LLMs to understand a virtual spatial environment simulated via natural language and act or reason correspondingly in text. By evaluating on classic spatial planning scenarios through natural language descriptions, we found that current popular LLMs still lack abilities to handle spatial relationships in texts. This arises a question -- do the natural language is the best way to represent complex spatial environments for LLMs, or maybe other alternatives such as symbolic representations are both more efficient and effective for LLMs? To this end, we propose a novel method called CoS (Chain-of-Symbol Prompting) that represents the spatial relationships with condensed symbols during the chained intermediate thinking steps. CoS is easy to use and does not need additional training on LLMs. Extensive experiments indicate that CoS clearly surpasses the performance of the Chain-of-Thought (CoT) Prompting described in natural langauge in all three spatial planning tasks and existing spatial QA benchmark, with even fewer tokens used in the inputs compared with CoT. The performance gain is strong, by up to 60.8% accuracy (from 31.8% to 92.6%) on Brick World scenarios for GPT-3.5-Turbo. CoS also reduces the number of tokens in the prompt obviously, by up to 65.8% of the tokens (from 407 to 139) for the intermediate steps from demonstrations on the Brick World task. Interestingly, we also observed emergent ability of abstract symbols understanding when the size of models scales up.",
+    "keywords": [
+      "In-Context Learning",
+      "Chain-of-Thought Prompting",
+      "Spatial Reasoning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Hvq9RtSoHG"
+  },
+  "review_fields": {
+    "summary": "The paper regards the implementation and evaluation of a symbolic language to communicate with a large language model. The translation of the natural language query or instruction to its symbolic form is done manually by the user. The results are compared with those obtained with zero-shot chain-of-thought prompting and with few-shot chain-of-thought prompting where the prompts are also manually drafted but are in natural language.",
+    "reasons_to_accept": "-\tThe idea is original.\n-\tThe idea is evaluated with different tasks (brick world spatial reasoning, natural language visual reasoning, natural language navigation and spatial question answering).",
+    "reasons_to_reject": "-\tThe expressiveness of the symbolic language is not theoretically defined and evaluated. It is not clear whether it exhaustively covers complex spatial configurations of objects in a real world settings.\n-\tThe paper claims that the symbolic language is easy to use, but a users’ study that supports this claim is lacking.\n-\tThe contribution towards novel techniques to improve language modeling is not clear. The paper rather suits a human-computer interaction venue.\n-\tIt is not surprising that the obtained results improve compared to zero- and few-shot chain-of-thought reasoning as the symbolic language has less complex patterns than natural language and is an unambiguous controlled language to attend to when querying the LLM, but it requires knowledge engineering expertise from the user.\n-\tThe paper seems to be written in a hurry and contains typos and grammatical errors.\n- Overall, the paper is not yet mature to be published but the authors are encouraged to improve their work."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:11Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:11Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1216,
+    "words": 193,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/947f4d5c-c6cf-4768-9a5d-bbe0af914c29",
+    "error": null,
+    "scored_chars": 1216
+  }
+}

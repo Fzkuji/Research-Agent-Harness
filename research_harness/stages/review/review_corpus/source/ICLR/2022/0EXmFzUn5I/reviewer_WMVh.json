@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "0EXmFzUn5I",
+  "reviewer": "WMVh",
+  "paper": {
+    "title": "Pyraformer: Low-Complexity Pyramidal Attention for Long-Range Time Series Modeling and Forecasting",
+    "authors": [
+      "Shizhan Liu",
+      "Hang Yu",
+      "Cong Liao",
+      "Jianguo Li",
+      "Weiyao Lin",
+      "Alex X. Liu",
+      "Schahram Dustdar"
+    ],
+    "abstract": "Accurate prediction of the future given the past based on time series data is of paramount importance, since it opens the door for decision making and risk management ahead of time. In practice, the challenge is to build a flexible but parsimonious model that can capture a wide range of temporal dependencies. In this paper, we propose Pyraformer by exploring the multiresolution representation of the time series. Specifically, we introduce the pyramidal attention module (PAM) in which the inter-scale tree structure summarizes features at different resolutions and the intra-scale neighboring connections model the temporal dependencies of different ranges. Under mild conditions, the maximum length of the signal traversing path in Pyraformer is a constant (i.e., $\\mathcal O(1)$) with regard to the sequence length $L$, while its time and space complexity scale linearly with $L$. Extensive numerical results show that Pyraformer typically achieves the highest prediction accuracy in both single-step and long-range forecasting tasks with the least amount of time and memory consumption, especially when the sequence is long.",
+    "keywords": [
+      "sparse attention",
+      "pyramidal graph",
+      "Transformer",
+      "time series forecasting",
+      "long-range dependence",
+      "multiresolution"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=0EXmFzUn5I"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors propose a new architecture to tackle the problem of long sequence temporal forecasting (LSTF) – which looks at capturing long-range dependencies in time-series data by providing more direct paths between the output and distant history. \n\nThe Pyraformer takes an interesting spin on the current state-of-the-art sparse transformers, consisting of 2 main components:\n1.\tA dilated CNN encoder to learn coarse-scale representations at multiple resolutions.\n2.\tA decoder with a pyramid structure that applies attentions masks to a limited subset of nearest neighbours (i.e. parents, adjacent nodes and children) – effectively sparsifying fully connected attention patterns by imposing a prior structure onto attention patterns.",
+    "main_review": "Strengths\n---\n1.\tThe architecture is well-motivated, tackles the important problem of LSTF, and improves both forecasting performance and computational efficiency of state-of-the-art baselines.\n2.\tPaper is well written and easy to follow – making motivations and contributions clear.\n\nWeaknesses\n---\nHowever, some key architectural details can be clarified further for full reproducibility and analysis. Specifically:\n1.\tHow are historical observations combined with inputs known over all time given differences in sequence lengths (L vs L+M)? The text mentions separate embedding and addition with positional encoding, but clarifications on how the embeddings are combined and fed into the CSCM are needed.\n2.\tCan each node attend to its own lower-level representation? From equation 2, it seems to be that only neighbouring nodes are attended to, based on the description of N_l^(s).\n3.\tDo the authors have any guidelines on how to select S/A/C (and consequently N) for a given receptive field L? \n\nIn addition, while the ablation analysis tests the impact of changing CSCM architectures, it would be good to evaluate the base performance without the PAM to determine the value added by attention. This would also provide a simple comparison vs dilated CNNs which have been used successfully in time series forecasting applications  (e.g. WaveNet). \n\nFinally, could I double check which dataset was used for the ablation analysis as well? I seem to be having some difficulty lining the numbers in Tables 4-6 up with Table 3.",
+    "summary_of_the_review": "The paper makes a strong contribution to long sequence temporal forecasting, although there are some aspects that need to be verified before it is ready for publication.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:24Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:24Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1523,
+    "words": 238,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d8effda3-04e1-498f-be34-efe3546c3585",
+    "error": null,
+    "scored_chars": 1526
+  }
+}

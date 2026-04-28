@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "JlWn80mTJi",
+  "reviewer": "RrKo",
+  "paper": {
+    "title": "The Implicit Bias of Gradient Descent on Separable Multiclass Data",
+    "authors": [
+      "Hrithik Ravi",
+      "Clayton Scott",
+      "Daniel Soudry",
+      "Yutong Wang"
+    ],
+    "abstract": "Implicit bias describes the phenomenon where optimization-based training algorithms, without explicit regularization, show a preference for simple estimators even when more complex estimators have equal objective values. Multiple works have developed the theory of implicit bias for binary classification under the assumption that the loss satisfies an *exponential tail property*. However, there is a noticeable gap in analysis for multiclass classification, with only a handful of results which themselves are restricted to the cross-entropy loss. In this work, we employ the framework of Permutation Equivariant and Relative Margin-based (PERM) losses [Wang and Scott, 2024] to introduce a multiclass extension of the exponential tail property. This class of losses includes not only cross-entropy but also other losses. Using this framework, we extend the implicit bias result of Soudry et al. [2018] to multiclass classification. Furthermore, our proof techniques closely mirror those of the binary case, thus illustrating the power of the PERM framework for bridging the binary-multiclass gap.",
+    "keywords": [
+      "gradient descent",
+      "multiclass classification",
+      "hard-margin SVM",
+      "implicit bias"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JlWn80mTJi"
+  },
+  "review_fields": {
+    "summary": "The authors study the problem of multiclass SVM in the realizable (i.e., separable) case.\nThey show that under several assumptions on the loss function, the gradient descent converges in direction toward the (unique) solution of the hard-margin problem.\nFor that, they used the notion of Permutation Equivariant and Relative Margin-based losses (introduced elsewhere) in order to extend the notion of exponential tail (from binary SVM) to multiclass SVM.\nThey also show that three loss functions, including cross-entropy, satisfy the assumptions of the theorem.",
+    "strengths": "This is a strong technical paper (even though I would like to ask several questions to the authors to be convinced of the soundness of the proof; see \"Questions\" section).",
+    "weaknesses": "The main weakness of the paper in my opinion is the difficulty to understand several technical steps of the proof due to the lack of details/explanations.\nThis is a general comment but I have several specific questions in the \"Questions\" section about steps that I did not understand and made me question the overall soundness of the proof.\nI would be happy to have answers from the authors about these questions.\n\nOther comments:\n- Line 193: Lemma 12 in the other paper does not directly give the result, one needs to browse to Eq 18 to complete the argument.\n- Eq. 20: $\\eta$ missing somewhere.",
+    "questions": "- Equation after line 200, first line: the equality seems wrong to me because I would expect a factor $\\log(1+t^{-1})$ multiplying $\\lVert\\hat{w}\\rVert$, but it is not there.\nFurthermore, I do not understand either how we get the inequality simply by showing that the third term is negative, since there is an extra $t^{-2}$ factor multiplying $\\lVert\\hat{w}\\rVert$.\n- Line 262: Why is $u_{\\pm}=0$, while in Def. 2.2, it can be anything?\n- Lines 609 to 611: I understand from the argument that *at least one* component of $u$ must converge to $\\infty$, because indeed $\\nabla\\phi(u)\\prec0$ for all finite $u$, but why do *all* the components of $u$ have to converge to $\\infty$?",
+    "limitations": "The authors acknowledge correctly the limitations of their work.\nHowever, a small discussion somewhere in the paper of how restrictive the assumptions on the loss function are would be welcome."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1644,
+    "words": 276,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0e52b18c-6658-4bf0-8e0f-4a9aed1ce9cf",
+    "error": null,
+    "scored_chars": 1644
+  }
+}

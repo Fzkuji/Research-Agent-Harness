@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "AFMGbq39bQ",
+  "reviewer": "QjJm",
+  "paper": {
+    "title": "Readability ≠ Learnability: Rethinking the Role of Simplicity in Training Small Language Models",
+    "authors": [
+      "Ivan Lee",
+      "Taylor Berg-Kirkpatrick"
+    ],
+    "abstract": "Recent studies suggest that very small language models (SLMs) can generate surprisingly coherent text when trained on simplified, child-directed corpora such as TinyStories. These findings have been interpreted as evidence that readability—characterized by accessible vocabulary, familiar narrative structure, and simple syntax—plays a key role in enabling such capabilities to emerge. In this paper, we challenge that interpretation. We construct synthetic datasets with matched structure but varied readability, and find that readability alone does not predict coherence or learning efficiency in SLMs. Models trained on complex, adult-level text perform comparably to those trained on simplified language, and even exhibit faster development of coherence during training. Instead, we show that statistical simplicity, as measured by n-gram diversity, is a stronger predictor of learnability. Our findings caution against the growing trend of anthropomorphizing language model training—drawing parallels to human cognitive development without empirical basis—and argue for more precise reasoning about what properties actually support capability emergence in small models.",
+    "keywords": [
+      "child-directed language",
+      "developmentally inspired data",
+      "small language models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=AFMGbq39bQ"
+  },
+  "review_fields": {
+    "summary": "The purpose of the authors paper is to prove that coherence that is learned from small languages model doesn't come from how readable a dataset it but how statistically diverse it is. The core contribution is developing a series of synthetic datasets where the authors control the readability followed by training small language models and using LLM as a judge to evaluate the coherence of the model.",
+    "reasons_to_accept": "(1) The main purpose the authors want to get across is coherence in small models does not come from simplified language and we shouldn't be framing training models in this way as it could be misleading. I think showcasing this is important. \n\n(2) The authors follow careful data validation. Additionally the paper is structured well.",
+    "reasons_to_reject": "(1) One thing that's always difficult when discussing metrics like coherence is the exact definition and how does that differ from fluency and clarity that the authors also mention. I think a more clear definition of this could help. \n\nOne thing that could've affected results is response length. Do models that generate longer responses are judged as more coherent? Should we control for that?\n\nHere's some reference that discusses the many different definition issue https://aclanthology.org/2020.inlg-1.23.pdf",
+    "questions_to_authors": "(1) For determining LLM-as-a Judge for quality how did you determine the ranking of models in Table A4?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 950,
+    "words": 148,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/823bf55e-05c5-4ca5-9125-7f9992cff9a1",
+    "error": null,
+    "scored_chars": 952
+  }
+}

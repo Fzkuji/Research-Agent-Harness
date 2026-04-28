@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "y6aGT625Lk",
+  "reviewer": "JUxr",
+  "paper": {
+    "title": "PairEval: Open-domain Dialogue Evaluation Metric with Pairwise Comparisons",
+    "authors": [
+      "ChaeHun Park",
+      "Minseok Choi",
+      "Dohyun Lee",
+      "Jaegul Choo"
+    ],
+    "abstract": "Building a reliable and automated evaluation metric is a necessary but challenging problem for open-domain dialogue systems. \nRecent studies proposed evaluation metrics that assess generated responses by considering their relevance to previous dialogue histories. \nAlthough effective, these metrics evaluate individual responses directly rather than considering their relative quality compared to other responses.  To handle this, we propose  PairEval, a novel dialogue evaluation metric for assessing responses by comparing their quality against responses in different conversations.  Our metric is built on top of open-sourced and moderate-size language models, and we make them specialized in pairwise comparison between dialogue responses. Extensive experiments on multiple benchmarks demonstrate that our metric exhibits a higher correlation with human judgments than baseline metrics. We also find that the proposed comparative metric is more robust in detecting common failures from open-domain dialogue systems, including repetition and speaker insensitivity. The codes and models will be publicly available after the paper is accepted.",
+    "keywords": [
+      "Open-domain dialogue",
+      "Dialogue evaluation",
+      "Evaluation metric"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=y6aGT625Lk"
+  },
+  "review_fields": {
+    "summary": "The paper proposed a method *PairEval* for dialog response evaluation.\n\n*PairEval* lies between commonly used reference-based metrics and reference-free metrics. The core idea and novelty is to make the assessment decision (1) dependent on some baseline examples, while (2) avoiding the direct use of a reference response of the conversation of interest.\n* The first design makes the assessment results more discriminative, especially when all evaluation examples use the same set of baseline examples, as is done in this work.\n* The second design alleviates the influence of the one-to-many mapping problem in open-domain dialogs.\n\nThe whole idea is great. Experiment settings are mostly reasonable and comprehensive.\n\nThe only problem is that the proposed method *PairEval* does not improve much over the actual baseline *DirectEval*.\n* Although the authors also compare it against a number of baseline metrics from prior works and *PairEval* is much stronger, the baseline *DirectEval* also outperforms other baselines a lot. It is fair to say that most of the improvement comes from using llama-2-7b-chat as the base model, and the gap between *PairEval* and *DirectEval* is less obvious.\n* To be more specific, firstly *PairEval* and *DirectEval* have close Spearman's $\\rho$ (63.1 vs. 61.8). Secondly, the larger gap of Pearson's $r$ (58.5 vs. 49.8) is likely to be largely reduced if we use another simple baseline which is a fine-tuned llama-2-7b-chat that regresses the output score.\n\nOverall, the proposed method is promising and the results are positive, but I would expect more performance gain from the method. I suggest considering the following to make this work stronger.\n* Make a more delicate design on the choice of baseline examples. Since all evaluation examples will share a small set of baseline examples, curating the baseline example set is not going to be very costly. Additionally, maybe we can get aspect-based evaluation and interpretability as a bonus by carefully choosing baseline examples.\n* Include a fine-tuned regression model based on llama-2-7b-chat as a baseline.\n* Analyze how the choice of evaluation dataset causes very different experimental results. For example, *PairEval* outperforms *DirectEval* significantly on *DailyDialog-GRADE* but it is close to or underperforms *DirectEval* on other datasets.\n\nA minor suggestion is to include the results of non-exhaustive comparison in Table 4 for easy reading.",
+    "reasons_to_accept": "* A novel dialog response evaluation method that combines the advantages of reference-free and reference-based metrics while avoiding their demerits.\n* Mostly comprehensive experiments and analyses.",
+    "reasons_to_reject": "* Marginal improvement over the actual good baseline (*DirectEval*).\n* Lack of investigation into the performance discrepancy on different datasets."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:57Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:57Z"
+  },
+  "ai_score": {
+    "status": "skipped",
+    "reason": "too_short:348"
+  }
+}

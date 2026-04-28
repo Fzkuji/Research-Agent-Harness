@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "MNLAbfZwh2",
+  "reviewer": "2GPD",
+  "paper": {
+    "title": "ScenicNL: Generating Probabilistic Scenario Programs from Natural Language",
+    "authors": [
+      "Karim Elmaaroufi",
+      "Devan Shanker",
+      "Ana Cismaru",
+      "Marcell Vazquez-Chanlatte",
+      "Alberto Sangiovanni-Vincentelli",
+      "Matei Zaharia",
+      "Sanjit A. Seshia"
+    ],
+    "abstract": "For cyber-physical systems, including robotics and autonomous vehicles, mass deployment has been hindered by fatal errors that occur when operating in rare events. To better understand failure modes, companies meticulously recreate rare crash events in simulation, but current methods do not easily allow for exploring ”what if” scenarios which could reveal how accidents might have been avoided. We present ScenicNL, an AI system that generates probabilistic scenario programs from natural language. Given the abundance of documented failures of autonomous vehicles due to regulatory requirements, we apply ScenicNL to police crash reports, providing a data-driven approach to capturing and understanding these failures. By using a probabilistic language such as Scenic, we can clearly and concisely represent such scenarios of interest and easily ask “what if” questions. We demonstrate how commonplace prompting techniques with Large Language Models are incapable of generating code for low-resource languages such as Scenic. We propose an AI system via the composition of several prompting techniques to extract the reasoning abilities needed to model probability distributions around the uncertainty in the crash events. Our system then uses Constrained Decoding and tools such as a compiler and simulator to produce scenario programs in this low-resource setting. We evaluate our system on publicly available autonomous vehicle crash reports in California from the last five years and share insights into how we generate code that is both semantically meaningful and syntactically correct. Finally, we release our code and a collection of over 500 crash reports from the California Department of Motor Vehicles.",
+    "keywords": [
+      "probabilistic programming languages",
+      "cyber physical systems",
+      "autonomous vehicles",
+      "scenarios",
+      "domain specific languages",
+      "low resource languages"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=MNLAbfZwh2"
+  },
+  "review_fields": {
+    "summary": "This paper introduces ScenarioNL, an AI system that creates scenario programs from natural language in police crash reports. It uses a Probabilistic Programming Language called Scenic to handle uncertainties about the scenarios. The system, which combines LLMs, prompting strategies, a compiler, and a simulator, has been tested on autonomous vehicle crash reports from California.",
+    "reasons_to_accept": "- Very clear and compelling motivation that helps the reader understand the problem of creating scenario programs to model CPS.\n- The processed AV DMV crash reports datasets is a useful contribution for the research community. \n- The methods underlying ScenarioNL highlight some limitations of LLMs in out-of-domain settings and how to circumvent them.",
+    "reasons_to_reject": "- There are few details of the evaluation setup. For example, how many experts were used to evaluate the outputs? Were the outputs anonymized?\n- The system behind ScenarioNL is interesting but has several components that are not presented in detail. It would be beneficial to have a more thorough description of exactly which components are used in ScenarioNL and which ones contribute the most to the overall performance. In particular, are all the components needed?\n- The RAG/RAG+HyDE performance is very high compared to the rest. Why is that? How did you ensure that the data store used does not contain examples that are similar to the solution?",
+    "questions_to_authors": "- Why is expressiveness interesting to track and how is it correlated with desirable properties? Wouldn’t accuracy or semantic similarity to the language prompt be a more interesting metric?\n- See questions regarding the evaluation setup\n- See questions about RAG results\n- Have you tried to provide Scenic documentation in a prompt? It would be interesting to know the performance of this simple approach to understand the degree to which LLMs are capable to rely on a description of a DSL"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:25Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:25Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1496,
+    "words": 245,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/04f46322-9524-4626-98bc-e6ab75d314cc",
+    "error": null,
+    "scored_chars": 1497
+  }
+}

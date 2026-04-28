@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "lBSSxTgXmiK",
+  "reviewer": "5fT8",
+  "paper": {
+    "title": "Entropic Desired Dynamics for Intrinsic Control",
+    "authors": [
+      "Steven Stenberg Hansen",
+      "Guillaume Desjardins",
+      "Kate Baumli",
+      "David Warde-Farley",
+      "Nicolas Heess",
+      "Simon Osindero",
+      "Volodymyr Mnih"
+    ],
+    "abstract": "An agent might be said, informally, to have mastery of its environment when it has maximised the effective number of states it can reliably reach. In practice, this often means maximizing the number of latent codes that can be discriminated from future states under some short time horizon (e.g. \\cite{eysenbach2018diversity}). By situating these latent codes in a globally consistent coordinate system, we show that agents can reliably reach more states in the long term while still optimizing a local objective. A simple instantiation of this idea, \\textbf{E}ntropic \\textbf{D}esired \\textbf{D}ynamics for \\textbf{I}ntrinsic \\textbf{C}on\\textbf{T}rol (EDDICT), assumes fixed additive latent dynamics, which results in tractable learning and an interpretable latent space. \nCompared to prior methods, EDDICT's globally consistent codes allow it to be far more exploratory, as demonstrated by improved state coverage and increased unsupervised performance on hard exploration games such as Montezuma's Revenge.",
+    "keywords": [
+      "intrinsic control",
+      "skill discovery",
+      "exploration",
+      "unsupervised reinforcement learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=lBSSxTgXmiK"
+  },
+  "review_fields": {
+    "summary": "This paper addressed a valuable problem: what should the agent learn in the absence of extrinsic rewards? Instead of sampling a single goal to be reached within the duration of the episode, The proposed method also samples a sequence of states from global goal coordinates. This paper is well organized and easy to follow.",
+    "main_review": "Strengthens:\nCompared to prior methods, the globally consistent codes of the proposed method allow it to be far more exploratory. And the corresponding experimental results also demonstrated that the proposed method could promote the state coverage and increase unsupervised performance\n\nWeakness:\nThe experimental result part is not sufficient. \n\nIt seems that there are some errors in Fig.2 and Fig.3. Inserting problem? \n\nI am not an expert in this research field. Even my current score is 5, I will change my score in the rebuttal stage and refer to other reviews. I will check the response carefully and give my final rating in the rebuttal stage.",
+    "limitations_and_societal_impact": "As the author mentioned, general purpose function approximators (e.g. neural networks) could be used to specify more general dynamics, but makes learning tractable remains an important open question."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

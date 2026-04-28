@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "6ox8XZGOqP",
+  "reviewer": "4zES",
+  "paper": {
+    "title": "Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale",
+    "authors": [
+      "Bowen Jiang",
+      "Zhuoqun Hao",
+      "Young Min Cho",
+      "Bryan Li",
+      "Yuan Yuan",
+      "Sihao Chen",
+      "Lyle Ungar",
+      "Camillo Jose Taylor",
+      "Dan Roth"
+    ],
+    "abstract": "Large Language Models (LLMs) have emerged as personalized assistants for users across a wide range of tasks – from offering writing support to delivering tailored recommendations or consultations. Over time, the interaction history between a user and an LLM can provide extensive information about an individual’s traits and preferences. However, open questions remain on how well LLMs today can effectively leverage such history to (1) internalize the user’s inherent traits and preferences, (2) track how the user profiling and preferences evolve over time, and (3) generate personalized responses accordingly in new scenarios.\n\nIn this work, we introduce the PERSONAMEM benchmark. PERSONAMEM features curated user profiles with over 180 simulated user-LLM interaction histories, each containing up to 60 sessions of multi-turn conversations across 15 real-world tasks that require personalization. Given an in-situ user query at a specific time point, we evaluate LLM chatbots’ ability to identify the most suitable response according to the current state of the user’s profile. We observe that current LLMs still struggle to recognize the dynamic evolution in users’ profiles over time through direct prompting approaches. As a consequence, LLMs often fail to deliver responses that align with users’ current situations and preferences, with frontier models such as GPT-4.5, or Gemini-2.0 achieving only around 50% overall accuracy, suggesting room for improvement. We hope that PERSONAMEM, along with the user profile and conversation simulation pipeline, can facilitate future research in the development of truly user-aware chatbots.",
+    "keywords": [
+      "personalization",
+      "long context",
+      "memory",
+      "conversational chatbot"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=6ox8XZGOqP"
+  },
+  "review_fields": {
+    "summary": "This paper introduces the PersonaMem benchmark for evaluating LLMs’ ability to use the interaction history with a user correctly to deliver personalized responses. In addition to static characteristics, a user has dynamic characteristics that change over time, and an LLM with memory should be able to track the changes and use the latest state. This paper highlights current challenges in this important feature, but it could benefit from more meaningful comparison with other works in the memory-augmented agents literature.\n\nThe benchmark dataset contains 180+ interaction histories based on 20 personas, each interaction history contains 10, 20 or 60 sessions, and each session contains 15-30 turns between the user and the LLM. The base personas are sampled from PersonaHub, the sessions span across 15 topics, and the dataset is mainly synthesized using GPT-4o. Notably, a timeline of life events (general personal history) and a series of updates under a specific topic (specific personal history) are generated to simulate evolution of the user.\n\n12 LLMs are evaluated on 7 types of queries representing different skills. In the “long-context” setup, a full interaction history is input to the LLM. The LLMs are found to be good at recalling simple user facts, but fall short on generating new ideas or providing suggestions in new scenarios. They struggle to incorporate the latest user preference or state, but are more capable at recalling how these evolved over time. Two setups with external memory have also been evaluated: RAG and Mem0. They are both improvements, and RAG outperforms Mem0. Regardless of whether to evaluate in a discriminative setting (choosing from 4 options) or a generative setting (computing log probabilities), the results are similar.",
+    "reasons_to_accept": "- The dataset is a useful resource to evaluate LLMs’ capability in memorizing, tracking, and incorporating a dynamic user profile.\n- The data synthesis pipeline is cost-efficient and scalable. It reuses sessions for efficiency and adds short non-personal interactions for diversity.\n- The evaluation results (Figure 5) are useful for understanding current gaps and the effect of external memory on different skills, although more insights are expected e.g. on failure cases.",
+    "reasons_to_reject": "- The comparison with existing benchmark datasets such as LOCOMO and LongMemEval in Section 5.1 is not clear enough. It would be useful to provide concrete evidence to motivate this new dataset, e.g. a comparison table as well as examples.\n- The latency of the different approaches is not measured. The efficiency benefit of external memory over inputting a full interaction history is not quantified. The paper claims that Mem0 is more computationally expensive than RAG, but no details are provided (necessary because Mem0 incurs cost to build the external memory besides retrieval cost at test time)."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1079,
+    "words": 168,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/128a3f92-defd-4b5d-8b4a-1d836b33bfd6",
+    "error": null,
+    "scored_chars": 1079
+  }
+}

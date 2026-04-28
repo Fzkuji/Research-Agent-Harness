@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "bp-LJ4y_XC",
+  "reviewer": "EDAS",
+  "paper": {
+    "title": "Sequence Approximation using Feedforward Spiking Neural Network for Spatiotemporal Learning: Theory and Optimization Methods",
+    "authors": [
+      "Xueyuan She",
+      "Saurabh Dash",
+      "Saibal Mukhopadhyay"
+    ],
+    "abstract": "A dynamical system of spiking neurons with only feedforward connections can classify spatiotemporal patterns without recurrent connections. However, the theoretical construct of a feedforward spiking neural network (SNN) for approximating a temporal sequence remains unclear, making it challenging to optimize SNN architectures for learning complex spatiotemporal patterns. In this work, we establish a theoretical framework to understand and improve sequence approximation using a feedforward SNN. Our framework shows that a feedforward SNN with one neuron per layer and skip-layer connections can approximate the mapping function between any arbitrary pairs of input and output spike train on a compact domain. Moreover, we prove that heterogeneous neurons with varying dynamics and skip-layer connections improve sequence approximation using feedforward SNN. Consequently, we propose SNN architectures incorporating the preceding constructs that are trained using supervised backpropagation-through-time (BPTT) and unsupervised spiking-timing-dependent plasticity (STDP) algorithms for classification of spatiotemporal data. A dual-search-space Bayesian optimization method is developed to optimize architecture and parameters of the proposed SNN with heterogeneous neuron dynamics and skip-layer connections.",
+    "keywords": [
+      "spiking neural network",
+      "spatiotemporal processing",
+      "feedforward network"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=bp-LJ4y_XC"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors introduce a theory on how to learn arbitrary input spike train - output spike train mappings, using a feedforward SNN with heterogeneous neurons and skip connections.\nThen this theory is used to train a deep SNN using either BPTT or STDP. The SNN is then evaluated on IBM DVS Gesture, N-Caltech101. The accuracy that they get with BPTT is beyond the SOTA.",
+    "main_review": "Pros:\n* very good accuracy\n\nCons:\n* many doubts need to be cleared about the theory\n* the connection between the theory and the experiments is unclear\n\nThe theory is unclear:\n* Does it only apply to sequences with constant inter-spike intervals (ISI), as Fig 1a suggests? The fact that they focus on the spike counts (gamma) also suggests that.\nIf true, this is a strong loss of generality, which should be properly acknowledged. Also, I don't understand how the theory can help with DVS datasets, in which the ISI are highly variable.\nIf false, then Fig 1 should show variable ISIs, and the authors should justify why they can summarize a spike train by its spike count.\n* Lemma 1 seems wrong: what if no input spike? Then changing G has no effect on the response...\n* Does the theory work in continuous or discrete-time? The equations suggest continuous time. But a timestep is mentioned on page 4. Plus BPTT works in discrete-time.\n\nThe connection between the theory and the experiments is not clear to me. Does the theory only suggests heterogeneous neurons and skip connections, but then the training is done with normal BPTT (or STDP)?\nDoes the theory also justify the use of learned and transferred synapses? BTW, these concepts are obscure to me. Isn't it equivalent to having a set of weights that is shared between neurons (like in a convolutional layer)?\n\n\nMINOR POINTS:\n* Eq 1: you should say that a is the resting potential\n* Eq 2: don't use t for the integration variable\n* Table 1 should specify the number of timesteps\n* Table 3 should include: https://arxiv.org/abs/2007.05785",
+    "summary_of_the_review": "Potentially interesting given the accuracy, but unclear",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1650,
+    "words": 282,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a5dda1eb-3954-4093-822b-2fe7faa2eccd",
+    "error": null,
+    "scored_chars": 1650
+  }
+}

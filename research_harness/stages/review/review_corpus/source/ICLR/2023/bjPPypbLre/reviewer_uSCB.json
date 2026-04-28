@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "bjPPypbLre",
+  "reviewer": "uSCB",
+  "paper": {
+    "title": "Making Substitute Models More Bayesian Can Enhance Transferability of Adversarial Examples",
+    "authors": [
+      "Qizhang Li",
+      "Yiwen Guo",
+      "Wangmeng Zuo",
+      "Hao Chen"
+    ],
+    "abstract": "The transferability of adversarial examples across deep neural networks (DNNs) is the crux of many black-box attacks. Many prior efforts have been devoted to improving the transferability via increasing the diversity in inputs of some substitute models. In this paper, by contrast, we opt for the diversity in substitute models and advocate to attack a Bayesian model for achieving desirable transferability. Deriving from the Bayesian formulation, we develop a principled strategy for possible finetuning, which can be combined with many off-the-shelf Gaussian posterior approximations over DNN parameters. Extensive experiments have been conducted to verify the effectiveness of our method, on common benchmark datasets, and the results demonstrate that our method outperforms recent state-of-the-arts by large margins (roughly 19% absolute increase in average attack success rate on ImageNet), and, by combining with these recent methods, further performance gain can be obtained. Our code: https://github.com/qizhangli/MoreBayesian-attack.",
+    "keywords": [
+      "Adversarial Examples",
+      "Black-box Attacks",
+      "Adversarial Transferability"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=bjPPypbLre"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes to attack a Bayesian model for improving the transferability of black-box adversarial attacks. Specifically, the authors employ gradient-based attack algorithms on their constructed Bayesian models and expect the generated adversarial attacks can better fool other unseen models. Extensive experiments show that the proposed method surpassed baseline methods in terms of attack success rate.",
+    "strength_and_weaknesses": "Strength\n\n1. In general the paper is well-written.\n2.  The authors conduct extensive experiments to validate the transferability of the proposed method by concerning many different neural architectures and multiple baselines.\n3. The proposed way to employ Bayesian estimation for improving the transferability of attacks looks novel to me.\n\nWeaknesses\n\n1. When both the substitute model and the victim model are adversarially trained (Table 6), the improvement is quite marginal. Therefore, the proposed method may only be employed to improve the transferability of attacks on nonrobust models, which weakens the empirical significance.\n2.  In Eq. 6, ∆w is sampled from the gaussian prior. Then why do we need p(∆w) ≥ ε? Plus, if p(∆w) ≥ ε is important, then ε should be a very important hyper-parameter but there is no experiment showing the sensitivity,",
+    "clarity,_quality,_novelty_and_reproducibility": "The Clarity is good. The proposed way to employ Bayesian estimation for attack transferability looks novel. The authors claimed that the code will be available.",
+    "summary_of_the_review": "Given the strength and weaknesses, I tend to rate the paper as marginally above the acceptance.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "sJvhwDtFhQ",
+  "reviewer": "AV4e",
+  "paper": {
+    "title": "TPD: Enhancing Student Language Model Reasoning via Principle Discovery and Guidance",
+    "authors": [
+      "Haorui Wang",
+      "Rongzhi Zhang",
+      "Yinghao Li",
+      "Lingkai Kong",
+      "Yuchen Zhuang",
+      "Xiusi Chen",
+      "Chao Zhang"
+    ],
+    "abstract": "Large Language Models (LLMs) have recently showcased remarkable reasoning abilities. However, larger models often surpass their smaller counterparts in reasoning tasks, posing the challenge of effectively transferring these capabilities from larger models. Existing approaches heavily rely on extensive fine-tuning data or continuous interactions with a superior teacher LLM during inference. We introduce a principle-based teacher-student framework called Teaching via Principle Discovery (TPD) to address these limitations. Inspired by human learning mechanisms, TPD mimics the interaction between a teacher and a student using a principle-based approach. The teacher LLM generates problem-solving instructions and corrective principles based on the student LLM's errors. These principles guide the refinement of instructions and the selection of instructive examples from a validation set. This enables the student model to learn from both the teacher's guidance and its own mistakes. Once the student model begins making inferences, TPD requires no further intervention from the teacher LLM. Through extensive experiments across eight reasoning tasks, we demonstrate the effectiveness of TPD. Compared to standard chain-of-thought prompting, TPD significantly improves the student model's performance, achieving an average improvement of 6.2\\%.",
+    "keywords": [
+      "Principle discovery",
+      "Teacher-student framework",
+      "Reasoning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=sJvhwDtFhQ"
+  },
+  "review_fields": {
+    "summary": "Large language models (LLMs) possess substantial reasoning abilities; however, they entail significant computational demands. Prior research has explored knowledge-distillation-based fine-tuning methods to confer these capabilities onto smaller models, though these methods are resource-intensive. This paper presents a novel approach, Teaching via Principle Discovery (TPD), which enhances the reasoning skills of smaller language models (student LLMs) by leveraging insights from larger models (teacher LLMs) without necessitating ongoing intervention during inference. TPD adopts human teaching methodologies through a two-phase procedure: principle generation and principle exploitation, guided by error analysis and the formulation of corrective principles by the teacher model.",
+    "reasons_to_accept": "1. The introduced framework is innovative, proposing principle discovery as an interesting new direction for transferring the reasoning powers of LLMs to smaller models.\n   \n2. The method is not just innovative, but also rigorously designed. The two-phase process of principle generation and exploitation is meticulously planned, effectively emulating human instructional techniques. This careful design ensures the method's reliability and validity.\n\n3. The empirical evidence demonstrates notable enhancements over conventional methods such as chain-of-thought prompting, making a strong case for TPD's effectiveness.",
+    "reasons_to_reject": "1. Inclusion of additional case studies would enhance the paper. While TPD demonstrates promising results for symbolic and arithmetic reasoning tasks, a more detailed exposition with extensive examples could clarify its advantages to readers.\n\n2. The paper should introduce and discuss failure scenarios more. Currently, the limitations of TPD and its applicability to tasks beyond the tested domains are not sufficiently discussed.\n\n3. Discussions on how well the principles learned can be generalized and transferred to different student models or a wider array of tasks are limited and could be expanded."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:35Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:35Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 86,
+    "human_pct": 14,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 1225,
+    "words": 172,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e6850b59-56dd-4ce7-8b32-7cd9301cd9c6",
+    "error": null,
+    "scored_chars": 1228
+  }
+}

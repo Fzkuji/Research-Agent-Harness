@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "HTJE5Krui0g",
+  "reviewer": "ypT3",
+  "paper": {
+    "title": "Softened Symbol Grounding for Neuro-symbolic Systems",
+    "authors": [
+      "Zenan Li",
+      "Yuan Yao",
+      "Taolue Chen",
+      "Jingwei Xu",
+      "Chun Cao",
+      "Xiaoxing Ma",
+      "Jian L\\\"{u}"
+    ],
+    "abstract": "Neuro-symbolic learning generally consists of two separated worlds, i.e., neural network training and symbolic constraint solving, \nwhose success hinges on symbol grounding, a fundamental problem in AI. This paper presents a novel, softened symbol grounding process, bridging the gap between the two worlds, and resulting in an effective and efficient neuro-symbolic learning framework. Technically, the framework features (1) modeling of symbol solution states as a Boltzmann distribution, which avoids expensive state searching and facilitates mutually beneficial interactions between network training and symbolic reasoning; (2) a new MCMC technique leveraging projection and SMT solvers, which efficiently samples from disconnected symbol solution spaces; (3) an annealing mechanism that can escape from sub-optimal symbol groundings. Experiments with three representative neuro-symbolic learning tasks demonstrate that, owing to its superior symbol grounding capability, our framework successfully solves problems well beyond the frontier of the existing proposals.",
+    "keywords": [
+      "neuro-symbolic learning",
+      "symbol grounding problem",
+      "projection-based sampling"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=HTJE5Krui0g"
+  },
+  "review_fields": {
+    "comment": "Thank you for revising the paper.\n\nTo me, the paper is still unreadable. \nFor example, the Metropolis algorithm is mentioned with citations now on page 4, but not explained even briefly. These citations do not really help me, because a reader will not read the references to understand this one detail.\n\nSimilarly, the Stackelberg game was not explained as well. A reader who has never heard about this term will not be able to continue reading the paper after the point where it is mentioned.\n\nMaybe the paper is good and useful for people in its subfield, but for me, it is not standalone and unreadable, and I thus keep my score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

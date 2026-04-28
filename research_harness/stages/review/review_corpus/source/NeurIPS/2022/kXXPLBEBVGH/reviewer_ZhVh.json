@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "kXXPLBEBVGH",
+  "reviewer": "ZhVh",
+  "paper": {
+    "title": "Context-enriched molecule representations improve few-shot drug discovery",
+    "authors": [
+      "Johannes Schimunek",
+      "Philipp Seidl",
+      "Lukas Friedrich",
+      "Daniel Kuhn",
+      "Friedrich Rippmann",
+      "Sepp Hochreiter",
+      "Günter Klambauer"
+    ],
+    "abstract": "A central task in computational drug discovery is to construct models from known active molecules to find further promising molecules for subsequent screening. However, typically only very few active molecules are known. Therefore, few-shot learning methods have the potential to improve the effectiveness of this critical phase of the drug discovery process. We introduce a new method for few-shot drug discovery. Its main idea is to enrich a molecule representation by knowledge about known context or reference molecules. Our novel concept for molecule representation enrichment is to associate molecules from both the support set and the query set with a large set of reference (context) molecules through a modern Hopfield network. Intuitively, this enrichment step is analogous to a human expert who would associate a given molecule with familiar molecules whose properties are known. The enrichment step reinforces and amplifies the covariance structure of the data and simultaneously removes spurious correlations arising from the decoration of molecules. We analyze our novel method on FS-Mol, which is the only established few-shot learning benchmark dataset for drug discovery. An ablation study shows that the enrichment step of our method is key to improving the predictive quality. In a domain shift experiment, our new method is more robust than other methods. On FS-Mol, our new method achieves a new state-of-the-art and outperforms all other few-shot methods.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=kXXPLBEBVGH"
+  },
+  "review_fields": {
+    "comment": "Thank you for your response, and for providing lots of additional clarifications. Find a few follow-up comments below:\n\n> Due to the computation time, we could not do this for the rebuttal version, but we provide a proxy in which we use the model trained on support set size 16 to extrapolate to other support set sizes (Appendix Figure A4).\n\nFair enough. However, I would encourage you to add the results for larger support set sizes eventually (either upon acceptance, or in the next version of the paper otherwise).\n\n> End-to-end training with GNNs is feasible, but usually leads to inferior models.\n\nYes, this is understandable in a low-data setting. I wonder how well a pretrained (and frozen) GNN would do, but such investigation is orthogonal to the method developed here.\n\n> Yes, we have some insights in what the context module is doing. The context module is reinforcing the correlation structure with similar molecules (see Appendix Section A7 and Figure A5).\n\nInteresting, thanks for the pointer to the right Appendix. I also note that all examples in Figure A5 seem to be moving towards roughly the same \"center\", as if the retrieved embeddings (before combining with the initial embeddings) were all mostly the same? Or am I reading this incorrectly?\n\n---\n\nFinally, I also went through the other reviews, out of which the one from Reviewer LC2d is the most negative one (and hence farthest from mine); however, I find the authors' response to that review satisfactory. I agree FS-Mol is newer and less established than some other datasets, although I wouldn't go as far as saying that the only available results there are naive baselines. I would note that the setting in FS-Mol (i.e. a very large number of diverse tasks) is a bit closer to real-life property prediction than, say, experiments based on a small number of targets in Tox21. However, benchmarks mentioned by Reviewer LC2d are also worthwhile, just address a somewhat different setting. All in all, I'm so far not convinced I should lower my score, and so I maintain it as \"Accept\"."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

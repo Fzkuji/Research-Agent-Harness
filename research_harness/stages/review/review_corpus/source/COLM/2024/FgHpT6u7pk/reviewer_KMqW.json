@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "FgHpT6u7pk",
+  "reviewer": "KMqW",
+  "paper": {
+    "title": "CoCA: Regaining Safety-awareness of Multimodal Large Language Models with Constitutional Calibration",
+    "authors": [
+      "Jiahui Gao",
+      "Renjie Pi",
+      "Tianyang Han",
+      "Han Wu",
+      "Lanqing HONG",
+      "Lingpeng Kong",
+      "Xin Jiang",
+      "Zhenguo Li"
+    ],
+    "abstract": "The deployment of multimodal large language models (MLLMs) has demonstrated remarkable success in engaging in conversations involving visual inputs, thanks to the superior power of large language models (LLMs). Those MLLMs are typically built based on the LLMs, with an image encoder to process images into the token embedding space of the LLMs. However, the integration of visual modality has introduced a unique vulnerability: the MLLM becomes susceptible to malicious visual inputs and prone to generating sensitive or harmful responses, even though the LLM has been trained on textual dataset to align with human value. In this paper, we first raise the following question: ``Do the MLLMs possess safety-awareness against malicious image inputs?\". We find that after adding a principle that specifies the safety requirement into the input of the MLLM, the model's safety awareness becomes boosted. This phenomenon verifies the existence of MLLM's safety-awareness against image inputs, it is only weakened by the modality gap. We then introduce a simple yet effective technique termed CoCA, which amplifies the safety-awareness of the MLLM by calibrating its output distribution. Our proposed strategy helps the model reclaim its original safety awareness without losing its original capabilities. We verify the effectiveness of our approach on both multimodal safety and understanding benchmarks.",
+    "keywords": [
+      "Multimodal Large Language Model",
+      "Safety"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=FgHpT6u7pk"
+  },
+  "review_fields": {
+    "summary": "The paper verifies that the safety awareness of multimodal LLMs (MLLMs) inherited from safety training with textual data is transferable to image inputs, and thus, the MLLMs has safety-awareness against malicious image inputs. The authors argue that the safety-awareness is weakened due to the modality gap between the continuous image representations and the discrete textual tokens. This work explores a simple yet effective approach called Constitutional Calibration, which effectively enhances MLLMs’ safety-awareness in a training-free manner. Extensive experiments demonstrates that the proposed approach not only enhances safety awareness, but also preserves the MLLM’s original capabilities.",
+    "reasons_to_accept": "1. This work revealed an interesting observation: by incorporating safety principles directly into the instructions, MLLM’s safety awareness could be improved noticeably. This indicates that the safety-awareness inherited from the textual safety training is indeed transferable to visual inputs.\n2. This work proposed a training-free method to strengthen the safety-awareness. The enhancement is quite significantly demonstrated by the empirical experiments. And thus, the proposed method also does not hurt the model’s original capabilities.",
+    "reasons_to_reject": "Overall, the reviewer thinks that this work does not have major weakness. \n\n1) The proposed method requires logins so it cannot be applied on closed-source MLLMs.\n2) It would be great to report results on more datasets. Currently there is only one dataset used for verifying the safety enhancement.\n\nTypos: Equation 4 seems missing a right parenthesis.",
+    "questions_to_authors": "When increasing the safety delta, how does the MLLMS’ original capability vary? Will it be hunted significantly?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:02Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:02Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1009,
+    "words": 147,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/5497fb7e-9897-4876-bf90-09d55c01a8c3",
+    "error": null,
+    "scored_chars": 1010
+  }
+}

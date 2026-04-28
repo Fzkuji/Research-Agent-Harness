@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "hVnM-ni5o5nVQ",
+  "reviewer": "7jBU",
+  "paper": {
+    "title": "Contextual Recommendations and Low-Regret Cutting-Plane Algorithms",
+    "authors": [
+      "Sreenivas Gollapudi",
+      "Guru Guruganesh",
+      "Kostas Kollias",
+      "Pasin Manurangsi",
+      "Renato Paes Leme",
+      "Jon Schneider"
+    ],
+    "abstract": "We consider the following variant of contextual linear bandits motivated by routing applications in navigational engines  and recommendation systems. We wish to learn a hidden $d$-dimensional value $w^*$. Every round, we are presented with a subset $\\mathcal{X}_t \\subseteq \\mathbb{R}^d$ of possible actions. If we choose (i.e. recommend to the user) action $x_t$, we obtain utility $\\langle x_t, w^* \\rangle$ but only learn the identity of the best action $\\arg\\max_{x \\in \\X_t} \\langle x, w^* \\rangle$.\n\nWe design algorithms for this problem which achieve regret $O(d\\log T)$ and $\\exp(O(d \\log d))$. To accomplish this, we design novel cutting-plane algorithms with low “regret” -- the total distance between the true point $w^*$ and the hyperplanes the separation oracle returns. \n\nWe also consider the variant where we are allowed to provide a list of several recommendations. In this variant, we give an algorithm with $O(d^2 \\log d)$ regret and list size $\\poly(d)$. Finally, we construct nearly tight algorithms for a weaker variant of this problem where the learner only learns the identity of an action that is better than the recommendation. Our results rely on new algorithmic techniques in convex geometry (including a variant of Steiner’s formula for the centroid of a convex set) which may be of independent interest.",
+    "keywords": [
+      "Online Learning",
+      "Convex Geometry",
+      "Separation Oracles",
+      "Linear Bandits",
+      "Contextual Bandits"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=hVnM-ni5o5nVQ"
+  },
+  "review_fields": {
+    "comment": "Thank you for your reply.\n\n>One would need to choose a distribution over the true weight vector $w^*$\n and over which action set is provided over each round. \n\nThis can't be a problem unless you have a Bayesian setup. Even in a Bayesian setting, the effect of the prior will be very small. \n\nFirstly, the stochasticity in the stochastic setting mainly comes from the noisy reward observations, not the probability distribution on $w^*$. If we assume a Bayesian setting, we may be assuming prior on $w^*$, but we can ignore its effect in many cases. See e.g., [1] [2].\n\n>Allowing for bounds over the adversarial setting obviates these concerns and allows us to give strong guarantees in any setting. Note that any regret bound over the adversarial results translate over to the stochastic setting.\n\nIts bound will be very loose, and won't be useful in practice (by far from the optimality. there are many alternative algorithms that can do better, hence no one would like to use the algorithm). \n\nIt is a shame that many studies, who have addressed the difficulties of adversarial and stochastic settings, are neglected. And strangely, the only two bandit papers you are citing are only the stochastic setting.\n\nIt should also be noted that there are studies that have addressed both Stochastic and Adversarial settings **simultaneously**. See e.g., [3] [4].\n\n\n>Feedback independent of chosen action: We would also like to put our setting in a wider context. In the standard experts setting (see [1] for details) we also get the exact same feedback (all the losses) regardless of which action we choose. Closer to our model is perhaps Awerbuch-Kleinberg (see [2]) of adaptive routing with 'transparent feedback' where in each period they learn the cost of all edges in the graph after selecting a route. Our model gives strictly less information: only the identity of the best path. Even though experts, adaptive routing and other models such as online convex optimization, the entire loss is revealed regardless of the action, we would still consider them valid learning models. While these problems have no inherent notion of \"explore-exploit\", there is still the need to hedge against many potential optima.\n\n\nThey are also not discussed in the main paper at all. And referencing papers are about optimization based on experts, which does not justify the authors' motivation of the draft: \"motivated by routing applications in navigational engines and recommendation systems\" from user feedback.\n\nOn a positive note, perhaps this result could be useful for learning equilibrium in a two-player game, although such a modification would require a very large revision.\n\n\n[1] Kaufmann, Emilie, Nathaniel Korda, and Rémi Munos. \"Thompson sampling: An asymptotically optimal finite-time analysis.\" ALT, 2012.\n\n[2] Shang, Xuedong, et al. \"Fixed-confidence guarantees for Bayesian best-arm identification.\" AISTATS, 2020.\n\n[3] Zimmert, Julian, and Yevgeny Seldin. \"An optimal algorithm for stochastic and adversarial bandits.\" AISTATS, 2019.\n\n[4] Ito, Shinji. \"Parameter-Free Multi-Armed Bandit Algorithms with Hybrid Data-Dependent Regret Bounds.\" COLT, 2021"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

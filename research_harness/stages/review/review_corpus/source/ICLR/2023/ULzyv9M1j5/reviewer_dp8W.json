@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "ULzyv9M1j5",
+  "reviewer": "dp8W",
+  "paper": {
+    "title": "Transformer-based model for symbolic regression via joint supervised learning",
+    "authors": [
+      "Wenqiang Li",
+      "Weijun Li",
+      "Linjun Sun",
+      "Min Wu",
+      "Lina Yu",
+      "Jingyi Liu",
+      "Yanjie Li",
+      "Songsong Tian"
+    ],
+    "abstract": "Symbolic regression (SR) is an important technique for discovering hidden mathematical expressions from observed data. Transformer-based approaches have been widely used for machine translation due to their high performance, and are recently highly expected to be used for SR. They input the data points, then output the expression skeleton, and finally optimize the coefficients. However, recent transformer-based methods for SR focus more attention on large scale training data and ignore the ill-posed problem: the lack of sufficient supervision, i.e., expressions that may be completely different have the same supervision because of their same skeleton, which makes it challenging to deal with data that may be from the same expression skeleton but with different coefficients. Therefore, we present a transformer-based model for SR with the ability to alleviate this problem. Specifically, we leverage a feature extractor based on pure residual MLP networks to obtain more information about data points. Furthermore, the core idea is that we propose a joint learning mechanism combining supervised contrastive learning, which makes features of data points from expressions with the same skeleton more similar so as to effectively alleviates the ill-posed problem. The benchmark results show that the proposed method is up to 25% higher with respect to the recovery rate of skeletons than typical transformer-based methods. Moreover, our method outperforms state-of-the-art SR methods based on reinforcement learning and genetic programming in terms of the coefficient of determination ($R^2$).",
+    "keywords": [],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=ULzyv9M1j5"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper presents a transformer-based method for symbolic regression using a new feature extractor and a joint supervised learning mechanism.  They evaluated the framework on synthetic datasets and compared it with several baseline methods. Experimental results show good performance of the proposed framework.",
+    "strength_and_weaknesses": "Strength: \n\n1. The problem is interesting. \n2. The proposed framework achieves good results. \n\nWeakness:\n\n1. It would be better if the authors could further clarify the potential application of symbolic regression. \n2. It is unclear to me why the authors adopt a point cloud-like feature extractor (like PointMLP). It seems that the tackled problem is a special regression problem, so why not use 1D convolution or directly use a transformer to handle it? Also, there are some works tackling tabular data, like TabNet. The authors should further clarify the motivation of network design. \n3. Since the proposed framework was trained and evaluated on the same synthetic dataset. There may be overfitting problems. The authors should discuss this point.",
+    "clarity,_quality,_novelty_and_reproducibility": "The whole paper is well-written and proposes a new solution for an interesting problem.",
+    "summary_of_the_review": "This is a good paper to tackle an interesting problem. While the potential application of the proposed technique and method design should be further clarified. The technical novelty of this paper seems limited.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

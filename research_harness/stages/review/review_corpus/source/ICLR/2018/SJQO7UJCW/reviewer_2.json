@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "SJQO7UJCW",
+  "reviewer": "2",
+  "paper": {
+    "title": "Adversarial Learning for Semi-Supervised Semantic Segmentation",
+    "authors": [
+      "Wei-Chih Hung",
+      "Yi-Hsuan Tsai",
+      "Yan-Ting Liou",
+      "Yen-Yu Lin",
+      "Ming-Hsuan Yang"
+    ],
+    "abstract": "We propose a method for semi-supervised semantic segmentation using the adversarial network. While most existing discriminators are trained to classify input images as real or fake on the image level, we design a discriminator in a fully convolutional manner to differentiate the predicted probability maps from the ground truth segmentation distribution with the consideration of the spatial resolution. We show that the proposed discriminator can be used to improve the performance on semantic segmentation by coupling the adversarial loss with the standard cross entropy loss on the segmentation network. In addition, the fully convolutional discriminator enables the semi-supervised learning through discovering the trustworthy regions in prediction results of unlabeled images, providing additional supervisory signals. In contrast to existing methods that utilize weakly-labeled images, our method leverages unlabeled images without any annotation to enhance the segmentation model. Experimental results on both the PASCAL VOC 2012 dataset and the Cityscapes dataset demonstrate the effectiveness of our algorithm.",
+    "keywords": [
+      "semantic segmentation",
+      "adversarial learning",
+      "semi-supervised learning",
+      "self-taught learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SJQO7UJCW"
+  },
+  "review_fields": {
+    "review": "The paper presents an alternative adversarial loss function for image segmentation, and an additional loss for unlabeled images.\n\n+ well written\n+ good evaluation\n+ good performance compared to prior state of art\n- technical novelty\n- semi-supervised loss does not yield significant improvement\n- missing citations and comparisons\n\nThe paper is well written, structured, and easy to read.\nThe experimental section is extensive, and shows a significant improvement over prior state of the art in semi-supervised learning.\nUnfortunately, it is unclear what exactly lead to this performance increase. Is it a better baseline model? Is the algorithm tuned better, or is there something fundamentally different compared to prior work (e.g. Luc 2016).\n\nFinally, it would help if the authors could highlight their technical difference compared to prior work. The presented adversarial loss is similar to Luc 2016 and \"Image-to-Image Translation with Conditional Adversarial Networks, Isola etal 2017\". What is different, and why is it important?\nThe semi-supervised loss is similar to Pathak 2015a, it would help to highlight the difference, and show experimentally why it matters.\n\nIn summary, the authors should highlight the difference to prior work, and show why the proposed changes matter."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

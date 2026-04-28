@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "eHzIwAhj06",
+  "reviewer": "Rwfv",
+  "paper": {
+    "title": "The Group Robustness is in the Details: Revisiting Finetuning under Spurious Correlations",
+    "authors": [
+      "Tyler LaBonte",
+      "John Collins Hill",
+      "Xinchen zhang",
+      "Vidya Muthukumar",
+      "Abhishek Kumar"
+    ],
+    "abstract": "Modern machine learning models are prone to over-reliance on spurious correlations, which can often lead to poor performance on minority groups. In this paper, we identify surprising and nuanced behavior of finetuned models on worst-group accuracy via comprehensive experiments on four well-established benchmarks across vision and language tasks. We first show that the commonly used class-balancing techniques of mini-batch upsampling and loss upweighting can induce a decrease in worst-group accuracy (WGA) with training epochs, leading to performance no better than without class-balancing. While in some scenarios, removing data to create a class-balanced subset is more effective, we show this depends on group structure and propose a mixture method which can outperform both techniques. Next, we show that scaling pretrained models is generally beneficial for worst-group accuracy, but only in conjunction with appropriate class-balancing. Finally, we identify spectral imbalance in finetuning features as a potential source of group disparities --- minority group covariance matrices incur a larger spectral norm than majority groups once conditioned on the classes. Our results show more nuanced interactions of modern finetuned models with group robustness than was previously known. Our code is available at https://github.com/tmlabonte/revisiting-finetuning.",
+    "keywords": [
+      "spurious correlations",
+      "group robustness",
+      "distribution shift",
+      "class balancing"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=eHzIwAhj06"
+  },
+  "review_fields": {
+    "comment": "I appreciate the authors' efforts to address my concerns.\n\nQ2: My concern is that it's incorrect to draw conclusions as if it were a controlled environment when dealing with real datasets in an uncontrolled environment. While I'm grateful for the toy example provided, it seems difficult to assume that the results from the toy example would apply to real data.\n\nQ3. My concern is that the proposed findings lack generalizability across datasets or models. This issue cannot be adequately addressed by identifying a single case of suboptimality. Furthermore, while the authors claim to have confirmed the suboptimality of no-class balancing and upsampling on Waterbirds with the Swin Transformer Base, but there appears to be minimal performance difference between upsampling and no-class balancing, even when utilizing the Swin Transformer Base.\n\nQ5. Contrary to the authors' response, I could not find the ResNet50 results in the attached document. I only see results for ResNet18 and ResNet152 from the ResNet family.\n\nTherefore, I still have significant concerns about the lack of unified experimental settings in this paper, making fair comparisons difficult, and about drawing conclusions in an uncontrolled environment. Consequently, I will maintain my score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 22,
+    "mixed_pct": 0,
+    "human_pct": 78,
+    "verdict": "We are moderately confident this text is entirely human",
+    "confidence": "moderately",
+    "chars": 1266,
+    "words": 192,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4ad76a02-188f-4a92-9df9-c1e510471682",
+    "error": null,
+    "scored_chars": 1266
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "DkRYImuQA9",
+  "reviewer": "sVmH",
+  "paper": {
+    "title": "ShieldAgent: Shielding Agents via Verifiable Safety Policy Reasoning",
+    "authors": [
+      "Zhaorun Chen",
+      "Mintong Kang",
+      "Bo Li"
+    ],
+    "abstract": "Autonomous agents powered by foundation models have seen widespread adoption across various real-world applications. However, they remain highly vulnerable to malicious instructions and attacks, which can result in severe consequences such as privacy breaches and financial losses. More critically, existing guardrails for LLMs are not applicable due to the complex and dynamic nature of agents. To tackle these challenges, we propose ShieldAgent, the first guardrail agent designed to enforce explicit safety policy compliance for the action trajectory of other protected agents through logical reasoning. Specifically, ShieldAgent first constructs a safety policy model by extracting verifiable rules from policy documents and structuring them into a set of action-based probabilistic rule circuits. Given the action trajectory of the protected agent, ShieldAgent retrieves relevant rule circuits and generates a shielding plan, leveraging its comprehensive tool library and executable code for formal verification. In addition, given the lack of guardrail benchmarks for agents, we introduce ShieldAgent-Bench, a dataset with 3K safety-related pairs of agent instructions and action trajectories, collected via SOTA attacks across 6 web environments and 7 risk categories. Experiments show that ShieldAgent achieves SOTA on ShieldAgent-Bench and three existing benchmarks, outperforming prior methods by 11.3% on average with a high recall of 90.1%. Additionally, ShieldAgent reduces API queries by 64.7% and inference time by 58.2%, demonstrating its high precision and efficiency in safeguarding agents. Our project is available and continuously maintained here: https://shieldagent-aiguard.github.io/",
+    "keywords": [
+      "LLM Agent Safety",
+      "LLM Guardrail Agent",
+      "Policy Compliance",
+      "Automated Logic Reasoning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=DkRYImuQA9"
+  },
+  "review_fields": {
+    "summary": "Main findings:\n- The paper introduces SHIELDAGENT, a novel guardrail agent designed for LLM agents to explicitly ensure compliance with safety policies during sequential decision-making through auto-mated probabilistic policy reasoning. It addresses significant vulnerabilities of LLMs to malicious instructions and attacks, which can lead to severe consequences such as privacy breaches and financial losses. Besides, this paper introduces a new benchmark, named SHIELDAGENT-WEB, which contains 2K safety-related instructions under two kinds of attacks. \n\nMain results:\n- This paper tests their algorithm on two benchmarks: SHIELDAGENT-WEB and ST-WEBAGENTBENCH. The SHIELDAGENT achieves SOTA results on both benchmarks under affordable inference costs. \n\nAlgorithmic ideas:\n- The SHIELDAGENT consists of constructing a structured safety policy model and a shielding model.\n\n-- Structured safety policy model: (1) uses GPT-4o to exhaust all the potential policies from the provided organization handbook which sets restrictions or guidelines based on four elements: definition, scope, policy description, and reference; (2) converts obtained policies to LTL structures with GPT-4o; (3) iteratively refines the verifiability of the policies and merges similar ones together; (4) trains the probabilistic circuit for policies and cluster similar circuits\n\n-- Shield model: (1) selects the most related circuits and computes the safety probability; (2) shields the action with control barrier function (CBF) based on the safety probability; (3) provides the safety label, explanations, or violated rules based on CBF.",
+    "claims_and_evidence": "One claim assumes there exists policy document to do policy extraction. One problem may be how to deal with the case when there is not such document.",
+    "methods_and_evaluation_criteria": "1.\tYes, this paper tests two datasets. One is created by themselves, and the other is an existing one.\n2.\tSHIELDAGENT outperforms existing baselines in both datasets.\n3.\tHowever, all benchmarks are related to web service. It would be better to add results in some other field.",
+    "experimental_designs_or_analyses": "The “Direct” baseline seems to have smaller FPR with low accuracy in table 2. The main reason may be “Direct” tends to predict more “0” so that it may have high False Negative Rate (FNR). It is better to also show the FNR in the table.",
+    "relation_to_broader_scientific_literature": "1.\tSafety: This paper introduces two general kinds of attacks, which are agent-based attacks and environment-based attacks. One contribution is that this paper considers both attacks in the design of SHIELDAGENT.\n2.\tGuardrails: Prior works mainly focus on guarding LLM models in natural languages or images rather than decision-making processes, like LlamaGuard, LlavaGuard, and SafeWatch. One method focuses on guarding LLM agents, named GuardAgent, mainly relies on model’s reasoning ability instead of explicitly shielding the policies of target LLM agent. Thus the main contribution of SHIELDAGENT is to achieve explicit safety for LLM agents in making sequential decisions.",
+    "essential_references_not_discussed": "No, the key contribution is clearly itself with correctly cited related works.",
+    "other_strengths_and_weaknesses": "1. Strengths\n- This paper designs a novel pipeline to construct safety policy model, which can explicitly shield LLM agents.\n- This paper provides a comprehensive benchmark, which contains 2k safety-related instructions across seven safety categories and six web environments under two kinds of attacks. \n\n2. Weaknesses\n- This paper only conducts experiments on Web services without other conditions.\n- The appendix part seems to be incomplete.",
+    "other_comments_or_suggestions": "1.\tI don’t think GuardAgent, in section 2.2., focuses solely on textual space since GuardAgent also does experiments on a web service benchmark. However, I agree with the authors for the latter part, where GuardAgent just relies on the internal knowledge and reasoning ability to guard safety.\n2.\tIn line 213-214, Page 4. Please correct the presentation “Prompts defined in Appendix C and Appendix C, respectively”.\n3.\tIn table 2, the smallest overall FPR comes from “Direct” baseline, but the bold style is in the SHIELDAGENT.\n4.\tIn Section 3.3 and 3.4, how to generate action shield plan and how to generate shielding code are not explained or with any examples.\n5.\tThe Appendix part seems to be incomplete. Some titles do not have any content.",
+    "questions_for_authors": "Q1: How to do pseudo training? Is the pseudo training high-time-cost since the agent trajectories need to be generated?\n\nQ2: How to generate action shield plan and how to generate shielding code? Are there any explanations or any examples?\n\nQ3: What is the action set in Figure 1? Is it the part of “Shielding Operations” in Section 3.3. \n\nQ4: are the shielding operations and the toolbox general or task-specific? Are they the same for different kinds of tasks or needed to be fine-tuned or designed for other tasks?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

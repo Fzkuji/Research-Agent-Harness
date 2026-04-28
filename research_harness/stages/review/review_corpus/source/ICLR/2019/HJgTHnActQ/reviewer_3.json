@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "HJgTHnActQ",
+  "reviewer": "3",
+  "paper": {
+    "title": "Local Image-to-Image Translation via Pixel-wise Highway Adaptive Instance Normalization",
+    "authors": [
+      "Wonwoong Cho",
+      "Seunghwan Choi",
+      "Junwoo Park",
+      "David Keetae Park",
+      "Tao Qin",
+      "Jaegul Choo"
+    ],
+    "abstract": "Recently, image-to-image translation has seen a significant success. Among many approaches, image translation based on an exemplar image, which contains the target style information, has been popular, owing to its capability to handle multimodality as well as its suitability for practical use. However, most of the existing methods extract the style information from an entire exemplar and apply it to the entire input image, which introduces excessive image translation in irrelevant image regions. In response, this paper proposes a novel approach that jointly extracts out the local masks of the input image and the exemplar as targeted regions to be involved for image translation. In particular, the main novelty of our model lies in (1) co-segmentation networks for local mask generation and (2) the local mask-based highway adaptive instance normalization technique. We demonstrate the quantitative and the qualitative evaluation results to show the advantages of our proposed approach. Finally, the code is available at https://github.com/AnonymousIclrAuthor/Highway-Adaptive-Instance-Normalization",
+    "keywords": [
+      "image to image translation",
+      "image translation",
+      "exemplar",
+      "mutlimodal"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=HJgTHnActQ"
+  },
+  "review_fields": {
+    "comment": "Thanks for your response and the revision. My rating is updated. However, here are further confusions/questions regarding to the rebuttal answers. These may be helpful for improving the paper further.\n\n\n1) It is still hard to read Figure 4. For example, it is always better to show the mask with a real manipulation, rather than manually drawing like 2nd row non-smile column. It is very hard to see what changes in the makeup-Lipstick macro column. Although it is good to see authors make Figure 4 more self-contained and specify the demonstration of interactive transfer, it is straightforward to ask why manually removing regions over the heatmap (mask), why not directly indicate the regions of interest to transfer directly from the RGB image?\n\n2a) It is a little confusing that, on the one hand the authors say \"the co-segmentation module is trained in a completely end-to-end manner, without any direct supervision\", on the other \"the used attribute label during training consists of `Smile’ and `Hair color’\". Maybe how to train such a model is straightforward to other people, I don't understand how it is trained by reading the paper. Should I interpret training the cosegmentation as a weakly supervised learning that the attribute labels are provided during training, while the pixel-wise annotations are not provided? \n\n2b) If interactive transfer is possible as discussed above in (1), a semantic segmentation should be also able to provide the region guide for style transfer on specified regions (by the segmentation model). Please explain clearly why such a segmentation method is incapable of targeted region transfer?\n\n4) As for the pink colors, it should be improved further, even though the images are changed to alleviate this problem. I'm not sure if directly showing the heatmaps makes more sense, as overlaid images really effects the readability of the figure (as the pink color dominates the images denoted by 1-m, 1-m1 and 1-m2).\n\n5) What is the meaning of AU 20? As readers (including me) may not be familiar with this dataset, missing the explanation of the index make it hard to follow."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

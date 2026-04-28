@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "Rupt2o4Fu6J",
+  "reviewer": "DeZu",
+  "paper": {
+    "title": "Machine learning structure preserving brackets for forecasting irreversible processes",
+    "authors": [
+      "Kookjin Lee",
+      "Nathaniel Trask",
+      "Panos Stinis"
+    ],
+    "abstract": "Forecasting of time-series data requires imposition of inductive biases to obtain predictive extrapolation, and recent works have imposed Hamiltonian/Lagrangian form to preserve structure for systems with \\emph{reversible} dynamics. In this work we present a novel parameterization of dissipative brackets from metriplectic dynamical systems appropriate for learning \\emph{irreversible} dynamics with unknown a priori model form. The process learns generalized Casimirs for energy and entropy guaranteed to be conserved and nondecreasing, respectively. Furthermore, for the case of added thermal noise, we guarantee exact preservation of a fluctuation-dissipation theorem, ensuring thermodynamic consistency. We provide benchmarks for dissipative systems demonstrating learned dynamics are more robust and generalize better than either \"black-box\" or penalty-based approaches.",
+    "keywords": [
+      "structure preserving machine learning",
+      "neural odes",
+      "forecasting",
+      "dissipative systems"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Rupt2o4Fu6J"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for the detailed response. Upon further examination and looking through the other reviews, I regret to say that I have lowered my score from 7 to 6 for now, but willing to push back to 7 again if the following points are addressed adequately. This mainly stems from the weaknesses in the experiments section as other reviewers have noted (setup is too simple, scalability issues, not enough baselines). However, I do maintain my enthusiasm for this work as I think the idea of exploiting the GENERIC inductive bias to model irreversible systems is promising and has not been explored enough in the literature, which often focuses too much on modelling reversible dynamics. Therefore I wholeheartedly support the work, however there are some things that should be addressed.\n\n> We have revised this statement. The difference is that the black-box neural ODE does not aim to discover a hidden state and only aims to solve an ODE for the observed quantities (in these examples, an ode for position and momentum only). Therefore, minibatches may use the data for position and momentum as an initial condition. For the GENERIC models an internal state variable it required - for example the entropy s_i may be thought of as modeling the internal configuration which stores energy internally, such as how a temperature characterizes the vibrational energy of a system. As these variables can't be observed experimentally, it is non-physical to assume we have access to data for them which may be used as an initial condition for a minibatch.\n\nThis makes sense. Thanks for clarifying. However, I think that it may be more fair to compare with latent neural ODEs, where the ODE dynamics take place in a latent space that is different from the observation space (i.e. encode first into latent space, progress dynamics there, then decode). In this setting, the neural ODE might actually be able to implicitly learn the effect of the entropy on the position and momentum, giving results that are harder to beat. What do the authors think about this?\n\n> We contrast this against the true models $L_T$, $M_T$, $E_T$, and $S_T$. Following the fluctuation dissipation theorem, we then define two SDEs $dx = L \\nabla E + M \\nabla S dt + \\sqrt{2 M} dB$ and $dx_T = L_T \\nabla E_T + M_T \\nabla S_Tdt + \\sqrt{2 M_T} dB$ and use Euler-Maruyama to solve both and compare the resulting distribution at the final time. This confirms that the learned dynamics provide converged equilibrium statistics and that the approach is suitable for modeling thermal systems.\n\nUnderstood. So the aim here is to verify that the learned $L, M, E$ and $S$ satisfy the correct fluctuation-dissipation relation. However,\n\n> For this section, we fit a deterministic model to the deterministic data\n\nis it a realistic assumption that the observed data comes from a deterministic system? If one were to model a thermal system, I would have imagined the data would come from a thermal system too, which is stochastic. How does one deal with this stochasticity when trying to learn the parameters of the model?\n\n>  For practical applications, there are typically problem specific sparsifications of these tensors available - for example in particle systems one may define finite interactions between neighbors to obtain sparse tensors. In addition to this memory consideration, since submitting the draft we have developed an effective training strategy by batching over several initial conditions concurrently rather than learning dynamics from a single trajectory, which has allowed us to consider larger systems.\n\nPlease could you elaborate further on this? Since the $O(N^3)$ and $O(N^4)$ cost for the $M$ and $L$ tensors respectively is pretty big, I think this should be addressed properly in order to make the algorithm practically useful. In particular, how do we exploit the finite interaction range to reduce the number of trainable parameters? What are the details of the new experiments/training procedure and how large can you it scale up?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

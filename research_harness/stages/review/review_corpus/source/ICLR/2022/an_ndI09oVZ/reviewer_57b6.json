@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "an_ndI09oVZ",
+  "reviewer": "57b6",
+  "paper": {
+    "title": "Deep banach space kernels",
+    "authors": [
+      "Mrityunjay Bhardwaj"
+    ],
+    "abstract": "The recent success of deep learning has encouraged many researchers to explore the deep/concatenated variants of classical kernel methods. Some of which includes MLMKL, DGP and DKL. Although, These methods have proven to be quite useful in various real-world settings. They still suffer from the limitations of only utilizing kernels from Hilbert spaces. In this paper, we address these shortcomings by introducing a new class of concatenated kernel learning methods that use the kernels from the reproducing kernel Banach spaces(RKBSs). These spaces turned out to be one of the most general spaces where a reproducing Kernel exists. We propose a framework of construction for these Deep RKBS models and then provide a representer theorem for regularized learning problems. We also describe the relationship with its deep RKHS variant as well as standard Deep Gaussian Processes. In the end, we construct and implement a two-layer deep RKBS model and demonstrate it on a range of machine learning tasks.",
+    "keywords": [
+      "RKBS",
+      "RKHS",
+      "concatenated kernel learning",
+      "representation learning",
+      "deep learning",
+      "MLMKL",
+      "Deep Gaussian Processes",
+      "gaussian processes",
+      "kernel machines"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=an_ndI09oVZ"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proves a Representer Theorem for the composition of functions from Reproducing Kernel Banach Spaces (RKBSs).",
+    "main_review": "This submission looks more like a working draft rather than a conference paper. In particular,\n\n**There are many typos**, making the reading very difficult (I am highlighting a few of them, only on page 1):\n- which *have* their own limitation (abstract)\n- that uses *functions* from Reproducing Kernel Banach Spaces (abstract)\n- and *test* it on a range on ML tasks (abstract)\n- the acronyms MLMKL, DGP, DKL are never introduced (abstract and later)\n- *W*e are still (1st paragraph)\n- *kernel from Hilbert Space* makes little sense (1st paragraph)\n- There has *been* (1st paragraph)\n- *W*e then examine (2nd paragraph)\n- *two layer RKBS kernel* makes little sense (2nd paragraph)\n- the connect*ion* with multiple (2nd paragraph)\n- *W*e also talk about *the* library (2nd paragraph)\n- the bibliography entry [Scholkopf and Smola] seems wrong\n\n**The maths are not rigorous**, to the extent they are almost incorrect:\n- the introduction of RKBSs is very confusing, as the proposed definition looks more like the RKHS definition to me, see e.g., Definition 4.18 in \"Support Vector Machines\" by Steinwart and Christmann, 2008\n- Theorems 2.1 and 2.2, that are not part of the contribution, should be explicitly linked to the paper they come from\n- undefined notation in eq. (2.9)\n- I would like to point out the paper \"Autoencoding any Data through Kernel Autoencoders\" by Laforgue et al., 2019 which considers a similar framework as the one introduced at the top of page 3. A Representer Theorem is also proved therein, as in [Bohn et al. 2019], except that it applies to potentially infinite dimensional output Hilbert spaces\n- the introduction of the $\\Theta_l$ is not understandable\n- In section 3.2 the proof is said to be given in the Appendix, but the latter is empty\n\n**The contribution is very limited**:\n- the Representer Theorem (RT) being mainly due to orthogonality properties, it is not surprising to recover it for a class of functions that share this property with RKHSs\n- I cannot see any novel idea in the proofs, so proving another RT seems not a sufficient contribution for acceptance\n- I cannot find any motivation for the presented results\n- the authors themselves acknowledge that their experimental contribution is very limited",
+    "summary_of_the_review": "This submission looks more like a working draft rather than a conference paper.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "1: The contributions are neither significant nor novel.",
+    "empirical_novelty_and_significance": "1: The contributions are neither significant nor novel."
+  },
+  "review_metadata": {
+    "recommendation": 1,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2326,
+    "words": 388,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e42eaa3e-f2cc-43f3-a287-c795e6702157",
+    "error": null,
+    "scored_chars": 2326
+  }
+}

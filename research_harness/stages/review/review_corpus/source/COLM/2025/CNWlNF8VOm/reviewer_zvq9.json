@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "CNWlNF8VOm",
+  "reviewer": "zvq9",
+  "paper": {
+    "title": "The Surprising Effectiveness of Membership Inference with Simple N-Gram Coverage",
+    "authors": [
+      "Skyler Hallinan",
+      "Jaehun Jung",
+      "Melanie Sclar",
+      "Ximing Lu",
+      "Abhilasha Ravichander",
+      "Sahana Ramnath",
+      "Yejin Choi",
+      "Sai Praneeth Karimireddy",
+      "Niloofar Mireshghallah",
+      "Xiang Ren"
+    ],
+    "abstract": "Membership inference attacks serves as useful tool for fair use of language models, such as detecting potential copyright infringement and auditing data leakage. However, many current state-of-the-art attacks require access to models' hidden states or probability distribution, which prevents investigation into more widely-used, API-access only models like GPT-4. In this work, we introduce N-Gram Coverage Attack, a membership inference attack that relies **solely** on text outputs from the target model, enabling attacks on completely black-box models. We leverage the observation that models are more likely to memorize and subsequently generate text patterns that were commonly observed in their training data. Specifically, to make a prediction on a candidate member, N-Gram Coverage Attack first obtains multiple model generations conditioned on a prefix of the candidate. It then uses n-gram overlap metrics to compute and aggregate the similarities of these outputs with the ground truth suffix; high similarities indicate likely membership. We first demonstrate on a diverse set of existing benchmarks that N-Gram Coverage Attack outperforms other black-box methods while also impressively achieving comparable or even better performance to state-of-the-art white-box attacks --- despite having access to only text outputs.  Interestingly, we find that the success rate of our method scales with the attack compute budget --- as we increase the number of sequences generated from the target model conditioned on the prefix, attack performance tends to improve. Having verified the accuracy of our method, we use it to investigate previously unstudied closed OpenAI models on multiple domains. We find that more recent models, such as GPT-4o, exhibit increased robustness to membership inference, suggesting an evolving trend toward improved privacy protections.",
+    "keywords": [
+      "membership inference",
+      "membership inference attack",
+      "privacy",
+      "memorization"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=CNWlNF8VOm"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a membership inference attack method for large language models (LLM). The idea is to probe the LLM with prefix strings from a dataset and see if the suffix is generated. The advantage of the method is its simplicity. The authors show that it is a promising method on some proprietary and open-source models, though I do have some suggestions for improving the experiment and discussions: \n\n1. It is nice that both proprietary and open-source models are used in experiments. However, we do not really know what is used in GPT-3.5/GPT-4, so as a matter of science there is no ground truth for your membership inference attack on those models. In fact, even for the various LLaMa variants, do you know for sure that the data samples you presume are used in training really did occur in training (it wasn't filtered)? I think it is fine to presume your new data is not in training, but the old ones are harder to say with certainty. There are several ways to address this: \n- Be more clear about this as a caveat in Section 4.2\n- Report both false positive and false negative results (or something similar that that breaks apart positive and negative samples, if you don't want to have a threshold) for at least one experiment. \n- Provide more results on Tulu (or Olmo?) where it is more certain what was in training. Table 2 for example only shows GPT-3, so I don't know whether to fully trust the numbers. \n\n2. More discussion on efficiency is warranted. The discussion in Section 4.6 says that the proposed method cost nxk tokens while previous work costs 100n, but is that difference important in practice? If I were a prosecutor representing book publishers who is using membership inference attack to decide whether to sue a LLM provider on copyright infringement, I may have a large budget. Further, I only need to find membership on just one book to provide evidence, i.e. I do not need multiple books as evidence to create a case. So I may be able to justify spending $1000 (I made up this number) on API calls since a lawsuit may be worth millions of dollars. So how exactly is your method \"efficient\" under this broader scheme? \n- I would suggest adding a table that investigates efficiency of your method in more detail. It could be something like the top figures in Fig 2, but more in-depth. For example, vary d and n and perhaps k and give recommendation on what is the recommended setting. It may also be interesting to try on sequences that have relatively frequent words vs those that don't. \n\n3. This is a minor point, but the discussion of \"white-box methods\" and \"black-box methods\" could potentially confuse the reader because these terms were not defined. \n- Do you say clearly \"white-box\" means that likelihood information is used, and that it is not white-box in the sense that internal parameters are used. Some API may provide a score for the generation so the distinction is important. \n- Can you do \"white-box methods\" on \"black-box models\"? It's not clear if methods and models are tied. \n- Many of the results have statements like \"N-gram coverage attack is more efficient than black-box methods\" where methods is plural form but really it is just one method. It is better to just say your method is better DE-COP rather than making a seemingly general claim of improvement over ALL black-box methods. \n\n4. It may be worthwhile citing the following paper. They show that using a group of sentences (rather than a single sentence) with ngram features can lead to improvements in the membership inference attack. The method is different and their setting focuses on machine translation sequence-to-sequence models, but their result corroborates well with your idea of using multiple strings and ngram overlaps. \n\nHisamoto (2020). Membership Inference Attacks on Sequence-to-Sequence Models: Is My Data In Your Machine Translation System? https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00299/43536/Membership-Inference-Attacks-on-Sequence-to",
+    "reasons_to_accept": "1. Membership inference for LLMs is an important problem considering the advances in the field and ongoing lawsuits regarding copyright, etc.\n2. The paper proposes a simple but promising solution. The experiments and comparisons are insightful.",
+    "reasons_to_reject": "1. Membership inference is a problem that potentially has important ramifications: for example, a prosecutor may use this to decide whether to sue LLM providers for copyright infringement. Because of this, I think there needs to be more rigorous and nuanced discussion of results (beyond simply stating that the method is \"effective.\"). That said, I gave some suggestions (see \"Summary\") and I think it is not too hard to address them in the revisions."
+  },
+  "review_metadata": {
+    "rating": 9,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 698,
+    "words": 110,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fb645b6c-770f-4539-8d9c-754280cbd3ad",
+    "error": null,
+    "scored_chars": 698
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "BiowiwzQaO",
+  "reviewer": "sgKz",
+  "paper": {
+    "title": "GoalLadder: Incremental Goal Discovery with Vision-Language Models",
+    "authors": [
+      "Alexey Zakharov",
+      "Shimon Whiteson"
+    ],
+    "abstract": "Natural language can offer a concise and human-interpretable means of specifying reinforcement learning (RL) tasks. The ability to extract rewards from a language instruction can enable the development of robotic systems that can learn from human guidance; however, it remains a challenging problem, especially in visual environments. Existing approaches that employ large, pretrained language models either rely on non‑visual environment representations, require prohibitively large amounts of feedback, or generate noisy, ill‑shaped reward functions. In this paper, we propose a novel method, GoalLadder, that leverages vision-language models (VLMs) to train RL agents from a single language instruction in visual environments. GoalLadder works by incrementally discovering states that bring the agent closer to completing a task specified in natural language. To do so, it queries a VLM to identify states that represent an improvement in agent's task progress and to rank them using pairwise comparisons. Unlike prior work, GoalLadder does not trust VLM's feedback completely; instead, it uses it to rank potential goal states using an ELO-based rating system, thus reducing the detrimental effects of noisy VLM feedback. Over the course of training, the agent is tasked with minimising the distance to the top-ranked goal in a learned embedding space, which is trained on unlabelled visual data. This key feature allows us to bypass the need for abundant and accurate feedback typically required to train a well-shaped reward function. We demonstrate that GoalLadder outperforms existing related methods on classic control and robotic manipulation environments with the average final success rate of $\\sim$95\\% compared to only $\\sim$45\\% of the best competitor.",
+    "keywords": [
+      "reinforcement learning",
+      "vision-language models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=BiowiwzQaO"
+  },
+  "review_fields": {
+    "summary": "This paper introduces GoalLadder, a reinforcement learning (RL) framework that learns from natural language task descriptions using vision-language models (VLMs). Rather than relying on dense reward signals or extensive VLM queries, GoalLadder incrementally builds a ranked buffer of goal candidate states using pairwise VLM comparisons guided by an ELO rating system. The agent is trained to minimize the distance in a learned embedding space to the top-rated goal. This enables sample-efficient, noise-tolerant goal discovery without explicit supervision. The method outperforms prior VLM-based baselines and achieves performance close to or better than oracle reward baselines on standard continuous control and robotic manipulation tasks.",
+    "strengths_and_weaknesses": "**Strengths**\n\n* Achieves strong empirical results: ~95% average success rate, outperforming all prior VLM-based baselines by a wide margin.\n\n* Significantly more sample-efficient in terms of VLM queries (∼4500 vs. ∼15000 for PEBBLE).\n\n* Clear, well-organized presentation with helpful diagrams and detailed algorithm description.\n\n* Leverages a learned embedding space to define rewards, enabling generalization to unseen states without requiring dense supervision.\n\n\n**Weaknesses**\n\n* No appendix is given in the paper. Should be fixed.\n\n* Embedding space is learned via VAE, but no comparison to alternative methods (e.g., contrastive learning).\n\n* Uses only Gemini 2.0 Flash as the VLM backbone; lacks evaluation on robustness across different models.\n\n* No analysis of robustness under adversarial or inconsistent VLM feedback.\n\n* The current evaluation is limited to five Metaworld tasks. In contrast, RL-VLM-F evaluated on a wider set, including Soccer, Cloth Fold, Straighten Rope, and Pass Water.",
+    "questions": "1. What was the prompt used for the VLM during pairwise comparisons in the discovery phase (i.e., for $\\text{VLM}(o^*, o_j, 1)$)?\n\n2. When a new observation $o_j$ is inserted into the goal buffer after outperforming the current best candidate, how is its initial ELO rating determined? i.e., what is $e_j$ if $\\text{VLM}(o^*, o_j, 1) = 1$ in the discovery phase?\n\n3. How does the size of the goal buffer affect the performance?\n\n4. The paper uses Gemini 2.0 Flash as the VLM backbone. Have the authors considered how GoalLadder would perform with more capable or recent models, such as GPT-4, Claude, or Gemini 2.5?\n\n5. The use of ELO to refine candidate goal rankings is a core component of GoalLadder, but its added value is not explicitly demonstrated. For instance, have the authors measured the correlation (e.g., Spearman rank correlation) between initial VLM comparisons and final ELO rankings? If the initial discovery decisions are highly predictive of final rankings, this might suggest that the ELO system introduces limited additional robustness.\n\n6. Have the authors observed any failure cases where the ELO system converges to suboptimal goals due to VLM inconsistencies?\n\n7. The method uses a variational autoencoder (VAE) to learn the latent space in which rewards are defined. Have the authors experimented with alternative approaches such as contrastive learning?\n\n8. Since the reward function depends on distances in the learned latent space, it would be helpful to see an analysis of whether this space meaningfully reflects task progress. Have the authors performed any sanity checks such as t-SNE or PCA visualizations of the latent representations?"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 2,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

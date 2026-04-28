@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "l5KpQ5MmaD",
+  "reviewer": "uMCt",
+  "paper": {
+    "title": "Scalable Non-Equivariant 3D Molecule Generation via Rotational Alignment",
+    "authors": [
+      "Yuhui Ding",
+      "Thomas Hofmann"
+    ],
+    "abstract": "Equivariant diffusion models have achieved impressive performance in 3D molecule generation. These models incorporate Euclidean symmetries of 3D molecules by utilizing an SE(3)-equivariant denoising network. However, specialized equivariant architectures limit the scalability and efficiency of diffusion models. In this paper, we propose an approach that relaxes such equivariance constraints. Specifically, our approach learns a sample-dependent SO(3) transformation for each molecule to construct an aligned latent space. A non-equivariant diffusion model is then trained over the aligned representations. Experimental results demonstrate that our approach performs significantly better than previously reported non-equivariant models. It yields sample quality comparable to state-of-the-art equivariant diffusion models and offers improved training and sampling efficiency. Our code is available at: https://github.com/skeletondyh/RADM",
+    "keywords": [
+      "Non-equivariant diffusion",
+      "3D molecule generation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=l5KpQ5MmaD"
+  },
+  "review_fields": {
+    "summary": "The paper explores a non-equivariant alternative to protein generation. It uses an explicit rotation network to rotate zero-centered molecule coordinates and builds a latent space on top of the rotated coordinates. The latent space is learned via VAE objective and encodes aligned features. This allows one to learn a non-equivariant diffusion model on the latent space, as motivated by those used in aligned 3D point cloud literature. The method achieves comparable performance as equivariant counterparts for generation while achieving faster sampling speed.\n\n## Update after rebuttal\n\nThe authors have adequately addressed my concerns regarding the non-equivariant decoder and scaling experiments. I increased score accordingly.",
+    "claims_and_evidence": "- The authors also claim that the non-equivariant diffusion model allows more \"scalability\" while no experiments are done to validate that this model \"scales\".\n\n- The authors claim that non-equivariant decoder is necessary to learn the aligned latent representation. Why is this the case? The paper does not further elucidate the intuition and does not design experiments to validate the claim. \n\n- The design of the encoder makes it such that the latent representation is supposedly aligned, which is the core of the method. However, the authors do not conduct experiments on investigating whether the learned latent spaces are actually aligned. Some simple PCA or other analysis can be done to investigate it further.",
+    "methods_and_evaluation_criteria": "The paper mostly follows previous papers in terms of datasets and in terms of evaluating generation quality.",
+    "theoretical_claims": "The method does not contain theories.",
+    "experimental_designs_or_analyses": "Pros:\n- The paper validates that the non-equivariant diffusion is faster due to parallelizable transformer network by showing sampling wall-clock time. It similarly shows by experiments that the generation performance is comparable.\n\n\nCons:\n- One simple baseline the paper is missing is simply to train fully non-equivariant autoencoder and non-equivariant latent diffusion with the same architecture. This is to validate the claim that the supposedly aligned latent feature and the newly introduced rotation network is actually useful. it is not clear whether the retained performance comes from the aligned latent space or the new transformer itself.\n- Following the above point, it is also not clear whether the latent space is actually aligned or could it be optimized away by some non-equivariant encoders.",
+    "relation_to_broader_scientific_literature": "The paper aims to advance core algorithms of drug generation and increase efficiency of generation while retaining quality.",
+    "essential_references_not_discussed": "Related works are properly discussed.",
+    "other_strengths_and_weaknesses": "Strength:\n- The writing is very clear and easy to follow.\n\nWeaknesses:\n- The proposal is incremental and novelty is limited.\n- The results show marginal improvement in terms of quality and some improvement in sampling speed only due to a change of architecture. The results do not strongly justify the reason for adopting this method.\n- The paper claims aligned feature helps, but does not actually conduct experiments to check that the latent space is aligned and the improvements are due to this design rather than other factors such as changing to a different transformer architecture.",
+    "questions_for_authors": "I have listed all my concerns in previous sections and wish the authors to address. I can consider increasing score if they are properly addressed."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

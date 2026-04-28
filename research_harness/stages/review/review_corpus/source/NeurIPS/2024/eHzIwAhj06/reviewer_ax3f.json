@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "eHzIwAhj06",
+  "reviewer": "ax3f",
+  "paper": {
+    "title": "The Group Robustness is in the Details: Revisiting Finetuning under Spurious Correlations",
+    "authors": [
+      "Tyler LaBonte",
+      "John Collins Hill",
+      "Xinchen zhang",
+      "Vidya Muthukumar",
+      "Abhishek Kumar"
+    ],
+    "abstract": "Modern machine learning models are prone to over-reliance on spurious correlations, which can often lead to poor performance on minority groups. In this paper, we identify surprising and nuanced behavior of finetuned models on worst-group accuracy via comprehensive experiments on four well-established benchmarks across vision and language tasks. We first show that the commonly used class-balancing techniques of mini-batch upsampling and loss upweighting can induce a decrease in worst-group accuracy (WGA) with training epochs, leading to performance no better than without class-balancing. While in some scenarios, removing data to create a class-balanced subset is more effective, we show this depends on group structure and propose a mixture method which can outperform both techniques. Next, we show that scaling pretrained models is generally beneficial for worst-group accuracy, but only in conjunction with appropriate class-balancing. Finally, we identify spectral imbalance in finetuning features as a potential source of group disparities --- minority group covariance matrices incur a larger spectral norm than majority groups once conditioned on the classes. Our results show more nuanced interactions of modern finetuned models with group robustness than was previously known. Our code is available at https://github.com/tmlabonte/revisiting-finetuning.",
+    "keywords": [
+      "spurious correlations",
+      "group robustness",
+      "distribution shift",
+      "class balancing"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=eHzIwAhj06"
+  },
+  "review_fields": {
+    "summary": "The subject of the work is over-reliance on spurious correlations, which can often lead to poor performance on minority groups. The authors identify two failure modes of common class-balancing techniques: (1) class-balanced mini-batch finetuning experiences catastrophic collapse with standard hyperparameters on benchmark datasets, and (2) finetuning on a balanced subset of data can harm WGA when a small minority group is present in the majority class.",
+    "strengths": "1. The authors provide important incremental advances to our understanding of subsetting and upsampling in this subfield; I.E., subsetting can be effective except when there is a small minority group present in the majority class, and ERM with class-balanced upsampling experiences a catastrophic collapse in test accuracy over the course of training.\n2. The decision to study the impact of model scaling on worst-group accuracy in a new setting — finetuning pretrained models — which more closely resembles practical use-cases -- is a welcome incremental contribution.\n3. The finding documented in Fig. 5 that the largest eigenvalue in each dataset belongs to a minority group and minority group eigenvalues are overall larger than majority group eigenvalues within the same class is a useful, if not terribly surprising, extension of [4].",
+    "weaknesses": "1. In 3.2, the authors overclaim the strengths of their proposed method and their investigation of prior work in this section is spotty. The authors mention [1] as prior work; however, Deep Feature Reweighting, the main method explored in [1], requires group labels, so it is unclear what aspect of this work they are referencing. The authors do not address Automatic Feature Reweighting [2] in this section, which resolves spurious correlations using a weighted loss on a held-out dataset drawn simply from the training distribution. [2] retrains the last layer only, with weights prioritizing datapoints on which the base model performs poorly. The authors cannot and do not claim superiority without comparisons to existing work; however, it would still be extremely informative to see how their mixture balancing method compares to that of [2].\n2. It would be helpful to have a section describing the motivation for why the authors chose to focus on subsetting and oversampling so heavily in the first section of the paper, included a section on spectral imbalance, but did not deeply investigate [3], which is also cited.\n\n[1] Last Layer Re-Training is Sufficient for Robustness to Spurious Correlations\n\n[2] Simple and fast group robustness by automatic feature reweighting\n\n[3] Spuriosity Rankings: Sorting Data to Measure and Mitigate Biases\n\n[4] Balanced Data, Imbalanced Spectra: Unveiling Class Disparities with Spectral Imbalance",
+    "questions": "* Why was [1] referenced in Sec 3.2?\n* Why was [2] not referenced in Sec. 3.2?\n* What motivates the authors' choice to focus on subsetting and oversampling in Secs 3 and 4, and on spectral imbalance in 5, rather than a more general investigation of their proposed method's efficacy or a simple analysis of subsetting and oversampling in group robustness?\n\nSUMMARY\n\nAs the paper stands, I think it is a weak accept; all of the contributions seem to be well supported by the evidence, but none of them seem likely to have an overwhelming impact. I will consider raising my score, however, if the weaknesses I mention are addressed.",
+    "limitations": "The authors have adequately addressed the limitations and potential negative societal impact of their work."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3023,
+    "words": 480,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b2cb210e-bc89-4c3b-b769-aafce0f3beb4",
+    "error": null,
+    "scored_chars": 3023
+  }
+}

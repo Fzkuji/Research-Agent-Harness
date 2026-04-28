@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "rqEoV-bub4E-",
+  "reviewer": "teJ3",
+  "paper": {
+    "title": "Charting and Navigating the Space of Solutions for Recurrent Neural Networks",
+    "authors": [
+      "Elia Turner",
+      "Kabir Vinay Dabholkar",
+      "Omri Barak"
+    ],
+    "abstract": "In recent years Recurrent Neural Networks (RNNs) were successfully used to model the way neural activity drives task-related behavior in animals, operating under the implicit assumption that the obtained solutions are universal. Observations in both neuroscience and machine learning challenge this assumption. Animals can approach a given task with a variety of strategies, and training machine learning algorithms introduces the phenomenon of underspecification. These observations imply that every task is associated with a space of solutions. To date, the structure of this space is not understood, limiting the approach of comparing RNNs with neural data.\nHere, we characterize the space of solutions associated with various tasks. We first study a simple two-neuron network on a task that leads to multiple solutions. We trace the nature of the final solution back to the network’s initial connectivity and identify discrete dynamical regimes that underlie this diversity. We then examine three neuroscience-inspired tasks: Delayed discrimination, Interval discrimination, and Time reproduction. For each task, we find a rich set of solutions. One layer of variability can be found directly in the neural activity of the networks. An additional layer is uncovered by testing the trained networks' ability to extrapolate, as a perturbation to a system often reveals hidden structure. Furthermore, we relate extrapolation patterns to specific dynamical objects and effective algorithms found by the networks. We introduce a tool to derive the reduced dynamics of networks by generating a compact directed graph describing the essence of the dynamics with regards to behavioral inputs and outputs. Using this representation, we can partition the solutions to each task into a handful of types and show that neural features can partially predict them.\nTaken together, our results shed light on the concept of the space of solutions and its uses both in Machine learning and in Neuroscience.",
+    "keywords": [
+      "RNN",
+      "underspecification",
+      "variability",
+      "space of solutions",
+      "neuroscience",
+      "reverse engineering",
+      "task optimized networks"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=rqEoV-bub4E-"
+  },
+  "review_fields": {
+    "summary": "The authors study the solutions  RNNs find and characterize them based on extrapolation and recurrent dynamics. They primarily consider two cases -- a simple two neuron network performing a memory task, and larger networks performing a Ready-Set-Go task. They show that the final solution depends on the initial connectivity, but not so much on the hyperparameters of learning.",
+    "main_review": "**Update:** Based on the authors response, and new results mentioned, I have updated my score to reflect my more positive evaluation of the paper.\n\nOverall, this is very interesting and nicely done work but the paper has some flaws that resulted in my recommendation of rejection.\n\n## Originality: \nThere are other works characterizing RNN dynamics, e.g. (Maheswaranathan et al. 2019) which is cited in the related work. All the aspects where this work differs is not very clear (might be useful to add), but one original contribution of this paper seems to be the use of extrapolation for characterizing the solution, which is an interesting idea. Another contribution is to show that initial connectivity and not hyperparameters influence the final solution (although it remains to be seen how generally applicable this is).\n\n## Quality: \nThe experiments performed in the paper are well defined, and the conclusions reached are reasonable. But the take-home message of the paper is not clear. Concrete comparisons with biological data would have strengthened the paper quite a lot.\n\nOne specific comment: It's strange that the parameters are trained in the PC space for the 2-neuron network as described in the caption for Fig. 1. Training in the original weight space and projecting onto the PC space just for plotting would have been more meaningful.\n\n## Clarity: \nThe writing is reasonably clear, but there are some gaps in the explanations:\n* How are the classes of networks defined? Is there a quantitative measure for this? Are the labels done manually? This key detail is not very clearly spelled out.\n* Sec. 4.3: Details about the networks being tested are not given. How large are these networks, and of what type?\n* Fig. 5 has no axis labels and explanation of what's plotted\n* l.219: Not sure reference [18] makes sense in the context of that sentence.\n\nMinor:\n* Fig. 2A: $t_p$ should be $t_s$?\n* Lines 128-135: Networks are referred using A,B,C,D while the figures are labelled D-G causing some confusion.\n* l.152: Figure 2A should be Figure 2D.\n\n## Significance: \nUnderstanding the space of solutions of RNNs is a very important problem, and this paper adds a couple of insights related to this.\nAnother key contribution of the paper is to show the variety of solutions that emerge for the considered tasks -- highlighting the selection bias present in papers that show activity similar to biology emerging in networks trained to do specific tasks.",
+    "limitations_and_societal_impact": "The authors have a fairly good discussion of the limitations of the paper."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

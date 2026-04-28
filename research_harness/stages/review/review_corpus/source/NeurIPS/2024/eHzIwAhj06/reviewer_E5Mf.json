@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "eHzIwAhj06",
+  "reviewer": "E5Mf",
+  "paper": {
+    "title": "The Group Robustness is in the Details: Revisiting Finetuning under Spurious Correlations",
+    "authors": [
+      "Tyler LaBonte",
+      "John Collins Hill",
+      "Xinchen zhang",
+      "Vidya Muthukumar",
+      "Abhishek Kumar"
+    ],
+    "abstract": "Modern machine learning models are prone to over-reliance on spurious correlations, which can often lead to poor performance on minority groups. In this paper, we identify surprising and nuanced behavior of finetuned models on worst-group accuracy via comprehensive experiments on four well-established benchmarks across vision and language tasks. We first show that the commonly used class-balancing techniques of mini-batch upsampling and loss upweighting can induce a decrease in worst-group accuracy (WGA) with training epochs, leading to performance no better than without class-balancing. While in some scenarios, removing data to create a class-balanced subset is more effective, we show this depends on group structure and propose a mixture method which can outperform both techniques. Next, we show that scaling pretrained models is generally beneficial for worst-group accuracy, but only in conjunction with appropriate class-balancing. Finally, we identify spectral imbalance in finetuning features as a potential source of group disparities --- minority group covariance matrices incur a larger spectral norm than majority groups once conditioned on the classes. Our results show more nuanced interactions of modern finetuned models with group robustness than was previously known. Our code is available at https://github.com/tmlabonte/revisiting-finetuning.",
+    "keywords": [
+      "spurious correlations",
+      "group robustness",
+      "distribution shift",
+      "class balancing"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=eHzIwAhj06"
+  },
+  "review_fields": {
+    "summary": "The paper tries to study the fundamental properties of fine-tuning DNNs and worst group accuracy in the presence of spurious correlations. The effort focuses on revealing nuances that were not clear. They conducted experiments with both 2 vision and 2 NLP datasets with spurious correlations and subgroup labels present. Within the authors' setup, the experiments discuss the (1) impacts of class-balancing on group robustness (2) proposed approach to mitigate (3) model scaling's impact and (4) spectral imbalance's effect.",
+    "strengths": "1. The paper conduct experiments to challenge the belief of (1) \"overparameterization helps or hurts robustness\" and (2) show the impact of different class-balancing methods,\n\n2. They conducted comprehensive experiments to explore and reveal the \"nuances\" in different directions across vision & language tasks, and propose suggestions when facing those scenarios.\n\n3. They propose a mixture method to outperform 2 prior common practices, subsetting and mini-batch class-balancing upsampling. The central idea of the mixture method is interpolate subsetting and upsampling.",
+    "weaknesses": "1. This paper aim to study the \"fundamental properties of fine-tuning\" but focused on ConvNext only and didn't experiment with another popular pre-trained model family such as ViTs.\n\n2. The paper keeps reiterating the \"nuanced\", however, I believe the those nuances are general prior beliefs, I would hope the authors can provide some ablations to clarify those nuances and potentially provide clear guidelines, since all methods have nuances.\n\n3. The findings of this paper have some dependencies, the success cases seem to depend on a specific or \"appropriate\" setup to work.\n\n4. The datasets the authors use has group labels in training set, the authors should at least study the how maybe other training paradigms such as GroupDRO, etc., fare in the authors setting and proposed method, otherwise I believe the scope would be relatively narrow.\n\n5. The datasets used are binary or trinary. In a more realistic setting multi-class setting, the nuances should be discussed.",
+    "questions": "1. Authors have put summaries at the end of each experiments. However, do the authors have a clearer guidelines for what practitioners should do under each \"nuanced\" scenarios, or just suggest there are more \"nuanced\" scenarios?\n\n2. Datasets authors used are all binary classifications, except MultiNLI (trinary), what would the nuances look like in a realistic multi-class setting? Would it create more nuances? [1] has an not ideal but acceptable multi-class dataset with group labels.\n\n3. What would the nuances look like in a ViT or its variants setting? As ViTs are know to require significant pretraining and downstream finetuning.\n\n---------------------------------------\n[1] Spawrious [Lynch, et. al, 2023]"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2266,
+    "words": 343,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8aad0c84-0cf5-4565-9a25-474abbce6db7",
+    "error": null,
+    "scored_chars": 2266
+  }
+}

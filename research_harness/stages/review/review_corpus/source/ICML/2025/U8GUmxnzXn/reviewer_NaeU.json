@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "U8GUmxnzXn",
+  "reviewer": "NaeU",
+  "paper": {
+    "title": "UnHiPPO: Uncertainty-aware Initialization for State Space Models",
+    "authors": [
+      "Marten Lienen",
+      "Abdullah Saydemir",
+      "Stephan Günnemann"
+    ],
+    "abstract": "State space models are emerging as a dominant model class for sequence problems with many relying on the HiPPO framework to initialize their dynamics. However, HiPPO fundamentally assumes data to be noise-free; an assumption often violated in practice. We extend the HiPPO theory with measurement noise and derive an uncertainty-aware initialization for state space model dynamics. In our analysis, we interpret HiPPO as a linear stochastic control problem where the data enters as a noise-free control signal. We then reformulate the problem so that the data become noisy outputs of a latent system and arrive at an alternative dynamics initialization that infers the posterior of this latent system from the data without increasing runtime. Our experiments show that our initialization improves the resistance of state-space models to noise both at training and inference time.",
+    "keywords": [
+      "state space",
+      "uncertainty",
+      "hippo",
+      "mamba",
+      "kalman",
+      "noise",
+      "filter"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=U8GUmxnzXn"
+  },
+  "review_fields": {
+    "summary": "This paper studies the HiPPO framework with noisy data. While the original HiPPO(-LegS) framework is based on projecting a function onto Legendre polynomials, it assumes that the input function is noise-free. The paper proposes an alternative way of formulating the HiPPO framework, called UnHiPPO, which is based on modeling the posterior of the states given the noisy measurements. The UnHiPPO framework introduces a new hyperparameter $\\sigma$ that is related to the noise level and ablation studies have been carried out to show its necessity.\n\n## update after rebuttal\nI thank the author(s) for their response and would maintain my score.",
+    "claims_and_evidence": "I find the claims made in the submission clear and convincing, modulo the first point I raised in the weaknesses section.",
+    "methods_and_evaluation_criteria": "The proposed method makes sense for the problem of interest.",
+    "theoretical_claims": "I checked the derivations of the formulas in the main text. I did not check the mathematics in the supplementary material.",
+    "experimental_designs_or_analyses": "I agree with the soundness of the experimental designs. I do have some questions about the analyses, which I raise in the questions section.",
+    "relation_to_broader_scientific_literature": "This paper studies the noise handling of a specific initialization scheme of LSSL/SSM. Both the objective (making the model noise-aware) and the class of models are of interest to many sequential and time series problems.",
+    "other_strengths_and_weaknesses": "I am ambivalent about my recommendation of this manuscript. On the one hand, the derivation of the UnHiPPO framework in this paper is beautiful and principled; on the other hand, I am not totally persuaded by the significance of the contribution to the application of LSSLs/SSMs, as there is a gap between the theory of the (Un)HiPPO framework and its practical success in such sequence models (as outlined in the questions section). In the end, I vote for weak acceptance, keeping in mind that such a gap is not an intrinsic flaw of the manuscript itself and that the UnHiPPO framework is potentially useful in fields other than LSSLs/SSMs or even deep learning.\n\nStrengths:\n   * The noisy-aware modeling is an important topic and has not been considered in the HiPPO literature.\n   * The derivation of the UnHiPPO framework in this paper is beautiful and principled.\n\nWeaknesses:\n   * While the UnHiPPO framework is derived from mathematical principles, there lacks a theoretical comparison of how UnHiPPO and HiPPO handle noises. That is, I would like to see a clear and convincing theorem that shows UnHiPPO is more robust to noises than HiPPO.\n   * The UnHiPPO state transitioning matrix $\\mathbf{A}$ is void of a simplified representation (e.g., diagonal-plus-low-rank or diagonal). This makes it harder to apply this initialization in the more efficient S4/S4D/S5 models.\n   * The presentation of the UnHiPPO framework can potentially be improved. See the comments section.",
+    "other_comments_or_suggestions": "1. I suggest clearly stating the issue with a noisy function $f$ and the objective of designing a noise-aware system before starting to derive it.\n2. The manuscript is very well-written and easy to follow up to the end of section 3. In section 4, the discussion is a bit confusing and required several reads for me to figure out the core idea. That is, (7)-(8) requires more explanation of how it connects to (4). The UnHiPPO systems are not derived in a way that an ML researcher standardly imagine, where one seeks parameters of an autoregressive system with given inputs. The idea is more of \"input matching given the guessed states.\" This can be made more straightforward at the beginning of section 4 to avoid confusion.\n3. I cannot understand the following sentence in section 4: \"In contrast to what one might expect, the observations $y\\_{k\\_t}$ do not exist in HiPPO and, instead, the signal $f(t)$ corresponds to the control signal $u\\_t$.\" Please consider rephrase or further explain it.\n4. At the end of section 2, I suggest expanding \"best possible compression of $f$\" to \"best possible compression of $f$ in the $L^2$ space\" to make the statement more precise.",
+    "questions_for_authors": "1. My main question is about the application of the HiPPO in LSSL. As mentioned earlier, I think there is a gap between theory and practice. The following subquestions may be useful to consider:\n   1. In Figure 7, you showed an ablation study that changing $\\sigma^2$ can vary the performance of the model. If you look at the model more carefully, then only a small proportion of $\\sigma^2$ leads to a better performance than the model initialized by HiPPO. This made me wonder: is it the noise-aware mechanism or something else that determines the performance of the model as the hyperparameter varies. By \"something else\", I mean things like the magnitudes of the eigenvalues of the discrete-time matrix $\\mathbf{A}$ that controls the system's memory (e.g., [1] and [2]), the imaginary parts of the eigenvalues of the continuous-time matrix $\\mathbf{A}$ that controls the frequency bias and the approximation-estimation (e.g., [3] and [4]), and the stability of the parameterization of the system (e.g., [5]). Can the authors show more empirical studies of whether the noise-awareness is really *the* thing? For example, it is useful to show Figure 7 multiple times given different $\\rho^2$ and see how the optimal $\\sigma^2$ changes.\n   2. As mentioned in the manuscript, what is used in theory (a time-varying system with a $1/t$ scaling) is different from what is used in practice (a time-invariant system that drops $1/t$). How does the theory account for this change and what is the noise-awareness of the time-invariant system?\n   3. HiPPO and UnHiPPO are only initializations. You have to train the systems eventually. How stable is UnHiPPO when trained?\n2. On page 6, you mentioned that \"An unfortunate side effect is that $\\sigma^2$ cannot be interpreted as the noise variance of the data\ndirectly.\" While I understand that one does not have $\\sigma^2 = \\rho^2$, I wonder if there is a connection between them. That is, if I know the noise level in the input, is there a principled way for me to select or scale the hyperparameter $\\sigma^2$?\n3. Can UnHiPPO be thought of as a regularization scheme, where $\\sigma^2$ controls the magnitude of regularization? This seems pretty clear in Figure 3-4. I wonder if some theory can be derived in this direction.\n4. The UnHiPPO discussed in this paper is only for HiPPO-LegS, while there are also many variants of HiPPO (e.g. HiPPO-LegT). Can the work in this paper be extended to those? To be clear, I do not look for detailed derivations of each of them. I only wonder if the analysis in this paper is generic or ad hoc to HiPPO-LegS.\n\n[1] Antonio Orvieto et al., Resurrecting recurrent neural networks for long sequences, International Conference on Machine Learning, 2023.\n\n[2] Naman Agarwal et al., Spectral state space models, arXiv preprint arXiv:2312.06837, 2023.\n\n[3] Annan Yu et al., Tuning frequency bias of state space models, International Conference on Learning Representations, 2025.\n\n[4] Fusheng Liu and Qianxiao Li, Autocorrelation Matters: Understanding the Role of Initialization Schemes for State Space Models, International Conference on Learning Representations, 2025.\n\n[5] Shida Wang and Qiaoxiao Li, Stablessm: Alleviating the curse of memory in state-space models through stable reparameterization, International Conference on Machine Learning, 2024."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

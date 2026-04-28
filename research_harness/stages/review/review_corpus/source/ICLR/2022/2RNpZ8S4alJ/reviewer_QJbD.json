@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "2RNpZ8S4alJ",
+  "reviewer": "QJbD",
+  "paper": {
+    "title": "KINet: Keypoint Interaction Networks for Unsupervised Forward Modeling",
+    "authors": [
+      "Alireza Rezazadeh",
+      "Changhyun Choi"
+    ],
+    "abstract": "Object-centric representation is an essential abstraction for physical reasoning and forward prediction. Most existing approaches learn this representation through extensive supervision (e.g, object class and bounding box) although such ground-truth information is not readily accessible in reality. To address this, we introduce KINet (Keypoint Interaction Network)---an end-to-end unsupervised framework to reason about object interactions in complex systems based on a keypoint representation. Using visual observations, our model learns to associate objects with keypoint coordinates and discovers a graph representation of the system as a set of keypoint embeddings and their relations. It then learns an action-conditioned forward model using contrastive estimation to predict future keypoint states. By learning to perform physical reasoning in the keypoint space, our model automatically generalizes to scenarios with a different number of objects, and novel object geometries. Experiments demonstrate the effectiveness of our model to accurately perform forward prediction and learn plannable object-centric representations which can also be used in downstream model-based control tasks.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=2RNpZ8S4alJ"
+  },
+  "review_fields": {
+    "comment": "Overall, I think what the paper does is quite similar to V-CDN, and making it end-to-end does not seem to be a significant contribution.\n\nRegarding the inference of adjacency matrix, in Variational Graph Auto-Encoders, the groundtruth adjacency matrix is provided, so the decoder can be trained to reconstruct the groundtruth adjacency matrix. However, in the proposed model, the groundtruth adjacency matrix is unknown, so I am wondering how the decoder can be learned and what A is used for computing log p(A|Z) in the inference loss."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 536,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/914f3620-4e2a-4571-b5a0-775078655f45",
+    "error": null,
+    "scored_chars": 536
+  }
+}

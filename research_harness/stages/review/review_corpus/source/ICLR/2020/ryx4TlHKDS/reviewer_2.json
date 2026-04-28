@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "ryx4TlHKDS",
+  "reviewer": "2",
+  "paper": {
+    "title": "EXACT ANALYSIS OF CURVATURE CORRECTED LEARNING DYNAMICS IN DEEP LINEAR NETWORKS",
+    "authors": [
+      "Dongsung Huh"
+    ],
+    "abstract": "Deep neural networks exhibit complex learning dynamics due to the highly non-convex loss landscape, which causes slow convergence and vanishing gradient problems. Second order approaches, such as natural gradient descent, mitigate such problems by neutralizing the effect of potentially ill-conditioned curvature on the gradient-based updates, yet precise theoretical understanding on how such curvature correction affects the learning dynamics of deep networks has been lack- ing. Here, we analyze the dynamics of training deep neural networks under a generalized family of natural gradient methods that applies curvature corrections, and derive precise analytical solutions. Our analysis reveals that curvature corrected update rules preserve many features of gradient descent, such that the learning trajectory of each singular mode in natural gradient descent follows precisely the same path as gradient descent, while only accelerating the temporal dynamics along the path. We also show that layer-restricted approximations of natural gradient, which are widely used in most second order methods (e.g. K-FAC), can significantly distort the learning trajectory into highly diverging dynamics that significantly differs from true natural gradient, which may lead to undesirable net- work properties. We also introduce fractional natural gradient that applies partial curvature correction, and show that it provides most of the benefit of full curvature correction in terms of convergence speed, with additional benefit of superior numerical stability and neutralizing vanishing/exploding gradient problems, which holds true also in layer-restricted approximations.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=ryx4TlHKDS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "In this manuscript, the authors analyze the dynamics of training deep linear neural networks under a generalized family of natural gradient methods that apply curvature corrections. They first show that the learning trajectory (direction of singular mode dynamics) in natural gradient descent follows the same path as gradient descent, while only accelerating the temporal dynamics along the path. Moreover, the authors show that the learning trajectory in layer-restricted approximations of natural gradient descent can significantly differ from the true natural gradient. Also, the authors proposed a fractional natural gradient that applies partial curvature correction which in addition to faster convergence, neutralizes vanishing/exploding gradient problems. \n\nI vote to reject this paper due to the following major concerns.\n1.\tThe results of the paper are limited to specific deep linear neural networks which are not practical. More specifically, in addition to only covering the deep linear case, the results hold under the following unexplained assumptions: (a) the correlation matrix of the input data is assumed to be whitened; (b) the singular vectors of adjacent weight matrices are well aligned; (c) Section 4, the singular values of all the weight matrices are the same.\n\n2.\tThe paper lacks a cohesive introduction that includes a literature review on this very rich area of research.\n\n3.\tThe paper is not clearly written and is missing many details.\n\nI discuss my comments on the manuscript in details next.\n\n•\tWhile the assumption on the input correlation matrix being whitened can be dropped, other assumptions in the paper are unrealistic and are stated without any intuition or explanation (the singular vectors of adjacent weight matrices are well aligned; (c) Section 4, the singular values of all the weight matrices are the same.)\n  \n•\tThe analysis performed in the paper cover the deep linear case and no intuition is provided on how these results can help in understanding the more general non-linear case. By citing [Saxe et al. 2013], the authors claim that the effect of curvature of loss landscape on deep learning dynamics can be well captured by deep linear networks. However, in [Saxe et al. 2013] this was only shown empirically on a specific example. In recent years, we have encountered many results that hold in deep linear networks but fail to hold when including simple non-linearities. For instance, when the target matrix Y is full rank, every local minimum of the studied problem is global in the deep linear case. However, this result does not hold even with the simplest non-linearities.\n\n•\tThe paper is unpolished and the objectives and contributions are not clearly stated. Moreover, the results are not rigorously stated and proved. Moreover, the algorithms stated and proposed in the paper are directly used without any introduction or explanation (how they work? What update rules do they use?  …)\n\n•\tThe introduction in the paper is very short and does not include a literature review on this rich area of research. Hence, the problem is not motivated by a gap in the literature and not linked to other results that study the behavior of algorithms used for training deep neural networks."
+  },
+  "review_metadata": {
+    "rating": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

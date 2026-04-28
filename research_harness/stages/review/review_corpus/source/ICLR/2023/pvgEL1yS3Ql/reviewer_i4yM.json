@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "pvgEL1yS3Ql",
+  "reviewer": "i4yM",
+  "paper": {
+    "title": "Cross-Layer Retrospective Retrieving via Layer Attention",
+    "authors": [
+      "Yanwen Fang",
+      "Yuxi CAI",
+      "Jintai Chen",
+      "Jingyu Zhao",
+      "Guangjian Tian",
+      "Guodong Li"
+    ],
+    "abstract": "More and more evidence has shown that strengthening layer interactions can enhance the representation power of a deep neural network, while self-attention excels at learning interdependencies by retrieving query-activated information. Motivated by this, we devise a cross-layer attention mechanism, called multi-head recurrent layer attention (MRLA), that sends a query representation of the current layer to all previous layers to retrieve query-related information from different levels of receptive fields. A light-weighted version of MRLA is also proposed to reduce the quadratic computation cost. The proposed layer attention mechanism can enrich the representation power of many state-of-the-art vision networks, including CNNs and vision transformers. Its effectiveness has been extensively evaluated in image classification, object detection and instance segmentation tasks, where improvements can be consistently observed. For example, our MRLA can improve 1.6% Top-1 accuracy on ResNet-50, while only introducing 0.16M parameters and 0.07B FLOPs. Surprisingly, it can boost the performances by a large margin of 3-4% box AP and mask AP in dense prediction tasks. Our code is available at https://github.com/joyfang1106/MRLA.",
+    "keywords": [
+      "Layer Attention",
+      "Recurrent Layer Attention",
+      "Layer Interaction",
+      "CNNs",
+      "Vision Transformers",
+      "Vision Networks"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=pvgEL1yS3Ql"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes a novel method for cross-layer interaction, which complements current mainstream networks emphasizing the interaction within a layer. Taking advantage of the attention mechanism, the proposed method enhances the layer interaction via attention. An efficient implementation is also introduced to avoid the vanilla quadratic complexity. Experimental results demonstrate the effectiveness of the proposed method.",
+    "strength_and_weaknesses": "[ Strength ]\n+ The motivation is very attractive. It is common that most of existing networks, including Transformers, only focus on the interaction within a certain layer. Even though ResNet and DenseNet, as analyzed by the authors, put some emphasis on layer interaction, the way they used (i.e., addition and/or concatenation) is a little bit naive and hard. The proposed method takes advantage of the attention mechanism and makes the cross-layer interaction more technically rational. \n+ The method is elegant and the presentation logic is clear. It is quite straightforward to understand each part of the method section. The proposed efficient implementation of layer attention, just like linear attention in efficient Transformers, is useful and necessary. \n+ Sufficient experiments demonstrate the effectiveness of the proposed method. The performance on image classification, object detection and instance segmentation indicates that the method is indeed effective and efficient. \n\n[ Weakness ]\n- On image classification, the input resolution is identically set as 224. What if enlarging the resolution? In fact, it is quite important to compare the accuracy and efficiency with various resolutions to reveal the robustness. Of course, it is necessary to check whether the complexity is linear (or nearly linear) to the input resolution.\n- Visual comparison is missing. The proposed cross-layer attention can enhance the interaction between layers, but there is no strong evidence specially for this interaction. For example, are local features from shallow layers transferred to top layers? How do high-level features facilitate the feature representation in shallow layers? These would need visual comparison.",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is of high quality including its clear motivation, good novelty and originality, and logical presentation.",
+    "summary_of_the_review": "I think the paper is quite good, and I recommend to accept the paper if the authors can address my two primary concerns above. Also, I would like to have further communication with other reviewers and the AC.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

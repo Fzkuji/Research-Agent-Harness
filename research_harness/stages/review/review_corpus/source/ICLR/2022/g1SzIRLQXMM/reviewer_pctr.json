@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "g1SzIRLQXMM",
+  "reviewer": "pctr",
+  "paper": {
+    "title": "Wiring Up Vision: Minimizing Supervised Synaptic Updates Needed to Produce a Primate Ventral Stream",
+    "authors": [
+      "Franziska Geiger",
+      "Martin Schrimpf",
+      "Tiago Marques",
+      "James J. DiCarlo"
+    ],
+    "abstract": "After training on large datasets, certain deep neural networks are surprisingly good models of the neural mechanisms of adult primate visual object recognition. Nevertheless, these models are considered poor models of the development of the visual system because they posit millions of sequential, precisely coordinated synaptic updates, each based on a labeled image.  While ongoing research is pursuing the use of unsupervised proxies for labels, we here explore a complementary strategy of reducing the required number of supervised synaptic updates to produce an adult-like ventral visual stream (as judged by the match to V1, V2, V4, IT, and behavior). Such models might require less precise machinery and energy expenditure to coordinate these updates and would thus move us closer to viable neuroscientific hypotheses about how the visual system wires itself up. Relative to standard model training on labeled images in ImageNet, we here demonstrate that the total number of supervised weight updates can be substantially reduced using three complementary strategies: First, we find that only 2% of supervised updates (epochs and images) are needed to achieve 80% of the match to adult ventral stream. Specifically, training benefits predictions of higher visual cortex the most whereas early visual cortex predictions only improve marginally over the course of training. Second, by improving the random distribution of synaptic connectivity, we find that 54% of the brain match can already be achieved “at birth\" (i.e. no training at all). Third, we find that, by training only 5% of model synapses, we can still achieve nearly 80% of the match to the ventral stream. This approach further improves on ImageNet performance over previous attempts in computer vision of minimizing trained components without substantially increasing the relative number of trained parameters. These results reflect first steps in modeling not just primate adult visual processing during inference, but also how the ventral visual stream might be \"wired up\" by evolution (a model's \"birth\" state) and by developmental learning (a model's updates based on visual experience).",
+    "keywords": [
+      "computational neuroscience",
+      "primate visual ventral stream",
+      "convolutional neural networks",
+      "biologically plausible learning"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=g1SzIRLQXMM"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "While deep networks are known to be biologically implausible, the strong similarities between the feature maps in such networks and the response characteristics (tuning curves) in different areas of the mammalian visual cortex (in particular the ventral stream) has prompted much work into trying to reconcile the known differences. The authors present work that contributes to such inquiries, demonstrating that at least some of the strong impediments in using such networks as plausible visual stream models may be more easily surmountable than they have thus far appeared to be.",
+    "main_review": "The authors present thorough analyses of standard feedforward networks that quantitatively demonstrate that such networks can model the visual stream well while requiring far fewer coordinated parameter changes than occur with traditional training methods.  In particular, they show that very little supervision is required for strong matches to neural responses, that plausible distributions of initial random weights can match neural responses very well, and that weights can be updated very sparsely while still achieving quite high neural response matches. \n\nSuch findings are highly relevant to allowing for such networks to be more plausibly accepted by the neuroscience community as valid models of cortical networks.  The striking finding that well-chosen random weights (Weight Compression) can predict neural responses with more than 50% accuracy is  especially interesting, as it suggests that indeed there may be less training required in mammalian brains compared to randomly initialized neuronal networks. This possibility opens up further avenues of study relating to the ability of real brains to learn with far fewer examples compared to ANNs.  \n\nFigure 4b further demonstrates this possibility, showing that, under the ethologically relevant condition of little supervision, WC + Critical Training, where only a small subset of weights in so-called critical layers are trained, greatly outperforms traditional training.  We note that, in the ideal case, a biologically plausible method might be found that performs well both under little supervision, as WC+CT does here, and under a large amount of supervision, as traditional backprop does, the demonstration of principle for the former case already represents appreciable progress.\n\nHowever, little in the way of tying model predictivity to accuracy on another task was explored. While tying brain predictivity to network performance is of course a very active area in its own right, we feel that addressing this directly within the context of the present work would facilitate readers' abilities to contextualize the present study with respect to ANN performance.\n\nOverall, we find the authors' presented work to be of great interest to those interested in applying ML models to theoretical questions in neuroscience and to have a thorough set of analyses that both illustrates progress in this area while suggesting future avenues of work.\n\nMinor:\n- opening quotes are backwards throughout paper",
+    "summary_of_the_review": "The authors provide a compelling case that much more biologically plausible sets of initial conditions and sparse, selective supervision and synaptic updates might help substantially close the gap in viewing deep networks as plausible visuocortical models.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2718,
+    "words": 404,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ef1c0f90-5e29-4d2e-aead-8e8ef9884d1c",
+    "error": null,
+    "scored_chars": 2725
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "Z4eFqgYbha",
+  "reviewer": "xS39",
+  "paper": {
+    "title": "Structure-Aware Spectral Sparsification via Uniform Edge Sampling",
+    "authors": [
+      "Kaiwen He",
+      "Petros Drineas",
+      "Rajiv Khanna"
+    ],
+    "abstract": "Spectral clustering is a fundamental method for graph partitioning, but its reliance on eigenvector computation limits scalability to massive graphs. Classical sparsification methods preserve spectral properties by sampling edges proportionally to their effective resistances, but require expensive preprocessing to estimate these resistances. We study whether uniform edge sampling—a simple, structure-agnostic strategy—can suffice for spectral clustering. Our main result shows that for graphs admitting a well-separated $k$-clustering, characterized by a large structure ratio $\\Upsilon(k) = \\lambda_{k+1} / \\rho_G(k)$, uniform sampling preserves the spectral subspace used for clustering. Specifically, we prove that uniformly sampling $O(\\gamma^2 n \\log n / \\varepsilon^2)$ edges, where $\\gamma$ is the Laplacian condition number, yields a sparsifier whose top $(n-k)$-dimensional eigenspace is approximately orthogonal to the cluster indicators. This ensures that the spectral embedding remains faithful, and clustering quality is preserved. Our analysis introduces new resistance bounds for intra-cluster edges, a rank-$(n-k)$ effective resistance formulation, and a matrix Chernoff bound adapted to the dominant eigenspace. These tools allow us to bypass importance sampling entirely. Conceptually, our result connects recent coreset-based clustering theory to spectral sparsification, showing that under strong clusterability, even uniform sampling is structure-aware. This provides the first provable guarantee that uniform edge sampling suffices for structure-preserving spectral clustering.",
+    "keywords": [
+      "Spectral Clustering",
+      "Graph Sparsification"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Z4eFqgYbha"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their response, and I appreciate the effort to clarify some of the statements made in the initial rebuttal. Nonetheless, I remain unconvinced about the contribution. \n\nI understand that the effective resistance $O(|E|)$ pre-processing cost is avoidable if we replace it with uniform sampling. However, in a _theory_ paper, a runtime improvement only matters if it is a runtime improvement in the _leading order_ term of the computation (otherwise, we would all be optimizing constants and logs). It is still not clear to me whether there is any dent in the leading order term in the computation, or if this is jut saving on lower order factors. \n\nMy concern is that if this paper is to be considered a pure theory paper, it should give a formal treatment of how this uniform sampling alternative factors into the overall complexity. However, if the paper is to be considered more of a practical paper, the experiments should be more comprehensive, comparing more thoroughly against alternative approaches (as mentioned in my original response.) \n\nBecause of these concerns, and the concerns about the claims I raised in my response to the rebuttal, I am currently inclined to maintain my score. However, I will engage in AC-reviewer discussions and revisit this decision. \n\nI thank the authors for their time and efforts to respond."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

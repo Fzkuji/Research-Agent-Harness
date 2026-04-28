@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "sZI1Oj9KBKy",
+  "reviewer": "Ghni",
+  "paper": {
+    "title": "TVSPrune - Pruning Non-discriminative filters via Total Variation separability of intermediate representations without fine tuning",
+    "authors": [
+      "Chaitanya Murti",
+      "Tanay Narshana",
+      "Chiranjib Bhattacharyya"
+    ],
+    "abstract": "Achieving structured, data-free sparsity of deep neural networks (DNNs) remains an open area of research.  In this work, we address the challenge of pruning filters without access to the original training set or loss function. We propose the discriminative filters hypothesis, that well-trained models possess discriminative filters, and any non-discriminative filters can be pruned without impacting the predictive performance of the classifier. Based on this hypothesis, we propose a new paradigm for pruning neural networks: distributional pruning, wherein we only require access to the distributions that generated the original datasets. Our approach to solving the problem of formalising and quantifying the discriminating ability of filters is through the total variation (TV) distance between the class-conditional distributions of the filter outputs. We present empirical results that, using this definition of discriminability, support our hypothesis on a variety of datasets and architectures. Next, we define the LDIFF score, a heuristic to quantify the extent to which a layer possesses a mixture of discriminative and non-discriminative filters. We empirically demonstrate that the LDIFF score is indicative of the performance of random pruning for a given layer, and thereby indicates the extent to which a layer may be pruned. Our main contribution is a novel one-shot pruning algorithm, called TVSPrune, that identifies non-discriminative filters for pruning. We extend this algorithm to IterTVSPrune, wherein we iteratively apply TVSPrune, thereby enabling us to achieve greater sparsity. Last, we demonstrate the efficacy of the TVSPrune on a variety of datasets, and show that in some cases, we can prune up to 60% of parameters with only a 2% loss of accuracy without any fine-tuning of the model, beating the nearest baseline by almost 10%.",
+    "keywords": [
+      "Structured pruning",
+      "model compression"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=sZI1Oj9KBKy"
+  },
+  "review_fields": {
+    "comment": "I would like to thank the authors for their detailed feedback to the original comments.\nBased on the feedback, I had a couple of clarifications,\n- The storage of moments, even if it only during runtime, is still a cost overhead that needs to be kept in mind when choosing/executing the algorithm presented in the manuscript (in terms of overhead/complexity needed).\n- When discussing the random pruning, my intention in saying \"loose bounds\" was to show that while random pruning offers an unguided approach to indicating the effectiveness of pruning, a more directed approach could provide tight bounds on just how much different layers can/cannot be pruned. There could possibly be a correlation in the choice of pruning constraint and internal scores computed in the algorithm.\n- The initial layers seem to have an odd level of behavior, w.r.t. the proposed algorithm. Could the authors further clarify the statement \" For layers with low LDIFF scores (such as the initial layers), we observe little difference between pruning the most discriminative and least discriminative filters. \". This statement seems to indicate that regardless of which filters are pruned, the network is able to sustain performance. This is counter to the intuition that initial layers grasp basic concepts which form the necessary building blocks for subsequent layers."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

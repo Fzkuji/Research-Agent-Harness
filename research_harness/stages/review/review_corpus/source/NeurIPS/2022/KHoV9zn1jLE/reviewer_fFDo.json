@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "KHoV9zn1jLE",
+  "reviewer": "fFDo",
+  "paper": {
+    "title": "Implicitly regularized interaction between SGD and the loss landscape geometry",
+    "authors": [
+      "Sungyoon Lee",
+      "Cheongjae Jang"
+    ],
+    "abstract": "We study unstable dynamics of stochastic gradient descent (SGD) and its impact on generalization in neural networks. We find that SGD induces an implicit regularization on the interaction between the gradient distribution and the loss landscape geometry. Moreover, based on the analysis of a concentration measure of the batch gradient, we propose a more accurate scaling rule, Linear and Saturation Scaling Rule (LSSR), between batch size and learning rate.",
+    "keywords": [
+      "SGD",
+      "learning rate",
+      "batch size",
+      "optimization",
+      "generalization",
+      "implicit bias",
+      "implicit regularization",
+      "sharpness",
+      "scaling rule"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=KHoV9zn1jLE"
+  },
+  "review_fields": {
+    "summary": "This paper makes several contributions:\n 1.  The authors propose a new characterization of 'edge of stability' which is said to improve over the original characterization from Cohen et al. (2021) in that it (1) fits full-batch GD better, and (2) generalizes to SGD.  Specifically, whereas the original characterization is that the sharpness (maximum Hessian eigenvalue) hovers **just above** the value $2/\\eta$, the authors propose characterizing the EoS as a regime in which the expected loss difference that is predicted by a quadratic taylor approximation hovers **around** the value zero (here, the expectation is wrt randomness in minibatch sampling).  For SGD, this condition comes out to $\\frac{\\text{tr}(H S_b)}{\\|g\\|^2} \\approx \\frac{2}{\\eta}$, where g is the (full-batch) gradient, H is the Hessian, and $S_b$ is the second moment matrix of minibatch gradients.  For full-batch GD, the condition reduces to $\\frac{g^T H g}{\\|g\\|^2} \\approx \\frac{2}{\\eta}$.  In the case of full-batch GD, the authors argue that their condition $\\frac{g^T H g}{\\|g\\|^2} \\approx \\frac{2}{\\eta}$ improves over the original condition $\\|H\\|_2 \\gtrapprox 2/\\eta $ in that  $\\frac{g^T H g}{\\|g\\|^2}$ empirically hovers right around $2/\\eta$ (Figure 4), whereas there is usually a gap between $\\|H\\|_2$ and  $2/\\eta $.  More importantly, it is currently an open question how the 'edge of stability' phenomenon generalizes to SGD, and the authors argue that their condition $\\frac{\\text{tr}(H S_b)}{\\|g\\|^2} \\approx \\frac{2}{\\eta}$ holds during SGD. \n  \n 2.  The authors investigate the behavior of gradient descent at the EoS (Figures 1-3).   They find, essentially, that gradient descent is leaping back and forth across an asymmetric valley (https://arxiv.org/abs/1902.00744).  At every iteration where  $\\frac{g^T H g}{\\|g\\|^2}$ is above $2/\\eta$, it dips below $2/\\eta$ on the next step.  At every iteration where $\\frac{g^T H g}{\\|g\\|^2}$ is below $2/\\eta$, it rises above $2/\\eta$ on the next step.  Note that a similar point has been made (with no experiments) in the contemporaneous work of Chen & Bruna (https://arxiv.org/abs/2206.04172).\n\n 3.  The authors propose a new scaling rule that describes how the linear rate ought to be scaled with the batch size in order to preserve the same implicit regularization.  Namely, the authors suggest that two training runs have the same implicit regularization whenever $\\text{tr}(S_b) / [\\eta \\| g\\|^2]$ is the same, and they present evidence (Figure 5) in support of their hypothesis.  Their scaling rule reduces to the well-known linear scaling rule in the limit of small batches, and reduces to \"no scaling\" in the limit of large batches.",
+    "strengths_and_weaknesses": "In what follows, I will reference the contributions I listed above by their numbers.\n\n- Weakness of contribution #1: I could be wrong, but I don't think the new EoS characterization will generalize to momentum gradient descent (either with Polyak-style or Nesterov-style momentum).  In the Cohen et al EoS paper, it is intuitively clear why the sharpness should hover just above $2/\\eta$: if the training objective is modeled by its quadratic Taylor approximation, we see that gradient descent cannot linger for long in any region where the sharpness exceeds $2/\\eta$, because it will oscillate with exponentially growing magnitude in a certain direction until it leaves the region.  The extensions in that paper to Nesterov and Polyak momentum are based on the same reasoning.  By contrast, the underlying logic behind the new proposed EoS characterization (which is based on the idea that the loss is always non-monotonic) is less clear to me, and one consequence is that I don't see how it can be generalized to momentum.\n\n- Strength of contribution #1: the proposed extension of EoS to SGD is interesting (note that it's basically a quadratic Taylor approximation version of the phenomenon reported in Cohen et al (2021) appendix H).  Nothing has been published in the literature addressing the question of how EoS might generalize to SGD, so any experimental result that seems to hold consistently across a wide range of networks is valuable.\n\n- Strength of contribution #2: I think that these experiments will be useful for people interested in how gradient descent manages to remain semi-stable at the EoS.\n\n- Weakness of contribution #3: both $\\text{tr}(S_b)$ and $\\|g\\|^2$ will vary over the course of training, and I don't see any reason why their ratio should remain constant.  Thus, the scaling rule is not even well-defined.",
+    "questions": "- In Figure 5, where does the yellow dotted line come from? \n\n- The plots of $||H||$ in Figure 31 look weird to me -- typically, the sharpness along the optimization trajectory is smaller when the batch size is smaller.  Could there be an error here?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 5,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

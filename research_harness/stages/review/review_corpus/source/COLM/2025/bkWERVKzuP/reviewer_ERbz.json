@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "bkWERVKzuP",
+  "reviewer": "ERbz",
+  "paper": {
+    "title": "Yourbench: Dynamic Evaluation Set Generation with LLMs",
+    "authors": [
+      "Sumuk Shashidhar",
+      "Clémentine Fourrier",
+      "Alina Lozovskaya",
+      "Thomas Wolf",
+      "Gokhan Tur",
+      "Dilek Hakkani-Tür"
+    ],
+    "abstract": "Large language models (LLMs) have rapidly outpaced traditional evaluation methodologies, with static benchmarks suffering from saturation, contamination, and domain-specificity limitations while human evaluation remains prohibitively expensive. We present YourBench, an open-source framework that transforms this evaluation paradigm by enabling automated generation of reliable, contamination-free benchmarks directly from user-provided documents without human annotation. To validate our approach, we successfully reproduce the challenging MMLU-Pro benchmark across 86 models spanning 400M to 405B parameters, achieving remarkable Pearson correlations of 0.91-0.99 while generating entirely novel questions for under $15 per model. This demonstrates that dynamically generated evaluations can match the discriminative power of expert-curated benchmarks while eliminating contamination risks. YourBench enables researchers to create domain-specific benchmarks in minutes rather than months. We demonstrate applications in agriculture, personalized education, and RAG training that were previously infeasible. By releasing the YourBench library, Tempora-0325 dataset, 150K+ generated QA pairs, and all evaluation traces, we provide the community with a practical solution to the challenge of keeping pace with rapidly evolving model capabilities.",
+    "keywords": [
+      "benchmarking",
+      "contemporary dataset",
+      "dataset",
+      "reference-free",
+      "automated",
+      "llm"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=bkWERVKzuP"
+  },
+  "review_fields": {
+    "summary": "This work introduces *YourBench*, a high-quality and clearly presented framework for automated, document-grounded LLM evaluation. The approach is original, leveraging user-provided documents to dynamically generate benchmarks without manual annotation. The framework is well-validated through benchmark replication and rigorous analysis, showing strong potential to address issues of benchmark saturation, contamination, and domain specificity. Overall, this is a timely and significant contribution to the field.",
+    "reasons_to_accept": "1.\tThe research problem addressed in this work is timely and valuable. Developing automated and up-to-date benchmarks is a pressing need in the field, particularly for evaluating and iterating on large language models efficiently.\n2.\tThe proposed pipeline is comprehensive, as it covers all key components including document preprocessing, question-answer generation, quality control, and final evaluation. This reflects a high level of completeness in the overall system design.\n3.\tThe experiments are thorough and well-designed, evaluating the benchmark generation process from multiple perspectives to ensure robustness and reliability.\n4.\tThe work is highly reproducible, with detailed descriptions provided for each step of the pipeline, enabling easy replication by the research community.\n5.\tThe paper is clearly written and well-organized, making it accessible and easy to follow.",
+    "reasons_to_reject": "1.\tWhile the proposed method effectively targets domain-specific benchmark construction, it primarily focuses on knowledge-based question generation. Its core approach relies on leveraging the information integration capabilities of LLMs to generate benchmarks grounded in source documents. As a result, it may face challenges in producing more creative or cognitively demanding questions, such as those involving complex logical reasoning or multi-step inference.\n2.\tThe experiments are limited to replicating the MMLU dataset. Incorporating additional datasets such as MMLU-Pro or GSM8K would help demonstrate the broader applicability and robustness of the approach.\n3.\tAlthough the paper introduces an evaluation strategy based on a judge LLM ensemble, this component is not clearly validated in the MMLU replication experiments, which do not rely on such a mechanism. The work would benefit from more direct comparisons between its evaluation methodology and existing benchmarks to establish alignment and effectiveness.",
+    "questions_to_authors": "1.\tIs the proposed method capable of generating benchmarks involving multi-turn dialogues, such as those found in MT-Bench?\n2.\tWhat is the recommended or best-practice ensemble configuration of LLMs based on the analysis in Section 3.2? Specifically, how are models selected to jointly optimize for question validity and diversity?\n3.\tSeveral hyperparameters are mentioned in the paper, such as the citation confidence threshold $\\theta_{cit}$ in Section 2.3.1. Could the authors elaborate on the sensitivity of the framework to these hyperparameters, and whether any tuning studies were conducted to assess their impact?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 3,
+    "mixed_pct": 97,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 2538,
+    "words": 360,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3762f176-4aeb-4ff2-9283-e99859aeaab7",
+    "error": null,
+    "scored_chars": 2538
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "B2iPEX5A9c",
+  "reviewer": "wh8N",
+  "paper": {
+    "title": "Information-Theoretic Discrete Diffusion",
+    "authors": [
+      "Moongyu Jeon",
+      "Sangwoo Shin",
+      "Dongjae Jeon",
+      "Albert No"
+    ],
+    "abstract": "We present an information-theoretic framework for discrete diffusion models \nthat yields principled estimators of log-likelihood using score-matching losses.\nInspired by the I-MMSE identity for the Gaussian setup, we derive analogous results for the discrete setting.\nSpecifically, we introduce the Information–Minimum Denoising Score Entropy (I-MDSE) relation,\nwhich links mutual information between data and its diffused version to the minimum denoising score entropy (DSE) loss.\nWe extend this theory to masked diffusion and establish the Information–Minimum Denoising Cross-Entropy (I-MDCE) relation,\nconnecting cross-entropy losses to mutual information in discrete masked processes.\nThese results provide a time-integral decomposition of the log-likelihood of the data in terms of optimal score-based losses,\nshowing that commonly used losses such as DSE and DCE are not merely variational bounds \nbut tight and principled estimators of log-likelihood.\nThe I-MDCE decomposition further enables practical extensions, including time-free formula,\nconditional likelihood estimation in prompt–response tasks, and coupled Monte Carlo estimation of likelihood ratios.\nExperiments on synthetic and real-world data confirm the accuracy, variance stability, and utility of our estimators.\nThe code is publicly available at https://github.com/Dongjae0324/infodis.",
+    "keywords": [
+      "Discrete Diffusion Models",
+      "Information Theory",
+      "Score Matching",
+      "Denoising Score Entropy (DSE)",
+      "Denoising Cross-Entropy (DCE)"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=B2iPEX5A9c"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a framework introducing information-theoretic framework for discrete diffusion models, by using principled estimators of log-likelihood based on score-matching losses. Empirical results on synthetic and real-world data confirm that the proposed approach accurately estimates log-probabilities of discrete inputs.",
+    "strengths_and_weaknesses": "**Strength**\n\n* The submission proposed I-MDSE and I-MDCE that connect mutual information decay with score-based loss functions in discrete diffusion.\n\n* The author provides closed-form of negative log-likelihood time-integral and time-free NLL estimators  for general discrete diffusion and masked diffusion and extends the NLL estimation to the conditional setting for structured prediction tasks..\n\n**Weaknesses**\n\n* The experimental scale is limited, and the absence of comparisons with prior work (e.g. baseline comparison) makes it difficult to fully validate the strength of the proposed framework. For instance, compared to other similar approaches such as ItDPDM (Information-Theoretic Discrete Poisson Diffusion Model), which includes comprehensive real-world evaluations and baselines to support its claims, this submission lacks such empirical breadth.\n\n* This framework appears to be an extension of Information-Theoretic Diffusion, adapting its analogous results to discrete diffusion settings. However, without clear motivation, detailed explanations, or illustrative examples, it is difficult to assess whether this submission offers more than an incremental contribution.",
+    "questions": "Could the authors provide baseline comparisons to better support the effectiveness of the proposed framework?",
+    "final_justification": "While a more detailed comparison against diverse baselines would have been helpful, I appreciate the authors' thoughtful clarifications and the additional experimental results provided during the rebuttal. In light of the strengths highlighted by other reviewers—particularly the use of discrete diffusion via I-MMSE connections—I have decided to raise my rating to align with their perspectives."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 2,
+    "significance": 3,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "a560KLF3v5",
+  "reviewer": "QeA1",
+  "paper": {
+    "title": "Unelicitable Backdoors via Cryptographic Transformer Circuits",
+    "authors": [
+      "Andis Draguns",
+      "Andrew Gritsevskiy",
+      "Sumeet Ramesh Motwani",
+      "Christian Schroeder de Witt"
+    ],
+    "abstract": "The rapid proliferation of open-source language models significantly increases the risks of downstream backdoor attacks. These backdoors can introduce dangerous behaviours during model deployment and can evade detection by conventional cybersecurity monitoring systems. In this paper, we introduce a novel class of backdoors in transformer models, that, in contrast to prior art, are unelicitable in nature. Unelicitability prevents the defender from triggering the backdoor, making it impossible to properly evaluate ahead of deployment even if given full white-box access and using automated techniques, such as red-teaming or certain formal verification methods. We show that our novel construction is not only unelicitable thanks to using cryptographic techniques, but also has favourable robustness properties.\nWe confirm these properties in empirical investigations, and provide evidence that our backdoors can withstand state-of-the-art mitigation strategies. Additionally, we expand on previous work by showing that our universal backdoors, while not completely undetectable in white-box settings, can be harder to detect than some existing designs. By demonstrating the feasibility of seamlessly integrating backdoors into transformer models, this paper fundamentally questions the efficacy of pre-deployment detection strategies. This offers new insights into the offence-defence balance in AI safety and security.",
+    "keywords": [
+      "Backdoor attacks",
+      "Transformers",
+      "handcrafting model parameters",
+      "cryptographic circuits"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=a560KLF3v5"
+  },
+  "review_fields": {
+    "summary": "The paper introduces a new technique of complied-weight based backdoor attack on transformer models, proposing two mechanisms, a \"NP-Complete Backdoor\", that is more simple but does not defeat Latent Adversarial Training, and an \"Encrypted Backdoor\", that defeats LAT and provides cryptographic guarantees of unelicitability against polynomially-bounded adversaries.",
+    "strengths": "- The \"encrypted backdoor\" is novel, technically interesting, and successful.\n\n- The paper defeats LAT and is an improvement over other weight-based backdoors.\n\n- The paper identifies and evades the \"thin bottleneck\" problem.",
+    "weaknesses": "- I am dubious of the claim that this work presents the \"first white-box unelicitable backdoor construction\". It seems [1] is also unelicitable in similar conditions, both because the trigger is NP-complete and because the backdoor does not exist in the weights or high level architecture. Perhaps the authors should be more specific with this claim.\n\n- The trigger mechanism of the NP-Complete Backdoor is very similar to the mechanism in [1], although it is more generally stated. Perhaps [1] should be cited.\n\n- It is unclear how large of a footprint the SHA-256 hash function has, though it is hinted to be large. Would such a large footprint not make for a reasonably detectable backdoor? I understand that obfuscation is (quite rightly) left for future work, but I don't see that obfuscation could make the footprint significantly smaller; and a backdoor that adds significant size to the model is suspicious even without looking in detail at the architecture.\n\n[1] Clifford et. al. 2022, ImpNet: Imperceptible and blackbox-undetectable backdoors in compiled neural networks",
+    "questions": "see limitations above.\n\nnitpick on clarity: are \"corrupted output\" in 4.2 and \"harmful payload\" in 4.1 the same thing? If no, what is the difference? If yes, it would be more clear if consistent terminology were used.",
+    "limitations": "Limitations are well addressed. Negative societal impact is minimal."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1596,
+    "words": 252,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/515fe505-fb4d-4154-bc86-c3cbf687867e",
+    "error": null,
+    "scored_chars": 1596
+  }
+}

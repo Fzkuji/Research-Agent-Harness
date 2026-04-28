@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "BkN_r2lR-",
+  "reviewer": "3",
+  "paper": {
+    "title": "Identifying Analogies Across Domains",
+    "authors": [
+      "Yedid Hoshen",
+      "Lior Wolf"
+    ],
+    "abstract": "Identifying analogies across domains without supervision is a key task for artificial intelligence. Recent advances in cross domain image mapping have concentrated on translating images across domains. Although the progress made is impressive, the visual fidelity many times does not suffice for identifying the matching sample from the other domain. In this paper, we tackle this very task of finding exact analogies between datasets i.e. for every image from domain A find an analogous image in domain B. We present a matching-by-synthesis approach: AN-GAN, and show that it outperforms current techniques. We further show that the cross-domain mapping task can be broken into two parts: domain alignment and learning the mapping function. The tasks can be iteratively solved, and as the alignment is improved, the unsupervised translation function reaches quality comparable to full supervision.",
+    "keywords": [
+      "unsupervised mapping",
+      "cross domain mapping"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=BkN_r2lR-"
+  },
+  "review_fields": {
+    "review": "This paper presents an image-to-image cross domain translation framework based on generative adversarial networks. The contribution is the addition of an explicit exemplar constraint into the formulation which allows best matches from the other domain to be retrieved. The results show that the proposed method is superior for the task of exact correspondence identification and that AN-GAN rivals the performance of pix2pix with strong supervision.\n\n\nNegatives:\n1.) The task of exact correspondence identification seems contrived. It is not clear which real-world problems have this property of having both all inputs and all outputs in the dataset, with just the correspondence information between inputs and outputs missing.\n2.) The supervised vs unsupervised experiment on Facades->Labels (Table 3) is only one scenario where applying a supervised method on top of AN-GAN’s matches is better than an unsupervised method.  More transfer experiments of this kind would greatly benefit the paper and support the conclusion that “our self-supervised method performs similarly to the fully supervised method.” \n\nPositives:\n1.) The paper does a good job motivating the need for an explicit image matching term inside a GAN framework\n2.) The paper shows promising results on applying a supervised method on top of AN-GAN’s matches.\n\nMinor comments:\n1. The paper sometimes uses L1 and sometimes L_1, it should be L_1 in all cases.\n2. DiscoGAN should have the Kim et al citation, right after the first time it is used. I had to look up DiscoGAN to realize it is just Kim et al."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

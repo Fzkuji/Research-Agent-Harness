@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "rJg8TeSFDH",
+  "reviewer": "2",
+  "paper": {
+    "title": "An Exponential Learning Rate Schedule for Deep Learning",
+    "authors": [
+      "Zhiyuan Li",
+      "Sanjeev Arora"
+    ],
+    "abstract": "Intriguing empirical evidence exists that deep learning can work well with exotic schedules for varying the learning rate. This paper suggests that the phenomenon may be due to Batch Normalization or BN(Ioffe & Szegedy, 2015), which is ubiq- uitous and provides benefits in optimization and generalization across all standard architectures. The following new results are shown about BN with weight decay and momentum (in other words, the typical use case which was not considered in earlier theoretical analyses of stand-alone BN (Ioffe & Szegedy, 2015; Santurkar et al., 2018; Arora et al., 2018)\n• Training can be done using SGD with momentum and an exponentially in- creasing learning rate schedule, i.e., learning rate increases by some (1 + α) factor in every epoch for some α > 0. (Precise statement in the paper.) To the best of our knowledge this is the first time such a rate schedule has been successfully used, let alone for highly successful architectures. As ex- pected, such training rapidly blows up network weights, but the net stays well-behaved due to normalization.\n• Mathematical explanation of the success of the above rate schedule: a rigor- ous proof that it is equivalent to the standard setting of BN + SGD + Standard Rate Tuning + Weight Decay + Momentum. This equivalence holds for other normalization layers as well, Group Normalization(Wu & He, 2018), Layer Normalization(Ba et al., 2016), Instance Norm(Ulyanov et al., 2016), etc.\n• A worked-out toy example illustrating the above linkage of hyper- parameters. Using either weight decay or BN alone reaches global minimum, but convergence fails when both are used.",
+    "keywords": [
+      "batch normalization",
+      "weight decay",
+      "learning rate",
+      "deep learning theory"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=rJg8TeSFDH"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "This work makes an interesting observation that it is possible to use exponentially growing learning rate schedule when training with neural networks with batch normalization. This paper provides both theoretical insights and empirical demonstration of this remarkable property. In detail, the authors prove that for stochastic gradient descent (SGD) with momentum, this exponential learning rate schedule is equivalent to constant learning rate + weight decay, for any scale invariant networks, including networks with Batch Normalization and other normalization methods. This paper also contains an interesting toy example where  gd converges when normalization or weight decay is used alone while not when normalization and weight decay are used together.\n\nPros:\n\n1. This paper gives new and important insight to the complex interplay between the tricks of network training, such as weight decay, normalization and momentum. The assumption and derivation are simple but the result is quite surprising. In classical optimization framework, it is common to keep the learning rate smaller than the 1/smoothness such that gd decreases the loss. However, the connection between exponential learning rate schedule and weight decay in common practice built by this paper suggests that the current neural net training recipe may be inherently non-smooth.\n\n2. The experiment of this paper also suggests that in practice (with normalization layer), learning rate and weight decay coefficient can be packed into a single parameter, which reduces the effort needed for hyper-parameter tuning.\n\nCons:\n\n1. Though it's obvious for the feedforward networks with normalization layers to be scale invariant, it's not the case for ResNet ( and the authors use this for experiment). And this needs to be clarified.\n2. The writing of the proofs should be imporved.\n\nTypos:\n\n1. Definition 1.2 broke citation\n2. Equation (1)  \\eta_t should be \\eta_{t-1}\n3. Some facts about Equation 4, incomplete sentence\n4 In thm B.2,R_\\infty might be 0. So the authors can just delete the last equation on page 12 and use the equation above as the statement of the lemma.\n5. In the first line of Equation (13), the appearance of ( \\beta * e^{1-\\beta} )^{ k/2 } seems to be a mistake",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory."
+  },
+  "review_metadata": {
+    "rating": 8
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

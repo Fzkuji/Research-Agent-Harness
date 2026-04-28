@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "Uc0dTE2Wox",
+  "reviewer": "SW6r",
+  "paper": {
+    "title": "Rethinking Benign Overfitting in Two-Layer Neural Networks",
+    "authors": [
+      "Ruichen Xu",
+      "Kexin Chen"
+    ],
+    "abstract": "Recent theoretical studies (Kou et al., 2023; Cao et al., 2022) revealed a sharp phase transition from benign to harmful overfitting when the\nnoise-to-feature ratio exceeds a threshold—a situation common in long-tailed data distributions where atypical data is prevalent. However, such harmful overfitting rarely happens in overparameterized neural networks. Further experimental results suggested that memorization is necessary for achieving near-optimal generalization error in long-tailed data distributions (Feldman & Zhang, 2020). We argue that this discrepancy between theoretical predictions and empirical observations arises because previous feature-noise data models overlook the heterogeneous nature of noise across different data classes. In this paper, we refine the feature-noise data model by incorporating class-dependent heterogeneous noise and re-examine the overfitting phenomenon in neural networks. Through a comprehensive analysis of the training dynamics, we establish test loss bounds for the refined model. Our findings reveal that neural networks can leverage \"data noise\" to learn implicit features that improve the classification accuracy for long-tailed data. Our analysis also provides a training-free metric for evaluating data influence on test performance. Experimental validation on both synthetic and real-world datasets supports our theoretical results.",
+    "keywords": [
+      "Benign overfitting",
+      "long-tailed data",
+      "two-layer neural networks"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Uc0dTE2Wox"
+  },
+  "review_fields": {
+    "summary": "This work investigates the phenomenon of benign overfitting in two-layer neural networks by rdiscussing a  feature-noise model. The authors introduce a class-dependent heterogeneous noise model to attempt to explain why neural nets can leverage long-tailed data distributions for generalization. The paper claim to provide theoretical results demonstrating a phase transition between benign and harmful overfitting and supports these findings with empirical evaluations on synthetic and real-world datasets. The authors argue that neural nets can learn implicit features from data-specific noise, which enhances classification accuracy, particularly for long-tailed distributions.",
+    "claims_and_evidence": "The central claim of the paper is that neural networks can use data-specific noise as an implicit feature to improve classification performance. While the theoretical results are rigorous, the paper’s framing of memorization is somewhat misleading. To me, the so-called \"memorization of noise\" is, in reality, learning from well-separated covariances rather than pure memorization of useless noise. The experimental results generally align with the theoretical findings, but the paper lacks a clear discussion on why its proposed model is the right one for studying benign overfitting in practical scenarios.",
+    "methods_and_evaluation_criteria": "he authors use a combination of theoretical analysis and experimental validation. The theoretical methods appear sound and build upon prior work, extending it to the heterogeneous noise setting. However, the experimental evaluation could be improved by including comparisons with alternative models of benign overfitting, rather than focusing exclusively on their own framework. The evaluation criteria for success are reasonable but could be more explicitly tied to real-world applications (CIFAR is ok, but MNIST does not really count in myopinion).",
+    "theoretical_claims": "The theoretical results appear correct and are well-supported by the provided proofs. The use of singular value distributions and covariance matrix properties seems to be an extension of previous work. However, the claim that memorizing noise is beneficial should be reconsidered; what is actually being demonstrated is that certain types of structured noise contain class-relevant information, making it part of the learnable signal rather than harmful noise.",
+    "experimental_designs_or_analyses": "This is a theory paper, so this kind of question seems ill-defined. The author do perform experiements, and the experimental setup is generally well-structured, with evaluations on both synthetic and real-world datasets (MNIST, CIFAR-10), even though i do not really count MNIST as meaningful. However, the key illustrative figures are unclear, particularly regarding the interpretation of \"noise\" and how it contributes to learning. It would be helpful to clarify how increasing the noise strength without a signal component affects performance and whether the conclusions hold for different model architectures.",
+    "relation_to_broader_scientific_literature": "The paper builds upon prior work on benign overfitting and feature-noise models, referencing key studies such as those by Kou et al. (2023) and Feldman & Zhang (2020). However, it does not sufficiently engage with alternative explanations for benign overfitting, such as implicit regularization effects in overparameterized models. These are classical and widely accepted. More discussion on the relationship between this work and theories of representation learning would strengthen its contribution.",
+    "essential_references_not_discussed": "he paper should include more discussion of recent work on implicit regularization and the role of covariance structures in deep learning. Some relevant studies on feature learning dynamics in deep networks and their relation to benign overfitting are missing. Additionally, work on the role of batch normalization and other architectural choices in mitigating harmful overfitting should be considered.\n\nOn the top of my head, i can thnkg of work such as Srebro's\n\nThe Implicit Bias of Gradient Descent on Separable Data\nDaniel Soudry, Elad Hoffer, Mor Shpigel Nacson, Suriya Gunasekar, Nathan Srebro; 19(70):1−57, 2018.\n\nOr\n\nThe Double-Edged Sword of Implicit Bias: Generalization vs. Robustness in ReLU Networks",
+    "other_strengths_and_weaknesses": "Strengths: The paper presents an interesting refinement of existing models and contributes new theoretical insights into overfitting in long-tailed distributions. The analysis of singular values and covariance structures is a valuable addition.\n\nWeaknesses: The framing of \"memorization of noise\" is somewhat misleading, as what is actually observed is learning from informative covariances. The motivation for the specific model chosen could be stronger, and the empirical results would benefit from comparisons to alternative benign overfitting models.",
+    "other_comments_or_suggestions": "Clarify what is meant by \"memorizing noise\"—if the noise contains label information, then it is not purely noise but an implicit feature.\n\nImprove the illustrative figures to make it clearer how noise and signal interact in the proposed model.\n\nInclude a discussion on why this specific refinement of the feature-noise model is preferable to other potential explanations for benign overfitting.\n\nCompare results against other recent theories of benign overfitting, such as those related to implicit regularization.",
+    "questions_for_authors": "Can you clarify why you refer to learning from structured noise as \"memorization\" when it appears to be leveraging class-dependent covariance information?\n\nHow would your results change if the noise distribution was not sub-Gaussian but had a different structure?\n\nWould your findings hold in deeper networks beyond two-layer models, and how would they interact with batch normalization or dropout?\n\nCould you include comparisons with other models of benign overfitting to contextualize your results?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

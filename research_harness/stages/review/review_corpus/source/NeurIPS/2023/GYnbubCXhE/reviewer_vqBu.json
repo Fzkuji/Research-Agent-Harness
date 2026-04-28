@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "GYnbubCXhE",
+  "reviewer": "vqBu",
+  "paper": {
+    "title": "Conditional Matrix Flows for Gaussian Graphical Models",
+    "authors": [
+      "Marcello Massimo Negri",
+      "Fabricio Arend Torres",
+      "Volker Roth"
+    ],
+    "abstract": "Studying conditional independence among many variables with few observations is a challenging task.\nGaussian Graphical Models (GGMs) tackle this problem by encouraging sparsity in the precision matrix through $l_q$ regularization with $q\\leq1$.\nHowever, most GMMs rely on the $l_1$ norm because the objective is highly non-convex for sub-$l_1$ pseudo-norms.\nIn the frequentist formulation, the $l_1$ norm relaxation provides the solution path as a function of the shrinkage parameter $\\lambda$.\nIn the Bayesian formulation, sparsity is instead encouraged through a Laplace prior, but posterior inference for different $\\lambda$ requires repeated runs of expensive Gibbs samplers.\nHere we propose a general framework for variational inference with matrix-variate Normalizing Flow in GGMs, which unifies the benefits of frequentist and Bayesian frameworks.\nAs a key improvement on previous work, we train with one flow a continuum of sparse regression models jointly for all regularization parameters $\\lambda$ and all $l_q$ norms, including non-convex sub-$l_1$ pseudo-norms.\nWithin one model we thus have access to (i) the evolution of the posterior for any $\\lambda$ and any $l_q$ (pseudo-) norm, (ii) the marginal log-likelihood for model selection, and (iii) the frequentist solution paths through simulated annealing in the MAP limit.",
+    "keywords": [
+      "normalizing flow",
+      "variational inference",
+      "graphical lasso",
+      "gaussian graphical model",
+      "bayesian inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GYnbubCXhE"
+  },
+  "review_fields": {
+    "summary": "This work proposed a framework for performing inference on Gaussian Graphical Models by approximating the posterior with a normalizing flow over PSD matrices. In this way, the authors can investigate $l_p$-norm regularized GGMs for any value of $p$ in an efficient way.",
+    "strengths": "The idea of using normalizing flows for GGM inference definitely brings in advantages of both Bayesian and frequentist worlds; to me, that's an innovative idea.",
+    "weaknesses": "The main weakness that I identified is the lack of comparison between the proposed framework and the well-studied graphical lasso with concave approximations of the $l_0$-norm. More precisely, the authors show that their framework obtains frequentist solution paths through simulated annealing, therefore, it'd be of great interest to see a comparison between these solution paths and those obtained by iterative algorithms such as iterative reweighted l1-norm for graphical lasso.",
+    "questions": "- in the frequentist case, how does the proposed framework compares against more classical techniques to obtain the solution paths, e.g., iterative reweighted l1-norm?",
+    "limitations": "The authors adequately addressed the limitations of their proposed framework."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 891,
+    "words": 128,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/dd4833c0-0ad3-4fab-8f46-f4a7ac02868c",
+    "error": null,
+    "scored_chars": 891
+  }
+}

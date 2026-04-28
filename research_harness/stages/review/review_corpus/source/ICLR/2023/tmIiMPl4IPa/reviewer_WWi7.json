@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "tmIiMPl4IPa",
+  "reviewer": "WWi7",
+  "paper": {
+    "title": "Factorized Fourier Neural Operators",
+    "authors": [
+      "Alasdair Tran",
+      "Alexander Mathews",
+      "Lexing Xie",
+      "Cheng Soon Ong"
+    ],
+    "abstract": "We propose the Factorized Fourier Neural Operator (F-FNO), a learning-based approach for simulating partial differential equations (PDEs). Starting from a recently proposed Fourier representation of flow fields, the F-FNO bridges the performance gap between pure machine learning approaches to that of the best numerical or hybrid solvers. This is achieved with new representations – separable spectral layers and improved residual connections – and a combination of training strategies such as the Markov assumption, Gaussian noise, and cosine learning rate decay. On several challenging benchmark PDEs on regular grids, structured meshes, and point clouds, the F-FNO can scale to deeper networks and outperform both the FNO and the geo-FNO, reducing the error by 83% on the Navier-Stokes problem, 31% on the elasticity problem, 57% on the airfoil flow problem, and 60% on the plastic forging problem. Compared to the state-of-the-art pseudo-spectral method, the F-FNO can take a step size that is an order of magnitude larger in time and achieve an order of magnitude speedup to produce the same solution quality.",
+    "keywords": [
+      "fourier transform",
+      "fourier operators",
+      "pde",
+      "navier stokes"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=tmIiMPl4IPa"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper uses the Fourier transform to learn neural operators that can handle long-range spatial dependencies. By factorizing the transform, using better residual connections, and improving the training setup, the proposed F-FNO outperforms the state of the art on PDEs on a variety of geometries and domains.",
+    "strength_and_weaknesses": "Pros:  The proposed method outperforms the state of art on PDEs with geometies and domains. \nCons: The literature reviews on the classical and recent PDE solvers are not very complete. I would like to see some comparison with the classical numerical method, such as the vortex model in approximating 2D Navier-Stokes/Euler with FFO.",
+    "clarity,_quality,_novelty_and_reproducibility": "It is a well-written article with high quality. It seems a continuation of the authors' previous work but it is still very important. \nI do not check the reproducibility given the constraint of time.",
+    "summary_of_the_review": "I would suggest to accept the current paper.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

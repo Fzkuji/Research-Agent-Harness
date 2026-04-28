@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "EfTuzTijDo",
+  "reviewer": "H7VY",
+  "paper": {
+    "title": "NoWag: A Unified Framework for Shape Preserving Com- pression of Large Language Models",
+    "authors": [
+      "Lawrence Ray Liu",
+      "Inesh Chakrabarti",
+      "Yixiao Li",
+      "Mengdi Wang",
+      "Tuo Zhao",
+      "Lin Yang"
+    ],
+    "abstract": "Large language models (LLMs) exhibit remarkable performance across various natural language processing tasks but suffer from immense computational and memory demands, limiting their deployment in resource-constrained environments. To address this challenge, we propose NoWag (Normalized Weight and Activation Guided Compression), a unified framework for one-shot shape preserving compression algorithms. We apply NoWag to compress Llama-2 (7B, 13B, 70B) and Llama-3 (8B, 70B) models using two popular shape-preserving techniques: vector quantization (NoWag-VQ) and unstructured/semi-structured pruning (NoWag-P). Our results show that NoWag-VQ significantly outperforms state-of-the-art one-shot vector quantization methods, while NoWag-P performs competitively against leading pruning techniques. These findings highlight underlying commonalities between these compression paradigms and suggest promising directions for future research. Our code is available at https://github.com/LawrenceRLiu/NoWag",
+    "keywords": [
+      "Quantization",
+      "Vector Quantization LLMs",
+      "Compression",
+      "Sparsity",
+      "Pruning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=EfTuzTijDo"
+  },
+  "review_fields": {
+    "summary": "The paper introduces NoWag, a framework combining vector quantization (NoWag-VQ) and pruning (NoWag-P) to compress large language models (LLMs). It achieves better performance than existing methods, reducing computational and memory requirements while maintaining accuracy.",
+    "reasons_to_accept": "1. This framework achieves good performance.\n\n2. This paper is well-written.",
+    "reasons_to_reject": "1. There's no inference speedup evaluation.\n\n2. The technique contribution is insufficient, as I believe the only contribution is that normalization can help gain good performance for VQ and pruning. \n\n3. Lack of ablation comparisons of proposed methods w/ and w/o column(row) normalization.\n\n4. Comparisons with more advanced pruning approaches could help validate its SOTA performance, e.g., [SparseGPT](https://github.com/IST-DASLab/sparsegpt), [https://arxiv.org/abs/2409.17372](https://arxiv.org/abs/2409.17372)."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 594,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/cda520b2-45ee-4b97-a0d8-232313cdb690",
+    "error": null,
+    "scored_chars": 595
+  }
+}

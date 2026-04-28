@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "T0B9AoM_bFg",
+  "reviewer": "78Uf",
+  "paper": {
+    "title": "Improving Mutual Information Estimation with Annealed and Energy-Based Bounds",
+    "authors": [
+      "Rob Brekelmans",
+      "Sicong Huang",
+      "Marzyeh Ghassemi",
+      "Greg Ver Steeg",
+      "Roger Baker Grosse",
+      "Alireza Makhzani"
+    ],
+    "abstract": "Mutual information (MI) is a fundamental quantity in information theory and machine learning. However, direct estimation of MI is intractable, even if the true joint probability density for the variables of interest is known, as it involves estimating a potentially high-dimensional log partition function. In this work, we present a unifying view of existing MI bounds from the perspective of importance sampling, and propose three novel bounds based on this approach. Since a tight MI bound without density information requires a sample size exponential in the true MI, we assume either a single marginal or the full joint density information is known. In settings where the full joint density is available, we propose Multi-Sample Annealed Importance Sampling (AIS) bounds on MI, which we demonstrate can tightly estimate large values of MI in our experiments. In settings where only a single marginal distribution is known, we propose Generalized IWAE (GIWAE) and MINE-AIS bounds. Our GIWAE bound unifies variational and contrastive bounds in a single framework that generalizes InfoNCE, IWAE, and Barber-Agakov bounds. Our MINE-AIS method improves upon existing energy-based methods such as MINE-DV and MINE-F by directly optimizing a tighter lower bound on MI. MINE-AIS uses MCMC sampling to estimate gradients for training and Multi-Sample AIS for evaluating the bound. Our methods are particularly suitable for evaluating MI in deep generative models, since explicit forms of the marginal or joint densities are often available. We evaluate our bounds on estimating the MI of VAEs and GANs trained on the MNIST and CIFAR datasets, and showcase significant gains over existing bounds in these challenging settings with high ground truth MI.",
+    "keywords": [
+      "mutual information estimation",
+      "annealed importance sampling",
+      "energy-based models"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=T0B9AoM_bFg"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "In this work, the authors proposed some novel estimators for mutual information, namely the GIWAE, Muti-Sample AIS and MINE-AIS bounds. The key idea is to apply importance sampling to mutual information in the model-based setting. In both theoretical and empirical analysis, they prove the bounds are much tighter than the existing ones in the literature.",
+    "main_review": "Strength: \n(1) This work unifies the view of mutual information from the perspective of importance sampling. This gives us another angle of thinking.\n(2) Good summary of the prior literature\n(3) Clear theoretical analysis.\n(4) The experiments provide evidence on the effectiveness of the proposals.\n\nWeakness:\n(1) This paper is more of a theoretical flavor and there is no experiment to show this method is practically useful. For example, is it useful to improve the prediction accuracy (using the learned latent representation z)?\n(2) How about the efficiency of the proposed strategies. (e.g. information about the running time). In the experiments, the author(s) have used tens of thousands of annealing steps, which may not be practically feasible. Also, it is helpful to visualize the trade-offs in computing time and bound sharpness.\n(3) I am curious about the stability of the training process. \n(4) The method has limited applicability in real-world settings, Generative modeling for feature engineering is not used that often, mostly because it is so hard to assume the knowledge of a likelihood model for a machine learning problem.\n\nMinor Comments:\n(1) Make clear distinction between empirical estimators and theoretical estimators. For example, I_{BA} is theoretical and I_{IWAE} is empirical. Please add hat over the empirical estimators.\n(2) In Figure 1, Z_{T-1} is bigger than other circles. Is there any different meanings?\n(3) Table 1 is messy, tidy it up. There too much data and at the first glance, no idea about where I should focus on. Also, there is inconsistency in notations: in the first column, T=30K, K=1K. Should change the capital letter K to lower case letter k.",
+    "summary_of_the_review": "The reviewer is convinced by the theoretical analysis of this paper and the novel perspectives it proposed. \nIt makes some valuable contribution to our community. However, I am concerned about the practicability and efficiency of this method.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1935,
+    "words": 308,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c7227828-6973-41ad-acd6-8841f21be4e7",
+    "error": null,
+    "scored_chars": 1938
+  }
+}

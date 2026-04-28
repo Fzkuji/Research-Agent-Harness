@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "Tqj3fYqhwS",
+  "reviewer": "t3tg",
+  "paper": {
+    "title": "Fleurs-SLU: A Massively Multilingual Benchmark for Spoken Language Understanding",
+    "authors": [
+      "Fabian David Schmidt",
+      "Ivan Vulić",
+      "Goran Glavaš",
+      "David Ifeoluwa Adelani"
+    ],
+    "abstract": "Spoken language understanding (SLU) is indispensable for half of all living languages that lack a formal writing system, since these languages cannot pair automatic speech recognition (ASR) with language models to benefit from language technology. Even if low-resource languages possess a writing system, ASR for these languages remains unreliable due to limited bimodal speech and text training data. However, the evaluation of multilingual SLU remains limited to shallow tasks such as intent classification or language identification. To address this, we present Fleurs-SLU, a multilingual SLU benchmark that encompasses (i) 692 hours of speech for topical utterance classification in 102 languages and (ii) multiple-choice question answering through listening comprehension spanning 944 hours of speech across 92 languages. We extensively evaluate both end-to-end speech classification models and cascaded systems that combine speech-to-text transcription with subsequent classification by large language models on Fleurs-SLU. Our results show that cascaded systems exhibit greater robustness in multilingual SLU tasks, though speech encoders can achieve competitive performance in topical speech classification when appropriately pre-trained. We further find a strong correlation between robust multilingual ASR, effective speech-to-text translation, and strong multilingual SLU, highlighting the mutual benefits between acoustic and semantic speech representations.",
+    "keywords": [
+      "spoken language understanding",
+      "multilingual benchmarks",
+      "multilingual evaluation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Tqj3fYqhwS"
+  },
+  "review_fields": {
+    "summary": "In this work, a multilingual spoken language understanding (SLU) benchmark, Fleurs-SLU, is proposed. It is derived from Fleurs, Flores and its derivatives (SIB-200 and Belebele) spanning over 100 languages. The SLU tasks include speech classification and question answering. \nDetailed evaluation is also presented for both end-to-end and cascaded systems. It would be a valuable benchmark for the SLU tasks.",
+    "reasons_to_accept": "- A multilingual SLU benchmark is provided for SLU tasks\n- Extensive experiments are conducted on the top of the proposed benchmark.",
+    "reasons_to_reject": "- The description of experiments are not clear and hard to follow.",
+    "questions_to_authors": "- As described in section 4.1, the speech encoder and cascaded systems are trained with English training set. I assume it is English data from Fleurs. However, I also notice Table 3 presents both MMS-1B-FLEURS and MMS-1B-ALL. It is quite confusion and no clear explanation about \"ALL\" training data.\n- \"zero-shot cross-lingual transfer (ZS-XLT)\" mentioned in section 4.2 is not clear. As mentioned in section 4.1, the model is trained with English data only. So the source language is English, is it correct?\n- In Table 3, there are 7 languages are not supported by Whisper and SeamlessM4T, how do we generate the corresponding transcription with Whisper or SeamlessM4T models?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 879,
+    "words": 144,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6c0ca48a-7e59-4fe7-a275-47ad6350c6bb",
+    "error": null,
+    "scored_chars": 879
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "ybaK4asBT2",
+  "reviewer": "nFPB",
+  "paper": {
+    "title": "LLM Discussion: Enhancing the Creativity of Large Language Models via Discussion Framework and Role-Play",
+    "authors": [
+      "Li-Chun Lu",
+      "Shou-Jen Chen",
+      "Tsung-Min Pai",
+      "Chan-Hung Yu",
+      "Hung-yi Lee",
+      "Shao-Hua Sun"
+    ],
+    "abstract": "Large language models (LLMs) have shown exceptional proficiency in natural language processing but often fall short of generating creative and original responses to open-ended questions. To enhance LLM creativity, our key insight is to emulate the human process of inducing collective creativity through engaging discussions with participants from diverse backgrounds and perspectives. To this end, we propose LLM Discussion, a three-phase discussion framework that facilitates vigorous and diverging idea exchanges and ensures convergence to creative answers. Moreover, we adopt a role-playing technique by assigning distinct roles to LLMs to combat the homogeneity of LLMs. We evaluate the efficacy of the proposed framework with the Alternative Uses Test, Similarities Test, Instances Test, and Scientific Creativity Test through both LLM evaluation and human study. The results show that our proposed framework outperforms single-LLM approaches and existing multi-LLM frameworks across various creativity metrics. The code is available at https://github.com/lawraa/LLM-Discussion.",
+    "keywords": [
+      "multi-agent discussion",
+      "creativity",
+      "role-play",
+      "large language models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ybaK4asBT2"
+  },
+  "review_fields": {
+    "comment": "No change to the score of 7 recommending acceptance.\n\nThe new table with the AMAP results ought to be included in the paper.  \n\nAt a core level what is happening internally is that the diversity of responses from a single prompt is limited.  For the approach taken in this paper, the setup of pretending to be various types of people is one way to add variety into the prompts, yielding extra originality. The setup of taking on different roles throws the generation into somewhat different distributions of training data, yielding different responses. It may be that even more diversity of responses would emerge if there were  increased diversity of the types of people being simulated or otherwise broadening of the diversity of the prompts.  Perhaps translating into different languages and asking the questions would be one way of getting answers from a very different part of the training distribution."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:37:19Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:19Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2376,
+    "words": 375,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/af6394a2-4df4-4e17-a8f6-edb8f3db7b63",
+    "error": null,
+    "scored_chars": 2379
+  }
+}

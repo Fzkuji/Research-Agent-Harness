@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "wnAN2ZU7br",
+  "reviewer": "6TXR",
+  "paper": {
+    "title": "Pipeline Combinators for Gradual AutoML",
+    "authors": [
+      "Guillaume Baudart",
+      "Martin Hirzel",
+      "Kiran Kate",
+      "Parikshit Ram",
+      "Avraham Shinnar",
+      "Jason Tsay"
+    ],
+    "abstract": "Automated machine learning (AutoML) can make data scientists more productive.  But if machine learning is totally automated, that leaves no room for data scientists to apply their intuition.  Hence, data scientists often prefer not total but gradual automation, where they control certain choices and AutoML explores the rest.  Unfortunately, gradual AutoML is cumbersome with state-of-the-art tools, requiring large non-compositional code changes.  More concise compositional code can be achieved with combinators, a powerful concept from functional programming.  This paper introduces a small set of orthogonal combinators for composing machine-learning operators into pipelines.  It describes a translation scheme from pipelines and associated hyperparameter schemas to search spaces for AutoML optimizers.  On that foundation, this paper presents Lale, an open-source sklearn-compatible AutoML library, and evaluates it with a user study.",
+    "keywords": [
+      "AutoML",
+      "scikit-learn",
+      "programming models",
+      "functional programming"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=wnAN2ZU7br"
+  },
+  "review_fields": {
+    "summary": "This paper presents a system for gradual AutoML within sklearn. The system focuses on _gradual_ automation, as opposed to total automation, so that the data scientist can incorporate their human intuitions into the AutoML process, saving time and compute resources. The paper introduces combinators that enable developers to write learning pipelines in sklearn, possibly with choices in the model architecture that the AutoML system can search over. There are only 3 combinators (pipe, and, or), their function is easy to understand, and they can be combined and nested arbitrarily. While combinators describe a space of pipelines to search over, the paper also uses an extension of JSON Schema to describe a space of hyperparameters to search over. The paper describes how the schemas can be transformed into formats that are accepted by existing AutoML algorithms. The authors also perform a user study investigating how easily their proposed system can be used, and perform empirical studies comparing how well their AutoML system performs compared to other systems on many datasets.",
+    "main_review": "**Positives:**\n* Important problem\n* Easy-to-use system for gradual AutoML\n* Very clear writing\n* Well-thought-out arguments for the benefit of gradual automation and how Lale enables this\n\n**Negatives:**\n* Limited novelty\n* Conclusions from the experiments are not laid out as clearly as I would like\n\n---\n\nThis paper tackles an important problem: creating a framework in which users can use AutoML technologies easily, with fine-grained control over the search space of model architectures and hyperparameters. The proposed system appears to achieve this goal well. It is easy to understand how to use the three combinators to construct pipelines, possibly with different choices in them that give rise to a space of pipelines to search over. It is also easy to use their proposed schemas to specify a space of hyperparameters as well. Altogether, the authors’ Lale library seems like a great way to enable gradual AutoML for users already familiar with sklearn -- I was able to understand the system quickly, and from the user study, it appears that other new Lale users were able to pick it up easily as well.\n\nI am not sure whether the translation scheme from Lale syntax (combinators and schemas) to a form that can be given to an optimizer is as novel as the authors claim. Of course, given that Lale is new, the implementation details of the translation scheme can be considered new as well, but the core ideas in the translation scheme seem standard. The normalize step is quite common when dealing with conjunctions and disjunctions. The combine step is straightforward as well, simply putting the schemas into the hierarchical pipeline structure defined by the combinators. Once we have a hierarchical nesting of search spaces, flattening and discretizing are “obvious” steps to take if a particular optimizer requires a flattened and/or discretized representation. It is good that the paper describes these steps in detail, and providing such detail can count as a contribution of the paper, but I would not describe the translation process as “novel”.\n\n**Originality: 2/5** The authors came up with a well-designed and easy to use syntax for enabling gradual AutoML in sklearn, although the ideas behind this syntax (the pipe/and/or combinators, schemas for hyperparameters) are quite straightforward (which is a good thing for usability!). It also seems that the implementation details to make their syntax work, i.e., the translation scheme, are not completely original either. Ultimately though, it appears that Lale is the first successful (easy to learn and understand, performs well, used in practice) framework for AutoML that naturally supports gradual automation (is this true?), with its usage in industry as further evidence of its success. In my opinion, accounts of such “success stories” are important research contributions, even if their technical details are not entirely original.\n\n**Quality: 4/5** The proposed Lale system itself is technically sound. My only concern is about the empirical results, where I would like more detailed analysis of the results, what conclusions we can draw, and discussion about why those conclusions make sense. See my questions below.\n\n**Clarity: 5/5** The paper was a pleasure to read. The ideas are organized and communicated very effectively.\n\n**Significance: 4/5** This work is quite significant, since it enables more users to easily use gradual AutoML, which will then improve whatever work those users end up doing. I am unsure about the significance of the empirical results though, since Lale appears to perform slightly worse than the SOTA auto-sklearn. \n\n## Questions\n* It is currently not clear whether Lale produces better or worse accuracies than auto-sklearn -- the paper simply mentions that they are in the same ballpark. It seems that Lale gets a slightly worse accuracy on a majority of tasks, but performs much better on the shuttle dataset. I’m assuming that auto-sklearn simply has a bug/flaw that manifests on the shuttle dataset, and the nature of that bug/flaw is unrelated to this paper. Ignoring the shuttle dataset, Lale appears to perform worse than auto-sklearn overall -- why would this be the case?\n* Why would GridSearchCV and Halving-GridSearchCV time out in Table 3? Does Lale produce too large of search spaces for those methods? How do other approaches deal with GridSearchCV?\n\n## Other suggestions\n*  In Table 2, it would be nice to have stats aggregated over all datasets, so there is one number for comparison between the different AutoML methods. However, doing this fairly is tricky. For instance, Lale dominates in performance on the shuttle dataset, so simpy using a mean of the numbers in a column would be skewed toward that result.\n* Since auto-sklearn is the primary baseline for comparison, the paper would benefit from a short description of how auto-sklearn works and the differences between it and Lale.\n* Line 368: interoperates -> interoperate",
+    "limitations_and_societal_impact": "The authors' Section 7 is more than adequate."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

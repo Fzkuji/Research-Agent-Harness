@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "kmn0BhQk7p",
+  "reviewer": "uZeq",
+  "paper": {
+    "title": "Beyond Memorization: Violating Privacy via Inference with Large Language Models",
+    "authors": [
+      "Robin Staab",
+      "Mark Vero",
+      "Mislav Balunovic",
+      "Martin Vechev"
+    ],
+    "abstract": "Current privacy research on large language models (LLMs) primarily focuses on the issue of extracting memorized training data. At the same time, models’ inference capabilities have increased drastically. This raises the key question of whether current LLMs could violate individuals’ privacy by inferring personal attributes from text given at inference time. In this work, we present the first comprehensive study on the capabilities of pretrained LLMs to infer personal attributes from text. We construct a dataset consisting of real Reddit profiles, and show that current LLMs can infer a wide range of personal attributes (e.g., location, income, sex), achieving up to 85% top-1 and 95% top-3 accuracy at a fraction of the cost (100x) and time (240x) required by humans. As people increasingly interact with LLM-powered chatbots across all aspects of life, we also explore the emerging threat of privacy-invasive chatbots trying to extract personal information through seemingly benign questions. Finally, we show that common mitigations, i.e., text anonymization and model alignment, are currently ineffective at protecting user privacy against LLM inference. Our findings highlight that current LLMs can infer personal data at a previously unattainable scale. In the absence of working defenses, we advocate for a broader discussion around LLM privacy implications beyond memorization, striving for stronger and wider privacy protection.",
+    "keywords": [
+      "Privacy",
+      "Large Language Models"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=kmn0BhQk7p"
+  },
+  "review_fields": {
+    "summary": "The authors demonstrate how LLMs can be used as to infer sensitive information from comments and text, such as location, occupation, place of birth, education, etc. The attack they propose involves prompting the LLM by asking them to be “an expert investigator” tasked with recovering these sensitive attributes from unstructured textual bodies. They formulate two kinds of attacks: a passive attack where the LLM is fed this information and an active method where the agent is presumed to be assisting the user while simulatenously trying to recover personal information. They try and mitigate their attack using a client-side anonymization method and via provider-side alignment.",
+    "strengths": "The paper is well organized, and presents a new and rising privacy risk. Such an attack was not feasible when a human was tasked with having to recover facts manually, and so the contribution is timely and well motivated. They surface important privacy-related risks and demonstrates that much more work needs to be done to mitigate these kinds of attacks.",
+    "weaknesses": "Further analysis into how recovery of different kinds of PII was correlated would have been appreciated.",
+    "questions": "- Have you considered using LLMs to \"rewrite\" inputs in a privacy-preserving manner?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 548,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/331155ad-530e-40da-92a9-2692a357b306",
+    "error": null,
+    "scored_chars": 548
+  }
+}

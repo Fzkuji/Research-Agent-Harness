@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "gkcU26BOml",
+  "reviewer": "xGW7",
+  "paper": {
+    "title": "Cross-modal Associations in Vision and Language Models: Revisiting the Bouba-Kiki Effect",
+    "authors": [
+      "Tom Kouwenhoven",
+      "Kiana Shahrasbi",
+      "Tessa Verhoef"
+    ],
+    "abstract": "Recent advances in multimodal models have raised questions about whether vision-and-language models (VLMs) integrate cross-modal information in ways that reflect human cognition. One well-studied test case in this domain is the bouba-kiki effect, where humans reliably associate pseudowords like ‘bouba’ with round shapes and ‘kiki’ with jagged ones. Given the mixed evidence found in prior studies for this effect in VLMs, we present a comprehensive re-evaluation focused on two variants of CLIP, ResNet and Vision Transformer (ViT), given their centrality in many state-of-the-art VLMs. We apply two complementary methods closely modelled after human experiments: a prompt-based evaluation that uses probabilities as a measure of model preference, and we use Grad-CAM as a novel approach to interpret visual attention in shape-word matching tasks. Our findings show that these model variants do not consistently exhibit the bouba-kiki effect. While ResNet shows a preference for round shapes, overall performance across both model variants lacks the expected associations. Moreover, direct comparison with prior human data on the same task shows that the models’ responses fall markedly short of the robust, modality-integrated behaviour characteristic of human cognition. These results contribute to the ongoing debate about the extent to which VLMs truly understand cross-modal concepts, highlighting limitations in their internal representations and alignment with human intuitions.",
+    "keywords": [
+      "Cross-modal associations",
+      "Vision-and-Language Models",
+      "bouba-kiki effect",
+      "Cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=gkcU26BOml"
+  },
+  "review_fields": {
+    "summary": "This paper revisits the classic bouba-kiki effect within the context of vision-language models (VLMs), particularly two CLIP variants (ResNet and ViT). Unlike previous studies that rely on embedding similarity or generation-based probing, this paper introduces a methodology tightly aligned with human psycholinguistic experiments. \n\nThe findings show that, despite some sensitivity to semantic adjectives (e.g., \"round\", \"spiky\"), CLIP models do not consistently exhibit the bouba-kiki effect for pseudowords, failing both in behavior and visual attention alignment.",
+    "strengths_and_weaknesses": "## Strengths\n\n- This paper stands out not for discovering a new bouba–kiki effect, but for disproving its presence in CLIP with a much more rigorous and cognitively aligned methodology. It raises the bar for testing cross-modal iconicity in vision-language models. Prior work (e.g., Alper & Averbuch-Elor) used embedding similarities or generation-based tasks with less experimental control. This paper brings direct comparability to human data, especially from Ćwiek et al. (2022).\n- Human-aligned evaluation protocol: The authors closely mirror experimental designs used in psycholinguistics (e.g., forced-choice tasks with minimal shape differences), allowing for principled comparison between human and model behavior.\n- A strong plus to use Grad-CAM for cross-modal interpretability: By examining visual attention patterns during label-shape association, the paper moves beyond accuracy to probe the internal mechanisms of cross-modal processing in VLMs.\n\n## Weaknesses\n\n- Sound-text-vision entanglement is underexplored: Since the original bouba-kiki effect is rooted in auditory perception, the textual substitution (e.g., \"bouba\" as a string token) may be too weak a proxy. The paper acknowledges this but does not systematically explore text-to-speech models or phoneme-level grounding.\n- Model scope is limited to CLIP: While CLIP is foundational, the paper does not evaluate whether more modern VLMs (e.g., BLIP-2, LLaVA) or large multimodal models (e.g., GPT-4o) show similar or different patterns, which weakens the generality of the conclusions.\n- While the paper introduces novel methodological angles, the core question of whether VLMs exhibit the bouba-kiki effect has already been substantially explored in prior work, particularly by Alper & Averbuch-Elor (2023) and Verhoef et al. (2024). As such, the contribution may feel incremental, and the bouba-kiki phenomenon, though conceptually interesting, may be too narrow in scope to carry a full conference paper on its own.",
+    "questions": "- Did you explore whether the CLIP models consistently output the same label regardless of the image input (i.e., label collapse), and if so, how does this affect interpretability?\n- Did you analyze the spatial distribution of attention beyond total intensity? Your Grad-CAM analysis uses summed activation across curved vs jagged halves, but this could overlook spatial patterns within each region. For example, did you consider using centroid-of-attention, entropy, or overlap with curvature-dense regions to better quantify alignment with shape features?\n- How does tokenization affect the model's ability to form shape-word associations, particularly for pseudowords? Since CLIP and other Transformer-based models operate on subword or byte-pair encodings (e.g., \"bouba\" might be split into “bou” and “ba”), this fragmentation may distort the phonological structure that underlies the bouba-kiki effect in humans, where sound symbolism operates over holistic auditory forms. Did you analyze how the pseudowords are tokenized by the CLIP text encoder, and whether token splits align with phoneme boundaries or disrupt the intended phonetic profiles? Could this explain the models' failure to form shape-sound associations, especially compared to their robust performance on real adjectives?",
+    "final_justification": "My concerns are addressed indeed, but no more exciting results are added during rebuttal. I would keep my current ratings."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5,
+    "quality": 4,
+    "clarity": 4,
+    "significance": 2,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

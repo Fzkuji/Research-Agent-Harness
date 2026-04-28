@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "9zWlrwlT9-j",
+  "reviewer": "YLGN",
+  "paper": {
+    "title": "Unbiased Estimates for Multilabel Reductions of Extreme Classification with Missing Labels",
+    "authors": [
+      "Erik Schultheis",
+      "Rohit Babbar"
+    ],
+    "abstract": "This paper considers the missing-labels problem in the extreme multilabel classification (XMC) setting, i.e. a setting\nwith a very large label space. The goal in XMC often is to maximize either precision or recall of the top-ranked\npredictions, which can be achieved by reducing the multilabel problem into a series of binary (One-vs-All) or multiclass\n(Pick-all-Labels) problems. Missing labels are a ubiquitous phenomenon in XMC tasks, yet the interaction between missing\nlabels and multilabel reductions has hitherto only been investigated for the case of One-vs-All reduction. In this\npaper, we close this gap by providing unbiased estimates for general (non-decomposable) multilabel losses, which enables\nunbiased estimates of the Pick-all-Labels reduction, as well as the normalized reductions which are required for\nconsistency with the recall metric. We show that these estimators suffer from increased variance and may lead to\nill-posed optimization problems. To address this issue, we propose to use convex upper bounds which trade off an\nincrease in bias against a strong decrease in variance.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=9zWlrwlT9-j"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors address the problem of unbiased estimates for multi-label reductions of extreme classification with missing labels. Specifically, the unbiased estimates for four cases of multi-label reductions are discussed. The authors first show the unbiased estimates for general multi-label losses capable for pick-all-labels and normalized reductions, and then prove the upper-bounds for two reductions, which trade-off bias and variance. The empirical experiments demonstrate the influence of missing labels, as well as unbiased estimates. The results also indicate that although unbiased loss functions work well with sufficient training data, normalized reductions can still be starving. Besides, the authors also show that generic multi-label losses with achievable unbiasedness could not be suitable for optimization while the presented trade-off method works well for handling training with fewer data.",
+    "strengths_and_weaknesses": "Strengths\n* Comprehensive coverage on different types and cases reductions.\n* Theorems and proofs for both unbiased estimates and convex upper-bounds.\n* Empirical studies and practical conclusions that emphasize the contributions\n\nWeaknesses\n* Lack of discussions on the relations to tree-based XMC methods, which are one of the most popular conventional methods for tackling XMC problems.\n* Lack of discussions of different types of noises.",
+    "questions": "* Most of the existing state-of-the-art methods for XMC problems are tree-based methods. In each layer, not all of the labels will participate in optimization and loss calculations. Moreover, the predictions and inference also usually are based on beam search. I wonder if the conclusions and guidelines can be also applied to those methods.\n\n* The authors model missing-label setting by treating them as independent noises, but real-world noises can be more complicated with many different distributions and correlations among labels. I wonder if the methods can be further extended to more different types of noises (or distributions of missing labels).",
+    "limitations": "The authors did not address any limitations and potential negative societal impact."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

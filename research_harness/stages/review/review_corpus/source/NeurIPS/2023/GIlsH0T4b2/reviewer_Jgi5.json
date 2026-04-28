@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "GIlsH0T4b2",
+  "reviewer": "Jgi5",
+  "paper": {
+    "title": "Two-Stage Learning to Defer with Multiple Experts",
+    "authors": [
+      "Anqi Mao",
+      "Christopher Mohri",
+      "Mehryar Mohri",
+      "Yutao Zhong"
+    ],
+    "abstract": "We study a two-stage scenario for learning to defer with multiple experts, which is crucial in practice for many applications.  In this scenario, a predictor is derived in a first stage by training with a common loss function such as cross-entropy.  In the second stage, a deferral function is learned to assign the most suitable expert to each input.  We design a new family of surrogate loss functions for this scenario both in the score-based and the predictor-rejector settings and prove that they are supported by $H$-consistency bounds, which implies their Bayes-consistency.  Moreover, we show that, for a constant cost function, our two-stage surrogate losses are realizable $H$-consistent. While the main focus of this work is a theoretical analysis, we also report the results of several experiments on CIFAR-10 and SVHN datasets.",
+    "keywords": [
+      "learning to defer",
+      "learning theory"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GIlsH0T4b2"
+  },
+  "review_fields": {
+    "comment": "Thanks to the authors for addressing my concerns. I’ve increased my score slightly but I think the paper remains very borderline because large changes to the framing and writing are required given that the proposed method doesn’t resolve the open problem of Mozannar et al., and the main contribution is the two-stage theory. For missing empirical comparisons, the most relevant one that comes to mind is Okati et al., which also trains the system in two phases."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 462,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/30325b21-f964-4dc5-a8c3-619e39edc9fc",
+    "error": null,
+    "scored_chars": 462
+  }
+}

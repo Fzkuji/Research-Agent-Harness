@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "mkYCfO822n",
+  "reviewer": "dFmw",
+  "paper": {
+    "title": "AmbigDocs: Reasoning across Documents on Different Entities under the Same Name",
+    "authors": [
+      "Yoonsang Lee",
+      "Xi Ye",
+      "Eunsol Choi"
+    ],
+    "abstract": "Different entities with the same name can be difficult to distinguish. Handling confusing entity mentions is a crucial skill for language models (LMs). For example, given the question “Where was Michael Jordan educated?” and a set of documents discussing different people named Michael Jordan, can LMs distinguish entity mentions to generate a cohesive answer to the question? To test this ability, we introduce a new benchmark, AmbigDocs. By leveraging Wikipedia’s disambiguation pages, we identify a set of documents, belonging to different entities who share an ambiguous name. From these documents, we generate questions containing an ambiguous name\nand their corresponding sets of answers. Our analysis reveals that current state-of-the-art models often yield ambiguous answers or incorrectly merge information belonging to different entities. We establish an ontology categorizing four types of incomplete answers and automatic evaluation metrics to identify such categories. We lay the foundation for future work on reasoning across multiple documents with ambiguous entities.",
+    "keywords": [
+      "multi-document reasoning",
+      "entity disambiguation",
+      "ambiguous QA"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=mkYCfO822n"
+  },
+  "review_fields": {
+    "comment": "Hi AC and all,\n\nAfter reviewing all the comments and rebuttals, I still retain my score (according to ACL/EMNLP standards). I share reviewer JT3K's concerns regarding the analysis of experimental results, and I also found some details in methodology unclear (although the author's rebuttal has addressed my questions). However, I believe these are minor issues; differing views and debates indicate the community's interest in this paper. Consider that this paper is the first to study the performance of LLMs on ambiguous entities (the same problem we've also observed affecting retrievers in RAG-QA, despite mitigation strategies in GPT-4 and Claude 3), introducing this perspective is significant. If this paper is accepted, I suggest that AC remind the authors in the meta-review to address the reviewers' concerns as much as possible in the camera-ready version. \n\nMany thanks. --dFmw"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:19Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:19Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 12,
+    "mixed_pct": 49,
+    "human_pct": 39,
+    "verdict": null,
+    "confidence": null,
+    "chars": 2521,
+    "words": 378,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/26006b27-57f9-4ac1-9417-c52545a23260",
+    "error": null,
+    "scored_chars": 2521
+  }
+}

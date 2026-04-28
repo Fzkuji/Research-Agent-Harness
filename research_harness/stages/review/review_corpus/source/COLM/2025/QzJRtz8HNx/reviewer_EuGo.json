@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "QzJRtz8HNx",
+  "reviewer": "EuGo",
+  "paper": {
+    "title": "Can LLMs Handle WebShell Detection? Overcoming Detection Challenges with Behavioral Function-Aware Framework",
+    "authors": [
+      "Feijiang Han",
+      "Jiaming Zhang",
+      "Chuyi Deng",
+      "Jianheng Tang",
+      "Yunhuai Liu"
+    ],
+    "abstract": "WebShell attacks, where malicious scripts are injected into web servers, pose a significant cybersecurity threat. Traditional machine learning and deep learning methods are often hampered by challenges such as the need for extensive training data, catastrophic forgetting, and poor generalization. Recently, Large Language Models (LLMs) have emerged as a powerful alternative for code-related tasks, but their potential in WebShell detection remains underexplored. In this paper, we make two major contributions: (1) a comprehensive evaluation of seven LLMs, including GPT-4, LLaMA 3.1 70B, and Qwen 2.5 variants, benchmarked against traditional sequence- and graph-based methods using a dataset of 26.59K PHP scripts, and (2) the Behavioral Function-Aware Detection (BFAD) framework, designed to address the specific challenges of applying LLMs to this domain. Our framework integrates three components: a Critical Function Filter that isolates malicious PHP function calls, a Context-Aware Code Extraction strategy that captures the most behaviorally indicative code segments, and Weighted Behavioral Function Profiling (WBFP) that enhances in-context learning by prioritizing the most relevant demonstrations based on discriminative function-level profiles. Our results show that, stemming from their distinct analytical strategies, larger LLMs achieve near-perfect precision but lower recall, while smaller models exhibit the opposite trade-off. However, all baseline models lag behind previous State-Of-The-Art (SOTA) methods. With the application of BFAD, the performance of all LLMs improves significantly, yielding an average F1 score increase of 13.82%. Notably, larger models like GPT-4, LLaMA-3.1-70B, and Qwen-2.5-Coder-14B now outperform SOTA benchmarks, while smaller models such as Qwen-2.5-Coder-3B achieve performance competitive with traditional methods. This work is the first to explore the feasibility and limitations of LLMs for WebShell detection and provides solutions to address the challenges in this task.",
+    "keywords": [
+      "WebShell detection",
+      "Large Language Models",
+      "Code Analysis",
+      "Cybersecurity",
+      "In-Context Learning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=QzJRtz8HNx"
+  },
+  "review_fields": {
+    "comment": "Thank you for the detailed and constructive reply.\n\nClarifications on deployment, code release, and dataset availability, along with the plan to support smaller open-source models, satisfactorily address my concerns regarding reproducibility and practicality.\n\nWhile the framework still depends on medium-to-large models for top-tier accuracy and remains evaluated only on PHP, I agree that these are reasonable first-step limitations and that the paper’s contributions stand.\n\nYour explanation of how BFAD’s modular design can be tailored to different resource budgets, along with the acknowledgement of inference-cost trade-offs, satisfactorily addresses my earlier concerns about complexity.\n\nOverall, the rebuttal reinforces my positive view of the work. I will maintain my original overall score (7 = Accept) and confidence. I look forward to seeing the final version and the public release of your resources."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 100,
+    "mixed_pct": 0,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 914,
+    "words": 129,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/106d17df-68c0-4d18-ad19-3277951f13de",
+    "error": null,
+    "scored_chars": 914
+  }
+}

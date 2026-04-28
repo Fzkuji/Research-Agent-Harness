@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "p4ujQsKmPV",
+  "reviewer": "do5a",
+  "paper": {
+    "title": "PrefPalette: Personalized Preference Modeling with Latent Attributes",
+    "authors": [
+      "Shuyue Stella Li",
+      "Melanie Sclar",
+      "Hunter Lang",
+      "Ansong Ni",
+      "Jacqueline He",
+      "Puxin Xu",
+      "Andrew Cohen",
+      "Chan Young Park",
+      "Yulia Tsvetkov",
+      "Asli Celikyilmaz"
+    ],
+    "abstract": "Personalizing AI systems requires understanding not just what users prefer, but the reasons that underlie those preferences—yet current preference models typically treat human judgment as a black box. We introduce PrefPalette, a framework that decomposes preferences into attribute dimensions and tailors its preference prediction to distinct social community values in a human-interpretable way. PrefPalette operationalizes a cognitive science principle known as multi-attribute decision making in two ways: (1) a scalable counterfactual attribute synthesis step that involves generating synthetic training data to isolate for individual attribute effects (e.g., formality, humor, cultural values), and (2) attention-based preference modeling that learns how different social communities dynamically weight these attributes. This approach moves beyond aggregate preference modeling to capture the diverse evaluation frameworks that drive human judgment. When evaluated on 45 social communities from the online platform Reddit, PrefPalette outperforms GPT-4o by 46.6% in average prediction accuracy. Beyond raw predictive improvements, PrefPalette also shed light on intuitive, community-specific profiles: scholarly communities prioritize verbosity and stimulation, conflict-oriented communities value sarcasm and directness, and support-based communities emphasize empathy. By modeling the attribute-mediated structure of human judgment, PrefPalette delivers both superior preference modeling\nand transparent, interpretable insights, and serves as a first step toward\nmore trustworthy, value-aware personalized applications.",
+    "keywords": [
+      "Social Reasoning",
+      "Preference Modeling",
+      "Explainability"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=p4ujQsKmPV"
+  },
+  "review_fields": {
+    "summary": "This work tackles preference modeling, i.e. predicting evaluative judgement over a given content, introducing a framework dubbed LAVA, for LAtent Value Attribute, modeling the cognitive process, with good results in accuracy and interpretability in their experiments. LAVA works by training predictors for the attributes, then used to produce attribute embeddings which are integrated with the content representation to predict a preference. The accuracy of LAVA when predicting the preferences for a Reddit dataset bests their baselines, with an impressive margin for the generic GPT-4o. Admittedly LAVA barely does better than the SoTA baseline but it has interpretable weightings, well in line with the specific subreddits.\nPreference modeling is a very relevant subfield. The intuition of relying on latent value attributes makes a lot of sense as it can indeed explain many of the preferences, translating in the good results shown here.\nThe paper itself is well written and a nice read. The work seems sound, if limited to a single dataset, which might question the applicability of the approach to other preferences, where the picked attributes might not translate to similar results –the fact that it works well for multiple subreddits does not mean it would transfer beyond the very specific world of Reddit.",
+    "reasons_to_accept": "This is a nice, theoretically grounded, work showing good interpretable results: \n- grounding in cognitive science: it is intuitive but this grounding does help.\n- good performances: when predicting preferences, especially over GPT-4o used as a judge\n- interpretability: by construction, and well in line with the expected values of the subdomains\n- resistance to temporal shift: although the experiment is limited in that regard",
+    "reasons_to_reject": "It's not clear if the results would extend beyond Reddit, at least without more work on the attributes:\n- limited experiments with a focus on a single dataset, in the artificial world of Reddit.\n- attribute selection: it's not clear how the dimensions were picked not if they would apply in different settings.\n- reliance on synthetic data: it's not clear how the counterfactual data are able to capture the needed nuances.\n- resistance to shift: there is some robustness but how much? As mentioned above, the experiment is very limited.",
+    "questions_to_authors": "- how would you approach a completely new domain, beyond Reddit's culture? I'm curious about the dimensions: do you think they would transfer well?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1116,
+    "words": 180,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7e1af4da-ebe8-410f-9082-7a4d42b50697",
+    "error": null,
+    "scored_chars": 1117
+  }
+}

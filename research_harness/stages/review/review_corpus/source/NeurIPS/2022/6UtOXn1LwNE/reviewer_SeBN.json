@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "6UtOXn1LwNE",
+  "reviewer": "SeBN",
+  "paper": {
+    "title": "Models of human preference for learning reward functions",
+    "authors": [
+      "W. Bradley Knox",
+      "Stephane Hatgis-Kessell",
+      "Serena Booth",
+      "Scott Niekum",
+      "Peter Stone",
+      "Alessandro G Allievi"
+    ],
+    "abstract": "The utility of reinforcement learning is limited by the alignment of reward functions with the interests of human stakeholders. One promising method for alignment is to learn the reward function from human-generated preferences between pairs of trajectory segments. These human preferences are typically assumed to be informed solely by partial return, the sum of rewards along each segment. We find this assumption to be flawed and propose modeling preferences instead as arising from a different statistic: each segment's regret, a measure of a segment's deviation from optimal decision-making. Given infinitely many preferences generated according to regret, we prove that we can identify a reward function equivalent to the reward function that generated those preferences. We also prove that the previous partial return model lacks this identifiability property without preference noise that reveals rewards' relative proportions, and we empirically show that our proposed regret preference model outperforms it with finite training data in otherwise the same setting. Additionally, our proposed regret preference model better predicts real human preferences and also learns reward functions from these preferences that lead to policies that are better human-aligned. Overall, this work establishes that the choice of preference model is impactful, and our proposed regret preference model provides an improvement upon a core assumption of recent research.",
+    "keywords": [
+      "reinforcement learning",
+      "learning reward functions",
+      "reward design",
+      "alignment",
+      "learning from preferences",
+      "regret",
+      "advantage",
+      "successor features"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=6UtOXn1LwNE"
+  },
+  "review_fields": {
+    "comment": "I would like to thank the author for the response. It indeed resolves several concerns of mine.\n\nUnfortunately, my concern regarding the main theoretical contribution (Theorem 3.1 and 3.2) of the work remains.\nI am not convinced by the argument of the author that \"3.1 shows that regret is identifiable under the conditions of 3.2 as the setting of 3.2 is a special case of 3.1\". For example, as reviewer xps1 points out in his response, why does the first line of the proof of 3.1 hold if we change to the setting of 3.2 (can minimizing the cross-entropy even work in the setting of 3.2)? Maybe totally re-written proofs of the 2 theorems with a consistent setting are more persuasive. Furthermore, if the noiseless setting is not practical, the common setting should be the one from the logistic observation model in Equation 2 (the setting in 3.1).\n\nBesides, in my view, saying that this work does not focus on scalability to justify the experiment involves only a toy grid world environment is not convincing. While different in the inputs, the solution in this work and IRL have a similar computation bottleneck of an inner loop of policy optimization. However, works on IRL (e.g., the popular Guided Cost Learning: Deep Inverse Optimal Control via Policy Optimization by Chelsea Finn 2016) have impressive experimental results. This IRL work has been also cited in many works in the last 5 years.\n\nTherefore, I decide the keep my score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

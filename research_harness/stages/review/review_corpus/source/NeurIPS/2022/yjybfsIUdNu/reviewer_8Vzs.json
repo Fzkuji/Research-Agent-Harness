@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "yjybfsIUdNu",
+  "reviewer": "8Vzs",
+  "paper": {
+    "title": "Multifidelity Reinforcement Learning with Control Variates",
+    "authors": [
+      "Sami Khairy",
+      "Prasanna Balaprakash"
+    ],
+    "abstract": "In many computational science and engineering applications, the output of a system of interest corresponding to a given input can be queried at different levels of fidelity with different costs. Typically, low-fidelity data is cheap and abundant, while high-fidelity data is expensive and scarce. In this work we study the reinforcement learning (RL) problem in the presence of multiple environments with different levels of fidelity for a given control task. We focus on improving the RL agent's performance with multifidelity data. Specifically, a multifidelity estimator that exploits the cross-correlations between the low- and high-fidelity returns is proposed to reduce the variance in the estimation of the state-action value function. The proposed estimator, which is based on the method of control variates, is used to design a multifidelity Monte Carlo RL (MFMCRL) algorithm that improves the learning of the agent in the high-fidelity environment. The impacts of variance reduction on policy evaluation and policy improvement are theoretically analyzed by using probability bounds. Our theoretical analysis and numerical experiments demonstrate that for a finite budget of high-fidelity data samples, our proposed MFMCRL agent attains  superior performance compared with that of a standard RL agent that uses only  the high-fidelity environment data for learning the optimal policy.",
+    "keywords": [
+      "Reinforcement learning",
+      "multifidelity environments",
+      "multifidelity estimation"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=yjybfsIUdNu"
+  },
+  "review_fields": {
+    "comment": "Thanks for answering some of my questions. Regarding [Q1,Q2,Q5], after getting information on what algorithm was being used (DDP) the distinction between variance reduction in your setting policy gradient style methods is more clear. My only comment on the Asymmetric information line of work was that making an explicit modeling assumption about the relationship between the two MDPs might be beneficial. I am also still somewhat unconvinced by the response for multi-fidelity estimation [Q2], as the possibility of my statement being true seems somewhat concerning. That said, I still enjoyed reading the paper, and it seems as though the authors worked hard to ensure the paper was as clear as possible so I will increase my score a bit."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

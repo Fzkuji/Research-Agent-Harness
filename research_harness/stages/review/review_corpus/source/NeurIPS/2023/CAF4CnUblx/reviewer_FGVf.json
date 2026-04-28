@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "CAF4CnUblx",
+  "reviewer": "FGVf",
+  "paper": {
+    "title": "Information Maximization Perspective of Orthogonal Matching Pursuit with Applications to Explainable AI",
+    "authors": [
+      "Aditya Chattopadhyay",
+      "Ryan Pilgrim",
+      "Rene Vidal"
+    ],
+    "abstract": "Information Pursuit (IP) is a classical active testing algorithm for predicting an output by sequentially and greedily querying the input in order of information gain. However, IP is computationally intensive since it involves estimating mutual information in high-dimensional spaces. This paper explores Orthogonal Matching Pursuit (OMP) as an alternative to IP for greedily selecting the queries. OMP is a classical signal processing algorithm for sequentially encoding a signal in terms of dictionary atoms chosen in order of correlation gain. In each iteration, OMP selects the atom that is most correlated with the signal residual (the signal minus its reconstruction thus far). Our first contribution is to establish a fundamental connection between IP and OMP, where we prove that IP with random projections of dictionary atoms as queries ``almost'' reduces to OMP, with the difference being that IP selects atoms in order of normalized correlation gain. We call this version IP-OMP and present simulations indicating that this difference does not have any appreciable effect on the sparse code recovery rate of IP-OMP compared to that of OMP for random Gaussian dictionaries. Inspired by this connection, our second contribution is to explore the utility of IP-OMP for generating explainable predictions, an area in which IP has recently gained traction. More specifically, we propose a simple explainable AI algorithm which encodes an image as a sparse combination of semantically meaningful dictionary atoms that are defined as text embeddings of interpretable concepts. The final prediction is made using the weights of this sparse combination, which serve as an explanation. Empirically, our proposed algorithm is not only competitive with existing explainability methods but also computationally less expensive.",
+    "keywords": [
+      "Information Maximization",
+      "Sparse Coding",
+      "Orthogonal Matching Pursuit",
+      "Explainable AI",
+      "Information Pursuit"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=CAF4CnUblx"
+  },
+  "review_fields": {
+    "comment": "Thank you for your reply. I have understood why the sign of the coefficients can have a meaning and increased my score slightly. (I do not oppose acceptance.) Nonetheless, I am not convinced that authors’ rebuttal resolves my main concern fully. I believe that this conflict is due to ambiguity in the meaning of words, such as “explainable” and “inappropriate.”\n\nI interpreted explainable AI as AI that generates a chain of queries as if a human created them. In this sense, a chain of “appropriate” queries for a tiger would be “predatory animal,” “striped fur,” “jungle,” “loneliness,” and so on. If “a witch” is included in this chain of queries, a human would regard it as an inappropriate query. The meaning of this “inappropriate” might be close to “inefficient” in human’s intuition. (It might be “efficient” in terms of machine learning.)\n\nOn the other hand, the authors seem to regard explainable AI as AI that generates a chain of queries that are possible for a human to interpret. In this sense, a feature vector in a high-dimensional space is an “inappropriate” query. However, “a witch” is an “appropriate” query for a tiger because a human can interpret its meaning.\n\nI still believe that the former human-like AI should be a ultimate target in future research and that greedy algorithms tend to generate inappropriate queries in terms of the human-like AI. On the other hand, inappropriate queries are never generated in terms of the latter AI because the set of queries only contains appropriate (interpretable) queries. I hope that the meaning of “explainable” is clarified in revision to circumvent a confusion."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1631,
+    "words": 270,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e56350f5-2fd4-479d-b269-7d02d9244491",
+    "error": null,
+    "scored_chars": 1631
+  }
+}

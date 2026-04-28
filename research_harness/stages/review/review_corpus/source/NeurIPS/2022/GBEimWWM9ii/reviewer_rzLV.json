@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "GBEimWWM9ii",
+  "reviewer": "rzLV",
+  "paper": {
+    "title": "MMRR: Unsupervised Anomaly Detection through Multi-Level Masking and Restoration with Refinement",
+    "authors": [
+      "Jaesung Ahn",
+      "Janghyeon Lee",
+      "Hanbyel Cho",
+      "Yooshin Cho",
+      "HyeongGwon Hong",
+      "Junmo Kim"
+    ],
+    "abstract": "Recent state-of-the-art anomaly detection algorithms mainly adopt generative models or approaches based on deep one-class classification. These approaches have hyperparameters to balance the adversarial framework of the generative adversarial network and to determine the decision boundary of the classifier. Both methods show good performance, but their performance suffers from hyperparameter sensitivity. A new category of anomaly detection methods has been proposed that utilizes prior knowledge about abnormal data or pretrained features, but it is more generic not to use such side information. In this study, we propose \"Multi-Level Masking and Restoration with Refinement (MMRR)\", an unsupervised-learning-based anomaly detection method based on a generative model that overcomes hyperparameter sensitivity and the need for side information. MMRR learns the salient features of normal data distributions through  restoration from restricted information via masking, resulting in a better restoration of in-distribution data than out-of-distribution data. To overcome hyperparameter sensitivity, we ensemble restoration results from information restricted to predefined multiple levels instead of finding a single optimal restriction level, and propose a novel mask generation and refinement method to achieve hyperparameter robustness. Extensive experimental evaluation on common benchmarks (i.e. MNIST, FMNIST, CIFAR10, MVTecAD) demonstrates the efficacy of the MMRR.",
+    "keywords": [
+      "Deep Learning",
+      "Computer Vision",
+      "Anomaly Detection"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=GBEimWWM9ii"
+  },
+  "review_fields": {
+    "comment": "Thank you for the answers. I have decided to keep my original rating. \n\nI am still not convinced by how competitive this approach is. More importantly, considering outliers can be in countless forms, it is fine to exploit some meta-level knowledge for designing anomaly detection algorithms, e.g., aiming at semantic or non-semantic outliers. While the authors argued their approach is complete unsupervised, their model is biased towards some form of anomalies (not all forms), and the more crucial problem is they have no control and awareness of which from the model learnt. Therefore, in my opinion, it is actually weaker than approaches that explicitly exploit the meta concept of anomalies and make sure their methods react to that type of anomalies. Here, the meta concept does not require collecting anomaly data for training, it could be as high-level as to detect any outliers do not belong the same semantic classes (e.g., one vs. rest in CIFARs), or outliers with abnormal local patterns or structures (industry defect)."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "AJBkfwXh3u",
+  "reviewer": "JCbW",
+  "paper": {
+    "title": "Causality-Inspired Spatial-Temporal Explanations for Dynamic Graph Neural Networks",
+    "authors": [
+      "Kesen Zhao",
+      "Liang Zhang"
+    ],
+    "abstract": "Dynamic Graph Neural Networks (DyGNNs) have gained significant popularity in the research of dynamic graphs, but are limited by the low transparency, such that human-understandable insights can hardly be drawn from their predictions. Although a number of existing research have been devoted to investigating the interpretability of graph neural networks (GNNs), achieving the interpretability of DyGNNs is pivotally challenging due to the complex spatial-temporal correlations in dynamic graphs. To this end, we propose an innovative causality-inspired generative model based on structural causal model (SCM), which explores the underlying philosophies of DyGNN predictions by identifying the trivial, static, and dynamic causal relationships. To reach this goal, two critical tasks need to be accomplished including (1) disentangling the complex causal relationships, and (2) fitting the spatial-temporal explanations of DyGNNs in the SCM architecture. To tackle these challenges, the proposed method incorporates a contrastive learning module to disentangle trivial and causal relationships, and a dynamic correlating module to disentangle dynamic and static causal relationships, respectively. A dynamic VGAE-based framework is further developed, which generates causal-and-dynamic masks for spatial interpretability, and recognizes dynamic relationships along the time horizon through causal invention for temporal interpretability. Comprehensive experiments have been conducted on both synthetic and real-world datasets, where our approach yields substantial improvements, thereby demonstrating significant superiority.",
+    "keywords": [
+      "Dynamic Graph",
+      "Graph Explanation",
+      "Graph Neural Network",
+      "Causal Inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=AJBkfwXh3u"
+  },
+  "review_fields": {
+    "summary": "This work aims at interpreting the Dynamic Graph Neural Networks (DyGNNs), and proposes an innovative causality-inspired\ngenerative framework based on structural causal model (SCM), which explores the underlying philosophies of DyGNN predictions by identifying the trivial, static, and dynamic causal relationships. This work actually identifies the subgraph via a masking mechanism.",
+    "strengths": "S1. The research motivation of this paper is clear. The existing studies on the interpretability of Dynamic Graph Neural Networks are still limited, thus it is meaningful to bridge such gap.\n \nS2. The description of the existing challenges to the interpretability of DyGNNs is interesting. The authors argue that the first challenge lies in the approach to disentangling the complex causal relationships as no explicit information is available for the identification of trivial, dynamic, and static relationships.",
+    "weaknesses": "W1. I'm confused about this sentence, 'Hence, our ultimate objective is to define a generative model', in Section 2.1. Throughout the whole paper, DyGNNExplainer is a representational model.\n\nW2. Equation 1 should be described in detail. Since causal relationships ($C$) consist of dynamic ($D$) and static ($S$) relationships, there should exist $P(S) = P(C) - P(D)$. I guess this equation is derived from it, but I can't see the logical derivation.\n\nW3. This paper still has not well addressed the interpretability issue of DyGNNs. The authors only provide evidence in performance improvements and static interpretability ('house' motif in BA-Shapes). We can not observe specific causal relationships in dynamic graphs from provided results. Besides, the baselines are interpretability methods conducted on static graphs, and the datasets are not classic dynamic graph datasets, such as traffic and citation network datasets. Thus, this proposed solution does not satisfy the expectation that exploring the interpretability of dynamic graph.\n\nW4. Some important literature is missing, e.g., CauSTG for capturing invariant relations targets temporal shifts in ST graphs [1] and CaST for discovering via Structural Causal Model (SCM) with back-door and front-door adjustment [2]. The authors should distinguish the distinctions between the proposed DyGNNExplainer and  (CauSTG, CaST), especially the CaST.\n\n\n\n[1] Xia Y, Liang Y, Wen H, et, al. Deciphering Spatio-Temporal Graph Forecasting: A Causal Lens and Treatment[J]. arXiv preprint arXiv:2309.13378, 2023.\n\n[2] Zhou Z,  Huang Q,  Yang K, et, al. Maintaining the Status Quo: Capturing Invariant Relations for OOD Spatiotemporal Learning. In Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '23), 3603–3614.",
+    "questions": "1. In Equation 7, $e$ is not defined in this paper, and the implementation of  $s( \\cdot , \\cdot )$ is also not provided. \n\n2. Does $||A||$ operate by summing all elements of $A$ in Equation 14? Besides, does Equation 14 exist error? To satisying the sparsity requirement of causal and dynamic causal graph set, whether Equation 14 should be replaced by $\\frac{{||A_t^C|{|_1} + ||A_t^S|{|_1}}}{{||{A_t}|{|_1}}}$?\n\n3. In Table 2, OrphicX achieves the best performances on DTree-Grid (96.1). But, you bold your work DyGNNExplainer (94.2 < 96.1).\n\n4. $\\Theta $ should be replaced by $\\Psi $ in the last line of Section 2.\n\n5. How to interpret the 'dynamic' in DyGNNExplainer? Can the datasets in experiments support the augment raised in this paper, as it seems there are no dynamic graph in experiments?\n\n6. Distinguish the distinctions between this work and CaST."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3175,
+    "words": 481,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b3069e6b-105c-4b95-9eeb-1d8b5bce143d",
+    "error": null,
+    "scored_chars": 3181
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "AOKU4nRw1W",
+  "reviewer": "EHJQ",
+  "paper": {
+    "title": "Linguistic Binding in Diffusion Models: Enhancing Attribute Correspondence through Attention Map Alignment",
+    "authors": [
+      "Royi Rassin",
+      "Eran Hirsch",
+      "Daniel Glickman",
+      "Shauli Ravfogel",
+      "Yoav Goldberg",
+      "Gal Chechik"
+    ],
+    "abstract": "Text-conditioned image generation models often generate incorrect associations between entities and their visual attributes. This reflects an impaired mapping between linguistic binding of entities and modifiers in the prompt and visual binding of the corresponding elements in the generated image. As one example, a query like ``a pink sunflower and a yellow flamingo'' may incorrectly produce an image of a yellow sunflower and a pink flamingo. To remedy this issue, we propose SynGen, an approach which first syntactically analyses the prompt to identify entities and their modifiers, and then uses a novel loss function that encourages the cross-attention maps to agree with the linguistic binding reflected by the syntax. Specifically, we encourage large overlap between attention maps of entities and their modifiers, and small overlap with other entities and modifier words. The loss is optimized during inference, without retraining or fine-tuning the model. Human evaluation on three datasets, including one new and challenging set, demonstrate significant improvements of SynGen compared with current state of the art methods. This work highlights how making use of sentence structure during inference can efficiently and substantially improve the faithfulness of text-to-image generation.",
+    "keywords": [
+      "syntax",
+      "diffusion",
+      "stable diffusion",
+      "attribute",
+      "attention"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=AOKU4nRw1W"
+  },
+  "review_fields": {
+    "comment": "I have read the other reviews, and would like to thank the authors for their responses.\n\nWith this information in mind, I will maintain my score.\n\nSome questions have been raised regarding similarity to the Attend-and-Excite paper. My view on this is that Attend-and-Excite is different in that it doesn't address the attribute binding problem (except indirectly by decreasing attribute neglect). Attribute binding seems to be somewhat resistant to being solved by indirect methods, which contributes to my favorable assessment of the more direct approach taken in this paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:50Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:50Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1116,
+    "words": 177,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/eca4472c-b9ca-4a4d-acfa-0d07140af0b5",
+    "error": null,
+    "scored_chars": 1116
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "8puv3c9CPg",
+  "reviewer": "DaaT",
+  "paper": {
+    "title": "Beyond the Doors of Perception: Vision Transformers Represent Relations Between Objects",
+    "authors": [
+      "Michael A. Lepori",
+      "Alexa R. Tartaglini",
+      "Wai Keen Vong",
+      "Thomas Serre",
+      "Brenden Lake",
+      "Ellie Pavlick"
+    ],
+    "abstract": "Though vision transformers (ViTs) have achieved state-of-the-art performance in a variety of settings, they exhibit surprising failures when performing tasks involving visual relations. This begs the question: how do ViTs attempt to perform tasks that require computing visual relations between objects? Prior efforts to interpret ViTs tend to focus on characterizing relevant low-level visual features. In contrast, we adopt methods from mechanistic interpretability to study the higher-level visual algorithms that ViTs use to perform abstract visual reasoning. We present a case study of a fundamental, yet surprisingly difficult, relational reasoning task: judging whether two visual entities are the same or different. We find that pretrained ViTs fine-tuned on this task often exhibit two qualitatively different stages of processing despite having no obvious inductive biases to do so: 1) a perceptual stage wherein local object features are extracted and stored in a disentangled representation, and 2) a relational stage wherein object representations are compared. In the second stage, we find evidence that ViTs can learn to represent somewhat abstract visual relations, a capability that has long been considered out of reach for artificial neural networks. Finally, we demonstrate that failures at either stage can prevent a model from learning a generalizable solution to our fairly simple tasks. By understanding ViTs in terms of discrete processing stages, one can more precisely diagnose and rectify shortcomings of existing and future models.",
+    "keywords": [
+      "visual reasoning",
+      "mechanistic interpretability",
+      "transformers",
+      "cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=8puv3c9CPg"
+  },
+  "review_fields": {
+    "summary": "The paper uses techniques from mechanistic interpretrability to analyze the algorithms implemented by pretrained ViTs to solve abstract visual reasoning tasks. The authors use two synthetic same-different tasks: discrimination and relational match-to-sample (RMTS), to analyze CLIP pretrained ViTs, DINO pretrained and Imagenet pretrained ViTs, finetuned on these tasks, as well as a ViT trained from scratch. Some pretrained ViTs, especially CLIP pretrained demonstrated a strong perceptual stage in the early layers, disentangling object representations, followed by a relational stage in the later layers, which implements somewhat abstract same-different relations. The authors also demonstrate that the formation of only the perceptual stage is enough to solve simple relational tasks like discrimination, but not enough for RMTS.",
+    "strengths": "1. The paper is well written and easy to follow.\n2. Interesting use of mechanistic interpretrability to analyze how pretrained ViTs solve same-different tasks: discrimination and relational match-to-sample (RMTS).\n3. The paper shows that early layers of CLIP pretrained ViTs demonstrate local attention for within object processing (perceptual stage), whereas the later layers demonstrate global attention for between object processing (relational stage). The two stage processing doesn’t form strongly for the other pretrained models (DINO and ImageNet) especially the relational stage. \n4. The perceptual stage is characterized by disentangled object representations (color and shape). Models trained from scratch can be enforced to have disentangled representations using an auxiliary loss which is enough for generalization in simple relational tasks like discrimination but not for RMTS task.",
+    "weaknesses": "1. Analysis is limited to simple tasks consisting of simple relations. It remains to be seen if the results would hold up for more tasks involving higher order relations and more complicated relations.\n\n2. The paper doesn’t give a clear and detailed intuition behind why CLIP pretrained ViTs implement the two stage processing more strongly compared to other pretrained ViT models.",
+    "questions": "1. According to Fig 2a,c deeper layers don’t seem to be dominated by global heads as WO attention score is higher than WP?\n\n2. Analysis of some models are missing in Fig 2 (e.g DINO Discrimination and Imagenet pretrained ViTs).\n\n\n3. Can the authors also perform the same analysis for ViTs pretrained using masked autoencoding objective [1]?\n\n4. Are the results in Fig 6 averaged for all models?\n\n[1] - He, K., Chen, X., Xie, S., Li, Y., Dollár, P. and Girshick, R., 2022. Masked autoencoders are scalable vision learners. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition (pp. 16000-16009).",
+    "limitations": "The authors have discussed the limitations in the last section."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1971,
+    "words": 300,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/87100dd9-e098-44eb-ae28-33b7f59d149b",
+    "error": null,
+    "scored_chars": 1972
+  }
+}

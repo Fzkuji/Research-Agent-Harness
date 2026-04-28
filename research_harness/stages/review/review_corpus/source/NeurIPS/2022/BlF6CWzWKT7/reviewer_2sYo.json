@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "BlF6CWzWKT7",
+  "reviewer": "2sYo",
+  "paper": {
+    "title": "Estimating individual treatment effects under unobserved confounding using binary instruments",
+    "authors": [
+      "Dennis Frauen",
+      "Stefan Feuerriegel"
+    ],
+    "abstract": "Estimating individual treatment effects (ITEs) from observational data is relevant in many fields such as personalized medicine. However, in practice, the treatment assignment is usually confounded by unobserved variables and thus introduces bias. A remedy to remove the bias is the use of instrumental variables (IVs). Such settings are widespread in medicine (e.g., trials where compliance is used as binary IV). In this paper, we propose a novel, multiple robust machine learning framework, called MRIV, for estimating ITEs using binary IVs and thus yield an unbiased ITE estimator. Different from previous work for binary IVs, our framework estimates the ITE directly via a pseudo outcome regression. (1) We provide a theoretical analysis where we show that our framework yields multiple robust convergence rates: our ITE estimator achieves fast convergence even if several nuisance estimators converge slowly. (2) We further show that our framework asymptotically outperforms state-of-the-art plug-in IV methods for ITE estimation. (3) We build upon our theoretical results and propose a tailored neural network architecture called MRIV-Net for ITE estimation using binary IVs. Across various computational experiments, we demonstrate empirically that our \\modelname achieves state-of-the-art performance. To the best of our knowledge, our MRIV is the first multiple robust machine learning framework tailored to estimating ITEs in the binary IV setting.",
+    "keywords": [
+      "Causal machine learning",
+      "treatment effect estimation",
+      "instrumental variables"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=BlF6CWzWKT7"
+  },
+  "review_fields": {
+    "comment": "Dear authors,\n\nThanks for your responses and updates to the paper. I think it is more clear now. I do have some issues with the emphasis on multiple robustness, and questions about it's significance. However, it does seem that there are some practical advantages to this formulation, and the contextualization is more clear now, so I will increase my score.\n\nIn general regarding multiple robustness, I wonder if it's really clear that it is an improvement over double robustness. Whereas double robustness requires only 1 of 2 models to be correctly specified, multiple robustness (in this paper) requires 2 of 3 to be correctly specified. Related to this, it seems like there might be some overspecification of the nuisance parameters, and therefore some constraints on the smoothness parameters? For example, does having a specific smoothness of $\\mu^Y_a(\\cdot)$ imply something about the best possible initial rates for $\\hat\\tau_{\\text{init}}(\\cdot)$?\n\nFrom a readability perspective, it might be helpful to have a table for all of the nuisance parameters, their names, their definition as a conditional expectation, their associated smoothness parameter, and how the smoothness is related to the smoothness of other parameters. This would make it easier for the reader to parse the theorems without scrolling around to look for which smoothness parameter is associated with which nuisance parameter, and would help clarify the above point."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

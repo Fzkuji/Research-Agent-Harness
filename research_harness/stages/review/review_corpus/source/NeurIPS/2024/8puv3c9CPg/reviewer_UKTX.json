@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "8puv3c9CPg",
+  "reviewer": "UKTX",
+  "paper": {
+    "title": "Beyond the Doors of Perception: Vision Transformers Represent Relations Between Objects",
+    "authors": [
+      "Michael A. Lepori",
+      "Alexa R. Tartaglini",
+      "Wai Keen Vong",
+      "Thomas Serre",
+      "Brenden Lake",
+      "Ellie Pavlick"
+    ],
+    "abstract": "Though vision transformers (ViTs) have achieved state-of-the-art performance in a variety of settings, they exhibit surprising failures when performing tasks involving visual relations. This begs the question: how do ViTs attempt to perform tasks that require computing visual relations between objects? Prior efforts to interpret ViTs tend to focus on characterizing relevant low-level visual features. In contrast, we adopt methods from mechanistic interpretability to study the higher-level visual algorithms that ViTs use to perform abstract visual reasoning. We present a case study of a fundamental, yet surprisingly difficult, relational reasoning task: judging whether two visual entities are the same or different. We find that pretrained ViTs fine-tuned on this task often exhibit two qualitatively different stages of processing despite having no obvious inductive biases to do so: 1) a perceptual stage wherein local object features are extracted and stored in a disentangled representation, and 2) a relational stage wherein object representations are compared. In the second stage, we find evidence that ViTs can learn to represent somewhat abstract visual relations, a capability that has long been considered out of reach for artificial neural networks. Finally, we demonstrate that failures at either stage can prevent a model from learning a generalizable solution to our fairly simple tasks. By understanding ViTs in terms of discrete processing stages, one can more precisely diagnose and rectify shortcomings of existing and future models.",
+    "keywords": [
+      "visual reasoning",
+      "mechanistic interpretability",
+      "transformers",
+      "cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=8puv3c9CPg"
+  },
+  "review_fields": {
+    "summary": "This work studies ViTs' learning behavior with relational tasks by experimenting on 2 same-different tasks: discrimination and RMTS tasks.  And the authors propose a dataset to analyze. And discovers that there are 2 stages of attention processing of CLIP ViTs by attention scores from patches to other patches. They characterize 2 stages, perceptual stage and relational stage.",
+    "strengths": "This paper defined a novel avenue with inspiration from mechanistic interpretability to understand the working mechanism of CLIP ViTs. And proposed approaches to study them with attention analyses.",
+    "weaknesses": "1. I believe readers in this track would generally not be experts in concepts of the proposed area of studies, the paper should include more literature review for context upfront.\n\n2. I find the writing and the flow of the paper hard to follow, maybe adding flow-chart would help improve readability.\n\n3. The dataset is not well-discussed.\n\n4. I think there is a slight mismatch between claimed study and experiments. The title suggest the study centers around ViTs but use CLIP ViTs, leaving me confused if the points made are the same on the original ViTs.",
+    "questions": "1. ln 23-24, the motivation \"little breakthrough progress on complex tasks involving relations between visual entities...\" is that true? What about the recent breakthroughs or datasets of vision-language models, Llava, GPT4, etc. Please give more explanations.\n\n2. ln 41, please define what are \"algorithms\" learned by ViT, and are there algorithms learned by other architectures, CNNs, LSTMs, etc.?\n\n3. Are there no existing datasets that can study the relations of visual entities? I mean in general, not the RMTS, etc.\n\n3. The motivation of using CLIP ViTs for study is not clear. Since part of the motivation is from infant learning, why not use more human-like CNN like ConvNext? Also, CLIP ViT is different from ViT as well.\n\n4. Vaguely remember [1] discussed about using better disentangled model for generalization and color, are there new insights from Sec 6?\n\n5. With the 2 stage processing, what would you suggest the architecture to change to build a more \"robust\" version?\n---------\n[1] Better may not be fairer? [Chiu, et. al., 2023]"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1806,
+    "words": 294,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d1a32daf-792c-46ac-886a-9a76c6b7f137",
+    "error": null,
+    "scored_chars": 1806
+  }
+}

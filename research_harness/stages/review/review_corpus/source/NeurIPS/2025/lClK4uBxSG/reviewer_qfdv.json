@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "lClK4uBxSG",
+  "reviewer": "qfdv",
+  "paper": {
+    "title": "ModHiFi: Identifying High Fidelity predictive components for Model Modification",
+    "authors": [
+      "Dhruva Kashyap",
+      "Chaitanya Murti",
+      "Pranav K Nayak",
+      "Tanay Narshana",
+      "Chiranjib Bhattacharyya"
+    ],
+    "abstract": "Open weight models, which are ubiquitous, rarely provide access to their training data or loss function. This makes modifying such models for tasks such as pruning or unlearning, which are constrained by this unavailability, an active area of research. Existing techniques typically require gradients or ground-truth labels, rendering them infeasible in settings with limited computational resources.\nIn this work, we investigate the fundamental question of identifying components that are critical to the model's predictive performance, without access to either gradients or the loss function, and with only distributional access such as synthetic data. \nWe theoretically demonstrate that the global error is linearly bounded by local reconstruction errors for Lipschitz-continuous networks such as CNNs and well-trained Transformers (which, contrary to existing literature, we find exhibit Lipschitz continuity).\nThis motivates using the locally reconstructive behavior of component subsets to quantify their global importance, via a metric that we term *Subset Fidelity*. \nIn the uncorrelated features setting, selecting individual components based on their Subset Fidelity scores is optimal, which we utilize to propose **ModHiFi**, an algorithm for model modification that requires neither training data nor access to a loss function. \n**ModHiFi-P**, for structured pruning, achieves an 11\\% speedup over the current state of the art on ImageNet models and competitive performance on language models. **ModHiFi-U**, for classwise unlearning, achieves complete unlearning on CIFAR-10 without fine-tuning and demonstrates competitive performance on Swin Transformers.",
+    "keywords": [
+      "Pruning",
+      "Machine Unlearning"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=lClK4uBxSG"
+  },
+  "review_fields": {
+    "summary": "The paper introduces ModHiFi, a novel framework for modifying well-trained models without access to the original training data or loss function. The authors address two key tasks: structured pruning and classwise unlearning. The core idea revolves around identifying High-Fidelity (HiFi) components which are small subsets of model components critical to predictive performance, using a new metric called Subset Fidelity, which quantifies how well a subset of components can reconstruct model outputs after weight adjustments.",
+    "strengths_and_weaknesses": "**Strength:**\n+ Architecture Generalization: The proposed algorithm performs well on both vision models (CNNs/ViTs) and language models (LLMs), demonstrating versatility across different architectures.\n+ Task Generalization: The modification based on the HiFi objective unifies two tasks, classwise unlearning and structured pruning. Specifically: The pruning method (ModHiFi-P) achieves an 11% speedup on ImageNet while maintaining superior accuracy over baselines. The unlearning method (ModHiFi-U) completely erases target classes without fine-tuning and is 10x faster than existing approaches.\n+ Comprehensive Experimental Setup: The experiments thoroughly address the four key questions posed in the paper.\n\n**Weakness:**\n- As shown in Table 2, while the method maintains strong average performance under high pruning ratios, its individual task metrics are not particularly outstanding.\n- The method’s effectiveness relies on the assumption that the target model is well-trained; its performance on poorly initialized or underfitted models remains unexplored and is theoretically expected to degrade.\n- The classwise unlearning performance on Swin-Transformers is subpar, possibly due to insufficient model training.\n- Computing Subset Fidelity requires high-dimensional matrix inversion, which may be computationally prohibitive for extremely large models (e.g., LLMs).\n- The experimental scope is somewhat limited:\n1) No exploration of the impact of k and η (key hyperparameters in HiFi selection).\n2) No discussion on the choice of B (pruning budget) for structured pruning or the sizes of forget set and retain set for classwise unlearning.",
+    "final_justification": "The rebuttal addressed my questions. But after checking other reviews, I feel the paper is not good enough for an accept. I will keep my rating."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

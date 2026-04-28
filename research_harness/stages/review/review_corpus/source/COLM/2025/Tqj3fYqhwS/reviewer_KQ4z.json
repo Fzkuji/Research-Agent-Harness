@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "Tqj3fYqhwS",
+  "reviewer": "KQ4z",
+  "paper": {
+    "title": "Fleurs-SLU: A Massively Multilingual Benchmark for Spoken Language Understanding",
+    "authors": [
+      "Fabian David Schmidt",
+      "Ivan Vulić",
+      "Goran Glavaš",
+      "David Ifeoluwa Adelani"
+    ],
+    "abstract": "Spoken language understanding (SLU) is indispensable for half of all living languages that lack a formal writing system, since these languages cannot pair automatic speech recognition (ASR) with language models to benefit from language technology. Even if low-resource languages possess a writing system, ASR for these languages remains unreliable due to limited bimodal speech and text training data. However, the evaluation of multilingual SLU remains limited to shallow tasks such as intent classification or language identification. To address this, we present Fleurs-SLU, a multilingual SLU benchmark that encompasses (i) 692 hours of speech for topical utterance classification in 102 languages and (ii) multiple-choice question answering through listening comprehension spanning 944 hours of speech across 92 languages. We extensively evaluate both end-to-end speech classification models and cascaded systems that combine speech-to-text transcription with subsequent classification by large language models on Fleurs-SLU. Our results show that cascaded systems exhibit greater robustness in multilingual SLU tasks, though speech encoders can achieve competitive performance in topical speech classification when appropriately pre-trained. We further find a strong correlation between robust multilingual ASR, effective speech-to-text translation, and strong multilingual SLU, highlighting the mutual benefits between acoustic and semantic speech representations.",
+    "keywords": [
+      "spoken language understanding",
+      "multilingual benchmarks",
+      "multilingual evaluation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Tqj3fYqhwS"
+  },
+  "review_fields": {
+    "comment": "Thank you for your reponses!\n\n> While we would like to address this comment, maintaining anonymity inhibits us to do so. We sincerely hope that you trust that we in good faith consider this concurrent work.\n\nI don't quite get the point about anonymity (no need to clarify if there are issues with it). And yes, I assume that this is concurrent work in the sense that it was developed concurrently with that other work (as opposed to reactive work started right after that publication and submitted by the March 28 deadline).\n\nAll the clarifications are helpful. I will keep my (high) score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 590,
+    "words": 103,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/06da1953-963d-4ad6-a5a9-90b69836ca02",
+    "error": null,
+    "scored_chars": 590
+  }
+}

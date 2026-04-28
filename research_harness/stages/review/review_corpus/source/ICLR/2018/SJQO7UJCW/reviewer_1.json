@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "SJQO7UJCW",
+  "reviewer": "1",
+  "paper": {
+    "title": "Adversarial Learning for Semi-Supervised Semantic Segmentation",
+    "authors": [
+      "Wei-Chih Hung",
+      "Yi-Hsuan Tsai",
+      "Yan-Ting Liou",
+      "Yen-Yu Lin",
+      "Ming-Hsuan Yang"
+    ],
+    "abstract": "We propose a method for semi-supervised semantic segmentation using the adversarial network. While most existing discriminators are trained to classify input images as real or fake on the image level, we design a discriminator in a fully convolutional manner to differentiate the predicted probability maps from the ground truth segmentation distribution with the consideration of the spatial resolution. We show that the proposed discriminator can be used to improve the performance on semantic segmentation by coupling the adversarial loss with the standard cross entropy loss on the segmentation network. In addition, the fully convolutional discriminator enables the semi-supervised learning through discovering the trustworthy regions in prediction results of unlabeled images, providing additional supervisory signals. In contrast to existing methods that utilize weakly-labeled images, our method leverages unlabeled images without any annotation to enhance the segmentation model. Experimental results on both the PASCAL VOC 2012 dataset and the Cityscapes dataset demonstrate the effectiveness of our algorithm.",
+    "keywords": [
+      "semantic segmentation",
+      "adversarial learning",
+      "semi-supervised learning",
+      "self-taught learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SJQO7UJCW"
+  },
+  "review_fields": {
+    "review": "This paper proposed an approach for semi-supervised semantic segmentation based on adversarial training. Built upon a popular segmentation network, the paper integrated adversarial loss to incorporate unlabeled examples in training. The outputs from the discriminator are interpreted as indicators for the reliability of label prediction, and used to filter-out non-reliable predictions as augmented training data from unlabeled images.  The proposed method achieved consistent improvement over existing state-of-the-art on two challenging segmentation datasets.\n\nAlthough the motivation is reasonable and the results are impressive, there are some parts that need more clarification/discussion as described below.\n\n1) Robustness of discriminator output:\nThe main contribution of the proposed model is exploiting the outputs from the discriminator as the confidence score maps of the predicted segmentation labels. However, the outputs from the discriminator indicate whether its inputs are from ground-truth labels or model predictions, and may not be directly related to ‘correctness’ of the label prediction. For instance, it may prefer per-pixel score vectors closed to one-hot encoded vectors. More thorough analysis/discussions are required to show how outputs from discriminator are correlated with the correctness of label prediction.     \n\n2) Design of discriminator\nI wonder if conditional discriminator fits better for the task. i.e. D(X,P) instead of D(P). It may prevent the model generating label prediction P non-relevant to input X by adversarial training, and makes the score prediction from the discriminator more meaningful. Some ablation study or discussions would be helpful.\n\n3) Presentations\nThere are several abused notations; notations for the ground-truth label P and the prediction from the generator S(X) should be clearly separated in Eq. (1) and (4). Also, it would better to find a better notation for the outputs from D instead of D^(*,0) and D^(*,1).  \nTraining details in semi-supervised learning would be helpful. For instance, the proposed semi-supervised learning strategy based on Eq. (5) may be suffered by noise outputs from the discriminator in early training stages. I wonder how authors resolved the issues (e.g. training the generator and discriminator are with the labeled example first and extending it to training with unlabeled data.)"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "DGA8XbJ8FVd",
+  "reviewer": "pJNf",
+  "paper": {
+    "title": "Skipping the Frame-Level: Event-Based Piano Transcription With Neural Semi-CRFs",
+    "authors": [
+      "Yujia Yan",
+      "Frank Cwitkowitz",
+      "Zhiyao Duan"
+    ],
+    "abstract": "Piano transcription systems are typically optimized to estimate pitch activity at each frame of audio. They are often followed by carefully designed heuristics and post-processing algorithms to estimate note events from the frame-level predictions. Recent methods have also framed piano transcription as a multi-task learning problem, where the activation of different stages of a note event are estimated independently. These practices are not well aligned with the desired outcome of the task, which is the specification of note intervals as holistic events, rather than the aggregation of disjoint observations. In this work, we propose a novel formulation of piano transcription, which is optimized to directly predict note events. Our method is based on Semi-Markov Conditional Random Fields (semi-CRF), which produce scores for intervals rather than individual frames. When formulating piano transcription in this way, we eliminate the need to rely on disjoint frame-level estimates for different stages of a note event. We conduct experiments on the MAESTRO dataset and demonstrate that the proposed model surpasses the current state-of-the-art for piano transcription. Our results suggest that the semi-CRF output layer, while still quadratic in complexity, is a simple, fast and well-performing solution for event-based prediction, and may lead to similar success in other areas which currently rely on frame-level estimates.",
+    "keywords": [
+      "Music",
+      "Audio",
+      "Piano Transcrition",
+      "Music Transcription",
+      "Semi-Markov",
+      "CRFs",
+      "Sound Event Detection",
+      "Music Information Retrieval"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=DGA8XbJ8FVd"
+  },
+  "review_fields": {
+    "summary": "This paper describes a piano transcription (audio->piano roll / MIDI representation) model that uses a conditional random field layer to produce the transcription as a sequence of event-intervals, rather than the commonly used frame-wise decoding/post-processing of prior work.  The proposed method has a slight increase in computational cost, but remains manageable for typical input lengths, and improves over prior work under some (but not all) transcription evaluation metrics.",
+    "main_review": "The primary innovation of this paper, as I understand it, is the formulation of the transcription problem in terms of events / intervals, rather than time-based classification.  While many works have approached this kind of problem with a two-stage model---produce an activation map, and then decode it with some kind of dynamics model, eg an HMM---this paper integrates the two steps in an end-to-end fashion through a CRF output layer.  While the individual components used here are not entirely novel, the authors seem to have done a good job of adapting and optimizing the Semi-CRF method for this particular use-case.  \n\nThe paper is generally clear and well-written, and literature review covers the related recent work on piano transcription.  Section 3.1 was somewhat difficult for me to follow at first, but the example table (1) did help quite a bit to clarify the structure of the loss/likelihood function.  I appreciated the attention to detail in designing the objective function and optimizing the memory layout of the intermediate representation (section 3.1).\n\nThe experimental results (tables 2-3) come across as somewhat mixed, for a few reasons.  First, only mean scores are reported, with no mention of variance or stability; the single highest number for each metric is marked in bold, but most of the time there are comparable methods (ie within 1%) of the best, and no statistical analysis is performed here.  In the cases where there does appear to be a large effect size, it sometimes vanishes when looking at the F-scores, or the proposed method under-performs prior work.  The exception here are the offset metrics (last two columns of table 2), where the proposed method does seem to provide a consistent and meaningful improvement over prior work (~4% absolute F1 improvement over Kong et al., 2020).  The authors claim improved speed of their method as a benefit over prior work, but this is not demonstrated.  Otherwise the experiments seem to be well-designed and executed.\n\nTo summarize the results, the take-away message appears to be that the proposed method improves at detecting note offsets, and may be faster (or otherwise more efficient) than prior methods for comparable accuracy.  It is worth noting that offset detection is in practice quite a difficult task, as data is often unreliable: even with MIDI, the observed offset may not match the encoded offset due to variations in sound fonts.  It is not lost on this reviewer that the improvements are in a difficult part of the problem space, but at the same time, the improvements overall are rather incremental.  The method itself is interesting though, and I agree with the authors that it may be applicable to other contexts, though it's not obvious how well some of the specific assumptions made here (eg non-overlapping events of the same type) may transfer to applications like sound event detection.  As such, significance of this work is somewhat difficult to gauge.\n\n## Minor comments\n\n- Line 114: broken section reference\n- Line 146-7: this part seems like a non-sequitur, or at least an incomplete thought.  I understand that eq (2) is a simplifying assumption made for practicality purposes, but saying that it's similar to naive Bayes is hardly a justification.\n- Line 260: the use of $N$ (duration) and $|E|$ (event types) is inconsistent with earlier parts of the paper, where $N$ refers to the number of event types (figure 1).",
+    "limitations_and_societal_impact": "No discussion of societal impact is provided.  However, this question does seem rather out of scope given the subject of the paper, so I don't have any suggestions to offer here."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "3PjCt4kmRx",
+  "reviewer": "uTRS",
+  "paper": {
+    "title": "From Pixels to UI Actions: Learning to Follow Instructions via Graphical User Interfaces",
+    "authors": [
+      "Peter Shaw",
+      "Mandar Joshi",
+      "James Cohan",
+      "Jonathan Berant",
+      "Panupong Pasupat",
+      "Hexiang Hu",
+      "Urvashi Khandelwal",
+      "Kenton Lee",
+      "Kristina Toutanova"
+    ],
+    "abstract": "Much of the previous work towards digital agents for graphical user interfaces (GUIs) has relied on text-based representations (derived from HTML or other structured data sources), which are not always readily available. These input representations have been often coupled with custom, task-specific action spaces.  This paper focuses on creating agents that interact with the digital world using the same conceptual interface that humans commonly use — via pixel-based screenshots and a generic action space corresponding to keyboard and mouse actions. Building upon recent progress in pixel-based pretraining, we show, for the first time, that it is possible for such agents to outperform human crowdworkers on the MiniWob++ benchmark of GUI-based instruction following tasks.",
+    "keywords": [
+      "instruction following",
+      "web tasks",
+      "user interface tasks",
+      "vision and language",
+      "representation learning",
+      "reinforcement learning",
+      "imitation learning",
+      "tree search",
+      "language grounding",
+      "web agents",
+      "computer control"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=3PjCt4kmRx"
+  },
+  "review_fields": {
+    "summary": "The paper describes a system to perform pixel-based interaction with human-taylored screens based on GUIs. The proposed system relies on a transformation to a text-based, structured representation of the screen and the screen tasks performed using a larger, pre-trained model of almost 300M parameters. The proposed system achieves performance similar to human beings performing those tasks and SOTA using text representations of the screen.",
+    "strengths": "The main strengths of the paper are:\n\n1. It demonstrates a successful system able to interact with the screen (web-based applications)  in a similar way that humans do.\n2. It does so by fine-tuning a pre-trained system with a small number of demonstrations. \n3. It performs an ablation test where it shows that the pre-training information is critical.",
+    "weaknesses": "The main weaknesses of the paper are:\n\n1. The evaluation procedure is so succinctly described that it is hard to understand what was exactly done.\n2. The granularity of number of tests according to test type seems to be too coarse (500 tests for 59 task is less than 10 per task).\n3. Results are report with little extra information such as mean scores.\n4. No statistical significance analysis is performed justifying the claims that the scores are better than SOTA or human (therefore here I assume they are similar, not better).\n5. The discussion section is very limited and not clear about the actual contributions.\n6. The authors fail to discuss important ethical issues concerning their research. In particular, if AI systems can interact using GUI interfaces, they can produce content and affect web-based systems in very impactful ways, including altering political and social discourses, create hard-to-identify denial attacks, fool \"I am not a robot\" tests, and pose as people while interacting with real people.",
+    "questions": "1. Are the results of the proposed system statistically better than the other systems? With what level of confidence?\n2. Can you provide the standard deviations of the tests performed? Are they adequate?",
+    "limitations": "The limitation section is very brief and not adequate for a paper with the ethical impacts that such technologies can create."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1705,
+    "words": 278,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/59188043-4bd7-43fd-8d4a-9352858f93ba",
+    "error": null,
+    "scored_chars": 1707
+  }
+}

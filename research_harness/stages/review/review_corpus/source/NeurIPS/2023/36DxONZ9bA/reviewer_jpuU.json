@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "36DxONZ9bA",
+  "reviewer": "jpuU",
+  "paper": {
+    "title": "Representational Strengths and Limitations of Transformers",
+    "authors": [
+      "Clayton Sanford",
+      "Daniel Hsu",
+      "Matus Telgarsky"
+    ],
+    "abstract": "Attention layers, as commonly used in transformers, form the backbone of modern deep learning, yet there is no mathematical description of their benefits and deficiencies as compared with other architectures. In this work we establish both positive and negative results on the representation power of attention layers, with a focus on intrinsic complexity parameters such as width, depth, and embedding dimension. On the positive side, we present a sparse averaging task, where recurrent networks and feedforward networks all have complexity scaling polynomially in the input size, whereas transformers scale merely logarithmically in the input size; furthermore, we use the same construction to show the necessity and role of a large embedding dimension in a transformer. On the negative side, we present a triple detection task, where attention layers in turn have complexity scaling linearly in the input size; as this scenario seems rare in practice, we also present natural variants that can be efficiently solved by attention layers. The proof techniques emphasize the value of communication complexity in the analysis of transformers and related models, and the role of sparse averaging as a prototypical attention task, which even finds use in the analysis of triple detection.",
+    "keywords": [
+      "self-attention",
+      "approximation theory",
+      "communication complexity"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=36DxONZ9bA"
+  },
+  "review_fields": {
+    "summary": "This paper focuses on the representational capabilities of attention layers in transformer models and showcases both the strengths and limitations. On one hand, the paper proves that attention layers excel at the presented sparse averaging task compared to RNNs and FNNs. On the negative side, they have complexity scaling linearly in the input size for the triple detection task. The paper theoretically showcases the strengths and limitations of the expressivity of attention layers, especially the role of embedding dimension of the attention layer.",
+    "strengths": "To my knowledge, the presented theoretical results are novel in the study of transformers and their representational capabilities. However, this work is out of my expertise and I cannot go into depth about the significance of the work. I do appreciate the authors in providing some empirical evidence about the theoretical findings of the work.",
+    "weaknesses": "As said previously, this is not within my area of expertise. I am however interested in how relevant/connected are the proposed tasks (e.g. sparse averaging and triple detection) to empirical studies such as language or visual data modeling. I think the work would be improved if more insights could be provided as to how the theoretical results can be connected to real-world practices.",
+    "questions": "My questions and suggestions are listed above.",
+    "limitations": "This is a theory paper and the authors provided open directions for future work."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 863,
+    "words": 139,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/36076610-9be1-466d-b748-9b722e25ac29",
+    "error": null,
+    "scored_chars": 863
+  }
+}

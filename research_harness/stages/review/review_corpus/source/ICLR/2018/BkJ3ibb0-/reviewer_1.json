@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "BkJ3ibb0-",
+  "reviewer": "1",
+  "paper": {
+    "title": "Defense-GAN: Protecting Classifiers Against Adversarial Attacks Using Generative Models",
+    "authors": [
+      "Pouya Samangouei",
+      "Maya Kabkab",
+      "Rama Chellappa"
+    ],
+    "abstract": "In recent years, deep neural network approaches have been widely adopted for machine learning tasks, including classification. However, they were shown to be vulnerable to adversarial perturbations: carefully crafted small perturbations can cause misclassification of legitimate images. We propose Defense-GAN, a new framework leveraging the expressive capability of generative models to defend deep neural networks against such attacks. Defense-GAN is trained to model the distribution of unperturbed images. At inference time, it finds a close output to a given image which does not contain the adversarial changes. This output is then fed to the classifier. Our proposed method can be used with any classification model and does not modify the classifier structure or training procedure. It can also be used as a defense against any attack as it does not assume knowledge of the process for generating the adversarial examples. We empirically show that Defense-GAN is consistently effective against different attack methods and improves on existing defense strategies.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=BkJ3ibb0-"
+  },
+  "review_fields": {
+    "review": "This paper presents a method to cope with adversarial examples in classification tasks, leveraging a generative model of the inputs.  Given an accurate generative model of the input, this approach first projects the input onto the manifold learned by the generative model (the idea being that inputs on this manifold reflect the non-adversarial input distribution).  This projected input is then used to produce the classification probabilities.  The authors test their method on various adversarially constructed inputs (with varying degrees of noise). \n\nQuestions/Comments:\n\n- I am interested in unpacking the improvement of Defense-GAN over the MagNet auto-encoder based method.  Is the MagNet auto-encoder suffering lower accuracy because the projection of an adversarial image is based on an encoding function that is learned only on true data?  If the decoder from the MagNet approach were treated purely as a generative model, and the same optimization-based projection approach (proposed in this work) was followed, would the results be comparable?  \n\n- Is there anything special about the GAN approach, versus other generative approaches? \n\n- In the black-box vs. white-box scenarios, can the attacker know the GAN parameters?  Is that what is meant by the \"defense network\" (in experiments bullet 2)?\n\n- How computationally expensive is this approach take compared to MagNet or other adversarial approaches? \n\nQuality: The method appears to be technically correct.\n\nClarity: This paper clearly written; both method and experiments are presented well. \n\nOriginality: I am not familiar enough with adversarial learning to assess the novelty of this approach. \n\nSignificance: I believe the main contribution of this method is the optimization-based approach to project onto a generative model's manifold.  I think this kernel has the potential to be explored further (e.g. computational speed-up, projection metrics)."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

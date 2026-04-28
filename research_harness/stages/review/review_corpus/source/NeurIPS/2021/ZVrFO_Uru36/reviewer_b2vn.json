@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "ZVrFO_Uru36",
+  "reviewer": "b2vn",
+  "paper": {
+    "title": "Deep inference of latent dynamics with spatio-temporal super-resolution using selective backpropagation through time",
+    "authors": [
+      "Feng Zhu",
+      "Andrew R Sedler",
+      "Harrison A Grier",
+      "Nauman Ahad",
+      "Mark A. Davenport",
+      "Matthew Kaufman",
+      "Andrea Giovannucci",
+      "Chethan Pandarinath"
+    ],
+    "abstract": "Modern neural interfaces allow access to the activity of up to a million neurons within brain circuits. However, bandwidth limits often create a trade-off between greater spatial sampling (more channels or pixels) and the temporal frequency of sampling. Here we demonstrate that it is possible to obtain spatio-temporal super-resolution in neuronal time series by exploiting relationships among neurons, embedded in latent low-dimensional population dynamics. Our novel neural network training strategy, selective backpropagation through time (SBTT), enables learning of deep generative models of latent dynamics from data in which the set of observed variables changes at each time step. The resulting models are able to infer activity for missing samples by combining observations with learned latent dynamics. We test SBTT applied to sequential autoencoders and demonstrate more efficient and higher-fidelity characterization of neural population dynamics in electrophysiological and calcium imaging data. In electrophysiology, SBTT enables accurate inference of neuronal population dynamics with lower interface bandwidths, providing an avenue to significant power savings for implanted neuroelectronic interfaces. In applications to two-photon calcium imaging, SBTT accurately uncovers high-frequency temporal structure underlying neural population activity, substantially outperforming the current state-of-the-art. Finally, we demonstrate that performance could be further improved by using limited, high-bandwidth sampling to pretrain dynamics models, and then using SBTT to adapt these models for sparsely-sampled data.",
+    "keywords": [
+      "Computational neuroscience",
+      "Systems neuroscience",
+      "Neural population dynamics",
+      "intermittent sampling",
+      "Electrophysiology",
+      "Calcium imaging",
+      "Brain-computer interfaces",
+      "Neuroscience",
+      "Neuroprosthetics",
+      "Neural coding",
+      "Motor control",
+      "Sequential autoencoders"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZVrFO_Uru36"
+  },
+  "review_fields": {
+    "summary": "The authors introduce selective backpropagation through time (SBTT), and use this technique to improve the spatiotemporal resolution of AutoLFADS (a sequential autoencoder). This approach allows accurately inferring a low-dimensional dynamical system when samples are not recorded at all times. They demonstrate how this approach could be useful for Neuropixel recordings, when a large population of neurons is recording with a limited bandwidth (so that not all neurons are recorded at all times). They also demonstrate how this could be useful with Calcium imaging, in order to incorporate the more precise times that neurons are recorded during scanning (rather than assuming all neurons were recorded at once).",
+    "main_review": "Pros:\n\n-This is a novel idea - I’m not aware of anyone who was trying to address these challenges. In fact, I hadn’t really thought about them as being challenges, so I think it could lead to a lot of new work in computational neuroscience.\n\n-The manuscript is very thorough and high quality - there are demonstrations on simulated data and multiple neuroscience applications.\n\n-The manuscript is clearly written, especially given the amount of information the authors are providing.\n\n\nCons:\n\n-I don’t have any major concerns. I think the broad significance of the approach is TBD, as it’s hard to know whether this would be used with Neuropixels as proposed. But I am more confident this approach would be used in the near future for calcium imaging data. I encourage the authors to make this tool very user friendly to increase adoption of their method.\n\n\nMinor comments:\n\nFor Fig. 2b,c:\n-Can you provide a citation for how you calculated pseudo-R2 (there are different ways of defining it). And similarly, can you provide a citation for coefficient of determination (unfortunately, i’ve also seen this defined multiple ways).\n\nIt can be a little challenging to keep the meaning of the acronyms in my head. A couple recommendations (that you can take or leave):\n-Just call A-ZIG-FR “A-ZIG”.\n-Instead of “A”, use “ALFADS” (so ALFADS-ZIG). I realize “A” is shorter, but I would forget that A referred to AutoLFADS."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

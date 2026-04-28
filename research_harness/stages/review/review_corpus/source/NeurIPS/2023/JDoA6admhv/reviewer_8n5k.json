@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "JDoA6admhv",
+  "reviewer": "8n5k",
+  "paper": {
+    "title": "Adversarial Examples Might be Avoidable: The Role of Data Concentration in Adversarial Robustness",
+    "authors": [
+      "Ambar Pal",
+      "Jeremias Sulam",
+      "Rene Vidal"
+    ],
+    "abstract": "The susceptibility of modern machine learning classifiers to adversarial examples has motivated theoretical results suggesting that these might be unavoidable. However, these results can be too general to be applicable to natural data distributions. Indeed, humans are quite robust for tasks involving vision. This apparent conflict motivates a deeper dive into the question: Are adversarial examples truly unavoidable? \nIn this work, we theoretically demonstrate that a key property of the data distribution -- concentration on small-volume subsets of the input space -- determines whether a robust classifier exists. We further demonstrate that, for a data distribution concentrated on a union of low-dimensional linear subspaces, utilizing structure in data naturally leads to classifiers that enjoy data-dependent polyhedral robustness guarantees, improving upon methods for provable certification in certain regimes.",
+    "keywords": [
+      "Adversarial Robustness",
+      "Geometry in Data",
+      "Low Dimensional Modeling"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JDoA6admhv"
+  },
+  "review_fields": {
+    "summary": "This paper first studies the existence problem of a robust classifier from a data concentration perspective. In particular, they prove that the (strong) concentration property of class-conditional data distributions characterizes a sufficient and necessary condition for determining whether a robust classifier exists. This seemingly contradicting result complements existing works on impossibility results of adversarially robust classification [17, 43, 11]. Built upon the assumption that the underlying distribution is concentrated on a union of low-dimensional linear subspaces, the paper proposes a new way to derive robustness certificates by leveraging techniques from sparse representation and subspace clustering. Experiments on MINST are provided as empirical evidence supporting the effectiveness of the proposed certification method.",
+    "strengths": "The theoretical results are mostly well-written, and their implications are discussed in detail. I did not check the proof, but I think the results are technically correct. In addition, I very much like how this paper structures its theoretical results: a main theorem followed by a proof sketch and a detailed discussion of its implication.\n\nThe first part of this paper shows a somewhat surprising result compared with existing works deriving impossibility results of robust classification [17, 43, 11]. Assuming a robust classifier exists (i.e., a human classifier), the paper shows that the data distribution has to be concentrated in a small-volume subset in the input space. A robust classifier is guaranteed to exist if the class conditionals are both concentrated and well-separated. Given that human is robust to small, adversarial perturbations exists, these results suggest natural data distributions are likely to be concentrated, and existing impossibility results may be due to unrealistic distributional assumptions.\n\nThe second part of this paper aims to study how to leverage the underlying data structure (i.e., the fact/assumption that data are concentrated on a union of low-dimensional subspaces) for adversarially robust classification. The presented method uses the classical literature of sparse representation, which seems novel to the field of robustness certification. Overall, the paper did a good job of discussing their theoretical results and explaining their broader implications.",
+    "weaknesses": "Regarding the first part of the paper, I think the presented theoretical possibility results are correct, which complements existing works [17, 43, 11]. However, I want to point out several missing references [1-4]. These works studied the concentration of measure phenomenon and its connection to robust classification/learning. There are some differences, but I believe those existing works are very relevant, thus, should be cited and discussed properly. In particular, your definition of (strongly) concentrated distribution and the notion of concentration of measure introduced in [2] seems different. Also, a key assumption imposed in them [1-4] is that there exists a ground-truth classifier (i.e., a human classifier) and a machine learning classifier is imperfect (see the definition of intrinsic robustness introduced in [3]). In other words, they assume a constant (say 1%) clean error of any machine learning classifier always exists. However, this assumption seems not to be considered in this work. Could you discuss those differences with comparisons to your work?\n\n[1] The Relationship Between High-Dimensional Geometry and Adversarial Examples. Justin Gilmer, Luke Metz, Fartash Faghri, Samuel S. Schoenholz, Maithra Raghu, Martin Wattenberg, Ian Goodfellow. ArXiv: 1801.02774.\n\n[2] The Curse of Concentration in Robust Learning: Evasion and Poisoning Attacks from Concentration of Measure. Saeed Mahloujifar, Dimitrios I. Diochnos, Mohammad Mahmoody. AAAI 2019\n\n[3] Empirically Measuring Concentration: Fundamental Limits on Intrinsic Robustness. Saeed Mahloujifar, Xiao Zhang, Mohammad Mahmoody, David Evans. NeurIPS 2019\n\n[4] Understanding Intrinsic Robustness Using Label Uncertainty. Xiao Zhang, David Evans. ICLR 2022\n\nIn addition, I am a little confused about the degree of concentration implied by Theorem 2.1. Theorem 2.1 says that if an $(\\epsilon, \\delta)$-robust classifier exists, all the class conditionals are $(\\epsilon, K\\delta)$-concentrated if they are balanced. This result seems interesting, but from my perspective, a discussion of whether this result holds for most data distributions or only applies to certain distributions is missing. Simply judging from Definition 2.1, there is little clue on what data distribution is concentrated and, more importantly, their degree of concentration. The constants $c_1$ and $c_2$ are vaguely described, so could you explain their dependence on other parameters such as the density function q and $\\delta$? If the data distribution lies on a low-dimensional manifold, does it always imply the underlying distribution is concentrated?  I recommend the authors provide examples of concentrated distributions with a characterization of their degree of concentration. \n\nThe result of Theorem 3.1 is not very surprising. The assumption that the underlying class conditional distribution is strongly concentrated seems strong. To be honest, I am not convinced that this assumption will hold for natural image distributions. Otherwise, image classification would be rather a simple task. Therefore, it would be important for the authors to clarify this in the response. \n\nRegarding the second part, I have to say I am not familiar with the literature on sparse representation. I can understand the motivation and main message of leveraging the underlying data structure, which is interesting. Still, I am concerned about the assumption that data distributions are concentrated on a union of low-dimensional linear subspaces to be too strong to hold in practice. The applicability of your method seems to be heavily dependent on whether the distribution satisfies the imposed subspace assumption. MNIST may be more aligned with such an assumption, but Gaussian-like data distributions such as CIFAR-10 and ImageNet may not be. Therefore, I am not confident that the proposed method will work for other image benchmarks like CIFAR-10.",
+    "questions": "1. Could you provide a detailed discussion with related works [1-4] and explain why data concentration implies different conclusions about the possibility/impossibility of adversarially robust classification?\n\n2. If we assume a human classifier is adversarially robust to image classification tasks, does Theorem 2.1 implies how concentrated the input distribution is? If so, what are the important factors affecting the degree of concentration?\n\n3. Do the constants $c_1$ and $c_2$ in Definition 2.2 depend on the underlying density $q$ and $\\delta$? If so, could you specify their dependencies?\n\n4. Could you clarify the generalizability of the proposed certified defense in Section 4 if the underlying data distribution deviates from the imposed assumption regarding linear subspaces?",
+    "limitations": "The paper discusses the limitations and implications of their results well in Section 6."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 6298 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 6298,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 6298
+  }
+}

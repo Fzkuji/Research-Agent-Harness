@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "HGNTcy4eEp",
+  "reviewer": "tMkz",
+  "paper": {
+    "title": "Learning Group Actions on Latent Representations",
+    "authors": [
+      "Yinzhu Jin",
+      "Aman Shrivastava",
+      "Tom Fletcher"
+    ],
+    "abstract": "In this work, we introduce a new approach to model group actions in autoencoders. Diverging from prior research in this domain, we propose to learn the group actions on the latent space rather than strictly on the data space. This adaptation enhances the versatility of our model, enabling it to learn a broader range of scenarios prevalent in the real world, where groups can act on latent factors. Our method allows a wide flexibility in the encoder and decoder architectures and does not require group-specific layers. In addition, we show that our model theoretically serves as a superset of methods that learn group actions on the data space. We test our approach on five image datasets with diverse groups acting on them and demonstrate superior performance to recently proposed methods for modeling group actions.",
+    "keywords": [
+      "group action",
+      "representation learning",
+      "image rendering"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=HGNTcy4eEp"
+  },
+  "review_fields": {
+    "summary": "This paper focus on learning group actions in latent space instead of data space. The group action takes effects between the encoder and decoder in an auto-encoder structure. Several tasks with different group actions are evaluated in the experiments.",
+    "strengths": "1. The paper is well organized and the core ideas are explained clearly.\n\n2. The results on rotated and blocked MNIST are impressive, which demonstrated that in the latent space, the variant and invariant parts are easier to be disentangled.",
+    "weaknesses": "1. The novelty of learning group action in latent space is not so strong, as the operation on latent space is not rare in lots of other tasks, such as disentangle different factors in generation model.\n\n2. The reason of framework building is not well explained in section 3.3. It is easy to understand directly sending high resolution to the decoder help to keep image details. However, the reason of applying attention operation to the skip connection is not explained, which is also not included in the ablation study.\n\n3. The ablation study results will be more convincible if the qualitative results with/without different parts are compared. For example, LPIPS is helpful for image rendering. Without LPIPS, are the numbers rotated correctly (even the image may not be as clear as the full model)? Or is the model able to separate the numbers and the blocks without LIPIS? These are not revealed from the quantitative results but can be easily demonstrated by the visualizations.",
+    "questions": "Please see the weaknesses.\n\nBesides, I would like to know the reason why the proposed method is better at PSNR on Brain MRI dataset compared to [13]. Firstly, this dataset does not contain any 'occlusions', which means it may be difficult to demonstrate the advantages of the proposed method on this dataset. And the authors also find 'it is difficult to determine a noticeable advantage visually'. Then why the proposed method shows much better performance on PSNR?",
+    "limitations": "Limitations are discussed in conclusion section."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1745,
+    "words": 287,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a168683d-e68b-47d0-9d71-5286a4e33f15",
+    "error": null,
+    "scored_chars": 1745
+  }
+}

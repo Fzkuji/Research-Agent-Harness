@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "XZp1uP0hh2",
+  "reviewer": "kK6Q",
+  "paper": {
+    "title": "Semi-Random Matrix Completion via Flow-Based Adaptive Reweighting",
+    "authors": [
+      "Jonathan Kelner",
+      "Jerry Li",
+      "Allen Liu",
+      "Aaron Sidford",
+      "Kevin Tian"
+    ],
+    "abstract": "We consider the well-studied problem of completing a rank-$r$, $\\mu$-incoherent matrix $\\mathbf{M} \\in \\mathbb{R}^{d \\times d}$ from incomplete observations. We focus on this problem in the semi-random setting where each entry is independently revealed with probability at least $p = \\frac{\\textup{poly}(r, \\mu, \\log d)}{d}$. \nWhereas multiple nearly-linear time algorithms have been established in the more specialized fully-random setting where each entry is revealed with probablity exactly $p$, the only known nearly-linear time algorithm in the semi-random setting is due to [CG18], whose sample complexity has a polynomial dependence on the inverse accuracy and condition number and thus cannot achieve high-accuracy recovery. \nOur main result is the first high-accuracy nearly-linear time algorithm for solving semi-random matrix completion, and an extension to the noisy observation setting.\nOur result builds upon the recent short-flat decomposition framework of [KLLST23a, KLLST23b] and leverages fast algorithms for flow problems on graphs to solve adaptive reweighting subproblems efficiently.",
+    "keywords": [
+      "matrix completion",
+      "semi-random model",
+      "flow solver",
+      "short-flat decomposition",
+      "adaptive reweighting"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=XZp1uP0hh2"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors study semirandom matrix completion. In their models, entry $ij$ of a $\\mu$-incoherent, symmetric ground truth rank-$r$ matrix $M^{\\star} \\in \\mathbb{R}^{d \\times d}$ are revealed independently with probability $p_{ij}$, where $1 \\ge p_{ij} \\ge p$ for some parameter $p$ that is a function of $r$ and $d$. The assumption that $M^{\\star}$ is symmetric is not important, as we can reduce the asymmetric setting to the symmetric one with minimal overhead.\n\nAn important feature of this model is that the entry reveal probabilities are allowed to vary. This contrasts against standard assumptions in the matrix completion literature which typically stipulate that the entries are revealed i.i.d with probability $p$. Although revealing more entries of the matrix may seem to help the learning algorithm learn the underlying matrix, many algorithms fail under this helpful adversary. This is evidence that these algorithms have overfit to a statistical assumption implicit in the problem statement.\n\nA prior work [CG18] studied this problem and gave some recovery guarantees based on a global reweighting scheme for the matrix, but this algorithm has certain undesirable properties -- it is not a high-accuracy algorithm, it is not robust to outliers, and it has a dependence on the conditioning of the matrix. The present work addresses all of these issues and gives a nearly linear time algorithm that achieves an $\\ell_{\\infty}$ recovery guarantee.\n\nThe main technical contribution builds off of a prior work concerning semirandom sparse recovery [KLLST23]. In particular, the algorithm tries to find a progress direction in each step that can be written as the sum of a \"short\" matrix (one that has small Frobenius norm) and a \"flat\" matrix (one that has low spectral norm). This is chosen by a combination of dropping heavy rows/columns of $M$ that witness a large  Frobenius error in the current iteration along with a fast reweighting algorithm that finds a candidate descent direction that admits the short-flat decomposition. The fast reweighting algorithm itself is a Frank-Wolfe type algorithm over a set of valid reweightings and short matrices. The runtime arising from this subproblem follows from observing that the set of valid reweightings is in fact a rescaled bipartite matching polytope, which means fast matching algorithms can be called as a black box, and implementing a separate algorithm to optimizer linear functions over the set of short matrices.\n\n* [CG18] Non-Convex Matrix Completion Against a Semi-Random Adversary (https://arxiv.org/abs/1803.10846)\n\n* [KLLST23] Semi-Random Sparse Recovery in Nearly-Linear Time (https://arxiv.org/abs/2203.04002)",
+    "strengths": "This paper constitutes an important step towards understanding algorithms that don't implicitly overfit to statistical assumptions present in the model. In practice, one probably shouldn't assume that entries are revealed i.i.d with distribution Bernoulli(p). The model studied in this paper (Definition 2) is much more realistic than the i.i.d random entry model.\n\nFurthermore, the improvements in this work over the previous state of the art, [CG18], are quite strong. In particular, the authors get a condition-free, high-accuracy recovery guarantee in $\\ell_{\\infty}$. Furthermore, the algorithm runs in nearly linear time in the number of revealed entries.\n\nThe paper is very well written and the main ideas are clearly presented. The algorithmic ideas will be very interesting to anyone in the algorithmic statistics and convex optimization communities.",
+    "weaknesses": "The rank of the matrix that's output can be $poly(r)$ than the ground truth. Since this paper seems mostly concerned with $r \\ll d$ and independent of $d$, this is morally not a big deal. Also, what is the polynomial? I did some very cursory searching but didn't find it explicitly written down (all I see is that it's bigger than $r^6$).\n\nThe error depends on the largest entry of the noise -- this might be a bit pessimistic (e.g. if the noise matrix has just one nonzero entry, but the corresponding index isn't revealed to the learner, then this shouldn't affect anything). The authors explicitly mention getting a more \"optimistic\" dependence on the noise as an interesting open direction for future work.",
+    "questions": "What are the challenges, if any, to extending the results to an adaptive adversary? For example, consider an adversary that perhaps samples several entries of $M$ with probability $p$, then upon seeing the sampled entries, reveals an extra arbitrary set of their choice? I ask these because it seems suggested that the algorithm you presented actually does work in such a settings (lines 54-62), but I don't see something in Definition 2 to this effect."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2026,
+    "words": 323,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f229299b-590b-4539-bdee-8eb7799fd320",
+    "error": null,
+    "scored_chars": 2026
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ByzcS3AcYX",
+  "reviewer": "4",
+  "paper": {
+    "title": "Neural TTS Stylization with Adversarial and Collaborative Games",
+    "authors": [
+      "Shuang Ma",
+      "Daniel Mcduff",
+      "Yale Song"
+    ],
+    "abstract": "The modeling of style when synthesizing natural human speech from text has been the focus of significant attention. Some state-of-the-art approaches train an encoder-decoder network on paired text and audio samples (x_txt, x_aud) by encouraging its output to reconstruct x_aud. The synthesized audio waveform is expected to contain the verbal content of x_txt and the auditory style of x_aud. Unfortunately, modeling style in TTS is somewhat under-determined and training models with a reconstruction loss alone is insufficient to disentangle content and style from other factors of variation. In this work, we introduce an end-to-end TTS model that offers enhanced content-style disentanglement ability and controllability. We achieve this by combining a pairwise training procedure, an adversarial game, and a collaborative game into one training scheme. The adversarial game concentrates the true data distribution, and the collaborative game minimizes the distance between real samples and generated samples in both the original space and the latent space. As a result, the proposed model delivers a highly controllable generator, and a disentangled representation. Benefiting from the separate modeling of style and content, our model can generate human fidelity speech that satisfies the desired style conditions. Our model achieves start-of-the-art results across multiple tasks, including style transfer (content and style swapping), emotion modeling, and identity transfer (fitting a new speaker's voice).",
+    "keywords": [
+      "Text-To-Speech synthesis",
+      "GANs"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ByzcS3AcYX"
+  },
+  "review_fields": {
+    "comment": "MOS:\nThe comment was about assessment of naturalness of the resultant speech, not prescribing an MOS test specifically.    In general prosodic modifications lead to decreased quality.  Assessing how large this degradation is valuable in assessing this work.  For what it's worth, both the GST and prosody-tacotron papers would significantly benefit from this kind of evaluation and I find it surprising that they were omitted.  \n\n\"So other than some evaluation metrics used in regular TTS, we also performed a set of experiments that do not typically appear in TTS work.\"\nThe main evaluation metrics for \"regular TTS\" are subjective tests that look at naturalness and to a lesser extent (given the state of the art) intelligibility. The typical tests are MOS, MUSHRA, or ABX (AXB, AXY).  The intelligibility dimension has been assessed by the WER evaluation.  Naturalness (or quality) has not.  It might be reasonable to claim that for this work TTS quality (measured in terms of naturalness) is not important, and is therefore not evaluated.\n\n\"The most important claim in our paper is the ability to disentangle content and style. We believe this [swapping] experiment actually is most important evaluation in validating our claim.\"  \nI agree that this is the most important claim of the paper and the most important evaluation.  This is why it is so surprising that there is no evaluation here.  Rather 16 examples are offered.  It would be reasonable to ask a human rater to assess the emotional content of the utterance as either neutral, happy, sad, angry.  This seems to be the most direct assessment of the claim of the paper.  Does the newly synthesized utterance contain the desired emotional information?  The style transfer evaluation is much more effective at demonstrating this.  The examples without evaluation are unconvincing.  \n\nStyle transfer: \n\"To validate that the test follows a normal distribution would require a large amount of subjective studies.  We followed the precedent in the most recent works (GST, and prosody-Tacotron).\"\n1) you do not need to use a t-test.  There are non-parametric tests available (specifically the Mann-Whitney U-test) that do not assume that the observations follow a normal distribution.  Most (all?) statistical packages support this test. 2) the test used in GST is not described.  In prosody-tacotron a 95% confidence interval is described, but not a t-test.  I hope that the confidence interval is generated non-parametrically in that work.  Using a mean and standard deviation derived from observations that are not normally distribtued would have generated a biased estimate of the confidence intervals. 3) even if these papers did use an unsupported statistical test, the t-test is still not valid without confirmation that the analyzed ordinal subject responses follow a normal distribution (in most cases they do not)."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

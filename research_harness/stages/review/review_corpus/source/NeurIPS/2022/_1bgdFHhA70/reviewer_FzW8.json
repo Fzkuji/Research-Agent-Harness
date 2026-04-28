@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "_1bgdFHhA70",
+  "reviewer": "FzW8",
+  "paper": {
+    "title": "Evident: a Development Methodology and a Knowledge Base Topology for Data Mining, Machine Learning and General Knowledge Management",
+    "authors": [
+      "Mingwu Gao",
+      "Samer Haidar"
+    ],
+    "abstract": "Software has been developed for knowledge discovery, prediction and management for over 30 years. However, there are still unresolved pain points when using existing project development and artifact management methodologies. Historically, there has been a lack of applicable methodologies. Further, methodologies that have been applied, such as Agile, have several limitations including scientific unfalsifiability that reduce their applicability. Evident, a development methodology rooted in the philosophy of logical reasoning and EKB, a knowledge base topology, are proposed. Many pain points in data mining, machine learning and general knowledge management are alleviated conceptually. Evident can be extended potentially to accelerate philosophical exploration, science discovery, education as well as knowledge sharing & retention across the globe. EKB offers one solution of storing information as knowledge, a granular level above data. Related topics in computer history, software engineering, database, sensing hardware, philosophy, and project & organization & military managements are also discussed.",
+    "keywords": [
+      "Data Mining",
+      "Machine Learning",
+      "Knowledge Management",
+      "Computer History",
+      "Software Engineering",
+      "Database",
+      "Sensing Hardware",
+      "Philosophy",
+      "Knowledge Sharing & Retention",
+      "Project Management"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=_1bgdFHhA70"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a project management/artifact management framework (Evident) in the form of a knowledge base topology. Throughout the paper, the authors discuss about the challenges presently faced by the AI community - including in knowledge representation and utilisation of traditional relational databases for ML/AI workflows. The paper is interesting and the problem being solved is relevant.",
+    "strengths_and_weaknesses": "Weaknesses:\nVery limited novelty in terms of the contributions of the paper. While the framework and discussions surrounding Evident are interesting, they do not add much substance from an AI perspective and from the project management perspective, it is not very clear how and why the proposed workflow is the way to go for the AI community. While the authors have described \"pain points of DM, ML and KM\", it is very theoretical with limited examples, limited practical scenarios and above all, limited interrelation with the substance related to AI over project management.\n\nStrengths:\nInteresting topic being discussed in the paper, very well written paper.",
+    "questions": "This reviewer believes that the paper is very theoretical and oriented more towards the \"project management\" audience in comparison to the substance which an AI audience would be interested in. It would have been useful if this paper had more interaction with AI - beyond the very common pitfalls (\"pain points\") that the paper describes which are mostly well known in terms of consensus in the community. Also, without any user-studies or real-world use of this framework, the value which Evident can deliver is very hypothetically presented in the paper which makes it less rigorous. This reviewer suggests that paper would be more suitable for a journal relevant to AI and project management etc. in its current form.",
+    "limitations": "Mostly the limitations have been addressed. However, there is not much added value or substance which the paper describes beyond the \"Pain points not alleviated\" described in Section 6.3 - the hypothetical nature of the Evident framework makes the paper read more like an essay (being very verbose) which affects the overall contributions outlined in the paper."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 2,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

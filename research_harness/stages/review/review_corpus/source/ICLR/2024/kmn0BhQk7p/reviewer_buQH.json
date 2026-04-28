@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "kmn0BhQk7p",
+  "reviewer": "buQH",
+  "paper": {
+    "title": "Beyond Memorization: Violating Privacy via Inference with Large Language Models",
+    "authors": [
+      "Robin Staab",
+      "Mark Vero",
+      "Mislav Balunovic",
+      "Martin Vechev"
+    ],
+    "abstract": "Current privacy research on large language models (LLMs) primarily focuses on the issue of extracting memorized training data. At the same time, models’ inference capabilities have increased drastically. This raises the key question of whether current LLMs could violate individuals’ privacy by inferring personal attributes from text given at inference time. In this work, we present the first comprehensive study on the capabilities of pretrained LLMs to infer personal attributes from text. We construct a dataset consisting of real Reddit profiles, and show that current LLMs can infer a wide range of personal attributes (e.g., location, income, sex), achieving up to 85% top-1 and 95% top-3 accuracy at a fraction of the cost (100x) and time (240x) required by humans. As people increasingly interact with LLM-powered chatbots across all aspects of life, we also explore the emerging threat of privacy-invasive chatbots trying to extract personal information through seemingly benign questions. Finally, we show that common mitigations, i.e., text anonymization and model alignment, are currently ineffective at protecting user privacy against LLM inference. Our findings highlight that current LLMs can infer personal data at a previously unattainable scale. In the absence of working defenses, we advocate for a broader discussion around LLM privacy implications beyond memorization, striving for stronger and wider privacy protection.",
+    "keywords": [
+      "Privacy",
+      "Large Language Models"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=kmn0BhQk7p"
+  },
+  "review_fields": {
+    "summary": "The authors show how LLMs (trained with information across the information) can utilize syntactic cues in written text to identify semantic (and personally identifiable) attributes of users. They demonstrate the feasibility of their approach on a custom-curated dataset of posts from Reddit.",
+    "strengths": "1. First paper demonstrating feasibility of such an attack.\n2. Reasonably well written (though the paper contains formalisms that are quite honestly unnecessary, and punts  a lot of relevant details to the appendix).",
+    "weaknesses": "1. Irreproducible\n2. Implications are a function of how good the humans are i.e., if the golden labels are inaccurate (e.g., how can I be sure that the age attribute is within error tolerance), all conclusions need to be made with a grain of salt.",
+    "questions": "I enjoyed reading the paper. It demonstrates a variant of “linkability attacks” in LLMs and empirically validates it. \n\n1. Apart from the fact that one can launch such an attack, this reviewer has gained no new technical insight from this work. While this demonstrates “feasibility” and that is of merit, what do follow-up works look like in this area?\n2. The authors motivate their work by stating that identifying certain attributes is potentially hazardous for people since these attributes can be cross-referenced with public databases to de-identify users. This reviewer believes this claim is a stretch; could the authors highlight how one can deanonymize the users that were present in the dataset they considered? While these claims are “true” from an academic sense, making these threats practical requires a lot of additional work which the authors do not factor in.\n3. The reviewer agrees with the authors that the LLM can be used to coerce users into sharing more private information. However, In the adversarial interaction scenario, the attack is easy to thwart. Users could perform prompt injection (as noted in this thread: https://x.com/StudentInfosec/status/1640360234882310145?s=20) and can read the instructions. Given how brittle LLMs are to such forms of attacks, how reliable can such “coercion attempts” be made?\n4. The notion of “defenses” against such attacks also seems slim. But should this be something that we need to actively defend against? Sharing posts (as done in the status quo) intrinsically contains some notion of utility that will be removed if the deducible information is scrubbed. Can the authors comment on the same?\n5. While the LLMs are certainly faster than humans, I don’t believe the numbers in this study are the very best humans can do. Could the authors describe how their human baseline can be improved? My understanding is that few humans were tasked with identifying attributes using web search (without much training on this front)."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 5,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2453,
+    "words": 394,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b0311746-ff01-49d2-867c-ba20cd936d50",
+    "error": null,
+    "scored_chars": 2455
+  }
+}

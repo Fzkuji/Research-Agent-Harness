@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ryxhB3CcK7",
+  "reviewer": "2",
+  "paper": {
+    "title": "Probabilistic Neural-Symbolic Models for Interpretable Visual Question Answering",
+    "authors": [
+      "Ramakrishna Vedantam",
+      "Stefan Lee",
+      "Marcus Rohrbach",
+      "Dhruv Batra",
+      "Devi Parikh"
+    ],
+    "abstract": "We propose a new class of probabilistic neural-symbolic models for visual question answering (VQA) that provide interpretable explanations of their decision making in the form of programs, given a small annotated set of human programs. The key idea of our approach is to learn a rich latent space which effectively propagates program annotations from known questions to novel questions. We do this by formalizing prior work on VQA, called module networks (Andreas, 2016) as discrete, structured, latent variable models on the joint distribution over questions and answers given images, and devise a procedure to train the model effectively. Our results on a dataset of compositional questions about SHAPES (Andreas, 2016) show that our model generates more interpretable programs and obtains better accuracy on VQA in the low-data regime than prior work.",
+    "keywords": [
+      "Neural-symbolic models",
+      "visual question answering",
+      "reasoning",
+      "interpretability",
+      "graphical models",
+      "variational inference"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryxhB3CcK7"
+  },
+  "review_fields": {
+    "comment": "I'd like to thank the authors for the comments. I agree with your points. I think that the updated version is a good work and I give it a positive score. As I pointed out, I can see that this work proposes a probabilistic neural symbolic models to the field of VQA. The probabilistic formulation is popular in many fields in machine learning, which I do not see it as special compared to non-probabilistic models. I can not strongly support a work only because it is formulated as a probabilistic model. As I mentioned, I do not think that I am experienced enough to determine the impact of this probabilistic model to the field of VQA, so I may underestimate the importance. \n\nI also think that a work should be evaluated from different aspects. As I mentioned, I focus more on technical section compared to other reviewers. I'd like to clarify again that my creativity and insight comments are about technical section. \n\nThank the authors for detailed replies to my concerns. I think that the updated version is good and I give this work a positive rating. We both make some clarification. I do not see a contradiction of points between the authors and me which we need to clarify further. I think that our discussion is clear for the AC. As the authors pointed out several times, how we view the importance of a probabilistic model to the field of VQA is crucial to determine the impact of this work. For this type of question, I can not change my support point to a strongly support point from a discussion with authors. As I mentioned, I do not think that I am experienced enough to determine the impact of this probabilistic model to the field of VQA. For technical section and experiment section, I still think that they are ordinary level to me.\n\nThank the authors. AC asked me to clarify my review. If we do not see a need to clarify further, we can leave it to AC and see if the AC still have questions. I think that our discussion is clear and we've discussed a lot of details about this work. I appreciate that."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

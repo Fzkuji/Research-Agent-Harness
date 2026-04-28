@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "jT1EwXu-4hj",
+  "reviewer": "j5tz",
+  "paper": {
+    "title": "From Intervention to Domain Transportation: A Novel Perspective to Optimize Recommendation",
+    "authors": [
+      "Da Xu",
+      "Yuting Ye",
+      "Chuanwei Ruan",
+      "Evren Korpeoglu",
+      "Sushant Kumar",
+      "Kannan Achan"
+    ],
+    "abstract": "The interventional nature of recommendation has attracted increasing attention in recent years. It particularly motivates researchers to formulate learning and evaluating recommendation as causal inference and data missing-not-at-random problems. However, few take seriously the consequence of violating the critical assumption of overlapping, which we prove can significantly threaten the validity and interpretation of the outcome. We find a critical piece missing in the current understanding of information retrieval (IR) systems: as interventions, recommendation not only affects the already observed data, but it also interferes with the target domain (distribution) of interest. We then rephrase optimizing recommendation as finding an intervention that best transports the patterns it learns from the observed domain to its intervention domain. Towards this end, we use domain transportation to characterize the learning-intervention mechanism of recommendation. We design a principled transportation-constraint risk minimization objective and convert it to a two-player minimax game.\nWe prove the consistency, generalization, and excessive risk bounds for the proposed objective, and elaborate how they compare to the current results. Finally, we carry out extensive real-data and semi-synthetic experiments to demonstrate the advantage of our approach, and launch online testing with a real-world IR system.",
+    "keywords": [
+      "Information retrieval",
+      "Learning theory",
+      "Causal inference",
+      "Missing data",
+      "Overlapping",
+      "Reweighting",
+      "Optimal transport"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=jT1EwXu-4hj"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors propose a novel way to learn new recommendation deterministic policies from feedback collected under different recommendation policies.\nThe authors start by pointing out that the majority of current approaches, either Counterfactual (Inverse Propensity Weighting) either Domain Adaptation-based, \ndo not work well when the support of the current and future recommendation policies do not fully overlap (one of the main causes being that the current recommendation is deterministic and therefore not exploring all actions).\nTo this end, the authors propose a novel way of re-weighting and regularizing empirical risk that encourages the search for policies that have better reward (lower risk) and are still overlapping in evidence with the current policy.\nTo escape the support issue that is present in the existing approaches, the authors switch the regularization parameter to an IPM metric (WASSERSTEIN) that can handle non-overlapping supports.\n The authors provide both theoretical and empirical evidence that the resulting algorithm outperforms existing SOTA methods.",
+    "main_review": "Strengths:\n* The subject of the paper is quite relevant and the identified issue of non-overlapping support for RW recommendations serious\n* The application of existing methods from causal inference to deterministic recommendation policies is valuable and the empirical section is well-developed and the results significant \n\nWeaknesses:\n* The motivation for the particular approach is not extremely clear. The authors build the argument around “transportability of patterns”, but I feel the point is never fully explained. If an action is never taken under a certain context in the past, (meaning is in the non-overlapping set), the algorithm will have to extrapolate the outcome. In order for the extrapolation to hold some assumptions need to be made about the reward model, and I find the authors do not really spend time on this.\n* The resulting objective is closely resembling the counterfactual loss proposed in [1], eq. 3. I think the authors should expand on this approach in the related work, and highlight that unlike in the cited work, they can choose the counterfactual world in which they want to act. Furthermore, I think borrowing either the counterfactual notation or the policy learning notation and vocabulary would help quite a lot in explaining the approach.",
+    "summary_of_the_review": "Overall, I liked the paper and I found the approach interesting. I think the authors should link their approach a lot more to the work presented in [1] and also covered in two of their references [2,3].\nI think by doing so, it clarifies that the main difference in the problem domain is that we are in control of which of the counterfactual worlds we want to compute the risk in. \nOtherwise, all of the vocabulary and the core explanations of the soundness of the approach remain the same.\n\n[1] @inproceedings{shalit2017estimating,\n  title={Estimating individual treatment effect: generalization bounds and algorithms},\n  author={Shalit, Uri and Johansson, Fredrik D and Sontag, David},\n  booktitle={International Conference on Machine Learning},\n  pages={3076--3085},\n  year={2017},\n  organization={PMLR}\n}\n\n[2] F. D. Johansson, D. Sontag, and R. Ranganath. Support and invertibility in domain-invariant representations. In The 22nd International Conference on Artificial Intelligence and Statistics, pages 527–536. PMLR, 2019. \n[3] F. D. Johansson, U. Shalit, N. Kallus, and D. Sontag. Generalization bounds and representation learning for estimation of potential outcomes and causal effects. arXiv preprint arXiv:2001.07426, 2020.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2499,
+    "words": 378,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8d40e621-cbe7-4ef7-9b50-f0b88f522ef2",
+    "error": null,
+    "scored_chars": 2514
+  }
+}

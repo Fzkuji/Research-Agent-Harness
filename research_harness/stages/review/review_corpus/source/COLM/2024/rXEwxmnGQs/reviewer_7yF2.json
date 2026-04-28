@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "rXEwxmnGQs",
+  "reviewer": "7yF2",
+  "paper": {
+    "title": "PhonATe: Impact of Type-Written Phonological Features of African American Language on Generative Language Modeling Tasks",
+    "authors": [
+      "Nicholas Deas",
+      "Jessica A Grieser",
+      "Xinmeng Hou",
+      "Shana Kleiner",
+      "Tajh Martin",
+      "Sreya Nandanampati",
+      "Desmond U. Patton",
+      "Kathleen McKeown"
+    ],
+    "abstract": "Current Large Language Models perform poorly on African American Language (AAL) texts in tasks like toxicity detection and sentiment analysis. AAL is underrepresented in both pre-training data and existing benchmarks for these tasks, hindering thorough evaluation and understanding of these biases. We introduce a novel approach to synthetically introduce type-written phonological features of AAL into text, a class of AAL features that has been overlooked in prior work. Our goal is to better understand how these features affect generative language models' performance on three tasks: toxicity detection, sentiment analysis, and masked span prediction. We find that fine-tuning with synthetic type-written phonological features lowers perceived biases on downstream tasks and our ablations reveal which features have particularly large negative impacts on model performance. Our results suggest that phonological features are vital to consider when designing bias mitigation techniques.",
+    "keywords": [
+      "data augmentation",
+      "african american language",
+      "bias and fairness",
+      "language generation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=rXEwxmnGQs"
+  },
+  "review_fields": {
+    "summary": "The study introduces Phonological Augmentations for Text (PhonATe), a method that converts between graphemes and phonemes, as well as rule-based phoneme transformations derived from sociolinguistic literature. By augmenting datasets with AAL phonological features, the researchers aim to understand how these features influence model predictions in tasks such as toxicity detection and sentiment analysis. The study also discusses the potential implications of incorporating AAL features into language models for bias mitigation and highlights the importance of developing more inclusive and accurate models for diverse linguistic contexts.",
+    "reasons_to_accept": "The paper introduces a novel approach, PhonATe, to synthetically introduce type-written phonological features of African American Language (AAL) into text, addressing a gap in prior research . This innovative method has the potential to enhance understanding of model behavior with AAL text and inform bias mitigation strategies in language models.\n\nThe paper demonstrates a commitment to openness, transparency, and ethical research practices in exploring the impact of AAL features on language model performance.\n\nBy focusing on type-written phonological features of AAL and their impact on model predictions, the study provides valuable insights that can inform the development of more inclusive and accurate language models.",
+    "reasons_to_reject": "While the paper states that fine-tuning on data augmented with synthetic AAL features is not intended as an approach to mitigate biases , there may be ambiguity in how the fine-tuning process was conducted and its implications on model behavior. Clearer explanations or guidelines on the fine-tuning methodology and its impact on model performance are necessary for transparency and reproducibility.\n\nThe paper emphasizes the importance of centering AAL speakers in decision-making processes . However, there is a lack of clarity on how the research engages with or involves the AAL community in the development and evaluation of the PhonATe approach. Involving relevant communities in the research process can provide valuable insights and ensure that the study is culturally sensitive and beneficial to those it aims to represent.\n\nPrevious research has highlighted how annotator beliefs and identities can bias toxic language detection tasks . Considering the sensitive nature of the tasks evaluated in the study (toxicity detection, sentiment analysis), there should be a thorough discussion on how potential biases in annotation or data collection were addressed to ensure the reliability and fairness of the results."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:26Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:26Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 93,
+    "mixed_pct": 0,
+    "human_pct": 7,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 1952,
+    "words": 288,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fd2fa7a8-d942-4c21-974d-8c712f26fbd9",
+    "error": null,
+    "scored_chars": 1952
+  }
+}

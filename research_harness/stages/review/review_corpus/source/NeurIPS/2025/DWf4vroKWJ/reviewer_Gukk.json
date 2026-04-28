@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "DWf4vroKWJ",
+  "reviewer": "Gukk",
+  "paper": {
+    "title": "Router-R1: Teaching LLMs Multi-Round Routing and Aggregation via Reinforcement Learning",
+    "authors": [
+      "Haozhen Zhang",
+      "Tao Feng",
+      "Jiaxuan You"
+    ],
+    "abstract": "The rapid emergence of diverse large language models (LLMs) has spurred the development of LLM routers that assign user queries to the most suitable model. However, existing LLM routers typically perform a single-round, one-to-one mapping (\\textit{i.e.}, assigning each query to a single model in isolation), which limits their capability to tackle complex tasks that demand the complementary strengths of multiple LLMs. In this paper, we present \\textbf{Router-R1}, a reinforcement learning (RL)-based framework that formulates multi-LLM routing and aggregation as a sequential decision process. Router-R1 instantiates the router itself as a capable LLM, leveraging its reasoning ability to interleave \"think\" actions (internal deliberation) with \"route\" actions (dynamic model invocation), and integrates each response into its evolving context. To facilitate learning, we employ a lightweight rule-based reward comprising format rewards, final outcome rewards, and a novel cost reward for optimizing the balance between performance and cost, opening a pathway toward enhancing performance-cost trade-offs via RL. Router-R1 also conditions only on simple model descriptors such as pricing, latency, and example performance, enabling strong generalization to unseen model selection. Experiments on seven general and multi-hop QA benchmarks show that Router-R1 outperforms several strong baselines, achieving superior performance while maintaining robust generalization and cost management.",
+    "keywords": [
+      "Large Language Models",
+      "LLM Routers",
+      "LLM Selection",
+      "Reinforcement Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=DWf4vroKWJ"
+  },
+  "review_fields": {
+    "summary": "The paper tackles the limitation of current LLM routers that make a single one-shot model choice. It formulates routing as a sequential decision process in which a router-LLM alternates between internal reasoning,  external model calls and final answering. The router is trained end-to-end with PPO on a composite reward (format, exact-match accuracy, and cost). Experiments on seven QA benchmarks show sizable gains over strong one-shot routers and retrieval baselines, while a cost-coefficient study demonstrates controllable performance/price trade-offs.",
+    "strengths_and_weaknesses": "Strength\n- Clear formulation of multi-round routing as RL.\n- Lightweight yet effective reward design. \n- Strong empirical results demonstrate generalization beyond in-domain datasets.\n\nWeaknesses\n- Not consider multi-round Router cost in comparison. The cost of policy router in Router-R1 can dominate latency when the called model is a small model.  Other baselines perform a single forward pass, omitting the router’s share makes Router-R1’s cost look lower than it really is. \n- Missing baselines. The comparison set lacks other multi-step methods. For example: Lingjiao Chen, Matei Zaharia, James Zou. FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance.\n- Router scalability. The router is a 3 B-parameter model trained with full-parameter PPO,  it is unclear whether the approach scales to larger policies with parameter-efficient tuning.",
+    "questions": "1. How sensitive is performance to the number or quality of model descriptors supplied in the prompt?\n\n2. Will the approach scales to larger policies with parameter-efficient tuning like LORA?"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 4,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

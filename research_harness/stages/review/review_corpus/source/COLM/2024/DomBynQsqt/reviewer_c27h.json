@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "DomBynQsqt",
+  "reviewer": "c27h",
+  "paper": {
+    "title": "3M-Diffusion: Latent Multi-Modal Diffusion for Language-Guided Molecular Structure Generation",
+    "authors": [
+      "Huaisheng Zhu",
+      "Teng Xiao",
+      "Vasant G Honavar"
+    ],
+    "abstract": "Generating molecular structures with desired properties is a critical task with broad applications in drug discovery and materials design. We propose 3M-Diffusion, a novel multi-modal molecular graph generation method, to generate diverse, ideally novel molecular structures with desired properties.  3M-Diffusion encodes molecular graphs into a graph latent space which it then aligns with the text space learned by encoder-based LLMs from textual descriptions. It then reconstructs the molecular structure and atomic attributes based on the given text descriptions using the molecule decoder. It then learns a probabilistic mapping from the text space to the latent molecular graph space using a diffusion model. The results of our extensive experiments on several datasets demonstrate that 3M-Diffusion can generate high-quality, novel and diverse molecular graphs that semantically match the textual description provided.",
+    "keywords": [
+      "Multi-modal",
+      "Molecule Generation",
+      "Diffusion Model"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=DomBynQsqt"
+  },
+  "review_fields": {
+    "summary": "The paper introduces a diffusion model that generates molecular graphs using textual descriptions of molecules as conditions. This framework first aligns the representations of molecular graphs and text descriptions. It then proceeds to train in two phases: an encoder-decoder and a multi-modal latent diffusion model.",
+    "reasons_to_accept": "- The paper proposes a novel method called 3M-Diffusion for generating diverse and novel molecular graphs from textual descriptions. The multi-modal diffusion approach that operates on an aligned latent space of graphs and text appears innovative and well-motivated to address limitations of prior work.\n- The experiments on multiple real-world datasets demonstrate that 3M-Diffusion outperforms state-of-the-art baselines, especially in terms of the novelty and diversity of generated molecules, while still maintaining semantic consistency with the text prompts. For example, it achieves over 146% improvement in novelty and 130% in diversity on the PCDes dataset.",
+    "reasons_to_reject": "- Figure 1 is confusing; the encoder and condition should be inputted together into the diffusion model.\n- The legends in Table 1 are incorrect for the datasets ChEBI-20 and PubChem. \n- Tables 1 and 2 could be merged to reduce redundancy.\n- How to obtain the ground truth graph of a generated molecule when calculating similarity if the descriptions of the two texts are very similar.\nAdditional experiments, such as retrieval tasks, should be conducted to validate the alignment of representations between text and molecular graphs.\n- Does the case study use examples taken from the training set?\n- It is inappropriate to express improvements in novelty and diversity as the percentage increases. The statement '3M-Diffusion achieves 146.27% novelty and 130.04% diversity relative improvement over the SOTA method' should be rephrased to better reflect these metrics.\n- Due to the lack of distinctiveness in the similarity, novelty, diversity, and validity metrics, it would be beneficial to identify additional indicators for assessing the algorithm, such as plotting the distribution of logP and QED.\n- Why is there such a significant difference between the prompts in Figure 2 and Figure 3? The prompt in Figure 3 includes the molecular components, whereas Figure 2 only provides a simple description of properties. The disparity is too significant.\nThe paper's statement, 'For example, the structure of ethanol can be specified using CCO, OCC, or C(O)C,' requires supporting evidence. If the method for generating SMILES is consistent, would this issue not exist?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:59Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2235,
+    "words": 341,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/49b0f551-ec6c-43e4-82bd-fe28b46165ab",
+    "error": null,
+    "scored_chars": 2236
+  }
+}

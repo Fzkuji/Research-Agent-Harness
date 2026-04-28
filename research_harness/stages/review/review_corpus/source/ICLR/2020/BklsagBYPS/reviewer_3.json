@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "BklsagBYPS",
+  "reviewer": "3",
+  "paper": {
+    "title": "A GOODNESS OF FIT MEASURE FOR GENERATIVE NETWORKS",
+    "authors": [
+      "Lorenzo Luzi",
+      "Randall Balestriero",
+      "Richard Baraniuk"
+    ],
+    "abstract": "We define a goodness of fit measure for generative networks which captures how well the network can generate the training data, which is necessary to learn the true data distribution.\nWe demonstrate how our measure can be leveraged to understand mode collapse in generative adversarial networks and provide practitioners with a novel way to perform model comparison and early stopping without having to access another trained model as with Frechet Inception Distance or Inception Score. This measure shows that several successful, popular generative models, such as DCGAN and WGAN, fall very short of learning the data distribution. We identify this issue in generative models and empirically show that overparameterization via subsampling data and using a mixture of models improves performance in terms of goodness of fit.",
+    "keywords": [
+      "generative adversarial networks",
+      "goodness of fit",
+      "inception score",
+      "empirical approximation error",
+      "validation metric",
+      "frechet inception score"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=BklsagBYPS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I carefully checked the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "This paper defines a goodness of fit measure F for generative networks, that reflects how well a model can generate the training data. F allows to detect mode collapse: as long as it is strictly positive, mode collapse is observed as parts of the training data have not been memorized. It aims at providing an alternative to the Fréchet Inception Distance and the Inception Score that rely on pretrained neural networks (whereas this new measure does not). It also provides insight into the DCGAN and WGAN networks in that regard, observing for instance that data subsampling helps decrease F, which motivates the use of a mixture of GANs.\n\nThis paper brings an interesting contribution to the evaluation of generative networks. However:\n\n1.\tThe use of the square distance in the image space is not obvious and not justified.\n2.\tComputation of this metric is not straightforward: there is no theoretical guarantee and it is computationally expensive.\n3.\tThe theoretical properties of this measure and its robustness are not investigated.\n4.\tTypos are obscuring the reading of the paper.\n\n- Post rebuttal: I have read the authors' response and am maintaining my weak reject rating.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory."
+  },
+  "review_metadata": {
+    "rating": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

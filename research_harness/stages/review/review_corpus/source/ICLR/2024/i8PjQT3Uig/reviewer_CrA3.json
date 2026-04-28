@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "i8PjQT3Uig",
+  "reviewer": "CrA3",
+  "paper": {
+    "title": "Locality Sensitive Sparse Encoding for Learning World Models Online",
+    "authors": [
+      "Zichen Liu",
+      "Chao Du",
+      "Wee Sun Lee",
+      "Min Lin"
+    ],
+    "abstract": "Acquiring an accurate world model $\\textit{online}$ for model-based reinforcement learning (MBRL) is challenging due to data nonstationarity, which typically causes catastrophic forgetting for neural networks (NNs). From the online learning perspective, a Follow-The-Leader (FTL) world model is desirable, which optimally fits all previous experiences at each round. Unfortunately, NN-based models need re-training on all accumulated data at every interaction step to achieve FTL, which is computationally expensive for lifelong agents. In this paper, we revisit models that can achieve FTL with incremental updates. Specifically, our world model is a linear regression model supported by nonlinear random features. The linear part ensures efficient FTL update while the nonlinear random feature empowers the fitting of complex environments. To best trade off model capacity and computation efficiency, we introduce a locality sensitive sparse encoding, which allows us to conduct efficient sparse updates even with very high dimensional nonlinear features. We validate the representation power of our encoding and verify that it allows efficient online learning under data covariate shift. We also show, in the Dyna MBRL setting, that our world models learned online using a $\\textit{single pass}$ of trajectory data either surpass or match the performance of deep world models trained with replay and other continual learning methods.",
+    "keywords": [
+      "model-based rl",
+      "online learning",
+      "incremental learning",
+      "catastrophic forgetting"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=i8PjQT3Uig"
+  },
+  "review_fields": {
+    "comment": "Thank you for the detailed comments and for updating your manuscript. I will increase my score to a 6.\n\nIn my opinion, this paper doesn't isolate the issue of nonstationary data for world model training. I appreciate that model-based RL algorithms have a lot of moving parts, which can make it hard to isolate specific problems. I do think that training until the validation loss stops decreasing will 100% lead to the NN overfitting early in training. As such, the limited performance of Full-replay is likely due to primacy bias and not the nonstationary data. A simple solution is to add one extra baseline. A modification of the Full replay experiment where the NN is reset at each episode. Whilst I know this is not practical for a lifelong agent, it should be feasible for the simple environments reported in the paper. This would remove issues with primacy bias and allow the baseline to act as a sort of upper bound on model-based performance. \n\nWhen talking about world models, readers will immediately think of methods like Dreamer. My questions about Dreamer/TD-MPC arose because you refer to your method as a world model. I'd suggest the authors move away from the term world model and instead stick to Dyna. Also, consider adding this part of your response to the manuscript:\n\n\"Existing end-to-end NN-based MBRL methods, such as Dreamer, TD-MPC, and MuZero, etc. rely heavily on techniques to make data more stationary, for example, maintaining a large replay buffer, updating the target network once in a while, or simultaneously running multiple environments. When these components are removed, they would fail to work.\nHowever, when they fail we don't know how much is due to the forgetting in policy/value/model because all components are entangled and trained end-to-end in these methods.\"\n\nGiven that you have now clearly stated your method's limitations, with regard to image-observations etc, I am OK without a direct comparison to Dreamer/TD-MPC.  I agree that comparing to dyna style methods makes a comparison of model learning easier."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2057,
+    "words": 336,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1663682b-4818-4ee5-a551-0819ed7fa23b",
+    "error": null,
+    "scored_chars": 2059
+  }
+}

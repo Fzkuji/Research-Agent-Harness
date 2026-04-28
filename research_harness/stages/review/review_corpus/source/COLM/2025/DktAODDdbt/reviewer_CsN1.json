@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "DktAODDdbt",
+  "reviewer": "CsN1",
+  "paper": {
+    "title": "Evaluating Large Language Models as Expert Annotators",
+    "authors": [
+      "Yu-Min Tseng",
+      "Wei-Lin Chen",
+      "Chung-Chi Chen",
+      "Hsin-Hsi Chen"
+    ],
+    "abstract": "Textual data annotation, the process of labeling or tagging text with relevant information, is typically costly, time-consuming, and labor-intensive.\nWhile large language models (LLMs) have demonstrated their potential as direct alternatives to human annotators for general domains natural language processing (NLP) tasks, their effectiveness on annotation tasks in domains requiring expert knowledge remains underexplored.\nIn this paper, we investigate: whether top-performing LLMs, which might be perceived as having expert-level proficiency in academic and professional benchmarks, can serve as direct alternatives to human expert annotators?\nTo this end, we evaluate both individual LLMs and multi-agent approaches across three highly specialized domains: finance, biomedicine, and law.\nSpecifically, we propose a multi-agent discussion framework to simulate a group of human annotators, where LLMs are tasked to engage in discussions by considering others’ annotations and justifications before finalizing their labels.\nAdditionally, we incorporate reasoning models (*e.g.*, o3-mini) to enable a more comprehensive comparison.\nOur empirical results reveal that:\n*(1)* Individual LLMs equipped with inference-time techniques (*e.g.*, chain-of-thought (CoT), self-consistency) show only marginal or even negative performance gains, contrary to prior literature suggesting their broad effectiveness.\n*(2)* Overall, reasoning models do not demonstrate statistically significant improvements over non-reasoning models in most settings.\nThis suggests that extended long CoT provides relatively limited benefits for data annotation in specialized domains.\n*(3)* Certain model behaviors emerge in the multi-agent discussion environment.\nFor instance, Claude 3.7 Sonnet with thinking rarely changes its initial annotations, even when other agents provide correct annotations or valid reasoning.",
+    "keywords": [
+      "LLMs-as-expert-annotators",
+      "reasoning models",
+      "multi-agent framework"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=DktAODDdbt"
+  },
+  "review_fields": {
+    "comment": "Thank you for the detailed response. After careful consideration, I will maintain my scores for this submission. I encourage the authors to incorporate deeper insights and more discussions. For instance (but not limit to), analysis of what causes multi-agent discussion failures, how different prompting engineering strategies affect performance, and the efficiency and complexity of multi-agent vs single model. These insights would strengthen the contribution and provide valuable guidance for future work in this area."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 2,
+    "mixed_pct": 98,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 521,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4c882e93-08a8-49d1-9adb-8e469267712b",
+    "error": null,
+    "scored_chars": 521
+  }
+}

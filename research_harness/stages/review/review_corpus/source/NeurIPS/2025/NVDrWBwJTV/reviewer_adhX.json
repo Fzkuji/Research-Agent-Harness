@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "NVDrWBwJTV",
+  "reviewer": "adhX",
+  "paper": {
+    "title": "The Good, the Bad and the Ugly: Meta-Analysis of Watermarks, Transferable Attacks and Adversarial Defenses",
+    "authors": [
+      "Grzegorz Gluch",
+      "Berkant Turan",
+      "Sai Ganesh Nagarajan",
+      "Sebastian Pokutta"
+    ],
+    "abstract": "We formalize and analyze the trade-off between backdoor-based watermarks and adversarial defenses, framing it as an interactive protocol between a verifier and a prover. While previous works have primarily focused on this trade-off, our analysis extends it by identifying transferable attacks as a third, counterintuitive but necessary option. Our main result shows that for all learning tasks, at least one of the three exists: a _watermark_, an _adversarial defense_, or a _transferable attack_. By transferable attack, we refer to an efficient algorithm that generates queries indistinguishable from the data distribution and capable of fooling _all_ efficient defenders. Using cryptographic techniques, specifically fully homomorphic encryption, we construct a transferable attack and prove its necessity in this trade-off. Finally, we show that tasks of bounded VC-dimension allow adversarial defenses against all attackers, while a subclass allows watermarks secure against fast adversaries.",
+    "keywords": [
+      "Interactive Proof Systems",
+      "Cryptography",
+      "Backdoors",
+      "Game Theory",
+      "Learning Theory",
+      "Transferable Attacks",
+      "Adversarial Robustness"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NVDrWBwJTV"
+  },
+  "review_fields": {
+    "summary": "This paper presents a unified theoretical framework to study the trade-offs between backdoor-based watermarking, adversarial robustness, and a novel third axis: transferable attacks. By modeling the interaction between a verifier and a prover as a game, the authors prove that for any learning task, at least one of these mechanisms must exist. They formalize each mechanism, demonstrate examples of transferable attacks using fully homomorphic encryption, and link the existence of transferable attacks to the existence of cryptographic primitives (EFID pairs). Overall, this paper introduces transferable attacks into the trade-off between watermarks and defences, providing a new perspective compared to existing works.",
+    "strengths_and_weaknesses": "- Strengths\n1. The paper addresses a significant research problem by exploring the relationship between backdoor-based watermarking and adversarial robustness. It innovatively introduces the concept of transferable attacks as a novel perspective to analyze this relationship.\n\n2. The Lines-on-Circle combined with Fully Homomorphic Encryption example provides the first rigorous demonstration that transferable attacks can succeed using substantially less computational power compared to what is required for defence.\n\n- Weaknesses\n1. The work is exclusively theoretical. Without empirical validation using real-world models or datasets, the practical implications and manifestations of the proposed trilemma in real deep learning systems remain unclear.\n\n2. The analysis is conducted in the idealized Boolean-circuit world. It remains unclear how (or whether) the same argument can scale to high-dimensional, structured data such as images, text, or graphs.\n\n3. The exemplar task relies on FHE, which is far removed from common computer-vision or NLP pipelines. It remains open whether similar transferable attacks can be instantiated without heavyweight cryptography.\n\n4. The notation in lines 206 and 217 seems incomplete or unclear. It should likely be corrected to \\mathbf{x} \\in ({0,1}^{n})^q rather than \\mathbf{x} \\in {0,1}^{nq}.",
+    "questions": "Question\n1. The input space is defined as {0,1}^n, but most current classification tasks operate on continuous spaces (e.g., \\mathbb{R}^n). Can this framework be extended to more realistic or complex input spaces? \n\n2. Why are Definitions 3 and 4 considered complementary? Intuitively, it seems that adversarial defence and transferable attacks are complementary. Or perhaps the complementarity is between defence and the union of transferable attacks and watermarks?\n\n3. In Definition 3, it is stated that there exists a B_n such that err(x,y)< 2\\epsilon. What if there are two such B_n​, or three, or up to n−1different B_n satisfying this condition? Do these cases need to be analyzed within your framework?\n\n4. Intuitively, if a model is adversarially robust, then adversarial examples (transferable attacks in this paper) should not exist. This seems to imply that for any model, either adversarial robustness holds or transferable attacks exist. In that case, why is watermarking needed? Could you clarify how watermarking fits into this framework and how it relates to the intuitive dichotomy between robustness and transferable attacks?"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

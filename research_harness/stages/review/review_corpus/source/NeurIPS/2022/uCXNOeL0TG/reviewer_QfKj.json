@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "uCXNOeL0TG",
+  "reviewer": "QfKj",
+  "paper": {
+    "title": "Fairness for Workers Who Pull the Arms: An Index Based Policy for Allocation of Restless Bandit Tasks",
+    "authors": [
+      "Arpita Biswas",
+      "Jackson A. Killian",
+      "Paula Rodriguez-Diaz",
+      "Susobhan Ghosh",
+      "Milind Tambe"
+    ],
+    "abstract": "Motivated by applications such as machine repair, project monitoring, and anti-poaching patrol scheduling, we study intervention planning of stochastic processes under resource constraints. This planning problem has previously been modeled as restless multi-armed bandits (RMAB), where each arm is an intervention-dependent Markov Decision Process. However, the existing literature assumes all intervention resources belong to a single uniform pool, limiting their applicability to real-world settings where interventions are carried out by a set of workers, each with their own costs, budgets, and intervention effects. In this work, we consider a novel RMAB setting, called multi-worker restless bandits (MWRMAB) with heterogeneous workers. The goal is to plan an intervention schedule that maximizes the expected reward while satisfying budget constraints on each worker as well as fairness in terms of the load assigned to each worker. Our contributions are two-fold: (1)~we provide a multi-worker extension of the Whittle index to tackle heterogeneous costs and per-worker budget and (2)~ we develop an index-based scheduling policy to achieve fairness. Further, we evaluate our method on various cost structures and show that our method significantly outperforms other baselines in terms of fairness without sacrificing much in reward accumulated.",
+    "keywords": [
+      "sequential planning",
+      "load balancing",
+      "Whittle indices",
+      "markov decision processes"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=uCXNOeL0TG"
+  },
+  "review_fields": {
+    "summary": "This paper considers a multi-worker version of the restless multi-armed bandit problem where the intervention on a particular arm can be carried out by one of M possible workers. The workers have possibly different costs for intervening on different arms and the goal is to design an optimal allocation policy that satisfies budget constraint for each worker and also fair.  \n\nThe authors devise a heuristic balanced allocation rule for the problem. The main idea behind the algorithm is to decompose the original problem into several related subproblems. The experiments show that the proposed heuristic scales with the number of agents without compromising too much on the objective.",
+    "strengths_and_weaknesses": "Strengths:\n- I think the multi-worker extension of the restless multi-armed bandit problem is an interesting direction and certainly more practical.\n- The empirical section is interesting as the authors could show that the proposed approximation algorithm runs fast for a large number of agents ($N$ is of the order of hundreds) and the performance doesn't deteriorate much.\n\nWeaknesses:\n- The main weakness of the paper is the lack of proper theoretical guarantees. First, it is not clear if you can decompose the original problem~(2) into $N \\times M$ subproblems because of the additional fairness constraint. Second, the main result also shows that the proposed algorithm works only for homogeneous workers (theorem 3) and it's not clear if the balanced allocation works when the costs are heterogeneous.\n- Even if I assume that the problem is decomposable the authors don't bound fairness violation of the final solution. Note that fairness is a global constraint and the individual subproblems don't have this constraint. So it is not trivial to combine the solutions of these subproblems and ensure a desired level of fairness. \n- For the adjusted index algorithm it is not clear what is the right choice of the variables $\\lambda_{-j}$ for each $j$. The authors justified that choosing $\\lambda_{-j} = 0$ is not optimal, and chose these values based on Whittle indices. But I am not sure that should be optimal either because of heterogeneous costs and global constraints. Maybe you can solve for a fixed point of this system and use the fixed point as the adjusted indices?\n\nSome other comments:\n- Give definition of indexability of arms.\n- At the end of section 3, the authors highlight two challenges for MWRMAB model. It might be a good idea to illustrate these challenges with an example.",
+    "questions": "1. The original optimization problem (1 and 2) has the fairness constraint. However, this constraint is absent in the subproblem (3). How do you guarantee that solving each subproblem will automatically generate a fair solution?\n\n2. Also I am not sure when solving each subproblem is sufficient to solve the original problem~(2). Do you have any result showing that you can obtain a solution of the original problem by solving the $N\\times M$ subproblems?\n \n3. I don't understand why theorem 1 is useful. It seems to me this theorem is only used to derive Corollary 1 for the case of identical cost and probability transition function. But doesn't that directly follow from the nature of the optimization problem (3) by substituting identical cost and probability transition function?\n\n4. Theorem 3 states that the algorithm balanced allocation works only when the workers are homogeneous. But I thought the whole point of introducing the general framework was to handle workers with heterogeneous costs. Do you have any results for the setting with heterogeneous costs?\n\n5. The balanced allocation takes fairness threshold $\\epsilon$ as input. But as far as I can understand, the algorithm never explicitly uses this argument. It would be nice if you could clarify which step of the algorithm uses this parameter? Also regarding this, do you have any guarantee for the fairness guarantee obtained by the balanced allocation algorithm?",
+    "limitations": "This paper doesn't have any negative societal impact."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4,
+    "soundness": 1,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

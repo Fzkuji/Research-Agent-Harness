@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "H196sainb",
+  "reviewer": "1",
+  "paper": {
+    "title": "Word translation without parallel data",
+    "authors": [
+      "Guillaume Lample",
+      "Alexis Conneau",
+      "Marc'Aurelio Ranzato",
+      "Ludovic Denoyer",
+      "Hervé Jégou"
+    ],
+    "abstract": "State-of-the-art methods for learning cross-lingual word embeddings have relied on bilingual dictionaries or parallel corpora. Recent studies showed that the need for parallel data supervision can be alleviated with character-level information. While these methods showed encouraging results, they are not on par with their supervised counterparts and are limited to pairs of languages sharing a common alphabet. In this work, we show that we can build a bilingual dictionary between two languages without using any parallel corpora, by aligning monolingual word embedding spaces in an unsupervised way. Without using any character information, our model even outperforms existing supervised methods on cross-lingual tasks for some language pairs. Our experiments demonstrate that our method works very well also for distant language pairs, like English-Russian or English-Chinese. We finally describe experiments on the English-Esperanto low-resource language pair, on which there only exists a limited amount of parallel data, to show the potential impact of our method in fully unsupervised machine translation. Our code, embeddings and dictionaries are publicly available.",
+    "keywords": [
+      "unsupervised learning",
+      "machine translation",
+      "multilingual embeddings",
+      "parallel dictionary induction",
+      "adversarial training"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H196sainb"
+  },
+  "review_fields": {
+    "review": "This paper presents a new method for obtaining a bilingual dictionary, without requiring any parallel data between the source and target languages. The method consists of an adversarial approach for aligning two monolingual word embedding spaces, followed by a refinement step using frequent aligned words (according to the adversarial mapping). The approach is evaluated on single word translation, cross-lingual word similarity, and sentence translation retrieval tasks.\n\nThe paper presents an interesting approach which achieves good performance. The work is presented clearly, the approach is well-motivated and related to previous studies, and a thorough evaluation is performed.\n\nMy one concern is that the supervised approach that the paper compares to is limited: it is trained on a small fixed number of anchor points, while the unsupervised method uses significantly more words. I think the paper's comparisons are valid, but the abstract and introduction make very strong claims about outperforming \"state-of-the-art supervised approaches\". I think either a stronger supervised baseline should be included (trained on comparable data as the unsupervised approach), or the language/claims in the paper should be softened. The same holds for statements like \"... our method is a first step ...\", which is very hard to justify. I also do not think it is necessary to over-sell, given the solid work in the paper.\n\nFurther comments, questions and suggestions:\n- It might be useful to add more details of your actual approach in the Abstract, not just what it achieves.\n- Given you use trained word embeddings, it is not a given that the monolingual word embedding spaces would be alignable in a linear way. The actual word embedding method, therefore, has a big influence on performance (as you show). Could you comment on how crucial it would be to train monolingual embedding spaces on similar domains/data with similar co-occurrence statistics, in order for your method to be appropriate?\n- Would it be possible to add weights to the terms in eq. (6), or is this done implicitly?\n- How were the 5k source words for Procrustes supervised baseline selected?\n- Have you considered non-linear mappings, or jointly training the monolingual word embeddings while attempting the linear mapping between embedding spaces?\n- Do you think your approach would benefit from having a few parallel training points?\n\nSome minor grammatical mistakes/typos (nitpicking):\n- \"gives a good performance\" -> \"gives good performance\"\n- \"Recent works\", \"several works\", \"most works\", etc. -> \"recent studies\", \"several studies\", etc.\n- \"i.e, the improvements\" -> \"i.e., the improvements\"\n\nThe paper is well-written, relevant and interesting. I therefore recommend that the paper be accepted."
+  },
+  "review_metadata": {
+    "rating": 9,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

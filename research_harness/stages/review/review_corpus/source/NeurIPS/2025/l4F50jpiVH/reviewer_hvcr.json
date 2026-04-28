@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "l4F50jpiVH",
+  "reviewer": "hvcr",
+  "paper": {
+    "title": "Q-Palette: Fractional-Bit Quantizers Toward Optimal Bit Allocation for Efficient LLM Deployment",
+    "authors": [
+      "Deokjae Lee",
+      "Hyun Oh Song"
+    ],
+    "abstract": "We study weight-only post-training quantization (PTQ), which quantizes the weights of a large language model (LLM) without retraining, using little or no calibration data. Weight-only PTQ is crucial for reducing the memory footprint and latency of LLM inference, especially in memory-bound, small-batch inference scenarios, such as personalized inference on edge devices. Despite its importance, irregular weight distributions with heavy-tailed outliers in LLMs complicate quantization, recently motivating rotation-based methods that transform weights into near-Gaussian distributions, which are more regular with fewer outliers, thereby reducing quantization error. In this work, we first derive the information-theoretically optimal bit allocation for Gaussianized weights under given bit budgets, revealing that fine-grained fractional-bit quantizers approaching the Gaussian distortion-rate bound are essential to achieve near-optimal quantization performance. To bridge this theoretical insight and practical implementation, we introduce Q-Palette, a versatile collection of fractional-bit quantizers that range from trellis-coded quantizers offering near-optimal distortion to simpler vector and scalar quantizers optimized for faster inference, all efficiently implemented with optimized CUDA kernels across various bitwidths. Furthermore, leveraging Q-Palette as a foundational component, we propose a novel mixed-scheme quantization framework, jointly optimizing quantizer choices and layer fusion decisions given resource constraints. The code is available at https://github.com/snu-mllab/Q-Palette.",
+    "keywords": [
+      "LLM quantization",
+      "Post-training quantization",
+      "Mixed scheme quantization",
+      "Data-free quantization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=l4F50jpiVH"
+  },
+  "review_fields": {
+    "comment": "Thanks for your follow up experiments. I think they confirm my initial thoughts about the paper, which is that the bit allocation algorithm and better tcq kernels are somewhat orthgonal to each other.  The bit allocation theorem could also be improved due to the possibility of just breaking the model in half (which apparently happens empirically without a bit floor). However, I think both components of the paper are useful and practical contributions that are not just incremental. I think this paper should be accepted, and if we were on the old scale I would give it a weak accept, which seems to be a 4.5 on this scale. I will keep my score at 4 for now since IMO a 5 would be a 7-8 on the old scale, and I don't think this paper is at the level of 7-8."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

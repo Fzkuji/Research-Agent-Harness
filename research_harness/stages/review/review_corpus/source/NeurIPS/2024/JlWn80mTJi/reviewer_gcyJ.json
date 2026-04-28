@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "JlWn80mTJi",
+  "reviewer": "gcyJ",
+  "paper": {
+    "title": "The Implicit Bias of Gradient Descent on Separable Multiclass Data",
+    "authors": [
+      "Hrithik Ravi",
+      "Clayton Scott",
+      "Daniel Soudry",
+      "Yutong Wang"
+    ],
+    "abstract": "Implicit bias describes the phenomenon where optimization-based training algorithms, without explicit regularization, show a preference for simple estimators even when more complex estimators have equal objective values. Multiple works have developed the theory of implicit bias for binary classification under the assumption that the loss satisfies an *exponential tail property*. However, there is a noticeable gap in analysis for multiclass classification, with only a handful of results which themselves are restricted to the cross-entropy loss. In this work, we employ the framework of Permutation Equivariant and Relative Margin-based (PERM) losses [Wang and Scott, 2024] to introduce a multiclass extension of the exponential tail property. This class of losses includes not only cross-entropy but also other losses. Using this framework, we extend the implicit bias result of Soudry et al. [2018] to multiclass classification. Furthermore, our proof techniques closely mirror those of the binary case, thus illustrating the power of the PERM framework for bridging the binary-multiclass gap.",
+    "keywords": [
+      "gradient descent",
+      "multiclass classification",
+      "hard-margin SVM",
+      "implicit bias"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JlWn80mTJi"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for clarifying my question and appreciate their effort. Nevertheless, my concerns about the relevance of the contribution, as listed in the weaknesses section, still stand, hence I leave my mark to 4.\n\nThe extension of (Soudry et al, '18) and other previous works to more general multiclass losses is surely interesting, but, in my opinion, it would be better suited as a technical paper in a dedicated journal. As an example, I find it difficult to appreciate the technical contributions of the lemmas mentioned in the author's reply (4.1, which seems to stem from a simple derivation of the gradient, and 4.2, a simple consequence of the definition of the trace) and I suspect that the broad audience of NeurIPS would too."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 744,
+    "words": 126,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/879d3ce1-5e90-41e2-a0b5-97372d9dce69",
+    "error": null,
+    "scored_chars": 744
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "AOKU4nRw1W",
+  "reviewer": "RH2g",
+  "paper": {
+    "title": "Linguistic Binding in Diffusion Models: Enhancing Attribute Correspondence through Attention Map Alignment",
+    "authors": [
+      "Royi Rassin",
+      "Eran Hirsch",
+      "Daniel Glickman",
+      "Shauli Ravfogel",
+      "Yoav Goldberg",
+      "Gal Chechik"
+    ],
+    "abstract": "Text-conditioned image generation models often generate incorrect associations between entities and their visual attributes. This reflects an impaired mapping between linguistic binding of entities and modifiers in the prompt and visual binding of the corresponding elements in the generated image. As one example, a query like ``a pink sunflower and a yellow flamingo'' may incorrectly produce an image of a yellow sunflower and a pink flamingo. To remedy this issue, we propose SynGen, an approach which first syntactically analyses the prompt to identify entities and their modifiers, and then uses a novel loss function that encourages the cross-attention maps to agree with the linguistic binding reflected by the syntax. Specifically, we encourage large overlap between attention maps of entities and their modifiers, and small overlap with other entities and modifier words. The loss is optimized during inference, without retraining or fine-tuning the model. Human evaluation on three datasets, including one new and challenging set, demonstrate significant improvements of SynGen compared with current state of the art methods. This work highlights how making use of sentence structure during inference can efficiently and substantially improve the faithfulness of text-to-image generation.",
+    "keywords": [
+      "syntax",
+      "diffusion",
+      "stable diffusion",
+      "attribute",
+      "attention"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=AOKU4nRw1W"
+  },
+  "review_fields": {
+    "summary": "The paper focuses on attribute binding/leak/neglect problems in text-to-image models. The authors propose, SynGen, a method that utilizes dependency trees combined with cross-attention map optimization to achieve better attribute binding results. Extensive experiments are conducted to show the effectiveness of SynGen compared to previous methods.",
+    "strengths": "- The paper addresses an important compositional problem in text-to-image generation. \n\n- The method is intuitive and effective. SynGen can obtain stronger attribute-object association using dependency trees compared to Structure Diffusion, the positive loss design is well-motivated for solving the problem, and the negative loss design enforces the cross-attention maps over A&E.  \n\n- The experiment looks comprehensive by considering all sources of datasets and including even more challenging prompts DVMP. The prompts in DVMP are more challenging and realistic than previous \"A and B\" format prompts.",
+    "weaknesses": "- I am concerned with the efficiency of incorporating so many negative losses in the diffusion process. What's the speed of SynGen compared to the original SD?\n\n- Using tree-based methods for binding may fail for more complicated and practical prompts. In reality, SD users write much longer prompts that describe the components at different levels. However, I think the contribution of SynGen still matters a lot as the community needs time to develop from methods for short prompts to more generalized methods.",
+    "questions": "Apart from the question in weaknesses:\n\n1. Would SynGen still work for prompts like \"an apple that is blue\" or \"a red apple on the left and another on the right\"?\n\n2. I may have missed this part but how do you deal with the padding tokens?\n\n3. Table 2 shows that positive only and positive+negative have lower visual appeal percentages than negative only. Does that imply that the positive loss will harm the visual appealing of the images?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:57Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:57Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1116,
+    "words": 169,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fe9f2ccc-37e6-42f0-b5fb-31cd9a6d8d38",
+    "error": null,
+    "scored_chars": 1119
+  }
+}

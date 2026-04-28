@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "wnAN2ZU7br",
+  "reviewer": "sNtW",
+  "paper": {
+    "title": "Pipeline Combinators for Gradual AutoML",
+    "authors": [
+      "Guillaume Baudart",
+      "Martin Hirzel",
+      "Kiran Kate",
+      "Parikshit Ram",
+      "Avraham Shinnar",
+      "Jason Tsay"
+    ],
+    "abstract": "Automated machine learning (AutoML) can make data scientists more productive.  But if machine learning is totally automated, that leaves no room for data scientists to apply their intuition.  Hence, data scientists often prefer not total but gradual automation, where they control certain choices and AutoML explores the rest.  Unfortunately, gradual AutoML is cumbersome with state-of-the-art tools, requiring large non-compositional code changes.  More concise compositional code can be achieved with combinators, a powerful concept from functional programming.  This paper introduces a small set of orthogonal combinators for composing machine-learning operators into pipelines.  It describes a translation scheme from pipelines and associated hyperparameter schemas to search spaces for AutoML optimizers.  On that foundation, this paper presents Lale, an open-source sklearn-compatible AutoML library, and evaluates it with a user study.",
+    "keywords": [
+      "AutoML",
+      "scikit-learn",
+      "programming models",
+      "functional programming"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=wnAN2ZU7br"
+  },
+  "review_fields": {
+    "summary": "In the paper „Pipeline Combinators for Gradual AutoML“ the authors propose a machine learning library that allows for convenient definition and usage of ML pipelines. In particular, the library supports the configuration of a pipeline to be (partially) automated.",
+    "main_review": "Overall, I very much enjoyed reading the paper since the structure and the language of the paper are excellent.\n\nThe ideas on which the library is based seem to be very targeted and helpful for using it in practice.\nIn the paper the authors give sufficient detail about their library and the specific features that distinguish their library from others such as scikit-learn. Everything is explained in much detail and the architecture and the design appears to be sound.\n\nHowever, in some respects the paper is very technical (due to the nature of its contribution, of course) but it could be less of the perspective of software engineering and focus more on the machine learning / data science part.\n\nSpeaking about the machine learning part, and thus, about the users of the library, I appreciate that the authors carried out a user study. However, I have sone concerns about the study itself:\n\n- First, it is stated that all subjects are from the same company. Guessing that the library is developed by the same company this might mean some bias towards the company‘s product. Be it due to loyalty or due to the library being implemented according to the company‘s principles and philosophies.\n\n- Second, it is stated that all subjects of the study are experienced users of scikit-learn. All the more I was very surprised that several  subjects couldnt identify the right pipeline shape. How is „experienced“ defined? I would have expected that at least reading code should be easy.\n\n- Third, the user base is relatively small in order to reliably draw conclusions based on the acquired data. This limitation should be mentioned somewhere. \n\nTo sum up, I believe that the library is a valuable contribution to the community and I hope that acceptance by users will be reasonable.",
+    "limitations_and_societal_impact": "The number of subjects in the user study is rather small and homogeneous, which also means a limitation to the generalizability of the results. This should be mentioned somewhere."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

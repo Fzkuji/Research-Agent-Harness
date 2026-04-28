@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "1BJUwgi3ed",
+  "reviewer": "9zyv",
+  "paper": {
+    "title": "Controlling Confusion via Generalisation Bounds",
+    "authors": [
+      "Reuben Adams",
+      "John Shawe-Taylor",
+      "Benjamin Guedj"
+    ],
+    "abstract": "We establish new generalisation bounds for multiclass classification by abstracting to a more general setting of discretised error types. Extending the PAC-Bayes theory, we are hence able to provide fine-grained bounds on performance for multiclass classification, as well as applications to other learning problems including discretisation of regression losses. Tractable training objectives are derived from the bounds. The bounds are uniform over all weightings of the discretised error types and thus can be used to bound weightings not foreseen at training, including the full confusion matrix in the multiclass classification case.",
+    "keywords": [
+      "PAC-Bayes",
+      "Generalisation bounds",
+      "Multiclass classification"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=1BJUwgi3ed"
+  },
+  "review_fields": {
+    "summary": "The paper studies the PAC-Bayes generalization bound, which is an important topic and has been successfully applied to produce non-vacuous generalization bounds for neural network. The authors extend the existing results to the multiclass setting by introducing the discretized error types, which is a disjoint partition of the assembly of model prediction and ground truth labels. Based on the results, the authors further provide an abstract implementation of the method which can be applied to the real tasks.",
+    "strengths_and_weaknesses": "Strength:\n\n1.The derived theorems hold for multiclass problem and soft labels, which has a wide range of applications to the real learning tasks. Such results in the PAC-Bayes literature have not been well-studied yet.\n\n2.Although there are no empirical studies to validate the results, the authors provide abstract implementation of the algorithm for better understanding the applications of the theorems.\n\n3.The paper is well presented and easy to understand. Detailed proofs are provided in the paper and supplementary material. \n\nWeakness:\n\n1.The technical contribution is somewhat weak in my view. The authors leverage the discretized error types to incorporate the entire confusion matrix, but many steps of the proofs mainly follow existing results.\n\n2.For the minor problems, there are some flaws in the paper, e.g., incorrect citations in L13 in the paper.",
+    "questions": "Although the discretized error types can be arbitrary in the theorem, are there any suggestions to set this parameter in the real tasks?\n\nCan you make more detailed discussion about your results that whether they are vacuous or not?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

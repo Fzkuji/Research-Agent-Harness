@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "GrB-y0SNkQ",
+  "reviewer": "eR6t",
+  "paper": {
+    "title": "CobBO: Coordinate Backoff Bayesian Optimization with Two-Stage Kernels",
+    "authors": [
+      "Jian Tan",
+      "Niv Nayman",
+      "MengChang WANG",
+      "Rong Jin"
+    ],
+    "abstract": "Bayesian optimization is a popular method for optimizing expensive black-box functions. Yet it oftentimes struggles in high dimensions where a sufficient estimation of the global landscape requires more observations and the computation cost becomes prohibitively expensive.\nWe introduce Coordinate backoff Bayesian optimization (CobBO) with two-stage kernels to alleviate this problem.\nIn each iteration, a promising subset of coordinates is selected in the first stage, as past observed points in the full space are projected to the selected subspace adopting a simple kernel that sacrifices the approximation accuracy for computational efficiency.\nThen in the second stage of the same iteration a more sophisticated kernel is applied for estimating the landscape in the selected low dimensional subspace where the computational cost becomes affordable. Effectively, this second stage kernel refines the approximation of the global landscape estimated by the first stage kernel through a sequence of observations in the local subspace. This refinement lasts until a stopping rule is met determining when to back off from a certain subspace and switch to another coordinate subset.\nThis decoupling significantly reduces the computational burden in high dimensions, while the two-stage kernels of the Gaussian process regressions fully leverage the observations in the whole space rather than only relying on observations in each coordinate subspace.\nExtensive evaluations show that CobBO finds solutions comparable to or better than other state-of-the-art methods for dimensions ranging from tens to hundreds, while reducing the trial complexity and computational costs.",
+    "keywords": [
+      "Bayesian Optimization"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=GrB-y0SNkQ"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a new High-dim BO framework inspired by Block coordinate ascent. Although similar, this paper differs from other works which leverages a low dimensional structure assumption in that it utilizes all the dimension in the function space. Aside from the overall scheme, its other contributions include (1) an update scheme for the coordinate sampling distribution; (2) a heuristic stopping rule to balance between exploiting current coordinate block and exploring new coordinate blocks; and (3) a theoretical analysis that upper bounds the total regret on a surrogate loss function. The framework shows some promising results when compared with other high-dim BO works.",
+    "main_review": "--Clarity\nThe paper is generally well written and easy to follow. I have some minor confusions:\n\n1. In the algorithm, the posterior is described as p(\\hat{f}| \\hat{H}). Is the posterior specified by a GP with low dimensional kernel or high dimensional kernel, but the length-scales on inactive coordinates are frozen (not learned)?.\n\n2. At the beginning of section 4.2, it was claimed that CobBO was compared to REMBO and ATPE but I don't see the comparison anywhere. Also, what would  BOHB be in Fig.5 ?\n\n--Originality\nThe motivation behind doing BO along a subset of coordinates has been explored many times in the literature. This paper argues that the proposed method, CobBO, \"efficiently leverages all the observations in the whole space ... rather than only relying on limited observations in each coordinate subspace\". As far as I understand, DROPOUT [35] also re-selects the active coordinates at every iteration (and fill in the remaining coordinates using some heuristic strategy), which guarantees making use of all coordinates in the long run. However, I believe that the proposed subspace selection algorithm is more informed due to the update scheme of the sampling distribution.\n--Quality\nMy main concern with this paper is that the theoretical analysis is not conventional (with respect to the BO literature). In my experience, BO regret analysis usually measures the regret on the objective function itself rather than a surrogate loss. It could be useful to assert that the sampling scheme will, in the asymptotic sense, always pick the right subspace to improve the objective the most number of times; but it does not inform us by how much does it improve the objective. It seems to me that the proposed regret bound is an analysis of the coordinate descent aspect alone, and is entirely independent of the optimization routine within each selected subspace (i.e., if I replace BO by something else, would anything change?). \n\nPlease refer to the Significance subsection for my comments on the experiments.\n\n--Significance\n1. For some experiments (e.g., Levy 200D and Ackley 200D), I don't think all methods have converged by the end of 10000 iterations. It would probably take longer to conclude that one is clearly superior to another. \n2. I would suggest some ablation study to show the effect of having variable coordinate block size |C_t| (as I understand, it is now capped at 30). On average, how many coordinates are sampled per iterations? Is there a lower bound to prevent the scheme from selecting none? How does it affect performance if we increase/decrease the upper bound?\n3. It was claimed that REMBO takes too long for Ackley 200D, but I dont see how it is the case if we limit the number of effective dimension (to be roughly the same as the average no. selected coordinates by CobBO)? Seems to me that both REMBO and CobBO optimize a low dimensional GP at every iteration with the same no. observations, so what makes one significantly slower than the other?",
+    "limitations_and_societal_impact": "The authors have described the Broader impact of this paper, which I find reasonable. I believe there would be no potential negative societal impact."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "rnx11J4hsg",
+  "reviewer": "M2sS",
+  "paper": {
+    "title": "HiRemate: Hierarchical Approach for Efficient Re-materialization of Neural Networks",
+    "authors": [
+      "Julia Gusak",
+      "Xunyi Zhao",
+      "Théotime Le Hellard",
+      "Zhe LI",
+      "Lionel Eyraud-Dubois",
+      "Olivier Beaumont"
+    ],
+    "abstract": "Training deep neural networks (DNNs) on memory-limited GPUs is challenging,  as storing intermediate activations often exceeds available memory. Re-materialization, a technique that preserves exact computations, addresses this by selectively recomputing activations instead of storing them. However, existing methods either fail to scale, lack generality, or introduce excessive execution overhead. We introduce ${\\mbox{HiRemate}}$ a ${\\textit hierarchical}$ re-materialization framework that recursively partitions  large computation graphs, applies optimized solvers at multiple levels, and merges solutions into a global efficient training schedule. This enables scalability to significantly larger graphs than prior ILP-based methods while keeping runtime overhead low. Designed for single-GPU models and activation re-materialization, HiRemate extends  the feasibility of training networks with thousands of graph nodes, surpassing  prior methods in both efficiency and scalability. Experiments on various types of networks yield up to 50-70%  memory reduction with only 10-15% overhead, closely matching optimal solutions while significantly reducing solver time. Seamlessly integrating with PyTorch Autograd, HiRemate requires almost no  code change to use,  enabling broad adoption in memory-constrained deep learning.",
+    "keywords": [
+      "Rematerialization",
+      "Checkpointing",
+      "Memory-Efficient Training",
+      "Neural Networks",
+      "PyTorch",
+      "Integer Linear Programming",
+      "Training"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rnx11J4hsg"
+  },
+  "review_fields": {
+    "summary": "The paper introduces HiRemate, a hierarchical framework for neural network re-materialization to reduce memory usage during training. The core idea involves recursively partitioning the computation graph into manageable subgraphs, solving each with optimized strategies, and merging solutions hierarchically.",
+    "claims_and_evidence": "- Comparisons with Checkmate on small graphs (Table 2) show close performance, but no theoretical guarantees or bounds on suboptimality. Actually for 5-layer GPT2, H-ILP already has >3% performance gap compared to the optimal one achieved by Checkmate.\n- The problem statement in Section 3 seems to be highly simplified. Do you assume a topological order of a computational graph here? How do you handle dependency between layers/operators.",
+    "methods_and_evaluation_criteria": "- Hierarchical decomposition is sensible for scalability, but the trade-off between partition granularity and solution quality is not rigorously analyzed.",
+    "theoretical_claims": "- As mentioned above, comparisons with Checkmate on small graphs (Table 2) show close performance, but no theoretical guarantees or bounds on suboptimality.",
+    "experimental_designs_or_analyses": "- Please include comparisons with dynamic re-materialization methods (e.g., DTR [A]) so that readers can more effectively evaluate the benefits of the hierarchical approach, especially considering that statically planning the schedule for a Transformer model with 2500 nodes takes 2.5 hours, which may be too expensive.\n- Comparisons with Checkmate are limited to small graphs, and Rockmate is only tested on sequential models. Please consider including RNN or SSM experiments.",
+    "relation_to_broader_scientific_literature": "It introduces a hybrid method that integrates hierarchical and solver-based approaches to address a key challenge in re-materialization.",
+    "essential_references_not_discussed": "[A] Marisa Kirisame, Steven Lyubomirsky, Altan Haan, Jennifer Brennan, Mike He, Jared Roesch, Tianqi Chen, Zachary Tatlock, \"Dynamic Tensor Rematerialization\", ICLR, 2021."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

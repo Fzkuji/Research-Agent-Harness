@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "IAoSG4Q2xC",
+  "reviewer": "rVAh",
+  "paper": {
+    "title": "Hyperparameter Loss Surfaces Are Simple Near their Optima",
+    "authors": [
+      "Nicholas Lourie",
+      "He He",
+      "Kyunghyun Cho"
+    ],
+    "abstract": "Hyperparameters greatly impact models' capabilities; however, modern models are too large for extensive search. Instead, researchers design recipes that train well across scales based on their understanding of the hyperparameters. Despite this importance, few tools exist for understanding the hyperparameter loss surface. We discover novel structure in it and propose a new theory yielding such tools. The loss surface is complex, but as you approach the optimum simple structure emerges. It becomes characterized by a few basic features, like its effective dimension and the best possible loss. To uncover this *asymptotic regime*, we develop a novel technique based on random search. Within this regime, the best scores from random search take on a new distribution we discover. Its parameters are exactly the features defining the loss surface in the asymptotic regime. From these features, we derive a new asymptotic law for random search that can explain and extrapolate its convergence. These new tools enable new analyses, such as confidence intervals for the best possible performance or determining the effective number of hyperparameters. We make these tools available at: https://github.com/nicholaslourie/opda.",
+    "keywords": [
+      "experimental design",
+      "hyperparameters",
+      "scaling laws"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=IAoSG4Q2xC"
+  },
+  "review_fields": {
+    "comment": "Thanks to the author for their substantial replies. They do provide additional context to better grasp their goal and some of the methods used.\n\nAfter reading the reviews and corresponding replies, there is still some struggle understanding how the described methods address the stated goal, and what the real-life impact is. With a goal of studying the hyper-parameter loss surface and develop *tools* for language modeling experiments, it would be highly relevant to have an idea of what type of LM experiment do benefit from these tools, and how. What is the reader able to do after reading this paper, that they could not do before?\n[E.g., is it useful for contrasting models? This is not apparent from Figs. 3, 6 where different model types and tasks are shown.] \n\nI will absolutely acknowledge that I may not have the proper context or background to fully appreciate the significance of this work, and have updated the confidence score to reflect this. I would also respectfully encourage the authors to clarify their methods, their use and the impact of this work in order to make its benefits more apparent to the reader."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1128,
+    "words": 190,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/79264126-1198-423c-aac0-15fc615a68d6",
+    "error": null,
+    "scored_chars": 1129
+  }
+}

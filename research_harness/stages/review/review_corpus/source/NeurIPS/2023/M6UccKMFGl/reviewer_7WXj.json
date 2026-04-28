@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "M6UccKMFGl",
+  "reviewer": "7WXj",
+  "paper": {
+    "title": "Multiply Robust Federated Estimation of Targeted Average Treatment Effects",
+    "authors": [
+      "Larry Han",
+      "Zhu Shen",
+      "Jose R Zubizarreta"
+    ],
+    "abstract": "Federated or multi-site studies have distinct advantages over single-site studies, including increased generalizability, the ability to study underrepresented populations, and the opportunity to study rare exposures and outcomes. However, these studies are complicated by the need to preserve the privacy of each individual's data, heterogeneity in their covariate distributions, and different data structures between sites. We propose a novel federated approach to derive valid causal inferences for a target population using multi-site data. We adjust for covariate shift and accommodate covariate mismatch between sites by developing a multiply-robust and privacy-preserving nuisance function estimation approach. Our methodology incorporates transfer learning to estimate ensemble weights to combine information from source sites. We show that these learned weights are efficient and optimal under different scenarios. We showcase the finite sample advantages of our approach in terms of efficiency and robustness compared to existing state-of-the-art approaches. We apply our approach to study the treatment effect of percutaneous coronary intervention (PCI) on the duration of hospitalization for patients experiencing acute myocardial infarction (AMI) with data from the Centers for Medicare \\& Medicaid Services (CMS).",
+    "keywords": [
+      "Causal inference",
+      "Covariate mismatch",
+      "Federated learning",
+      "Multiple robustness",
+      "Transportation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=M6UccKMFGl"
+  },
+  "review_fields": {
+    "comment": "Thanks! To be clear, detailed proofs in the Appendix are helpful too, e.g. for my initial comment for weakness 7 (\"It also seems strange to me that each influence function is being applied to every data point, given that the influence function is essentially the effect of a data point on an estimate, but only some data points are used for some estimates.\"). \n\nI am curious what it means for ICD-10 to be modeled as the \"same\" covariate in the source and target, if it is much noisier in the target but not the source."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 518,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/39b90e7d-dc0a-4ca2-829d-e54d615095a1",
+    "error": null,
+    "scored_chars": 519
+  }
+}

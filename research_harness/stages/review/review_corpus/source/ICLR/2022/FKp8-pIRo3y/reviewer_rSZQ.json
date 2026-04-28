@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "FKp8-pIRo3y",
+  "reviewer": "rSZQ",
+  "paper": {
+    "title": "Wish you were here: Hindsight Goal Selection for long-horizon dexterous manipulation",
+    "authors": [
+      "Todor Davchev",
+      "Oleg Olegovich Sushkov",
+      "Jean-Baptiste Regli",
+      "Stefan Schaal",
+      "Yusuf Aytar",
+      "Markus Wulfmeier",
+      "Jon Scholz"
+    ],
+    "abstract": "Complex sequential tasks in continuous-control settings often require agents to successfully traverse a set of ``narrow passages'' in their state space. Solving such tasks with a sparse reward in a sample-efficient manner poses a challenge to modern reinforcement learning (RL) due to the associated long-horizon nature of the problem and the lack of sufficient positive signal during learning. \nVarious tools have been applied to address this challenge. When available, large sets of demonstrations can guide agent exploration. Hindsight relabelling on the other hand does not require additional sources of information. However, existing strategies explore based on task-agnostic goal distributions, which can render the solution of long-horizon tasks impractical. In this work, we extend hindsight relabelling mechanisms to guide exploration along task-specific distributions implied by a small set of successful demonstrations. We evaluate the approach on four complex, single and dual arm, robotics manipulation tasks against strong suitable baselines. The method requires far fewer demonstrations to solve all tasks and achieves a significantly higher overall performance as task complexity increases. Finally, we investigate the robustness of the proposed solution with respect to the quality of input representations and the number of demonstrations.",
+    "keywords": [
+      "goal-conditioned reinforcement learning",
+      "learning from demonstrations",
+      "long-horizon dexterous manipulation",
+      "bi-manual manipulation"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=FKp8-pIRo3y"
+  },
+  "review_fields": {
+    "comment": "I would like to thank the authors for their thorough responses to my questions, and the clarifications which they have provided which have helped immensely. The clarification was quite helpful for the points about the encoder usage for baseline comparison, the differences between Nair et al. (2018a), and the baseline coverage compared to relevant components of RIG. This makes me more convinced of the effectiveness of the relabeling strategy based on the empirical evaluation. I have revised my score accordingly."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 516,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c09827c4-b2bb-4e1c-9614-5a462d049b4a",
+    "error": null,
+    "scored_chars": 516
+  }
+}

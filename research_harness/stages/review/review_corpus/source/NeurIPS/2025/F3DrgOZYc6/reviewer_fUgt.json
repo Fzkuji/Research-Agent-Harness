@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "F3DrgOZYc6",
+  "reviewer": "fUgt",
+  "paper": {
+    "title": "Improved Algorithms for Overlapping and Robust Clustering of Edge-Colored Hypergraphs: An LP-Based Combinatorial Approach",
+    "authors": [
+      "Changyeol Lee",
+      "Yongho Shin",
+      "Hyung-Chan An"
+    ],
+    "abstract": "Clustering is a fundamental task in both machine learning and data mining. Among various methods, edge-colored clustering (ECC) has emerged as a useful approach for handling categorical data. Given a hypergraph with (hyper)edges labeled by colors, ECC aims to assign vertex colors to minimize the number of edges where the vertex color differs from the edge's color. However, traditional ECC has inherent limitations, as it enforces a nonoverlapping and exhaustive clustering. To tackle these limitations, three versions of ECC have been studied: Local ECC and Global ECC, which allow overlapping clusters, and Robust ECC, which accounts for vertex outliers. For these problems, both linear programming (LP) rounding algorithms and greedy combinatorial algorithms have been proposed. While these LP-rounding algorithms provide high-quality solutions, they demand substantial computation time; the greedy algorithms, on the other hand, run very fast but often compromise solution quality. In this paper, we present a family of algorithms that combines the strengths of LP with the computational efficiency of combinatorial algorithms. Both experimental and theoretical analyses show that our algorithms efficiently produce high-quality solutions for all three problems: Local, Global, and Robust ECC. We complement our algorithmic contributions with complexity-theoretic inapproximability results and integrality gap bounds, which suggest that significant theoretical improvements are unlikely. Our results also answer two open questions previously raised in the literature.",
+    "keywords": [
+      "overlapping edge-colored clustering",
+      "robust edge-colored clustering",
+      "edge-colored clustering",
+      "hypergraph clustering",
+      "primal-dual methods",
+      "approximation algorithms"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=F3DrgOZYc6"
+  },
+  "review_fields": {
+    "summary": "This paper studies overlapping and robust edge-colored clustering (ECC) problem on hypergraphs. It is a node multi-coloring task such that the total number (even weight) of mistaken hyperedges whose colors are not covered by their nodes is minimized. The authors investigate three versions named Local, Global and Robust ECCs that have some kinds of budgeted number of node colors or node deletion, and present several algorithmic and lower bound results on them. The main technical contributions include new characterizations of ECCs by linear programming, and combinatorial algorithms based on the primal-dual schema that brings improvements in solution quality. Since the new algorithmic framework is combinatorial and doesn’t need to actually solve LP, it also brings great improvement in time complexity (theoretically). The proofs of lower bound results, including the reductions and instance designs, are constructive. The solution quality and efficiency of their algorithms are evaluated by experiments.",
+    "strengths_and_weaknesses": "Strengths:\n- This paper has provided a new framework of primal-dual schema for the three kinds of ECC problems.\n- It is well written and easy to follow.\n- The experimental results are good.\n\nWeaknesses:\n- I did not find many weaknesses except that the six subfigures of Figure 1(a) are hard to read. The running times of Greedy and Proposed methods are indistinguishable. It is better to have logarithmic scaling on the y-axis also.",
+    "final_justification": "This paper proposes combinatorial algorithms for ECC based on the classic primal-dual schema. I think it should be accept."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "quality": 4,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

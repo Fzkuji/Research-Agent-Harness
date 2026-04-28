@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "YItWKZci78",
+  "reviewer": "DQbp",
+  "paper": {
+    "title": "Symmetric Mean-field Langevin Dynamics for Distributional Minimax Problems",
+    "authors": [
+      "Juno Kim",
+      "Kakei Yamamoto",
+      "Kazusato Oko",
+      "Zhuoran Yang",
+      "Taiji Suzuki"
+    ],
+    "abstract": "In this paper, we extend mean-field Langevin dynamics to minimax optimization over probability distributions for the first time with symmetric and provably convergent updates. We propose \\emph{mean-field Langevin averaged gradient} (MFL-AG), a single-loop algorithm that implements gradient descent ascent in the distribution spaces with a novel weighted averaging, and establish average-iterate convergence to the mixed Nash equilibrium. We also study both time and particle discretization regimes and prove a new uniform-in-time propagation of chaos result which accounts for the dependency of the particle interactions on all previous distributions. Furthermore, we propose \\emph{mean-field Langevin anchored best response} (MFL-ABR), a symmetric double-loop algorithm based on best response dynamics with linear last-iterate convergence. Finally, we study applications to zero-sum Markov games and conduct simulations demonstrating long-term optimality.",
+    "keywords": [
+      "mean-field Langevin dynamics",
+      "minimax optimization",
+      "zero-sum games",
+      "Markov games"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=YItWKZci78"
+  },
+  "review_fields": {
+    "summary": "The paper considers the solution of minmax problems with convex-concave objectives (plus entropic regularization terms) in the space of pairs of probability measures. Numerous problems can be viewed as particular cases of this. \n\nThere exists a natural Mckean-Vlasov type system of diffusions --  mean-field Langevin dynamics (MFLD) -- that should converge to the saddle point that solves the above problem. The paper shows such a result for a version of these diffusions where the drift term is averaged over past states. Moreover, particle approximations of the diffusions are shown to satisfy strong convergence rates: for instance, the approximation bounds are uniform in time. \n\nBounds for the authors' methods are given for \"Markov games\" assuming oracle access to certain functions and gradients related to the problem. A small simulation study suggests improved performance vis a vis MFLD.",
+    "strengths": "The class of minmax optimization problems under consideration is quite natural. The result seems to be the first of its kind for this sort of problems. Similar results on convergence of McKean-Vlasov particle systems for convex optimization would be much easier to prove. The technical difficulties faced in the minimax scenario with the time averaging seem considerable.",
+    "weaknesses": "The assumptions over the two measures used in entropic regularization are quite strong. The result of Theorem 3.7 has an expectation inside $W_1$, which is somewhat hard to interpret: it would seem to be saying that the bias of the procedure is small, but not the variance, so many repetitions of the particle dynamics would be needed to estimate the expectation of some function $f$. The outer-loop particle discretization error is not accounted for in the algorithm from Section 4.\n\nI do not understand what is going on in Lemma C.7 (it might be because I do not understand $\\Pi$ fully -- see below). \n\nSome of the notation is unnecessarily hard to parse. Let me offer a few examples.\n\nPage 5: *Denote ordered sets of $N$ particles* -- it would seem that the authors mean a vector in $\\mathcal{X}^N$. Also on the same page: it seems that the authors introduce the subscript $1:k$ to identify particle positions at different times, but then don't use this notation consistently at the bottom of the page (and also elsewhere). \n\n$L_\\mu$ and $L_\\nu$ are used to denote Lipschitz constants in the first/second variable, but also, $L$ is the functional and $(\\mu,\\nu)$ are used to denoted arbitrary elements of the space of probability measures.  \n\nThe definition of $\\Pi$ in page 6 as ``the average of the pushforward operators along the projections $X\\mapsto X^i$ does not seem correct. How can you project to a higher-dimensional space?",
+    "questions": "*(Q1)* Algorithm 1 and elsewhere - rathen than sample subsets of $\\mathcal{X}_k,\\mathcal{Y}_k$, maybe you could just use a weighted empirical measure where set $\\mathcal{X}_k$ has weight proportional to $\\beta_k$?\n\n*(Q2)* Can you clarify what is $\\Pi$ and explain specifically the proof of Lemma C7?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2106,
+    "words": 341,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/42f4b08a-00dd-4141-93a8-a773e83b7033",
+    "error": null,
+    "scored_chars": 2110
+  }
+}

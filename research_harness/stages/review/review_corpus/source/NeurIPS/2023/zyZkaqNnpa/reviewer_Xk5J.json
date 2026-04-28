@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "zyZkaqNnpa",
+  "reviewer": "Xk5J",
+  "paper": {
+    "title": "Don’t blame Dataset Shift! Shortcut Learning due to Gradients and Cross Entropy",
+    "authors": [
+      "Aahlad Manas Puli",
+      "Lily H Zhang",
+      "Yoav Wald",
+      "Rajesh Ranganath"
+    ],
+    "abstract": "Common explanations for shortcut learning assume that the shortcut improves prediction only under the training distribution. Thus, models trained in the typical way by minimizing log-loss using gradient descent, which we call default-ERM, should utilize the shortcut. However, even when the stable feature determines the label in the training distribution and the shortcut does not provide any additional information, like in perception tasks, default-ERM exhibits shortcut learning. Why are such solutions preferred when the loss can be driven to zero when using the stable feature alone? By studying a linear perception task, we show that default-ERM’s preference for maximizing the margin, even without overparameterization, leads to models that depend more on the shortcut than the stable feature. This insight suggests that default-ERM’s implicit inductive bias towards max-margin may be unsuitable for perception tasks. Instead, we consider inductive biases toward uniform margins. We show that uniform margins guarantee sole dependence on the perfect stable feature in the linear perception task and suggest alternative loss functions, termed margin control (MARG-CTRL), that encourage uniform-margin solutions. MARG-CTRL techniques mitigate shortcut learning on a variety of vision and language tasks, showing that changing inductive biases can remove the need for complicated shortcut-mitigating methods in perception tasks.",
+    "keywords": [
+      "shortcut learning",
+      "spurious correlations",
+      "perfect stable feature",
+      "perception tasks",
+      "implicit bias in optimization",
+      "improving inductive biases"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=zyZkaqNnpa"
+  },
+  "review_fields": {
+    "summary": "Having had my concerns addressed by the authors I have updated my score.\n-----------------------------------------------------------------------------------------\n\n\n\n* The paper proposes an explanation for why neural networks tend to learn spurious features over stable fratures which lead to a lower loss and better performance.\n* The main argument for this is due to the maxmargin losses induced through cross entropy, to counter this the authors propose several losses which induce a uniform margin.\n* The authors propose a nice example and demonstrate the results on vision and language datasets.",
+    "strengths": "* The paper addresses a very important topic of the simplicity bias, and goes a significant way in addressing it. \n* The comments and explanations are clear and concise, and follow a clear narrative.\n* I find the arguments that inductive bias towards uniform margins for perception tasks to be convincing.\n* The experiments are well conducted and clearly support their statements",
+    "weaknesses": "* I find the scatter approach to testing many margin based losses a little un elegant, I would rather know which is the most effective in the paper and then see the results for other attempted losses in the Appendix. But this is just me preference.\n* Is Corollary one explicitly followed up with an experiment? I would like to know if it actually exhibits this behaviour or is there just the potential to?\n* The experimental datasets are rather limited, Waterbirds, CelebA, Wilds etc. Not a negative per se, but it would be nice to see authors trying to improve the testing framework for this probelm.",
+    "questions": "* The examples in the paper tend to be restricted to linear models, which is not the case in most perception systems, do you have any intuition if these conclusions carry through to a non-linear case? I'm aware it makes the analysis harder, and I'm not asking you to perform it. But it would be nice to hear any issues that may arrise.\n* Are there any experiments in the non over-parameterised setting? As this is discussed in the paper, I would have expected to see them in the experiments.\n* Do you think these shortcuts are a bit artifificial? For instance in the waterbirds dataset, the background should be an important feature in the decision, but not the primary feature, does this method enable predictions from multiple features? Or do you think it will just rely on one?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1763,
+    "words": 308,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1961e627-efda-453d-8929-020e905c4cdf",
+    "error": null,
+    "scored_chars": 1764
+  }
+}

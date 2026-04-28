@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "7yvu4qOKtn1",
+  "reviewer": "qRy1",
+  "paper": {
+    "title": "Computational Doob h-transforms for Online Filtering of Discretely Observed Diffusions",
+    "authors": [
+      "Nicolas Chopin",
+      "Andras Fulop",
+      "Jeremy Heng",
+      "Alexandre H. Thiery"
+    ],
+    "abstract": "This paper is concerned with online filtering of discretely observed nonlinear diffusion processes. We propose to approximate the Fully Adapted Particle Filter algorithm by solving a single auxiliary stochastic control problem prior to the data-assimilation procedure. The methodology relies on the non-linear Feynman-Kac approach to solving semi-linear partial differential equations. Numerical experiments suggest that the proposed approach can be orders of magnitude more efficient than the bootstrap particle filter in the regime when observations are highly informative.",
+    "keywords": [
+      "diffusion",
+      "filtering",
+      "monte-carlo",
+      "particle-filters",
+      "BSDE"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=7yvu4qOKtn1"
+  },
+  "review_fields": {
+    "summary": "Disclaimer: I am not expert in SDE theory so my review will focus on the high level and clarity.\n\nThe authors are interested in the filtering problem in SDEs, i.e. computing the conditional distributions x_t|y<t, with x the latent process and y the observations.\nThe focus is on particule filtering, where the filtering distribution is approximated via discrete particules.\nIn particule filtering, a guiding function q or proposal is used to propagate the values of the particules in time.\nA convenient guide is the 'Fully Adapted Auxiliary Particle Filter' which samples from the conditional p(x_t+1|y_t+1, x_t).\n\nDoob's theorem happens to give an expression for the SDE corresponding to this conditional p(x_t+1|y_t+1, x_t), which shares the same\ndiffusion as the a priori SDE and whose drift function is equal to the prior drift function plus an offest, or control function. \nSampling from this SDE for starting point x_t would give the desired sample of p(x_t+1|y_t+1, x_t) for the purpose of particule filtering\n\nThe authors propose an algorithm to find learn this control function c, without having to have to first solve a PDE first.\nThis function and the prior density is parameterized by neural network.\nAn objective is proposed to learn the control function.\nAn algorithm is proposed to optimize this objective.\n\nThe algorithm is evaluated to check the validity of the learned control in toy settings and in Particle filtering scenarios.",
+    "strengths_and_weaknesses": "I find the proposed manuscript is well motivated.\nThe background on particule filtering is clear.\n\nMy SDE theory is less developed but I don't understand section 2.5,\nnot even at a high level. As a result I m not sure I trust the content of section 3.1 (the loss and algorithm)\nI m possibly not the best reviewer (hence the low confidence) \nbut I also think clarity could be greatly improved (see below).",
+    "questions": "Some comments / questions:\n\ntwo related comments first\n* eta_x should depend on the conditioning end observation. \nIf you drop this dependency, you are not sampling from the conditioned SDE. \nIn your experiment (L252), you drop this dependency. Is this a typo, a design choice, an approximation?\n\n* L159: \"In practice, we will let the three sources of randomness be independent of each other.\"\nWhat is lost with that approximation (is it an approximation)? If you choose T large, then the process reverts to the prior (independent of Y), stationary distribution of the uncontrolled SDE.\nIs it what you do?\n\n* The result section, shows that the learned control matches the exact control on a linear SDE scenario.\nMany details are missing, an appendix with those would be great. \nas a reader, I don't want to have to fill all the gaps. Even less as a reviewer.\nFor example, for OU, you could give the exact expression for h, and v.\n\n* The proposed objective seems to contain the control on both side of the square loss, the V_T and the log g(..).\nI do not really understand or see why the optimal control is a minimizer of objective.\nIt also feels like hitting a moving target.\n\n* It would be good to have a discussion of this optimization problem.\nFor example, how do the dynamics of learning look like?\n\n* Could you be more precise on which variables you are taking expectations over and why?\nThis is important for the loss.\n\n* Also could you give a justification for the 'stop gradient' comment?\nYou have a loss that has multiple dependence on c and you decide to only propagate through one part.\n\n* CDT algorithm, it would help to have a more detailed pseudo code for the algorithm.\n\n* Doob's transform: I suggest you either give more details or remove the sketch from the main paper. As is it is not useful.\n\n* Where is the conclusion? It is good to end a paper with the conclusion summarizing the method and results."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

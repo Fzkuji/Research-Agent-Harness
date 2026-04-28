@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "yIEyHP7AvH",
+  "reviewer": "WmnJ",
+  "paper": {
+    "title": "Khayyam Challenge (PersianMMLU): Is Your LLM Truly Wise to The Persian Language?",
+    "authors": [
+      "Omid Ghahroodi",
+      "Marzia Nouri",
+      "Mohammad Vali Sanian",
+      "Alireza Sahebi",
+      "Doratossadat Dastgheib",
+      "Ehsaneddin Asgari",
+      "Mahdieh Soleymani Baghshah",
+      "Mohammad Hossein Rohban"
+    ],
+    "abstract": "Evaluating Large Language Models (LLMs) is challenging due to their generative nature, necessitating precise evaluation methodologies. Additionally, non-English LLM evaluation lags behind English, resulting in the absence or weakness of LLMs for many languages.\nIn response to this necessity, we introduce Khayyam Challenge (also known as PersianMMLU), a meticulously curated collection comprising 20,805 four-choice questions sourced from 38 diverse tasks extracted from Persian examinations, spanning a wide spectrum of subjects, complexities, and ages. The primary objective of the Khayyam Challenge is to facilitate the rigorous evaluation of LLMs that support the Persian language. Distinctive features of the Khayyam Challenge are (i) its comprehensive coverage of various topics, including literary comprehension, mathematics, sciences, logic, intelligence testing, etc aimed at assessing different facets of LLMs such as language comprehension, reasoning, and information retrieval across various educational stages, from lower primary school to upper secondary school (ii) its inclusion of rich metadata such as human response rates, difficulty levels, and descriptive answers (iii) its utilization of new data to avoid data contamination issues prevalent in existing frameworks (iv) its use of original, non-translated data tailored for Persian speakers, ensuring the framework is free from translation challenges and errors while encompassing cultural nuances (v) its inherent scalability for future data updates and evaluations without requiring special human effort. Previous works lacked an evaluation framework that combined all of these features into a single comprehensive benchmark. Furthermore, we evaluate a wide range of existing LLMs that support the Persian language, with statistical analyses and interpretations of their outputs. We believe that the Khayyam Challenge will improve advancements in LLMs for the Persian language by highlighting the existing limitations of current models, while also enhancing the precision and depth of evaluations on LLMs, even within the English language context.",
+    "keywords": [
+      "LLM",
+      "Evaluation",
+      "Multitask",
+      "Persian Language Understanding"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=yIEyHP7AvH"
+  },
+  "review_fields": {
+    "comment": "Thanks for your response.\n\nRegarding the first point about the \"bias\" of the dataset: While standard examinations can alleviate some bias, sourcing data from a single source can still introduce significant bias, such as in the style and difficulty of the questions. This is something I would like the authors to discuss in the paper.\n\nOn the data contamination issue, it's good to see that the authors conducted some numerical checks. However, the hypothesis that \"the website features an authentication-required login interface that prevents access through common web crawling methods, thereby helping to prevent data contamination\" is not very convincing. I assume there are also many copies outside this specific site if such an exam is a very important one. Therefore, one possible solution would be to check the n-gram overlap of the questions with common crawl dumps, which might be more convincing.\n\nOverall, the authors have addressed some of my concerns, and I would like to increase my score to 6."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:37:03Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:03Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 85,
+    "human_pct": 15,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 1570,
+    "words": 232,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2bf47860-aebe-451e-8caa-8523f4706bf7",
+    "error": null,
+    "scored_chars": 1570
+  }
+}

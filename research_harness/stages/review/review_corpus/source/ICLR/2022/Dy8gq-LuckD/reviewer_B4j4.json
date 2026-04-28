@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "Dy8gq-LuckD",
+  "reviewer": "B4j4",
+  "paper": {
+    "title": "Recognizing and overcoming the greedy nature of learning in multi-modal deep neural networks",
+    "authors": [
+      "Nan Wu",
+      "Stanislaw Kamil Jastrzebski",
+      "Kyunghyun Cho",
+      "Krzysztof J. Geras"
+    ],
+    "abstract": "We hypothesize that due to the greedy nature of learning in multi-modal deep neural networks (DNNs), these models tend to rely on just one modality while under-utilizing the other modalities. We observe empirically that such behavior hurts its overall generalization. We validate our hypothesis by estimating the gain on the accuracy when the model has access to an additional modality. We refer to this gain as the conditional utilization rate of the modality. In the experiments, we consistently observe an imbalance in conditional utilization rate between modalities, across multiple tasks and architectures. Since conditional utilization rate cannot be computed efficiently during training, we introduce an efficient proxy based on the pace at which a DNN learns from each modality, which we refer to as conditional learning speed. We thus propose a training algorithm, balanced multi-modal learning, and demonstrate that it indeed addresses the issue of greedy learning. The proposed algorithm is found to improve the model’s generalization on three datasets: Colored MNIST (Kim et al., 2019), Princeton ModelNet40 (Wu et al., 2015), and NVIDIA Dynamic Hand Gesture Dataset (Molchanov et al., 2016).",
+    "keywords": [
+      "multi-modal learning",
+      "deep neural networks",
+      "multi-view learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=Dy8gq-LuckD"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper talks about efficient multi-modal training. They hypothesize that multi-modal training is greedy and perform experiments to empirically show the same.\nThey propose metrics such as conditional utilization rate and conditional learning speed which serves as a proxy for the former to measure the imbalance in utilization between modalities while training.\nBased on conditional learning speed, they propose a multi-modal training algorithm that mitigates the imbalance in modality utilization.\nThrough experiments, the authors empirically show that it is true and their training paradigm performs better than vanilla multi-modal training.",
+    "main_review": "1. The paper focuses on a relevant problem in multi-modal learning on how to utilize information from both modalities efficiently.\nThe strength of the paper is that they follow a structured and scientific way of identifying the problem, proposing a metric to measure the extent of the problem and perform experiments\nto validate their hypothesis. They also show through experiments that the proposed training procedure leads to more efficient modality utilization and shows improved accuracy. The empirical results are strong.\n2. Weakness: In a MTMM architecture, Theta_0 (red blocks in Fig 1) would also be receiving updates based on the modality m1 as information is being passed through the fusion blocks denoted by parameters (theta_0)'(green and red-green blocks).\nIn that case, I am not sure if definition 4.1 is a valid way to define the conditional learning speeds as both theta_0 and theta_0' would see the information flow from modality m1. It would have been valid if theta_0 did not se information from m1 at all (like the way conditional utilization rate was defined in 2.1). So, I am not clearly convinced with the statement in Section 4.1 that \"If the greedy learner hypothesis is true, the conditional learning speed would serve as a proxy for the conditional utilization rate. dspeed(f;t) would predict dutil(f) at the end of training.\" Authors have tried to explain how to derive uni-modal outputs from MTMM in section A1 but it isn't clear to me\n3. Re-balancing step is not clear as explained in Appendix A2. Lets say we want to balance the information flow from modality m0 in a MTMM architecture in Fig 1.\nIn that case, does it mean the top branch takes information from just m0 (i.e. the information flow from green and green-red blocks is stopped) to generate prediction y0_hat, while the bottom branch takes information from both m0 and m1 to generate the prediction y1_hat.",
+    "summary_of_the_review": "This paper is easy to read and addresses the shortcomings of vanilla multi-modal training scenarios. Authors have done a good job of explaining the problem followed by laying out their hypotheses clearly. They have done experiments which enforces the hypotheses empirically. Authors should explain the re-balancing step (in section A2) and how to derive uni-modal predictions from multi-modal DNNs (in section A1) more clearly with consistent notations as used throughout the paper.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2382,
+    "words": 387,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f96505e9-3b0b-4841-ac62-40678ec275fb",
+    "error": null,
+    "scored_chars": 2382
+  }
+}

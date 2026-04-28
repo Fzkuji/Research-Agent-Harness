@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "M6UccKMFGl",
+  "reviewer": "hesp",
+  "paper": {
+    "title": "Multiply Robust Federated Estimation of Targeted Average Treatment Effects",
+    "authors": [
+      "Larry Han",
+      "Zhu Shen",
+      "Jose R Zubizarreta"
+    ],
+    "abstract": "Federated or multi-site studies have distinct advantages over single-site studies, including increased generalizability, the ability to study underrepresented populations, and the opportunity to study rare exposures and outcomes. However, these studies are complicated by the need to preserve the privacy of each individual's data, heterogeneity in their covariate distributions, and different data structures between sites. We propose a novel federated approach to derive valid causal inferences for a target population using multi-site data. We adjust for covariate shift and accommodate covariate mismatch between sites by developing a multiply-robust and privacy-preserving nuisance function estimation approach. Our methodology incorporates transfer learning to estimate ensemble weights to combine information from source sites. We show that these learned weights are efficient and optimal under different scenarios. We showcase the finite sample advantages of our approach in terms of efficiency and robustness compared to existing state-of-the-art approaches. We apply our approach to study the treatment effect of percutaneous coronary intervention (PCI) on the duration of hospitalization for patients experiencing acute myocardial infarction (AMI) with data from the Centers for Medicare \\& Medicaid Services (CMS).",
+    "keywords": [
+      "Causal inference",
+      "Covariate mismatch",
+      "Federated learning",
+      "Multiple robustness",
+      "Transportation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=M6UccKMFGl"
+  },
+  "review_fields": {
+    "comment": "Thank you for your detailed response. I've also gone through the reviews from other reviewers. Based on the response, other reviews, the lack of any evidence for real applications, as well as the acknowledgment of the third weakness I mentioned earlier, I am on the fence about my score. I am lowering my score to 5 for now but will re-assess later. \n\nHere are a few comments regarding your response:\n\nWeakness:\n1. My question was more about finite sample bounds vs asymptotic guarantees and not about the sensitivity analysis. Regarding sensitivity analysis, what would these bounds under relaxed identification requirements look like? It would be useful to know how the resulting sensitivity analysis performs on some real-world data. \n2. I concur with Reviewer TqVy: the authors' responses are about plans for adding background, motivation, intuition, and real-world experiments but there is none available to assess as of now. Overall, after revisiting the first section of the paper, I think it may require some major revamp but acceptance.  \n3. I understand and agree that these assumptions are historically common in the community. However, the recent focus is on moving away from these. Given that, it is important to understand the behavior of the method when these assumptions are violated, i.e., via sensitivity analysis. Alternatively, it is important to see how the proposed method behaves on some real-data where these assumptions may not hold (as also mentioned by reviewer LaCg). Also, while random treatment assignment is an important scenario, so is observational study where random assignment may not hold."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1621,
+    "words": 257,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/bc095404-193e-4c3f-919e-10efeb77e334",
+    "error": null,
+    "scored_chars": 1625
+  }
+}

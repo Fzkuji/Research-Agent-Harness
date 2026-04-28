@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "pvgEL1yS3Ql",
+  "reviewer": "XdGN",
+  "paper": {
+    "title": "Cross-Layer Retrospective Retrieving via Layer Attention",
+    "authors": [
+      "Yanwen Fang",
+      "Yuxi CAI",
+      "Jintai Chen",
+      "Jingyu Zhao",
+      "Guangjian Tian",
+      "Guodong Li"
+    ],
+    "abstract": "More and more evidence has shown that strengthening layer interactions can enhance the representation power of a deep neural network, while self-attention excels at learning interdependencies by retrieving query-activated information. Motivated by this, we devise a cross-layer attention mechanism, called multi-head recurrent layer attention (MRLA), that sends a query representation of the current layer to all previous layers to retrieve query-related information from different levels of receptive fields. A light-weighted version of MRLA is also proposed to reduce the quadratic computation cost. The proposed layer attention mechanism can enrich the representation power of many state-of-the-art vision networks, including CNNs and vision transformers. Its effectiveness has been extensively evaluated in image classification, object detection and instance segmentation tasks, where improvements can be consistently observed. For example, our MRLA can improve 1.6% Top-1 accuracy on ResNet-50, while only introducing 0.16M parameters and 0.07B FLOPs. Surprisingly, it can boost the performances by a large margin of 3-4% box AP and mask AP in dense prediction tasks. Our code is available at https://github.com/joyfang1106/MRLA.",
+    "keywords": [
+      "Layer Attention",
+      "Recurrent Layer Attention",
+      "Layer Interaction",
+      "CNNs",
+      "Vision Transformers",
+      "Vision Networks"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=pvgEL1yS3Ql"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper presents a module to perform layer attention for CNNs and Vision Transformers in linear-complexity. The core idea is to leverage the representations of previous layers in a recurrent form so that the quadratic-complexity self-attention is avoided. Experiments on image classification, object detection, and instance segmentation are performed to validate the effectiveness of the proposed module.",
+    "strength_and_weaknesses": "Strength\n- The core idea is straightforward to implement.\n- A wide range of experiments (image classification, object detection, and instance segmentation) are performed on large-scale datasets including ImageNet-1K and COCO. Also, the same module has been tested on quite a few backbone networks including many common variants of ResNet and Vision Transformers.\n- The paper is clearly written.\n\nWeakness\n- Honestly, I reviewed this paper in the last NeurIPS 2022 and thought the work quality, e.g. solid experiments, well-written,  reached the weak acceptance bar at that time. Given the edited version, the authors have addressed my previous concerns about the experiments. However, my main concerns about this work are still reserved. The novelty of applying layer-wise connection to improve attention is limited, which has been proved by the existing works, e.g, denseNet. And the marginal improvement over existing methods makes it stay slightly above the borderline.\n- The ablation study of different layer connections impacting performance is missing.",
+    "clarity,_quality,_novelty_and_reproducibility": "It is straightforward to implement MRLA. And the code is provided. The novelty is minor.",
+    "summary_of_the_review": "Though the novelty and performance improvement over SOTA is minor, the work contains solid experiments and comes with good presentation, which provides insights into designing layer-wise connected attention. The idea is straightforward and easy to implement.  Overall, I think it reaches the acceptance bar.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

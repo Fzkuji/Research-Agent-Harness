@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "zP6DJaBBcR",
+  "reviewer": "AyBr",
+  "paper": {
+    "title": "REFA: Reference Free Alignment with Fine-Grained Length Control",
+    "authors": [
+      "Taneesh Gupta",
+      "Rahul Madhavan",
+      "Xuchao Zhang",
+      "Chetan Bansal",
+      "Saravan Rajmohan"
+    ],
+    "abstract": "To mitigate reward hacking from response verbosity, modern preference optimization methods are increasingly adopting length normalization (e.g., SimPO, ORPO, LN-DPO). While effective against this bias, we demonstrate that length normalization itself introduces a failure mode: the **URSLA shortcut**. Here models learn to satisfy the alignment objective by prematurely truncating low-quality responses rather than learning from their semantic content. To address this, we introduce **REFA**, a new alignment framework that proposes probabilistic control on a structural token that controls termination. Our core innovation is a new class of regularizers that operate directly on the probability of the End-of-Sequence (EOS) token, a previously unexploited control lever. This token-level intervention provides a principled solution to the URSLA shortcut, ensuring genuine quality improvements. Furthermore, it unlocks a versatile mechanism for managing the alignment-efficiency tradeoff, enabling practitioners to fine-tune models that adhere to specific token budgets. Empirically, REFA achieves a **60.29\\%** win rate and a **52.17\\%** length-controlled win rate on AlpacaEval2 with Llama-3-8B-Instruct, demonstrating the power of our token-level control paradigm.",
+    "keywords": [
+      "Model Alignment",
+      "RLHF",
+      "Preference Optimization"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=zP6DJaBBcR"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a family of reference-free alignment methods for multi-preference optimization which maintain response length control. The technical contributions that enable this are deviation-based weighting and a length regularizer. Theoretically, they show that naive length normalization can lead to shorter negative responses and shows how they can be addressed through additional constraints. Empirical results show REFA achieves state-of-the-art performance on AlpacaEval2, with 26.6% length-controlled and 24.2% standard win rate.",
+    "reasons_to_accept": "- Introduces two new algorithmic components (deviation-based weighting) and improved length regularizer that addresses limitations in prior work. \n- Provides some interesting theoretical insights into length-based optimization in alignment methods. \n- Presents a thorough empirical comparison of the proposed methods with several competitive baselines across several datasets and different model families (up to 8B).  \n- Includes a detailed analysis the effect of length normalization hyperparameters and dynamic adaptation, highlighting useful insights for its use in practice. (e.g. need to carefully tune \\lambda)",
+    "reasons_to_reject": "- The proposed methodology is incremental, primarily combining and refining techniques from existing approaches like SWEPO and SimPO.\n- There is no formal proof in the theoretical foundation of URSLA, and it is mainly built with conjectures based on some empirical observations. It's unclear if the findings are universally valid.",
+    "questions_to_authors": "1. Could you elaborate on the differences of different methods in terms of computational costs/efficiency? \n2. From which tasks in the benchmarks does the improvement come from? It would be useful to provide an additional analysis to better understand the strengths.\n3. The paper might benefit from an ablation study for the performance impact of each proposed component (deviation-based weighting, length normalization, EOS regularization)."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 13,
+    "mixed_pct": 0,
+    "human_pct": 87,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1386,
+    "words": 196,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/be53dd83-6ec0-4a19-aba3-a7e0df295f7c",
+    "error": null,
+    "scored_chars": 1391
+  }
+}

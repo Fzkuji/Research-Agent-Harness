@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "a560KLF3v5",
+  "reviewer": "Pejt",
+  "paper": {
+    "title": "Unelicitable Backdoors via Cryptographic Transformer Circuits",
+    "authors": [
+      "Andis Draguns",
+      "Andrew Gritsevskiy",
+      "Sumeet Ramesh Motwani",
+      "Christian Schroeder de Witt"
+    ],
+    "abstract": "The rapid proliferation of open-source language models significantly increases the risks of downstream backdoor attacks. These backdoors can introduce dangerous behaviours during model deployment and can evade detection by conventional cybersecurity monitoring systems. In this paper, we introduce a novel class of backdoors in transformer models, that, in contrast to prior art, are unelicitable in nature. Unelicitability prevents the defender from triggering the backdoor, making it impossible to properly evaluate ahead of deployment even if given full white-box access and using automated techniques, such as red-teaming or certain formal verification methods. We show that our novel construction is not only unelicitable thanks to using cryptographic techniques, but also has favourable robustness properties.\nWe confirm these properties in empirical investigations, and provide evidence that our backdoors can withstand state-of-the-art mitigation strategies. Additionally, we expand on previous work by showing that our universal backdoors, while not completely undetectable in white-box settings, can be harder to detect than some existing designs. By demonstrating the feasibility of seamlessly integrating backdoors into transformer models, this paper fundamentally questions the efficacy of pre-deployment detection strategies. This offers new insights into the offence-defence balance in AI safety and security.",
+    "keywords": [
+      "Backdoor attacks",
+      "Transformers",
+      "handcrafting model parameters",
+      "cryptographic circuits"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=a560KLF3v5"
+  },
+  "review_fields": {
+    "summary": "This paper shows a construction for planting backdoors in the architecture of an autoregressive transformer model. The proposed construction is a SHA256 implemented in the transformer as a compiled module. The hashing algorithm is following a typical implementation and has been compiled to Tracr modules. The authors consider two potential defenses to show that the trigger cannot be guessed by the approach and the proposed backdoor is more robust.",
+    "strengths": "1. The authors provide a principled way to construct a backdoor via cryptographic hash implementations and evaluate the backdoor’s robustness and elicitation to two techniques.\n\n2. The authors mention creating and releasing a set of benchmarks as synthetic models with backdoors for future research as part of their contributions.",
+    "weaknesses": "1. The attacker controls the whole training process and can embed the backdoor at the computational graph level, while knowing the model exactly. \n\n2. It is unclear how this is different from architectural backdoors, besides the implementation of SHA-256, and whether the evaluated techniques are convincing enough - e.g., why is not fine-tuning considered as well.",
+    "questions": "1. There is another similar class of backdoors, called architectural backdoors that are similar to the one proposed by this paper, except they do construct circuits for encrypted payloads (see [1]). Could you contrast this work from [1]? For instance, if an ML expert were to inspect the model definition or the computational graph and look for SHA implementations, would the proposed defense still work?\n\n2. There have been a number of techniques for watermarking the content and models that utilize similar cryptographic constructions recently [2]. Could you comment on how similar your approach is for backdooring, and if it has similar properties as these works?\n\n3. Can you clarify how encoding the 3-SAT problem in the transformer circuit yields an encoding to average-case LWE problems?\n\n[1] Bober-Irizar, Mikel, et al. \"Architectural backdoors in neural networks.\" Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2023.\n\n[2] Christ, Miranda, Sam Gunn, and Or Zamir. \"Undetectable watermarks for language models.\" The Thirty Seventh Annual Conference on Learning Theory. PMLR, 2024.",
+    "limitations": "The authors have identified limitations of their work."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1877,
+    "words": 284,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6122d2ef-7390-4a79-af85-2eed6aba2b59",
+    "error": null,
+    "scored_chars": 1878
+  }
+}

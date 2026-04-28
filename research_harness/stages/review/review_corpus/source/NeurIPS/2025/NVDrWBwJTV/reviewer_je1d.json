@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "NVDrWBwJTV",
+  "reviewer": "je1d",
+  "paper": {
+    "title": "The Good, the Bad and the Ugly: Meta-Analysis of Watermarks, Transferable Attacks and Adversarial Defenses",
+    "authors": [
+      "Grzegorz Gluch",
+      "Berkant Turan",
+      "Sai Ganesh Nagarajan",
+      "Sebastian Pokutta"
+    ],
+    "abstract": "We formalize and analyze the trade-off between backdoor-based watermarks and adversarial defenses, framing it as an interactive protocol between a verifier and a prover. While previous works have primarily focused on this trade-off, our analysis extends it by identifying transferable attacks as a third, counterintuitive but necessary option. Our main result shows that for all learning tasks, at least one of the three exists: a _watermark_, an _adversarial defense_, or a _transferable attack_. By transferable attack, we refer to an efficient algorithm that generates queries indistinguishable from the data distribution and capable of fooling _all_ efficient defenders. Using cryptographic techniques, specifically fully homomorphic encryption, we construct a transferable attack and prove its necessity in this trade-off. Finally, we show that tasks of bounded VC-dimension allow adversarial defenses against all attackers, while a subclass allows watermarks secure against fast adversaries.",
+    "keywords": [
+      "Interactive Proof Systems",
+      "Cryptography",
+      "Backdoors",
+      "Game Theory",
+      "Learning Theory",
+      "Transferable Attacks",
+      "Adversarial Robustness"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NVDrWBwJTV"
+  },
+  "review_fields": {
+    "comment": "Thanks for the rebuttal.\nI have re-read the paper along with the other reviews. \nIt seems that there's consensus on the strengths and weaknesses, with different weights on each of them.\nThe rebuttal addresses my concerns to some degree, but I still think practicality is an important issue that must be addressed by the paper. \nIf the other reviewers find the claims useful, I wouldn't argue against accepting this paper.\nIn addition, even with the new descriptions provided in the rebuttal, the explanations seem to be unfriendly to many readers in the community. \nIf the paper is to be accepted, I wish the authors would go through a thorough revision."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "nwKXyFvaUm",
+  "reviewer": "RXZV",
+  "paper": {
+    "title": "Diverse Client Selection for Federated Learning via Submodular Maximization",
+    "authors": [
+      "Ravikumar Balakrishnan",
+      "Tian Li",
+      "Tianyi Zhou",
+      "Nageen Himayat",
+      "Virginia Smith",
+      "Jeff Bilmes"
+    ],
+    "abstract": "In every communication round of federated learning, a random subset of clients communicate  their  model  updates  back  to  the  server  which  then  aggregates them all.  The optimal size of this subset is not known and several studies have shown that typically random selection does not perform very well in terms of convergence, learning efficiency and fairness. We, in this paper, propose to select a small diverse subset of clients, namely those carrying representative gradient information, and we transmit only these updates to the server.  Our aim is for updating via only a subset to approximate updating via aggregating all client information. We achieve this by choosing a subset that maximizes a submodular facility location function defined over gradient space. We introduce “federated averaging with diverse client selection (DivFL)”. We provide a thorough analysis of its convergence in the heterogeneous setting and apply it both to synthetic and to real datasets. Empirical results show several benefits to our approach including improved learning efficiency, faster convergence and also more uniform (i.e., fair) performance across clients. We further show a communication-efficient version of DivFL that can still outperform baselines on the above metrics.",
+    "keywords": [
+      "federated learning",
+      "submodularity",
+      "diversity"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=nwKXyFvaUm"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper studies a problem of improving the efficiency of federated learning by selecting a\nsubset of clients whose gradients are representative. This is formulated as a submodular maximization\nproblem, and the authors analyze a greedy algorithm for it. This is evaluated through experiments\non synthetic as well as real datasets.",
+    "main_review": "page 4: Minimizing G(S) is certainly equivalent to maximizing \\bar{G}. However, the equivalence\nbreaks down when you consider approximation. In particular, the (1-1/e) approximation to \\bar{G}\ndoes not imply a similar approximation to G(S), in general\n\nEnd of section 3: the greedy step is not clearly explained and needs more discussion, since it will\naffect the communication complexity. It is mentioned that the algorithm only utilizes\n\"updates from the clients that participated in the previous round\", and it is claimed that this works\nquite well. This is pretty surprising. Is there some special structure in the instance due\nto which this holds?\n\nAssumption 1: this is a property of the algorithm. So I don't understand why this is an assumption.\nYou need to prove that for the sets S_t chosen in each step t, this property will hold. The authors\nclaim that this assumption is also made in (Mirzasoleiman et al., 2020). They should say more clearly\nwhere that is (though an assumption in a prior paper doesn't automatically make it correct).\n\nIn view of the issue with assumption 1, it is not clear if Theorem 1 is correct\n\nThe formulation in the paper has a lot of similarity with the setup in (Mirzasoleiman et al., 2020).\nThe authors should explain this more carefully, instead of cursorily stating it in the Introduction",
+    "summary_of_the_review": "The problem considered in the paper is interesting and well motivated. However, the formulation is\nincremental, and builds quite heavily on earlier paper. The main contribution is the analysis of the\ngreedy algorithm, which has serious issues as mentioned above.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1595,
+    "words": 262,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/73b7ae1d-d898-42af-8e16-7b83bc447753",
+    "error": null,
+    "scored_chars": 1595
+  }
+}

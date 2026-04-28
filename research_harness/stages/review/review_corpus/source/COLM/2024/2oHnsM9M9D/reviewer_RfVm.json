@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "2oHnsM9M9D",
+  "reviewer": "RfVm",
+  "paper": {
+    "title": "ACORN: Aspect-wise Commonsense Reasoning Explanation Evaluation",
+    "authors": [
+      "Ana Brassard",
+      "Benjamin Heinzerling",
+      "Keito Kudo",
+      "Keisuke Sakaguchi",
+      "Kentaro Inui"
+    ],
+    "abstract": "Evaluating the quality of free-text explanations is a multifaceted, subjective, and labor-intensive task. Large language models (LLMs) present an appealing alternative due to their potential for consistency, scalability, and cost-efficiency. In this work, we present ACORN, a new dataset of 3,500 free-text explanations and aspect-wise quality ratings, and use it to evaluate how LLMs rate explanations. We observed that larger models outputted labels that maintained or increased the inter-annotator agreement, suggesting that they are within the expected variance between human raters. However, their correlation with majority-voted human ratings varied across different quality aspects, indicating that they are not a complete replacement. In turn, using LLMs as a supplement to a smaller group of human raters in some cases improved the correlation with the original majority labels. However, the effect was limited to cases where human raters were scarce, and an additional human rater had a more pronounced effect in all cases. Overall, we recommend against using LLMs as a complete replacement for human raters but encourage using them in configurations that end with targeted human involvement.",
+    "keywords": [
+      "commonsense reasoning",
+      "free-text explanations",
+      "LLM-as-a-judge",
+      "human alignment"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=2oHnsM9M9D"
+  },
+  "review_fields": {
+    "summary": "This paper evaluates the utility of LLMs for evaluating AI-generated free-text explanations of model predictions. In particular, the quality of the aggregate ratings is tested in various settings where a random human rater is replaced with a suitably prompted LLM. For the most part, LLMs reduce overall annotator agreement and drag the aggregate label distribution away from the majority vote, but one small exception is the case of GPT-4 breaking ties between two humans.\n\nThe contribution of the work consists of some commonsense QA explanation data, a pretty straightforward and sound evaluation paradigm for testing whether LMs add productively on top of human raters, and the results of experiments testing several LLMs.",
+    "reasons_to_accept": "The specific methodology for testing LMs as replacing human raters seems really strong to me, and the discussion of how to interpret these results (i.e., if agreement decreases, remains the same, or increases) was solid. I think this paper serves as a good example for future work evaluating similar kinds of questions.\n* Not critical, but I think it'd be interesting & informative to add another bar to Figure 4 corresponding to a single random human, to serve as a baseline. As the human labelers are noisy, they shouldn't have 1.0 correlation with the majority vote, and it'd be nice to see how each model compares with that case.",
+    "reasons_to_reject": "The paper seriously conflates some important issues around explanation quality. The motivation provided in the introduction is about model trustworthiness, interpretability, compliance with \"right to explanation\" laws, but all of these use-cases of explanations depend on them being faithful to the model's decision making process, i.e., predictive of model behavior. The evaluations done in this paper have little bearing on faithfulness, as they only assess whether the explanation is coherent, correct, and supports the given answer. While explanation coherence is necessary for faithfulness (as incoherent explanations cannot give much information about how the model behaves), the other aspects being measured are about the quality of the explanation with respect to the _actual reason_ a label is correct. A model's ability to report a reason that supports an answer — even the correct reason — is neither necessary nor sufficient for faithfulness, which is about how the explanation relates to the model's decision making process, and cannot be inferred from a single example alone (see e.g. the discussion of \"coherent biased reasoning\" in https://arxiv.org/abs/2403.05518). Faithfulness, furthermore, is the aspect that is critical for all of the uses of explainability promoted in the intro. Given all of this, I think the paper is not really about explainability, but about evaluating model performance at a specific task, which is producing correct-with-respect-to-the-real-world explanations for classification decisions. I think an accurate presentation of the work would frame it in this way.\n\nAll of that said, this framing issue is not crucial to the contribution of the paper, and the experiments and evaluations all seem pretty reasonable to me. So I don't think this is a dealbreaker or anything, I just strongly urge the authors to rework the motivation to avoid any undue implications about the relevance of this work to model trustworthiness, reliability, interpretability. etc., and ask that the discussion of aspects in Table 1 avoid implying that the \"Supports\" or \"Overall\" aspects address faithfulness.\n\nThe main reason I can imagine this being rejected is that it's overall a pretty small contribution. I don't begrudge it this necessarily but it doesn't feel like it needed the full space it used. Thankfully, the authors did not unnecessarily pad it out to 9 pages, finishing within 8, but there's still quite a bit of fluff and repetition — I feel the paper could have probably fit just fine in 4 pages, and I think it would've made a great short paper. COLM doesn't have a short paper track, and of course this is the first COLM, so I don't really know how to handle this case. I'm recommending the paper for acceptance, as I think it's sound, but leave it to the meta-reviewer to judge.",
+    "questions_to_authors": "General comment: I find the description of the data sources hard to follow. I don't know how to evaluate claims like \"improved version\" or \"aligning with our criteria for well-formed explanations\". These seem like subjective qualitative judgments. When describing the provenance of your data, please describe in concrete, non-subjective terms what was done to create it. Some things are also curious to me & unexplained — why did you have to post-process CoS-E and BCOPA for fluency improvement? Could this have introduced errors? Why were only half of them fluency-improved? Does this not also mean that some of your test examples are correlated, hurting your statistical power later on? A lot of things about the setup here seem messy. Can you please clarify in the paper how you processed the data and why?\n\nQuestion: did you try few-shot prompting? I found a brief mention of it in Appendix D, but I couldn't figure out how it worked into the experiments and whether you tried it. It seems to me that you should probably be doing the best you can to get good performance out of these models and see if they work. Needing a few human labels for few-shot prompting doesn't weaken the case IMO, as you're already assuming access to some human labels anyway (e.g., when adding an LM to a pool of human raters).\n\nIn the ethics statement, you say:\n> Some of the datasets used in our research have been found to contain biases that can be further perpetuated through explanations supporting them.\n\nWhich datasets? Please clarify this and provide citations if it's the case."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:34Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:34Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 5027 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 5027,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 5027
+  }
+}

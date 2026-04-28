@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "jIh4W7r0rn",
+  "reviewer": "YPrH",
+  "paper": {
+    "title": "Autoregressive Image Diffusion: Generation of Image Sequence and Application in MRI",
+    "authors": [
+      "Guanxiong Luo",
+      "Shoujin Huang",
+      "Martin Uecker"
+    ],
+    "abstract": "Magnetic resonance imaging (MRI) is a widely used non-invasive imaging modality. However, a persistent challenge  lies in balancing image quality with imaging speed. This trade-off is primarily constrained by k-space measurements, which traverse specific trajectories in the spatial Fourier domain (k-space). These measurements are often undersampled to shorten acquisition times, resulting in image artifacts and compromised quality. Generative models learn image distributions and can be used to reconstruct high-quality images from undersampled k-space data. In this work, we present the autoregressive image diffusion (AID) model for image sequences and use it to sample the posterior for accelerated MRI reconstruction. The algorithm incorporates both undersampled k-space and pre-existing information. Models trained with fastMRI dataset are evaluated comprehensively. The results show that the AID model can robustly generate sequentially coherent image sequences. In MRI applications, the AID can outperform the standard diffusion model and reduce hallucinations, due to the learned inter-image dependencies. The project code is available at https://github.com/mrirecon/aid.",
+    "keywords": [
+      "Autoregressive models",
+      "Diffusion models",
+      "Inverse problems",
+      "Medical imaging",
+      "MRI"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=jIh4W7r0rn"
+  },
+  "review_fields": {
+    "summary": "This paper presents a diffusion model for MRI acceleration.  In which, an autoregressive image diffusion (AID) model is proposed to sequentially generate MRI image conditions on a given prior image sequences. This method is evaluated on the accelerated MRI reconstruction task using the public available dataset, fastMRI dataset.",
+    "strengths": "The figures are very helpful for the understanding of the paper.\n\nThe paper is well-organized and easy to follow.",
+    "weaknesses": "1. Lack of quantitive comparison with other methods for MRI reconstruction.\n2. The paper should highlight the technical contribution, as most of the context of the methods is from the existing works.\n3. The paper claims the contribution on 3D and dynamic MRI, but expects more such results, not just for 2D images.\n4. The paper deals with 3D reconstruction but the results only show 2D slices. It is not clear the consistency from other views like Coronal and Sagittal views.",
+    "questions": "The method is conditioned on previous images, how about the computational cost, as the method will use all previous slices?\n\nThe efficiency of the proposed method should be horrible as it is a drawback of the autoregressive model, is this correct?\n\nAs the cost is high, can the AIM model be constructed in the latent space?",
+    "limitations": "1. The method lacks novelty as diffusion models are commonly used in MRI acceleration tasks\n2. The method is more like for normal images but not for medical images like MRI; For medical studies, we care more about he anatomy plausibility while the image metrics, like MSE, may not be a good measurement for this purpose;\n3. 3D medical images are not videos; we care more about the structure consistency from any of the three views."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1348,
+    "words": 232,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ef471bfd-10f4-4869-bd42-2f49ff39c4f7",
+    "error": null,
+    "scored_chars": 1348
+  }
+}

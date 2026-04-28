@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "GIlsH0T4b2",
+  "reviewer": "yH2K",
+  "paper": {
+    "title": "Two-Stage Learning to Defer with Multiple Experts",
+    "authors": [
+      "Anqi Mao",
+      "Christopher Mohri",
+      "Mehryar Mohri",
+      "Yutao Zhong"
+    ],
+    "abstract": "We study a two-stage scenario for learning to defer with multiple experts, which is crucial in practice for many applications.  In this scenario, a predictor is derived in a first stage by training with a common loss function such as cross-entropy.  In the second stage, a deferral function is learned to assign the most suitable expert to each input.  We design a new family of surrogate loss functions for this scenario both in the score-based and the predictor-rejector settings and prove that they are supported by $H$-consistency bounds, which implies their Bayes-consistency.  Moreover, we show that, for a constant cost function, our two-stage surrogate losses are realizable $H$-consistent. While the main focus of this work is a theoretical analysis, we also report the results of several experiments on CIFAR-10 and SVHN datasets.",
+    "keywords": [
+      "learning to defer",
+      "learning theory"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GIlsH0T4b2"
+  },
+  "review_fields": {
+    "summary": "This paper studies a two-stage scenario for learning to defer with multiple experts. For both the score-based setting and the predictor-rejector setting, the authors design a new family of surrogate loss function . The authors show that the surrogate losses are realizable H-consistent and  Bayes-consistency of our surrogate losses. The authors provide theoretical analysis and empirical results to justify the proposed framework.",
+    "strengths": "1. The problem setup is interesting and realistic. The two stage deferring scenario is suitable when predictor is a pretrained LLM, and has promising real applications.\n\n2. The surrogate loss function is well-motivated and new as far as I am concerned. The theoretical results are strong and comprehensive. I do not fully check the proof, but the results seem reasonable to me.",
+    "weaknesses": "I am satisfied with the theoretical part. However, I would like to remark that I am not an expert in this field. I will be happy to follow up in the discussion period, if there is any additional questions raised up by other reviewers. \n\nFor the experiments, the accuracy on CIFAR10 and SVHN is significantly lower than the standard results of ResNet. Moreover, the authors only implement the proposed loss function. I would be better to compare with different baselines in previous works.",
+    "limitations": "I do not see the discussion of limitations, but I think this is not a major problem. I do not see potential negative societal impact as this paper mainly focuses on the theoretical side."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 1,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1054,
+    "words": 179,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7aedd9f4-9960-46a3-9370-ca066fc7be58",
+    "error": null,
+    "scored_chars": 1055
+  }
+}

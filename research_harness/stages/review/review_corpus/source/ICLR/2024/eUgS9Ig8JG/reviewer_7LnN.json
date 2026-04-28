@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "eUgS9Ig8JG",
+  "reviewer": "7LnN",
+  "paper": {
+    "title": "SaNN: Simple Yet Powerful Simplicial-aware Neural Networks",
+    "authors": [
+      "Sravanthi Gurugubelli",
+      "Sundeep Prabhakar Chepuri"
+    ],
+    "abstract": "Simplicial neural networks (SNNs) are deep models for higher-order graph representation learning. SNNs learn low-dimensional embeddings of simplices in a simplicial complex by aggregating features of their respective upper, lower, boundary, and coboundary adjacent simplices. The aggregation in SNNs is carried out during training. Since the number of simplices of various orders in a simplicial complex is significantly large, the memory and training-time requirement in SNNs is enormous. In this work, we propose a scalable simplicial-aware neural network (SaNN) model with a constant run-time and memory requirements independent of the size of the simplicial complex and the density of interactions in it. SaNN is based on pre-aggregated simplicial-aware features as inputs to a neural network, so it has a strong simplicial-structural inductive bias. We provide theoretical conditions under which SaNN is provably more powerful than the Weisfeiler-Lehman (WL) graph isomorphism test and as powerful as the simplicial Weisfeiler-Lehman (SWL) test. We also show that SaNN is permutation and orientation equivariant and satisfies simplicial-awareness of the highest order in a simplicial complex. We demonstrate via numerical experiments that despite being computationally economical, the proposed model achieves state-of-the-art performance in predicting trajectories,  simplicial closures, and classifying graphs.",
+    "keywords": [
+      "Graph Neural Networks",
+      "Higher-order Representation Learning",
+      "Simplicial Complexes",
+      "Simplicial Neural Networks",
+      "Weisfeiler-Lehman Isomorphism Test"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=eUgS9Ig8JG"
+  },
+  "review_fields": {
+    "summary": "The authors propose a class of simple simplicial neural network models, referred to as simplicial-aware neural\nnetworks (SaNNs), which leverage precomputation of simplicial features. The authors theoretically demonstrate that under certain conditions, SaNNs are better discriminators of non-isomorphic graphs than the WL and SWL test. Empirically, SaNNs are shown to perform competitively against other SNNs and GNNs on tasks such as trajectory prediction, simplicial closure prediction, and several graph classification tasks over various datasets.",
+    "strengths": "1. The theoretical results are intriguing. Indeed, a competitor to the WL and SWL tests would be a valuable contribution to the graph ML community. \n\n2. A wide variety of benchmarks over several tasks and datasets are conducted to demonstrate the efficacy and efficiency of SaNNs. \n\n3. SaNNs inherit several valuable invariance properties of other SNNs including permutation invariance, orientation invariance, and simplicial-awareness. \n\n4. Compared to MPSNs, consideration of higher-order simplices does not blow up computation complexity.",
+    "weaknesses": "1. It is unclear for a research with limited expertise in this rather niche area to conclude the strength of the conditions prescribed in Theorems 4.1 and 4.2. (See questions.) \n\n2. There do not appear to be any results describing the pre-computation time which should be included in any run-time comparisons which I imagine should scale near-exponentially with graph size and order of simplices considered. \n\n3. SaNNs are often not outright the winner in terms of prediction accuracies for the tasks displayed in Tables 1 and 3. For example, in Table 1, the SaNN is outcompeted by Projection and Scone on 3/4 of the datasets and the run-time savings of SaNN are not significant enough to justify usage of the SaNN. In Table 3, SaNN is not the leader in 4/5 of the datasets and it is not even the fastest. On the other hand, the time savings against MPSN are quite significant, but since many practitioners of graph learning expect training to take significant amounts of time, accuracy is the topmost priority, so there wouldn't be a strong enough justification to go with a SaNN.",
+    "questions": "1. Is assuming the learnable transformation functions $g_k^{(t)}\\cdot)$ are injective too strong? Although the MLPs will be injective, appealing to the Universal Approximation Theorem to declare that $g_k$ can be injectively-approximated is probably not practical. \n\n2. I may have missed this but are pre-computation times explicitly indicated in the results?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1979,
+    "words": 313,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d0239292-c774-44ff-8777-3e5d3506a138",
+    "error": null,
+    "scored_chars": 1985
+  }
+}

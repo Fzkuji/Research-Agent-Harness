@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "frVo9MzRuU",
+  "reviewer": "L63E",
+  "paper": {
+    "title": "Compositional Abilities Emerge Multiplicatively: Exploring Diffusion Models on a Synthetic Task",
+    "authors": [
+      "Maya Okawa",
+      "Ekdeep Singh Lubana",
+      "Robert P. Dick",
+      "Hidenori Tanaka"
+    ],
+    "abstract": "Modern generative models exhibit unprecedented capabilities to generate extremely realistic data. However, given the inherent compositionality of the real world, reliable use of these models in practical applications requires that they exhibit the capability to compose a novel set of concepts to generate outputs not seen in the training data set. Prior work demonstrates that recent diffusion models do exhibit intriguing compositional generalization abilities, but also fail unpredictably. Motivated by this, we perform a controlled study for understanding compositional generalization in conditional diffusion models in a synthetic setting, varying different attributes of the training data and measuring the model's ability to generate samples out-of-distribution. Our results show: (i) the order in which the ability to generate samples from a concept and compose them emerges is governed by the structure of the underlying data-generating process; (ii) performance on compositional tasks exhibits a sudden \"emergence\" due to multiplicative reliance on the performance of constituent tasks, partially explaining emergent phenomena seen in generative models; and (iii) composing concepts with lower frequency in the training data to generate out-of-distribution samples requires considerably more optimization steps compared to generating in-distribution samples. Overall, our study lays a foundation for understanding emergent capabilities and compositionality in generative models from a data-centric perspective.",
+    "keywords": [
+      "Diffusion model; Emergence; Emergent capabilities; Science of deep learning; Mechanistic interpretability"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=frVo9MzRuU"
+  },
+  "review_fields": {
+    "summary": "The authors try to understand the compositionality aspects of generative models by training a conditional diffusion model in a toy setting on synthetic data. They show that the models indeed learn to be compositional if we train longer. They also hypothesize that the sudden emergence of compositionality in the later parts of training is due to multiplicity of how the model learns the underlying factors. They also show that it is hard to disentangle and generalize to new concepts if the underlying factors are highly correlated.",
+    "strengths": "The paper is easy to follow. The study of compositionality in diffusion models is a crucial problem to understand. The authors studied it in a controlled setting which is novel.",
+    "weaknesses": "The authors chose a very simple synthetic dataset to study this problem. The dataset has only 3 attributes. Even though some of the observations make sense, we have no guarantees that any of the results will extend to the real world. \n\nThe figures are quite confusing. Especially the colors. Blue (albeit a different shade), was used as an attribute and to denote the training data. \n\nIn Section 4, the authors used a bit of sensationalist language, such as “sudden emergence” etc, while such terms are not defined nor appropriately cited. They can improve the writing in this section.",
+    "questions": "1.\tDid you try or have results with synthetic data with > 3 attributes?\n2.\tWhy did you not use synthetic data with real objects instead of colors and shapes? Verifying your claims on even a small real-object dataset would make the paper much more robust and useful. \n3.\tI might have missed this detail, what is the size of the test set, did you look at only the “pink” examples in the figures?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1156,
+    "words": 202,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6c4b5cc7-8ae6-4065-8910-984af7291225",
+    "error": null,
+    "scored_chars": 1159
+  }
+}

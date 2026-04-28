@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "H1I3M7Z0b",
+  "reviewer": "1",
+  "paper": {
+    "title": "WSNet: Learning Compact and Efficient Networks with Weight Sampling",
+    "authors": [
+      "Xiaojie Jin",
+      "Yingzhen Yang",
+      "Ning Xu",
+      "Jianchao Yang",
+      "Jiashi Feng",
+      "Shuicheng Yan"
+    ],
+    "abstract": "We present a new approach and a novel architecture, termed WSNet, for learning compact and efficient deep neural networks. Existing approaches conventionally learn full model parameters independently and then compress them via \\emph{ad hoc} processing such as model pruning or filter factorization. Alternatively, WSNet proposes learning model parameters by sampling from a compact set of learnable parameters, which naturally enforces {parameter sharing} throughout the learning process. We demonstrate that such a novel weight sampling approach (and induced WSNet) promotes both weights and computation sharing favorably. By employing this method, we can more efficiently learn much smaller networks with competitive performance compared to baseline networks with equal numbers of convolution filters. Specifically, we consider learning compact and efficient 1D convolutional neural networks for audio classification. Extensive experiments on multiple audio classification datasets verify the effectiveness of WSNet. Combined with weight quantization, the resulted models are up to \\textbf{180$\\times$} smaller and theoretically up to \\textbf{16$\\times$} faster than the well-established baselines, without noticeable performance drop.",
+    "keywords": [
+      "Deep learning",
+      "model compression"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H1I3M7Z0b"
+  },
+  "review_fields": {
+    "review": "The paper presents a method to compress deep network by weight sampling and channel sharing.  The method combined with weight quantization provides 180x compression with a very small accuracy drop. \n\nThe method is novel  and tested on multiple audio classification datasets and results show a good compression ratio with a negligible accuracy drop.  The organization of the paper is good. However, it is a bit difficult to understand the method. Figure 1 does not help much. Channel sharing part in Figure 1 is especially confusing; it looks like the whole filter has the same weights in each channel. Also it isn’t stated in Figure and text that the weight sharing filters are learned by training.\n\nIt would be a nice addition to add number of operations that are needed by baseline method and compressed method with integral image.\n\nTable 5: Please add network size of other networks (SoundNet and Piczak ConvNet).  For setting, SoundNet has two settings, scratch init and unlabeled video, what is that setting for WSNet and baseline?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

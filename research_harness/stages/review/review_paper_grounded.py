@@ -10,6 +10,23 @@ from research_harness.references.venue_scoring import (
 )
 from research_harness.utils import call_with_schema
 
+from research_harness.stages.review._review_prose_codex import (
+    generate_review_text,
+)
+
+
+def _format_review_text_for_prompt(review_text: dict) -> str:
+    """Render dynamic stage-1 dict (per-venue field names) for stage-2."""
+    out: list[str] = []
+    for fname, content in review_text.items():
+        if isinstance(content, list):
+            body = "\n".join(f"- {c}" for c in content)
+        else:
+            body = str(content or "").strip()
+        if body:
+            out.append(f"## Already-written `{fname}`\n{body}")
+    return "\n\n".join(out)
+
 
 _PERSONA_INSTRUCTIONS = {
     "balanced": (
@@ -48,78 +65,117 @@ _PERSONA_INSTRUCTIONS = {
 }
 
 
+def _build_structured_instructions(*, venue_name: str, venue_criteria: str,
+                                   paper_content: str,
+                                   review_text: dict[str, object],
+                                   persona_block: str,
+                                   grounding_section: str) -> str:
+    """Stage-2 prompt: numeric / enum / boolean fields only.
+
+    All free-text fields have already been written under v6 constraint;
+    they are shown for context so the score/verdict line up. Stage 2 must
+    NOT regenerate them.
+    """
+    return (
+        f"You are a senior reviewer for {venue_name}. The full free-text "
+        f"portion of the review has already been written (shown below). "
+        f"Your task now is to call the `submit_review` tool to produce ONLY "
+        f"the numeric / enum / boolean fields: `score`, `verdict`, "
+        f"`sub_scores` (using {venue_name}'s exact dimension names — do NOT "
+        f"substitute names from other venues), `confidence`, "
+        f"`best_paper_candidate` (if applicable). Free-text fields will be "
+        f"merged in automatically — do NOT regenerate them.\n\n"
+        f"{persona_block}"
+        f"## Venue criteria\n{venue_criteria}\n\n"
+        f"{grounding_section}"
+        f"{_format_review_text_for_prompt(review_text)}\n\n"
+        f"## Paper under review (for reference)\n{paper_content}\n\n"
+        f"Now call `submit_review`. Use {venue_name}'s exact `sub_scores` "
+        f"dimension names. Do NOT respond with free text — the tool call "
+        f"IS your submission."
+    )
+
+
 @agentic_function(render_range={"depth": 0, "siblings": 0})
 def review_paper_grounded(paper_content: str, venue: str,
                           venue_criteria: str, prior_work_context: str,
                           persona: str,
                           runtime: Runtime) -> str:
-    """Venue-aware grounded review using tool-use to force structured output.
+    """Venue-aware grounded reviewer using a two-stage pipeline.
 
-    Returns a JSON string matching the venue's review schema. Score field
-    uses the venue's exact scale (e.g. ARR 1-5, NeurIPS 1-6, ICLR 0-10).
+    Stage 1: free-form codex CLI generates the long-prose `review` field
+    using the v6 sentence-template constraint (review_corpus/). Persona
+    and prior-work grounding are injected into the venue_criteria string
+    that the prose generator sees.
 
-    The LLM is forced via tool-use to call the submit_review tool, so:
-      - score is always within the venue's valid range
-      - sub_scores follow the venue's exact dimensions (Soundness/Excitement
-        for ARR; Quality/Clarity/Significance/Originality for NeurIPS; etc.)
-      - verdict uses the venue's vocabulary (no more "Weak Reject" on ARR papers)
+    Stage 2: tool-use call_with_schema fills the structured summary
+    fields. The `review` field is excluded from this schema and patched
+    in from Stage 1.
 
     Args:
         paper_content:        Full paper text.
         venue:                Target venue (case-insensitive, aliases handled).
-        venue_criteria:       Pre-rendered criteria text (for visibility in
-                              prompt; also used as fallback if spec lookup fails).
+        venue_criteria:       Pre-rendered criteria text.
         prior_work_context:   Markdown blob from adaptive_summarize_priors,
                               with [N] citations for the reviewer to use.
         persona:              "balanced" / "empiricist" / "theorist" /
                               "novelty_hawk" / "clarity_critic".
     """
     spec = get_venue_spec(venue)
-    schema = build_review_schema(spec)
 
     persona_instr = _PERSONA_INSTRUCTIONS.get(
         persona, _PERSONA_INSTRUCTIONS["balanced"]
     )
+    persona_block = f"## Persona\n{persona_instr}\n\n"
 
     grounding_section = ""
     if prior_work_context.strip():
         grounding_section = (
-            f"\n=== PRIOR WORK CONTEXT (auto-retrieved from arXiv) ===\n"
-            f"{prior_work_context}\n"
-            f"=== END PRIOR WORK CONTEXT ===\n\n"
-            f"WHEN judging novelty / contextualization, you MUST cite specific "
-            f"prior work entries by [N] notation. Do NOT rely on your training "
-            f"knowledge of 'what's been done' — use the retrieved list above.\n"
+            f"## Prior work context (auto-retrieved from arXiv)\n"
+            f"{prior_work_context}\n\n"
+            f"WHEN judging novelty / contextualization, you MUST cite "
+            f"specific prior work entries by [N] notation. Do NOT rely on "
+            f"your training knowledge of 'what's been done' — use the "
+            f"retrieved list above.\n\n"
         )
 
-    instructions = (
-        f"You are a senior reviewer for {spec.name}. Read the paper carefully, "
-        f"then call the submit_review tool with your assessment.\n\n"
-        f"## Persona\n{persona_instr}\n\n"
-        f"## Required scoring scale\n"
-        f"You MUST use {spec.name}'s exact scoring scales. Do NOT use "
-        f"vocabulary from other venues (e.g. don't say 'Weak Reject' on an ARR "
-        f"paper — ARR uses 'Resubmit' / 'Findings' / 'Conference acceptance').\n\n"
-        f"## Venue criteria (verbatim from official guidelines)\n"
-        f"{venue_criteria}\n\n"
-        f"{grounding_section}"
-        f"## Paper under review\n{paper_content}\n\n"
-        f"Now call the submit_review tool. Do NOT respond with free text — "
-        f"the tool call IS your review."
+    # Stage 1: all free-text under v6 template constraint. Persona +
+    # grounding ride along inside the venue_criteria string so the prose
+    # generator sees them without needing extra placeholders.
+    enriched_criteria = persona_block + venue_criteria + "\n\n" + grounding_section
+    review_text = generate_review_text(
+        paper_content=paper_content,
+        venue_name=spec.name,
+        venue_criteria=enriched_criteria,
     )
 
+    # Stage 2: structured numeric / enum / boolean fields only. Exclude
+    # whatever stage 1 produced (depends on the venue's form).
+    stage1_fields = tuple(review_text.keys())
+    schema = build_review_schema(spec, exclude_fields=stage1_fields)
+    instructions = _build_structured_instructions(
+        venue_name=spec.name,
+        venue_criteria=venue_criteria,
+        paper_content=paper_content,
+        review_text=review_text,
+        persona_block=persona_block,
+        grounding_section=grounding_section,
+    )
     result = call_with_schema(
         runtime=runtime,
         instructions=instructions,
         schema_name="submit_review",
         schema_description=(
-            f"Submit a complete reviewer assessment for {spec.name}, "
-            f"following the venue's exact scoring scale and vocabulary."
+            f"Submit the structured numeric / enum / boolean fields for a "
+            f"{spec.name} review. The free-text fields have been generated "
+            f"separately and will be merged in afterwards."
         ),
         parameters=schema,
     )
 
-    # Tag with venue + persona for downstream traceability
+    # Merge stage-1 text fields back in (whatever the venue's form has).
+    for fname, content in review_text.items():
+        result[fname] = content
     result["venue"] = spec.name
     result["persona"] = persona or "balanced"
     return json.dumps(result, ensure_ascii=False, indent=2)

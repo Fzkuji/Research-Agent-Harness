@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "1uirUsR9E7",
+  "reviewer": "EW9X",
+  "paper": {
+    "title": "Explaining V1 Properties with a Biologically Constrained Deep Learning Architecture",
+    "authors": [
+      "Galen Pogoncheff",
+      "Jacob Granley",
+      "Michael Beyeler"
+    ],
+    "abstract": "Convolutional neural networks (CNNs) have recently emerged as promising models of the ventral visual stream, despite their lack of biological specificity.\nWhile current state-of-the-art models of the primary visual cortex (V1) have surfaced from training with adversarial examples and extensively augmented data, these models are still unable to explain key neural properties observed in V1 that arise from biological circuitry.\nTo address this gap, we systematically incorporated neuroscience-derived architectural components into CNNs to identify a set of mechanisms and architectures that more comprehensively explain V1 activity.\nUpon enhancing task-driven CNNs with architectural components that simulate center-surround antagonism, local receptive fields, tuned normalization, and cortical magnification, we uncover models with latent representations that yield state-of-the-art explanation of V1 neural activity and tuning properties.\nMoreover, analyses of the learned parameters of these components and stimuli that maximally activate neurons of the evaluated networks provide support for their role in explaining neural properties of V1.\nOur results highlight an important advancement in the field of NeuroAI, as we systematically establish a set of architectural components that contribute to unprecedented explanation of V1.\nThe neuroscience insights that could be gleaned from increasingly accurate in-silico models of the brain have the potential to greatly advance the fields of both neuroscience and artificial intelligence.",
+    "keywords": [
+      "NeuroAI",
+      "Neuroscience",
+      "Visual Stream",
+      "Convolutional Neural Networks",
+      "Biologically inspired deep learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=1uirUsR9E7"
+  },
+  "review_fields": {
+    "comment": "Thank you for the responses. It is indeed interesting to show that \"it was only when these components were combined that we observed drastically improved explanations of V1, suggesting their complimentary contribution.\"  Somehow I did not get this on my earlier reading. \nThank you also for the additional experiments which do provide some insights.\nI am willing to upgrade my score, but my overall sentiment is very much aligned with that of Reviewer  bbGj. \n\nIncidentally, it would also be interesting to compare this transfer-learning + neural constraint model with purely data-driven model, e.g.\nhttps://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006897\nHowever, I suppose that data set won't have contextual modulation effects, and thus can't serve as a real neuron-in-silico. \nPerhaps some Allen Institute dataset on mice could work."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 855,
+    "words": 122,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fd347b2b-c481-4eab-9225-0975352cda11",
+    "error": null,
+    "scored_chars": 860
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "NnMEadcdyD",
+  "reviewer": "eoU3",
+  "paper": {
+    "title": "Understanding Diffusion Objectives as the ELBO with Simple Data Augmentation",
+    "authors": [
+      "Diederik P Kingma",
+      "Ruiqi Gao"
+    ],
+    "abstract": "To achieve the highest perceptual quality, state-of-the-art diffusion models are optimized with objectives that typically look very different from the maximum likelihood and the Evidence Lower Bound (ELBO) objectives. In this work, we reveal that diffusion model objectives are actually closely related to the ELBO.\n\nSpecifically, we show that all commonly used diffusion model objectives equate to a weighted integral of ELBOs over different noise levels, where the weighting depends on the specific objective used. Under the condition of monotonic weighting, the connection is even closer: the diffusion objective then equals the ELBO, combined with simple data augmentation, namely Gaussian noise perturbation. We show that this condition holds for a number of state-of-the-art diffusion models. \n\nIn experiments, we explore new monotonic weightings and demonstrate their effectiveness, achieving state-of-the-art FID scores on the high-resolution ImageNet benchmark.",
+    "keywords": [
+      "Diffusion Model",
+      "Evidence Lower Bound",
+      "Maximum Likelihood"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=NnMEadcdyD"
+  },
+  "review_fields": {
+    "summary": "This paper presents new theoretical insights on denoising diffusion objective. Namely, training a diffusion model with a non-uniform weighting can be expressed as a weighted integral of ELBOs, and monotonic weighting results in training ELBO with additive Gaussian noise augmentation. The authors also propose an adaptive noise schedule to ensure all losses are trained uniformly over time and show the adaptive schedule with a monotonic weighting attains SOTA FID on ImageNet.",
+    "strengths": "Although not shown in this work, the interpretation that denoising diffusion with monotonic weighting trains ELBO with data augmentation means that the same data augmentation can be applied to other likelihood-based models for a fair comparison to diffusion models. And, we would have a clearer understanding of sample quality and likelihood of various model classes.",
+    "limitations": "Yes, the authors addressed limitations, potential negative societal impact, and mitigation."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:24Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:24Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 370,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/110384d4-1023-4da4-9a99-a60c7f86c2e6",
+    "error": null,
+    "scored_chars": 370
+  }
+}

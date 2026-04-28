@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "Hkesr205t7",
+  "reviewer": "3",
+  "paper": {
+    "title": "Learning shared manifold representation of images and attributes for generalized zero-shot learning",
+    "authors": [
+      "Masahiro Suzuki",
+      "Yusuke Iwasawa",
+      "Yutaka Matsuo"
+    ],
+    "abstract": "Many of the zero-shot learning methods have realized predicting labels of unseen images by learning the relations between images and pre-defined class-attributes. However, recent studies show that, under the more realistic generalized zero-shot learning (GZSL) scenarios, these approaches severely suffer from the issue of biased prediction, i.e., their classifier tends to predict all the examples from both seen and unseen classes as one of the seen classes.  The cause of this problem is that they cannot properly learn a mapping to the representation space generalized to the unseen classes since the training set does not include any unseen class information. To solve this, we propose a concept to learn a mapping that embeds both images and attributes to the shared representation space that can be generalized even for unseen classes by interpolating from the information of seen classes, which we refer to shared manifold learning.  Furthermore, we propose modality invariant variational autoencoders, which can perform shared manifold learning by training variational autoencoders with both images and attributes as inputs. The empirical validation of well-known datasets in GZSL shows that our method achieves the significantly superior performances to the existing relation-based studies.",
+    "keywords": [
+      "zero-shot learning",
+      "variational autoencoders"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Hkesr205t7"
+  },
+  "review_fields": {
+    "comment": "Thanks to the authors for providing detailed comments and explanations wherever applicable and revising the paper to reflect the same as well. In light of the comments below (regarding author responses to review comments and clarifications), I am slightly skeptical of the results presented in the paper. As such, I will be sticking to my original rating for the paper.\n\n- Edits with respect to the GZSL-bias discussion: Thanks for clarifying the seen-unseen bias issue in detail. I will merge 2 discussion points here and highlight what is missing. Firstly, the authors clarified that they did not hold out a set of seen classes as validation to test generalization during training the joint model. Assuming there is no access to the test-split during training, absence of a validation set implies the choice of hyper-parameters for training MIVAE was not done in a manner to test generalization. As such, an arbitrary choice of stopping training at 200 epochs across all experiments (assuming this is across datasets) is odd. The validation subset of seen classes in itself could be used to perform hyper-parameter sweeps -- the resulting values from which could be used to train the entire setup again on the entirety of the seen training set. Secondly, given this fact, it seems that no notion of generalization to an unseen split (even for the choice of hyper-params) was done and hence from Section 3.1 (and other sections) it is unclear to me how the “shared representation” from the proposed approach could help in alleviating the bias issue. In general, I am now curious about how the hyper-parameters were chosen -- I think this clarification is quite important. The paper the authors point to w.r.t. this issue does indeed use a validation split if I’m correct -- see Section 6.1, line - “The hyper-parameters were chosen … were used while training the model on complete data.” of https://arxiv.org/pdf/1712.03878.pdf. \n\n- Regarding advantages of learning a joint model as opposed to unidirectional mappings: Thanks for responding to this comment in detail. However, the response still does not explicitly state why learning a joint model -- that allows one to do inference from attributes to images, images to attributes and latent variable to either modalities -- is better than just learning a single unidirectional mapping from attributes to images or images to attributes. I agree that the shared representation is richer -- but it is not convincing enough as to why is this needed in the context of GZSL in text? The authors should talk more about the experiment they refer to regarding inference in latent space regarding this."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

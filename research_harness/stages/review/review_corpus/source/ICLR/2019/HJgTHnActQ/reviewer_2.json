@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "HJgTHnActQ",
+  "reviewer": "2",
+  "paper": {
+    "title": "Local Image-to-Image Translation via Pixel-wise Highway Adaptive Instance Normalization",
+    "authors": [
+      "Wonwoong Cho",
+      "Seunghwan Choi",
+      "Junwoo Park",
+      "David Keetae Park",
+      "Tao Qin",
+      "Jaegul Choo"
+    ],
+    "abstract": "Recently, image-to-image translation has seen a significant success. Among many approaches, image translation based on an exemplar image, which contains the target style information, has been popular, owing to its capability to handle multimodality as well as its suitability for practical use. However, most of the existing methods extract the style information from an entire exemplar and apply it to the entire input image, which introduces excessive image translation in irrelevant image regions. In response, this paper proposes a novel approach that jointly extracts out the local masks of the input image and the exemplar as targeted regions to be involved for image translation. In particular, the main novelty of our model lies in (1) co-segmentation networks for local mask generation and (2) the local mask-based highway adaptive instance normalization technique. We demonstrate the quantitative and the qualitative evaluation results to show the advantages of our proposed approach. Finally, the code is available at https://github.com/AnonymousIclrAuthor/Highway-Adaptive-Instance-Normalization",
+    "keywords": [
+      "image to image translation",
+      "image translation",
+      "exemplar",
+      "mutlimodal"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=HJgTHnActQ"
+  },
+  "review_fields": {
+    "review": "The paper deals with image to image (of faces) translation solving two main typical issues: 1) the style information comes from the entire region of a given exemplar, collecting information from the background too, without properly isolating the face area; 2) the extracted style is applied to the entire region of the target image, even if some parts should be kept unchanged. The approach is called LOMIT, and is very elaborated, with source code which is available (possible infringement of the anonymity, Area Chair please check). In few words, LOMIT lies on a cosegmentation basis, which allows to find semantic correspondences between image regions of the exemplar and the source image. The correspondences are shown as a soft mask, where the user may decide to operate on some parts leaving unchanged the remaining (in the paper is shown for many alternatives: hair, eyes, mouth). Technically, the paper assembles other state of the art techniques,  (cosegmentation networks, adaptive instance normalization via highway networks) but it does it nicely. The major job in the paper lies in the regularization part, where the authors specify each of their adds in a proper way. Experiments are nice, since for one of the first times provide facial images which are pleasant to see. One thing I did not like were on the three set of final qualitative results, where gender change results in images which are obviously diverse wrt the source one, but after a while are not communicating any newer thing. Should have been better to explore other attributes combo."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

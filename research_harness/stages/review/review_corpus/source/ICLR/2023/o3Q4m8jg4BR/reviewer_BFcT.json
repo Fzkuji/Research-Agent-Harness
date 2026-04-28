@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "o3Q4m8jg4BR",
+  "reviewer": "BFcT",
+  "paper": {
+    "title": "LS-IQ: Implicit Reward Regularization for Inverse Reinforcement Learning",
+    "authors": [
+      "Firas Al-Hafez",
+      "Davide Tateo",
+      "Oleg Arenz",
+      "Guoping Zhao",
+      "Jan Peters"
+    ],
+    "abstract": "Recent methods for imitation learning directly learn a $Q$-function using an implicit reward formulation rather than an explicit reward function. However, these methods generally require implicit reward regularization to improve stability and often mistreat absorbing states. Previous works show that a squared norm regularization on the implicit reward function is effective, but do not provide a theoretical analysis of the resulting properties of the algorithms. In this work, we show that using this regularizer under a mixture distribution of the policy and the expert provides a particularly illuminating perspective: the original objective can be understood as squared Bellman error minimization, and the corresponding optimization problem minimizes a bounded $\\chi^2$-Divergence between the expert and the mixture distribution. This perspective allows us to address instabilities and properly treat absorbing states. We show that our method, Least Squares Inverse Q-Learning (LS-IQ), outperforms state-of-the-art algorithms, particularly in environments with absorbing states. Finally, we propose to use an inverse dynamics model to learn from observations only. Using this approach, we retain performance in settings where no expert actions are available.",
+    "keywords": [
+      "Inverse Reinforcement Learning",
+      "Imitation Learning",
+      "Reward Regularization",
+      "Deep Reinforcement Learning"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=o3Q4m8jg4BR"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper focus on addressing the reward bias issue of a SOTA imitation learning method called IQ-Learn that directly uses an implicit reward function. Specifically, this paper proposed an implicit reward regularization approach called Least Square Inverse Q-Learning (LS-IQ), which uses a modified inverse Bellman operator to address the reward bias issue of IQ-Learn. LS-IQ achieves this goal by using a squared L2 penalty on the mixture distribution of expert and policy. Empirically, LS-IQ outperforms some baseline methods on standard continuous control tasks.",
+    "strength_and_weaknesses": "## Strength\n\n+ This paper noticed that the squared norm regularization on the implicit reward function is effective in imitation learning, but lack of theoretical analysis. Interestingly, this paper uses the regularizer under a mixture distribution of the policy and the expert, and understand the learning procedure in a illuminating perspective. The original objective was understood as a least-squared Bellman error minimization, resulting an minimization of $\\chi^2$-divergence between the expert and the mixture distribution.   \n\n+ Given theoretical analysis of the regularizer, this paper indicates some sources of instabilities of the IQ-Learn approach: the arbitrariness of the Q-function scale, exploding Q-function targets and reward bias. Then, Least Square Inverse Q-Learning was proposed to addressed these issues. \n\n\n## Weakness \n\n+ The proposed method are only evaluated on online imitation learning tasks. To fairly and fullly compare the proposed method to IQ-Learn, I suggest the authors to also evaluate the methods on offline settings as in the IQ-Learn paper.\n\n+ The proposed method, LS-IQ, stabilize training by providing fixed targets for the Q-function on expert states, and properly treat absorbing states. This work also introduces an entropy-regulariation critic. However, there is no ablation to study the true effects of each component.",
+    "clarity,_quality,_novelty_and_reproducibility": "## Clarity\n\nMost part of the paper are well written, but the clarity can be improved. Some parts are not clear. Give some suggesions bellow:\n+ In Section 3.6, why not introducing your method using Fig. 2. How can a IDM training online with the collected data can infer action for expert observations? how to guarantee the correctness of the predicted expert actions?\n\n\n## Quality\nMotivated by theoretical analysis and derive the novel objective of LS-IQ, I can believe the quality of the proposed method is good. \n\n## Novelty\nThe proposed method is novel.\n\n## Reproducibility\nNeed more details to reproduce the results.",
+    "summary_of_the_review": "Overall, the proposed method is well motivated by theoretical analysis. I expect the authors to further improve the clarity of the paper and address my concerns above. \n\n\n======After rebuttal===\nThanks the authors for addressing my concerns. I agree to raise my rating to 6. Hope to see more details and open source code for better reproducibility.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

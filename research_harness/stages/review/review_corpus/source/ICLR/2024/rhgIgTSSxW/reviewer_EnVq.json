@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "rhgIgTSSxW",
+  "reviewer": "EnVq",
+  "paper": {
+    "title": "TabR: Tabular Deep Learning Meets Nearest Neighbors",
+    "authors": [
+      "Yury Gorishniy",
+      "Ivan Rubachev",
+      "Nikolay Kartashev",
+      "Daniil Shlenskii",
+      "Akim Kotelnikov",
+      "Artem Babenko"
+    ],
+    "abstract": "Deep learning (DL) models for tabular data problems (e.g. classification, regression) are currently receiving increasingly more attention from researchers.\nHowever, despite the recent efforts, the non-DL algorithms based on gradient-boosted decision trees (GBDT) remain a strong go-to solution for these problems.\nOne of the research directions aimed at improving the position of tabular DL involves designing so-called retrieval-augmented models.\nFor a target object, such models retrieve other objects (e.g. the nearest neighbors) from the available training data and use their features and labels to make a better prediction.\n\nIn this work, we present TabR -- essentially, a feed-forward network with a custom k-Nearest-Neighbors-like component in the middle.\nOn a set of public benchmarks with datasets up to several million objects, TabR marks a big step forward for tabular DL: it demonstrates the best average performance among tabular DL models, becomes the new state-of-the-art on several datasets, and even outperforms GBDT models on the recently proposed \"GBDT-friendly\" benchmark (see Figure 1).\nAmong the important findings and technical details powering TabR, the main ones lie in the attention-like mechanism that is responsible for retrieving the nearest neighbors and extracting valuable signal from them.\nIn addition to the higher performance, TabR is simple and significantly more efficient compared to prior retrieval-based tabular DL models.",
+    "keywords": [
+      "tabular",
+      "tabular data",
+      "architecture",
+      "deep learning",
+      "neural networks"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rhgIgTSSxW"
+  },
+  "review_fields": {
+    "comment": "Thank you for your responses, which have partially addressed my concerns.\n\n1. However, I find it puzzling why the hyperparameter tuning for T2G-Former did not complete on time, and other approaches were able to finish. The architecture of T2G-Former is very similar to FTT, and their training schemes are also similar. Nevertheless, this seems to be a minor issue, and I trust the author can provide a satisfactory clarification in their final version. Even in such a situation, deeming a model as the worst in performance solely because hyperparameter tuning was not completed is unfair. Even without completing the scheduled tuning iterations, a model may still achieve good performances, not necessarily the worst. Therefore, comparing with the state-of-the-art in this way is unreasonable and the results are not convincing.\n\n2. This method exhibits inefficiency in training. While the author attempts to justify its use without the need of hyperparameter tuning, comparing the time cost of TabR (without hyperparameter tuning) to other works undergoing hyperparameter tuning seems unfair. There are several competitive deep learning models that do not require hyperparameter tuning and perform well (the comparison with sota has not been executed successfully). Moreover, CatBoost often achieves good performance with fewer iterations compared to XGBoost. I still feel hesitant about using this approach in practice.\n\nI would like to keep my scores."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 31,
+    "mixed_pct": 0,
+    "human_pct": 69,
+    "verdict": "We are moderately confident this text is entirely human",
+    "confidence": "moderately",
+    "chars": 1454,
+    "words": 221,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/754e6811-9339-4478-aa54-3aa42d3dfe57",
+    "error": null,
+    "scored_chars": 1454
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "AFMGbq39bQ",
+  "reviewer": "nRzk",
+  "paper": {
+    "title": "Readability ≠ Learnability: Rethinking the Role of Simplicity in Training Small Language Models",
+    "authors": [
+      "Ivan Lee",
+      "Taylor Berg-Kirkpatrick"
+    ],
+    "abstract": "Recent studies suggest that very small language models (SLMs) can generate surprisingly coherent text when trained on simplified, child-directed corpora such as TinyStories. These findings have been interpreted as evidence that readability—characterized by accessible vocabulary, familiar narrative structure, and simple syntax—plays a key role in enabling such capabilities to emerge. In this paper, we challenge that interpretation. We construct synthetic datasets with matched structure but varied readability, and find that readability alone does not predict coherence or learning efficiency in SLMs. Models trained on complex, adult-level text perform comparably to those trained on simplified language, and even exhibit faster development of coherence during training. Instead, we show that statistical simplicity, as measured by n-gram diversity, is a stronger predictor of learnability. Our findings caution against the growing trend of anthropomorphizing language model training—drawing parallels to human cognitive development without empirical basis—and argue for more precise reasoning about what properties actually support capability emergence in small models.",
+    "keywords": [
+      "child-directed language",
+      "developmentally inspired data",
+      "small language models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=AFMGbq39bQ"
+  },
+  "review_fields": {
+    "summary": "The paper contests the claim that very small models are able to generate simplified text when trained on child directed datasets such as TinyStories because they have accessible vocabulary, and simple syntax and narrative structure. The authors argue that this could be because of statistical simplicity i.e., less n-gram variation by building a synthetic dataset prompting for more adult directed language and comparing very small (262k to 33M without embeddings) parameter language models built with these datasets on a set of text completions and measuring the generated outputs across various dimensions using a LLM as a judge setup. \n\nThe paper explores an interesting idea and does focused experiments related to it. The writing is largely clear and I don't find anything particularly problematic.",
+    "reasons_to_accept": "The paper explores an interesting idea and does focused experiments related to it. The writing is largely clear and I don't find anything particularly problematic.",
+    "reasons_to_reject": "No strong reasons. I have a few suggestions which I think are minor revisions, listed under the next question.",
+    "questions_to_authors": "Some details about the approximate size of the dataset (i.e., average number of words per text and the likes), more details on how the conclusions drawn vary by the model size (your results seem to focus only on the 33M model) would be good. Some of these is already seen in the supplementary material, but not discussed in the main paper. Perhaps you can at least list some major observations and direct the reader to the supplementary material in the end.  \n\nAt least mention briefly that you only look at English and we can't say whether these observations hold good beyond that. While a limitations section does not seem to be mandatory in COLM, it doesn't hurt to add some nuance to the conclusions section."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 987,
+    "words": 169,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fcc0e838-61eb-477c-9e16-287650ca42eb",
+    "error": null,
+    "scored_chars": 989
+  }
+}

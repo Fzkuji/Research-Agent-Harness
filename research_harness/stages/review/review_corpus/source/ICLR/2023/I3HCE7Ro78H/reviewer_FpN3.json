@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "I3HCE7Ro78H",
+  "reviewer": "FpN3",
+  "paper": {
+    "title": "Finding Actual Descent Directions for Adversarial Training",
+    "authors": [
+      "Fabian Latorre",
+      "Igor Krawczuk",
+      "Leello Tadesse Dadi",
+      "Thomas Pethick",
+      "Volkan Cevher"
+    ],
+    "abstract": "Adversarial Training using a strong first-order adversary (PGD) is the gold standard for training Deep Neural Networks that are robust to adversarial examples. We show that, contrary to the general understanding of the method, the gradient at an optimal adversarial example may increase, rather than decrease, the adversarially robust loss. This holds independently of the learning rate. More precisely, we provide a counterexample to a corollary of Danskin's Theorem presented in the seminal paper of Madry et al. (2018) which states that a solution of the inner maximization problem can yield a descent direction for the adversarially robust loss. Based on a correct interpretation of Danskin's Theorem, we propose Danskin's Descent Direction (DDi) and we verify experimentally that it provides better directions than those obtained by a PGD adversary. Using the CIFAR10 dataset we further provide a real world example showing that our method achieves a steeper increase in robustness levels in the early stages of training, and is more stable than the PGD baseline. As a limitation, PGD training of ReLU+BatchNorm networks still performs better, but current theory is unable to explain this.",
+    "keywords": [
+      "Adversarial Training",
+      "Adversarial Examples",
+      "non-convex optimization",
+      "robustness"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=I3HCE7Ro78H"
+  },
+  "review_fields": {
+    "comment": "Thanks for your clarifications.  They certainly address all of the points raised in my review, and I feel that these changes have made the paper stronger.  In particular, the new result -- Thm. 3 -- strengthens the claims of the paper by looking more closely into whether the assumption of a finite set of minimizers is reasonable.  \n\nAs the authors have improved the paper, I think it's only fair that I improve my score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

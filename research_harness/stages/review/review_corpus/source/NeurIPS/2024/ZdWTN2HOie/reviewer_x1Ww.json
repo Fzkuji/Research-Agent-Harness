@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "ZdWTN2HOie",
+  "reviewer": "x1Ww",
+  "paper": {
+    "title": "Stochastic Amortization: A Unified Approach to Accelerate Feature and Data Attribution",
+    "authors": [
+      "Ian Connick Covert",
+      "Chanwoo Kim",
+      "Su-In Lee",
+      "James Zou",
+      "Tatsunori Hashimoto"
+    ],
+    "abstract": "Many tasks in explainable machine learning, such as data valuation and feature attribution, perform expensive computation for each data point and are intractable for large datasets. These methods require efficient approximations, and although amortizing the process by learning a network to directly predict the desired output is a promising solution, training such models with exact labels is often infeasible. We therefore explore training amortized models with noisy labels, and we find that this is inexpensive and surprisingly effective. Through theoretical analysis of the label noise and experiments with various models and datasets, we show that this approach tolerates high noise levels and significantly accelerates several feature attribution and data valuation methods, often yielding an order of magnitude speedup over existing approaches.",
+    "keywords": [
+      "Amortization",
+      "feature attribution",
+      "data valuation",
+      "stochastic optimization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZdWTN2HOie"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors introduce a framework termed stochastic amortization that can accelerate computationally expensive explainable machine learning (XML) tasks by training models with noisy but unbiased labels. They provide theoretical analysis that shows that unbiased noisy labels allow learning the correct function. Empirically, the authors demonstrate the effectiveness of this approach on several XML tasks, including Shapley value feature attributions, Banzhaf values, LIME, and data valuation, achieving speedups over traditional per-example computation and improvements over simply using noisy labels.",
+    "strengths": "- The paper is well-written, with clear motivations and a thorough discussion of related work. The technical details appear sound and well-presented.\n- The proposed approach offers a simple yet effective framework for accelerating computationally expensive XML methods, potentially enabling their application to large-scale datasets.\n- The authors provide code (with good documentation) and detailed experimental information in the Appendix for reproducability.\n- Limitations of the proposed approach are well discussed, demonstrating a balanced perspective.\n- Comprehensive experiments across multiple XML tasks (Shapley values, Banzhaf values, LIME, and data valuation) consistently demonstrate the benefits of stochastic amortization over per-example computation.",
+    "weaknesses": "While the concept of amortization for Shapley value prediction is not entirely new, this paper makes a good contribution through its use of noisy labels and the accompanying theoretical analysis. I don't find any major weaknesses that would significantly detract from the paper's value, and I recommend acceptance. Reflecting my limited familiarity with some aspects of the relevant literature, I set my confidence to 3.",
+    "questions": "- For applying stochastic amortization to a new XML task, how should practitioners determine an appropriate error level from a practical perspective?\n- Regarding line 99, \"while there are works that accelerate data attribution with datamodels, we are not aware of any that use amortization\". Could datamodels themselves be considered a form of amortized optimization (linear regression model)?\n- What guidelines can you provide for defining the architecture for amortization (e.g., ResNet) in practice? Did you observe significant differences with various architectures? Should the architecture be similar to the base model?\n- In Figure 4 (right), why does the correlation decrease for MC as the number of data points increases (intuitively, I expected correlation to remain relatively flat for both MC and amortized approaches, assuming a constant number of samples per point)?",
+    "limitations": "The authors adequately addressed the limitations of the proposed approach."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 100,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 2144,
+    "words": 307,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9109b796-d840-41c0-9457-e141af625f88",
+    "error": null,
+    "scored_chars": 2144
+  }
+}

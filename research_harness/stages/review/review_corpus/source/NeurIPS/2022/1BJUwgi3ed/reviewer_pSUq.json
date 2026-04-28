@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "1BJUwgi3ed",
+  "reviewer": "pSUq",
+  "paper": {
+    "title": "Controlling Confusion via Generalisation Bounds",
+    "authors": [
+      "Reuben Adams",
+      "John Shawe-Taylor",
+      "Benjamin Guedj"
+    ],
+    "abstract": "We establish new generalisation bounds for multiclass classification by abstracting to a more general setting of discretised error types. Extending the PAC-Bayes theory, we are hence able to provide fine-grained bounds on performance for multiclass classification, as well as applications to other learning problems including discretisation of regression losses. Tractable training objectives are derived from the bounds. The bounds are uniform over all weightings of the discretised error types and thus can be used to bound weightings not foreseen at training, including the full confusion matrix in the multiclass classification case.",
+    "keywords": [
+      "PAC-Bayes",
+      "Generalisation bounds",
+      "Multiclass classification"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=1BJUwgi3ed"
+  },
+  "review_fields": {
+    "summary": "The paper deals with multi-class classification with a vector of $M$ possible error types. The paper establishes a PAC-Bayes bound for the convergence of the empirical error vector to the expected one,  under some convex distance measure (Thm. 3), and gives a more explicit bound for the kl-measure between the Multininomial distributions parametrized by those two corresponding vectors (Cor. 7). Finally, the paper discusses how the result of Cor.7 can yield a bound for the individual error types, and how to derive a gradient-based algorithm that minimizes the bound.",
+    "strengths_and_weaknesses": "### Strengths\n\n1. The problem of multi-class generalization bounds for the confusion matrix is interesting.\n2. The main results (Thm. 3, Cor. 7) seem elegant and non-trivial to derive. \n\n### Weaknesses\n\n1. The writing can be improved - for example - paragraph 38-48 is hard to follow, The structure of the paper can be improved, currently, the main contributions are hard to discern from smaller details.\n\n2. Classical PAC-Bayes bounds (e.g. Maurer ‘04) can account for non-zero-one losses.  An alternative route to deriving bounds on the divergence of the empirical confusion matrix from the expected one, under some matrix norm, can be using those classical bounds for each error type and then using the union bound. How does this simple approach compares to the results in the paper?  I think the paper lacks comparisons to possible simpler approaches.\n\n3. In the introduction, the authors describe a problem where each error type is associated with a different loss value $\\ell_j \\in [0, \\infty)$. However, if am not mistaken, the bound presented in Thm 3. and Cor. 7 seem to only deal with $\\ell_j \\in {0,1}$.\n\n4. There are also no explicit results for the convergence of the confusion matrix under some matrix norms.\nI may have not understood correctly the results, in that case, I suggest the authors improve the clarity of these issues, by emphasizing the corresponding formulations and results. \n\n5. There is no experimental validation for the suggested algorithm and for the bounds.",
+    "questions": "1. \nLine 170 -  I didn’t understand the comment about $m’$. How is the formulation with $\\beta$ more general?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 2,
+    "soundness": 4,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

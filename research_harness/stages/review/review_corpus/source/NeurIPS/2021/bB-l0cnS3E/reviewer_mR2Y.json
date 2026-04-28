@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "bB-l0cnS3E",
+  "reviewer": "mR2Y",
+  "paper": {
+    "title": "Evaluation of Human-AI Teams for Learned and Rule-Based Agents in Hanabi",
+    "authors": [
+      "Ho Chit Siu",
+      "Jaime Daniel Pena",
+      "Edenna Chen",
+      "Yutai Zhou",
+      "Victor Lopez",
+      "Kyle Palko",
+      "Kimberlee Chestnut Chang",
+      "Ross Emerson Allen"
+    ],
+    "abstract": "Deep reinforcement learning has generated superhuman AI in competitive games such as Go and StarCraft. Can similar learning techniques create a superior AI teammate for human-machine collaborative games? Will humans prefer AI teammates that improve objective team performance or those that improve subjective metrics of trust? In this study, we perform a single-blind evaluation of teams of humans and AI agents in the cooperative card game Hanabi, with both rule-based and learning-based agents. In addition to the game score, used as an objective metric of the human-AI team performance, we also quantify subjective measures of the human's perceived performance, teamwork, interpretability, trust, and overall preference of AI teammate. We find that humans have a clear preference toward a rule-based AI teammate (SmartBot) over a state-of-the-art learning-based AI teammate (Other-Play) across nearly all subjective metrics, and generally view the learning-based agent negatively, despite no statistical difference in the game score. This result has implications for future AI design and reinforcement learning benchmarking, highlighting the need to incorporate subjective metrics of human-AI teaming rather than a singular focus on objective task performance.",
+    "keywords": [
+      "Human-AI Teaming",
+      "Deep Learning",
+      "Reinforcement Learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=bB-l0cnS3E"
+  },
+  "review_fields": {
+    "summary": "This paper experimentally evaluates player perception and subjective experience when playing Hanabi in a team with a learning or rule-based agent. A quantitative analysis of player survey responses indicates that while human-agent teams performed similarly in terms of score for either type of agent, players preferred to play with the rule-based agent. \n\nThe paper is very well written, and Hanabi is particularly well explained. The subject of the paper, and its results, are also quite interesting. My main criticism of the paper is that there is not enough qualitative analysis of player responses. The quantitative analysis shows a preference for the rule-based agent, and I can make assumptions as to why, but I wanted to read some analysis of the likely reasons based on player responses. I think this is important as this kind of study should give us some insight into what human players expect or desire in an agent teammate. I assume that player feedback was elicited as some responses are discussed for the survey question on mental workload.",
+    "main_review": "Page 6: How should we interpret the games scores by self-rate player experience plot in Figure 1? When I look at it, I see a correlation between player score and self-rated experience for OP games, but then the commentary says the correlation is not significant for OP games. Could the authors elaborate on this more, and provide more commentary for Figure 1? Given that the result for OP games -- that there is no significant correlation between self-rated player experience and score -- is a bit counter-intuitive, there needs to be more discussion here as to the likely reasons why this is the case. Why do you think there was correlation for SB games and not OP? \n\nIn the results where self-rated Hanabi experience is referred to, I would add the \"self-rated\" prefix so that a reader doesn't confuse \"Hanabi experience\" with \"subjective game-play experience\" (i.e., how they rated their experience in playing with a particular agent). I did this on my first read through the paper. \n\nI did find the use of OP and SB to denote the two agents used in the experiments confusing sometimes, as I had to keep reminding myself that OP was the RL agent and SB was the rule-based agent. The acronyms do make sense given the agents they are referring to, but it would have made my life easier if they were something like LB-OP and RB-SB. This is a minor point, however."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

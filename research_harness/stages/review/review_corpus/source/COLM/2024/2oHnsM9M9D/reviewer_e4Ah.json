@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "2oHnsM9M9D",
+  "reviewer": "e4Ah",
+  "paper": {
+    "title": "ACORN: Aspect-wise Commonsense Reasoning Explanation Evaluation",
+    "authors": [
+      "Ana Brassard",
+      "Benjamin Heinzerling",
+      "Keito Kudo",
+      "Keisuke Sakaguchi",
+      "Kentaro Inui"
+    ],
+    "abstract": "Evaluating the quality of free-text explanations is a multifaceted, subjective, and labor-intensive task. Large language models (LLMs) present an appealing alternative due to their potential for consistency, scalability, and cost-efficiency. In this work, we present ACORN, a new dataset of 3,500 free-text explanations and aspect-wise quality ratings, and use it to evaluate how LLMs rate explanations. We observed that larger models outputted labels that maintained or increased the inter-annotator agreement, suggesting that they are within the expected variance between human raters. However, their correlation with majority-voted human ratings varied across different quality aspects, indicating that they are not a complete replacement. In turn, using LLMs as a supplement to a smaller group of human raters in some cases improved the correlation with the original majority labels. However, the effect was limited to cases where human raters were scarce, and an additional human rater had a more pronounced effect in all cases. Overall, we recommend against using LLMs as a complete replacement for human raters but encourage using them in configurations that end with targeted human involvement.",
+    "keywords": [
+      "commonsense reasoning",
+      "free-text explanations",
+      "LLM-as-a-judge",
+      "human alignment"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=2oHnsM9M9D"
+  },
+  "review_fields": {
+    "summary": "This paper examines the potential of large language models (LLMs) to automatically evaluate the quality of explanations in commonsense reasoning tasks. The authors introduce ACORN, a novel dataset of 3,500 explanations with human ratings across eight different quality aspects. The authors explore the capabilities of various LLMs to replace or supplement human evaluation, analyzing inter-annotator agreement and correlation with gold-standard labels. They find that LLMs often deviate from human judgments, but GPT-4 shows some potential, particularly as an additional rater when human resources are limited.",
+    "reasons_to_accept": "S1. The paper thoroughly investigates various LLMs and their impacts on inter-annotator agreement and correlation with human judgments. The experimental design, which examines LLMs as potential replacements for human annotators, was particularly interesting. The results offer insightful ideas on how to use LLMs to complement human evaluations.\n\nS2. ACORN provides a valuable resource for research into automatic explanation evaluation, offering a diverse set of explanations and comprehensive human ratings across varying qualities.\n\nS3. Overall, the paper is well-written and easy to follow. The authors clearly document their data collection and analysis procedures, enhancing the transparency and reproducibility of their findings.",
+    "reasons_to_reject": "While the paper focuses on a topic that may interest a narrow audience (evaluating explanations), its contributions are clearly and concretely articulated. However, I have one minor concern. The datasets used are of varying quality, yet the analysis encompasses all datasets uniformly. It would have been advantageous if the authors had conducted analyses on subsets of the datasets to determine if LLMs can be more effective with texts of particular quality levels. Additionally, the purpose of including fluency-improved versions in the datasets was not clear. Clarification on this aspect would be helpful."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:36Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 75,
+    "human_pct": 25,
+    "verdict": "We are moderately confident this text human written and polished with AI",
+    "confidence": "moderately",
+    "chars": 1347,
+    "words": 192,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ae55bac7-4a4e-4c93-8452-e9adbd6eb742",
+    "error": null,
+    "scored_chars": 1347
+  }
+}

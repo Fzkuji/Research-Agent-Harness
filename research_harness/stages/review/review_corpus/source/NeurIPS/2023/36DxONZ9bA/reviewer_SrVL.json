@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "36DxONZ9bA",
+  "reviewer": "SrVL",
+  "paper": {
+    "title": "Representational Strengths and Limitations of Transformers",
+    "authors": [
+      "Clayton Sanford",
+      "Daniel Hsu",
+      "Matus Telgarsky"
+    ],
+    "abstract": "Attention layers, as commonly used in transformers, form the backbone of modern deep learning, yet there is no mathematical description of their benefits and deficiencies as compared with other architectures. In this work we establish both positive and negative results on the representation power of attention layers, with a focus on intrinsic complexity parameters such as width, depth, and embedding dimension. On the positive side, we present a sparse averaging task, where recurrent networks and feedforward networks all have complexity scaling polynomially in the input size, whereas transformers scale merely logarithmically in the input size; furthermore, we use the same construction to show the necessity and role of a large embedding dimension in a transformer. On the negative side, we present a triple detection task, where attention layers in turn have complexity scaling linearly in the input size; as this scenario seems rare in practice, we also present natural variants that can be efficiently solved by attention layers. The proof techniques emphasize the value of communication complexity in the analysis of transformers and related models, and the role of sparse averaging as a prototypical attention task, which even finds use in the analysis of triple detection.",
+    "keywords": [
+      "self-attention",
+      "approximation theory",
+      "communication complexity"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=36DxONZ9bA"
+  },
+  "review_fields": {
+    "comment": "Thank you for your response!\n\n\n\n**\"The qSA task was motivated by the fact that most self-attention matrices appear to be either wide-scale averages over a large fraction of tokens (where most inputs average over the same collection of other inputs and the identity of the token has little bearing on which elements it is associated with)\"**\n\nCan you refer me to the specific paper and the location where such a statement is made/supported?\n\n**\"As noted by Rogers et al, grammatical structures and syntax are directly encoded in self-attention matrices, which can in turn be decomposed into sentence diagrams or trees over multiple layers. We see Match2 as a fundamental unit of that phenomenon, since trees are easily decomposed into combinations of pairwise matches.\"**\n\nI'm unfamiliar with sentence diagrams or trees over multiple layers (but I'm happy to learn). Can you help me and refer me to the exact location of Rogers et al. where your claim is supported (since it's a survey of over 150 studies)?\n\n**We agree with the general standard---applicable to all papers and not just \"theoretical papers\"---of providing motivation and justifying assumptions and frameworks, and our paper does meet this standard. The motivation to study transformers is given throughout the introduction of the paper, along with specific justification for our analysis framework and scaling regimes. Understanding fundamental capabilities and limitations of transformers is of interest to researchers studying these models, and the types of separation results we proved have a long history of being presented at machine learning venues, including NeurIPS, over the past few decades.**\n\n\n I totally agree that you mention the above in your text! I only had a problem with the lack of support for the tasks you considered.\n\nI did not see references for \n\nClark K, Khandelwal U, Levy O, Manning C. What Does BERT Look At? An Analysis of BERT's Attention. In ACL 2019.\n\nChen N, Sun Q, Zhu R, Li X, Lu X, Gao M. CAT-probing: A Metric-based Approach to Interpret How Pre-trained Models for Programming Language Attend Code Structure. In EMNLP 2022.\n\nThese works provide some motivation for the tasks, as you replied in your answer. Did I miss it in the main text? or some other form of explanation?\n\n**We don't agree that \"theoretical papers\" are subject to a different standard for NeurIPS compared to other types of papers, as the NeurIPS Call for Papers explicitly welcomes learning theory papers without stipulating any such qualifications.**\n\nI agree with you about the standard for NeurIPS.  It was under the assumption that the task at hand was unmotivated and unrelated to practical transformers. \n\n\n\n**in appendix D we verify empirically that qSA is a problem efficiently learned empirically by transformers, but not by other architectures (as evidence by their poor test error); tying this back, while perhaps the reviewer feels our work does not have explicit empirical suggestions, it motivates a problem which does capture some empirical benefits of transformers over their predecessors.**\n\nAfter a quick glance, and I might be wrong, it seems the task you empirically examined is very artificial.\nMight it be the case that with actual sentences embedded with word2vec, for example, a fully connected network (or other non-transformer) can learn qSA?\n\nIf not, I think this would establish your case much better because right now, it might be that fully connected networks fail because they are presented with an unnatural and unrealistic distribution."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3538,
+    "words": 566,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/77c626fc-3367-4309-969a-b7303de7133d",
+    "error": null,
+    "scored_chars": 3542
+  }
+}

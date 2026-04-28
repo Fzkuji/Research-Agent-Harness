@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "S5Rv7Yv2THb",
+  "reviewer": "Thd9",
+  "paper": {
+    "title": "Efficient Learning of Discrete-Continuous Computation Graphs",
+    "authors": [
+      "David Friede",
+      "Mathias Niepert"
+    ],
+    "abstract": "Numerous models for supervised and reinforcement learning benefit from combinations of discrete and continuous model components. End-to-end learnable discrete-continuous models are compositional, tend to generalize better, and are more interpretable. A popular approach to building discrete-continuous computation graphs is that of integrating discrete probability distributions into neural networks using stochastic softmax tricks. Prior work has mainly focused on computation graphs with a single discrete component on each of the graph's execution paths. We analyze the behavior of more complex stochastic computations graphs with multiple sequential discrete components. We show that it is challenging to optimize the parameters of these models, mainly due to small  gradients and local minima. We then propose two new strategies to overcome these challenges. First, we show that increasing the scale parameter of the Gumbel noise perturbations during training improves the learning behavior. Second, we propose dropout residual connections specifically tailored to stochastic, discrete-continuous computation graphs. With an extensive set of experiments, we show that we can train complex discrete-continuous models which one cannot train with standard stochastic softmax tricks. We also show that complex discrete-stochastic models generalize better than their continuous counterparts on several benchmark datasets.",
+    "keywords": [
+      "Discrete-Continuous Learning",
+      "Stochastic Computation Graphs",
+      "Gumbel-softmax Trick"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=S5Rv7Yv2THb"
+  },
+  "review_fields": {
+    "summary": "The authors consider the problem of learning in models that combine discrete and continuous operations through the use of stochastic sampling of categorical variables. In the case where the learning makes use of the Gumbel-Softmax reparametrization of the categorical distributions, the authors propose two modifications to the architecture of the network in order to improve training: 1) tempering the categorical distributions towards more uniformity in the later stages of training, and 2) including a stochastic pass-through (residual connection). The authors demonstrate the benefits of the proposed modifications on a couple of common tasks in the domain.",
+    "main_review": "The authors propose techniques which are somewhat unsurprising, but they demonstrate good results on proposed applications. Unfortunately, the authors do not provide direct comparisons between baselines and their suggested techniques, making it difficult to identify the source of the improvement. This paper could be greatly improved by more directly focusing on the problem of gradient propagation through stochastic neurons, and in particular it would be helpful for the authors to directly compare with commonly used methods (e.g. see [1]). Given the lack of direct evidence for the effectiveness of the proposed methods, I do not believe that this paper is quite ready. Please see more detailed comments below.\n\nOn the empirical results. Given the main claims in the abstract (“we show that it is challenging to optimize [...], mainly due to vanishing gradients. We then propose two new strategies to overcome these challenges [...]”), I believe that the main contribution of this paper is to tackle the fairly general problem of gradient propagation through stochastic neurons. In this light, the empirical section of the paper should be reworked to better support these claims, with more emphasis on ablation and comparative studies (e.g. as presented in table 2, but for a large range of models and problems), rather than introducing the author’s own variations for standard problems, where the source of the improvement is not obviously identified. Additionally, such comparisons should attempt to include other commonly used strategies to propagating gradients through stochastic neurons: in particular, the author’s proposal for DropRes has some parallels to the straight-through estimators. Similarly, figure 4 should be extended for different combinations of models, problems and gradient estimators.\n\nOn the bias of the proposed methods. Compared to estimators of the gradient based on the score function, the reparameterized gradients for discrete stochastic neurons are slightly biased. The proposed methods in this paper further amplify this bias, by 1) increasing $\\beta$ (effectively scaling down $\\theta$ and $\\tau$), and 2) considering an uncorrected residual connection. Given the presence of this bias, it would be interesting to compare these methods to standard methods (e.g. based on the score-function estimator a.k.a. REINFORCE and their variance-reduced counterparts) to better understand the impact of these methods, and e.g. whether the improvements are due to better gradient propagation and training behavior, or some implicit regularization due to the introduced bias.\n\n\n[1] Estimating or propagating gradients through stochastic neurons for conditional computation. Bengio, Leonard and Courville. ArXiv 2013\n\nEdit after author response\n\nI thank the authors for their response. I believe that ablation studies should be the primary empirical justification for claims advanced in this paper, and I strongly encourage the authors to consider expanding the ablation studies and reducing the number of comparison with custom-tuned models, which although interesting, do not necessarily provide evidence for the current claims as they do not clearly demonstrate the source of the improvement.",
+    "limitations_and_societal_impact": "Please see main review for limitations."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

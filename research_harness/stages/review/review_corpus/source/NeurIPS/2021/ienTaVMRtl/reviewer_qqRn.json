@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "ienTaVMRtl",
+  "reviewer": "qqRn",
+  "paper": {
+    "title": "Pooling by Sliced-Wasserstein Embedding",
+    "authors": [
+      "Navid Naderializadeh",
+      "Joseph F. Comer",
+      "Reed W Andrews",
+      "Heiko Hoffmann",
+      "Soheil Kolouri"
+    ],
+    "abstract": "Learning representations from sets has become increasingly important with many applications in point cloud processing, graph learning, image/video recognition, and object detection. We introduce a geometrically-interpretable and generic pooling mechanism for aggregating a set of features into a fixed-dimensional representation. In particular, we treat elements of a set as samples from a probability distribution and propose an end-to-end trainable Euclidean embedding for sliced-Wasserstein distance to learn from set-structured data effectively. We evaluate our proposed pooling method on a wide variety of set-structured data, including point-cloud, graph, and image classification tasks, and demonstrate that our proposed method provides superior performance over existing set representation learning approaches. Our code is available at https://github.com/navid-naderi/PSWE.",
+    "keywords": [
+      "Pooling",
+      "feature aggregation",
+      "permutation invariance",
+      "optimal transport",
+      "set learning",
+      "representation learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ienTaVMRtl"
+  },
+  "review_fields": {
+    "summary": "This is an extremely well-written paper on a topic well-suited for presentation at NeurIPS. The material is highly technical and the authors do an excellent job at providing a clear exposition and necessary background material (see below for minor caveats). While empirical results are not compelling across all experiments, the results do show promise in this line of research, especially given its strong theoretical underpinnings.",
+    "main_review": "I have very little to add beyond the summary above. Some small questions for the authors:\n\n1. Can the sets $X_i$ be multisets, which would give rise to different empirical distributions (i.e., weighted delta functions) and how would this affect the method?\n2. Why use ${\\cal X}$ and ${\\cal X'}$ in Eqn (1) instead of ${\\cal X}_i$ and ${\\cal X}_j$?\n3. Are the regularity conditions presented in [39] (L.131) satisfied when the inputs are learned from a neural network?\n4. Exactly what is learned in the set $X_0$ (L.171)? My understanding is that it's the $x_n^0$ that are learned/perturbed during learning, so it's unclear why the underlying distribution $p_0$ is needed. These points are never resampled.\n5. The paper discusses computational complexity in terms of computing PSWE. Can the authors provide running times as a function of L for the experiments?",
+    "limitations_and_societal_impact": "Limitations are discussed briefly throughout the paper but there is no single place where they are summarized. There is no discussion of societal impact and I don't see any negative consequences of this work to society."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

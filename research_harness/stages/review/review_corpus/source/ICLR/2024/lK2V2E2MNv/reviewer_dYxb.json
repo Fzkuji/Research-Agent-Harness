@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "lK2V2E2MNv",
+  "reviewer": "dYxb",
+  "paper": {
+    "title": "Bridging Vision and Language Spaces with Assignment Prediction",
+    "authors": [
+      "Jungin Park",
+      "Jiyoung Lee",
+      "Kwanghoon Sohn"
+    ],
+    "abstract": "This paper introduces VLAP, a novel approach that bridges pretrained vision models and large language models (LLMs) to make frozen LLMs understand the visual world. VLAP transforms the embedding space of pretrained vision models into the LLMs' word embedding space using a single linear layer for efficient and general-purpose visual and language understanding. Specifically, we harness well-established word embeddings to bridge two modality embedding spaces. The visual and text representations are simultaneously assigned to a set of word embeddings within pretrained LLMs by formulating the assigning procedure as an optimal transport problem. We predict the assignment of one modality from the representation of another modality data, enforcing consistent assignments for paired multimodal data. This allows vision and language representations to contain the same information, grounding the frozen LLMs' word embedding space in visual data. Moreover, a robust semantic taxonomy of LLMs can be preserved with visual data since the LLMs interpret and reason linguistic information from correlations between word embeddings. Experimental results show that VLAP achieves substantial improvements over the previous linear transformation-based approaches across a range of vision-language tasks, including image captioning, visual question answering, and cross-modal retrieval. We also demonstrate the learned visual representations hold a semantic taxonomy of LLMs, making visual semantic arithmetic possible.",
+    "keywords": [
+      "Multimodal learning",
+      "vision-language tasks",
+      "frozen LLMs",
+      "optimal transport",
+      "assignment prediction"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=lK2V2E2MNv"
+  },
+  "review_fields": {
+    "summary": "In vision-language modeling, a significant challenge persists: bridging the modality gap between pretrained vision and language models. This gap arises primarily due to the models' pretraining exclusively on unimodal data, leading to inconsistencies in their embedding spaces. Motivated by this limitation and the computational costs of previous methods, this work introduces VLAP, a novel linear transformation-based approach that employs assignment prediction to connect vision encoders and large language models (LLMs). By harnessing the established word embeddings of LLMs and introducing an optimal transport-based assignment prediction objective, VLAP maps visual data representations to LLM's word embeddings, aiming for consistent modality representation. This not only results in visual data representations with the semantic richness of LLMs but also surpasses prior methods in computational and memory efficiency across various vision-language tasks.",
+    "strengths": "1. The limitations from SOA mentioned in the paper exist, and the motivation is valid.\n2. Resolving the modality gap problem with the cross-modal assignment prediction using word embeddings of LLMs is a better solution than previous methods.",
+    "weaknesses": "1.  A better alignment (reducing the gap) in multi-modality is the essential contribution of this work. However, it lacks studies or results, apart from the overall performance, to validate that the gap reduction is achieved by the current predicted assignments rather than the linear layers from previous works.\n2. The authors mentioned, ``Mapping visual data to LLM’s word embeddings results in learned visual representations that hold a semantic taxonomy of LLMs.'' However, there's a lack of quantitative/qualitative results to validate that this allows visual representations to inherit a semantic taxonomy of LLMs.\n3. The final objectives are influenced by the assignment prediction loss and captioning loss. However, there's a lack of study on these hyperparameters. Also, which part contributes more to the learning remains a question.\n4. For the probability that the corresponding modality data belongs to each word, $P_{nk}$, what does $P_{nk}^{v}$ in the visual modality signify? Does this ``word'' refer to the single word token in the class label of that visual region?\n5. There's a lack of formal definitions for the terms/operations appearing in equations, i.e., $Tr(\\cdot)$, $[prefix]$.\n\n[Summary] The current limitations and motivations are valid, and the claimed contribution is significant. However, in the paper's delivery, there's a concern about how this performance is achieved by the proposed architecture and mechanism. Additionally, the paper lacks a depth of study beyond introducing a novel architecture.",
+    "questions": "Please also refer to the previous section."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 5,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1818,
+    "words": 273,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f2964009-0c02-4727-9386-53a5aa2a28c1",
+    "error": null,
+    "scored_chars": 1819
+  }
+}

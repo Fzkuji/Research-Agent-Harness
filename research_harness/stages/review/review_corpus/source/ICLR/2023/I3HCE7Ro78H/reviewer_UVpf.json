@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "I3HCE7Ro78H",
+  "reviewer": "UVpf",
+  "paper": {
+    "title": "Finding Actual Descent Directions for Adversarial Training",
+    "authors": [
+      "Fabian Latorre",
+      "Igor Krawczuk",
+      "Leello Tadesse Dadi",
+      "Thomas Pethick",
+      "Volkan Cevher"
+    ],
+    "abstract": "Adversarial Training using a strong first-order adversary (PGD) is the gold standard for training Deep Neural Networks that are robust to adversarial examples. We show that, contrary to the general understanding of the method, the gradient at an optimal adversarial example may increase, rather than decrease, the adversarially robust loss. This holds independently of the learning rate. More precisely, we provide a counterexample to a corollary of Danskin's Theorem presented in the seminal paper of Madry et al. (2018) which states that a solution of the inner maximization problem can yield a descent direction for the adversarially robust loss. Based on a correct interpretation of Danskin's Theorem, we propose Danskin's Descent Direction (DDi) and we verify experimentally that it provides better directions than those obtained by a PGD adversary. Using the CIFAR10 dataset we further provide a real world example showing that our method achieves a steeper increase in robustness levels in the early stages of training, and is more stable than the PGD baseline. As a limitation, PGD training of ReLU+BatchNorm networks still performs better, but current theory is unable to explain this.",
+    "keywords": [
+      "Adversarial Training",
+      "Adversarial Examples",
+      "non-convex optimization",
+      "robustness"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=I3HCE7Ro78H"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper points out an issue in a recent theoretical result that motivates the adversarial training algorithm. The authors construct counter examples and provide explanations about the issue they identify, and then further propose a Danskin's Descent Direction for training robust neural networks.",
+    "strength_and_weaknesses": "Strengths: \n\nThe claims of the paper seem solid, and the paper is well written. \n\nThe proposed method is backed up by experiments.\n\nWeaknesses: \n\nTheorem 2 is based on the assumption that the set of optimal adversarial perturbations is finite. This is a strong and sometimes unrealistic assumption.\n\nAccording to the authors' discussion, it seems that Madry et al. (2018, Corollary C.2) could be made rigorous by adding an assumption such as \"$\\phi(\\theta)$ is differentiable at $\\theta$\". Even with this additional assumption, this result seems sufficient to motivate the adversarial training algorithm. \n\nBecause of the above reasons, the advantage of the proposed DDD method over the adversarial training method is not very clear. After all, the theoretical guarantee for the proposed DDD method (Theorem 2) is also based on an unrealistic assumption. The DDD method also seems to be computationally more expensive than adversarial training.",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is written clearly and the results are novel.",
+    "summary_of_the_review": "This paper points out an important issue in adversarial training. The paper is well written and the claims seem solid. However, the proposed method is still questionable and more justification is needed to demonstrate its advantage over existing methods.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

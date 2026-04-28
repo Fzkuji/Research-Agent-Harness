@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "9zV2OXCrVF",
+  "reviewer": "MjrB",
+  "paper": {
+    "title": "k-Median Clustering via Metric Embedding: Towards Better Initialization with Differential Privacy",
+    "authors": [
+      "Chenglin Fan",
+      "Ping Li",
+      "Xiaoyun Li"
+    ],
+    "abstract": "In clustering algorithms, the choice of initial centers is crucial for the quality of the learned clusters. We propose a new initialization scheme for the $k$-median problem in the general metric space (e.g., discrete space induced by graphs), based on the construction of metric embedding tree structure of the data. We propose a novel and efficient search algorithm, for good initial centers that can be used subsequently for the local search algorithm. The so-called HST initialization method can produce initial centers achieving lower error than those from another popular method $k$-median++, also with higher efficiency when $k$ is not too small. Our HST initialization can also be easily extended to the setting of differential privacy (DP) to generate private initial centers. We show that the error of applying DP local search followed by our private HST initialization improves previous results on the approximation error, and approaches the lower bound within a small factor. Experiments demonstrate the effectiveness of our proposed methods.",
+    "keywords": [
+      "privacy",
+      "clustering"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=9zV2OXCrVF"
+  },
+  "review_fields": {
+    "comment": "Thank you the authors for the rebuttal. \n\nWhile I agree that fixing # of iterations can help validate HST vs other initialization, I would still like to encourage including experiments varying # of iterations in the final version since this is a non-trivial procedure. (As I said earlier, it could be possible that other, worse, initialization turns out to be equally good if we increase the number of iterations a bit.)"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 419,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fb8b8944-9693-4820-8c04-52620d07f7e8",
+    "error": null,
+    "scored_chars": 420
+  }
+}

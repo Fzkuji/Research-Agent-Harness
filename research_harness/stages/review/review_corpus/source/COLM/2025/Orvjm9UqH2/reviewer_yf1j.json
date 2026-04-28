@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "Orvjm9UqH2",
+  "reviewer": "yf1j",
+  "paper": {
+    "title": "Epistemic Alignment: A Mediating Framework for User-LLM Knowledge Delivery",
+    "authors": [
+      "Nicholas Clark",
+      "Hua Shen",
+      "Bill Howe",
+      "Tanu Mitra"
+    ],
+    "abstract": "Large Language Models (LLMs) increasingly serve as tools for knowledge acquisition, yet users cannot effectively specify how they want information presented. When users request that LLMs \"cite reputable sources,\" \"express appropriate uncertainty,\" or \"include multiple perspectives,\" they discover that current interfaces provide no structured way to articulate these preferences. The result is prompt sharing folklore: community-specific copied prompts passed through trust relationships rather than based on measured efficacy. We propose the Epistemic Alignment Framework, a set of ten challenges in knowledge transmission derived from the philosophical literature of epistemology, concerning issues such as uncertainty expression, evidence quality assessment, and calibration of testimonial reliance. The framework serves as a structured intermediary between user needs and system capabilities, creating a common vocabulary to bridge the gap between what users want and what systems deliver. Through a thematic analysis of custom prompts and personalization strategies shared on online communities where these issues are actively discussed, we find users develop elaborate workarounds to address each of the challenges. We then apply our framework to two prominent model providers, OpenAI and Anthropic, through structured content analysis of their documented policies and product features. Our analysis shows that while these providers have partially addressed the challenges we identified, they fail to establish adequate mechanisms for specifying epistemic preferences, lack transparency about how preferences are implemented, and offer no verification tools to confirm whether preferences were followed. For AI developers, the Epistemic Alignment Framework offers concrete guidance for supporting diverse approaches to knowledge; for users, it works toward information delivery that aligns with their specific needs rather than defaulting to one-size-fits-all approaches.",
+    "keywords": [
+      "epistemology of AI",
+      "language model behavior",
+      "human-AI interaction"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Orvjm9UqH2"
+  },
+  "review_fields": {
+    "summary": "This paper tackles a critical and often overlooked aspect of LLMs development: how these models deliver information to users.\nWhile much recent work in LLM research has focused on hallucinations, safety, and bias, the authors spotlight a different (but related) question: how can LLMs be designed so that they align with the epistemic preferences of individual users?",
+    "reasons_to_accept": "The paper’s major theoretical contribution is a ten-challenge framework that clarifies mismatches between users’ knowledge-related preferences and typical LLM outputs.\nThe framework is broken down into ten specific challenges that are derived from both philosophical analysis and real user queries/instructions. The framework seems as both rigorous and immediately useful.\n\nTo validate the framework, the authors conduct a thematic analysis of “custom instructions” and prompt-engineering tricks posted online (e.g., Reddit). These real-world examples show that users repeatedly try to solve the same set of problems, despite having no standardized approach to do so. This offers solid empirical grounding for the framework.\nThe authors review documentation from two leading providers (OpenAI and Anthropic). Although both platforms show awareness of certain epistemic concerns, neither one provides robust, structured ways for users to specify or verify detailed epistemic preferences. Instead, the preferences remain limited to free-form text, which can be inconsistently interpreted by the model.\n\nThe paper proposes a new interface paradigm. This includes interface elements to specify citation standards, uncertainty levels, or perspective range, and a more verifiable record of whether the model complied.\n\nThe perspective presented in the paper can help designers and researchers move beyond the question “Does the model respond accurately?” to “How well does the model reflect—and adapt to—the user’s unique epistemic goals?”",
+    "reasons_to_reject": "The authors acknowledge (but do not fully explore) the conflict between personal epistemic alignment and global safety filters. Balancing personalization with guardrails remains tricky. While the paper recommends that personalization not override safety, a deeper exploration of how to implement that boundary in practice would be valuable.\n\nThe paper gives only high-level design principles rather than step-by-step guidelines or prototypes."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 33,
+    "mixed_pct": 0,
+    "human_pct": 67,
+    "verdict": "We are moderately confident this text is entirely human",
+    "confidence": "moderately",
+    "chars": 1977,
+    "words": 274,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0b9b818d-b214-45f3-82fe-733ab7d9f341",
+    "error": null,
+    "scored_chars": 1977
+  }
+}

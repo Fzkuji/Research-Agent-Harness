@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "U8GUmxnzXn",
+  "reviewer": "ZXjz",
+  "paper": {
+    "title": "UnHiPPO: Uncertainty-aware Initialization for State Space Models",
+    "authors": [
+      "Marten Lienen",
+      "Abdullah Saydemir",
+      "Stephan Günnemann"
+    ],
+    "abstract": "State space models are emerging as a dominant model class for sequence problems with many relying on the HiPPO framework to initialize their dynamics. However, HiPPO fundamentally assumes data to be noise-free; an assumption often violated in practice. We extend the HiPPO theory with measurement noise and derive an uncertainty-aware initialization for state space model dynamics. In our analysis, we interpret HiPPO as a linear stochastic control problem where the data enters as a noise-free control signal. We then reformulate the problem so that the data become noisy outputs of a latent system and arrive at an alternative dynamics initialization that infers the posterior of this latent system from the data without increasing runtime. Our experiments show that our initialization improves the resistance of state-space models to noise both at training and inference time.",
+    "keywords": [
+      "state space",
+      "uncertainty",
+      "hippo",
+      "mamba",
+      "kalman",
+      "noise",
+      "filter"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=U8GUmxnzXn"
+  },
+  "review_fields": {
+    "summary": "The paper extends HiPPO by incorporating uncertainty-awareness, enhancing the robustness of state space models (SSMs) to noise.\n\n- The study is limited to SC10; testing on additional datasets and tasks would improve generalizability, a limitation acknowledged in the paper.  \n- The choice of regularization method is not thoroughly analyzed, though the proposed approach is discussed in detail. Exploring alternative strategies would strengthen the contribution.  \n- The $\\sigma^2$ hyperparameter is crucial but lacks a systematic selection method across different datasets, despite some analysis of its impact.  \n- Claims of negligible runtime cost are supported by experiments, but further evaluation on larger datasets would provide a clearer comparison with standard HiPPO.  \n- No structured formulation for the UnHiPPO matrix is provided, which may impact computational efficiency—an issue noted by the authors.  \n- The closed-form solution is preferred over the trapezoidal rule, and while its instability in UnHiPPO is noted, further explanation could clarify this choice.  \n- More analysis on the impact of different $\\Sigma$ structures on performance would be beneficial.  \n- Empirical comparisons with existing methods would help contextualize UnHiPPO’s advantages and limitations beyond theoretical discussion."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

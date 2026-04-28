@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "9Kywz2fO26",
+  "reviewer": "wb9a",
+  "paper": {
+    "title": "Pairwise Maximum Likelihood For Multi-Class Logistic Regression Model With Multiple Rare Classes",
+    "authors": [
+      "Xuetong Li",
+      "Danyang Huang",
+      "Hansheng Wang"
+    ],
+    "abstract": "We study in this work the problem of multi-class logistic regression with one major class and multiple rare classes, which is motivated by a real application in TikTok live stream data. The model is inspired by the two-class logistic regression model of Wang (2020) but with surprising theoretical findings, which in turn motivate new estimation methods with excellent statistical and computational efficiency. \nSpecifically, since rigorous theoretical analysis suggests that the resulting maximum likelihood estimators of different rare classes should be asymptotically independent, we consider to solve multiple pairwise two-class logistic regression problems instead of optimizing the joint log-likelihood function with computational challenge in multi-class problem, which are computationally much easier and can be conducted in a fully parallel way. To further reduce the computation cost, a subsample-based pairwise likelihood estimator is developed by down-sampling the major class. We show rigorously that the resulting estimators could be as asymptotically efficient as the global maximum likelihood estimator under appropriate regularity conditions. Extensive simulation studies are presented to support our theoretical findings and a TikTok live stream dataset is analyzed for illustration purpose.",
+    "keywords": [
+      "Multi-class logistic regression model",
+      "Pairwise maximum likelihood estimation",
+      "Rare class analysis",
+      "Car plate recognition"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=9Kywz2fO26"
+  },
+  "review_fields": {
+    "summary": "This paper focuses on multi-class logistic regression with one major class and multiple rare classes, a problem arising from real applications.\nBy the suggestions from Theorem 2.1, the standard maximum likelihood estimators as well as the re-parametrized version are asymptotically independent for different rare classes, which in turn motivates the development of a new algorithm,  PMLE, by solving multiple pairwise log-likelihood functions. Since the pairwise log-likelihood functions contain the samples with large size in the major class,  minimizing the pairwise log-likelihood functions is still computationally challenging. To further accelerate the computation, the authors propose to solve subsample-based pairwise log-likelihood functions, termed as SPMLE. Theoretically, the authors prove that the newly-proposed algorithms, PMLE and SPMLE, require lower computational cost compared to the standard maximum likelihood estimators without compromising asymptotic efficiency.",
+    "experimental_designs_or_analyses": "Yes. The proposed methods are corroborated by simulation studies and real-example analysis.",
+    "relation_to_broader_scientific_literature": "A result similar to Theorem 2.1 in the submitted manuscript is also established by Wang (2020); however, their work focuses on an imbalanced two-class problem, whereas the manuscript addresses a multi-class setting with one major class and multiple rare classes. Notably, a new computationally efficient algorithm with theoretical guarantee is proposed in the manuscript, advancing beyond the scope of prior work.\n\n[1] Wang, H. Logistic regression for massive data with rare events. In International Conference on Machine Learning, pp. 9829–9836. PMLR, 2020.",
+    "other_strengths_and_weaknesses": "**Strengths:**\n\n1. Inspired by the asymptotic covariance matrix of the global MLE,  the manuscript  proposed two methods, PMLE and SPMLE,  which \nhave a significant advantage in computation and are specifically designed for the problem of multi-class logistic regression with one major class and multiple rare classes.\n\n2. The established theory for PMLE and SPMLE  is quite impressive.  It reveals that the newly-proposed algorithms require lower computational cost without compromising asymptotic efficiency. \n\n3. Comprehensive numerical studies, including simulations and real-data analyses, demonstrate the effectiveness of the proposed methods.\n\n\nWeaknesses:\n\nThe appendix should be well-organized. For instance, Lines 629-639 currently appear cluttered and could be improved by using interline formulas for better clarity and readability.",
+    "other_comments_or_suggestions": "Typographical remarks:\n\n1. In Line 93, it should be $1\\le i\\le N$.",
+    "questions_for_authors": "In this work, the number of classes $K$ is treated as fixed. I think it may be interesting to investigate the theoretical behavior of the proposed method when considering the case where  $K$ diverges as the number of samples increases?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

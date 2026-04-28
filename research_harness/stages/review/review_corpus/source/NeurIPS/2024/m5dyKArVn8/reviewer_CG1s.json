@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "m5dyKArVn8",
+  "reviewer": "CG1s",
+  "paper": {
+    "title": "How many classifiers do we need?",
+    "authors": [
+      "Hyunsuk Kim",
+      "Liam Hodgkinson",
+      "Ryan Theisen",
+      "Michael W. Mahoney"
+    ],
+    "abstract": "As performance gains through scaling data and/or model size experience diminishing returns, it is becoming increasingly popular to turn to ensembling, where the predictions of multiple models are combined to improve accuracy. \nIn this paper, we provide a detailed analysis of how the disagreement and the polarization (a notion we introduce and define in this paper) among classifiers relate to the performance gain achieved by aggregating individual classifiers, for majority vote strategies in classification tasks.\nWe address these questions in the following ways. \n(1) An upper bound for polarization is derived, and we propose what we call a neural polarization law: most interpolating neural network models are 4/3-polarized. Our empirical results not only support this conjecture but also show that polarization is nearly constant for a dataset, regardless of hyperparameters or architectures of classifiers. \n(2) The error rate of the majority vote classifier is considered under restricted entropy conditions, and we present a tight upper bound that indicates that the disagreement is linearly correlated with the error rate, and that the slope is linear in the polarization.\n(3) We prove results for the asymptotic behavior of the disagreement in terms of the number of classifiers, which we show can help in predicting the performance for a larger number of classifiers from that of a smaller number. \nOur theoretical findings are supported by empirical results on several image classification tasks with various types of neural networks.",
+    "keywords": [
+      "ensemble",
+      "model aggregation",
+      "machine learning",
+      "computer vision"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=m5dyKArVn8"
+  },
+  "review_fields": {
+    "summary": "This paper analyzes the majority vote error of an ensemble of classifiers. A new quantity called polarity is introduced. The polarity of neural networks is analyzed empirically and theoretically, and stronger bounds on the majority vote error are derived based on the polarity. Finally, the previously derived bounds are used to predict the majority vote error rate of a large ensemble from that of a smaller ensemble.",
+    "strengths": "As far as I am aware, the notion of an ensemble's polarity around which the paper is developed is a novel concept. The derived bounds based on polarity are stronger than previously known bounds and even subsume some of them, for example those based on the notion of competent ensembles.",
+    "weaknesses": "The conjecture of the neural polarity is somewhat lacking in evidence given the generality of the statement. While Figure 1 provides some empirical evidence for a variety of models and hyperparameters, only the relatively simple CIFAR-10 dataset is considered. It would be interesting to see if the neural polarity law still holds for more challenging tasks, where the performance of each individual classifier would be lower.\n\nI also feel that some parts of the paper could be improved for clarity. In particular, in Section 5 it is somewhat unclear how all the results fit together, which can detract from their potential significance. See some of the questions below.",
+    "questions": "1. The description of Theorem 1 as a lower bound in line 127 is somewhat misleading. As mentioned later in the paper, models can be polarized for $\\eta$ lower than the derived bound. I wonder if the wording here can be improved.\n\n2. I do not quite see the connection to neural collapse in line 159. Neural collapse describes the phenomenon that representations of examples from the same class collapse to a single point and the class means form a simplex ETF. Still, it does not state how the probabilities of any given example are distributed among the labels.\n\n3. In theorem 5, what is $\\sigma^2$? And what is the significance of the scaled random walk converging to Brownian motion? As far as I can tell, the convergence to Brownian motion is a restatement of a standard result from stochastic calculus and is not used anywhere else in the paper.\n\n4. In the definition of $\\mathcal{L}(h)$ in line 215, it appears that the symbol $h$ is overloaded."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1910,
+    "words": 325,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3719dcec-759c-4e24-8376-1d5113a0d231",
+    "error": null,
+    "scored_chars": 1910
+  }
+}

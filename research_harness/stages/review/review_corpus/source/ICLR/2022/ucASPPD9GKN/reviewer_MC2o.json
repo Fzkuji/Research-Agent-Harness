@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "ucASPPD9GKN",
+  "reviewer": "MC2o",
+  "paper": {
+    "title": "Is Homophily a Necessity for Graph Neural Networks?",
+    "authors": [
+      "Yao Ma",
+      "Xiaorui Liu",
+      "Neil Shah",
+      "Jiliang Tang"
+    ],
+    "abstract": "Graph neural networks (GNNs) have shown great prowess in learning representations suitable for numerous graph-based machine learning tasks. When applied to semi-supervised node classification,  GNNs are widely believed to work well due to the homophily assumption (``like attracts like''), and fail to generalize to heterophilous graphs where dissimilar nodes connect. Recent works design new architectures to overcome such heterophily-related limitations, citing poor baseline performance and new architecture improvements on a few heterophilous graph benchmark datasets as evidence for this notion. In our experiments, we empirically find that standard graph convolutional networks (GCNs) can actually achieve better performance than such carefully designed methods on some commonly used heterophilous graphs. This motivates us to reconsider whether homophily is truly necessary for good GNN performance.  We find that this claim is not quite true, and in fact, GCNs can achieve strong performance on heterophilous graphs under certain conditions. Our work carefully characterizes these conditions and provides supporting theoretical understanding and empirical observations.  Finally, we examine existing heterophilous graphs benchmarks and reconcile how the GCN (under)performs on them based on this understanding.",
+    "keywords": [],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ucASPPD9GKN"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper discusses the relationships between the performance of GNNs for semi-supervised node-classification taaks and label-homophily/heterophily in the underlying graph structure. \nThe authors show that the classic CGN architecture can perform well on certain label heterophilic graphs -- which they argue is disputed heavily in the literature -- and provide a theoretical discussion on when a good performance for CGN on such heterophilic graphs is possible.",
+    "main_review": "The paper aims to provide a more careful assessment about the role of label-homophily for graph neural network. Given the research activity  in this area recently, I think this is an interesting topic. As the authors outline, there appears to be indeed some \"folklore knowledge\" about label-homophily present in the literature which is probably not entirely accurate. Establishing a more precise understanding on when CGNs can work well, and when not is indeed useful.\n\nHowever, what I find problematic is that the authors claim that the current understanding in the literature is that homophily would be a necessity for CGN to perform well (i.e., a necessary condition for CGNs to work). This feels to much like a straw man argument for me; I think in most cases the argument is that heterophily can be problematic for CGNs -- and indeed the authors confirm this as well: \"bad homophily\" does indeed exist, as they say. The claim that there was some kind of consensus that CGNs can never perform well in label-heterophilic graphs is too far reaching to me. \nThe authors have to be very careful here to not throw out the baby with the bathwater. There is merit in what the authors do: clarifying when CGNs can perform well (even under heterophily); however, that does not mean that there are no issues with heterophilic graphs in general. I strongly suggest the authors reconsider their phrasing in certain areas. \n\nIn a similar vein, I believe the paper would benefit from a more precise treatment of certain aspects of homophily as well. Basically, the authors consider a homophily definition at the level of node-labels; they also assume that there is a tight correlation between the node labels and the underlying node features; so a label-homophily would translate into a feature homophily (or heterophily) as well. I think some more in depth discussion in this context about the relation between the correlation of features of neighbors and labels would be helpful. \n\nAt a high level, CGNs act by aggregating (averaging) the features of the node neighbors. If those features in the neighborhood are correlated (or indeed anti-correlated) to the target node label, then CGNs will be able to pick out the correct relation. This is true for fully homophilic graphs -- in which there is a strong positive correlation between the neighborhood features and the true node label -- and, e.g., for the bipartite example the authors present, in which case there is a strong anti-correlation (which works for prediction as well). However, extending the bipartite examples to multiple classes is already much more complicated: it may well happen that there is no clear label-to-feature correspondence any more that can be exploited. Some aspects of this are already alluded to in the discussion on the embeddings -- but I believe need to be more clearly articulated.\n\nSome further technical comments:\n\nThe CGN architecture described by the authors has no self-embedding component; this is an important point as it leads to \"no mixing\" behavior of the features / labels the authors describe for the toy example. Most convolutional architectures of GNNs have however at least some diagonal weights / self-embeddings -- which will inevitably lead to a stronger mixing between features of nodes of different classes. Again it is the correlation structure between node-labels (across the graph) and node-features (features to labels and features across the graph) that will come into play here and self-loops may help or hinder here.\n\nWhile the probabilistic analysis provided with the SBMs is clearly better than simply assuming constant features; performing the analysis in expectation is in this case basically the same as the deterministic construction discussed at the end of page 3, augmented with a bound on the deviation bound (which is only available here because of the bounded feature assumption it seems)\n\nThere are at least some problematic aspects with this analysis:\n1) the SBM and alike models are not a good model for sparse graphs, as they exhibit a graphon like structure and lead to dense graphs -- which is problematic as we often consider sparse graphs in practise; this limitation needs to be at least discussed I think.\n\n2) the assumption that the every node with the same class label has the same feature distribution (thus providing a perfect probabilistic coupling between labels and features) and the same neighbor label distribution and that each feature is indeed independent seems very unrealistic. This would lead basically to a problem in which a single inspection of the neighborhood suffices -- there is (almost) no graph structure necessary here really. \n\n3) Dropping the nonlinearity, while done in practice, is clearly another strong simplification which would merit some more discussion I think.\n\nFinally, the numerical experiments paint a much richer picture than the theoretical analysis and indeed the introduction of the paper. Some of these aspects could also be discussed in the theoretical parts (neighborhood similarity and correlation structure) -- which would lead to a more balanced picture. As it stands the introduction and theory parts make the paper feel a bit one-sides (to exaggerate: \"heterophily is not a problem\"); whereas in the end the conclusion is much more nuanced. I think such a more nuanced appraisal of heterophily/homophily is useful throughout.\n\nMinor comments\np.2 last line -- X is never defined, instead H and H' are used as input/output. Please correct.",
+    "summary_of_the_review": "Overall I see the paper slightly above the line, provided some of the above points are addressed (I think this is possible).\n\nThe paper should be improved with respect to the following points (see above for more detailed suggestions and comments)\na) provide a more nuanced appraisal of literature and the role of homophily/heterophiliy\nb) discuss the roles of the correlation structure between node labels and features more clearly\nc) discuss the role of self-loops/ego embedding in mixing information from different classes\nd) provide a more rigorous discussion on the assumptions and shortcomings of the theoretical analysis and the SBM model.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 6162 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 6162,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 6162
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "S1x6TlBtwB",
+  "reviewer": "1",
+  "paper": {
+    "title": "Mixture Distributions for Scalable Bayesian Inference",
+    "authors": [
+      "Pranav Poduval",
+      "Hrushikesh Loya",
+      "Rajat Patel",
+      "Sumit Jain"
+    ],
+    "abstract": "Bayesian Neural Networks (BNNs) provides a mathematically grounded framework to quantify uncertainty. However BNNs are computationally inefficient,\nthus are generally not employed on complicated machine learning tasks. Deep\nEnsembles were introduced as a Bootstrap inspired frequentist approach to the\ncommunity, as an alternative to BNN’s. Ensembles of deterministic and stochastic networks are a good uncertainty estimator in various applications (Although,\nthey are criticized for not being Bayesian). We show Ensembles of deterministic\nand stochastic Neural Networks can indeed be cast as an approximate Bayesian\ninference. Deep Ensembles have another weakness of having high space complexity, we provide an alternative to it by modifying the original Bayes by Backprop (BBB) algorithm to learn more general concrete mixture distributions over\nweights. We show our methods and its variants can give better uncertainty estimates at a significantly lower parametric overhead than Deep Ensembles. We\nvalidate our hypothesis through experiments like non-linear regression, predictive\nuncertainty estimation, detecting adversarial images and exploration-exploitation\ntrade-off in reinforcement learning.",
+    "keywords": [
+      "uncertainty estimation",
+      "Deep Ensembles",
+      "Adverserial Robustness"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=S1x6TlBtwB"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I carefully checked the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "The authors interpret Deep Ensemble as a special type of variational inference. Based on Bayes by Backprop which uses a Gaussian approximation to the posterior, the authors propose to use a mixture of Gaussians. The proposed methods have been tested on a regression task and Bayesian neural networks.\n\nThe authors argue that Deep ensemble is equivalent to variational inference with a mixture of Gaussians approximation with variance going to 0. It is not surprising that Deep ensemble is equivalent to variational inference with learning the mean only.  I’m not sure how useful this argument is since learning the distribution, not only the mean, is the key factor of being Bayesian.\n\nUsing a mixture of Gaussians rather than a Gaussian in Bayes by Backprop is a natural extension and therefore the novelty seems low. \n\nIn the experiments, I’m surprised to see that Bayes by Backprop fails to give any uncertainty estimate on the simple regression experiment. From the figure, BBB seems to be very confident about its prediction. However, it has been demonstrated in the literature that BBB is able to perform fairly well on this kind of regression. Can the authors give explanations on why it performs badly here? Also, I do not see why it is important to model multiple modes on this task. I believe a Gaussian approximation is able to work well. The multimodality here is likely induced by the symmetric parameterization of neural networks and trying to capture this kind of multimodality will be meaningless and even problematic. By looking at Figure 2, it seems like the posterior of the proposed method is close to being unimodal. Why is it beneficial to use a mixture of Gaussians under this situation?\n\nThe axis and labels in the figures are very small and hard to read.\nEq. (2) is overlapped with the above text."
+  },
+  "review_metadata": {
+    "rating": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

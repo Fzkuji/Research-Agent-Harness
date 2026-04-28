@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "GKZySvM2t9",
+  "reviewer": "1f2k",
+  "paper": {
+    "title": "KGMark: A Diffusion Watermark for Knowledge Graphs",
+    "authors": [
+      "Hongrui Peng",
+      "Haolang Lu",
+      "Yuanlong Yu",
+      "WeiYe Fu",
+      "Kun Wang",
+      "Guoshun Nan"
+    ],
+    "abstract": "Knowledge graphs (KGs) are ubiquitous in numerous real-world applications, and watermarking facilitates protecting intellectual property and preventing potential harm from AI-generated content. Existing watermarking methods mainly focus on static plain text or image data, while they can hardly be applied to dynamic graphs due to spatial and temporal variations of structured data. This motivates us to propose KGMark, the first graph watermarking framework that aims to generate robust, detectable, and transparent diffusion fingerprints for dynamic KG data. Specifically, we propose a novel clustering-based alignment method to adapt the watermark to spatial variations. Meanwhile, we present a redundant embedding strategy to harden the diffusion watermark against various attacks, facilitating the robustness of the watermark to the temporal variations. Additionally, we introduce a novel learnable mask matrix to improve the transparency of diffusion fingerprints. By doing so, our KGMark properly tackles the variation challenges of structured data. Experiments on various public benchmarks show the effectiveness of our proposed KGMark.",
+    "keywords": [
+      "Watermarking",
+      "Knowledge Graph",
+      "Diffusion Models",
+      "Generative Models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GKZySvM2t9"
+  },
+  "review_fields": {
+    "summary": "This manuscript presents a novel watermarking method for knowledge graph embeddings to ensure the traceability and auditability of knowledge graphs, claiming to embed invisible signatures into diffusion-based latent representations using the Fourier transform. It addresses key challenges by incorporating multi-level redundancy, graph alignment, and a learnable mask to enhance robustness and transparency.",
+    "claims_and_evidence": "This paper emphasizes the detectability, transparency, and robustness of the proposed watermarking method, KGMark. These claims are supported by the following aspects:\n\n1.  Theoretical Derivation: The paper rigorously presents the mathematical formulation of KGMark along with detailed derivations, ensuring the theoretical correctness of the proposed method.\n2.  Experimental Evidence: Comprehensive evaluations are conducted to assess the detectability, transparency, and robustness of KGMark, with results demonstrating the effectiveness of the approach.\n3.  Case Study: The paper provides a case study for specific downstream tasks, showcasing the practical utility of KGMark in real-world scenarios.",
+    "methods_and_evaluation_criteria": "The proposed methods and evaluation criteria align well with the problem at hand. The study:\n\n1.   The AUC is used to evaluate the detectability and robustness of KGMark.\n2.   The transparency of KGMark is evaluated by the cosine similarity and quality metrics of knowledge graph embeddings.\n3.   Extensive ablation experiments have been performed on multiple variants of KGMark and their associated hyperparameters.",
+    "theoretical_claims": "In this paper, the mathematical expression of KGMark and the related theoretical derivation are given, and the attacks on KGmark are modeled. The proofs are logically sound and mathematically rigorous.",
+    "experimental_designs_or_analyses": "The paper selects three KG datasets from different domains to evaluate KGMark.\n\n1.   The detectability of KGMark on clean samples was evaluated.\n2.   The robustness of KGMark under different kinds and intensities of attacks is evaluated.\n3.   The transparency of KGMark is evaluated by the similarity and quality of knowledge graph embeddings.",
+    "relation_to_broader_scientific_literature": "This paper aims to introduce watermarking technology into knowledge graph, which ensures the traceability and auditability of knowledge graph and protects its intellectual property rights to a certain extent. I think this is a meaningful and useful exploration.",
+    "other_strengths_and_weaknesses": "## Strength：\n\nKGMark presents an outstanding exposition of a novel watermarking method for KGEs. Driven by an insightful motivation to protect the copyrights,  the proposed KGMark framework introduces key innovations to enhance both transparency and robustness. The Learnable Adaptive Watermark Mask Matrix improves transparency, while multi-level redundancy ensures resilience against structural modifications. Additionally, the incorporation of graph alignment effectively mitigates challenges arising from isomorphism variations. Overall, this approach demonstrates significant potential for safeguarding intellectual property and maintaining data integrity in KGEs.\n\n## Weakness：\n\n- The lack of comparison with relevant baselines makes the effectiveness of the proposed method in various aspects unable to be more credible verified.\n- Although the paper introduces a learnable mask matrix to improve transparency, the relationship between this matrix and the redundant embedding strategy is not explicitly clarified. Further explanation on how these two components interact and contribute to watermark robustness and transparency would enhance the paper.\n- The case study demonstrates KGMark in a recommendation system. However, it remains unclear whether the authors have tested the method in other domains. Expanding the evaluation to other real-world applications would strengthen the paper’s claims of versatility.",
+    "other_comments_or_suggestions": "- While KGMark is the first watermarking scheme designed for knowledge graphs, it would benefit from additional comparisons with existing watermark methods to provide a clearer context for its innovations.\n- The experiments are conducted on relatively small datasets. Evaluating KGMark on larger knowledge graphs would better demonstrate its scalability and robustness in more realistic settings.\n- The paper does not discuss the computational efficiency of KGMark for embedding watermarks in knowledge graphs of varying sizes. Including an analysis of the method’s performance in terms of computational resources and time complexity across different scales would be valuable.",
+    "questions_for_authors": "- Considering the large number of hyperparameters involved in the paper, can you explain the basis for configuring these parameters?\n- The paper mentioned the use of community algorithm to segment the graph. Can you explain the necessity of introducing community algorithm? Why don't we directly select several vertices on the graph for redundant embedding?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

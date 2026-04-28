@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "lBSSxTgXmiK",
+  "reviewer": "GBWd",
+  "paper": {
+    "title": "Entropic Desired Dynamics for Intrinsic Control",
+    "authors": [
+      "Steven Stenberg Hansen",
+      "Guillaume Desjardins",
+      "Kate Baumli",
+      "David Warde-Farley",
+      "Nicolas Heess",
+      "Simon Osindero",
+      "Volodymyr Mnih"
+    ],
+    "abstract": "An agent might be said, informally, to have mastery of its environment when it has maximised the effective number of states it can reliably reach. In practice, this often means maximizing the number of latent codes that can be discriminated from future states under some short time horizon (e.g. \\cite{eysenbach2018diversity}). By situating these latent codes in a globally consistent coordinate system, we show that agents can reliably reach more states in the long term while still optimizing a local objective. A simple instantiation of this idea, \\textbf{E}ntropic \\textbf{D}esired \\textbf{D}ynamics for \\textbf{I}ntrinsic \\textbf{C}on\\textbf{T}rol (EDDICT), assumes fixed additive latent dynamics, which results in tractable learning and an interpretable latent space. \nCompared to prior methods, EDDICT's globally consistent codes allow it to be far more exploratory, as demonstrated by improved state coverage and increased unsupervised performance on hard exploration games such as Montezuma's Revenge.",
+    "keywords": [
+      "intrinsic control",
+      "skill discovery",
+      "exploration",
+      "unsupervised reinforcement learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=lBSSxTgXmiK"
+  },
+  "review_fields": {
+    "comment": "Thanks for the responses! I still have some lingering concerns around some of these points:\n\n> We frame EDDICT in representational learning terms, but we view this as an extension to the notion of unsupervised option discovery. EDDICT still discovers options, but additionally situates them in a learned representational space. For example, a particular option might correspond to ‘add [1.0, -0.5] to your current state’, whereas VIC options are independent of each other and any notion of state (e.g. ‘execute option 3’). However, we acknowledge that this connection may be insufficiently explicit in the current draft, and will revise it with this in mind.\n\nI see your point, but I'm still not clear on how EDDICT's relative options can be transferred to additional environments. It seems that one advantage of a method like VIC or DIAYN is that you can learn a collection of options and use them as options in a HRL controller on a transfer task. \n\n> This ties into why we didn’t initially compare to ‘standard exploration approaches’, as they don’t yield conditional policies, and are thus solving a different problem.\n\nRelated to the above point—how can such conditional policies be used at evaluation time? That is, what should you condition on at test time? I feel that this point is not clearly addressed in the work. \n\n> As mentioned in the text, the \"target position\" in the Pointmass environment serves as a \"noisy TV\" in that it's a randomly positioned red dot in the agent's observation, which is uncontrollable but would nonetheless be represented by traditional representation learning methods (e.g. via generative modeling).\n\nThis is not the definition of noisy TV, which specifically describes states emitting high entropy observations that aim to distract the agent from solving the MDP. The goal state is quite the opposite, as the agent needs to visit this state to solve the MDP.  Under your definition, all goal-based navigation tasks in RL are inherently noisy TV problems, which leads to reductio ad absurdum. \n\n> Distance to the center frame doesn't quite capture the same information, as the agent occasionally leaves the first room, in which case the distance to the center of the frame isn't meaningful.\n\nTo clarify, by center frame of the starting room, I was referring to the center position in the first room, so an agent leaving the first room would continue to increase this distance from the center. Nevertheless, your histogram solution sounds like a good approach.\n\n> Error bars were only excluded due to typesetting constraints, but a version of this already exists in the appendix. We will add a footnote in the main text referencing this.\n\nThe more important issue here is that error bars are not that informative if you only have 3 seeds.\n\nGiven these remaining concerns, I will keep my rating at a 5 for now."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

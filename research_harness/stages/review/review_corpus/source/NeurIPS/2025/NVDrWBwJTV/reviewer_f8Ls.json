@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "NVDrWBwJTV",
+  "reviewer": "f8Ls",
+  "paper": {
+    "title": "The Good, the Bad and the Ugly: Meta-Analysis of Watermarks, Transferable Attacks and Adversarial Defenses",
+    "authors": [
+      "Grzegorz Gluch",
+      "Berkant Turan",
+      "Sai Ganesh Nagarajan",
+      "Sebastian Pokutta"
+    ],
+    "abstract": "We formalize and analyze the trade-off between backdoor-based watermarks and adversarial defenses, framing it as an interactive protocol between a verifier and a prover. While previous works have primarily focused on this trade-off, our analysis extends it by identifying transferable attacks as a third, counterintuitive but necessary option. Our main result shows that for all learning tasks, at least one of the three exists: a _watermark_, an _adversarial defense_, or a _transferable attack_. By transferable attack, we refer to an efficient algorithm that generates queries indistinguishable from the data distribution and capable of fooling _all_ efficient defenders. Using cryptographic techniques, specifically fully homomorphic encryption, we construct a transferable attack and prove its necessity in this trade-off. Finally, we show that tasks of bounded VC-dimension allow adversarial defenses against all attackers, while a subclass allows watermarks secure against fast adversaries.",
+    "keywords": [
+      "Interactive Proof Systems",
+      "Cryptography",
+      "Backdoors",
+      "Game Theory",
+      "Learning Theory",
+      "Transferable Attacks",
+      "Adversarial Robustness"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NVDrWBwJTV"
+  },
+  "review_fields": {
+    "summary": "This paper presents a unified framework for analyzing the trade-offs between backdoor-based watermarks, adversarial defenses, and transferable attacks in machine learning. The authors formalize these concepts as interactive protocols between two players, modeled as families of circuits to account for their computational resources. The key contribution is a theorem stating that for any learning task, at least one of these three properties must exist. This result is proven by formulating the interaction as a zero-sum game between the players and analyzing its Nash equilibrium. \n\nThe paper also establishes a connection between transferable attacks and cryptographic primitives, specifically showing that the existence of transferable attacks implies the existence of EFID pairs of distributions. This connection suggests that tasks admitting transferable attacks must be computationally complex. Additionally, the paper provides concrete examples of learning tasks that support watermarks and adversarial defenses, particularly for hypothesis classes with bounded VC dimension. These examples demonstrate how different security properties can exist or coexist depending on the characteristics of the learning task and the available computational resources.",
+    "strengths_and_weaknesses": "**Strengths** \n\nS1. The paper demonstrates technical depth by employing diverse theoretical tools. It leverages game theory (zero-sum games and Nash equilibria) to prove its main theorem, uses cryptographic concepts (EFID pairs) to analyze transferable attacks, applies computational complexity theory to model resource-bounded adversaries, and connects to learning theory (VC-dimension) in analyzing watermarks and defenses. \n\nS2. The main theorem, stating that at least one of the three properties (watermark, adversarial defense, or transferable attack) must exist for any learning task, appears to be a significant contribution. It provides fundamental insights into the nature of machine learning security and the inherent trade-offs involved.  \n\n**Weaknesses** \n\nW1. The definitions in Section 4 don't clearly connect to established notions of watermarking and adversarial defense, nor do they fully justify the various properties introduced. This makes it harder for readers to relate the new framework to existing knowledge in the field. \n\nW2. The paper could benefit from more discussion on the practical implications of its findings for real-world machine learning systems and security practices.  \n\nW3. While not a major weakness, the paper focuses solely on classification tasks. The authors acknowledge this limitation and discuss potential generalizations to generative modeling tasks in Appendix E. \n\nW4. The paper could benefit from a discussion of whether there are any real-world scenarios that aren't captured by the theory. Additionally, the authors could justify more thoroughly their choice to model Alice and Bob as circuits and discuss potential limitations of this approach. \n\n**Minor** \n\n- Incorrect cite style \n\n- Fig 1: the caption refers to “adversaries” and “defenders”, but it’s not clear whether this refers to Alice or Bob. (I believe Alice corresponds to the adversary in all cases).",
+    "questions": "The paper presents a strong theoretical framework, but the practical implications of the results are not thoroughly discussed. Could the authors provide more guidance on how practitioners in machine learning security should interpret and apply these results? Specifically: a) How might the trade-offs identified in the paper influence the design of secure machine learning systems in practice? b) Can the authors provide examples or scenarios where their framework could inform decision-making in real-world ML security situations?",
+    "limitations": "The authors have addressed limitations by acknowledging their focus on classification tasks. However, two additional limitations could be discussed: \n\n- The implications of modeling Alice and Bob as circuits and whether this accurately represents real-world adversaries and defenders. Are there scenarios where this model might break down? \n\n- The paper introduces new definitions for watermarks, adversarial defenses, and transferable attacks. It would be beneficial to discuss potential limitations of these definitions, especially in relation to “working definitions” used in the field.",
+    "final_justification": "After considering the authors' response and discussions, I maintain my recommendation in favor of acceptance. \n\nMy primary concern prior to the discussion phase was the paper's clarity and accessibility. I suggested better connecting the work to more practical research in ML security. The authors' response to these concerns was convincing. They've outlined plans to improve connections to established concepts in backdoor watermarks, adversarial defences, and transferable attacks. While the work remains primarily theoretical, they've made a commendable effort to discuss its practical implications, which should enhance its relevance for a more general ML audience.\n\nThe paper's technical depth and the significance of its main theorem remain its core strengths. These aspects, combined with the authors' commitment to improving accessibility, support its acceptance in my view."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 2,
+    "quality": 4,
+    "clarity": 2,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

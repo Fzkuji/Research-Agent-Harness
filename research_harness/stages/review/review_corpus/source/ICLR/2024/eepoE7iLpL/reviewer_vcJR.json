@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "eepoE7iLpL",
+  "reviewer": "vcJR",
+  "paper": {
+    "title": "Enhancing Neural Subset Selection: Integrating Background Information into Set Representations",
+    "authors": [
+      "Binghui Xie",
+      "Yatao Bian",
+      "Kaiwen Zhou",
+      "Yongqiang Chen",
+      "Peilin Zhao",
+      "Bo Han",
+      "Wei Meng",
+      "James Cheng"
+    ],
+    "abstract": "Learning neural subset selection tasks, such as compound selection in AI-aided drug discovery, have become increasingly pivotal across diverse applications. The existing methodologies in the field primarily concentrate on constructing models that capture the relationship between utility function values and subsets within their respective supersets. However, these approaches tend to overlook the valuable information contained within the superset when utilizing neural networks to model set functions. In this work, we address this oversight by adopting a probabilistic perspective. Our theoretical findings demonstrate that when the target value is conditioned on both the input set and subset, it is essential to incorporate an invariant sufficient statistic of the superset into the subset of interest for effective learning. This ensures that the output value remains invariant to permutations of the subset and its corresponding superset, enabling identification of the specific superset from which the subset originated. Motivated by these insights, we propose a simple yet effective information aggregation module designed to merge the representations of subsets and supersets from a permutation invariance perspective. Comprehensive empirical evaluations across diverse tasks and datasets validate the enhanced efficacy of our approach over conventional methods, underscoring the practicality and potency of our proposed strategies in real-world contexts.",
+    "keywords": [
+      "Neural Set Function",
+      "Hierarchical Structure",
+      "Invariance",
+      "Subset Selection"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=eepoE7iLpL"
+  },
+  "review_fields": {
+    "summary": "The paper tackles neural subset selection. In particular, they tackle the issue that current methods do not consider the properties of the superset while constructing subsets. Their theoretical findings demonstrate that when the target value is conditioned on both the input set and subset, it is essential to incorporate an invariant sufficient statistic of the superset into the subset of interest for effective learning.",
+    "strengths": "- The paper is clearly written.\n- The related work covers enough ground for a new researcher to understand a high level idea of this field.\n- The experiments include multiple baselines.",
+    "weaknesses": "- Lack of ablation studies.\n- The proposed method is not evaluated on a wide distribution of datasets.\n- Will similar findings hold if the dataset contains imbalance? If so, what degree of imbalance do the guarantees still hold?",
+    "questions": "- Baselines do not consider the information from superset, but these baselines be improved by adding the invariant sufficient statistic of the superset?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 569,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/41b17548-ed11-45c5-8c7b-75d3c1857cf5",
+    "error": null,
+    "scored_chars": 569
+  }
+}

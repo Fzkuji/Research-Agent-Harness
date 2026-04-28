@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "BiowiwzQaO",
+  "reviewer": "zeqD",
+  "paper": {
+    "title": "GoalLadder: Incremental Goal Discovery with Vision-Language Models",
+    "authors": [
+      "Alexey Zakharov",
+      "Shimon Whiteson"
+    ],
+    "abstract": "Natural language can offer a concise and human-interpretable means of specifying reinforcement learning (RL) tasks. The ability to extract rewards from a language instruction can enable the development of robotic systems that can learn from human guidance; however, it remains a challenging problem, especially in visual environments. Existing approaches that employ large, pretrained language models either rely on non‑visual environment representations, require prohibitively large amounts of feedback, or generate noisy, ill‑shaped reward functions. In this paper, we propose a novel method, GoalLadder, that leverages vision-language models (VLMs) to train RL agents from a single language instruction in visual environments. GoalLadder works by incrementally discovering states that bring the agent closer to completing a task specified in natural language. To do so, it queries a VLM to identify states that represent an improvement in agent's task progress and to rank them using pairwise comparisons. Unlike prior work, GoalLadder does not trust VLM's feedback completely; instead, it uses it to rank potential goal states using an ELO-based rating system, thus reducing the detrimental effects of noisy VLM feedback. Over the course of training, the agent is tasked with minimising the distance to the top-ranked goal in a learned embedding space, which is trained on unlabelled visual data. This key feature allows us to bypass the need for abundant and accurate feedback typically required to train a well-shaped reward function. We demonstrate that GoalLadder outperforms existing related methods on classic control and robotic manipulation environments with the average final success rate of $\\sim$95\\% compared to only $\\sim$45\\% of the best competitor.",
+    "keywords": [
+      "reinforcement learning",
+      "vision-language models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=BiowiwzQaO"
+  },
+  "review_fields": {
+    "comment": "I sincerely thank the authors for their detailed response and the effort made during the rebuttal period. All of my concerns have now been addressed. I have also read the discussions between the authors and other reviewers.\n\nWhile I believe this work makes a valuable contribution to better utilizing pre-trained knowledge for reward modeling, I have some reservations about its broader impact. The method's applicability does not seem to extend beyond the scope of prior work (e.g., RoboCLIP), and its underlying mechanism remains unclear. As the authors themselves note, the use of the L2 norm is an empirical finding rather than a theoretically motivated choice. For these reasons, the work provides a useful result but lacks deeper, more generalizable principles.\n\nTherefore, I recognize the value of this specific work. I hope the paper is accepted by the community. I also encourage the authors to explore more principled methods for leveraging pre-trained knowledge in future iterations. I will maintain my positive evaluation."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

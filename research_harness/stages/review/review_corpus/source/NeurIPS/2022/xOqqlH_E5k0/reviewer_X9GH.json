@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "xOqqlH_E5k0",
+  "reviewer": "X9GH",
+  "paper": {
+    "title": "Augmented Deep Unrolling Networks for Snapshot Compressive Hyperspectral Imaging",
+    "authors": [
+      "Xinran Qin",
+      "Yuhui Quan",
+      "Hui Ji"
+    ],
+    "abstract": "Snapshot compressive hyperspectral imaging requires reconstructing a hyperspectral image from its snapshot measurement. This paper proposes an augmented deep unrolling neural network for solving such a challenging reconstruction problem. The proposed network is based on the unrolling of a proximal gradient descent algorithm with two innovative modules for gradient update and proximal mapping. The gradient update is modeled by a memory-assistant descent module motivated by the momentum-based acceleration heuristics. The proximal mapping is modeled by a sub-network with a cross-stage self-attention which effectively exploits inherent self-similarities of a hyperspectral image along the spectral axis, as well as enhancing the feature flow through the network. Moreover, a spectral geometry consistency loss is proposed to encourage the model to concentrate more on the geometric layer of spectral curves for better reconstruction. Extensive experiments on several datasets showed the performance advantage of our approach over the latest methods.",
+    "keywords": [
+      "Hyperspectral Imaging",
+      "Snapshot Compressive Imaging",
+      "Image Reconstruction",
+      "Deep Unrolling Networks"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=xOqqlH_E5k0"
+  },
+  "review_fields": {
+    "summary": "This paper is on spectral reconstruction from snapshot CASSI. It is based on the linear inverse model, and solved by merging model-based and learning-based methods in the framework of deep unrolling network. Compared with existing methods, memory-assistant descent blocks and cross-stage attentive proximal subnetworks are proposed, together with a new loss term. Experiments show that it outperforms exiting unrolling based methods and end-to-end methods.",
+    "strengths_and_weaknesses": "Strong points: \n1.\tTo use deep unrolling for image/video restoration receives attention in recent years, and the authors proposed new add-ons to improve DUN for CASSI based spectral reconstruction. \n2.\tExperiment results have shown that the proposed method achieves favorable results than existing iterative methods, as well as the latest end-to-end learning based methods. \n\nWeak points: \n1.\tInitialization of the algorithm and its effect on convergence is not mentioned/discussed. \n2.\tModel/algorithm complexity and running time is not mentioned, especially the advantages/disadvantages when compared with end-to-end methods.\n3.\tMany results are directly quoted from other papers. Is there any reason for that? At least ,there are some randomness for data augmentation. To quote results from elsewhere tends to be improper. \n4.\tNo quantitative comparison is conducted on real data. Maybe a real dataset with GT should be prepared first.\n5.\tPersonally, the reviewer has severe concern about the real meaningfulness of trying to reconstruct spectra from CASSI. Given the spectral accuracy in Fig.2 and Fig4, most high-frequency details can not be recovered. To use several mosaiced filters can reach same level accuracy, yet has much better spatial resolution/details. Given this level of spectral details, reconstructed spectral curves are not meaningful for practical applications. One might directly use CASSI raw images for segmentation/recognition directly, without reconstruction.",
+    "questions": "Please refer to the weakpoints.",
+    "limitations": "No potential negative social impact."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

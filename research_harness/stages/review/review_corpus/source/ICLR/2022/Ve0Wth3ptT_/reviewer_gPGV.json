@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "Ve0Wth3ptT_",
+  "reviewer": "gPGV",
+  "paper": {
+    "title": "DEGREE: Decomposition Based Explanation for Graph Neural Networks",
+    "authors": [
+      "Qizhang Feng",
+      "Ninghao Liu",
+      "Fan Yang",
+      "Ruixiang Tang",
+      "Mengnan Du",
+      "Xia Hu"
+    ],
+    "abstract": "Graph Neural Networks (GNNs) are gaining extensive attention for their application in graph data. However, the black-box nature of GNNs prevents users from understanding and trusting the models, thus hampering their applicability. Whereas explaining GNNs remains a challenge, most existing methods fall into approximation based and perturbation based approaches with suffer from faithfulness problems and unnatural artifacts respectively. To tackle these problems, we propose DEGREE (Decomposition based Explanation for GRaph nEural nEtworks) to provide a faithful explanation for GNN predictions. By decomposing the information generation and aggregation mechanism of GNNs, DEGREE allows tracking the contributions of specific components of the input graph to the final prediction. Based on this, we further design a subgraph level interpretation algorithm to reveal complex interactions between graph nodes that are overlooked by previous methods. The efficiency of our algorithm can be further improved by utilizing GNN characteristics. Finally, we conduct quantitative and qualitative experiments on synthetic and real-world datasets to demonstrate the effectiveness of DEGREE on node classification and graph classification tasks.",
+    "keywords": [
+      "XAI",
+      "GNN"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Ve0Wth3ptT_"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes a decomposition-based explanations method for graph neural networks.  In detail, the authors design a subgraph level interpretation algorithm to reveal complex interactions between graph nodes, so as to achieve the faithful explanation for GNN predictions. They demonstrate the effectiveness of the proposed method on synthetic and real-world datasets.",
+    "main_review": "The main concern of this paper is the decomposition assumption.  Because of the nonlinearity property in neural networks, how to decompose to the target portion and the background portion for the input features/representations.  It likely has potential interactions between the target portion and the background portion. \n\nAs for the faithfulness issue, there exist a few decomposition-based explanations methods, e.g.,  Layer-wise Relevance Propagation (LRP) [1], Excitation BP [2], and GNN-LRP [3]. Most of their methods are proposed to employ score decomposition.\n\nThe subgraph-level interpretation search algorithm has been already explored by others [4]. It would be better if authors can compare with them.\n\n[1] Explainability techniques for graph convolutional networks\n\n[2] Explainability methods for graph convolutional neural networks\n\n[3] Higher-order explanations of graph neural networks via relevant walks\n\n[4] On Explainability of Graph Neural Networks via Subgraph Explorations\n\n\nIt is not easy to understand the description in the qualitative evaluation section, especially the description of Figures 2 and 3. \nMeanwhile, it would be better if authors can compare with other explanations methods in the qualitative evaluation section.",
+    "summary_of_the_review": "The main concern of this paper is the decomposition assumption.  Because of the nonlinearity property in neural networks, how to decompose to the target portion and the background portion for the input features/representations.  It likely has potential interactions between the target portion and the background portion.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1566,
+    "words": 222,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2137512d-5689-42f4-b783-fbfd990051cb",
+    "error": null,
+    "scored_chars": 1573
+  }
+}

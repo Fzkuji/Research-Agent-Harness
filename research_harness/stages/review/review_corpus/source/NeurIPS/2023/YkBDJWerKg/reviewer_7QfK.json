@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "YkBDJWerKg",
+  "reviewer": "7QfK",
+  "paper": {
+    "title": "STEVE-1: A Generative Model for Text-to-Behavior in Minecraft",
+    "authors": [
+      "Shalev Lifshitz",
+      "Keiran Paster",
+      "Harris Chan",
+      "Jimmy Ba",
+      "Sheila A. McIlraith"
+    ],
+    "abstract": "Constructing AI models that respond to text instructions is challenging, especially for sequential decision-making tasks. This work introduces a methodology, inspired by unCLIP, for instruction-tuning generative models of behavior without relying on a large dataset of instruction-labeled trajectories. Using this methodology, we create an instruction-tuned Video Pretraining (VPT) model called STEVE-1, which can follow short-horizon open-ended text and visual instructions in Minecraft. STEVE-1 is trained in two steps: adapting the pretrained VPT model to follow commands in MineCLIP's latent space, then training a prior to predict latent codes from text. This allows us to finetune VPT through self-supervised behavioral cloning and hindsight relabeling, reducing the need for costly human text annotations, and all for only $60 of compute. By leveraging pretrained models like VPT and MineCLIP and employing best practices from text-conditioned image generation, STEVE-1 sets a new bar for open-ended instruction following in Minecraft with low-level controls (mouse and keyboard) and raw pixel inputs, far outperforming previous baselines and robustly completing 12 of 13 tasks in our early-game evaluation suite. We provide experimental evidence highlighting key factors for downstream performance, including pretraining, classifier-free guidance, and data scaling. All resources, including our model weights, training scripts, and evaluation tools are made available for further research.",
+    "keywords": [
+      "minecraft",
+      "instruction following",
+      "foundation models",
+      "sequence models",
+      "reinforcement learning",
+      "sequential decision making",
+      "goal conditioned reinforcement learning",
+      "text conditioned reinforcement learning",
+      "transformers",
+      "deep learning"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=YkBDJWerKg"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a generative pretraining method to learn an instruction-following agent in Minecraft by fine-tuning the VPT agent. It first trains an image-goal-conditioned policy and then leverages the foundation model MineCLIP as the bridge to map the language instruction into the image-goal space. Using this method, this paper claims that it can solve any short-horizon open-ended text and visual task in Minecraft.",
+    "strengths": "(1) This paper explores the feasibility of jointly using the foundation models (such as the vision-language model MineCLIP and pre-trained policy model VPT) for solving decision-making problems and shows a preliminary conclusion. \n\n(2) Using unCLIP approach to solve instruction-following decision-making problems is interesting. \n\n(3) This paper proposes to improve the instruction sensitivity with the classifier-free guidance technique, which is interesting and reasonable. \n\n(4) The paper is well-written and easy to follow.",
+    "weaknesses": "(1) The paper overstates its performance by claiming that \"STEVE-1 can follow nearly **any short-horizon** open-ended text and visual task in Minecraft.\"\n\nTo verify this, I downloaded the provided code and ran the attached checkpoints on some basic short-horizon tasks like \"kill sheep\", \"kill cow\", and \"kill pig\". Before testing these tasks, I had already summoned 10 \"pigs\", \"cows\", and \"sheep\" nearby. While I found that the agent actually killed some animals, it did not seem aware of which particular animal it was targeting. The behavior was more like \"kill cow if there is a cow\" rather than following the specific instruction. I tried several other prompt variants such as \"hunt cow\" and \"hunt cow in Minecraft\", but they were unsuccessful. Additionally, I tested STEVE-1 on some short-horizon crafting tasks with sufficient materials in the initial inventory, like \"craft stick\", \"craft oak plank\", and \"craft torch\". The agent merely opened its inventory and then acted randomly.\n\nGiven these observations, I do not believe that STEVE-1 has solved all short-horizon tasks, as it cannot even differentiate between \"cows\" and \"sheep\". This could lead others to misconstrue the extent of the research in the Minecraft environment.\n\n(2) This paper lacks generalization experiments on unseen text instructions. \n\nAs the primary aim of this method is to support open-ended text instructions in STEVE-1, it is crucial to demonstrate its performance on unseen text instructions. The authors collected approximately 10,000 instruction-trajectory pairs, with 2,000 of them hand-labeled and an additional 8,000 instructions generated by GPT. It remains unclear whether the tasks (\"dig dirt\", \"build a tower\", \"make wooden planks\") in the experiments were already included in these instructions. If so, the experiments may not be particularly convincing, as neural networks can easily map the text instructions to corresponding visual embeddings in the training set. That is, pre-training STEVE-1 on visual instructions already achieves this goal and the later generative model training may be not important, which is not impressive. So, I strongly recommend including generalization experiments if the paper wants to show support for open-ended text instructions. \n\n(3) The evaluation metric is insufficient.\n\nThe MineCLIP evaluation metric is not convincingly effective in measuring whether a trajectory corresponds to a given task. This is because the MineCLIP latent space cannot distinguish some trajectories well. For instance, we have found that it was unable to differentiate between two trajectories where one involved approaching a tree and the other involved moving away from it (MineCLIP was not sensitive to distance).\n\nTo address this issue, I recommend that the paper incorporates a success-rate-based confusion matrix, in which the values in Figure 3 (b) are replaced with the task success rate, conditioned on the given instruction.",
+    "questions": "As stated in the weakness part.",
+    "limitations": "The main limitations include (1) prompt design being too sensitive and (2) chain-of-thought prompting is not automated. \nThe authors have adequately stated the limitations."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 5,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 11,
+    "mixed_pct": 0,
+    "human_pct": 89,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3679,
+    "words": 547,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b54b46c5-1d92-451b-96b9-96b8f746dacb",
+    "error": null,
+    "scored_chars": 3685
+  }
+}

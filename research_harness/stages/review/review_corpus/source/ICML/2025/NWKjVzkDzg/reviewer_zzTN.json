@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "NWKjVzkDzg",
+  "reviewer": "zzTN",
+  "paper": {
+    "title": "Scalable Meta-Learning via Mixed-Mode Differentiation",
+    "authors": [
+      "Iurii Kemaev",
+      "Dan A. Calian",
+      "Luisa M Zintgraf",
+      "Gregory Farquhar",
+      "Hado van Hasselt"
+    ],
+    "abstract": "Gradient-based bilevel optimisation is a powerful technique with applications in hyperparameter optimisation, task adaptation, algorithm discovery, meta-learning more broadly, and beyond. It often requires differentiating through the gradient-based optimisation process itself, leading to \"gradient-of-a-gradient\" calculations with computationally expensive second-order and mixed derivatives. While modern automatic differentiation libraries provide a convenient way to write programs for calculating these derivatives, they oftentimes cannot fully exploit the specific structure of these problems out-of-the-box, leading to suboptimal performance. In this paper, we analyse such cases and propose Mixed-Flow Meta-Gradients, or MixFlow-MG -- a practical algorithm that uses mixed-mode differentiation to construct more efficient and scalable computational graphs yielding over 10x memory and up to 25\\% wall-clock time improvements over standard implementations in modern meta-learning setups.",
+    "keywords": [
+      "meta-learning",
+      "bilevel optimization",
+      "second-order optimization",
+      "automatic differentiation",
+      "autodiff",
+      "mixed-mode differentiation",
+      "gradient-based methods",
+      "scalable algorithms"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NWKjVzkDzg"
+  },
+  "review_fields": {
+    "summary": "The paper introduces MixFlow-MG, a method for scalable bilevel optimization in meta-learning using mixed-mode automatic differentiation. The core idea involves reparameterizing the inner-loop dynamics to replace inefficient reverse-over-reverse differentiation with forward-over-reverse mode. This reduces computational costs and memory usage. Experiments demonstrate up to 10× memory savings and 25% faster wall-clock time across tasks like hyperparameter learning, MAML, and loss weighting. The method is validated on large models (up to 16B parameters) and hardware (GPUs/TPUs), showing consistent gains in dynamic memory and compute efficiency.",
+    "claims_and_evidence": "1. The submission claims that the reverse-mode differentiation performed by the default autodiff can be suboptimal in practice. However, the underlying reasons for this drawback are not clearly explained in the submission.\n\n2. Equations (7) and (8) claim that the transport versions of VHP and VMP lead to more efficient computation; however, this is not clearly explained.",
+    "methods_and_evaluation_criteria": "The papers evaluate and compare the memory overhead introduced by the proposed algorithm and various baseline methods across different meta-learning algorithms. However, the performance of the bilevel optimization-based methods is not reported.",
+    "theoretical_claims": "There are no theorems proposed in the submission.",
+    "experimental_designs_or_analyses": "Only three bilevel optimization-based methods are evaluated using the proposed hypergradient computation strategy.\n\nLack of comparison with the recent methods focusing on LLM for instance [1].\n\n[1] Choe, Sang, et al. \"Making scalable meta learning practical.\" Advances in neural information processing systems 36 (2023): 26271-26290.",
+    "relation_to_broader_scientific_literature": "The submission focuses on efficient hypergradient computation in bilevel optimization. I believe there is no clear connection to broader scientific research beyond the scope of meta-learning.",
+    "essential_references_not_discussed": "The implicit gradient-based algorithms are not discussed in the paper. \n\n[1] Lorraine, Jonathan, Paul Vicol, and David Duvenaud. \"Optimizing millions of hyperparameters by implicit differentiation.\" International conference on artificial intelligence and statistics. PMLR, 2020.\n\n[2] Rajeswaran, Aravind, et al. \"Meta-learning with implicit gradients.\" Advances in neural information processing systems 32 (2019).\n\n[3] Gao, Boyan, et al. \"Loss function learning for domain generalization by implicit gradient.\" International Conference on Machine Learning. PMLR, 2022.",
+    "other_strengths_and_weaknesses": "The main deep learning and meta-learning implementation trend is still PyTorch. However, this submission only demonstrates the algorithm on the VJP and JVP-friendly platform, JAX."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

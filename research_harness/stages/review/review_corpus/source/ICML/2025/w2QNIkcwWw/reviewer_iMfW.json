@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "w2QNIkcwWw",
+  "reviewer": "iMfW",
+  "paper": {
+    "title": "Fast Min-$\\epsilon$ Segmented Regression using Constant-Time Segment Merging",
+    "authors": [
+      "Ansgar Lößer",
+      "Max Schlecht",
+      "Florian Schintke",
+      "Joel Witzke",
+      "Matthias Weidlich",
+      "Björn Scheuermann"
+    ],
+    "abstract": "Segmented regression is a statistical method that approximates a function $f$ by a piecewise function $\\hat{f}$ using noisy data samples.\n*Min-$\\epsilon$* approaches aim to reduce the regression function's mean squared error (MSE) for a given number of $k$ segments.\nAn optimal solution for *min-$\\epsilon$* segmented regression is found in $\\mathcal{O}(n^2)$ time (Bai & Perron, 1998; Yamamoto & Perron, 2013) for $n$ samples. For large datasets, current heuristics improve time complexity to $\\mathcal{O}(n\\log{n})$ (Acharya et al., 2016) but can result in large errors, especially when exactly $k$ segments are used.\nWe present a method for *min-$\\epsilon$* segmented regression that combines the scalability of top existing heuristic solutions with a statistical efficiency similar to the optimal solution. This is achieved by using a new method to merge an initial set of segments using precomputed matrices from samples, allowing both merging and error calculation in constant time.\nOur approach, using the same samples and parameter $k$, produces segments with up to 1,000 times lower MSE compared to Acharya et al. (2016) in about 100 times less runtime on data sets over $10^4$ samples.",
+    "keywords": [
+      "Regression",
+      "Segmented Regression",
+      "Time-Series Analysis"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=w2QNIkcwWw"
+  },
+  "review_fields": {
+    "summary": "The authors present a new method and algorithm for min-$\\epsilon$ segmented\nregression. The main contributions are primarily algorithmic but also related\nto software engineering, as the authors implement highly efficient programming\ntechniques to enhance their implementation. The greedy algorithm they propose\nmerges neighboring segments in constant time. The paper includes one real-data\nexample and several synthetic benchmarks that demonstrate the efficiency of the\nmethod.\n\n## Update After Rebuttal\n\nI stand by my original, high, score of the paper. I think it is valuable and interesting work\nand that the paper is well-written and showcases strong results for the method. The\nauthors have also clarified some of my initial minor concerns.",
+    "claims_and_evidence": "The claims are generally convincing and the results are strong. The\nproblem is well-motivated and the method is clearly explained.\n\nI would like to offer a couple of constructive suggestions:\n\n- On line 431, first column, you mention that your algorithm performs better\n  than certain alternatives from R and Python. However, I don't see evidence of\n  direct comparisons to these alternatives in the paper. If such comparisons were\n  conducted, including these experimental results would strengthen your claims.\n  If not, it might be helpful to clarify this statement and perhaps explain why\n  these comparisons weren't included. **Edit: I understand that these might not be \n  warranted after all, so please disregard this comment.**\n- It would be valuable to see an analysis of how well the theoretical\n  complexity of your method is reflected in practical performance.",
+    "methods_and_evaluation_criteria": "The benchmarks presented are appropriate for the problem at hand. Additional\nbenchmarks would further strengthen the paper, and perhaps the supplementary\nmaterial could be utilized to provide these.",
+    "theoretical_claims": "I briefly checked the complexity analysis and could not find any issues.",
+    "experimental_designs_or_analyses": "The experiments are well-designed and the results are convincing.",
+    "relation_to_broader_scientific_literature": "The relevant preceding papers appear to be appropriately cited and discussed.\nTable 1 effectively summarizes previous related contributions. The contribution\nof the current paper is straightforward, aiming to improve complexity and\npractical performance of this method.",
+    "other_strengths_and_weaknesses": "The paper is well-written and easy to follow, with a clear structure and\nhelpful illustrations that aid the reader in understanding the method. The\nplots are well-designed and clearly convey the relevant information.",
+    "other_comments_or_suggestions": "- Figure 5 is large (in file size) and could benefit from being rasterized to\n  improve loading times of the PDF.\n- On line 307, second column, you suggest that results should not change by\n  orders of magnitude due to the implementation language. While this is likely\n  true when comparing Julia to C++, the statement may not hold for all language\n  comparisons. A slight rephrasing might more accurately reflect this nuance."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

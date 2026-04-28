@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "uCXNOeL0TG",
+  "reviewer": "TAkH",
+  "paper": {
+    "title": "Fairness for Workers Who Pull the Arms: An Index Based Policy for Allocation of Restless Bandit Tasks",
+    "authors": [
+      "Arpita Biswas",
+      "Jackson A. Killian",
+      "Paula Rodriguez-Diaz",
+      "Susobhan Ghosh",
+      "Milind Tambe"
+    ],
+    "abstract": "Motivated by applications such as machine repair, project monitoring, and anti-poaching patrol scheduling, we study intervention planning of stochastic processes under resource constraints. This planning problem has previously been modeled as restless multi-armed bandits (RMAB), where each arm is an intervention-dependent Markov Decision Process. However, the existing literature assumes all intervention resources belong to a single uniform pool, limiting their applicability to real-world settings where interventions are carried out by a set of workers, each with their own costs, budgets, and intervention effects. In this work, we consider a novel RMAB setting, called multi-worker restless bandits (MWRMAB) with heterogeneous workers. The goal is to plan an intervention schedule that maximizes the expected reward while satisfying budget constraints on each worker as well as fairness in terms of the load assigned to each worker. Our contributions are two-fold: (1)~we provide a multi-worker extension of the Whittle index to tackle heterogeneous costs and per-worker budget and (2)~ we develop an index-based scheduling policy to achieve fairness. Further, we evaluate our method on various cost structures and show that our method significantly outperforms other baselines in terms of fairness without sacrificing much in reward accumulated.",
+    "keywords": [
+      "sequential planning",
+      "load balancing",
+      "Whittle indices",
+      "markov decision processes"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=uCXNOeL0TG"
+  },
+  "review_fields": {
+    "summary": "This paper considers constrained resource allocation tasks framed as restless bandit problems. In contrast to prior work in this space which assumes that all of the resources (i.e., healthcare workers, mechanics, etc.) to be allocated are interchangeable, the authors: (a) consider *heterogeneous* workers with individual/varied costs, budgets, and intervention effects; and (b) strive to optimally allocate arms to workers while ensuring the disparity in costs incurred by any two workers does not exceed a given threshold, $\\epsilon$. To do this, the authors define an augmented action space, such that each worker is represented as a possible active action, with a corresponding worker-arm-specific cost function and transition matrix. They then decompose the problem and compute Whittle indices for each worker-arm combination. They use these Whittle indices to compute an adjusted index that reflects the minimum charge required to make the agent indifferent between an active action provided by worker $j$ and one provided by any other worker $j^\\prime$. They use the adjusted indices to inform budget- and fairness-constraint satisfying round-robin allocation of arms to workers.",
+    "strengths_and_weaknesses": "*Strengths*:\n- The paper is well-written and the extension to the RMAB setting that the authors propose (i.e., actions with arm-specific heterogenous costs and effectiveness) is well-motivated by many practical domains, such as healthcare, manufacturing, and wildlife conservation. The technical work required to extend the problem setting in this way is significant since one must now account for how workers with different (arm/state-specific) expertise may interact (and influence arms' transitions) over time.\n\n*Weaknesses*:\n- Arms' states and worker-specific transition matrices are assumed to be observable. While it is conventional to assume each arm's (worker-agnostic) transition matrix is known by the decision-maker in the planning setting, the assumption that this additional level of information is available should be explicitly stated and justified by the availability/\"learnability\" of this type of information within the domain(s) of interest. This will be particularly important in settings where there is heteroskedastic uncertainty about workers' intervention effects.",
+    "questions": "1. How is fair allocation defined/operationalized in the empirical results?\n2. Could the knapsack portion of the Hawkins approach be modified to encode the type of cost-disparity threshold fairness considered here?",
+    "limitations": "The authors acknowledge that incorporating fairness among workers (i.e., with respect to the number of arms each worker is allocated) will, in general, reduce expected total reward relative to a fairness-agnostic (but otherwise equivalent) approach. An additional limitation is that worker-specific transition matrices are assumed to be known by the agent."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

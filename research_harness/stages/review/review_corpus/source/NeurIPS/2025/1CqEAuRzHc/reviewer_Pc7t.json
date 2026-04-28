@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "1CqEAuRzHc",
+  "reviewer": "Pc7t",
+  "paper": {
+    "title": "CVGL: Causal Learning and Geometric Topology",
+    "authors": [
+      "Songsong Ouyang",
+      "Yingying Zhu"
+    ],
+    "abstract": "Cross-view geo-localization (CVGL) aims to estimate the geographic location of a street image by matching it with a corresponding aerial image. This is critical for autonomous navigation and mapping in complex real-world scenarios. However, the task remains challenging due to significant viewpoint differences and the influence of confounding factors. To tackle these issues, we propose the Causal Learning and Geometric Topology (CLGT) framework, which integrates two key components: a Causal Feature Extractor (CFE) that mitigates the influence of confounding factors by leveraging causal intervention to encourage the model to focus on stable, task-relevant semantics; and a Geometric Topology Fusion (GT Fusion) module that injects Bird’s Eye View (BEV) road topology into street features to alleviate cross-view inconsistencies caused by extreme perspective changes. Additionally, we introduce a Data-Adaptive Pooling (DA Pooling) module to enhance the representation of semantically rich regions. Extensive experiments on CVUSA, CVACT, and their robustness-enhanced variants (CVUSA-C-ALL and CVACT-C-ALL) demonstrate that CLGT achieves state-of-the-art performance, particularly under challenging real-world corruptions.",
+    "keywords": [
+      "cross-view",
+      "casual learning",
+      "BEV"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=1CqEAuRzHc"
+  },
+  "review_fields": {
+    "summary": "This paper presents a novel framework for cross-view geo-localization. The primary goal is to improve matching accuracy between street-level and aerial images, especially under challenging real-world conditions.  The authors introduce three main components, namely GT Fusion, CFE and DA-Pooling module for this task, and the proposed method is evaluated on several standard and corruption-augmented benchmarks, where it demonstrates state-of-the-art performance, particularly in robustness against visual corruptions.",
+    "strengths_and_weaknesses": "# Strengths\n\n- **Originality**: The introduction of a causal learning paradigm to CVGL is a significant conceptual contribution, establishing a new research avenue by framing robustness as the mitigation of confounders.\n\n- **Significance & Quality**: The extensive experimental evaluation shows compelling state-of-the-art results, especially on corruption-augmented datasets, providing robust empirical evidence for the proposed components' efficacy.\n\n- **Clarity**: the manuscript is generally well-written.\n\n# Weaknesses\n\n- The paper's central claim of applying causal inference seems undermined by the tenuous link between the formal SCM and the CFE's implementation. The manuscript does not establish how the CFE's frequency-filtering constitutes a principled do()-intervention. Consequently, the method appears to be an effective frequency-based augmentation presented with causal terminology, rather than a rigorous application of causal inference.\n\n- The CFE operates on an simplified heuristic that causal and non-causal features are separable in the frequency domain (lines 139-142) with only qualitative supports. The paper lacks substantive analysis to validate this critical assumption, leaving the CFE's foundation to appear more ad-hoc than theoretically grounded and thereby undermining its claim to causality.\n\n- The manuscript omits analysis of inference time and computational cost, precluding an assessment of the method's practical viability for applications like autonomous navigation.",
+    "questions": "1. The paper's central claim is predicated on a causal framework, yet the connection between the SCM (Figure 1) and the CFE is not explicit. Please bridge this gap: How does the do()-operation translate to Equation 1? Why is this a principled causal intervention?\n\n2. Could you provide a comparative analysis of inference time and computational overhead against baselines and other top methods?\n\n3. The CFE relies on the heuristic that factors are separable in the frequency domain. Could you provide a more rigorous analysis or empirical validation for this assumption?\n\nIf the authors can convincingly address them, It would be likely that I raise my score.",
+    "final_justification": "the rebuttal has successfully addressed my most critical technical and empirical questions. The reasons to accept now outweigh the remaining minor concerns about the framing of the causal claims. I have therefore raised my score.\n\nInitially, I had three main reservations: (1) the tenuous link between the formal causal model (SCM) and the implementation of the Causal Feature Extractor (CFE); (2) the lack of empirical validation for the key assumption that causal and non-causal features are separable in the frequency domain; and (3) the absence of a computational cost analysis.\n\nThe authors have successfully resolved concerns (2) and (3) by providing new experimental results.\n- The new data provided in Table I of the rebuttal demonstrates that the proposed method achieves its state-of-the-art accuracy with only marginal computational overhead compared to key baselines like EP-BEV. This fully addresses my concern about the method's practical viability.\n- More importantly, the new ablation study presented in Table II provides strong empirical validation for the CFE's design. By showing that performance drops when perturbing the mid-frequency bands (which are assumed to be causal), the authors give significant credence to their heuristic. This moves the CFE's design from being seemingly ad-hoc to being an empirically grounded and well-motivated engineering choice.\n\nRegarding the primary concern about the causal framework, the authors' rebuttal clarifies their reasoning significantly. While I still find the link to the formal \"back-door adjustment\" principle to be more analogical than rigorous, the authors have made it clear that their work is guided by causal *thinking* to motivate a novel data augmentation and feature consistency scheme. The framing could be more cautious, but the underlying idea is novel for this domain and, as shown by the new ablation, empirically sound."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 2,
+    "quality": 2,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

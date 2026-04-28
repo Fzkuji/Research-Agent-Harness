@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "SyqAPeWAZ",
+  "reviewer": "1",
+  "paper": {
+    "title": "CNNs as Inverse Problem Solvers and Double Network Superresolution",
+    "authors": [
+      "Cem TARHAN",
+      "Gözde BOZDAĞI AKAR"
+    ],
+    "abstract": "In recent years Convolutional Neural Networks (CNN) have been used extensively for Superresolution (SR). In this paper, we use inverse problem and sparse representation solutions to form a mathematical basis for CNN operations. We show how a single neuron is able to provide the optimum solution for inverse problem, given a low resolution image dictionary as an operator. Introducing a new concept called Representation Dictionary Duality, we show that CNN elements (filters) are trained to be representation vectors and then, during reconstruction, used as dictionaries. In the light of theoretical work, we propose a new algorithm which uses two networks with different structures that are separately trained with low and high coherency image patches and show that it performs faster compared to the state-of-the-art algorithms while not sacrificing from performance.",
+    "keywords": [
+      "superresolution",
+      "convolutional neural network",
+      "sparse representation",
+      "inverse problem"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SyqAPeWAZ"
+  },
+  "review_fields": {
+    "review": "This paper discusses using neural networks for super-resolution. The positive aspects of this work is that the use of two neural networks in tandem for this task may be interesting, and the authors attempt to discuss the network's behavior by drawing relations to successful sparsity-based super-resolution. Unfortunately I cannot see any novelty in the relationship the authors draw to LASSO style super-resolution and dictionary learning beyond what is already in the literature (see references below), including in one reference that the authors cite. In addition, there are a number of sloppy mistakes (e.g. Equation 10 as a clear copy-paste error) in the manuscript. Given that much of the main result seems to already be known, I feel that this work is not novel enough at this time. \n\nSome other minor points for the authors to consider for future iterations of this work:\n\n- The authors mention the computational burden of solving L1-regularized optimizations. A lat of work has been done to create fast, efficient solvers in many settings (e.g. homotopy, message passing etc.). Are these methods still insufficient in some applications? If so, which applications of interest are the authors considering?\n\n- In figure 1, it seems that under \"superresolution problem\": 'f' should be 'High res data' and 'g' should be 'Low res data' instead of what is there. I'm also not sure how this figure adds to the information already in the text.\n\n- In the results, the authors mention how some network features represented by certain neurons resemble the training data. This seems like over-training and not a good quality for generalization. The authors should clarify if, and why, this might be a good thing for their application. \n\n- Overall a heavy editing pass is needed to fix a number of typos throughout.\n\nReferences:\n\n[1] K. Gregor and Y. LeCun , “Learning fast approximations of sparse coding,” in Proc. Int. Conf. Mach. Learn., 2010, pp. 399–406.\n[2] P. Sprechmann, P. Bronstein, and G. Sapiro, “Learning efficient structured sparse models,” in Proc. Int. Conf. Mach. Learn., 2012, pp. 615–622.\n[3] M. Borgerding, P. Schniter, and S. Rangan, ``AMP-Inspired Deep Networks for Sparse Linear Inverse Problems [pdf] [arxiv],\" IEEE Transactions on Signal Processing, vol. 65, no. 16, pp. 4293-4308, Aug. 2017.\n[4] V. Papyan*, Y. Romano* and M. Elad, Convolutional Neural Networks Analyzed via Convolutional Sparse Coding, accepted to Journal of Machine Learning Research, 2016."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

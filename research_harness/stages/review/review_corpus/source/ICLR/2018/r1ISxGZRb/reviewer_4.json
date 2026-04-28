@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "r1ISxGZRb",
+  "reviewer": "4",
+  "paper": {
+    "title": "Generation and Consolidation of Recollections for Efficient Deep Lifelong Learning",
+    "authors": [
+      "Matt Riemer",
+      "Michele Franceschini",
+      "and Tim Klinger"
+    ],
+    "abstract": "Deep lifelong learning systems need to efficiently manage resources to scale to large numbers of experiences and non-stationary goals. In this paper, we explore the relationship between lossy compression and the resource constrained lifelong learning problem of function transferability. We demonstrate that lossy episodic experience storage can enable efficient function transferability between different architectures and algorithms at a fraction of the storage cost of lossless storage. This is achieved by introducing a generative knowledge distillation strategy that does not store any full training examples. As an important extension of this idea, we show that lossy recollections stabilize deep networks much better than lossless sampling in resource constrained settings of lifelong learning while avoiding catastrophic forgetting. For this setting, we propose a novel dual purpose recollection buffer used to both stabilize the recollection generator itself and an accompanying reasoning model.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=r1ISxGZRb"
+  },
+  "review_fields": {
+    "review": "This paper presents an approach to lifelong learning with episodic experience storage under resource constraints. The key idea of the approach is to store the latent code obtained from a categorical Variational Autoencoder as opposed to the input example itself. When a new task is learnt, catastrophic forgetting is avoided by randomly sampling stored codes corresponding to past experience and adding the corresponding reconstruction to a batch of data from a new problem. The authors show that explicitly storing data provides better results than random sampling from the generative model. Furthermore, the method is compared to other techniques relying on episodic memory and as expected, achieves better results given a fixed effective buffer size due to being able to store more experience.\n\nWhile the core idea of this paper is reasonable, it provides little insight into how episodic experience storage compares to related methods as an approach to lifelong learning. While the authors compare their method to other techniques based on experience replay, I feel that a comparison to other techniques is important. A natural choice would be a model which introduces task-specific parameters for each problem (e.g.  (Li & Hoiem, 2016) or (Rusu et al., 2016)).\n\nA major concern is the fact that the VAE with categorical latents itself suffers from catastrophic forgetting. While the authors propose to \"freeze decoder parameters right before each incoming experience and train multiple gradient descent iterations over randomly selected recollection batches before moving on to the next experience\", this makes the approach both less straight-forward to apply and more computationally expensive. \n\nMoreover, the authors only evaluate the approach on simple image recognition tasks (MNIST, CIFAR-100, Omniglot). I feel that an experiment in Reinforcement Learning  (e.g. as proposed in (Rusu et al., 2016)) would provide more insight into how the approach behaves in more challenging settings. In particular, it is not clear whether experience replay may lead to negative transfer when subsequent tasks are more diverse.\n\nFinally, the manuscript lacks clarity. As another reviewer noted, detailed sections of weakly related motivations fail to strengthen the reader's understanding. As a minor point, the manuscript contains several grammar and spelling mistakes."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "y6aGT625Lk",
+  "reviewer": "P95M",
+  "paper": {
+    "title": "PairEval: Open-domain Dialogue Evaluation Metric with Pairwise Comparisons",
+    "authors": [
+      "ChaeHun Park",
+      "Minseok Choi",
+      "Dohyun Lee",
+      "Jaegul Choo"
+    ],
+    "abstract": "Building a reliable and automated evaluation metric is a necessary but challenging problem for open-domain dialogue systems. \nRecent studies proposed evaluation metrics that assess generated responses by considering their relevance to previous dialogue histories. \nAlthough effective, these metrics evaluate individual responses directly rather than considering their relative quality compared to other responses.  To handle this, we propose  PairEval, a novel dialogue evaluation metric for assessing responses by comparing their quality against responses in different conversations.  Our metric is built on top of open-sourced and moderate-size language models, and we make them specialized in pairwise comparison between dialogue responses. Extensive experiments on multiple benchmarks demonstrate that our metric exhibits a higher correlation with human judgments than baseline metrics. We also find that the proposed comparative metric is more robust in detecting common failures from open-domain dialogue systems, including repetition and speaker insensitivity. The codes and models will be publicly available after the paper is accepted.",
+    "keywords": [
+      "Open-domain dialogue",
+      "Dialogue evaluation",
+      "Evaluation metric"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=y6aGT625Lk"
+  },
+  "review_fields": {
+    "summary": "This paper introduces a novel dialogue evaluation metric for assessing one response's quality by comparing the target dialogue with a set of different dialogues.  Specifically, the method requires the model to compare the target dialogue with each of the dialogues in the set and use the accumulated comparison score as the final evaluation for the target dialogue.  The method is based on moderate-sized open-source language models. Experiments on multiple test sets show the effectiveness. However, some statements are confusing and there are a few questions about the method.",
+    "reasons_to_accept": "2.1 The paper is generally well-written and easy to understand.\n\n2.2 Extensive experiments are conducted and the results show the effectiveness of the method.",
+    "reasons_to_reject": "3.1 This paper needs to explain more deeply why this comparative method would lead to better evaluation results. Specifically, why comparing with other dialogue can help the model to evaluate dialogue quality? \n\n3.2 On page 2, the authors state \"However, they find that exhaustive comparison between candidate responses is needed for reliable quality estimation of dialogues, resulting in an undesirable computational overhead.\". This is why they use moderate-sized open-source models, but the method in this paper requires fine-tuning the model and multiple calls to the model for one evaluation. The undesirable computational overhead still exists. A computation cost comparison between the LLM-based method and this paper should be conducted.\n\n3.3 On page 2, the authors state \"However, these approaches usually require exhaustive comparison operations or human-crafted candidate responses, which may not always be available.\". Since you state that human-crafted data has the above drawbacks, why do you still conduct experiments with human-crafted adversarial data (from previous research)?",
+    "questions_to_authors": "4.1 This article uses artificially constructed adversarial data (from previous research). Does this impact the migration of the method in this article to other domains? Such as DSTC-9 data?\n\n4.2 Apart from using a relatively large 7B model, what is the essential difference between your pairwise training method and the previous method that distinguishes positive and negative examples (such as DynaEval by Zhang et al., 2021)? \n\n4.3 Why using an exhaustive comparison did not entail big improvements (Tables 3 and 4)?\n\n4.4 The experimental results are different in Tables 3 and 6 when N=1. Why the differences?"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:59Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1865,
+    "words": 278,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4b8739c4-570d-4fef-8728-fd020b296cb9",
+    "error": null,
+    "scored_chars": 1867
+  }
+}

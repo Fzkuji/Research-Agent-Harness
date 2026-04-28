@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "g1SzIRLQXMM",
+  "reviewer": "Rdb1",
+  "paper": {
+    "title": "Wiring Up Vision: Minimizing Supervised Synaptic Updates Needed to Produce a Primate Ventral Stream",
+    "authors": [
+      "Franziska Geiger",
+      "Martin Schrimpf",
+      "Tiago Marques",
+      "James J. DiCarlo"
+    ],
+    "abstract": "After training on large datasets, certain deep neural networks are surprisingly good models of the neural mechanisms of adult primate visual object recognition. Nevertheless, these models are considered poor models of the development of the visual system because they posit millions of sequential, precisely coordinated synaptic updates, each based on a labeled image.  While ongoing research is pursuing the use of unsupervised proxies for labels, we here explore a complementary strategy of reducing the required number of supervised synaptic updates to produce an adult-like ventral visual stream (as judged by the match to V1, V2, V4, IT, and behavior). Such models might require less precise machinery and energy expenditure to coordinate these updates and would thus move us closer to viable neuroscientific hypotheses about how the visual system wires itself up. Relative to standard model training on labeled images in ImageNet, we here demonstrate that the total number of supervised weight updates can be substantially reduced using three complementary strategies: First, we find that only 2% of supervised updates (epochs and images) are needed to achieve 80% of the match to adult ventral stream. Specifically, training benefits predictions of higher visual cortex the most whereas early visual cortex predictions only improve marginally over the course of training. Second, by improving the random distribution of synaptic connectivity, we find that 54% of the brain match can already be achieved “at birth\" (i.e. no training at all). Third, we find that, by training only 5% of model synapses, we can still achieve nearly 80% of the match to the ventral stream. This approach further improves on ImageNet performance over previous attempts in computer vision of minimizing trained components without substantially increasing the relative number of trained parameters. These results reflect first steps in modeling not just primate adult visual processing during inference, but also how the ventral visual stream might be \"wired up\" by evolution (a model's \"birth\" state) and by developmental learning (a model's updates based on visual experience).",
+    "keywords": [
+      "computational neuroscience",
+      "primate visual ventral stream",
+      "convolutional neural networks",
+      "biologically plausible learning"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=g1SzIRLQXMM"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper addresses the question of how many weight updates are needed to train a deep network before it takes on biologically realistic representations. The paper uses CORnet-S (a network that has been proposed to resemble primate ventral stream), and BrainScore (a benchmark of how closely related deep network responses are to visual responses in primate ventral stream). Three ways of reducing the numbers of weight updates are explored, each of which is found to vastly reduce updates while moderately reducing BrainScore. First, the network is simply trained for fewer epochs. Second, weights are initialized with clusters of weights found after training. Third, only a subset of layers is updated. A combination of methods leads to 80% of full brain predictivity with 0.5% of the standard number of weight updates.",
+    "main_review": "Strengths: \n- The paper is clear and well written\n- The analysis is thorough and supports the authors' arguments\n- The method of initializing weights via clusters of trained kernels is interesting  \n- The \"critical training\" method of training only selected layers is also interesting \n\nWeaknesses: \n- \"Recently, such models have been criticized due to how their learning departs from brain development (Marcus, 2004; Grossberg, 2020; Zador, 2019).\" This seems to be the motivation for the work, but those authors don't raise the issues that are addressed in this paper. The Marcus book predates deep learning. Grossberg focuses on catastrophic forgetting. Zador focuses on the sparsity of labelled data in life. I am not sure whether the number of weight updates needed to train deep networks presents a substantial independent concern about their biological plausibility, particularly given the possibility of constant unsupervised learning. If the issue has been raised in the literature, more specific references would help here. If not, I think the authors should argue more specifically that it is a problem, before going on to solve it. \n- The cluster-based initialization method seems to be presented as a way of bringing some learning results through a genetic bottleneck, but the biological plausibility isn't obvious. Further discussion of how this relates to and departs from biology would be helpful. \n- It's interesting that critical training worked so well, but in the context of the paper's goals, the biological relevance of this method should also be laid out more clearly. \n\nMinor: \n- I don't think it was shown how classification performance is affected by the cluster-based initialization method, but it would be nice to see that. \n- \"37 bits per synapse (Zador, 2019)\" This refers to the binary connectivity pattern (an issue of architecture) rather than the weights (which are addressed in this paper).",
+    "summary_of_the_review": "I think the approach and the results are new and interesting, but I have reservations about the motivation for the work and its connection to biology.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2067,
+    "words": 330,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4da19de6-3367-4e76-8ce4-2b925ce07972",
+    "error": null,
+    "scored_chars": 2077
+  }
+}

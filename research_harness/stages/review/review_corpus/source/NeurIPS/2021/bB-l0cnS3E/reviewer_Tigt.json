@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "bB-l0cnS3E",
+  "reviewer": "Tigt",
+  "paper": {
+    "title": "Evaluation of Human-AI Teams for Learned and Rule-Based Agents in Hanabi",
+    "authors": [
+      "Ho Chit Siu",
+      "Jaime Daniel Pena",
+      "Edenna Chen",
+      "Yutai Zhou",
+      "Victor Lopez",
+      "Kyle Palko",
+      "Kimberlee Chestnut Chang",
+      "Ross Emerson Allen"
+    ],
+    "abstract": "Deep reinforcement learning has generated superhuman AI in competitive games such as Go and StarCraft. Can similar learning techniques create a superior AI teammate for human-machine collaborative games? Will humans prefer AI teammates that improve objective team performance or those that improve subjective metrics of trust? In this study, we perform a single-blind evaluation of teams of humans and AI agents in the cooperative card game Hanabi, with both rule-based and learning-based agents. In addition to the game score, used as an objective metric of the human-AI team performance, we also quantify subjective measures of the human's perceived performance, teamwork, interpretability, trust, and overall preference of AI teammate. We find that humans have a clear preference toward a rule-based AI teammate (SmartBot) over a state-of-the-art learning-based AI teammate (Other-Play) across nearly all subjective metrics, and generally view the learning-based agent negatively, despite no statistical difference in the game score. This result has implications for future AI design and reinforcement learning benchmarking, highlighting the need to incorporate subjective metrics of human-AI teaming rather than a singular focus on objective task performance.",
+    "keywords": [
+      "Human-AI Teaming",
+      "Deep Learning",
+      "Reinforcement Learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=bB-l0cnS3E"
+  },
+  "review_fields": {
+    "summary": "The work investigates tradeoffs between objective metrics of performance and subjective metrics of partner collaborative-ness in human-AI cooperation scenarios, taking the Hanabi domain as a case study. After reviewing previous work in this domain, the authors then perform a detailed user study with two state-of-the-art human-AI bots (one rule-based, one learned), and demonstrate that interestingly, users tend to prefer rule-based rather than learned Hanabi agents (even though they have similar objective performance metrics). They argue that this has important implications for the field of AI, as we want AI agents to be considered trustworthy teammates in addition to obtaining high reward.",
+    "main_review": "## Originality\n\nWhile there is no new method presented in the paper, the main contribution would consist of the in-depth analysis of a user study performed to assess 1) the performance of two difference categories of human-AI Hanabi agents and 2) how they are perceived by the users. While minor user studies were performed for individual agents (focusing on reward), I am not aware of any studies comparing different Hanabi AI bots or focusing on the qualitative aspects of the behavior. Generally, this result is interesting and provides further an in depth account of the phenomenon that by default, learned agents for collaboration will not be human-interpretable even if they perform very well with each other (and perform ok with humans). In particular, I don't know of any work showing that this holds even when comparing to rule based agents, which might tend to have more baked-in inductive biases which lead them to be more human-interpretable.\n\n## Quality / Clarity\n\nThe claim that people tend to prefer the SmartBot Hanabi AI agent relative to the Other-Play one is well supported by the statistical analysis, which seems thorough and well executed. The difference between the perceptions of novice and experienced players was particularly interesting – this seems like something worth spending more time on explaining. It would also be interesting to think about whether one should expect similar types of trends in other domains than Hanabi. \n\nGenerally, the paper is very clearly written, well organized, and a pleasure to read. The bar charts in particular were well made and very informative.\n\n## Significance\n\nWhile the analysis was clear, I found the takeaway of this work to be less so: are the authors simply showing that some agents are perceived to be less cooperative than others, even under similar levels of objective performance (311-312)? If so, it would be interesting to head what preliminary ideas for including these subjective judgements into the AI generation process would be. Alternatively, if the intention of the authors was to claim that rule-based agents in Hanabi tend to be perceived as better agents relative to learned ones (as seems to be suggested in various parts of the paper), doing a comparison with just one rule-based and one learned agent seems a bit limiting (more of this in the limitations below). Another potential takeaway might be that the authors are suggesting that one should use rule-based agents because they tend considered better partners (although this is not explicitly said anywhere in the paper)? \n\nGenerally, it would be helpful to spell out more obviously what the intended contribution is.",
+    "limitations_and_societal_impact": "If the intention of the authors was to claim that rule-based agents in Hanabi tend to be perceived as better agents relative to learned ones (as it seems in various parts of the paper), doing a comparison with just one rule-based and one learned agent seems a bit limiting. While it seems plausible that learned approaches tend to systematically be less interpretable to human partners, doing a comparison with just one member of each group (rule vs. learned) seems potentially insufficient: there might be other factors that are method-specific which influence the perception of the user. \n\nIn particular, I would not expect all rule-based systems to be better than all learned systems. If the rules are not human-like or not very good, trivially such a system would not be well-perceived by users. On the other hand, the untrustworthiness (and convergence to obscure equilibria) of learned AI agents doesn't seem to necessarily be an intrinsic characteristic of learned systems: if one trained AI agents which leverage human data for learning policies which complement users' policies, that would likely lead to much better perception of such agents (this phenomenon has been shown at least when comparing to pure self-play trained collaboration partners, e.g. in [9] from your paper).\n\nFurther qualifying the claim, reducing the generality of it, or addressing why comparing just one rule-based and learned agent is enough would strengthen the paper."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

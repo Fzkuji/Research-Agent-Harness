@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "l4F50jpiVH",
+  "reviewer": "skQe",
+  "paper": {
+    "title": "Q-Palette: Fractional-Bit Quantizers Toward Optimal Bit Allocation for Efficient LLM Deployment",
+    "authors": [
+      "Deokjae Lee",
+      "Hyun Oh Song"
+    ],
+    "abstract": "We study weight-only post-training quantization (PTQ), which quantizes the weights of a large language model (LLM) without retraining, using little or no calibration data. Weight-only PTQ is crucial for reducing the memory footprint and latency of LLM inference, especially in memory-bound, small-batch inference scenarios, such as personalized inference on edge devices. Despite its importance, irregular weight distributions with heavy-tailed outliers in LLMs complicate quantization, recently motivating rotation-based methods that transform weights into near-Gaussian distributions, which are more regular with fewer outliers, thereby reducing quantization error. In this work, we first derive the information-theoretically optimal bit allocation for Gaussianized weights under given bit budgets, revealing that fine-grained fractional-bit quantizers approaching the Gaussian distortion-rate bound are essential to achieve near-optimal quantization performance. To bridge this theoretical insight and practical implementation, we introduce Q-Palette, a versatile collection of fractional-bit quantizers that range from trellis-coded quantizers offering near-optimal distortion to simpler vector and scalar quantizers optimized for faster inference, all efficiently implemented with optimized CUDA kernels across various bitwidths. Furthermore, leveraging Q-Palette as a foundational component, we propose a novel mixed-scheme quantization framework, jointly optimizing quantizer choices and layer fusion decisions given resource constraints. The code is available at https://github.com/snu-mllab/Q-Palette.",
+    "keywords": [
+      "LLM quantization",
+      "Post-training quantization",
+      "Mixed scheme quantization",
+      "Data-free quantization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=l4F50jpiVH"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a multi-scheme quantization framework for post-training quantization of neural networks, including large language models (LLMs). Specifically, it formulates the problem of choosing the most suitable quantizer for each layer—selected from a suite of quantizers with varying precision levels—as an optimization problem that can be numerically solved to balance accuracy and model size. The authors further extend their approach to account for layer fusion, noting that the fusion-aware optimization problem is NP-hard but can still be addressed numerically in practice.",
+    "strengths_and_weaknesses": "The paper’s main strengths are its practical contributions: the authors provide efficient CUDA implementations of the quantizers used in their framework, making the method readily usable for practitioners interested in deploying their solution. Moreover, the experimental results show some improvement over both uniform bitwidth baselines and a previous work that allocated bit-widths to layers non-uniformly.\n\nThe main weakness of the paper lies in its limited novelty. The quantizer selection through optimization closely parallels the principles established in Malinovskii et al. ([30]) for bitwidth allocation, and the approach appears to build directly on that prior framework. Additionally, the quantizers included in the QPalette suite are classical, well-known algorithms, and the work does not introduce new quantization techniques. As a result, while the practical contributions are clear and valuable for deployment, the paper’s research novelty may not be sufficient to justify acceptance.",
+    "questions": "- Can the computation of the layer sensitivities $\\alpha_l$ be explained in greater detail, particularly in the context of data-free settings?\n- Do the experimental results include the fusion-aware framework? Does including/not including it make a significant difference in the results?\n- Does the linearization of the model loss hold for non-standard architectures such as those with many skip layer connections?",
+    "final_justification": "I thank the authors for their detailed response. Despite the noteworthy practical value demonstrated, as stated in my final response to the authors, I will keep my original score of 3 because of my concerns with the novelty."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 3,
+    "quality": 2,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

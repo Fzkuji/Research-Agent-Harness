@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "l4F50jpiVH",
+  "reviewer": "LLDE",
+  "paper": {
+    "title": "Q-Palette: Fractional-Bit Quantizers Toward Optimal Bit Allocation for Efficient LLM Deployment",
+    "authors": [
+      "Deokjae Lee",
+      "Hyun Oh Song"
+    ],
+    "abstract": "We study weight-only post-training quantization (PTQ), which quantizes the weights of a large language model (LLM) without retraining, using little or no calibration data. Weight-only PTQ is crucial for reducing the memory footprint and latency of LLM inference, especially in memory-bound, small-batch inference scenarios, such as personalized inference on edge devices. Despite its importance, irregular weight distributions with heavy-tailed outliers in LLMs complicate quantization, recently motivating rotation-based methods that transform weights into near-Gaussian distributions, which are more regular with fewer outliers, thereby reducing quantization error. In this work, we first derive the information-theoretically optimal bit allocation for Gaussianized weights under given bit budgets, revealing that fine-grained fractional-bit quantizers approaching the Gaussian distortion-rate bound are essential to achieve near-optimal quantization performance. To bridge this theoretical insight and practical implementation, we introduce Q-Palette, a versatile collection of fractional-bit quantizers that range from trellis-coded quantizers offering near-optimal distortion to simpler vector and scalar quantizers optimized for faster inference, all efficiently implemented with optimized CUDA kernels across various bitwidths. Furthermore, leveraging Q-Palette as a foundational component, we propose a novel mixed-scheme quantization framework, jointly optimizing quantizer choices and layer fusion decisions given resource constraints. The code is available at https://github.com/snu-mllab/Q-Palette.",
+    "keywords": [
+      "LLM quantization",
+      "Post-training quantization",
+      "Mixed scheme quantization",
+      "Data-free quantization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=l4F50jpiVH"
+  },
+  "review_fields": {
+    "summary": "This paper presents a set of fractional-bit quantizers aimed at accelerating weight-only PTQ for LLMs. The proposed CUDA kernels, together with a mixed-scheme quantization framework, demonstrate competitive performance in decoding speed.",
+    "strengths_and_weaknesses": "**Strengths**\n\n1. The custom CUDA kernel implementation is technically solid and shows real-world speedups on NVIDIA GPUs.\n2. The quantizers introduced in Q-Palette achieve significant decoding speed improvements compared to existing baselines such as NF and QTIP.\n\n**Weaknesses**\n\n1. The experimental evaluation is primarily limited to LLaMA series models and small-scale models. Broader coverage would strengthen the conclusions.\n2. Some relevant rotation-based quantization methods, such as DuQuant [1] and OstQuant [2], are not discussed in the Related Work section. Please consider citing and briefly discussing these in Section 6.\n3. The solution to fusion-based mixed-scheme quantization in Section 4.2 is not clearly explained. Additional details are needed to understand how the solution is derived and implemented.\n\n\n[1]. DuQuant: Distributing Outliers via Dual Transformation Makes Stronger Quantized LLMs. NeurIPS 2024.\n\n[2]. OstQuant: Refining Large Language Model Quantization with Orthogonal and Scaling Transformations for Better Distribution Fitting. ICLR 2025.",
+    "questions": "1. What is the effectiveness of Q-Palette and MSQ on larger LLMs (e.g., LLaMA3-70B) and on other architectures such as the Qwen series?\n2. Could Q-Palette be extended to support or improve weight-activation quantization methods, particularly rotation-based techniques?"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

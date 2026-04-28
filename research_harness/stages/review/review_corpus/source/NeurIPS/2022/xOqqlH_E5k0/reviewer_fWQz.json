@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "xOqqlH_E5k0",
+  "reviewer": "fWQz",
+  "paper": {
+    "title": "Augmented Deep Unrolling Networks for Snapshot Compressive Hyperspectral Imaging",
+    "authors": [
+      "Xinran Qin",
+      "Yuhui Quan",
+      "Hui Ji"
+    ],
+    "abstract": "Snapshot compressive hyperspectral imaging requires reconstructing a hyperspectral image from its snapshot measurement. This paper proposes an augmented deep unrolling neural network for solving such a challenging reconstruction problem. The proposed network is based on the unrolling of a proximal gradient descent algorithm with two innovative modules for gradient update and proximal mapping. The gradient update is modeled by a memory-assistant descent module motivated by the momentum-based acceleration heuristics. The proximal mapping is modeled by a sub-network with a cross-stage self-attention which effectively exploits inherent self-similarities of a hyperspectral image along the spectral axis, as well as enhancing the feature flow through the network. Moreover, a spectral geometry consistency loss is proposed to encourage the model to concentrate more on the geometric layer of spectral curves for better reconstruction. Extensive experiments on several datasets showed the performance advantage of our approach over the latest methods.",
+    "keywords": [
+      "Hyperspectral Imaging",
+      "Snapshot Compressive Imaging",
+      "Image Reconstruction",
+      "Deep Unrolling Networks"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=xOqqlH_E5k0"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a proximal gradient descent (PGD) based deep unrolling network for snapshot compressive hyperspectral imaging, which employs a memory assistant descent module for gradient descent and a sub-network with cross-stage self-attention for proximal mapping. The experimental results show that the proposed method outperforms the compared methods.",
+    "strengths_and_weaknesses": "Strength\n+ Deep unrolling network is an important technique for snapshot compressive sensing.\n+ Modeling correlation between different iteration stages in deep unrolling network is a good idea to improve the performance.\nWeakness\n- Novelty. Memory assistant deep unrolling network has been proposed in previous work, such as [1]. The relationship and the difference should be discussed. Besides, the comparison between these two methods is also necessary.\n- Interpretability. Deep unrolling network is famous for its interpretability, compared with conventional deep network. However, adding the connection between different iteration stages weaken the interpretability. Moreover, in this paper, employing ConvLSTM to model the correlation between gradient descent in different iteration stages, which does not follow the PGD iteration. Besides, for hyperspectral snapshot compressive sensing, employing other optimization methods, e.g, ADMM, always have a fast close-form solver for data-fidelity. Thus, gradient descent and further memory-assistant module may be unnecessary.\n- Experiment. PSNR and SSIM only evaluate the spatial fidelity between reconstructed HSI and groudtruth. Spectral fidelity evaluation metrics, e.g., SAM and ERGAS, are also necessary, especially the proposed method proposes a spectral loss.\n- Writing. The citation of RMSProp and Adam is lacking in line 61. There lacks blank between 0 and otherwise in line 195. Please checking the typos of this manuscript.",
+    "questions": "Please see strength and weakness"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "TXoZiUZywf",
+  "reviewer": "Cd9x",
+  "paper": {
+    "title": "Improved Algorithms for Stochastic Linear Bandits Using Tail Bounds for Martingale Mixtures",
+    "authors": [
+      "Hamish Flynn",
+      "David Reeb",
+      "Melih Kandemir",
+      "Jan Peters"
+    ],
+    "abstract": "We present improved algorithms with worst-case regret guarantees for the stochastic linear bandit problem. The widely used \"optimism in the face of uncertainty\" principle reduces a stochastic bandit problem to the construction of a confidence sequence for the unknown reward function. The performance of the resulting bandit algorithm depends on the size of the confidence sequence, with smaller confidence sets yielding better empirical performance and stronger regret guarantees. In this work, we use a novel tail bound for adaptive martingale mixtures to construct confidence sequences which are suitable for stochastic bandits. These confidence sequences allow for efficient action selection via convex programming. We prove that a linear bandit algorithm based on our confidence sequences is guaranteed to achieve competitive worst-case regret. We show that our confidence sequences are tighter than competitors, both empirically and theoretically. Finally, we demonstrate that our tighter confidence sequences give improved performance in several hyperparameter tuning tasks.",
+    "keywords": [
+      "Linear bandits",
+      "confidence sequences",
+      "martingales",
+      "convex optimization",
+      "cumulative regret",
+      "regret analysis"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=TXoZiUZywf"
+  },
+  "review_fields": {
+    "summary": "The paper considers the problem of stochastic linear contextual bandits, and proposes an improvement of the classic LinUCB / OFUL algorithmic template via a more sophisticated construction of the confidence sets for the hidden reward vector. The improvement comes from replacing the confidence ellipsoid used since the classic work of Abbasi-Yadkori et al. (based on the method of mixtures) with a tighter confidence set based on what the authors call \"adaptive martingale mixtures\". The authors eventually derive a confidence ellipsoid resembling the ones used by Russo and Van Roy, which enjoys the useful property of having a potentially data-dependent radius, and can also be turned into a confidence sequence very easily via an application of Ville's inequality. Using two different methods (an exact convex solver and an approximation of the optimal width), the authors then turn these confidence sets for theta into confidence bounds for the rewards of each action, and use the resulting bounds in a UCB scheme. The algorithms are then shown to outperform standard LinUCB in some simple experiments.",
+    "strengths": "The paper is superbly written and presents a very interesting technique, improving one of the main building blocks of UCB algorithms that have been used for over a decade without any substantial changes. The proposed techniques make use of techniques that have recently gained popularity for mean estimation and proving PAC-Bayesian generalization bounds. The derivations up until the end of Section 5 are very neat and satisfying, and I believe that everyone interested in confidence ellipsoids and linear bandits should find them interesting.",
+    "weaknesses": "The concrete approaches proposed in Section 6 are also nice but leave something to be desired. Perhaps it is my fault, but I have missed how one should choose the predictions mu_t and T_t. From what I understand, both approaches in Sections 6.1 and 6.2 should give valid results irrespective of the choice of these parameters, but I still wonder how the choice will impact the quality of the guarantees. The authors only suggest that choosing mu and T that \"are good predictors of the (stochastic) reward r\" will yield good results, but do not elaborate further. For instance, is setting mu_t as the least squares estimator and T_t as the Grammian a good idea? It feels somewhat unsatisfying to introduce all the possibilities for adaptivity and then simply set a constant lambda_t and go with the standard choice of mu and T... Also, the confidence set proposed in Section 6.2 doesn't seem all that different from the standard tail bound popularized by Abbasi-Yadkori et al. Accordingly, the regret bounds of Theorem 7.5 and 7.6 also take the same for as previous bounds, which is not unexpected given how the theorems are stated for rather generic choices of mu and T. I can see that the new bounds *could* be tighter, but at the moment the theory does not reflect this, which is somewhat disappointing.\n\nOne additional thing that I would like to comment on is the computational complexity of the resulting method. I understand that the UCB's obtained from the method are always convex in the feature representation of the actions (given how they are a maximum of linear functions). Thus, calculating the action with maximal UCB is a convex maximization problem, which is NP-hard in general. This is generally true for all UCB-like methods I can think of, so perhaps it is a bit odd to avoid discussing this question altogether in the paper and suggest that the gradient-based optimization scheme for finding the optimistic actions is a theoretically well-justified idea. (It is not, but I understand that it often still works in practice.) I think it would be nice to add a comment on this in order to not mislead more casual readers who may not be familiar with this computational difficulty.\n\nDespite all my criticism above, I am happy to support acceptance of this paper to the NeurIPS program. I am looking forward to future literature addressing the current limitations of the approach proposed in this otherwise very nice paper."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:28Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2983,
+    "words": 497,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/49b36c1a-73ab-4e1a-9023-f72a7482e5d6",
+    "error": null,
+    "scored_chars": 2983
+  }
+}

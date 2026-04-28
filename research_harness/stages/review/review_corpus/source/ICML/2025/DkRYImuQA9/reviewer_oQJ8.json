@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "DkRYImuQA9",
+  "reviewer": "oQJ8",
+  "paper": {
+    "title": "ShieldAgent: Shielding Agents via Verifiable Safety Policy Reasoning",
+    "authors": [
+      "Zhaorun Chen",
+      "Mintong Kang",
+      "Bo Li"
+    ],
+    "abstract": "Autonomous agents powered by foundation models have seen widespread adoption across various real-world applications. However, they remain highly vulnerable to malicious instructions and attacks, which can result in severe consequences such as privacy breaches and financial losses. More critically, existing guardrails for LLMs are not applicable due to the complex and dynamic nature of agents. To tackle these challenges, we propose ShieldAgent, the first guardrail agent designed to enforce explicit safety policy compliance for the action trajectory of other protected agents through logical reasoning. Specifically, ShieldAgent first constructs a safety policy model by extracting verifiable rules from policy documents and structuring them into a set of action-based probabilistic rule circuits. Given the action trajectory of the protected agent, ShieldAgent retrieves relevant rule circuits and generates a shielding plan, leveraging its comprehensive tool library and executable code for formal verification. In addition, given the lack of guardrail benchmarks for agents, we introduce ShieldAgent-Bench, a dataset with 3K safety-related pairs of agent instructions and action trajectories, collected via SOTA attacks across 6 web environments and 7 risk categories. Experiments show that ShieldAgent achieves SOTA on ShieldAgent-Bench and three existing benchmarks, outperforming prior methods by 11.3% on average with a high recall of 90.1%. Additionally, ShieldAgent reduces API queries by 64.7% and inference time by 58.2%, demonstrating its high precision and efficiency in safeguarding agents. Our project is available and continuously maintained here: https://shieldagent-aiguard.github.io/",
+    "keywords": [
+      "LLM Agent Safety",
+      "LLM Guardrail Agent",
+      "Policy Compliance",
+      "Automated Logic Reasoning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=DkRYImuQA9"
+  },
+  "review_fields": {
+    "summary": "This paper presents ShieldAgent, a new technique for determining whether LLM\noutputs conform to a given policy. ShieldAgent starts by using an LLM to\nformalize a policy document and produce a set of rules expressed in LTL. These\nLTL formulae are embedded into probabilistic circuits which can be used to\nefficiently estimate the safety of potential actions. These probabilistic\ncircuits can also be used to construct a barrier function which ensures the\nsafety of an LLM agent over a long sequence of decisions. The paper proposes a\nnew dataset designed to test the efficacy of guardrails for LLM agents. On both\nthis new dataset and a preexisting dataset, ShieldAgent outperforms prior work.",
+    "claims_and_evidence": "The main claim of the paper, that ShieldAgent works better as a guardrail for\nLLM agents, is well supported with experiments. Across several different risk\ncategories, ShieldAgent is almost universally more accurate than prior methods\nat identifying potentially unsafe behaviors. The practical impact of this\naccuracy is shown with additional experiments that use ShieldAgent on a set of\ninternet interaction tasks. These experiments show that ShieldAgent results in\nsafer behavior compared to prior guardrails.",
+    "methods_and_evaluation_criteria": "The datasets used for evaluation are appropriate and include both an established\ndataset and a novel dataset designed for the use case targeted by the proposed\ntechnique. The experiments include both prior work in this setting as well as a\nfew plausible baseline techniques to provide evidence that ShieldAgent is a\nuseful approach.",
+    "theoretical_claims": "This paper does not make any novel theoretical claims.",
+    "experimental_designs_or_analyses": "The experiments are generally well-designed. They could be improved with the\ninclusion of some ablation studies. ShieldAgent includes so many interacting\ncomponents that it is difficult for me to tell what the impacts of different\npieces of the system are. For example, it would be helpful to understand the\ncosts of omitting the model checker or the KV-cache.",
+    "relation_to_broader_scientific_literature": "The related work section situates this work well within related literature.\nBecause LLM's are often used sequentially, it is important to ensure they are\nsafe even when used repeatedly to generate a sequence of decisions.",
+    "essential_references_not_discussed": "To the best of my knowledge, the authors discuss all essential relevant\nliterature.",
+    "other_strengths_and_weaknesses": "The main strength of the paper in my opinion is the experimental results. They\nare extensive and show an impressive improvement over prior work in terms of\naccurately classifying potentially unsafe behavior.\n\nThe main weakness of the paper which is not captured in the other fields of this review is the\nnumber of interacting components. This is not inherently a problem, but it makes\nit difficult to include enough detail to really understand the proposed\ntechnique in the paper. See the \"other comments or suggestions\" section below\nfor a few specific places where I felt this detracted from the paper.",
+    "other_comments_or_suggestions": "The paper mentions that many external tools are used by ShieldAgent but gives\nlittle detail about what those tools are or how they are used. For example,\nSection 3.3 says that ShieldAgent uses a formal verification component that\n\"conducts model checking to rigorously validate rule compliance\". But model\nchecking can refer to quite a few different techniques, so it would be useful to\ninclude some details on how that model checking is conducted. As another\nexample, 3.2.3 describes \"probabilistic safety inference\" at a very high level,\nbut it's not clear to me how such a computation would actually be carried out.\n\nAt the same time, there are some places in the paper where space is used to\nexplain fairly standard concepts. For example, in 3.2.3, there is a definition\nof the binary cross-entropy loss. In my opinion, this definition is so standard\nthat it could be removed or moved to the appendix in order to save some space\nfor the more novel details of this paper.",
+    "questions_for_authors": "I'm not quite sure I understand the definition of $P_S(a \\mid o)$. As I\nunderstand it, it is related to the probability of picking action $a$\n(denoted $P(a \\mid o)$) as well as \"the safety probability when all rules are\nsatisfied\", $P_{ub}(o)$. First, why is it the case that when all rules are\nsatisfied, the probability of safety is not one? Second, I'm not sure why the\nprobability of safety is defined with respect to the probability of picking\naction $a$ rather than the probability that the system remains safe after taking\naction $a$.\n\nSecond, could the authors elaborate on the soundness of the barrier certificate?\nIt seems to me that the second requirement,\n$P_S(a \\mid o) - P_s(o) \\le \\epsilon_{tol}$, allows the probability of unsafe\nbehavior to increase by $\\epsilon_{tol}$ with each time step. Doesn't this allow\nthe system to behave unsafely over long time horizons?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

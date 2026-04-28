@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "MhWaMOkoN3",
+  "reviewer": "vrcM",
+  "paper": {
+    "title": "Universality in Transfer Learning for Linear Models",
+    "authors": [
+      "Reza Ghane",
+      "Danil Akhtiamov",
+      "Babak Hassibi"
+    ],
+    "abstract": "We study the problem of transfer learning and fine-tuning in linear models for both regression and binary classification. In particular, we consider the use of stochastic gradient descent (SGD) on a linear model initialized with pretrained weights and using a small training data set from the target distribution. In the asymptotic regime of large models, we provide an exact and rigorous analysis and relate the generalization errors (in regression) and classification errors (in binary classification) for the pretrained and fine-tuned models. In particular, we give conditions under which the fine-tuned model outperforms the pretrained one. An important aspect of our work is that all the results are \"universal\", in the sense that they depend only on the first and second order statistics of the target distribution. They thus extend well beyond the standard Gaussian assumptions commonly made in the literature. Furthermore, our universality results extend beyond standard SGD training to the test error of a classification task trained using ridge regression.",
+    "keywords": [
+      "Gaussian Universality",
+      "Transfer Learning",
+      "Linear Regression",
+      "Binary Classification"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=MhWaMOkoN3"
+  },
+  "review_fields": {
+    "comment": "Thank you for detailed responses to all the questions, in particular, the clarifications for definition 2 and theorem 1 were helpful. Regarding my other concerns, I understand that the target samples are included in the term $\\kappa$. However, my broader question is whether interesting results can come out of explicitly modeling the source data as opposed to starting from a pre-trained solution $w_0$. For example, if you look at previous work on transfer learning, for example Ben-David et al. [1], the generalization bounds explicitly model the source distributions which leads to defining a distance between tasks (the $H \\Delta H$ divergence). Modeling the source data, can you tell *how* to arrive at a good initialization $w_0$. The existing setup is certainly interesting but relates directly to model initialization than to a typical theoretical setup for transfer learning. \n\nI will stay at my current score since I do not see immediate connections to explain or answer questions for deep networks (network don't always operate in the linear regime with NTKs). However, I find the lens of universality to be different from prior theoretical work on transfer learning and support the acceptance of this work.\n\n[1]  Ben-David, Shai, et al. \"A theory of learning from different domains.\" Machine learning 79 (2010): 151-175."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1331,
+    "words": 210,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b7c6260b-3d5d-4978-b3a6-9268d8fc42d0",
+    "error": null,
+    "scored_chars": 1333
+  }
+}

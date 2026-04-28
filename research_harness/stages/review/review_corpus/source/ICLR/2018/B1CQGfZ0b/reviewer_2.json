@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "B1CQGfZ0b",
+  "reviewer": "2",
+  "paper": {
+    "title": "Learning to select examples for program synthesis",
+    "authors": [
+      "Yewen Pu",
+      "Zachery Miranda",
+      "Armando Solar-Lezama",
+      "Leslie Pack Kaelbling"
+    ],
+    "abstract": "Program synthesis is a class of regression problems where one seeks a solution, in the form of a source-code program, that maps the inputs to their corresponding outputs exactly. Due to its precise and combinatorial nature, it is commonly formulated as a constraint satisfaction problem, where input-output examples are expressed constraints, and solved with a constraint solver. A key challenge of this formulation is that of scalability: While constraint solvers work well with few well-chosen examples, constraining the entire set of example constitutes a significant overhead in both time and memory. In this paper we address this challenge by constructing a representative subset of examples that is both small and is able to constrain the solver sufficiently. We build the subset one example at a time, using a trained discriminator to predict the probability of unchosen input-output examples conditioned on the chosen input-output examples, adding the least probable example to the subset. Experiment on a diagram drawing domain shows our approach produces subset of examples that are small and representative for the constraint solver.",
+    "keywords": [
+      "program synthesis",
+      "program induction",
+      "example selection"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=B1CQGfZ0b"
+  },
+  "review_fields": {
+    "review": "General-purpose program synthesizers are powerful but often slow, so work that investigates means to speed them up is very much welcome—this paper included. The idea proposed (learning a selection strategy for choosing a subset of synthesis examples) is good. For the most paper, the paper is clearly-written, with each design decision justified and rigorously specified. The experiments show that the proposed algorithm allows a synthesizer to do a better job of reliably finding a solution in a short amount of time (though the effect is somewhat small).\n\nI do have some serious questions/concerns about this method:\n\nPart of the motivation for this paper is the goal of scaling to very large sets of examples. The proposed neural net setup is an autoencoder whose input/output size is proportional to the size of the program input domain. How large can this be expected to scale (a few thousand)? \n\nThe paper did not specify how often the neural net must be trained. Must it be trained for each new synthesis problem? If so, the training time becomes extremely important (and should be included in the “NN Phase” time measurements in Figure 4). If this takes longer than synthesis, it defeats the purpose of using this method in the first place.\nAlternatively, can the network be trained once for a domain, and then used for every synthesis problem in that domain (i.e. in your experiments, training one net for all possible binary-image-drawing problems)? If so, the training time amortizes to some extent—can you quantify this?\nThese are all points that require discussion which is currently missing from the paper.\n\nI also think that this method really ought to be evaluated on some other domain(s) in addition to binary image drawing. The paper is not an application paper about inferring drawing programs from images; rather, it proposes a general-purpose method for program synthesis example selection. As such, it ought to be evaluated on other types of problems to demonstrate this generality. Nothing about the proposed method (e.g. the neural net setup) is specific to images, so this seems quite readily doable.\n\nOverall: I like the idea this paper proposes, but I have some misgivings about accepting it in its current state.\n\n\n\n\nWhat follows are comments on specific parts of the paper:\n\n\nIn a couple of places early in the paper, you mention that the neural net computes “the probability” of examples. The probability of what? This was totally unclear until fairly deep into Section 3.\n - Page 2: “the neural network computes the probability for other examples not in the subset”\n - Page 3: “the probability of all the examples conditioned on…”\n\nOn a related note, I don’t like the term “Selection Probability” for the quantity it describes. This quantity is ‘the probability of an input being assigned the correct output.’ That happens to be (as you’ve proven) a good measure by which to select examples for the synthesizer. The first property (correctness) is a more essential property of this quantity, rather than the second (appropriateness as an example selection measure).\n\nPage 5: “Figure blah shows our neural network architecture” - missing reference to Figure 3.\n\nPage 5: “note that we do not suggest a specific neural network architecture for the middle layers, one should select whichever architecture that is appropriate for the domain at hand” - such as? What are some architectures that might be appropriate for different domains? What architecture did you use in your experiments?\n\nThe description of the neural net in Section 3.3 (bottom of page 5) is hard to follow on first read-through. It would be better to lead with some high-level intuition about what the network is supposed to do before diving into the details of how it’s set up. The first sentence on page 6 gives this intuition; this should come much earlier.\n\nPage 5: “a feed-forward auto-encoder with N input neurons…” Previously, N was defined as the size of the input domain. Does this mean that the network can only be trained when a complete set of input-output examples is available (i.e. outputs for all possible inputs in the domain)? Or is it fine to have an incomplete example set?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

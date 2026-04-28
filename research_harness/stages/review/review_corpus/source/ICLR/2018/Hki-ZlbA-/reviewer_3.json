@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "Hki-ZlbA-",
+  "reviewer": "3",
+  "paper": {
+    "title": "Ground-Truth Adversarial Examples",
+    "authors": [
+      "Nicholas Carlini",
+      "Guy Katz",
+      "Clark Barrett",
+      "David L. Dill"
+    ],
+    "abstract": "The ability to deploy neural networks in real-world, safety-critical systems is severely limited by the presence of adversarial examples: slightly perturbed inputs that are misclassified by the network. In recent years, several techniques have been proposed for training networks that are robust to such examples; and each time stronger attacks have been devised, demonstrating the shortcomings of existing defenses. This highlights a key difficulty in designing an effective defense: the inability to assess a network's robustness against future attacks. We propose to address this difficulty through formal verification techniques. We construct ground truths: adversarial examples with a provably-minimal distance from a given input point. We demonstrate how ground truths can serve to assess the effectiveness of attack techniques, by comparing the adversarial examples produced by those attacks to the ground truths; and also of defense techniques, by computing the distance to the ground truths before and after the defense is applied, and measuring the improvement. We use this technique to assess recently suggested attack and defense techniques.",
+    "keywords": [
+      "adversarial examples",
+      "neural networks",
+      "formal verification",
+      "ground truths"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Hki-ZlbA-"
+  },
+  "review_fields": {
+    "review": "The authors propose to employ provably minimal-distance examples as a tool to evaluate the robustness of a trained network. This is demonstrated on a small-scale network using the MNIST data set.\n\nFirst of all, I find it striking that a trained network with 97% accuracy (as claimed by the authors) seems extremely brittle -- considering the fact that all the adversarial examples in Figure 1 are hardly borderline examples at all, at least to my eyes. This does reinforce the (well-known?) weakness of neural networks in general. I therefore find the authors' statement on page 3 disturbing: \"... they are trained over a small set of inputs, and can then perform well, in general, on previously-unseen inputs\" -- which seems false (with high probability over all possible worlds).\n\nSecondly, the term \"ground truth\" example seems very misleading to me. Perhaps \"closest misclassified examples\"?\n\nFinally, while the idea of \"closest misclassified examples\" seems interesting, I am not convinced that they are the right way to go when it comes to both building and evaluating robustness. All such examples shown in the paper are indeed within-class examples that are misclassified. But we could equally consider another extreme, where the trained network is \"over-regularized\" in the sense that the closest misclassified examples are indeed from another class, and therefore \"correctly\" misclassified. Adding these as adversarial examples could seriously degrade the accuracy.\n\nAlso, for building robustness, one could argue that adding misclassified examples that are \"furthest\" (i.e. closest to the true decision boundary) is a much more efficient training approach, since a few of these can possibly subsume a large number of close examples."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

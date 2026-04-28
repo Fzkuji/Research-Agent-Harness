@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "Syx6bz-Ab",
+  "reviewer": "1",
+  "paper": {
+    "title": "Seq2SQL: Generating Structured Queries From Natural Language Using Reinforcement Learning",
+    "authors": [
+      "Victor Zhong",
+      "Caiming Xiong",
+      "Richard Socher"
+    ],
+    "abstract": "Relational databases store a significant amount of the worlds data. However, accessing this data currently requires users to understand a query language such as SQL. We propose Seq2SQL, a deep neural network for translating natural language questions to corresponding SQL queries. Our model uses rewards from in the loop query execution over the database to learn a policy to generate the query, which contains unordered parts that are less suitable for optimization via cross entropy loss. Moreover, Seq2SQL leverages the structure of SQL to prune the space of generated queries and significantly simplify the generation problem. In addition to the model, we release WikiSQL, a dataset of 80654 hand-annotated examples of questions and SQL queries distributed across 24241 tables fromWikipedia that is an order of magnitude larger than comparable datasets. By applying policy based reinforcement learning with a query execution environment to WikiSQL, Seq2SQL outperforms a state-of-the-art semantic parser, improving execution accuracy from 35.9% to 59.4% and logical form accuracy from 23.4% to 48.3%.",
+    "keywords": [
+      "deep learning",
+      "reinforcement learning",
+      "dataset",
+      "natural language processing",
+      "natural language interface",
+      "sql"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Syx6bz-Ab"
+  },
+  "review_fields": {
+    "review": "This work introduces a new semantic parsing dataset, which focuses on generating SQL from natural language. It also proposes a reinforcement-learning based model for this task.\n\nFirst of all, I'd like to emphasize that the creation of a large scale semantic parsing dataset is fantastic, and it is a much appreciated contribution. However, I find its presentation problematic. It claims to supplant existing semantic parsing and language-to-SQL datasets, painting WikiSQL as a more challenging dataset overall. Given the massive simplifications to what is considered SQL in this dataset (no joins, no subqueries, minimal lexical grounding problem), I am reluctant to accept this claim without empirical evidence. For example, how well does the proposed model work when evaluated on an existing dataset containing full SQL queries, such as ATIS? That being said, I am sympathetic to making simplifications to a dataset for the sake of scalability, but it shouldn't be presented as representative of SQL.\n\nOn the modeling side, the role of reinforcement learning seems oddly central in the paper, even though though the added complexity is not well motivated. RL is typically needed when there are latent decisions that can affect the outcome in ways that are not known a priori. In this case, we know the reward is invariant to the ordering of the tokens in the WHERE clause. There are far simpler solutions that would achieve the same result, such as optimizing the marginal likelihood or even simply including all orderings as training examples. These should be included as baselines.\n\nWhile the data contribution is great, the claims of the paper need to be revised."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

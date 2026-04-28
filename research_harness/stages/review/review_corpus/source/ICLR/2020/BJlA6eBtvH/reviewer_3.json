@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "BJlA6eBtvH",
+  "reviewer": "3",
+  "paper": {
+    "title": "Differentiable Hebbian Consolidation for Continual Learning",
+    "authors": [
+      "Vithursan Thangarasa",
+      "Thomas Miconi",
+      "Graham W. Taylor"
+    ],
+    "abstract": "Continual learning is the problem of sequentially learning new tasks or knowledge while protecting previously acquired knowledge. However, catastrophic forgetting poses a grand challenge for neural networks performing such learning process. Thus, neural networks that are deployed in the real world often struggle in scenarios where the data distribution is non-stationary (concept drift), imbalanced, or not always fully available, i.e., rare edge cases. We propose a Differentiable Hebbian Consolidation model which is composed of a Differentiable Hebbian Plasticity (DHP) Softmax layer that adds a rapid learning plastic component (compressed episodic memory) to the fixed (slow changing) parameters of the softmax output layer; enabling learned representations to be retained for a longer timescale. We demonstrate the flexibility of our method by integrating well-known task-specific synaptic consolidation methods to penalize changes in the slow weights that are important for each target task. We evaluate our approach on the Permuted MNIST, Split MNIST and Vision Datasets Mixture benchmarks, and introduce an imbalanced variant of Permuted MNIST --- a dataset that combines the challenges of class imbalance and concept drift. Our proposed model requires no additional hyperparameters and outperforms comparable baselines by reducing forgetting.",
+    "keywords": [
+      "continual learning",
+      "catastrophic forgetting",
+      "Hebbian learning",
+      "synaptic plasticity",
+      "neural networks"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=BJlA6eBtvH"
+  },
+  "review_fields": {
+    "experience_assessment": "I do not know much about this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I did not assess the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I did not assess the derivations or theory.",
+    "review": "This paper tackles the problems of continual learning and catastrophic forgetting in neural networks. It uses methods inspired by Hebbia learning and complementary learning system (CLS), where there are slow and fast weights in the model. \n\nThe paper addresses an important topic. I find the idea of fast/slow weights to be a refreshing and different approach compared to previous work on catastrophic forgetting. \n\nI had trouble following the details of the DHS Softmax, however. This may stem from my inexperience with Hebbian Learning, but here are some questions/suggestions:\n\n- I am a bit confused exactly what is referred to as post/pre-synaptic connection, what is penultimate layer, etc. A figure might be helpful. \n\n- It also might be helpful to write out an equation for the standard Softmax so it can be compared to Eq 2. \n\n- Related to above, I am confused what is indexed by i,j in Eq 4. Compared to Eq 1, where theta only has one index (k), in Eq 4 theta has two indices (i,j). \n\n- In terms of motivation, can you explain why this Hebbian strategy is applied only to the final softmax? \n\nOther questions:\n\n- Does it seem like DHS Softmax is not as strong by itself but works best in conjunction with others, such as EWC? I do not quite follow how they complement each other intuitively. \n\n- Are there any hyperparameters required for DHS Softmax? It seems to be no?"
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

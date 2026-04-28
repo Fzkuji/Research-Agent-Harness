@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "xS6zx1aBI9",
+  "reviewer": "d8nz",
+  "paper": {
+    "title": "CLIN: A Continually Learning Language Agent for Rapid Task Adaptation and Generalization",
+    "authors": [
+      "Bodhisattwa Prasad Majumder",
+      "Bhavana Dalvi Mishra",
+      "Peter Jansen",
+      "Oyvind Tafjord",
+      "Niket Tandon",
+      "Li Zhang",
+      "Chris Callison-Burch",
+      "Peter Clark"
+    ],
+    "abstract": "Language agents have shown some ability to interact with an external environment, e.g., a virtual world such as ScienceWorld, to perform complex tasks, e.g.,  growing a plant, without the startup costs of reinforcement learning. While recent work, e.g., Reflexion, has demonstrated how such agents can also self-improve by adding a textual memory of ''hints'' learned from prior experience, such improvements have been limited both in size and scope. In contrast, our goal is a language agent that can robustly improve performance over time, including when both the task and environment are varied. Our approach is to have the agent learn a textual representation of how the world works (rather than just isolated hints), expressed as a memory of causal abstractions, to guide future decision-making. In experiments, we find CLIN is able to continually improve on repeated trials on the same task and environment, outperforming state-of-the-art reflective language agents like Reflexion by 23 points in ScienceWorld and 1.4 points in ALFWorld benchmarks. CLIN can also transfer its learning to new environments and tasks, enhancing performance by 21 points in ScienceWorld and 11 points in ALFWorld. This suggests that language agents with a textual causal memory can play a significant role in interactive environments, including being able to rapidly improve over time.",
+    "keywords": [
+      "Language Agents",
+      "Memory",
+      "Causal Abstraction",
+      "Continual Learning",
+      "Memory-augmented Agents",
+      "Task Adaptation",
+      "Text-based Simulator",
+      "Virtual Environment"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=xS6zx1aBI9"
+  },
+  "review_fields": {
+    "summary": "The work proposes CLIN, which writes (create/edit) to a textual long-term memory semantic knowledge about the domain and its causal abstractions. Compared to existing work like Reflexion or Voyager, the key difference is that CLIN learns across environments and tasks.\n\nOn ScienceWorld and ALFWorld, it shows performance gain over the base agent and compared to baselines like ReAct and Reflexion, across setups of performing same/different task/environments.",
+    "reasons_to_accept": "- Long-term memory is a fundamental direction for language agents, and the paper makes solid contribution to this direction.\n\n- The idea makes sense and is tested in systematic setups across domains, environments, and tasks. \n\n- Findings are interesting, e.g. causal abstractions help more than free-form advice, the correlation of correctness and helpfulness of memories, etc. Some experiments and setups can serve as the basis for future research.",
+    "reasons_to_reject": "- The main limitation is that domains (especially ALFWorld) have regularities and are relatively synthetic. Thus, it is not surprising that causal abstractions can be learned and applied, given the current reasoning capabilities of LLMs. It would make the paper much stronger if some more noisy and realistic domains can be tested, e.g. Jericho/WebShop/WebArena/SWE-bench/etc. Even if the results are not good, I would still think the results make the paper stronger, as it objectively reflects limitations of current methods and better point out future directions.\n\n\n- There are many math notations but the explanation is not most intuitive. I'd suggest some concrete examples to better illustrate the ideas.",
+    "questions_to_authors": "- Equation 1: what's e? I guess environment but not defined in 3.1.\n\n- Table 1: Is SayCan basically \"Act\" in ReAct? i.e. \"Observation\" and \"Action\" turns? SayCan should have grounded visual parts, not sure if ScienceWorld has it."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:50Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:50Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1390,
+    "words": 215,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/aadba052-8c2f-4e98-8dbf-a8749a41b675",
+    "error": null,
+    "scored_chars": 1391
+  }
+}

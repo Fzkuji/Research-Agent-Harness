@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "3PjCt4kmRx",
+  "reviewer": "sYmC",
+  "paper": {
+    "title": "From Pixels to UI Actions: Learning to Follow Instructions via Graphical User Interfaces",
+    "authors": [
+      "Peter Shaw",
+      "Mandar Joshi",
+      "James Cohan",
+      "Jonathan Berant",
+      "Panupong Pasupat",
+      "Hexiang Hu",
+      "Urvashi Khandelwal",
+      "Kenton Lee",
+      "Kristina Toutanova"
+    ],
+    "abstract": "Much of the previous work towards digital agents for graphical user interfaces (GUIs) has relied on text-based representations (derived from HTML or other structured data sources), which are not always readily available. These input representations have been often coupled with custom, task-specific action spaces.  This paper focuses on creating agents that interact with the digital world using the same conceptual interface that humans commonly use — via pixel-based screenshots and a generic action space corresponding to keyboard and mouse actions. Building upon recent progress in pixel-based pretraining, we show, for the first time, that it is possible for such agents to outperform human crowdworkers on the MiniWob++ benchmark of GUI-based instruction following tasks.",
+    "keywords": [
+      "instruction following",
+      "web tasks",
+      "user interface tasks",
+      "vision and language",
+      "representation learning",
+      "reinforcement learning",
+      "imitation learning",
+      "tree search",
+      "language grounding",
+      "web agents",
+      "computer control"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=3PjCt4kmRx"
+  },
+  "review_fields": {
+    "summary": "One of the main goals of intelligent agents is to interact with the internet in the same way that humans do. Prior state-of-the-art models relied on both the DOM structure and the graphical user interface (GUI) to achieve good performance on web browsing tasks that involve following instructions. In this paper, the authors propose a model that relies solely on pixel-based screenshots as input. The model then selects actions that correspond to basic mouse and keyboard operations. \n\nThe authors use a pre-trained model called Pix2Struct and a standard behavior cloning and reinforcement learning (RL) framework to improve the model's ability to follow instructions and perform various web tasks. The authors demonstrate that their pixel-based approach, which does not require access to DOM-related information, can achieve competitive performance on the MiniWob++ benchmark. Additionally, they show through ablation studies that the performance gains can be primarily attributed to the pre-training of Pix2Struct.\n\n**Update after rebuttal**\nI confirm that I have read the rebuttal and other reviewers feedback. Authors have addressed my concerns.",
+    "strengths": "- Teaching agents to interact with the web is an important research direction. The experiments presented in this paper provide valuable insights to the community. In particular, the authors demonstrate that large-scale pre-training on image-to-text tasks, such as Pix2Struct, can reduce the need to explicitly provide DOM information to the model. Additionally, the task transfer ablation study shows that the model is able to generalize to other tasks. These findings will help to shape the future research direction on this topic.\n\n- Paper is well written and is easy to follow. For MiniWob++ benchmark, authors performed sufficient ablation studies to quantify gains due to individual components i.e. pre-training, behavior cloning.",
+    "weaknesses": "- It's not clear if authors have tuned all baselines correctly. In particular, authors show that their proposed RL data bootstrapping method leads to better performance than Behavior Cloning. If I understood the experiments correctly, they have not trained the model for the same number of steps so it's very likely that behavior cloning baseline is potentially under-trained. \n- There are multiple important design discussions that are added to the text without any particular justification. For example, authors fine-tune model on MiniWoB++ data for WebShop experiment but don't use WebShop data for MiniWob++ experiment. There is no justification for such design choices. Further, authors provide different learning rate and number of steps for various experiments without justifying these design choices.   \n- Authors present very sparse results and discussion on WebShop dataset and all experiments are mainly conducted on MiniWoB++ dataset. As a reader, it feels like that authors added that dataset mainly for the sake of adding it.",
+    "questions": "- Hyperparameter on Webshop data: learning rate and optimizer details. If these are similar to MiniWoB++, please add a note \n- Choose-date: what kind of mistakes model make ? How does RL sampled data help with poor performing tasks? \n- Fig 3: for how many steps did you train Ours (BC only) vs Ours ? In particular, does BC training for additional steps help in improving BC baseline? \n- Authors suggest that intermediate fine-tuning on MiniWoB++ helps for WebShop tasks. Do they observe similar gains while using WebShop data for MiniWoB++ task?",
+    "limitations": "Authors have addressed major limitations of their work and have also provided potential misuse of their research."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2432,
+    "words": 377,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/dc31ccb8-0222-4a5e-99fd-e6c9592aeecc",
+    "error": null,
+    "scored_chars": 2439
+  }
+}

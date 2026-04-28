@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "KjNEzWRIqn",
+  "reviewer": "JodV",
+  "paper": {
+    "title": "Synatra: Turning Indirect Knowledge into Direct Demonstrations for Digital Agents at Scale",
+    "authors": [
+      "Tianyue Ou",
+      "Frank F. Xu",
+      "Aman Madaan",
+      "Jiarui Liu",
+      "Robert Lo",
+      "Abishek Sridhar",
+      "Sudipta Sengupta",
+      "Dan Roth",
+      "Graham Neubig",
+      "Shuyan Zhou"
+    ],
+    "abstract": "LLMs can now act as autonomous agents that interact with digital environments and complete specific objectives (e.g., arranging an online meeting). However, accuracy is still far from satisfactory, partly due to a lack of large-scale, direct demonstrations for digital tasks. Obtaining supervised data from humans is costly, and automatic data collection through exploration or reinforcement learning relies on complex environmental and content setup, resulting in datasets that lack comprehensive coverage of various scenarios. On the other hand, there is abundant knowledge that may indirectly assist task completion, such as online tutorials that were created for human consumption. In this work, we present Synatra, an approach that effectively transforms this indirect knowledge into direct supervision at scale. We define different types of indirect knowledge, and carefully study the available sources to obtain it, methods to encode the structure of direct demonstrations, and finally methods to transform indirect knowledge into direct demonstrations. We use 100k such synthetically-created demonstrations to finetune a 7B CodeLlama, and demonstrate that the resulting agent surpasses all comparably sized models on three web-based task benchmarks Mind2Web, MiniWoB++ and WebArena, as well as surpassing GPT-3.5 on WebArena and Mind2Web. In addition, while synthetic demonstrations prove to be only 3% the cost of human demonstrations (at $0.031 each), we show that the synthetic demonstrations can be more effective than an identical number of human demonstrations collected from limited domains.",
+    "keywords": [
+      "AI agents",
+      "sythetic data",
+      "web navigation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=KjNEzWRIqn"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a demonstration generation approach for learning UI control by mixing two different sources. The first one uses GPT4 to generate scenarios, grounded actions, and observations using WikiHow plans which is initially filtered by GPT-3.5. Another data source is ClueWeb, form which the authors extract web pages, sample a segment for any page, and ask GPT4 to come up with scenarios and next actions. Both data sources are combined into a single dataset of 50K traces where a program format is used. A CodeLlama model is fine-tuned with the resulting dataset. Results show that it achieves comparably when compared to other baselines, including a basic GPT-based prompting method. Ablation analysis shows that program format is important, both data mixtures add value, and proposed dataset transfer to other benchmarks better than Mind2Web traces.",
+    "strengths": "The paper proposes a data synthesis approach for training UI agents. It combines WikiHow plans and actual observations with the strength of GPT-based models to fill in the gaps. the approach is agnostic to any domain and can serve as a good initialization.",
+    "weaknesses": "My main concerns are weak baselines and lack of some others.\n\n1. There are many baselines missing from the comparison and available baselines are weak. For example, HTML-T5 [11] achieves 49.7 and MindAct [6] achieves 30.9 on Mind2Web dataset. Performance on Miniwob++ reaches up to 99.2% [A]. There are many other baselines including prompting and fine-tuning based ones with different pre-training that should be included.\n\n2. Can you further fine-tune on demonstrations from available benchmarks? While a semi-supervised approach is helpful, how much does it improve when human demonstrations added?\n\n3. You also mentioned that a unique \"id\" is assigned to target elements in your training demonstrations. Given that the actions condition on the current state, what prevents the model from overfitting to this unique id when detecting salient elements?\n\n4. You mention that you use viewports in Mind2Web benchmark to fit into the context window. But to extract viewports, you need to know where the ground truth element resides in the DOM (or accessibility tree) or you assume you have access to an oracle scrolling agent. I think both cases are different from your baselines and suggests leakage of test data.\n\n5. When you use NL format rather than programs, how do you ground generated actions to executable environment actions?\n\n6. What is the performance of the model trained with Mind2Web demonstrations on Mind2Web test sets? When tested on other benchmarks, how do you ground the action on the particular benchmark?\n\n7. It is not clear if the claim that collected demonstrations have a similar distribution as Mind2Web as they have fatter tails.\n\n8. Text and legend in Figure-2 are not readable.\n\nA. Longtao Zheng, Rundong Wang, and Bo An. Synapse: Leveraging few-shot exemplars for human level computer control. arXiv preprint arXiv:2306.07863, 2023.",
+    "questions": "Please see my above concerns for particular questions.",
+    "limitations": "Limitations of the work are addressed."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 5,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2214,
+    "words": 351,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b2401153-7fa5-4e92-a2f0-b92a945d0fc2",
+    "error": null,
+    "scored_chars": 2214
+  }
+}

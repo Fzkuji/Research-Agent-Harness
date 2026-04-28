@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "6iEoTr-jeB7",
+  "reviewer": "XKEH",
+  "paper": {
+    "title": "Learning Continuous Normalizing Flows For Faster Convergence To Target Distribution via Ascent Regularizations",
+    "authors": [
+      "Shuangshuang Chen",
+      "Sihao Ding",
+      "Yiannis Karayiannidis",
+      "Mårten Björkman"
+    ],
+    "abstract": "Normalizing flows (NFs) have been shown to be advantageous in modeling complex distributions and improving sampling efficiency for unbiased sampling. In this work, we propose a new class of continuous NFs, ascent continuous normalizing flows (ACNFs), that makes a base distribution  converge faster to a target distribution. As solving such a flow is non-trivial and barely possible, we propose a practical implementation to learn flexibly parametric ACNFs via ascent regularization and apply it in two learning cases: maximum likelihood learning for density estimation and minimizing reverse KL divergence for unbiased sampling and variational inference. The learned ACNFs demonstrate faster convergence towards the target distributions, therefore, achieving better density estimations, unbiased sampling and variational approximation at lower computational costs. Furthermore, the flows show to stabilize themselves to mitigate performance deterioration and are less sensitive to the choice of training flow length $T$.",
+    "keywords": [
+      "normalizing flows",
+      "gradient flows",
+      "density estimation",
+      "unbiased sampling",
+      "variational inference"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=6iEoTr-jeB7"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper proposes a way to regularize continuous normalizing flows by regularizing them to have monotonically decreasing KL divergence wrt to the base distribution along the integration path. In doing so the paper builds on previous work of NODE, RNODE and CNFs and adds to the collection of papers around stabilizing continuous normalizing flows. Through a bunch of experiments on tabular datasets and some experiments on MNIST images the paper shows that their method can indeed lead to flows that converge faster (less NFEs) and are more stable.",
+    "strength_and_weaknesses": "Strengths:\n\n- The authors have formulated a novel way of regularizing continuous flows that not only makes the flow stable but also improves efficiency (in terms of NFEs) and final performance (in terms of NLL)\n- The authors have backed their regularization functional with ample explanations and theoretical justification and followed it up with experiments that reflect the contributions they claim.\n\nWeaknesses:\n- While not specific to this work but continuous flows papers in general should discuss an important limitation: scaling to high-dimensional datasets like ImageNet or FFHQ. The authors show some results on MNIST but I think the stronger case should be made on high-dimensional images. If not, commenting on a possible roadmap to get there might also be useful.\n- I am unsure how the computational cost compares wrt to previous work. From Algorithms 1 and 2 it seems like integrating augmented states for z_t and then for log(p_t(z_t)) should incur a higher computational cost. It would be better if the authors could discuss the overall compute cost as well and not just NFE.\n- Another thing to discuss is more theoretical: why should there exist a map from the data distribution to a base distribution that has the ascent continuous property? The topology of the support of the data distribution may not be homeomorphic to a ball in high-dimensional space (in case of Gaussian) ? Moreover even if it is homeomorphic, it is not obvious to me why should an ascent-continuous map always exist.",
+    "clarity,_quality,_novelty_and_reproducibility": "- The paper is written well and the ideas seem novel.\n- The authors share some code but no unit tests on how to run yet. Hopefully, this will be fixed in the final submission to allow for reproducibility.",
+    "summary_of_the_review": "I think the paper makes a good contribution to the bijective normalizing flows literature. It supports the claimed contribution with theory and appropriate empirical analysis.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

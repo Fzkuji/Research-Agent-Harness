@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "nZ4mFzCZIx",
+  "reviewer": "X5JK",
+  "paper": {
+    "title": "Towards Generalizable 3D Human Pose Estimation via Ensembles on Flat Loss Landscapes",
+    "authors": [
+      "Jumin Han",
+      "Jun-Hee Kim",
+      "Seong-Whan Lee"
+    ],
+    "abstract": "3D Human Pose Estimation (HPE) is a fundamental task in the computer vision. Generalization in 3D HPE task is crucial due to the need for robustness across diverse environments and datasets. Existing methods often focus on learning relationships between joints to enhance the generalization capability, but the role of the loss landscape, which is closely tied to generalization, remains underexplored. In this paper, we empirically visualize the loss landscape of the 3D HPE task, revealing its complexity and the challenges it poses for optimization. To address this, we first introduce a simple adaptive scaling mechanism that smooths the loss landscape. We further observe that different solutions on this smoothed loss landscape exhibit varying generalization behaviors. Based on this insight, we propose an efficient ensemble approach that combines diverse solutions on the smooth loss landscape induced by our adaptive scaling mechanism. Extensive experimental results demonstrate that our approach improves the generalization capability of 3D HPE models, and can be easily applied, regardless of model architecture, with consistent performance gains.",
+    "keywords": [
+      "Lifting-based 3D Human Pose Estimation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=nZ4mFzCZIx"
+  },
+  "review_fields": {
+    "comment": "We thank the authors for the theoretical explanation and the additional experiments, which have addressed some of my concerns. However, I still have some doubts regarding noise robustness:\n1. In Fig. 6 (d), although your model appears more stable at high noise levels, the $\\Delta$MPJPE exceeds 100, which indicates a poor result. While the baseline is indeed worse, both results are essentially unusable under such noise levels.\n2. In Fig. 6 (d), when the perturbation level is 0.1, the $\\Delta$MPJPE clearly exceeds 50, yet the value reported in the accompanying table is less than 40. Could you clarify this inconsistency?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

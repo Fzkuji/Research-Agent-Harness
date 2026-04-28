@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "GrB-y0SNkQ",
+  "reviewer": "CYQL",
+  "paper": {
+    "title": "CobBO: Coordinate Backoff Bayesian Optimization with Two-Stage Kernels",
+    "authors": [
+      "Jian Tan",
+      "Niv Nayman",
+      "MengChang WANG",
+      "Rong Jin"
+    ],
+    "abstract": "Bayesian optimization is a popular method for optimizing expensive black-box functions. Yet it oftentimes struggles in high dimensions where a sufficient estimation of the global landscape requires more observations and the computation cost becomes prohibitively expensive.\nWe introduce Coordinate backoff Bayesian optimization (CobBO) with two-stage kernels to alleviate this problem.\nIn each iteration, a promising subset of coordinates is selected in the first stage, as past observed points in the full space are projected to the selected subspace adopting a simple kernel that sacrifices the approximation accuracy for computational efficiency.\nThen in the second stage of the same iteration a more sophisticated kernel is applied for estimating the landscape in the selected low dimensional subspace where the computational cost becomes affordable. Effectively, this second stage kernel refines the approximation of the global landscape estimated by the first stage kernel through a sequence of observations in the local subspace. This refinement lasts until a stopping rule is met determining when to back off from a certain subspace and switch to another coordinate subset.\nThis decoupling significantly reduces the computational burden in high dimensions, while the two-stage kernels of the Gaussian process regressions fully leverage the observations in the whole space rather than only relying on observations in each coordinate subspace.\nExtensive evaluations show that CobBO finds solutions comparable to or better than other state-of-the-art methods for dimensions ranging from tens to hundreds, while reducing the trial complexity and computational costs.",
+    "keywords": [
+      "Bayesian Optimization"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=GrB-y0SNkQ"
+  },
+  "review_fields": {
+    "summary": "This paper aims at making Bayesian optimization scalable to problems with large dimensional inputs. The authors propose an approach that selects block coordinates of the input space to explore at each iteration. The authors provide some theoretical results to support the proposed approach, and report experimental results to demonstrate that the proposed approach can achieve better performance than existing approaches.",
+    "main_review": "Originality: \nThe main idea of the proposed approach is to use the multiplicative weights update method in Bayesian optimization. To my limited knowledge about Bayesian optimization, this is novel and thus the originality is reasonable. \n\n\nQuality:\nWhile the approach seems reasonable and the experimental results look promising, I have the following concerns about the paper. \n\n- The way they cite some of the existing works is not very precise, and thus I don't have a good impression of the quality of the work. For instance, [6] and [7] are the same book;  [26] on inverse distance weighting is Wikipedia; [32] and [33] are the same paper; [40] on Matern kernels is a webpage of scikit learn; [50] on radial basis functions is a webpage of scipy; [61] and [62] are the same paper; [64] and [65] are the same paper. \n\n- In lines 32-34, the authors say ``always exactly using the values on the queried points as the conditional events may mismatch the function’s local landscape by overemphasizing the approximation accuracy of the global landscape.'' Similar arguments are made in lines 43-48. I feel confused to see this argument. In GP regression, we usually assume noisy outputs, and the use of a regularized matrix inversion (where the regularizer is given by the noise variance) incorporates this assumption by automatically smoothing the outputs. \n\n- In line 57, the authors say ``CobBO uses the Automatic Relevance Determination (ARD) Matérn 5/2 kernel.'' But it is not clear how the authors specify the weights of this ARD kernel, as this is also not described in the supplementary. And the authors do not explain the value of the length scale parameter in the kernel. \n\n- In line 12 of Algorithm 1, there exists an RBF interpolation, denoted by $R$. The authors should describe the explicit from this interpolator. While the authors seem to explain that the RBF interpolation and GP regression are different, they are essentially the same approach. As such, RBF interpolation requires the computational complexity cubic to the data size. This point should also be discussed.\n\n- In line 14 of Algorithm 1, $\\Omega_t$ denotes the subspace spanned by the block coordinates $C_t$. I am wondering about how the authors specify the values for the coordinates in $\\Omega_t$ not selected in $C_t$. For instance, suppose the dimensions are $D = 4$ and $C_t = \\{1, 2\\}$. Then is $x \\in \\Omega_t$ given in the form $x = (x_1, x_2, 0, 0)$ by specifying the coordinates not in $C_t$ (i.e,. \\{3, 4\\}) to be zeros? This point is not clear from the presentation. If this is the case, the authors implicitly make an assumption about the optimal solution that some of their coordinates are zero. This is rather a strong assumption.\n\n- In Section 3.3, the authors define ``regret'' in terms of the selection of the best coordinate block. This regret is different from the regrets defined in terms of the global optimizer, usually analyzed in the Bayesian optimization literature. Therefore, the theoretical results of the paper do not really provide a theoretical guarantee for the proposed approach in terms of the convergence to the global optimizer.  \n\n- While the authors show the hyperparameter settings in Table 2 of the supplementary, some information is still missing, such as the acquisition function used and the length scales of the kernels in RBF interpolation and GP regression. \n\n\nClarity:\n- Since the authors omit the concrete expressions for many mathematical concepts (e.g., RBF interpolation and the subspace $\\Omega_t$), it is not very easy to deeply understand the mechanism of the proposed algorithm. Also, some key information for reproducing the experimental results is missing. \n\nSignificance:\n- There are many hyperparameters that need to be chosen in the proposed algorithm. (Table 2 in the supplementary shows an incomplete list of the hyperparameters.) If the performance of the proposed algorithm is sensitive to the choice of these parameters, the algorithm is not easy to be used by practitioners. This point is not clear from the paper. If this is the case, the significance of the proposed method is limited. \n\n- Also, as described above, it may be the case that the proposed approach implicitly assumes that some of the coordinates of the global optimizer are zeros. If this is the case, the proposed approach can only be applied to problems that satisfy this assumption, which may be restrictive.\n\n\n------------ Post rebuttal --------------\nAs the authors made some clarifications, I have increased my score to 5. Still, however, I'm not very convinced by the argument of the authors on regret analysis.",
+    "limitations_and_societal_impact": "The authors do not discuss the limitations of their work."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "7fFO4cMBx_9",
+  "reviewer": "cp9d",
+  "paper": {
+    "title": "Variational Neural Cellular Automata",
+    "authors": [
+      "Rasmus Berg Palm",
+      "Miguel González Duque",
+      "Shyam Sudhakaran",
+      "Sebastian Risi"
+    ],
+    "abstract": "In nature, the process of cellular growth and differentiation has lead to an amazing diversity of organisms --- algae, starfish, giant sequoia, tardigrades, and orcas are all created by the same generative process.\nInspired by the incredible diversity of this biological generative process, we propose a generative model, the Variational Neural Cellular Automata (VNCA), which is loosely inspired by the biological processes of cellular growth and differentiation. Unlike previous related works, the VNCA is a proper probabilistic generative model, and we evaluate it according to best practices. We find that the VNCA learns to reconstruct samples well and that despite its relatively few parameters and simple local-only communication, the VNCA can learn to generate a large variety of output from information encoded in a common vector format. While there is a significant gap to the current state-of-the-art in terms of generative modeling performance, we show that the VNCA can learn a purely self-organizing generative process of data. Additionally, the self-organizing nature bestows the VNCA with some inherent robustness against perturbations in the early stages of growth.",
+    "keywords": [
+      "Neural Cellular Automata",
+      "Cellular Automata",
+      "Self-Organization",
+      "Generative Models"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=7fFO4cMBx_9"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors incorporate Neural Cellular Automata (NCA) into the decoding process of a variaitional autoencoder. They then train this model on a number of toy datasets, test out beta-VAE to make better reconstructions, and show a few reconstruction/decoding tasks that highlight the contributions of the described approach.",
+    "main_review": "Pros:\n\n- Figure 2 is extremely clear, and I understand pretty much how the model works.\n\n- I appreciate that the authors looked at a number of different datasets to compare their model against. \n\n- I think the \"damage\" experiments in Figure 10 were very interesting and well done, and could have been more of a showcase of the paper.\n\nCons:\n\n- I think this work could be improved by showing more tasks this approach would work very well for. For example, in Figure 10, what does neuron/latent variable ablation look like with a normal variational autoencoder with upsampling? Can this be quantified with log-likelihood? This would be a great metric to compare against.\n\n- For the decoding process figures (Figure 1 and 4), I don't see how this approach necessarily differs from a regular variational autoencoder with some sort of upsampling. \n\n- With respect to inpainting of images, there are many other approaches that directly use the log-likelihood that could be compared against.\n\n- I don't think the claims of \"super-resolution\" are well founded, especially if those claims are only using MNIST as the input dataset and the reconstructions have artifacts. This could be sufficiently tested by training the model either blurry or downsampled images and comparing the \"super-resolved\" images to the true high-resolution images.\n\nNeutral:\n\n- The individual samples reported in the appendix are a bit surprising (their low quality). I think this should have been reported more in the main part of the paper.",
+    "summary_of_the_review": "Generally, I think this model is an incremental improvement over neural cellular automata. While I do think that this approach is interesting and the results are sound, I think there could be more careful analysis of where the VNCA shines compared to existing approaches.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1780,
+    "words": 291,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c4821162-6c15-4a9f-99df-f823f05f0fd3",
+    "error": null,
+    "scored_chars": 1782
+  }
+}

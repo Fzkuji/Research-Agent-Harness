@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "78iGZdqxYY",
+  "reviewer": "XL6A",
+  "paper": {
+    "title": "Mirage: Model-agnostic Graph Distillation for Graph Classification",
+    "authors": [
+      "Mridul Gupta",
+      "Sahil Manchanda",
+      "HARIPRASAD KODAMANA",
+      "Sayan Ranu"
+    ],
+    "abstract": "GNNs, like other deep learning models, are data and computation hungry. There is a pressing need to scale training of GNNs on large datasets to enable their usage on low-resource environments. Graph distillation is an effort in that direction with the aim to construct a smaller synthetic training set from the original training data without significantly compromising model performance. While initial efforts are promising, this work is motivated by two key observations: (1) Existing graph distillation algorithms themselves rely on training with the full dataset, which undermines the very premise of graph distillation. (2) The distillation process is specific to the target GNN architecture and hyper-parameters and thus not robust to changes in the modeling pipeline. We circumvent these limitations by designing a distillation algorithm called MIRAGE for graph classification. MIRAGE is built on the insight that a message-passing GNN decomposes the input graph into a multiset of computation trees. Furthermore, the frequency distribution of computation trees is often skewed in nature, enabling us to condense this data into a concise distilled summary. By compressing the computation data itself, as opposed to emulating gradient flows on the original training set—a prevalent approach to date—MIRAGE transforms into an unsupervised and architecture-agnostic distillation algorithm. Extensive benchmarking on real-world datasets underscores MIRAGE’s superiority, showcasing enhanced generalization accuracy, data compression, and distillation efficiency when compared to state-of-the-art baselines.",
+    "keywords": [
+      "graph distillation",
+      "graph classification",
+      "frequent pattern mining"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=78iGZdqxYY"
+  },
+  "review_fields": {
+    "summary": "This paper introduces a graph classification model called MIRAGE, which is a graph distillation method based on frequent pattern mining. MIRAGE takes advantage of the design features of the message passing framework, decomposes the graph into calculation trees, and uses the distribution characteristics of the calculation tree to compress calculation data. Compared with existing graph distillation algorithms, MIRAGE shows advantages in key indicators such as prediction accuracy, distillation efficiency, and data compression rate. Furthermore, MIRAGE only relies on CPU operations, providing a more environmentally friendly and energy-efficient graph distillation method.",
+    "strengths": "1. It is a novel idea to transform the graph distillation problem into the problem of graph decomposition.\n2. This paper clearly expresses the distillation problem in mathematical language and naturally transforms it into a graph decomposition problem.\n3. The experimental configuration is described in detail, and the experimental results are good and reasonable.",
+    "weaknesses": "1. The datasets used in the experiment is too small.",
+    "questions": "1. Would MIRAGE still be as effective if used on a very large data set?\n2. Why is MIRAGE, which only uses the CPU, so much faster than DOSCOND and KIDD, which can use the GPU?\n3. If a datasets is large, but its global computation tree is very similar, will such a datasets affect the effect of MIRAGE?\n4. How will MIRAGE perform in multi-classification tasks?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 779,
+    "words": 131,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6ae738a7-f732-469d-a08c-50c7e345090d",
+    "error": null,
+    "scored_chars": 779
+  }
+}

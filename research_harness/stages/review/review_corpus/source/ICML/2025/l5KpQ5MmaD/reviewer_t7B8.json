@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "l5KpQ5MmaD",
+  "reviewer": "t7B8",
+  "paper": {
+    "title": "Scalable Non-Equivariant 3D Molecule Generation via Rotational Alignment",
+    "authors": [
+      "Yuhui Ding",
+      "Thomas Hofmann"
+    ],
+    "abstract": "Equivariant diffusion models have achieved impressive performance in 3D molecule generation. These models incorporate Euclidean symmetries of 3D molecules by utilizing an SE(3)-equivariant denoising network. However, specialized equivariant architectures limit the scalability and efficiency of diffusion models. In this paper, we propose an approach that relaxes such equivariance constraints. Specifically, our approach learns a sample-dependent SO(3) transformation for each molecule to construct an aligned latent space. A non-equivariant diffusion model is then trained over the aligned representations. Experimental results demonstrate that our approach performs significantly better than previously reported non-equivariant models. It yields sample quality comparable to state-of-the-art equivariant diffusion models and offers improved training and sampling efficiency. Our code is available at: https://github.com/skeletondyh/RADM",
+    "keywords": [
+      "Non-equivariant diffusion",
+      "3D molecule generation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=l5KpQ5MmaD"
+  },
+  "review_fields": {
+    "summary": "The paper suggests learning a sample-dependent rotational transformation during molecule generation. This approach aligns the molecules to specific directions, eliminating the necessity of employing equivariant models. The proposed method demonstrates promising performance and efficiency on benchmark datasets.",
+    "claims_and_evidence": "The claims presented in this paper are substantiated by references and detailed experiments.",
+    "methods_and_evaluation_criteria": "First and foremost, I would like to emphasize that the authors’ concept of “aligning” molecules is known as *canonicalization* [1], and the resulting molecules are referred to as “canonical forms”. The authors inadvertently overlooked an extensive body of research on canonicalization. Notably, their method of learning a rotational matrix using a network is a weaker version of *learned canonicalization* [2,3], where the authors do not strictly enforce rotational equivariance on the canonicalization network. Since the authors’ approach is essentially canonicalization, it inherits the drawbacks of canonicalization methods. For instance, it imposes additional computational burden on the network to learn canonicalization and is unlikely to be more sample-efficient than equivariant networks. Furthermore, it lacks smoothness, meaning that a slight perturbation of the input molecule can result in a significant change in its canonical form.\n\nThe authors propose employing a non-equivariant network to learn the rotation matrix, thereby the learned “canonical form” $\\mathbf{R}\\_\\theta\\mathbf{x}$ is not guaranteed to be invariant to rotations. In contrast, the authors could consider using an equivariant network for this purpose as well, which would guarantee that $\\mathbf{R}_\\theta\\mathbf{x}$ remains strictly invariant. However, using an equivariant network may be computationally inefficient, so the authors should also explore the use of a deterministic canonicalization algorithm. For instance, the simplest approach to “align” a molecule in 3D space would be applying Principal Component Analysis (PCA). This method involves identifying the top 3 directions with the highest variance in atom positions and aligning them with the standard basis (the $x,y,z$ axes). This method is even more efficient than the authors’ approach.\n\nFurthermore, the authors assert that equivariant models are not essential for molecule generation since we only care about the overall probability of all possible positions. This argument holds true. However, in Section 4.1, it appears that the authors are still using an equivariant network for the encoder. The authors should provide justification for this choice through ablation experiments. Additionally, if we employ an equivariant canonicalization network or a deterministic canonicalization algorithm, the use of an equivariant encoder becomes unnecessary, as the aligned molecules will be guaranteed to be invariant.\n\n---\n[1] Ma, G., Wang, Y., Lim, D., Jegelka, S., & Wang, Y. A Canonicalization Perspective on Invariant and Equivariant Learning. In The Thirty-eighth Annual Conference on Neural Information Processing Systems.\n\n[2] Kaba, S. O., Mondal, A. K., Zhang, Y., Bengio, Y., & Ravanbakhsh, S. (2023, July). Equivariance with learned canonicalization functions. In International Conference on Machine Learning (pp. 15546-15566). PMLR.\n\n[3] Sareen, K., Levy, D., Mondal, A. K., Kaba, S. O., Akhound-Sadegh, T., & Ravanbakhsh, S. (2025). Symmetry-Aware Generative Modeling through Learned Canonicalization. arXiv preprint arXiv:2501.07773.\n\n---\n\n**Update: I had previously overlooked that [3] is a concurrent work released on January 15 of this year. In light of this, I have updated my score accordingly.**\n\n**I would like to clarify my earlier rebuttal comment. When I stated that the paper \"lacks empirical evidence demonstrating that canonicalization reduces the variance of latent representations across different input orientations,\" I meant that the authors should explicitly measure and report the variance of the learned latent representations, and compare this to appropriate baselines. This would provide stronger support than the current anecdotal examples where certain molecular ring structures appear similarly aligned. Such qualitative examples are insufficient to substantiate the claim that performance gains arise from improved alignment in latent space due to canonicalization.**\n\n**I appreciate the additional ablation studies provided in the rebuttal and follow-up comment, and I recommend that the authors include these results in the paper, as they are essential for its completeness. Additionally, prior work on canonicalization should be acknowledged and discussed in the camera-ready version, which may require substantial revisions to the current writing.**",
+    "theoretical_claims": "There are no theoretical claims in this paper.",
+    "experimental_designs_or_analyses": "The authors provided sufficient details about their experiment settings, and the performance and efficiency of their method on real-world tasks seem promising. However, as mentioned, this paper lacks several ablation experiments.\n\n1. Comparing the use of a non-equivariant encoder or an equivariant decoder would help justify the authors’ architectural decisions.\n\n2. Comparing their method with an equivariant canonicalization network or a canonicalization algorithm which ensure the rotational invariance of the aligned molecules.\n\n3. Additionally, the authors claim that the aligned latent space reduces variations caused by Euclidean symmetries, but this assertion lacks empirical evidence. The authors could validate this claim through experiments, demonstrating a smaller variance in the latent space compared to non-equivariant baselines.",
+    "relation_to_broader_scientific_literature": "The proposed method enhances the performance and efficiency of 3D molecule generation, benefiting the broader AI for science community.",
+    "essential_references_not_discussed": "The paper lacks references of the research on canonicalization. This should encompass, but is not limited to, the following:\n- Ma, G., Wang, Y., Lim, D., Jegelka, S., & Wang, Y. A Canonicalization Perspective on Invariant and Equivariant Learning. In The Thirty-eighth Annual Conference on Neural Information Processing Systems.\n- Tahmasebi, B., & Jegelka, S. Generalization Bounds for Canonicalization: A Comparative Study with Group Averaging. In The Thirteenth International Conference on Learning Representations.\n- Dym, N., Lawrence, H., & Siegel, J. W. (2024, July). Equivariant Frames and the Impossibility of Continuous Canonicalization. In International Conference on Machine Learning (pp. 12228-12267). PMLR.\n- Ma, G., Wang, Y., & Wang, Y. (2023). Laplacian canonization: A Minimalist Approach to Sign and Basis Invariant Spectral Embedding. Advances in Neural Information Processing Systems, 36, 11296-11337.\n- Kaba, S. O., Mondal, A. K., Zhang, Y., Bengio, Y., & Ravanbakhsh, S. (2023, July). Equivariance with learned canonicalization functions. In International Conference on Machine Learning (pp. 15546-15566). PMLR.",
+    "other_strengths_and_weaknesses": "The strengths and weaknesses are adequately discussed in the preceding points.",
+    "other_comments_or_suggestions": "It would be more readable to bold the best performance in Tables 1 and 2.",
+    "questions_for_authors": "I have no additional questions."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

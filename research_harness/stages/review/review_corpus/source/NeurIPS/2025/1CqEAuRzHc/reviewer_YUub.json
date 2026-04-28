@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "1CqEAuRzHc",
+  "reviewer": "YUub",
+  "paper": {
+    "title": "CVGL: Causal Learning and Geometric Topology",
+    "authors": [
+      "Songsong Ouyang",
+      "Yingying Zhu"
+    ],
+    "abstract": "Cross-view geo-localization (CVGL) aims to estimate the geographic location of a street image by matching it with a corresponding aerial image. This is critical for autonomous navigation and mapping in complex real-world scenarios. However, the task remains challenging due to significant viewpoint differences and the influence of confounding factors. To tackle these issues, we propose the Causal Learning and Geometric Topology (CLGT) framework, which integrates two key components: a Causal Feature Extractor (CFE) that mitigates the influence of confounding factors by leveraging causal intervention to encourage the model to focus on stable, task-relevant semantics; and a Geometric Topology Fusion (GT Fusion) module that injects Bird’s Eye View (BEV) road topology into street features to alleviate cross-view inconsistencies caused by extreme perspective changes. Additionally, we introduce a Data-Adaptive Pooling (DA Pooling) module to enhance the representation of semantically rich regions. Extensive experiments on CVUSA, CVACT, and their robustness-enhanced variants (CVUSA-C-ALL and CVACT-C-ALL) demonstrate that CLGT achieves state-of-the-art performance, particularly under challenging real-world corruptions.",
+    "keywords": [
+      "cross-view",
+      "casual learning",
+      "BEV"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=1CqEAuRzHc"
+  },
+  "review_fields": {
+    "summary": "In this paper, the author introduces Causal Feature Extractor, Geometric Topology Fusion via BEV, and DA Pooling for cross-view matching. \nMy main concern is the design of Structural Causal Model. More illustrations are needed.\nFigure 3 is confusing. What is structural causal components and redundant non-causal components in the figure 3 ?\nThe Causal Feature Extractor is a data-augmentation method, but it is not neccessary better than the conventional data agumentation. \nThe Geometric Topology Fusion is similar to Qformer, which leverage street feature as query, and the transformed BEV feature as Key and Vale. \nThe DA pooling is incremental to use three kinds of pooling together.",
+    "strengths_and_weaknesses": "In this paper, the authors propose a novel framework for cross-view geo-localization that integrates a Causal Feature Extractor (CFE), Geometric Topology Fusion (GT Fusion) using BEV, and a Data-Adaptive Pooling (DA Pooling) module.\n\nStrengths:\n\n1. The paper addresses a timely and challenging problem in cross-view geo-localization and presents a complete pipeline with causal and geometric components.\n\n2. The experimental results are strong across multiple datasets, including corrupted variants, demonstrating robustness.\n\n3. The motivation for introducing causal learning to suppress non-stable features is well-explained.\n\nMain Concerns:\n\n1. Clarity and Justification of Structural Causal Modeling (SCM):\n\nThe design of the Structural Causal Model (SCM) is briefly shown in Figure 1 but lacks sufficient justification and explanation. It remains unclear how the variables in the causal graph are defined and how interventions are operationalized in practice.\n\nFigure 3 refers to “causal” and “non-causal” components based on DCT frequency bands. However, the distinction appears heuristic and lacks empirical or theoretical justification. How confident can we be that mid-frequency bands capture \"causal\" structures while high/low frequencies are \"non-causal\"? More concrete illustrations or validation would be helpful.\n\n2. Causal Feature Extractor as Frequency Filtering:\n\nThe Causal Feature Extractor appears to perform a kind of adaptive frequency-domain filtering with randomized augmentation. While it is framed as causal intervention, the current formulation is arguably closer to frequency-based data augmentation or regularization. The causal interpretation should be further grounded or clarified.\n\n3. Comparison with Standard Augmentations:\n\nWhile the causal feature extractor is shown to improve robustness, it's not sufficiently compared with more standard or learned data augmentation techniques (e.g., RandAugment, CutMix, or recent frequency-based domain generalization approaches). This weakens the claim that causal modeling offers unique benefits.\n\n4. Similarity to Existing Architectures:\n\nThe GT Fusion module resembles prior cross-attention mechanisms such as Q-former, especially the use of street features as queries and BEV features as key/value. The novelty in the geometric fusion design seems marginal unless better distinguished from prior works.\n\n5. DA Pooling Contribution is Incremental:\n\nThe DA Pooling module combines standard pooling types (max, average, and geometric mean) with gating. This is a reasonable design choice but seems incremental in isolation. Ablation results show marginal gain; a clearer motivation or design rationale could strengthen its necessity.\n\n6. Reproducibility and Clarity of Presentation:\n\nSeveral parts of the method, especially loss terms and the frequency masking strategy, are mathematically specified but not intuitively explained. More illustrations and conceptual diagrams would help readers understand the pipeline.\n\n7. The paper title is different from the title in the Openreview system. \n\n8. Cross-view matching. It would be test on drone-view datasets, like University-1652 and Vigor.",
+    "final_justification": "Causality part still does not convince me. \nThe cause is not well-defined. \nThe association is not intuitive. \n\nI can understand that we need to remove the noise, and do the augmentation. But I do not think it needs  ``causality'' to explain it. So it is somehow over-claimed. \n\nIf we only consider the noise and augmentation, the proposed module is not new."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4,
+    "quality": 2,
+    "clarity": 2,
+    "significance": 2,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

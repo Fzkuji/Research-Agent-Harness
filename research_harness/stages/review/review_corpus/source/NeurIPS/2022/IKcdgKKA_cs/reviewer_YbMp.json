@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "IKcdgKKA_cs",
+  "reviewer": "YbMp",
+  "paper": {
+    "title": "Mathematically Modeling the Lexicon Entropy of Emergent Language",
+    "authors": [
+      "Brendon Boldt",
+      "David R Mortensen"
+    ],
+    "abstract": "We formulate a stochastic process, FiLex, as a mathematical model of lexicon entropy in deep learning-based emergent language systems. Defining a model mathematically allows it to generate clear predictions which can be directly and decisively tested. We empirically verify across four different environments that FiLex predicts the correct correlation between hyperparameters (training steps, lexicon size, learning rate, rollout buffer size, and Gumbel-Softmax temperature) and the emergent language's entropy in $20$ out of $20$ environment-hyperparameter combinations. Furthermore, our experiments reveal that different environments show diverse relationships between their hyperparameters and entropy which demonstrates the need for a model which can make well-defined predictions at a precise level of granularity.",
+    "keywords": [
+      "emergent language",
+      "emergent communication",
+      "stochastic process",
+      "modeling"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=IKcdgKKA_cs"
+  },
+  "review_fields": {
+    "summary": "This paper fits into the Emergent Language literation and argues that prior work has been insufficiently rigorous when presenting their hypotheses. This work is presented as a starting point for mathematical methodology in developing and testing models of emergent language. \n\nTheir main contribution is an approach \"FiLex\" to understanding models of emergent language influenced by the Chinese Restaurant process (CRP). The relation here is to describe words as having a similar property to the tables in the CRP in that their usage is self-reinforcing. This approach is detailed in Section 3.1 with Algorithm 1 and the Formulation on page 3.\n\nTheir hypothesis, presented in Section 3.4, is that hyperparameters in FiLex correlate with hyperparameters commonly found in emergent language setups: time steps, lexicon size, learning rate, buffer size, and temperature. Their specific statement is that the sign of the correlation between those hyperparameters and entropy will be the same for FiLex as it is for the ELS setups. \n\nThey experimentally test this hypothesis by comparing FiLex against 4 ELS setups in Table 2 and Figure 1 and then make claims in Sec 5 (discussion) that this model lets practitioners more rigorously understand confounding factors.",
+    "strengths_and_weaknesses": "Originality:\n\nThis paper is original. It's taking a well-known idea (CRP) and applying it to a domain (emergent language) where the procedure is potentially beneficial for attaining understanding. It's unclear to me that this is actually the right approach for this domain and that's something that warrants greater discussion in the paper, but it's still an interesting direction that has merit.\n\n\nQuality:\n\nI don't think that this approach makes sense to do in ELS. I love the motivation to have better mathematical foundations in the space, but I disagree that this approach, or at least as presented, is the right path.\n\nFirst, why should it be the case that methods with same sign correlations in individual hyperparameters are actually indicative of each other? This is much too weak of a statement to be predictive as we could manufacture this artificially without much issue. The argument given at the end of section 3 that then qualitatively associates the variables doesn't fix this issue; changing just the algorithm used from PPO to something else that doesn't have a buffer size shows how fragile that is. \n\nThe explanation in 3.4 (L173-L180) points to this as well, suggesting that there are too many factors unaccounted for (due to FiLex's simplicity) to do much else besides this. But that's exactly what the paper set out to do at the beginning after discussing how prior work skipped out on this important step. Perhaps they did so for this same reason?\n\nSec 5, the evaluation, talks about making predictions (\"[... FiLex] makes the correct prediction 20 out of 20 times.\") and how that wouldn't happen if it wasn't predictive. But then the graphs (and the discussion) shows how tenuous that is. It's not very helpful for my research to run this method a bunch of times and hope that the correlation remains positive versus just varying a hyperparameter in my actual model and seeing what that does. Perhaps the authors are thinking that I cannot run my actual model that much because, say, it's a real robot. Okay that's fair, but I have no idea if this method would actually work in that setting and little belief that my model in totality would really be correlated given that a handful of hyperparameters are.\n\nClarity:\nThe paper is clear enough. The one area which would have been more helpful is to coalesce Table 2 and Figure 1 to be more apparently connected. It takes longer than I would have liked to understand what was going on in them (which are the results) and the stories they told.\n\nSignificance:\n\nThis paper is only significant in the world where the simple model is predictive of much bigger and more interesting models. The ones examined are not that, nor is it even assessed as predictive of anything in those settings.\n\nFor it to get to a place where we can confidently say that this is interesting for real-world settings, it would need to be aligned with actual (emergent) language learning. That is unfair to evaluate wrt learning new words in this setting (as neither FiLex nor most ELS systems are doing that), but it is fair to ask whether the learned language distributions are the same. Is that true? Is FiLex learning similar word distributions to the ELS models? More to the point, because FiLex's learned distribution won't ever be different given its simplicity, is it Zipfian? We expect that to if it's ever going to be able to model a full language.",
+    "questions": "1. It's not clear in this paper whether we are asking whether the mathematical model that this process produces can answer questions of current ELS systems or are we asking whether it can help us illuminate where these systems are weak. Which one is it? The second is much more significant imo.\n\n2. Why should the sign of the per-hyperparameter entropy correlation be predictive about what my approach will do? Is there some foundation for that in other literature?\n\n3. What is the resulting word distribution of the CRP at steady state?\n\n4. My suggestion is to return to the models you've made (the 4 methods NoDyn Recon Sig and Nav) and try and see what, if anything, is invariant and unit-independent amongst these. I think that will bear more interesting fruit than this approach starting w CRP.",
+    "limitations": "Societally, this is fine. Wrt limitations, see the above S&W section."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4,
+    "soundness": 1,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

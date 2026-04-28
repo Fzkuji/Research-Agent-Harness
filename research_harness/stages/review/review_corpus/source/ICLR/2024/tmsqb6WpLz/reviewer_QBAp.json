@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "tmsqb6WpLz",
+  "reviewer": "QBAp",
+  "paper": {
+    "title": "Dissecting learning and forgetting in language model finetuning",
+    "authors": [
+      "Xiao Zhang",
+      "Ji Wu"
+    ],
+    "abstract": "Finetuning language models on domain-specific corpus is a common approach to enhance their domain knowledge and capability. While improving performance on domain tasks, it often brings a side-effect of forgetting of the model's general abilities. In this study, we analyze the effects of finetuning on language models by dissecting its impacts on the modeling of topic, style, and factual knowledge in text. Our method uses instruction-following LLMs such as ChatGPT to auto-generate controlled-variable text examples which we use to probe the model. Our findings reveal that finetuning results in significant shifts in the language model's topic and style priors, while actual knowledge learning only contributes to a small fraction of the total probability change. Analysis shows that the adaptation of topic and style priors behave akin to learning simple features: they are learned rapidly and require little model capacity. They are also learned independently and primarily at the beginning of a text sequence. In contrast, factual knowledge is learned stably but slowly and requires significant model capacity to learn. The research offers insights and understanding into the finer dynamics of learning and forgetting in language models, and can potentially inform future research on improving domain adaptation and addressing the challenges of forgetting in continual learning of language models.",
+    "keywords": [
+      "language models",
+      "domain adaptation",
+      "catastrophic forgetting"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=tmsqb6WpLz"
+  },
+  "review_fields": {
+    "summary": "The paper investigates the impact of finetuning language models on domain-specific texts and how it affects their general performance. The authors show that finetuning alters the model's preferences for topics and styles significantly, learning these features quickly and with minimal capacity. Factual knowledge, however, is acquired more slowly and requires greater capacity. The study's insights into language model learning dynamics could guide future enhancements in domain adaptation and help address the challenge of model forgetting during continuous learning.\n\nIn this study, the authors fine-tuned three models in increasing scales (GPT2-XL, LLaMa2 7B, and 13B) on PubMed abstracts with different scales of datasets up to 1M abstracts.",
+    "strengths": "1. Investigating the changes language models undergo after finetuning continues to be a highly relevant and evolving area of study, despite prior coverage in academic literature.\n\n2. The research offers key empirical insights into the differential impact of finetuning on language models, revealing a more pronounced effect on style and topic preferences compared to factual knowledge. These findings enhance our understanding of language model training dynamics and are instrumental in formulating more effective training methodologies.\n\n3. The researchers conducted extensive experiments on three language models of considerable size, particularly from an academic perspective.",
+    "weaknesses": "* The assertion that each prediction by a language model can be broken down into components of writing style, topic, and factual knowledge requires further justification or explanation. The paper should present a stronger argument or provide additional evidence to substantiate this claim.\n\n* The primary message or conclusion of the paper is ambiguous. The authors need to clarify the central thesis to ensure that readers can grasp the main contribution of the work. what is the takeaway from this research? \n\n* While the prose is generally lucid, the paper's structure, particularly the introduction, could use refinement to enhance its readability and impact.\n\nFor improved clarity and presentation, the following suggestions are offered:\n1. The introduction would benefit from concrete examples illustrating the key domains of style, topic, and factual knowledge to help contextualize the subsequent findings.\n2. Details regarding the fine-tuning process are scant. Clarification of which specific models are assessed and the precise nature of the fine-tuning would provide a more robust understanding of the study's scope.\n3. The transition from discussing fine-tuning effects to probing methods in the third paragraph of the introduction is somewhat abrupt. A smoother segue that connects these topics would aid reader comprehension.\n4. In the fourth paragraph, where style and topic biases are introduced, it would be helpful to include examples or elaborate on what these biases entail to furnish readers with a clearer picture of these concepts.",
+    "questions": "* The basis of the method assumes that p(x)=p(topic,style,factual), but is there a justification to that decomposition? what about arithmetic? how does it fall to this decomposition?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 5,
+    "mixed_pct": 95,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 2419,
+    "words": 356,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/cdb395d3-d946-4a2c-a916-d34ae5549fe2",
+    "error": null,
+    "scored_chars": 2420
+  }
+}

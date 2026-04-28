@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "ZED5wdGous",
+  "reviewer": "YFQD",
+  "paper": {
+    "title": "Human-in-the-Loop Optimization for Deep Stimulus Encoding in Visual Prostheses",
+    "authors": [
+      "Jacob Granley",
+      "Tristan Fauvel",
+      "Matthew Chalk",
+      "Michael Beyeler"
+    ],
+    "abstract": "Neuroprostheses show potential in restoring lost sensory function and enhancing human capabilities, but the sensations produced by current devices often seem unnatural or distorted. Exact placement of implants and differences in individual perception lead to significant variations in stimulus response, making personalized stimulus optimization a key challenge. Bayesian optimization could be used\nto optimize patient-specific stimulation parameters with limited noisy observations, but is not feasible for high-dimensional stimuli. Alternatively, deep learning models can optimize stimulus encoding strategies, but typically assume perfect knowledge of patient-specific variations. Here we propose a novel, practically feasible approach that overcomes both of these fundamental limitations. First, a deep encoder network is trained to produce optimal stimuli for any individual patient by inverting a forward model mapping electrical stimuli to visual percepts. Second, a preferential Bayesian optimization strategy utilizes this encoder to learn the optimal patient-specific parameters for a new patient, using a minimal number of pairwise comparisons between candidate stimuli. We demonstrate the viability of this approach on a novel, state-of-the-art visual prosthesis model. Our approach quickly learns a personalized stimulus encoder and leads to dramatic improvements in the quality of restored vision, outperforming existing encoding strategies. Further, this approach is robust to noisy patient feedback and misspecifications in the underlying forward model. Overall, our results suggest that combining the strengths of deep learning and Bayesian optimization could significantly improve the perceptual experience of patients fitted with visual prostheses and may prove a viable solution for a range of neuroprosthetic technologies",
+    "keywords": [
+      "Brain Computer Interfaces",
+      "BCI",
+      "Stimulus Encoding",
+      "Visual Prostheses",
+      "Bayesian Optimization",
+      "Preferential Bayesian Optimization",
+      "Human-in-the-loop Optimization",
+      "Sensory Neuroprostheses",
+      "Neuroprostheses",
+      "Patient-Specific Optimization",
+      "Latent Space Bayesian Optimization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZED5wdGous"
+  },
+  "review_fields": {
+    "summary": "* This paper proposes a flexible framework addressing personalized stimulus optimization predominantly seen in _visual prostheses_. \n* The authors propose integrating the state-of-the-art deep learning with a preferential Bayesian Optimization (BO) strategy to learn optimal patient-specific parameters in fewer trials. \n* The proposed approach is a two-stage process, with the first stage aiming at learning a Deep Stimulus Encoder (DSE) to optimize stimuli, and the second stage aiming at embedding the DSE learnt in the first stage in a sample-efficient preferential Bayesian optimization strategy.",
+    "strengths": "* This paper aims at advancing the state-of-the-art in sensory neuroprostheses that have a significant impact on the present world.\n* The authors propose to overcome the strong assumptions made on the accuracy of the knowledge on patient-specific parameters, thus aiming to improvise the accuracy of the deep stimulus encoder by optimizing the stimuli.\n* The authors use a sample-efficient Bayesian optimisation (Human-in-the-loop Optimization (HILO)) method to optimally select the patient-specific parameters used in deep stimulus encoder. \n* Authors have empirically evaluated the proposed approach in optimizing the personalized stimulus encoder for several simulated patients.\nFurther, the authors evaluate the performance of their method when the preferential inputs are noisy, thereby proving its robustness.",
+    "weaknesses": "* The main weakness of this paper lies in its _limited novelty_, as the proposed approach is merely a _combination_ of the state-of-the-art of forward models and sample-efficient Bayesian optimization to optimally find personalized stimuli. \n* Although this paper improvises the techniques used in the visual prostheses domain, the overall contribution of this paper is in the _application of the existing ML/DL techniques_ in neuroprostheses, visual prostheses in particular, thus may not advance the state-of-the-art in ML/DL community. \n* Though the paper reads well in many parts, it demands significant knowledge/domain expertise in visual prosthesis for a thorough understanding of the paper. \n* Authors have missed defining/describing a few important mathematical quantities or parameters that break the flow of understanding and also raise questions about its reproducibility (Please refer to the Questions section).\n* The details provided in _Section 4_ give the impression that the proposed framework is tightly coupled with the problems in visual prostheses. \n* The authors have discussed a few experimental settings in Section 4 that are apt to discuss in Section 5, though they do not contribute to the proposed method.\n* The visualization schemes used to show the empirical results do not effectively demonstrate the superiority of the proposed approach. Also, the authors do not discuss in brief the trends and the possible reasons behind them.",
+    "questions": "* Line 159: What does $n_e$ stand for? number of electrodes?\n* Line 169: What is the significance of threshold $\\epsilon$ and why authors have set it to $e^{-2}$? \n* Line 198: Why do authors considered only 10 simulated patients for transfer learning? is that not sparse? \n* Line 200: The hyperparameters considered and their bounds are neither mentioned in the main paper nor in the supplementary material. Could authors confirm the hyperparameter set of each kernel?\n* Line 214: The noise parameter s is set to be $\\frac{1}{0.01}=100$, whereas in Line 285, s is set to 1e-4, is this a typo or it is $\\frac{1}{1e-4}$?\n* Line 221: What is the significance of $\\beta$ in equation (7)?\n* Line 235: What does $R_i$ stands for? Is $i \\in$ {$ 1,...,n_e$}?\n* Line 239: Why authors have not considered comparing their empirical results with Beyeler et al. 2019?\n* Line 250: How do the results compare with Granley et al. 2022 if L1 is used in computing the test loss for DSE?\n* Line 302: Could Batch-BO strategies further reduce the latency and thus provide a quicker solution by parallelizing the data acquisition?\n* Figure 3: Why there is an increasing (or decreasing) trend in loss (or accuracy) plot during the initial phase of the optimization?\n* Figure 4: Why there is a lot of variance in the bottom right plot for \"Out of Distribution\" misspecification?\n\n\nFollowing are the minor (typographical) errors, that needs to be fixed.\n\n* Inconsistent referencing style and hyperlinks are missing throughout the paper. It is strongly suggested to not modify the style files provided by NeurIPS.\n* Line 59: \"...visual prostheses that, where ....\" \n* Figure 2: The current font size in the Leftmost plot is illegible.\n* Line 151: The section/Sub-section number has to be clearly mentioned. \n* Line 204: Provide a quick reference to the Brier score in the main paper, even though it is mentioned in the supplementary.\n* Line 237: \"ratings as amplitude, frequency,....\"\n* Line 259: :...  perceptual loss (figure 3.B)....(figure 3.C)\"\n\n**References**\n\n* Michael Beyeler, Devyani Nanduri, James D. Weiland, Ariel Rokem, Geoffrey M. Boynton, and Ione Fine. A model of ganglion axon pathways accounts for percepts elicited by retinal implants. Scientific Reports, 9(1):1–16, June 2019.",
+    "limitations": "* The optimization performance of PBO crucially depends on the _ generalization performance of the inherent GP surrogate model_. Authors reduce latency by avoiding online inference and instead use a transfer learning strategy. However, the source considered in the adopted transfer learning uses sparse data generated from 10 patients, thus, raising concerns about the optimality of kernel parameters and generalizability of the GP surrogates.\n* Although the authors discuss the empirical results, the lack of sufficient experiments and competing baselines (Beyeler et al. 2019, Granley et al. 2022) in the empirical results makes it hard to conclude the superiority of the proposed approach. (Please refer to the Questions section).\n* Sequential PBO may not be very suitable in time-critical situations, thus, more efficient strategies such as batch-BO could be of great use to reduce the possible latency in finding the optimal stimuli on-the-fly.\n\n**References**\n\n* Michael Beyeler, Devyani Nanduri, James D. Weiland, Ariel Rokem, Geoffrey M. Boynton, and Ione Fine. A model of ganglion axon pathways accounts for percepts elicited by retinal implants. Scientific Reports, 9(1):1–16, June 2019.\n\n* Jacob Granley, Lucas Relic, and Michael Beyeler. Hybrid Neural Autoencoders for Stimulus Encoding in Visual and Other Sensory Neuroprostheses. October 2022."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 5907 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 5907,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 5907
+  }
+}

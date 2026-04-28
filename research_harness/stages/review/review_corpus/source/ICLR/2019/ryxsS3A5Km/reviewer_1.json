@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ryxsS3A5Km",
+  "reviewer": "1",
+  "paper": {
+    "title": "Continual Learning via Explicit Structure Learning",
+    "authors": [
+      "Xilai Li",
+      "Yingbo Zhou",
+      "Tianfu Wu",
+      "Richard Socher",
+      "Caiming Xiong"
+    ],
+    "abstract": "Despite recent advances in deep learning, neural networks suffer catastrophic forgetting when tasks are learned sequentially. We propose a conceptually simple and general framework for continual learning, where structure optimization is considered explicitly during learning. We implement this idea by separating the structure and parameter learning. During structure learning, the model optimizes for the best structure for the current task. The model learns when to reuse or modify structure from previous tasks, or create new ones when necessary. The model parameters are then estimated with the optimal structure. Empirically, we found that our approach leads to sensible structures when learning multiple tasks continuously. Additionally, catastrophic forgetting is also largely alleviated from explicit learning of structures. Our method also outperforms all other baselines on the permuted MNIST and split CIFAR datasets in continual learning setting.",
+    "keywords": [
+      "continuous learning",
+      "catastrophic forgetting",
+      "architecture learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryxsS3A5Km"
+  },
+  "review_fields": {
+    "comment": "I have read the authors' response and the updated manuscript, and I applaud their efforts to improve the paper.\n\nHowever, while the paper is improved, regrettably, I still feel it falls short of publication.\n\nIn particular, as I stated in my original review, the comparisons (even with the newly added baselines) are only applied to permuted MNIST, and the VDD performance baselines are quite simple. Permuted MNIST, while used in the past, is arguably no longer considered a strong evaluation, as the tasks are relatively independent [4].\nThe references I suggested don't appear in the paper, except for [4], which is only mentioned in passing to introduce single-headed MNIST.\n\nFinally, the writing issues still seem to persist, such as sentence fragments and a few typos throughout.\neg. in the newly added section 4.3: \"In particular, since our model tends to add new parameters at the first layer. For all methods...\"\n\nAs with my original review, I think this approach has potential, but I think the writing issues need to be addressed, references added, and comparisons performed on VDD or another strong dataset."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

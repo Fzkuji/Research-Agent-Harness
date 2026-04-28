@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "HylTBhA5tQ",
+  "reviewer": "2",
+  "paper": {
+    "title": "The Limitations of Adversarial Training and the Blind-Spot Attack",
+    "authors": [
+      "Huan Zhang*",
+      "Hongge Chen*",
+      "Zhao Song",
+      "Duane Boning",
+      "Inderjit S. Dhillon",
+      "Cho-Jui Hsieh"
+    ],
+    "abstract": "The adversarial training procedure proposed by Madry et al. (2018) is one of the most effective methods to defend against adversarial examples in deep neural net- works (DNNs). In our paper, we shed some lights on the practicality and the hardness of adversarial training by showing that the effectiveness (robustness on test set) of adversarial training has a strong correlation with the distance between a test point and the manifold of training data embedded by the network. Test examples that are relatively far away from this manifold are more likely to be vulnerable to adversarial attacks. Consequentially, an adversarial training based defense is susceptible to a new class of attacks, the “blind-spot attack”, where the input images reside in “blind-spots” (low density regions) of the empirical distri- bution of training data but is still on the ground-truth data manifold. For MNIST, we found that these blind-spots can be easily found by simply scaling and shifting image pixel values. Most importantly, for large datasets with high dimensional and complex data manifold (CIFAR, ImageNet, etc), the existence of blind-spots in adversarial training makes defending on any valid test examples difficult due to the curse of dimensionality and the scarcity of training data. Additionally, we find that blind-spots also exist on provable defenses including (Kolter & Wong, 2018) and (Sinha et al., 2018) because these trainable robustness certificates can only be practically optimized on a limited set of training data.",
+    "keywords": [
+      "Adversarial Examples",
+      "Adversarial Training",
+      "Blind-Spot Attack"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=HylTBhA5tQ"
+  },
+  "review_fields": {
+    "review": "This paper provides some insights on influence of data distribution on robustness of adversarial training. The paper demonstrates through a number of analysis that the distance between the training an test data sets plays an important role on the effectiveness of adversarial training. To show the latter, the paper proposes an approach to measure the distance between the two data sets using combination of nonlinear projection (e.g. t-SNE), KDE, and K-L divergence. The paper also shows that under simple transformation to the test dataset (e.g. scaling), performance of adversarial training reduces significantly due to the large gap between training and test data set. This tends to impact high dimensional data sets more than low dimensional data sets since it is much harder to cover the whole ground truth data distribution in the training dataset.\n\nPros:\n- Provides insights on why adversarial training is less effective on some datasets.\n- Proposes a metric that seems to strongly correlate with the effectiveness of adversarial training.\n\nCons:\n- Lack of theoretical analysis. It could have been nice if the authors could show the observed phenomenon analytically on some simple distribution.\n- The marketing phrase \"the blind-spot attach\" falls short in delivering what one may expect from the paper after reading it. The paper would read much better if the authors better describe the phenomena based on the gap between the two distribution than using bling-spot. For some dataset, this is beyond a spot, it could actually be huge portion of the input space!\n\nMinor comments:\n- I believe one should not compare the distance shown between the left and right columns of Figure 3 as they are obtained from two different models. Though the paper is not suggesting that, it would help to clarify it in the paper. Furthermore, it would help if the paper elaborates why the distance between the test and training dataset is smaller in an adversarially trained network compared to a naturally trained network.\n- Are the results in Table 1 for an adversarially trained network or a naturally trained network? Either way, it could be also interesting to see the average K-L divergence between an adversarially and a naturally trained network on the same dataset.\n- Please provide more visualization similarly to those shown in Fig 4."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "GYnbubCXhE",
+  "reviewer": "CnQu",
+  "paper": {
+    "title": "Conditional Matrix Flows for Gaussian Graphical Models",
+    "authors": [
+      "Marcello Massimo Negri",
+      "Fabricio Arend Torres",
+      "Volker Roth"
+    ],
+    "abstract": "Studying conditional independence among many variables with few observations is a challenging task.\nGaussian Graphical Models (GGMs) tackle this problem by encouraging sparsity in the precision matrix through $l_q$ regularization with $q\\leq1$.\nHowever, most GMMs rely on the $l_1$ norm because the objective is highly non-convex for sub-$l_1$ pseudo-norms.\nIn the frequentist formulation, the $l_1$ norm relaxation provides the solution path as a function of the shrinkage parameter $\\lambda$.\nIn the Bayesian formulation, sparsity is instead encouraged through a Laplace prior, but posterior inference for different $\\lambda$ requires repeated runs of expensive Gibbs samplers.\nHere we propose a general framework for variational inference with matrix-variate Normalizing Flow in GGMs, which unifies the benefits of frequentist and Bayesian frameworks.\nAs a key improvement on previous work, we train with one flow a continuum of sparse regression models jointly for all regularization parameters $\\lambda$ and all $l_q$ norms, including non-convex sub-$l_1$ pseudo-norms.\nWithin one model we thus have access to (i) the evolution of the posterior for any $\\lambda$ and any $l_q$ (pseudo-) norm, (ii) the marginal log-likelihood for model selection, and (iii) the frequentist solution paths through simulated annealing in the MAP limit.",
+    "keywords": [
+      "normalizing flow",
+      "variational inference",
+      "graphical lasso",
+      "gaussian graphical model",
+      "bayesian inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GYnbubCXhE"
+  },
+  "review_fields": {
+    "summary": "This paper concerns the estimation of precision matrix under $l_p$ norm sparcity penal. The solution is a variational inference through normalizing flow, which is a function of shrinkage parameter $\\lambda$ and non-negative norm parameter $p$. It allows for straightforward computation of solution paths for the intervals of $\\lambda$ and $p$, and was empirically evaluated on two relatively small data sets.",
+    "strengths": "Framework for GGM estimation based on conditional normalizing flows, indeed appears novel. Supporting math seems solid. \n\nUsing simulated annealing algorithm to recover a path of solutions for varying $\\lambda$ and $p$ is useful, in particular for the case of $p$, as in case of $\\lambda$ it was fairly straightforward to perform it with other methods too. I am just wondering how costly and scalable it is under the new framework, an empirical/theoretical analysis would be appreciated.",
+    "weaknesses": "Empirical evaluation appears limited. It does not contain comparison with other (e.g. frequentist) approaches to derive the solution paths. Both in terms of estimation accuracy and in terms of computational cost.",
+    "questions": "In synthetic data example, why did you choose to have more samples than dimensions ( $n>d$ )? Since in that case GGM can be obtained with matrix inverse, and no need for penalized objective.",
+    "limitations": "Limitations were not discussed."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 925,
+    "words": 145,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f911fdf4-edcc-4569-9985-4339c58e1696",
+    "error": null,
+    "scored_chars": 926
+  }
+}

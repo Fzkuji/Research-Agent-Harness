@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "AZGIwqCyYY",
+  "reviewer": "GtBu",
+  "paper": {
+    "title": "Towards Cross Domain Generalization of Hamiltonian Representation via Meta Learning",
+    "authors": [
+      "Yeongwoo Song",
+      "Hawoong Jeong"
+    ],
+    "abstract": "Recent advances in deep learning for physics have focused on discovering shared representations of target systems by incorporating physics priors or inductive biases into neural networks. While effective, these methods are limited to the system domain, where the type of system remains consistent and thus cannot ensure the adaptation to new, or unseen physical systems governed by different laws. For instance, a neural network trained on a mass-spring system cannot guarantee accurate predictions for the behavior of a two-body system or any other system with different physical laws.\nIn this work, we take a significant leap forward by targeting cross domain generalization within the field of Hamiltonian dynamics. \nWe model our system with a graph neural network (GNN) and employ a meta learning algorithm to enable the model to gain experience over a distribution of systems and make it adapt to new physics. Our approach aims to learn a unified Hamiltonian representation that is generalizable across multiple system domains, thereby overcoming the limitations of system-specific models. \nWe demonstrate that the meta-trained model captures the generalized Hamiltonian representation that is consistent across different physical domains.\nOverall, through the use of meta learning, we offer a framework that achieves cross domain generalization, providing a step towards a unified model for understanding a wide array of dynamical systems via deep learning.",
+    "keywords": [
+      "hamiltonian dynamics",
+      "cross domain generalization",
+      "learning physics",
+      "meta learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=AZGIwqCyYY"
+  },
+  "review_fields": {
+    "summary": "This work leverages the power of meta-learning algorithms coupled with graph neural networks to find a shared representation of physical systems across various functional forms of Hamiltonian. In contrast to previous work, here the focus is on obtaining a representation which is valid across different physical systems. The performance of the framework is evaluated over a range of physical systems aiming to showcase its adaptivity to unseen settings.",
+    "strengths": "$\\underline{\\textrm{Originality}}$: the paper presents great originality in providing a Hamiltonian representation learning framework that can generalize across multiple system domains. This is in contrast to the common approach of providing system-specific models.\n\n\n$\\underline{\\textrm{Quality}}$: the paper is very well written. First, it provides the reader with all necessary background as well as motivation for the task addressed. Next, methods and results are well constructed. \n\n\n$\\underline{\\textrm{Clarity}}$:  the main ideas conveyed in this paper are clearly constructed and explained and supplementary information assists with providing further details and ablation studies. \n\n\n$\\underline{\\textrm{Significance}}$:  the main significance of the paper is in defining a new task, generalizing upon existing approaches, and suggesting to derive a framework that learns a representation that is not domain-specific.",
+    "weaknesses": "The paper presents an appealing goal, providing generalized Hamiltonian representations consistent across different physical domains. However, given the presented quantitative and qualitative results it is hard to judge the actual generalization and performance of the framework as detailed in the following points:\n\n1. The notion of $\\textit{generalization}$: ideally when discussing generalization in DL we would like to obtain a single pre-trained model which can then be used for diverse applications. With respect to the presented framework, this would suggest training the model(s) on a single task and then using the same network for prediction on all held-out systems. Similar to the setting presented in Ricci et al. (2023). However, here presented results always consider a single held-out-system. Providing an ablation over the number of systems used for training will allow for strengthening the claim of generalization and applicability for real-world applications.\n\n2. Baselines: it would be beneficial to extend the baselines presented in the paper in two directions:\n(i) optimal;  Training over the tested task, using all regimes (meta-, pre-, and vanilla HNN). This will allow a better assessment of the quality of the generalized model and (ii) within system generalization; following the background presented in section 2 it will be valuable to add a comparison to frameworks that are similar in nature and allow $\\textit{within}$ model generalization, e.g. CoDA (Kirchmeyer et al. 2022) or within the same functional form of the Hamiltonian, e.g. iMODE (Li et al. 2023). Here training over the same train-test splits.",
+    "questions": "1. Can the authors provide additional ablation studies following the weaknesses presented above? Specifically, it will be beneficial to present the performance as a function of the number of systems used in training (see weaknesses 1.) and add additional baselines  (see weaknesses 2.) \n2. Judging from the presented results the current framework is not suitable for larger systems, could the authors suggest possible extensions that may allow? What would be the necessary refinements that could be incorporated in the meta-learning configuration to allow for that?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3124,
+    "words": 449,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ae0a0b8b-2c02-4a75-a69b-d3ef32e35632",
+    "error": null,
+    "scored_chars": 3131
+  }
+}

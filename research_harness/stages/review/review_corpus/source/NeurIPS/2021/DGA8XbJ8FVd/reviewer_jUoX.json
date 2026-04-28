@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "DGA8XbJ8FVd",
+  "reviewer": "jUoX",
+  "paper": {
+    "title": "Skipping the Frame-Level: Event-Based Piano Transcription With Neural Semi-CRFs",
+    "authors": [
+      "Yujia Yan",
+      "Frank Cwitkowitz",
+      "Zhiyao Duan"
+    ],
+    "abstract": "Piano transcription systems are typically optimized to estimate pitch activity at each frame of audio. They are often followed by carefully designed heuristics and post-processing algorithms to estimate note events from the frame-level predictions. Recent methods have also framed piano transcription as a multi-task learning problem, where the activation of different stages of a note event are estimated independently. These practices are not well aligned with the desired outcome of the task, which is the specification of note intervals as holistic events, rather than the aggregation of disjoint observations. In this work, we propose a novel formulation of piano transcription, which is optimized to directly predict note events. Our method is based on Semi-Markov Conditional Random Fields (semi-CRF), which produce scores for intervals rather than individual frames. When formulating piano transcription in this way, we eliminate the need to rely on disjoint frame-level estimates for different stages of a note event. We conduct experiments on the MAESTRO dataset and demonstrate that the proposed model surpasses the current state-of-the-art for piano transcription. Our results suggest that the semi-CRF output layer, while still quadratic in complexity, is a simple, fast and well-performing solution for event-based prediction, and may lead to similar success in other areas which currently rely on frame-level estimates.",
+    "keywords": [
+      "Music",
+      "Audio",
+      "Piano Transcrition",
+      "Music Transcription",
+      "Semi-Markov",
+      "CRFs",
+      "Sound Event Detection",
+      "Music Information Retrieval"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=DGA8XbJ8FVd"
+  },
+  "review_fields": {
+    "summary": "The authors take a well studied network architecture and task (MAESTRO piano transcription) and propose a straightforward extension of previous work to incorporate a CRF output layer that can directly predict temporal dependencies among the output labels. This contrasts with previous SOTA techniques that use multiple output heads (for separate parts of notes) and heuristics to infer the notes from network outputs. The CRF loss function is used to train a network similar to previous work, and shows improvements in classification accuracy, most notably in Onset+Offset F1 score.",
+    "main_review": "The paper presents a straightforward approach, but impressive results of value to the music research community. The significance is limited by the domain-specific nature of the work, but the contribution is high-quality. Most significantly, the clarity of the writing and description of the CRF layer / forward-backward algorithm could be significantly improved to make the paper more useful to readers.\n\n\nOriginality/Significance: This work is an incremental combination of existing techniques for AMT (ConvRNN architectures, CRF) on existing benchmarks. However, the implementation of the differentiable CRF layer is not trivial, and demonstrating that it actually improves the note offset predictions as well as it does is a valuable contribution to the field. The work is not directly applicable to domains beyond piano transcription, which limits the relevance for the broader ML community, but the techniques could possibly be useful for other domains with further domain-specific adaptations. \n\nQuality: The authors clearly demonstrate an improvement of the SOTA on the MAESTRO dataset, which is a good target dataset for their model/task. While the numbers are clearly superior for the proposed system, it is unclear why there are some inconsistencies with the evaluation numbers for the other papers (https://arxiv.org/pdf/2010.01815.pdf, https://arxiv.org/pdf/1710.11153.pdf). For instance, Kong et al. show an F1 note + offset of 82.47, but are reported at 84.45. It is unclear from the paper the reasons for these discrepancies, and whether the public models are used to recompute metrics for this paper, which casts a little confusion over the numbers for the reported system. \n\nIf that is the case, it's worth noting that the MAESTRO v2 dataset has several known erroneous tracks in it, and it would be more beneficial to the field to start using the MAESTRO v3 dataset for training and comparison.\n\nFor the benchmarking comparisons, it could be helpful to add a row for the time ratio of Viterbi decoding / nn model forward prediction, to help support the claim that it is indeed a small fraction.\n\n\nClarity: For the most part the ideas of the paper are presented clearly, but this is clearly the area for the most improvement. Specifically, the loss function, and forward-backward algorithm are the key contributions of the paper, but could benefit from a clearer description. A few things that could help:\n* The notion of \"eventType\" is perhaps overly opaque in this context. There are many overloaded concepts (such as onset, offset, velocity change, pedal, etc.) that are all considered \"events\" in similar literature. For these equations, \"eventType\" seems to just be referring to a given dimension of a frame-level binary note/pedal \"On\" variable. The equations could probably be simplified by describing it as such and using a more compact letter/symbol for the index. It's also unclear if the score matrix refers to 88 notes and pedal (89 dims) simultaneously or if there is some other factorization.\n\n* Similarly, factorizing over the notes independently is helpful for understanding eq. 1, so introducing eq. 2 first, can better motivate the equation for p(y_note/pedal | x).\n\n* Pairing Equation 1 and Algorithm 1 with a diagram/example to demonstrate visually how the output scores are converted into loss values would help to clarify some of the notation. For example, expanding on Table 1 visually for a specific example of score outputs and labels could help clarify the entire CRF section.\n\n* The forward backward algorithm could use further clarification/elaboration. It is one of the key contributions of the paper, but is mentioned only in passing for a sentence without any relevant citations / explanation. Algorithm 1 is complete, but could be made clearer with a diagram and more explanation. \n\n\nSome proof reading could benefit the paper, for example: \nL114: \"(See Section XXX)\"\nL126: \"is the unnormalized the likelihood\"",
+    "limitations_and_societal_impact": "The authors do not discuss the societal impacts of their work, but piano transcription is a relatively benign technology so that is reasonable.",
+    "ethical_concerns": "N/A, piano transcription is a relatively benign application and the datasets are all public and open source."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

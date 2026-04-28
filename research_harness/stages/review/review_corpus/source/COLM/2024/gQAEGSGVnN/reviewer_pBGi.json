@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "gQAEGSGVnN",
+  "reviewer": "pBGi",
+  "paper": {
+    "title": "UniMem: Towards a Unified View of Long-Context Large Language Models",
+    "authors": [
+      "Junjie Fang",
+      "Likai Tang",
+      "Hongzhe Bi",
+      "Yujia Qin",
+      "Si Sun",
+      "Zhenyu Li",
+      "Haolun Li",
+      "Yongjian Li",
+      "Xin Cong",
+      "Yankai Lin",
+      "Yukun Yan",
+      "Xiaodong Shi",
+      "Sen Song",
+      "Zhiyuan Liu",
+      "Maosong Sun"
+    ],
+    "abstract": "Long-context processing is a critical ability that constrains the applicability of large language models (LLMs). Although there exist various methods devoted to enhancing the long-context processing ability of LLMs, they are developed in an isolated manner and lack systematic analysis and integration of their strengths, hindering further developments. In this paper, we introduce UniMem, a Unified framework that reformulates existing long-context methods from the view of Memory augmentation of LLMs.  Distinguished by its four core dimensions—Memory Management, Memory Writing, Memory Reading, and Memory Injection, UniMem empowers researchers to conduct systematic exploration of long-context methods. We re-formulate 16 existing methods based on UniMem and analyze four representative methods: Transformer-XL, Memorizing Transformer, RMT, and Longformer into equivalent UniMem forms to reveal their design principles and strengths. Based on these analyses, we propose UniMix, an innovative approach that integrates the strengths of these algorithms. Experimental results show that UniMix achieves superior performance in handling long contexts with significantly lower perplexity than baselines. The code is publicly available at https://github.com/thunlp/UniMem.",
+    "keywords": [
+      "long-context",
+      "large language models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=gQAEGSGVnN"
+  },
+  "review_fields": {
+    "summary": "This paper summarized the previous representative works of memory-augmented long LLMs and proposed a unified framework to formulate the methodology of these methods. This paper well resolved the previous issue of incompatible evaluation suites between different method and instead evaluated all methods under the same setting. Additionally, the comprehensive ablation studies are conducted to find the best design choices for each component in the memory module, and the authors used this best hyperparameter groups to train a best model, UniMix.",
+    "reasons_to_accept": "1. The research problem is significant to the community. The long-context LLM suffered from the unfair comparison between different methods for quite long.\n\n2. The architecture design lessons and conclusions drawn from the experiments are very useful for other researchers. It helps everyone working on memory-augmented LLMs to have an optimal architecture design.",
+    "reasons_to_reject": "1. The evaluations are limited to ppl metrics on language modeling dataset. However, the recent research trend in long-context llm community do not regard the lower ppl as the sign for strong long-context understanding capability. I strongly suggested that the authors could consider the e Needle-ina-Haystack tests, the long-document qa experiments, and the long-context in-context learning experiments.\n\n2. The baselines are only trained for 0.1B tokens, which is a small data size for long-context adaptation. Even if the recent consensus on the optimal long-context extension data size has decreased from 100B (Wang et al., 2023) to 5B (Fu et al., 2024), the 0.1B is too small to train the model to understand the long-context input well.\n\n[Wang et al., 2023] Augmenting Language Models with Long-Term Memory\n[Fu et al. 2024] Data Engineering for Scaling Language Models to 128K Context",
+    "questions_to_authors": "1. How you sample and filter the 0.1B tokens? What are the data resources for that?\n\n2. The number of trainable parameters for different methods vary a lot. Is the same lr 5e-5 fair for the implementation of each method?\n\n3. Why Github is considered as a long-context corpus for evaluation? The more common practice is using ArXiv paper dataset."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:35:14Z",
+    "migrated_from_v1_at": "2026-04-27T15:35:14Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1603,
+    "words": 252,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/08a75e5a-a8ce-40a5-8550-61978373a107",
+    "error": null,
+    "scored_chars": 1603
+  }
+}

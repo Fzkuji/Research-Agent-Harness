@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "GByP03IitA",
+  "reviewer": "n3vv",
+  "paper": {
+    "title": "ITFormer: Bridging Time Series and Natural Language for Multi-Modal QA with Large-Scale Multitask Dataset",
+    "authors": [
+      "Yilin wang",
+      "Peixuan Lei",
+      "Jie Song",
+      "Yuzhe Hao",
+      "Tao Chen",
+      "Yuxuan Zhang",
+      "LEI JIA",
+      "Yuanxiang Li",
+      "zhongyu wei"
+    ],
+    "abstract": "Time-series data are critical in diverse applications, such as industrial monitoring, medical diagnostics, and climate research. However, effectively integrating these high-dimensional temporal signals with natural language for dynamic, interactive tasks remains a significant challenge. To address this, we introduce the Time-Series Question Answering (Time-Series QA) task and release EngineMT-QA, the first large-scale, multi-task, temporal-textual QA dataset designed to capture complex interactions between time-series signals and natural language. Building on this resource, we propose the Instruct Time Transformer (ITFormer), a novel framework that bridges time-series encoders with frozen large language models (LLMs). ITFormer effectively extracts, aligns, and fuses temporal and textual features, achieving a strong improvement in QA accuracy over strong baselines with fewer than 1\\% additional trainable parameters. By combining computational efficiency with robust cross-modal modeling, our work establishes a adaptable paradigm for integrating temporal data with natural language, paving the way for new research and applications in multi-modal AI. More details about the project, including datasets and code, are available at: https://pandalin98.github.io/itformer_site/.",
+    "keywords": [
+      "Time Series Analysis",
+      "Time-Series Question Answering",
+      "Time-Series-Textual Alignment",
+      "Time-Series-Textual Fusion"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GByP03IitA"
+  },
+  "review_fields": {
+    "summary": "This paper introduces ITFormer, a novel framework that bridges time-series signals and natural language for multi-modal question answering (QA). To support this task, the authors release EngineMT-QA, the first large-scale, multi-task dataset designed to capture complex interactions between temporal data and textual queries. ITFormer integrates time-series encoders with frozen large language models (LLMs) using innovative components such as Time Token Position Encoding, Learnable Instruct Tokens, Instruct Time Attention, and Time Token as Language, enabling effective temporal-textual fusion with minimal training overhead. Experimental results show that ITFormer achieves state-of-the-art performance across diverse QA tasks, offering a scalable and efficient solution for real-world time-series understanding and decision-making.",
+    "claims_and_evidence": "The claims made in the paper are generally well-supported by clear and convincing evidence. The authors provide comprehensive experimental results demonstrating ITFormer’s state-of-the-art performance across multiple QA tasks with minimal trainable parameters, supported by strong baselines and detailed ablation studies. The introduction of the EngineMT-QA dataset is justified as a novel contribution, and the effectiveness of each ITFormer component (TPE, LIT, ITA, TAL) is validated through systematic analysis. While the generalization capability across different encoders and LLMs is supported to some extent, a notable limitation is that the EngineMT-QA dataset is constructed entirely from one domain, which raises concerns about the model’s ability to generalize to other real-world time-series scenarios such as healthcare, finance, or energy systems. Without evaluations on more diverse domains, it remains unclear whether ITFormer’s performance and alignment mechanisms are truly generalizable beyond this specific application context.",
+    "methods_and_evaluation_criteria": "The proposed methods and evaluation criteria are generally well-aligned with the problem of time-series question answering, and the ITFormer framework is thoughtfully designed to bridge temporal and textual modalities. The use of a QA formulation to unify multiple time-series tasks is a reasonable and practical choice. However, a key limitation lies in the evaluation benchmark itself—EngineMT-QA is constructed solely from one domain, which significantly constrains the representativeness of the benchmark. While the tasks span understanding, perception, reasoning, and decision-making, they are all derived from a single application context, limiting the conclusions that can be drawn about the model's general applicability. As a result, it is unclear whether ITFormer would perform equally well on time-series data from other domains such as healthcare, finance, or climate monitoring. To truly validate the method's generalizability and robustness, it should include multi-domain benchmarks that reflect the broad range of real-world time-series applications.",
+    "experimental_designs_or_analyses": "The experimental design in the paper is generally sound and systematically structured, with evaluations conducted across four distinct QA task types: understanding, perception, reasoning, and decision-making. The use of multiple metrics (e.g., Accuracy, F1, BLEU, Rouge-L) and comparisons against both multimodal baselines (e.g., ChatGPT-4o, InstructBLIP) and domain-specific methods (e.g., Time-LLM, AutoTime) helps validate ITFormer’s performance. The inclusion of ablation studies further strengthens the reliability of the analysis by isolating the contribution of each model component.",
+    "relation_to_broader_scientific_literature": "The paper makes a meaningful contribution to the growing literature at the intersection of time-series analysis and multimodal language modeling. Its proposed framework, ITFormer, builds upon prior advancements in time-series encoders (e.g., PatchTST, Informer, Crossformer) and multimodal integration techniques inspired by vision-language models such as InstructBLIP.",
+    "essential_references_not_discussed": "Merrill, Mike A., et al. \"Language models still struggle to zero-shot reason about time series.\" arXiv preprint arXiv:2404.11757 (2024).\nYe, Wen, et al. \"Beyond Forecasting: Compositional Time Series Reasoning for End-to-End Task Execution.\" arXiv preprint arXiv:2410.04047 (2024).\nChow, Winnie, et al. \"Towards time series reasoning with llms.\" arXiv preprint arXiv:2409.11376 (2024)."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

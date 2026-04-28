@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "gOG9Zoyn4R",
+  "reviewer": "SCro",
+  "paper": {
+    "title": "KLASS: KL-Guided Fast Inference in Masked Diffusion Models",
+    "authors": [
+      "Seo Hyun Kim",
+      "Sunwoo Hong",
+      "Hojung Jung",
+      "Youngrok Park",
+      "Se-Young Yun"
+    ],
+    "abstract": "Masked diffusion models have demonstrated competitive results on various tasks including language generation. However, due to its iterative refinement process, the inference is often bottlenecked by slow and static sampling speed. To overcome this problem, we introduce `KL-Adaptive Stability Sampling' (KLASS), a fast yet effective sampling method that exploits token-level KL divergence to identify stable, high-confidence predictions. By unmasking multiple tokens in each iteration without any additional model training, our approach speeds up generation significantly while maintaining sample quality. On reasoning benchmarks, KLASS achieves up to $2.78\\times$ wall-clock speedups while improving performance over standard greedy decoding, attaining state-of-the-art results among diffusion-based samplers. We further validate KLASS across diverse domains, including text, image, and molecular generation, showing its effectiveness as a broadly applicable sampler across different models.",
+    "keywords": [
+      "Generative Models",
+      "Efficient Inference Methods"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=gOG9Zoyn4R"
+  },
+  "review_fields": {
+    "summary": "This paper presents KLASS, a method for accelerating sampling from masked diffusion models, based on estimating both the confidence and KL divergence between adjacent timesteps to identify stable tokens in which to unmask. Experimental results show consistent 2x speedups while maintaining performance.",
+    "strengths_and_weaknesses": "**Strengths**\n- Overall approach is both theoretically sound and empirically motivated, and is very intuitive to understand.\n- Results of KLASS seem to flatly improve methods across modalities on all tested metrics, which clearly shows their approach works in practice.\n\n\n**Weaknesses**\n- Lines 144-146: I'm not sure if this is true? The plots seem to suggest that while correct samples have *slightly* higher confidence than incorrect samples across timesteps, they seem to be well within the variance bounds for significance (though proper error bars are not reported in lieu of a scatter plot, which I think could be changed). If anything, I think this argues that internal model confidence is *not* indicative of final correctness. Additionally, the error bounds for the KL divergence plot (1b) seem even larger, and it is hard to visually tell whether the plotted smoothing line is actually a reasonable fit. The proposed method obviously works, but more could be done to give explanation as to *why* empirically other than just this plot.\n- I think the authors do not fairly recognize their limitation that while their speedup method is training-free, precisely because of that its overall acceleration ability is upper-bounded and cannot achieve the order-of-magnitude speedups that distillation methods get.",
+    "questions": "- What is \"Halton-based\" (line 247)?\n- Is there a reason the appendix seems to just contain a completely different (assumed earlier) version of the paper?\n- Lines 146-147: This should say \"KL score for corrects tends to be significantly **lower**\", right?",
+    "final_justification": "Overall, I am now confident in my score of accept. The paper's contribution is strong and straightforward, with clear reasoning and empirical results across the board. In the rebuttal, the author's addressed my only real concern with additional experiments and theoretical insight, and thus I think the paper is deserving of acceptance at NeurIPS."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 2,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

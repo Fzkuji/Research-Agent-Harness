@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "rqEoV-bub4E-",
+  "reviewer": "Q7WG",
+  "paper": {
+    "title": "Charting and Navigating the Space of Solutions for Recurrent Neural Networks",
+    "authors": [
+      "Elia Turner",
+      "Kabir Vinay Dabholkar",
+      "Omri Barak"
+    ],
+    "abstract": "In recent years Recurrent Neural Networks (RNNs) were successfully used to model the way neural activity drives task-related behavior in animals, operating under the implicit assumption that the obtained solutions are universal. Observations in both neuroscience and machine learning challenge this assumption. Animals can approach a given task with a variety of strategies, and training machine learning algorithms introduces the phenomenon of underspecification. These observations imply that every task is associated with a space of solutions. To date, the structure of this space is not understood, limiting the approach of comparing RNNs with neural data.\nHere, we characterize the space of solutions associated with various tasks. We first study a simple two-neuron network on a task that leads to multiple solutions. We trace the nature of the final solution back to the network’s initial connectivity and identify discrete dynamical regimes that underlie this diversity. We then examine three neuroscience-inspired tasks: Delayed discrimination, Interval discrimination, and Time reproduction. For each task, we find a rich set of solutions. One layer of variability can be found directly in the neural activity of the networks. An additional layer is uncovered by testing the trained networks' ability to extrapolate, as a perturbation to a system often reveals hidden structure. Furthermore, we relate extrapolation patterns to specific dynamical objects and effective algorithms found by the networks. We introduce a tool to derive the reduced dynamics of networks by generating a compact directed graph describing the essence of the dynamics with regards to behavioral inputs and outputs. Using this representation, we can partition the solutions to each task into a handful of types and show that neural features can partially predict them.\nTaken together, our results shed light on the concept of the space of solutions and its uses both in Machine learning and in Neuroscience.",
+    "keywords": [
+      "RNN",
+      "underspecification",
+      "variability",
+      "space of solutions",
+      "neuroscience",
+      "reverse engineering",
+      "task optimized networks"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=rqEoV-bub4E-"
+  },
+  "review_fields": {
+    "summary": "This study proposes an approach for characterising the space of solutions obtained by fitting neural networks to a couple of tasks (one simple but general task and one neuroscience-related task). The analyses suggest that network initialisation and architecture are two key factors for the degeneracy of solutions obtained when fitting neural networks.",
+    "main_review": "### Originality\n\nThe novelty of the study resides in the development of a set of analyses to characterise the space of neural network solutions. Previous work is appropriately cited and it is clear how this work differs from previous contributions.\n\n### Quality\n\nThe paper is technically sound, and claims are appropriately backed by empirical evaluation.\n\n\n### Clarity\n\nThe paper is clearly written, and provides enough information for an expert reader to understand all the steps to reproduce the results. There is just a minor typo I would like to point out: in lines 128-134, the authors reference the networks as A to D, and I believe these references to be wrong.\n\n\n### Significance\n\nI believe the developed analyses would be of interest to the neuroscience community, in particular applied to real neuroscience datasets. However, the conclusions drawn from the analyses are somewhat unsurprising from the Machine Learning point of view, as it is well known that neural network fitting is a problem with multiple local minima, and that this depends on the initialisation and architecture. In fact, it is common and good practice in Machine Learning to train networks several times, with multiple seeds, initialisations and hyperparameters, in order to assess the robustness of the drawn conclusions. In order to improve the significance and impact of the manuscript, I would recommend the authors to apply their set of analyses to a Machine Learning task, with the hope of getting new insights e.g. in terms of optimisation (note that the manuscript is one page shorter than the limit, and thus would have the space for extra analyses).\n\n\n### After rebuttal\n\nThank you for the careful answer to all reviews. After reading all the reviews and authors' rebuttal, I believe the authors made an effort to address all the reviews, and in my opinion, to some satisfaction. I increased my score to better reflect the quality and significance of the work.",
+    "limitations_and_societal_impact": "The authors have adequately addressed the limitations of their work."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

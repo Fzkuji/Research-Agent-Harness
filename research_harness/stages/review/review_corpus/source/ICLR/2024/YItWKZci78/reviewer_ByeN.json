@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "YItWKZci78",
+  "reviewer": "ByeN",
+  "paper": {
+    "title": "Symmetric Mean-field Langevin Dynamics for Distributional Minimax Problems",
+    "authors": [
+      "Juno Kim",
+      "Kakei Yamamoto",
+      "Kazusato Oko",
+      "Zhuoran Yang",
+      "Taiji Suzuki"
+    ],
+    "abstract": "In this paper, we extend mean-field Langevin dynamics to minimax optimization over probability distributions for the first time with symmetric and provably convergent updates. We propose \\emph{mean-field Langevin averaged gradient} (MFL-AG), a single-loop algorithm that implements gradient descent ascent in the distribution spaces with a novel weighted averaging, and establish average-iterate convergence to the mixed Nash equilibrium. We also study both time and particle discretization regimes and prove a new uniform-in-time propagation of chaos result which accounts for the dependency of the particle interactions on all previous distributions. Furthermore, we propose \\emph{mean-field Langevin anchored best response} (MFL-ABR), a symmetric double-loop algorithm based on best response dynamics with linear last-iterate convergence. Finally, we study applications to zero-sum Markov games and conduct simulations demonstrating long-term optimality.",
+    "keywords": [
+      "mean-field Langevin dynamics",
+      "minimax optimization",
+      "zero-sum games",
+      "Markov games"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=YItWKZci78"
+  },
+  "review_fields": {
+    "summary": "This paper presents an approach to minimize optimization over probability distributions by extending the principles of mean-field Langevin dynamics. They propose two methods: (MFL-AG),  a single-loop algorithm designed to achieve convergence towards the mixed Nash equilibrium, and (MFL-ABR), a two-loop algorithm that demonstrates linear convergence in the outer loop. Furthermore, they also investigate various discretization methods and offer a fresh analysis of how chaos spreads, taking into account its dependencies on past distributions. This research paves the way for more in-depth investigations into mean-field dynamics for numerous learning agents.",
+    "strengths": "* The paper's contributions are supported by theoretical proofs\n* It seems that the convergence of mean-field Langevin dynamics was still an open problem and the problem of this paper is well defined.",
+    "weaknesses": "* Proposed methods could be well motivated. The two proposed methods themselves are convincing. However, is there any reasons or motivation why you have both methods at the same time: mean-field Langevin averaged gradient and mean-field Langevin anchored the best response? Any explicit relationship between these two settings? \n* The description of the equation can be more comprehensive. Usually, we should describe all the notations of the equation at least right after it. For example, you do not mention what $\\rho^{\\mu}$ and $\\rho^{\\nu}$ are in equation 1.",
+    "questions": "* Could you please explain more about what \"SYMMETRIC\" means in your proposed method and title? Is it mainly from the same temperature or regularization strength $\\lambda$ for both players?\n* Then how compatible your proposed method and proof can be extended to when there exists $\\lambda_1$ and $\\lambda_2$ for two players respectively? Since you mentioned that the problems you are looking for naturally arise for example solving robust learning or zero-sum games in reinforcement learning. Usually, in the robustness via adversarial learning, the regularization strength is relevant to the strength of the adversary. For example, if the adversary is attacked on soft actor-critic (SAC)[1], which originally had its regularization term (temperature), then it is not flexible to have the regularization terms for the target agent and the adversary the same values.\n* Could you analyze why MFL-AG can have a lower NI error compared with MFL-ABR and does it mean that MFL-AG performs better than MFL-ABR in this experiment? Furthermore, please suggest what kind of numerical experiment is more suitable with MFL-ABR against MFL-AG, and vice versa.\n\n[1] Haarnoja, T., Zhou, A., Abbeel, P., and Levine, S. Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor. In International Conference on Machine Learning (ICML), 2018"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2127,
+    "words": 328,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8e04927e-7736-4227-b404-75ab80a3dc20",
+    "error": null,
+    "scored_chars": 2128
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "yrrU5YChQr",
+  "reviewer": "25Wa",
+  "paper": {
+    "title": "Vulnerable Data-Aware Adversarial Training",
+    "authors": [
+      "Yuqi Feng",
+      "Jiahao Fan",
+      "Yanan Sun"
+    ],
+    "abstract": "Fast adversarial training (FAT) has been considered as one of the most effective alternatives to the computationally-intensive adversarial training. Generally, FAT methods pay equal attention to each sample of the target task. However, the distance between each sample and the decision boundary is different, learning samples which are far from the decision boundary (i.e., less important to adversarial robustness) brings additional training cost and leads to sub-optimal results. To tackle this issue, we present vulnerable data-aware adversarial training (VDAT) in this study. Specifically, we first propose a margin-based vulnerability calculation method to measure the vulnerability of data samples. Moreover, we propose a vulnerability-aware data filtering method to reduce the training data for adversarial training thus improve the training efficiency. The experiments are conducted in terms of adversarial training and robust neural architecture search on CIFAR-10, CIFAR-100, and ImageNet-1K. The results demonstrate that VDAT is up to 76% more efficient than state-of-the-art FAT methods, while achieving improvements regarding the natural accuracy and adversarial accuracy in both scenarios. Furthermore, the visualizations and ablation studies show the effectiveness of both core components designed in VDAT.",
+    "keywords": [
+      "Adversarial Training",
+      "Adversarial Robustness",
+      "Decision Boundary Analysis"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=yrrU5YChQr"
+  },
+  "review_fields": {
+    "summary": "This paper addresses the efficiency of fast adversarial training (FAT) by proposing vulnerable data-aware adversarial training (VDAT), which employs sample-wise data filtering rather than the batch-wise filtering used in existing FAT methods. Building on prior research showing that certain samples contribute minimally to adversarial robustness, the authors propose prioritizing vulnerable samples during training to achieve faster convergence. The filtering mechanism relies on a margin-based vulnerability metric defined through soft margins considering all classes, which quantifies the model's vulnerability to specific samples.",
+    "strengths_and_weaknesses": "**Strengths**\n\nThe paper presents a simple and intuitive concept of sample-wise data filtering using margins, which offers high compatibility with various adversarial example generation methods and demonstrates good generalizability. The proposed method shows superior performance compared to existing approaches in terms of both speed and accuracy. The experimental setup is generally comprehensive and well-designed.\n\n**Weaknesses**\n\n**1. Effectiveness of soft margin and temperature parameter $\\tau$**\n\nWhile the paper introduces the soft margin and temperature parameter $\\tau$ to enhance robustness against targeted attacks, the ablation study in Table 5 does not clearly demonstrate whether these components actually improve effectiveness against targeted attacks as intended.\n\n**2. Theoretical analysis contains errors or lacks clarity**\n\nI believe the theoretical analysis section requires substantial revision or removal. The analysis suffers from insufficient assumptions and unclear explanations in the proofs, making it difficult to assess the validity of the theoretical claims.\n\nLemma 4.1 lacks necessary assumptions. While $f_θ$ is described as \"a deep neural network,\" the specific definition remains unclear. If any classifier is acceptable, it should be written as a general function as shown in line 114. If it must be a neural network, the architecture should be explicitly specified. Although this is borrowed from [48], as required by NeurIPS Checklist 3, it should be formally provided within this paper. Additional details such as the parameter update method for $\\theta$ (gradient descent? flow? [48] may use gradient flow) and the domain and conditions for $x$ and $y$ should also be clarified.\n\nUpon reviewing the proof in [48], I found that their proof relies on Assumption 5.1, which you must also reference in your paper. Unfortunately, this assumption is not explicitly stated in the arXiv version of [48], making it impossible for me to infer its content. At minimum, this appears to involve positive eigenvalues of the Gram matrix, which is neither a simple nor obvious assumption and likely requires strong constraints such as infinite width for neural network architectures. Data assumptions such as spherical distributions may also be necessary. Please refer to neural tangent kernel literature.\n\nProposition 4.2 also contains vague statements such as \"Training the target model based on datasets $X_{nat}$ and $X_{adv}$.\" In an extreme case, even \"training\" with a loss function $\\ell(x, y) = 0$ would be included under this description, yet your claim would not hold in such cases.\n\nAdditionally, the proof in Appendix B relies heavily on verbal explanations rather than mathematical formulations, making it difficult to follow. I would appreciate specific references to the relevant sections in [48] where equation (11) is mentioned, as well as mathematical formulations for the operations described in lines 508-512. The mathematical derivations leading to the conclusion should be more explicitly stated.\n\nIn summary, to support Lemma 4.1 and Proposition 4.2, you should provide detailed definitions of the network architecture and parameter update methods, along with accurate references to all assumptions used, as required by NeurIPS Checklist 3. These clarifications may necessitate substantial rewriting of the proofs.\n\nGiven recent theoretical research in adversarial training, proving the theoretical effectiveness of this loss function for deep neural networks appears extremely challenging and would likely require dozens of pages of rigorous proof. Proofs for linear classifiers or at most two-layer networks would be more realistic in scope.\n\nBased on these concerns, I recommend either:\n\n- Substantial revision of the theorem statements, claims, and proofs, along with review of potentially overclaimed statements (e.g., lines 11, 12, 66).\n- Removal of the theoretical claims entirely.\n\n**Minor Comments**\n\n- Line 115: Missing braces {}.\n- The notation V_{x_i} and V_θ(x_i) are used inconsistently throughout the text (e.g., around line 131) and should be unified.\n- In Algorithm 1, the model parameter θ may be missing from the input and output specifications.",
+    "questions": "I find the proposed method and experimental results satisfactory and believe they contribute meaningfully to the field. These contributions would be valuable even without theoretical guarantees. However, as noted in the weaknesses section, I am concerned that the paper contains clear errors or overclaiming in its theoretical analysis, which could mislead readers. If the authors provide a clear commitment to addressing these theoretical issues, I would be willing to raise my rating to Accept.",
+    "limitations": "Yes, but the authors addressed only a few in the checklist.",
+    "final_justification": "As my concerns have been addressed, and as stated in my earlier review, I am increasing my score from 3 to 5."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 2,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

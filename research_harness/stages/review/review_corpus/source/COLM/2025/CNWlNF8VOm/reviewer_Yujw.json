@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "CNWlNF8VOm",
+  "reviewer": "Yujw",
+  "paper": {
+    "title": "The Surprising Effectiveness of Membership Inference with Simple N-Gram Coverage",
+    "authors": [
+      "Skyler Hallinan",
+      "Jaehun Jung",
+      "Melanie Sclar",
+      "Ximing Lu",
+      "Abhilasha Ravichander",
+      "Sahana Ramnath",
+      "Yejin Choi",
+      "Sai Praneeth Karimireddy",
+      "Niloofar Mireshghallah",
+      "Xiang Ren"
+    ],
+    "abstract": "Membership inference attacks serves as useful tool for fair use of language models, such as detecting potential copyright infringement and auditing data leakage. However, many current state-of-the-art attacks require access to models' hidden states or probability distribution, which prevents investigation into more widely-used, API-access only models like GPT-4. In this work, we introduce N-Gram Coverage Attack, a membership inference attack that relies **solely** on text outputs from the target model, enabling attacks on completely black-box models. We leverage the observation that models are more likely to memorize and subsequently generate text patterns that were commonly observed in their training data. Specifically, to make a prediction on a candidate member, N-Gram Coverage Attack first obtains multiple model generations conditioned on a prefix of the candidate. It then uses n-gram overlap metrics to compute and aggregate the similarities of these outputs with the ground truth suffix; high similarities indicate likely membership. We first demonstrate on a diverse set of existing benchmarks that N-Gram Coverage Attack outperforms other black-box methods while also impressively achieving comparable or even better performance to state-of-the-art white-box attacks --- despite having access to only text outputs.  Interestingly, we find that the success rate of our method scales with the attack compute budget --- as we increase the number of sequences generated from the target model conditioned on the prefix, attack performance tends to improve. Having verified the accuracy of our method, we use it to investigate previously unstudied closed OpenAI models on multiple domains. We find that more recent models, such as GPT-4o, exhibit increased robustness to membership inference, suggesting an evolving trend toward improved privacy protections.",
+    "keywords": [
+      "membership inference",
+      "membership inference attack",
+      "privacy",
+      "memorization"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=CNWlNF8VOm"
+  },
+  "review_fields": {
+    "summary": "The paper presents a membership inference attack for black-box models. The main idea is to sample from the model using a prefix and compute similarity metrics between the model's completion and the ground truth. A threshold on these similarity scores is then used to detect whether a sample was part of the training data.",
+    "reasons_to_accept": "The paper addresses a timely and important problem: detecting potential copyright infringements in a restrictive setting where only output tokens (without probabilities) are available from the LLM's API.\n\nThe proposed method appears nearly as effective as white-box attacks. However, the overall evaluation could be improved, as discussed below.",
+    "reasons_to_reject": "There are several papers on black-box membership inference attacks on LLMs (such as [1], [2], and [3]) that deserve a (more) detailed discussion. These works share some similarities with the current approach, so a comparative analysis of results would be valuable.\n\nWhile the authors introduced a new version of WikiMIA to mitigate distribution shift, other benchmarks used in the paper, such as BookMIA, are known to suffer from such shifts [4]. Incorporating benchmarks like MIMIR [5] could further validate the robustness of the method.\n\nIt would also be beneficial for the authors to evaluate their method using True Positive Rate (TPR) at a low False Positive Rate (FPR), which is a commonly used metric in membership inference.\n\nAlthough the authors compare their method with [6], it's worth noting that [6] is designed for document-level membership inference, where results from multiple paragraphs are aggregated. In contrast, the black-box methods referenced earlier ([1]–[3]) might serve as more appropriate baselines for comparison.\n\n[1] https://arxiv.org/pdf/2310.13771\n\n[2] https://arxiv.org/pdf/2409.13831\n\n[3] https://arxiv.org/pdf/2404.11262\n\n[4] https://arxiv.org/pdf/2406.16201\n\n[5] https://arxiv.org/pdf/2402.07841\n\n[6] https://arxiv.org/pdf/2402.09910"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 100,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 1618,
+    "words": 219,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c4e6c279-7b70-4357-9009-f011309029d9",
+    "error": null,
+    "scored_chars": 1618
+  }
+}

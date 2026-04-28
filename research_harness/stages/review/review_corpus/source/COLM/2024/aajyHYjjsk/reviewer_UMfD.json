@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "aajyHYjjsk",
+  "reviewer": "UMfD",
+  "paper": {
+    "title": "The Geometry of Truth: Emergent Linear Structure in Large Language Model Representations of True/False Datasets",
+    "authors": [
+      "Samuel Marks",
+      "Max Tegmark"
+    ],
+    "abstract": "Large Language Models (LLMs) have impressive capabilities, but are prone to outputting falsehoods. Recent work has developed techniques for inferring whether a LLM is telling the truth by training probes on the LLM's internal activations. However, this line of work is controversial, with some authors pointing out failures of these probes to generalize in basic ways, among other conceptual issues. In this work, we use high-quality datasets of simple true/false statements to study in detail the structure of LLM representations of truth, drawing on three lines of evidence: 1. Visualizations of LLM true/false statement representations, which reveal clear linear structure. 2. Transfer experiments in which probes trained on one dataset generalize to different datasets. 3. Causal evidence obtained by surgically intervening in a LLM's forward pass, causing it to treat false statements as true and vice versa. Overall, we present evidence that at sufficient scale, LLMs *linearly represent* the truth or falsehood of factual statements. We also show that simple difference-in-mean probes generalize as well as other probing techniques while identifying directions which are more causally implicated in model outputs.",
+    "keywords": [
+      "Interpretability",
+      "world models",
+      "knowledge representations",
+      "causal mediation analysis"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=aajyHYjjsk"
+  },
+  "review_fields": {
+    "summary": "The paper curates a data set for probing TRUE and FALSE believes of LLMs and uses this datasets to provide evidence that LLMs of the LLama2 family reveal a clear linear structure separating TRUE from FALSE statements that can be transferred across data sets and can be causally intervened. The study further tries to correct of general probability and likelihood or other features that may intervene.",
+    "reasons_to_accept": "- Well structured and written work that tries to find evidence to what extent believes are actually modeled and therefore models have awareness of truth/falsehood\n- The different data sets allow for a precise investigation of possible factors without too many intervening factors. The paper can be inspiring for the development of many more of such datasets.",
+    "reasons_to_reject": "- The simplicity and clarity of the datasets also has a disadvantage that it does not reflect models behaviour in complex contexts and for more nuanced epistemic values than just TRUE and FALSE, such (im)possible, rare, likely)\n- What does it really mean that a model “believes” a statement to be true or false? This also relates to the previous point that being false and impossible is different from being false and possible. There should be more discussion on this and also what this implies for using LLMs."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:48Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:48Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 870,
+    "words": 145,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1d41e299-3fad-4246-9d1f-a5463f9d5081",
+    "error": null,
+    "scored_chars": 870
+  }
+}

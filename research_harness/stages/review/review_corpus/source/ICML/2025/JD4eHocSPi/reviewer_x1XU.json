@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "JD4eHocSPi",
+  "reviewer": "x1XU",
+  "paper": {
+    "title": "Symmetry-Aware GFlowNets",
+    "authors": [
+      "Hohyun Kim",
+      "Seunggeun Lee",
+      "Min-hwan Oh"
+    ],
+    "abstract": "Generative Flow Networks (GFlowNets) offer a powerful framework for sampling graphs in proportion to their rewards. However, existing approaches suffer from systematic biases due to inaccuracies in state transition probability computations. These biases, rooted in the inherent symmetries of graphs, impact both atom-based and fragment-based generation schemes. To address this challenge, we introduce Symmetry-Aware GFlowNets (SA-GFN), a method that incorporates symmetry corrections into the learning process through reward scaling. By integrating bias correction directly into the reward structure, SA-GFN eliminates the need for explicit state transition computations. Empirical results show that SA-GFN enables unbiased sampling while enhancing diversity and consistently generating high-reward graphs that closely match the target distribution.",
+    "keywords": [
+      "GFlowNet",
+      "graph generation",
+      "molecule optimization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JD4eHocSPi"
+  },
+  "review_fields": {
+    "summary": "This paper aims to rectify equivalent actions in the graph generation process of GFlowNet. In GFlowNet’s graph generation, actions that result in identical graphs are considered distinct actions, leading to incorrect learning of their probabilities. The paper presents a theoretical framework for these actions and proposes a solution using reward scaling to correct them. The effectiveness of this approach is validated through both synthetic and real-world experiments.",
+    "claims_and_evidence": "The theoretical claims presented in this paper are substantiated by detailed proofs presented in the appendix. The experiment settings are outlined in the main text, while the experiment details are further elaborated upon in the appendix.",
+    "methods_and_evaluation_criteria": "Graph generation is a common use case of GFlowNets, and the existence of equivalent actions is a common problem in related tasks like atom-based and fragment-based molecule generation. The authors propose reward scaling as a simple and effective solution to this issue. However, I have a potential concern with this approach: its exponential complexity could limit its scalability to large and symmetric graphs. In contrast, the positional encoding approach proposed by Ma et al. has polynomial time complexity. While Ma et al. didn’t provide their code, it would be helpful for the authors to compare the proposed reward scaling approach with Ma et al.’s approach in different scales. Specifically, the authors could compare the following two methods:\n1. The proposed reward scaling approach, which requires computing the automorphism group of terminal graphs.\n2. Computing the random walk positional encodings of each graph in the trajectory, e.g., using the `torch_geometric.transforms.AddRandomWalkPE` function from the PyG package. Since Ma et al. didn’t provide their code implementation, the authors don’t need to use positional encodings to check for orbit equivalent actions.",
+    "theoretical_claims": "I reviewed the theoretical proofs and didn’t find any errors on my own. By the way, in Theorem 4.4, when you mention that the state-action flow constraints $F(s)p_{\\bar{\\mathcal{A}}}(a|s)=F(s’)p_{\\bar{\\mathcal{A}}}(a|s’)$ are satisfied, do you mean that they should be satisfied for every possible action $a$ that leads from $s$ to $s’$? It would be clearer if you could clarify this in the theorem statement to prevent any confusion.",
+    "experimental_designs_or_analyses": "I’ve thoroughly examined the soundness of all experiment settings. The proposed method appears to be effective in generating synthetic and fragment-based molecules. However, it shows limited improvement in generating atom-based molecules. My understanding is that symmetries are uncommon in real-world molecule graphs, and as the graph size increases, these symmetries become even rarer. Consequently, the proposed method may not scale well to large-scale graphs. The authors could validate this by measuring the ratio of equivalent actions in their tasks. This could potentially restrict the scalability of the proposed approach to large-scale tasks.\n\nAdditionally, I have some concerns regarding the synthetic experiment results:\n- In Figure 3(c), why is the performance of reward scaling consistently lower than transition and orbit correction? I suspect that the reward scaling approach only corrects the terminal probabilities, while the intermediate probabilities remain incorrect. Therefore, for methods that rely on intermediate probabilities, such as detailed balance, the performance would still be negatively impacted. This limitation is particularly significant considering that detailed balance outperforms trajectory balance in your task.\n- In Figure 3(a), why are there some outliers that deviate from the straight line? From your theoretical analysis, both reward scaling and transition correction are expected to yield perfect terminal probabilities. Consequently, I would anticipate the predicted probabilities in Figure 3(a) to form a perfect straight line.",
+    "relation_to_broader_scientific_literature": "This paper makes a significant and broad contribution to the application of GFlowNets in graph generation tasks. In theory, any application of GFlowNets in this domain should incorporate these correction methods to ensure accurate prediction of rewards.",
+    "essential_references_not_discussed": "I couldn’t find any missing essential references.",
+    "other_strengths_and_weaknesses": "The strengths and weaknesses of this paper have been thoroughly discussed in the preceding points, and I have nothing further to contribute.",
+    "other_comments_or_suggestions": "A minor point on Appendix H.2: you mentioned augmenting edge-level representations with shortest-path lengths. However, shortest-path lengths aren’t very expressive, and there are many edge cases where non-equivalent edges in the same graph can have the same shortest-path lengths. I suggest augmenting edge-level representations with the off-diagonal elements of the powers of the random walk matrix. As per results from Ma et al, this approach should yield nearly perfect performance.",
+    "questions_for_authors": "My questions for this paper are listed in the preceding points."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

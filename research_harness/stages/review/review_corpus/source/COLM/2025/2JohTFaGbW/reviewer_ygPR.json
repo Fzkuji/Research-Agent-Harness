@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "2JohTFaGbW",
+  "reviewer": "ygPR",
+  "paper": {
+    "title": "Language models align with brain regions that represent concepts across modalities",
+    "authors": [
+      "Maria Ryskina",
+      "Greta Tuckute",
+      "Alexander Fung",
+      "Ashley Malkin",
+      "Evelina Fedorenko"
+    ],
+    "abstract": "Cognitive science and neuroscience have long faced the challenge of disentangling representations of language from representations of conceptual meaning. As the same problem arises in today's language models (LMs), we investigate the relationship between LM--brain alignment and two neural metrics: (1) the level of brain activation during processing of sentences, targeting linguistic processing, and (2) a novel measure of meaning consistency across input modalities, which quantifies how consistently a brain region responds to the same concept across paradigms (sentence, word cloud, image) using an fMRI dataset (Pereira et al., 2018). Our experiments show that both language-only and language-vision models predict the signal better in more meaning-consistent areas of the brain, even when these areas are not strongly sensitive to language processing, suggesting that LMs might internally represent cross-modal conceptual meaning.",
+    "keywords": [
+      "LM–brain alignment",
+      "fMRI",
+      "conceptual meaning",
+      "cognitive neuroscience"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=2JohTFaGbW"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for addressing several questions. However, except the finding of vision-language models result in Fig. 5, the remaining results primarily involve the use of recent language models and their brain alignment. For example, if the authors aim to investigate concept alignment, the Pereira dataset used in Experiment 1 includes both abstract and concrete concepts. How does concept alignment differ between these two types of concepts? Do vision-language models better explain concept alignment across the three ROIs compared to text-only language models? Additionally, in Figure 5, each ROI shows the same Pearson correlation across all text-only models. Does this suggest that all text-based language models exhibit similar patterns of concept alignment? \nFurthermore, an important language-related region-the angular gyrus, part of the parietal cortex-has not been explored in this study. This is notable, as the angular gyrus is well known for its role in semantic information processing.\n\nOverall, I am still not convinced that the current study provides meaningful implications or conclusions regarding the relationship between language models and brain alignment. Although I’ve updated my score to 4, I believe the manuscript still requires significant improvements before it can be considered for publication."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 14,
+    "mixed_pct": 0,
+    "human_pct": 86,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1331,
+    "words": 194,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/30a7b375-0b01-40e6-88f6-d3182214c01c",
+    "error": null,
+    "scored_chars": 1332
+  }
+}

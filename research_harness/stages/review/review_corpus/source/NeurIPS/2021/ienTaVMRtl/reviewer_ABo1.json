@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "ienTaVMRtl",
+  "reviewer": "ABo1",
+  "paper": {
+    "title": "Pooling by Sliced-Wasserstein Embedding",
+    "authors": [
+      "Navid Naderializadeh",
+      "Joseph F. Comer",
+      "Reed W Andrews",
+      "Heiko Hoffmann",
+      "Soheil Kolouri"
+    ],
+    "abstract": "Learning representations from sets has become increasingly important with many applications in point cloud processing, graph learning, image/video recognition, and object detection. We introduce a geometrically-interpretable and generic pooling mechanism for aggregating a set of features into a fixed-dimensional representation. In particular, we treat elements of a set as samples from a probability distribution and propose an end-to-end trainable Euclidean embedding for sliced-Wasserstein distance to learn from set-structured data effectively. We evaluate our proposed pooling method on a wide variety of set-structured data, including point-cloud, graph, and image classification tasks, and demonstrate that our proposed method provides superior performance over existing set representation learning approaches. Our code is available at https://github.com/navid-naderi/PSWE.",
+    "keywords": [
+      "Pooling",
+      "feature aggregation",
+      "permutation invariance",
+      "optimal transport",
+      "set learning",
+      "representation learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ienTaVMRtl"
+  },
+  "review_fields": {
+    "comment": "I acknowledge the author's efforts to respond to my questions; I increase my rating slightly. However, my concerns are not fully addressed: 1. Modelnet40 is not a large dataset and I think it's more convincing to demonstrate the practical value by reaching a reasonable performance on this dataset. 2. The scale of the experiments in the 2D vision domain is also too small. That said I am mainly concerned the practical value of the this work."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

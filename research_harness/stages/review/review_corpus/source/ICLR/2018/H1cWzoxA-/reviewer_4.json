@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "H1cWzoxA-",
+  "reviewer": "4",
+  "paper": {
+    "title": "Bi-Directional Block Self-Attention for Fast and Memory-Efficient Sequence Modeling",
+    "authors": [
+      "Tao Shen",
+      "Tianyi Zhou",
+      "Guodong Long",
+      "Jing Jiang",
+      "Chengqi Zhang"
+    ],
+    "abstract": "Recurrent neural networks (RNN), convolutional neural networks (CNN) and self-attention networks (SAN) are commonly used to produce context-aware representations. RNN can capture long-range dependency but is hard to parallelize and not time-efficient. CNN focuses on local dependency but does not perform well on some tasks. SAN can model both such dependencies via highly parallelizable computation, but memory requirement grows rapidly in line with sequence length. In this paper, we propose a model, called \"bi-directional block self-attention network (Bi-BloSAN)\", for RNN/CNN-free sequence encoding. It requires as little memory as RNN but with all the merits of SAN. Bi-BloSAN splits the entire sequence into blocks, and applies an intra-block SAN to each block for modeling local context, then applies an inter-block SAN to the outputs for all blocks to capture long-range dependency. Thus, each SAN only needs to process a short sequence, and only a small amount of memory is required. Additionally, we use feature-level attention to handle the variation of contexts around the same word, and use forward/backward masks to encode temporal order information. On nine benchmark datasets for different NLP tasks, Bi-BloSAN achieves or improves upon state-of-the-art accuracy, and shows better efficiency-memory trade-off than existing RNN/CNN/SAN.",
+    "keywords": [
+      "deep learning",
+      "attention mechanism",
+      "sequence modeling",
+      "natural language processing",
+      "sentence embedding"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H1cWzoxA-"
+  },
+  "review_fields": {
+    "review": "This high-quality paper tackles the quadratic dependency of memory on sequence length in attention-based models, and presents strong empirical results across multiple evaluation tasks. The approach is basically to apply self-attention at two levels, such that each level only has a small, fixed number of items, thereby limiting the memory requirement while having negligible impact on speed. It captures local information into so-called blocks using self-attention, and then applies a second level of self-attention over the blocks themselves.\n\nThe paper is well organized and clearly written, modulo minor language mistakes that should be easy to fix with further proof-reading. The contextualization of the method relative to CNNs/RNNs/Transformers is good, and the beneficial trade-offs between memory, runtime and accuracy are thoroughly investigated, and they're compelling.\n\nI am curious how the story would look if one tried to push beyond two levels...? For example, how effective might a further inter-sentence attention level be for obtaining representations for long documents? \n\nMinor points:\n- Text between Eq 4 & 5: W^{(1)} appears twice; one instance should probably be W^{(2)}.\n- Multiple locations, e.g. S4.1: for NLI, the word is *premise*, not *promise*.\n- Missing word in first sentence of S4.1: ... reason __ the ..."
+  },
+  "review_metadata": {
+    "rating": 9,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

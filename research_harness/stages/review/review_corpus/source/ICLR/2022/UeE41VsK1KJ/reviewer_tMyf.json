@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "UeE41VsK1KJ",
+  "reviewer": "tMyf",
+  "paper": {
+    "title": "Subjective Learning for Open-Ended Data",
+    "authors": [
+      "Tianren Zhang",
+      "Yizhou Jiang",
+      "Xin Su",
+      "Shangqi Guo",
+      "Feng Chen"
+    ],
+    "abstract": "Conventional supervised learning typically assumes that the learning task can be solved by learning a single function since the data is sampled from a fixed distribution. However, this assumption is invalid in open-ended environments where no task-level data partitioning is available. In this paper, we present a novel supervised learning framework of learning from open-ended data, which is modeled as data implicitly sampled from multiple domains with the data in each domain obeying a domain-specific target function. Since different domains may possess distinct target functions, open-ended data inherently requires multiple functions to capture all its input-output relations, rendering training a single global model problematic. To address this issue, we devise an Open-ended Supervised Learning (OSL) framework, of which the key component is a subjective function that allocates the data among multiple candidate models to resolve the \"conflict'' between the data from different domains, exhibiting a natural hierarchy. We theoretically analyze the learnability and the generalization error of OSL, and empirically validate its efficacy in both open-ended regression and classification tasks.",
+    "keywords": [
+      "Open-ended data",
+      "machine learning",
+      "supervised learning",
+      "data conflict"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=UeE41VsK1KJ"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes a framework for open-ended data by learning a subjective functions that allows to represent multiple domains without interference. The framework works in two stages: 1) evaluating a set of candidate hypotheses for each domain using a batch of data for that domain, 2) training the hypothesis with the smallest error  for each domain. The paper also proposes two new evaluation metrics, one to determine the error of the subjective function and one for calculating the model error in domain prediction. The authors provide both theoretical and experimental analyses of the proposed framework. In terms of theoretical analyses, the authors provide some guarantees in terms of learnability and generalisation error. In terms of experimental results, the authors test both regression and classification tasks with data of multiple labels and hierarchical labels. Comparisons to other approaches such as ProbCon, Pseudo-L and LabelProp in Colored MNIST, CIFAR-100 and Fashion Product Images datasets demonstrate gains of the proposed approach versus counterparts.",
+    "main_review": "Strengths of the paper are:\n-  The paper studies the important problem of learning on multiple domains with open-ended data. The proposed approach is novel, simple yet effective, as clearly demonstrated in both the theoretical and experimental results\n- The paper is very well contextualised in the existing literature \n- The paper is very well-written, organised and the claims are sufficiently justified\n\nWeaknesses of the paper are:\n- A few aspect are not entirely clear in the writing of the paper. For example, in page 3 it is mentioned that \"In the above setting, an episodic sample number parameter n is introduced to maintain the local consistency of data, implicitly assuming that we are able to sample a size-n data batch at a time from each domain.\" - does this mean that at each time all domains should have corresponding data batches or that each domain is sampled sequentially one after the other? Please clarify\n- There are some typos in the paper, e.g. Section 2.4 page 4",
+    "summary_of_the_review": "I find this paper very interesting. The proposed approach is novel, yet simple, and clearly works well for the problem of learning from open-ended data. I would recommend to accept this paper.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1179,
+    "words": 200,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/eddbeaa4-fe19-4b94-9384-cc2886ab28bd",
+    "error": null,
+    "scored_chars": 1181
+  }
+}

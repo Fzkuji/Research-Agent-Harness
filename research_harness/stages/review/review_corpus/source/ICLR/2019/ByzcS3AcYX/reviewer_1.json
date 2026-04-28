@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ByzcS3AcYX",
+  "reviewer": "1",
+  "paper": {
+    "title": "Neural TTS Stylization with Adversarial and Collaborative Games",
+    "authors": [
+      "Shuang Ma",
+      "Daniel Mcduff",
+      "Yale Song"
+    ],
+    "abstract": "The modeling of style when synthesizing natural human speech from text has been the focus of significant attention. Some state-of-the-art approaches train an encoder-decoder network on paired text and audio samples (x_txt, x_aud) by encouraging its output to reconstruct x_aud. The synthesized audio waveform is expected to contain the verbal content of x_txt and the auditory style of x_aud. Unfortunately, modeling style in TTS is somewhat under-determined and training models with a reconstruction loss alone is insufficient to disentangle content and style from other factors of variation. In this work, we introduce an end-to-end TTS model that offers enhanced content-style disentanglement ability and controllability. We achieve this by combining a pairwise training procedure, an adversarial game, and a collaborative game into one training scheme. The adversarial game concentrates the true data distribution, and the collaborative game minimizes the distance between real samples and generated samples in both the original space and the latent space. As a result, the proposed model delivers a highly controllable generator, and a disentangled representation. Benefiting from the separate modeling of style and content, our model can generate human fidelity speech that satisfies the desired style conditions. Our model achieves start-of-the-art results across multiple tasks, including style transfer (content and style swapping), emotion modeling, and identity transfer (fitting a new speaker's voice).",
+    "keywords": [
+      "Text-To-Speech synthesis",
+      "GANs"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ByzcS3AcYX"
+  },
+  "review_fields": {
+    "comment": "Thank you for the clarifications. I feel that the material is now much more convincing after seeing the architectural presentation. It is illuminating to note that one can break up content and style to capture their essence as can be seen in figures 2, 3, 4 and 5 in the appendix. Fig 2 uses multiheaded attention to compute similarity between ref. embedding and randomly initialized tokens - this seems to be a new addition to the previous GST works (Skerry-Ryan et al 2018 and Wang et al 2018). \n\nOverall, This work exhibits a very high level of application - attention based seq2seq modeling with Tacotron setup, and manipulating content and style with instructive use of techniques from the formulation to the architectures used . \n\nI rule this as a clear accept."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

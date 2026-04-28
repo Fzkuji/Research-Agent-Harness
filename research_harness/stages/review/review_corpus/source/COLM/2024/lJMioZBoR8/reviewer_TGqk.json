@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "lJMioZBoR8",
+  "reviewer": "TGqk",
+  "paper": {
+    "title": "Rejection Improves Reliability: Training LLMs to Refuse Unknown Questions Using RL from Knowledge Feedback",
+    "authors": [
+      "Hongshen Xu",
+      "Zichen Zhu",
+      "Situo Zhang",
+      "Da Ma",
+      "Shuai Fan",
+      "Lu Chen",
+      "Kai Yu"
+    ],
+    "abstract": "Large Language Models (LLMs) often generate erroneous outputs, known as hallucinations, due to their limitations in discerning questions beyond their knowledge scope. While addressing hallucination has been a focal point in research, previous efforts primarily concentrate on enhancing correctness without giving due consideration to the significance of rejection mechanisms. In this paper, we conduct a comprehensive examination of the role of rejection, introducing the alignment goal of model reliability along with corresponding metrics. This goal requires the model to provide accurate responses while adeptly rejecting questions exceeding its knowledge boundaries, thereby minimizing hallucinations. To improve the inherent reliability of LLMs, we present a novel alignment framework called Reinforcement Learning from Knowledge Feedback (RLKF). RLKF leverages knowledge feedback to dynamically determine the model's knowledge boundary and trains a reliable reward model to encourage the rejection of out-of-knowledge questions. Experimental results on mathematical and question answering datasets affirm the substantial efficacy of RLKF in significantly enhancing LLM reliability.",
+    "keywords": [
+      "hallucination",
+      "alignment",
+      "RLKF"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=lJMioZBoR8"
+  },
+  "review_fields": {
+    "summary": "This paper addresses the problem of LLMs providing incorrect answers to questions. The idea is that in some\ncases it is preferable that the LLM refuses to answer the question, rather than confidentally outputting a\nwrong answer. The paper proposes RLKF (reinforcement learning from knowledge feedback) which consists of\ngenerating appropriate ranking data using the LLM, and then tuning with this data  in a similar way to RLHF. The\nevaluation on mathematical problems shows that RLKF can increase the truthfulness of the LLM whilst having\na minor negative impact on accuracy.",
+    "reasons_to_accept": "- The paper addresses a clear problem with LLMs\n- The proposed solution seems to be novel and effective.\n- The experiments show that the method makes the LLM more likely to reject difficult questions",
+    "reasons_to_reject": "- The experiments are on a narrow range of problems (maths)\n- No code or data are released as part of the paper, making it hard to reproduce and build on.\n- Whilst figure 7 shows strong results on the arithmetic data, figure 8 shows that the proposed\nmethod has limited effect on GSM8k, as compared to baselines. The usefulness of the method depends\non how the user balances accuracy and truthfulness.",
+    "questions_to_authors": "- What does Acnt in Table 2 mean? Should this be Truth?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:35:34Z",
+    "migrated_from_v1_at": "2026-04-27T15:35:34Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 659,
+    "words": 119,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d8fa3b2d-0a1e-4411-95f3-db3ddab4afd2",
+    "error": null,
+    "scored_chars": 659
+  }
+}

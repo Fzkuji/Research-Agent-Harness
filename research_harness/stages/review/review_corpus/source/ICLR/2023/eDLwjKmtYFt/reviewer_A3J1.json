@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "eDLwjKmtYFt",
+  "reviewer": "A3J1",
+  "paper": {
+    "title": "EquiMod: An Equivariance Module to Improve Visual Instance Discrimination",
+    "authors": [
+      "Alexandre DEVILLERS",
+      "Mathieu Lefort"
+    ],
+    "abstract": "Recent self-supervised visual representation methods are closing the gap with supervised learning performance. Most of these successful methods rely on maximizing the similarity between embeddings of related synthetic inputs created through data augmentations. This can be seen as a task that encourages embeddings to leave out factors modified by these augmentations, i.e. to be invariant to them. However, this only considers one side of the trade-off in the choice of the augmentations: they need to strongly modify the images to avoid simple solution shortcut learning (e.g. using only color histograms), but on the other hand, augmentations-related information may be lacking in the representations for some downstream tasks (e.g. literature shows that color is important for bird and flower classification). Few recent works proposed to mitigate this problem of using only an invariance task by exploring some form of equivariance to augmentations. This has been performed by learning additional embeddings space(s), where some augmentation(s) cause embeddings to differ, yet in a non-controlled way. In this work, we introduce EquiMod a generic equivariance module that structures the learned latent space, in the sense that our module learns to predict the displacement in the embedding space caused by the augmentations. We show that applying that module to state-of-the-art invariance models, such as BYOL and SimCLR, increases the performances on the usual CIFAR10 and ImageNet datasets. Moreover, while our model could collapse to a trivial equivariance, i.e. invariance, we observe that it instead automatically learns to keep some augmentations-related information beneficial to the representations.",
+    "keywords": [
+      "Representation learning",
+      "Self-supervised learning",
+      "Contrastive learning",
+      "Equivariance"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=eDLwjKmtYFt"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes an equivariance regularizer as a modification to the usual invariance-inducing self-supervised losses. This is an interesting approach to enabling equivariance as there is no need to have a special architecture as prior work. The authors are able to train multiple self-supervised losses on a standard ResNet-50 and show good linear probe improvements over invariant baselines.",
+    "strength_and_weaknesses": "Strengths:\n\n1. A novel approach to enforcing equivariance is presented. The regularizer and modification to regular architectures is simple and effective.\n\n2. The performance of the technique is shown on multiple losses and \n\nWeaknesses/Questions:\n\n1. In Eq. (4) why is j not shown on the numerator? \n\n2. Is the only difference between the equivariance projection head and equivariant predictor the fact that the augmentation parameters are fed into the predictor? Otherwise equivariance projection head and predictor could have just been merged? Is equivariance projection head used elsewhere?\n\n3. In Figure 3 and 4, what is the value of these measures for a regularly trained (invariant) model? This will tell us the benefit of adding the regularizer. \n\n4. What is the reason that equivariance is stronger for color compared to other augmentations for ImageNet? Any insight into this behavior?\n\n5. Did you try any finetuning experiments?",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is easy to follow, clearly written, and the method is novel. I imagine that it will be easy to reproduce given the details in the paper.",
+    "summary_of_the_review": "Given the overall novelty and clean/simple idea which seems to work well, I recommend acceptance.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

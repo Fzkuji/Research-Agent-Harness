@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "SysEexbRb",
+  "reviewer": "1",
+  "paper": {
+    "title": "Critical Points of Linear Neural Networks: Analytical Forms and Landscape Properties",
+    "authors": [
+      "Yi Zhou",
+      "Yingbin Liang"
+    ],
+    "abstract": "Due to the success of deep learning to solving a variety of challenging machine learning tasks, there is a rising interest in understanding loss functions for training neural networks from a theoretical aspect. Particularly, the properties of critical points and the landscape around them are of importance to determine the convergence performance of optimization algorithms. In this paper, we provide a necessary and sufficient characterization of the analytical forms for the critical points (as well as global minimizers) of the square loss functions for linear neural networks. We show that the analytical forms of the critical points characterize the values of the corresponding loss functions as well as the necessary and sufficient conditions to achieve global minimum. Furthermore, we exploit the analytical forms of the critical points to characterize the landscape properties for the loss functions of linear neural networks and shallow ReLU networks. One particular conclusion is that: While the loss function of linear networks has no spurious local minimum, the loss function of one-hidden-layer nonlinear networks with ReLU activation function does have local minimum that is not global minimum.",
+    "keywords": [
+      "neural networks",
+      "critical points",
+      "analytical form",
+      "landscape"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SysEexbRb"
+  },
+  "review_fields": {
+    "review": "This paper mainly focuses on the square loss function of linear networks. It provides the sufficient and necessary characterization for the forms of critical points of one-hidden-layer linear networks. Based on this characterization, the authors are able to discuss different types of non-global-optimal critical points and show that every local minimum is a global minimum for one-hidden-layer linear networks. As an extension, the manuscript also characterizes the analytical forms for the critical points of deep linear networks and deep ReLU networks, although only a subset of non-global-optimal critical points are discussed. In general, this manuscript is well written.   \n\nPros:\n1. This manuscript provides the sufficient and necessary characterization of critical points for deep networks. \n2. Compared to previous work, the current analysis for one-hidden-layer linear networks doesn’t require assumptions on parameter dimensions and data matrices. The novel analyses, especially the technique to characterize critical points and the proof of item 2 in Proposition 3, will probably be interesting to the community.\n3. It provides an example when a local minimum is not global for a one-hidden-layer neural network with ReLU activation.\n\nCons:\n1. I'm concerned that the contribution of this manuscript is a little incremental. The equivalence of global minima and local minima for linear networks is not surprising based on existing works e.g. Hardt & Ma (2017) and Kawaguchi (2016).  \n2. Unlike one-hidden-layer linear networks, the characterizations of critical points for deep linear networks and deep ReLU networks seem to be hard to be interpreted. This manuscript doesn't show that every local minimum of these two types of deep networks is a global minimum, which actually has been shown by existing works like Kawaguchi (2016) with some assumptions. The behaviors of linear networks and practical (deep and nonlinear) networks are very different. Under such circumstance, the results about one-hidden-layer linear networks are less interesting to the deep learning community.\n\nMinors:\nThere are some mixed-up notations: tilde{A_i} => A_i , and rank(A_2) => rank(A)_2 in Proposition 3."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

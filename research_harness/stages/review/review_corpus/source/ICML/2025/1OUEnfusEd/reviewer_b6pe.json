@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "1OUEnfusEd",
+  "reviewer": "b6pe",
+  "paper": {
+    "title": "How Compositional Generalization and Creativity Improve as Diffusion Models are Trained",
+    "authors": [
+      "Alessandro Favero",
+      "Antonio Sclocchi",
+      "Francesco Cagnetta",
+      "Pascal Frossard",
+      "Matthieu Wyart"
+    ],
+    "abstract": "Natural data is often organized as a hierarchical composition of features. How many samples do generative models need in order to learn the composition rules, so as to produce a combinatorially large number of novel data? What signal in the data is exploited to learn those rules? We investigate these questions in the context of diffusion models both theoretically and empirically. Theoretically, we consider a simple probabilistic context-free grammar - a tree-like graphical model used to represent the hierarchical and compositional structure of data such as language and images. We demonstrate that diffusion models learn the grammar's composition rules with the sample complexity required for clustering features with statistically similar context, a process similar to the word2vec algorithm. However, this clustering emerges hierarchically: higher-level features associated with longer contexts require more data to be identified. This mechanism leads to a sample complexity that scales polynomially with the said context size. As a result, diffusion models trained on an intermediate dataset size generate data coherent up to a certain scale, but lacking global coherence. We test these predictions across different domains and find remarkable agreement:  both generated texts and images achieve progressively larger coherence lengths as the training time or dataset size grows. We discuss connections between the hierarchical clustering mechanism we introduce here and the renormalization group in physics.",
+    "keywords": [
+      "Science of deep learning",
+      "compositionality",
+      "diffusion models",
+      "probabilistic graphical models",
+      "sample complexity",
+      "generalization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=1OUEnfusEd"
+  },
+  "review_fields": {
+    "summary": "In the paper, the authors use probabilistic context-free grammars and random hierarchy models in order to analyze compositional generalization in diffusion models. The papers begin by training a D3PM, analyzing how the model learns the rules of RHM at different hierarchical levels. They empirically observe a learned stage process, showing that the network first learns highest levels, and only after the generalization accuracy is high enough for lower levels, the accuracy starts to increase for higher levels. The authors proceed to investigate the sample complexity, which is defined as the number of samples required for the accuracy at a certain level to exceed that of chance. The authors establish theoretical results for this and show that simulated experiments behave according to theory. After establishing theoretical results, the authors show that for a hierarchical-structured data, deep networks such as UNets can exploit this structure resulting in enhanced. Finally, authors perform experiments for both diffusion on text and images, showcasing that diffusion models learn hierarchical structures in a progressive manner.",
+    "claims_and_evidence": "I find there to be several claims in the paper which remain unsupported. For example, the title mentions \"creativity,\" a term that is not defined or discussed throughout the paper. I suggest reconsidering the title to better reflect the content.\n\nRegarding the first contribution, the authors claim to empirically demonstrate the hierarchical learning process of diffusion models. However, this concept has already been explored in previous studies, such as Sclocchi et al.'s \"A Phase Transition in Diffusion Models Reveals the Hierarchical Nature of Data\" and Li et al.'s \"Critical windows: non-asymptotic theory for feature emergence in diffusion models.\" These works provide similar insights, rendering the authors' claim less novel. Therefore, the significance of the first contribution lacks solid grounding.\n\nSecondly, regarding compositional generalization, which might be more obvious and valid for the case of context-free grammar (with which I am not extremely familiar), the contribution from a theoretical point of view stands. However, I am not convinced whether the numerical experiments really explain whether or why compositional generalization occurs in these models. The results, particularly on images, seem to show that early layers do indeed encode low-level localized features, while deeper layers represent more abstract and global factors, as the authors point out in Section 5. and provide sufficient number of references. However, I do not see, for example, why does the MMD result in Figure 5b) nor the images in Figure 5a) imply much on compositional generalization ability of diffusion models. An experiment that would be very useful to show is for example whether the model is capable indeed of generating combinations of features that have not previously been seen. To strengthen their claim, the authors could conduct additional experiments, such as testing the model's ability to generate combinations of features not seen during training. For instance, using text-to-image models, they could verify whether the model can produce feature combinations absent from the training set. Although this might be a costly and time-consuming experiment, I do believe that strong claims regarding compositional generalization of diffusion models require more extensive experimentation and convincing experimentation.\n\nIn conclusion, the paper starts off strong and develops good theory for RHM but after reading it, several claims are left unsupported.",
+    "methods_and_evaluation_criteria": "The methods and evaluation criteria make sense for the problem at hand. I am unsure regarding Figure 1; Why does the evaluated empirical curve differ from the one suggested by theory? To be specific, could the authors comment on why does the theory not predict the cascaded learning across levels, as observed in practice (level k+1 starts to have better accuracy only after level k has a sufficiently high generalization accuracy). I think it would be very beneficial to the paper if the authors could provide explanation of this.",
+    "theoretical_claims": "I did not check the correctness of the proofs.",
+    "experimental_designs_or_analyses": "The experimental analyses seem to be sound.",
+    "relation_to_broader_scientific_literature": "The problem of compositional generalization in diffusion is very timely and of great interest to the literature. Any progress towards understanding it, either from theoretical or empirical perspective is of great contribution to the community.",
+    "essential_references_not_discussed": "There is one reference which the authors should add, mentioned above: Li et al.'s \"Critical windows: non-asymptotic theory for feature emergence in diffusion models.\".",
+    "other_comments_or_suggestions": "1. Line 89 typo: Kamb & Ganguli studies -> study\n2. Please provide a reference for equation (2) for the discrete data case. Furthermore, it would be better if the authors could use different notation for the forward transition matrix q, as the same notation is used for the continuous data case, where the forward transition matrix is in fact a probability distribution.\n3. It would be beneficial if the authors could clarify or comment on what do they mean by \"synonyms\" at the beginning of Section 3.1, and how they relate to the m production rules that mentioned in the iii) part of Random Hierarchy Models introduction. It is not very clear what the authors mean by synonyms and what having a larger/smaller value of $m$ means in practice.\n4. Line 257 and 258: the authors mention that \"they demonstrate that the learning the score function in the low-noise limit corresponds to a task invariant to exchanging synonyms\" but do not reference where this is performed. Could the authors please provide a section or figure reference?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

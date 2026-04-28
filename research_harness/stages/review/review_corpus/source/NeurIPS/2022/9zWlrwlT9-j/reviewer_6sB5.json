@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "9zWlrwlT9-j",
+  "reviewer": "6sB5",
+  "paper": {
+    "title": "Unbiased Estimates for Multilabel Reductions of Extreme Classification with Missing Labels",
+    "authors": [
+      "Erik Schultheis",
+      "Rohit Babbar"
+    ],
+    "abstract": "This paper considers the missing-labels problem in the extreme multilabel classification (XMC) setting, i.e. a setting\nwith a very large label space. The goal in XMC often is to maximize either precision or recall of the top-ranked\npredictions, which can be achieved by reducing the multilabel problem into a series of binary (One-vs-All) or multiclass\n(Pick-all-Labels) problems. Missing labels are a ubiquitous phenomenon in XMC tasks, yet the interaction between missing\nlabels and multilabel reductions has hitherto only been investigated for the case of One-vs-All reduction. In this\npaper, we close this gap by providing unbiased estimates for general (non-decomposable) multilabel losses, which enables\nunbiased estimates of the Pick-all-Labels reduction, as well as the normalized reductions which are required for\nconsistency with the recall metric. We show that these estimators suffer from increased variance and may lead to\nill-posed optimization problems. To address this issue, we propose to use convex upper bounds which trade off an\nincrease in bias against a strong decrease in variance.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=9zWlrwlT9-j"
+  },
+  "review_fields": {
+    "summary": "This paper discusses the problem of  missing labels in extreme multi-label classification (XMC). First a framework for defining the loss function is defined, which can be applied to various one-vs-all (OVA) and pick-all-labels reduction methods. Next, unbiased estimators for the loss functions based on propensity  are discussed, and it is shown that such estimators have high variance. Next, convex upper-bounds for the loss functions are discussed, in order to obtain efficient solvers. Numerical results on two datasets are presented to illustrate the various aspects of missing labels in XMC problems.",
+    "strengths_and_weaknesses": "The strengths of the paper  are:\n1. An important problem in XMC, that of missing labels is discussed.\n2. Unbiased loss functions and their convex upper bounds are discussed.\n3. The framework is general and addressed a range of XMC methods that can be written as OvA or PAL.\n\nThe weaknesses of the paper  are:\n1. Significance of the results are not clear.\n2. Numerical results seem limited.\n3. Scalability issues are not addressed.",
+    "questions": "Missing labels is an important problem in XMC literature. The paper might be presenting an interesting framework for solving XMC problems with missing labels. \nHowever, the current version of the paper has the following shortcomings:  \n\n1. Significance: Unbiased loss functions for XMC with missing labels have been proposed before, see [1],[2]. It is not clear how the proposed estimators in this paper differ from the existing ones and what are the significance of the proposed estimators. Also, certain aspects are  not clear, eg., why the upper bounds would have reduced variance and how the bias looks like in these cases.\n\n2. Numerical results: The experiment results seem limited. Only two datasets are considered. Many aspects of the framework are not studied, e.g., whether the considers loss functions solve the original XMC problem efficiently, what type of XMC algorithms perform best (OvA or PAL), also, comparison to [1],[2] would be helpful to better understand the advantages of the popped framework. \n\n3. Scalibity: Since in XMC set up, the number of instances and labels can be very large (in millions), it is not clear if OvA or PAL is scalable. There are many other reduction methods (label reduction or tree based methods) that are scalable. So, it is not clear if studying OvA type methods is useful in XMC settings.\n\n\n4. Minor comment:\ni. In Theorem 2, under the conditions of Theorem 2 --> under the conditions of Proposition 2?\n\n\nReferences:\n\n[1] Schultheis, Erik, and Rohit Babbar. \"Unbiased Loss Functions for Multilabel Classification with Missing Labels.\" arXiv preprint arXiv:2109.11282 (2021).\n\n[2] Schultheis, Erik, et al. \"Unbiased Loss Functions for Extreme Classification With Missing Labels.\" arXiv preprint arXiv:2007.00237 (2020).",
+    "limitations": "Yes, the paper addresses these."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

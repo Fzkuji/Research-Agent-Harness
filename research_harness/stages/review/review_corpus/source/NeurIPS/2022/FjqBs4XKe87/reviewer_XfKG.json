@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "FjqBs4XKe87",
+  "reviewer": "XfKG",
+  "paper": {
+    "title": "Prompt Injection: Parameterization of Fixed Inputs",
+    "authors": [
+      "Eunbi Choi",
+      "Yongrae Jo",
+      "Joel Jang",
+      "Minjoon Seo"
+    ],
+    "abstract": "Recent works have shown that attaching prompts to the input is effective at conditioning Language Models (LM) to perform specific tasks. However, prompts are always included in the input text during inference, thus incurring substantial computational and memory overhead. Also, there is currently no straightforward method of utilizing prompts that are longer than the maximum input length of the LMs without incurring additional costs during inference. We propose Prompt Injection (PI), a novel formulation of injecting the prompt into the parameters of an LM to be an efficient alternative to attaching fixed prompts to the input. We show that in scenarios with long fixed prompts, PI can be up to 280 times more efficient in terms of total FLOPs than previous approaches. We further explore methodologies for PI and show promising results in persona-dependent conversation, semantic parsing, and zero-shot learning with task instructions. Through these explorations, we show that PI can be a promising direction for conditioning language models, especially in scenarios with long and fixed prompts.",
+    "keywords": [
+      "Prompt",
+      "Injection",
+      "Parameterization",
+      "Language Model",
+      "Inference Efficiency",
+      "Distillation"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=FjqBs4XKe87"
+  },
+  "review_fields": {
+    "summary": "The paper is about prompt injection, which aims to be an efficient alternative to attaching fixed prompts to the input. Prompt injection is sample efficient and worth it when there are long prompts. This can be useful if there is a detailed description of a personalized chatbot, for example.\n\n**Update after response.**\n\nWith the additional experiment, I've increased my score to 5.",
+    "strengths_and_weaknesses": "Originality: Paper tackles the problem of using fixed prompts many times for different examples.\nQuality: Experiments done in the paper are OK but not particularly stunning. One way to improve the experiments could have been to pick a setting where it was crucial for long contexts (like summarization, or long dialogues), and show that with this method it was possible to use longer contexts which lead to substantially better performance. Or show that it works over a broad range of settings.\nClarity: The paper is relatively clear.\nSignificance: The paper proposes a method for prepending fixed prompts in a computationally efficient manner. \n\nWhile the paper is a nice start, I think it still leaves a lot to be desired. There is enough substance to warrant an ACL short paper, but I am not sure about a NeurIPS paper. Some examples of how I think the paper could be stronger:\n- Empirical results showing that PING works across a very wide range of tasks with good performance. \n- Comparison with other methods that try to do similar things.\n- Show for tasks that require long inputs and long prompts, PING enables substantial performance improvements. \n- Overall, experiments on settings where fast inference is crucial might make it more clear to the reader why it is important to trade off this complexity from using PING for faster inference. \n\nMinor note: Line 22 should be Sanh et al, not Raffel et al., right?\nSome further related work might have been missed, such as context distillation (https://arxiv.org/pdf/2112.00861.pdf)",
+    "questions": "How does the proposed method compare with other baselines such as context distillation? (Askell et al, https://arxiv.org/pdf/2112.00861.pdf)\nAre there other approaches where this approach might be especially useful? As the main benefit is inference-time efficiency, one might imagine that the WSC, RTE, COPA, and SPIDER tasks are not the prime candidates for this approach. The dialogue eval is good but it only uses one dataset."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

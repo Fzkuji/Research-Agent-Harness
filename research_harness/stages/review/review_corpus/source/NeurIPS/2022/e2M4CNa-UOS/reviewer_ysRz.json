@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "e2M4CNa-UOS",
+  "reviewer": "ysRz",
+  "paper": {
+    "title": "Efficient Sequence Packing without Cross-contamination: Accelerating Large Language Models without Impacting Performance",
+    "authors": [
+      "Mario Michael Krell",
+      "Matej Kosec",
+      "Sergio P. Perez",
+      "Mrinal Iyer",
+      "Andrew W Fitzgibbon"
+    ],
+    "abstract": "Effective training of today's large language models (LLMs) depends on large batches and long sequences for throughput and accuracy. To handle variable-length sequences on hardware accelerators, it is common practice to introduce padding tokens, so that all sequences in a batch have the same length. We show in this paper that the variation in sequence lengths in common NLP datasets is such that up to 50% of all tokens can be padding. In less common, but not extreme, cases (e.g. GLUE-COLA with sequence length 128), the ratio is up to 89%. Existing methods to address the resulting inefficiency are complicated by the need to avoid \"cross-contamination\" in self-attention, by a reduction in accuracy when sequence ordering information is lost, or by customized kernel implementations only valid for specific accelerators.\n\nThis paper introduces a new formalization of sequence packing in the context of the well-studied bin packing problem, and presents new algorithms based on this formulation which, for example, confer a 2x speedup for phase 2 pretraining in BERT while preserving downstream performance. We show how existing models can be adapted to ensure mathematical equivalence between the original and packed models, meaning that packed models can be trained with existing pre-training and fine-tuning practices.",
+    "keywords": [
+      "deep learning",
+      "BERT",
+      "IPU",
+      "GPU",
+      "hardware-acceleration",
+      "padding",
+      "Wikipedia",
+      "NLP",
+      "bin-packing"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=e2M4CNa-UOS"
+  },
+  "review_fields": {
+    "summary": "This paper describes an approach for packing sequences into batches in order to improve the training efficiency of large-scale language models (and related tasks). \nFirst, several datasets are analyzed with respect to their sequence length variations and the potential speed-up if batches were packed with minimized padding. The paper then formalizes the packing problem and proposes two new algorithms, that in turn require slight model adaptations for the example of BERT. In experiments on BERT pre-training, they showcase the packing efficiency on IPUs and resulting realized speed-up in comparison to other packing (or none) algorithms, and investigate required hyperparameter changes on the MLPerf benchmark. An ablation study of the model adaptations of BERT confirm that these are indeed necessary, and that packed pretraining does not negatively affect fine-tuning (non-packed) on the SQuAD benchmark.",
+    "strengths_and_weaknesses": "Strengths:\n1. The paper sheds light on a problem that has previously been hidden in NLP implementations and has not been clearly documented/researched/discussed, despite its effect on required training resources, hyperparameters, and model quality. The paper is educational for anyone who has not delved deeply into this topic or has not implemented packing themselves (like myself included), and brings transparency into the choice of packing implementations and their impact.\n2. As the paper outlines in Section 2, the potential gain of efficiency is large, since sequence length varies a lot in many NLP tasks. The proposed solution is therefore a very impactful contribution to NLP implementations, thereby the efficiency of NLP research. \n3. The empirical results are strong, with theoretical speed-ups being close to be realized with little overhead.\n\nWeaknesses:\n1. Packing is only applied during pre-training, not during fine-tuning. Adding an experiment on top of the existing SQuAD experiments where packing is continued during fine-tuning would make the proposed approach more convincing, especially since Section 2 lists fine-tuning datasets for motivation.\n2. The experimental conditions for 4.1 are not well introduced. Is it BERT pre-training?",
+    "questions": "1. Which BERT pre-processing is referred to in Section 1 (line 23)?",
+    "limitations": "The authors mention more challenging applications in computer vision as a next step, and potential difficulties with the implementation. I'd appreciate if the limitations of the current approach would be discussed in more depth: are there any edge cases where the overhead would be prohibitively large? In which data conditions should this packing approach be avoided?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

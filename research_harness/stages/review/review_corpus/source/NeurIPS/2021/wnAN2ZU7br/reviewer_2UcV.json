@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "wnAN2ZU7br",
+  "reviewer": "2UcV",
+  "paper": {
+    "title": "Pipeline Combinators for Gradual AutoML",
+    "authors": [
+      "Guillaume Baudart",
+      "Martin Hirzel",
+      "Kiran Kate",
+      "Parikshit Ram",
+      "Avraham Shinnar",
+      "Jason Tsay"
+    ],
+    "abstract": "Automated machine learning (AutoML) can make data scientists more productive.  But if machine learning is totally automated, that leaves no room for data scientists to apply their intuition.  Hence, data scientists often prefer not total but gradual automation, where they control certain choices and AutoML explores the rest.  Unfortunately, gradual AutoML is cumbersome with state-of-the-art tools, requiring large non-compositional code changes.  More concise compositional code can be achieved with combinators, a powerful concept from functional programming.  This paper introduces a small set of orthogonal combinators for composing machine-learning operators into pipelines.  It describes a translation scheme from pipelines and associated hyperparameter schemas to search spaces for AutoML optimizers.  On that foundation, this paper presents Lale, an open-source sklearn-compatible AutoML library, and evaluates it with a user study.",
+    "keywords": [
+      "AutoML",
+      "scikit-learn",
+      "programming models",
+      "functional programming"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=wnAN2ZU7br"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a framework and library of operators for enabling so-called gradual automl. The operators share similarities and extend scikit-learn's methodology of creating ml pipelines. Operators can be nested, creating complex constructs, which can be automatically translated into automl search spaces. The hyperparameters are defined by schemas.\n\nThe library is evaluated in terms of a user study with 18 participants, testing for pipeline understanding, construction and improvement following the introduced progressive disclosure concept. The evaluation also shows empirical results on 14 OpenML classification datasets for available automl algorithms in the framework compared to standard auto-sklearn, showing competitive performance. Finally, the authors also show that different optimizer backends, such as HyperOpt, can be used in the library.",
+    "main_review": "Positive factors are ...\n- Operators could be an intuitive approach to modeling pipelines\n- Conceptual differences to other libraries are made clear\n\nNegative factors are ...\n- Concept of gradual AutoML not fully convincing, experimental results do not fully back claims\n\nThe paper thoroughly introduces the concept of available/implemented combinators, execution modes as well as the developed schema. The design of the framework is qualitative, elegantly enabling to model complex pipelines in nested structures. \n\nThe authors also provide a detailed related frameworks and libraries, as well as key differences in design decisions. The clarity of the framework components and differences to related works is therefore high. The originality of the framework is also sufficiently high, as it gives practical value to AutoML end-users. \n\nTo this end, I have problems to grasp the \"gradual\" aspect of the approach, which is part of the key message of the paper. The concept is introduced and explained, and a mapping to individual framework functionalities is available, but the latter merely enable manipulation on different abstraction levels. It would be beneficial to clearly state the novelty here, if it is a central claim.\n\nThat said, while the paper maps different gradual AutoML stages to library functionalities, the evaluation does not attempt to compare them to frameworks other than scikit-learn. Why was no other library, as described in the related work section, chosen in addtion? scikit-learn is surely a good baseline, but comparing it to other libraries which enable easier / more interactive modeling might help to support the claims.\n\n### Update after author response\nI thank the authors for their answers to my questions for which I do not have any follow-ups. After reading the other reviews and discussions, I raised my score to a weak accept, as I agree that the paper does not need to show superior performance to other AutoML tools. I still believe that it would be beneficial for the venue to better quantify the added value of the proposed \"gradual\" property, e.g. in the user study.",
+    "limitations_and_societal_impact": "The authors address both conceptual limitations as well as negative societal impact. They explain shortcomings in the current framework an point out that AutoML raises CO2 omission."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

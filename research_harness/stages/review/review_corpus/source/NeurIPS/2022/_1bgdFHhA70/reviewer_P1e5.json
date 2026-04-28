@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "_1bgdFHhA70",
+  "reviewer": "P1e5",
+  "paper": {
+    "title": "Evident: a Development Methodology and a Knowledge Base Topology for Data Mining, Machine Learning and General Knowledge Management",
+    "authors": [
+      "Mingwu Gao",
+      "Samer Haidar"
+    ],
+    "abstract": "Software has been developed for knowledge discovery, prediction and management for over 30 years. However, there are still unresolved pain points when using existing project development and artifact management methodologies. Historically, there has been a lack of applicable methodologies. Further, methodologies that have been applied, such as Agile, have several limitations including scientific unfalsifiability that reduce their applicability. Evident, a development methodology rooted in the philosophy of logical reasoning and EKB, a knowledge base topology, are proposed. Many pain points in data mining, machine learning and general knowledge management are alleviated conceptually. Evident can be extended potentially to accelerate philosophical exploration, science discovery, education as well as knowledge sharing & retention across the globe. EKB offers one solution of storing information as knowledge, a granular level above data. Related topics in computer history, software engineering, database, sensing hardware, philosophy, and project & organization & military managements are also discussed.",
+    "keywords": [
+      "Data Mining",
+      "Machine Learning",
+      "Knowledge Management",
+      "Computer History",
+      "Software Engineering",
+      "Database",
+      "Sensing Hardware",
+      "Philosophy",
+      "Knowledge Sharing & Retention",
+      "Project Management"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=_1bgdFHhA70"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a new software development methodology (Evident) for machine learning, data mining, and knowledge management. It discusses pitfalls of traditional software processes related to the waterfall and agile models and explains why they may not be sufficient for these fields. Further, the paper describes the main concepts related to Evident. The main idea centers around modeling the relationships between observations, hypotheses, and tests. Finally, the paper describes how this methodology may help to alleviate common pain points in ML, DM, and knowledge management.",
+    "strengths_and_weaknesses": "Strengths:\n\nS1- The paper aims to make a contribution to the important problem of improving development processes for ML and more. \n\nWeaknesses:\n\nW1- It is difficult to judge the effectiveness of the contribution without any user studies with development teams that have applied Evident. At the very least, it would have been useful to see a few case studies and qualitative remarks on how teams could apply this in practice. This would instantiate the presented terminology (knowledges, containers, hypotheses, observations etc) with concrete tasks and terms of a given project.\n\nW2- Often the paper makes strong claim regarding the ineffectiveness of Agile (or other processes like CRISP-DM) and the effectiveness of of Evident but the justifications are mostly abstract and sometimes handwaving potential benefits without a proper either theoretical or rigorous framework to prove these claims. \n\nW3- It is not clear how the authors distilled the presented challenges in Table 2 from related work. How did they decide to include or leave a challenge out of the table? Plus, there is a lot more work on methods and processes for ML by now that could also be considered. Some of the challenges are also very generic and they may as well apply to any software that may not include ML (e.g. dead code paths, Prototype Algo may be accidentally run in production causing damages).\n\nLiterature on challenges in ML software development:\n\nSoftware Engineering for Machine Learning: A Case Study\n\nSoftware 2.0 https://karpathy.medium.com/software-2-0-a64152b37c35\n\nMachine learning testing: Survey, landscapes and horizons\n\n“Everyone wants to do the model work, not the data work”: Data Cascades in High-Stakes AI\n\nAn empirical study of common challenges in developing deep learning applications",
+    "questions": "- Has this process been applied in practice? Are there any insights to share to this end?\n\n- For future versions of the paper it may be useful to be more specific and highlight for which of the challenges in Table 2, Evident may work better than other methodologies and why.",
+    "limitations": "I do not think the authors have really described or mentioned the limitations of their approach. In contrary, the contributions are sometimes hyperbolically described claiming that the process can advance society, philosophy, and science, without any factual evidence."
+  },
+  "review_metadata": {
+    "rating": 2,
+    "confidence": 4,
+    "soundness": 1,
+    "presentation": 2,
+    "contribution": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "cG1EbmWiSs",
+  "reviewer": "R1E7",
+  "paper": {
+    "title": "Unified View of Grokking, Double Descent and Emergent Abilities: A Comprehensive Study on Algorithm Task",
+    "authors": [
+      "Yufei Huang",
+      "Shengding Hu",
+      "Xu Han",
+      "Zhiyuan Liu",
+      "Maosong Sun"
+    ],
+    "abstract": "Recent studies have uncovered intriguing phenomena in deep learning, such as *grokking*, *double descent*, and *emergent abilities* in large language models, which challenge human intuition and are crucial for a deeper understanding of neural models. In this paper, we present a comprehensive study on algorithm task to provide a unified view of these three phenomena, with a focus on the interplay between memorization and generalization. Through extensive experiments spanning a wide range of model sizes and training data quantities, we uncover four distinct training dynamics, each arising from unique combinations of model size and training data quantity, formulating a theoretical framework for further analysis. Utilizing this framework, we establish connections between *double descent* and *grokking* and propose two verifiable predictions regarding the occurrence of *double descent*, both substantiated by our experimental results. Moreover, we expand our experiments to the multi-task learning paradigm, demonstrating how algorithm tasks can be turned into emergent abilities by mixing some pure memorization data. This offers a novel perspective to understand *emergent abilities* in Large Language Models.",
+    "keywords": [
+      "Deep Learning",
+      "Grokking",
+      "Double Descent",
+      "Emergent Abilities"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=cG1EbmWiSs"
+  },
+  "review_fields": {
+    "summary": "This paper aims to analyze observations regarding training dynamics in neural network-based models (grokking, double descent, emergent abilities) under a unified lens of memorization/generalization competition, following the Varma et al.'s explanation of grokking. Specifically, the claim is that the interaction between two factors (inverse correlation between scale and critical dataset size for grokking, correlation between scale and memorization capacity) can provide an explanation for all of the aforementioned phenomena. \n\n* Quality: The hypothesis being tested is clearly stated and the experiments conducted to test it seem sound. \n* Clarity: The exposition and writing are generally easy to follow, barring a few minor suggestions to improve (see question to authors section for more details).\n* Originality: The attempt to tie together the various observations about training and scaling dynamics in recent literature is novel. However, this is not my direct area of expertise so I haven't been following the relevant literature fully---I am basing my assessment based on the claimed contribution. \n* Significance: The work makes a \"connecting the dots\" type of contribution that can potentially generate a wide range of concrete predictions about training and scaling dynamics of Transformer models. Generalizability of the findings outside the exact setup (architecture, task) tested is limited, but the hypothesis and predictions laid out are concrete enough that their generalizability can be easily tested under more diverse settings.",
+    "reasons_to_accept": "This is a clearly written, interesting paper proposing a unifying explanation for various prior observations about training and scaling dynamics.",
+    "reasons_to_reject": "Limited testing environments (architectural and task variation), but I don't think this is a strong reason to reject.",
+    "questions_to_authors": "- I think the patterns visualized in Figure 4 doesn't itself serve as full evidence that the patterns observed during the course of training is exactly \"grokking\" or other phases---for example, the part of the graphs labeled \"grokking\", because in the graph itself just shows the endpoint of training (I assume), could equally be derived from a set of underlying models with training dynamics showing a fully overlapping train/val graphs from the beginning to end, with endpoints converging to full accuracy. I'm not saying this is the case for the results reported and I do believe that if we zoomed in to the individual models' training dynamics, they are probably adhering to the claimed patterns. I'm just saying that the visualizations from the Figure 4 themselves don't inherent imply/serve as evidence that the labels they are being assigned unless one actually looks at the full training dynamics for the individual cases, which might mean that a different set of metrics that can show signatures of the phases need to be devised in addition to simply visualizing the final training/val performance across varying model size.\n- What did the performance on the memorization examples in the multitask experiment look like?\n- I would also be interested in knowing what the lower bound of the memorization dataset size for observing the effect in Section 5 - the smallest size (3000) is still quite substantial since it matches the size of the modular addition task dataset. It would be very interesting if we observed such an effect with only a very small number of memorization examples.\n\nMore minor presentation suggestions:\n- Currently the right panel of Figure 1 is serving a dual purpose (illustrative and also showing experimental results), and they seem to contain insufficient information to actually show the points of the experiments. For example, the text says \"We first verify that modular addition task indeed show grokking in our experimental setup which is shown in Figure 1 (d).\", but it is unclear what subset of the experiments that Figure (1d) is pointing to (especially in contrast to 1c---the details are only vaguely suggested: \"model needs specific amount of training data\")\n- Typo: Memorizatioin -> Memorization\n- (1c) doesn't seem to show \"multiple plateaus\" (at least in a way that significantly differs from plateaus in 1d)"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:35:02Z",
+    "migrated_from_v1_at": "2026-04-27T15:35:02Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2695,
+    "words": 422,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c32996f4-8dfc-4ddd-9b55-47bae247b67a",
+    "error": null,
+    "scored_chars": 2621
+  }
+}

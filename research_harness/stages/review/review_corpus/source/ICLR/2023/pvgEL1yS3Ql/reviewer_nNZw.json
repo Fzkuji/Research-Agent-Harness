@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "pvgEL1yS3Ql",
+  "reviewer": "nNZw",
+  "paper": {
+    "title": "Cross-Layer Retrospective Retrieving via Layer Attention",
+    "authors": [
+      "Yanwen Fang",
+      "Yuxi CAI",
+      "Jintai Chen",
+      "Jingyu Zhao",
+      "Guangjian Tian",
+      "Guodong Li"
+    ],
+    "abstract": "More and more evidence has shown that strengthening layer interactions can enhance the representation power of a deep neural network, while self-attention excels at learning interdependencies by retrieving query-activated information. Motivated by this, we devise a cross-layer attention mechanism, called multi-head recurrent layer attention (MRLA), that sends a query representation of the current layer to all previous layers to retrieve query-related information from different levels of receptive fields. A light-weighted version of MRLA is also proposed to reduce the quadratic computation cost. The proposed layer attention mechanism can enrich the representation power of many state-of-the-art vision networks, including CNNs and vision transformers. Its effectiveness has been extensively evaluated in image classification, object detection and instance segmentation tasks, where improvements can be consistently observed. For example, our MRLA can improve 1.6% Top-1 accuracy on ResNet-50, while only introducing 0.16M parameters and 0.07B FLOPs. Surprisingly, it can boost the performances by a large margin of 3-4% box AP and mask AP in dense prediction tasks. Our code is available at https://github.com/joyfang1106/MRLA.",
+    "keywords": [
+      "Layer Attention",
+      "Recurrent Layer Attention",
+      "Layer Interaction",
+      "CNNs",
+      "Vision Transformers",
+      "Vision Networks"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=pvgEL1yS3Ql"
+  },
+  "review_fields": {
+    "comment": "Thank you so much for preparing the response to our initial comments in such a short time! The authors have addressed my previous concerns partially, and revised the draft accordingly. Thus, I slightly increased the score to 6. However, as the authors also agreed, there are still some issues about the base vs light as well as the paper's presentation. I also agreed with the other reviewers on the novelty and related works. Considering both the positive and negative comments, I think the paper is slightly above the acceptance bar. Good luck!\n\nCheers"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

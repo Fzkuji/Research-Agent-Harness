@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "2YdSsi0bxK",
+  "reviewer": "UKgJ",
+  "paper": {
+    "title": "SUV: Scalable Large Language Model Copyright Compliance with Regularized Selective Unlearning",
+    "authors": [
+      "Tianyang Xu",
+      "Xiaoze Liu",
+      "Feijie Wu",
+      "Xiaoqian Wang",
+      "Jing Gao"
+    ],
+    "abstract": "Large Language Models (LLMs) have transformed natural language processing by learning from massive datasets, yet this rapid progress has also drawn legal scrutiny, as the ability to unintentionally generate copyrighted content has already prompted several prominent lawsuits. In this work, we introduce SUV (Selective Unlearning for Verbatim data), a selective unlearning framework designed to prevent LLM from memorizing copyrighted content while preserving its overall utility. In detail, the proposed method constructs a dataset that captures instances of copyrighted infringement cases by the targeted LLM. With the dataset, we unlearn the content from the LLM by means of Direct Preference Optimization (DPO), which replaces the verbatim copyrighted content with plausible and coherent alternatives. Since DPO may hinder the LLM’s performance in other unrelated tasks, we integrate gradient projection and Fisher information regularization to mitigate the degradation. We validate our approach using a large-scale dataset of 500 famous books (predominantly copyrighted works) and demonstrate that SUV significantly reduces verbatim memorization with negligible impact on the performance on unrelated tasks. Extensive experiments on both our dataset and public benchmarks confirm the scalability and efficacy of our approach, offering a promising solution for mitigating copyright risks in real-world LLM applications.",
+    "keywords": [
+      "LLMs; Calibration; Copyright; Unlearning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=2YdSsi0bxK"
+  },
+  "review_fields": {
+    "summary": "The paper presents a technically sound methodology, integrating DPO with gradient projection and Fisher information regularization to address verbatim memorization. The experimental design is rigorous, with evaluations on a large-scale dataset (CBP-500) and public benchmarks. Ablation studies validate the necessity of each component (e.g., SUV-AS vs. SUV-TV).",
+    "reasons_to_accept": "* Scalability: Demonstrates unlearning on 500 copyrighted books, a 100× scale-up over prior work.\n* Practical Utility: Maintains downstream task performance (e.g., CSQA: 0.7093 vs. Vanilla 0.7166) while exercising copyrighted content.\n* Technical Innovation: Novel fusion of DPO with regularization techniques for precise parameter updates.\n* Ethical Alignment: Explicitly addresses copyright concerns via fair use justification and transformative dataset usage.",
+    "reasons_to_reject": "* It’s unclear what is the advantage of the SUV is compared to prior copyright protection methods. Is it possible to discuss both theoretically and empirically?\n* The range of applied models is limited. can you evaluate how your method affects the original abilities of various models?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 100,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text is a mix of AI and human",
+    "confidence": "highly",
+    "chars": 749,
+    "words": 107,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8aba6173-2a6d-4d2e-803d-22fe0a872f4f",
+    "error": null,
+    "scored_chars": 749
+  }
+}

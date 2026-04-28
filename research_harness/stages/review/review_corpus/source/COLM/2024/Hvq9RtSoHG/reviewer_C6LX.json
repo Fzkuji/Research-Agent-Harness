@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "Hvq9RtSoHG",
+  "reviewer": "C6LX",
+  "paper": {
+    "title": "Chain-of-Symbol Prompting For Spatial Reasoning in Large Language Models",
+    "authors": [
+      "Hanxu Hu",
+      "Hongyuan Lu",
+      "Huajian Zhang",
+      "Yunze Song",
+      "Wai Lam",
+      "Yue Zhang"
+    ],
+    "abstract": "While conventional Chain-of-Thought prompting shows promising performance on various language tasks for LLMs, the spatial scenarios are nearly unexplored. In this paper, we first investigate the performance of LLMs on complex spatial planning and understanding tasks that require LLMs to understand a virtual spatial environment simulated via natural language and act or reason correspondingly in text. By evaluating on classic spatial planning scenarios through natural language descriptions, we found that current popular LLMs still lack abilities to handle spatial relationships in texts. This arises a question -- do the natural language is the best way to represent complex spatial environments for LLMs, or maybe other alternatives such as symbolic representations are both more efficient and effective for LLMs? To this end, we propose a novel method called CoS (Chain-of-Symbol Prompting) that represents the spatial relationships with condensed symbols during the chained intermediate thinking steps. CoS is easy to use and does not need additional training on LLMs. Extensive experiments indicate that CoS clearly surpasses the performance of the Chain-of-Thought (CoT) Prompting described in natural langauge in all three spatial planning tasks and existing spatial QA benchmark, with even fewer tokens used in the inputs compared with CoT. The performance gain is strong, by up to 60.8% accuracy (from 31.8% to 92.6%) on Brick World scenarios for GPT-3.5-Turbo. CoS also reduces the number of tokens in the prompt obviously, by up to 65.8% of the tokens (from 407 to 139) for the intermediate steps from demonstrations on the Brick World task. Interestingly, we also observed emergent ability of abstract symbols understanding when the size of models scales up.",
+    "keywords": [
+      "In-Context Learning",
+      "Chain-of-Thought Prompting",
+      "Spatial Reasoning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Hvq9RtSoHG"
+  },
+  "review_fields": {
+    "comment": "1.1 I hope the authors can expose the details and the results in the next version. A sentence of \"We attempted our best efforts in tuning the baselines\" is very ambiguous:) However, I found the result surprising (less rigorous step-by-step CoT outperforming the more rigorous one) and believe that more discussions are needed.\n\n1.2 I'm sorry for the cost concern, but an experiment using GPT-4 makes more sense and will certainly tell people how much needed the CoS is. \n\n1.3 The answer is not convincing. The original NLVR was designed to evaluate visional reasoning, including spatial reasoning, but the NLVR-Manipulation in experiments as I understand was annotated by the authors. Based on examples in the paper, the kind of spatial reasoning it needs is very shallow. The Natural Language Navigation benchmark was also created by the authors, not any prior work, hence \"they are both representative benchmarks\" is very misleading. \n\n2. Thanks for the justification.\n\nI increased my score as parts of my concerns were addressed."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:09Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:09Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2744,
+    "words": 439,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c329b854-1f94-4faa-bddb-f11b39d70812",
+    "error": null,
+    "scored_chars": 2745
+  }
+}

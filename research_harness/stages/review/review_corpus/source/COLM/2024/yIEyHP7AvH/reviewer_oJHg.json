@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "yIEyHP7AvH",
+  "reviewer": "oJHg",
+  "paper": {
+    "title": "Khayyam Challenge (PersianMMLU): Is Your LLM Truly Wise to The Persian Language?",
+    "authors": [
+      "Omid Ghahroodi",
+      "Marzia Nouri",
+      "Mohammad Vali Sanian",
+      "Alireza Sahebi",
+      "Doratossadat Dastgheib",
+      "Ehsaneddin Asgari",
+      "Mahdieh Soleymani Baghshah",
+      "Mohammad Hossein Rohban"
+    ],
+    "abstract": "Evaluating Large Language Models (LLMs) is challenging due to their generative nature, necessitating precise evaluation methodologies. Additionally, non-English LLM evaluation lags behind English, resulting in the absence or weakness of LLMs for many languages.\nIn response to this necessity, we introduce Khayyam Challenge (also known as PersianMMLU), a meticulously curated collection comprising 20,805 four-choice questions sourced from 38 diverse tasks extracted from Persian examinations, spanning a wide spectrum of subjects, complexities, and ages. The primary objective of the Khayyam Challenge is to facilitate the rigorous evaluation of LLMs that support the Persian language. Distinctive features of the Khayyam Challenge are (i) its comprehensive coverage of various topics, including literary comprehension, mathematics, sciences, logic, intelligence testing, etc aimed at assessing different facets of LLMs such as language comprehension, reasoning, and information retrieval across various educational stages, from lower primary school to upper secondary school (ii) its inclusion of rich metadata such as human response rates, difficulty levels, and descriptive answers (iii) its utilization of new data to avoid data contamination issues prevalent in existing frameworks (iv) its use of original, non-translated data tailored for Persian speakers, ensuring the framework is free from translation challenges and errors while encompassing cultural nuances (v) its inherent scalability for future data updates and evaluations without requiring special human effort. Previous works lacked an evaluation framework that combined all of these features into a single comprehensive benchmark. Furthermore, we evaluate a wide range of existing LLMs that support the Persian language, with statistical analyses and interpretations of their outputs. We believe that the Khayyam Challenge will improve advancements in LLMs for the Persian language by highlighting the existing limitations of current models, while also enhancing the precision and depth of evaluations on LLMs, even within the English language context.",
+    "keywords": [
+      "LLM",
+      "Evaluation",
+      "Multitask",
+      "Persian Language Understanding"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=yIEyHP7AvH"
+  },
+  "review_fields": {
+    "summary": "This paper describes a new QA dataset for the Persian language. Just like the MMLU dataset for English, this new 'PersianMMLU' dataset covers a wide range of subjects, ranging from the natural sciences to the humanities, and contains more than 20,000 questions. The questions are multiple-choice with 4 answer alternatives, of which one is correct. Each question has its associated metadata, which includes the educational stage for which the question is intended, the difficulty level (which I assume is relative to the intended user group), and a detailed explanation of why the indicated correct answer is correct. The latter is very useful, as it can be used for 'chain-of-thought' training. As a motivation for their work, the authors convincingly point out several shortcomings of using an automatically translated variant of English datasets like the MMLU. The paper also contains experiments of applying various models to answer the questions. An extensive appendix gives lots of details of various aspects of the dataset. \n\nUnless I missed it, it is not explicitly stated in the paper that the dataset will be made public upon acceptance of the paper. It is merely said that 'all associated code is publicly accessible in [anonymous link]'. I assume the dataset will also be published open to everyone, but the authors should state this explicitly.",
+    "reasons_to_accept": "The dataset seems to be a major contribution to Persian NLP. The paper is well written. Everything related to the dataset is clear, but I have some questions about the experiment section.",
+    "reasons_to_reject": "Unless the authors commit to publishing the dataset free to the world upon acceptance of the paper, the paper should be rejected. I believe the area chair should sort this out with the authors before deciding on publication.\n\nI didn't understand the experimentation section very well. See questions below.",
+    "questions_to_authors": "Remove this sales talk, as it is completely unscientific: \n\"Since conducting its first examination in 1993, Kanoon has been at the forefront of educational innovation, serving a nationwide network of 450,000 students. The center is highly regarded for its comprehensive range of educational services, notably its facilitation of creating and administering smart, customized tests and providing standardized solutions for exercises through the Learning Ladder platform. This\ninitiative aims to enable educators to design and administer quality, customized tests effortlessly and to provide students with insightful feedback to enhance their learning process.\"\n\n \"The quality of the questions in the dataset is exceptionally high, a testament to the institution’s reputable standing in the educational sector\" How do you measure the quality of the questions? This just seems like more sales talk. Remove.\n\n\"The ongoing development of new questions for various educational stages and subjects allows for the continuous expansion and updating of the dataset, reducing the risks of data contamination and erosion.\" Are you committing to a regular update of the dataset, or what does this mean, really?\n\nHow was the human success rate in Figure 2 computed?\n\nExplain the regex method better. Give examples of answers where it is successful. The \"single probability probability\" and \"full answer probability\" were also a bit obscure to me. Shouldn't the model just output a single letter (\"a\", \"b\", \"c\", or \"d\") indicating the correct answer? \n\n\"In cases where Regex failed to identify the correct option, we utilized a pre-trained model to generate embeddings for each choice...\"  Is this still part of the Regex method, or is this an alternative method?\n\nI didn't understand this sentence, please explain: \"We chose the answer selected by humans if the combined total of the remaining three options was lower.\""
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:37:05Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:05Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 5,
+    "human_pct": 94,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2396,
+    "words": 372,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f5484e2b-935b-4002-8603-ada725800067",
+    "error": null,
+    "scored_chars": 2400
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "2RNpZ8S4alJ",
+  "reviewer": "YtC3",
+  "paper": {
+    "title": "KINet: Keypoint Interaction Networks for Unsupervised Forward Modeling",
+    "authors": [
+      "Alireza Rezazadeh",
+      "Changhyun Choi"
+    ],
+    "abstract": "Object-centric representation is an essential abstraction for physical reasoning and forward prediction. Most existing approaches learn this representation through extensive supervision (e.g, object class and bounding box) although such ground-truth information is not readily accessible in reality. To address this, we introduce KINet (Keypoint Interaction Network)---an end-to-end unsupervised framework to reason about object interactions in complex systems based on a keypoint representation. Using visual observations, our model learns to associate objects with keypoint coordinates and discovers a graph representation of the system as a set of keypoint embeddings and their relations. It then learns an action-conditioned forward model using contrastive estimation to predict future keypoint states. By learning to perform physical reasoning in the keypoint space, our model automatically generalizes to scenarios with a different number of objects, and novel object geometries. Experiments demonstrate the effectiveness of our model to accurately perform forward prediction and learn plannable object-centric representations which can also be used in downstream model-based control tasks.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=2RNpZ8S4alJ"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "**The main idea of the paper**\n\nThis paper combines two powerful ideas, 1. unsupervised keypoint extraction for objects and 2. object-centric representation for forward modeling. KINET first detects objects' key points in the video in an unsupervised manner and extract object-centric representation for future prediction. Experiments are conducted in a new dataset built on MuJoCo and the performance in table 1 shows the proposed framework achieves better performance than the baseline methods.",
+    "main_review": "**1. Strengths**\n\n(1). The idea of combining unsupervised keypoint detection and forward modeling seems to be new and has not been done before.\n\n(2). The idea is simple and shows its effectiveness to some previous baselines.\n\n**2. Concerns**\n\nThe reviewer does have some concerns about the model.\n\n(1). The claim on the previous method is not accurate enough that \"Relying on object detection and segmentation tools, on the other hand, makes the forward model fragile and dependent on the flawless performance of these tools. More often than not, pretrained object detection or segmentation models suffer from poor generalization to unseen objects\". Models based-on detection or segmentation proposals have not been compared in the experimental sections. Also, recent methods like MoNet[A] have been showing object proposals can be obtained from unsupervised learning. It will be interesting and necessary to compare the models based on keypoint detection and object proposals like combining the MoNet and PropNet for forward modeling.\n\n(2). The evaluation is limited on a newly-built dataset and it will be more convincing to compare the proposed methods on the previous dataset like CLEVRER, which offers more baselines for future prediction.\n\n(3). The details of the newly-built dataset is missing like the statistics of the dataset and what kind of objects it contains. It will be hard for readers to catch up how challenging the dataset is and how effective the model is.\n\n(4). From the examples in Figure 3, the dataset seems to be simple. It contains simple objects from the top-down view.  whether the dataset contains occlusion cases? Is the camera stable? Much details about the dataset is needed.\n\n[A]. Burgess C P, Matthey L, Watters N, et al. Monet: Unsupervised scene decomposition and representation[J]. arXiv preprint arXiv:1901.11390, 2019.",
+    "summary_of_the_review": "Since a bunch of significant baselines are absent and the details of the dataset are missing, the reviewer thinks the paper in the current version is not suitable for publishing on ICLR. The reviewer does think that a revised version will make the paper much more appealing.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2132,
+    "words": 337,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6a1b408a-086f-4f9f-bdaa-16347c73f0d4",
+    "error": null,
+    "scored_chars": 2133
+  }
+}

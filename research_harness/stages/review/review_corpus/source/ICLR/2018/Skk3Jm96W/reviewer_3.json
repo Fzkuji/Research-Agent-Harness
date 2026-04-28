@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "Skk3Jm96W",
+  "reviewer": "3",
+  "paper": {
+    "title": "Some Considerations on Learning to Explore via Meta-Reinforcement Learning",
+    "authors": [
+      "Bradly Stadie",
+      "Ge Yang",
+      "Rein Houthooft",
+      "Xi Chen",
+      "Yan Duan",
+      "Yuhuai Wu",
+      "Pieter Abbeel",
+      "Ilya Sutskever"
+    ],
+    "abstract": "We consider the problem of exploration in meta reinforcement learning. Two new meta reinforcement learning algorithms are suggested: E-MAML and ERL2. Results are presented on a novel environment we call 'Krazy World'  and a set of maze environments. We show E-MAML and ERL2 deliver better performance on tasks where exploration is important.",
+    "keywords": [
+      "reinforcement learning",
+      "rl",
+      "exploration",
+      "meta learning",
+      "meta reinforcement learning",
+      "curiosity"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Skk3Jm96W"
+  },
+  "review_fields": {
+    "review": "This is an interesting paper about correcting some of the myopic bias in meta RL. For two existing algorithms (MAML, RL2) it proposes a modification of the metaloss that encourages more exploration in the first (couple of) test episodes. The approach is a reasonable one, the proposed methods seem to work, the (toy) domains are appropriate, and the paper is well-rounded with background, motivation and a lot of auxiliary results.\n\nNevertheless, it could be substantially improved:\n\nSection 4 is of mixed rigor: some aspects are formally defined and clear, others are not defined at all, and in the current state many things are either incomplete or redundant. Please be more rigorous throughout, define all the terms you use (e.g. \\tau, R, \\bar{\\tau}, ...). Actually, the text never makes it clear how \\tau and \\ber{\\tau} relate to each other: make this connection in a formal way, please.\n\nIn your (Elman) formulation, “L” is not an RNN, but just a feed-forward mapping?\n\nEquation 3 is over-complicated: it is actually just a product of two integrals, because all the terms are separable. \n\nThe integral notation is not meaningful: you can’t sample something in the subscript the way you would in an expectation. Please make this rigorous.\n\nThe variability across seems extremely large, so it might be worth averaging over mores seeds for the learning curves, so that differences are more likely to be significant.\n\nFigure fontsizes are too small to read, and the figures in the appendix are impossible to read. Also, I’d recommend always plotting std instead of variance, so that the units or reward remain comparable.\n\nI understand that you built a rich, flexible domain. But please describe the variant you actually use, cleanly, without all the other variants. Or, alternatively, run experiments on multiple variants."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

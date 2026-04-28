@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "Skl6peHFwS",
+  "reviewer": "3",
+  "paper": {
+    "title": "Best feature performance in codeswitched hate speech texts",
+    "authors": [
+      "Edward Ombui",
+      "Lawrence Muchemi",
+      "Peter Wagacha"
+    ],
+    "abstract": "How well can hate speech concept be abstracted in order to inform automatic classification in codeswitched texts by machine learning classifiers? We explore different representations and empirically evaluate their predictiveness using both conventional and deep learning algorithms in identifying hate speech in a ~48k human-annotated dataset that contain mixed languages, a phenomenon common among multilingual speakers. This paper espouses a novel approach to handle this challenge by introducing a hierarchical approach that employs Latent Dirichlet Allocation to generate topic models that feed into another high-level feature set that we acronym PDC. PDC groups similar meaning words in word families during the preprocessing stage for supervised learning models. The high-level PDC features generated are based on Ombui et al, (2019) hate speech annotation framework that is informed by the triangular theory of hate (Stanberg,2003).  Results obtained from frequency-based models using the PDC feature on the annotated dataset of ~48k short messages comprising of tweets generated during the 2012 and 2017 Kenyan presidential elections indicate an improvement on classification accuracy in identifying hate speech as compared to the baseline",
+    "keywords": [
+      "Hate Speech",
+      "Code-switching",
+      "feature selection",
+      "representation learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=Skl6peHFwS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I carefully checked the derivations and theory.",
+    "review": "I'm sorry to say that this paper is not ready for publication.\n\nI think it's an important area and the dataset collected could be quite valuable for tackling hate speech.\n\nThe paper does not follow the style guide, is full of typos or 'kkkkk' tokens indicating missing values. The first sentence of the abstract is not grammatical. Codeswitched needs to be mentioned more specifically in the introduction.\n\nI couldn't easily find statistics about the dataset, especially in terms of language breakdown. How many of the tweets were multi-lingual? For pure-english tweets, I would be interested in this dataset being split out as a sub-dataset, as I would heavily bet the sota method for classifying hate-speech would be to fine-tune a BERT model on these labels. We need a table of dataset statistics.\n\nWe need a mathematical definition of PDC that is made very explicit in the paper, there is too much prose, I did not have time to do the background reading of the linked papers to understand this sociological theory of hate speech.\n\nThe paper did not feel sufficiently anonymized. I would anonymize the university used to create the dataset and the funding agencies that supported the research in subsequent submissions."
+  },
+  "review_metadata": {
+    "rating": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

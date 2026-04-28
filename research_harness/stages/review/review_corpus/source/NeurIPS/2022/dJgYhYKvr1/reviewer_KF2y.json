@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "dJgYhYKvr1",
+  "reviewer": "KF2y",
+  "paper": {
+    "title": "The Slingshot Mechanism: An Empirical Study of Adaptive Optimizers and the \\emph{Grokking Phenomenon}",
+    "authors": [
+      "Vimal Thilak",
+      "Etai Littwin",
+      "Shuangfei Zhai",
+      "Omid Saremi",
+      "Roni Paiss",
+      "Joshua M. Susskind"
+    ],
+    "abstract": "The \\emph{grokking phenomenon} as reported by Power et al.~\\cite{power2021grokking} refers to a regime where a long period of overfitting is followed by a seemingly sudden transition to perfect generalization. In this paper, we attempt to reveal the underpinnings of Grokking via a series of empirical studies. Specifically, we uncover an optimization anomaly plaguing adaptive optimizers at extremely late stages of training, referred to as the \\emph{Slingshot Mechanism}. A prominent artifact of the Slingshot Mechanism can be measured by the cyclic phase transitions between stable and unstable training regimes, and can be easily monitored by the cyclic behavior of the norm of the last layers weights. We empirically observe that without explicit regularization, Grokking as reported in \\cite{power2021grokking} almost exclusively happens at the onset of \\emph{Slingshots}, and is absent without it. \n    While common and easily reproduced in more general settings, the Slingshot Mechanism does not follow from any known optimization theories that we are aware of, and can be easily overlooked without an in depth examination. Our work points to a surprising and useful inductive bias of adaptive gradient optimizers at late stages of training, calling for a revised theoretical analysis of their origin.",
+    "keywords": [
+      "optimization",
+      "adam",
+      "adamw",
+      "adaptive optimizers",
+      "grokking",
+      "training instability",
+      "instability",
+      "empirical",
+      "empirical science of deep learning",
+      "double descent"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=dJgYhYKvr1"
+  },
+  "review_fields": {
+    "summary": "The paper studies the grokking phenomenon introduced by Power et al [1], which is a curious phenomenon of delayed generalization. This paper describes a characteristic of training termed the \"slingshot mechanism\", that is found in a number of tasks and optimization settings. The slingshot mechanism refers to periods of instability found in adaptive optimizers in the late stages of training. These periods of instability are accompanied by norm increases in the classification layer, as well as an improvement in generalization performance for the grokking tasks introduced in [1]. The paper studies this phenomenon and finds that it occurs in a number of different tasks more general than those in [1], and find that it is controlled by the epsilon parameter in adaptive optimizers.",
+    "strengths_and_weaknesses": "### Strengths\n\n- The paper has a good and comprehensive discussion of related work.\n- The paper characterizes an interesting phenomenon that is sometimes found in the optimization trajectory of adaptive optimizers.\n- Interesting observations regarding the effect of epsilon on the slingshot behavior.\n\n### Weaknesses\n\n- There is no explanation, empirical or otherwise, for how the slingshot mechanism may relate to generalization. Understanding the delayed generalization is an important aspect of why the grokking phenomenon in [1] is interesting to the community. I believe that in the current state, without a deeper understanding, this work may be more appropriate for a workshop submission.\n- The paper claims that the slingshot mechansim is a general phenomenon, however on CIFAR10 the phenomenon was mostly observed when training with extremely small training data (e.g. 200 examples), and no correlation to better generalization was shown. There is one experiment in the Appendix where the full CIFAR10 dataset is used in training a ViT model, but this model only achieves a final test accuracy of <80% and it's not clear how much test accuracy is improved due to the slingshot mechanism due to a single run and increasing test loss. This calls into question how relevant or general the identified behavior is to modern day neural networks.",
+    "questions": "- In Figure 3(d), why do we not see a corresponding spike in sharpness at the onset of the second plateau? Based on the hypothesis that the weights are flung to a new region in parameter space when the curvature grows too large, I would expect to see the curvature spike at each transition.\n\n- Figure 5, what is the accuracy being plotted? Is it training accuracy or test accuracy? If test accuracy, what is the training accuracy of these models? Do all the runs achieve 100% training accuracy? It is unclear whether correlation with better generalization comes from the appearance of slingshots or from the bad hyperparameter choices required to remove slingshot behavior from the training trajectory. \n\n- Dataset size is a crucial parameter in determining whether grokking / generalization occurs in [1]. How does the correlation between generalization vs slingshot behavior change when models are trained with differing data size? Does slingshots exist regardless of whether the model generalizes?",
+    "limitations": "Beyond the weaknesses I listed, the authors were good at addressing several limitations of this work."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

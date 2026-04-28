@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "nw4TWuEPGx",
+  "reviewer": "rSVd",
+  "paper": {
+    "title": "Discovering plasticity rules that organize and maintain neural circuits",
+    "authors": [
+      "David G Bell",
+      "Alison Duffy",
+      "Adrienne Fairhall"
+    ],
+    "abstract": "Intrinsic dynamics within the brain can accelerate learning by providing a prior scaffolding for dynamics aligned with task objectives. Such intrinsic dynamics would ideally self-organize and self-sustain in the face of biological noise including synaptic turnover and cell death. An example of such dynamics is the formation of sequences, a ubiquitous motif in neural activity. The sequence-generating circuit in zebra finch HVC provides a reliable timing scaffold for motor output in song and demonstrates a remarkable capacity for unsupervised recovery following perturbation. Inspired by HVC, we seek a local plasticity rule capable of organizing and maintaining sequence-generating dynamics despite continual network perturbations. We adopt a meta-learning approach introduced by Confavreux et al, which parameterizes a learning rule using basis functions constructed from pre- and postsynaptic activity and synapse size, with tunable time constants. Candidate rules are simulated within initially random networks, and their fitness is evaluated according to a loss function that measures the fidelity with which the resulting dynamics encode time. We use this approach to introduce biological noise, forcing meta-learning to find robust solutions. We first show that, in the absence of perturbations, meta-learning identifies a temporally asymmetric generalization of Oja's rule that reliably organizes sparse sequential activity. When synaptic turnover is introduced, the learned rule incorporates a form of homeostasis, better maintaining robust sequential dynamics relative to other previously proposed rules. Additionally, inspired by recent findings demonstrating that the strength of projections from inhibitory interneurons in HVC also dynamically responds to perturbations, we explore the role of inhibitory plasticity in sequence-generating circuits. We find that learned plasticity adjusts both excitation and inhibition in response to manipulations, outperforming rules applied only to excitatory connections. We demonstrate how plasticity acting on both excitatory and inhibitory synapses can better shape excitatory cell dynamics to scaffold timing representations.",
+    "keywords": [
+      "biologically plausible learning rules plasticity self-organization RNNs homeostasis meta-learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=nw4TWuEPGx"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a method for discovering plasticity rules in spiking neural networks to achieve sequence generation using both excitatory and inhibitory dynamics. Rules are parametrized with basis function. The biological approach in the model involves also considerations homeostasis and robustness to perturbation. The HVC region of the zebra finch was used as inspiration. The study shows interesting finding, including a self-discovered generalisation of the Oja rule, robustness to perturbation and enhanced stability, including homeostatic mechanisms.",
+    "strengths": "- The method uses interesting biological concepts, including both excitatory and inhibitory signals, and local Hebbian-like rules.\n- The study analyses various properties of the evolved neural circuits, including robustness to perturbation and robustness to synaptic turnover.\n- The model includes the use of noise, an important factor that affects both biological and artificial systems. \n- The computational study supports the idea, not new in biology, that both excitatory and inhibitory synapses are important in maintaining equilibrium.\n- The method allows for testing of particular hypothesis, e.g., the utility of dense feedforward connectivity.",
+    "weaknesses": "- Unclear novelty: there have been many studies that evolved plasticity rules using some form of evolutionary computation and biological plausible rules. In fact, evolution of Hebbian-like rules has been a popular area of research for decades. While this study advances many previous studies, I feel that the novelty and contributions in this area are not well highlighted with respect to existing studies. \n- It is unclear to me how the findings can be used more broadly. I agree that it is interesting the CMA-ES and meta-learning can optimize plasticity rules to have interesting biological properties, but how can this finding be used? This is the most important concern I have: what impact can this paper and its discoveries have in the field? \n- Figures' clarity: there are a lot of assumption on the meaning of symbols, colours, etc, in the figure. E.g., Fig 1c, unless one is very familiar with the zebra fish, I don't think these graphs very useful. What is the big blue dot on top of the red ones? what do the colour in the cell-index vs. time mean? what does the graph mean? \n- The manuscript describes synaptic turnover starting from the abstract, but a search of the term to find out what that is and how it is implemented did not provide satisfactory results. \n- There may be an issue with the submission as the Supplementary information is not included, resulted also in broken references (e.g. line 197, page 7)",
+    "questions": "- How many fitness evaluation through CMA-ES were performed? How much time did one evaluation take? How did the fitness evolve over time? \n- Following up from a point in the weakness. How can these findings be used? Is there a recommendation that we should use evolution to implement and tune artificial spiking neural networks?",
+    "limitations": "The paper addresses the limitations, in particular in relation to computational demands."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2495,
+    "words": 406,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/baf8592d-81e9-4ff9-91fd-09fb29411d6c",
+    "error": null,
+    "scored_chars": 2501
+  }
+}

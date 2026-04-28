@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "DWf4vroKWJ",
+  "reviewer": "iXcu",
+  "paper": {
+    "title": "Router-R1: Teaching LLMs Multi-Round Routing and Aggregation via Reinforcement Learning",
+    "authors": [
+      "Haozhen Zhang",
+      "Tao Feng",
+      "Jiaxuan You"
+    ],
+    "abstract": "The rapid emergence of diverse large language models (LLMs) has spurred the development of LLM routers that assign user queries to the most suitable model. However, existing LLM routers typically perform a single-round, one-to-one mapping (\\textit{i.e.}, assigning each query to a single model in isolation), which limits their capability to tackle complex tasks that demand the complementary strengths of multiple LLMs. In this paper, we present \\textbf{Router-R1}, a reinforcement learning (RL)-based framework that formulates multi-LLM routing and aggregation as a sequential decision process. Router-R1 instantiates the router itself as a capable LLM, leveraging its reasoning ability to interleave \"think\" actions (internal deliberation) with \"route\" actions (dynamic model invocation), and integrates each response into its evolving context. To facilitate learning, we employ a lightweight rule-based reward comprising format rewards, final outcome rewards, and a novel cost reward for optimizing the balance between performance and cost, opening a pathway toward enhancing performance-cost trade-offs via RL. Router-R1 also conditions only on simple model descriptors such as pricing, latency, and example performance, enabling strong generalization to unseen model selection. Experiments on seven general and multi-hop QA benchmarks show that Router-R1 outperforms several strong baselines, achieving superior performance while maintaining robust generalization and cost management.",
+    "keywords": [
+      "Large Language Models",
+      "LLM Routers",
+      "LLM Selection",
+      "Reinforcement Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=DWf4vroKWJ"
+  },
+  "review_fields": {
+    "summary": "This paper introduces an interesting idea to combine model reasoning ability with multi-model routing,  Router-R1 optimizes for performance and cost using a hierarchal rule-based reward system. It demonstrates strong generalization to unseen LLMs via simple model descriptors. Experiments show superior performance on diverse QA benchmarks, highlighting robust generalization and cost management.",
+    "strengths_and_weaknesses": "Strengths:\n- The use of reasoning model for routing is interesting yet intuitive, utilizing the more powerful reasoning paradigm on the model routing use case. The strong generalization may suggest the model learns some useful insights for routing the models.\n- The reward design enables successful RL training without suffering from reward hacking. Specifically, the authors choose to use rewards with verifiable rules and uses a hierarchical reward system.\n - Extensive evaluation is done on a list of benchmarks and baseline methods.\n\nWeakness:\n- The multi-round, iterative nature of Router-R1 introduces increased inference latency due to the reasoning steps. Depending on the task, this may be negligible or significant. An analysis on this would help improve the paper.\n - The application shown here are generally QA tasks. A complex routing method may work well on complex scenarios (such as SWE where the router works like a PM). It would be interesting to see application in similar domains.",
+    "questions": "- is it possible to consider the computational cost of the Router-R1 policy LLM into the overall cost analysis, or even let the model optimize the joint cost?",
+    "final_justification": "My original recommendation of this paper is positive. While I and some reviewers are concerned about the cost of the router, I consider that is a factor that might change as technology develops so I wouldn't use that as the main reason to reject this work. \n\nMy recommendation is in between borderline accept/accept, but in general I think the idea is novel and I try not to use \"borderline\" as the \"rating\" intruction suggested."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 4,
+    "significance": 2,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

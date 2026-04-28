@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "n7XbkHOwKn6",
+  "reviewer": "WUEH",
+  "paper": {
+    "title": "CogVideo: Large-scale Pretraining for Text-to-Video Generation via Transformers",
+    "authors": [
+      "Wenyi Hong",
+      "Ming Ding",
+      "Wendi Zheng",
+      "Xinghan Liu",
+      "Jie Tang"
+    ],
+    "abstract": "Large-scale pretrained transformers have created milestones in text (GPT-3) and text-to-image (DALL-E) generation. Its application on video generation is still faced difficulties: The huge computation makes training from scratch unaffordable; The scarcity and weak relevance of text-video datasets hinder the model understanding complex movements. In this work, we present 9-billion-parameter CogVideo, which is trained by inheriting the knowledge from the pretrained large-scale text-to-image model, CogView2. We also propose multi-frame-rate hierarchical training strategy to better align text and video clips. As (probably) the first open-source large-scale pretrained text-to-video model, the CogVideo outperforms the previous public available models at a large margin in both machine and human evaluation.",
+    "keywords": [
+      "pretraining"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=n7XbkHOwKn6"
+  },
+  "review_fields": {
+    "summary": "This paper is the first work to propose an open-source pretrained transformer to solve the text-to-video task. The authors propose a two-stage framework CogVideo by finetuning a text-to-image model and avoid pretraining from scratch to reduce the training cost. The idea of multi-frame-rate ensures the flexibility and accuracy of the generated video. Experiments and visualized samples show the effectiveness of the method on video generating.",
+    "strengths_and_weaknesses": "（1）Strengths：\n\nThe paper proposes the pretrained two-stage Sequential Generation and Recursive Interpolation pipeline and better reconstruct the alignment relation in a video. And the two-stage method does help the model converge better and faster, which is proved by the line chart of training loss shown in the ablation studies. I think the CogVideo pipeline has its value in real-world application scenarios. Also, the paper is well writing.\n\n（2）Weaknesses:\n\n-First, the paper is not the first attempting to investigate hierarchical transformer structure in text-to-video challenge. For example, [1] also exploits autoregressive and interpolation transformers and gain better performance on UCF-101. However, the authors do not explain the difference or innovation compared with [1].\n-The authors have claimed that the CogVideo pipeline can solve the text-to-video generation in the general domain, but the experiment results in tab.1 are all attained on human action video datasets( UCF-101 and Kinetics-600), which maybe somewhat weak to prove the above conclusion. I guess maybe general domain represents the motions in the text have some temporal relation. If the concept of general domain can be defined in the paper, it will be much better.\n\n[1] S. Ge, T. Hayes, H. Yang, X. Yin, G. Pang, D. Jacobs, J.-B. Huang, and D. Parikh. Long video generation with time-agnostic vqgan and time-sensitive transformer. arXiv preprint arXiv:2204.03638, 2022",
+    "questions": "1)Is the fps a learnable parameter or a hyper-parameter? And how to use the fps token concretely in the transformer?\n\n2)Compared with other training method, does CogVideo accelerate the training process? What environment and how much time does the training process need?\n\n3)Compared with the 1-Stage finetuned CogVideo model, how does the full model deal with the problem that one generated frame in the sequential generation stage collapses and influences the later frames? I do not have any idea that the two stage pipeline can solve this problem.",
+    "limitations": "No.\nAnd I do not see any serious concerns."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "JeP0lpusYw",
+  "reviewer": "wkP4",
+  "paper": {
+    "title": "HM3: Hierarchical Multi-Objective Model Merging for Pretrained Models",
+    "authors": [
+      "Yu Zhou",
+      "Xingyu Wu",
+      "Jibin Wu",
+      "Liang Feng",
+      "KC Tan"
+    ],
+    "abstract": "Model merging is a technique that combines multiple large pretrained models into a single model, enhancing performance and broadening task adaptability without original data or additional training. However, most existing model merging methods focus primarily on exploring the parameter space, merging models with identical architectures. Despite its potential, merging in the architecture space remains in its early stages due to the vast search space and challenges related to layer compatibility. This paper designs a hierarchical model merging framework named HM3, formulating a bilevel multi-objective model merging problem across both parameter and architecture spaces. At the parameter level, HM3 integrates existing merging methods to quickly identify optimal parameters. Based on these, an actor-critic strategy with efficient policy discretization is employed at the architecture level to explore inference paths with Markov property in the layer-granularity search space for reconstructing these optimal models. By training reusable policy and value networks, HM3 learns Pareto optimal models to provide customized solutions for various tasks. Experimental results on language and vision tasks demonstrate that HM3 outperforms methods focusing solely on the parameter or architecture space.",
+    "keywords": [
+      "Large language model",
+      "model merging",
+      "multi-objective optimization",
+      "architecture-level merging"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=JeP0lpusYw"
+  },
+  "review_fields": {
+    "comment": "Thank you for the authors’ detailed responses. Although they argue that proposed method is fundamentally different from conventional model-merging techniques, I still consider it part of the model-merging domain given its objectives. The additional “representation alignment” analysis seems to be a simple ablation study, perhaps limited by time. Overall, I feel my main concerns remain unaddressed. Nevertheless, the paper does offer novel contributions as an alternative to traditional model-merging approaches, so I have adjusted my ratings accordingly."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "7vVWiCrFnd",
+  "reviewer": "G6RK",
+  "paper": {
+    "title": "Rethinking and Extending the Probabilistic Inference Capacity of GNNs",
+    "authors": [
+      "Tuo Xu",
+      "Lei Zou"
+    ],
+    "abstract": "Designing expressive Graph Neural Networks (GNNs) is an important topic in graph machine learning fields. Despite the existence of numerous approaches proposed to enhance GNNs based on Weisfeiler-Lehman (WL) tests, what GNNs can and cannot learn still lacks a deeper understanding. This paper adopts a fundamentally different approach to examine the expressive power of GNNs from a probabilistic perspective. By establishing connections between GNNs' predictions and the central inference problems of probabilistic graphical models (PGMs), we can analyze previous GNN variants with a novel hierarchical framework and gain new insights into their node-level and link-level behaviors. Additionally, we introduce novel methods that can provably enhance GNNs' ability to capture complex dependencies and make complex predictions. Experiments on both synthetic and real-world datasets demonstrate the effectiveness of our approaches.",
+    "keywords": [
+      "graph neural networks",
+      "expressiveness",
+      "approximate inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7vVWiCrFnd"
+  },
+  "review_fields": {
+    "summary": "The paper studies the expressiveness of different GNN variants from a probabilistic inference perspective. Specifically, under certain settings of PGMs and different ways to measure their complexity, the paper studies to what extent MPNNs can approximate node and edge marginals which are obtained from local minima of Bethe approximation. The analysis is also extended to other GNN variants. To equip GNNs with the power of estimating more complex node and edge marginals, phantom nodes and edges are proposed respectively, and experiments are conducted on several node and link prediction datasets to evaluate the proposed methods.",
+    "strengths": "1. Analyzing how well GNNs can approximate marginals in PGMs is interesting (though there are limitations as will be discussed), and offers a new perspective for measuring the expressiveness of GNNs.\n2. The paper is generally well written with clear background introductions and problem setup. Many details are given in the appendix, which is also appreciated.\n2. A lot of analysis has been done with discussions on many different GNN variants and inference tasks. Results also seem solid (but I did not carefully check the proof).",
+    "weaknesses": "1. Defining the discriminative power of potential function by WL test appears to be a somewhat contrived setup, whereby the problem still boils down to graph isomorphism. I am not sure how practically relevant this setting is, and whether it is truly “fundamentally different” with works on WL tests. A more comprehensive discussion about the connection may mitigate the issue.\n2. Following the above point, the analysis does not take into account node features, whereas in many PGMs node and clique potentials are functions on node features. This further stresses the point that the setup might deviate from practice.\n3. The proposed method seems not scalable as it requires identifying maximum cliques that is exponentially complex, and even relaxing it to cliques with size k has super-quadratic complexity O(n^k) (please correct me if I am wrong). This limitation has not been discussed in the paper, and experiments only include small datasets.\n4. The experimental results are relatively weak. E.g. on PPI, best performance in most cases (4 out of 6 columns in the table) is achieved by GCNII+SPN. Improvement on synthetic dataset is also limited, and Planetoid dataset is outdated. Baselines are also limited. Particularly, many GNN variants are considered in the analysis but are not compared in experiments, and I wonder why? Moreover, the proposed methods are essentially based on data augmentation, but competitors in this category are missing.\n\nTypos: invalid reference in appendix A and E.2; “a successful ? for minimizing” in 3.2; repeated references Bergen et al. and Cai \nat al.",
+    "questions": "1.  In 3.1, while lemma 1 is straight-forward, I do not fully understand why the authors mention “in graph machine learning fields each instance corresponds to different graphs with possibly different structures”, as the paper does not address the case of graph classification? And what does “instance” present? (the authors might wanna refer to a graph as an instance, but in the context of paper where node- and edge-level tasks are considered, each node or random variable in the PGM correspond an an instance.)\n2. What is the complexity of the proposed method, and are there any ways to scale it to large graphs?\n3. If possible, please also answer to questions in the weakness section.\n\n---\n\nI decrease score from 6 to 5 due to my lingering concerns, and there has been no response from the authors to date."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2937,
+    "words": 480,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/58b01a62-cc8a-4632-95ed-730a5257ac2f",
+    "error": null,
+    "scored_chars": 2939
+  }
+}

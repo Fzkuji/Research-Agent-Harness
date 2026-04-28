@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "ucASPPD9GKN",
+  "reviewer": "6L9A",
+  "paper": {
+    "title": "Is Homophily a Necessity for Graph Neural Networks?",
+    "authors": [
+      "Yao Ma",
+      "Xiaorui Liu",
+      "Neil Shah",
+      "Jiliang Tang"
+    ],
+    "abstract": "Graph neural networks (GNNs) have shown great prowess in learning representations suitable for numerous graph-based machine learning tasks. When applied to semi-supervised node classification,  GNNs are widely believed to work well due to the homophily assumption (``like attracts like''), and fail to generalize to heterophilous graphs where dissimilar nodes connect. Recent works design new architectures to overcome such heterophily-related limitations, citing poor baseline performance and new architecture improvements on a few heterophilous graph benchmark datasets as evidence for this notion. In our experiments, we empirically find that standard graph convolutional networks (GCNs) can actually achieve better performance than such carefully designed methods on some commonly used heterophilous graphs. This motivates us to reconsider whether homophily is truly necessary for good GNN performance.  We find that this claim is not quite true, and in fact, GCNs can achieve strong performance on heterophilous graphs under certain conditions. Our work carefully characterizes these conditions and provides supporting theoretical understanding and empirical observations.  Finally, we examine existing heterophilous graphs benchmarks and reconcile how the GCN (under)performs on them based on this understanding.",
+    "keywords": [],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ucASPPD9GKN"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper revisited the performance of GCN on graph with heterophily and provide negative evidence that heterophily does not always result in the poor performance of GCN, which contradicts with the assumptions/observations of many previous papers. They demonstrated that the GCN embeddings are still label-distinguishable on a special type of graphs with assumptions that the nodes with same labels have the same node feature distribution as well as the same neighborhood label distributions. They theoretically analyzed the case of CSBM model with two classes, and also empirically investigated on synthetic/real-world graphs with multiple classes. The conclusion is that GCNs can achieve good performance on heterophilous graphs under certain conditions.",
+    "main_review": "Strength:\n1.\tIt provides a deeper insights into the heterophily problem and help us understand the GCNs’ performance.\n2.\tIt also designs a new cross-class neighborhood similarity metric to help explain the performance of GCN on various graphs (although it is not perfect).\n3.\tThe writing is generally clear.\n\n\nWeakness and Questions:\n1.\tThe analysis is only limited to GCNs, while the paper title is too general (GNNs). Not very \n2.\tOne concern is that the performance of GCN on Chameleon and Squirrel (Table1) differs a lot from the one reported in other papers (e.g. Geom-GCN (Pei et al. 2020), H2GNN (Zhu et al. 2020)). It seems the settings are the same as Pei et al. 2020, why is the result on these two datasets so different (2 to 3 times different)? Generally, I do not think the hyperprameter tunning should impact so much. Could the authors explain more details about it? In fact I also run some experiments on those datasets before and I cannot get those high numbers either.\n3.\tThe cross-class neighborhood similarity metric is intuitive and a good idea. However, it lacks of a direct theoretic connection to GCNs’ performance. Same as the heterophily metric, I do not think it can completely decide the GCNs’ performance, because the node feature distribution is also important here.  In fact, the assumptions in Theorem 1 are quite strong. If the nodes with the same label are sampled from the same feature distribution, it means generally MLP can also have a good performance. When this assumption does not meet, the analysis will become very complex. That is why I think Figure5 may be not enough to explain everything (but it is still interesting to see this empirical result). \n4.\tAlthough Theorem 1 seems correct to me, I have a question here. Assume we have a separate node with 0 neighbors, that means the upper bound here is 0. It is obviously not true. So, how to explain this exception?",
+    "summary_of_the_review": "The paper provides a new perspective of heterophily and GCNs, but there remains some concerns both in the theoretic part and in the experiments.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2052,
+    "words": 353,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0592a31f-d2cc-4b11-aeee-5b8972bff9c6",
+    "error": null,
+    "scored_chars": 2055
+  }
+}

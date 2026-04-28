@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "S1cZsf-RW",
+  "reviewer": "3",
+  "paper": {
+    "title": "WHAI: Weibull Hybrid Autoencoding Inference for Deep Topic Modeling",
+    "authors": [
+      "Hao Zhang",
+      "Bo Chen",
+      "Dandan Guo",
+      "Mingyuan Zhou"
+    ],
+    "abstract": "To train an inference network jointly with a deep generative topic model, making it both scalable to big corpora and fast in out-of-sample prediction, we develop Weibull hybrid autoencoding inference (WHAI) for deep latent Dirichlet allocation, which infers posterior samples via a hybrid of stochastic-gradient MCMC and autoencoding variational Bayes. The generative network of WHAI has a hierarchy of gamma distributions, while the inference network of WHAI is a Weibull upward-downward variational autoencoder, which integrates a deterministic-upward deep neural network, and a stochastic-downward deep generative model based on a hierarchy of Weibull distributions. The Weibull distribution can be used to well approximate a gamma distribution with an analytic Kullback-Leibler divergence, and has a simple reparameterization via the uniform noise, which help efficiently compute the gradients of the evidence lower bound with respect to the parameters of the inference network. The effectiveness and efficiency of WHAI are illustrated with experiments on big corpora.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=S1cZsf-RW"
+  },
+  "review_fields": {
+    "review": "The authors propose a hybrid Bayesian inference approach for deep topic models that integrates stochastic gradient MCMC for global parameters and Weibull-based multilayer variational autoencoders (VAEs) for local parameters. The decoding arm of the VAE consists of deep latent Dirichlet allocation, and an upward-downward structure for the encoder. Gamma distributions are approximated as Weibull distributions since the Kullback-Leibler divergence is known and samples can be efficiently drawn from a transformation of samples from a uniform distribution. \n\nThe results in Table 1 are concerning for several reasons, i) the proposed approach underperfroms DLDA-Gibbs and DLDA-TLASGR. ii) The authors point to the scalability of the mini-batch-based algorithms, however, although more expensive, DLDA-Gibbs, is not prohibitive given results for Wikipedia are provided. iii) The proposed approach is certainly faster at test time, however, it is not clear to me in which settings such speed (compared to Gibbs) would be needed, provided the unsupervised nature of the task at hand. iv) It is not clear to me why there is no test-time difference between WAI and WHAI, considering that in the latter, global parameters are sampled via stochastic-gradient MCMC. One possible explanation being that during test time, the approach does not use samples from W but rather a summary of them, say posterior means, in which case, it defeats the purpose of sampling from global parameters, which may explain why WAI and WHAI perform about the same in the 3 datasets considered.\n\n- \\Phi is in a subset of R_+, in fact, columns of \\Phi are in the P_0-dimensional simplex.\n- \\Phi should have K_1 columns not K.\n- The first paragraph in Page 5 is very confusing because h is introduced before explicitly connecting it to k and \\lambda. Also, if k = \\lambda, why introduce different notations?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

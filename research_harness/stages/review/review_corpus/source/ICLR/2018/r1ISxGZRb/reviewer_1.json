@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "r1ISxGZRb",
+  "reviewer": "1",
+  "paper": {
+    "title": "Generation and Consolidation of Recollections for Efficient Deep Lifelong Learning",
+    "authors": [
+      "Matt Riemer",
+      "Michele Franceschini",
+      "and Tim Klinger"
+    ],
+    "abstract": "Deep lifelong learning systems need to efficiently manage resources to scale to large numbers of experiences and non-stationary goals. In this paper, we explore the relationship between lossy compression and the resource constrained lifelong learning problem of function transferability. We demonstrate that lossy episodic experience storage can enable efficient function transferability between different architectures and algorithms at a fraction of the storage cost of lossless storage. This is achieved by introducing a generative knowledge distillation strategy that does not store any full training examples. As an important extension of this idea, we show that lossy recollections stabilize deep networks much better than lossless sampling in resource constrained settings of lifelong learning while avoiding catastrophic forgetting. For this setting, we propose a novel dual purpose recollection buffer used to both stabilize the recollection generator itself and an accompanying reasoning model.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=r1ISxGZRb"
+  },
+  "review_fields": {
+    "review": "The paper proposes an architecture for efficient deep lifelong learning. The key idea is to use recollection generator (autoencoder) to remember the previously processed data in a compact representation. Then when training a reasoning model, recollections generated from the recollection generator are used with real-world examples as input data. Using the recollection, it can avoid forgetting previous data. In the experiments, it has been shown that the proposed approach is efficient for transfer knowledge with small data compared to random sampling approach.\n\nIt is an interesting idea to remember previous examples using the compact representation from autoencoder and use it for transfer learning. However, I think the paper would be improved if the following points are clarified.\n\n1. It seems that reconstructed data from autoencoder does not contain target values. It is not clear to me how the reasoning model can use the reconstructed data (recollections) for supervised learning tasks. \n\n2. It seems that the proposed framework can be better presented as a method for data compression for deep learning. Ideally, for lifelong learning, the reasoning model should not forget previously learned kwnoledge embeded in their weights. \nHowever, under the current architecture, it seems that the reasoning model does not have such mechanisms.\n\n3. For lifelong learning, it would be interesting to test if the same reasoning model can deal with increasing number of tasks from different datasets using the recollection mechanisms."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

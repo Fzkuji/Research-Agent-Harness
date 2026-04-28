@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "i8PjQT3Uig",
+  "reviewer": "2Y3F",
+  "paper": {
+    "title": "Locality Sensitive Sparse Encoding for Learning World Models Online",
+    "authors": [
+      "Zichen Liu",
+      "Chao Du",
+      "Wee Sun Lee",
+      "Min Lin"
+    ],
+    "abstract": "Acquiring an accurate world model $\\textit{online}$ for model-based reinforcement learning (MBRL) is challenging due to data nonstationarity, which typically causes catastrophic forgetting for neural networks (NNs). From the online learning perspective, a Follow-The-Leader (FTL) world model is desirable, which optimally fits all previous experiences at each round. Unfortunately, NN-based models need re-training on all accumulated data at every interaction step to achieve FTL, which is computationally expensive for lifelong agents. In this paper, we revisit models that can achieve FTL with incremental updates. Specifically, our world model is a linear regression model supported by nonlinear random features. The linear part ensures efficient FTL update while the nonlinear random feature empowers the fitting of complex environments. To best trade off model capacity and computation efficiency, we introduce a locality sensitive sparse encoding, which allows us to conduct efficient sparse updates even with very high dimensional nonlinear features. We validate the representation power of our encoding and verify that it allows efficient online learning under data covariate shift. We also show, in the Dyna MBRL setting, that our world models learned online using a $\\textit{single pass}$ of trajectory data either surpass or match the performance of deep world models trained with replay and other continual learning methods.",
+    "keywords": [
+      "model-based rl",
+      "online learning",
+      "incremental learning",
+      "catastrophic forgetting"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=i8PjQT3Uig"
+  },
+  "review_fields": {
+    "summary": "The paper introduces a model-based reinforcement learning approach that utilizes a sparse representation-to-representation model. The use of sparse representation aims to address the challenge of catastrophic forgetting in a reinforcement learning (RL) setting, where data generation constantly shifts. The architecture employed for model-based reinforcement learning is Dyna. The proposed method involves learning nonlinear sparse features and building a model based on this sparse representation. To enhance computational efficiency, a method for updating model weights using sparse representation is presented. Empirical experiments are included to demonstrate the effectiveness of this approach.",
+    "strengths": "1. The paper targets an important topic of learning a model in RL \n\n2. I do not see many related works of building sparse representation-based models.",
+    "weaknesses": "I will list below main weaknesses for improvements, centred around the main contribution of the paper. \n\n1. Is there any reason for why the particular sparse representation learning method is chosen? Furthermore, in the experiments part, FTA should also be compared as a baseline. It is unclear why you compare it in a supervised learning setting but omit in a RL setting. The performance on a SL setting does not invlidate/validate another. As an empirical paper, I think a rigorous comparison is necessary. \n\n2. Could you clarify do you update both your model and representation every environment time step? \n\n3. There is a critical weakness in the paper: the paper claims to develop a sparse representation-based approach for model learning, but it is not justified the reported benefits come from the use of the sparse representation for policy learning or for model learning. Note that the former has been extensive studied. in general, a full replay method should be the best in mitigating catastrophic forgetting, but the empirical results reported that the proposed algorithm can sometimes even outperform full replay. That raises a natural question that the benefit mainly comes from the policy learning part by using sparse representation, rather than the proposed model learning part. \n\n4. other issues. \n\nAlg 1. it is better to be specific, use the title Dyna architecture, rather than MBRL, as there are numerous MBRL algorithms and not everyone is as Alg 1 described. \n\nAlg 2, line 4 & 5: shouldn’t it be outer product? Please specify the dimension of the matrices capital Phi and letter phi. This is nontrivial as it affects the understanding of the algorithm. \n\nThe term “world model” might intrigue the readers to see much more challenging tasks than the paper presented, this can be seen by other papers using such terms. It is better to rephrase it to be more precise."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2031,
+    "words": 337,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/808d13dd-569f-4e8b-96da-49eb0f5c121c",
+    "error": null,
+    "scored_chars": 2039
+  }
+}

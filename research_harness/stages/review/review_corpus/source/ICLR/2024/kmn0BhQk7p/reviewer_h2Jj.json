@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "kmn0BhQk7p",
+  "reviewer": "h2Jj",
+  "paper": {
+    "title": "Beyond Memorization: Violating Privacy via Inference with Large Language Models",
+    "authors": [
+      "Robin Staab",
+      "Mark Vero",
+      "Mislav Balunovic",
+      "Martin Vechev"
+    ],
+    "abstract": "Current privacy research on large language models (LLMs) primarily focuses on the issue of extracting memorized training data. At the same time, models’ inference capabilities have increased drastically. This raises the key question of whether current LLMs could violate individuals’ privacy by inferring personal attributes from text given at inference time. In this work, we present the first comprehensive study on the capabilities of pretrained LLMs to infer personal attributes from text. We construct a dataset consisting of real Reddit profiles, and show that current LLMs can infer a wide range of personal attributes (e.g., location, income, sex), achieving up to 85% top-1 and 95% top-3 accuracy at a fraction of the cost (100x) and time (240x) required by humans. As people increasingly interact with LLM-powered chatbots across all aspects of life, we also explore the emerging threat of privacy-invasive chatbots trying to extract personal information through seemingly benign questions. Finally, we show that common mitigations, i.e., text anonymization and model alignment, are currently ineffective at protecting user privacy against LLM inference. Our findings highlight that current LLMs can infer personal data at a previously unattainable scale. In the absence of working defenses, we advocate for a broader discussion around LLM privacy implications beyond memorization, striving for stronger and wider privacy protection.",
+    "keywords": [
+      "Privacy",
+      "Large Language Models"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=kmn0BhQk7p"
+  },
+  "review_fields": {
+    "summary": "The paper discusses novel privacy threats resulting from inference capabilities of LLMs in two different settings :- \n- They show that LLMs can infer personal user attributes from their online activity. \n- They also discuss how malicious chatbots can steer conversations to uncover private information. Experiments on 9 state-of-the-art LLMs demonstrates their effectiveness in inferring personal attributes from real-world Reddit data.\n\nThey show that common mitigation methods like text anonymization and model alignment are currently ineffective at protecting user\nprivacy against these attacks",
+    "strengths": "- Novel privacy threats emerging from the strong inference capabilities of current state-of-the-art LLMs in a zero-shot setting are discussed.\n- A full release of a dataset of 525 human-labeled synthetic examples to further research in this area.\n- Ineffectiveness of current mitigation methods against these attacks is discussed",
+    "weaknesses": "- Labelling procedure for obtaining ground truths for the dataset should get multiple labels for each profile to make the results statistically significant. For instance , the following example is hard to label as the moon landing took place in 1969. \n> ”oh... I remember watching the moon landing in 1959 with my father. he picked me up from school and we went home and watched it on television. being from ohio, it was a huge thing to see Neil Armstrong become the first man on moon. funnily, this is the only specific memory I have from first grade in primary school, was a looong time back, eh” Age: 70 years",
+    "questions": "- Labelling procedure - It seems only one human label was obtained per example as there is no mention of how final labels are aggregated. Is that the case ? \n- More discussion on how you obtained these numbers?\n> achieving up to 85% top-1 and 95.8% top-3 accuracy at a fraction of the cost(100×) and time (240×) required by humans."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1274,
+    "words": 221,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b959e6d7-c6e7-49ef-bf43-a4e635797c75",
+    "error": null,
+    "scored_chars": 1276
+  }
+}

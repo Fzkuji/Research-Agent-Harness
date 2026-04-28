@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "ULzyv9M1j5",
+  "reviewer": "eWWS",
+  "paper": {
+    "title": "Transformer-based model for symbolic regression via joint supervised learning",
+    "authors": [
+      "Wenqiang Li",
+      "Weijun Li",
+      "Linjun Sun",
+      "Min Wu",
+      "Lina Yu",
+      "Jingyi Liu",
+      "Yanjie Li",
+      "Songsong Tian"
+    ],
+    "abstract": "Symbolic regression (SR) is an important technique for discovering hidden mathematical expressions from observed data. Transformer-based approaches have been widely used for machine translation due to their high performance, and are recently highly expected to be used for SR. They input the data points, then output the expression skeleton, and finally optimize the coefficients. However, recent transformer-based methods for SR focus more attention on large scale training data and ignore the ill-posed problem: the lack of sufficient supervision, i.e., expressions that may be completely different have the same supervision because of their same skeleton, which makes it challenging to deal with data that may be from the same expression skeleton but with different coefficients. Therefore, we present a transformer-based model for SR with the ability to alleviate this problem. Specifically, we leverage a feature extractor based on pure residual MLP networks to obtain more information about data points. Furthermore, the core idea is that we propose a joint learning mechanism combining supervised contrastive learning, which makes features of data points from expressions with the same skeleton more similar so as to effectively alleviates the ill-posed problem. The benchmark results show that the proposed method is up to 25% higher with respect to the recovery rate of skeletons than typical transformer-based methods. Moreover, our method outperforms state-of-the-art SR methods based on reinforcement learning and genetic programming in terms of the coefficient of determination ($R^2$).",
+    "keywords": [],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=ULzyv9M1j5"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes a novel transformer-based model for symbolic regression (SR), which produces mathematical expression skeletons from data points. In the proposed method, a feature extractor using pointMLP is added and jointly trained using contrastive loss to realize efficient training. The experimental evaluation using benchmark functions demonstrates that the proposed method exhibits higher recovery rates and R2 scores compared to existing SR methods.",
+    "strength_and_weaknesses": "**Strengths**\n* Introducing the idea of feature extractor and contrastive learning into the transformer-based symbolic regression model is convincing. Although each component of the proposed method was previously proposed in the context of other tasks, incorporating such methods into the SR model seems to be novel.\n* The numerical experiment supports the effectiveness of the proposed method.\n\n**Weaknesses**\n* In the experiment, the same dataset is used for training and testing. I am not confident whether such a setting is reasonable. From the machine learning perspective, the obtained model should be evaluated on test datasets.\n\n**Comments**\n* It would be nice if the proposed method was evaluated using recent benchmark datasets such as SRBench (https://github.com/cavalab/srbench).\n* In Figure 2, the redder color might indicate the cosine similarity is closer to **0**.\n* How is the computational cost of the proposed method compared to other SR methods?",
+    "clarity,_quality,_novelty_and_reproducibility": "* This paper is well-written. The motivation and contribution are easily understood.\n* Although the components of the proposed method are existing ideas, introducing such promising techniques into the transformer-based SR model is novel.\n* The code is provided and the detailed setting of the experiment is reported.",
+    "summary_of_the_review": "Basically, this paper is well-written, and the motivation and contribution are clear. The effectiveness of the proposed method is supported by the numerical evaluation.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "x7AD0343Jz",
+  "reviewer": "DGs4",
+  "paper": {
+    "title": "Limits of Transformer Language Models on Learning to Compose Algorithms",
+    "authors": [
+      "Jonathan Thomm",
+      "Giacomo Camposampiero",
+      "Aleksandar Terzic",
+      "Michael Hersche",
+      "Bernhard Schölkopf",
+      "Abbas Rahimi"
+    ],
+    "abstract": "We analyze the capabilities of Transformer language models in learning compositional discrete tasks. To this end, we evaluate training LLaMA models and prompting GPT-4 and Gemini on four tasks demanding to learn a composition of several discrete sub-tasks. In particular, we measure how well these models can reuse primitives observable in the sub-tasks to learn the composition task. Our results indicate that compositional learning in state-of-the-art Transformer language models is highly sample inefficient: LLaMA requires more data samples than relearning all sub-tasks from scratch to learn the compositional task; in-context prompting with few samples is unreliable and fails at executing the sub-tasks or correcting the errors in multi-round code generation. Further, by leveraging complexity theory, we support these findings with a theoretical analysis focused on the sample inefficiency of gradient descent in memorizing feedforward models. We open source our code at https://github.com/IBM/limitations-lm-algorithmic-compositional-learning.",
+    "keywords": [
+      "Few-shot Compositional Learning",
+      "Compositionality",
+      "Sample Efficiency",
+      "Algorithmic Learning",
+      "Large Language Models",
+      "Transformers"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=x7AD0343Jz"
+  },
+  "review_fields": {
+    "comment": "Thank you for the detailed responses. \nMany of questions were responded to and clarified and I'm more confident in my evaluation. \nI would like to note that my main concern which is the synthetic nature of the experiments remains unanswered. I appreciate the authors attempt to provide additional experimental results in the short rebuttal time. However, using English-words as tokens does not make it \"in-distribution\" as these n-grams are completely out-of-distribution compared to the training data of the model. If anything, using common full-word tokens as inputs induce a strong prior as encoded in their embeddings and is thus expected to deteriorate the performance. It is not trivial to design a similar testbed that does simulate an in-distribution task, but is a pursuit that if achieved will be most beneficial. Nevertheless, even this intermediate step of investigating the compositional abilities of model in a synthetic controlled setting is interesting and enriches our knowledge about the properties of transformer based language models.\nI thus wish to thank the authors for the answers, and choose to keep my score as is."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1137,
+    "words": 179,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/85bda834-d86f-4832-b767-fd3fc42cb185",
+    "error": null,
+    "scored_chars": 1139
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "GdYg0Ohx0k",
+  "reviewer": "jzSS",
+  "paper": {
+    "title": "LSCD: Lomb--Scargle Conditioned Diffusion for Time series Imputation",
+    "authors": [
+      "Elizabeth Fons",
+      "Alejandro Sztrajman",
+      "Yousef El-Laham",
+      "Luciana Ferrer",
+      "Svitlana Vyetrenko",
+      "Manuela Veloso"
+    ],
+    "abstract": "Time series with missing or irregularly sampled data are a persistent challenge in machine learning. Many methods operate on the frequency-domain, relying on the Fast Fourier Transform (FFT) which assumes uniform sampling, therefore requiring prior interpolation that can distort the spectra. To address this limitation, we introduce a differentiable Lomb--Scargle layer that enables a reliable computation of the power spectrum of irregularly sampled data.\nWe integrate this layer into a novel score-based diffusion model (LSCD) for time series imputation conditioned on the entire signal spectrum. \nExperiments on synthetic and real-world benchmarks demonstrate that our method recovers missing data more accurately than purely time-domain baselines, while simultaneously producing consistent frequency estimates. Crucially, our method can be easily integrated into learning frameworks, enabling broader adoption of spectral guidance in machine learning approaches involving incomplete or irregular data.",
+    "keywords": [
+      "time series",
+      "diffusion models",
+      "frequency spectrum"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GdYg0Ohx0k"
+  },
+  "review_fields": {
+    "summary": "This paper introduces a novel diffusion-based time series imputation method. Specifically designed for irregularly sampled data, the proposed method leverages the Lomb-Scargle periodogram to enhance imputation performance.",
+    "theoretical_claims": "No theoretical results are provided in the paper.",
+    "experimental_designs_or_analyses": "Yes. The experimental design is reasonable.",
+    "relation_to_broader_scientific_literature": "The idea of using Lomb-Scargle Periodogram for time series modelling is not novel. See\n\n[1] Glynn, Earl F., Jie Chen, and Arcady R. Mushegian. \"Detecting periodic patterns in unevenly spaced gene expression time series using Lomb–Scargle periodograms.\" Bioinformatics 22, no. 3 (2006): 310-316.\n\n[2] Ruf, T. \"The Lomb-Scargle periodogram in biological rhythm research: analysis of incomplete and unequally spaced time-series.\" Biological Rhythm Research 30, no. 2 (1999): 178-201.\n\n[3] Van Dongen, H. P. A., E. Olofsen, J. H. Van Hartevelt, and E. W. Kruyt. \"A procedure of multiple period searching in unequally spaced time-series with the Lomb–Scargle method.\" Biological Rhythm Research 30, no. 2 (1999): 149-177.",
+    "other_strengths_and_weaknesses": "Strengths:\n1) The idea of using the Lomb-Scargle periodogram to impute unevenly distributed time series data is reasonable.\n\n2) The proposed method is assessed on different time series datasets.\n\nWeakness:\n1) The novelty of the proposed method is limited. Although incorporating the Lomb–Scargle periodogram into the diffusion model is relatively new, the idea of using it to deal with time series data has been studied by many previous works and the proposed framework is still mainly based on CSDI with only small changes. \n\n2) From results presented in Table 2, the proposed method did not show significant empirical performance improvement compared to other diffusion-based method that did not use spectral method, i.e., CSDI.\n\n3)  The theoretical results regarding the effect of the Lomb-Scargle periodogram on the diffusion process are missing.",
+    "other_comments_or_suggestions": "The authors could provide a theoretical analysis of how the Lomb-Scargle periodogram influences the diffusion process.",
+    "questions_for_authors": "How is the computational efficiency of the Lomb-Scargle periodogram compared with FFT?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

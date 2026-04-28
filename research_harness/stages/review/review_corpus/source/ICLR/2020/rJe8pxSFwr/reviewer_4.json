@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "rJe8pxSFwr",
+  "reviewer": "4",
+  "paper": {
+    "title": "End-to-end learning of energy-based representations for irregularly-sampled signals and images",
+    "authors": [
+      "Ronan Fablet",
+      "Lucas Drumetz",
+      "François Rousseau"
+    ],
+    "abstract": "For numerous domains, including for instance earth observation, medical imaging, astrophysics,..., available image and signal datasets often irregular space-time sampling patterns and large missing data rates. These sampling properties is a critical issue to apply state-of-the-art learning-based (e.g., auto-encoders, CNNs,...) to fully benefit from the available large-scale observations and reach breakthroughs in the reconstruction and identification of processes of interest. In this paper, we address the end-to-end learning of representations of signals, images and image sequences from irregularly-sampled data, {\\em i.e.} when the training data involved missing data. From an analogy to Bayesian formulation, we consider energy-based representations. Two energy forms are investigated: one derived from auto-encoders and one relating to Gibbs energies. The learning stage of these energy-based representations (or priors) involve a joint interpolation issue, which resorts to solving an energy minimization problem under observation constraints. Using a neural-network-based implementation of the considered energy forms, we can state an end-to-end learning scheme from irregularly-sampled data. We demonstrate the relevance of the proposed representations for different case-studies: namely, multivariate time series, 2{\\sc } images and image sequences.",
+    "keywords": [
+      "end-to-end-learning",
+      "irregularly-sampled data",
+      "energy representations",
+      "optimal interpolation"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=rJe8pxSFwr"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "This paper discusses various approaches to predict missing values in the input (filling/inpainting task).\nThey define an energy function equal to the squared L2 distance between the input and its reconstruction by various kinds of neural nets. They show slightly better performance compared to a PCA-based baseline.\n\nPositive things about this work\n- the topic is interesting\n- the last application is interesting (water temperature prediction) \n\nNegative things about this work\n- this work is very poorly  written and lacks sufficient clarity. This work needs a major rewrite. I do not even know where to start, but to give an example:\n1st sentence  of the abstract reads:  “For numerous domains, including for instance earth observation, medical imaging, astrophysics,..., available image and signal datasets often irregular spacetime sampling patterns and large missing data rates.”, a sentence that misses the verb.\n2nd sentence of the abstract reads: \"These sampling properties is” which is not grammatically correct\nAnd so on so forth. Speaking of which, the Authors make excessive use of \"....\".\n- because of the lack of clarity throughout the paper, I have had hard time figuring out what exactly the authors do. From the limited understanding I got after reading this draft twice, I think they consider a few different variants of auto-encoder and a \"log-prior\"/energy function equal to the squared L2 distance between input and its reconstruction. However, this formulation has barely any novelty. For instance, see old work like:\nS. Roth and M. J. Black, “Fields of experts: A framework for learning image priors,” in Proc. of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), vol. 2, San Diego, California, June 2005, pp. 860–867\nwhere they used a different log-prior, but essentially the same optimization process. If the novelty is the use of auto-encoders, then the comparison should be against methods that do not auto-encode (like the above or more modern versions of it).\n- several choices made by the Authors seem not well motivated. For instance, it's written that computing gradients is too expensive and therefore these are replaced by the G network. However, doesn't the G network also need gradients to be updated?\n- the terminology is not standard and confusing. Hidden state usually refers to the encoder output, not to the decoder output.\n- the Authors never introduce the metrics they use, reconstruction and interpolation scores.\n- in general, the motivation is unclear. Why is it a problem if the data does not come from a grid? In vision, inpainting on unconstrained masks has been standard for decades. \nMore recently, transformer architectures and GNNs seem quite good at representing sets and graph structured data.\nSo considering this context, the current motivation provided by the authors needs some refinement. In fact, the authors could consider building on top of these other more modern approaches."
+  },
+  "review_metadata": {
+    "rating": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

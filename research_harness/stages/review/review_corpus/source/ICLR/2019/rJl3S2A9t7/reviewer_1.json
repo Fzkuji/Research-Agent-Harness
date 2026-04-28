@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "rJl3S2A9t7",
+  "reviewer": "1",
+  "paper": {
+    "title": "Policy Optimization via Stochastic Recursive Gradient Algorithm",
+    "authors": [
+      "Huizhuo Yuan",
+      "Chris Junchi Li",
+      "Yuhao Tang",
+      "Yuren Zhou"
+    ],
+    "abstract": "In this paper, we propose the StochAstic Recursive grAdient Policy Optimization (SARAPO) algorithm which is a novel variance reduction method on Trust Region Policy Optimization (TRPO). The algorithm incorporates the StochAstic Recursive grAdient algoritHm(SARAH) into the TRPO framework. Compared with the existing Stochastic Variance Reduced Policy Optimization (SVRPO), our algorithm is more stable in the variance. Furthermore, by theoretical analysis the ordinary differential equation and the stochastic differential equation (ODE/SDE) of SARAH, we analyze its convergence property and stability. Our experiments demonstrate its performance on a variety of benchmark tasks. We show that our algorithm gets better improvement in each iteration and matches or even outperforms SVRPO and TRPO.",
+    "keywords": [
+      "reinforcement learning",
+      "policy gradient",
+      "variance reduction",
+      "stochastic recursive gradient algorithm"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rJl3S2A9t7"
+  },
+  "review_fields": {
+    "review": "This paper proposes a new policy gradient method for reinforcement learning.\nThe method essentially combines SARAH and trust region method using Fisher information matrix.\nThe effectiveness of the proposed method is verified in experiments.\n\nSARAH is a variance reduction method developed in stochastic optimization literature, which significantly accelerates convergence speed of stochastic gradient descent.\nSince the policy gradient often suffers from high variance during the training, a combination with variance reduction methods is quite reasonable.\nHowever, this work seems to be rather incremental compared to a previous method adopting another variance reduction method (SVRG) [Xu+2017, Papini+2018].\nMoreover, the advantage of the proposed method over SVRPG (SVRG + policy gradient) is unclear both theoretically and experimentally.\n[Papini+2018] provided a convergence guarantee with its convergence rate, while this paper does not give such a result.\nIt would be nice if the authors could clarify theoretical advantages over SVRPG.\n\nMinor comment:\n- The description of SVRG updates in page 2 is wrong.\n- The notation of H in Section 3.1 (\"ODE analysis\") is not defined at this time."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

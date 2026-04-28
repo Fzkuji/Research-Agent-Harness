@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "te6VagJf6G",
+  "reviewer": "a6dH",
+  "paper": {
+    "title": "Learning to Reason via Program Generation, Emulation, and Search",
+    "authors": [
+      "Nathaniel Weir",
+      "Muhammad Khalifa",
+      "Linlu Qiu",
+      "Orion Weller",
+      "Peter Clark"
+    ],
+    "abstract": "Program synthesis with language models (LMs) has unlocked a large set of reasoning abilities; code-tuned LMs have proven adept at generating programs that solve a wide variety of algorithmic symbolic manipulation tasks (e.g. word concatenation). However, not all reasoning tasks are easily expressible as code, e.g. tasks involving commonsense reasoning, moral decision-making, and sarcasm understanding. Our goal is to extend a LM’s program synthesis skills to such tasks and evaluate the results via pseudo-programs, namely Python programs where some leaf function calls are left undefined. To that end, we propose, Code Generation and Emulated EXecution (COGEX). COGEX works by (1) training LMs to generate pseudo-programs and (2) teaching them to emulate their generated program’s execution, including those leaf functions, allowing the LM’s knowledge to fill in the execution gaps; and (3) using them to search over many programs to find an optimal one. To adapt the COGEX model to a new task, we introduce a method for performing program search to find a single program whose pseudo-execution yields optimal performance when applied to all the instances of a given dataset. We show that our approach yields large improvements compared to standard in-context learning approaches on a battery of tasks, both algorithmic and soft reasoning. This result thus demonstrates that code synthesis can be applied to a much broader class of problems than previously considered.",
+    "keywords": [
+      "language models",
+      "instruction tuning",
+      "code generation",
+      "reasoning",
+      "program search",
+      "program emulation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=te6VagJf6G"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a means of training language models to perform semi-programmatic reasoning, along with an adaptation method based on program search to specialize the resulting models for particular downstream tasks without updating their parameters.\n\nThe authors use GPT-4 to generate programmatic reasoning strategies from Alpaca instruction-tuning examples, allowing GPT-4 to include undefined function calls as the resulting code does not actually need to be executable, only used to guide the downstream language model's inference process.\n\nThe authors evaluate their method by fine-tuning Llama 2 models on their version of the Alpaca dataset, then comparing benchmark performance against few-shot, instruction-tuned zero-shot, and chain-of-thought baselines on several tasks picked to represent both algorithmic and non-algorithmic reasoning.\n\nExperimental results indicate that the proposed method outperforms the considered baselines across most tasks by a good margin.",
+    "strengths": "- The proposed method appears to strike a nice balance between the rigidity of code-structured reasoning and freeform CoT, as it performs well across domains where CoT excels and ones where it struggles.\n- Being able to specialize reasoning for a particular task by selecting a pseudo-program is neat. It also appears to work well with a much smaller number of examples than are required to effectively fine-tune a model.\n- The authors do a very good job of proactively answering natural questions with their ablations in section 3.3.\n- As for clarity of exposition, all the writing is easy to follow and the paper is laid out intuitively.",
+    "weaknesses": "1. The authors don't report statistical significance (e.g. through bootstrapping) or variance across runs with different subsamplings of training data.\n2. As far as I can tell, the reported experiments don't really include domains where the correct solution can be reached by actually executing a fully specified program, besides Number Summing (accordingly, a program-of-thought baseline is also missing). In CoGEX the model is responsible for simulating program execution, so it seems likely that it would underperform in these settings. While actually integrating an interpreter into a system that can still handle underspecified functions would be out of scope, it would be good to address this issue at the conceptual level somewhere in the text.",
+    "questions": "1. Did you try few-shot with the Alpaca (instruction-tuned) models that you used zero-shot in the paper?",
+    "limitations": "The authors include a short statement to the effect that their models may make reasoning mistakes and the model artifacts are provided without any guarantees of safety. It might be worth including the fact that models may fail to execute generated code consistently, and thus generated code may be seen as an unfaithful explanation of model reasoning."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1851,
+    "words": 297,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/012e0a57-2162-4375-9760-5ac53eca8221",
+    "error": null,
+    "scored_chars": 1851
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "HndgQudNb91",
+  "reviewer": "wmVs",
+  "paper": {
+    "title": "Learning to Downsample for Segmentation of Ultra-High Resolution Images",
+    "authors": [
+      "Chen Jin",
+      "Ryutaro Tanno",
+      "Thomy Mertzanidou",
+      "Eleftheria Panagiotaki",
+      "Daniel C. Alexander"
+    ],
+    "abstract": "Many computer vision systems require low-cost segmentation algorithms based on deep learning, either because of the enormous size of input images or limited computational budget. Common solutions uniformly downsample the input images to meet memory constraints, assuming all pixels are equally informative. In this work, we demonstrate that this assumption can harm the segmentation performance\nbecause the segmentation difficulty varies spatially (see Figure 1 “Uniform”). We combat this problem by introducing a learnable downsampling module, which can be optimised together with the given segmentation model in an end-to-end fashion. We formulate the problem of training such downsampling module as optimisation of sampling density distributions over the input images given their low-resolution views. To defend against degenerate solutions (e.g. over-sampling trivial regions like the backgrounds), we propose a regularisation term that encourages the sampling locations to concentrate around the object boundaries. We find the downsampling\nmodule learns to sample more densely at difficult locations, thereby improving the segmentation performance (see Figure 1 \"Ours\"). Our experiments on benchmarks of high-resolution street view, aerial and medical images demonstrate substantial improvements in terms of efficiency-and-accuracy trade-off compared to both uniform downsampling and two recent advanced downsampling techniques.",
+    "keywords": [
+      "ultra-high resolution image segmentation",
+      "non-uniform dowmsampling",
+      "efficient segmentation",
+      "large volume image segmentation",
+      "medical image segmentation"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=HndgQudNb91"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper aims to improve the performance of segmenting ultra high-resolution images by replacing the commonly used downsampling functions with the learned deformation sampling module. The biggest difference of the proposed method is, instead of sampling all areas uniformly, the sampling density is estimated based on the contents. The experiment results on the Cityscape, DeepGlobe and PCa-Histo datasets show some improvements on mIoU and cost-performance trade-offs compared with uniform downsampling.",
+    "main_review": "Strength:\n- This paper proposes a new deformed sampling module that explicitly downscale the image into target resolution. The idea of making the network to learn the sampling density is very intuitive, and it is also adaptable to classical sampling functions.\n- Besides, the author noticed the importance of regularization and added the edge loss in training. \n- The proposed method is end-to-end trainable, and can be plugged into different backbone networks.\n\nWeakness:\n\nStill, I have complex feeling about this paper: the motivation is really good: following all the previous works that try to improve the segmentation performance by allocating the computations to most important regions, the proposed module does make a lot of sense, and it's plug-and-play. But when I read the experiment results, I find that it is not the module itself that brings the most difference, but the joint loss. From Fig.5, it can be seen that adding the module trained with single loss is not as good as the uniform one at the most time. This implies that the most important contribution of this paper is the joint loss.\n\nThough, if this paper wants to illustrate the importance of joint loss that avoids the trivial solution, there are still some missing points to support this claim:\n- Not enough ablation studies. If applying the joint loss on other methods, how the performance would be influenced? \n- More analysis of why the single segmentation loss would not work. After reading this paper, I still do not understand: why single loss would lead to a trivial solution?\n\nI read the appendix and find the downsampling module consists of 3 layers of CNN with 3x3 kernel. Since the other works in 2.1 all aim to cover multiple scale information, does it matter that this module only has this limited spatial window? And, Fig. 12 shows that the sampling density suddenly increases on the edge of the picture, even if the content is still solid-color. Why would this happen? Is this learned module vulnerable to noises in image?\n\nBesides, since this work adopts a learned CNN module to predict the sampling density, and then conduct rescaling by interpolation, I wonder why not directly makes the network to directly downsample/super-resolve the input? Such ideas are applied in \"Learning to Resize Images for Computer Vision Tasks\". How does the proposed method compare with this paper?\n\n\nMinor errors:\n- In the caption of Fig. 5, the last line should note \"(c) a local prostate cancer histology dataset...\".",
+    "summary_of_the_review": "Overall, this paper has good motivation and proposes an interesting method. But after reading the whole paper, I felt that it is not the proposed method, but the joint loss that contributes most to the performance improvement. Besides, this paper lacks of in-depth explanation of the performance drop when applying the single loss, and comparisons of several similar methods. So I would give score 5 for now.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2902,
+    "words": 481,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f50fed45-6223-43e0-b0da-00b29850fea0",
+    "error": null,
+    "scored_chars": 2904
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "7QFmZ7i7sr",
+  "reviewer": "QQCz",
+  "paper": {
+    "title": "GPEN: Global Position Encoding Network for Enhanced Subgraph Representation Learning",
+    "authors": [
+      "Nannan Wu",
+      "Yuming Huang",
+      "Yiming Zhao",
+      "Jie Chen",
+      "Wenjun Wang"
+    ],
+    "abstract": "Subgraph representation learning has attracted growing interest due to its wide applications in various domains. However, existing methods primarily focus on local neighborhood structures while overlooking the significant impact of global structural information, in particular the influence of multi-hop neighbors beyond immediate neighborhoods. This presents two key challenges: how to effectively capture the structural relationships between distant nodes, and how to prevent excessive aggregation of global structural information from weakening the discriminative ability of subgraph representations.\nTo address these challenges, we propose GPEN (Global Position Encoding Network). GPEN leverages a hierarchical tree structure to encode each node's global position based on its path distance to the root node, enabling a systematic way to capture relationships between distant nodes. Furthermore, we introduce a boundary-aware convolution module that selectively integrates global structural information while maintaining the unique structural patterns of each subgraph. Extensive experiments on eight public datasets identify that GPEN significantly outperforms state-of-the-art methods in subgraph representation learning.",
+    "keywords": [
+      "Subgraph Representation Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7QFmZ7i7sr"
+  },
+  "review_fields": {
+    "summary": "The paper introduces GPEN (Global Position Encoding Network), a novel algorithm for subgraph representation learning. The algorithm addresses the task of predicting labels for subgraphs within a large input graph, given a set of labeled subgraphs. GPEN innovates by moving beyond the limitations of existing methods that primarily focus on local neighborhood structures. It achieves this by incorporating global structural information through a novel tree-based global position encoding for each node. This encoding is combined with a boundary-aware convolution module and an optional tree perturbation technique. The authors support their approach with both empirical evaluations demonstrating effectiveness and theoretical analyses to justify the method.",
+    "claims_and_evidence": "The paper's main claims are well supported by convincing evidence. Experimental results show that GPEN outperforms existing methods across various datasets, while theoretical analysis validates the method's soundness from multiple angles. In particular, Figure 1 clearly demonstrates the limitations of relying solely on local structural information and how GPEN addresses this issue by capturing global structural information.",
+    "methods_and_evaluation_criteria": "The proposed methods are innovative and well-justified. GPEN cleverly utilizes tree structures to encode global position information, while the boundary-aware convolution module effectively balances local and global information. The experimental evaluation employs widely recognized datasets and baseline methods in the field, with a well-designed and comprehensive evaluation protocol.",
+    "theoretical_claims": "I carefully checked the correctness of the theoretical claims, including the theorems and proofs related to bounded representation discrepancy, global position encoding distinctness, noise robustness, and the generalization bound. They are robust and clearly presented, providing a strong theoretical foundation for the GPEN algorithm. The inclusion of these formal analyses significantly strengthens the paper.",
+    "experimental_designs_or_analyses": "The experimental design is sound and effective. Extensive experiments on eight public datasets, with results averaged over 10 different random seeds, provide reliable statistical significance. The hyperparameter analysis and ablation studies effectively validate the contribution of each module.",
+    "relation_to_broader_scientific_literature": "The work is well-connected with existing research. The paper clearly identifies limitations in existing methods and proposes effective solutions. GPEN's main innovations - global position encoding and boundary-aware convolution - represent significant improvements and additions to prior work.",
+    "essential_references_not_discussed": "I did not find any essential references that were missing or overlooked in the paper's discussion of related work.",
+    "other_strengths_and_weaknesses": "Strengths：\n\nThe core idea of tree-based global position encoding is novel and effective.\nRobust theoretical analysis strengthens the paper.\nThe paper is well-structured and easy to follow.\n\nWeaknesses:\n\nVisualizations of learned embeddings could further illustrate the effectiveness of GPEN.",
+    "other_comments_or_suggestions": "1. Although the paper includes hyperparameter analysis, a sentence or two summarizing the general robustness or sensitivity of the key hyperparameters within the main body (perhaps in the experimental section) would be helpful for readers. This would provide a concise summary without requiring a deep dive into the appendix.\n\n2. Adding visualizations of the final learned embeddings could highlight the effectiveness of the approach to a reader.",
+    "questions_for_authors": "The current work primarily addresses subgraph representation learning on undirected graphs. Could the authors discuss the applicability of GPEN to directed graphs (e.g., follow relationships in social networks, citation links in academic networks)? Specifically, we are interested in how edge directionality would be handled in the tree construction phase and what modifications to the maximum spanning tree algorithm would be necessary to accommodate directed scenarios. The answer would help understand GPEN's potential for broader applications in directed graph domains."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "ZUb4JpNoJe",
+  "reviewer": "Ly5J",
+  "paper": {
+    "title": "Cost-Sensitive Freeze-thaw Bayesian Optimization for Efficient Hyperparameter Tuning",
+    "authors": [
+      "Dong Bok Lee",
+      "Aoxuan Silvia Zhang",
+      "Byungjoo Kim",
+      "Junhyeon Park",
+      "Steven Adriaensen",
+      "Juho Lee",
+      "Sung Ju Hwang",
+      "Hae Beom Lee"
+    ],
+    "abstract": "In this paper, we address the problem of cost-sensitive hyperparameter optimization (HPO) built upon freeze-thaw Bayesian optimization (BO). Specifically, we assume a scenario where users want to early-stop the HPO process when the expected performance improvement is not satisfactory with respect to the additional computational cost. Motivated by this scenario, we introduce \\emph{utility} in the freeze-thaw framework, a function describing the trade-off between the cost and performance that can be estimated from the user's preference data. This utility function, combined with our novel acquisition function and stopping criterion, allows us to dynamically continue training the configuration that we expect to maximally improve the utility in the future, and also automatically stop the HPO process around the maximum utility. Further, we improve the sample efficiency of existing freeze-thaw methods with transfer learning to develop a specialized surrogate model for the cost-sensitive HPO problem. We validate our algorithm on established multi-fidelity HPO benchmarks and show that it outperforms all the previous freeze-thaw BO and transfer-BO baselines we consider, while achieving a significantly better trade-off between the cost and performance.",
+    "keywords": [
+      "Cost-Sensitive",
+      "Bayesian Optimization",
+      "Multi-Fidelity HPO",
+      "PFNs",
+      "Transfer Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZUb4JpNoJe"
+  },
+  "review_fields": {
+    "comment": "Thank you for your responses.\nBelow, I would like to address a few remaining points regarding early stopping in BO.\n\nI do maintain that existing work on early stopping in BO, particularly for HPO, is highly relevant to your contribution (and I see it as positive that you are agreeing on this and will improve the presentation of this related work).\nThe downstream applications of your work and general early stopping in BO / HPO do overlap strongly.\nIn both cases, users want to early stop HPO, though for potentially different reasons.\nIn your approach, stopping occurs when expected performance improvement does not justify additional computational cost, while in other works such as [8], stopping is triggered when the noise in generalization error estimates dominates the potential improvements.\nBoth approaches ultimately result in saving computational resources.\n\nWhile I understand the challenges you have outlined, I disagree that direct empirical comparisons are completely unfeasible.\nYour method could be compared against existing early stopping techniques to assess both final performance and computational cost savings.\nMoreover, although [8] was not specifically designed for multi-fidelity HPO (and thus CFBO as a whole would likely have an advantage), they do discuss how to adapt their method for settings using a single holdout validation split.\nI can see that your choice of benchmarks (LCBench, TaskSet, PD1) makes such comparisons more challenging, but not impossible.\n\nAfter considering the rebuttal, the other reviews, and the subsequent discussions, I find myself in a somewhat mixed position. While most of my initial concerns have been addressed, and I can acknowledge there is merit in your contributions, I remain reserved about advocating for acceptance.\nI am willing to increase my score slightly, but overall the paper remains in a borderline state for me."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

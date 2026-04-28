@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "r1RQdCg0W",
+  "reviewer": "2",
+  "paper": {
+    "title": "MACH: Embarrassingly parallel $K$-class classification in $O(d\\log{K})$ memory and $O(K\\log{K} + d\\log{K})$ time, instead of $O(Kd)$",
+    "authors": [
+      "Qixuan Huang",
+      "Anshumali Shrivastava",
+      "Yiqiu Wang"
+    ],
+    "abstract": "We present Merged-Averaged Classifiers via Hashing (MACH) for $K$-classification with large $K$. Compared to traditional one-vs-all classifiers that require $O(Kd)$ memory and inference cost, MACH only need $O(d\\log{K})$ memory while only requiring $O(K\\log{K} + d\\log{K})$ operation for inference. MACH is the first generic $K$-classification algorithm, with provably theoretical guarantees, which requires $O(\\log{K})$ memory without any assumption on the relationship between classes. MACH uses universal hashing to reduce classification with a large number of classes to few independent classification task with very small (constant) number of classes. We provide theoretical quantification of accuracy-memory tradeoff by showing the first connection between extreme classification and heavy hitters. With MACH we can train ODP dataset with 100,000 classes and 400,000 features on a single Titan X GPU (12GB), with the classification accuracy of 19.28\\%, which is the best-reported accuracy on this dataset. Before this work, the best performing baseline is a one-vs-all classifier that requires 40 billion parameters (320 GB model size) and achieves 9\\% accuracy.  In contrast, MACH can achieve 9\\% accuracy with 480x reduction in the model size (of mere 0.6GB). With MACH, we also demonstrate complete training of fine-grained imagenet dataset (compressed size 104GB), with 21,000 classes, on a single GPU.",
+    "keywords": [
+      "Extreme Classification",
+      "Large-scale learning",
+      "hashing",
+      "GPU",
+      "High Performance Computing"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=r1RQdCg0W"
+  },
+  "review_fields": {
+    "review": "The paper presents a hashing based scheme (MACH) for reducing memory and computation time for K-way classification when K is large. The main idea is to use R hash functions to generate R different datasets/classifiers where the K classes are mapped into a small number of buckets (B). During inference the probabilities from the R classifiers are summed up to obtain the best scoring class. The authors provide theoretical guarantees showing that both memory and computation time become functions of log(K) and thus providing significant speed-up for large scale classification problems. Results are provided on the Imagenet and ODP datasets with comparisons to regular one-vs-all classifiers and tree-based methods for speeding up classification.\n\nPositives\n- The idea of using R hash functions to remap K-way classification into R B-way classification problems is fairly novel and the authors provide sound theoretical arguments showing how the K probabilities can be approximated using the R different problems.\n- The theoritical savings in memory and computation time is fairly significant and results suggest the proposed approach provides a good trade-off between accuracy and resource costs.\n\nNegatives\n- Hierarchical softmax is one of more standard techniques that has been very effective at large-scale classification. The paper does not provide comparisons with this baseline which also reduces computation time to log(K).\n- The provided baselines LOMTree, Recall Tree are missing descriptions/citations. Without this it is hard to judge if these are good baselines to compare with.\n- Figure 1 only shows how accuracy varies as the model parameters are varied. A better graph to include would be a time vs accuracy trade-off for all methods. \n- On the Imagenet dataset the best result using the proposed approach is only 85% of the OAA baseline.  Is there any setting where the proposed approach reaches 95% of the baseline accuracy?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

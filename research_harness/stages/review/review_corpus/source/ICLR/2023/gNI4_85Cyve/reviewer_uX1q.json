@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "gNI4_85Cyve",
+  "reviewer": "uX1q",
+  "paper": {
+    "title": "QAID: Question Answering Inspired Few-shot Intent Detection",
+    "authors": [
+      "Asaf Yehudai",
+      "Matan Vetzler",
+      "Yosi Mass",
+      "Koren Lazar",
+      "Doron Cohen",
+      "Boaz Carmeli"
+    ],
+    "abstract": "Intent detection with semantically similar fine-grained intents is a challenging task. To address it, we reformulate intent detection as a question-answering retrieval task by treating utterances and intent names as questions and answers. To that end, we utilize a question-answering retrieval architecture and adopt a two stages training schema with batch contrastive loss. In the pre-training stage, we improve query representations through self-supervised training. Then, in the fine-tuning stage, we increase contextualized token-level similarity scores between queries and answers from the same intent. Our results on three few-shot intent detection benchmarks achieve state-of-the-art performance.",
+    "keywords": [
+      "Intent Detection",
+      "Question Answering",
+      "Contrastive Learning",
+      "Passage Retrieval"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=gNI4_85Cyve"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper proposes QAID, Question Answering inspired Intent Detection system, which models the intention detection classification as a question-answering task. The model uses two stages of training: a pretraining for better query representation and finetuning on few-shot labels of query and answers (name of intents). Certain choices of model, such as token-level similarity, batched contrastive learning, and inference with answers only, are verified by detailed ablation studies. The proposed method achieves SOTA  performance on three intention detection dataset from DialoGLUE.",
+    "strength_and_weaknesses": "Strength: \n\n- The paper uses and adapts techniques from QA and answer retrieval to the task of ID. The method is effective and efficient on three benchmark datasets when compared with various baselines.\n- The detailed ablation study verifies the necessity of stages and component of proposed framework.\n- The paper is well-written and easy to follow.\n\nWeakness:\n- Given the number of intents being only a few hundreds at most, is Faiss really necessary for inference?\n- n has two meanings in section 2.1: one for batch size and another for number of tokens.",
+    "clarity,_quality,_novelty_and_reproducibility": "Clarity: The paper is clearly written.\nQuality: The statements are well supported. The empirical results are solid.\nNovelty: The paper adapts the method from question answering to intent detection. The adaptation itself is novel although the proposed methods are a combination of existing techniques.\nReproducibility: It requires some effort to reproduce the results.",
+    "summary_of_the_review": "The paper is inspired by the development of ColBERT in QA task and propose a variant of the model for the task of intent detection. The proposed model makes several adaptations including batch contrastive loss and  signal from the intent names. The proposed method achieves SOTA performance on three few-shot ID benchmarks. And the ablation study proves the necessity of various components in the system.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "rJ3fy0k0Z",
+  "reviewer": "2",
+  "paper": {
+    "title": "Deterministic Policy Imitation Gradient Algorithm",
+    "authors": [
+      "Fumihiro Sasaki",
+      "Atsuo Kawaguchi"
+    ],
+    "abstract": "The goal of imitation learning (IL) is to enable a learner to imitate an expert’s behavior given the expert’s demonstrations. Recently, generative adversarial imitation learning (GAIL) has successfully achieved it even on complex continuous control tasks. However, GAIL requires a huge number of interactions with environment during training. We believe that IL algorithm could be more applicable to the real-world environments if the number of interactions could be reduced. To this end, we propose a model free, off-policy IL algorithm for continuous control. The keys of our algorithm are two folds: 1) adopting deterministic policy that allows us to derive a novel type of policy gradient which we call deterministic policy imitation gradient (DPIG), 2) introducing a function which we call state screening function (SSF) to avoid noisy policy updates with states that are not typical of those appeared on the expert’s demonstrations. Experimental results show that our algorithm can achieve the goal of IL with at least tens of times less interactions than GAIL on a variety of continuous control tasks.",
+    "keywords": [
+      "Imitation Learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rJ3fy0k0Z"
+  },
+  "review_fields": {
+    "review": "The paper lists 5 previous very recent papers that combine IRL, adversarial learning, and stochastic policies. The goal of this paper is to do the same thing but with deterministic policies as a way of decreasing the sample complexity. The approach is related to that used in the deterministic policy gradient work. Imitation learning results on the standard control problems appear very encouraging.\n\nDetailed comments:\n\n\"s with environment\" -> \"s with the environment\"?\n\n\"that IL algorithm\" -> \"that IL algorithms\".\n\n\"e to the real-world environments\" -> \"e to real-world environments\".\n\n\" two folds\" -> \" two fold\".\n\n\"adopting deterministic policy\" -> \"adopting a deterministic policy\".\n\n\"those appeared on the expert’s demonstrations\" -> \"those appearing in the expert’s demonstrations\".\n\n\"t tens of times less interactions\" -> \"t tens of times fewer interactions\".\n\nOk, I can't flag all of the examples of disfluency. The examples above come from just the abstract. The text of the paper seems even less well edited. I'd highly recommend getting some help proof reading the work.\n\n\"Thus, the noisy policy updates could frequently be performed in IL and make the learner’s policy poor. From this observation, we assume that preventing the noisy policy updates with states that are not typical of those appeared on the expert’s demonstrations benefits to the imitation.\": The justification for filtering is pretty weak. What is the statistical basis for doing so? Is it a form of a standard variance reduction approach? Is it a novel variance reduction approach? If so, is it more generally applicable?\n\nUnfortunately, the text in Figure 1 is too small. The smallest font size you should use is that of a footnote in the text. As such, it is very difficult to assess the results.\n\nAs best I can tell, the empirical results seem impressive and interesting."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

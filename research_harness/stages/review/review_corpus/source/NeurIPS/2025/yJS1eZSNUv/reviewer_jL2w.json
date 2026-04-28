@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "yJS1eZSNUv",
+  "reviewer": "jL2w",
+  "paper": {
+    "title": "Novel Exploration via Orthogonality",
+    "authors": [
+      "Andreas Theophilou",
+      "Özgür Şimşek"
+    ],
+    "abstract": "Efficient exploration remains one of the most important open problems in reinforcement learning. Discovering novel states or transitions requires policies that efficiently direct the agent away from the regions of the state space that are already well explored. We introduce Novel Exploration via Orthogonality (NEO), an approach that automatically uncovers not only which regions of the environment are novel but also how to reach them by leveraging Laplacian representations. NEO uses the eigenvectors of a modified graph Laplacian to induce gradient flows from states that are frequently visited (less novel) to states that are seldom visited (more novel). We show that NEO's modified  Laplacian yields eigenvectors whose extreme values align with the most novel regions of the state space. We provide bounds for the eigenvalues of the modified Laplacian; and we show that the smoothest eigenvectors with real eigenvalues below certain thresholds provide guaranteed gradients to novel states for both undirected and directed graphs. In an empirical evaluation in online, incremental settings, NEO outperformed related state-of-the-art approaches, including eigen-options and cover options, in a large collection of undirected and directed environments with varying connectivity structures.",
+    "keywords": [
+      "Laplacian",
+      "Novelty",
+      "Reinforcement Learning",
+      "Exploration",
+      "Eigenvectors",
+      "Spectral Methods"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=yJS1eZSNUv"
+  },
+  "review_fields": {
+    "comment": "**Q1.** Thank you for providing the additional experiments for stochastic environments. These experiments show a similar coverage behavior to deterministic environments, which helps clarify my concerns. However, could you please further clarify how the option policy is constructed in these non-deterministic environments (as mentioned on line 10 in Algorithm 1)? Specifically, are the probabilities for different $(s, a, s')$ pairs cached in the graph, and is the action with the highest probability of transitioning to $s'$ selected?\n\n**Q2.** The additional clarification regarding the bound is much appreciated. With this, the proof now appears sound to me.\n\n**Q3.** Thank you again for providing the additional results. However, I would appreciate some further clarification on why you chose to use the cosine similarity of EVs when compared to CNN-based approximations, as opposed to the reward-based and coverage-based evaluation metrics presented in the paper (Figure 3 & 4). Additionally, I still believe an analysis of the discovered options in an Atari (or similar non-tabular) environment, similar to the approach in the Eigenoptions paper [1], would have been valuable and could have further strengthened the paper.\n\n**Q4.** The figure has effectively clarified the sensitivity, and I have no further questions on this matter.\n\n**Q5**. For the final question, I once again thank you for the additional experiments, which indicate that NEO performs well in terms of runtime when compared to other baselines. However, could you please clarify what exactly is being measured in terms of time? Is it the time for an entire run, one epoch, or just the time for a single option discovery call?\n\n[1] Machado, Marlos C., Marc G. Bellemare, and Michael Bowling. \"A laplacian framework for option discovery in reinforcement learning.\" International Conference on Machine Learning. PMLR, 2017."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

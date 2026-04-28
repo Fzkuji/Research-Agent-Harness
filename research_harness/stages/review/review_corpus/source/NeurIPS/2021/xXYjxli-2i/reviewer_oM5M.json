@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "xXYjxli-2i",
+  "reviewer": "oM5M",
+  "paper": {
+    "title": "Optimization-Based Algebraic Multigrid Coarsening Using Reinforcement Learning",
+    "authors": [
+      "Ali Taghibakhshi",
+      "Scott MacLachlan",
+      "Luke Olson",
+      "Matthew West"
+    ],
+    "abstract": "Large sparse linear systems of equations are ubiquitous in science and engineering, such as those arising from discretizations of partial differential equations. Algebraic multigrid (AMG) methods are one of the most common methods of solving such linear systems, with an extensive body of underlying mathematical theory. A system of linear equations defines a graph on the set of unknowns and each level of a multigrid solver requires the selection of an appropriate coarse graph along with restriction and interpolation operators that map to and from the coarse representation. The efficiency of the multigrid solver depends critically on this selection and many selection methods have been developed over the years. Recently, it has been demonstrated that it is possible to directly learn the AMG interpolation and restriction operators, given a coarse graph selection. In this paper, we consider the complementary problem of learning to coarsen graphs for a multigrid solver, a necessary step in developing fully learnable AMG methods. We propose a method using a reinforcement learning (RL) agent based on graph neural networks (GNNs), which can learn to perform graph coarsening on small planar training graphs and then be applied to unstructured large planar graphs, assuming bounded node degree. We demonstrate that this method can produce better coarse graphs than existing algorithms, even as the graph size increases and other properties of the graph are varied. We also propose an efficient inference procedure for performing graph coarsening that results in linear time complexity in graph size.",
+    "keywords": [
+      "Algebraic Multigrid",
+      "Reinforcement Learning",
+      "Graph Partitioning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=xXYjxli-2i"
+  },
+  "review_fields": {
+    "summary": "An AMG coarsening algorithm is proposed based on reinforcement learning on graph neural networks. The coarsening is determined from the diagonal dominance criterium for AMG as proposed by MacLachlan and Saad. Numerical experiments on a wide variety of 2D meshes (structured and unstructured) for the Poisson problem show excellent performance compared to the simple greedy algorithm proposed by MacLachlan and Saad. Theoretical results are fairly limited but the approach is very promising algorithmically. However, more meshes (3D), elliptic operators (smooth and discontinuous coefficients), and better comparison to the state-of-the art should have been tried to truly assess the novelty and viability of the proposed algorithm.",
+    "main_review": "Questions / remarks:\n1) Can the proposed Reinforcement Learning (RL) solution be used as starting value for the NP hard problem (4) when solved as an integer programming? This would also allow to deduce how far from optimality the RL solution is.\n\n2) How is an optimal agent defined in Thm 1? As minimising the number of actions? It is worth point out that in practice one does not find an optimal agent.\n\n3) Sec 4.2 - line 204: Please give more details (in the appendix) about the \"random convex triangular mesh\" and its FEM discretisation. How is the mesh generated? Which FEM discretisation (order of elements)?\n\n4) Please explain briefly (in the appendix) how Lloyd aggregation works and why it would result in an $O(n)$ cost.\n\n5) Fig 3: Add other metrics like AMG grid complexity and convergence factor. Effective convergence factor combines, which is nice, but could be difficult to interpret.\n\n6) Fig 2: add the type of mesh in the legend.\n\n7) While I find the results of Poisson on unstructured meshes very impressive, more experiments should be done truly assess the novelty and viability of the proposed ideas: \n - 3D (un)structured \n - Variable coefficients (smooth and discontinuous) elliptic on 2D/3D\n - Helmholtz problems\n - Compare to state-of-the-art and not only to the greedy approach: standard AMG with heuristic coarsening and other ML optimized MG.\n - Maybe not needed but nice: actually solve the PDE and compare time, cost.\n\nIt is probably not feasible to perform all these tests, but I find doing at least a few of them necessary to make the submission acceptable for Neurips. It is recommended to put much more experiments in the appendix."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

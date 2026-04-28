@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "sZI1Oj9KBKy",
+  "reviewer": "fFbD",
+  "paper": {
+    "title": "TVSPrune - Pruning Non-discriminative filters via Total Variation separability of intermediate representations without fine tuning",
+    "authors": [
+      "Chaitanya Murti",
+      "Tanay Narshana",
+      "Chiranjib Bhattacharyya"
+    ],
+    "abstract": "Achieving structured, data-free sparsity of deep neural networks (DNNs) remains an open area of research.  In this work, we address the challenge of pruning filters without access to the original training set or loss function. We propose the discriminative filters hypothesis, that well-trained models possess discriminative filters, and any non-discriminative filters can be pruned without impacting the predictive performance of the classifier. Based on this hypothesis, we propose a new paradigm for pruning neural networks: distributional pruning, wherein we only require access to the distributions that generated the original datasets. Our approach to solving the problem of formalising and quantifying the discriminating ability of filters is through the total variation (TV) distance between the class-conditional distributions of the filter outputs. We present empirical results that, using this definition of discriminability, support our hypothesis on a variety of datasets and architectures. Next, we define the LDIFF score, a heuristic to quantify the extent to which a layer possesses a mixture of discriminative and non-discriminative filters. We empirically demonstrate that the LDIFF score is indicative of the performance of random pruning for a given layer, and thereby indicates the extent to which a layer may be pruned. Our main contribution is a novel one-shot pruning algorithm, called TVSPrune, that identifies non-discriminative filters for pruning. We extend this algorithm to IterTVSPrune, wherein we iteratively apply TVSPrune, thereby enabling us to achieve greater sparsity. Last, we demonstrate the efficacy of the TVSPrune on a variety of datasets, and show that in some cases, we can prune up to 60% of parameters with only a 2% loss of accuracy without any fine-tuning of the model, beating the nearest baseline by almost 10%.",
+    "keywords": [
+      "Structured pruning",
+      "model compression"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=sZI1Oj9KBKy"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "In this paper authors propose a mechanism to prune a convolutional neural network model in a relatively data-free manner i.e., they do not utilize training data or loss function for retraining the pruned model. However unlike the actual data-free pruning techniques they assume the availability of moments of class-conditional distributions of the activations. They make a critical assumption that these distributions are Gaussian to exploit cheaply computable sufficient statistics in deriving tractable bounds which are used to guide the pruning process.\n\nThey propose a pruning method which exploits the proposed metric to both decide the extent of pruning for a given layer and the actual filters to prune in a given layer, without measuring the impact on the down-stream layer outputs either in terms of the deviations in the metric or in terms of actual performance. This is a reasonable operation under the fundamental hypothesis informing this paper, i.e., discriminability of a filter strongly correlates with performance impact on pruning it. However they do design an iterative version of their pruning method which explicitly measures the cumulative impact of pruning at all the layers on the over all model.\n\nThey show appreciable reductions in performance degradations for a given pruning budget compared to other data-free pruning methods.",
+    "strength_and_weaknesses": "Strengths\n------------\nThe paper clearly calls out the hypothesis and constantly justifies the algorithmic decisions in the context of this hypothesis. \nIt performs intermediate validation exercises for their hypothesis, which motivate the reader and guide them through the author's intuitions.\nThe supplementary material is very exhaustive and helpful in further clarifying the details of the proposed algorithm/metrics.\n\nWeaknesses\n---------------\nThe motivation for data free pruning is not clearly described in the paper. The readers are forced to rely on the references.\nIt would be very informative to the reader to compare the sparsification potential of this technique to a pruning method which exploits fine-tuning post compression.",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is very clear. It explicitly calls out the hypothesis under which the proposed method is designed and provides reasonable intermediary validation steps.\n\nThe novelty of the paper lies in designing a cheap pruning method which is cheap due to well validated/referenced assumptions such as Gaussian nature of intermediate activations or strong correlation between discriminability of a layer's output and its prunability. \n\nAuthors made appreciable effort to improve reproducibility of the results in the paper.\nThey provide a link to their implementation.\nThe authors describe the algorithm in great detail.\nThey utilize standard architectures to demonstrate their pruning method.\nThey utilize open datasets for experimental validation.",
+    "summary_of_the_review": "This paper guides the reader through the design of the algorithm and motivates the design decisions with well validated/referenced hypotheses. It addresses a problem of critical interest to this community. The writing style is clear. The references are more than adequate. The proposed technique is has limited but sufficient experimental validation. Though there are minor possible improvements the paper in its current form is already useful to the readers.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

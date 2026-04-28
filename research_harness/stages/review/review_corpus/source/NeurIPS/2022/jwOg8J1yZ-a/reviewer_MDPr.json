@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "jwOg8J1yZ-a",
+  "reviewer": "MDPr",
+  "paper": {
+    "title": "Adversarially Robust Learning with Tolerance",
+    "authors": [
+      "Hassan Ashtiani",
+      "Vinayak Pathak",
+      "Ruth Urner"
+    ],
+    "abstract": "We initiate the study of tolerant adversarial PAC learning with respect to metric perturbation sets. In adversarial PAC learning, an adversary is allowed to replace a test point $x$ with an arbitrary point in a closed ball of radius $r$ centered at $x$. In the tolerant version, the error of the learner is compared with the best achievable error with respect to a slightly larger perturbation radius $(1+\\gamma)r$. This simple tweak helps us bridge the gap between theory and practice and obtain the first PAC-type guarantees for algorithmic techniques that are popular in practice. Furthermore, our sample complexity bounds improve exponentially over best known (non-tolerant) bounds in terms of the VC dimension of the hypothesis class. In particular, for perturbation sets with doubling dimension $d$, we show that a variant of the  ``perturb-and-smooth'' algorithm PAC learns any hypothesis class $H$ with VC dimension $v$ in the $\\gamma$-tolerant adversarial setting with $O\\left(\\frac{v(1+1/\\gamma)^{O(d)}}{\\varepsilon}\\right)$ samples. This guarantee holds in the tolerant robust realizable setting. We extend this to the agnostic case by designing a novel sample compression scheme based on the perturb-and-smooth approach. This compression-based algorithm has a linear dependence on the doubling dimension as well as the VC-dimension.",
+    "keywords": [
+      "Statistical Learning Theory",
+      "PAC Learning",
+      "Adversarial Learning",
+      "Compression",
+      "Perturb and Smooth"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=jwOg8J1yZ-a"
+  },
+  "review_fields": {
+    "comment": "Hi, FjcX,\n\nThanks for the feedback. I must confess that I am not familiar with the recent development of PAC learning in adversarial training and I feel that I am too harsh on the rating given that this is the first PAC result in the fielding. I am considering raising my score, but would like to ask the expert reviewer FjcX one more question: is it common in the PAC learning community that no simulation is conducted?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

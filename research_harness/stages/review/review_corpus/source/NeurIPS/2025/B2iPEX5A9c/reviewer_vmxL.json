@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "B2iPEX5A9c",
+  "reviewer": "vmxL",
+  "paper": {
+    "title": "Information-Theoretic Discrete Diffusion",
+    "authors": [
+      "Moongyu Jeon",
+      "Sangwoo Shin",
+      "Dongjae Jeon",
+      "Albert No"
+    ],
+    "abstract": "We present an information-theoretic framework for discrete diffusion models \nthat yields principled estimators of log-likelihood using score-matching losses.\nInspired by the I-MMSE identity for the Gaussian setup, we derive analogous results for the discrete setting.\nSpecifically, we introduce the Information–Minimum Denoising Score Entropy (I-MDSE) relation,\nwhich links mutual information between data and its diffused version to the minimum denoising score entropy (DSE) loss.\nWe extend this theory to masked diffusion and establish the Information–Minimum Denoising Cross-Entropy (I-MDCE) relation,\nconnecting cross-entropy losses to mutual information in discrete masked processes.\nThese results provide a time-integral decomposition of the log-likelihood of the data in terms of optimal score-based losses,\nshowing that commonly used losses such as DSE and DCE are not merely variational bounds \nbut tight and principled estimators of log-likelihood.\nThe I-MDCE decomposition further enables practical extensions, including time-free formula,\nconditional likelihood estimation in prompt–response tasks, and coupled Monte Carlo estimation of likelihood ratios.\nExperiments on synthetic and real-world data confirm the accuracy, variance stability, and utility of our estimators.\nThe code is publicly available at https://github.com/Dongjae0324/infodis.",
+    "keywords": [
+      "Discrete Diffusion Models",
+      "Information Theory",
+      "Score Matching",
+      "Denoising Score Entropy (DSE)",
+      "Denoising Cross-Entropy (DCE)"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=B2iPEX5A9c"
+  },
+  "review_fields": {
+    "summary": "This paper develops an information-theoretic framework for discrete diffusion models, analogous to the I-MMSE identity in Gaussian settings. Specifically, an I-MDSE identity is derived for discrete diffusion, linking the rate of KL divergence decay to the minimum denoising score-entropy loss. The framework is further extended to masked diffusion models, leading to the I-MDCE relation. Both time-integral and time-free expressions for NLL estimation in conditional and unconditional scenarios are proposed. Experiments on NLL estimation demonstrate the effectiveness of the proposed method.",
+    "strengths_and_weaknesses": "Strengths:\n- The paper is well-structured and the idea of connecting mutual information with score-based losses in discrete diffusion models is interesting. This paper generalizes continuous‑domain I‑MMSE results to discrete domain, offering a new angle to understand discrete diffusion models.\n- This paper provides both time-integral and time-free NLL estimators, which are validated by experimental results.\n\nWeaknesses:\n- NLL decomposition is achieved via both I-MDSE and I-MDCE relations (Theorem 3.2 and Corollary 3.7), which require the optimal score functions. However, as the optimal score is unavailable, the learned score network is used for approximation, leading to a trivial likelihood estimation via loss function, which is a variational upper bound for log-likelihood. Therefore, the introduction of time-integral NLL estimators seems to be trivial.\n- The experimental part lacks comparison. The introduction of the time-free likelihood estimation (Theorem 3.8) is novel. However, the experimental results only show its effectives without comparison to other methods, which is not enough to demonstrate the advantages of time-free estimator as claimed in line 230-232.",
+    "questions": "The derived I-MDSE and I-MDCE identities link mutual information to score-based losses. What are the practical benefits and how does these relations bring new insights?",
+    "paper_formatting_concerns": "I don't find any major formatting issues in this paper.",
+    "final_justification": "I thank the authors for the detailed response. Most of my concerns are addressed and I will raise my rating accordingly."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

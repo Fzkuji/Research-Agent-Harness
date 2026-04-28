@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "SysEexbRb",
+  "reviewer": "3",
+  "paper": {
+    "title": "Critical Points of Linear Neural Networks: Analytical Forms and Landscape Properties",
+    "authors": [
+      "Yi Zhou",
+      "Yingbin Liang"
+    ],
+    "abstract": "Due to the success of deep learning to solving a variety of challenging machine learning tasks, there is a rising interest in understanding loss functions for training neural networks from a theoretical aspect. Particularly, the properties of critical points and the landscape around them are of importance to determine the convergence performance of optimization algorithms. In this paper, we provide a necessary and sufficient characterization of the analytical forms for the critical points (as well as global minimizers) of the square loss functions for linear neural networks. We show that the analytical forms of the critical points characterize the values of the corresponding loss functions as well as the necessary and sufficient conditions to achieve global minimum. Furthermore, we exploit the analytical forms of the critical points to characterize the landscape properties for the loss functions of linear neural networks and shallow ReLU networks. One particular conclusion is that: While the loss function of linear networks has no spurious local minimum, the loss function of one-hidden-layer nonlinear networks with ReLU activation function does have local minimum that is not global minimum.",
+    "keywords": [
+      "neural networks",
+      "critical points",
+      "analytical form",
+      "landscape"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SysEexbRb"
+  },
+  "review_fields": {
+    "review": "This paper studies the critical points of shallow and deep linear networks. The authors give a (necessary and sufficient) characterization of the form of critical points and use this to derive necessary and sufficient conditions for which critical points are global optima. Essentially this paper revisits a classic paper by Baldi and Hornik (1989) and relaxes a few requires assumptions on the matrices. I have not checked the proofs in detail but the general strategy seems sound. While the exposition of the paper can be improved in my view this is a neat and concise result and merits publication in ICLR. The authors also study the analytic form of critical points of a single-hidden layer ReLU network. However, given the form of the necessary and sufficient conditions the usefulness of of these results is less clear.\n\n\nDetailed comments:\n\n- I think in the title/abstract/intro the use of Neural nets is somewhat misleading as neural nets are typically nonlinear. This paper is mostly about linear networks. While a result has been stated for single-hidden ReLU networks. In my view this particular result is an immediate corollary of the result for linear networks. As I explain further below given the combinatorial form of the result, the usefulness of this particular extension to ReLU network is not very clear. I would suggest rewording title/abstract/intro\n\n- Theorem 1 is neat, well done!\n\n- Page 4 p_i’s in proposition 1\nFrom my understanding the p_i have been introduced in Theorem 1 but given their prominent role in this proposition they merit a separate definition (and ideally in terms of the A_i directly). \n\n- Theorems 1, prop 1, prop 2, prop 3, Theorem 3, prop 4 and 5\n\tAre these characterizations computable i.e. given X and Y can one run an algorithm to find all the critical points or at least the parameters used in the characterization p_i, V_i etc?\n\n- Theorems 1, prop 1, prop 2, prop 3, Theorem 3, prop 4 and 5\n\tWould recommend a better exposition why these theorems are useful. What insights do you gain by knowing these theorems etc. Are less sufficient conditions that is more intuitive or useful. (an insightful sufficient condition in some cases is much more valuable than an unintuitive necessary and sufficient one).\n\n- Page 5 Theorem 2\n\tDoes this theorem have any computational implications? Does it imply that the global optima can be found efficiently, e.g. are saddles strict with a quantifiable bound?\n\n- Page 7 proposition 6 seems like an immediate consequence of Theorem 1 however given the combinatorial nature of the K_{I,J} it is not clear why this theorem is useful. e.g . back to my earlier comment w.r.t. Linear networks given Y and X can you find the parameters of this characterization with a computationally efficient algorithm?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "aN4Jf6Cx69",
+  "reviewer": "Y7Wm",
+  "paper": {
+    "title": "The mechanistic basis of data dependence and abrupt learning in an in-context classification task",
+    "authors": [
+      "Gautam Reddy"
+    ],
+    "abstract": "Transformer models exhibit in-context learning: the ability to accurately predict the response to a novel query based on illustrative examples in the input sequence, which contrasts with traditional in-weights learning of query-output relationships. What aspects of the training data distribution and architecture favor in-context vs in-weights learning? Recent work has shown that specific distributional properties inherent in language, such as burstiness, large dictionaries and skewed rank-frequency distributions, control the trade-off or simultaneous appearance of these two forms of learning. We first show that these results are recapitulated in a minimal attention-only network trained on a simplified dataset. In-context learning (ICL) is driven by the abrupt emergence of an induction head, which subsequently competes with in-weights learning. By identifying progress measures that precede in-context learning and targeted experiments, we construct a two-parameter model of an induction head which emulates the full data distributional dependencies displayed by the attention-based network. A phenomenological model of induction head formation traces its abrupt emergence to the sequential learning of three nested logits enabled by an intrinsic curriculum. We propose that the sharp transitions in attention-based networks arise due to a specific chain of multi-layer operations necessary to achieve ICL, which is implemented by nested nonlinearities sequentially learned during training.",
+    "keywords": [
+      "in-context learning",
+      "mechanistic interpretability",
+      "language models",
+      "induction heads"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=aN4Jf6Cx69"
+  },
+  "review_fields": {
+    "summary": "The paper attempts to provide a deeper understanding of in-context learning of LLMs -- which is also related to the broader discussion about their \"emergent learning capabilities\". \nTo provide such an understanding, the authors wisely choose to abstract away many details of LLMs, and of the tasks that LLMs usually perform, and to focus instead on a simple experimental setting in which they can easily control or monitor whether the task is performed through in-weights learning (IWL) versus in-context learning (ICL). Additionally, the data is generated through a parsimonious gaussian mixture model in which they can also control some important aspects, such as the burstiness with which certain classes appear in the sequence, or the rank-frequency relation. \nThen, and based on the insights from the previous experiments, they design a very small (in terms of number of parameters) phenomenological model of an \"induction head\" that reproduces quite well the observed behaviors of the more complex attention-based networks used in the experiments.",
+    "strengths": "I have read several papers recently that try to provide some insights about the emergent capabilities of LLMs -- through abstract modeling and experiments with tasks such as linear regression (learned through ICL). This paper is the best I have read so far in that direction. \nThe experiments are wisely designed, allowing us to understand the complex tradeoff between IWL and ICL -- as well the effect of some key data distributional parameters such as the rank-frequency exponent. \nThe simple model proposed in the second part of the paper is also intriguing, explaining how the abstract model of an induction head can explain mechanistically the ICL capabilities of an attention-based network.",
+    "weaknesses": "The paper can be improved in terms of writing/presentation. For example, you can explain early on in the paper what \"induction head\" means for readers that are less familiar with this area. \n\nThere are also several other parts of the paper in which the writing can be improved -- mostly by writing simpler/shorter/more clear sentences.",
+    "questions": "As written in the Strengths section, I am very positive about this paper and so I do not have many technical suggestions or questions for the authors. \n\nI would like to see at the end a clear discussion about the limitations of this simple/abstract model. Which aspects of an LLM's behavior may still be important but not captured by the proposed simple task and model that the paper proposes? \n\nI would also like to see a more clear discussion of how your observations/conclusions agree (or disagree?) with earlier results in the literature about ICL and the emergent abilities of LLMs."
+  },
+  "review_metadata": {
+    "rating": 10,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:23Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:23Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1030,
+    "words": 166,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/800f2512-7c35-4c29-91e6-7e8176551860",
+    "error": null,
+    "scored_chars": 1033
+  }
+}

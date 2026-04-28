@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "9k0krNzvlV",
+  "reviewer": "metd",
+  "paper": {
+    "title": "On the Learnability of Watermarks for Language Models",
+    "authors": [
+      "Chenchen Gu",
+      "Xiang Lisa Li",
+      "Percy Liang",
+      "Tatsunori Hashimoto"
+    ],
+    "abstract": "Watermarking of language model outputs enables statistical detection of model-generated text, which can mitigate harms and misuses of language models. Existing watermarking strategies operate by altering the decoder of an existing language model. In this paper, we ask whether language models can directly learn to generate watermarked text, which would have significant implications for the real-world deployment of watermarks. First, learned watermarks could be used to build open models that naturally generate watermarked text, enabling watermarking for open models, where users can control the decoding procedure. Second, if watermarking is used to determine the provenance of generated text, an adversary can hurt the reputation of a victim model by spoofing its watermark and generating damaging watermarked text. To investigate the learnability of watermarks, we propose watermark distillation, which trains a student model to behave like a teacher model that uses decoding-based watermarking. We test our approach on three decoding-based watermarking strategies and various hyperparameter settings, finding that models can learn to generate watermarked text with high detectability. We also find limitations to learnability, including the loss of watermarking capabilities under fine-tuning on normal text and high sample complexity when learning low-distortion watermarks.",
+    "keywords": [
+      "watermarking",
+      "large language models",
+      "distillation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=9k0krNzvlV"
+  },
+  "review_fields": {
+    "summary": "The authors study whether language watermarks can be spoofed by training a student language model (LM) on the watermarked outputs of a teacher LM (the process is known as distillation). The experiments show that all three surveyed watermarking methods can be spoofed when the attacker has 640k (watermarked) samples, each comprised of 256 tokens, and that the distilled watermark remains effective under different decoding strategies and has similar robustness properties as the teacher's watermark.",
+    "strengths": "* Overall, I liked the paper. The problem of watermarking open models and spoofing attacks against watermarks is timely and important. \n\n* The authors show that three watermarking methods are vulnerable to spoofing through distillation. \n\n* The authors convince me their distillation approach works for many different generation parameters against all three watermarking methods when sufficiently many samples are available to the attacker.\n\n* The authors show experiments with many state-of-the-art models.",
+    "weaknesses": "**Contribution to Open Model Watermarking**. As the authors show, open-model watermarking using distillation is not robust against fine-tuning. I am unclear about the contribution of the authors to open model watermarking. No prior work has used distillation to watermark LMs, hence there is no security threat. What is the use of a watermark that (i) lacks robustness and (ii) can be spoofed by design? I would love to hear the author's thoughts on this. \n\n**Limited novelty.** One would expect that watermarking can be spoofed if the attacker can access sufficiently many watermarked samples. If I understood correctly, the authors use **163 million tokens** ($640$k samples times 256 tokens each) of watermarked text with the _same_ message. How realistic is this assumption? Is the attack effective when a provider uses a different message after generating a set number of tokens? \n\nSpoofing is possible when sufficiently many samples are revealed. I believe a more interesting approach is to measure the number of samples that enable spoofing or to derive a theoretical bound for the spoofer's sample efficiency. Insights into that question could guide the party that injects the watermark into deploying defenses, such as switching to a different key or message after this number of samples has been revealed. Unfortunately, the paper does not investigate this problem. Do the authors have any insights into that problem?",
+    "questions": "* What are your contributions towards open model watermarking?\n\n* How sample-efficient is the spoofing attack?\n\n* Can the distilled and original watermarked distributions be distinguished? I assume the spoofed watermarked does not learn rare watermarked sequences, but instead focuses first on the most often occurring ones. If a defender can detect and ignore those during detection, can they evade your spoofing attack while effectively detecting watermarked text?",
+    "details_of_ethics_concerns": "I believe there are no ethical concerns in this paper."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2400,
+    "words": 364,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/51164a91-fa73-4d7e-bc0d-75600b2ee2f3",
+    "error": null,
+    "scored_chars": 2404
+  }
+}

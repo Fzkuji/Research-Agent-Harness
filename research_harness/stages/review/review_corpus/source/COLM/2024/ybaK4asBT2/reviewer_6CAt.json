@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "ybaK4asBT2",
+  "reviewer": "6CAt",
+  "paper": {
+    "title": "LLM Discussion: Enhancing the Creativity of Large Language Models via Discussion Framework and Role-Play",
+    "authors": [
+      "Li-Chun Lu",
+      "Shou-Jen Chen",
+      "Tsung-Min Pai",
+      "Chan-Hung Yu",
+      "Hung-yi Lee",
+      "Shao-Hua Sun"
+    ],
+    "abstract": "Large language models (LLMs) have shown exceptional proficiency in natural language processing but often fall short of generating creative and original responses to open-ended questions. To enhance LLM creativity, our key insight is to emulate the human process of inducing collective creativity through engaging discussions with participants from diverse backgrounds and perspectives. To this end, we propose LLM Discussion, a three-phase discussion framework that facilitates vigorous and diverging idea exchanges and ensures convergence to creative answers. Moreover, we adopt a role-playing technique by assigning distinct roles to LLMs to combat the homogeneity of LLMs. We evaluate the efficacy of the proposed framework with the Alternative Uses Test, Similarities Test, Instances Test, and Scientific Creativity Test through both LLM evaluation and human study. The results show that our proposed framework outperforms single-LLM approaches and existing multi-LLM frameworks across various creativity metrics. The code is available at https://github.com/lawraa/LLM-Discussion.",
+    "keywords": [
+      "multi-agent discussion",
+      "creativity",
+      "role-play",
+      "large language models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ybaK4asBT2"
+  },
+  "review_fields": {
+    "summary": "The authors present an LLM discussion framework for improving the creativity of LLM outputs by using multiple LLM agents with diversified role-playing instructions in a 3-step pipeline.",
+    "reasons_to_accept": "The idea of giving different role-playing instructions to different agents seems intuitive and well-motivated, and the method appears empirically effective at increasing creativity. Additionally, although they are evaluating creativity which (I think) should be a fairly difficult thing to nail down evaluation-wise, the experimental setup and analysis seem reasonable and sound, which I think is a solid contribution in its own right (and could perhaps be highlighted more if the authors want to).",
+    "reasons_to_reject": "While the authors have shown that their method can improve the creativity of LLM outputs, it does appear to come at some cost to fluency. In LM generation one can typically increase diversity trivially at the cost of fluency by e.g. increasing the temperature. It's not immediately obvious to me that the proposed method is not just a fancy way of doing the same tradeoff, rather than \"pushing the Pareto boundary\" in some sense. While the current experimental results are fine, in my opinion this paper would be substantially stronger if the authors showed results on e.g., something like a creative problem solving task where the additional creativity actually results in something like higher success rate or accuracy, rather than solely improving creativity for its own sake.",
+    "questions_to_authors": "- Why does your method often perform worse on fluency compared to some baselines? Is there a tradeoff for fluency vs diversity (similar to how you make this tradeoff when you change the temperature of generation)?\n- Why is flexibility not a main metric? Isn't coming up with more different answers a pretty reasonable thing to evaluate? Or is the problem just that you don't have a good way to \"deduplicate\" different answers? Not sure if I'm misunderstanding what is meant by flexibility in your setup.\n- Why are all the metrics 0 when you have 3 agents in fig 6?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:37:12Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:12Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1845,
+    "words": 301,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/5ad81367-52b2-4f4e-8ae2-d3bd26627770",
+    "error": null,
+    "scored_chars": 1845
+  }
+}

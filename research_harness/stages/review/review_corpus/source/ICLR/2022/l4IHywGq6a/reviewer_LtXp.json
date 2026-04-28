@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "l4IHywGq6a",
+  "reviewer": "LtXp",
+  "paper": {
+    "title": "Data-Efficient Graph Grammar Learning for Molecular Generation",
+    "authors": [
+      "Minghao Guo",
+      "Veronika Thost",
+      "Beichen Li",
+      "Payel Das",
+      "Jie Chen",
+      "Wojciech Matusik"
+    ],
+    "abstract": "The problem of molecular generation has received significant attention recently. Existing methods are typically based on deep neural networks and require training on large datasets with tens of thousands of samples. In practice, however, the size of class-specific chemical datasets is usually limited (e.g., dozens of samples) due to labor-intensive experimentation and data collection. Another major challenge is to generate only physically synthesizable molecules. This is a non-trivial task for neural network-based generative models since the relevant chemical knowledge can only be extracted and generalized from the limited training data. In this work, we propose a data-efficient generative model that can be learned from datasets with orders of magnitude smaller sizes than common benchmarks. At the heart of this method is a learnable graph grammar that generates molecules from a sequence of production rules. Without any human assistance, these production rules are automatically constructed from training data. Furthermore, additional chemical knowledge can be incorporated into the model by further grammar optimization. Our learned graph grammar yields state-of-the-art results on generating high-quality molecules for three monomer datasets that contain only ${\\sim}20$ samples each. Our approach also achieves remarkable performance in a challenging polymer generation task with $only$ $117$ training samples and is competitive against existing methods using $81$k data points.",
+    "keywords": [
+      "molecular generation",
+      "graph grammar",
+      "data efficient generative model"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=l4IHywGq6a"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposed an interesting grammar learning-based data-efficient molecule generation model. \nThe key idea of this method is to learn a set of production rules via a hyper-edge selection process that optimizes a set of evaluation metrics. \nThis method achieves impressive performance on extremely small datasets and achieves competitive performance compared with end-to-end models trained on a large dataset.",
+    "main_review": "Strength:\nThis method is very data efficient given grammar-based learning. \nThe hypergraph contraction-based production rule learning process is very novel (at least from my perspective).\n\nWeakness:\nIt seems like the model can only work on a small set of molecules to generate the rules due to the computational complexity.\nThe way this model learns the production rule is actually very related to a domain called task-based learning, where people tend to optimize their model towards some non-differentiable evaluation metrics. \nThe authors should reference some of those works, e.g. \n\"Task-Based Learning via Task-Oriented Prediction Network with Applications in Finance\", \n\"Task-based End-to-end Model Learning in Stochastic Optimization\".",
+    "summary_of_the_review": "Due to the novelty of this data-efficient grammar-based molecule generation method and its impressive performance, I recommend to accept this paper.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:51Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 738,
+    "words": 105,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e9ce9627-8e42-4bfc-b47b-5c888a5579b7",
+    "error": null,
+    "scored_chars": 742
+  }
+}

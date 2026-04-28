@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "rJxcHnRqYQ",
+  "reviewer": "2",
+  "paper": {
+    "title": "Local Binary Pattern Networks for Character Recognition",
+    "authors": [
+      "Jeng-Hau Lin",
+      "Yunfan Yang",
+      "Rajesh K. Gupta",
+      "Zhuowen Tu"
+    ],
+    "abstract": "Memory and computation efficient deep learning architectures are crucial to the continued proliferation of machine learning capabilities to new platforms and systems. Binarization of operations in convolutional neural networks has shown promising results in reducing the model size and computing efficiency. \nIn this paper, we tackle the character recognition problem using a strategy different from the existing literature by proposing local binary pattern networks or LBPNet that can learn and perform bit-wise operations in an end-to-end fashion. LBPNet uses local binary comparisons and random projection in place of conventional convolution (or approximation of convolution) operations, providing important means to improve memory and speed efficiency that is particularly suited for small footprint devices and hardware accelerators. These operations can be implemented efficiently on different platforms including direct hardware implementation. LBPNet demonstrates its particular advantage on the character classification task where the content is composed of strokes. We applied LBPNet to benchmark datasets like MNIST, SVHN, DHCD, ICDAR, and Chars74K and observed encouraging results.",
+    "keywords": [
+      "deep learning",
+      "local binary pattern",
+      "supervised learning",
+      "hardware-friendly"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rJxcHnRqYQ"
+  },
+  "review_fields": {
+    "review": "1. The paper introduces the idea of some existing hand-crafted features into the deep learning framework, which is a smart way for building light weighted convolutional neural networks.\n\n2. I have noticed that binary patterns used in the paper are trainable, which means that these binary patterns can be seen as learned convolution filters with extremely space and computational complexity. Thus, the proposed method can also be recognized as a kind of binary network. \n\n3.  The baseline BCNN has a different architecture to the network using the proposed method. Thus, comparisons shown in Table 3 and Table 4 are somewhat unfair.\n\n4. The capability of the proposed method was only verified on character recognition datasets. Does it can be easily used for other tasks such as face recognition or object detection on some relatively large datasets?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

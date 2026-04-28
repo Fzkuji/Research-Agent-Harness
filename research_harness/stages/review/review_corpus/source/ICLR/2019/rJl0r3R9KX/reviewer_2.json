@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "rJl0r3R9KX",
+  "reviewer": "2",
+  "paper": {
+    "title": "Regularized Learning for  Domain Adaptation under Label Shifts",
+    "authors": [
+      "Kamyar Azizzadenesheli",
+      "Anqi Liu",
+      "Fanny Yang",
+      "Animashree Anandkumar"
+    ],
+    "abstract": "We propose Regularized Learning under Label shifts (RLLS), a principled and a practical domain-adaptation algorithm to correct for shifts in the label distribution between a source and a target domain. We first estimate importance weights using labeled source data and unlabeled target data, and then train a classifier on the weighted source samples. We derive a generalization bound for the classifier on the target domain which is independent of the (ambient) data dimensions, and instead only depends on the complexity of the function class. To the best of our knowledge, this is the first generalization bound for the label-shift problem where the labels in the target domain are not available. Based on this bound, we propose a regularized estimator for the small-sample regime which accounts for the uncertainty in the estimated weights. Experiments on the CIFAR-10 and MNIST datasets show that RLLS improves classification accuracy, especially in the low sample and large-shift regimes, compared to previous methods.",
+    "keywords": [
+      "Deep Learning",
+      "Domain Adaptation",
+      "Label Shift",
+      "Importance Weights",
+      "Generalization"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rJl0r3R9KX"
+  },
+  "review_fields": {
+    "review": "- The authors consider the problem of learning under label shifts, where the label proportions p(y) and q(y) of the training and test distributions differ, while the conditionals p(x|y) and q(x|y) are equal. They build upon the work by Lipton et al. 18 on estimating label proportion weights q(y)/p(y) using the confusion matrix, by proposing an improved estimator with regularization. They show that their estimator provides better weight estimates compared to the unregularized version, and it also gives better prediction accuracies under large label shift scenarios. \n\n- One question I have about this approach is the choice of h in the confusion matrix estimation. Since the theory holds for any fixed hypothesis h, is there any guidance on how we should pick h? The authors seem to use the same model class for the weight estimation and predictions in the experiments. How would using a simpler h for weight estimation (e.g., linear logistic regression) affect the results presented here? \n\n- The Dirichlet shifts described with only the parameter alpha is not particularly intuitive in conveying the size of shifts. The CIFAR10 and MNIST datasets contain about 6000 examples per class. How would a large shift with alpha=0.01 change the distribution, especially for the smallest class how many samples are retained? This can help the readers judge when the correction of label shifts are helpful. \n\n- To clarify, in the experiments for Figure 4 using Minority-Class shifts, with p=0.001, is it true that there are less than 100 training examples for each of the minority classes in the training set? This seems like a very extreme shift. \n\n- I also have trouble understanding Figure 3. RESNET-18 should give >90% accuracy on the original CIFAR10, but in 3b we see accuracies around 75% for small shifts. Also how is the F1-score in 3c computed? Is it micro-averaged or macro-averaged F1? Either way an F1 score below 20% is very low for the unweighted classifier, since RESNET-18 should give fairly good classification accuracy on each class separately if it has >90% overall accuracy. \n\n- The paper is quite solid in motivating the need for better weight estimators for reweighing label proportions and their derivations, and manage to show improvements over the unregularized estimator. Details on the experiments should be improved to give the readers better ideas on when correcting for label shifts help. Right now it looks like it only helps for cases with fairly extreme shifts."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

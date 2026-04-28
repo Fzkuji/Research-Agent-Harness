@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "NVDrWBwJTV",
+  "reviewer": "9QUZ",
+  "paper": {
+    "title": "The Good, the Bad and the Ugly: Meta-Analysis of Watermarks, Transferable Attacks and Adversarial Defenses",
+    "authors": [
+      "Grzegorz Gluch",
+      "Berkant Turan",
+      "Sai Ganesh Nagarajan",
+      "Sebastian Pokutta"
+    ],
+    "abstract": "We formalize and analyze the trade-off between backdoor-based watermarks and adversarial defenses, framing it as an interactive protocol between a verifier and a prover. While previous works have primarily focused on this trade-off, our analysis extends it by identifying transferable attacks as a third, counterintuitive but necessary option. Our main result shows that for all learning tasks, at least one of the three exists: a _watermark_, an _adversarial defense_, or a _transferable attack_. By transferable attack, we refer to an efficient algorithm that generates queries indistinguishable from the data distribution and capable of fooling _all_ efficient defenders. Using cryptographic techniques, specifically fully homomorphic encryption, we construct a transferable attack and prove its necessity in this trade-off. Finally, we show that tasks of bounded VC-dimension allow adversarial defenses against all attackers, while a subclass allows watermarks secure against fast adversaries.",
+    "keywords": [
+      "Interactive Proof Systems",
+      "Cryptography",
+      "Backdoors",
+      "Game Theory",
+      "Learning Theory",
+      "Transferable Attacks",
+      "Adversarial Robustness"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NVDrWBwJTV"
+  },
+  "review_fields": {
+    "summary": "This paper shows that for all learning tasks, at least one of the following three algorithms exists, Watermark, Transferable Attacks, and Adversarial Defenses. They give rigorous definitions of these algorithms by formulating them as two-player interaction protocols, and prove their main result based on circuit complexity.",
+    "strengths_and_weaknesses": "Strengths:\n\n1.\tThis paper provides comprehensive analysis of Watermarks, Adversarial Defenses and Transferable Attacks under a cryptographic perspective.\n\n2.\tRelationship between Transferable Attacks and complex learning tasks based on cryptography has been well-studied.\n\n\nWeaknesses:\n\n1.\tThe definitions are very obscure, it’s hard for readers to understand. There are no explanations of why these definitions are reasonable, and no discussions on the relationship between these definitions and the well-known concepts of Watermarking, Transferable Attacks and Adversarial Defenses. For example, in the definition of Watermark, what is $B_n$? Is it a decoder that try to obtain the injected watermarked messages? In the definition of Adversarial Defense, why soundness means adversarial inputs are detected? Does this definition align more with the adversarial detection rather than defense? Also in the definition of Transferable Attacks, why it is defined in this way? I don’t think this align well with the well-known transferable attacks, that an attack can be transferable across models or datasets. Overall, these definitions are abstract, it is very hard for readers to connect them with real-world scenarios. I suggest the authors to provide more discussions, explanations of these definitions, and their potential alignment with well-known definitions of these aspects.\n\n2.\tAll these definitions and results are based on the $F_2$ field. This may be not practical for modern deep networks and embeddings.\n\n3.\tAuthors say this paper focus on classification tasks. However, not any experimental results can validate the soundness of their definitions and theorems. I suggest the authors to conduct some simple experiments on MNIST, or at least some hand-wavy evaluation on certain human-crafted datasets (with some multivariate Gaussian distributions I guess, as often used in other theoretical works). It is worthy to note that, NeurIPS is a conference consider more on practicality, even for a theoretical paper, some simple experiments are welcome and necessary.",
+    "questions": "1.\tWhat is the relationship between the Undetectability of Watermark in your definition and the pseudorandomness of error-correcting codes[a]?\n\n2.\tCan these results be expanded to continuous data space?\n\n3.\tIn Section 3.3, the probability is $1/2+\\gamma$, why $\\gamma$ be $[0,1]$?\n\n\n\nRef:\n\n[a] Christ and Gunn. Pseudorandom Error-Correcting Codes. 2024.",
+    "limitations": "They talked about some limitations on extending these ideas to generative tasks. But more perspective should be considered. (See weaknesses and questions, like $F_2$ field, potential misalignment of definitions.)",
+    "final_justification": "The rebuttal has addressed my concerns. I tend to be more positive on this paper."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 1,
+    "significance": 2,
+    "originality": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

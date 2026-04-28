@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "a560KLF3v5",
+  "reviewer": "psDc",
+  "paper": {
+    "title": "Unelicitable Backdoors via Cryptographic Transformer Circuits",
+    "authors": [
+      "Andis Draguns",
+      "Andrew Gritsevskiy",
+      "Sumeet Ramesh Motwani",
+      "Christian Schroeder de Witt"
+    ],
+    "abstract": "The rapid proliferation of open-source language models significantly increases the risks of downstream backdoor attacks. These backdoors can introduce dangerous behaviours during model deployment and can evade detection by conventional cybersecurity monitoring systems. In this paper, we introduce a novel class of backdoors in transformer models, that, in contrast to prior art, are unelicitable in nature. Unelicitability prevents the defender from triggering the backdoor, making it impossible to properly evaluate ahead of deployment even if given full white-box access and using automated techniques, such as red-teaming or certain formal verification methods. We show that our novel construction is not only unelicitable thanks to using cryptographic techniques, but also has favourable robustness properties.\nWe confirm these properties in empirical investigations, and provide evidence that our backdoors can withstand state-of-the-art mitigation strategies. Additionally, we expand on previous work by showing that our universal backdoors, while not completely undetectable in white-box settings, can be harder to detect than some existing designs. By demonstrating the feasibility of seamlessly integrating backdoors into transformer models, this paper fundamentally questions the efficacy of pre-deployment detection strategies. This offers new insights into the offence-defence balance in AI safety and security.",
+    "keywords": [
+      "Backdoor attacks",
+      "Transformers",
+      "handcrafting model parameters",
+      "cryptographic circuits"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=a560KLF3v5"
+  },
+  "review_fields": {
+    "summary": "This work presents a new encrypted backdoor construction technique that compiles backdoors directly into transformer architectures.\nThe literature research of current backdoors and give an understanding of current limitations. \nThe proposed method is able to overcome the limitations for NP-completeness.\nThe weaknesses the minor writing flaws could be improved and suggest a table/figure to localize where is the current backdoor can be ordered compared to the others. \n\nPerhaps, the reviewer is a bit biased to have more experiments and downgraded the soundness. \nIn overall, the reviewer thinks to accept this paper despite the weaknesses, but is looking forward of the opinion of the other reviewers and the answers of the authors.",
+    "strengths": "- Novelty is high because the reviewer has not found any comparable methods.\n- The authors discuss current state-of-the art backdoors and clearly describe the limitations of their proposed method. \n- Discusses the NP-Completeness of their work and support their theoretical analysis.",
+    "weaknesses": "- Experimental comparison with other backdoors does not exist. \n- No error bars used in the experiments.\n- Writing (minor): \n    - The writing is coherent but sometimes difficult follow such as\n\t- L56 order: \"universal, robust and undetectable\" but then discuss L58 universal, L66 undetectable, L77 robust; or\n        - Section 3 feels more to be part of the related work.\n        - L79 ill formed sentence: \"hat level of robustness\" The?\n\t- More cross references between the sections would make the reading easier.",
+    "questions": "The reviewer would be curious about the following questions: \n\n1. Comparative Analysis: Why wasn't important to you to have an experimental comparison to other backdoor attacks?\n\n2. Performance Impact: Does the integration of cryptographic circuits into the transformer architecture affect the model's performance, inference speed, or resource requirements? If so, to what extent?\n\n3. Trigger Specificity: How sensitive are the backdoors to variations in the trigger inputs? Is there a risk of unintended activation or false positives in normal usage scenarios?",
+    "limitations": "It is a novel approach and shows a proof-of-concept. In the following there are some concerns:\n\n1. Generalizability concerns: The research focuses on specific language models and architectures. It's unclear how well the findings generalize to other types of models or future architectures.\n\n2. Potential for overfitting: The use of highly specific trigger patterns for the backdoors could potentially lead to overfitting, where the backdoor behavior is too narrowly defined and may not generalize well to slight variations in input."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 27,
+    "mixed_pct": 0,
+    "human_pct": 73,
+    "verdict": "We are moderately confident this text is entirely human",
+    "confidence": "moderately",
+    "chars": 1871,
+    "words": 285,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/08c60b8d-800f-483c-ae6b-651ef86bd7cd",
+    "error": null,
+    "scored_chars": 1897
+  }
+}

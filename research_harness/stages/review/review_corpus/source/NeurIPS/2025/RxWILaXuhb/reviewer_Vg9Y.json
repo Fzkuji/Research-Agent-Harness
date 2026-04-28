@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "RxWILaXuhb",
+  "reviewer": "Vg9Y",
+  "paper": {
+    "title": "Time-o1: Time-Series Forecasting Needs Transformed Label Alignment",
+    "authors": [
+      "Hao Wang",
+      "Licheng Pan",
+      "Zhichao Chen",
+      "Xu Chen",
+      "Qingyang Dai",
+      "Lei Wang",
+      "Haoxuan Li",
+      "Zhouchen Lin"
+    ],
+    "abstract": "Training time-series forecasting models poses unique challenges in loss function design. Most existing approaches adopt temporal mean squared error, but this study reveals two critical limitations: (1) it ignores the presence of label autocorrelation, which biases it from the true label sequence likelihood;  (2) it involves excessive number of tasks, which complicates optimization, especially for long-term forecasting. To address these issues, we introduce Time-o1, a transform-enhanced loss function for time-series forecasting. The central idea is to transform the label sequence into decorrelated components with discriminated significance. Models are then trained to align the most significant components, thereby effectively mitigating label autocorrelation and reducing task amount. Experiments demonstrate that Time-o1 achieves state-of-the-art performance and is compatible with various forecast models. Code is available at https://github.com/Master-PLC/Time-o1.",
+    "keywords": [
+      "Time-Series",
+      "Label Autocorrelation",
+      "Orthogonalization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=RxWILaXuhb"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a new label transformation method that transforms time series forecasting labels to decorrelate labels and mitigate the unimportant forecasting labels, so as to reduce forecasting tasks. The proposed method can then enhance the performance of forecasting models and maintain high efficiency. Experiment results show that the proposed method can help improve the performance of existing forecasting models as a plug-and-play module. Comprehensive results further prove the effectiveness of the label decorrelation and reduction of the number of tasks.",
+    "strengths_and_weaknesses": "Strengths:\n1. The paper is well written with comprehensive details and results.\n2. The idea is well motivated and explained. The motivation examples are easy to follow and make sense.\n3. The proposed method is efficient but effective. Experiments are designed carefully to show the superiority of the proposed method and to research various aspects of the proposed method.\n4. The provided code is comprehensive and structured clearly for researchers to follow.\n\nWeaknesses:\n1. Some conclusions are very precise. For example, the paper claims, \"We observe that increasing $\\alpha$ from 0 to 1 generally leads to improved forecasting accuracy, with the best results typically achieved when $\\alpha$ is close to 1.\" However, from the results, the best results occur at $\\alpha=1$ for ETTh2, ETTm1, and ETTm2. This should be presented precisely and explained clearly in the paper.\n2. The parameter sensitivity on different tasks shows different patterns, with some datasets showing a decrease with $\\alpha$ increases, and on other datasets showing a first decrease and sharp increase at $\\alpha=1$. These inconsistent patterns indicate potential failure of unexpected behaviours in some cases.\n3. To demonstrate the effectiveness of the method as a plug-and-play module, it would be better to see whether the proposed method improves forecasting performance on more base forecasting models, like non-deep learning ones, instead of four pure deep learning forecasting models.\n4. The paper does not really discuss limitations, although it has a section called \"limitations and future works\".",
+    "questions": "How to interpret the sharp error increase at $\\alpha=1$ for some datasets like weather, while other datasets do not?\n\nHow does the proposed model perform when applied to non-deep learning forecasting models?",
+    "limitations": "The paper discusses future work, but does not really discuss limitations, even though it has a \"limitations and future works\" section.",
+    "final_justification": "This paper is well written with convincing motivations, clear structures, comprehensive details, as well as a well-structured code repository. The proposed method also presents novelty and effectiveness for the documented existing problems. My main concern about the sharp error increase has been well addressed with detailed explanations and experiments during the rebuttal. I thus advocate for the acceptance of this paper."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 4,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

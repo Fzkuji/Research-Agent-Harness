@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "6KcBgHQz3sJ",
+  "reviewer": "G8uS",
+  "paper": {
+    "title": "Risk Minimization from Adaptively Collected Data: Guarantees for Supervised and Policy Learning",
+    "authors": [
+      "Aurelien Bibaut",
+      "Nathan Kallus",
+      "Maria Dimakopoulou",
+      "Antoine Chambaz",
+      "Mark van der Laan"
+    ],
+    "abstract": "Empirical risk minimization (ERM) is the workhorse of machine learning, whether for classification and regression or for off-policy policy learning, but its model-agnostic guarantees can fail when we use adaptively collected data, such as the result of running a contextual bandit algorithm. We study a generic importance sampling weighted ERM algorithm for using adaptively collected data to minimize the average of a loss function over a hypothesis class and provide first-of-their-kind generalization guarantees and fast convergence rates. Our results are based on a new maximal inequality that carefully leverages the importance sampling structure to obtain rates with the good dependence on the exploration rate in the data. For regression, we provide fast rates that leverage the strong convexity of squared-error loss. For policy learning, we provide regret guarantees that close an open gap in the existing literature whenever exploration decays to zero, as is the case for bandit-collected data. An empirical investigation validates our theory.",
+    "keywords": [
+      "empirical risk minimization",
+      "maximal inequality",
+      "metric entropy",
+      "fast rates",
+      "policy learning",
+      "empirical process theory",
+      "adaptively collected data"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=6KcBgHQz3sJ"
+  },
+  "review_fields": {
+    "summary": "This paper studies how to perform risk minimization when the training data is adaptively collected. The main example that the authors refer to is the setting where the data is collected while running a contextual bandit algorithm. That data is certainly not i.i.d., so empirical risk minimization (ERM) will not necessarily generalize well. A popular alternative approach is to employ importance sampling (IS), where the samples are weighted by the inverse of the policy’s probability of choosing the observed action. However, the authors write that the existing analyses of IS are not well-suited for data collected via a contextual bandit algorithm, where the rate of exploration is decaying, so the IS weights will diverge to infinity. From my understanding, the authors provide a new analysis of “IS-weighted ERM” (ISWERM) which allows them to provide a bound on excess risk that has a better dependence on the exploration rate. For policy learning, with this new analysis, they match a lower bound by Zhan et al. [arXiv‘21].",
+    "main_review": "This paper studies a very important, practical problem where we want to optimize over a hypothesis class using adaptively collected data. The main downside is that as a non-expert reviewer (but with expertise in related areas), I had trouble seeing the forest for the trees. It was difficult for me to understand the core technical contribution (the new “maximal inequality” described in Section 2) because of how technical it was—the entire paper could *really* benefit from some interpretation for the reader. Here are some specific examples:\n-\tLines 53: What do you mean by a reference policy g*? How is it chosen, and how does it relate to g_t? Are there reasons why we’d use a different reference policy than the deterministic one suggested in line 53 (g*(x | a) = 1)?\n-\tLine 144: The function M_T(f) seems to be an important definition. It’s always important to not only provide the mathematical definition, but also describe what it is in words.\n-\tLine 147: Can you provide some interpretation of the sequential bracketing entropy, in addition to defining it formally?\n-\tTheorem 1: This is difficult for me to parse. Can you provide some intuitive interpretation of this bound? Most importantly, intuitively, how will it help you provide better rates for ISWERM?\n-\tAssumptions 1-7: There are a quite a few assumptions that are stated quite formally. Perhaps these are common (for example, from lines 285-288, it seems like Assumption 7 is common), but as someone who is not familiar with the related research, it’s a bit hard for me to grasp whether they’re reasonable assumptions to make. If you could provide more context around the assumptions and explain why they might be reasonable, that would help a lot.\n\nMore detailed comments:\n-\tLine 51: What is a “non-anticipatory action”?\n-\tLine 80: “biblioraphies\" -> “bibliographies”\n-\tLine 145: “sequence sequence” -> “sequence”\n-\tLine 146: I am not familiar with what it means for g* to be in the subscript of the norm notation. Could you please define this?\n-\tLine 147: It seems that lambda is overloaded.\n-\tLine 151: “of classes of classes” -> “of classes”\n-\tLine 233: “withe” -> “with”\n-\tLine 300: “mutli-calss” -> “multi-class”",
+    "limitations_and_societal_impact": "I believe that the authors have sufficiently described the limitations and potential negative societal impact of their work."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

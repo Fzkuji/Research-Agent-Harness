@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "9Kywz2fO26",
+  "reviewer": "6Ats",
+  "paper": {
+    "title": "Pairwise Maximum Likelihood For Multi-Class Logistic Regression Model With Multiple Rare Classes",
+    "authors": [
+      "Xuetong Li",
+      "Danyang Huang",
+      "Hansheng Wang"
+    ],
+    "abstract": "We study in this work the problem of multi-class logistic regression with one major class and multiple rare classes, which is motivated by a real application in TikTok live stream data. The model is inspired by the two-class logistic regression model of Wang (2020) but with surprising theoretical findings, which in turn motivate new estimation methods with excellent statistical and computational efficiency. \nSpecifically, since rigorous theoretical analysis suggests that the resulting maximum likelihood estimators of different rare classes should be asymptotically independent, we consider to solve multiple pairwise two-class logistic regression problems instead of optimizing the joint log-likelihood function with computational challenge in multi-class problem, which are computationally much easier and can be conducted in a fully parallel way. To further reduce the computation cost, a subsample-based pairwise likelihood estimator is developed by down-sampling the major class. We show rigorously that the resulting estimators could be as asymptotically efficient as the global maximum likelihood estimator under appropriate regularity conditions. Extensive simulation studies are presented to support our theoretical findings and a TikTok live stream dataset is analyzed for illustration purpose.",
+    "keywords": [
+      "Multi-class logistic regression model",
+      "Pairwise maximum likelihood estimation",
+      "Rare class analysis",
+      "Car plate recognition"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=9Kywz2fO26"
+  },
+  "review_fields": {
+    "summary": "This paper studies the parameter estimation problem for Multi-class logistic model with one major class and $K$ rare classes. The main observation is that, under certain decay rate assumptions on the coefficients of rare classes. The joint MLE estimator is asymptotically equal to the pairwise MLE estimator between each rare class and major class, and the pairwise MLE estimator significantly save the computation complexity. Authors also extends the theoretical guarantee of pairwise estimators to the sub-sampled setting.",
+    "claims_and_evidence": "The theoretical statements and contributions made in this paper are easy to understand. However, there are several points that could further improve readability:\n\n\n1. I am a bit confused about the estimator under the model described in Equation (1). From my understanding, all subsequent operations (e.g., pairwise estimates, sub-sampling) are based on the model defined in Equation (2). Why not start directly with the model in Equation (2)? Additionally, the reductions made from the model in Equation (1) to the model in Equation (2) (paragraph 2 in section 2.2) should be explained more clearly.\n\n2. Please consider formally stating the technical assumptions mentioned in the last paragraph of Section 2.1.",
+    "methods_and_evaluation_criteria": "The proposed method(pairwise MLE) is the main contribution of this paper, and is easy to apply. The applied evaluation criteria(estimation error) is standard.",
+    "theoretical_claims": "I have not checked all the details of the theoretical proofs, but the independence structure revealed by Theorem 2.1 make sense to me given the assumptions made in this paper. And the Theorem 2.2 and 2.3 also seems reasonable given such independence structure.",
+    "relation_to_broader_scientific_literature": "This paper studies a special structure in multi-class logistic regression, which is new in this area. And the proposed new estimator provides a efficient algorithm under such structure, as demonstrated in their experiment.",
+    "other_strengths_and_weaknesses": "Strength:\n\nThe studied setting is new, and the proposed method is new and efficient.\n\nWeakness:\n\n1. In my opinion, the assumptions made regarding rare classes are too strong, which weakens the theoretical contributions of this paper. Specifically, the theoretical guarantees require the rare classes to be sufficiently balanced and impose an explicit rate bound on $\\alpha_N$. I tend to believe this is a relatively loose sufficient condition, as no lower bound results or counterexamples are provided to justify its necessity.\n\n2. The assumption that there exists only one major class (corresponding to $k=0$) seems restrictive. Can the current results be extended to a more general setting where there are $m$ major classes?",
+    "questions_for_authors": "My questions are:\n\n1. Are there any necessity results on the decay rate condition $\\alpha + \\log N \\to +\\infty$ ?\n\n2. Can the assumption of a single major class be extended to accommodate a general case with $m$ major classes?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "M6UccKMFGl",
+  "reviewer": "27aW",
+  "paper": {
+    "title": "Multiply Robust Federated Estimation of Targeted Average Treatment Effects",
+    "authors": [
+      "Larry Han",
+      "Zhu Shen",
+      "Jose R Zubizarreta"
+    ],
+    "abstract": "Federated or multi-site studies have distinct advantages over single-site studies, including increased generalizability, the ability to study underrepresented populations, and the opportunity to study rare exposures and outcomes. However, these studies are complicated by the need to preserve the privacy of each individual's data, heterogeneity in their covariate distributions, and different data structures between sites. We propose a novel federated approach to derive valid causal inferences for a target population using multi-site data. We adjust for covariate shift and accommodate covariate mismatch between sites by developing a multiply-robust and privacy-preserving nuisance function estimation approach. Our methodology incorporates transfer learning to estimate ensemble weights to combine information from source sites. We show that these learned weights are efficient and optimal under different scenarios. We showcase the finite sample advantages of our approach in terms of efficiency and robustness compared to existing state-of-the-art approaches. We apply our approach to study the treatment effect of percutaneous coronary intervention (PCI) on the duration of hospitalization for patients experiencing acute myocardial infarction (AMI) with data from the Centers for Medicare \\& Medicaid Services (CMS).",
+    "keywords": [
+      "Causal inference",
+      "Covariate mismatch",
+      "Federated learning",
+      "Multiple robustness",
+      "Transportation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=M6UccKMFGl"
+  },
+  "review_fields": {
+    "summary": "This paper focuses on federated ATE estimation. The main challenges lie in deriving valid causal inferences from decentralized data with heterogeneity, different data structures, and privacy constraints. To address these issues, the authors propose a privacy-preserving estimator that allows incorporating site-specific covariate information and adopts an adaptive ensembling approach. This method is more flexible and provides increased protection against model misspecification compared to existing approaches.",
+    "strengths": "1) The paper addresses a crucial problem in the field of causal ATE estimation, particularly in the context of multi-site studies and privacy-preserving requirement. Compared with the previous works, the setting is practical. For example, it does not assume that a common set of confounders is observed in all sites.\n\n2) The proposed method is technically sound. The propsoed density ratio models and multiply robust estimator in federated setting are novel.\n \n3) This paper provide theoretical guarantee, including identifiability (Theorem 1), local eatimation consistency (Theorem 2), and global eatimation consistency (Theorem 3).\n\n4) The experimental setting are extensive, and the results basically can support what the authors claim.",
+    "weaknesses": "1) The positivity assumption (A3, A5, A7) is necessary for the adopted inverse probability weighting method. However, in federated setting, there may be serious client drift and the positivity assumption may not be satisfied on some clients (sites).\n\n2) It seems that the eatimation consistency requires that one of the multiple outcome or treatment models is correctly specified. I am not sure whether this assumption is too strong in practical.",
+    "questions": "I wonder whether the proposed method can still work well if the number of samples in different sites are NOT comparable.",
+    "limitations": "My concern centers on the assumptions made in this paper. Please refer to the weakness for details."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1409,
+    "words": 216,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f0f47c73-fc74-4102-ad49-0edabebcafc4",
+    "error": null,
+    "scored_chars": 1410
+  }
+}

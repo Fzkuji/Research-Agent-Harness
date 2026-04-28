@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "aN4Jf6Cx69",
+  "reviewer": "sq8T",
+  "paper": {
+    "title": "The mechanistic basis of data dependence and abrupt learning in an in-context classification task",
+    "authors": [
+      "Gautam Reddy"
+    ],
+    "abstract": "Transformer models exhibit in-context learning: the ability to accurately predict the response to a novel query based on illustrative examples in the input sequence, which contrasts with traditional in-weights learning of query-output relationships. What aspects of the training data distribution and architecture favor in-context vs in-weights learning? Recent work has shown that specific distributional properties inherent in language, such as burstiness, large dictionaries and skewed rank-frequency distributions, control the trade-off or simultaneous appearance of these two forms of learning. We first show that these results are recapitulated in a minimal attention-only network trained on a simplified dataset. In-context learning (ICL) is driven by the abrupt emergence of an induction head, which subsequently competes with in-weights learning. By identifying progress measures that precede in-context learning and targeted experiments, we construct a two-parameter model of an induction head which emulates the full data distributional dependencies displayed by the attention-based network. A phenomenological model of induction head formation traces its abrupt emergence to the sequential learning of three nested logits enabled by an intrinsic curriculum. We propose that the sharp transitions in attention-based networks arise due to a specific chain of multi-layer operations necessary to achieve ICL, which is implemented by nested nonlinearities sequentially learned during training.",
+    "keywords": [
+      "in-context learning",
+      "mechanistic interpretability",
+      "language models",
+      "induction heads"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=aN4Jf6Cx69"
+  },
+  "review_fields": {
+    "comment": "The authors have now added useful results showing that the predictions of the reduced models hold up in the actual (albeit minimal) transformer, supporting the relevance of these models to that case.  The cleaner writing is also an enhancement, as are the new results with in the 0 < pB < 1, 0 < pC < 1 regime, suggested by reviewer ciFG.\n\nReviewer ciFG questioned 'the connection between pages 1-4 of the paper and the rest', that is, first replicating the phenomenology from Chan et al on the interplay of ICL and IWL, then beaming in of the ICL / induction head by setting pB=0 and pC=1.  I consider this progression a plus.  The fact that the paper's minimal induction head transformer with two attention heads and one FF network replicates the Chan et al findings makes it clear that it can capture the mix of IW and ICL generally present in transformers, making it a useful reduced model to further understand. Zeroing in to understand more about ICL in an architecture that can capture both is important because IWL is the (or at least one of the) key new emergent properties that transformers provide, enabling few-shot learning, a crucial attribute previous models lacked.  Lots for further work will grow from this, including more work to understand such things as whether the analysis presented here still applies in the mixed IW/IC setting; it might still apply to the emergence of ICL, given that the IW learning probably takes place completely through the direct weights in the transformer FF layers, bypassing the attention heads which are especially relevant for ICL.  Perhaps an added comment about this in the discussion could address ciFG's concern, and further enhance the appreciation of the importance of the paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:35Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:35Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 6815,
+    "words": 1106,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e0473a16-36ad-441d-ada6-8f396b29a534",
+    "error": null,
+    "scored_chars": 6842
+  }
+}

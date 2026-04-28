@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "JeP0lpusYw",
+  "reviewer": "B6zw",
+  "paper": {
+    "title": "HM3: Hierarchical Multi-Objective Model Merging for Pretrained Models",
+    "authors": [
+      "Yu Zhou",
+      "Xingyu Wu",
+      "Jibin Wu",
+      "Liang Feng",
+      "KC Tan"
+    ],
+    "abstract": "Model merging is a technique that combines multiple large pretrained models into a single model, enhancing performance and broadening task adaptability without original data or additional training. However, most existing model merging methods focus primarily on exploring the parameter space, merging models with identical architectures. Despite its potential, merging in the architecture space remains in its early stages due to the vast search space and challenges related to layer compatibility. This paper designs a hierarchical model merging framework named HM3, formulating a bilevel multi-objective model merging problem across both parameter and architecture spaces. At the parameter level, HM3 integrates existing merging methods to quickly identify optimal parameters. Based on these, an actor-critic strategy with efficient policy discretization is employed at the architecture level to explore inference paths with Markov property in the layer-granularity search space for reconstructing these optimal models. By training reusable policy and value networks, HM3 learns Pareto optimal models to provide customized solutions for various tasks. Experimental results on language and vision tasks demonstrate that HM3 outperforms methods focusing solely on the parameter or architecture space.",
+    "keywords": [
+      "Large language model",
+      "model merging",
+      "multi-objective optimization",
+      "architecture-level merging"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=JeP0lpusYw"
+  },
+  "review_fields": {
+    "comment": "Thank you for your response and for sharing your innovative method. I'd like to clarify a few points:\n\n1.  Regarding the fusion process, my understanding is that each layer in the final model is selected in its entirety from one of the source models, rather than averaging the parameters of a single layer from multiple models (as is common in parameter-merging techniques). This seems to diverge from some standard model merging approaches. Could you please elaborate on the theoretical basis for this, perhaps something analogous to Linear Mode Connectivity (LMC)?\n\n2.  Due to the introduction of MLP, the fused model isn't immediately usable. Does this necessitate a subsequent training phase? If so, could you provide an estimate of the data requirements and computational overhead involved?\n\n3. Is it like outcome reward?\n\n4.  May I also ask if you plan to release the code, including the details of the reinforcement learning implementation?\n\nThank you again for your time and insights."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

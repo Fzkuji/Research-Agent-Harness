@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "KntaNRo6R48",
+  "reviewer": "LbVS",
+  "paper": {
+    "title": "L0-Sparse Canonical Correlation Analysis",
+    "authors": [
+      "Ofir Lindenbaum",
+      "Moshe Salhov",
+      "Amir Averbuch",
+      "Yuval Kluger"
+    ],
+    "abstract": "Canonical Correlation Analysis (CCA) models are powerful for studying the associations between two sets of variables. The canonically correlated representations, termed \\textit{canonical variates} are widely used in unsupervised learning to analyze unlabeled multi-modal registered datasets. Despite their success, CCA models may break (or overfit) if the number of variables in either of the modalities exceeds the number of samples. Moreover, often a significant fraction of the variables measures modality-specific information, and thus removing them is beneficial for identifying the \\textit{canonically correlated variates}. Here, we propose $\\ell_0$-CCA, a method for learning correlated representations based on sparse subsets of variables from two observed modalities.\nSparsity is obtained by multiplying the input variables by stochastic gates, whose parameters are learned together with the CCA weights via an $\\ell_0$-regularized correlation loss. \nWe further propose $\\ell_0$-Deep CCA for solving the problem of non-linear sparse CCA by modeling the correlated representations using deep nets. We demonstrate the efficacy of the method using several synthetic and real examples. Most notably, by gating nuisance input variables, our approach improves the extracted representations compared to other linear, non-linear and sparse CCA-based models.",
+    "keywords": [],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=KntaNRo6R48"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper proposes a new method for l0-CCA using stochastic gating which allows for an efficient algorithm and also permits a deep-version of the l0-CCA. Results are shown on synthetic and real-world datasets that highlight the superior performance of the proposed approach. \n\nMain Contributions: \n\n1). The paper proposes a new approach for l0-CCA that uses a continuous relaxation of a bernoulli random variable via stochastic gating. \n\n2). The paper extends the proposed method to l0-deep-CCA which allows non-linear interactions between the two CCA views.\n\n3). Results are shown on synthetic and real-world datasets which show the superior performance of the proposed l0-CCA methods.",
+    "main_review": "Comments:\n\nOriginality & Quality: The paper proposes a stochastic gating based approach for l0-CCA which uses ideas from a couple of recent papers on gaussian relaxation of discrete/bernoulli random variables. The resulting algorithm is straightforward and it is also possible to \"backprop into it\", so it is also amenable to non-linear \"deep\" extensions. The results on various synthetic and real-world datasets show the superior performance of the proposed method.\n\nWhile I like the proposed approach, there are a couple of questions/concerns that I have:\n\n1). The paper mentions that standard l0-CCA relies on greedy optimization and that the l1-CCA leads to parameter shrinkage. Both these are valid concerns. Though, it is unclear what recovery guarantees does the stochastic gating approach has? Optimal subset selection is a NP-Hard problem, so clearly the proposed approach is also performing some approximation. Can it be theoretically compared to the greedy l0-solution?\n\n2). The paper shows predictive accuracies of the different CCA approaches on real-world datasets. However, it doesn't show the number of features selected by the different methods and how they compare to each other. If we only cared about predictive accuracy then why select features as shown by (Shalev-Shwartz et al. 2010)? And, also sparsity leads to interpretability so it is unclear how different approaches compare on that front. \n\n\n\nClarity: The paper is well written and puts itself nicely in context of previous work. The overall presentation of the paper is good.\n\nSignificance: The paper addresses an important problem of sparse CCA using a l0 penalty. The proposed approach uses stochastic gating to enforce sparsity which does not rely on a greedy/heuristic solution as previous l0-sparse CCA approaches.",
+    "summary_of_the_review": "An interesting paper that solves an \"old\" problem of sparse-CCA using some recent advances in stochastic gating based sparsity solution. Results are comprehensive, but the focus is less on feature selection and more on predictive power. If predictive power is the primary concern, why care about sparsity?",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2105,
+    "words": 322,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/52b43b8b-b967-4da7-b23e-8d1931d5c474",
+    "error": null,
+    "scored_chars": 2106
+  }
+}

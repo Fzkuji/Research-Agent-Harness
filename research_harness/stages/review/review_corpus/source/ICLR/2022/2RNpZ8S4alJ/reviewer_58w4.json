@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "2RNpZ8S4alJ",
+  "reviewer": "58w4",
+  "paper": {
+    "title": "KINet: Keypoint Interaction Networks for Unsupervised Forward Modeling",
+    "authors": [
+      "Alireza Rezazadeh",
+      "Changhyun Choi"
+    ],
+    "abstract": "Object-centric representation is an essential abstraction for physical reasoning and forward prediction. Most existing approaches learn this representation through extensive supervision (e.g, object class and bounding box) although such ground-truth information is not readily accessible in reality. To address this, we introduce KINet (Keypoint Interaction Network)---an end-to-end unsupervised framework to reason about object interactions in complex systems based on a keypoint representation. Using visual observations, our model learns to associate objects with keypoint coordinates and discovers a graph representation of the system as a set of keypoint embeddings and their relations. It then learns an action-conditioned forward model using contrastive estimation to predict future keypoint states. By learning to perform physical reasoning in the keypoint space, our model automatically generalizes to scenarios with a different number of objects, and novel object geometries. Experiments demonstrate the effectiveness of our model to accurately perform forward prediction and learn plannable object-centric representations which can also be used in downstream model-based control tasks.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=2RNpZ8S4alJ"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper introduces KINet (Keypoint Interaction Network)---an end-to-end unsupervised framework to reason about object interactions in complex systems based on a keypoint representation. There are three major steps in this model: extracting keypoint coordinates, inferring a probabilistic graph representation of the system, and estimating the next state of the system conditioned on the action.",
+    "main_review": "Strength:\nThis work propose to achieve multi-object position prediction with only using visual information like images without ground truth positions as supervision.\n\nWeakness:\n1 In general, this work is a patchwork of a condition-based generative model and a raw image preprocessing method at the input and output ends, leading to insufficient novelty. \n   1) For key point detection, Jakab et al. (2018) thoughts are followed.\n   2) The initial graph Gt with its nodes and edges is built through widely used operations, e.g., visual+position; distance\n   3) Why the approximate posterior is conditioned on the graph at next step? There is no interpretation, but this design is seem as some condition-VAE-based multi-agent prediction methods [1,2], while the only difference is that existing works infer the agents' dynamics but KINet infers the graph representation.\n   4) The message passing is not novel.\n   5) The forward prediction with a skip connection is not novel.\n\n2 Why do you use the contrastive loss? The interpretation is not clear; why it helps to learn actionable object-centric representation? How to build the negative G-?\n\n3 As for the experiments, I do not think the dataset matches the authors' claim: hard to annotation/detection and complex scenes.\n   1) The objects and scenes are quite simple. I suggest to test the methods on some real-world dataset like SDD and ETH-UCY, which have top-view image and scene information like obstacles.\n   2) In the proposed dataset, I notice that there are very large `+' object, but the method only determines a few key points for each object. So how to simulate the positional constraints imposed by the shape of an object？\n\n\n\n[1] It Is Not the Journey But the Destination: Endpoint Conditioned Trajectory Prediction (ECCV2020)\n[2] Contextually Plausible and Diverse 3D Human Motion Prediction (ICCV 2021)",
+    "summary_of_the_review": "This work propose to achieve multi-object position prediction with only using visual information like images without ground truth positions as supervision. But the detailed designs are not sufficiently novel.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2056,
+    "words": 321,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9a4d79a7-4e95-473e-bf14-58fd93483f0d",
+    "error": null,
+    "scored_chars": 2078
+  }
+}

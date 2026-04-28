@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "0rEJx5QAxt",
+  "reviewer": "sSzA",
+  "paper": {
+    "title": "Convex-Concave Zero-Sum Markov Stackelberg Games",
+    "authors": [
+      "Denizalp Goktas",
+      "Arjun Prakash",
+      "Amy Greenwald"
+    ],
+    "abstract": "Zero-sum Markov Stackelberg games can be used to model myriad problems, in domains ranging from economics to human robot interaction. In this paper, we develop policy gradient methods that solve these games in continuous state and action settings using noisy gradient estimates computed from observed trajectories of play. When the games are convex-concave, we prove that our algorithms converge to Stackelberg equilibrium in polynomial time. We also show that reach-avoid problems are naturally modeled as convex-concave zero-sum Markov Stackelberg games, and that Stackelberg equilibrium policies are more effective than their Nash counterparts in these problems.",
+    "keywords": [
+      "Stackelberg games",
+      "Equilibrium Computation",
+      "Policy Gradient"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=0rEJx5QAxt"
+  },
+  "review_fields": {
+    "comment": "Thank you for your detailed answers. I now understand your contributions. I have a few more follow-up questions. \n\n1. The authors repeatedly mentioned the convergence of the nested policy gradient algorithm to the Stackelberg equilibrium as their main contribution. However, I have a few comments on this.\n\n    a. In order to prove the convergence the authors rely on Theorem 3.1. However, that heavily depends on the structure of the function such as convex in $x$, and affine in $y$. I am wondering whether this restricts the practicality of this approach. For example, it is well known that value function in general is not concave in the policy space. The authors did mention sufficient conditions on reward, I am wondering for which settings those would hold.\n\n   b. This leads to the second question. The proof of Lemma 1 is not correct. The authors have used the concavity of $v$ to prove the concavity of $q$, and then the concavity of $q$ to prove the concavity of $v$.\n\n2. The reviewer is also confused with the structure of the constraint for the MDP. Is it related to the CMDP setup [1,2] (meaning the at some cumulative cost/utility has to be less than or equal to some threshold) or is it something else, like at every state a constraint is required to be satisfied? The paper has considered $\\underline{g}$ which means taking minimum across all the states. How can one evaluate this value as one needs to evaluate the policy at every possible state?\n\n3. I do not understand the statement ``Our generator model is not based on the state-action visitation distribution, but rather the history distribution\". The algorithm (Algorithm 2) needs to generate samples for the current policy $\\pi_x,\\pi_y$. Hence, it needs to access any type of generator or simulator model (whether it depends on the history distribution is immaterial). Furthermore, I don't think the gradient computed in Algorithm 1 is an unbiased estimator as claimed by the authors (if it is an infinite-dimensional). Please see [3] on how to ensure unbiasedness in the Q-function evaluation. \n\n[1]. Efroni, Y., Mannor, S. and Pirotta, M., 2020. Exploration-exploitation in constrained mdps. arXiv preprint arXiv:2003.02189.\n\n[2]. Ghosh, A., Zhou, X. and Shroff, N., 2022. Provably efficient model-free constrained rl with linear function approximation. Advances in Neural Information Processing Systems, 35, pp.13303-13315.\n\n[3]. Zhang, K., Koppel, A., Zhu, H. and Basar, T., 2020. Global convergence of policy gradient methods to (almost) locally optimal policies. SIAM Journal on Control and Optimization, 58(6), pp.3586-3612."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 2,
+    "mixed_pct": 0,
+    "human_pct": 98,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2597,
+    "words": 416,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7d1ae842-7cb3-4501-96e4-09aedc49d245",
+    "error": null,
+    "scored_chars": 2606
+  }
+}

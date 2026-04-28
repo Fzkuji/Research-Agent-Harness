@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "te6VagJf6G",
+  "reviewer": "Hd75",
+  "paper": {
+    "title": "Learning to Reason via Program Generation, Emulation, and Search",
+    "authors": [
+      "Nathaniel Weir",
+      "Muhammad Khalifa",
+      "Linlu Qiu",
+      "Orion Weller",
+      "Peter Clark"
+    ],
+    "abstract": "Program synthesis with language models (LMs) has unlocked a large set of reasoning abilities; code-tuned LMs have proven adept at generating programs that solve a wide variety of algorithmic symbolic manipulation tasks (e.g. word concatenation). However, not all reasoning tasks are easily expressible as code, e.g. tasks involving commonsense reasoning, moral decision-making, and sarcasm understanding. Our goal is to extend a LM’s program synthesis skills to such tasks and evaluate the results via pseudo-programs, namely Python programs where some leaf function calls are left undefined. To that end, we propose, Code Generation and Emulated EXecution (COGEX). COGEX works by (1) training LMs to generate pseudo-programs and (2) teaching them to emulate their generated program’s execution, including those leaf functions, allowing the LM’s knowledge to fill in the execution gaps; and (3) using them to search over many programs to find an optimal one. To adapt the COGEX model to a new task, we introduce a method for performing program search to find a single program whose pseudo-execution yields optimal performance when applied to all the instances of a given dataset. We show that our approach yields large improvements compared to standard in-context learning approaches on a battery of tasks, both algorithmic and soft reasoning. This result thus demonstrates that code synthesis can be applied to a much broader class of problems than previously considered.",
+    "keywords": [
+      "language models",
+      "instruction tuning",
+      "code generation",
+      "reasoning",
+      "program search",
+      "program emulation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=te6VagJf6G"
+  },
+  "review_fields": {
+    "summary": "The proposed approach, Code Generation and Emulated Execution (COGEX), involves training LMs to generate pseudo-programs with some undefined functions and then emulate the execution of these programs. This allows the LM's knowledge to fill in the gaps while maintaining a program like reasoning framework. The COGEX model is adapted to new tasks through program search, optimizing performance across dataset instances. The approach shows improvements over standard in-context learning methods, demonstrating that code synthesis can be applied to a wider range of problems.",
+    "strengths": "- The concept of pseudo-program and LLM emulation of program is interesting.\n- The authors evaluated the methodology on many different dataset and tasks.",
+    "weaknesses": "I would consider raising my score if a fair number of the following weaknesses can be fixed by the authors. Many of them should be doable without extra experiments.\n\n- Motivation: While in general I like the idea of pseudo-programs, but I don’t think it is very well motivated or explained in the paper. For this relatively new concept to be introduced, I would like to see a more precise definition that describes each type of reasoning, whether its intuition based with no reasoning, “soft reasoning”, and exact reasoning. State clearly what task falls into the camp of “soft reasoning”.\n- Examples: I think the motivation is insufficient partly because of that the motivating examples (Fig. 1, 3, 10) do not seem to be requiring any “complex reasoning”. By “complex reasoning” I specifically mean things like composition of multiple sources of information, long range dependency of information, the use of logical operations like “and”, “or”, “not”, and “implies”, and etc.\n- Task/Dataset selection: (also related to previous points) I would want some more clarification on why the authors pick the presented tasks and datasets. What makes these dataset special so that COGEX can be applied to them? What additional conceptual benefits do COGEX bring to them? This will also help motivate the methodology you proposed.\n- Formalization: the symbol $f$ for COGEX model is unnecessarily abused. It can be invoked with either 2 or 3 arguments, which does not type check as a well-defined formalization. You should at least create two separate symbols, such as $f_{\\text{reasoner}}$ and $f_{\\text{enumlator}}$.\n- Algorithm: The while loop in line 7-10 of Algorithm 1 does not seem to have termination guarantee. This is a potential flaw in the algorithm. What if the task and dataset is malformed and there exists no proper pseudo-program? Your algorithm should account for this.\n- Comparison to GPT-4: I don’t want to suggest to do new experiments with GPT-4 as baselines, but I do want clarification on why GPT-4 is not used as a zero-shot baseline. I see that authors use GPT-4 to generate datasets used for training. So it’s definitely not the case that authors do not have access or hardware/financial limitations for doing so. Then why isn’t GPT-4 used as a baseline? I would assume that GPT-4 without training can still be used to synthesizing pseudo-programs, right?\n- Claim in the experimental results: authors describes Fig.4 as “Figure 4 (blue vs gold) shows that CoT… can approach COTACS performance on some NLP classification tasks but generally performs substantially worse.” But to me when looking at Fig.4, I don’t see this claim accurate. I can only see significant difference on CoinFlip and Number Summing.\n- Experimental setting: (related to the previous point) the direct comparison with zero-shot CoT might not be fair because your model has undergone fine-tuning, right?",
+    "questions": "(I asked majority of questions along with the listed weaknesses)\n- Typo in Figure 3 caption: “SocialIQa” -> “Social IQa”",
+    "limitations": "- The author listed the limitations in the Appendix, which I would prefer doing in the main text. This also relates to the first listed weakness that I wrote: giving a proper overview would help people identify where and when your methodology could be applied."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3430,
+    "words": 559,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/638ae17d-f8fd-4782-8765-933ac3c5dc7d",
+    "error": null,
+    "scored_chars": 3430
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "TXoZiUZywf",
+  "reviewer": "uqhQ",
+  "paper": {
+    "title": "Improved Algorithms for Stochastic Linear Bandits Using Tail Bounds for Martingale Mixtures",
+    "authors": [
+      "Hamish Flynn",
+      "David Reeb",
+      "Melih Kandemir",
+      "Jan Peters"
+    ],
+    "abstract": "We present improved algorithms with worst-case regret guarantees for the stochastic linear bandit problem. The widely used \"optimism in the face of uncertainty\" principle reduces a stochastic bandit problem to the construction of a confidence sequence for the unknown reward function. The performance of the resulting bandit algorithm depends on the size of the confidence sequence, with smaller confidence sets yielding better empirical performance and stronger regret guarantees. In this work, we use a novel tail bound for adaptive martingale mixtures to construct confidence sequences which are suitable for stochastic bandits. These confidence sequences allow for efficient action selection via convex programming. We prove that a linear bandit algorithm based on our confidence sequences is guaranteed to achieve competitive worst-case regret. We show that our confidence sequences are tighter than competitors, both empirically and theoretically. Finally, we demonstrate that our tighter confidence sequences give improved performance in several hyperparameter tuning tasks.",
+    "keywords": [
+      "Linear bandits",
+      "confidence sequences",
+      "martingales",
+      "convex optimization",
+      "cumulative regret",
+      "regret analysis"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=TXoZiUZywf"
+  },
+  "review_fields": {
+    "summary": "A very well written paper introducing a slightly different way of constructing confidence sets for $\\theta^\\star$ in the adaptive regression setting. The two main differences are that the paper bounds the norm of the observation noises $\\epsilon_t$ directly, rather than the projection of the noises that features in the standard bound. This is done by showing that the method of mixtures can be used with a suitably adapted sequence of mixing measures, and choosing that mixture appropriately.",
+    "strengths": "Paper is _very_ well written. Method introduced is neat and the perspective taken in deriving it will be of interest to other researchers in adaptive regression/design.",
+    "weaknesses": "I don't believe the paper has any significant weaknesses. One could argue that it has, perhaps, limited scope: but bandits and adaptive regression/design are very popular topics nowadays, and this is an interesting read for many people interested in those.\n\nOne issue I feel strongly about, but that can be easily addressed: you advertise that your confidence intervals are robust to misspecification (abstract, line 12). I was very disappointed to see, when I got to section 8.1 and particularly lines 282-289, that you mean misspecification to a prior in a Bayesian setting. The general setting of your work is frequentist, and in the frequentist setting, misspecification has a well understood meaning which, of course, does not coincide with that which you show. It is unclear that your method is any better in this respect than the standard concentration inequality used in OFUL (Yasin's original work); and indeed, that's a generous interpretation: it is generally accepted that bounds derived under frequentist assumptions work well in a misspecified Bayesian setting. Please remove this claim from your abstract.\n\nAnother issue is that your plots are unreadable when printed in grayscale (all lines look the same). I'm reviewing a grayscale printed version of this paper, so cannot asses empirical performance from plots. Fortunately for you, I also happen to care little for empirical results.\n\nI have some minor feedback, solely for the purpose of improving the manuscript:\n\n-High level: please reiterate in the introduction, e.g. on line 44, that your UCBs are tighter in an empirical sense; that you have not (to my understanding) shown them to be tighter in a theoretical sense. Your results are neat: by risking the perception that you might be overclaiming/misleading you'd be doing yourself a disservice. \n\n-High level: your method is highly related to the rather excellent paper \n\n-Line 65: the result you cite Chowdhury & Gopalan 2017 for is implied directly by theorem 4.1 in Yasin Abbasi-Yadkori's PhD thesis (2012); that the result of Chowdhury & Gopalan was novel is an error in the literature that ought not be propagated.\n\n-Lines 97-98, you state that $\\mathcal{H}_t$-measurability equates to 'can be calculated using the data available just after reward $r_t$ is revealed'. From the rest of the paper, I know that you know that this isn't true. It may seem like a nice simplifying explanation, but its misleading, and often inexperienced authors make a mess of things because they take that to be the definition. Indeed, in your setting, the event $\\{ \\theta^\\star \\in \\Theta_t\\}$ is $\\mathcal{H}_t$ measurable (assuming $\\Theta_t$ is a closed set, see next comment), since $\\theta^\\star$ is a constant and $\\Theta_t$ is a measurable random set. But $\\theta^\\star$ is explicitly unknown at the end of the $t$th iteration, and so the indicator of $\\theta^\\star \\in \\Theta_t$  _cannot_ be computed with the information available at that point. Please remove that statement, and if you feel the reader might need a primer on measurability, please include a reference to any standard measure/probability textbook.\n\n-Lines 95 to 100: you define what are effectively random sets with a certain property. One has to be careful around the definitions of random sets to ensure they behave in a way that one would expect. For example, we'd usually like that for a random set $A'$ subset of $A$, for any $a \\in A$, the event $\\{a \\in A'\\}$ is measurable. Your sets are closed and you work on a Polish space, so this is true; but I would point out that this is so (and indeed, you might run into trouble if the confidence sets were open). See Molchanov, Ilya: Theory of Random Sets. Springer London. 2017, 2nd edition. Proposition 1.1.2; that should be all you need.\n\n-Eq (5), I would point out that this is just the 2-norm of $\\epsilon_t$; this makes it much clearer, for example, where your naive bound of line 158 comes from.\n\n-On your assumptions 7.1-7.4: It seems to me that 7.2+7.3 together imply a bound of the form asked for in 7.4; is there a good reason you have a separate assumption 7.4? \n\nPS: I have not read the appendix. I am confident from the sketches in the main text that the result claimed goes through.",
+    "questions": "I included some minor questions in the weaknesses section. I have no major questions for the authors.",
+    "limitations": "Some aspects of the writing could be thought to overclaim, specifically when it comes to robustness to misspecification. I feel strongly that this ought to be addressed. But this is also easily fixable; I hope the authors do so."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:37Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:37Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 4402,
+    "words": 727,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1832efd1-fbca-419b-906f-eb6190d657ae",
+    "error": null,
+    "scored_chars": 4406
+  }
+}

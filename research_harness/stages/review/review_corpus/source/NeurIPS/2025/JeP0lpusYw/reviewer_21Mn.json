@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "JeP0lpusYw",
+  "reviewer": "21Mn",
+  "paper": {
+    "title": "HM3: Hierarchical Multi-Objective Model Merging for Pretrained Models",
+    "authors": [
+      "Yu Zhou",
+      "Xingyu Wu",
+      "Jibin Wu",
+      "Liang Feng",
+      "KC Tan"
+    ],
+    "abstract": "Model merging is a technique that combines multiple large pretrained models into a single model, enhancing performance and broadening task adaptability without original data or additional training. However, most existing model merging methods focus primarily on exploring the parameter space, merging models with identical architectures. Despite its potential, merging in the architecture space remains in its early stages due to the vast search space and challenges related to layer compatibility. This paper designs a hierarchical model merging framework named HM3, formulating a bilevel multi-objective model merging problem across both parameter and architecture spaces. At the parameter level, HM3 integrates existing merging methods to quickly identify optimal parameters. Based on these, an actor-critic strategy with efficient policy discretization is employed at the architecture level to explore inference paths with Markov property in the layer-granularity search space for reconstructing these optimal models. By training reusable policy and value networks, HM3 learns Pareto optimal models to provide customized solutions for various tasks. Experimental results on language and vision tasks demonstrate that HM3 outperforms methods focusing solely on the parameter or architecture space.",
+    "keywords": [
+      "Large language model",
+      "model merging",
+      "multi-objective optimization",
+      "architecture-level merging"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=JeP0lpusYw"
+  },
+  "review_fields": {
+    "summary": "This paper proposes HM3, a novel hierarchical framework for merging multiple pretrained and fine-tuned models into a single model. The method treats model merging as a multi-objective optimization task and uses reinforcement learning to explore both parameter and architecture space. The result is a Pareto front of merged models, enabling flexible trade-offs among task-specific performance objectives. Experimental evaluations on several language tasks and vision tasks demonstrate promising performance over baseline model-merging techniques.",
+    "strengths_and_weaknesses": "Strengths: \n- The combination of parameter- and architecture-level merging within a multi-objective optimization framework is novel and well-motivated.\n- The reported experimental results appear promising and demonstrate competitive performance compared to existing model merging methods.\n\nWeaknesses:\n- The experimental procedure is insufficiently explained.\n- The scalability of the proposed method is not well discussed. While the method is tested on a small number of tasks and model pairs, it is unclear how HM3 performs when scaling to more base models, larger architectures, or more objectives. \n- The paper contains typos (e.g., \"optimity\") and inconsistent symbol usage (e.g., in Appendix A.2.1, the symbols k, m, and d are used ambiguously for the number of objectives). In addition, the language can be improved throughout the paper to eliminate grammatical issues and enhance readability.",
+    "questions": "1. The authors claim that HM3 supports merging in architecture space. However, all experiments are conducted using pretrained models with highly similar structures. Could the authors provide more details or ablation studies to demonstrate the effectiveness of architecture-level merging, particularly in scenarios involving structurally different components?\n2. Did the authors ensure a fair comparison between the MOEA-based baseline and the proposed method? The experimental settings and evaluation are not clearly described. Clarification is needed regarding how performance metrics, computational budgets, and parameter configurations were aligned across methods.\n3. How do the authors select a final model from the set of Pareto-optimal solutions in practice? Is there an automatic or heuristic-based selection strategy, or does it require manual validation? Please elaborate on the model selection process and whether it applies fairly across all compared methods.\n4. The paper uses (1, 1) as the reference point for hypervolume (HV) calculation. This choice may not be appropriate in practice as the boundary points may not be included in the evaluation. Have the authors considered using a more appropriate reference point, such as a slightly larger value than the estimated nadir point?\n5. Is the proposed method scalable with respect to the number of tasks or objectives? For example, how would HM3 perform when merging models fine-tuned on more than three tasks?",
+    "final_justification": "The authors have addressed my concerns and improved the clarity of the paper. Therefore, I have decided to raise my score."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

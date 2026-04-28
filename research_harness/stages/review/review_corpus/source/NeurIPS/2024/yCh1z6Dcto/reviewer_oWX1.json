@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "yCh1z6Dcto",
+  "reviewer": "oWX1",
+  "paper": {
+    "title": "Stepping Forward on the Last Mile",
+    "authors": [
+      "Chen Feng",
+      "Shaojie Zhuo",
+      "Xiaopeng Zhang",
+      "Ramchalam Kinattinkara Ramakrishnan",
+      "Zhaocong Yuan",
+      "Andrew Zou Li"
+    ],
+    "abstract": "Continuously adapting pre-trained models to local data on resource constrained edge devices is the \\emph{last mile} for model deployment. However, as models increase in size and depth, backpropagation requires a large amount of memory, which becomes prohibitive for edge devices. In addition, most existing low power neural processing engines (e.g., NPUs, DSPs, MCUs, etc.) are designed as fixed-point inference accelerators, without training capabilities. Forward gradients, solely based on directional derivatives computed from two forward calls, have been recently used for model training, with substantial savings in computation and memory. However, the performance of quantized training with fixed-point forward gradients remains unclear. In this paper, we investigate the feasibility of on-device training using fixed-point forward gradients, by conducting comprehensive experiments across a variety of deep learning benchmark tasks in both vision and audio domains. We propose a series of algorithm enhancements that further reduce the memory footprint, and the accuracy gap compared to backpropagation. An empirical study on how training with forward gradients navigates in the loss landscape is further explored. Our results demonstrate that on the last mile of model customization on edge devices, training with fixed-point forward gradients is a feasible and practical approach.",
+    "keywords": [
+      "On-device model adaptation",
+      "Fixed-point forward gradient learning",
+      "Low memory",
+      "Edge devices"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=yCh1z6Dcto"
+  },
+  "review_fields": {
+    "comment": "I would like to thank the authors for their detailed response. However, I still believe that a fair comparison of memory and computational complexity should include the number of steps required to achieve a certain level of accuracy. Currently, when a practitioner has a system with limited memory, they often use activation checkpointing, a technique used to manage memory consumption in large language models (LLMs) during training. Instead of storing all intermediate activations for backpropagation, only a subset of activations is saved at \"checkpoints.\" The rest of the activations are recomputed as needed during the backward pass. This approach reduces memory usage significantly at the cost of increased computation time. If QZO-FF requires three perturbations and converges much more slowly, say five times slower to achieve same accuracy, it might not be beneficial to use it. Can you add convergence curves for BP and QZO-FF or numbers of iterations required to reach the reported accuracy? If so I'll consider raising my  score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 91,
+    "human_pct": 9,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 1040,
+    "words": 162,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7d95a65f-b245-445f-9fe5-dec7e9962389",
+    "error": null,
+    "scored_chars": 1041
+  }
+}

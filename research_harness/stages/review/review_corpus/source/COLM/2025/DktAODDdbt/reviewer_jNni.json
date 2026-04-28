@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "DktAODDdbt",
+  "reviewer": "jNni",
+  "paper": {
+    "title": "Evaluating Large Language Models as Expert Annotators",
+    "authors": [
+      "Yu-Min Tseng",
+      "Wei-Lin Chen",
+      "Chung-Chi Chen",
+      "Hsin-Hsi Chen"
+    ],
+    "abstract": "Textual data annotation, the process of labeling or tagging text with relevant information, is typically costly, time-consuming, and labor-intensive.\nWhile large language models (LLMs) have demonstrated their potential as direct alternatives to human annotators for general domains natural language processing (NLP) tasks, their effectiveness on annotation tasks in domains requiring expert knowledge remains underexplored.\nIn this paper, we investigate: whether top-performing LLMs, which might be perceived as having expert-level proficiency in academic and professional benchmarks, can serve as direct alternatives to human expert annotators?\nTo this end, we evaluate both individual LLMs and multi-agent approaches across three highly specialized domains: finance, biomedicine, and law.\nSpecifically, we propose a multi-agent discussion framework to simulate a group of human annotators, where LLMs are tasked to engage in discussions by considering others’ annotations and justifications before finalizing their labels.\nAdditionally, we incorporate reasoning models (*e.g.*, o3-mini) to enable a more comprehensive comparison.\nOur empirical results reveal that:\n*(1)* Individual LLMs equipped with inference-time techniques (*e.g.*, chain-of-thought (CoT), self-consistency) show only marginal or even negative performance gains, contrary to prior literature suggesting their broad effectiveness.\n*(2)* Overall, reasoning models do not demonstrate statistically significant improvements over non-reasoning models in most settings.\nThis suggests that extended long CoT provides relatively limited benefits for data annotation in specialized domains.\n*(3)* Certain model behaviors emerge in the multi-agent discussion environment.\nFor instance, Claude 3.7 Sonnet with thinking rarely changes its initial annotations, even when other agents provide correct annotations or valid reasoning.",
+    "keywords": [
+      "LLMs-as-expert-annotators",
+      "reasoning models",
+      "multi-agent framework"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=DktAODDdbt"
+  },
+  "review_fields": {
+    "summary": "This paper explores the use of large language models (LLMs) as annotators in specialized domains such as finance, law, and biomedicine. The authors evaluate both instruction-tuned and reasoning-focused models on five datasets, using only annotation guidelines and unlabeled data. They also test inference-time techniques like chain-of-thought prompting, self-refinement, and self-consistency. Results show that inference-time techniques offer limited benefit for instruction-tuned models, while reasoning models perform slightly better overall. Multi-agent collaboration improves both accuracy and model agreement, but remains limited when initial predictions lack the correct answer. The analysis also finds that reasoning models are more rigid, while models like Gemini 2.0 Flash and GPT-4o revise outputs more flexibly.",
+    "reasons_to_accept": "- The paper offers a comprehensive evaluation of LLMs as annotators across specialized domains (finance, law, and biomedicine) and addresses an underexplored but practically important area.\n- It compares a diverse set of models (i.e., instruction-tuned and reasoning models: Clause-3-Ops, Gemini 1.5 Pro, Gemini 2.0 Flash, GPT-4o, Clause-3.7-Sonnet, o3-mini) and inference-time techniques (i.e., CoT, self-consistency, self-refine, and multi-agent discussion), providing insights into their relative strengths and weaknesses.\n- The analysis of multi-agent discussion is detailed and insightful, showing both performance improvements and inherent limitations.\n- The paper presents results clearly through informative figures and tables, making the findings easy to interpret.",
+    "reasons_to_reject": "Overall, this paper is highly interesting. My main concern lies in the limited discussion surrounding the key empirical observations reported in the experiments, specifically, why inference-time techniques underperform while multi-agent collaboration proves effective. These contrasting results are intriguing, yet the paper does not offer sufficient explanation or analysis to help the reader understand the underlying causes.\n\n1. The paper reports that inference-time techniques (e.g., chain-of-thought, self-refine, self-consistency) tend to degrade performance when applied to instruction-tuned models (while multi-agent collaboration proves effective). However, it does not provide a clear explanation for this phenomenon. This is especially notable given that prior work has shown these inference-time techniques to improve performance across a variety of tasks. Since expert-annotation tasks share a similar input-output formalization with those in existing studies, the lack of improvement raises important questions. For example, could the domain-specific nature of the required knowledge limit the effectiveness of these techniques? (If so, why?) Addressing such questions would enhance the paper’s depth and its potential to inspire further discussion within the community.\n2. The paper does not discuss whether the findings (such as the limited effectiveness of inference-time techniques and the benefits of multi-agent collaboration) are specific to expert domains (e.g., finance, law, biomedicine) or generalizable to other domains. Clarifying this point would help position the work more clearly within the broader literature.\n3. Important practical aspects such as annotation cost, inference latency, and scalability are not discussed, which limits the study’s implications for real-world deployment.",
+    "questions_to_authors": "1. Why do you think inference-time techniques such as chain-of-thought prompting, self-consistency, and self-refinement underperform in your expert-annotation tasks, despite prior work showing their effectiveness in other NLP tasks? Does the domain-specific nature of the required knowledge plays a role? Could you elaborate on possible reasons?\n2. Do you expect the observed behaviors (particularly the failure of inference-time techniques and the success of multi-agent collaboration) to generalize beyond expert domains? Or do you think these are specific to the complexity and implicit knowledge requirements of domains like finance, law, and biomedicine?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 30,
+    "mixed_pct": 0,
+    "human_pct": 70,
+    "verdict": "We are moderately confident this text is entirely human",
+    "confidence": "moderately",
+    "chars": 3253,
+    "words": 436,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d89e2554-9227-47a2-97de-4114f60f722a",
+    "error": null,
+    "scored_chars": 3253
+  }
+}

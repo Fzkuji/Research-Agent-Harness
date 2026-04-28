@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "79zWncwO2p",
+  "reviewer": "tdpf",
+  "paper": {
+    "title": "Collaborating with Humans without Human Data",
+    "authors": [
+      "DJ Strouse",
+      "Kevin R. McKee",
+      "Matthew Botvinick",
+      "Edward Hughes",
+      "Richard Everett"
+    ],
+    "abstract": "Collaborating with humans requires rapidly adapting to their individual strengths, weaknesses, and preferences. Unfortunately, most standard multi-agent reinforcement learning techniques, such as self-play (SP) or population play (PP), produce agents that overfit to their training partners and do not generalize well to humans. Alternatively, researchers can collect human data, train a human model using behavioral cloning, and then use that model to train \"human-aware\" agents (\"behavioral cloning play\", or BCP). While such an approach can improve the generalization of agents to new human co-players, it involves the onerous and expensive step of collecting large amounts of human data first. Here, we study the problem of how to train agents that collaborate well with human partners without using human data. We argue that the crux of the problem is to produce a diverse set of training partners. Drawing inspiration from successful multi-agent approaches in competitive domains, we find that a surprisingly simple approach is highly effective. We train our agent partner as the best response to a population of self-play agents and their past checkpoints taken throughout training, a method we call Fictitious Co-Play (FCP). Our experiments focus on a two-player collaborative cooking simulator that has recently been proposed as a challenge problem for coordination with humans. We find that FCP agents score significantly higher than SP, PP, and BCP when paired with novel agent and human partners. Furthermore, humans also report a strong subjective preference to partnering with FCP agents over all baselines.",
+    "keywords": [
+      "multi-agent",
+      "zero-shot coordination",
+      "collaboration",
+      "cooperation",
+      "common-payoff",
+      "human-ai interaction",
+      "reinforcement learning",
+      "deep reinforcement learning"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=79zWncwO2p"
+  },
+  "review_fields": {
+    "comment": "Thanks for the follow up. Let me start by saying that I find the paper addresses a relevant problem and is well-executed in terms of experiments and presentation. In fact, I would have voted a clear accept but for the two issues below: \n\n> Could you elaborate on what you mean by \"lacks clear novelty\"? \n\nThe idea of training with checkpointed models has been shown in Tylkin, Radanovic & Parkes (2020) to produce models that can assist humans and other agents of specific skill levels. In my opinion, the extension to multiple seeds and skill levels is a small change since it is already known that diversity in training partners tends to produce more robust behaviors. Hence, the strength of the paper would have to lie in the experimental work and the new insights it provides (more below). I acknowledge this is a subjective opinion and other reviewers may weigh this criteria differently, hence the variance in scores. \n\n> analysis of the policy differences between methods\n\nI meant policy differences among the different training partners, i.e., \"self-play agents varying in seed, architecture, and training time\" and $H_\\textrm{proxy}$ (as described in Section 4.1). In particular, architectural variation appears to provide no benefit, but potentially, this is because changing initialization seeds already provides sufficiently varied behavior. In other words, perhaps changing the architecture does not provide any additional differences in *policy*, i.e., there is no added diversity in terms of the partner behaviors?\n\nMy larger point is that although the paper clearly describes the experimental results, there is a lack of discussion / analyses into *why* training with multiple seeds and initializations appears works as well as it does. Such analyses would provide the community with deeper insights into the problem and method. At the moment, the focus of the discussion is on conveying that \"FCP works well\". I agree FCP is simple, easily implementable and superior to SP/PP/BCP, but what additional knowledge have we gained? As a specific example, showing an \"overlap\" between the human / held-out behavior and the previously trained agents suggests a reason why FCP works so well: the partner behavior was largely observed in the training set. Little or no overlap suggests the model is somehow extrapolating or interpolating behavior which would be an interesting finding. Similar analyses may show why the ablations / baselines failed to produce similarly good results. \n\nI welcome further discussion with the authors, especially if I have missed something critical. If not, I would like to add that I am not opposed to acceptance if the other reviewers and AC find in favor of the work. Either way, I hope the authors find the above helpful."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

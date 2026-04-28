@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "4KV2xLeqPN",
+  "reviewer": "ZyPC",
+  "paper": {
+    "title": "On the Variance, Admissibility, and Stability of Empirical Risk Minimization",
+    "authors": [
+      "Gil Kur",
+      "Eli Putterman",
+      "Alexander Rakhlin"
+    ],
+    "abstract": "It is well known that Empirical Risk Minimization (ERM) may attain minimax suboptimal rates in terms of the mean squared error (Birgé and Massart, 1993). In this paper, we prove that, under relatively mild assumptions, the suboptimality of ERM must be due to its bias. Namely, the variance error term of ERM (in terms of the bias and variance decomposition) enjoys the minimax rate. In the fixed design setting, we provide an elementary proof of this result using the probabilistic method. Then, we extend our proof to the random design setting for various models. In addition, we provide a simple proof of Chatterjee’s admissibility theorem (Chatterjee, 2014, Theorem 1.4), which states that in the fixed design setting, ERM cannot be ruled out as an optimal method, and then we extend this result to the random design setting. We also show that our estimates imply stability of ERM, complementing the main result of Caponnetto and Rakhlin (2006) for non-Donsker classes. Finally, we highlight the somewhat irregular nature of the loss landscape of ERM in the non-Donsker regime, by showing that functions can be close to ERM, in terms of $L_2$ distance, while still being far from almost-minimizers of the empirical loss.",
+    "keywords": [
+      "empirical risk minimization",
+      "bias-variance decomposition",
+      "admissibility"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=4KV2xLeqPN"
+  },
+  "review_fields": {
+    "summary": "This paper explores the minimax optimality of ERM in terms of the bias and variance of the ERM method.\nThey find in some settings that the variance is always at the minimax rate, implying that suboptimality can only occur due to bias. This paper also explores stability of ERM, finding that almost-minimizers are close to the ERM w.r.t the population distribution, but not necessarily the empirical distribution.",
+    "strengths": "* Cool results and proofs in the fixed design setting\n* The random design setting results are very interesting as well, albeit harder to digest all the quantities.",
+    "weaknesses": "* The independence relations should be clarified in the preliminaries. I assume that $\\mathbf{\\xi}$ is independent from $\\mathbf{X}$ in the random design case, but I don't think that's mentioned.\n\n\n\nMinor Typos:\n* In the proof of Theorem 2, $\\mathcal{G}$ and $\\mathcal{G}_\\star$ seem to be used interchangeably.\n* The statement of Lemma 2 in the proof of Theorem 2 seems to have a typo? I think it should be $f$ instead of $f^\\star$.",
+    "questions": "* Given that assumption 8 is necessary to get from a $\\epsilon_V^2$ to an $\\epsilon_\\star^2$ bound, how restrictive is this assumption?",
+    "limitations": "The authors have adequately addressed the limitations."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 791,
+    "words": 128,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2d83a64f-009d-4095-bb1d-4c498f26f19b",
+    "error": null,
+    "scored_chars": 791
+  }
+}

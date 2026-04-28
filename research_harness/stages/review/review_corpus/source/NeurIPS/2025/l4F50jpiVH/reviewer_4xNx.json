@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "l4F50jpiVH",
+  "reviewer": "4xNx",
+  "paper": {
+    "title": "Q-Palette: Fractional-Bit Quantizers Toward Optimal Bit Allocation for Efficient LLM Deployment",
+    "authors": [
+      "Deokjae Lee",
+      "Hyun Oh Song"
+    ],
+    "abstract": "We study weight-only post-training quantization (PTQ), which quantizes the weights of a large language model (LLM) without retraining, using little or no calibration data. Weight-only PTQ is crucial for reducing the memory footprint and latency of LLM inference, especially in memory-bound, small-batch inference scenarios, such as personalized inference on edge devices. Despite its importance, irregular weight distributions with heavy-tailed outliers in LLMs complicate quantization, recently motivating rotation-based methods that transform weights into near-Gaussian distributions, which are more regular with fewer outliers, thereby reducing quantization error. In this work, we first derive the information-theoretically optimal bit allocation for Gaussianized weights under given bit budgets, revealing that fine-grained fractional-bit quantizers approaching the Gaussian distortion-rate bound are essential to achieve near-optimal quantization performance. To bridge this theoretical insight and practical implementation, we introduce Q-Palette, a versatile collection of fractional-bit quantizers that range from trellis-coded quantizers offering near-optimal distortion to simpler vector and scalar quantizers optimized for faster inference, all efficiently implemented with optimized CUDA kernels across various bitwidths. Furthermore, leveraging Q-Palette as a foundational component, we propose a novel mixed-scheme quantization framework, jointly optimizing quantizer choices and layer fusion decisions given resource constraints. The code is available at https://github.com/snu-mllab/Q-Palette.",
+    "keywords": [
+      "LLM quantization",
+      "Post-training quantization",
+      "Mixed scheme quantization",
+      "Data-free quantization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=l4F50jpiVH"
+  },
+  "review_fields": {
+    "summary": "This paper aims to develop a finegrained fractional bit quantizer to approach the optimal bit allocation rate for Gaussianized weights after rotation-based transformation. The paper proposes a collection of fractional bit quantizers and corresponding CUDA kernels to achieve optimal compression rate and speedup.",
+    "strengths_and_weaknesses": "## Strength\n1. This paper pays special attention to the quantizer design for the post-rotation weight distribution, which is an area largely ignored by previous rotation-based quantizer design.\n2. The paper makes solid emperical contribution by exploring the fractional-bit quantizers and the implementation of CUDA kernel, achieving both improved performance and real speedup\n3. The paper is well-motivated, clearly-written, and easy to follow.\n\n## Weakness\n1. Novelty-wise, the fractional precision quantization and the kernel implementation proposed in the paper appears to have been based on existing work, as cited in the paper. The contribution of the paper is mainly implementing these techniques on rotational-quantized LLMs\n2. The conclusion that fractional-bit quantization leads to better performance-efficiency tradeoff is not suprising. Though the paper brings practical advances on the model compression frontier, the research insight is less significant.",
+    "questions": "Please explain the difference between the proposed quantizer and the TCQ quantizer cited in the paper.",
+    "final_justification": "After checking the rebuttal and the author's reply, I'm confident in my judgement that the paper is solid. Though the novelty on the algorithm side may be limited, the practical contribution is adequate and should be encouraged."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

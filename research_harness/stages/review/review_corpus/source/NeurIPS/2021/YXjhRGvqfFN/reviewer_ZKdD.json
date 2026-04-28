@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "YXjhRGvqfFN",
+  "reviewer": "ZKdD",
+  "paper": {
+    "title": "Learnable Fourier Features for Multi-dimensional Spatial Positional Encoding",
+    "authors": [
+      "Yang Li",
+      "Si Si",
+      "Gang Li",
+      "Cho-Jui Hsieh",
+      "Samy Bengio"
+    ],
+    "abstract": "Attentional mechanisms are order-invariant. Positional encoding is a crucial component to allow attention-based deep model architectures such as Transformer to address sequences or images where the position of information matters. In this paper, we propose a novel positional encoding method based on learnable Fourier features. Instead of hard-coding each position as a token or a vector, we represent each position, which can be multi-dimensional, as a trainable encoding based on learnable Fourier feature mapping, modulated  with  a  multi-layer perceptron. The representation is particularly advantageous for a spatial multi-dimensional position, e.g., pixel positions on an image, where $L_2$ distances or more complex positional relationships need to be captured. Our experiments based on several public benchmark tasks show that our learnable Fourier feature representation for multi-dimensional positional encoding outperforms existing methods by both improving the accuracy and allowing faster convergence.",
+    "keywords": [
+      "Positional encoding",
+      "Transformer",
+      "Fourier features",
+      "multi-dimensional spatial tasks",
+      "image classification",
+      "image generation",
+      "object detection",
+      "widget captioning",
+      "UI modeling"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=YXjhRGvqfFN"
+  },
+  "review_fields": {
+    "comment": "Thanks authors for all clarification and intention to add extensive ablation in the future revision, which I am looking forward to seeing.\n\n> Re: (Fig 3d) One of the baselines should be defined by Eq. (2) and fixed (not learnable) random matrix\n\nRegarding this question I had - you are right, thanks for pointing. We are good here.\n\n> For DETR, although COCO images with augmentation have different sizes, DETR by default normalizes pixel positions in the range of 0 to 1. You brought up a very interesting ablation that we should conduct, which is to experiment with our PE in the unnormalized setup to investigate how it generalizes to unscreen positions. For image generation, there are no unseen positions involved. All the images are 64x64.\n\nI would suggest another way of experiment here for generalization: still normalize to (0, 1) as it is the way we do training and inference, but evaluate on different input resolutions. So resize all images to, say, 96x96, 160x160, 224x224, 384x384 and evaluate how DETR performs on each particular resolution. My understanding that during training all training data are resized to a fixed resolution. With this test when we evaluate on particular image resolution even with scaling to (0, 1) we will have different from training continuous positions, so we can check the generalization on them. We always interpolate positions here, but I think it is ok (very different from the widget task, but maybe also for widget task we should do global scaling of all positions to (0, 1) too to avoid extrapolation). Does this make sense?\n\n> We think the proposed PE could generalize to unseen positions for a number of reasons. First of all, it treats positions as continuous values, which does not suffer the difficulty with embedding-based approaches where an embedding vector is assigned to a discrete position. Second, we bring in the inductive bias of L2 distance to the representation. The Fourier feature maintains the shift-invariant property during learning. You raised a great question about extrapolation versus interpolation. By examining the data, we found 2685 of the 2692 unseen positions are inside the convex hull of all the training positions. We will add the analysis in the revision.\n\nYes, I agree with your points why your embedding should have better generalization ability. However, it should be proven with experiments. Having experiment observation (evaluation/training/anything else) one can make a statements/explanations of the reasons. \n\nSome comment on extrapolation: I believe that if your embedding allows to use relative information (as in theory it should, even fixed sin. pos. in theory should do it too) then model should work on extrapolation region, but if it only uses absolute information in the end then it will perform badly on extrapolation region (at least what was seen for fixed sin. pos.).\n\n> About gamma parameter\n\nThanks, everything clear now as you mentioned about max position and scaling to (0, 1) in DETR. Would be good to have this in the text for clear reading.\n\n> Re: DETR in Fig 4. We intended to show how different methods impact the convergence speed of the model.\n\nAnd what about final performance? Did you train every model till full convergence or only the same fixed number of updates/epochs?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

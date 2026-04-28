@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "9k0krNzvlV",
+  "reviewer": "GhKC",
+  "paper": {
+    "title": "On the Learnability of Watermarks for Language Models",
+    "authors": [
+      "Chenchen Gu",
+      "Xiang Lisa Li",
+      "Percy Liang",
+      "Tatsunori Hashimoto"
+    ],
+    "abstract": "Watermarking of language model outputs enables statistical detection of model-generated text, which can mitigate harms and misuses of language models. Existing watermarking strategies operate by altering the decoder of an existing language model. In this paper, we ask whether language models can directly learn to generate watermarked text, which would have significant implications for the real-world deployment of watermarks. First, learned watermarks could be used to build open models that naturally generate watermarked text, enabling watermarking for open models, where users can control the decoding procedure. Second, if watermarking is used to determine the provenance of generated text, an adversary can hurt the reputation of a victim model by spoofing its watermark and generating damaging watermarked text. To investigate the learnability of watermarks, we propose watermark distillation, which trains a student model to behave like a teacher model that uses decoding-based watermarking. We test our approach on three decoding-based watermarking strategies and various hyperparameter settings, finding that models can learn to generate watermarked text with high detectability. We also find limitations to learnability, including the loss of watermarking capabilities under fine-tuning on normal text and high sample complexity when learning low-distortion watermarks.",
+    "keywords": [
+      "watermarking",
+      "large language models",
+      "distillation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=9k0krNzvlV"
+  },
+  "review_fields": {
+    "summary": "This paper investigates the learnability of watermarks for language models. The authors use watermark distillation, a method that trains a student model to behave like a teacher model that uses decoding-based watermarking. They test their approach on three decoding-based watermarking strategies and find that models can learn to generate watermarked text with high detectability. However, they also find limitations to learnability, such as the loss of watermarking capabilities under fine-tuning on normal text and high sample complexity when learning low-distortion watermarks.",
+    "strengths": "1. This paper finds an approach for learning watermarks in language models through knowledge distillation.\n2. The paper presents empirical findings on the learnability of watermarks, including the success of the proposed distillation method on three distinct decoding-based watermarking strategies. The results show that models can learn to generate watermarked text with high detectability.\n3. The paper discusses the limitations of learnability, including the loss of watermarking capabilities under fine-tuning and the high sample complexity for learning low-distortion watermarks. These limitations provide valuable insights and highlight the challenges in implementing watermarking in language models.",
+    "weaknesses": "1. The method presented is neither novel nor new. Knowledge distillation is a well-established concept, and this paper simply tests existing watermarking methods in conjunction with it. The paper appears more evaluative in nature.\n\n2. There's a body of prior works focused on watermark distillation. These works show that if the student model distills the watermarked teacher model, it offers protection against model extraction attacks. Although the context may differ, it is better for the author to acknowledge this in the related works section. Key references include:\n\n- He et al., \"Protecting Intellectual Property of Language Generation APIs with Lexical Watermark,\" AAAI 2022.\n- Zhao et al., \"Distillation-Resistant Watermarking for Model Protection in NLP,\" EMNLP 2022.\n- He et al., \"CATER: Intellectual Property Protection on Text Generation APIs via Conditional Watermarks,\" NeurIPS 2022.\n- Zhao et al., \"Protecting Language Generation Models via Invisible Watermarking,\" ICML 2023.\n\n3. Although the p-value is utilized for watermark detection, I also recommend that the author present quantitative metrics such as AUC, FPR, etc., for a more comprehensive understanding of watermark detection."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 50,
+    "mixed_pct": 6,
+    "human_pct": 44,
+    "verdict": null,
+    "confidence": null,
+    "chars": 1912,
+    "words": 271,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/de183050-9914-4334-88f2-cf8b2f786575",
+    "error": null,
+    "scored_chars": 1912
+  }
+}

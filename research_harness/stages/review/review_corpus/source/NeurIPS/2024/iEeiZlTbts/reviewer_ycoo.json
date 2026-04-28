@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "iEeiZlTbts",
+  "reviewer": "ycoo",
+  "paper": {
+    "title": "No Regrets: Investigating and Improving Regret Approximations for Curriculum Discovery",
+    "authors": [
+      "Alexander Rutherford",
+      "Michael Beukman",
+      "Timon Willi",
+      "Bruno Lacerda",
+      "Nick Hawes",
+      "Jakob Nicolaus Foerster"
+    ],
+    "abstract": "What data or environments to use for training to improve downstream performance is a longstanding and very topical question in reinforcement learning. \nIn particular, Unsupervised Environment Design (UED) methods have gained recent attention as their adaptive curricula promise to enable agents to be robust to in- and out-of-distribution tasks.\nThis work investigates how existing UED methods select training environments, focusing on task prioritisation metrics.\nSurprisingly, despite methods aiming to maximise regret in theory, the practical approximations do not correlate with regret but with success rate.\nAs a result, a significant portion of an agent's experience comes from environments it has already mastered, offering little to no contribution toward enhancing its abilities. Put differently, current methods fail to predict intuitive measures of *learnability*. Specifically, they are unable to consistently identify those scenarios that the agent can sometimes solve, but not always.\nBased on our analysis, we develop a method that directly trains on scenarios with high learnability. This simple and intuitive approach outperforms existing UED methods in several binary-outcome environments, including the standard domain of Minigrid and a novel setting closely inspired by a real-world robotics problem. \nWe further introduce a new adversarial evaluation procedure for directly measuring robustness, closely mirroring the conditional value at risk (CVaR).\nWe open-source all our code and present visualisations of final policies here: https://github.com/amacrutherford/sampling-for-learnability.",
+    "keywords": [
+      "MARL",
+      "UED",
+      "Robotics"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=iEeiZlTbts"
+  },
+  "review_fields": {
+    "comment": "Dear Authors, \nThanks for your detailed response and additional experiments. \n\n**Different values of the sampling ratio**: Thanks for producing these results. In the final manuscript, I would be interested in seeing other possible features of the environment which are common in levels sampled with SFL\n\n**Average vs top-k learnability in UED**: This result is interesting. I would consider to appropriately insert it in the appendix of the  final version of the paper.\n\n**Justification for SFL & Different Definitions of Learnability**: Thanks for providing additional examples of learnability. This addresses the issues I raised. \n\nGiven the above discussion, I believe most of the issues I raised were appropriately addressed by the authors. I will raise my score accordingly. \n\nThanks again for the detailed answers and the additional experiments, and good luck with the paper"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 875,
+    "words": 133,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/19e44d0c-482b-49c8-85b4-85d98d2aaa14",
+    "error": null,
+    "scored_chars": 880
+  }
+}

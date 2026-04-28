@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "Ebt7JgMHv1",
+  "reviewer": "YsUK",
+  "paper": {
+    "title": "Is This the Subspace You Are Looking for? An Interpretability Illusion for Subspace Activation Patching",
+    "authors": [
+      "Aleksandar Makelov",
+      "Georg Lange",
+      "Atticus Geiger",
+      "Neel Nanda"
+    ],
+    "abstract": "Mechanistic interpretability aims to attribute high-level model behaviors to specific, interpretable learned features. It is hypothesized that these features manifest as directions or low-dimensional subspaces within activation space. Accordingly, recent studies have explored the identification and manipulation of such subspaces to reverse-engineer computations, employing methods such as activation patching. In this work, we demonstrate that naïve approaches to subspace interventions can give rise to interpretability illusions.\n\nSpecifically, even if patching along a subspace has the intended end-to-end causal effect on model behavior, this effect may be achieved by activating \\emph{a dormant parallel pathway} using a component that is \\textit{causally disconnected} from the model output.\nWe demonstrate this in a mathematical example, realize the example empirically in two different settings (the Indirect Object Identification (IOI) task and factual recall), and argue that activating dormant pathways ought to be prevalent in practice.\nIn the context of factual recall, we further show that the illusion is related to rank-1 fact editing, providing a mechanistic explanation for previous work observing an inconsistency between fact editing performance and fact localisation.\n\nHowever, this does not imply that activation patching of subspaces is intrinsically unfit for interpretability.\nTo contextualize our findings, we also show what a success case looks like in a task (IOI) where prior manual circuit analysis allows an understanding of the location of the ground truth feature. We explore the additional evidence needed to argue that a patched subspace is faithful.",
+    "keywords": [
+      "Mechanistic Interpretability",
+      "Natural Language Processing",
+      "Large Language Models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Ebt7JgMHv1"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for the thorough reply. I appreciate the effort of the authors to provide code and strongly encourage them to do so. I would also encourage the authors to include Fig. 26 instead of Fig. 1 in the main text but understand that page limit may be hindering in doing so. Lastly, I appreciate the discussion on subspace vs. entire activation space patching that could be also featured in the paper.\n\nOverall, I believe that this paper constitutes a very important contribution to the interpretability community and consequently should be highlighted as such at the conference."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 591,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/683c6c5d-1194-49e8-b060-4ec78647bf61",
+    "error": null,
+    "scored_chars": 591
+  }
+}

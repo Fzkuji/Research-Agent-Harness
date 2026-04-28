@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "TN9gQ4x0Ep3",
+  "reviewer": "1cgk",
+  "paper": {
+    "title": "Don’t fear the unlabelled: safe semi-supervised learning via debiasing",
+    "authors": [
+      "Hugo Schmutz",
+      "Olivier HUMBERT",
+      "Pierre-Alexandre Mattei"
+    ],
+    "abstract": "Semi-supervised learning (SSL) provides an effective means of leveraging unlabelled data to improve a model’s performance. Even though the domain has received a considerable amount of attention in the past years, most methods present the common drawback of lacking theoretical guarantees. Our starting point is to notice that the estimate of the risk that most discriminative SSL methods minimise is biased, even asymptotically. This bias impedes the use of standard statistical learning theory and can hurt empirical performance. We propose a simple way of removing the bias. Our debiasing approach is straightforward to implement and applicable to most deep SSL methods.  We provide simple theoretical guarantees on the trustworthiness of these modified methods, without having to rely on the strong assumptions on the data distribution that SSL theory usually requires. In particular, we provide generalisation error bounds for the proposed methods. We evaluate debiased versions of different existing SSL methods, such as the Pseudo-label method and Fixmatch, and show that debiasing can compete with classic deep SSL techniques in various settings by providing better calibrated models. Additionally, we provide a theoretical explanation of the intuition of the popular SSL methods.  An implementation of a debiased version of Fixmatch is available at\nhttps://github.com/HugoSchmutz/DeFixmatch",
+    "keywords": [
+      "Semi-supervised learning",
+      "deep learning",
+      "empirical risk minimisation",
+      "control variate",
+      "variance reduction",
+      "asymptotic statistics"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=TN9gQ4x0Ep3"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "Empirical Risk Minimization (ERM) is an established technique and is one of the basis of supervised (plus some other types) learning. The ERM objective is to minimize the risk when fitting a set of labeled data points. In the context of Semi Supervised Learning (SSL), as we need to deal with data points with and without labels, existing conventional approaches combine (usually through some weighting) two independent losses; however, they lack concrete theoretical guarantee (one of the claims of this paper). One of the the objectives of this paper is to address this issue and ensure the unbiased (in the context of data distribution) semi supervised learning.\n \nTraditional SSL techniques (such as low density separation and consistency regularization based) heavily depend on labeled data points and sometimes overweight them when compared to the corresponding unlabeled set. This may look obvious as unlabeled data come with label uncertainty (compared to labelled data). The hypothesis is even unlabeled data come with uncertain labels; they shouldn’t be weighted poorly (compared to labeled data) to learn a proper model.\n \nIn this work (DeSSL), the SSL problem has been formulated as s ERM problem which also includes a debiasing term to control/minimize the labeled data bias. The main hypothesis is unlabeled data should be taken as complementary not the competitor of the available labeled data. The debiasing term can be thought as a regularizer to penalize higher weights to labeled data and thus control the data bias.\n \nThe proposed approach has been tested on CIFAR-10, CIFAR-100 and compared against FixMatch. Reported results are found to be encouraging.",
+    "strength_and_weaknesses": "Strength: The proposed DeSSL model is based on the hypothesis that existing SSL techniques put less weight on unlabeled data and more on the labelled set and thus bias the learning. If this biasing problem can be solved, it is likely that SSL model performance will improve. The debiasing methodology, presented in this work, comes with a set of theorems and corresponding proofs that make the paper theoretically strong. The experiment results, especially the boosted worst-class  performance, signals that  the debiasing idea is working to an extent (for classification tasks). \n \nThe proposed approach has been tested on CIFAR-10, CIFAR-100 and compared against FixMatch, a known technique in SSL.  The most interesting result is the DeSSL worst-case accuracy, which is noticeably better than FixMatch for both CIFAR-10 and 100 benchmarks although the overall accuracy gain for CIFAR-100 was marginal.\n\nAn additional advantage is that the proposed  DeSSL method can be easily applied to some of the available SSL algorithms with minimal changes/efforts.\n\nWeakness: Although the results reported in section 4 look encouraging it is difficult to judge whether the reported gains are statistically significant. It is suggested that authors perform some statistical tests to measure if the performance gains are statistically significant.\n\nThe overall accuracy gain for CIFAR-100 was marginal (compared to CIFAR-10) which signals scalability limitations of the approach.",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is well written, the structure is well organized and the content is easy to follow. The debiasing idea in the context of Semi Supervised learning (SSL) is presented clearly with minimum fuzziness. \n \nThere have been a number of innovations especially the debiasing idea itself plus its theoretical derivation including proofs of some of the underlying theorems.  Another advantage is the DeSSL method can easily be applied to some  existing SSL algorithms without making any assumptions on the distribution of data.  The paper also provided some theoretical guarantee estimates  (on the safeness of the proposed methodology) on consistency, calibration, asymptotic normality and generalization error.\n\nAs the code has been shared, it is expected the results can be reproduced.",
+    "summary_of_the_review": "I have gone through the paper more than once including the appendices. Overall, the debiasing idea is quite sound, well articulated, and the document is found easy to follow. Learning by balancing the contribution from both labeled and unlabelled data is well supported through experiments and  corresponding results. Some important SSL theoretical derivations have made the paper even stronger.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

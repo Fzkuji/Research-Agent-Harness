@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "H1I3M7Z0b",
+  "reviewer": "3",
+  "paper": {
+    "title": "WSNet: Learning Compact and Efficient Networks with Weight Sampling",
+    "authors": [
+      "Xiaojie Jin",
+      "Yingzhen Yang",
+      "Ning Xu",
+      "Jianchao Yang",
+      "Jiashi Feng",
+      "Shuicheng Yan"
+    ],
+    "abstract": "We present a new approach and a novel architecture, termed WSNet, for learning compact and efficient deep neural networks. Existing approaches conventionally learn full model parameters independently and then compress them via \\emph{ad hoc} processing such as model pruning or filter factorization. Alternatively, WSNet proposes learning model parameters by sampling from a compact set of learnable parameters, which naturally enforces {parameter sharing} throughout the learning process. We demonstrate that such a novel weight sampling approach (and induced WSNet) promotes both weights and computation sharing favorably. By employing this method, we can more efficiently learn much smaller networks with competitive performance compared to baseline networks with equal numbers of convolution filters. Specifically, we consider learning compact and efficient 1D convolutional neural networks for audio classification. Extensive experiments on multiple audio classification datasets verify the effectiveness of WSNet. Combined with weight quantization, the resulted models are up to \\textbf{180$\\times$} smaller and theoretically up to \\textbf{16$\\times$} faster than the well-established baselines, without noticeable performance drop.",
+    "keywords": [
+      "Deep learning",
+      "model compression"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H1I3M7Z0b"
+  },
+  "review_fields": {
+    "review": "In this work, the authors propose a technique to compress convolutional and fully-connected layers in a network by tying various weights in the convolutional filters: specifically within a single channel (weight sampling) and across channels (channel sampling). When combined with quantization, the proposed approach allows for large compression ratios with minimal loss in performance on various audio classification tasks. Although the results are interesting, I have a number of concerns about this work, which are listed below:\n\n1. The idea of tying weights in the neural network in order to compress the model is not entirely new. This has been proposed previously in the context of feed-forward networks [1], and convolutional networks [2] where the choice of parameter tying is based on hash functions which ensure a random (but deterministic) mapping from a small set of “true” weights to a larger set of “virtual” weights. I think it would be more fair to compare against the HashedNet technique.\n\nReferences:\n[1] Wenlin Chen, James T. Wilson, Stephen Tyree, Kilian Q. Weinberger, and Yixin Chen. 2015. Compressing neural networks with the hashing trick. In Proceedings of the 32nd International Conference on International Conference on Machine Learning - Volume 37 (ICML'15), Francis Bach and David Blei (Eds.), Vol. 37. JMLR.org 2285-2294.\n[2] Wenlin Chen, James Wilson, Stephen Tyree, Kilian Q. Weinberger, and Yixin Chen. 2016. Compressing Convolutional Neural Networks in the Frequency Domain. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD '16). ACM, New York, NY, USA, 1475-1484. DOI: https://doi.org/10.1145/2939672.2939839\n\n2. Given that the experiments are conducted on tasks where there isn’t a large amount of training data, one concern is that the baseline model used by the authors might be overparameterized. It would be interesting to see how performance varies as a function of number of parameters for these tasks without any “compression”, i.e., just by reducing filter sizes, for example.\n\n3. It seems somewhat surprising that repeating the filter weights across channels as is done in the channel sharing technique yields no loss in accuracy, especially for the deeper convolutional layers. Could this perhaps be a function of the tasks that the binary “music detection” task that these models are evaluated on? Do the authors have any comments on why this doesn't hurt performance?\n\n4. In citing relevant previous work, the authors should also include student-teacher approaches [1, 2] and distillation [3], and work by Denil et al. [4] on compression.\nReferences:\n[1] C. Bucilua, R. Caruana, and A. Niculescu-Mizil. Model compression. In Proceedings of the 12th ACM SIGKDD international conference on Knowledge discovery and data mining, pages 535–541. ACM, 2006\n[2] J. Ba and R. Caruana. Do deep nets really need to be deep? In Advances in neural information processing systems, pages 2654–2662, 2014.\n[3] G. Hinton, O. Vinyals, J. Dean. Distilling the Knowledge in a Neural Network, NIPS 2014 Deep Learning Workshop. 2014.\n[4] M. Denil, B. Shakibi, L. Dinh, N. de Freitas, et al. Predicting parameters in deep learning. In Advances in Neural Information Processing Systems, pages 2148–2156, 2013.\n\n5. Section 3, where the authors describe the proposed techniques is somewhat confusing to read, because of a lack of detailed mathematical explanations of the proposed techniques. This makes the paper harder to understand, in my view. Please re-write these sections in order to clearly express the parameter tying mechanism. In particular, I had the following questions:\n- Are weights tied across layers i.e., are the “weight sharing” matrices shared across layers?\n- There appears to be a typo in Equation 3: I believe it should be m = m* C.\n- Filter augmentation/Weight quantization are applicable to all methods, including the baseline. It would therefore be interesting to examine how they affect the baseline, not just the proposed system.\n- Section 3.5, on using the “Integral Image” to speed up computation was not clear to me. In particular, could the authors re-write to explain how the computation is computed efficiently with “two subtraction operations”. Could the authors also clarify the savings achieved by this technique?\n\n6. Results are reported on the various test sets without any discussion of statistical significance. Could the authors describe whether the differences in performance on the various test sets are statistically significant?\n\n7. On the ESC-50, UrbanSound8K, and DCASE tasks, it is a bit odd to compare against previous baselines which use different input features, use different model configurations, etc. It would be much better to use one of the previously published configurations as the baseline, and apply the proposed techniques to that configuration to examine performance. In particular, could the authors also use log-Mel filterbank energies as input features similar to (Piczak, 2015) and (Salomon and Bello, 2015), and apply the proposed techniques starting from those input features? Also, it would be useful when comparing against previously published baselines to indicate total number of independent parameters in the system in addition to accuracy numbers.\n\n8. Minor Typographical Errors: There are a number of minor typographical/grammatical errors in the paper, some of which are listed below:\n- Abstract: “Combining weight quantization ...” → “Combining with weight quantization ...”\n- Sec 1: “... without sacrificing the loss of accuracy” → “... without sacrificing accuracy”\n- Sec 1: “Above experimental results strongly evident the capability of WSNet …” → “Above experimental results strongly evidence the capability of WSNet …”\n- Sec 2: “... deep learning based approaches has been recently proven ...” → “... deep learning based approaches have been recently proven ...”\n- The work by Aytar et al., 2016 is repeated twice in the references."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "jREF4bkfi_S",
+  "reviewer": "yi8Y",
+  "paper": {
+    "title": "Mini-batch $k$-means terminates within $O(d/\\epsilon)$ iterations",
+    "authors": [
+      "Gregory Schwartzman"
+    ],
+    "abstract": "We answer the question: \"Does \\emph{local} progress (on batches) imply \\emph{global} progress (on the entire dataset) for mini-batch $k$-means?\". Specifically, we consider mini-batch $k$-means which terminates only when the improvement in the quality of the clustering on the sampled batch is below some threshold.\n\nAlthough at first glance it appears that this algorithm might execute forever, we answer the above question in the affirmative and show that if the batch is of size $\\tilde{\\Omega}((d/\\epsilon)^2)$, it must terminate within $O(d/\\epsilon)$ iterations with high probability, where $d$ is the dimension of the input, and $\\epsilon$ is a threshold parameter for termination. This is true \\emph{regardless} of how the centers are initialized. When the algorithm is initialized with the $k$-means++ initialization scheme, it achieves an approximation ratio of $O(\\log k)$ (the same as the full-batch version). \n\nFinally, we show the applicability of our results to the mini-batch $k$-means algorithm implemented in the scikit-learn (sklearn) python library.",
+    "keywords": [],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=jREF4bkfi_S"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper investigates  the convergenence rate of the mini-batch $k$-means algorithm. In the well-known k-means clustering problem, we are given a set of $n$ points and a number $k$ and the goal is to find $k$ centers (the center set) that minimizes the sum (or average as in this paper) of the squared distances of all the points to the nearest center point. The well-known Lloyd's algorithm starts with a random $k$ centers, partitions the $n$-point set into $k$ sets by assigning each point to its nearest center and then computes the centriods of the partition as the new center set and repeats (until a stopping criteria is met).   \n\nIn the mini-batch version, which is analyzed in this paper, instead of considering all the $n$ points in each step to update the centers, the algorithm independently and randomly picks $b$ (batch size) points from the point set and performs the center update. This reduces the running time of each iteration. The question that is investigated is how fast this mini-batch algorithm converges: For the given set of $n$ points and a center set $C$, let $f(C)$ be the quantity (average of the squared distances) that we would like to optimize. Then the algorithm at iteration $i$, computes the center set $C_i$. We say that the algorithm $(t,\\epsilon)$-converges if $f(C_t)-f(C_{t+1}) < \\epsilon$. Clearly if the diameter of the universe is bounded by $d$, then the original algorithm converges in $d/\\epsilon$ steps ($f(C_{I+1} \\leq f(C_i)$ at all $i$ since the centroid minimizes the sum of squared distances). The paper considers the problem: what is the batch size $b$ that is required to achieve asymptotically the same convergence rate. The paper establishes that if  $b =  \\tilde\\Omega(d^2/\\epsilon^2)$, a variant of the mini-batch k-means algorithm  $(O(d/\\epsilon),\\epsilon)$ converges.",
+    "strength_and_weaknesses": "Strengths: The strength of the paper is that it investigates an important problem and establishes a nice upper bound result. The analysis is also nice and simple. \n\nWeakness: The research question is very interesting but is in the initial stages. The one result established is nice (and the reviewer is pleasantly surprised that it is not considered earlier) but the picture is far from complete. In particular, the lower bound landscape is completely missing. It will be nice to prove that for $O(d/\\epsilon)$ convergence, the sample complexity (or the mini batch size) has to be $\\Omega(d^2/\\epsilon^2)$. If not why the present algorithm is not optimal? Any concert result indicating that current bounds are optimal will be nice.  More generally is there a generic trade off between the convergence rate and the batch size? Also, as the authors point out, any guarantee on the the quality of solution (does it converge to a local minima) is missing.",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is clearly written, barring  some typos. It is reproducible as mostly it consists of theoretical analysis. The analysis is moderately novel.",
+    "summary_of_the_review": "The main result is nice and publishable. The main criticism is the completeness of the research conducted. There are many missing issues (lower bounds and tradeoffs) which if addressed will make this submission into a solid paper.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

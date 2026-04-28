@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "FKp8-pIRo3y",
+  "reviewer": "BCwv",
+  "paper": {
+    "title": "Wish you were here: Hindsight Goal Selection for long-horizon dexterous manipulation",
+    "authors": [
+      "Todor Davchev",
+      "Oleg Olegovich Sushkov",
+      "Jean-Baptiste Regli",
+      "Stefan Schaal",
+      "Yusuf Aytar",
+      "Markus Wulfmeier",
+      "Jon Scholz"
+    ],
+    "abstract": "Complex sequential tasks in continuous-control settings often require agents to successfully traverse a set of ``narrow passages'' in their state space. Solving such tasks with a sparse reward in a sample-efficient manner poses a challenge to modern reinforcement learning (RL) due to the associated long-horizon nature of the problem and the lack of sufficient positive signal during learning. \nVarious tools have been applied to address this challenge. When available, large sets of demonstrations can guide agent exploration. Hindsight relabelling on the other hand does not require additional sources of information. However, existing strategies explore based on task-agnostic goal distributions, which can render the solution of long-horizon tasks impractical. In this work, we extend hindsight relabelling mechanisms to guide exploration along task-specific distributions implied by a small set of successful demonstrations. We evaluate the approach on four complex, single and dual arm, robotics manipulation tasks against strong suitable baselines. The method requires far fewer demonstrations to solve all tasks and achieves a significantly higher overall performance as task complexity increases. Finally, we investigate the robustness of the proposed solution with respect to the quality of input representations and the number of demonstrations.",
+    "keywords": [
+      "goal-conditioned reinforcement learning",
+      "learning from demonstrations",
+      "long-horizon dexterous manipulation",
+      "bi-manual manipulation"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=FKp8-pIRo3y"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper studies long-horizon manipulation tasks given sparse rewards and a few demonstrations from a hindsight relabeling-based approach. Specifically, it leverages the demonstration states as relevant goals in the goal relabeling process to guide task-specific exploration.\n\nWhen evaluating the policy, the online goals are sampled from a goal dataset, composed of successful states and final states from the demonstrations. When relabeling the goals for training, the goals are sampled from the set of states visited by the demonstrations. Rather than operating over the raw state observations, this method utilizes an encoder, which can be either engineered by an expert or learned through self-supervision, to extract a latent representation. Then, the rewards are relabeled in hindsight based on a thresholded distance in the latent space.",
+    "main_review": "Strengths:\n- The paper studies a difficult problem in robotic manipulation, and shows results on tasks of varying difficulty. Leveraging demonstrations as task-relevant goals is intuitive and straightforward.\n\n- The experiments are thorough. They study the importance of the goal selection strategy, sensitivity to different numbers of demonstrations, and how quickly different learned policies can solve the task.\n\nWeaknesses:\n- In the hindsight goal selection, relabeling the rewards for goals not part of the rollout trajectory necessitates a different reward function separate from the environment reward. The separate reward function seems to need to follow a sparse-reward structure to learn a Q-value function from both reward functions. This requires choosing a thresholding value \\epsilon (although Appendix A.8 presents a seemingly general way to define what this should be, it ultimately still depends on task-specific knowledge of how large the window should be, from which \\epsilon is computed). It would be nice to include a sensitivity analysis of this hyperparameter.\n\n- Relabeling the goals with just demonstration states can fail to make the sparse-reward problem easier (as intended by HER) if the resulting goal distribution is still relatively narrow. For example, we could imagine tasks with a wide initial state distribution and a large state space that the demonstrations only sparsely cover, and even reaching demo states can be difficult. It seems like mixing the demo-driven goal distribution and distribution over reached states could lead to some benefits as shown in Appendix A.4.\n\n- The choice of encoder seems to be quite important, with the TCC results being the closest to those with the hand-engineered features across the four tasks.\n\nFinally, some of the implementation/experimental details are currently a bit unclear to me. My questions are below:\n\n- Which encoder is used for the results in Table 1? Do the other methods in Table 1 operate over the same latent representation as HinDRL? Is the strong performance due to the proposed relabeling scheme or its combination with the extracted representation?\n\n- What is p(z_g) in the definition of R_G? Is this derived from the demonstration data, e.g., a uniform distribution over the set of demonstration states?\n\n- What does the “number of hindsight goal samples” hyper-parameter refer to? Is it the total number of hindsight goals, i.e., |R_G|?\n\n- In Figure 7, why is there a dip in success rate for the different methods at around 60K environment steps? Is this because the BC term in the actor’s loss is annealed away?\n\nMinor comments:\n- The placement of the figures is a bit awkward. For example, Figure 8 corresponds to Sec. 5.4 but is placed in Sec. 5.5; Table 6 corresponds to Sec. 5.2 but is placed in Sec. 5.3. Some of the figures also appear in the paper out of order.\n\n- It’d be nice to have a consistent legend across the 4 plots in Figure 12.",
+    "summary_of_the_review": "The paper tackles an important and relevant problem: solving long-horizon tasks given a few demonstrations. The experiments are quite thorough, but there are some missing details that seem critical to evaluating the performance of the method compared to prior work. Also, it would be good to include a discussion of scenarios in which this goal relabeling method might fail, i.e., when reaching the demonstration states is difficult and so relabeling still doesn’t provide additional learning signal.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3446,
+    "words": 553,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/524ddea7-3743-46df-b969-d3f47ad650b4",
+    "error": null,
+    "scored_chars": 3446
+  }
+}

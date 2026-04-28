@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "SyVpB2RqFX",
+  "reviewer": "2",
+  "paper": {
+    "title": "INFORMATION MAXIMIZATION AUTO-ENCODING",
+    "authors": [
+      "Dejiao Zhang",
+      "Tianchen Zhao",
+      "Laura Balzano"
+    ],
+    "abstract": "We propose the Information Maximization Autoencoder (IMAE), an information theoretic approach to simultaneously learn continuous and discrete representations in an unsupervised setting. Unlike the Variational Autoencoder framework, IMAE starts from a stochastic encoder that seeks to map each input data to a hybrid discrete and continuous representation with the objective of maximizing the mutual information between the data and their representations. A decoder is included to approximate the posterior distribution of the data given their representations, where a high fidelity approximation can be achieved by leveraging the informative representations.     \nWe show that the proposed objective is theoretically valid and provides a principled framework for understanding the tradeoffs regarding informativeness of each representation factor, disentanglement of representations, and decoding quality.",
+    "keywords": [
+      "Information maximization",
+      "unsupervised learning of hybrid of discrete and continuous representations"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SyVpB2RqFX"
+  },
+  "review_fields": {
+    "comment": "- The draft changed substantially from the original submission, especially the experimental section. As per the guidelines of the reviewing process on the conference webpage, it would not be fair to increase the score based on these drastic changes.\n- Regarding discrete latent traversals, it seems like you’ve used different z’s across the rows of Figures 2b,c,d and for 2e,f it’s not clear whether you’re keeping z fixed across the latent traversal of y. Similar point holds for Figure 4a. It would be infromative to keep the z's fixed across the discrete latent traversals to show good disentangling.\n- I can’t see how if you fix the variance of z_k, then increasing (6) leads to increasing (4). Can this be shown mathematically? Also don’t you learn the variance of z_k in practice? You seem to denote it as sigma_k(x), implying that it is learned."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

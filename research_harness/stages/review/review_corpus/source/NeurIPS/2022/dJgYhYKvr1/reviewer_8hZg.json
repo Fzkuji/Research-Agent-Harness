@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "dJgYhYKvr1",
+  "reviewer": "8hZg",
+  "paper": {
+    "title": "The Slingshot Mechanism: An Empirical Study of Adaptive Optimizers and the \\emph{Grokking Phenomenon}",
+    "authors": [
+      "Vimal Thilak",
+      "Etai Littwin",
+      "Shuangfei Zhai",
+      "Omid Saremi",
+      "Roni Paiss",
+      "Joshua M. Susskind"
+    ],
+    "abstract": "The \\emph{grokking phenomenon} as reported by Power et al.~\\cite{power2021grokking} refers to a regime where a long period of overfitting is followed by a seemingly sudden transition to perfect generalization. In this paper, we attempt to reveal the underpinnings of Grokking via a series of empirical studies. Specifically, we uncover an optimization anomaly plaguing adaptive optimizers at extremely late stages of training, referred to as the \\emph{Slingshot Mechanism}. A prominent artifact of the Slingshot Mechanism can be measured by the cyclic phase transitions between stable and unstable training regimes, and can be easily monitored by the cyclic behavior of the norm of the last layers weights. We empirically observe that without explicit regularization, Grokking as reported in \\cite{power2021grokking} almost exclusively happens at the onset of \\emph{Slingshots}, and is absent without it. \n    While common and easily reproduced in more general settings, the Slingshot Mechanism does not follow from any known optimization theories that we are aware of, and can be easily overlooked without an in depth examination. Our work points to a surprising and useful inductive bias of adaptive gradient optimizers at late stages of training, calling for a revised theoretical analysis of their origin.",
+    "keywords": [
+      "optimization",
+      "adam",
+      "adamw",
+      "adaptive optimizers",
+      "grokking",
+      "training instability",
+      "instability",
+      "empirical",
+      "empirical science of deep learning",
+      "double descent"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=dJgYhYKvr1"
+  },
+  "review_fields": {
+    "summary": "The authors describe a \"slingshot\" effect present in the use of Adam (and cousins). This purportedly cyclic effect can be observed when the norm of the final layer sharply increases, often accompanied by an increase in train loss. The authors offer the slingshot effect as a possible explanation for the ability of Adam to induce generalization even without explicit regularization.",
+    "strengths_and_weaknesses": "This is overall a nicely executed empirical paper that reveals a moderately interesting phenomenon. A cyclic regime of generalization would be quite remarkable and this paper offers preliminary evidence that supports the authors' hypothesis. It is also refreshing that the authors did not attempt to handwave nonsense poorly-motivated math into the paper, which is unfortunately a severe problem even in 2022.\n\nMy main concerns are the following:\n\n- Significance: Given that this effect explains generalization in unregularized optimization, the overall impact to practical deep learning is somewhat muted.\n- Strength of evidence: the results in the paper leave me with certain questions (most notably #6 below) as to whether the authors have sufficiently validated their hypothesized effect.\n- Implications: the paper enumerates a number of interesting facts (e.g. dependence on $\\epsilon$) but doesn't really dive deeper beyond some of those facts, leaving the reader wondering as to why those facts were presented.\n\nOverall, I enjoyed reading this paper. I don't think it's super noteworthy in terms of immediate impact, but it is (as far as I can tell) a novel discovery that may serve as a waypoint on our path to better understanding of oddball generalization phenomena in deep learning.",
+    "questions": "1. Is there a reason validation error/loss is not depicted in Fig 1? Given the emphasis in this paper on generalization, it seems odd not to depict in the headline figure.\n2. Figure 2(c) looks either incorrect or misgenerated—the validation loss should not be zero at the beginning of training, unless I am missing something.\n3. Do the authors have any explanation for why Figure 3(d) doesn't show a high-curvature update on the second plateau?\n4. Can the authors elaborate more on the implications of the larger $\\epsilon$ result? To me, larger $\\epsilon$ ruining the grokking effect sort of implies that non-adaptive methods (e.g. plain GD) don't benefit from slingshotting either (which is exactly what the authors found empirically). But it would still be good to explicitly connect the dots here.\n5. I am also left wondering about the result on the paragraph starting on line 243. It's cool that the authors discovered it but what is it supposed to tell me? What about low-dim data makes the slingshot effect less likely to occur?\n6. Finally, is it fair to call this effect cyclic when most empirical examples only have two cycles (with a few having 3)? Is there a setup where we can see $n$ distinct plateaus and sharp norm increases for some $n >> 3$?",
+    "limitations": "The authors do a good job not overclaiming, and they explicitly enumerate a number of other regimes that achieve the results despite lack of \"slingshot\". Certain items are left unaddressed (see \"Questions\").\n\nMinor\n----\n\n- Line 84: missing author name\n- Line 112: what is \"Adam without momentum\" and how is it different from RMSProp?\n- Line 145: \"layers\" $\\rightarrow$ \"layer\"\n- Line 170: \"has\" $\\rightarrow$ \"have\"\n- Line 245: \"choices\" $\\rightarrow$ \"choice\"\n- Line 254: \"it's\" $\\rightarrow$ \"its\""
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "eUgS9Ig8JG",
+  "reviewer": "LALK",
+  "paper": {
+    "title": "SaNN: Simple Yet Powerful Simplicial-aware Neural Networks",
+    "authors": [
+      "Sravanthi Gurugubelli",
+      "Sundeep Prabhakar Chepuri"
+    ],
+    "abstract": "Simplicial neural networks (SNNs) are deep models for higher-order graph representation learning. SNNs learn low-dimensional embeddings of simplices in a simplicial complex by aggregating features of their respective upper, lower, boundary, and coboundary adjacent simplices. The aggregation in SNNs is carried out during training. Since the number of simplices of various orders in a simplicial complex is significantly large, the memory and training-time requirement in SNNs is enormous. In this work, we propose a scalable simplicial-aware neural network (SaNN) model with a constant run-time and memory requirements independent of the size of the simplicial complex and the density of interactions in it. SaNN is based on pre-aggregated simplicial-aware features as inputs to a neural network, so it has a strong simplicial-structural inductive bias. We provide theoretical conditions under which SaNN is provably more powerful than the Weisfeiler-Lehman (WL) graph isomorphism test and as powerful as the simplicial Weisfeiler-Lehman (SWL) test. We also show that SaNN is permutation and orientation equivariant and satisfies simplicial-awareness of the highest order in a simplicial complex. We demonstrate via numerical experiments that despite being computationally economical, the proposed model achieves state-of-the-art performance in predicting trajectories,  simplicial closures, and classifying graphs.",
+    "keywords": [
+      "Graph Neural Networks",
+      "Higher-order Representation Learning",
+      "Simplicial Complexes",
+      "Simplicial Neural Networks",
+      "Weisfeiler-Lehman Isomorphism Test"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=eUgS9Ig8JG"
+  },
+  "review_fields": {
+    "summary": "The authors present a Simplicial Graph Neural Network, which considers higher-order structures in the input graphs. In comparison to previous work, the features from k-simplices are precomputed without trainable parameters and only then fed into a GNN. This leads to lower runtime during training since features can be reused in each epoch, which is validated by the authors theoretically and empirically.\n\nThe authors prove that their method is more powerful than the WL test and as powerful as the Simplicial WL (SWL) test, when it comes to distinguishing non-isomorphic subgraphs. Further, they prove permutation equivariance, orientation equivariance, and simplicial-awareness.\n\nThe method is evaluated on trajectory prediction, simplicial closure prediction, and graph classification, where it is on par/slightly outperforms previous works with better training runtimes.",
+    "strengths": "- The goal of the work, achieving better scalability of expressive networks by using non-parametric simplicial encoders makes sense.\n- The authors thoroughly analyze their method theoretically and provide proofs for all relevant properties.\n- The presented method seems to find a good trade-off between expressiveness, runtime and empirical quality.\n- There is theoretical value in the non-parametric encoder for simplices that keeps equivariant properties and simplicial-awareness\n- The paper is mostly well written",
+    "weaknesses": "- Runtime and asymptotic comparisons in this work are done by excluding the precomputation of features. I think this is misleading, since in practice, the precomputation is certainly part of the computation, especially during inference. Thus, the presented gains seem to be only valid during training, when the features need to be computed only once for many iterations of training. \n- At the same time, the method only performs on par with previous work, with small gains on some datasets.\n- The method requires many hyper parameter choices like hops, T, k, which seem to have different optimal settings on different datasets. The result quality differs substantially depending on the configuration.\n- I am skeptical regarding the practical relevance of the presented method due to above reasons.\n\n- The method lacks conceptual novelty. The main idea of precomputing features by non-learnable functions has been seen in other areas, e.g. non-parametric GNNs. The general structure of the work follows a long line of work about GNN expressiveness (higher order and WL-level) without presenting many novel insights.",
+    "questions": "- I wonder how the method compares to previous methods in inference runtime, when feature precomputation needs to be included.\n\n-----------\nI thank the authors for proving the precomputation times explicitly and for replying to other concerns I have - this is certainly helpful to evaluate the differences to previous work.\n\nIn general, I am still on the fence and still doubt the significance of the contribution. However, I acknowledge that other reviewers find value in it and, thus, slightly raise my score. I am not opposing this paper to be accepted, as I think it is a thorough and well executed work."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2241,
+    "words": 352,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/68b4873a-eaa0-45b1-9ef7-b5799abc0b75",
+    "error": null,
+    "scored_chars": 2242
+  }
+}

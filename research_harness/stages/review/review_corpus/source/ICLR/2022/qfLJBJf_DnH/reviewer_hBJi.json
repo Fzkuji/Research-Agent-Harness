@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "qfLJBJf_DnH",
+  "reviewer": "hBJi",
+  "paper": {
+    "title": "Brain insights improve RNNs' accuracy and robustness for hierarchical control of continually learned autonomous motor motifs",
+    "authors": [
+      "Laureline Logiaco",
+      "G Sean Escola"
+    ],
+    "abstract": "We study the problem of learning dynamics that can produce hierarchically organized continuous outputs consisting of the flexible chaining of re-usable motor ‘motifs’ from which complex behavior is generated. Can a motif library be efficiently and extendably learned without interference between motifs, and can these motifs be chained in arbitrary orders without first learning the corresponding motif transitions during training? This requires (i) parameter updates while learning a new motif that do not interfere with the parameters used for the previously acquired ones; and (ii) successful motif generation when starting from the network states reached at the end of any of the other motifs, even if these states were not present during training (a case of out-of-distribution generalization). We meet the first requirement by designing recurrent neural networks (RNNs) with specific architectures that segregate motif-dependent parameters (as customary in continual learning works), and try a standard method to address the second by training with random initial states. We find that these standard RNNs are very unreliable during zero-shot transfer to motif chaining. We then use insights from the motor thalamocortical circuit, featuring a specific module that shapes motif transitions. We develop a method to constrain the RNNs to function similarly to the thalamocortical circuit during motif transitions, while preserving the large expressivity afforded by gradient-based training of non-analytically tractable RNNs. We then show that this thalamocortical inductive bias not only acts in synergy with gradient-descent RNN training to improve accuracy during in-training-distribution motif production, but also leads to zero-shot transfer to new motif chains with no performance cost. Besides proposing an efficient, robust and flexible RNN architecture, our results shed new light on the function of motor preparation in the brain.",
+    "keywords": [
+      "neuroscience",
+      "dynamical systems",
+      "thalamocortical architecture",
+      "motor preparation",
+      "continual learning",
+      "hierarchical continuous motor control",
+      "out-of-distribution generalization",
+      "robustness"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=qfLJBJf_DnH"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The article proposes a biologically inspired architecture which increases the degree to which simple recurrent neural networks may be able to chain together elemental output sequences. The authors show that the proposed \"predatory module\" allows networks to perform on par as if the network were starting from a set initial state, while also providing a smooth transition between motifs.",
+    "main_review": "Pros\n- The modification that's required to the \"control\" network in order is extremely simple, and has a clear theoretical goal of decreasing \"residual\" activity between motif transitions, without quenching activity in response to the new control signal.\n- The level of experimental detail is sufficient such that the experiments  in the main text can be replicated by an independent reader.\n\nCons\n- The methods in the main text are clear, and lead to convincing results in the main-section. However, without digging much deeper into appendix 4 & 5, there's no clear reason why the learned preparatory modules are able function",
+    "summary_of_the_review": "The preparatory module appears to function well, and the quenching activity is reasonable well tied to biological thalamocortical loop actions. To my knowledge, the motif-transition problem is not solved in switching recurrent networks, however I am not overly familiar with that literature. Overall, my low confidence ratings come from not knowing how interesting or novel the analytical work in the appendices is.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1043,
+    "words": 163,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4490eb92-7e7e-418b-8585-7abf32d0f525",
+    "error": null,
+    "scored_chars": 1044
+  }
+}

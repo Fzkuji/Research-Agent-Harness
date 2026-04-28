@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "xOqqlH_E5k0",
+  "reviewer": "y9Ct",
+  "paper": {
+    "title": "Augmented Deep Unrolling Networks for Snapshot Compressive Hyperspectral Imaging",
+    "authors": [
+      "Xinran Qin",
+      "Yuhui Quan",
+      "Hui Ji"
+    ],
+    "abstract": "Snapshot compressive hyperspectral imaging requires reconstructing a hyperspectral image from its snapshot measurement. This paper proposes an augmented deep unrolling neural network for solving such a challenging reconstruction problem. The proposed network is based on the unrolling of a proximal gradient descent algorithm with two innovative modules for gradient update and proximal mapping. The gradient update is modeled by a memory-assistant descent module motivated by the momentum-based acceleration heuristics. The proximal mapping is modeled by a sub-network with a cross-stage self-attention which effectively exploits inherent self-similarities of a hyperspectral image along the spectral axis, as well as enhancing the feature flow through the network. Moreover, a spectral geometry consistency loss is proposed to encourage the model to concentrate more on the geometric layer of spectral curves for better reconstruction. Extensive experiments on several datasets showed the performance advantage of our approach over the latest methods.",
+    "keywords": [
+      "Hyperspectral Imaging",
+      "Snapshot Compressive Imaging",
+      "Image Reconstruction",
+      "Deep Unrolling Networks"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=xOqqlH_E5k0"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a new unrolled neural network architecture for the problem of snapshot compressive hyperspectral imaging.\nThe architecture is inspired from proximal gradient descent, where both the gradient update and the proximal mapping steps are replaced by two recurrent modules.\nThe former (Memory-Assistant Descent) is based on ConvLSTM, and the latter (Cross-stage Attentive Proximal sub-network) uses a combination of convolutions, self-attention and triplet attention.\nThe authors compare against multiple recent approaches on several datasets.",
+    "strengths_and_weaknesses": "# Strengths\n* The method achieves very good performances on noise-free data\n* The performances are compared against several recent methods\n* Several datasets are used to show the superior performances of the proposed method\n* Ablation studies are provided for multiple parts of the method, allowing to validate the overall significance of the main contributions\n\n# Weaknesses\n* All quantitative results shown are valid on noise-free measurements only.\n  * No quantitative results are provided for noisy measurements, although the image formation model described in the introduction explicitly mentions the presence of noise on measurements. \n  * This is even more dissonant as the model is fine-tuned on synthetic **noisy** data (shot noise) before applying it to real data for visual assessment, which indicates that the noise-free setting is not very realistic.\n* The authors claim that the visual results on real data is sufficient evidence of the good generalization of the method on real measurement data (i.e. with noise). This is not a convincing argument as it is very difficult to see any improvement of the proposed method over its competitors on real data.\n* All quantitative results are provided without error bars.\n* No visual comparison is provided against the most competitive methods (HDNet, MST-L) on real data.",
+    "questions": "* Regarding generalization to real data:\n  * As previously stated, visual comparison on real data is not provided against the most performant methods (HDNet, MST-L). This would help assessing the performance of the method.\n  * A convincing argument would be to provide quantitative results on synthetic data **with noisy measurements**, similar to table 2 of the paper TSA-Net, where the authors argue that shot noise is realistic in this setting.\n* There is no evidence that the unrolled architecture is beneficial with this method. An ablation study with a few different number of iterations/stages would be more convincing (including the limit case of a single iteration).\n* Since both the Gradient Update and the Proximal Mapping modules benefits from using information across several stages/iterations, what is the justification for using different recurrent architectures (ConvLSTM and \"Cross-stage self-attention\") for tasks which are so similar in spirit ? If the authors disagree with this last statement, please explain why.\n* The use of triplet attention for the CAP module is mentioned, but it would be helpful to develop a bit more why it is used here.\n* It should be made clearer that the results presented in table 1 and table 2 are for noise-free synthetic data.\n* What is the batch size used ?\n* Minor:\n  * The same notation is used to denote convolutions (eq. 10-13 and 15) and matrix multiplication (eq. 14). It would be clearer to denote the convolution operation with a dedicated symbol (see for example the ConvLSTM paper), and more coherent as the Hadamard operator has its own explicit symbol.\n  * In eq 16, the symbol used for concatenation is ambiguous.\n  * l. 202: it is unclear what the authors refer to as \"padding number\". Another formulation would be clearer.\n  * l. 79: supposed to **be** (I guess)\n  * eq. 10-11: missing term with **C^(k-1)**\n  * l. 201: please provide citation for PyTorch\n  * Table 1: \n    * the table is difficult to read. It would benefit from enhancing the separation between methods (spacing or horizontal lines).\n    * the number of parameters of DNU should be in bold\n  * fig. 2-3 of main paper and fig. 3 of supplemental: DGMP -> DGMSP ?\n  * on visual comparison, it would be helpful to know which spectral channel are shown.\n  * on visual comparison on real data, it would be helpful to display the zoomed region on the reference and snapshot, as it is done with the results\n  * l. 149: decent -> descent",
+    "limitations": "* The broader impact section is not included in the 9 pages limit. Instead it is addressed in the supplemental material.\n* The authors do not address the fact that their quantitative experiments are only valid on noise-free measurements only.\n* The authors adequately mention the limitations of the supervised framework, i.e. its dependency on the amount of data available."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "XII0Wp1XA9",
+  "reviewer": "2JJf",
+  "paper": {
+    "title": "A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration",
+    "authors": [
+      "Zijun Liu",
+      "Yanzhe Zhang",
+      "Peng Li",
+      "Yang Liu",
+      "Diyi Yang"
+    ],
+    "abstract": "Recent studies show that collaborating multiple large language model (LLM) powered agents is a promising way for task solving. However, current approaches are constrained by using a fixed number of agents and static communication structures. In this work, we propose automatically selecting a team of agents from candidates to collaborate in a dynamic communication structure toward different tasks and domains. Specifically, we build a framework named Dynamic LLM-Powered Agent Network ($\\textbf{DyLAN}$) for LLM-powered agent collaboration, operating a two-stage paradigm: (1) Team Optimization and (2) Task Solving. During the first stage, we utilize an agent selection algorithm, based on an unsupervised metric called Agent Importance Score, enabling the selection of best agents according to their contributions in a preliminary trial, oriented to the given task. Then, in the second stage, the selected agents collaborate dynamically according to the query. Empirically, we demonstrate that DyLAN outperforms strong baselines in code generation, decision-making, general reasoning, and arithmetic reasoning tasks with moderate computational cost. On specific subjects in MMLU, selecting a team of agents in the team optimization stage improves accuracy by up to 25.0% in DyLAN.",
+    "keywords": [
+      "large language model",
+      "LLM-powered agent",
+      "multi-agent collaboration",
+      "team optimization"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=XII0Wp1XA9"
+  },
+  "review_fields": {
+    "summary": "In this paper, it proposes a new method for dynamically conduct multi-agent collaboration. In incorporates the team operation process and task solving process, which can improve the performance of agent collaborations. The experiments have shown the effectiveness of this method.",
+    "reasons_to_accept": "Advantage:\n1.The problem is practical and the motivation is sensible. It is similar to create a meta agent filter to construct an agent team. Some previous works like MetaGPT also study this problems as well.\nThe techniques sound great, which utilizes methods from graph learni",
+    "reasons_to_reject": "Shortcoming & Question:\n1.It seems that there is no error bar in the results of experiments.\n2.What about the comparison with MetaGPT?\n3.The paper formatting can be improved, such as reducing the empty blocks within it."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:32Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:32Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 509,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f0717e44-df99-4bf5-803e-b9632802381b",
+    "error": null,
+    "scored_chars": 509
+  }
+}

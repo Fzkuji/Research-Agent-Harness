@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "tmIiMPl4IPa",
+  "reviewer": "n5hB",
+  "paper": {
+    "title": "Factorized Fourier Neural Operators",
+    "authors": [
+      "Alasdair Tran",
+      "Alexander Mathews",
+      "Lexing Xie",
+      "Cheng Soon Ong"
+    ],
+    "abstract": "We propose the Factorized Fourier Neural Operator (F-FNO), a learning-based approach for simulating partial differential equations (PDEs). Starting from a recently proposed Fourier representation of flow fields, the F-FNO bridges the performance gap between pure machine learning approaches to that of the best numerical or hybrid solvers. This is achieved with new representations – separable spectral layers and improved residual connections – and a combination of training strategies such as the Markov assumption, Gaussian noise, and cosine learning rate decay. On several challenging benchmark PDEs on regular grids, structured meshes, and point clouds, the F-FNO can scale to deeper networks and outperform both the FNO and the geo-FNO, reducing the error by 83% on the Navier-Stokes problem, 31% on the elasticity problem, 57% on the airfoil flow problem, and 60% on the plastic forging problem. Compared to the state-of-the-art pseudo-spectral method, the F-FNO can take a step size that is an order of magnitude larger in time and achieve an order of magnitude speedup to produce the same solution quality.",
+    "keywords": [
+      "fourier transform",
+      "fourier operators",
+      "pde",
+      "navier stokes"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=tmIiMPl4IPa"
+  },
+  "review_fields": {
+    "comment": "I would like to thank the authors for the rebuttal. At the outset, it is hard to judge the precise changes made by the authors since they are not clearly delineated (i.e they are not either written in a different color or any other means) which makes it hard to adjudge what precisely has changed. From the looks of it the three contributions laid out in the introduction seem to be pretty much overhauled.\n\nI still think that the architectural details and the other training techniques (known to perform better in general like teacher forcing, cosine lr and residual connections) is not very novel. (Residual connections helping for depth is not very surprising given vanishing gradients). \n\nI thank the authors for clarifying the points on complex geometries and how FNO can’t be a proper baseline, I presume geo-FNO is a more reasonable baseline which the authors have indeed compared against. \n\nI have increased this score to a 5. However, I still maintain that the contributions are not novel enough."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

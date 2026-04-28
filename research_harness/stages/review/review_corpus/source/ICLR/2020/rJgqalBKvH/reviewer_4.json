@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "rJgqalBKvH",
+  "reviewer": "4",
+  "paper": {
+    "title": "Deceptive Opponent Modeling with Proactive Network Interdiction for Stochastic Goal Recognition Control",
+    "authors": [
+      "Junren Luo",
+      "Wei Gao",
+      "Zhiyong Liao",
+      "Weilin Yuan",
+      "Wanpeng Zhang",
+      "Shaofei Chen"
+    ],
+    "abstract": "Goal recognition based on the observations of the behaviors collected online has been used to model some potential applications. Newly formulated problem of goal recognition design aims at facilitating the online goal recognition process by performing offline redesign of the underlying environment with hard action removal.\nIn this paper, we propose the stochastic goal recognition control (S-GRC) problem with two main stages: (1) deceptive opponent modeling based on maximum entropy regularized Markov decision processes (MDPs) and (2) goal recognition control under proactively static interdiction.\nFor the purpose of evaluation, we propose to use the worst case distinctiveness (wcd) as a measure of the non-distinctive path without revealing the true goals, the task of S-GRC is to interdict a set of actions that improve or reduce the wcd.\nWe empirically demonstrate that our proposed approach control the goal recognition process based on opponent's deceptive behavior.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=rJgqalBKvH"
+  },
+  "review_fields": {
+    "experience_assessment": "I do not know much about this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I made a quick assessment of this paper.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I did not assess the derivations or theory.",
+    "review": "This paper aims to provide a goal recognition framework. The paper reviews previous literature and outlines a model, but it seems to be at the draft stage as it stands as the experiment section is missing (section 4). Also, in some parts the sentences are broken and hard to follow, for example, “Here we formulate the stochastic goal recognition control (S-GRC) problem as an extension of the GRD problem to allows non-optimal agents and stochastic actions, which means the agent’s action are not deterministic and the possible successor states are with probability, the measures we can take are interdictions with cost.”\nBased on the above comments I think the paper is not ready for publication."
+  },
+  "review_metadata": {
+    "rating": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

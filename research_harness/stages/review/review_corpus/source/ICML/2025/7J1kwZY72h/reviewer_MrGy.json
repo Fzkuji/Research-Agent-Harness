@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "7J1kwZY72h",
+  "reviewer": "MrGy",
+  "paper": {
+    "title": "Kinetic Langevin Diffusion for Crystalline Materials Generation",
+    "authors": [
+      "François R J Cornet",
+      "Federico Bergamin",
+      "Arghya Bhowmik",
+      "Juan Maria Garcia-Lastra",
+      "Jes Frellsen",
+      "Mikkel N. Schmidt"
+    ],
+    "abstract": "Generative modeling of crystalline materials using diffusion models presents a series of challenges: the data distribution is characterized by inherent symmetries and involves multiple modalities, with some defined on specific manifolds. Notably, the treatment of fractional coordinates representing atomic positions in the unit cell requires careful consideration, as they lie on a hypertorus. In this work, we introduce Kinetic Langevin Diffusion for Materials (KLDM), a novel diffusion model for crystalline materials generation, where the key innovation resides in the modeling of the coordinates. Instead of resorting to Riemannian diffusion on the hypertorus directly, we generalize Trivialized Diffusion Model (TDM) to account for the symmetries inherent to crystals. By coupling coordinates with auxiliary Euclidean variables representing velocities, the diffusion process is now offset to a flat space. This allows us to effectively perform diffusion on the hypertorus while providing a training objective that accounts for the periodic translation symmetry of the true data distribution. We evaluate KLDM on both Crystal Structure Prediction (CSP) and De-novo Generation (DNG) tasks, demonstrating its competitive performance with current state-of-the-art models.",
+    "keywords": [
+      "generative models",
+      "diffusion models",
+      "crystals",
+      "materials"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7J1kwZY72h"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a diffusion model tailored for crystalline material generation. It utilizes the specific manifold structure of the data, and applies the framework of Trivialized Diffusion model, which is a diffusion model that works on Lie groups. This framework avoids doing Riemannian diffusion by taking the tangent space and defining the noising process on the velocity, which lies in an Euclidean space, largely simplifies the computation. It demonstrates empirical performance on structure prediction and de novo generation tasks, with comparable performance with existing methods.\n## Update after rebuttal\nThank you for adding these empirical results, comparison and explanations. I have raised my score accordingly.",
+    "claims_and_evidence": "The claims made in the submission are supported by clear and convincing evidence.",
+    "methods_and_evaluation_criteria": "The methods that specifically design diffusion process for the coordinate parametrization of the crystalline data structures makes sense.\n\nFor the structure prediction task, it compares RMSE with ground truth and Match Rate. For RMSE computation, I wonder if it considered the symmetry of the coordinates as described in section 2.1.\n\nThe Metric for de novo generation makes sense and aligns with literature.",
+    "theoretical_claims": "I checked the main ideas, the transition kernels and objectives, and they make sense. I did not look into the details of the derivation in the appendix.",
+    "experimental_designs_or_analyses": "The experimental designs are sound. The structure prediction and de novo generation make sense. The ablation study shows the simplified parameterization improves the accuracy of the prediction. The paper also mentions “the simplified parameterization” leads to faster convergence, but I did not see quantitative results supporting this.",
+    "relation_to_broader_scientific_literature": "How are the key contributions of the paper related to the broader scientific literature? Be specific in terms of prior related findings/results/ideas/etc.\n\nThis paper mainly uses the Trivialized Diffusion Model, which enables simpler training of diffusion model for data with a Lie group structure. It provides an interesting direction of designing the diffusion process specific to the algebraic and geometric structure of crystals. It has application in structure prediction and crystal generation.",
+    "other_strengths_and_weaknesses": "Strengths: The idea of designing the diffusion process and score-matching objective specific to the crystal problem is novel, and the application of the trivialized diffusion model for this data with the group structure is interesting.\n\nWeaknesses: Analysis and result of complexity, convergence, are missing, which would support the benefit of this approach over existing methods. Especially given the fact that it does not outperform them for de novo generation tasks.",
+    "other_comments_or_suggestions": "For de novo generation, the performance is not as good as existing methods. Maybe a future direction would be adding some guidance of those desirable structures.",
+    "questions_for_authors": "Can you provide a complexity analysis and comparison with the existing methods, especially the ones using Riemannian Diffusion models on manifolds? Is the matrix exponential step slow to compute, or are they simplified with the trigonometric functions? Compared to existing methods (DIFFCSP), are there less parameters?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

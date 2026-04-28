@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "rJgqalBKvH",
+  "reviewer": "2",
+  "paper": {
+    "title": "Deceptive Opponent Modeling with Proactive Network Interdiction for Stochastic Goal Recognition Control",
+    "authors": [
+      "Junren Luo",
+      "Wei Gao",
+      "Zhiyong Liao",
+      "Weilin Yuan",
+      "Wanpeng Zhang",
+      "Shaofei Chen"
+    ],
+    "abstract": "Goal recognition based on the observations of the behaviors collected online has been used to model some potential applications. Newly formulated problem of goal recognition design aims at facilitating the online goal recognition process by performing offline redesign of the underlying environment with hard action removal.\nIn this paper, we propose the stochastic goal recognition control (S-GRC) problem with two main stages: (1) deceptive opponent modeling based on maximum entropy regularized Markov decision processes (MDPs) and (2) goal recognition control under proactively static interdiction.\nFor the purpose of evaluation, we propose to use the worst case distinctiveness (wcd) as a measure of the non-distinctive path without revealing the true goals, the task of S-GRC is to interdict a set of actions that improve or reduce the wcd.\nWe empirically demonstrate that our proposed approach control the goal recognition process based on opponent's deceptive behavior.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=rJgqalBKvH"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review": "This paper studies goal recognition control given a deceptive opponent, who selects actions to intentionally mislead or confusing the learner to learn the true goal. The problem has been studied in the security game, resource allocation game and Stackelberg game, where the defender is to play a resource allocation game given the best response of the attacker. in this paper, the authors use stochastic-shortest-path MDP to model the attacker's planning problem. The defender's objective is stated in eq (2) and (3) but not explained clearly.\n\nThe work considers a deceptive attacker whose objective is not to maximize the total reward/minimize the total cost, but rather to balance two objectives: minimizing the total cost while maximizing the KL divergence between its current policy and the optimal goal-achieving policy. This opponent model seems to be simplistic, given security game has studied the opponent using more rigorous equilibrium analysis and with dynamic Bayesian game formulation. \n\nsee Manshaei, Mohammad Hossein, et al. \"Game theory meets network security and privacy.\" ACM Computing Surveys (CSUR) 45.3 (2013): 25.\n\nThe practical application is well motivated.  The paper itself is incomplete and contains many typos. The paper is unfinished."
+  },
+  "review_metadata": {
+    "rating": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

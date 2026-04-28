@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "0Kj5mhn6sw",
+  "reviewer": "mN3D",
+  "paper": {
+    "title": "Gesture2Vec: Clustering Gestures using  Representation Learning Methods for Co-speech Gesture Generation",
+    "authors": [
+      "Payam Jome Yazdian",
+      "Mo Chen",
+      "Angelica Lim"
+    ],
+    "abstract": "Co-speech gestures are a principal component in conveying messages and enhancing interaction experiences between humans. Similarly, the co-speech gesture is a key ingredient in human-agent interaction including both virtual agents and robots. Existing machine learning approaches have yielded only marginal success in learning speech-to-motion at the frame level. Current methods generate repetitive gesture sequences that lack appropriateness with respect to the speech context. In this paper, we propose a Gesture2Vec model using representation learning methods to learn the relationship between semantic features and corresponding gestures. We propose a vector-quantized variational autoencoder structure as well as training techniques to learn a rigorous representation of gesture sequences. Furthermore, we use a machine translation model that takes input text and translates it into a discrete sequence of associated gesture chunks in the learned gesture space. Ultimately, we use translated quantized gestures from the input text as an input to the autoencoder’s decoder to produce gesture sequences. The resulting gestures can be applied to both virtual agents and humanoid robots. Subjective and objective evaluations confirm the success of our approach in terms of appropriateness, human-likeness, and diversity.",
+    "keywords": [
+      "representation learning",
+      "gesture generation",
+      "vector quantization",
+      "machine translation"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=0Kj5mhn6sw"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "In this paper, the authors propose an approach to perform co-speech gesture generation. A model Gesture2Vec is proposed to first learn the latent representation of gesture sequences. A vector quantized variational autoencoder is used to learn a codebook of different kinds of gesture sequences speaker's gesture manifold. Finally, the pre-trained decoder and codebook representations are conditioned on a sequence of language tokens to generate relevant co-speech gestures. This approach is tested on a public dataset containing a single speaker objective and subjective metrics.",
+    "main_review": "### **Strengths**\n\n- The choice of learning a representation of a gesture sequence instead of a single frame can indeed provide the model with the ability to generate plausible gesture sequences. This is corroborated by somewhat better subjective evaluation scores.\n\n### **Weaknesses and Suggestions**\n- The novelty of the contributions is overplayed in the paper. Most of the discussion is about prior work on VAE, VQVAE, crossmodal conditional VQVAE decoding [1]. Learning representations for gesture sequence is an incremental contribution (it is also quite similar to Hierarchical VQVAE[6]), but ablation studies discussing its importance is missing. Hence it is hard to judge whether these representations really helped with the performance. \n\n- As the task is to generate a sequence of upper body gestures, it would have been more convincing to see some demo videos. While I appreciate the subjective evaluation studies, it is hard to judge the output of a generative model without actually having seen any examples. \n\n- Method: The overall method explained in Sections 3.1 and 3.2 is effectively paraphrasing the VAE and VQVAE papers. Only a small portion on sequence level representation learning seems to be novel. It would have been better to see significantly more descriptions about the contributions instead of the prior work. \n\n- A big chunk of the paper talks about the representation learning of co-speech gestures, yet there is no analysis of these representations. There are several challenges that could occur with a sequence level codebook, two of which are as follows:\n  - How do two sequences, one of which is a shifted version of the other (i.e. the two sequences are x[0:30] and x[10:40]), appear in the latent space? Are they represented by the same code in the codebook? If yes, how does the decoder figure out where to start the gesture from, 0 or 10? \n  - What is the optimal number of codes in the codebook that is able to represent the manifold of all possible gestures? How is the value of K=300 chosen? Often, if the value of K is higher than optimal, there can be codes that are very close to each other. This is similar to the challenge of choosing more cluster centers than the data requires. Here, what could happen is that the language encoder (in the third step) will now be uncertain about which code to choose from.\n\n- Section 3.3 - In step 3, the text features are used to choose a sequence of codes which are later decoded into gesture sequences. An interesting metric here could be measuring the classification accuracy of these codes. This could also help measure the uncertainty of prediction of the gestures which is not possible in the system with implicit generative models like GANs.\n\n- Section 4.2 VQ-DVAE - The derivatives (i.e speed/velocity) of the pose representations of the input were also fed in with the pose representations as a proxy for motion dynamics. This makes an assumption that transformations such as addition or subtraction in pose representations are equivalent to the same transformations in the original pose. This is in general not true as the network used here is non-linear. \n\n- It is not clear when the decoder is frozen (Section 4.3 on Weakened decoders)? Is it during step 1, 2 or 3?\n\n- Section 5.1 Baselines: Some of the baselines are missing including [2] (text + audio input with a gesture as output), [4](audio input and gesture as output) and [5] (text input and human body motion as output with a seq2seq architecture).\n\n- Hellinger distance: The authors propose the use of Hellinger distance as an objective metric to measure the distance between the distributions of the generated gestures and ground truth gestures. While measuring the distribution distance is a good idea, it has been proposed for the same task in [2] and [3] with the use of Wasserstein Distance (i.e FID[2] or FGD[3]). There is a tradeoff between Hellinger distance and Wasserstein distance. They both have similar properties when the domains of the two distributions have some overlap. But as soon as the overlap between the distributions becomes zero, Hellinger distance fails to give any information on how far the two distributions are. Wasserstein distance on the other hand will still be able to give information on how far the two distributions are.\n\n- Table 1: What is the average jerk of the ground truth gestures so high ($1588.63 \\pm 2899.61$)? The interval covered by the GT jerk is [$-1310.98, 4400.24$] which encompasses the jerk vaues of all the models. Hence, this experiment can't definitively say much about the performance of baselines and the proposed model. \n\n- Ablations: There are many hyperparameters in this approach, including codebook size K, gesture sequence length (which was taken as 30 arbitrarily), DAE bottleneck. In section 3.2, the description of the model indicates that it also predicts the velocity of the output poses. Why is that necessary? It was also not clear how that affects the learnt representations.\n\n- The paper is fairly confusing, and hence unclear at times. The clarity of the paper can definitely be improved a lot with a significant re-write. For example:\n  - In Section 4, it is mentioned that the Euler angles were converted to joint positions. But in Section 4.1, it is stated that 3x3 rotational matrices were used instead of 3D coordinates. These two statements are inconsistent.\n  - In section 4.1, it is stated that the model is trained with differently sized latent embedding bottlenecks to find the optimal size. But the next statement mentions that a dimension size of 40 is chosen similar to Thangthai et. al. 2021 and Kucharenko et. al. 2019. These statements are contradictory.\n  - It wasn't very clear how that learn representations of the DAE were used as part of the second VQ-DVAE. I had to infer this from the 40+40=80 dimensional vector in Section 4.2. \n  - The terms DAE and VAE have been used interchangeably. It would be good to stick to one of them.\n\n\nReferences\n- [1] Richard, Alexander, et al. \"MeshTalk: 3D Face Animation from Speech using Cross-Modality Disentanglement.\" ICCV 2021\"\n- [2] Ahuja, Chaitanya, et al. \"No Gestures Left Behind: Learning Relationships between Spoken Language and Freeform Gestures.\" Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: Findings. 2020.\n- [3] Yoon, Youngwoo, et al. \"Speech gesture generation from the trimodal context of text, audio, and speaker identity.\" ACM Transactions on Graphics (TOG) 39.6 (2020): 1-16. \n- [4] Ginosar, Shiry, et al. \"Learning individual styles of conversational gesture.\" Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2019.\n- [5] Ahuja, Chaitanya, and Louis-Philippe Morency. \"Language2pose: Natural language grounded pose forecasting.\" 2019 International Conference on 3D Vision (3DV). IEEE, 2019.\n- [6] Razavi, Ali, Aaron van den Oord, and Oriol Vinyals. \"Generating diverse high-fidelity images with vq-vae-2.\" Advances in neural information processing systems. 2019.",
+    "summary_of_the_review": "While the motivation behind the learning representations of a gesture sequence instead of single frames is interesting, it is not executed very well. A lot of time has been spent explaining prior work instead of the contributions. The experiments to analyse the learnt representations is also lacking. Some of the details in the paper are confusing and hence needs significant revisions. And finally, being a generative modelling task, it would have been good to see some example videos.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "text_too_long",
+    "error": "text is 7538 chars; GPTZero landing-page Scan accepts at most ~5000 chars before showing a Premium upsell modal. Split the text into smaller fields (per-section) and call this function once per field. (Premium dashboard can do 150k chars at once but uses a different flow this adapter does not implement.)",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": 7538,
+    "words": null,
+    "ai_vocab": null,
+    "url": null,
+    "scored_chars": 7538
+  }
+}

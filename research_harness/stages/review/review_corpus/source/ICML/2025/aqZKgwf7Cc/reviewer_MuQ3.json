@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "aqZKgwf7Cc",
+  "reviewer": "MuQ3",
+  "paper": {
+    "title": "Time to Spike? Understanding the Representational Power of Spiking Neural Networks in Discrete Time",
+    "authors": [
+      "Duc Anh Nguyen",
+      "Ernesto Araya",
+      "Adalbert Fono",
+      "Gitta Kutyniok"
+    ],
+    "abstract": "Recent years have seen significant progress in developing spiking neural networks (SNNs) as a potential solution to the energy challenges posed by conventional artificial neural networks (ANNs). However, our theoretical understanding of SNNs remains relatively limited compared to the ever-growing body of literature on ANNs. In this paper, we study a discrete-time model of SNNs based on leaky integrate-and-fire (LIF) neurons, referred to as discrete-time LIF-SNNs, a widely used framework that still lacks solid theoretical foundations. We demonstrate that discrete-time LIF-SNNs realize piecewise constant functions defined on polyhedral regions, and more importantly, we quantify the network size required to approximate continuous functions. Moreover, we investigate the impact of latency (number of time steps) and depth (number of layers) on the complexity of the input space partitioning induced by discrete-time LIF-SNNs. Our analysis highlights the importance of latency and contrasts these networks with ANNs that use piecewise linear activation functions. Finally, we present numerical experiments to support our theoretical findings.",
+    "keywords": [
+      "Spiking neural networks",
+      "Linear regions",
+      "Approximation theory"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=aqZKgwf7Cc"
+  },
+  "review_fields": {
+    "summary": "The paper presents bounds on the capacity of spiking neural networks to approximate functions on static inputs for discrete-time spiking neural networks. The theory includes a universal approximation theorem (which is simple, as noted by the authors), and d bound on the number of regions. The experiments cover the effect of layer width on the capacity of the network, some effects of the decay term, and a counting of the number of regions in very small networks.",
+    "claims_and_evidence": "I think the claims on the abstract are omitting an important fact: their results are only applicable to static inputs. Even the title refers to time, but the rest of the paper does not really address timing or temporal patterns. The authors should really mention this.",
+    "methods_and_evaluation_criteria": "It is not entirely clear to me why did the authors chose CIFAR for small, feed-forward networks, where something simpler (MNIST) would be more appropriate given the scale used.\nThe use of very small networks in 5.3 is ok for illustration, but it would be useful to know how this scales (if possible, if not explain).\nTable 1 should be complemented by the growth of number of regions with T. ALso, I would imagine that for T=1 this result is the same as for heavyside networks, so it would be useful to know how much the difference is.",
+    "theoretical_claims": "The proofs look reasonable.\n\nHowever, there are a couple of issues:\n- The standard LIF model is not strictly what is used in Eq. 1. There the autors reduce the membrane potential by a fixed amount, whereas the classical LIF model sets the membrane potential to a specific value. The authors should mention this distinction.\n- The proof sketch for 3.1 is rather hard to follow for something that is meant to give an intuition. I think the authors should state something along the lines of: partition the input state space in hypercubes of maximum radius r (bounded by the lipschitz constant I assume), this is the first layer. then partition the ouptut space in a similar fashion, every output is one neuron. Connect every input to every output. Although I might have misunderstood the proof.\n- The first part of Proposition 3.3 seems to be the same as Thm. 3.2. If that is the case, then the proposition should also mention the lower bound. But then again, is not clear to me when do you used the lower bound. So I don't really know why you need this propositoin.\n- The remark on the comparison with RELUS (expressivity growth) could be misleading. If I understand this correctly, the growth might be faster but it would saturate if beta < 1 (periodic case, there is a maximum latency). For beta =1, I am not 100% that the growth will continue (because this might be similar to a quantized network, which is definitelly less expressive than ReLu).\n- I think a comparison with the continuous-time LIF should be discussed.",
+    "experimental_designs_or_analyses": "The experiments are alright, but there are a couple of problems:\n- They only report training accuracies, not testing accuracies. While I get that for the expressivity it does not matter, I think it would be useful to at least know if the trends translate to testing.\n- Why did the authors pick a linear separation toy example, when their theory refers to networks that could compute any function? I think it would be useful to try some more complex logic functions (XOR or parity checks, for example). This would require more regions than currently specified by the linear case.",
+    "relation_to_broader_scientific_literature": "I think that the authors could discuss the relationship of their work with the expessivity of quantized neural networks, specially in the case of beta=1. The rationale is that if the neurons are simply integrating binary inputs, then it can be considered as a form of counting discrete inputs. It would also help to note that quantized networks might in principle be a better solution for low-power ANNs dealing with static inputs.",
+    "essential_references_not_discussed": "Quantized neural networks, if the connection is relevant (which I think it is).\nAlso, whether T=1 recovers the existing bounds with heavyside activation functions on ANNs should be mentionned.",
+    "other_strengths_and_weaknesses": "I think it's good to have such theorems for SNNs. Also, the relevance of the first layer is an interesting angle.\nThe main weakness is that the title/abstract does not mention the key limitation (temporal structure is missing).",
+    "other_comments_or_suggestions": "- Typo in Proposition 3.3, the infinity should be on the low.\n When writing back, please do not be overly polite. I would prefer to have just the answers to the points raised without mentioning how nice of me to do this at every answer.",
+    "questions_for_authors": "I don't see the point of Proposition 3.3. Looks very similar to the previous theorem, just with a lower bound as an add-on that is not really used anywhere else. Did I miss something?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

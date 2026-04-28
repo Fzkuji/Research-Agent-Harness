@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "jT1EwXu-4hj",
+  "reviewer": "Lm9j",
+  "paper": {
+    "title": "From Intervention to Domain Transportation: A Novel Perspective to Optimize Recommendation",
+    "authors": [
+      "Da Xu",
+      "Yuting Ye",
+      "Chuanwei Ruan",
+      "Evren Korpeoglu",
+      "Sushant Kumar",
+      "Kannan Achan"
+    ],
+    "abstract": "The interventional nature of recommendation has attracted increasing attention in recent years. It particularly motivates researchers to formulate learning and evaluating recommendation as causal inference and data missing-not-at-random problems. However, few take seriously the consequence of violating the critical assumption of overlapping, which we prove can significantly threaten the validity and interpretation of the outcome. We find a critical piece missing in the current understanding of information retrieval (IR) systems: as interventions, recommendation not only affects the already observed data, but it also interferes with the target domain (distribution) of interest. We then rephrase optimizing recommendation as finding an intervention that best transports the patterns it learns from the observed domain to its intervention domain. Towards this end, we use domain transportation to characterize the learning-intervention mechanism of recommendation. We design a principled transportation-constraint risk minimization objective and convert it to a two-player minimax game.\nWe prove the consistency, generalization, and excessive risk bounds for the proposed objective, and elaborate how they compare to the current results. Finally, we carry out extensive real-data and semi-synthetic experiments to demonstrate the advantage of our approach, and launch online testing with a real-world IR system.",
+    "keywords": [
+      "Information retrieval",
+      "Learning theory",
+      "Causal inference",
+      "Missing data",
+      "Overlapping",
+      "Reweighting",
+      "Optimal transport"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=jT1EwXu-4hj"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "In this paper, the authors first point out that the requirement of efficiency of IW- and DA-based methods is the overlapping between the source domain and target domain. Meanwhile, theoretical analysis also shows that insufficient overlapping problems can cause the hardness or impossibility of IW- and DA-based learning methods. In light of this, this paper aims to propose a novel method to optimize recommendation results by solving such insufficient overlapping problems. Specifically, a principled transportation-constraint risk minimization objective function is devised to optimize the recommendation results, which is able to transport the learned patterns from the source domain to the intervention domain better. Then a two-layer adversarial model (GDA) is deployed to optimize the transportation-constraint risk minimization objective function, and sufficient analysis of the GDA is provided. Extensive experiments were conducted on both real datasets and semi-synthetic datasets to show the superiority of the proposed method.",
+    "main_review": "Pros: \n\t1. This paper identifies and tries to tackle an important problem in recommender systems - insufficient overlapping. The theoretical proof is given to show the uncertainty of the results.  \n\t2. Generally speaking, the paper is well-written and well-presented. Though many mathematical theorems are contained in this paper, it is easy to follow for readers.\n\t3. The proposed method is novel and can inspire future research in recommender systems. \n\t4. The experiments are sufficient to validate the claims.\n\nCons:\n\t1. There are some small typos that should be fixed before publication. \n\t\t1. In claim 1, E_Q R(f) should be E_Pw R(f).\n\t\t2. In Table 1, the Hit@10 of DT-MCF on LastFM is 81.81(20). I am confused as 20 is pretty high, and maybe here is (0.20) or (.02).\n\t\t3. In Section 5, we randomly sample m < |I| items and see if i' is among the top-K of these m items. items should be unrelated items. Also, the same questions occurred in other parts. I suggest to double-check that.\n\n\t2. \\mu is also an important hyperparameter, and authors also mentioned that a suitable \\mu will give us the opportunity to better explore the whole feedback data. I recommend that the parameter sensitivity of \\mu should be conducted. \n\t3. The main contribution is to address the insufficient overlapping problem that causes the uncertainty of IW and DA-based methods. However, in the experiment part, IW and DA-based methods are not compared with. I recommend that DT-IW and DT-WA should be included.\n\t4. The motivation is somehow unclear and the presentation of introduction could be further improved. A more detailed explanation about the relationships between intervention and domain adaption, intervention and the proposed method, why the proposed method can address insufficient overlapping problems, etc should be introduced.",
+    "summary_of_the_review": "The novelty of this paper is high.  However, the motivation is not quite clear, and  more IW- and DA-based methods are expected to compare in the experiment.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1962,
+    "words": 321,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b8fe203d-876c-488f-a678-d19b99ced250",
+    "error": null,
+    "scored_chars": 1984
+  }
+}

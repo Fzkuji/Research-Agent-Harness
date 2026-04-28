@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "Rupt2o4Fu6J",
+  "reviewer": "D146",
+  "paper": {
+    "title": "Machine learning structure preserving brackets for forecasting irreversible processes",
+    "authors": [
+      "Kookjin Lee",
+      "Nathaniel Trask",
+      "Panos Stinis"
+    ],
+    "abstract": "Forecasting of time-series data requires imposition of inductive biases to obtain predictive extrapolation, and recent works have imposed Hamiltonian/Lagrangian form to preserve structure for systems with \\emph{reversible} dynamics. In this work we present a novel parameterization of dissipative brackets from metriplectic dynamical systems appropriate for learning \\emph{irreversible} dynamics with unknown a priori model form. The process learns generalized Casimirs for energy and entropy guaranteed to be conserved and nondecreasing, respectively. Furthermore, for the case of added thermal noise, we guarantee exact preservation of a fluctuation-dissipation theorem, ensuring thermodynamic consistency. We provide benchmarks for dissipative systems demonstrating learned dynamics are more robust and generalize better than either \"black-box\" or penalty-based approaches.",
+    "keywords": [
+      "structure preserving machine learning",
+      "neural odes",
+      "forecasting",
+      "dissipative systems"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Rupt2o4Fu6J"
+  },
+  "review_fields": {
+    "summary": "This paper tries to learn an irreversible dynamic system with dissipation that has entropy growth. The author used a rigorous treatment and parameterization for the dissipation part and separated it from the reversible part. The parameterization naturally satisfies the degeneracy conditions. The author shows that compared to other methods that try to learn degeneracy, like the penalty-based method, this approach preserves the dynamics of damped systems in the long run.",
+    "main_review": "Originality: Preserve metriplectic structure is pretty novel compared to the Hamiltonian system, and this parametrization using the GENERIC formalism is new.\n\nQuality and Clarity: The theory and math are correct and well written. The experiments are not so appealing and convincing, although some comparisons are provided. The selection of the non-observable state is arbitrary, and no physical interpretation is provided in the paper.\n\nSignificance: The significance is not vital as some pioneering work by neural ODE and penalty-based method for dissipation treatment. This work has a more complex network while showing some noticeable improvement. In the real world, learning entropy growth is not as exciting and valuable as learning energy conservation.",
+    "limitations_and_societal_impact": "I doubt the generalization of this work as the experiments are relatively simple damped systems. I suspect the treatment in this literature can forecast some more chaotic systems or predicting something like the “butterfly effect.” There have been some potential impacts, but currently, I can only see it works for some well-studied fundamental problems."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

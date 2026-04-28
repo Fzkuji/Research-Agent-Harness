@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "B1gTShAct7",
+  "reviewer": "1",
+  "paper": {
+    "title": "Learning to Learn without Forgetting by Maximizing Transfer and Minimizing Interference",
+    "authors": [
+      "Matthew Riemer",
+      "Ignacio Cases",
+      "Robert Ajemian",
+      "Miao Liu",
+      "Irina Rish",
+      "Yuhai Tu",
+      "and Gerald Tesauro"
+    ],
+    "abstract": "Lack of performance when it comes to continual learning over non-stationary distributions of data remains a major challenge in scaling neural network learning to more human realistic settings. In this work we propose a new conceptualization of the continual learning problem in terms of a temporally symmetric trade-off between transfer and interference that can be optimized by enforcing gradient alignment across examples. We then propose a new algorithm, Meta-Experience Replay (MER), that directly exploits this view by combining experience replay with optimization based meta-learning. This method learns parameters that make interference based on future gradients less likely and transfer based on future gradients more likely. We conduct experiments across continual lifelong supervised learning benchmarks and non-stationary reinforcement learning environments demonstrating that our approach consistently outperforms recently proposed baselines for continual learning. Our experiments show that the gap between the performance of MER and baseline algorithms grows both as the environment gets more non-stationary and as the fraction of the total experiences stored gets smaller.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=B1gTShAct7"
+  },
+  "review_fields": {
+    "review": "The paper considers a number of streaming learning settings with various forms of dataset shift/drift of interest for continual learning research, and proposes a novel regularization-based objective enabled by a replay memory managed using the well known reservoir sampling algorithm.\n\nPros:\nThe new objective is not too surprising, but figuring out how to effectively implement this objective in a streaming setting is the strong point of this paper. \n\nTask labels are not used, yet performance seems superior to competing methods, many of which use task labels.\n\nResults are good on popular benchmarks, I find the baselines convincing in the supervised case.\n\nCons:\nDespite somewhat frequent usage, I would like to respectfully point out that Permuted MNIST experiments are not very indicative for a majority of desiderata of interest in continual learning, and i.m.h.o. should be used only as a prototyping tool. To pick one issue, such results can be misleading since the benchmark allows for “trivial” solutions which effectively freeze the upper part of the network and only change first (few) layer(s) which “undo” the permutation. This is an artificial type of dataset shift, and is not realistic for the type of continual learning issues which appear even in single task deep reinforcement learning, where policies or value functions represented by the model need to change substantially across learning.\n\nI was pleased to see the RL experiments, which I find more convincing because dataset drifts/shifts are more interesting. Also, such applications of continual learning solutions are attempting to solve a ‘real problem’, or at least something which researchers in that field struggle with. That said, I do have a few suggestions. At first glance, it’s not clear whether anything is learned in the last 3 versions of Catcher, also what the y axis actually means. What is good performance for each game is very specific to your actual settings so I have no reference to compare the scores with. The sequence of games is progressively harder, so it makes sense that scores are lower, but it’s not clear whether your approach impedes learning of new tasks, i.e. what is the price to pay for not forgetting?\n\nThis is particularly important for the points you’re trying to make because a large number of competing approaches either saturate the available capacity and memory with the first few tasks, or they faithfully model the recent ones. Any improvement there is worth a lot of attention, given proper comparisons. Even if this approach does not strike the ‘optimal’ balance, it is still worth knowing how much training would be required to reach full single-task performance on each game variant, and what kind of forgetting that induces."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

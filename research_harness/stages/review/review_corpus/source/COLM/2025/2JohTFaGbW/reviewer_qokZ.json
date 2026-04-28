@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "2JohTFaGbW",
+  "reviewer": "qokZ",
+  "paper": {
+    "title": "Language models align with brain regions that represent concepts across modalities",
+    "authors": [
+      "Maria Ryskina",
+      "Greta Tuckute",
+      "Alexander Fung",
+      "Ashley Malkin",
+      "Evelina Fedorenko"
+    ],
+    "abstract": "Cognitive science and neuroscience have long faced the challenge of disentangling representations of language from representations of conceptual meaning. As the same problem arises in today's language models (LMs), we investigate the relationship between LM--brain alignment and two neural metrics: (1) the level of brain activation during processing of sentences, targeting linguistic processing, and (2) a novel measure of meaning consistency across input modalities, which quantifies how consistently a brain region responds to the same concept across paradigms (sentence, word cloud, image) using an fMRI dataset (Pereira et al., 2018). Our experiments show that both language-only and language-vision models predict the signal better in more meaning-consistent areas of the brain, even when these areas are not strongly sensitive to language processing, suggesting that LMs might internally represent cross-modal conceptual meaning.",
+    "keywords": [
+      "LM–brain alignment",
+      "fMRI",
+      "conceptual meaning",
+      "cognitive neuroscience"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=2JohTFaGbW"
+  },
+  "review_fields": {
+    "summary": "The work presents an analysis of brain-LLM representation alignment. The focus here is on concepts rather than words, where concepts can be represented either as text or visually. The study uses a dataset of fMRI readings collected in three settings (word in a sentence, word in a word cloud and word with accormpanying image). Based on Pearson's correlation analysis and RSA, the authors observe that certain areas of the brain consistently respond to textual and visual stimuli corresponding to the same concept, and furthermore, these responses can be reliably predicted from LLM and VLM representations, which is interpreted as evidence for a modality-agnostic encoding of concepts in LLMs.",
+    "reasons_to_accept": "The paper is very well written. \n\nThe novel method to identify brain regions of interest through a consistency analysis is well-motivated and seems reasonable.\n\nThe authors follow standard procedures in measuring brain-LM alignment and analyse the results in sufficient depth.\n\nA good number of older and newer LMs are included in the study. \n\nAn insightful finding is reported: LLMs and VLMs show stronger alignment to brain activations in the newly-identified consisency-based regions of interest, regardless of whether these regions play a role in linguisic processing, suggesting that these models encode a modality agnostic concept representation.",
+    "reasons_to_reject": "My only concern is that the much of the work is dedicated to the novel method for region of interest identification, which in itself is not an NLP contribution. But since it is a prerequisite for the subsequent analysis, I reckon that's okay.",
+    "questions_to_authors": "How is strong and weak response defined?\n\nWhat is the interpretation of a voxel that consistently responds to one concept (e.g. bird), but not another (e.g. art)?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1058,
+    "words": 165,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1a012375-c547-4881-a0b7-30a0fff4f8e1",
+    "error": null,
+    "scored_chars": 1060
+  }
+}

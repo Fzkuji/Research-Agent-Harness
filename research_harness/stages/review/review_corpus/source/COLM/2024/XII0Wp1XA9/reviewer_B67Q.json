@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "XII0Wp1XA9",
+  "reviewer": "B67Q",
+  "paper": {
+    "title": "A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration",
+    "authors": [
+      "Zijun Liu",
+      "Yanzhe Zhang",
+      "Peng Li",
+      "Yang Liu",
+      "Diyi Yang"
+    ],
+    "abstract": "Recent studies show that collaborating multiple large language model (LLM) powered agents is a promising way for task solving. However, current approaches are constrained by using a fixed number of agents and static communication structures. In this work, we propose automatically selecting a team of agents from candidates to collaborate in a dynamic communication structure toward different tasks and domains. Specifically, we build a framework named Dynamic LLM-Powered Agent Network ($\\textbf{DyLAN}$) for LLM-powered agent collaboration, operating a two-stage paradigm: (1) Team Optimization and (2) Task Solving. During the first stage, we utilize an agent selection algorithm, based on an unsupervised metric called Agent Importance Score, enabling the selection of best agents according to their contributions in a preliminary trial, oriented to the given task. Then, in the second stage, the selected agents collaborate dynamically according to the query. Empirically, we demonstrate that DyLAN outperforms strong baselines in code generation, decision-making, general reasoning, and arithmetic reasoning tasks with moderate computational cost. On specific subjects in MMLU, selecting a team of agents in the team optimization stage improves accuracy by up to 25.0% in DyLAN.",
+    "keywords": [
+      "large language model",
+      "LLM-powered agent",
+      "multi-agent collaboration",
+      "team optimization"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=XII0Wp1XA9"
+  },
+  "review_fields": {
+    "summary": "In this paper, the author introduce the Dynamic LLM-Agent Network (DyLAN) framework, designed to facilitate collaboration automatically among multiple LLM agents.The author employs T-FNN to dynamically regulate interactions between different agents and Introducing Agent Importance Score to measure each agent's contribution, reducing manual intervention, which is quite innovative in this field. The whole framework includes two stages: \"Team Optimization\", which identifies and excludes underperforming agents, and \"Task solving\" performing inference based on the T-FFNs. \n\nThe author conducted experiments on DyLAN across four tasks: Code Generation, Decision Making, General Reasoning, and Arithmetic Reasoning, comparing it with several previous SOTA methods. DyLAN not only improves performance but also keeps API calls at a relatively low level. To demonstrate the effectiveness of DyLAN, the author conducted lots of experiments and discussions. However, many important findings were included in the appendix. Personally, I believe some crucial discussions such as C.2 and C.8 should be included in the main paper.",
+    "reasons_to_accept": "1. Using T-FNN to dynamically regulate interactions between different agents and Introducing Agent Importance Score to measure each agent's contribution, reducing manual intervention, which is quite innovative in this field.\n\n2. The idea of introducing Byzantine Consensus theory to achieve early stopping is very interesting and proved to be effictive through ablation study.\n\n3. The author demonstrated the outstanding performance of DyLAN through various experiments and comparisons with current sota methods.",
+    "reasons_to_reject": "I don't have any major concerns that would lead me to reject the submission of this article, although:\n1. As I said  in  summary, some crucial discussions should be included in main paper.\n2. The improvement of DyLAN on the AR task is limited compared to other tasks. What might cause this phenomenon?",
+    "questions_to_authors": "1. In the ablation study, I noticed an interesting phenomenon: the early stop has a significant impact on API calls in arithmetic reasoning and general reasoning tasks. Whereas in the decision-making task, both methods have considerable impacts. For code generation, however, neither method seems to have much effect. What reasons might the author attribute to this phenomenon?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:34Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:34Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1192,
+    "words": 181,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fcd9f924-639e-4fb4-adfd-4099a97cd420",
+    "error": null,
+    "scored_chars": 1194
+  }
+}

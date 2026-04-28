@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "rkONG0xAW",
+  "reviewer": "3",
+  "paper": {
+    "title": "Recursive Binary Neural Network Learning Model  with 2-bit/weight Storage Requirement",
+    "authors": [
+      "Tianchan Guan",
+      "Xiaoyang Zeng",
+      "Mingoo Seok"
+    ],
+    "abstract": "This paper presents a storage-efficient learning model titled Recursive Binary Neural Networks for embedded and mobile devices having a limited amount of on-chip data storage such as hundreds of kilo-Bytes. The main idea of the proposed model is to recursively recycle data storage of weights (parameters) during training. This enables a device with a given storage constraint to train and instantiate a neural network classifier with a larger number of weights on a chip, achieving better classification accuracy. Such efficient use of on-chip storage reduces off-chip storage accesses, improving energy-efficiency and speed of training. We verified the proposed training model with deep and convolutional neural network classifiers on the MNIST and voice activity detection benchmarks. For the deep neural network, our model achieves data storage requirement of as low as 2 bits/weight, whereas the conventional binary neural network learning models require data storage of 8 to 32 bits/weight. With the same amount of data storage, our model can train a bigger network having more weights, achieving 1% less test error than the conventional binary neural network learning model. To achieve the similar classification error, the conventional binary neural network model requires 4× more data storage for weights than our proposed model. For the convolution neural network classifier, the proposed model achieves 2.4% less test error for the same on-chip storage or 6× storage savings to achieve the similar accuracy.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rkONG0xAW"
+  },
+  "review_fields": {
+    "review": "Summary: The paper addresses the issue of training feed-forward neural networks with memory constraints. The idea is to start by training a very small network, binarise this network, then reuse the non-signed bits of the binarised weights to add/store new weights, and recursively repeat these steps. The cost of reducing the memory storage is the extra computation. An experiment on MNIST shows the efficacy of the proposed recursive scheme.\n\nQuality and significance: The proposed method is a combination of the binarised neural network (BNN) architecture of Courbariaux et al. (2015; 2016) with a network growing scheme to reduce the number of bits per weight. However, the computation complexity is significantly larger. The pitch of the paper is to reduce the \"high overhead of data access\" when training NNs on small devices and indeed this seems to be the case as shown in the experiment. However, if the computation is that large compared to the standard BNNs, I wonder if training is viable on small devices after all. Perhaps all aspects (training cost [computation + time], accuracy and storage) should be plotted together to see what methods form the frontier. This is probably out of scope for ICLR but to really test these methods, they should be trained/stored on a real small device and trained/fine-tuned using user data to see what would work best.\n\nThe experiment is also limited to MNIST and fully connected neural networks."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

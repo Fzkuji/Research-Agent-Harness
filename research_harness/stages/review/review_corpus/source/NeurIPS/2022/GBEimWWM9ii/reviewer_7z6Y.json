@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "GBEimWWM9ii",
+  "reviewer": "7z6Y",
+  "paper": {
+    "title": "MMRR: Unsupervised Anomaly Detection through Multi-Level Masking and Restoration with Refinement",
+    "authors": [
+      "Jaesung Ahn",
+      "Janghyeon Lee",
+      "Hanbyel Cho",
+      "Yooshin Cho",
+      "HyeongGwon Hong",
+      "Junmo Kim"
+    ],
+    "abstract": "Recent state-of-the-art anomaly detection algorithms mainly adopt generative models or approaches based on deep one-class classification. These approaches have hyperparameters to balance the adversarial framework of the generative adversarial network and to determine the decision boundary of the classifier. Both methods show good performance, but their performance suffers from hyperparameter sensitivity. A new category of anomaly detection methods has been proposed that utilizes prior knowledge about abnormal data or pretrained features, but it is more generic not to use such side information. In this study, we propose \"Multi-Level Masking and Restoration with Refinement (MMRR)\", an unsupervised-learning-based anomaly detection method based on a generative model that overcomes hyperparameter sensitivity and the need for side information. MMRR learns the salient features of normal data distributions through  restoration from restricted information via masking, resulting in a better restoration of in-distribution data than out-of-distribution data. To overcome hyperparameter sensitivity, we ensemble restoration results from information restricted to predefined multiple levels instead of finding a single optimal restriction level, and propose a novel mask generation and refinement method to achieve hyperparameter robustness. Extensive experimental evaluation on common benchmarks (i.e. MNIST, FMNIST, CIFAR10, MVTecAD) demonstrates the efficacy of the MMRR.",
+    "keywords": [
+      "Deep Learning",
+      "Computer Vision",
+      "Anomaly Detection"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=GBEimWWM9ii"
+  },
+  "review_fields": {
+    "comment": "Thanks for the responses.\n\nRegarding the request for AUPRC numbers - I would have liked to see a comparison of AUPRC numbers with the other methods, not just those for the proposed method.\n\nOn the comparison to other masked-based methods - the rebuttal has addressed my concern. \n\nOn the response to the hyper-parameter sensitivity problem, I do agree with R2 that in practice all methods are likely to be used by empirically setting a threshold with small numbers of anomalies, but I also appreciate the perspective that it could be interesting to study the strict setting where such labeled anomalies are not available. With respect to the response on model design, a greater variation in architectures would have to be explore to more definitively make the claim that architecture and training hyperparameters do not make a big difference; in particular, U-Nets would not have been my choice for such networks given that they were designed for segmentation and conventional ResNets or transformers would have come to mind first.\n\nOn results on non-image data: the presented results on tabular datasets are promising and are a good start. I also agree with R2 underlying point that in real situations, one will pick the method based on prior knowledge of the proposed anomalies. Given that such knowledge is available in the datasets of choice, again I suggest finding other datasets where this is not available to more convincingly demonstrate the utility of the approach. \n\nOverall, the response has addressed some of my concerns and I will raise my score. That said, a convincing demonstration of the practical utility of the method on other datasets including comparisons with the other masked-based reconstruction methods will make for a more convincing paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

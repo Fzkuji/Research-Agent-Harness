@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "rhgIgTSSxW",
+  "reviewer": "fJsx",
+  "paper": {
+    "title": "TabR: Tabular Deep Learning Meets Nearest Neighbors",
+    "authors": [
+      "Yury Gorishniy",
+      "Ivan Rubachev",
+      "Nikolay Kartashev",
+      "Daniil Shlenskii",
+      "Akim Kotelnikov",
+      "Artem Babenko"
+    ],
+    "abstract": "Deep learning (DL) models for tabular data problems (e.g. classification, regression) are currently receiving increasingly more attention from researchers.\nHowever, despite the recent efforts, the non-DL algorithms based on gradient-boosted decision trees (GBDT) remain a strong go-to solution for these problems.\nOne of the research directions aimed at improving the position of tabular DL involves designing so-called retrieval-augmented models.\nFor a target object, such models retrieve other objects (e.g. the nearest neighbors) from the available training data and use their features and labels to make a better prediction.\n\nIn this work, we present TabR -- essentially, a feed-forward network with a custom k-Nearest-Neighbors-like component in the middle.\nOn a set of public benchmarks with datasets up to several million objects, TabR marks a big step forward for tabular DL: it demonstrates the best average performance among tabular DL models, becomes the new state-of-the-art on several datasets, and even outperforms GBDT models on the recently proposed \"GBDT-friendly\" benchmark (see Figure 1).\nAmong the important findings and technical details powering TabR, the main ones lie in the attention-like mechanism that is responsible for retrieving the nearest neighbors and extracting valuable signal from them.\nIn addition to the higher performance, TabR is simple and significantly more efficient compared to prior retrieval-based tabular DL models.",
+    "keywords": [
+      "tabular",
+      "tabular data",
+      "architecture",
+      "deep learning",
+      "neural networks"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rhgIgTSSxW"
+  },
+  "review_fields": {
+    "summary": "This work proposes a retrieval-augmented deep learning architecture for tabular regression/classification. The model passes $x$, the row to be classified/predicted, as well as additional retrieval context rows, through a learned encoder. TabR then retrieves the rows most similar to the encoded form of $x$, where similarity is defined as the Euclidean distance between the encoded versions of two rows, mapped through a linear layer. The top retrieval candidates and their respective labels are then sent through some more learned transformations before being aggregated and combined with the encoded form of the row to be classified/regressed. This combined embedding goes through more MLP layers to result in the output.\n\nThe paper goes through variants of the architecture and how each respective change impacts performance. It then compares against other deep learning-based models as well as gradient boosted decision trees. In both default-hyperparameter and tuned-hyperparameter settings, TabR performs well.",
+    "strengths": "1. The extensive amount of open-sourcing and experiment reproducibility is greatly appreciated.\n1. Strong results relative to both deep learning and boosted tree methods, and TabR-S's relatively strong performance relative to out-of-the-box boosted tree libraries suggests this isn't just excessive parameter tweaking and overfitting via architecture search.\n1. Easy to read, with key pieces of information generally emphasized appropriately.",
+    "weaknesses": "1. Paper doesn't go into detail describing differences with prior deep learning-based tabular methods. What might explain the performance differences? Ex. \"prior work, where several layers with multi-head attention between objects and features are often used\" but was this what led to retrieval's low benefit in the past?\n1. Insufficient discussion of categorical variables. Is accuracy or training time particularly affected by their relative abundance relative to numerical features?\n1. The steps of Section 3.2 seem rather arbitrary. Some of the detail could be compressed to make room for more intuition why the final architecture makes more sense (content from A.1.1). Description of architectural changes that didn't work would also be very insightful.\n1. Paper describes training times in A.4, but I believe a summary of this is important enough to warrant inclusion in the main paper. Something like a mention of the geometric mean (over the datasets) of the ratio between TabR's training time to a gradient boosted methods, described in the conclusion, would be sufficient. While the ratio is likely >1, it is better to acknowledge this weakness than to hide it.",
+    "questions": "See weaknesses. Also, what is $I_{cand}$? Is it all rows of the table that labels have been provided for? It's mentioned in page 3 that \"we use the same set of candidates for all input objects\" but what it the set of candidates exactly?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1853,
+    "words": 287,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fb53f771-34d3-4fcb-9ac6-72404f1cf053",
+    "error": null,
+    "scored_chars": 1853
+  }
+}

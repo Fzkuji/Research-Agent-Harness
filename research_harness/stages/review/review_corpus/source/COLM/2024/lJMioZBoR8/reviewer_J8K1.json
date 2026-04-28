@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "lJMioZBoR8",
+  "reviewer": "J8K1",
+  "paper": {
+    "title": "Rejection Improves Reliability: Training LLMs to Refuse Unknown Questions Using RL from Knowledge Feedback",
+    "authors": [
+      "Hongshen Xu",
+      "Zichen Zhu",
+      "Situo Zhang",
+      "Da Ma",
+      "Shuai Fan",
+      "Lu Chen",
+      "Kai Yu"
+    ],
+    "abstract": "Large Language Models (LLMs) often generate erroneous outputs, known as hallucinations, due to their limitations in discerning questions beyond their knowledge scope. While addressing hallucination has been a focal point in research, previous efforts primarily concentrate on enhancing correctness without giving due consideration to the significance of rejection mechanisms. In this paper, we conduct a comprehensive examination of the role of rejection, introducing the alignment goal of model reliability along with corresponding metrics. This goal requires the model to provide accurate responses while adeptly rejecting questions exceeding its knowledge boundaries, thereby minimizing hallucinations. To improve the inherent reliability of LLMs, we present a novel alignment framework called Reinforcement Learning from Knowledge Feedback (RLKF). RLKF leverages knowledge feedback to dynamically determine the model's knowledge boundary and trains a reliable reward model to encourage the rejection of out-of-knowledge questions. Experimental results on mathematical and question answering datasets affirm the substantial efficacy of RLKF in significantly enhancing LLM reliability.",
+    "keywords": [
+      "hallucination",
+      "alignment",
+      "RLKF"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=lJMioZBoR8"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a new RLHF framework to address LLM hallucinations by defining a new reward model for model reliability. It trains LLMs to generate \"I don't know\" answers to questions outside the model's knowledge boundary. It conducts empirical experiments on two math question datasets to validate the effectiveness of the proposed method in enhancing LLM reliability. \n\nThe proposed method is simple and easy to follow and the evaluation is comprehensive, but the result analysis seems to suggest that the proposed method is sacrificing accuracy to improve model reliability.",
+    "reasons_to_accept": "1. This paper proposes a new reward model which can enhance LLM to generate \"I don't know\" answers to questions outside the model's knowledge boundary. \n2. This paper conducts comprehensive evaluation experiments to compare the proposed reward model with Rule-based reward, SFT, and prompt-based methods.\n3. The proposed method can improve the model alignment ability in generating truthful rejections and prevent the model from generating wrong answers.",
+    "reasons_to_reject": "1. The model performance in accuracy and truthfulness gets worse after applying RLKF, which may suggest the reward model is too strict in identifying the correct and wrong answers."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:35:30Z",
+    "migrated_from_v1_at": "2026-04-27T15:35:30Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 642,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/849f6905-3152-452c-a708-13927df08196",
+    "error": null,
+    "scored_chars": 636
+  }
+}

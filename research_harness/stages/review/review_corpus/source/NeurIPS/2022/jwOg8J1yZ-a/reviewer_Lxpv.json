@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "jwOg8J1yZ-a",
+  "reviewer": "Lxpv",
+  "paper": {
+    "title": "Adversarially Robust Learning with Tolerance",
+    "authors": [
+      "Hassan Ashtiani",
+      "Vinayak Pathak",
+      "Ruth Urner"
+    ],
+    "abstract": "We initiate the study of tolerant adversarial PAC learning with respect to metric perturbation sets. In adversarial PAC learning, an adversary is allowed to replace a test point $x$ with an arbitrary point in a closed ball of radius $r$ centered at $x$. In the tolerant version, the error of the learner is compared with the best achievable error with respect to a slightly larger perturbation radius $(1+\\gamma)r$. This simple tweak helps us bridge the gap between theory and practice and obtain the first PAC-type guarantees for algorithmic techniques that are popular in practice. Furthermore, our sample complexity bounds improve exponentially over best known (non-tolerant) bounds in terms of the VC dimension of the hypothesis class. In particular, for perturbation sets with doubling dimension $d$, we show that a variant of the  ``perturb-and-smooth'' algorithm PAC learns any hypothesis class $H$ with VC dimension $v$ in the $\\gamma$-tolerant adversarial setting with $O\\left(\\frac{v(1+1/\\gamma)^{O(d)}}{\\varepsilon}\\right)$ samples. This guarantee holds in the tolerant robust realizable setting. We extend this to the agnostic case by designing a novel sample compression scheme based on the perturb-and-smooth approach. This compression-based algorithm has a linear dependence on the doubling dimension as well as the VC-dimension.",
+    "keywords": [
+      "Statistical Learning Theory",
+      "PAC Learning",
+      "Adversarial Learning",
+      "Compression",
+      "Perturb and Smooth"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=jwOg8J1yZ-a"
+  },
+  "review_fields": {
+    "comment": "I'm open to discussing my rating. I don't think your comment address my reasons for a low score.\n\n\"I don't think that experiments are necessary for this paper.\" : Neither do I. I ran some experiments of my own as part of my review to back up my claim that the proposed algorithms are worse than random guessing. I don't think the paper needs to have experiments added to it.\n\nMy 2 main reasons for rejecting are:\n\n1) I'm concerned that people interested in adversarial examples but not expert in PAC learning would take this paper as an endorsement of TPaS as an effective defense against adversarial examples, when it is in fact worse against an adversary than random guessing. Even the title \"Adversarially Robust Learning...\" implies that the algorithm does become robust in some way. For this reason, I'm arguing for rejection in terms of an absolute standard, I don't want to endorse something that I think could cause widespread misconceptions. I think in this respect you're looking at this coming from the PAC community, while I'm looking at this coming from the adversarial example community, which has a significant problem with incorrect beliefs about defense effectiveness spreading widely.\n\n2) I think that because the algorithm does not work at all, the analysis is not very interesting. In this case I'm arguing for rejection on a relative standard---the AC probably has something like 12 papers and is meant to pick something like 3 to accept, so I'm signaling that a technically correct paper on an uninteresting topic probably doesn't rank in the top ~3 of the ACs stack. I realize that other PAC analysis in the adversarial setting have been accepted before; I wasn't a reviewer of those papers. Speaking as someone who is not part of the PAC learning theory, I believe that PAC analysis has been interesting in the past when it analyzed algorithms that do actually work, such as supervised learning in the non-adversarial setting. I don't understand why anyone should care about the sample complexity of something that does not work---low sample complexity just means it converges to bad performance fast. While this is my secondary reason for rejection, it is one where I feel like FjcX might be able to persuade me (by explaining why it's interesting)."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

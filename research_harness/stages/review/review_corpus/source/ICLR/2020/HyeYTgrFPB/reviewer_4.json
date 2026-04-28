@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "HyeYTgrFPB",
+  "reviewer": "4",
+  "paper": {
+    "title": "Massively Multilingual Sparse Word Representations",
+    "authors": [
+      "Gábor Berend"
+    ],
+    "abstract": "In this paper, we introduce Mamus for constructing multilingual sparse word representations. Our algorithm operates by determining a shared set of semantic units which get reutilized across languages, providing it a competitive edge both in terms of speed and evaluation performance. We demonstrate that our proposed algorithm behaves competitively to strong baselines through a series of rigorous experiments performed towards downstream applications spanning over dependency parsing, document classification and natural language inference. Additionally, our experiments relying on the QVEC-CCA evaluation score suggests that the proposed sparse word representations convey an increased interpretability as opposed to alternative approaches. Finally, we are releasing our multilingual sparse word representations for the 27 typologically diverse set of languages that we conducted our various experiments on.",
+    "keywords": [
+      "sparse word representations",
+      "multilinguality",
+      "sparse coding"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=HyeYTgrFPB"
+  },
+  "review_fields": {
+    "comment": "Thanks very much for adding these two experiments: for adding multilingual BERT to the paper and discussing the relation to BiSparse in the comments above (and presumably later adding it to the paper). I think the conclusion that you actually outperform BiSparse really helps strengthen the paper, and I greatly  appreciate your honesty and straightforwardness with the multilingual BERT result. \n\nYou have definitely addressed all of my major questions."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

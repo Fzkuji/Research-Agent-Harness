@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "aVh9KRZdRk",
+  "reviewer": "CrUb",
+  "paper": {
+    "title": "Learning to grok: Emergence of in-context learning and skill composition in modular arithmetic tasks",
+    "authors": [
+      "Tianyu He",
+      "Darshil Doshi",
+      "Aritra Das",
+      "Andrey Gromov"
+    ],
+    "abstract": "Large language models can solve tasks that were not present in the training set. This capability is believed to be due to in-context learning and skill composition. In this work, we study the emergence of in-context learning and skill composition in a collection of modular arithmetic tasks. Specifically, we consider a finite collection of linear modular functions $z = a  x + b  y \\text{ mod } p$ labeled by the vector $(a, b) \\in \\mathbb{Z}_p^2$. We use some of these tasks for pre-training and the rest for out-of-distribution testing. We empirically show that a GPT-style transformer exhibits a transition from in-distribution to out-of-distribution generalization as the number of pre-training tasks increases. We find that the smallest model capable of out-of-distribution generalization requires two transformer blocks, while for deeper models, the out-of-distribution generalization phase is *transient*, necessitating early stopping. Finally, we perform an interpretability study of the pre-trained models, revealing highly structured representations in both attention heads and MLPs; and discuss the learned algorithms. Notably, we find an algorithmic shift in deeper models, as we go from few to many in-context examples.",
+    "keywords": [
+      "In-Context Learning",
+      "Grokking",
+      "Modular Arithmetic",
+      "Interpretability"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=aVh9KRZdRk"
+  },
+  "review_fields": {
+    "summary": "This paper develops novel insights into in-context learning and how it works in Transformers. To this end, the authors propose a generalization of the modular arithmetic task explored in several prior works on grokking. Unlike those works, the structure of the defined task is more rich, enabling an analysis of both in-distribution generalization (standard test evaluation) and out-of-distribution generalization (which is itself broken down into two variants).",
+    "strengths": "The paper is fairly well written and clear. Going beyond the standard linear regression task to study ICL was great to see as well.\n\nThe main selling point for me are the empirics though---I really like the results! The visualization of how the model represents concepts relevant to this paper's setup is quite beautiful: the circle of circles was fascinating to look at and, arguably, not something I expected. In retrospect, I can rationalize this as making sense---we get circular embeddings in grokking, so circle of circles is the logical geometrical extension here. Results on scaling are interesting in their own right as well.",
+    "weaknesses": "I do not have any major apprehensions, except for the related work, which I think is relatively sparse.\n\n- **Related Work.** At this point, the topic this paper is focused on has a rather rich literature and I think a more detailed related work is warranted (perhaps in the appendix if space is an issue). For example, the results by Kirsch et al. (which is cited) are very similar to what authors show, especially results on scaling effects. The main different is width scaling in that paper and no geometric analysis, but nonetheless the relationship warranted more emphasis and discussion. Similarly, several recent works have explored OOD generalization of toy ICL tasks defined in prior works (e.g., see Ahuja and Lopez-Paz [1] for work on linear regression tasks and Ramesh et al. [2] for group arithmetic tasks). Regarding grokking, there are several works exploring the phase transition-y nature of this task. For example, see Kumar et al. [3]. The transient nature of ICL also has negative results (see Reddy [4]), which are worth discussion since they are the primary conclusion in depth scaling as I see it.\n\n[1] https://arxiv.org/abs/2305.16704\n[2] https://arxiv.org/abs/2311.12997 \n[3] https://arxiv.org/abs/2310.06110\n[4] https://openreview.net/forum?id=aN4Jf6Cx69",
+    "questions": "A few questions below that I would like to see answered. \n\n- **PCA variance.** Given this is a rather rich geometry in 2-D, I'm slightly surprised to see PCA captured it. Did you have to do some preprocessing? How much variance is explained by the two projected components? If there are other components that are not shown but have a large variance, what do those components encode---can you try 3D plots?\n\n- **What does the MLP do?** Given the mechinterp focused on attention solely, it is unclear what role MLPs played. Two experiments to try here are: (i) train attention only models to see if MLPs are even necessary, and (ii) perform the PCA analysis to uncover representations' geometry at the level of attentions and MLPs at each block in the model. Experiment (i) may require retraining models, so I understand if the authors are unable to conduct it, but my expectation will be that you will see that model \"internalizes\" task vectors and records them in MLPs. Attention only models can solve the task, but I expect the representations' geometry will be quite different. For experiment (ii) however, I expect that's easy to run and is merely repeating the plotting script on intermediate representations as a forward pass occurs through the model. If the geometry is primarily formed at attention layers, we'll see that in this experiment; vice versa, if it forms via MLPs, we'll see it explicitly.",
+    "limitations": "Limitations are fairly discussed."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:40Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:40Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1913,
+    "words": 299,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/81ab20f1-8f14-4b3c-9790-c2287fe1bdfb",
+    "error": null,
+    "scored_chars": 1914
+  }
+}

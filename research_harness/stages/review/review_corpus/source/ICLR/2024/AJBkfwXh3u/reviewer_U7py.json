@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "AJBkfwXh3u",
+  "reviewer": "U7py",
+  "paper": {
+    "title": "Causality-Inspired Spatial-Temporal Explanations for Dynamic Graph Neural Networks",
+    "authors": [
+      "Kesen Zhao",
+      "Liang Zhang"
+    ],
+    "abstract": "Dynamic Graph Neural Networks (DyGNNs) have gained significant popularity in the research of dynamic graphs, but are limited by the low transparency, such that human-understandable insights can hardly be drawn from their predictions. Although a number of existing research have been devoted to investigating the interpretability of graph neural networks (GNNs), achieving the interpretability of DyGNNs is pivotally challenging due to the complex spatial-temporal correlations in dynamic graphs. To this end, we propose an innovative causality-inspired generative model based on structural causal model (SCM), which explores the underlying philosophies of DyGNN predictions by identifying the trivial, static, and dynamic causal relationships. To reach this goal, two critical tasks need to be accomplished including (1) disentangling the complex causal relationships, and (2) fitting the spatial-temporal explanations of DyGNNs in the SCM architecture. To tackle these challenges, the proposed method incorporates a contrastive learning module to disentangle trivial and causal relationships, and a dynamic correlating module to disentangle dynamic and static causal relationships, respectively. A dynamic VGAE-based framework is further developed, which generates causal-and-dynamic masks for spatial interpretability, and recognizes dynamic relationships along the time horizon through causal invention for temporal interpretability. Comprehensive experiments have been conducted on both synthetic and real-world datasets, where our approach yields substantial improvements, thereby demonstrating significant superiority.",
+    "keywords": [
+      "Dynamic Graph",
+      "Graph Explanation",
+      "Graph Neural Network",
+      "Causal Inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=AJBkfwXh3u"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a novel approach for interpretability in dynamic graph neural networks. The proposed framework is demonstrated on both synthetic and real-world datasets. The experimental results show that the proposed method outperforms the baselines (all baselines are for explaining static graph neural networks). Another contribution is that the paper constructs a new synthetic benchmark dataset for dynamic graph interpretability tasks.",
+    "strengths": "The proposed framework is the first work for interpretability in dynamic graph neural networks. This is a significant contribution. The paper is well organized and clearly described. The method is technically sound. The experiments are comprehensive and the results show the effectiveness of the proposed method. The new constructed benchmark dataset is a good addition to the research domain.",
+    "weaknesses": "Minors: \nIn Figure 1, the text is too small.",
+    "questions": "In table 2, the best performance for OrphicX is obtained by DTree-Grid?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 511,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/630976de-548b-413d-9fe9-0e93faea8a30",
+    "error": null,
+    "scored_chars": 512
+  }
+}

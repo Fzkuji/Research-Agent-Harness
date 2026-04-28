@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "cNqMAmpZh4",
+  "reviewer": "xauJ",
+  "paper": {
+    "title": "From Euler to AI: Unifying Formulas for Mathematical Constants",
+    "authors": [
+      "Tomer Raz",
+      "Michael Shalyt",
+      "Elyasheev Leibtag",
+      "Rotem Kalisch",
+      "Shachar Weinbaum",
+      "Yaron Hadad",
+      "Ido Kaminer"
+    ],
+    "abstract": "The constant $\\large \\pi$ has fascinated scholars throughout the centuries, inspiring numerous formulas for its evaluation, such as infinite sums and continued fractions. Despite their individual significance, many of the underlying connections among formulas remain unknown, missing unifying theories that could unveil deeper understanding. The absence of a unifying theory reflects a broader challenge across math and science: knowledge is typically accumulated through isolated discoveries, while deeper connections often remain hidden. In this work, we present an automated framework for the unification of mathematical formulas. Our system combines large language models (LLMs) for systematic formula harvesting, an LLM-code feedback loop for validation, and a novel symbolic algorithm for clustering and eventual unification. We demonstrate this methodology on the hallmark case of $\\large \\pi$, an ideal testing ground for symbolic unification. Applying this approach to 455,050 arXiv papers, we validate 385 distinct formulas for $\\large \\pi$ and prove relations between 360 (94\\%) of them, of which 166 (43\\%) can be derived from a single mathematical object—linking canonical formulas by Euler, Gauss, Brouncker, and newer ones from algorithmic discoveries by the Ramanujan Machine.\n  Our method generalizes to other constants, including $e$, $\\zeta(3)$, and Catalan’s constant, demonstrating the potential of AI-assisted mathematics to uncover hidden structures and unify knowledge across domains.",
+    "keywords": [
+      "AI for Science",
+      "AI for Math",
+      "LLM-Tool Integration",
+      "Mathematical Constants",
+      "Continued Fractions",
+      "Recurrences",
+      "Number Theory",
+      "Pi"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=cNqMAmpZh4"
+  },
+  "review_fields": {
+    "comment": "- The authors argue that Lemma 1 already implies sufficiency because, given a true coboundary, the measured sequence $U(1),\\dots,U(N)$ “will be correct” once $N$ is “large enough. I think this argument is still on existence. It does not bound the required $N$ or show that the least-squares fit used in practice converges uniquely to the true rational function under noise or finite precision.  Therefore the pipeline may still miss valid links for small/medium $N$. A formal statement such as “if degree ≤ d then $N\\ge 2d+1$ suffices” is still missing. \n\n- Hyper-parameter sensitivity study : A strange result is that for large thresholds almost every parameter combination yields 100 % linkage, suggesting the clustering pass is sometimes redundant! I think this should be discussed and properly addressed. \n\n- The authors agree that minimality is not guaranteed by Guess. Lemma 5 merely shows that an order-2 polynomial-coefficient recurrence implies the series is hypergeometric; it does not prove the converse or cover rational coefficients. Thus minimality for order > 2 remains empirical. I am partially satisfied here. The correctness is addressed, but I think minimality is still an open (though mitigated) issue for higher orders and rational-coefficient cases.                                                                                                                                             \n\n- Showing that the specific $\\pi$ CMF arises from contiguous relations of ${}_2F_1$ is useful but does **not** constitute a general existence theorem for arbitrary d-finite constants. Lemma 6 gives a convergence target involving $F/F'$.  It is unclear how this generalises beyond ${}_2F_1$ or ensures every lattice path corresponds to a known symbolic formula.               The formalism now covers one important class but not the general CMF claims made in the introduction. I think the manuscript should narrow its scope or supply a broader argument.\n\n**My thoughts so far:** The paper's introduction and abstract promise a general framework for unifying mathematical knowledge. The CMF is presented as this general structure. However, the theoretical justification provided (including rebuttal) is proper only to a specific class of special functions. It is the authors' responsibility to either (a) provide the general theory that underpins their general claims or (b) narrow their claims to match the scope of their theory."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

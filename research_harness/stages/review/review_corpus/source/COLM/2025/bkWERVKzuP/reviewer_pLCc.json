@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "bkWERVKzuP",
+  "reviewer": "pLCc",
+  "paper": {
+    "title": "Yourbench: Dynamic Evaluation Set Generation with LLMs",
+    "authors": [
+      "Sumuk Shashidhar",
+      "Clémentine Fourrier",
+      "Alina Lozovskaya",
+      "Thomas Wolf",
+      "Gokhan Tur",
+      "Dilek Hakkani-Tür"
+    ],
+    "abstract": "Large language models (LLMs) have rapidly outpaced traditional evaluation methodologies, with static benchmarks suffering from saturation, contamination, and domain-specificity limitations while human evaluation remains prohibitively expensive. We present YourBench, an open-source framework that transforms this evaluation paradigm by enabling automated generation of reliable, contamination-free benchmarks directly from user-provided documents without human annotation. To validate our approach, we successfully reproduce the challenging MMLU-Pro benchmark across 86 models spanning 400M to 405B parameters, achieving remarkable Pearson correlations of 0.91-0.99 while generating entirely novel questions for under $15 per model. This demonstrates that dynamically generated evaluations can match the discriminative power of expert-curated benchmarks while eliminating contamination risks. YourBench enables researchers to create domain-specific benchmarks in minutes rather than months. We demonstrate applications in agriculture, personalized education, and RAG training that were previously infeasible. By releasing the YourBench library, Tempora-0325 dataset, 150K+ generated QA pairs, and all evaluation traces, we provide the community with a practical solution to the challenge of keeping pace with rapidly evolving model capabilities.",
+    "keywords": [
+      "benchmarking",
+      "contemporary dataset",
+      "dataset",
+      "reference-free",
+      "automated",
+      "llm"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=bkWERVKzuP"
+  },
+  "review_fields": {
+    "comment": "# Do Consumers of Benchmark Scores Feel Like The Benchmark Is Capturing The Essence of the Task at Hand?\n\nTo quickly recap, I originally wrote that there's a critical missing component: do consumers of models' benchmarks scores feel like the scores are capturing the important elements of the task at hand? For instance, if we used YourBench to develop an arithmetic exam for 4th graders, would educators find the students' scores to be measuring whatever educators care about? Or if we used YourBench to create interview questions for software engineers, would hiring managers find the applicants' scores to be measuring the right skills for the job?\n\nIt's not clear to me that YourBench can automate this since the key consideration is working with stakeholders to develop such desiderata.\n\nI found the authors' response to be not compelling:\n\n> (1) Our generation prompts explicitly instruct models to focus only \"meaningful content\" (pp.33,37)\n\nTelling the model to choose \"meaningful content\" means that it (the model) chooses what it thinks is meaningful, not the consumers of the benchmark scores.\n\n> (2) System prompts are curated for \"educational importance\" (Appendix H)\n\nThis is an implicit notion of what matters - educational importance - and again defaults to the model's subjective evaluation of what matters, rather than the consumes of the benchmark scores.\n\n> (3) Human evaluation confirmed ~85% validity across 2k+ questions (Appendix E.1), with the frontier models scoring at 96%\n\nThe paper defines validity as \"Question Validity (the intrinsic correctness and answerability of a question)\". That's not really relevant to this point.\n\n> We will therefore add it explicitly to the formalisation as the 4th D2EG criterion and thank the reviewer for their suggestion.\n\nMy point wasn't \"Please add a fourth principle,\" but \"How do consumers' preferences get integrated into the generated benchmark as a first-class consideration?\" This is not clear to me, and the manuscript doesn't show that doing so is accomplishable."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2036,
+    "words": 320,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/97df9dd3-9c6d-43dc-aa84-d0e96972364b",
+    "error": null,
+    "scored_chars": 2036
+  }
+}

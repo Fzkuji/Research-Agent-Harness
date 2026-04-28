@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "m4F3kQCfGX",
+  "reviewer": "zZHD",
+  "paper": {
+    "title": "LLM Unlearning Without an Expert Curated Dataset",
+    "authors": [
+      "Xiaoyuan Zhu",
+      "Muru Zhang",
+      "Ollie Liu",
+      "Robin Jia",
+      "Willie Neiswanger"
+    ],
+    "abstract": "Modern large language models often encode sensitive, harmful, or copyrighted knowledge, raising the need for post-hoc unlearning—the ability to remove specific domains of knowledge from a model without full retraining. A major bottleneck in current unlearning pipelines is constructing effective forget sets—datasets that approximate the target domain and guide the model to forget it. In this work, we introduce a scalable, automated approach to generate high-quality forget sets using language models themselves. Our method synthesizes textbook-style data through a structured prompting pipeline, requiring only a domain name as input. Through experiments on unlearning biosecurity, cybersecurity, and Harry Potter novels, we show that our synthetic datasets consistently outperform the baseline synthetic alternatives and are comparable to the expert-curated ones. Additionally, ablation studies reveal that the multi-step generation pipeline significantly boosts data diversity, which in turn improves unlearning utility. Overall, our findings suggest that synthetic datasets offer a promising path toward practical, scalable unlearning for a wide range of emerging domains without the need for manual intervention. We release our code and dataset at [https://github.com/xyzhu123/Synthetic_Textbook](https://github.com/xyzhu123/Synthetic_Textbook).",
+    "keywords": [
+      "NLP",
+      "Machine Unlearning",
+      "Synthetic Data Generation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=m4F3kQCfGX"
+  },
+  "review_fields": {
+    "summary": "This work proposes a prompting method to generate forget sets for LLM unlearning, and shows that this approach outperforms the state-of-the-art in multiple conditions.\n\nWork description is very clear and writing is very good, reporting important concepts in a clear manner.\n\nThis work does not propose a really new and original approach: it boils down adapting data generation pipeline\nto the unlearning context. However, it is well-known in the LLM community that a carefully designed engineering\ncontribution may have more impact than brand new original theoretical ideas;\ntherefore, the experimental contributions and proposed design are clearly valuable and useful for the community.",
+    "reasons_to_accept": "- The contribution is mostly experimental, and proposes a well-designed and successful pipeline that will prove useful for the community.\n- The proposed prompting method focuses on increasing diversity of synthetic data through 3 stages, which is indeed likely the best objective, given our understanding of current literature about synthetic data for LLM.\n- The experiments are nicely conducted and convincing.\n- The fact to also compare with Mistral-based data generation is very welcome, as it is the only way to guarantee reproducibility, which is crucial and mandatory to qualify any study as scientific.",
+    "reasons_to_reject": "- The work does not propose original ideas, but a simple combination and (well-done !) adaptation of known ideas.\n- A motivation is the human effort required to create the forget set: this should somehow be compared to the computational cost to create the forget set with the proposed approach, and more importantly, both minimum sizes of forget sets should be compared: indeed, the human-created forget set might be of higher quality and may be smaller than the GPT4o-created forget set to reach the same level of unlearning; and if it is the case, then the additional computational cost incurred by the proposed method does not only concern creating the forget set, but also finetuning the LLM. More generally, because the main claim is to reduce the human effort, some section about costs estimation would be welcome.\n- It is clear that the proposed pipeline improves the tradeoff between unlearning and retaining general capabilities as compared to the baselines. It is no clear however, but this is a general comment that addresses many works beyond this one in the unlearning field, whether this tradeoff has become good enough to be really useful in practice.\n- Larger open source LLMs could have been used to generate the forget set."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1852,
+    "words": 302,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/89c6c031-7656-4a87-896e-22f4f449ce0b",
+    "error": null,
+    "scored_chars": 1852
+  }
+}

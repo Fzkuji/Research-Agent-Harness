@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "Z4eFqgYbha",
+  "reviewer": "R6LN",
+  "paper": {
+    "title": "Structure-Aware Spectral Sparsification via Uniform Edge Sampling",
+    "authors": [
+      "Kaiwen He",
+      "Petros Drineas",
+      "Rajiv Khanna"
+    ],
+    "abstract": "Spectral clustering is a fundamental method for graph partitioning, but its reliance on eigenvector computation limits scalability to massive graphs. Classical sparsification methods preserve spectral properties by sampling edges proportionally to their effective resistances, but require expensive preprocessing to estimate these resistances. We study whether uniform edge sampling—a simple, structure-agnostic strategy—can suffice for spectral clustering. Our main result shows that for graphs admitting a well-separated $k$-clustering, characterized by a large structure ratio $\\Upsilon(k) = \\lambda_{k+1} / \\rho_G(k)$, uniform sampling preserves the spectral subspace used for clustering. Specifically, we prove that uniformly sampling $O(\\gamma^2 n \\log n / \\varepsilon^2)$ edges, where $\\gamma$ is the Laplacian condition number, yields a sparsifier whose top $(n-k)$-dimensional eigenspace is approximately orthogonal to the cluster indicators. This ensures that the spectral embedding remains faithful, and clustering quality is preserved. Our analysis introduces new resistance bounds for intra-cluster edges, a rank-$(n-k)$ effective resistance formulation, and a matrix Chernoff bound adapted to the dominant eigenspace. These tools allow us to bypass importance sampling entirely. Conceptually, our result connects recent coreset-based clustering theory to spectral sparsification, showing that under strong clusterability, even uniform sampling is structure-aware. This provides the first provable guarantee that uniform edge sampling suffices for structure-preserving spectral clustering.",
+    "keywords": [
+      "Spectral Clustering",
+      "Graph Sparsification"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Z4eFqgYbha"
+  },
+  "review_fields": {
+    "comment": "I completely agree with what is said here! I think this line in particular highlights the issue this paper is trying to address, and is perhaps discussing the main issue I have with this paper that I was not able to properly articulate before. I think I did not do a good enough job during the initial review process, or was not able to fully articulate how I felt about this work. \n\n> In well clustered applications, the effective resistances of cross cluster edges are potentially extremely large (with dependence on , resulting in vacuous bounds), which would dominate the importance when it comes to sampling compared to the intracluster edges. \n\nI fully agree with what is said here. It is certainly true that uniform sampling would not work if we were trying to obtain spectral sparsifiers of the entire graph, and that this is precisely because the cross cluster edges can be high effective resistance. I think the authors also agree that if we were to want to sparsify each individual well connected component, then this is also simple as uniform sampling would suffice. The real question is the regime in between, we know that we can sparsify each individual well connected component if we do uniform sampling, but the whole graph will not be sparsified. What global properties are preserved exactly if we sample uniformly at random? This is the question the authors are trying to answer. \n\nIn fact, there is a well known folklore algorithm to construct spectral sparsifiers that is somewhat related that comes to mind here. Instead of sampling edges proportional to their leverage scores, we can instead flip coins for all the edges with leverage score $< n/2m$, for which a constant fraction of the graph satisfies. Repeating this log n times gives an algorithm that takes $\\widetilde{O}(m)$ time. \n\nI mention this because this seems similar in spirit to trying to sample just the edges that are connected components uniformly at random. I understand this is not what the authors are doing, but I am mentioning it nevertheless. These are precisely the edges that have low leverage score. The main issue with this approach is that there can be many other low leverage score edges that can be across cuts. \n\nI think the discussion above better elucidates how I felt initially about the paper. There are ways to perform spectral sparsification, if the graph is structured a certain way, say, very uninterestingly, connected clusters, with O(n) total edges across clusters. If there is no structure, or a lot, this is a very simple problem, but finding out the exact graph classes for which uniform sampling would work on is an interesting problem. Correspondingly, finding out what specific eigenspaces are preserved under uniform sampling is also an interesting problem. \n\nThis is why my initial questions focused so much so on what this class of graphs the authors were discussing looked like. To me, the authors initial response describing this class of graphs was the most interesting part, because it describes exactly a class of graphs for which uniform sampling would work. \n\nHowever, the main reason why I did not give a higher score, is because it does not seem obvious to me what the applications of this work would be. I might be completely wrong, but I do not really see where these bounds would find use in."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

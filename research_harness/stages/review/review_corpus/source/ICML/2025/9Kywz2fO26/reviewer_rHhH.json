@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "9Kywz2fO26",
+  "reviewer": "rHhH",
+  "paper": {
+    "title": "Pairwise Maximum Likelihood For Multi-Class Logistic Regression Model With Multiple Rare Classes",
+    "authors": [
+      "Xuetong Li",
+      "Danyang Huang",
+      "Hansheng Wang"
+    ],
+    "abstract": "We study in this work the problem of multi-class logistic regression with one major class and multiple rare classes, which is motivated by a real application in TikTok live stream data. The model is inspired by the two-class logistic regression model of Wang (2020) but with surprising theoretical findings, which in turn motivate new estimation methods with excellent statistical and computational efficiency. \nSpecifically, since rigorous theoretical analysis suggests that the resulting maximum likelihood estimators of different rare classes should be asymptotically independent, we consider to solve multiple pairwise two-class logistic regression problems instead of optimizing the joint log-likelihood function with computational challenge in multi-class problem, which are computationally much easier and can be conducted in a fully parallel way. To further reduce the computation cost, a subsample-based pairwise likelihood estimator is developed by down-sampling the major class. We show rigorously that the resulting estimators could be as asymptotically efficient as the global maximum likelihood estimator under appropriate regularity conditions. Extensive simulation studies are presented to support our theoretical findings and a TikTok live stream dataset is analyzed for illustration purpose.",
+    "keywords": [
+      "Multi-class logistic regression model",
+      "Pairwise maximum likelihood estimation",
+      "Rare class analysis",
+      "Car plate recognition"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=9Kywz2fO26"
+  },
+  "review_fields": {
+    "summary": "This paper addresses the problem of multi-class logistic regression in scenarios with class imbalance: specifically, one class is overwhelmingly dominant and the remaining classes are rare. The authors develop a theoretical framework demonstrating that, under appropriate assumptions and asymptotic conditions, the maximum likelihood estimator (MLE) is asymptotically normal with a mean-zero error, and has an asymptotically block-diagonal covariance structure, implying that the parameters for the rare classes are asymptotically independent. Building on this insight, the paper proposes a pairwise maximum likelihood estimator (PMLE) that decomposes the multi-class problem into separate binary logistic regression problems, along with a subsample-based variant (SPMLE) that reduces computational costs by down-sampling the major class.  \n\n## Update After Rebuttal\nI raised my score as a result of a discussion with the authors (see below).",
+    "claims_and_evidence": "### Interesting theoretical results with limited motivation.\nThe paper presents intriguing theoretical results that decompose a multi-class classification problem with imbalanced classes into a set of pairwise binary problems. However, the overall motivation and practical impact remain questionable. The introduction discusses customer purchase behavior and related contexts, which might lead readers to expect approaches involving gaze tracking or attention mechanisms integrated into an object detection pipeline. Instead, the paper ultimately focuses on logistic regression applied to sub-image classification. For instance, one might naturally consider a two-stage approach—first detecting car plates and then classifying them—to mitigate the imbalance issue, an alternative not discussed by the authors.\n\n### Strong assumptions with limited practical relevance.\nThe theoretical guarantees rely on specific conditions such as $\\alpha_N \\to -\\infty$ and $a_N + \\log N \\to \\infty$. These conditions ensure that while the probability of a rare event converges to zero, the absolute number of rare events still diverges, allowing for asymptotic analysis. In practice, however, these assumptions may not hold. For example, in a dataset of car images, the probability that a car plate is visible might remain roughly constant regardless of $N$ (assuming each image reliably shows a car plate). Moreover, the convergence rate is effectively downgraded from $1/\\sqrt{N} \\to 1/\\sqrt{N e^{a_N}}, meaning that when the rare events are very infrequent (i.e., $e^{a_N}$ is very small), the effective sample size for estimation is substantially reduced, resulting in a much slower convergence. This raises concerns about the practical feasibility of the method even if the theoretical assumptions are met.\n\n### Limited experimental validation.\nWhile the paper supports its theoretical claims with simulation studies and a single real-world TikTok Screenshots dataset, the experimental evidence is limited. The evaluation compares only the authors’ own MLE-based variants (GMLE, PMLE, and SPMLE) without benchmarking against alternative methods—such as a detection-classification pipeline or other imbalance-handling techniques (e.g., cost-sensitive learning, upsampling, or downsampling) —that are commonly used in practice. This narrow scope of experiments makes it challenging to assess the broader impact and practical relevance of the proposed approach.\n\nOverall, although the paper’s theoretical contributions are solid, the motivation, practical relevance, and experimental validation leave several claims insufficiently supported by convincing evidence.",
+    "methods_and_evaluation_criteria": "I incorporated methodological concerns into the above “Claims and Evidence” section.",
+    "theoretical_claims": "I have reviewed the high-level theoretical claims but I did not perform a line-by-line verification of the detailed proofs in the main text and Appendix. Consequently, while the arguments appear plausible, there remains a possibility that oversights exist.",
+    "experimental_designs_or_analyses": "I incorporated experimental concerns into the above “Claims and Evidence” section.",
+    "relation_to_broader_scientific_literature": "Their theoretical findings, notably the asymptotically block-diagonal covariance structure and the derivation of a convergence rate, provide rigorous insights into the behavior of maximum likelihood estimators under extreme imbalance. While the focus is on logistic regression, these insights have the potential to inform future research on more complex models, advancing our understanding of algorithm design in extreme imbalance scenarios.",
+    "essential_references_not_discussed": "The paper would benefit from a broader discussion of the imbalanced classification literature. For example, recent advances in deep learning for imbalanced data, such as focal loss (Lin et al., ICCV 2017) and class-balanced loss based on the effective number of samples (Cui et al., CVPR 2019), have shown promising results in mitigating imbalance issues, especially in object detection tasks. Discussing these methods would help situate the paper’s contributions within the broader context of imbalanced classification and highlight potential avenues for extending the theoretical results to more complex models.",
+    "other_strengths_and_weaknesses": "### Other strengths to note:\nBuilding on their theoretical insights, the authors introduce the pairwise maximum likelihood estimator PMLE and its subsample-based variant, SPMLE. SPMLE keeps the same convergence rate as PMLE, efficiently reduce computational burdens without sacrificing benefits.\n\n### Minor weaknesses:\n- The term “NR algorithm” is undefined. I assume it refers to the Newton-Raphson algorithm, but a clear definition or brief explanation would improve clarity.\n- To ensure reproducibility, it would be beneficial if the authors made the code available.",
+    "other_comments_or_suggestions": "The paper was an enjoyable read. Please note that my comments represent my initial impressions and may include misunderstandings. I welcome further discussion on these points and am open to revising my score once my questions and concerns are adequately addressed.",
+    "questions_for_authors": "I have incorporated questions into the above sections."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

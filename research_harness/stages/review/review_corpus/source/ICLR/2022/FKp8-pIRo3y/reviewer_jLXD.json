@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "FKp8-pIRo3y",
+  "reviewer": "jLXD",
+  "paper": {
+    "title": "Wish you were here: Hindsight Goal Selection for long-horizon dexterous manipulation",
+    "authors": [
+      "Todor Davchev",
+      "Oleg Olegovich Sushkov",
+      "Jean-Baptiste Regli",
+      "Stefan Schaal",
+      "Yusuf Aytar",
+      "Markus Wulfmeier",
+      "Jon Scholz"
+    ],
+    "abstract": "Complex sequential tasks in continuous-control settings often require agents to successfully traverse a set of ``narrow passages'' in their state space. Solving such tasks with a sparse reward in a sample-efficient manner poses a challenge to modern reinforcement learning (RL) due to the associated long-horizon nature of the problem and the lack of sufficient positive signal during learning. \nVarious tools have been applied to address this challenge. When available, large sets of demonstrations can guide agent exploration. Hindsight relabelling on the other hand does not require additional sources of information. However, existing strategies explore based on task-agnostic goal distributions, which can render the solution of long-horizon tasks impractical. In this work, we extend hindsight relabelling mechanisms to guide exploration along task-specific distributions implied by a small set of successful demonstrations. We evaluate the approach on four complex, single and dual arm, robotics manipulation tasks against strong suitable baselines. The method requires far fewer demonstrations to solve all tasks and achieves a significantly higher overall performance as task complexity increases. Finally, we investigate the robustness of the proposed solution with respect to the quality of input representations and the number of demonstrations.",
+    "keywords": [
+      "goal-conditioned reinforcement learning",
+      "learning from demonstrations",
+      "long-horizon dexterous manipulation",
+      "bi-manual manipulation"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=FKp8-pIRo3y"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper aims to improve the learning effectiveness and data efficiency for long-horizon control tasks under sparse rewards with demonstrations. Building upon prior works on DPGfD and HER, the authors proposed a new hindsight goal relabeling technique, which is referred to as “task-constrained goal-conditioned RL” to differentiate against “general goal-conditioned RL” as in prior works. Specifically, instead of selecting goals from the learned agent’s rollouts, the new technique only selects goals from the successful rollouts (and demonstrations). Rigorous experiments demonstrated that the proposed algorithm outperforms prior works on a very challenging bidextrous peg insertion task in simulation, in the aspects of the learned agent’s final performance (e.g. task completion rate) and data efficiency (e.g. number of demonstrations).",
+    "main_review": "Strong Points\n\n+ The final task used in the paper (“bimanual insertion”) is challenging enough to convince readers of the authors’ claim that the proposed algorithm is a meaningful improvement on learning long-horizon control tasks. Authors’ breaking it down to several tasks by complexity is very helpful.\n\n+ The empirical results are comprehensive and convincing. Difference between the proposed algorithm and prior works is big.\n\n+ The paper is well motivated. The overall “storyline” is clear and makes sense.\n\nWeak Points\n\n- The amount of novelty is mediocre. The main innovation seems to be the new technique for hindsight relabeling. \n\n- Technical clarity can be improved, especially in the way prior works are introduced in the Methodology section, which seems a bit high-level and requires readers to have substantial knowledge in the prior works to understand the full picture. \n\nAdditional Questions\n\n? I’m curious to learn from the authors why HER (both the “final” and “future” variants) underperforms DPGfD in the Bring Near and Bring Near + Orient tasks, as shown in Table 1?",
+    "summary_of_the_review": "Overall I enjoy reading this paper. While the novelty is not steller, the experimental results are convincing and impressive. I recommend acceptance for broader dissemination.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1265,
+    "words": 199,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b4946a3e-8c31-4332-847e-1ff0dcf8e155",
+    "error": null,
+    "scored_chars": 1267
+  }
+}

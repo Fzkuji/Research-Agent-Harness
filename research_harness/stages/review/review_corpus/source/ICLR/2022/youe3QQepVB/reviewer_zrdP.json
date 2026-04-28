@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "youe3QQepVB",
+  "reviewer": "zrdP",
+  "paper": {
+    "title": "Generative Modeling for Multitask Visual Learning",
+    "authors": [
+      "Zhipeng Bao",
+      "Yu-Xiong Wang",
+      "Martial Hebert"
+    ],
+    "abstract": "Generative modeling has recently shown great promise in computer vision, but it has mostly focused on synthesizing visually realistic images. In this paper, motivated by multi-task learning of shareable feature representations, we consider a novel problem of learning a shared generative model that is useful across various visual perception tasks. Correspondingly, we propose a general multi-task oriented generative modeling (MGM) framework, by coupling a discriminative multi-task network with a generative network. While it is challenging to synthesize both RGB images and pixel-level annotations in multi-task scenarios, our framework enables us to use synthesized images paired with only weak annotations (i.e., image-level scene labels) to facilitate multiple visual tasks. Experimental evaluation on challenging multi-task benchmarks, including NYUv2 and Taskonomy, demonstrates that our MGM framework improves the performance of all the tasks by large margins, especially in the low-data regimes, and our model consistently outperforms state-of-the-art multi-task approaches.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=youe3QQepVB"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes a multi-task network for pixel-wise estimation tasks such as semantic segmentation and depth estimation. The authors additionally introduced an GAN-based image generation network, a self-supervised network and a scene category classification network (which was called a refinement network in the paper). As an image generation network, any conditional GANs including SA-GAN and DCGAN can be used. As a self-supervised network, SimCLR was used in the proposed network. The refinement network classifies\na scene category from the outputs of multitask networks (i.e. estimated segmentation masks and estimated depth images).\n\nIn the experiments with two dataset, the proposed model, MGM, consistently outperformed the results of the baselines and ablated methods. \nIn addition, additional experiments with six tasks and high resolution images (256x256) were performed and confirmed the effectiveness of the proposed method as well.",
+    "main_review": "Pros)\nThe idea on introducing an image generation network, G,  into multi-task learning on pixel-wise estimation tasks seems novel. To use scene-class-conditionally synthesized images without GT annotations of the target multi-tasks, the authors introduced a refinement network which classifies a scene class. The scene class was known for a synthesized image, since it was generated with a class condition, which enabled training of the multi-task network,M, with generated images.  In addition, EM-style training was proposed to train the network effectively. Its effectiveness was successfully proved by the experiments. This is the biggest contribution of this paper.\n\nAlthough adding a self-supervision network is not so novel, its effectiveness was shown by the experiments. \n\nThe paper is well written, and the experiments including ones in the supplementary material are comprehensive and detailed. \nThe pilot study is helpful to understand that naive usage of GAN for this task is not effective at all.\n\nCons)\nThe proposed method needs to scene labels for all the training images. That's why MGM cannot be applied to the CityScape dataset which consists of only street scene. This property narrows applicability of the proposed method.\n\nAdditional Comments)\nTo deal with CityScape, it will be needed to introduce a multi-label classifier into the refinement network, and use a multi-label-conditional \nGAN (probably using multiple-hot instead of one-hot vector). Does the authors think if this works ? In Semi Supervised Semantic Segmentation Using Generative Adversarial Network,ICCV2017, multi-label was used. \n\nMGM does not seem to be limited to multiple tasks. It can be applied to a single task such as only semantic segmentation. Did the authors try that ?\n\nShowing the synthesized images on the supplementary material will be helpful for the readers.",
+    "summary_of_the_review": "This paper has novelty which is introducing a generative model into multitask network, and the effectiveness was successfully supported by the comprehensive experiments.  The reviewer think this paper can be accepted.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2078,
+    "words": 312,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3bc97c12-6ff3-4a4a-aba7-18db5550f7f3",
+    "error": null,
+    "scored_chars": 2085
+  }
+}

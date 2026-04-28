@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "SyVpB2RqFX",
+  "reviewer": "1",
+  "paper": {
+    "title": "INFORMATION MAXIMIZATION AUTO-ENCODING",
+    "authors": [
+      "Dejiao Zhang",
+      "Tianchen Zhao",
+      "Laura Balzano"
+    ],
+    "abstract": "We propose the Information Maximization Autoencoder (IMAE), an information theoretic approach to simultaneously learn continuous and discrete representations in an unsupervised setting. Unlike the Variational Autoencoder framework, IMAE starts from a stochastic encoder that seeks to map each input data to a hybrid discrete and continuous representation with the objective of maximizing the mutual information between the data and their representations. A decoder is included to approximate the posterior distribution of the data given their representations, where a high fidelity approximation can be achieved by leveraging the informative representations.     \nWe show that the proposed objective is theoretically valid and provides a principled framework for understanding the tradeoffs regarding informativeness of each representation factor, disentanglement of representations, and decoding quality.",
+    "keywords": [
+      "Information maximization",
+      "unsupervised learning of hybrid of discrete and continuous representations"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SyVpB2RqFX"
+  },
+  "review_fields": {
+    "comment": "I have looked at the revision and also simply looked at the paper more carefully.  My earlier review was somewhat careless because, in any case, the empirical evaluation is quite weak.  Although I believe that a stronger empirical evaluation is required, the fundamental issues being addressed are important and it is nice to get things clarified.\n\nYour only parameters are the encoder and decoder parameters.  These parameters do not support computing marginal distributions on continuous latent variables.  Consider the term KL(P_Theta(z_k),r(z_k)) appearing in equation (6) and ultimately appearing in the overall loss function.  This term equals\n\nE_{z_k} log (P_Theta(z_k)/r(z_k))\n\nWe can sample z_k by sampling x and sampling z_k from P_Theta(z|x).  Since z_k is one dimensional we could try to model P_Theta(z_k) as a one dimensional Gaussian by empirically measuring its mean and variance.  But this would not be a good model if P_Theta(z|x) is trending toward delta distributions.  While the problem of P_Theta(z|x) drifting toward delta distributions is discussed, the method proposed does not seem to address the problem.  A simple fix is to require that P_Theta(z|x) has a minimum variance.  This possibility is mentioned but not formally placed in the objective.\n\nThis problem is much more serious in the total variation term in the final objective (10).  To optimize this term we need to be able to assign a joint marginal probability P_Theta(z) to a particular sample of the vector z. ???"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

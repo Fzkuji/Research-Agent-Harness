@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "ybaK4asBT2",
+  "reviewer": "6qWd",
+  "paper": {
+    "title": "LLM Discussion: Enhancing the Creativity of Large Language Models via Discussion Framework and Role-Play",
+    "authors": [
+      "Li-Chun Lu",
+      "Shou-Jen Chen",
+      "Tsung-Min Pai",
+      "Chan-Hung Yu",
+      "Hung-yi Lee",
+      "Shao-Hua Sun"
+    ],
+    "abstract": "Large language models (LLMs) have shown exceptional proficiency in natural language processing but often fall short of generating creative and original responses to open-ended questions. To enhance LLM creativity, our key insight is to emulate the human process of inducing collective creativity through engaging discussions with participants from diverse backgrounds and perspectives. To this end, we propose LLM Discussion, a three-phase discussion framework that facilitates vigorous and diverging idea exchanges and ensures convergence to creative answers. Moreover, we adopt a role-playing technique by assigning distinct roles to LLMs to combat the homogeneity of LLMs. We evaluate the efficacy of the proposed framework with the Alternative Uses Test, Similarities Test, Instances Test, and Scientific Creativity Test through both LLM evaluation and human study. The results show that our proposed framework outperforms single-LLM approaches and existing multi-LLM frameworks across various creativity metrics. The code is available at https://github.com/lawraa/LLM-Discussion.",
+    "keywords": [
+      "multi-agent discussion",
+      "creativity",
+      "role-play",
+      "large language models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ybaK4asBT2"
+  },
+  "review_fields": {
+    "summary": "The paper presents a method called LLM Discussion, which is a multi-turn multi-LLM method to attempt to extract more creative responses out of LLMs on common creativity \"brainteasers\" such as Alternative Uses. The work experiments on four types of tasks, and evaluates different conversational methods to extract creative answers. The LLM Discussion method is found to be more creative both through a robust human evaluation, and using an LLM as a judge, which is found to correlate satisfactorily with human judgments.",
+    "reasons_to_accept": "- The work is thorough, considers prior both in education and recent CS work seriously, and discusses the implications and limitations in a nuanced and realistic way.\n- The LLM Discussion framework -- although somewhat evident -- is well constructed, particularly with the concept of the three phases of discussion: initiation, discuss & convergence.\n- The human annotation seems thorough, and the release of the collection of judgments might be useful to others studying creativity in similar settings.\n- The paper is generally well-written, and although some details are lacking, these can easily be resolved in a round of revisions.",
+    "reasons_to_reject": "- Nothing serious, overall the work is creative and rigorous.\n- The four tasks studied are known to be somewhat artificial. As the authors point out, the tests to evaluate creativity in humans might not be adequate to evaluate LLMs, since the latter can be infinitely verbose at very low cost. The authors point this out and attenuate the importance of certain TTCW metrics, yet the tasks themselves remain tasks that were created for humans, not LLMs.\n- There is a strong correlation between response length and perceived creativity, both in human & LLM evals. The work did not directly control for length of response (which seems like it would have been very easy to do...) and the examples shown in Figure 4 unfortunately show that LLM Discussion outputs are much longer. Are the promising results therefore only reflecting the underlying signal that responses in that condition are significantly longer on average?",
+    "questions_to_authors": "Q1: Can you report the average length of response for each task and each approach? This would help explain to the reader whether length explains away the creativity difference or not. Why did you not include in your prompt an expected response length, to normalize for this important effect?\n\nQ2: Besides the tasks you've collected, whose intended audience are humans under a time constraint, do you have a sense of what tasks could be more appropriate to evaluate LLMs' creativity abilities? Do you believe that the \"number of turns\" reflects a similar effect to human test-takers having \"limited time\" in TTCT?\n\nQ3: Two of the core contributions in LLM Discussion seem to be: (1) the three phases, (2) the role-playing. Yet, neither of these two elements seems to have been ablated. Do you have experimental evidence showing that such elements indeed lead to improved creativity in the responses?\n\nQ4: It is not 100% clear in the paper which LLM is used in experimentation. The draft clearly states which GPT model is used for auto-eval, but not for generation. Are you using GPT4? Are the different roles all played by the same underlying LLM, or different LLMs? Does that make a difference?\n\nQ5: It is not 100% clear in the paper how the \"Convergence Phase\" is conducted. It seems logical that only one LLM would perform the final agglomeration based on the conversation so far. How do you pick which \"role\" gets to do the final response? (e.g., do you get the final response from the environmentalist or the social entrepreneur).\n\nQ6: Temperature plays a strong role on the diverging nature of an answer. What temperature setting did you set the generation models with, and do you expect increased temperature to further improve creativity scores?\n\nMinor notes:\n- It seems a bit of a stretch to call tau correlations at ~0.3 \"strong correlation\"\n- This reviewer appreciated the pun in the title of Section 6, kudos :)"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:37:14Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:14Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3479,
+    "words": 578,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1839d306-0378-4497-9883-519ac418f50c",
+    "error": null,
+    "scored_chars": 3479
+  }
+}

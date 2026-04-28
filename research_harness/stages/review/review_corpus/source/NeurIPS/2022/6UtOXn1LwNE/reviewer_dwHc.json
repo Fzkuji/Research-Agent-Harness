@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "6UtOXn1LwNE",
+  "reviewer": "dwHc",
+  "paper": {
+    "title": "Models of human preference for learning reward functions",
+    "authors": [
+      "W. Bradley Knox",
+      "Stephane Hatgis-Kessell",
+      "Serena Booth",
+      "Scott Niekum",
+      "Peter Stone",
+      "Alessandro G Allievi"
+    ],
+    "abstract": "The utility of reinforcement learning is limited by the alignment of reward functions with the interests of human stakeholders. One promising method for alignment is to learn the reward function from human-generated preferences between pairs of trajectory segments. These human preferences are typically assumed to be informed solely by partial return, the sum of rewards along each segment. We find this assumption to be flawed and propose modeling preferences instead as arising from a different statistic: each segment's regret, a measure of a segment's deviation from optimal decision-making. Given infinitely many preferences generated according to regret, we prove that we can identify a reward function equivalent to the reward function that generated those preferences. We also prove that the previous partial return model lacks this identifiability property without preference noise that reveals rewards' relative proportions, and we empirically show that our proposed regret preference model outperforms it with finite training data in otherwise the same setting. Additionally, our proposed regret preference model better predicts real human preferences and also learns reward functions from these preferences that lead to policies that are better human-aligned. Overall, this work establishes that the choice of preference model is impactful, and our proposed regret preference model provides an improvement upon a core assumption of recent research.",
+    "keywords": [
+      "reinforcement learning",
+      "learning reward functions",
+      "reward design",
+      "alignment",
+      "learning from preferences",
+      "regret",
+      "advantage",
+      "successor features"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=6UtOXn1LwNE"
+  },
+  "review_fields": {
+    "comment": ">Regarding safe RL, this paper focuses on \n\nThank you. Figure 1 seems to be a safe RL example. That is why I’m a little confused about the motivation. \n\n> about partial return and [9-16]\n\nSorry for the unclear part. In the experiments, there are baselines named as Partial return (noiseless) and Partial return (stochastic). Are the two baselines from [9-16] or created by the paper? There are a lot of partial return methods. Why not compare with the methods from those papers?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

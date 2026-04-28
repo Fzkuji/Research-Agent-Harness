@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "tBRNC6YemY",
+  "reviewer": "MqVN",
+  "paper": {
+    "title": "Gorilla: Large Language Model Connected with Massive APIs",
+    "authors": [
+      "Shishir G Patil",
+      "Tianjun Zhang",
+      "Xin Wang",
+      "Joseph E. Gonzalez"
+    ],
+    "abstract": "Large Language Models (LLMs) have seen an impressive wave of advances, with\nmodels now excelling in a variety of tasks, such as mathematical reasoning and\nprogram synthesis. However, their potential to effectively use tools via API calls\nremains unfulfilled. This is a challenging task even for today’s state-of-the-art\nLLMs such as GPT-4 largely due to their unawareness of what APIs are available\nand how to use them in a frequently updated tool set. We develop Gorilla, a\nfinetuned LLaMA model that surpasses the performance of GPT-4 on writing API\ncalls. Trained with the novel Retriever Aware Training (RAT), when combined\nwith a document retriever, Gorilla demonstrates a strong capability to adapt to\ntest-time document changes, allowing flexible user updates or version changes.\nIt also substantially mitigates the issue of hallucination, commonly encountered\nwhen prompting LLMs directly. To evaluate the model’s ability, we introduce\nAPIBench, a comprehensive dataset consisting of HuggingFace, TorchHub, and\nTensorHub APIs. The successful integration of the retrieval system with Gorilla\ndemonstrates the potential for LLMs to use tools more accurately, keep up with\nfrequently updated documentation, and consequently increase the reliability and\napplicability of their outputs. Gorilla’s code, model, data, and demo are available\nat: https://gorilla.cs.berkeley.edu",
+    "keywords": [
+      "LLM",
+      "Tool Use",
+      "APIs",
+      "Function Calling"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=tBRNC6YemY"
+  },
+  "review_fields": {
+    "summary": "This paper addresses a pipeline to call adequate APIs among massive pools to accomplish users’ instructions. For that, the authors construct and release the APIBench dataset that contains more than 1645 APIs, and propose the Gorilla model, which is a retrieval-aware finetuned Llama-7B model for API calls.",
+    "strengths": "- Constructing the APIBench with AST tree matching evaluation metrics as well as open-sourcing the trained Gorilla model will be largely benefit to the community.\n- The problem in this paper is timely in terms of LLM applications and eco-systems — i.e., automatizing API function calls.\n- The fine-tuned model, Gorilla, surpasses performance compared to current SOTA models.\n- The paper is well written and soundly provides experiment results and analysis.",
+    "weaknesses": "- Lack of details about the training data for Gorilla, such as data stats and construction methods. It’s unclear how different the Gorilla training data and evaluation sets of APIBench are, which could lead to doubts about data contamination.\n- Experiment results analysis\n    - How robust are models to paraphrased user instructions corresponding to the same target model API?\n    - Providing performance for each domain could make it possible to analyze which domains are easy and hard.\n- Clarifications are needed:\n    - In the experimental result section, the authors report two metrics along with overall accuracy: **the error by hallucination and by selecting the wrong API call.** The metric equations or explanations for calculating the values need to be clarified.\n    - In section AST as a Hallucination Metric (line 251), how was experimented to attain the human evaluation of 78% accuracy?\n- It is required to mention the license of crawled APIs for usage.\n- A limitation section is absent, though the authors describe them in the checklist. Broader impact and limitation could include implicit risks such as usage of unreliable APIs, license infringement, or unexpected results by incorrect function calls.",
+    "questions": "- In section 4.1, “Note that for TorchHub and TensorHub, we evaluate all the models using AST tree accuracy score. *However, for HuggingFace, since the dataset is not exhaustive, for all the models except Gorilla, we only check if they can provide the correct domain names.*” is vague. The numbers of data for HF, TFH, and TH are 925, 801, and 95, respectively. Please clarify this.\n- Table 1 shows that TorchHub is hard to even with oracle API documents compared to HuggingFace and TensorFlowHub. Can you draw the reason?\n- (Typos) line 225. `his suggests`\n- (suggestions) Please elaborate more on Table 2 — e.g., the caption and highlights. Moreover, it’s hard to connect between the written explanation and the table, due to different numbers.\n- (suggestions) Absence of mentioning the full name of AST (Abstract Syntax Tree)",
+    "limitations": "- Limitation section is absent, though the authors describe them in the check list. Broader impact and limitation could include implicit risks such as usage of unreliable APIs, license infringement, or unexpected results by incorrect function calls."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2742,
+    "words": 438,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/374bea3b-35df-486a-b8ee-3c4bdbe0bebe",
+    "error": null,
+    "scored_chars": 2758
+  }
+}

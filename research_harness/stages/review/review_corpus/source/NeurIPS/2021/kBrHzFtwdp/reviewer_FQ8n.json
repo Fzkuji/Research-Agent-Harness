@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "kBrHzFtwdp",
+  "reviewer": "FQ8n",
+  "paper": {
+    "title": "Nested Variational Inference",
+    "authors": [
+      "Heiko Zimmermann",
+      "Hao Wu",
+      "Babak Esmaeili",
+      "Jan-Willem van de Meent"
+    ],
+    "abstract": "We develop nested variational inference (NVI), a family of methods that learn proposals for nested importance samplers by minimizing an forward or reverse KL divergence at each level of nesting. NVI is applicable to many commonly-used importance sampling strategies and provides a mechanism for learning intermediate densities, which can serve as heuristics to guide the sampler. Our experiments apply NVI to (a) sample from a multimodal distribution using a learned annealing path (b) learn heuristics that approximate the likelihood of future observations in a hidden Markov model and (c) to perform amortized inference in hierarchical deep generative models. We observe that optimizing nested objectives leads to improved sample quality in terms of log average weight and effective sample size.",
+    "keywords": [
+      "Variational Inference",
+      "Importance Sampling",
+      "Monte Carlo methods"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=kBrHzFtwdp"
+  },
+  "review_fields": {
+    "summary": "This paper proposes an inference procedure that combines ideas from variational and nested inference, resulting in a sequence of forward and reverse proposal distributions that are optimized with local objectives that encourage the forward and backward edge marginals to be similar. This allows the objective and therefore gradients to decouple. The addition of resampling, afforded by the connection to nested inference, additionally improves sample diversity.",
+    "main_review": "*Originality*\n* This work proposes a novel combination of prior techniques, namely the local marginal objectives from AVO and the addition of resampling for intermediate distributions.\n\n*Quality*\n* The submission is technically sound, and its claims are well-supported by the experimental results. Experiment 1, multimodal sampling, demonstrates quantitative improvements over flow and AVO baselines, both in accuracy as well as sample diversity. Experiment 2, on posterior inference in a small HMM, demonstrates NVI’s use in a problem where intermediate densities are not of constant dimension. Experiment 3 uses NVI on a mixture model on (fashion) MNIST, and contains a favorable qualitative comparison to the same model trained with RWS.\n\n*Clarity*\n* The submission is clearly written, although I am hopeful the presentation can be greatly simplified. I would also have liked to see discussion of / relation to AVO earlier than the experiments section.\n* The notation might be a bit redundant, with different variable names for (edge) marginals, unnormalized marginals, and proposal distributions. In addition to the different directions, it took a while to get used to the notation. While it does not detract from the paper, any simplifications would be welcome.\n* In addition to the appendix, I believe an expert reader could reproduce the results.\n* Will the in-text derivation in lines 116-118 be replaced by equations given more space?\n\n*Significance*\n* I found the results convincing, although I am not familiar with the SMC literature.\nAdditionally, the experiments were performed on small data, which leads to concerns regarding scale.\n\n[AVO] Huang, Chin-Wei, Tan, Shawn, Lacoste, Alexandre, Courville, Aaron C. “Improving explorability in variational inference with annealed variational objectives”. Advances in Neural Information Processing Systems. 2018, pp. 9701–9711.",
+    "limitations_and_societal_impact": "I would like to see speed comparisons between NVI and baselines where appropriate, as that could be a limiting factor in its applicability. For example in the HMM, how fast would exact inference be relative to NVI? This also causes me to be concerned about whether this technique can scale to models with larger state spaces, such as HMMs with thousands of states."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

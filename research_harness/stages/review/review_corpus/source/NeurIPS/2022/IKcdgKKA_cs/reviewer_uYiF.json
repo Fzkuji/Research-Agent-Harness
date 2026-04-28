@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "IKcdgKKA_cs",
+  "reviewer": "uYiF",
+  "paper": {
+    "title": "Mathematically Modeling the Lexicon Entropy of Emergent Language",
+    "authors": [
+      "Brendon Boldt",
+      "David R Mortensen"
+    ],
+    "abstract": "We formulate a stochastic process, FiLex, as a mathematical model of lexicon entropy in deep learning-based emergent language systems. Defining a model mathematically allows it to generate clear predictions which can be directly and decisively tested. We empirically verify across four different environments that FiLex predicts the correct correlation between hyperparameters (training steps, lexicon size, learning rate, rollout buffer size, and Gumbel-Softmax temperature) and the emergent language's entropy in $20$ out of $20$ environment-hyperparameter combinations. Furthermore, our experiments reveal that different environments show diverse relationships between their hyperparameters and entropy which demonstrates the need for a model which can make well-defined predictions at a precise level of granularity.",
+    "keywords": [
+      "emergent language",
+      "emergent communication",
+      "stochastic process",
+      "modeling"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=IKcdgKKA_cs"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a stochastic process FILEX developed from the Chinese restaurant process, to mathematically model the lexicon entropy of emergent language between multiple agents (the speaker and the listener) in ELS (emergent language system) environments. The authors make correspondences between the FILEX and ELS to evaluate FILEX in real ELS environments. Experimental results on four ELS environments show that FILEX can correctly predict the correlation between hyperparameters and the lexicon entropy of well-trained emergent language in real ELS systems.",
+    "strengths_and_weaknesses": "In this paper, the authors propose a mathematical model of lexicon entropy of emergent language between agents. Moreover, the authors conduct extensive experiments to verify the model, and the results show its effectiveness.\nStrengths:\n1.\tThe paper provides an inspiring idea of mathematically modeling the properties of the emergent language without training in real environments. Besides, the mathematical description is more precise and testable than natural language.\n2.\tThe experimental results demonstrate the effectiveness of the proposed FILEX, which verifies the feasibility of the idea.\nWeaknesses:\n1. The mathematical model may be not rigorous enough.\n----a) The proposed FILEX is based on the assumption that word use is reinforced in emergent language in sec 3.1. However, the paper only provides evidence in human language but not emergent language between agents. The paper does not prove the assumption fits all ELS environments either.\n----b) The correspondences of hyperparameters between FILEX and ELS in line 193 are based on analogy, thus the relationships between FILEX and ELS maybe not strong enough to support the alignments. Besides, beta in FILEX is corresponding to both buffer size and temperature in ELS, which may break the independence of the two hyperparameters despite the reason given in the paper.\n2. The experiments seem to be not well-organized and insufficient somewhat.\n----a) In sec 3.4, the meaning of the hyperparameter-entropy correlation and the reason why it can be used to evaluate whether FILEX matches ELS is not given.\n----b) It is better to add the experimental evidence of the self-reinforcing assumption of emergent language in the four ELS environments, which is the basic assumption of the proposed FILEX.\n----c) In line 173, as a testable mathematical model, FILEX is expected to provide more precise information, thus the equality of sign of correlation as the metric seems a little too weak. It would be better if the authors add some stronger metrics.\n3. The organization and presentation of the paper could be improved.\n----a) The introduction section misses necessary background introductions to the key concept “emergent language” and “lexicon entropy”, which may confuse readers from a broad domain.\n----b) The paper lacks a formal definition of the problem or task. Besides, it is better to give the input, output, and goal of FILEX before the technical details in sec 3.1.\n----c) In sec 3.4, it is better to provide more explanations about the obscure hyperparameter-entropy correlation, which may be unfamiliar to many readers.\n----d) The paper may be not well-organized. For example, the environments in sec 3.2 and result analysis in sec 5.1 should be included in the experimental parts.\n----e) There are some typos and small mistakes in the paper. For example, line 9 in Algorithm 1 is not correctly initialized and used elsewhere; “Section 3.3” -> “in Section 3.3” in line 102.",
+    "questions": "1. Does the self-reinforcing assumption of emergent language in line 79 make sense in all ELS environments? Are there any evidences in the literature or experimental results?\n2. What’s the idea or intuitions behind the hyperparameter-entropy correlation in line 162? Why can it be used to evaluate whether FILEX matches the real ELS system?",
+    "limitations": "According to the authors, there are weaknesses in this work that have not been addressed. Details are as above.\nThis paper does not have any potential negative societal impact."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "S1cZsf-RW",
+  "reviewer": "2",
+  "paper": {
+    "title": "WHAI: Weibull Hybrid Autoencoding Inference for Deep Topic Modeling",
+    "authors": [
+      "Hao Zhang",
+      "Bo Chen",
+      "Dandan Guo",
+      "Mingyuan Zhou"
+    ],
+    "abstract": "To train an inference network jointly with a deep generative topic model, making it both scalable to big corpora and fast in out-of-sample prediction, we develop Weibull hybrid autoencoding inference (WHAI) for deep latent Dirichlet allocation, which infers posterior samples via a hybrid of stochastic-gradient MCMC and autoencoding variational Bayes. The generative network of WHAI has a hierarchy of gamma distributions, while the inference network of WHAI is a Weibull upward-downward variational autoencoder, which integrates a deterministic-upward deep neural network, and a stochastic-downward deep generative model based on a hierarchy of Weibull distributions. The Weibull distribution can be used to well approximate a gamma distribution with an analytic Kullback-Leibler divergence, and has a simple reparameterization via the uniform noise, which help efficiently compute the gradients of the evidence lower bound with respect to the parameters of the inference network. The effectiveness and efficiency of WHAI are illustrated with experiments on big corpora.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=S1cZsf-RW"
+  },
+  "review_fields": {
+    "review": "The authors develop a hybrid amortized variational inference MCMC inference \nframework for deep latent Dirichlet allocation. Their model consists of a stack of\n gamma factorization layers with a Poisson layer at the bottom. They amortize \ninference at the observation level using a Weibull approximation. The structure \nof the inference network mimics the MCMC sampler for this model. Finally they \nuse MCMC to infer the parameters shared across data. A couple of questions:\n\n1) How effective are the MCMC steps at mixing? It looks like this approach helps a \nbit with local optima?\n\n2) The gamma distribution can be reparameterized via its rejection sampler \n\n@InProceedings{pmlr-v54-naesseth17a,\n  title = \t {{Reparameterization Gradients through Acceptance-Rejection Sampling Algorithms}},\n  author = \t {Christian Naesseth and Francisco Ruiz and Scott Linderman and David Blei},\n  booktitle = \t {Proceedings of the 20th International Conference on Artificial Intelligence and Statistics},\n  pages = \t {489--498},\n  year = \t {2017}\n}\n\nI think some of the motivation for the Weibull is weakened by this work. Maybe a \ncomparison is in order?\n\n3) Analytic KL divergence can be good or bad. It depends on the correlation between \nthe gradients of the stochastic KL divergence and the stochastic log-likelihood\n\n4) One of the original motivations for DLDA was that the augmentation scheme \nremoved the need for most non-conjugate inference. However, this approach doesn't \nuse that directly. Thus, it seems more similar to inference procedure in deep exponential \nfamilies. Was the structure of the inference network proposed here crucial?\n\n5) How much like a Weibull do you expect the posterior to be? This seems unclear."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

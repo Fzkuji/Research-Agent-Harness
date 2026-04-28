@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "ZeFMtRBy4Z",
+  "reviewer": "xtx1",
+  "paper": {
+    "title": "REVE: A Foundation Model for EEG - Adapting to Any Setup with Large-Scale Pretraining on 25,000 Subjects",
+    "authors": [
+      "Yassine El Ouahidi",
+      "Jonathan Lys",
+      "Philipp Thölke",
+      "Nicolas Farrugia",
+      "Bastien Pasdeloup",
+      "Vincent Gripon",
+      "Karim Jerbi",
+      "Giulia Lioi"
+    ],
+    "abstract": "Foundation models have transformed AI by reducing reliance on task-specific data through large-scale pretraining. While successful in language and vision, their adoption in EEG has lagged due to the heterogeneity of public datasets, which are collected under varying protocols, devices, and electrode configurations. Existing EEG foundation models struggle to generalize across these variations, often restricting pretraining to a single setup, resulting in suboptimal performance, in particular under linear probing.\nWe present REVE (Representation for EEG with Versatile Embeddings), a pretrained model explicitly designed to generalize across diverse EEG signals. REVE introduces a novel 4D positional encoding scheme that enables it to process signals of arbitrary length and electrode arrangement. Using a masked autoencoding objective, we pretrain REVE on over 60,000 hours of EEG data from 92 datasets spanning 25,000 subjects, representing the largest EEG pretraining effort to date.\nREVE achieves state-of-the-art results on 10 downstream EEG tasks, including motor imagery classification, seizure detection, sleep staging, cognitive load estimation, and emotion recognition. With little to no fine-tuning, it demonstrates strong generalization, and nuanced spatio-temporal modeling. We release code, pretrained weights, and tutorials to support standardized EEG research and accelerate progress in clinical neuroscience.",
+    "keywords": [
+      "Foundation Model",
+      "EEG",
+      "SSL",
+      "BCI"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZeFMtRBy4Z"
+  },
+  "review_fields": {
+    "summary": "This paper presents REVE a foundation model trained on over 60,000 hours of EEG data from 92 datasets and 25,000 subjects. REVE achieves SOTA performance on 10 downstream EEG tasks. REVE addresses several challenges in training an EEG foundation model such as data heterogenity, low SNR, and different electrode configurations. The main contributions of this paper are\n\n1. A novel 4D positional encoding to model EEG signals with varying temporal lengths and electrode configuration\n2. Curation of large scale EEG by combining 92 datasets.\n3. State-of-the-art performance on multiple benchmarks",
+    "strengths_and_weaknesses": "1. This paper has created a large scale EEG dataset by combining 92 datasets spanning data from clinical, BCI and research domains. This will be a valuable resource for foundation model research in EEG\n2. This paper adapts MAE to spatiotemporal EEG signal and proposes a 4D positional encoding to address variation in temporal length and electrode configuration across datasets.\n3. Strong results demonstrating the importance of large scale pretraining on multiple downstream tasks.\n4. Clear writing , description of methods and results. \n5. Modeling choices are inspired by successes in different modalities \n\nI do not see any major weaknesses in this paper and believe it is a strong contribution towards foundation model development in EEG Domain. A minor weakness of this paper is that it is leveraging the ideas from other modalities but is missing an ablation study on the design choices for the architecture.",
+    "questions": "What other architecture design choices did you consider? Were there any other successful or failed designs that are not mentioned in the paper. It would be great to mention failed designs as that can help guide future directions\n\nDid you have an ablation on performance vs scale to find out whether there is room for improvement with more data or we have reached a saturation in performance with this dataset",
+    "final_justification": "The authors addressed most of my concerns. I will maintain positive rating"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 4,
+    "clarity": 4,
+    "significance": 4,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

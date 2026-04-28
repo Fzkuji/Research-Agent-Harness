@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "BAakY1hNKS",
+  "reviewer": "TpLJ",
+  "paper": {
+    "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversations",
+    "authors": [
+      "Qingyun Wu",
+      "Gagan Bansal",
+      "Jieyu Zhang",
+      "Yiran Wu",
+      "Beibin Li",
+      "Erkang Zhu",
+      "Li Jiang",
+      "Xiaoyun Zhang",
+      "Shaokun Zhang",
+      "Jiale Liu",
+      "Ahmed Hassan Awadallah",
+      "Ryen W White",
+      "Doug Burger",
+      "Chi Wang"
+    ],
+    "abstract": "We present AutoGen, an open-source framework that allows developers to build LLM applications by composing multiple agents to converse with each other to accomplish tasks. AutoGen agents are customizable, conversable, and can operate in various modes that employ combinations of LLMs, human inputs, and tools. It also enables developers to create flexible agent behaviors and conversation patterns for different applications using both natural language and code. AutoGen serves as a generic infrastructure and is widely used by AI practitioners and researchers to build diverse applications of various complexities and LLM capacities. We demonstrate the framework’s effectiveness with several pilot applications, with domains ranging from mathematics and coding to question-answering, supply-chain optimization, online decision-making, and entertainment.",
+    "keywords": [
+      "Large Language Model",
+      "Multi-Agent Conversation Framework",
+      "Open-Source Library"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=BAakY1hNKS"
+  },
+  "review_fields": {
+    "summary": "This paper presents an open-source framework to solve tasks by combining multiple LLMs acting as agents that talk to each other. It describes necessary features of such a framework, such as being easy to customize (to allow generality) or allowing re-use of modules (to reduce complexity). The main proposal is the concept of \"conversation programming\" which implies the definition of a set of agents and the definition the code that controls their interaction. After the main proposal the paper describes the features of the framework and the applications, which contains various experimental setups.",
+    "reasons_to_accept": "The topic is timely: agents and the authors are straightforward about the paper is being an open source framework.",
+    "reasons_to_reject": "My main problem is that it is hard to judge the contributions of this work from a research perspective both because, as the abstract states, the papers main proposal is an open source framework and also because the experimental setup needs a lot of improvement. The proposal of \"conversation programming\" seems also vague and its not clear how it is different from a generic multi-agent framework.\n\nTo put it in concrete terms:\n\n- Most of the manuscript reads more like the documentation of a software package than a research paper. It contains a lot of description of software abstractions such as classes and general descriptions of the package's features and even usage of flags or variable values. The software-like description makes it hard to isolate the concrete components that contribute to the experimental setup's results.\n\n- The experimental setup itself is also lacking. Many of the results are also missing from the main paper and moved to the Appendix e.g RaG. These results are important enough that they should be on the main body of the manuscript. The experiments in the Appendix seem also not standard, using a small number examples and oddly organized with a general lack of tables. \n\n- It seems like the original manuscript was far longer ans it has been split between body and appendix in a way that makes it hard to follow."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:49Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:49Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1462,
+    "words": 247,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/562e3e6f-9bf9-42bf-b43b-2dce036cb78a",
+    "error": null,
+    "scored_chars": 1463
+  }
+}

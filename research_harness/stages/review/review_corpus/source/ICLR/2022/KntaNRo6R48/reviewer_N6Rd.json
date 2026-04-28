@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "KntaNRo6R48",
+  "reviewer": "N6Rd",
+  "paper": {
+    "title": "L0-Sparse Canonical Correlation Analysis",
+    "authors": [
+      "Ofir Lindenbaum",
+      "Moshe Salhov",
+      "Amir Averbuch",
+      "Yuval Kluger"
+    ],
+    "abstract": "Canonical Correlation Analysis (CCA) models are powerful for studying the associations between two sets of variables. The canonically correlated representations, termed \\textit{canonical variates} are widely used in unsupervised learning to analyze unlabeled multi-modal registered datasets. Despite their success, CCA models may break (or overfit) if the number of variables in either of the modalities exceeds the number of samples. Moreover, often a significant fraction of the variables measures modality-specific information, and thus removing them is beneficial for identifying the \\textit{canonically correlated variates}. Here, we propose $\\ell_0$-CCA, a method for learning correlated representations based on sparse subsets of variables from two observed modalities.\nSparsity is obtained by multiplying the input variables by stochastic gates, whose parameters are learned together with the CCA weights via an $\\ell_0$-regularized correlation loss. \nWe further propose $\\ell_0$-Deep CCA for solving the problem of non-linear sparse CCA by modeling the correlated representations using deep nets. We demonstrate the efficacy of the method using several synthetic and real examples. Most notably, by gating nuisance input variables, our approach improves the extracted representations compared to other linear, non-linear and sparse CCA-based models.",
+    "keywords": [],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=KntaNRo6R48"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "Paper presents a novel sparse nonlinear-CCA method which works especially for cases where number of sample are less than max input feature dimension (D) N << D. It presents a novel algorithm that uses Gaussian relaxation of Bernoulli gating variables that sub-select sparse set of features. Empirical results on synthetic and real world data show efficacy of the method.",
+    "main_review": "Idea of sparse non-linear CCA for N << D case is novel and interesting and is valuable for such real-world cases. Loss function that minimizes correlation and increases sparsity provides a unique way to do feature selection for multi-modal cases.\n\nAlgorithm presented that does l_0 feature selection using Gaussian relaxed Bernoulli variables is interesting and novel application of for sparse-DCCA problem.\n\nEmpirical results on synthetic data show lowest error in learned correlations from sparse-DCCA compared to other SOTA techniques. Results on multi-view, MNIST digits, Seismic event and METABRIC datasets show that technique is able to pick relevant input features in challenging noisy and high dimensional (N<<D) cases with few examples.\n\nA strength of the presented method is that it is able to sub-select relevant features from high dimensional inputs so it is expected to perform well compared to techniques that are not specifically designed for that. It would be helpful to see performance of sparse-DCCA for cases of N>>D compared to other techniques for comparison.",
+    "summary_of_the_review": "Novelty of the paper is extension of idea of nonlinear-CCA method to sparse case where where number of sample are less than max input feature dimensions (D) N << D. Results presented are convincing and support technical details.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "details_of_ethics_concerns": "Authors present limitations do address limitations of proposed approach but would like to see performance for N>>D for sanity check as well. There are no direct social impact issues or concerns."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1310,
+    "words": 203,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d0ec1a3e-8010-4a6c-b8c0-816ae70401e1",
+    "error": null,
+    "scored_chars": 1310
+  }
+}

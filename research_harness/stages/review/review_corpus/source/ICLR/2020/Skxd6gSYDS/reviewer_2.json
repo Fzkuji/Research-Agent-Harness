@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "Skxd6gSYDS",
+  "reviewer": "2",
+  "paper": {
+    "title": "Query-efficient Meta Attack to Deep Neural Networks",
+    "authors": [
+      "Jiawei Du",
+      "Hu Zhang",
+      "Joey Tianyi Zhou",
+      "Yi Yang",
+      "Jiashi Feng"
+    ],
+    "abstract": "Black-box attack methods aim to infer suitable attack patterns to targeted DNN models by only using output feedback of the models and the corresponding input queries. However, due to lack of prior and inefficiency in leveraging the query and feedback information, existing methods are mostly query-intensive for obtaining effective attack patterns. In this work, we propose a meta attack approach that is capable of attacking a targeted  model with much fewer queries. Its high query-efficiency stems from effective utilization of  meta learning approaches in learning generalizable prior abstraction from the previously observed attack patterns and exploiting  such prior to help infer attack patterns from only a few queries and outputs. Extensive experiments on MNIST, CIFAR10 and tiny-Imagenet demonstrate that our meta-attack method can remarkably reduce the number of model queries without sacrificing the attack performance. Besides, the obtained meta attacker is not restricted to a particular model but can be used easily with a fast adaptive ability to attack a variety of models. Our code will be released to the public.",
+    "keywords": [
+      "Adversarial attack",
+      "Meta learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Skxd6gSYDS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I carefully checked the experiments.",
+    "review": "The authors proposed a meta-learning based black-box adversarial attack method to reduce the number of queries. Their proposed meta attacker is trained via a meta-learning approach, and it could utilize historical query information and fast adapted to different target models. The authors conduct experiments in three datasets, and the results show that their proposed meta attacker is more efficient than other black-box attack methods. \n\nStrong points of this paper:\n1) novelty. The paper combines meta-learning and black-box attack and develops a deep convolutional model (meta attacker) to predict the gradients of another DNN model. Most of the other query-efficient attack methods focus on utilizing estimated gradients, while this paper focuses on predicting accurate gradients. That makes this paper novel. \n2) The results are good. The proposed method could attain comparable l2 norm and attack success rate with much fewer queries. And the analysis in experiments is interesting. The generalizability experiment of the meta-attacker(meta transfer) shows that gradients in different models and different datasets have some similar patterns. \n\nWeak points of this paper:\n1) The authors could investigate more in the theoretical part. For example, the authors could gives the theoretical support of why a convolutional network could stimulate other networks' gradient. \n2) The deploy of the meta-attacker is not as easy as other black-box attack methods. It would not be practical if we need to meta training the attacker before we use it. \n\nQuestions:\n1) Is it hard to meta training the meta-attacker? How long will it take for training? \n2) Is it necessary to finetune the meta attacker in algorithm 2 every m iteration? How to determine the \"m\"?\n3) Could the proposed meta-attacker embedded with other optimized black-box attack methods? \n\nOverall, this paper is well-structured, novel, and ideas are well motivated. The query-efficient black-box attack problem is practical and meaningful. I would encourage the authors to release their codes. Last, I would recommend acceptance for this paper.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I carefully checked the derivations and theory."
+  },
+  "review_metadata": {
+    "rating": 8
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

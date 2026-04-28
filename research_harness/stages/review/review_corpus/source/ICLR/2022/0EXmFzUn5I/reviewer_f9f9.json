@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "0EXmFzUn5I",
+  "reviewer": "f9f9",
+  "paper": {
+    "title": "Pyraformer: Low-Complexity Pyramidal Attention for Long-Range Time Series Modeling and Forecasting",
+    "authors": [
+      "Shizhan Liu",
+      "Hang Yu",
+      "Cong Liao",
+      "Jianguo Li",
+      "Weiyao Lin",
+      "Alex X. Liu",
+      "Schahram Dustdar"
+    ],
+    "abstract": "Accurate prediction of the future given the past based on time series data is of paramount importance, since it opens the door for decision making and risk management ahead of time. In practice, the challenge is to build a flexible but parsimonious model that can capture a wide range of temporal dependencies. In this paper, we propose Pyraformer by exploring the multiresolution representation of the time series. Specifically, we introduce the pyramidal attention module (PAM) in which the inter-scale tree structure summarizes features at different resolutions and the intra-scale neighboring connections model the temporal dependencies of different ranges. Under mild conditions, the maximum length of the signal traversing path in Pyraformer is a constant (i.e., $\\mathcal O(1)$) with regard to the sequence length $L$, while its time and space complexity scale linearly with $L$. Extensive numerical results show that Pyraformer typically achieves the highest prediction accuracy in both single-step and long-range forecasting tasks with the least amount of time and memory consumption, especially when the sequence is long.",
+    "keywords": [
+      "sparse attention",
+      "pyramidal graph",
+      "Transformer",
+      "time series forecasting",
+      "long-range dependence",
+      "multiresolution"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=0EXmFzUn5I"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes Pyraformer, a low-complexity pyramidal attention model for long-range time-series modelling and forecasting. The proposed architecture is build upon a pyramidal attention module (PAM) in which the inter-scale tree structure summarizes features at different resolutions and the intra-scale neighbouring connections model the temporal dependencies of different ranges. The proposed framework harnesses the benefit of both transformer and RNN. Evaluation on Electricity, wind, App Flow, and ETT dataset against baseline models including Informer., LogTrans, Longformer, Reformer, ETC shows superior performance.",
+    "main_review": "Strength:\n1. The paper is well written and the proposed architecture is easy to understand. I believe the equations are correct, and the included model illustrations makes the model design very intuitive.\n2. Extensive evaluation is provided, and the proposed model consistently outperforms baseline models.\n3. A ablation study is provided to justify the effectiveness of each component in the proposed architecture.\n\nWeakness:\n1. Although I couldn't find any specific publication, I believe hierarchical structure illustrated in Figure 1 (d) has been explored before in the context of LSTM/RNN. In addition, another line of work trying to apply the residual connections from ResNet to RNNs (e.g., https://arxiv.org/pdf/1701.03360.pdf) also provides a means for long-range time-series modelling. \n2. The paper states that Pyraformer simultaneously capture temporal dependencies of different ranges in a compact multi resolution fashion. This is intuitively understandable. However, it would be more convincing if the evaluation could also illustrate this perspective. To be more specific, how do we know from the current evaluation setting that the model indeed learns multi resolution temporal dependencies?\n3. Connected to comment 2, it would be better if the authors could illustrate a bit more on why these datasets can be used to evaluate long-term dependency modelling. In my understanding, long-term dependency modelling could be a bit different from long-term prediction. The former focuses on extract meaningful information from long-term previous steps, and the latter focuses on accurate prediction into the far future. If the real-world dataset does not include the long-term dependency in it, some study on a synthetic dataset would help readers understand the benefit of the proposed model. In other words, inaccuracy in long-term prediction could be resulted from (1) accumulated noise in predictions along time, and (2) lack of long-term temporal dependency modelling. How does the authors distinguish the result from these two perspectives? \n4. The proposed method uses a factor of 2 to construct the hierarchy. This number seems a bit arbitrary. I'm wondering if this is a design choice with some thoughts behind it, or could this number be treated as a hyper parameter? Basically this number will decide the number of hierarchies in the structure.",
+    "summary_of_the_review": "Overall it is a solid paper. Please refer to the above session for the detailed discussion. I had a few concerns regarding evaluation setup and novelty. If the authors could reply accordingly, I'm willing to reevaluate the paper.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:29Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:29Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 5,
+    "human_pct": 95,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2494,
+    "words": 358,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fdfeb250-2f60-44ba-a4da-0a38295959e3",
+    "error": null,
+    "scored_chars": 2365
+  }
+}

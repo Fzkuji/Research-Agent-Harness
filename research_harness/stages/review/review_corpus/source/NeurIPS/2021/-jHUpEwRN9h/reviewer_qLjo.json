@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "-jHUpEwRN9h",
+  "reviewer": "qLjo",
+  "paper": {
+    "title": "Row-clustering of a Point Process-valued Matrix",
+    "authors": [
+      "Lihao Yin",
+      "Ganggang Xu",
+      "Huiyan Sang",
+      "Yongtao Guan"
+    ],
+    "abstract": "Structured point process data harvested from various platforms poses new challenges to the machine learning community. To cluster repeatedly observed marked point processes, we propose a novel mixture model of multi-level marked point processes for identifying potential heterogeneity in the observed data. Specifically, we study a matrix whose entries are marked log-Gaussian Cox processes and cluster rows of such a matrix.  An efficient semi-parametric Expectation-Solution (ES) algorithm combined with functional principal component analysis (FPCA) of point processes is proposed for model estimation. The effectiveness of the proposed framework is demonstrated through simulation studies and real data analyses.",
+    "keywords": [
+      "Expectation-Solution Algorithm",
+      "Functional Principal Component Analysis",
+      "Marked Point Processes",
+      "Model-based Clustering",
+      "Semiparametric Model"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=-jHUpEwRN9h"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a mixture model of multi-level marked point processes (MM-MPP), which is inspired by a real-world Twitter dataset. A computationally efficient expectation-solution (ES) algorithm is proposed and shown to outperform two existing methods in numerical experiments.",
+    "main_review": "This work extends the existing MM-MPP to a mixture model setting, accounting for heterogeneity in data. This is largely inspired by a Twitter dataset, though it is potentially suitable for many other applications as well. \n\nPro: the overall structure of this paper is clean and easy to follow. The models (Sec 3) and algorithms (Sec 4), as well as settings and results of numerical experiments (Sec 5), are presented and explained in detail. In particular, the proposed ES algorithm admits close-form solution in its intermediate steps, which allows efficient computation.\n\nCon: the proposed ES algorithm doesn't come with any theoretical guarantees, and one of my concern is about its convergence. It is well known that typically EM-type algorithm can get stuck at local minimums; the current paper has no discussion on this issue. I would suggest checking (at least) empirically whether the proposed algorithm is indeed robust/insensitive to random initialization, e.g. with 100 random initializations, how many times does it converge to a good solution?\n\nA minor suggestion: in Tables 1 and 2, it would be better to include not just a single number, but also a confidence interval, to account for uncertainty/randomness in data and/or algorithms. It is also helpful (and standard) to use bold font to highlight the best performance under each setting.\n\nTypo: Line 7, \"Exponential-Solution\" -> \"Expectation-Solution\"."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

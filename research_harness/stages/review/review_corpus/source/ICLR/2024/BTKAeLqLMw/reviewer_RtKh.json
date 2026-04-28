@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "BTKAeLqLMw",
+  "reviewer": "RtKh",
+  "paper": {
+    "title": "What Makes Good Data for Alignment? A Comprehensive Study of Automatic Data Selection in Instruction Tuning",
+    "authors": [
+      "Wei Liu",
+      "Weihao Zeng",
+      "Keqing He",
+      "Yong Jiang",
+      "Junxian He"
+    ],
+    "abstract": "Instruction tuning is a standard technique employed to align large language models to end tasks and user preferences after the initial pretraining phase. Recent research indicates the critical role of data engineering in instruction tuning -- when appropriately selected, only limited data is necessary to achieve superior performance. However, we still lack a principled understanding of what makes good instruction tuning data for alignment, and how we should select data automatically and effectively. In this work, we delve deeply into automatic data selection strategies for alignment. We start with controlled studies to measure data across three dimensions: complexity, quality, and diversity, along which we examine existing methods and introduce novel techniques for enhanced data measurement. Subsequently, we propose a simple strategy to select data samples based on the measurement. We present Deita (short for Data-Efficient Instruction Tuning for Alignment), a series of models fine-tuned from LLaMA models using data samples automatically selected with our proposed approach.  When assessed through both automatic metrics and human evaluation, Deita performs better or on par with the state-of-the-art open-source alignment models such as Vicuna and WizardLM with only 6K training data samples -- 10x less than the data used in the baselines. We anticipate this work to provide clear guidelines and tools on automatic data selection, aiding researchers and practitioners in achieving data-efficient alignment.",
+    "keywords": [
+      "data selection",
+      "instruction tuning",
+      "large language models"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=BTKAeLqLMw"
+  },
+  "review_fields": {
+    "comment": "Thanks to the authors for the careful response. The explanations and additional results definitely helped to better contextualize this work. I can understand the challenge of working on a trending topic with new results coming out all the time. From the author's explanation, the performance achieved by this work is at the frontier. \n\nThe part of my review remains that I do not see a clear technical contribution offered by this work, at least not a principled framework. I am not very familiar with the state-of-the-art performance for instruction tuning so I will have to leave the evaluation of this part to other reviewers and the AC.\n\nThus, I am not passionately against the publication of the work or passionately supporting it. I would raise my score to 5 while decreasing my confidence to 2."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 800,
+    "words": 135,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a084120d-3721-4b95-8ed5-f41a7b1c0d38",
+    "error": null,
+    "scored_chars": 801
+  }
+}

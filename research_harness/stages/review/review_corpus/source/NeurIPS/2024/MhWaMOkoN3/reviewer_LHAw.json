@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "MhWaMOkoN3",
+  "reviewer": "LHAw",
+  "paper": {
+    "title": "Universality in Transfer Learning for Linear Models",
+    "authors": [
+      "Reza Ghane",
+      "Danil Akhtiamov",
+      "Babak Hassibi"
+    ],
+    "abstract": "We study the problem of transfer learning and fine-tuning in linear models for both regression and binary classification. In particular, we consider the use of stochastic gradient descent (SGD) on a linear model initialized with pretrained weights and using a small training data set from the target distribution. In the asymptotic regime of large models, we provide an exact and rigorous analysis and relate the generalization errors (in regression) and classification errors (in binary classification) for the pretrained and fine-tuned models. In particular, we give conditions under which the fine-tuned model outperforms the pretrained one. An important aspect of our work is that all the results are \"universal\", in the sense that they depend only on the first and second order statistics of the target distribution. They thus extend well beyond the standard Gaussian assumptions commonly made in the literature. Furthermore, our universality results extend beyond standard SGD training to the test error of a classification task trained using ridge regression.",
+    "keywords": [
+      "Gaussian Universality",
+      "Transfer Learning",
+      "Linear Regression",
+      "Binary Classification"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=MhWaMOkoN3"
+  },
+  "review_fields": {
+    "summary": "The paper studies model-based transfer learning. In this setting, a model is pre-trained on the source data, and the learner aims to fine-tune it on the target data by running SGD initialized at the pre-trained model. The paper focuses on linear regression and classification, aiming to generalize the assumption of Gaussianity to general distributions and investigate the scenarios where fine-tuning on the target data can or cannot be beneficial.",
+    "strengths": "The paper derives a universality result that allows replacing Gaussian data with more general distributions. It then analyzes the generalization error in linear regression and classification for SGD initialized at a model pre-trained on the source data. The study shows that when the noise in the data is high, fine-tuning can be harmful, and just using the model pre-trained on the source data results in a lower error. Conversely, when the noise is less than the error of the model pre-trained on the source data, transfer learning improves test performance.",
+    "weaknesses": "The paper attempts to generalize the assumption of Gaussianity but is limited to the linear model, which is inherently restrictive. Furthermore, it focuses exclusively on a specific algorithm—SGD initialized at the model pre-trained on the source data—without demonstrating the optimality of these results or determining whether better results are achievable with alternative algorithms.",
+    "questions": "It appears that there are some parameters in the paper that have not been defined.\n\nIn line 194, \"p\" is used without definition.\n\nIn equation (7), \\kappa is referenced without definition.\n\nIn line 206, it's unclear what \"p(r)\" represents.",
+    "limitations": "The paper does not have any potential negative societal impact."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 14,
+    "mixed_pct": 0,
+    "human_pct": 86,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1254,
+    "words": 192,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/52e5307e-d5de-4f01-b099-59ec4cf586b8",
+    "error": null,
+    "scored_chars": 1254
+  }
+}

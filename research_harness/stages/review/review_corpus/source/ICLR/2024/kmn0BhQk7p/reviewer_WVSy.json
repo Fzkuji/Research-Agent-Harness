@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "kmn0BhQk7p",
+  "reviewer": "WVSy",
+  "paper": {
+    "title": "Beyond Memorization: Violating Privacy via Inference with Large Language Models",
+    "authors": [
+      "Robin Staab",
+      "Mark Vero",
+      "Mislav Balunovic",
+      "Martin Vechev"
+    ],
+    "abstract": "Current privacy research on large language models (LLMs) primarily focuses on the issue of extracting memorized training data. At the same time, models’ inference capabilities have increased drastically. This raises the key question of whether current LLMs could violate individuals’ privacy by inferring personal attributes from text given at inference time. In this work, we present the first comprehensive study on the capabilities of pretrained LLMs to infer personal attributes from text. We construct a dataset consisting of real Reddit profiles, and show that current LLMs can infer a wide range of personal attributes (e.g., location, income, sex), achieving up to 85% top-1 and 95% top-3 accuracy at a fraction of the cost (100x) and time (240x) required by humans. As people increasingly interact with LLM-powered chatbots across all aspects of life, we also explore the emerging threat of privacy-invasive chatbots trying to extract personal information through seemingly benign questions. Finally, we show that common mitigations, i.e., text anonymization and model alignment, are currently ineffective at protecting user privacy against LLM inference. Our findings highlight that current LLMs can infer personal data at a previously unattainable scale. In the absence of working defenses, we advocate for a broader discussion around LLM privacy implications beyond memorization, striving for stronger and wider privacy protection.",
+    "keywords": [
+      "Privacy",
+      "Large Language Models"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=kmn0BhQk7p"
+  },
+  "review_fields": {
+    "summary": "The paper presents the privacy risks of LLM to infer personal attributes from user-written text. Empirical results show that the current LLM can infer a wide range of personal attributes from text with proper prompts.",
+    "strengths": "1. This is the first work showing LLM could effectively infer sensitive attributes from user-written text. This work could have a high impact on the community. \n2. The authors have conducted comprehensive experiments to substantiate the key statement presented in the paper.\n3. The paper offers a novel perspective on the study of Language Model Models (LLMs).",
+    "weaknesses": "1. Some experiment setups should be justified. For some attributes (e.g., MSE for age), accuracy is not the correct metric.\n2. Using sensitive topics and need additional ethics review. For example, whether the study is  IRB approved? \n3. Quality checks of the synthetic data generation is missing. In the paper, the author fails to mention what types of quality checks they performed on the collected synthetic data, weakening the soundness of the paper. \n\nMinor:\n 1. Typos: Mititgations -> Mitigations, exampels -> examples",
+    "questions": "Please provide a response to the weaknesses mentioned above.",
+    "details_of_ethics_concerns": "The paper leverages LLMs to infer the sensitive attribute of user-written text, which might need a more in-depth ethics review."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 943,
+    "words": 148,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a91549c8-fad1-459b-b88c-2e7d128389ef",
+    "error": null,
+    "scored_chars": 948
+  }
+}

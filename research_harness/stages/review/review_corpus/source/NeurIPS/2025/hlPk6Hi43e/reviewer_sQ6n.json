@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "hlPk6Hi43e",
+  "reviewer": "sQ6n",
+  "paper": {
+    "title": "Tight analyses of first-order methods with error feedback",
+    "authors": [
+      "Daniel Berg Thomsen",
+      "Adrien Taylor",
+      "Aymeric Dieuleveut"
+    ],
+    "abstract": "Communication between agents often constitutes a major computational bottleneck in distributed learning. One of the most common mitigation strategies is to compress the information exchanged, thereby reducing communication overhead. To counteract the degradation in convergence associated with compressed communication, error feedback schemes---most notably EF and EF21---were introduced. In this work, we provide a tight analysis of both of these methods. Specifically, we find the Lyapunov function that yields the best possible convergence rate for each method---with matching lower bounds.  This principled approach yields sharp performance guarantees and enables a rigorous, apples-to-apples comparison between EF, EF21, and compressed gradient descent. Our analysis is carried out in the simplified single-agent setting, which allows for clean theoretical insights and fair comparison of the underlying mechanisms.",
+    "keywords": [
+      "distributed optimization",
+      "distributed learning",
+      "error feedback",
+      "EF",
+      "EF21",
+      "tight analysis",
+      "performance estimation",
+      "convex optimization",
+      "large-scale machine learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=hlPk6Hi43e"
+  },
+  "review_fields": {
+    "summary": "The paper provides tight bounds for Compressed GD, EF, and EF21. It employs the performance estimation framework to find the optimal Lyapunov functions for EF and EF21. The paper demonstrates that CSG actually converges for the larger set of problem parameters compared with EF and EF21.",
+    "strengths_and_weaknesses": "The paper is very well-written and the main technique for finding optimal Lyapunov functions was very interesting.\n\nConcerns:\n\nThe paper only considers the exact-gradient case. Note that EF was largely motivated by the need of compressed GD to handle the stochastic noise (see [“Error Feedback Fixes SignSGD and other Gradient Compression Schemes”](https://arxiv.org/pdf/1901.09847), Section 3). Since the practical scenarios have stochastic noise, I question the significance of this work, in particular the conclusion “We also observed that their performance is strictly worse than that of compressed gradient descent – an outcome that, we believe, challenges the intuition of many in the field.”\n\nSection 3: what is the optimal convergence rate for CGD?\n\nIn Section 2.1, you don’t talk about EF. Also, please mention EF21 when using reference [14].",
+    "questions": "Minor concerns:\n\nLine 188: redundant “and”\n\nLine 220: better to move the reference to the end of the phrase\n\nLine 237: naemly\n\nLine 565 is strange"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "quality": 4,
+    "clarity": 4,
+    "significance": 2,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "youe3QQepVB",
+  "reviewer": "Ytpa",
+  "paper": {
+    "title": "Generative Modeling for Multitask Visual Learning",
+    "authors": [
+      "Zhipeng Bao",
+      "Yu-Xiong Wang",
+      "Martial Hebert"
+    ],
+    "abstract": "Generative modeling has recently shown great promise in computer vision, but it has mostly focused on synthesizing visually realistic images. In this paper, motivated by multi-task learning of shareable feature representations, we consider a novel problem of learning a shared generative model that is useful across various visual perception tasks. Correspondingly, we propose a general multi-task oriented generative modeling (MGM) framework, by coupling a discriminative multi-task network with a generative network. While it is challenging to synthesize both RGB images and pixel-level annotations in multi-task scenarios, our framework enables us to use synthesized images paired with only weak annotations (i.e., image-level scene labels) to facilitate multiple visual tasks. Experimental evaluation on challenging multi-task benchmarks, including NYUv2 and Taskonomy, demonstrates that our MGM framework improves the performance of all the tasks by large margins, especially in the low-data regimes, and our model consistently outperforms state-of-the-art multi-task approaches.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=youe3QQepVB"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper focuses on using generative models to improve multi-task learning. The authors propose a framework that combines discriminative multi-task model and generative model, with a refinement network that performs scene classification on top of the multi-task network predictions to guide the learning. The network uses weak labels and self-supervision for end-to-end training. Compared with single-task and multi-task learning baselines, both quantitative and qualitative results show improved performance.",
+    "main_review": "The proposed framework that combines multi-task learning and generative modeling is interesting and inspiring. I also appreciate the extensive experiments (ablation studies and extensions) conducted by the authors.\n\nHowever, I am not entirely convinced by the pilot study. The experiment is carried out on a single task, and the proposed framework is suitable for multi-task. The discovery of single-task scenarios may not be applicable to multi-task scenarios.  A more convincing comparison is to show that \"using images synthesized by an off-the-shelf generative model may hurt the performance on multi-task learning\". In addition, I think using Taskonomy's output as the ground truth to train with the synthesized image is not good enough. Although Taskonomy is the state-of-the-art method, its qualitative performance is still far from being regarded as a good ground truth. It is better to visualize the sample ground truth (Taskonomy's output) in the supplement to prove that the output of using Taskonomy is sufficient for training. In general, I think the pilot study is still very different from the proposed framework: it is conducted on a single task, there is no self-supervision/contrastive learning, it does not use weak labels, but uses the output of Taskonomy as the ground truth. I think the pilot study alone is not enough to support the claim.\n\nI also don't fully believe in the benefits of introducing generative models in joint training. The role of generative models is like providing additional data augmentations. The advantage of training the generative model with the multi-task model is that it can better learn the synthetic images guided by the multi-task outputs and the downstream tasks. I think a stronger baseline is to train a separate generative model for each task on the same dataset for each experiment, and then fix the generative model weights, train a multi-task learning network with the generated model guided by the downstream tasks. Again, since I believe that the pilot study is not enough to be such a baseline, further comparisons are needed.",
+    "summary_of_the_review": "Although I think the whole idea is interesting and worthy of discussion in the research community, I still don’t fully believe most of the claims: e.g. the pilot study that tries to support the claim \"directly using images synthesized by an off-the-shelf generative model (self-attention GAN) may hurt the performance on the downstream task\" and the performance differences between using generative models and a more complex data augmentation technique. Therefore, at this stage, I will vote for borderline reject. I will re-evaluate the score based on the authors' response.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2666,
+    "words": 420,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/bc26eb8a-e649-4b10-b1d9-978687f1c3de",
+    "error": null,
+    "scored_chars": 2667
+  }
+}

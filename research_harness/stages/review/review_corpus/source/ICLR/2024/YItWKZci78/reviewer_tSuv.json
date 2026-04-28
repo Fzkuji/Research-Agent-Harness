@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "YItWKZci78",
+  "reviewer": "tSuv",
+  "paper": {
+    "title": "Symmetric Mean-field Langevin Dynamics for Distributional Minimax Problems",
+    "authors": [
+      "Juno Kim",
+      "Kakei Yamamoto",
+      "Kazusato Oko",
+      "Zhuoran Yang",
+      "Taiji Suzuki"
+    ],
+    "abstract": "In this paper, we extend mean-field Langevin dynamics to minimax optimization over probability distributions for the first time with symmetric and provably convergent updates. We propose \\emph{mean-field Langevin averaged gradient} (MFL-AG), a single-loop algorithm that implements gradient descent ascent in the distribution spaces with a novel weighted averaging, and establish average-iterate convergence to the mixed Nash equilibrium. We also study both time and particle discretization regimes and prove a new uniform-in-time propagation of chaos result which accounts for the dependency of the particle interactions on all previous distributions. Furthermore, we propose \\emph{mean-field Langevin anchored best response} (MFL-ABR), a symmetric double-loop algorithm based on best response dynamics with linear last-iterate convergence. Finally, we study applications to zero-sum Markov games and conduct simulations demonstrating long-term optimality.",
+    "keywords": [
+      "mean-field Langevin dynamics",
+      "minimax optimization",
+      "zero-sum games",
+      "Markov games"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=YItWKZci78"
+  },
+  "review_fields": {
+    "summary": "The authors considered the problem of developing a symmetric mean-field Langevin dynamics (MFLD) algorithm for distributional minimax problems with global convergence guarantees. Based on the mean-field Langevin descent ascent (MFL-DA) dynamics, the authors proposed mean-field Langevin averaged gradient (MFL-AG) flow that replaces the MFL-DA drift with the historical weighted average; based on the mean-field best response (MF-BR) flow, the authors proposed the mean-field Langevin anchored best response (MFL-ABR) process. Extensive convergence analyses were provided for both methods. The authors also studied the time and particle discretization error and applied their methods to zero-sum Markov games. Numerical experiments were conducted to compare their methods with MFL-DA.",
+    "strengths": "Compactly written, this paper is the first to establish convergence results in using MFLD for minimax optimization over probability measures. By incorporating a weighting scheme into MFL-AG, the authors offered a creative direction for future works on MFLD. The comprehensive discretization analysis complements the continuous-time convergence result well.  Their second method, MFL-ABR, is also an interesting improvement upon MF-BR that is realizable by a particle algorithm and enjoys convergence guarantees.",
+    "weaknesses": "The paper could be improved by providing more intuitions for the proposed methods. For example, what is the intuition for using a weighting scheme in MFL-AG, and what might cause MFL-AG and MFL-ABR to converge more slowly than MFL-DA in the numerical experiments? Is it correct to think that the slowdown of the convergence ensures better convergence?",
+    "questions": "See weakness. Also, what are some limitations of the proposed methods?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 2,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 935,
+    "words": 138,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/95395357-3eab-4846-a889-17807866376a",
+    "error": null,
+    "scored_chars": 936
+  }
+}

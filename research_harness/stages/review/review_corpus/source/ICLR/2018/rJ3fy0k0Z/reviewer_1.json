@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "rJ3fy0k0Z",
+  "reviewer": "1",
+  "paper": {
+    "title": "Deterministic Policy Imitation Gradient Algorithm",
+    "authors": [
+      "Fumihiro Sasaki",
+      "Atsuo Kawaguchi"
+    ],
+    "abstract": "The goal of imitation learning (IL) is to enable a learner to imitate an expert’s behavior given the expert’s demonstrations. Recently, generative adversarial imitation learning (GAIL) has successfully achieved it even on complex continuous control tasks. However, GAIL requires a huge number of interactions with environment during training. We believe that IL algorithm could be more applicable to the real-world environments if the number of interactions could be reduced. To this end, we propose a model free, off-policy IL algorithm for continuous control. The keys of our algorithm are two folds: 1) adopting deterministic policy that allows us to derive a novel type of policy gradient which we call deterministic policy imitation gradient (DPIG), 2) introducing a function which we call state screening function (SSF) to avoid noisy policy updates with states that are not typical of those appeared on the expert’s demonstrations. Experimental results show that our algorithm can achieve the goal of IL with at least tens of times less interactions than GAIL on a variety of continuous control tasks.",
+    "keywords": [
+      "Imitation Learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rJ3fy0k0Z"
+  },
+  "review_fields": {
+    "review": "This paper considers the problem of model-free imitation learning. The problem is formulated in the framework of generative adversarial imitation learning (GAIL), wherein we alternate between optimizing reward parameters and learner policy's parameters. The reward parameters are optimized so that the margin between the cost of the learner's policy and the expert's policy is maximized. The learner's policy is optimized (using any model-free RL method) so that the same cost margin is minimized. Previous formulation of GAIL uses a stochastic behavior policy and the RIENFORCE-like algorithms. The authors of this paper propose to use a deterministic policy instead, and apply the deterministic policy gradient DPG (Silver et al., 2014) for optimizing the behavior policy. \nThe authors also briefly discuss the problem of the little overlap between the teacher's covered state space and the learner's. A state screening function (SSF) method is proposed to drive the learner to remain in areas of the state space that have been covered by the teacher. Although, a more detailed discussion and a clearer explanation is needed to clarify what SSF is actually doing, based on the provided formulation.\nExcept from a few typos here and there, the paper is overall well-written. The proposed idea seems new. However, the reviewer finds the main contribution rather incremental in its nature. Replacing a stochastic policy with a deterministic one does not change much the original GAIL algorithm, since the adoption of stochastic policies is often used just to have differentiable parameterized policies, and if the action space is continuous, then there is not much need for it (except for exploration, which is done here through re-initializations anyway). My guess is that if someone would use the GAIL algorithm for real problems (e.g, robotic task), they would significantly reduce the stochasticity of the behavior policy, which would make it virtually similar in term of data efficiency to the proposed method.\nPros:\n- A new GAIL formulation for saving on interaction data. \nCons:\n- Incremental improvement over GAIL\n- Experiments only on simulated toy problems \n- No theoretical guarantees for the state screening function (SSF) method"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

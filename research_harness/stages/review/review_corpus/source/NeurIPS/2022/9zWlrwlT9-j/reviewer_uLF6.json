@@ -1,0 +1,34 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "9zWlrwlT9-j",
+  "reviewer": "uLF6",
+  "paper": {
+    "title": "Unbiased Estimates for Multilabel Reductions of Extreme Classification with Missing Labels",
+    "authors": [
+      "Erik Schultheis",
+      "Rohit Babbar"
+    ],
+    "abstract": "This paper considers the missing-labels problem in the extreme multilabel classification (XMC) setting, i.e. a setting\nwith a very large label space. The goal in XMC often is to maximize either precision or recall of the top-ranked\npredictions, which can be achieved by reducing the multilabel problem into a series of binary (One-vs-All) or multiclass\n(Pick-all-Labels) problems. Missing labels are a ubiquitous phenomenon in XMC tasks, yet the interaction between missing\nlabels and multilabel reductions has hitherto only been investigated for the case of One-vs-All reduction. In this\npaper, we close this gap by providing unbiased estimates for general (non-decomposable) multilabel losses, which enables\nunbiased estimates of the Pick-all-Labels reduction, as well as the normalized reductions which are required for\nconsistency with the recall metric. We show that these estimators suffer from increased variance and may lead to\nill-posed optimization problems. To address this issue, we propose to use convex upper bounds which trade off an\nincrease in bias against a strong decrease in variance.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=9zWlrwlT9-j"
+  },
+  "review_fields": {
+    "comment": "Thanks for your response. I agree with your comment that its hard to interpret results as the unbiased estimates do not fall in [0 -100] and just normalising them to fall in between 0-100 is probably not the best idea. However, we can still do some sort of proxy/qualitative analysis where we check if the model trained with unbiased loss is actually giving better results for tail labels (as done in Jain et al. paper as well), because thats where most of the missing data would be.\nBut anyways, I am willing to increase my rating to 6."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

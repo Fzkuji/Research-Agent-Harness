@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "JxFgJbZ-wft",
+  "reviewer": "xcsC",
+  "paper": {
+    "title": "Variational Predictive Routing with Nested Subjective Timescales",
+    "authors": [
+      "Alexey Zakharov",
+      "Qinghai Guo",
+      "Zafeirios Fountas"
+    ],
+    "abstract": "Discovery and learning of an underlying spatiotemporal hierarchy in sequential data is an important topic for machine learning. Despite this, little work has been done to explore hierarchical generative models that can flexibly adapt their layerwise representations in response to datasets with different temporal dynamics. Here, we present Variational Predictive Routing (VPR) – a neural probabilistic inference system that organizes latent representations of video features in a temporal hierarchy, based on their rates of change, thus modeling continuous data as a hierarchical renewal process. By employing an event detection mechanism that relies solely on the system’s latent representations (without the need of a separate model), VPR is able to dynamically adjust its internal state following changes in the observed features, promoting an optimal organisation of representations across the levels of the model’s latent hierarchy.  Using several video datasets, we show that VPR is able to detect event boundaries, disentangle spatiotemporal features across its hierarchy, adapt to the dynamics of the data, and produce accurate time-agnostic rollouts of the future. Our approach integrates insights from neuroscience and introduces a framework with high potential for applications in model-based reinforcement learning, where flexible and informative state-space rollouts are of particular interest.",
+    "keywords": [
+      "Hierarchical temporal abstraction",
+      "event discovery",
+      "hierarchical generative models",
+      "variational inference"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=JxFgJbZ-wft"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper presents a new model for unsupervised event detection, which has the following three technical contributions:\n- It proposes individual criterion and mechanisms to detect expected and unexpected observations based on the comparison of prior and posterior latent representations. (Novel)\n- It uses the above criterion to control the update rate of the latent states in a hierarchy of RNN layers. (Somewhat similar to VTA [Kim et al., 2019])\n- The paper includes some interesting experiments to support the effectiveness of the proposed method. (But not convincing enough)",
+    "main_review": "Strengths: In my knowledge, the proposed method of learning hierarchical temporal structures by measuring prior and posterior belief states is new in the area of unsupervised representation learning for video data.\n\nWeaknesses: My major concern is about the insufficient experimental results.\n- The model is compared with VTA only on the Moving Ball dataset, which in my view, is not enough to validate the superiority of the proposed model. The authors may consider to compare with VTA on a more challenging dataset such as Bouncing Balls. I believe this dataset can better support the claim in this paper, because it has more obvious event changes represented by the interactions of multiple balls and is also used in the work of VTA.\n- The model is not compared with any existing approaches on the other three datasets. \n- How does the rollout result in Fig 5, especially the color of the object, support the claim in the caption that \"the produced rollouts illustrate model’s ability to...produce accurate...jumpy rollouts\"?\n\nOther concerns:\n- How to determine the number of layers if we do not know how many latent factors (e.g., color, shape, floor...) there are in the environment?\n- Although the authors claim in the appendix and the hyperparameters in Criterion U are robust across datasets, it is still not clear to me how to tune these hyperparameters. It would be good if the authors can give a sensitivity analysis on them.",
+    "summary_of_the_review": "This paper explores an interesting problem of unsupervised representation learning in videos. Although the hierarchical architecture based on latent variables is very similar to the temporal abstraction structure in VTA [Kim et al., 2019], I think the proposed criteria for event detection are novel and reasonable. However, my major concern is about the insufficient experimental results (see my comments above), and so I give this paper a Weak Reject at this moment.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1905,
+    "words": 311,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/75651ac9-5994-4bd7-a250-579f0e998936",
+    "error": null,
+    "scored_chars": 1906
+  }
+}

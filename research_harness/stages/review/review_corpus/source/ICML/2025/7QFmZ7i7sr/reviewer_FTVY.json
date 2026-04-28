@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "7QFmZ7i7sr",
+  "reviewer": "FTVY",
+  "paper": {
+    "title": "GPEN: Global Position Encoding Network for Enhanced Subgraph Representation Learning",
+    "authors": [
+      "Nannan Wu",
+      "Yuming Huang",
+      "Yiming Zhao",
+      "Jie Chen",
+      "Wenjun Wang"
+    ],
+    "abstract": "Subgraph representation learning has attracted growing interest due to its wide applications in various domains. However, existing methods primarily focus on local neighborhood structures while overlooking the significant impact of global structural information, in particular the influence of multi-hop neighbors beyond immediate neighborhoods. This presents two key challenges: how to effectively capture the structural relationships between distant nodes, and how to prevent excessive aggregation of global structural information from weakening the discriminative ability of subgraph representations.\nTo address these challenges, we propose GPEN (Global Position Encoding Network). GPEN leverages a hierarchical tree structure to encode each node's global position based on its path distance to the root node, enabling a systematic way to capture relationships between distant nodes. Furthermore, we introduce a boundary-aware convolution module that selectively integrates global structural information while maintaining the unique structural patterns of each subgraph. Extensive experiments on eight public datasets identify that GPEN significantly outperforms state-of-the-art methods in subgraph representation learning.",
+    "keywords": [
+      "Subgraph Representation Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7QFmZ7i7sr"
+  },
+  "review_fields": {
+    "summary": "The paper introduces a method called GPEN for Subgraph Representation Learning. It proposes the construction of a hierarchical tree to compute the Global Position Encoding (GPE) and introduces Boundary-aware Convolution (BWC) and tree-based Optional Tree Perturbation (OTP). These strategies aim to address two major challenges in graph representation learning: capturing structural relationships between distant nodes and preventing excessive aggregation of global structural information.",
+    "claims_and_evidence": "The paper provides detailed theoretical analysis and validation for the GPE, BWC, and OTP in GPEN.",
+    "methods_and_evaluation_criteria": "Experiments show that GPEN has better average performance and lower standard deviation. However, the experimental results are not significant, as detailed in [W4].",
+    "theoretical_claims": "The paper proposes several theorems as theoretical support for the effectiveness of the modules in GPEN, and provides comprehensive proofs in the appendix.",
+    "experimental_designs_or_analyses": "The paper demonstrates through experiments that the standard deviation of GPEN is significantly lower than other methods, indicating better robustness. However, several conclusions from the experiments are not significant, as detailed in comment W4.",
+    "relation_to_broader_scientific_literature": "The paper identifies two major challenges in existing Subgraph Representation Learning methods: capturing structural relationships between distant nodes and preventing excessive aggregation of global structural information. It proposes to construct a hierarchical tree and designs the GPE, BWC, and OTP modules to address these challenges.",
+    "other_strengths_and_weaknesses": "Strengths:\n\nThe paper provides detailed theoretical analysis and validation for each module.\n\nWeaknesses:\n\n[W1] In section 3.1.1, as the transition matrix of PageRank, why $M$ is $\\mathbf M_{ij}=\\frac{1}{d_i}$ instead of $\\frac{1}{d_j}$? Also, what is the initial value of $R$ in equation 3?\n\n[W2] Section 3.1.3 mentions that \"The insufficient number of subgraphs can affect the model’s stability.\" However, the tree perturbation module generates at most one new sample for each subgraph. Therefore, the total number of subgraphs is at most twice the original number. Is this sufficient to address the issue of insufficient subgraphs?\n\n[W3] In section 3.2, the notion in equation 12 is unclear:\n* What is $\\mathbf A$? It seems to be undefined in the paper.\n* What does the subscript $n$ in $\\mathbf H_n^{(l-1)}$ stand for? Is it a different matrix from $\\mathbf H^{(l-1)}$?\n* Is $\\mathbf W^{(l-1)}$ the edge weight of the weighted graph in section 3.1.1? If so, what does the superscript $(l-1)$ represent? The edge weight in section 3.1.1 seems to be a constant independent of the layer.\n\n[W4] In Table 1, the $p$-values comparing GPEN with S2N on all datasets are greater than 0.05, indicating non-significant differences. The same applies to the experiments in Table 3 and the ablation study in Table 4. The advantage of GPEN seems to lie only in its more stable performance and smaller variance.",
+    "other_comments_or_suggestions": "In section 3.1.2, the global positional encoding groups nodes according to their depth in the tree, then encodes them directly into a 01 vector. It loses the information of its value. Especially considering that the edge weights and trees here are artificially calculated and constructed, the shortest path length on the tree may not represent real and accurate global information. Would it be better to use an encoding that retains the depth value of the nodes, such as the sin/cos function encoding designed for sequences in the classic \"Attention is all you need\"?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "w2QNIkcwWw",
+  "reviewer": "9p1E",
+  "paper": {
+    "title": "Fast Min-$\\epsilon$ Segmented Regression using Constant-Time Segment Merging",
+    "authors": [
+      "Ansgar Lößer",
+      "Max Schlecht",
+      "Florian Schintke",
+      "Joel Witzke",
+      "Matthias Weidlich",
+      "Björn Scheuermann"
+    ],
+    "abstract": "Segmented regression is a statistical method that approximates a function $f$ by a piecewise function $\\hat{f}$ using noisy data samples.\n*Min-$\\epsilon$* approaches aim to reduce the regression function's mean squared error (MSE) for a given number of $k$ segments.\nAn optimal solution for *min-$\\epsilon$* segmented regression is found in $\\mathcal{O}(n^2)$ time (Bai & Perron, 1998; Yamamoto & Perron, 2013) for $n$ samples. For large datasets, current heuristics improve time complexity to $\\mathcal{O}(n\\log{n})$ (Acharya et al., 2016) but can result in large errors, especially when exactly $k$ segments are used.\nWe present a method for *min-$\\epsilon$* segmented regression that combines the scalability of top existing heuristic solutions with a statistical efficiency similar to the optimal solution. This is achieved by using a new method to merge an initial set of segments using precomputed matrices from samples, allowing both merging and error calculation in constant time.\nOur approach, using the same samples and parameter $k$, produces segments with up to 1,000 times lower MSE compared to Acharya et al. (2016) in about 100 times less runtime on data sets over $10^4$ samples.",
+    "keywords": [
+      "Regression",
+      "Segmented Regression",
+      "Time-Series Analysis"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=w2QNIkcwWw"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a new heuristic method for the $\\\\min$-$\\\\epsilon$ segmented regression problem. Some prior works propose two types of algorithms for this problem. One line of work (Bai & Perron, 1998; Yamamoto & Perron, 2013) gives optimal solutions for this problem with computational complexity $\\\\mathcal{O}(n^2)$, where $n$ is the number of samples. Another work (Acharya et al., 2016) focuses on the case where $n$ is large and provides a heuristic algorithm with computational complexity $\\\\mathcal{O}(n \\\\log n)$, though it can result in large errors. This paper proposes a new heuristic method that achieves: (1) computational complexity $\\mathcal{O}(n \\\\log n)$, and (2) (empirically) comparable to the optimal solutions. This paper provides computational complexity analysis for the proposed method and experiments showing the effectiveness of the proposed methods in terms of solutions quality and running time compared to prior works.",
+    "theoretical_claims": "Yes. However, the theoretical side of this paper is minimal.",
+    "experimental_designs_or_analyses": "Yes. This paper contains two main experiments: (1) one with synthetic data, where they generate piecewise continuous functions with the number of pieces $k = 6$, and create data sets of $n$ points using the generated functions plus Gaussian noises. The results of this experiment are shown in Figure 3. (2) Another experiment with real data of 43 hours of CPU usage, measured every two seconds, resulted in 70,607 samples. The results of this experiment are shown in Table 2 and Figure 5.",
+    "relation_to_broader_scientific_literature": "Some prior works propose two types of algorithms for this problem. One line of work (Bai & Perron, 1998; Yamamoto & Perron, 2013) gives optimal solutions for this problem with computational complexity $\\\\mathcal{O}(n^2)$, where $n$ is the number of samples. Another work (Acharya et al., 2016) focuses on the case where $n$ is large and provides a heuristic algorithm with computational complexity $\\\\mathcal{O}(n \\\\log n)$, though it can result in large errors. This paper proposes a new heuristic method that achieves: (1) computational complexity $\\mathcal{O}(n \\\\log n)$, and (2) (empirically) comparable to the optimal solutions. This paper provides computational complexity analysis for the proposed method and experiments showing the effectiveness of the proposed methods in terms of solutions quality and running time compared to prior works.",
+    "other_strengths_and_weaknesses": "Firstly, I am not an expert in this field so my opinion should be taken lightly. \n\n## Strengths\nThe proposed method for $\\\\min-\\\\epsilon$ $k$-segment regression is computationally efficient (comparable to the prior heuristic approach) and achieves good performance (shown empirically, comparable to the optimal solution). I also appreciate that the paper presentation is straightforward to follow. \n\n## Weaknesses\n\nTo me, the contribution of this paper is somewhat niche, and the contribution in the \"machine learning\" aspect does not meet the bar of a top ML conference. Here are the reasons. \n\n### The problem considered is (somewhat) niche \n   1. This paper considers the problem of $\\\\min$-\\$\\epsilon$ $k$ segmented regression. Though dealing with multi-dimensional data, the algorithm first has to choose a single axis/coefficient of the input and then perform segmenting along that particular axis. I know that this is not an issue with some specific types of data (e.g., time series), but it restricts the application of this method. \n\n  2. Many other methods can deal with this general case (e.g., classification and regression tree (CART), multivariate adaptive regression splines (MARS), or regression tree, to name but a few), which is segmenting using multiple axes. I know that those methods had their own limitations, but the point I am making here is that the setting this paper considered is just a sub-case of a much broader problem.\n\n  3. Besides, even if one restricts themselves to choosing only one axis to perform segmenting, choosing the axis itself is also a challenge.\n\n### The main contribution lies in the computational aspect; contribution in the machine learning aspect is limited\n   1. As far as I understand, the general idea of performing redundant segmentations along an axis and then merging was introduced by Arycha et al. (2016). I know it is controversial, but I think that the novelty of this paper lies in introducing a smarter way of merging segments that lead to improved solution quality (empirically). \n\n   2. Moreover, though claiming that this method works well on a large dataset, it is only in terms of the number of samples $n$. As said, there is another critical factor in their computation cost, which is $\\mathcal{O}(nd^2)$, where $d$ is the dimension of the input. This can scale up to $\\\\mathcal{O}(nd^3)$ if using standard implementation for calculating the inversed matrix, which is bad for high-dimensional data. Maybe that is why the experiments demonstrated in this paper were only conducted with data with small $d$. \n\n  3. Most importantly, the machine learning contribution of this paper is limited. For example, I want to see how the predicted (segmented) functions perform on unseen data or extrapolate to data that lies outside the interval. I know that this is the limitation of the considered problem itself, not necessarily of the proposed method, and it is just my taste.",
+    "other_comments_or_suggestions": "I reiterate that I am not an expert in this field. Though I do not underestimate the contribution of this paper, I believe that the contribution in the ML aspect is not enough for an ICML publication. Since the main contribution lies in the algorithmic/computational aspect, I believe this paper should be submitted to other venues focusing on those aspects (e.g., STOC, SODA, or (somewhat) lesser conference like ITCS, etc.), or venues for data-mining (ICDM), or a more generic one like AAAI. **Though my overall recommendation is Weak Accept, my opinion is actually borderline, and I believe that the AC and other reviewers will have better judgement than me.**\n\n### Other minor comments\n\n1. At the beginning of page 2, please use itemize for the first paragraph (since the two contribution paragraphs also use itemize)."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

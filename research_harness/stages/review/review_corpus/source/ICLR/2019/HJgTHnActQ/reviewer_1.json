@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "HJgTHnActQ",
+  "reviewer": "1",
+  "paper": {
+    "title": "Local Image-to-Image Translation via Pixel-wise Highway Adaptive Instance Normalization",
+    "authors": [
+      "Wonwoong Cho",
+      "Seunghwan Choi",
+      "Junwoo Park",
+      "David Keetae Park",
+      "Tao Qin",
+      "Jaegul Choo"
+    ],
+    "abstract": "Recently, image-to-image translation has seen a significant success. Among many approaches, image translation based on an exemplar image, which contains the target style information, has been popular, owing to its capability to handle multimodality as well as its suitability for practical use. However, most of the existing methods extract the style information from an entire exemplar and apply it to the entire input image, which introduces excessive image translation in irrelevant image regions. In response, this paper proposes a novel approach that jointly extracts out the local masks of the input image and the exemplar as targeted regions to be involved for image translation. In particular, the main novelty of our model lies in (1) co-segmentation networks for local mask generation and (2) the local mask-based highway adaptive instance normalization technique. We demonstrate the quantitative and the qualitative evaluation results to show the advantages of our proposed approach. Finally, the code is available at https://github.com/AnonymousIclrAuthor/Highway-Adaptive-Instance-Normalization",
+    "keywords": [
+      "image to image translation",
+      "image translation",
+      "exemplar",
+      "mutlimodal"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=HJgTHnActQ"
+  },
+  "review_fields": {
+    "comment": "Thanks for your response and the revision. Some issues are fixed but the results are still not convincing. As to the comparison with StarGAN in Fig. 6, the output hair color is not so consistent to the exemplar image in some cases,  and the diversity in the blonde attribute is naturally very limited. Considering that one core contribution of this paper is the diversity controlled by the exemplar image, the paper should show how the output will vary given different exemplar images in the core experiments.\nIn addition, the inception score improvement from LOMIT_single to LOMIT is also limited, especially for the multi-attribute translation (FH+G) setting.\nTherefore, I keep my initial rating."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

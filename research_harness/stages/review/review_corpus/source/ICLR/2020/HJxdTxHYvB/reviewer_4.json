@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "HJxdTxHYvB",
+  "reviewer": "4",
+  "paper": {
+    "title": "BREAKING  CERTIFIED  DEFENSES:  SEMANTIC  ADVERSARIAL  EXAMPLES  WITH  SPOOFED  ROBUSTNESS  CERTIFICATES",
+    "authors": [
+      "Amin Ghiasi",
+      "Ali Shafahi",
+      "Tom Goldstein"
+    ],
+    "abstract": "Defenses against adversarial attacks can be classified into certified and non-certified. Certifiable defenses make networks robust within a certain $\\ell_p$-bounded radius, so that it is impossible for the adversary to make adversarial examples in the certificate bound. We present an attack that maintains the imperceptibility property of adversarial examples while being outside of the certified radius. Furthermore, the proposed \"Shadow Attack\" can fool certifiably robust networks by producing an imperceptible adversarial example that gets misclassified and produces a strong ``spoofed'' certificate.",
+    "keywords": [],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=HJxdTxHYvB"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review": "The paper presents a new attack: Shadow Attack, which can generate imperceptible adversarial samples. This method is based on adding regularization on total variation, color change in each channel and similar perturbation in each channel. This method is easy to follow and a lot of examples of different experiments are shown.\nHowever, I have several questions about motivation and method.\n\nFirst, the proposed attack method can yield adversarial perturbations to images that are large in the \\ell_p norm. Therefore, the authors claim that the method can attack certified systems. However, attack in Wasserstein distance and some other methods can also do so. They can generate adversarial examples whose \\ell_p norm is large.\nI think the author should have some discussions about these related methods. \n\nSecond, I notice that compared to the result in Table 1, PGD attack can yield better results [1]. I hope to see some discussions about this. Also, Table 1 is really confused. I would not understand the meaning if I am not familiar with the experiment settings.\n\n[1] Salman, Hadi, et al. \"Provably Robust Deep Learning via Adversarially Trained Smoothed Classifiers.\" Neuips (2019)."
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

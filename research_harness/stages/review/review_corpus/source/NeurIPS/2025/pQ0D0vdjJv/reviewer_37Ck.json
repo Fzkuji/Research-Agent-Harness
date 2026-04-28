@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "pQ0D0vdjJv",
+  "reviewer": "37Ck",
+  "paper": {
+    "title": "Neural Evolution Strategy for Black-box Pareto Set Learning",
+    "authors": [
+      "Chengyu LU",
+      "Zhenhua Li",
+      "Xi Lin",
+      "Ji Cheng",
+      "Qingfu Zhang"
+    ],
+    "abstract": "Multi-objective optimization problems (MOPs) are prevalent in numerous real-world applications. Recently, Pareto Set Learning (PSL) has emerged as a powerful paradigm for solving MOPs. PSL can produce a neural network for modeling the set of all Pareto optimal solutions. However, applying PSL to black-box objectives, particularly those exhibiting non-separability, high dimensionality, and/or other complex properties, remains very challenging. To address this issue, we propose leveraging evolution strategies (ESs), a class of specialized black-box optimization algorithms, within the PSL paradigm. Traditional ESs capture the complex dimensional dependencies less efficiently, which can significantly hinder their performance in PSL. To tackle this issue, we suggest encapsulating the dependencies within a neural network, which is then trained using a novel gradient estimation method. The proposed method, termed Neural-ES, is evaluated using a bespoke benchmark suite for black-box PSL. Experimental comparisons with other methods demonstrate the efficiency of Neural-ES, underscoring its ability to learn the Pareto sets of challenging black-box MOPs.",
+    "keywords": [
+      "evolution strategy",
+      "multi-objective optimization",
+      "black-box optimization",
+      "pareto set learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=pQ0D0vdjJv"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a new method for black-box multiobjective optimization based on Pareto Set Learning (PSL). The approach relies on a Evolution Strategy (ES) scheme to conduct the optimization for specific objectives preference (trade-off), which search for specific preference is fed back to PSL for updating the general PSL set model. The PSL set model provides the sampling distribution used by the ES for the given preference. Results show significantly better performances that several other multi-objective optimization techniques applied to black box problem, including approaches based on PSL.",
+    "strengths_and_weaknesses": "Strengths:\n- A quite straightforward and sound proposal to extend PSL to black box multi-objective optimization.\n- Detailed presentation of the method, with enough details that should allow to reproduce the method from the paper rather easily.\n- The paper is quite well-written and easy to follow.\n\nWeaknesses:\n- Black box optimization usually requires more potential solutions (samples) to be evaluated for achieving good enough solutions compared to cases where analytical equations of the objectives are available. Except for Fig. 3, which shows convergence over generations in a specific case, this is not considered in much details in the paper, while being an important aspect to consider, in my opinion.\n- The experiments are not always easy to follow and the figures presented are not that obvious to understand. For instance, from Fig. 6 (a)-(c), I am not sure about conclusions to have.\n- Likewise, the practical application in Sec. 5.3 is not super convincing, the results in Fig. 7 showing simply that the proposed Neural-ES approach is skewed toward low f2 values, while EPSL-R1 is the opposite. Many of the results presentated appear more visual/qualitative than anything.",
+    "questions": "- Can you provide a more detailled assessment of the overall efficiency of the proposed Neural-ES approach regarding the number of samples to evaluate for converging to good set compared to other approaches?\n- I think there is a notion of coverage over the Pareto front is important for the current problem, but this is not much explored, metrics used are IGD and hypervolume. Can you explain how these metrics relate to the fact that the Pareto front is well covered (or not) from a given optimization run?",
+    "limitations": "There is not much direct impact on society coming from the current work, so no discussion is required here. The Limitation paragraph in the Conclusion (sec. 6) consider constraint in multi-objective optimization as a future work is quite out-of-scope and seems to be a general problem with PSL. I am not sure it is much relevant to mention this in the paper.",
+    "paper_formatting_concerns": "Looks good, no formatting concerns noticed.",
+    "final_justification": "I would like to thanks the authors for their answers and extra experiments conducted. If not already done, I am advising strongly to update the paper according to the discussions with the reviewers. I am satisfied with the answers and I am maintaining my evaluation."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 4,
+    "significance": 3,
+    "originality": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "4KV2xLeqPN",
+  "reviewer": "hXZP",
+  "paper": {
+    "title": "On the Variance, Admissibility, and Stability of Empirical Risk Minimization",
+    "authors": [
+      "Gil Kur",
+      "Eli Putterman",
+      "Alexander Rakhlin"
+    ],
+    "abstract": "It is well known that Empirical Risk Minimization (ERM) may attain minimax suboptimal rates in terms of the mean squared error (Birgé and Massart, 1993). In this paper, we prove that, under relatively mild assumptions, the suboptimality of ERM must be due to its bias. Namely, the variance error term of ERM (in terms of the bias and variance decomposition) enjoys the minimax rate. In the fixed design setting, we provide an elementary proof of this result using the probabilistic method. Then, we extend our proof to the random design setting for various models. In addition, we provide a simple proof of Chatterjee’s admissibility theorem (Chatterjee, 2014, Theorem 1.4), which states that in the fixed design setting, ERM cannot be ruled out as an optimal method, and then we extend this result to the random design setting. We also show that our estimates imply stability of ERM, complementing the main result of Caponnetto and Rakhlin (2006) for non-Donsker classes. Finally, we highlight the somewhat irregular nature of the loss landscape of ERM in the non-Donsker regime, by showing that functions can be close to ERM, in terms of $L_2$ distance, while still being far from almost-minimizers of the empirical loss.",
+    "keywords": [
+      "empirical risk minimization",
+      "bias-variance decomposition",
+      "admissibility"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=4KV2xLeqPN"
+  },
+  "review_fields": {
+    "summary": "This paper proves that variance for ERM enjoys a a minimax rate. The findings indicate that in scenarios where ERM is not optimal, the source of suboptimality lies within the bias component. Furthermore, these insights are extended to encompass an admissibility-type theorem for both fixed and random design, as well as a stability result for ERM.\nThe paper's contributions can be summarized as follows:\n1)Demonstrating the optimality of the variance term in both fixed and random design situations.\n2)The obtained results automatically yield a stability result for ERM.\n3)Presenting a simpler proof for the admissibility theorem in the fixed and random design setting.\n4)Highlighting a counterintuitive outcome concerning the ERM estimator $\\widehat{f}_n$: when $f'$ is close to $\\widehat{f}_n$, it can lead to a large squared error.",
+    "strengths": "The paper studies an important problem, provides convincing conclusion. The problem is not only intellectually interesting, it also advances our understanding of ERM, which is arguably the most important estimator for modern machine learning.",
+    "weaknesses": "Typo: above Equation 1 $f^* \\in f^*$.\nRemark should be referred to in the appendix.",
+    "questions": "Given dense results here, it would help reader to better understand the paper if the theorems could be summarized in a table."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 454,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fa093d71-2968-44b3-aa36-d5a2019d0a0e",
+    "error": null,
+    "scored_chars": 454
+  }
+}

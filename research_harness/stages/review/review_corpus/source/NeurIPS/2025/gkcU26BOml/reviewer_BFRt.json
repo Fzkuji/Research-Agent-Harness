@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "gkcU26BOml",
+  "reviewer": "BFRt",
+  "paper": {
+    "title": "Cross-modal Associations in Vision and Language Models: Revisiting the Bouba-Kiki Effect",
+    "authors": [
+      "Tom Kouwenhoven",
+      "Kiana Shahrasbi",
+      "Tessa Verhoef"
+    ],
+    "abstract": "Recent advances in multimodal models have raised questions about whether vision-and-language models (VLMs) integrate cross-modal information in ways that reflect human cognition. One well-studied test case in this domain is the bouba-kiki effect, where humans reliably associate pseudowords like ‘bouba’ with round shapes and ‘kiki’ with jagged ones. Given the mixed evidence found in prior studies for this effect in VLMs, we present a comprehensive re-evaluation focused on two variants of CLIP, ResNet and Vision Transformer (ViT), given their centrality in many state-of-the-art VLMs. We apply two complementary methods closely modelled after human experiments: a prompt-based evaluation that uses probabilities as a measure of model preference, and we use Grad-CAM as a novel approach to interpret visual attention in shape-word matching tasks. Our findings show that these model variants do not consistently exhibit the bouba-kiki effect. While ResNet shows a preference for round shapes, overall performance across both model variants lacks the expected associations. Moreover, direct comparison with prior human data on the same task shows that the models’ responses fall markedly short of the robust, modality-integrated behaviour characteristic of human cognition. These results contribute to the ongoing debate about the extent to which VLMs truly understand cross-modal concepts, highlighting limitations in their internal representations and alignment with human intuitions.",
+    "keywords": [
+      "Cross-modal associations",
+      "Vision-and-Language Models",
+      "bouba-kiki effect",
+      "Cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=gkcU26BOml"
+  },
+  "review_fields": {
+    "summary": "The paper investigates whether vision-and-language models (VLMs), specifically two variants of CLIP (ResNet and Vision Transformer), exhibit human-like cross-modal understanding by testing the bouba-kiki effect—a phenomenon where people associate round shapes with the word \"bouba\" and jagged shapes with \"kiki.\" Using prompt-based evaluation and Grad-CAM for visual attention, the study finds that:\n* ResNet shows some preference for round shapes, but\n* The models do not consistently demonstrate the bouba-kiki effect.\n* Their performance falls short of human-like cross-modal integration.\nThese findings suggest that current VLMs have limited internal representations of such intuitive, cross-modal associations, raising questions about the depth of their \"understanding.\"",
+    "strengths_and_weaknesses": "Strengths: \n- The paper is well written and easy to follow. \n- The paper provides a good overview of the literature regarding the bouba-kiki effect.\n- The results are obtained both with synthetic and natural data.  \n \nWeaknesses: \n- The paper does not contribute to novel machine learning models. Its contribution is interesting for the natural language processing and computer vision domains, so EMNLP, CoNLL and CVPR might be better venues for its publication. \n- It is strange that a CLIP model was chosen as underlying vision-language foundation model. It is well known that alignment in CLIP is computed at the sentence/scene level and not at the level of individual words, which devalues the findings of the paper.",
+    "questions": "- Please motivate why the work is valuable for the machine learning community as you do not propose strategies to improve cross-modal associations. \n- What is the practical impact of investigating the bouba-kiki effect?",
+    "limitations": "The limitations of the work are discussed.",
+    "paper_formatting_concerns": "There are no formatting issues.",
+    "final_justification": "The answers to my questions mitigate my concerns."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

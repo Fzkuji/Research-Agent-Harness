@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "F3DrgOZYc6",
+  "reviewer": "oQ2L",
+  "paper": {
+    "title": "Improved Algorithms for Overlapping and Robust Clustering of Edge-Colored Hypergraphs: An LP-Based Combinatorial Approach",
+    "authors": [
+      "Changyeol Lee",
+      "Yongho Shin",
+      "Hyung-Chan An"
+    ],
+    "abstract": "Clustering is a fundamental task in both machine learning and data mining. Among various methods, edge-colored clustering (ECC) has emerged as a useful approach for handling categorical data. Given a hypergraph with (hyper)edges labeled by colors, ECC aims to assign vertex colors to minimize the number of edges where the vertex color differs from the edge's color. However, traditional ECC has inherent limitations, as it enforces a nonoverlapping and exhaustive clustering. To tackle these limitations, three versions of ECC have been studied: Local ECC and Global ECC, which allow overlapping clusters, and Robust ECC, which accounts for vertex outliers. For these problems, both linear programming (LP) rounding algorithms and greedy combinatorial algorithms have been proposed. While these LP-rounding algorithms provide high-quality solutions, they demand substantial computation time; the greedy algorithms, on the other hand, run very fast but often compromise solution quality. In this paper, we present a family of algorithms that combines the strengths of LP with the computational efficiency of combinatorial algorithms. Both experimental and theoretical analyses show that our algorithms efficiently produce high-quality solutions for all three problems: Local, Global, and Robust ECC. We complement our algorithmic contributions with complexity-theoretic inapproximability results and integrality gap bounds, which suggest that significant theoretical improvements are unlikely. Our results also answer two open questions previously raised in the literature.",
+    "keywords": [
+      "overlapping edge-colored clustering",
+      "robust edge-colored clustering",
+      "edge-colored clustering",
+      "hypergraph clustering",
+      "primal-dual methods",
+      "approximation algorithms"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=F3DrgOZYc6"
+  },
+  "review_fields": {
+    "comment": "Thank you for addressing my comments. I have carefully reviewed the authors’ response and found it reasonable.\n\n> Theorems 3.7 and 3.8 provide lower bounds on the integrality gaps...\n\nMy apologies, I intended to refer to Theorems 3.5 and 3.6 instead of Theorems 3.7 and 3.8. In these theorems, the authors only state the existence of algorithms; however, they indeed have the algorithms, and the theorems should be modified to explicitly mention this.\n\nAlthough the novelty of the work is somewhat limited, I hold a positive view of the paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

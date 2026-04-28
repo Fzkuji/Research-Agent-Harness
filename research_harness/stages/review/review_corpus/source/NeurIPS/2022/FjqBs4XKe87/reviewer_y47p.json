@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "FjqBs4XKe87",
+  "reviewer": "y47p",
+  "paper": {
+    "title": "Prompt Injection: Parameterization of Fixed Inputs",
+    "authors": [
+      "Eunbi Choi",
+      "Yongrae Jo",
+      "Joel Jang",
+      "Minjoon Seo"
+    ],
+    "abstract": "Recent works have shown that attaching prompts to the input is effective at conditioning Language Models (LM) to perform specific tasks. However, prompts are always included in the input text during inference, thus incurring substantial computational and memory overhead. Also, there is currently no straightforward method of utilizing prompts that are longer than the maximum input length of the LMs without incurring additional costs during inference. We propose Prompt Injection (PI), a novel formulation of injecting the prompt into the parameters of an LM to be an efficient alternative to attaching fixed prompts to the input. We show that in scenarios with long fixed prompts, PI can be up to 280 times more efficient in terms of total FLOPs than previous approaches. We further explore methodologies for PI and show promising results in persona-dependent conversation, semantic parsing, and zero-shot learning with task instructions. Through these explorations, we show that PI can be a promising direction for conditioning language models, especially in scenarios with long and fixed prompts.",
+    "keywords": [
+      "Prompt",
+      "Injection",
+      "Parameterization",
+      "Language Model",
+      "Inference Efficiency",
+      "Distillation"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=FjqBs4XKe87"
+  },
+  "review_fields": {
+    "comment": "Thanks for your response. My support for acceptance has not changed. \n\nMinor:\n\n- \"Since PING method creates new pseudo inputs every step for maximizing the diversity, we deemed that there is the concept of training steps but not the concept of the number of inputs.\"\n\nI might have missed it in the paper -- how does the number of injection steps influence the performance? Intuitively, if you train for infinite steps and cover the entire space of samples, the teacher-student gap should decrease, is that right?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

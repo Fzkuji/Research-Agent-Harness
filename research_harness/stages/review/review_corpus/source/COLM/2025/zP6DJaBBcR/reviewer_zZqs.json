@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "zP6DJaBBcR",
+  "reviewer": "zZqs",
+  "paper": {
+    "title": "REFA: Reference Free Alignment with Fine-Grained Length Control",
+    "authors": [
+      "Taneesh Gupta",
+      "Rahul Madhavan",
+      "Xuchao Zhang",
+      "Chetan Bansal",
+      "Saravan Rajmohan"
+    ],
+    "abstract": "To mitigate reward hacking from response verbosity, modern preference optimization methods are increasingly adopting length normalization (e.g., SimPO, ORPO, LN-DPO). While effective against this bias, we demonstrate that length normalization itself introduces a failure mode: the **URSLA shortcut**. Here models learn to satisfy the alignment objective by prematurely truncating low-quality responses rather than learning from their semantic content. To address this, we introduce **REFA**, a new alignment framework that proposes probabilistic control on a structural token that controls termination. Our core innovation is a new class of regularizers that operate directly on the probability of the End-of-Sequence (EOS) token, a previously unexploited control lever. This token-level intervention provides a principled solution to the URSLA shortcut, ensuring genuine quality improvements. Furthermore, it unlocks a versatile mechanism for managing the alignment-efficiency tradeoff, enabling practitioners to fine-tune models that adhere to specific token budgets. Empirically, REFA achieves a **60.29\\%** win rate and a **52.17\\%** length-controlled win rate on AlpacaEval2 with Llama-3-8B-Instruct, demonstrating the power of our token-level control paradigm.",
+    "keywords": [
+      "Model Alignment",
+      "RLHF",
+      "Preference Optimization"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=zP6DJaBBcR"
+  },
+  "review_fields": {
+    "summary": "The paper presents a new method for offline alignment which is reference-free, multi-preference and combines 3 different signals: length normalization, deviation-based weighting, and an EOS probability regularizer.\n\nThe paper provides a good motivation for each component in its algorithm and a good motivation for each (while justifying the differences to previous work). \n\nI found the writing sometimes a bit \"dense\" and I can see some whitespacing mistakes that seem like for fitting the paper into 9 pages. E.g: line 290 and 293 there is no space after the full stops.",
+    "reasons_to_accept": "The paper seems to show good results on benchmarks that have been used on similar papers (AlpacaEval, MT-Bench, ArenaHard). It also presents a good motivation for each of the components in the loss and how they contribute for the final performance.",
+    "reasons_to_reject": "I don't have any reason to reject. The authors setup has been standard to compare offline methods such as this. Nonetheless I believe there are improvements to be made to make the setup more robust.\n\n1) What were the  hyper parameters used on each method? Results for these methods are highly sensible to hyper-parameters and the authors acknowledge that but then don't show what they used or what they tried\n2) The setup only uses preferences taken from other models (off-policy) but how does their method compare to other methods when data is on-policy? For this I would recommend a different setup where all samples are taken from the SFT model and then ranked according to an open reward model like ArmoRM or Skywork.\n3) How does it compare to WPO? WPO is a recent PO method where they actually weight each sample according to the models policy and it seems to achieve also great results in \"length-controlled\". This is more for my curiosity because I think authors used enough methods."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1239,
+    "words": 212,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/dd29f117-4e5f-4be5-a741-74d546c1f544",
+    "error": null,
+    "scored_chars": 1240
+  }
+}

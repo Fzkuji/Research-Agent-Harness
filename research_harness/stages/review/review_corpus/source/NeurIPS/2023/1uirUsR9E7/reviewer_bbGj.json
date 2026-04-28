@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "1uirUsR9E7",
+  "reviewer": "bbGj",
+  "paper": {
+    "title": "Explaining V1 Properties with a Biologically Constrained Deep Learning Architecture",
+    "authors": [
+      "Galen Pogoncheff",
+      "Jacob Granley",
+      "Michael Beyeler"
+    ],
+    "abstract": "Convolutional neural networks (CNNs) have recently emerged as promising models of the ventral visual stream, despite their lack of biological specificity.\nWhile current state-of-the-art models of the primary visual cortex (V1) have surfaced from training with adversarial examples and extensively augmented data, these models are still unable to explain key neural properties observed in V1 that arise from biological circuitry.\nTo address this gap, we systematically incorporated neuroscience-derived architectural components into CNNs to identify a set of mechanisms and architectures that more comprehensively explain V1 activity.\nUpon enhancing task-driven CNNs with architectural components that simulate center-surround antagonism, local receptive fields, tuned normalization, and cortical magnification, we uncover models with latent representations that yield state-of-the-art explanation of V1 neural activity and tuning properties.\nMoreover, analyses of the learned parameters of these components and stimuli that maximally activate neurons of the evaluated networks provide support for their role in explaining neural properties of V1.\nOur results highlight an important advancement in the field of NeuroAI, as we systematically establish a set of architectural components that contribute to unprecedented explanation of V1.\nThe neuroscience insights that could be gleaned from increasingly accurate in-silico models of the brain have the potential to greatly advance the fields of both neuroscience and artificial intelligence.",
+    "keywords": [
+      "NeuroAI",
+      "Neuroscience",
+      "Visual Stream",
+      "Convolutional Neural Networks",
+      "Biologically inspired deep learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=1uirUsR9E7"
+  },
+  "review_fields": {
+    "comment": "Thank you for the response. From this, it is more clear that the benefit of this work comes from integrating all of the different V1 components into the same model, showing that this results in better alignment with V1 responses. If this is the case, I think that should be made more explicit throughout the paper (ie in the listed bullet points on line 46).\n\nI also agree with Reviewer yZMG about the Untrained models being a nice addition.\n\nAfter the author responses I still find this work borderline. I appreciate that amount of effort it takes to integrate all of these components into a single model (and that itself may be useful for the field as a new baseline, as the authors discuss). But as currently presented, I'm not sure if that is \"new\" enough or if the insights gained are deep enough for a typical NeurIPS paper. \n\nFinally, this is a bit of my personal preference in terms of wording (and thus is not influencing my score), but as neuroscientists, I wonder if we want to fall into the trap of publishing paper after paper highlighting the achievements of \"SOTA\" on a particular benchmark when the improvements are around +2-3%? To me, it seems especially problematic given the limited size of the current datasets. This is why I was highlighting the concerns about multiple-comparisons above, and suggestions to tone down the language about things like \"unprecedented explanation\" of V1."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1404,
+    "words": 241,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/650018f2-0ef4-4c18-b1b4-07caf89c9950",
+    "error": null,
+    "scored_chars": 1405
+  }
+}

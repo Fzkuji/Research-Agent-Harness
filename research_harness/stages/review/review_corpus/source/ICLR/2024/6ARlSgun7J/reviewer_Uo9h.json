@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "6ARlSgun7J",
+  "reviewer": "Uo9h",
+  "paper": {
+    "title": "Enhancing Tail Performance in Extreme Classifiers by Label Variance Reduction",
+    "authors": [
+      "Anirudh Buvanesh",
+      "Rahul Chand",
+      "Jatin Prakash",
+      "Bhawna Paliwal",
+      "Mudit Dhawan",
+      "Neelabh Madan",
+      "Deepesh Hada",
+      "Vidit Jain",
+      "SONU MEHTA",
+      "Yashoteja Prabhu",
+      "Manish Gupta",
+      "Ramachandran Ramjee",
+      "Manik Varma"
+    ],
+    "abstract": "Extreme Classification (XC) architectures, which utilize a massive One-vs-All (OvA) classifier layer at the output, have demonstrated remarkable performance on problems with large label sets. Nonetheless, these architectures falter on tail labels with few representative samples. This phenomenon has been attributed to factors such as classifier over-fitting and missing label bias, and solutions involving regularization and loss re-calibration have been developed. This paper explores the impact of label variance - a previously unexamined factor - on the tail performance in extreme classifiers. It also develops a method to systematically reduce label variance in XC by transferring the knowledge from a specialized tail-robust teacher model to the OvA classifiers. For this purpose, it proposes a principled knowledge distillation framework, LEVER, which enhances the tail performance in extreme classifiers with formal guarantees on generalization. Comprehensive experiments are conducted on a diverse set of XC datasets, demonstrating that LEVER can enhance tail performance by around 5\\% and 6\\% points in PSP and coverage metrics, respectively, when integrated with leading extreme classifiers. Moreover, it establishes a new state-of-the-art when added to the top-performing Renee classifier. Extensive ablations and analyses substantiate the efficacy of our design choices. Another significant contribution is the release of two new XC datasets that are different from and more challenging than the available benchmark datasets, thereby encouraging more rigorous algorithmic evaluation in the future. Code for LEVER is available at: aka.ms/lever.",
+    "keywords": [
+      "Extreme Classification",
+      "Extreme Multi-Label Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=6ARlSgun7J"
+  },
+  "review_fields": {
+    "comment": "Thanks to the authors for the response. While this does help somewhat in improving my score, there are still some concerns/clarifications required :\n1. Variance issues : In my opinion, both the earlier work [1] and this one focus on different aspects of the same issue i.e. data scarcity leading to shift in the observed empirical distribution between different sub-samples. In [1] the change in the empirical distribution (between train and test) of the inputs x_i for a given label, and in this case, possible change in the observed label y_i for an instance x_i over time or different annotators. In the second scenario, however, it seems like a missing label problem, even though the authors mention that this does not include any systematic bias, and hence they claim that it is not a missing labels problem, to which I am not sure if I entirely agree. Despite that PSP metrics are used for evaluation, which were designed for missing label problem in the first place, and the usage for measuring the tail-label performance as a metric is rather secondary (as per Schultheis et al 2022). Apparently, we seem to be going in circles, and this requires some clarification/discussion in the paper. \n\n2. The overlap with Menon et al. 2021 remains a concern, and the paper in its current form lacks theoretical soundness in comparison to that paper. On the positive side, it has strong empirical performance and addresses a key problem in XMLC literature."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1453,
+    "words": 245,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/fd3f4ba9-5688-4fb1-866b-e0aac258dd94",
+    "error": null,
+    "scored_chars": 1454
+  }
+}

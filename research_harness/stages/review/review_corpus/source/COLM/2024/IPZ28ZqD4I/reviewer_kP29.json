@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "IPZ28ZqD4I",
+  "reviewer": "kP29",
+  "paper": {
+    "title": "Faithful and Unfaithful Error Recovery in Chain of Thought",
+    "authors": [
+      "Evelyn Yee",
+      "Alice Li",
+      "Chenyu Tang",
+      "Yeon Ho Jung",
+      "Ramamohan Paturi",
+      "Leon Bergen"
+    ],
+    "abstract": "Large language models (LLMs) often improve their performance in downstream tasks when they generate Chain of Thought reasoning text before producing an answer. We investigate how LLMs recover from errors in Chain of Thought. Through analysis of error recovery behaviors, we find evidence for unfaithfulness in Chain of Thought, which occurs when models arrive at the correct answer despite invalid reasoning text. We identify factors that shift LLM recovery behavior: LLMs recover more frequently from obvious errors and in contexts that provide more evidence for the correct answer. Critically, these factors have divergent effects on faithful and unfaithful recoveries. \nOur results indicate that there are distinct mechanisms driving faithful and unfaithful error recoveries. Selective targeting of these mechanisms may be able to drive down the rate of unfaithful reasoning and improve model interpretability.",
+    "keywords": [
+      "chain of thought",
+      "error recovery",
+      "reasoning",
+      "faithfulness"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=IPZ28ZqD4I"
+  },
+  "review_fields": {
+    "summary": "The paper investigates the faithfulness of error recovery behaviors in large language models (LLMs) during Chain of Thought reasoning. The authors analyze the factors that influence error recovery, such as the amount of evidence for the correct answer and the magnitude of the error. They also examine the impact of prior expectations on error recovery. The study finds that error recovery is influenced by these factors and that there is a dissociation between faithful and unfaithful error recoveries.",
+    "reasons_to_accept": "(1) The paper provides a comprehensive analysis of error recovery behaviors in LLMs during Chain of Thought reasoning.\n\n(2) The experiments are well-designed and provide insights into the factors that influence error recovery.\n\n(3) The paper contributes to the understanding of the faithfulness of LLM reasoning and highlights the dissociation between faithful and unfaithful error recoveries.",
+    "reasons_to_reject": "This is a very insightful paper. Actually I do not see any reasons to reject while I have some questions to authors. Please see Questions To Authors",
+    "questions_to_authors": "(1) I was wondering whether the findings in this paper could be generalized to open-source / smaller models? For example,  could the authors add some experiments with llama 3 series in different model sizes?\n\n(2) Previous work has investigated how to make LLMs generate more effective chains of thought, incorporating aspects like selection [1], diversity [2], uncertainty [3], and difficulty [4]. I am very interested in how the author's findings in this paper can be applied to enhance the model's reasoning capabilities. Could the author possibly discuss these works to provide some outlook?\n\n[1] Automatic Prompt Augmentation and Selection with Chain-of-Thought from Labeled Data https://arxiv.org/abs/2302.12822\n\n[2] Automatic Chain of Thought Prompting in Large Language Models https://arxiv.org/abs/2210.03493\n\n[3] Active Prompting with Chain-of-Thought for Large Language Models https://arxiv.org/abs/2302.12246\n\n[4] Complexity-Based Prompting for Multi-step ReasoningDownload https://openreview.net/forum?id=yf1icZHC-l9"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:21Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:21Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 7,
+    "mixed_pct": 3,
+    "human_pct": 90,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1572,
+    "words": 216,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/eb8e774f-3e4c-4bff-9cab-37689215f230",
+    "error": null,
+    "scored_chars": 1573
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "yrrU5YChQr",
+  "reviewer": "MotY",
+  "paper": {
+    "title": "Vulnerable Data-Aware Adversarial Training",
+    "authors": [
+      "Yuqi Feng",
+      "Jiahao Fan",
+      "Yanan Sun"
+    ],
+    "abstract": "Fast adversarial training (FAT) has been considered as one of the most effective alternatives to the computationally-intensive adversarial training. Generally, FAT methods pay equal attention to each sample of the target task. However, the distance between each sample and the decision boundary is different, learning samples which are far from the decision boundary (i.e., less important to adversarial robustness) brings additional training cost and leads to sub-optimal results. To tackle this issue, we present vulnerable data-aware adversarial training (VDAT) in this study. Specifically, we first propose a margin-based vulnerability calculation method to measure the vulnerability of data samples. Moreover, we propose a vulnerability-aware data filtering method to reduce the training data for adversarial training thus improve the training efficiency. The experiments are conducted in terms of adversarial training and robust neural architecture search on CIFAR-10, CIFAR-100, and ImageNet-1K. The results demonstrate that VDAT is up to 76% more efficient than state-of-the-art FAT methods, while achieving improvements regarding the natural accuracy and adversarial accuracy in both scenarios. Furthermore, the visualizations and ablation studies show the effectiveness of both core components designed in VDAT.",
+    "keywords": [
+      "Adversarial Training",
+      "Adversarial Robustness",
+      "Decision Boundary Analysis"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=yrrU5YChQr"
+  },
+  "review_fields": {
+    "summary": "The authors introduce vulnerable data-aware adversarial training (VDAT) to improve the efficiency and effectiveness of fast adversarial training (FAT). The authors measure the vulnerability by computing the difference of decision margin for clean and adversarial examples, and then update the clean and adversarial training dataset by using adversarial examples of vulnerable examples in the training process. Extensive experiments validate the effectiveness of the proposed approach in different tasks, datasets and models.",
+    "strengths_and_weaknesses": "Strengths:\n\n1. The proposed approach is clear elaborated with detailed procedure for each step of adversarial training, ensuring the reproducibility.\n2. The paper focus on the critical issue in adversarial training, and propose an effective measurement for vulnerability of adversarial examples.\n3. Extensive experiments are conducted through various tasks, datasets and models, and consistent improvement is achieved in all the experiments, validating the effectiveness of the proposed method. \n\nWeaknesses:\n\n1. The effectiveness of the proposed margin-based vulnerability calculation compared with other measurement is not fully explored by experimental results.\n2. The proposed VDAT seems to be a plug-and-play method in multiple adversarial training frameworks. However, there lacks experiments for combining VDAT with other frameworks like AWP, TRADES and etc.",
+    "questions": "1. What are the performance when replacing the vulnerability calculation, e.g. using the pure margin, or changing the margin calculation?\n2. Can the proposed VDAT combine with other multi-step or single-step adversarial training frameworks like AWP and TRADES and further improve their performance?\n3. Can the proposed method be extended to other tasks apart from image classification? If so, how to measure the vulnerability and design the data filtering approach?",
+    "final_justification": "The author addressed my questions, and I believe the novelty of this paper deserves the attention of the conference audience."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

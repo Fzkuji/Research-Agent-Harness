@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "kmn0BhQk7p",
+  "reviewer": "FqCb",
+  "paper": {
+    "title": "Beyond Memorization: Violating Privacy via Inference with Large Language Models",
+    "authors": [
+      "Robin Staab",
+      "Mark Vero",
+      "Mislav Balunovic",
+      "Martin Vechev"
+    ],
+    "abstract": "Current privacy research on large language models (LLMs) primarily focuses on the issue of extracting memorized training data. At the same time, models’ inference capabilities have increased drastically. This raises the key question of whether current LLMs could violate individuals’ privacy by inferring personal attributes from text given at inference time. In this work, we present the first comprehensive study on the capabilities of pretrained LLMs to infer personal attributes from text. We construct a dataset consisting of real Reddit profiles, and show that current LLMs can infer a wide range of personal attributes (e.g., location, income, sex), achieving up to 85% top-1 and 95% top-3 accuracy at a fraction of the cost (100x) and time (240x) required by humans. As people increasingly interact with LLM-powered chatbots across all aspects of life, we also explore the emerging threat of privacy-invasive chatbots trying to extract personal information through seemingly benign questions. Finally, we show that common mitigations, i.e., text anonymization and model alignment, are currently ineffective at protecting user privacy against LLM inference. Our findings highlight that current LLMs can infer personal data at a previously unattainable scale. In the absence of working defenses, we advocate for a broader discussion around LLM privacy implications beyond memorization, striving for stronger and wider privacy protection.",
+    "keywords": [
+      "Privacy",
+      "Large Language Models"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=kmn0BhQk7p"
+  },
+  "review_fields": {
+    "summary": "This paper focusses on extracting personal attributes of Reddit users based on the comments they left on a subset of reddit communities. The methodology involves prompting SOTA LLMs",
+    "strengths": "The paper opens up a really interesting problem, and conducts thorough experiments to demonstrate that LLMs can be used to infer personal attributes from online comments. This is an important and novel research topic. \n\nThe experimental set up is really convincing. I really appreciate the rating of the difficulty of attribute assignment and the anonymisation experiment.",
+    "weaknesses": "1. The presentation could be clearer. One of the main contributions of the paper is the release of a synthetic data set. However it is not clear how this data set was created. This should be discussed in the main part of the paper. But also the presentation in the appendix does not make it obv how to reproduce the data set creation.\n2. Re the findings on the ACS data set, I wonder whether it is obv that the LLMs have not seen and memorised the ACS data.\n3. I wonder how much of the results are due to memorisation. While the authors have controlled for memorisation on long comments, I am not sure how convincing the methodology is. It would be interesting to see the subreddit prediction performance of LLMs of a comment for instance. \n4. Do the authors release results on the synthetic examples? Since the experiment is not reproducible, it would be important to have result s on the synthetic data so future work can build upon the results of this paper.",
+    "questions": "1. How was the synthetic data set created?\n2. What is the baseline in Fig. 25?",
+    "details_of_ethics_concerns": "This paper is exploring how LLMs can be used to infer personal information from seemingly benign comments. As such this research could be misused by malicious actors. The paper takes steps towards preventing this (no release of real data set), so my ethical concerns are low but an ethics review by experts might still be necessary."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1413,
+    "words": 248,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2b9d73b1-930b-4a8a-977d-e28340c92de2",
+    "error": null,
+    "scored_chars": 1415
+  }
+}

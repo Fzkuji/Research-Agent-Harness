@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "36DxONZ9bA",
+  "reviewer": "bmhz",
+  "paper": {
+    "title": "Representational Strengths and Limitations of Transformers",
+    "authors": [
+      "Clayton Sanford",
+      "Daniel Hsu",
+      "Matus Telgarsky"
+    ],
+    "abstract": "Attention layers, as commonly used in transformers, form the backbone of modern deep learning, yet there is no mathematical description of their benefits and deficiencies as compared with other architectures. In this work we establish both positive and negative results on the representation power of attention layers, with a focus on intrinsic complexity parameters such as width, depth, and embedding dimension. On the positive side, we present a sparse averaging task, where recurrent networks and feedforward networks all have complexity scaling polynomially in the input size, whereas transformers scale merely logarithmically in the input size; furthermore, we use the same construction to show the necessity and role of a large embedding dimension in a transformer. On the negative side, we present a triple detection task, where attention layers in turn have complexity scaling linearly in the input size; as this scenario seems rare in practice, we also present natural variants that can be efficiently solved by attention layers. The proof techniques emphasize the value of communication complexity in the analysis of transformers and related models, and the role of sparse averaging as a prototypical attention task, which even finds use in the analysis of triple detection.",
+    "keywords": [
+      "self-attention",
+      "approximation theory",
+      "communication complexity"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=36DxONZ9bA"
+  },
+  "review_fields": {
+    "summary": "The authors study the representational power of transformers. They quantify how the transformers are superior to other neural network architectures, as well as the limitation of the transformer architecture. They focus on the $q$-sparse averaging (qSA) task which amounts to  averaging $d$-dimensional input vectors over subsets of size $q$ over a set of size $N$. They show by an explicit construction a unit of self-attention with $m \\geq q$ dimensional embedding can approximate qSA. Using tools from communication complexity between two parties, they show fully connected networks require $\\Omega(Nd)$ hidden layers, and recurrent neural networks require $\\Omega(N)$ bits of information. They further show that standard transformers can approximate functions that intrinsically depends on input pairs, while failing to approximate functions that depends on triplets instead. Finally, they propose a variant of transformers that can approximate the triplet-functions.",
+    "strengths": "- The authors leverage the communication complexity to show that the self attention layers add more representational capacity as compared to fully connected and recurrent neural networks. \n\n- They use Match2 and Match3 problems to show rigorously that 2nd-order functions represent the threshold of efficient approximability for transformers.\n\n- The variants of Match3 problems hint at transformers leveraging some local structures present in the data to go beyond pair matching. This reconciles the Match3 impossibility result with the much presumably higher order successes of transformer models. \n\n- They additionally show higher order transformers can solve the higher order function approximations.",
+    "weaknesses": "- The fixed precision (Theorem 2) result still uses precision that needs to grow with the data size and approximation parameters. Although it is a good first step, it leaves open the approximability with constant precision (which is used in most practical cases). \n\n- The ``third-order tensor self-attention\" is an important claim in the paper, but it is fully omitted in the main paper. It will be good to at least introduce the basic ideas in the main paper.",
+    "questions": "- Given a fixed constant precision $p$ what is the bottleneck in creating the transformers that can approximate q-SA? What if $z_i$s are themselves restricted to some $O(p)$ precision?\n\n- Is the use of communication complexity in the approximability of Transformers (and broader Neural networks) novel in this work?",
+    "limitations": "It is hard to foresee any potential negative societal impact of this theoretical work."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 3,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 6,
+    "mixed_pct": 0,
+    "human_pct": 94,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1567,
+    "words": 242,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d4a90a4f-e91e-4af8-a493-6ef64d847c11",
+    "error": null,
+    "scored_chars": 1570
+  }
+}

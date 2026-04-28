@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "IPZ28ZqD4I",
+  "reviewer": "kvJb",
+  "paper": {
+    "title": "Faithful and Unfaithful Error Recovery in Chain of Thought",
+    "authors": [
+      "Evelyn Yee",
+      "Alice Li",
+      "Chenyu Tang",
+      "Yeon Ho Jung",
+      "Ramamohan Paturi",
+      "Leon Bergen"
+    ],
+    "abstract": "Large language models (LLMs) often improve their performance in downstream tasks when they generate Chain of Thought reasoning text before producing an answer. We investigate how LLMs recover from errors in Chain of Thought. Through analysis of error recovery behaviors, we find evidence for unfaithfulness in Chain of Thought, which occurs when models arrive at the correct answer despite invalid reasoning text. We identify factors that shift LLM recovery behavior: LLMs recover more frequently from obvious errors and in contexts that provide more evidence for the correct answer. Critically, these factors have divergent effects on faithful and unfaithful recoveries. \nOur results indicate that there are distinct mechanisms driving faithful and unfaithful error recoveries. Selective targeting of these mechanisms may be able to drive down the rate of unfaithful reasoning and improve model interpretability.",
+    "keywords": [
+      "chain of thought",
+      "error recovery",
+      "reasoning",
+      "faithfulness"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=IPZ28ZqD4I"
+  },
+  "review_fields": {
+    "comment": "Thank you for your response.\n\n> Our current study focused on artificial errors so that we can carefully control the experimental conditions, and eliminate any possible confounds\n\nWhile this is a possible direction for analysis, I believe that artificial errors should try to mimic actual errors made by recent LLMs to provide useful observations.\n\n> 1. Characterize the types of errors current high-performing models actually make on various reasoning tasks.\n\nI agree this point should be added to your paper. I look forward to seeing the updated version."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:23Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:23Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 871,
+    "words": 136,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b26fdb4b-9167-4873-be03-b0a16efe1291",
+    "error": null,
+    "scored_chars": 871
+  }
+}

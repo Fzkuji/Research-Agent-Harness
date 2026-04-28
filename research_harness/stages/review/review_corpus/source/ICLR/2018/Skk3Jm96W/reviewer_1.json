@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "Skk3Jm96W",
+  "reviewer": "1",
+  "paper": {
+    "title": "Some Considerations on Learning to Explore via Meta-Reinforcement Learning",
+    "authors": [
+      "Bradly Stadie",
+      "Ge Yang",
+      "Rein Houthooft",
+      "Xi Chen",
+      "Yan Duan",
+      "Yuhuai Wu",
+      "Pieter Abbeel",
+      "Ilya Sutskever"
+    ],
+    "abstract": "We consider the problem of exploration in meta reinforcement learning. Two new meta reinforcement learning algorithms are suggested: E-MAML and ERL2. Results are presented on a novel environment we call 'Krazy World'  and a set of maze environments. We show E-MAML and ERL2 deliver better performance on tasks where exploration is important.",
+    "keywords": [
+      "reinforcement learning",
+      "rl",
+      "exploration",
+      "meta learning",
+      "meta reinforcement learning",
+      "curiosity"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Skk3Jm96W"
+  },
+  "review_fields": {
+    "review": "Summary: this paper proposes algorithmic extensions to two existing RL algorithms to improve exploration in meta-reinforcement learning. The new approach is compared to the baselines on which they are built on a new domain, and a grid-world.\n\nThis paper needs substantial revision. The first and primary issue is that authors claim their exists not prior work on \"exploration in Meta-RL\". This appears to be the case because the authors did not use the usual names for this: life-long learning, learning-to-learn, continual learning, multi-task learning, etc. If you use these terms you see that much of the work in these settings is about how to utilize and adapt exploration. Either given a \"free learning phases\", exploration based in internal drives (curiosity, intrinsic motivation). These are subfields with too much literature to list here. The paper under-review must survey such literature and discuss why these new approaches are a unique contribution.\n\nThe empirical results do not currently support the claimed contributions of the paper. The first batch of results in on a new task introduced by this paper. Why was a new domain introduced? How are existing domains not suitable. This is problematic because domains can easily exhibit designer bias, which is difficult to detect. Designing domains are very difficult and why benchmark domains that have been well vetted by the community are such an important standard. In the experiment, the parameters were randomly sampled---is a very non-conventional choice. Usually one performance a search for the best setting and then compares the results. This would introduce substantial variance in the results, requiring many more runs to make statistically significant conclusions.\n\nThe results on the first task are not clear. In fig4 one could argue that e-maml is perhaps performing the best, but the variance of the individual lines makes it difficult to conclude much. In fig5 rl2 gets the best final performance---do you have a hypothesis as to why? Much more analysis of the results is needed.\n\nThere are well-known measures used in transfer learning to access performance, such as jump-start. Why did you define new ones here?\n \nFigure 6 is difficult to read. Why not define the Gap and then plot the gap. These are very unclear plots especially bottom right. It's your job to sub-select and highlight results to clearly support the contribution of the paper---that is not the case here. Same thing with figure 7. I am not sure what to conclude from this graph.\n\nThe paper, overall is very informal and unpolished. The text is littered with colloquial language, which though fun, is not as precise as required for technical documents. Meta-RL is never formally and precisely defined. There are many strong statements e.g., : \"which indicates that at the very least the meta learning is able to do system identification correctly.\">> none of the results support such a claim. Expectations and policies are defined with U which is never formally defined. The background states the problem of study is a finite horizon MDP, but I think they mean episodic tasks. The word heuristic is used, when really should be metric or measure."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

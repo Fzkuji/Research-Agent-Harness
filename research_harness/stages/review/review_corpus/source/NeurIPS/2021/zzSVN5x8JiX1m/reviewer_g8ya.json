@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "zzSVN5x8JiX1m",
+  "reviewer": "g8ya",
+  "paper": {
+    "title": "On the Role of Optimization in Double Descent: A Least Squares Study",
+    "authors": [
+      "Ilja Kuzborskij",
+      "Csaba Szepesvari",
+      "Omar Rivasplata",
+      "Amal Rannen-Triki",
+      "Razvan Pascanu"
+    ],
+    "abstract": "Empirically it has been observed that the performance of deep neural networks steadily improves with increased model size, contradicting the classical view on overfitting and generalization. Recently, the double descent phenomenon has been proposed to reconcile this observation with theory, suggesting that the test error has a second descent when the model becomes sufficiently overparameterized, as the model size itself acts as an implicit regularizer. In this paper we add to the growing body of work in this space, providing a careful study of learning dynamics as a function of model size for the least squares scenario. We show an excess risk bound for the gradient descent solution of the least squares objective. The bound depends on the smallest non-zero eigenvalue of the sample covariance matrix of the input features, via a functional form that has the double descent behaviour. This gives a new perspective on the double descent curves reported in the literature, as our analysis of the excess risk allows to decouple the effect of optimization and generalization error. In particular, we find that in the case of noiseless regression, double descent is explained solely by optimization-related quantities, which was missed in studies focusing on the Moore-Penrose pseudoinverse solution. We believe that our derivation provides an alternative view compared to existing works, shedding some light on a possible cause of this phenomenon, at least in the considered least squares setting. We empirically explore if our predictions hold for neural networks, in particular whether the spectrum of the sample covariance of features at intermediary hidden layers has a similar behaviour as the one predicted by our derivations in the least squares setting.",
+    "keywords": [
+      "Double Descent",
+      "Optimization Error",
+      "Excess Risk",
+      "Generalization",
+      "Least Squares"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=zzSVN5x8JiX1m"
+  },
+  "review_fields": {
+    "comment": "After reading the authors' response, some of my concerns remain. In particular, the authors clarified that DD also occurs for Moore-Penrose solutions, and thus DD happens only partly because of optimization. Potential motivation for studying DD with GD optimization could be that DD can be explained even in the absence of label noise. However, as pointed out by Reviewer XaVR, the bound can only be tight for large T, which suggests that the theory in this paper may only hold when the solution found by GD is close to the Moore-Penrose solution. Therefore, this paper does not have a significant contribution to our knowledge of DD.\n\nFor this reason and concerns raised by the other reviewers, I decided to change my score to 5."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "9zWlrwlT9-j",
+  "reviewer": "s9K4",
+  "paper": {
+    "title": "Unbiased Estimates for Multilabel Reductions of Extreme Classification with Missing Labels",
+    "authors": [
+      "Erik Schultheis",
+      "Rohit Babbar"
+    ],
+    "abstract": "This paper considers the missing-labels problem in the extreme multilabel classification (XMC) setting, i.e. a setting\nwith a very large label space. The goal in XMC often is to maximize either precision or recall of the top-ranked\npredictions, which can be achieved by reducing the multilabel problem into a series of binary (One-vs-All) or multiclass\n(Pick-all-Labels) problems. Missing labels are a ubiquitous phenomenon in XMC tasks, yet the interaction between missing\nlabels and multilabel reductions has hitherto only been investigated for the case of One-vs-All reduction. In this\npaper, we close this gap by providing unbiased estimates for general (non-decomposable) multilabel losses, which enables\nunbiased estimates of the Pick-all-Labels reduction, as well as the normalized reductions which are required for\nconsistency with the recall metric. We show that these estimators suffer from increased variance and may lead to\nill-posed optimization problems. To address this issue, we propose to use convex upper bounds which trade off an\nincrease in bias against a strong decrease in variance.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=9zWlrwlT9-j"
+  },
+  "review_fields": {
+    "summary": "The paper studies the problem of extreme multi-label learning with missing labels. To solve the problem, the paper considers reducing the multi-label problem into a serious binary or multi-class problems. To deal with missing labels, the paper proposes unbiased estimates for multi-label reduction loss functions. To reduce the variance of estimates, the paper proposes convex upper-bound for the OVA and PAL-reduction.",
+    "strengths_and_weaknesses": "Strength\n\n1.The paper proposes a framework for dealing with missing labels in extreme multi-label setting. In the proposed framework, the unbiased estimates in terms of decomposable reduction and non-decomposable losses under missing-label setting are derived.\n\n2.To deal with issue of increased variance, the paper proposes convex upper bounds for normalized PAL reduction, which provides trade-off between bias and variance.\n\nWeakness\n\n1.The experiments are weak. The paper only conducts a toy experiment and an experiment on a real-world dataset. Furthermore, the proposed method does not compare with other counterpart methods. The experimental results on the current submission are insufficient to validate the effectiveness of the proposed method.\n\n2.The paper is not well written. Many important details are missed or placed on the appendix, which make the paper hard to understand. For example, Eq.(4) is difficult to understand without any detailed introduction (in appendix). This makes this paper become difficult to follow. The organization of this paper should be improved. For example, the figures in experiments are too large with limited information.\n\n3.The paper fails to sufficiently discuss its pioneering works. Many related works are missed. For example, authors do not discuss the relevant works in extreme multi-label classification that are very relevant to this work. The very relevant works about multi-label noise are also missed.",
+    "questions": "In experiments, why use BCE for OVA reduction and CCE for PAL reduction? \n\nIn Related Work, authors claim that “learning with missing labels is a specific” instance of learning with class-conditional noise. Why? Is it there any reference?",
+    "limitations": "The experiments are weak due to the lack of comparison with counterpart methods. The results on real-world scenarios are also insufficient."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 1,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

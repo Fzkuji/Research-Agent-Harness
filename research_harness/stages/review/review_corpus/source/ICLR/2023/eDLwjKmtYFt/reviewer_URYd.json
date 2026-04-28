@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "eDLwjKmtYFt",
+  "reviewer": "URYd",
+  "paper": {
+    "title": "EquiMod: An Equivariance Module to Improve Visual Instance Discrimination",
+    "authors": [
+      "Alexandre DEVILLERS",
+      "Mathieu Lefort"
+    ],
+    "abstract": "Recent self-supervised visual representation methods are closing the gap with supervised learning performance. Most of these successful methods rely on maximizing the similarity between embeddings of related synthetic inputs created through data augmentations. This can be seen as a task that encourages embeddings to leave out factors modified by these augmentations, i.e. to be invariant to them. However, this only considers one side of the trade-off in the choice of the augmentations: they need to strongly modify the images to avoid simple solution shortcut learning (e.g. using only color histograms), but on the other hand, augmentations-related information may be lacking in the representations for some downstream tasks (e.g. literature shows that color is important for bird and flower classification). Few recent works proposed to mitigate this problem of using only an invariance task by exploring some form of equivariance to augmentations. This has been performed by learning additional embeddings space(s), where some augmentation(s) cause embeddings to differ, yet in a non-controlled way. In this work, we introduce EquiMod a generic equivariance module that structures the learned latent space, in the sense that our module learns to predict the displacement in the embedding space caused by the augmentations. We show that applying that module to state-of-the-art invariance models, such as BYOL and SimCLR, increases the performances on the usual CIFAR10 and ImageNet datasets. Moreover, while our model could collapse to a trivial equivariance, i.e. invariance, we observe that it instead automatically learns to keep some augmentations-related information beneficial to the representations.",
+    "keywords": [
+      "Representation learning",
+      "Self-supervised learning",
+      "Contrastive learning",
+      "Equivariance"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=eDLwjKmtYFt"
+  },
+  "review_fields": {
+    "comment": "> Since we place ourselves as a complement to existing invariant methods, which learn similar embeddings for two augmentations of the same image (a.k.a. views, noted  and ), our batch contains pairs of embeddings coming from the same image. For this reason, our loss needs  to avoid the repulsion of \n and \n as these embeddings are originating from the same image.\n\nThanks, this makes sense.  I'm assuming that a batch consists of $2N$ images, $N$ original images and $N$ augmentations?  It might help to mention this in the paper.  Also, if we number the original images $i=1,...,N$, we could number the augmentations as $j=N+1,...,2N$ and we have pairs $(i, j) = (i, N+i)$.  Is that right?  Again, it might help the reader to make this explicit."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

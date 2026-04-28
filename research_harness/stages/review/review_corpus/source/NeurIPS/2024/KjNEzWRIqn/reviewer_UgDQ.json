@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "KjNEzWRIqn",
+  "reviewer": "UgDQ",
+  "paper": {
+    "title": "Synatra: Turning Indirect Knowledge into Direct Demonstrations for Digital Agents at Scale",
+    "authors": [
+      "Tianyue Ou",
+      "Frank F. Xu",
+      "Aman Madaan",
+      "Jiarui Liu",
+      "Robert Lo",
+      "Abishek Sridhar",
+      "Sudipta Sengupta",
+      "Dan Roth",
+      "Graham Neubig",
+      "Shuyan Zhou"
+    ],
+    "abstract": "LLMs can now act as autonomous agents that interact with digital environments and complete specific objectives (e.g., arranging an online meeting). However, accuracy is still far from satisfactory, partly due to a lack of large-scale, direct demonstrations for digital tasks. Obtaining supervised data from humans is costly, and automatic data collection through exploration or reinforcement learning relies on complex environmental and content setup, resulting in datasets that lack comprehensive coverage of various scenarios. On the other hand, there is abundant knowledge that may indirectly assist task completion, such as online tutorials that were created for human consumption. In this work, we present Synatra, an approach that effectively transforms this indirect knowledge into direct supervision at scale. We define different types of indirect knowledge, and carefully study the available sources to obtain it, methods to encode the structure of direct demonstrations, and finally methods to transform indirect knowledge into direct demonstrations. We use 100k such synthetically-created demonstrations to finetune a 7B CodeLlama, and demonstrate that the resulting agent surpasses all comparably sized models on three web-based task benchmarks Mind2Web, MiniWoB++ and WebArena, as well as surpassing GPT-3.5 on WebArena and Mind2Web. In addition, while synthetic demonstrations prove to be only 3% the cost of human demonstrations (at $0.031 each), we show that the synthetic demonstrations can be more effective than an identical number of human demonstrations collected from limited domains.",
+    "keywords": [
+      "AI agents",
+      "sythetic data",
+      "web navigation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=KjNEzWRIqn"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a method for synthetically creating a dataset of agent trajectories for navigating websites. They propose using annotated programs, specifically python code interleaved with comments, as a representation of task and motion planning trajectories, where tasks are described in natural language in the comments, and actions are python API calls to the environment. A dataset of trajectories is created by applying GPT-4 to two sources of data. The first source is wikiHow, which contains ungrounded high-level tutorials. GPT-4 is used to generate plausible trajectories consistent with the tutorial. The second source is ClueWeb, which contains HTML snapshots of real websites. GPT-4 is again used to generate plausible trajectories consistent with the website. The paper finds that the resultant dataset of trajectories, when used to finetune CodeLlama-instruct-7b, outperforms open-weight models of similar sizes on Mind2Web, MiniWoB++, and WebArena. This result demonstrates that finetuning on the dataset transfers well to tasks.",
+    "strengths": "- The paper is well-motivated, and for some sections clearly written\n- Creative usage of two different data sources, tutorials and snapshots, to complement each other\n- Makes progress towards building competent LLM-agents\n- Demonstrates that synthetic trajectories improve benchmark performances.",
+    "weaknesses": "- Requires the use of GPT-4 to generate the synthetic data. While the paper demonstrates that using GPT-4 to generate training data can improve smaller open weight models, it's not clear if this can help push the SOTA. \n- Unequal comparison with human annotation: Sec. 6.2 compares with the human annotated trajectories in Mind2Web. As acknowledged by the authors, Mind2Web tasks are very restricted and simple compared with the tasks in synatra. A fairer comparison would be to collect a smaller set of human annotations on roughly the same task distribution as synatra. \n- 6.3 rather ad hoc",
+    "questions": "- open-source vs open-weight. Be careful with the distinction! (e.g. L54)\n- How would GPT-4 perform if trained on synatra? Is synatra limited to distilling agent-capability from stronger models to weaker models? What stopped you from finetuning GPT-4 or GPT-3.5 on synatra?\n- In 6.3 you write that you \"conducted a detailed examination\" comparing synatra with GPT-4, but I can't seem to find the analysis.\n- Given that the comparison with human annotation in 6.2 doesn't seem very fair, I'm not sure if you can claim in the abstract that \"we show that the synthetic demonstrations can be more effective than a similar number of human demonstrations.\"\n- To help answer the quality/quantity trade-off, one might look at how finetuning codellama does when varying the size of the dataset. As prior work [0] suggested, maybe only a small number of examples is needed, which pushes the trade-off towards obtaining smaller quantities of high-quality human-annotated data instead of large quantities of synthetic data.\n\n[0] Zhou, C., et al. \"LIMA: Less Is More for Alignment. arXiv, Article.\" arXiv preprint arXiv:2305.11206 (2023).",
+    "limitations": "- Broader impacts adequately discusses potential unethical usage of LLM agents enabled by this work.\n- Needs discussion of robustness of LLM agents and potential security risks posed by deploying them.\n- Limitations of using synthetic data adequately discussed."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2278,
+    "words": 357,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d24c09c6-0ae2-492e-836e-1e62d37d6a7f",
+    "error": null,
+    "scored_chars": 2280
+  }
+}

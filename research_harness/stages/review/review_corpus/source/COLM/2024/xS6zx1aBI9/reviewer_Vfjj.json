@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "xS6zx1aBI9",
+  "reviewer": "Vfjj",
+  "paper": {
+    "title": "CLIN: A Continually Learning Language Agent for Rapid Task Adaptation and Generalization",
+    "authors": [
+      "Bodhisattwa Prasad Majumder",
+      "Bhavana Dalvi Mishra",
+      "Peter Jansen",
+      "Oyvind Tafjord",
+      "Niket Tandon",
+      "Li Zhang",
+      "Chris Callison-Burch",
+      "Peter Clark"
+    ],
+    "abstract": "Language agents have shown some ability to interact with an external environment, e.g., a virtual world such as ScienceWorld, to perform complex tasks, e.g.,  growing a plant, without the startup costs of reinforcement learning. While recent work, e.g., Reflexion, has demonstrated how such agents can also self-improve by adding a textual memory of ''hints'' learned from prior experience, such improvements have been limited both in size and scope. In contrast, our goal is a language agent that can robustly improve performance over time, including when both the task and environment are varied. Our approach is to have the agent learn a textual representation of how the world works (rather than just isolated hints), expressed as a memory of causal abstractions, to guide future decision-making. In experiments, we find CLIN is able to continually improve on repeated trials on the same task and environment, outperforming state-of-the-art reflective language agents like Reflexion by 23 points in ScienceWorld and 1.4 points in ALFWorld benchmarks. CLIN can also transfer its learning to new environments and tasks, enhancing performance by 21 points in ScienceWorld and 11 points in ALFWorld. This suggests that language agents with a textual causal memory can play a significant role in interactive environments, including being able to rapidly improve over time.",
+    "keywords": [
+      "Language Agents",
+      "Memory",
+      "Causal Abstraction",
+      "Continual Learning",
+      "Memory-augmented Agents",
+      "Task Adaptation",
+      "Text-based Simulator",
+      "Virtual Environment"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=xS6zx1aBI9"
+  },
+  "review_fields": {
+    "summary": "The paper introduces CLIN, a memory-augmented, large language model (LLM)-based agent capable of continuous learning from interactions with simulation environments. The memory system records actions paired with their rewards to evaluate whether certain actions are necessary for achieving the final goals. Results indicate that this approach achieves state-of-the-art performance on benchmarks such as ScienceWorld and ALFWorld, surpassing existing agent task planning methods like Reflexion, React, and Saycan.",
+    "reasons_to_accept": "1. The performance on benchmarks such as ScienceWorld and ALFWorld seems good, compared to other agent task planning methods like Reflexion, React, and Saycan.\n2. The paper is well organized, the demonstration of the method is clear.",
+    "reasons_to_reject": "1. Misuse of the term continual learning: The term \"continual learning\" may be misleading. In machine learning, continual learning typically refers to a model's ability to learn from a sequence of different tasks, often requiring the model to behave as if not all contents were observed simultaneously. CLIN does not exhibit the characteristics of continual learning. The term \"learning\" as used here is brief and may be more accurately described as few-shot learning with trial-and-error iterations.\n2. The assignment of rewards for given actions are not specified clearly. It is also good to study the influence using different feedback signals, reward scoring methods such as in Reflexion.\n3. The authors should conduct experiments on more benchmark datasets such as hotpotQA, HumanEval.\n4. How and where does the dynamic memory mechanism influence the model inference, and why it can help continue learning and adaptation to new tasks? More ablation study and case study should be given.",
+    "questions_to_authors": "The memory system depends on the agent's own exploration trails, so I wonder how the LLMs would affect the efficiency of the whole system? As I concern that if the agent cannot retrieve useful information or if the reward is consistently low for a bunch of trials, in the case that the agent cannot gain use knowledge of the world, what would happen."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:48Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:48Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 4,
+    "human_pct": 96,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1578,
+    "words": 255,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/dd9ff6bb-4bf8-4fb2-a72a-aba4ab152ee5",
+    "error": null,
+    "scored_chars": 1578
+  }
+}

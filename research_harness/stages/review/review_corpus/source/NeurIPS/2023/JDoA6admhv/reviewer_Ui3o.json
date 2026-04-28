@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "JDoA6admhv",
+  "reviewer": "Ui3o",
+  "paper": {
+    "title": "Adversarial Examples Might be Avoidable: The Role of Data Concentration in Adversarial Robustness",
+    "authors": [
+      "Ambar Pal",
+      "Jeremias Sulam",
+      "Rene Vidal"
+    ],
+    "abstract": "The susceptibility of modern machine learning classifiers to adversarial examples has motivated theoretical results suggesting that these might be unavoidable. However, these results can be too general to be applicable to natural data distributions. Indeed, humans are quite robust for tasks involving vision. This apparent conflict motivates a deeper dive into the question: Are adversarial examples truly unavoidable? \nIn this work, we theoretically demonstrate that a key property of the data distribution -- concentration on small-volume subsets of the input space -- determines whether a robust classifier exists. We further demonstrate that, for a data distribution concentrated on a union of low-dimensional linear subspaces, utilizing structure in data naturally leads to classifiers that enjoy data-dependent polyhedral robustness guarantees, improving upon methods for provable certification in certain regimes.",
+    "keywords": [
+      "Adversarial Robustness",
+      "Geometry in Data",
+      "Low Dimensional Modeling"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=JDoA6admhv"
+  },
+  "review_fields": {
+    "summary": "The paper studies the problem of adversarial robustness in multi-class classification. The authors show that a necessary condition for the existence of an adversarially robust classifier is the condition that at least one of the class conditional ditributions is \"concentrated\" in the sense that most of the probability mass is concentrated on a set of very small volume. The condition of concentration however is not sufficient for the existence of a robust classifier, because one also needs the class conditional ditributions to be well-separated. \n\nThe authors then study adversarial robustness for the special case of data distributions lying on a low-dimensional linear subspace. For this case, they show that robustness at any data point can be certified in a polyhedron that depends on the subspace representation of the point. Using experiments on MNIST dataset, they show that the polyhedron certificate can be complementary to the spherical certificate one can get with randomized smoothing.",
+    "strengths": "- Necessary condition: The theorem showing the necessity of concentration for robustness results from a simple, but nice application of the Brunn-Minkowski inequality. I think this condition is novel, and complements existing results showing concentration of measure is bad for robustness\n- Polyhedral certificate: The theorem showing the polyhedral certificate for robustness appears non-trivial and interesting. The certificate obtained is complementary to the spherical certificates of randomized smoothing. \n- Writing: The paper is well-written and clear for the most part.",
+    "weaknesses": "- Definition 3.1: I think the definition of strongly concentrated distributions is a misnomer. The critical assumption in this definition is in line 125 which assumes minimal overlap between the approximate supports of the class conditional distributions. Hence, this definition has more to do with \"well-separatedness\" of class conditional distributions, and in my opinion, has very little relation to concentration. \n- Novelty of the sufficient condition: If concentration on small volume sets is not sufficient for robustness, what is? As I state in the previous point, it is some notion of separation between class conditional distributions. Several papers already study such conditions. For example, [this](http://proceedings.mlr.press/v119/pydi20a/pydi20a.pdf) and [this](https://proceedings.neurips.cc/paper/2019/file/02bf86214e264535e3412283e817deaa-Paper.pdf) paper show that if the class-conditional distributions are well-separated in an optimal-transport distance, then there exists a robust classifier. It is also shown in these papers that such a separation condition holds empirically on real-world datasets. \n- The low-dimensional linear subspace assumption: First, I think this is a very strong assumption that real world datasets probably don't satisfy. Second, the motivation for studying distributions of this form appears weak, as one can imagine many other types of distributions that satisfy the necessary and sufficient conditions of sections 2 and 3 but are not supported on linear subspaces. Case in point is Example 3.1 in this very paper. \n- The utility of polyhedral certificate: Intuitively, one can imagine many \"benevolent perturbations\" to input data that do not affect the accuracy of a classifier. Spherical certificates for robustness make sense because the guarantee holds for any possible direction of the adversarial perturbation. A polyhedral certificate is not a \"worst-case\" certificate in this sense.",
+    "questions": "- For $\\sigma = 0.04$ (red and green curves) Figure 6 seems to show that the the paper's method gives a worse certificate than randomized smoothing. Is this a typo?\n- Is it possible to find the radius of the largest $\\ell_p$ ball centered at x that fits inside C(x)? This will give a data-dependent spherical certificate at each point, which will be interesting. \n\nMinor suggestions:\n- I think it is better to show the dependence on dimension for the constants $\\epsilon, \\delta$ in the main theorems of sections 2 and 3. \n- The connections of the main theorem of section 4 to subspace clustering literature can probably be presented much earlier. Currently, the paper only brings up this connection at the end of section 4."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3242,
+    "words": 474,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/5a8eff8d-cb80-4534-9170-ca04f9ead9ea",
+    "error": null,
+    "scored_chars": 3248
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "2aC0_RxkBL_",
+  "reviewer": "B7am",
+  "paper": {
+    "title": "Where is the bottleneck in long-tailed classification?",
+    "authors": [
+      "Zaid Khan",
+      "Yun Fu"
+    ],
+    "abstract": "A commonly held belief in deep-learning based long-tailed classiﬁcation is that the representations learned from long-tailed data are ”good enough” and the performance bottleneck is the classiﬁcation head atop the representation learner. We design experiments to investigate this folk wisdom, and ﬁnd that representations learned from long-tailed data distributions substantially differ from the representations learned from ”normal” data distributions. We show that the long-tailed representations are volatile and brittle with respect to the true data distribution. Compared to the representations learned from the true, balanced distributions, long-tailed representations fail to localize tail classes and display vastly worse inter-class separation and intra-class compactness when unseen samples from the true data distribution are embedded into the feature space. We provide an explanation for why data augmentation helps long-tailed classiﬁcation despite leaving the dataset imbalance unchanged — it promotes inter-class separation, intra-class compactness, and improves localization of tail classes w.r.t to the true data distribution.",
+    "keywords": [
+      "fairness",
+      "bias",
+      "long tailed learning",
+      "imbalanced learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=2aC0_RxkBL_"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper seeks to study what is the bottleneck in long-tailed learning. Based on extensive experiments, the authors propose that representation learning is the bottleneck in long-tailed classification. Also, this paper analyzes representation learning from the perspectives of intra-class compactness and inter-class separation, as well as the influence of data mixup on long-tailed representation learning.",
+    "main_review": "Positive points:\n1. This paper seeks to empirically investigate the importance of representation learning, which may provide a new understanding of deep long-tailed learning to the community.\n\n\n2. This work shows the effectiveness of intra-class compactness and inter-class separation on long-tailed representation learning.  \n\n\n3. This work also analyzes the influence of data augmentation on long-tailed representation learning, which provides a better understanding of data augmentation in deep long-tailed learning. \n\nNegative points:\n1. This paper mentioned that \"a commonly held belief in deep long-tailed classification is that performance bottleneck is the classification head atop the representation learner\". However, such a belief may not be common. Note that many recent long-tailed learning studies focus on improving representation learning [1], e.g., KCL [2], Hybrid [3], PaCo[4] and DRO-LT [5].  Moreover, in the conclusion, this paper stated that \"the results suggest that the primary problem in long-tailed classification may in fact be the few-shot learning problem on the tail classes, rather than the imbalance problem\". However, this argument is too strong and the obtained results cannot support it. It would be better if the authors had written all the arguments more rigorously and verified them more completely.  \n\n\n2. As mentioned by the above question, there are many representation learning-based long-tailed studies, e.g., [1-5]. Therefore, it would be better if authors can review mire representation learning based long-tailed learning methods in related work.\n\n\n3. The vital problem in this paper is the used balanced set: i.e., CIFAR-10/100 and ImageNet-1K. Please note that the data number of  CIFAR-10/100 or ImageNet-1K is much more than their long-tailed variants, i.e., CIFAR-LT and ImageNet-LT. Considering using more training samples will lead to significant improvement in representation learning and model performance, most empirical comparisons in this paper (especially Table 1 and Figure 2) are unfair and the corresponding arguments are unpersuasive. The experiments would have been more persuasive, if the balanced training set is a variant of the long-tailed training set with a similar total data number but each class has the same/similar data number, like [1,2]. For example, a balanced set of ImageNet-LT can be obtained at https://github.com/Vanint/Awesome-LongTailed-Learning/tree/main/resources/data_txt/ImageNet_LT. \n\n\n4. Please discuss more of Figure 5. On ImageNet-LT and CIFAR100-LT, the variance trends of long-tailed representations and ideal representations are quite consistent. Such observations seem different from the conclusion of Sec 2.1. Since I am confused about the results, I guess other readers may also do so. Therefore, I suggest the authors explain them more. \n\n\n\n\nMinor suggestions:\n1. Figure 3 is not clear enough. It would be better if the authors can explain it more in the captions. Moreover, what are \"degrees\" in Fig.6-8? Please make them more clear.\n\n2. In Lines 4-5 of page 2, ImageNet-LT appears twice. In Line 1 of page 6, there should be a \"full stop\" before In practice. \n\n\nReferences:\n\n[1] Deep long-tailed learning: A survey. ArXiv, 2021.\n\n[2] Exploring balanced feature spaces for representation learning. In ICLR, 2021.\n\n[3] Contrastive learning based hybrid networks for long-tailed image classification. In CVPR, 2021.\n\n[4] Parametric contrastive learning. In ICCV, 2021.\n\n[5] Distributional robustness loss for long-tail learning. In ICCV, 2021.",
+    "summary_of_the_review": "Overall, I like the goal of this paper, i.e., analyzing the bottleneck of long-tailed learning. However, I cannot champion this paper since the data number of the used balanced set is much larger than the long-tailed set, which makes the empirical comparisons unfair and the corresponding finding unpersuasive. Moreover, the arguments in this paper should be written more rigorously. I am glad to see the response of the authors.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3963,
+    "words": 583,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/821fd678-549d-45b4-af7c-f100e2672da6",
+    "error": null,
+    "scored_chars": 3973
+  }
+}

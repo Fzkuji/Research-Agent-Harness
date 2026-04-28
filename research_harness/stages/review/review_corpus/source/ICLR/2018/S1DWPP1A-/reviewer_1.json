@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "S1DWPP1A-",
+  "reviewer": "1",
+  "paper": {
+    "title": "Unsupervised Learning of Goal Spaces for Intrinsically Motivated Goal Exploration",
+    "authors": [
+      "Alexandre Péré",
+      "Sébastien Forestier",
+      "Olivier Sigaud",
+      "Pierre-Yves Oudeyer"
+    ],
+    "abstract": "Intrinsically motivated goal exploration algorithms enable machines to discover repertoires of policies that produce a diversity of effects in complex environments. These exploration algorithms have been shown to allow real world robots to acquire skills such as tool use in high-dimensional continuous state and action spaces. However, they have so far assumed that self-generated goals are sampled in a specifically engineered feature space, limiting their autonomy. In this work, we propose an approach using deep representation learning algorithms to learn an adequate goal space. This is a developmental 2-stage approach: first, in a perceptual learning stage, deep learning algorithms use passive raw sensor observations of world changes to learn a corresponding latent space; then goal exploration happens in a second stage by sampling goals in this latent space. We present experiments with a simulated robot arm interacting with an object, and we show that exploration algorithms using such learned representations can closely match, and even sometimes improve, the performance obtained using engineered representations.",
+    "keywords": [
+      "exploration; autonomous goal setting; diversity; unsupervised learning; deep neural network"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=S1DWPP1A-"
+  },
+  "review_fields": {
+    "review": "The paper investigates different representation learning methods to create a latent space for intrinsic goal generation in guided exploration algorithms.  The research is in principle very important and interesting.\n\nThe introduction discusses a great deal about intrinsic motivations and about goal generating algorithms. This is really great, just that the paper only focuses on a very small aspect of learning a state representation in an agent that has no intrinsic motivation other than trying to achieve random goals.\nI think the paper (not only the Intro) could be a bit condensed to more concentrate on the actual contribution. \n\nThe contribution is that the quality of the representation and the sampling of goals is important for the exploration performance and that classical methods like ISOMap are better than Autoencoder-type methods. \n\nAlso, it is written in the Conclusions (and in other places): \"[..] we propose a new intrinsically Motivated goal exploration strategy....\". This is not really true.  There is nothing new with the intrinsically motivated selection of goals here, just that they are in another space. Also, there is no intrinsic motivation. I also think the title is misleading.\n\nThe paper is in principle interesting. However, I doubt that the experimental evaluations are substantial enough for profound conclusion. \n\nSeveral points of critic: \n- the input space was very simple in all experiments, not suitable for distinguishing between the algorithms, for instance, ISOMap typically suffers from noise and higher dimensional manifolds, etc.\n- only the ball/arrow was in the input image, not the robotic arm. I understand this because in phase 1 the robot would not move, but this connects to the next point:\n- The representation learning is only a preprocessing step requiring a magic first phase.\n    -> Representation is not updated during exploration\n- The performance of any algorithm (except FI) in the Arm-Arrow task is really bad but without comment. \n- I am skeptical about the VAE  and RFVAE results. The difference between Gaussian sampling and the KDE is a bit alarming, as the KL in the VAE training is supposed to match the p(z) with N(0,1). Given the power of the encoder/decoder it should be possible to properly represent the simple embedded 2D/3D manifold and not just a very small part of it as suggested by Fig 10. \nI have a hard time believing these results. I urge you to check for any potential errors made. If there are not mistakes then this is indeed alarming.\n\nQuestions:\n- Is it true that the robot always starts from same initial condition?! Context=Emptyset. \n- For ISOMap etc, you also used a 10dim embedding?\n\nSuggestion:\n- The main problem seems to be that some algorithms are not representing the whole input space.\n- an additional measure that quantifies the difference between true input distribution and reproduced input distribution could tier the algorithms apart and would measure more what seems to be relevant here.  One could for instance measure the KL-divergence between the true input and the sampled (reconstructed) input (using samples and KDE or the like). \n- This could be evaluated on many different inputs (also those with a bit more complicated structure) without actually performing the goal finding.\n- BTW: I think Fig 10 is rather illustrative and should be somehow in the main part of the paper\n \nOn the positive side, the paper provides lots of details in the Appendix.\nAlso, it uses many different Representation Learning algorithms and uses measures from manifold learning to access their quality.\n\nIn the related literature, in particular concerning the intrinsic motivation, I think the following papers are relevant:\nJ. Schmidhuber, PowerPlay: training an increasingly general problem solver by continually searching for the simplest still unsolvable problem. Front. Psychol., 2013.\n\nand\n\nG. Martius, R. Der, and N. Ay. Information driven self-organization of complex robotic behaviors. PLoS ONE, 8(5):e63400, 2013.\n\n\nTypos and small details:\np3 par2: for PCA you cited Bishop. Not critical, but either cite one the original papers or maybe remove the cite altogether\np4 par-2: has multiple interests...: interests -> purposes?\np4 par-1: Outcome Space to the agent is is ...\nSec 2.2 par1: are rapidly mentioned... -> briefly\nSec 2.3 ...Outcome Space O, we can rewrite the architecture as:\n  and then comes the algorithm. This is a bit weird\nSec 3: par1: experimental campaign -> experiments?\np7: Context Space: the object was reset to a random position or always to the same position?\nFootnote 14: superior to -> larger than\np8 par2: Exploration Ratio Ratio_expl... probably also want to add (ER) as it is later used\nSec 4: slightly underneath -> slightly below\np9 par1: unfinished sentence: It is worth noting that the....\none sentence later: RP architecture? RPE?\nFig 3: the error of the methods (except FI) are really bad. An MSE of 1 means hardly any performance!\np11 par2: for e.g. with the SAGG..... grammar?\n\nPlots in general: use bigger font sizes."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

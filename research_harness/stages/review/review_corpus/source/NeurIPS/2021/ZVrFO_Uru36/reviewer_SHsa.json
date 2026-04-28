@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "ZVrFO_Uru36",
+  "reviewer": "SHsa",
+  "paper": {
+    "title": "Deep inference of latent dynamics with spatio-temporal super-resolution using selective backpropagation through time",
+    "authors": [
+      "Feng Zhu",
+      "Andrew R Sedler",
+      "Harrison A Grier",
+      "Nauman Ahad",
+      "Mark A. Davenport",
+      "Matthew Kaufman",
+      "Andrea Giovannucci",
+      "Chethan Pandarinath"
+    ],
+    "abstract": "Modern neural interfaces allow access to the activity of up to a million neurons within brain circuits. However, bandwidth limits often create a trade-off between greater spatial sampling (more channels or pixels) and the temporal frequency of sampling. Here we demonstrate that it is possible to obtain spatio-temporal super-resolution in neuronal time series by exploiting relationships among neurons, embedded in latent low-dimensional population dynamics. Our novel neural network training strategy, selective backpropagation through time (SBTT), enables learning of deep generative models of latent dynamics from data in which the set of observed variables changes at each time step. The resulting models are able to infer activity for missing samples by combining observations with learned latent dynamics. We test SBTT applied to sequential autoencoders and demonstrate more efficient and higher-fidelity characterization of neural population dynamics in electrophysiological and calcium imaging data. In electrophysiology, SBTT enables accurate inference of neuronal population dynamics with lower interface bandwidths, providing an avenue to significant power savings for implanted neuroelectronic interfaces. In applications to two-photon calcium imaging, SBTT accurately uncovers high-frequency temporal structure underlying neural population activity, substantially outperforming the current state-of-the-art. Finally, we demonstrate that performance could be further improved by using limited, high-bandwidth sampling to pretrain dynamics models, and then using SBTT to adapt these models for sparsely-sampled data.",
+    "keywords": [
+      "Computational neuroscience",
+      "Systems neuroscience",
+      "Neural population dynamics",
+      "intermittent sampling",
+      "Electrophysiology",
+      "Calcium imaging",
+      "Brain-computer interfaces",
+      "Neuroscience",
+      "Neuroprosthetics",
+      "Neural coding",
+      "Motor control",
+      "Sequential autoencoders"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZVrFO_Uru36"
+  },
+  "review_fields": {
+    "summary": "This paper extends AutoLFADS to deal with missing data. The proposed solution has two main elements: (i) the generative loss is simply zeroed-out at those (neuron, time) pairs where data is missing, and (ii) missing data are zero-filled before going into the encoder for amortized inference. I am not entirely convinced that this contribution crosses Neurips' high bar on technical & conceptual innovation. Element (i) above is probably the first thing that would cross one's mind for dealing with missing data in this particular case -- not sure the use of the fancy name \"Selective backpropagation through time\" is justified, where it simply corresponds to ignoring what the generator does at points where no data is available. Moreover, I do not see a clear a priori justification for using zeroes in element (ii). Finally, this hack is so simple that it doesn't strike me as a big modification of the existing AutoLFADS codebase (though I do appreciate the huge coding effort for the applications!). Overall, I therefore find this contribution rather incremental. Nevertheless, the case for tackling the problem of missing data is well made, and the experiments on a number of datasets are both impressive and convincing: the method just works, and I can see that it will be used in practice. Also, the paper very nicely shows that missing data, even when a lot is missing, isn't necessarily a deal-breaker for accurate reconstruction of latent dynamics.",
+    "main_review": "Beyond the review summary, here a few points the authors might want to consider:\n\n- Perhaps Bayesian methods (e.g. GPFA) ought to be given more credit in the introduction / prior art for their natural principled approach to dealing with missing data.\n\n- Unpacking a point made in the summary: it is not clear to me why replacing missing data by zeros in the input to the encoder is \"the\" right thing to do... Do the authors agree that this choice was arbitrary? Could one consider replacing missing data by the mean spike count (or calcium) of the relevant neuron instead? Better yet, shouldn't these values be treated as variational parameters? I can see that they could affect the ELBO.\n\n- Have the authors looked at how GPFA performs with missing data? I am curious to know how the rate at which cross-validated prediction errors deteriorates with increasing fraction of dropped samples compares with AutoLFADS'.\n\n- Section 2 is a greatt overview of related work; I learned a lot there about refs I didn't know about!\n \n----\n\nMinor things:\n\n- The first paragraph of section 2 is rather obscure / premature; e.g. what does \"similar loss function to that considered in this work\" refer to? Having already gone through Figure 1, the reader might reasonably expect that the \"loss function considered in this work\" already involves the masking sketched in Figure 1C, yet the paragraph ends \"all of the above works limit their focus to [...] where the observations are fully sampled\".\n\n- typo: Possion emissions model → Poisson emission model\n\n- \"KL penalties described above\": only one KL penalty is described (?)\n\n\n\n==== Post-rebuttal update =====\n\nMany thanks to the authors for their response, which consolidates my impressions. I had scored the paper at \"marginally above acceptance threshold\", already balancing the lack of technical innovation (which would normally lead to a clear reject in my mind) with the convincing experimental results and interesting conceptual framing of the study. To explain my reasoning very bluntly: does a neuroscientist with a missing data problem really need this paper? Yes and no. Yes, for the encouraging proof of concept that missing data isn't that bad a problem. No, because there is no substantial technical insight required to replace missing data with zeros and ignoring the reconstruction loss at these points. I am therefore reluctant to increase my score, out of fairness for the countless papers that make highly innovative algorithmic contributions yet will be rejected this year in this extremely competitive field -- I hope the authors will understand this stance! In any case, great work to be proud of.",
+    "limitations_and_societal_impact": "Yes, limitations and societal impact are well addressed."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

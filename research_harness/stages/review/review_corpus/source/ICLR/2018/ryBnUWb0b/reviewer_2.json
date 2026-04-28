@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "ryBnUWb0b",
+  "reviewer": "2",
+  "paper": {
+    "title": "Predicting Floor-Level for 911 Calls with Neural Networks and Smartphone Sensor Data",
+    "authors": [
+      "William Falcon",
+      "Henning Schulzrinne"
+    ],
+    "abstract": "In cities with tall buildings, emergency responders need an accurate floor level location to find 911 callers quickly. We introduce a system to estimate a victim's floor level via their mobile device's sensor data in a two-step process. First, we train a neural network to determine when a smartphone enters or exits a building via GPS signal changes. Second, we use a barometer equipped smartphone to measure the change in barometric pressure from the entrance of the building to the victim's indoor location. Unlike impractical previous approaches, our system is the first that does not require the use of beacons, prior knowledge of the building infrastructure, or knowledge of user behavior. We demonstrate real-world feasibility through 63 experiments across five different tall buildings throughout New York City where our system predicted the correct floor level with 100% accuracy.",
+    "keywords": [
+      "Recurrent Neural Networks",
+      "RNN",
+      "LSTM",
+      "Mobile Device",
+      "Sensors"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryBnUWb0b"
+  },
+  "review_fields": {
+    "review": "The paper proposes a two-step method to determine which floor a mobile phone is on inside a tall building. \nAn LSTM RNN classifier analyzes the changes/fading in GPS signals to determine whether a user has entered a building.  Using the entrance point's barometer reading as a reference, the method calculates the relative floor the user has moved to using a well known relationship between heights and barometric readings.\n\nThe paper builds on a simple but useful idea and is able to develop it into a basic method for the goal.  The method has minimal dependence on prior knowledge and is thus expected to have wide applicability, and is found to be sufficiently successful on data collected from a real world context.  The authors present some additional explorations on the cases when the method may run into complications.\n\nThe paper could use some reorganization.   The ideas are presented often out of order and are repeated in cycles, with some critical details that are needed to understand the method revealed only in the later cycles.   Most importantly, it should be stated upfront that the outdoor-indoor transition is determined using the loss of GPS signals.  Instead, the paper elaborates much on the neural net model but delays until the middle of p.4 to state this critical fact. However once this fact is stated, it is obvious that the neural net model is not the only solution.\n\nThe RNN model for Indoor/Outdoor determination is compared to several baseline classifiers.  However these are not the right methods to compare to -- at least, it is not clear how you set up the vector input to these non-auto-regressive classifiers. You need to compare your model to a time series method that includes auto-regressive terms, or other state space methods like Markov models or HMMs.\n\nOther questions:\n\np.2,  Which channel's RSSI is the one included in the data sample per second?\n\np.4,  k=3, what is k?\n\nDo you assume that the entrance is always at the lowest floor? What about basements or higher floor entrances?  Also, you may continue to see good GPS signals in elevators that are mounted outside a building, and by the time they fade out,  you can be on any floor reached by those elevators.\n\nHow does each choice of your training parameters affect the performance?  e.g. number of epoches, batch size, learning rate.   What are the other architectures considered?  What did you learn about which architecture works and which does not?  Why?\n\nAs soon as you start to use clustering to help in floor estimation, you are exploiting prior knowledge about previous visits to the building.  This goes somewhat against the starting assumption and claim."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

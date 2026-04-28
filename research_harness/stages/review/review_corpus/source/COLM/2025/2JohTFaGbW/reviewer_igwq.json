@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "2JohTFaGbW",
+  "reviewer": "igwq",
+  "paper": {
+    "title": "Language models align with brain regions that represent concepts across modalities",
+    "authors": [
+      "Maria Ryskina",
+      "Greta Tuckute",
+      "Alexander Fung",
+      "Ashley Malkin",
+      "Evelina Fedorenko"
+    ],
+    "abstract": "Cognitive science and neuroscience have long faced the challenge of disentangling representations of language from representations of conceptual meaning. As the same problem arises in today's language models (LMs), we investigate the relationship between LM--brain alignment and two neural metrics: (1) the level of brain activation during processing of sentences, targeting linguistic processing, and (2) a novel measure of meaning consistency across input modalities, which quantifies how consistently a brain region responds to the same concept across paradigms (sentence, word cloud, image) using an fMRI dataset (Pereira et al., 2018). Our experiments show that both language-only and language-vision models predict the signal better in more meaning-consistent areas of the brain, even when these areas are not strongly sensitive to language processing, suggesting that LMs might internally represent cross-modal conceptual meaning.",
+    "keywords": [
+      "LM–brain alignment",
+      "fMRI",
+      "conceptual meaning",
+      "cognitive neuroscience"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=2JohTFaGbW"
+  },
+  "review_fields": {
+    "summary": "The study compares brain imaging (fMRI) data from Pereira et al. (2018), which collected data from human participants exposed to multimodal conceptual stimuli, to representations from various small/medium-sized LMs and VLMs. This is measured by common metrics: brain encoding performance, i.e. predicting brain activations from model representations using ridge regression; and representational similarity analysis, i.e. spearman correlation between pairwise similarity matrices obtained from the each representation. These are correlated with a novel metric of semantic consistency as well as selectivity to language processing across brain regions.\nResults show correlation between semantic consistency and both predictivity and alignment.",
+    "reasons_to_accept": "Precise and clear overview of the fMRI data from Pereira et al. (2018), which is central to the experiments in this study. This is useful for the COLM community, which may be less familiar with human imaging data.\n\nExperiments are thorough and robust, employing various models, paradigms, modalities and controls.\n\nClear and focused contribution of the semantic consistency measure, which is explained clearly.",
+    "reasons_to_reject": "Missing references about LM-brain alignment [1,2], particularly structural similarities [3], and about concept sharing in vision and language models [4].\n\nLacking discussion on what is known from neuroscience about the identified ROIs and whether the fact that they exhibit the highest semantic consistency is surprising or consistent with previous findings about the human brain.\n\n[1] Antonia Karamolegkou, Mostafa Abdou, and Anders Søgaard. 2023. Mapping Brains with Language Models: A Survey. In Findings of the Association for Computational Linguistics: ACL 2023, pages 9748–9762, Toronto, Canada. Association for Computational Linguistics.\n\n[2] Gabriele Merlin and Mariya Toneva. 2024. Language models and brains align due to more than next-word prediction and word-level information. In Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing, pages 18431–18454, Miami, Florida, USA. Association for Computational Linguistics.\n\n[3] Jiaang Li, Antonia Karamolegkou, Yova Kementchedjhieva, Mostafa Abdou, Anders S\\ogaard. 2024. Structural Similarities Between Language Models and Neural Response Measurements. Proceedings of the 2nd NeurIPS Workshop on Symmetry and Geometry in Neural Representations, PMLR 228:346-365, 2024.\n\n[4] Jiaang Li, Yova Kementchedjhieva, Constanza Fierro, and Anders Søgaard. 2024. Do Vision and Language Models Share Concepts? A Vector Space Alignment Study. Transactions of the Association for Computational Linguistics, 12:1232–1249.",
+    "questions_to_authors": "Since I am not perfectly familiar with the related literature, I cannot judge whether the semantic consistency metric is really novel or not. What similar metrics have been introduced before, and why are they insufficient? This is something that should be covered in related work. It just seems rather obvious. I am not saying it is not novel enough or too simple, just that I would imagine others to have introduced similar metrics before."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2352,
+    "words": 336,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0a799a35-11ff-4608-946c-8e03db4b03ac",
+    "error": null,
+    "scored_chars": 2352
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "7fFO4cMBx_9",
+  "reviewer": "AnwX",
+  "paper": {
+    "title": "Variational Neural Cellular Automata",
+    "authors": [
+      "Rasmus Berg Palm",
+      "Miguel González Duque",
+      "Shyam Sudhakaran",
+      "Sebastian Risi"
+    ],
+    "abstract": "In nature, the process of cellular growth and differentiation has lead to an amazing diversity of organisms --- algae, starfish, giant sequoia, tardigrades, and orcas are all created by the same generative process.\nInspired by the incredible diversity of this biological generative process, we propose a generative model, the Variational Neural Cellular Automata (VNCA), which is loosely inspired by the biological processes of cellular growth and differentiation. Unlike previous related works, the VNCA is a proper probabilistic generative model, and we evaluate it according to best practices. We find that the VNCA learns to reconstruct samples well and that despite its relatively few parameters and simple local-only communication, the VNCA can learn to generate a large variety of output from information encoded in a common vector format. While there is a significant gap to the current state-of-the-art in terms of generative modeling performance, we show that the VNCA can learn a purely self-organizing generative process of data. Additionally, the self-organizing nature bestows the VNCA with some inherent robustness against perturbations in the early stages of growth.",
+    "keywords": [
+      "Neural Cellular Automata",
+      "Cellular Automata",
+      "Self-Organization",
+      "Generative Models"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=7fFO4cMBx_9"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their rebuttal. \n\nI would like to point out to the authors that resnets with constant weights (i.e. weights tied across all layers) have been studied in the past, especially in the context of neural ODEs (see [1] as an example). Therefore I maintain that many (not all) of the claims in the paper are either explicitly known in literature in one form or another or are not surprising given what is out there.\n\nHowever, I think there is value in bridging the literature between what is known in the resnet/nODE domain and NCA. I am increasing my score but I would like to see the authors explicitly explain the relationship between NCA and weight shared resnets and give references to prior work.\n\n[1] Avelin, Benny, and Kaj Nyström. \"Neural ODEs as the deep limit of ResNets with constant weights.\" Analysis and Applications 19, no. 03 (2021): 397-437."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 875,
+    "words": 152,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/48d5aa41-3281-4dae-ac0f-2e4939d49fbb",
+    "error": null,
+    "scored_chars": 876
+  }
+}

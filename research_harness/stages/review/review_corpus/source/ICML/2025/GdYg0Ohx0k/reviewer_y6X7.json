@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "GdYg0Ohx0k",
+  "reviewer": "y6X7",
+  "paper": {
+    "title": "LSCD: Lomb--Scargle Conditioned Diffusion for Time series Imputation",
+    "authors": [
+      "Elizabeth Fons",
+      "Alejandro Sztrajman",
+      "Yousef El-Laham",
+      "Luciana Ferrer",
+      "Svitlana Vyetrenko",
+      "Manuela Veloso"
+    ],
+    "abstract": "Time series with missing or irregularly sampled data are a persistent challenge in machine learning. Many methods operate on the frequency-domain, relying on the Fast Fourier Transform (FFT) which assumes uniform sampling, therefore requiring prior interpolation that can distort the spectra. To address this limitation, we introduce a differentiable Lomb--Scargle layer that enables a reliable computation of the power spectrum of irregularly sampled data.\nWe integrate this layer into a novel score-based diffusion model (LSCD) for time series imputation conditioned on the entire signal spectrum. \nExperiments on synthetic and real-world benchmarks demonstrate that our method recovers missing data more accurately than purely time-domain baselines, while simultaneously producing consistent frequency estimates. Crucially, our method can be easily integrated into learning frameworks, enabling broader adoption of spectral guidance in machine learning approaches involving incomplete or irregular data.",
+    "keywords": [
+      "time series",
+      "diffusion models",
+      "frequency spectrum"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GdYg0Ohx0k"
+  },
+  "review_fields": {
+    "summary": "The paper proposes LSCD for irregular time series imputation, which uses Lomb-Scargle periodograms to compute additional frequency domain loss in the diffusion model. LSCD uses Lomb-Scargle instead of FFT to transform irregular time series into the frequency domain and achieves more accurate imputation results.",
+    "claims_and_evidence": "From line 21 to line 23, the abstract claims that the method imputes without requiring imputation \"in the frequency domain\", which seems to conflict with the statement \"prior to frequency estimation\" from line 17 to line 18. Also, imputing in the time domain instead of the frequency domain is more prevalent, so I suspect the claim is wrong.",
+    "methods_and_evaluation_criteria": "In Figure 2, there are two questionable designs. First, in the calculation of consistency loss, the ground-truth spectrum is calculated using masked \"observed condition\" instead of the original \"observed time series\". Second, \"imputation target\" and \"noisy imputation target\" are plotted mostly the same, which is confusing. Since the code is unavailable in the provided anonymous github link, and LSCD is based on CSDI [1], I assume LSCD uses a similar approach in handling the diffusion and denoising process. According to the implementation of CSDI, \"noisy imputation target\" should be distorted with random noise instead of shifted compared to the \"imputation target\". \n[1] Y. Tashiro, J. Song, Y. Song, and S. Ermon, \"CSDI: Conditional Score-based Diffusion Models for Probabilistic Time Series Imputation,\" in Advances in Neural Information Processing Systems, Curran Associates, Inc., 2021, pp. 24804–24816.",
+    "theoretical_claims": "I check the correctness of conditional diffusion in section 3.3.",
+    "experimental_designs_or_analyses": "Experimental designs are not convincing. \nFirst, Lomb-Scargle is an approach relying heavily on the assumption of sinusoidal signal, which makes it unfair to compare the baselines on synthetic sines datasets. Also, unlike fully observed regular datasets, which usually exhibit clear seasonal patterns, real-world irregular time series usually lack such patterns, making them significantly different from synthetic sines datasets. Moreover, I think frequency domain patterns are not directly associated with data distributions shown in Figure 5, where data distributions are just statistical results on observed values. Therefore, visualizing data distributions cannot prove the effectiveness of  Lomb-Scargle on real-world irregular time series datasets. Lastly, since Lomb-Scargle is more computationally expensive than FFT, an analysis of training time and inference time is necessary to evaluate the model.",
+    "relation_to_broader_scientific_literature": "The main contribution is the usage of frequency domain information in the diffusion model. However, compared to previous work CSDI [1], the introduction of the diffusion model in Figures and the experimental comparisons are not convincing enough. \n\n[1] Y. Tashiro, J. Song, Y. Song, and S. Ermon, \"CSDI: Conditional Score-based Diffusion Models for Probabilistic Time Series Imputation,\" in Advances in Neural Information Processing Systems, Curran Associates, Inc., 2021, pp. 24804–24816.",
+    "other_strengths_and_weaknesses": "Other Weaknesses:\n\n• The code is not available in the provided URL at line 34.\n\n• Math symbols in Figure 2 are in low resolution.\n\n• I believe irregular time series are not equal to time series with missing values. The paper mainly discusses the missingness scenarios in Figure 3. However, unalignments and irregular time intervals in real-world irregular time series are caused by different sampling rates of different variables, which is not the same as regularly sampled time series with missing values. Therefore, Using incomplete synthetic data to simulate irregular time series is unreasonable. Although CSDI [1] also uses irregular time series datasets to prove its effectiveness, its task is \"probabilistic time series imputation\", which is a more general task that includes irregular time series imputation.\n\n[1] Y. Tashiro, J. Song, Y. Song, and S. Ermon, \"CSDI: Conditional Score-based Diffusion Models for Probabilistic Time Series Imputation,\" in Advances in Neural Information Processing Systems, Curran Associates, Inc., 2021, pp. 24804–24816.",
+    "questions_for_authors": "What's the research purpose of irregular time series imputation, especially on medical datasets? For example, in Physionet'12, samples are collected during patients' 48 hours of stay in ICU, where the values of different features are sampled at different frequencies as scheduled. The missingness is informative to indicate different sampling rates. Therefore, imputation for these medical irregular times series seems to lack proper motivations."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

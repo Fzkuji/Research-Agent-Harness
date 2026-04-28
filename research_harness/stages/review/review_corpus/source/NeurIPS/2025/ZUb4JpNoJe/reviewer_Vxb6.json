@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "ZUb4JpNoJe",
+  "reviewer": "Vxb6",
+  "paper": {
+    "title": "Cost-Sensitive Freeze-thaw Bayesian Optimization for Efficient Hyperparameter Tuning",
+    "authors": [
+      "Dong Bok Lee",
+      "Aoxuan Silvia Zhang",
+      "Byungjoo Kim",
+      "Junhyeon Park",
+      "Steven Adriaensen",
+      "Juho Lee",
+      "Sung Ju Hwang",
+      "Hae Beom Lee"
+    ],
+    "abstract": "In this paper, we address the problem of cost-sensitive hyperparameter optimization (HPO) built upon freeze-thaw Bayesian optimization (BO). Specifically, we assume a scenario where users want to early-stop the HPO process when the expected performance improvement is not satisfactory with respect to the additional computational cost. Motivated by this scenario, we introduce \\emph{utility} in the freeze-thaw framework, a function describing the trade-off between the cost and performance that can be estimated from the user's preference data. This utility function, combined with our novel acquisition function and stopping criterion, allows us to dynamically continue training the configuration that we expect to maximally improve the utility in the future, and also automatically stop the HPO process around the maximum utility. Further, we improve the sample efficiency of existing freeze-thaw methods with transfer learning to develop a specialized surrogate model for the cost-sensitive HPO problem. We validate our algorithm on established multi-fidelity HPO benchmarks and show that it outperforms all the previous freeze-thaw BO and transfer-BO baselines we consider, while achieving a significantly better trade-off between the cost and performance.",
+    "keywords": [
+      "Cost-Sensitive",
+      "Bayesian Optimization",
+      "Multi-Fidelity HPO",
+      "PFNs",
+      "Transfer Learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZUb4JpNoJe"
+  },
+  "review_fields": {
+    "summary": "The paper describes a freeze-thaw BO algorithm for hyper-parameter optimization that optimizes the utility, which is a measure of the user's internal tradeoff between cost and performance.",
+    "strengths_and_weaknesses": "The central idea behind this paper is solid and the paper is well-written for the most part. The paper is well structured - relevant background material is introduced systematically, the algorithm described clearly and the experimental verification appears reasonable.\n\nIt strikes me that clarity has been somewhat compromised to fit within the page limit in some places. For example I am not at all familiar with PFNs, so ideally I would like a more detailed exposition to be presented: however I understand that this may be incompatible with page limits. Also the figures in the results section are basically unreadable, but again I understand that this is almost certainly due to page limits, so I will overlook this.\n\nMore seriously equation (2) is not clear to me. If I understand correctly, $u_1$ and $u_2$ are pairs $(b,\\tilde{y}_n)$, which appears incompatible with exponentials and inversions as per the equation. This seems central to the paper - could you please clarify?",
+    "questions": "See above re my (mis)understanding of equation (2).",
+    "final_justification": "My main point of uncertainty in the initial reviews was Q2. The authors response covers this, so I am happy to increase my recommendation to accept."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 2,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

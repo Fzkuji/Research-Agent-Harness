@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "NNooZoQpP4",
+  "reviewer": "a9o6",
+  "paper": {
+    "title": "To Stay or Not to Stay in the Pre-train Basin: Insights on Ensembling in Transfer Learning",
+    "authors": [
+      "Ildus Sadrtdinov",
+      "Dmitrii Pozdeev",
+      "Dmitry P. Vetrov",
+      "Ekaterina Lobacheva"
+    ],
+    "abstract": "Transfer learning and ensembling are two popular techniques for improving the performance and robustness of neural networks. \nDue to the high cost of pre-training, ensembles of models fine-tuned from a single pre-trained checkpoint are often used in practice. \nSuch models end up in the same basin of the loss landscape, which we call the pre-train basin, and thus have limited diversity. \nIn this work, we show that ensembles trained from a single pre-trained checkpoint may be improved by better exploring the pre-train basin, however, leaving the basin results in losing the benefits of transfer learning and in degradation of the ensemble quality. \nBased on the analysis of existing exploration methods, we propose a more effective modification of the Snapshot Ensembles (SSE) for transfer learning setup, StarSSE, which results in stronger ensembles and uniform model soups.",
+    "keywords": [
+      "ensembles",
+      "transfer learning",
+      "loss landscape basins",
+      "model soups"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NNooZoQpP4"
+  },
+  "review_fields": {
+    "comment": "> __W1. StarSSE name and connection to Local DE.__\n> \n> Your assessment of the conceptual closeness of StarSSE and Local DE is absolutely correct, and we discuss it in the paper (lines 295-304). We had the same doubts as you about the name but agreed on StarSSE because it was originally motivated as a modification of SSE in our project. Generally, we are open to changing the name to, e.g., Star Ensemble or Star DE, especially if other reviewers also find the name StarSSE a bit misleading. We would also be happy to hear your suggestions =)\n\nEven though the StarSSE algorithm no longer precisely aligns with the definition of a \"snapshot,\" I believe that the main contribution of this paper is rooted in the experimental analysis involving \"snapshot\" ensembles (SSE). Considering this perspective, it would be more beneficial to stick with the name \"SSE\", even if the proposed algorithm departs from the original concept of \"snapshot.\" Thank you for sharing a behind-the-scenes :)"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 983,
+    "words": 165,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6d00f654-672e-4d0f-a48d-24b06d08dcfa",
+    "error": null,
+    "scored_chars": 984
+  }
+}

@@ -21,6 +21,7 @@ from research_harness.stages.review.lookup_venue_criteria import lookup_venue_cr
 from research_harness.stages.review.pdf_to_markdown import pdf_to_markdown
 from research_harness.stages.review.review_paper import review_paper
 from research_harness.stages.review.review_paper_grounded import review_paper_grounded
+from research_harness.stages.external.gptzero_browser import check_ai_score_gptzero
 
 import json
 import os
@@ -81,6 +82,36 @@ def _save(directory: str, filename: str, content: str):
     os.makedirs(directory, exist_ok=True)
     with open(os.path.join(directory, filename), "w") as f:
         f.write(content)
+
+
+def _gptzero_sample(paper_content: str, *, max_chars: int = 4500) -> str:
+    """Pull a representative slice of the paper for GPTZero scoring.
+
+    GPTZero's free UI silently rejects > ~5k chars and times out on long bodies;
+    abstract + intro is also where authors over-polish, so it's the most
+    informative slice anyway. Heuristic: abstract + first ~3500 chars of intro.
+    """
+    text = paper_content.strip()
+    if len(text) <= max_chars:
+        return text
+
+    # Try to lift abstract block.
+    lower = text.lower()
+    abs_start = lower.find("abstract")
+    abs_end = -1
+    if abs_start >= 0:
+        # Stop at "1 introduction" / "1. introduction" / "## introduction".
+        for marker in ("introduction", "## 1", "# 1 ", "\n1 ", "\n1. "):
+            cand = lower.find(marker, abs_start + 8)
+            if cand > 0:
+                abs_end = cand
+                break
+    abstract = text[abs_start:abs_end] if 0 < abs_end - abs_start < 2500 else ""
+
+    intro_start = abs_end if abs_end > 0 else 0
+    intro_budget = max_chars - len(abstract)
+    intro = text[intro_start:intro_start + intro_budget]
+    return (abstract + "\n\n" + intro).strip()
 
 
 # ---------------------------------------------------------------------------
@@ -1041,6 +1072,9 @@ def review_loop(
     external_providers: tuple[str, ...] = (),
     external_review_urls: Optional[dict] = None,
     external_email: str = "",
+    with_gptzero: bool = False,
+    gptzero_humanize_threshold: float = 50.0,
+    gptzero_cdp_url: str = "http://localhost:9222",
     callback: Optional[callable] = None,
 ) -> dict:
     """Multi-reviewer review loop with Area Chair meta-review.
@@ -1103,6 +1137,19 @@ def review_loop(
         external_email:   Email to use when registering with external services.
                           Empty string lets the user supply it via memory or
                           ad-hoc prompting.
+        with_gptzero:     If True, run a GPTZero AI-detection pass on the
+                          paper's abstract+intro slice (~4.5k chars) each
+                          round and attach the result to the review dict
+                          under "ai_detection". Requires Chrome running with
+                          --remote-debugging-port=9222 (or `openprogram
+                          browser attach`). Default False — turn on only when
+                          a CDP-attached Chrome is available.
+        gptzero_humanize_threshold: AI-percent threshold (0-100) above which
+                          the round is flagged as recommend_humanize=True.
+                          Default 50. The flag is informational; review_loop
+                          does NOT auto-rewrite the paper, that is a separate
+                          stage the user opts into.
+        gptzero_cdp_url:  CDP base URL. Default http://localhost:9222.
         callback:         Called after review and fix. Return False to break.
 
     Returns:
@@ -1292,6 +1339,28 @@ def review_loop(
         if external_meta:
             review["external"] = external_meta
 
+        # ── 4.4. GPTZero AI-detection on the paper itself ──
+        if with_gptzero:
+            sample = _gptzero_sample(paper_content)
+            try:
+                ai_det = check_ai_score_gptzero(
+                    sample, cdp_url=gptzero_cdp_url, poll_timeout=60.0,
+                )
+            except Exception as e:
+                ai_det = {"status": "error",
+                          "error": f"{type(e).__name__}: {e}",
+                          "ai_pct": None}
+            ai_pct = ai_det.get("ai_pct")
+            ai_det["recommend_humanize"] = (
+                isinstance(ai_pct, (int, float))
+                and ai_pct >= gptzero_humanize_threshold
+            )
+            ai_det["sample_chars"] = len(sample)
+            ai_det["humanize_threshold"] = gptzero_humanize_threshold
+            review["ai_detection"] = ai_det
+            _save(round_dir, "ai_detection.json",
+                  json.dumps(ai_det, ensure_ascii=False, indent=2))
+
         # ── 4.5. Calibrate score from sub-scores (venue-aware regression) ──
         # AC meta-review's raw `score` may be unreliable when LLM emits a single
         # scalar; if sub_scores are present we compute a calibrated score from
@@ -1441,6 +1510,21 @@ def review_loop(
                 f"→ `round_{rn}/reviewer_{rid}{persona_tag}.md`"
             )
         summary_lines.append(f"- Area Chair: **{r.get('score', '?')}** → `round_{rn}/meta_review.md`")
+        ad = r.get("ai_detection")
+        if ad:
+            if ad.get("status") == "ok" and isinstance(ad.get("ai_pct"), (int, float)):
+                flag = " ⚠ recommend humanize" if ad.get("recommend_humanize") else ""
+                summary_lines.append(
+                    f"- GPTZero (AI %): **{ad.get('ai_pct')}%** "
+                    f"(mixed {ad.get('mixed_pct', 0)}%, human {ad.get('human_pct', 0)}%, "
+                    f"{ad.get('confidence', '?')} confidence){flag} "
+                    f"→ `round_{rn}/ai_detection.json`"
+                )
+            else:
+                summary_lines.append(
+                    f"- GPTZero (AI %): **{ad.get('status', 'error').upper()}** — "
+                    f"{(ad.get('error') or '')[:120]}"
+                )
         for em in r.get("external", []):
             prov = em.get("provider", "?")
             if em.get("status") == "ok":
@@ -1497,6 +1581,7 @@ __all__ = [
     'adaptive_summarize_priors', 'apply_revision_plan',
     'build_prior_work_context', 'build_revision_plan',
     'calibrate_score',
+    'check_ai_score_gptzero',
     'detect_ai_flavor', 'docx_to_markdown',
     'fetch_external_review',
     'filter_relevant_priors', 'fix_paper',

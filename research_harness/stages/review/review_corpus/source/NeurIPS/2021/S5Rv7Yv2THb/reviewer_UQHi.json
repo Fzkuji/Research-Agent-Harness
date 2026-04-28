@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "S5Rv7Yv2THb",
+  "reviewer": "UQHi",
+  "paper": {
+    "title": "Efficient Learning of Discrete-Continuous Computation Graphs",
+    "authors": [
+      "David Friede",
+      "Mathias Niepert"
+    ],
+    "abstract": "Numerous models for supervised and reinforcement learning benefit from combinations of discrete and continuous model components. End-to-end learnable discrete-continuous models are compositional, tend to generalize better, and are more interpretable. A popular approach to building discrete-continuous computation graphs is that of integrating discrete probability distributions into neural networks using stochastic softmax tricks. Prior work has mainly focused on computation graphs with a single discrete component on each of the graph's execution paths. We analyze the behavior of more complex stochastic computations graphs with multiple sequential discrete components. We show that it is challenging to optimize the parameters of these models, mainly due to small  gradients and local minima. We then propose two new strategies to overcome these challenges. First, we show that increasing the scale parameter of the Gumbel noise perturbations during training improves the learning behavior. Second, we propose dropout residual connections specifically tailored to stochastic, discrete-continuous computation graphs. With an extensive set of experiments, we show that we can train complex discrete-continuous models which one cannot train with standard stochastic softmax tricks. We also show that complex discrete-stochastic models generalize better than their continuous counterparts on several benchmark datasets.",
+    "keywords": [
+      "Discrete-Continuous Learning",
+      "Stochastic Computation Graphs",
+      "Gumbel-softmax Trick"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=S5Rv7Yv2THb"
+  },
+  "review_fields": {
+    "summary": "This paper tackles the learning of a computation graph with possibly multiple discrete and continuous nodes. The authors argue the challenge for effective learning is the gradient vanishing in Gumbel-softmax in discrete nodes, and propose two techniques, annealing parameters in Gumbel-Softmax and introducing residual dropout connections, to deal with the challenge. Empirical experiments show the effectiveness of the proposed method.",
+    "main_review": "This work addresses the task of learning in a computation graph with possibly multiple discrete and continuous nodes. Particularly, the authors consider discrete nodes instantiated as Gumbel-softmax, and argue that the vanishing gradient on Gumbel-softmax is the challenge posed to effective learning that should be addressed. This overall motivation is an important one, yet is it not un-explored. For example, the balance between approximation quality and saturation/vanishing gradients has already been noted [1] and compared [2], and improvements have been proposed [2]. These existing works are not present in the current draft, and the authors are encouraged to include them to give a better overview of the topic and the motivation behind it. The authors also argue for interpretability as an advantage for the proposed tasks throughout the draft (e.g. L4, L38, L253, Table 5), without elaboration. It may be better to demonstrate interpretability though either examples and/or visualization in one of the experiments to give readers a better understanding.\n\nTo tackle the challenge, the authors proposed two techniques, namely TM (Temperature Matching and Inverse Scale Annealing) and DR (Residual Dropout Connections), detailed in Section 2.1 and 2.2 respectively. From my understanding, TM is a newly proposed method --- actually the original Gumbel-Softmax paper [1] already adapts annealing in the training. Also, DR, or stochastic residual, has been proposed for vision tasks [3], while it's application to Gumbel-Softmax would be novel. Another question regarding DR would be, since only Gumbel-Softmax poses the issue of vanishing gradients, why not just skip-connecting the $\\theta \\to z$ part? Neitherness, the authors are encouraged to discuss these related works and compare the proposed method with them, as they are closely related to the claimed contributions.\n\nThe experiments are concluded thoroughly and the code is available (great job!) Probably due to the design of the methods, there are some hyperparameters to choose such as annealing rate (L484 \"The temperatures are updated 10 times per epoch\"), and schedule of decaying $\\alpha$ that seem to be hard-coded in the code. The experiment section mentioned that hyperparameters are chosen following previous methods, but it may be more useful to conduct study on how they work to give readers more rationale behind these choices.\n\n\nOverall, The work is clearly written and well organized andI think this is an interesting work Future works may draw inspirations (empirical methods that mitigate the gradient vanishing problem in Gumbel-Softmax) proposed in this manuscript. However, it still needs some improvements as detailed above, as a few discussions with existing works are missing.\n\nReferences:\n\n* [1] Jang et al. Categorical Reparameterization with Gumbel-Softmax. ICLR ;17 https://openreview.net/forum?id=rkE3y85ee\n* [2] Shayer et al. Learning Discrete Weights Using the Local Reparameterization Trick. ICLR '18 https://openreview.net/forum?id=BySRH6CpW \n* [3] Huang et al. Deep Networks with Stochastic Depth. ECCV '16. https://arxiv.org/pdf/1603.09382v2.pdf",
+    "limitations_and_societal_impact": "The authors adequately addressed the limitations and potential negative societal impact."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "BAakY1hNKS",
+  "reviewer": "Z1Mk",
+  "paper": {
+    "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversations",
+    "authors": [
+      "Qingyun Wu",
+      "Gagan Bansal",
+      "Jieyu Zhang",
+      "Yiran Wu",
+      "Beibin Li",
+      "Erkang Zhu",
+      "Li Jiang",
+      "Xiaoyun Zhang",
+      "Shaokun Zhang",
+      "Jiale Liu",
+      "Ahmed Hassan Awadallah",
+      "Ryen W White",
+      "Doug Burger",
+      "Chi Wang"
+    ],
+    "abstract": "We present AutoGen, an open-source framework that allows developers to build LLM applications by composing multiple agents to converse with each other to accomplish tasks. AutoGen agents are customizable, conversable, and can operate in various modes that employ combinations of LLMs, human inputs, and tools. It also enables developers to create flexible agent behaviors and conversation patterns for different applications using both natural language and code. AutoGen serves as a generic infrastructure and is widely used by AI practitioners and researchers to build diverse applications of various complexities and LLM capacities. We demonstrate the framework’s effectiveness with several pilot applications, with domains ranging from mathematics and coding to question-answering, supply-chain optimization, online decision-making, and entertainment.",
+    "keywords": [
+      "Large Language Model",
+      "Multi-Agent Conversation Framework",
+      "Open-Source Library"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=BAakY1hNKS"
+  },
+  "review_fields": {
+    "summary": "The paper proposes AutoGen, an open-source framework for constructing Large Language Models (LLMs), characterized by utilizing conversations among multiple agents to build specific applications, also referred to as conversational programming. In terms of evaluation, the paper covers six different use cases, including mathematical problem-solving and question-answering tasks, demonstrating the effectiveness of AutoGen. Overall, AutoGen is a promising framework for the rapid, flexible, and customizable development of LLM applications.",
+    "reasons_to_accept": "1. It is a fully open-source multi-agent transformation framework, facilitating users in rapid application development. The high transparency of technical details aids in traceability and reproducibility.\n2. The authors provide ample empirical results to showcase the performance of multi-agent conversations, aiding readers in better understanding the advantages and limitations of multi-agent systems.",
+    "reasons_to_reject": "1. The claimed multi-agent system is more accurately described as multi-prompting. More convincing evidence would be provided by observing dialogues under different conditions within the agents themselves.\n2. The major concern lies in the inherent differences from other multi-agent frameworks, such as CAMEL (NeurIPS 2023) and MetaGPT (ICLR 2023). In the related work and discussion, the paper assert no explicit restrictions on the number of agents and whether tools are supported to distinguish from previous works. In my opinion, these are not very strong justifications."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:51Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 2,
+    "mixed_pct": 0,
+    "human_pct": 98,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 986,
+    "words": 138,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a411fbce-a1f1-48b5-a0f7-655b80eeb7f3",
+    "error": null,
+    "scored_chars": 986
+  }
+}

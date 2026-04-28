@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "ZdWTN2HOie",
+  "reviewer": "cihK",
+  "paper": {
+    "title": "Stochastic Amortization: A Unified Approach to Accelerate Feature and Data Attribution",
+    "authors": [
+      "Ian Connick Covert",
+      "Chanwoo Kim",
+      "Su-In Lee",
+      "James Zou",
+      "Tatsunori Hashimoto"
+    ],
+    "abstract": "Many tasks in explainable machine learning, such as data valuation and feature attribution, perform expensive computation for each data point and are intractable for large datasets. These methods require efficient approximations, and although amortizing the process by learning a network to directly predict the desired output is a promising solution, training such models with exact labels is often infeasible. We therefore explore training amortized models with noisy labels, and we find that this is inexpensive and surprisingly effective. Through theoretical analysis of the label noise and experiments with various models and datasets, we show that this approach tolerates high noise levels and significantly accelerates several feature attribution and data valuation methods, often yielding an order of magnitude speedup over existing approaches.",
+    "keywords": [
+      "Amortization",
+      "feature attribution",
+      "data valuation",
+      "stochastic optimization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZdWTN2HOie"
+  },
+  "review_fields": {
+    "summary": "This paper presents a fast prediction explanation approach for machine unlearning models that approximates traditional explanation approaches by using an neural network. The network is trained with noisy labels (so called stochastic amortization) such that it learns to approximate the prediction explanations of various approaches, including Shaply, LIME, and others. Experiments covers multiple explanation approaches from feature explanation to data instance explanation, showing effectiveness of the approximation.",
+    "strengths": "Using network to approximate prediction explanation of various explanation methods seem an interesting idea.\nUsing noisy labels to train the approximation model is also well justified with corresponding proofs. \nExperiments covers the various scenarios from feature to instance based explanation approaches.",
+    "weaknesses": "It is concerning to use neural networks to explaining the predictive behaviour of another machine learning model. In fact, how do we know whether the explanation itself is trustworthy? If the prediction explanation is given to an stakeholders, is it possible to distinguish the potential concern between target machine learning model's trustworthiness and the approximative explainer? This concern needs to be addressed further to let the proposed approach practically useful.\n\nPartial experimental results show the proposed model may not be a good approximation approach; the results can be interpreted as the approximation fails to provide correct explanation to feature importance (Section 5.1). It causes me wonder if there is a practical value for the proposed approach if it is fast but not accurate.",
+    "questions": "How do you prove the proposed approximation is, in general, faithful to the ground-truth explanation results from the actual explanation models? \nWhy would the proposed approach to be useful if the explanation is off from the ground-truth?",
+    "limitations": "I don't see limitations. But, as the proposed approach is about XAI, it should be sound in terms of improving the trustworthiness of prediction instead of introducing another layer of uncertainty."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1552,
+    "words": 232,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/efbf2f5a-f026-48a5-b33f-1afd6c3fd732",
+    "error": null,
+    "scored_chars": 1554
+  }
+}

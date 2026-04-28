@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "Q0rKYiVEZq",
+  "reviewer": "JTBj",
+  "paper": {
+    "title": "Emoji Attack: Enhancing Jailbreak Attacks Against Judge LLM Detection",
+    "authors": [
+      "Zhipeng Wei",
+      "Yuqi Liu",
+      "N. Benjamin Erichson"
+    ],
+    "abstract": "Jailbreaking techniques trick Large Language Models (LLMs) into producing restricted output, posing a potential threat. One line of defense is to use another LLM as a Judge to evaluate the harmfulness of generated text. However, we reveal that these Judge LLMs are vulnerable to token segmentation bias, an issue that arises when delimiters alter the tokenization process, splitting words into smaller sub-tokens. This alters the embeddings of the entire sequence, reducing detection accuracy and allowing harmful content to be misclassified as safe. In this paper, we introduce Emoji Attack, a novel strategy that amplifies existing jailbreak prompts by exploiting token segmentation bias. Our method leverages in-context learning to systematically insert emojis into text before it is evaluated by a Judge LLM, inducing embedding distortions that significantly lower the likelihood of detecting unsafe content. Unlike traditional delimiters, emojis also introduce semantic ambiguity, making them particularly effective in this attack. Through experiments on state-of-the-art Judge LLMs, we demonstrate that Emoji Attack substantially reduces the unsafe prediction rate, bypassing existing safeguards.",
+    "keywords": [
+      "LLM safety; Jailbreaking Attacks; Judge LLMs; Token Segmentation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Q0rKYiVEZq"
+  },
+  "review_fields": {
+    "summary": "This paper presents a jailbreak attack against judge LLM detection.\n\n**After rebuttal:** I read the author's rebuttal and most of my concerns are addressed. I am actively participating in reviewer-AC discussion to champion this paper.",
+    "methods_and_evaluation_criteria": "Yes, but could be improved. See weakness.",
+    "experimental_designs_or_analyses": "Yes, the experimental design are sound and make sense to me. However it can be improved because it misses an important baseline. See weakness part.",
+    "relation_to_broader_scientific_literature": "Recently LLM service provider, e.g., Meta, and IBM propose their guardrail model to detect harmful question. This paper proposes a jailbreak attack to show that the safety risk still exists despite these efforts.",
+    "essential_references_not_discussed": "There is a method concerning the very same scenario need to be discussed:\n\nVirus: Harmful Fine-tuning Attack for Large Language Models Bypassing Guardrail Moderation\n\nI believe this is a concurrent paper with this paper and I know authors have no obligation to dicuss concurrent work. However, I still encourage the authors to discuss this paper because these two method focus on the very same problem (i.e., jailbreaking judge LLM) and use a very similar experiment setting. Discussing them all together can raise more attention and thinking among the community.",
+    "other_strengths_and_weaknesses": "**Stengths:**\n\n1. While there are quite a lot of research in jailbreaking LLM, there is only a few available study trying to jailbreak the judge LLM. I believe this paper is the very early paper along this line of research. I believe this paper is important in this sense, because nowadays the appearance of diversified Guardrail models (i.e., judge LLMs) give the community a false sense of \"security\". This paper can serve to increase awareness of the risk. \n\n2. The storyline is very smooth and easy to understand. I especially like the illustration of Section 3.2, which clearly illustrate the concept of embedding distortions and its relation with token splitting. \n\n3. Extensive experiments on both open-sourced and close-soiurce LLM judge is done.  \n\n**Weakness:**\n\n1. The finding of using token segmentation to attack LLM is not a unique finding of this paper, but should be credited to Claburn (2024). Therefore, the contribution of this paper is to replace the normal spaces with emoji. In this sense, the novelty of this paper is quite limited. \n\n2. Given that the core contribution is to utilize emoji to replace space, It is unclear why using emoji instead of other character? Yes, the space might not be a best option to perturb the embedding, but so does the emoji could be not.  Instead of manually checking each class of character, I think an automatic otpimization-based algorithm would be more appreciable, and will have more contribution advancing the field. In this sense, the technical contribution of this paper is limited.  \n\n3. A minor perturbation to the words should not affect the classification in principle, and therefore as shown in the experiment, the attack sucess rate of emoji attack (as well as Token Segmentation) is not that high. The reason is that a well-trained LLM should still be able to classify the full token and its splitting part correctly. For example the next word embedding of \"Euca\" \"tion\" and \"Education\" should be roughly the same with growing ability of LLM.   Although such a perfect LLM is not available for now, however, I think this issue is not something very fundamental that cannot be solved with growing ability of modern LLM. \n\n4. The authors should compare with GCG. In the considered judge LLM jailbreak scenario, it can still be applied in my understanding.  Specifically, the attackers can optimize a suffix to elicit the classification of the judge LLM to be  \"safe\".  After optimizing the suffix, a similar  In-Context Learning method can be used to instruct the target LLM to output the optimized suffix.  \n\n\nSome of my weakness I mentioned (e.g., 1-3) might not be able to easily solved with rebuttal and experiment, but I would like to point out here as a reason of my rating.  Very likely I will keep my rating even after rebuttal because of the concern of novelty.  I hope the authors can understand. However, I am okay with its acceptance because the fluent writing and also it serves as a timely paper to provide better understanding of risk of guardrail moder."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

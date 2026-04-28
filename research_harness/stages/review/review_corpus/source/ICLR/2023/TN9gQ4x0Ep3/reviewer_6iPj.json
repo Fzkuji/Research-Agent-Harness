@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "TN9gQ4x0Ep3",
+  "reviewer": "6iPj",
+  "paper": {
+    "title": "Don’t fear the unlabelled: safe semi-supervised learning via debiasing",
+    "authors": [
+      "Hugo Schmutz",
+      "Olivier HUMBERT",
+      "Pierre-Alexandre Mattei"
+    ],
+    "abstract": "Semi-supervised learning (SSL) provides an effective means of leveraging unlabelled data to improve a model’s performance. Even though the domain has received a considerable amount of attention in the past years, most methods present the common drawback of lacking theoretical guarantees. Our starting point is to notice that the estimate of the risk that most discriminative SSL methods minimise is biased, even asymptotically. This bias impedes the use of standard statistical learning theory and can hurt empirical performance. We propose a simple way of removing the bias. Our debiasing approach is straightforward to implement and applicable to most deep SSL methods.  We provide simple theoretical guarantees on the trustworthiness of these modified methods, without having to rely on the strong assumptions on the data distribution that SSL theory usually requires. In particular, we provide generalisation error bounds for the proposed methods. We evaluate debiased versions of different existing SSL methods, such as the Pseudo-label method and Fixmatch, and show that debiasing can compete with classic deep SSL techniques in various settings by providing better calibrated models. Additionally, we provide a theoretical explanation of the intuition of the popular SSL methods.  An implementation of a debiased version of Fixmatch is available at\nhttps://github.com/HugoSchmutz/DeFixmatch",
+    "keywords": [
+      "Semi-supervised learning",
+      "deep learning",
+      "empirical risk minimisation",
+      "control variate",
+      "variance reduction",
+      "asymptotic statistics"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=TN9gQ4x0Ep3"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper tries to give theoretical analysis about the safeness of semi-supervised learning, and proposed a debiased method that can be applied to the classical semi-supervised learning objectives. Experimental results show the proposal can improve the performance of FixMatch algorithm.",
+    "strength_and_weaknesses": "Strength:\n1) The proposal is clear and easy to understand.\n2) The proposed debias method is general and can be applied to various semi-supervised learning methods.\n\nWeakness:\n1) The safety of semi-supervised learning means its performance will be better than simple supervised learning. Why the deep SSL, such as FixMatch will be unsafe? From the experimental results of other SSL methods, it seems they do not suffer from this problem.\n2) The theoretical analysis seems did not give the guarantee that the performance of the proposed method will be better than the supervised learning method. So it may be inconsistent with the author's claim.\n3) The experimental results are not convincing. The author should apply the proposal to more SSL methods (such as PL, MixMatch, FixMatch, ReMixMatch, UDA, etc) and more commonly adopted datasets (such as STL-10, SVHN, Image-Net).\n4) The paper writing needs to be improved. For example, Figure 1 needs to be reorganized.",
+    "clarity,_quality,_novelty_and_reproducibility": "The proposal is simple and easy to follow. But the theoretical and experimental parts are not convincing.",
+    "summary_of_the_review": "Based on the above discussion, the paper is not ready to be published, so I tend to reject this paper.\n--------------------------------\n\nThe author's responses address my concerns. Based on the author's efforts and other reviewers' comments,  I change the score to borderline accept.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

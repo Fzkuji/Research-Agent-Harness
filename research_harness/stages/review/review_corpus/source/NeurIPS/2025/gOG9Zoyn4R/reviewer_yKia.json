@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "gOG9Zoyn4R",
+  "reviewer": "yKia",
+  "paper": {
+    "title": "KLASS: KL-Guided Fast Inference in Masked Diffusion Models",
+    "authors": [
+      "Seo Hyun Kim",
+      "Sunwoo Hong",
+      "Hojung Jung",
+      "Youngrok Park",
+      "Se-Young Yun"
+    ],
+    "abstract": "Masked diffusion models have demonstrated competitive results on various tasks including language generation. However, due to its iterative refinement process, the inference is often bottlenecked by slow and static sampling speed. To overcome this problem, we introduce `KL-Adaptive Stability Sampling' (KLASS), a fast yet effective sampling method that exploits token-level KL divergence to identify stable, high-confidence predictions. By unmasking multiple tokens in each iteration without any additional model training, our approach speeds up generation significantly while maintaining sample quality. On reasoning benchmarks, KLASS achieves up to $2.78\\times$ wall-clock speedups while improving performance over standard greedy decoding, attaining state-of-the-art results among diffusion-based samplers. We further validate KLASS across diverse domains, including text, image, and molecular generation, showing its effectiveness as a broadly applicable sampler across different models.",
+    "keywords": [
+      "Generative Models",
+      "Efficient Inference Methods"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=gOG9Zoyn4R"
+  },
+  "review_fields": {
+    "comment": "Thanks for the reply. \n1. The FID metric is important for generation task, reflecting distribution distance. The very marginal lift in FID limits the effectiveness of this method, especifically given that this paper adopts KL divergence for better performance. The lift in IS is also encouraged but not enough for verifying effectiveness.\n2. The model/task -specific hyperparameter search problem still exists. Though the general serach pipeline doesn't complicate this so much, this still significantly limiting the practicality. In contrast, the traditional confidence-guided strategy is more general and easy-to-use."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

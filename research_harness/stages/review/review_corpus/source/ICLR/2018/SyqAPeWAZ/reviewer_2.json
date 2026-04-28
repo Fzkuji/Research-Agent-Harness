@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "SyqAPeWAZ",
+  "reviewer": "2",
+  "paper": {
+    "title": "CNNs as Inverse Problem Solvers and Double Network Superresolution",
+    "authors": [
+      "Cem TARHAN",
+      "Gözde BOZDAĞI AKAR"
+    ],
+    "abstract": "In recent years Convolutional Neural Networks (CNN) have been used extensively for Superresolution (SR). In this paper, we use inverse problem and sparse representation solutions to form a mathematical basis for CNN operations. We show how a single neuron is able to provide the optimum solution for inverse problem, given a low resolution image dictionary as an operator. Introducing a new concept called Representation Dictionary Duality, we show that CNN elements (filters) are trained to be representation vectors and then, during reconstruction, used as dictionaries. In the light of theoretical work, we propose a new algorithm which uses two networks with different structures that are separately trained with low and high coherency image patches and show that it performs faster compared to the state-of-the-art algorithms while not sacrificing from performance.",
+    "keywords": [
+      "superresolution",
+      "convolutional neural network",
+      "sparse representation",
+      "inverse problem"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SyqAPeWAZ"
+  },
+  "review_fields": {
+    "review": "The paper proposes an understanding of the relation between inverse problems, CNNs and sparse representations. Using the ground work for each proposes a new competitive super resolution technique using CNNs. Overall I liked authors' endeavors bringing together different fields of research addressing similar issues. However, I have significant concerns regarding how the paper is written and final section of the proposed algorithm/experiments etc.  \n\nIntroduction/literature review-> I think paper significantly lacks literature review and locating itself where the proposed approach at the end stands in the given recent SR literature (particularly deep learning based methods) --similarities to other techniques, differences from other techniques etc. There have been several different ways of using CNNs for super resolution, how does this paper’s architecture differs from those? Recent GAN based methods are very promising and how does the proposed technique compares to them? \n\nNotation/readability -> I do respect the author’s mentioning different research field’s notations and understand the complication of building a single framework. However I still think that notations could be a lot more simplified—to make them look in the same page. It is very confusing for readers even if you know the mentioned sub-fields and their notations. Figure 1 was very useful to alleviate this problem. More visuals like figure 1 could be used for this problem. For example different network architecture figures (training/testing for CNNs) could be used to explain in a compact way instead of plain text. \n\nSection 3-> I liked the way authors try to use the more generalized Daubechies et. al. However I do not understand lots of pieces still. For example using the low resolution image patches as a basis—more below. In the original solution Daubechies et. al. maps data to the orthonormal Hilbert space, but authors map to the D (formed by LR patches). How does this affect the provability? \n\nRepresentation-dictionary duality concept -> I think this is a very fundamental piece for the paper and don’t understand why it is in the appendix. Using images as D in training and using filters as D in scoring/testing, is very unintuitive to me. Even after reading second time. This requires better discussion and examples. Comparison/discussion to other CNN/deep learning usage for super-resolution methods is required exactly right here.\n\nFinal proposed algorithm -> Splitting the data for high and low coherence makes sense however coherence is a continues variable. Why to keep the quantization at binary? Why not 4,8 or more? Could this be modeled in the network?\n\nResults -> I understand the numerical results and comparisons to the Kim et. Al—and don’t mind at all if they are on-par or slightly better or worse. However in super-resolution paper I do expect a lot more visual comparisons. There has been only Figure 5. Authors could use appendix for this purpose. Also I would love to understand why the proposed solution is significantly faster. This is particularly critical in super-resolution as to apply the algorithms to videos and reconstruction time is vital."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

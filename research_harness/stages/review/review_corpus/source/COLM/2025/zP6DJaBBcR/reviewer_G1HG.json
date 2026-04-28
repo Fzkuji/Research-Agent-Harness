@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "zP6DJaBBcR",
+  "reviewer": "G1HG",
+  "paper": {
+    "title": "REFA: Reference Free Alignment with Fine-Grained Length Control",
+    "authors": [
+      "Taneesh Gupta",
+      "Rahul Madhavan",
+      "Xuchao Zhang",
+      "Chetan Bansal",
+      "Saravan Rajmohan"
+    ],
+    "abstract": "To mitigate reward hacking from response verbosity, modern preference optimization methods are increasingly adopting length normalization (e.g., SimPO, ORPO, LN-DPO). While effective against this bias, we demonstrate that length normalization itself introduces a failure mode: the **URSLA shortcut**. Here models learn to satisfy the alignment objective by prematurely truncating low-quality responses rather than learning from their semantic content. To address this, we introduce **REFA**, a new alignment framework that proposes probabilistic control on a structural token that controls termination. Our core innovation is a new class of regularizers that operate directly on the probability of the End-of-Sequence (EOS) token, a previously unexploited control lever. This token-level intervention provides a principled solution to the URSLA shortcut, ensuring genuine quality improvements. Furthermore, it unlocks a versatile mechanism for managing the alignment-efficiency tradeoff, enabling practitioners to fine-tune models that adhere to specific token budgets. Empirically, REFA achieves a **60.29\\%** win rate and a **52.17\\%** length-controlled win rate on AlpacaEval2 with Llama-3-8B-Instruct, demonstrating the power of our token-level control paradigm.",
+    "keywords": [
+      "Model Alignment",
+      "RLHF",
+      "Preference Optimization"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=zP6DJaBBcR"
+  },
+  "review_fields": {
+    "comment": "Thank you so much for the detailed responses.\n\nLooking at Table 1 in the attached PDF and Table 2 in the submitted draft, I believe it's still the case that when I want to apply it to either new model type, model family, or Instruct/non-Instruct models, then all parameters should be carefully tuned. But this is pretty common across preference (and general) training setup so no need to oversell REFA as \"consistent\" across settings (and I believe that's even misleading for the future readers). Marked as \"[minor]\" just to clarify that it's relatively less important. \n\nMy core concerns for this paper is presentation and clarity in motivation and how does the new results fit with the original story of the paper, and to correctly evaluate on it, I will need a new revision/submission on it so I will keep my score as-is."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 823,
+    "words": 142,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/380feafa-731f-4ebc-a81b-7b55cff908ee",
+    "error": null,
+    "scored_chars": 824
+  }
+}

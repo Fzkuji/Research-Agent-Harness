@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "7ntI4kcoqG",
+  "reviewer": "Byrz",
+  "paper": {
+    "title": "AMAG: Additive, Multiplicative and Adaptive Graph Neural Network For Forecasting Neuron Activity",
+    "authors": [
+      "Jingyuan Li",
+      "Leo Scholl",
+      "Trung Le",
+      "Pavithra Rajeswaran",
+      "Amy L Orsborn",
+      "Eli Shlizerman"
+    ],
+    "abstract": "Latent Variable Models (LVMs) propose to model the dynamics of neural populations by capturing low-dimensional structures that represent features involved in neural activity. Recent LVMs are based on deep learning methodology where a deep neural network is trained to reconstruct the same neural activity given as input and as a result to build the latent representation. Without taking past or future activity into account such a task is non-causal. In contrast, the task of forecasting neural activity based on given input extends the reconstruction task. LVMs that are trained on such a task could potentially capture temporal causality constraints within its latent representation. Forecasting has received less attention than reconstruction due to recording challenges such as limited neural measurements and trials. In this work, we address modeling neural population dynamics via the forecasting task and improve forecasting performance by including a prior, which consists of pairwise neural unit interaction as a multivariate dynamic system. Our proposed model---Additive, Multiplicative, and Adaptive Graph Neural Network (AMAG)---leverages additive and multiplicative message-passing operations analogous to the interactions in neuronal systems and adaptively learns the interaction among neural units to forecast their future activity. We demonstrate the advantage of AMAG compared to non-GNN based methods on synthetic data and multiple modalities of neural recordings (field potentials from penetrating electrodes or surface-level micro-electrocorticography) from four rhesus macaques. Our results show the ability of AMAG to recover ground truth spatial interactions and yield estimation for future dynamics of the neural population.",
+    "keywords": [
+      "Neuroscience and Cognitive Science",
+      "Neural Activity Forecasting",
+      "Graph Neural Network"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7ntI4kcoqG"
+  },
+  "review_fields": {
+    "comment": "Thank you for the replies and additional experiments.\n\nRe: response to Q1 & W1, I’m still not convinced that a second train-test split is sufficient. If there is an overlap in test set data between the first and the second train-test splits, the selected model hyperparameters based on the first test set could still work well for the second test set. And this is not the best practice in ML research."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 401,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b70ced72-c6e2-42f2-b61c-7194769f62f8",
+    "error": null,
+    "scored_chars": 401
+  }
+}

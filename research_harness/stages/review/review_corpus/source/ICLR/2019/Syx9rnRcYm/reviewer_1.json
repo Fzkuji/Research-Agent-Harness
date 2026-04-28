@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "Syx9rnRcYm",
+  "reviewer": "1",
+  "paper": {
+    "title": "A CASE STUDY ON OPTIMAL DEEP LEARNING MODEL FOR UAVS",
+    "authors": [
+      "Chandan Kumar",
+      "Subrahmanyam Vaddi",
+      "Aishwarya Sarkar"
+    ],
+    "abstract": "Over the passage of time Unmanned Autonomous Vehicles (UAVs), especially\nAutonomous flying drones grabbed a lot of attention in Artificial Intelligence.\nSince electronic technology is getting smaller, cheaper and more efficient, huge\nadvancement in the study of UAVs has been observed recently. From monitoring\nfloods, discerning the spread of algae in water bodies to detecting forest trail, their\napplication is far and wide. Our work is mainly focused on autonomous flying\ndrones where we establish a case study towards efficiency, robustness and accuracy\nof UAVs where we showed our results well supported through experiments.\nWe provide details of the software and hardware architecture used in the study. We\nfurther discuss about our implementation algorithms and present experiments that\nprovide a comparison between three different state-of-the-art algorithms namely\nTrailNet, InceptionResnet and MobileNet in terms of accuracy, robustness, power\nconsumption and inference time. In our study, we have shown that MobileNet has\nproduced better results with very less computational requirement and power consumption.\nWe have also reported the challenges we have faced during our work\nas well as a brief discussion on our future work to improve safety features and\nperformance.",
+    "keywords": [
+      "Energy Efficiency",
+      "Autonomous Flying",
+      "Trail Detection"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=Syx9rnRcYm"
+  },
+  "review_fields": {
+    "review": "The main context for this paper is two recent publications: Giusti et al.’s \"A Machine Learning Approach to Visual Perception of Forest Trails for Mobile Robots” (2016) and Smolyanskiy et al.’s \"Toward Low-Flying Autonomous MAV Trail Navigation using Deep Neural Networks for Environmental Awareness” (2017). \n\nGiusti introduced a dataset of trail images (later called the “IDSIA dataset”) acquired by having a hiker wear three head-mounted cameras. The forward facing image is associated with a label “go straight”, whereas the two side images are associated with labels for “go left” and “go right”. Giusti then trained a convolutional neural network to predict these labels and used the network to guide a \"quadrotor micro aerial vehicle”. \n\nSmolyanskiy improves on Giusti’s work by (1) gathering additional trail image data using three cameras mounted to face forward but with lateral offsets and (2) using this additional data to train a 6 output neural network (“Trailnet”) which predicts both view orientation and lateral offset. In addition, they also combined predicted pose relative to the trail with predictions of localized objects and a depth map for potential obstacles. They compared several neural network architectures for predicting the view angle on the IDSIA data as well as the closed-loop performance of each network in avoiding collisions while operating within a UAV on a previously unseen trail. Though Trailnet did not achieve the highest accuracy (84% vs. the max 92% achieved by ResNet-18), it was the only network that achieved 100% collision avoidance on their UAV test course. \n\nThis paper, \"A CASE STUDY ON OPTIMAL DEEP LEARNING MODEL FOR UAVS”, attempts to evaluate two potentially better convolutional neural networks for UAV trail guidance. They fine tune pertained Inception-Resnet and MobileNet models to predict the IDSIA dataset. These then both achieve better accuracy on the IDSIA test set and were analyzed for inference time and power consumption. These two models are then run through a single simulated path, where both seem to perform adequately across 2 turns in the path. \n\nThis paper has a variety of essential flaws.\n\n1. A large portion of the text is devoted to their hardware and UAV control but they were not able to actually run models on a physical UAV \"due to a hardware bug we were facing with the FCU”. \n2. The paper claims to \"introduce to the best of our knowledge, a very first comparative study of three algorithms in order to find a better motion control of a drone for detecting a trail”. This is a confusing claim since a comparison of neural network architectures is a central part of the evaluation in the Smolyanskiy paper. \n3. The higher accuracy on view orientation does not seem relevant since it was also achieved by Smolyanskiy et al. with networks that they then showed performed worse when combined with object detection, obstacle depth inference and combined controller.\n4. The sentence \"An important goal of our method is to demonstrate the effectiveness of low cost systems for the complex task of flying an autonomous drone” appears to have been plagiarized from “Learning to Fly by Crashing” (2017) which contains \"A important goal of our method is to demonstrate the effectiveness of low cost systems for the complex task of flying in an indoor environment”."
+  },
+  "review_metadata": {
+    "rating": 2,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

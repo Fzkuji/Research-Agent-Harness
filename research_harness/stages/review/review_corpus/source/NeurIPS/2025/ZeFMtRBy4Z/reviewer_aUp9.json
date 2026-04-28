@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "ZeFMtRBy4Z",
+  "reviewer": "aUp9",
+  "paper": {
+    "title": "REVE: A Foundation Model for EEG - Adapting to Any Setup with Large-Scale Pretraining on 25,000 Subjects",
+    "authors": [
+      "Yassine El Ouahidi",
+      "Jonathan Lys",
+      "Philipp Thölke",
+      "Nicolas Farrugia",
+      "Bastien Pasdeloup",
+      "Vincent Gripon",
+      "Karim Jerbi",
+      "Giulia Lioi"
+    ],
+    "abstract": "Foundation models have transformed AI by reducing reliance on task-specific data through large-scale pretraining. While successful in language and vision, their adoption in EEG has lagged due to the heterogeneity of public datasets, which are collected under varying protocols, devices, and electrode configurations. Existing EEG foundation models struggle to generalize across these variations, often restricting pretraining to a single setup, resulting in suboptimal performance, in particular under linear probing.\nWe present REVE (Representation for EEG with Versatile Embeddings), a pretrained model explicitly designed to generalize across diverse EEG signals. REVE introduces a novel 4D positional encoding scheme that enables it to process signals of arbitrary length and electrode arrangement. Using a masked autoencoding objective, we pretrain REVE on over 60,000 hours of EEG data from 92 datasets spanning 25,000 subjects, representing the largest EEG pretraining effort to date.\nREVE achieves state-of-the-art results on 10 downstream EEG tasks, including motor imagery classification, seizure detection, sleep staging, cognitive load estimation, and emotion recognition. With little to no fine-tuning, it demonstrates strong generalization, and nuanced spatio-temporal modeling. We release code, pretrained weights, and tutorials to support standardized EEG research and accelerate progress in clinical neuroscience.",
+    "keywords": [
+      "Foundation Model",
+      "EEG",
+      "SSL",
+      "BCI"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZeFMtRBy4Z"
+  },
+  "review_fields": {
+    "summary": "This paper addresses the limited generalization of existing EEG foundation models across diverse datasets, especially under linear probing. The authors propose REVE, a new pretrained model with a novel 4D positional encoding scheme that enables flexible handling of variable-length signals and electrode configurations. Trained on a large-scale EEG corpus, REVE achieves strong performance across multiple downstream tasks with minimal fine-tuning, offering a promising step toward more robust and transferable EEG representations.",
+    "strengths_and_weaknesses": "#### Strengths\n\n- The scale of the pretraining dataset is truly impressive, covering over 60,000 hours of EEG data from 92 different datasets and 25,000 subjects. This kind of breadth has not been seen before in the field of EEG foundation models.\n\n- The proposed 4D positional encoding scheme introduces a fresh idea for handling EEG signals with varying electrode configurations and lengths. It’s a thoughtful design that could help future models better adapt to real-world EEG setups.\n\n- The authors evaluated their model across a wide range of downstream tasks — including motor imagery, seizure detection, sleep staging, emotion recognition, and more — showing both broad coverage and solid performance across the board.\n\n- The results are consistently strong, often outperforming existing methods by a meaningful margin. Especially under linear probing or minimal fine-tuning settings, REVE still delivers competitive accuracy, which speaks well of its generalization capability.\n\n\n#### Weaknesses\n\n- Although the paper claims strong performance under linear probing, this is mostly supported by experiments on PhysioNet-MI. That’s just one dataset, and it’s hard to draw general conclusions from such limited evidence. More cross-dataset comparisons would make this claim much stronger.\n\n- Looking at Table 17, it seems like the secondary loss might actually be the key factor behind REVE’s impressive linear probing performance. However, the authors don’t explain what this loss does or why it helps. It feels underemphasized, especially given how important it appears to be. I’d strongly suggest expanding on this part and running more ablation studies to back it up.\n\n- While the empirical results are convincing, the paper lacks deeper analysis. There’s no visualization or interpretability study showing what the model learns. Also, the advantage of the 4D positional encoding over standard approaches isn’t clearly demonstrated through ablation experiments.\n\n- Some practical details are missing — for example, how many devices were used during training, or how long the pretraining actually took. These are important for reproducibility and understanding the computational cost. There are also some citation formatting issues that should be cleaned up.",
+    "questions": "- The paper adopts a Transformer-based architecture with both encoder and decoder, but it’s not entirely clear why the decoder is needed. From what I could tell, the model doesn’t seem to involve any autoregressive training — so what role does the decoder play in the overall design? A clearer explanation would help readers understand its purpose.\n- The authors borrow several training techniques from large language models, such as RMSNorm and GEGLU activation. While these components are well-established in NLP, it’s less clear whether they bring real benefits to EEG foundation model training compared to more traditional choices like LayerNorm or GELU. Some ablation or discussion on this would be helpful.",
+    "paper_formatting_concerns": "The paper uses only narrative-style citations throughout the manuscript, without distinguishing between narrative and parenthetical styles. A clearer and more consistent use of both types — depending on sentence structure and emphasis — would improve readability and align the writing with standard academic conventions.\n\n---\n### Parenthetical vs. Narrative Citations: A Simple Comparison\n\n| Feature                     | Parenthetical Citation             | Narrative Citation                  |\n|----------------------------|------------------------------------|-------------------------------------|\n| **Format**                 | (Author et al., Year)              | Author et al. (Year)                |\n| **Use Case**               | When citing a fact or idea without emphasizing the author | When highlighting the author or their work |\n| **Example 1**              | This has been observed before (Zhang et al., 2020). | Zhang et al. (2020) observed this effect. |\n| **Example 2**              | EEG modeling has improved in recent years (Wang & Lee, 2021). | Wang and Lee (2021) introduced a new approach to EEG modeling. |\n| **Tone / Emphasis**        | Neutral, background reference      | Direct, highlights the authors      |",
+    "final_justification": "The authors have adequately addressed most of my concerns regarding linear probing results, architectural clarifications, and ablation studies. I maintain my positive score and look forward to the open-sourced code and pretrained weights contributing to and inspiring the EEG research community."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

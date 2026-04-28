@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "S5Rv7Yv2THb",
+  "reviewer": "Uy2p",
+  "paper": {
+    "title": "Efficient Learning of Discrete-Continuous Computation Graphs",
+    "authors": [
+      "David Friede",
+      "Mathias Niepert"
+    ],
+    "abstract": "Numerous models for supervised and reinforcement learning benefit from combinations of discrete and continuous model components. End-to-end learnable discrete-continuous models are compositional, tend to generalize better, and are more interpretable. A popular approach to building discrete-continuous computation graphs is that of integrating discrete probability distributions into neural networks using stochastic softmax tricks. Prior work has mainly focused on computation graphs with a single discrete component on each of the graph's execution paths. We analyze the behavior of more complex stochastic computations graphs with multiple sequential discrete components. We show that it is challenging to optimize the parameters of these models, mainly due to small  gradients and local minima. We then propose two new strategies to overcome these challenges. First, we show that increasing the scale parameter of the Gumbel noise perturbations during training improves the learning behavior. Second, we propose dropout residual connections specifically tailored to stochastic, discrete-continuous computation graphs. With an extensive set of experiments, we show that we can train complex discrete-continuous models which one cannot train with standard stochastic softmax tricks. We also show that complex discrete-stochastic models generalize better than their continuous counterparts on several benchmark datasets.",
+    "keywords": [
+      "Discrete-Continuous Learning",
+      "Stochastic Computation Graphs",
+      "Gumbel-softmax Trick"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=S5Rv7Yv2THb"
+  },
+  "review_fields": {
+    "summary": "Summary.\n\n- This paper introduces two techniques to help with learning neural network architectures that embed two or more layers of categorical probability distributions (parameters of those distributions are learnt!). \n- The first method is Temp-Match: The suggestion is to separately tune the variance of the Gumbel noise and the temperature parameter. \n- The second method are dropout-residual connections. The authors add residual connections to connect the input to the output stochastically for a given discrete-continuous component (Figure 2).",
+    "main_review": "**Strengths**\n- Clarity. The paper is well-written overall and I like the structure.\n- Significance. Studying gradient estimation for discrete-continuous computation graphs is interesting.\n- Originality. I am not an expert on dropout and residual connections, but I have not seen dropout-residual connections as presented in this paper before. \n\n**Weaknesses**\n- Originality. I feel the relationship between the temperature parameter and the Gumbel noise variance is known widely, even though I don’t have a concrete reference on hand right now. \n- Quality. I do not find the analysis of the vanishing gradient problem when using Gumbel-Softmax convincing.\n- Quality, Significance. From the argument and evidence presented, I wouldn’t use Temp-Match.\n- Quality. I believe the experiments need to be revised to make a stronger case for the methods presented (e.g. more complex models with more stochastic layers, see below).\n\n**Decision**\n- Ok, but not good enough. \nAs is, unfortunately, I do not think the paper is ready for acceptance. \nI would like to make some suggestions for improvement below. \n\n**Suggestions**\n\n*As is, I do not find the analysis of the vanishing gradient problem when using Gumbel-Softmax convincing.*\n- The authors say that gradients may vanish whenever the probability saturates. \nBut when the probability saturates, the categorical distribution becomes degenerate, the stochasticity vanishes, the output is deterministic. \nSo my question: Isn’t this a setting in which I may not want to model a latent categorical distribution in the first place, and could use a deterministic function instead? \nMy issue with the toy example presented in Figure 3 is similar. \nThis toy example is presenting an edge case, where the ideal distribution is degenerate, since target is $(1, 0)$. \nWhy not present the same case as the REBAR paper, which seems very similar in set-up but didn’t pick an edge case. To what extent is the problem present there?\n\n*From the argument and evidence presented, I probably wouldn’t use Temp-Match.*\n- I am missing a discussion on the theoretical side, that highlights that for every $(\\tau, \\beta)$ pair, there is a pair $(\\alpha, \\tau’)$ with $\\beta = 1$ that gives rise to the same Gumbel-Softmax distribution as $(\\tau, \\beta)$. Here, $\\alpha$ is a parameter that scales the logits. The reason for this is basically, that $\\tau$ inversely scales both logits and Gumbels. To decouple scaling both logits and Gumbels together, one can introduce either an additional parameter to rescale the Gumbels (this is $\\beta$) or an additional parameter to rescale the logits (I used $\\alpha$ for that above). In practice, since the logits are outputs from a neural network with learnable parameters, the $\\alpha$ is implicit and is learnt. My questions: Why is Gumbel scaling better than logit scaling? Why should $\\alpha$ (or $\\beta$) not be learnt? \n- Further, Figure 3 seems to present some evidence for the benefits of tuning $\\beta$. But $\\tau$ is held fixed. Isn’t the argument that is required compare “tuning $\\tau$” vs “tuning $\\tau$ and $\\beta$” (both with a schedule ideally). There should also be a loss curve, to make the case that “\\tuning $\\tau$ and $\\beta$” vs “tuning $\\tau$” yields significant improvements that justify an extra hyperparameter. \n-Finally, Temp-Match is evaluated in an ablation study. I like that. But the standard deviations are so high, that I do not see any evidence for benefits from TempMatch. Or am I misinterpreting Table 2? \n\n*The focus of this paper is on complex networks with multiple discrete components, but the experimental section is underdelivering.* \n- To make a stronger case for the setting and methods of the paper, I would like to see settings and models that are more ambitious and practical. As a concrete suggestion, I would recommend looking into the model Gumbel-Tree-LSTM from Choi et al. (2017). This model is much better tailored to the ListOps dataset than the GNN model considered by the authors. \nIt also requires much more stochastic decisions, namely #number of tokens - 1, rather than a fixed set, so I feel is more relevant experimentally to the methods presented. Other papers that cite ListOps also include this model or variants that I believe are generally viewed as more suitable for unsupervised parsing on ListOps. I do not understand why the authors considered a GNN architecture instead and modified the ListOps dataset to make the GNN practical. \n\n**Minors.**\n- Gumbel hard setting -> I think generally this is referred to as Gumbel straight-through. See for example, Jang et al. (2016) or Paulus et al. (2021).\n\n**References.**\n- Jang et al. (2016). Categorical reparameterizatoin with Gumbel-Softmax.\n- Choi et al. (2017). Learning to compose task-specific tree structures. \n- Paulus et al. (2021). Rao-Blackwellizing the Straight-Through Gumbel-Softmax estimator. \n\n\nEDIT. \nI read through the response of the authors, but I am keeping my score unchanged. \nUnfortunately, I am of the opinion that more work is required to improve the paper before it is ready for submission along the lines I suggested above.",
+    "time_spent_reviewing": "I don't stop a clock, but probably 4 hours."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

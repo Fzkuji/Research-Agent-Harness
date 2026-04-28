@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "SyVpB2RqFX",
+  "reviewer": "3",
+  "paper": {
+    "title": "INFORMATION MAXIMIZATION AUTO-ENCODING",
+    "authors": [
+      "Dejiao Zhang",
+      "Tianchen Zhao",
+      "Laura Balzano"
+    ],
+    "abstract": "We propose the Information Maximization Autoencoder (IMAE), an information theoretic approach to simultaneously learn continuous and discrete representations in an unsupervised setting. Unlike the Variational Autoencoder framework, IMAE starts from a stochastic encoder that seeks to map each input data to a hybrid discrete and continuous representation with the objective of maximizing the mutual information between the data and their representations. A decoder is included to approximate the posterior distribution of the data given their representations, where a high fidelity approximation can be achieved by leveraging the informative representations.     \nWe show that the proposed objective is theoretically valid and provides a principled framework for understanding the tradeoffs regarding informativeness of each representation factor, disentanglement of representations, and decoding quality.",
+    "keywords": [
+      "Information maximization",
+      "unsupervised learning of hybrid of discrete and continuous representations"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SyVpB2RqFX"
+  },
+  "review_fields": {
+    "review": "* This paper proposed a principled framework for auto-encoding through information maximization. A novel contribution of this paper is to introduce a hybrid continuous-discrete representation. The authors also related this approach with other related work such as \\beta-VAE and info-VAE, putting their work in context. Empirical results show that the learned representation has better trade-off among interpretability and decoding quality.\n\n* It seems a little strange to me to incorporate the VAT regularization to the IMAE framework in Section 4.2, as this is not included in the overall objective in Equation (10) and earlier analysis (Proposition 1 and 2). Will the conclusions in Proposition 1 and 2 change accordingly due to the inclusion of VAT regularization?\n\n* The paper states that IMAE has better trade-off among interpretability and decoding quality. But it is still unclear how a user can choose a good trade-off according to different applications. More discussion along this direction would be helpful.\n\n* I guess the L(y) term in Equation (10) is from Equation (9), but this is not stated explicitly in the paper."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

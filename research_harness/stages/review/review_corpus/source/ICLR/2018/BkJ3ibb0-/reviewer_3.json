@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "BkJ3ibb0-",
+  "reviewer": "3",
+  "paper": {
+    "title": "Defense-GAN: Protecting Classifiers Against Adversarial Attacks Using Generative Models",
+    "authors": [
+      "Pouya Samangouei",
+      "Maya Kabkab",
+      "Rama Chellappa"
+    ],
+    "abstract": "In recent years, deep neural network approaches have been widely adopted for machine learning tasks, including classification. However, they were shown to be vulnerable to adversarial perturbations: carefully crafted small perturbations can cause misclassification of legitimate images. We propose Defense-GAN, a new framework leveraging the expressive capability of generative models to defend deep neural networks against such attacks. Defense-GAN is trained to model the distribution of unperturbed images. At inference time, it finds a close output to a given image which does not contain the adversarial changes. This output is then fed to the classifier. Our proposed method can be used with any classification model and does not modify the classifier structure or training procedure. It can also be used as a defense against any attack as it does not assume knowledge of the process for generating the adversarial examples. We empirically show that Defense-GAN is consistently effective against different attack methods and improves on existing defense strategies.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=BkJ3ibb0-"
+  },
+  "review_fields": {
+    "review": "The authors describe a new defense mechanism against adversarial attacks on classifiers (e.g., FGSM). They propose utilizing Generative Adversarial Networks (GAN), which are usually used for training generative models for an unknown distribution, but have a natural adversarial interpretation. In particular, a GAN consists of a generator NN G which maps a random vector z to an example x, and a discriminator NN D which seeks to discriminate between an examples produced by G and examples drawn from the true distribution. The GAN is trained to minimize the max min loss of D on this discrimination task, thereby producing a G (in the limit) whose outputs are indistinguishable from the true distribution by the best discriminator. \n\nUtilizing a trained GAN, the authors propose the following defense at inference time. Given a sample x (which has been adversarially perturbed), first project x onto the range of G by solving the minimization problem z* = argmin_z ||G(z) - x||_2. This is done by SGD. Then apply any classifier trained on the true distribution on the resulting x* = G(z*). \n\nIn the case of existing black-box attacks, the authors argue (convincingly) that the method is both flexible and empirically effective. In particular, the defense can be applied in conjunction with any classifier (including already hardened classifiers), and does not assume any specific attack model. Nevertheless, it appears to be effective against FGSM attacks, and competitive with adversarial training specifically to defend against FGSM. \n\nThe authors provide less-convincing evidence that the defense is effective against white-box attacks. In particular, the method is shown to be robust against FGSM, RAND+FGSM, and CW white-box attacks. However, it is not clear to me that the method is invulnerable to novel white-box attacks. In particular, it seems that the attacker can design an x which projects onto some desired x* (using some other method entirely), which then fools the classifier downstream.\n\nNevertheless, the method is shown to be an effective tool for hardening any classifier against existing black-box attacks \n(which is arguably of great practical value). It is novel and should generate further research with respect to understanding its vulnerabilities more completely. \n\nMinor Comments:\nThe sentence starting “Unless otherwise specified…” at the top of page 7 is confusing given the actual contents of Tables 1 and 2, which are clarified only by looking at Table 5 in the appendix. This should be fixed."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

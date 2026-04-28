@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "x5ZruOa4ax",
+  "reviewer": "1GwN",
+  "paper": {
+    "title": "Improving *day-ahead* Solar Irradiance Time Series Forecasting by Leveraging Spatio-Temporal Context",
+    "authors": [
+      "Oussama Boussif",
+      "Ghait Boukachab",
+      "Dan Assouline",
+      "Stefano Massaroli",
+      "Tianle Yuan",
+      "Loubna Benabbou",
+      "Yoshua Bengio"
+    ],
+    "abstract": "Solar power harbors immense potential in mitigating climate change by substantially reducing CO$_{2}$ emissions. Nonetheless, the inherent variability of solar irradiance poses a significant challenge for seamlessly integrating solar power into the electrical grid. While the majority of prior research has centered on employing purely time series-based methodologies for solar forecasting, only a limited number of studies have taken into account factors such as cloud cover or the surrounding physical context.\nIn this paper, we put forth a deep learning architecture designed to harness spatio-temporal context using satellite data, to attain highly accurate day-ahead time-series forecasting for any given station, with a particular emphasis on forecasting Global Horizontal Irradiance (GHI). We also suggest a methodology to extract a distribution for each time step prediction, which can serve as a very valuable measure of uncertainty attached to the forecast. When evaluating models, we propose a testing scheme in which we separate particularly difficult examples from easy ones, in order to capture the model performances in crucial situations, which in the case of this study are the days suffering from varying cloudy conditions. Furthermore, we present a new multi-modal dataset gathering satellite imagery over a large zone and time series for solar irradiance and other related physical variables from multiple geographically diverse solar stations. Our approach exhibits robust performance in solar irradiance forecasting, including zero-shot generalization tests at unobserved solar stations, and holds great promise in promoting the effective integration of solar power into the grid.",
+    "keywords": [
+      "Time series forecasting",
+      "multi-modal learning",
+      "solar irradiance",
+      "context-enriched learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=x5ZruOa4ax"
+  },
+  "review_fields": {
+    "comment": "Thank you for providing detailed answers to my questions.\n\nThere are no major disagreements left, and I would be glad to see the paper accepted at the conference as it addresses an interesting problem field with state-of-the-art models and is technically solid.\n\nAs remark on the limitations discussion:\nAs the paper appears sound, a more detailed discussion of existing limitations would be appreciated and highly beneficial to guide future research. A lack of description of limitations in the initial paper was also mentioned by reviewer zf5t and adding \"small note\" in the conclusion (reply to my review) or increasing the \"part a little since the review.\" (response to reviewer zf5t) is not satisfactory. \n\nWhile I appreciate the additional runtime results, they also show that the training time is > x30 longer, and the latency of transformer models is still 2x to 5x longer than classical models. This can be openly discussed as not a limitation of this work but rather of transformers in general. Hence, discussing this limitation openly would encourage future work to develop more efficient and still accurate models. This also touches on fairness questions with regard to access to computational resources.\n\nI trust that the authors integrate a thorough discussion on limitations in the final camera-ready version."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1323,
+    "words": 210,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f35f00b6-9f59-4620-9431-782f46a9f747",
+    "error": null,
+    "scored_chars": 1324
+  }
+}

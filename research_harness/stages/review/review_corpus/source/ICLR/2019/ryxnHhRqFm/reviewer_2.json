@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ryxnHhRqFm",
+  "reviewer": "2",
+  "paper": {
+    "title": "Global-to-local Memory Pointer Networks for Task-Oriented Dialogue",
+    "authors": [
+      "Chien-Sheng Wu",
+      "Richard Socher",
+      "Caiming Xiong"
+    ],
+    "abstract": "End-to-end task-oriented dialogue is challenging since knowledge bases are usually large, dynamic and hard to incorporate into a learning framework. We propose the global-to-local memory pointer (GLMP) networks to address this issue. In our model, a global memory encoder and a local memory decoder are proposed to share external knowledge. The encoder encodes dialogue history, modifies global contextual representation, and generates a global memory pointer. The decoder first generates a sketch response with unfilled slots. Next, it passes the global memory pointer to filter the external knowledge for relevant information, then instantiates the slots via the local memory pointers. We empirically show that our model can improve copy accuracy and mitigate the common out-of-vocabulary problem. As a result, GLMP is able to improve over the previous state-of-the-art models in both simulated bAbI Dialogue dataset and human-human Stanford Multi-domain Dialogue dataset on automatic and human evaluation.",
+    "keywords": [
+      "pointer networks",
+      "memory networks",
+      "task-oriented dialogue systems",
+      "natural language processing"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryxnHhRqFm"
+  },
+  "review_fields": {
+    "review": "The paper presents a new model for reading and writing memory in the context of task-oriented dialogue. The model contains three main components: an encoder, a decoder, and an external KB. The external KB is in the format of an SVO triple store. The encoder encodes the dialogue history and, in doing so, writes its hidden states to memory and generates a \"global memory pointer\" as its last hidden state. The decoder takes as input the global memory pointer, the encoded dialogue state history, and the external KB and then generates a response using a two-step process in which it 1) generates a template response using tags to designate slots that need filling and 2) looks up the correct filler for each slot using the template+global memory pointer as a query. The authors evaluate the model on a simulated dialogue dataset (bAbI) and on a human-human dataset (Stanford Multi-domain Dialogue or SMD) as well as in a human eval. They show substantial improvements over existing models on SMD (the more interesting of the datasets) in terms of entity F1--i.e. the number of correctly-generated entities in the response. They also show improvement on bAbI specifically on cases involving OOVs. On the human evaluation, they show improvements in terms of both \"appropriateness\" and \"human-likeness\". \n\nOverall, I think this is a nice and well-motivated model. I very much appreciate the thoroughness of the evaluation (two different datasets, plus a human evaluation). The level of analysis of the model was also good, although there (inevitably) could have been more. Since it is such a complex model, I would have liked to see more thorough ablations or at least better descriptions of the baselines, in order to better understand which specific pieces of the model yield which types of gains. A few particular questions below:\n\n- You describe the auxiliary loss on the global pointer, and mention an ablation study that show that this improves performance. Maybe I am overlooking something, but I cannot find this ablation in the paper or appendix. It would be nice to see how large the effect is. \n- Following on the above, why no similar auxiliary losses on additional components, e.g. the template generation? Were these tried and deemed unnecessary or vice-versa (i.e. the default was no auxiliary loss and they were only added when needed)? Either way, it would be nice to better communicate the experiments/intuitions that motivated the particular architecture you arrived at.\n- I really appreciate that you run a human eval. But why not have humans evaluate objective \"correctness\" as well? It seems trivial to ask people to say whether or not the answer is correct/communicates the same information as the gold."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

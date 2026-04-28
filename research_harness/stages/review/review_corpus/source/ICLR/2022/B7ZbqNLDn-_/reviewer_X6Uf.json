@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "B7ZbqNLDn-_",
+  "reviewer": "X6Uf",
+  "paper": {
+    "title": "Recycling Model Updates in Federated Learning: Are Gradient Subspaces Low-Rank?",
+    "authors": [
+      "Sheikh Shams Azam",
+      "Seyyedali Hosseinalipour",
+      "Qiang Qiu",
+      "Christopher Brinton"
+    ],
+    "abstract": "In this paper, we question the rationale behind propagating large numbers of parameters through a distributed system during federated learning. We start by examining the rank characteristics of the subspace spanned by gradients (i.e., the gradient-space) in centralized model training, and observe that the gradient-space often consists of a few leading principal components accounting for an overwhelming majority (95-99%) of the explained variance. Motivated by this, we propose the \"Look-back Gradient Multiplier\" (LBGM) algorithm, which utilizes this low-rank property of the gradient-space in federated learning. Operationally, LBGM recycles the gradients between model update rounds to significantly reduce the number of parameters to be propagated through the system. We analytically characterize the convergence behavior of LBGM, revealing the nature of the trade-off between communication savings and model performance. Our subsequent experimental results demonstrate the improvement LBGM obtains on communication overhead compared to federated learning baselines. Additionally, we show that LBGM is a general plug-and-play algorithm that can be used standalone or stacked on top of existing sparsification techniques for distributed model training.",
+    "keywords": [
+      "Distributed Machine Learning",
+      "Federated Learning",
+      "Gradient Subspace",
+      "SGD"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=B7ZbqNLDn-_"
+  },
+  "review_fields": {
+    "comment": "Thank the authors for the detailed response. While my first concern is addressed, I'm still not convinced that this algorithm can work well with client sampling. The newly added experiments uses a very high client sampling ratio, ie 50%. In practice, the client sampling ratio would be much smaller. For example, in the StackOverflow dataset in [1], the client sampling ratio is only 0.01%. If the authors cannot run experiments in such low client sampling ratio, then I think the authors at least are supposed to provide some discussions/experiments showing how the performance of the proposed algorithm changes along with the client sampling ratio. My main concern is that when the client sampling ratio is lower than some threshold, the proposed algorithm might not provide significant communication reduction."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 813,
+    "words": 128,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7da4cbce-f8cb-4bcc-b81d-b29c7bb02a20",
+    "error": null,
+    "scored_chars": 813
+  }
+}

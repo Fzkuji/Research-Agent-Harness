@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "bDWXhzZT40",
+  "reviewer": "bRmp",
+  "paper": {
+    "title": "Learning model uncertainty as variance-minimizing instance weights",
+    "authors": [
+      "Nishant Jain",
+      "Karthikeyan Shanmugam",
+      "Pradeep Shenoy"
+    ],
+    "abstract": "Predictive uncertainty--a model’s self-awareness regarding its accuracy on an input--is key for both building robust models via training interventions and for test-time applications such as selective classification. We propose a novel instance-conditional reweighting approach that captures predictive uncertainty using an auxiliary network, and unifies these train- and test-time applications. The auxiliary network is trained using a meta-objective in a bilevel optimization framework. A key contribution of our proposal is the meta-objective of minimizing dropout variance, an approximation of Bayesian predictive uncertainty, We show in controlled experiments that we effectively capture diverse specific notions of uncertainty through this meta-objective, while previous approaches only capture certain aspects. These results translate to significant gains in real-world settings–selective classification, label noise, domain adaptation, calibration–and across datasets–Imagenet, Cifar100, diabetic retinopathy, Camelyon, WILDs, Imagenet-C,-A,-R, Clothing-1.6M, etc. For Diabetic Retinopathy, we see upto 3.4\\%/3.3\\% accuracy & AUC gains over SOTA in selective classification. We also improve upon large-scale pretrained models such as PLEX.",
+    "keywords": [
+      "loss reweighting",
+      "epistemic uncertainty",
+      "bi-level optimization",
+      "model calibration",
+      "bayesian neural networks"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=bDWXhzZT40"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors propose an instance weighting methodology based on an auxiliary network that quantifies the uncertainty of the predictor subject to learning. More precisely, a bilevel optimization formulation enables one to simultaneously learn the predictor and the auxiliary uncertainty quantifier, whereas a meta-level loss enforces to reduce the predictor’s uncertainty by minimizing a variational approximation of Bayesian Neural Networks by means of multiple inference passes employing Dropout regularizations. As the authors show, the method proves to be an effective means to achieve a more uncertainty-aware, and consequently better generalizing predictors.",
+    "strengths": "- Strong empirical evidence of the reasonability of the method. Also, the experiments are at an impressive scale, supporting the claims of the work.\n- Rich set of recent baselines considered in the experiments, fair comparisons.\n- I really like that this method allows for augmenting previous robust approaches, e.g., PLEX, with the proposed solution. That significantly boosts its applicability.\n- Computational efficiency concerns are thoroughly addressed in the appendix.",
+    "weaknesses": "Major:\n\n- The contribution and distinctions to previous works (which e.g. also use a bilevel optimization formulation for reweighting) should be made more clear in the thread of Section 3. Often, it does not become clear when something is new in the course of the ReVaR proposal, and when previous works are revisited.\n- Many grammatical and orthographic issues, e.g., missing articles (“*the* dataset” → motivational questions in Section 1), misplaced words (“captures captures” → beginning of Section 5), …\n- Section 4 is very hard to read, some design choices also appear arbitrary. For instance, intuitively, what is the role of $X_c$, $X_e$, $W_c$ and $W_e$, and why are the dimensionalities chosen as described in the paper? Elaborating more on the setup would help to better understand the settings and allow for estimating the significance of these results.\n\nMinor:\n\n- Sometimes unclear / inconsistent notation, e.g., “p=w=g(x)” in  Section 1.1, also see my previous comment on $X_c$, $X_e$, $W_c$ and $W_e$.\n- As far as I can see, there is no code served along with the paper, which does not support the reproducibility of this work.\n- Section 4, Scenario 1: „?“ Broken reference\n- Details about the U-score model architecture appear in the appendix only – as this is not as trivial as “normal” predictors, this should be already hinted at in the main paper.",
+    "questions": "1. While Section 4 gives a comprehensive overview of different forms of captured uncertainties in $g_\\theta$, I would be also interested in seeing concrete learning behaviors of $g$ in the real-world experiments. Perhaps the authors could augment the results by showing patterns of $g$ in this regime, e.g., by plotting the distributions of the learned weights, and how these evolve over the training. Right now, it is hard to get an impression about the learning dynamics, raising the following questions: Does the novel meta loss slow down the training by making it more cautious, or does it even accelerate the training? Note that I am not referring here to what has been discussed in E.3, but with the focus on learning curves. For instance, setting the maximum number of epochs / data points to control training costs is often a critical consideration in real-world application at larger scales.\n2. Could the U-SCORE and predictor weights be shared? How would this affect the training?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2834,
+    "words": 460,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/74612599-efc3-4d97-a0e0-6addf39eaecf",
+    "error": null,
+    "scored_chars": 2835
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "RO5OGOzs6M",
+  "reviewer": "znat",
+  "paper": {
+    "title": "PINNsAgent: Automated PDE Surrogation with Large Language Models",
+    "authors": [
+      "Qingpo Wuwu",
+      "Chonghan Gao",
+      "Tianyu Chen",
+      "Yihang Huang",
+      "Yuekai Zhang",
+      "Jianing Wang",
+      "Jianxin Li",
+      "Haoyi Zhou",
+      "Shanghang Zhang"
+    ],
+    "abstract": "Solving partial differential equations (PDEs) using neural methods has been a long-standing scientific and engineering research pursuit. Physics-Informed Neural Networks (PINNs) have emerged as a promising alternative to traditional numerical methods for solving PDEs. However, the gap between domain-specific knowledge and deep learning expertise often limits the practical application of PINNs. Previous works typically involve manually conducting extensive PINNs experiments and summarizing heuristic rules for hyperparameter tuning. In this work, we introduce PINNsAgent, a novel surrogation framework that leverages large language models (LLMs) to bridge the gap between domain-specific knowledge and deep learning. PINNsAgent integrates Physics-Guided Knowledge Replay (PGKR) for efficient knowledge transfer from solved PDEs to similar problems, and Memory Tree Reasoning for exploring the search space of optimal PINNs architectures. We evaluate PINNsAgent on 14 benchmark PDEs, demonstrating its effectiveness in automating the surrogation process and significantly improving the accuracy of PINNs-based solutions.",
+    "keywords": [
+      "pinns",
+      "llm-agent"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=RO5OGOzs6M"
+  },
+  "review_fields": {
+    "summary": "The paper introduces PINNsAgent, an automated framework using LLM to design and optimize PINNs for solving PDEs. It addresses the limitations of manual hyperparameter tuning by incorporating two novel methods: Physics-Guided Knowledge Replay for efficient knowledge transfer from past experiments, and the Memory Tree Reasoning Strategy for systematic hyperparameter optimization. Experiments on various PDEs demonstrate that PINNsAgent outperforms traditional approaches.\n\n## update after rebuttal\nAfter reviewing the other reviewers' comments and the corresponding responses, the reviewer keeps the current rating.",
+    "claims_and_evidence": "The authors' experiments partially provide empirical evidence supporting their claims. However, there are several limitations:\n\n1.\tThe experiments can provide empirical evidence for the claims to some extent, but the results do not conclusively show that the proposed approach successfully learns or transfers domain-specific knowledge. It remains unclear whether the observed improvements come from learning genuine transferable knowledge or merely from exhaustive hyperparameter search.\n\n2.\tThere is insufficient theoretical analysis and empirical evidence to substantiate that the information encoded by PGKR is both effective and transferable across different PDEs.\n\n3.\tAdditionally, the authors have not provided adequate theoretical justification or empirical validation for the effectiveness of representing the hyperparameter tuning problem explicitly as a tree-structured search.",
+    "methods_and_evaluation_criteria": "The proposed method and evaluation criteria make sense to the problem. But it is worth pointing out here that a large portion of the proposed method seems to be a combination of existing methods while acknowledging there are some new aspects added to the existing work.",
+    "theoretical_claims": "There is no theoretical claim in this paper.",
+    "experimental_designs_or_analyses": "Although the authors have compared their proposed methods with two baselines and conducted the ablation studies, the experiments are insufficient. \n\nFirst, the paper lacks detailed analysis or discussion regarding the computational cost associated with implementing and running the proposed framework, especially given the iterative nature of the Memory Tree method. It could be extremely time consuming when the search space for hyperparameters is large.\n\nSecond, there is no experiments to verify that the PINNs actually can learns or transfers domain-specific knowledge from PINNsAgent.\n\nThird, there is insufficient theoretical analysis and empirical evidence to substantiate that the information encoded by PGKR is both effective and transferable across different PDEs.\n\nFourth, the authors have not provided adequate theoretical justification or empirical validation for the effectiveness of representing the hyperparameter tuning problem explicitly as a tree-structured search.",
+    "relation_to_broader_scientific_literature": "As it primarily addresses hyperparameter tuning specifically for PINNs, there seem to be some contributions to the scientific community interested in using PINNs. However, it is less clear if the proposed method has been thoroughly studied (e.g., computational costs, accessibility -- the current one uses GPT 4, variants of PINNs architectures)  could be generally applicable to other relevant methods (such as neural operators).",
+    "essential_references_not_discussed": "No. Although there are some PINNs-related papers that could be discussed here in this paper, the main focus of the paper is not the PINN itself, but hyper-parameter tuning. Regarding the hyper-parameter tuning, not extensive, but essential papers seem to be included.",
+    "other_strengths_and_weaknesses": "S1: The authors propose their own framework to reduce manual effort and reliance on expert knowledge for solving PDE.\n\nS2: The authors conduct some experiments with the proposed methods.\n\nW1: This paper's technical contributions do not seem to reach the bar. \n\nW2: The scope of this paper is rather limited as it is only designed for hyperparameter tuning for PINNs (only the vanilla PINNs architecture, which is known to suffer from many technical issues e.g., spectral bias in PINNs failure mode by Krishnapriyan et al, NeurIPS 2021).\n\nW3: This paper lacks theoretical evidence, and the experiments are insufficient to verify the effectiveness of their proposed method. \nW4: Different components lack motivations. For instance, the authors should explain why they formulate the searching for hyperparameters as a tree structure, and why MCTS process is a potential optimal choice.",
+    "other_comments_or_suggestions": "Some minor issues: \n- The author should provide the provide the definition of L_BC in the Preliminary. \n\t\n- In line 310 “Figure ??” should be “Figure 2”.",
+    "questions_for_authors": "The major questions are relevant to the points raised in \"Experimental Designs Or Analyses\". Including those, other points raised in the above sections (weaknesses, etc) would be the questions."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

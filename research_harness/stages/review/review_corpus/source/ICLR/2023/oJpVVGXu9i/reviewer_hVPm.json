@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "oJpVVGXu9i",
+  "reviewer": "hVPm",
+  "paper": {
+    "title": "Share Your Representation Only: Guaranteed Improvement of the Privacy-Utility Tradeoff in Federated Learning",
+    "authors": [
+      "Zebang Shen",
+      "Jiayuan Ye",
+      "Anmin Kang",
+      "Hamed Hassani",
+      "Reza Shokri"
+    ],
+    "abstract": "Repeated parameter sharing in federated learning causes significant information leakage about private data, thus defeating its main purpose: data privacy.  Mitigating the risk of this information leakage, using state of the art differentially private algorithms, also does not come for free.  Randomized mechanisms can prevent convergence of models on learning even the useful representation functions, especially if there is more disagreement between local models on the classification functions (due to data heterogeneity). In this paper, we consider a representation federated learning objective that encourages various parties to collaboratively refine the consensus part of the model, with differential privacy guarantees, while separately allowing sufficient freedom for local personalization (without releasing it).  We prove that in the linear representation setting, while the objective is non-convex, our proposed new algorithm \\DPFEDREP\\ converges to a ball centered around the \\emph{global optimal} solution at a linear rate, and the radius of the ball is proportional to the reciprocal of the privacy budget.  With this novel utility analysis, we improve the SOTA utility-privacy trade-off for this problem by a factor of $\\sqrt{d}$, where $d$ is the input dimension.  We empirically evaluate our method with the image classification task on CIFAR10, CIFAR100, and EMNIST, and observe a significant performance improvement over the prior work under the same small privacy budget. The code can be found in this link, https://github.com/shenzebang/CENTAUR-Privacy-Federated-Representation-Learning.",
+    "keywords": [
+      "Differential Privacy",
+      "Representation Learning",
+      "Federated Learning"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=oJpVVGXu9i"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper presents a new algorithm for DP federated learning (with trusted central server) under model personalization assumptions. The algorithm (CENTAUR) works by having the clients only send a subset of their parameters to the central server to be trained privately. The final (classification) layer is trained on each client non-privately. The authors provide rigorous analysis for the specific problem of linear representation learning (LRL) and further support the efficacy of their algorithm empirically with experiments.",
+    "strength_and_weaknesses": "Strengths:\n\n- The paper provides a substantial rate improvement over existing work for the problem of LRL\n- The paper provides sound empirical reasoning for their method (i.e. that data representations are less prone to distribution shift)\n- The paper supports its results empirically\n\nWeakness:\n- The $O(d/n)$ rate is stated is for the matrix 2-norm but Jain et al. 2021 provide convergence guarantees for the Frobenious norm, making the comparison to existing work less clear.\n- The proposed algorithm is not incredibly novel compared to prior work. \n- The presentation of the analysis for the theoretical results is a bit verbose. Theorem 5.1 and 5.2 are not easily interpreted on their own and it seems more useful instead to provide a more direct statement of Corollary 5.1.\n- Given the rate improvement, an investigation into what DP lower bounds suggest is necessary would be nice.",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper makes precise statements and provides adequately detailed proofs. The experiments are likewise well documented.",
+    "summary_of_the_review": "The paper makes progress for the problem model personalization under user level differential privacy and federated learning constraints.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

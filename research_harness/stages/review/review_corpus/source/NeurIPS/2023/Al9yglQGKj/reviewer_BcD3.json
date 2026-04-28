@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "Al9yglQGKj",
+  "reviewer": "BcD3",
+  "paper": {
+    "title": "Phase diagram of early training dynamics in deep neural networks: effect of the learning rate, depth, and width",
+    "authors": [
+      "Dayal Singh Kalra",
+      "Maissam Barkeshli"
+    ],
+    "abstract": "We systematically analyze optimization dynamics in deep neural networks (DNNs) trained with stochastic gradient descent (SGD) and study the effect of learning rate $\\eta$, depth $d$, and width $w$ of the neural network. By analyzing the maximum eigenvalue $\\lambda^H_t$ of the Hessian of the loss, which is a measure of sharpness of the loss landscape, we find that the dynamics can show four distinct regimes: (i) an early time transient regime, (ii) an intermediate saturation regime, (iii) a progressive sharpening regime, and (iv) a late time \"edge of stability\" regime. The early and intermediate regimes (i) and (ii) exhibit a rich phase diagram depending on $\\eta \\equiv c / \\lambda_0^H $, $d$, and $w$. We identify several critical values of $c$, which separate qualitatively distinct phenomena in the early time dynamics of training loss and sharpness. Notably, we discover the opening up of a \"sharpness reduction\" phase, where sharpness decreases at early times, as $d$ and $ 1/w$ are increased.",
+    "keywords": [
+      "Optimization dynamics",
+      "Phase diagrams",
+      "learning rate transition",
+      "Catapult effect"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Al9yglQGKj"
+  },
+  "review_fields": {
+    "summary": "The paper identifies new phenomena involving the dynamics of the sharpness (largest eigenvalue of the Hessian) in the early stages of neural net training, for ReLU nets of various architectures that are initialized using He initialization.   Previously, it was known that for very wide networks, there are two 'phases' in hyperparameter space: on the one hand, if the step size exceeds 2/(initial sharpness), then a \"catapult\" occurs (https://arxiv.org/abs/2003.02218) and the sharpness drops; on the other hand, if the step size is below this threshold, then the sharpness remains at its initial value.  This paper fills in the picture for _narrow_ nets.   For these nets, the paper shows that the sharpness decreases at the beginning of training even when the step size is less than 2/(initial sharpness).   As a consequence, the train loss does not spike even when the step size is bigger than 2/(initial sharpness), since the sharpness drops first.   Only for larger learning rates does the train loss initially spike.  Then, for still larger learning rates, the paper shows the _sharpness_ also spikes (which the paper calls a \"sharpness catapult\"), which has not been observed previously.  For several architectures, the paper draws phase diagrams depicting which learning rates cause which behavior.  The paper then investigates connections to the loss connectivity literature, finding that only very large learning rates result in a barrier in the loss landscape (and that not every catapult results in a barrier).  The paper then investigates the role of initial network output, finding that initial sharpness reduction goes away if the network is made to output zero at initialization.  The paper finally reproduces all of these phenomena analytically in a simplified model (the u-v model from the catapult paper).",
+    "strengths": "- The paper identifies and carefully studies a novel phenomenon involving the dynamics of the sharpness at the early stage of training.\n- The experiments are very thorough (though limited to ReLU nets initialized with He initialization)\n- There is an analytical explanation in a simplified model\n- The findings shed some light on mode connectivity",
+    "weaknesses": "- The paper doesn't explain the early-stage sharpness reduction for general neural nets (i.e. beyond the simple u-v model)",
+    "questions": "- Have you looked at loss connectivity between the final parameters (at the end of training) and the initialization?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 589,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/62e82cff-766e-48a2-a45c-360bbf562d2d",
+    "error": null,
+    "scored_chars": 589
+  }
+}

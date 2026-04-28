@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "jIh4W7r0rn",
+  "reviewer": "oZEE",
+  "paper": {
+    "title": "Autoregressive Image Diffusion: Generation of Image Sequence and Application in MRI",
+    "authors": [
+      "Guanxiong Luo",
+      "Shoujin Huang",
+      "Martin Uecker"
+    ],
+    "abstract": "Magnetic resonance imaging (MRI) is a widely used non-invasive imaging modality. However, a persistent challenge  lies in balancing image quality with imaging speed. This trade-off is primarily constrained by k-space measurements, which traverse specific trajectories in the spatial Fourier domain (k-space). These measurements are often undersampled to shorten acquisition times, resulting in image artifacts and compromised quality. Generative models learn image distributions and can be used to reconstruct high-quality images from undersampled k-space data. In this work, we present the autoregressive image diffusion (AID) model for image sequences and use it to sample the posterior for accelerated MRI reconstruction. The algorithm incorporates both undersampled k-space and pre-existing information. Models trained with fastMRI dataset are evaluated comprehensively. The results show that the AID model can robustly generate sequentially coherent image sequences. In MRI applications, the AID can outperform the standard diffusion model and reduce hallucinations, due to the learned inter-image dependencies. The project code is available at https://github.com/mrirecon/aid.",
+    "keywords": [
+      "Autoregressive models",
+      "Diffusion models",
+      "Inverse problems",
+      "Medical imaging",
+      "MRI"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=jIh4W7r0rn"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their detailed rebuttal effort. Based on the positive comparison to CSGM and some results on new datasets shown in the PDF attached to the rebuttal, I am willing to bump my rating up from 4 to 5. I find the work the authors put into their rebuttal quite respectable. \n\nI still think the total contribution is relatively low for NeurIPS: the paper is an application of a sequence-level autoregressive approach and a diffusion model, in my eyes a combination of existing approaches applied to the MRI domain. I think it is a perfectly acceptable paper for a more domain-specific conference. \n\nAs I've said before, I would've also liked to see how direct prediction from sequence-level (not voxel-level) autoregression with a simple neural network would have fared compared to the diffusion approach, but that is perhaps for another work, and would not significantly affect the contribution. Thank you for your work."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 935,
+    "words": 155,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/daa0d6de-ca0b-4395-83ee-636b3a9fffa4",
+    "error": null,
+    "scored_chars": 937
+  }
+}

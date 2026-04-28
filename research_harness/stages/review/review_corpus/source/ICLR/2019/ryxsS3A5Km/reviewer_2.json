@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ryxsS3A5Km",
+  "reviewer": "2",
+  "paper": {
+    "title": "Continual Learning via Explicit Structure Learning",
+    "authors": [
+      "Xilai Li",
+      "Yingbo Zhou",
+      "Tianfu Wu",
+      "Richard Socher",
+      "Caiming Xiong"
+    ],
+    "abstract": "Despite recent advances in deep learning, neural networks suffer catastrophic forgetting when tasks are learned sequentially. We propose a conceptually simple and general framework for continual learning, where structure optimization is considered explicitly during learning. We implement this idea by separating the structure and parameter learning. During structure learning, the model optimizes for the best structure for the current task. The model learns when to reuse or modify structure from previous tasks, or create new ones when necessary. The model parameters are then estimated with the optimal structure. Empirically, we found that our approach leads to sensible structures when learning multiple tasks continuously. Additionally, catastrophic forgetting is also largely alleviated from explicit learning of structures. Our method also outperforms all other baselines on the permuted MNIST and split CIFAR datasets in continual learning setting.",
+    "keywords": [
+      "continuous learning",
+      "catastrophic forgetting",
+      "architecture learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryxsS3A5Km"
+  },
+  "review_fields": {
+    "review": "The paper considers the problem of sequential learning where data access for the previous tasks is completely prohibited. Authors propose a conceptually simple framework to learn structures (it is the selection of reusing, adapting previously learned layers or training new layers) as well as corresponding parameters in the sequential learning.\n\nThe paper is potentially interesting and providing possibly important framework for life-long learning. It is well written in most of cases and easy to follow (however I got the impression that the paper was rushed in the last minute; there are some trivial typos and very low resolution images etc.)\n\nHowever, I have a huge concern about the empirical evaluations.  This area is really huge and has attracted lots of interest from many researchers, meaning that we lots of methods to compare. Nevertheless, authors only focus on providing insights on effects of different components of the propose model. This is also critical but comparing against state-of-the-arts is also very important. Especially, comparing against Lee et al 2017 seems essential. I can see the difference against that paper from the authors' argument in the related work, but that is the difference not comparison. It would be great to compare the performances as well as the number of increased memory sizes as the number of task increases.\n\nMoreover, the details should be provided; for instance provide the explicit form of R(s). \n\n---------------------------------------------\n\nThanks for the update. But are they fair comparisons (evaluation only in terms of accuracy)? Different methods expand the network different amount. Hence, they should be compared on this metric too."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

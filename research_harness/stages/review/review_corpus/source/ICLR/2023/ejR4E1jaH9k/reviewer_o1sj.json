@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "ejR4E1jaH9k",
+  "reviewer": "o1sj",
+  "paper": {
+    "title": "Solving stochastic weak Minty variational inequalities without increasing batch size",
+    "authors": [
+      "Thomas Pethick",
+      "Olivier Fercoq",
+      "Puya Latafat",
+      "Panagiotis Patrinos",
+      "Volkan Cevher"
+    ],
+    "abstract": "This paper introduces a family of stochastic extragradient-type algorithms for a class of nonconvex-nonconcave problems characterized by the weak Minty variational inequality (MVI). Unlike existing results on extragradient methods in the monotone setting, employing diminishing stepsizes is no longer possible in the weak MVI setting. This has led to approaches such as increasing batch sizes per iteration which can however be prohibitively expensive. In contrast, our proposed methods involves two stepsizes and only requires one additional oracle evaluation per iteration. We show that it is possible to keep one fixed stepsize while it is only the second stepsize that is taken to be diminishing, making it interesting even in the monotone setting. Almost sure convergence is established and we provide a unified analysis for this family of schemes which contains a nonlinear generalization of the celebrated primal dual hybrid gradient algorithm.",
+    "keywords": [
+      "Variational inequalities",
+      "stochastic first-order methods",
+      "nonconvex-nonconcave",
+      "minimax"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=ejR4E1jaH9k"
+  },
+  "review_fields": {
+    "comment": "I am satisfied with most of the response and I have already updated my score. \n\nA few minor suggestions and questions:\n\n1. I still suggest to modify the paragraphs in page 4, where it kinda suggests diminishing stepsize in SEG is not possible in this setting. However, based on my understanding, there is no theoretical evidence or lower bound.\n\n2. With weak MVI condition, is it possible to have average iterate or last iterate convergence instead of random iterate convergence?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

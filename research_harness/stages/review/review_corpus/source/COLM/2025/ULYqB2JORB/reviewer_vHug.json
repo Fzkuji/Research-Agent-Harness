@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "ULYqB2JORB",
+  "reviewer": "vHug",
+  "paper": {
+    "title": "Can a Crow Hatch a Falcon? Lineage Matters in Predicting Large Language Model Performance",
+    "authors": [
+      "Takuya Tamura",
+      "Taro Yano",
+      "Masafumi Enomoto",
+      "Masafumi Oyamada"
+    ],
+    "abstract": "Accurately forecasting the performance of Large Language Models (LLMs) before extensive fine-tuning or merging can substantially reduce both computational expense and development time. Although prior approaches like scaling laws account for global factors such as parameter size or training tokens, they often overlook explicit lineage relationships—i.e., which models are derived or merged from which parents. In this work, we propose a novel Lineage-Regularized Matrix Factorization (LRMF) framework that encodes ancestral ties among LLMs via a graph Laplacian regularizer. By leveraging multi-hop parent--child connections, LRMF consistently outperforms conventional matrix factorization and collaborative filtering methods in both instance-level and benchmark-level performance prediction. Our large-scale study includes 2,934 publicly available Hugging Face models and 21,000+ instances across 6 major benchmarks, \nshowing that the introduction of lineage constraints yields up to 0.15–0.30 higher correlation coefficients with actual performance compared to baseline methods.\nMoreover, LRMF effectively addresses the cold-start problem, providing accurate estimates for newly derived or merged models even with minimal data. This lineage-guided strategy thus offers a resource-efficient way to inform hyperparameter tuning, data selection, and model combination in modern LLM development.",
+    "keywords": [
+      "LLM",
+      "Performance Estimation",
+      "Matrix Factorization",
+      "Neural Collaborative Filtering"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ULYqB2JORB"
+  },
+  "review_fields": {
+    "comment": "Thanks for the clarification! \n\nIn my initial review there was some misunderstanding regarding the problems setting. It seems that this paper pursues a cold-start setting (predict a model's performance given its \"lineage\" information, before actually training the model) that is very different from prior work (predict a model's performance based on its performance on other tasks, or scaling-law-style pre-training meta-data) and thus methods in prior work are not very suitable as baselines. Hence I think the baseline selection in the paper is acceptable. \n\nAlso I appreciate (1) clarification on the metric, (2) clarification and improved ablation study on task/lineage regularization (3) additional experiments on multiple train-test splits.\n\nHappy to adjust my ratings. I hope our discussion get incorporated to your revised paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 835,
+    "words": 122,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4073d984-f98c-41e6-952b-e6cfca4752ac",
+    "error": null,
+    "scored_chars": 837
+  }
+}

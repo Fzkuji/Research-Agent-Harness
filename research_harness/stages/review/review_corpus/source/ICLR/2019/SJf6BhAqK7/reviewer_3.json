@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "SJf6BhAqK7",
+  "reviewer": "3",
+  "paper": {
+    "title": "Variadic Learning by Bayesian Nonparametric Deep Embedding",
+    "authors": [
+      "Kelsey R Allen",
+      "Hanul Shin",
+      "Evan Shelhamer",
+      "Josh B. Tenenbaum"
+    ],
+    "abstract": "Learning at small or large scales of data is addressed by two strong but divided frontiers: few-shot learning and standard supervised learning. Few-shot learning focuses on sample efficiency at small scale, while supervised learning focuses on accuracy at large scale. Ideally they could be reconciled for effective learning at any number of data points (shot) and number of classes (way). To span the full spectrum of shot and way, we frame the variadic learning regime of learning from any number of inputs. We approach variadic learning by meta-learning a novel multi-modal clustering model that connects bayesian nonparametrics and deep metric learning. Our bayesian nonparametric deep embedding (BANDE) method is optimized end-to-end with a single objective, and adaptively adjusts capacity to learn from variable amounts of supervision. We show that multi-modality is critical for learning complex classes such as Omniglot alphabets and carrying out unsupervised clustering. We explore variadic learning by measuring generalization across shot and way between meta-train and meta-test, show the first results for scaling from few-way, few-shot tasks to 1692-way Omniglot classification and 5k-shot CIFAR-10 classification, and find that nonparametric methods generalize better than parametric methods. On the standard few-shot learning benchmarks of Omniglot and mini-ImageNet, BANDE equals or improves on the state-of-the-art for semi-supervised classification.",
+    "keywords": [
+      "meta-learning",
+      "metric learning",
+      "bayesian nonparametrics",
+      "few-shot learning",
+      "deep learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=SJf6BhAqK7"
+  },
+  "review_fields": {
+    "review": "The paper proposes a meta-learning method that utilizes unlabeled examples along with labeled examples. The technique proposed is very similar to the one by (Ren et al. 2018), only differing in the choice of a different clustering algorithm (Kulis and Jordan, 2012) instead of soft k-means as used by Ren et al. \n\nI feel the contrast to Ren et al, is not provided to the degree it should be. The Appendix paragraph A4 is not sufficient in terms of explaining why this method is conceptually different or significantly better than the related approach. It is hard for me to certify the merits of their work, including explaining the experimental results.\n\nI also do not understand the significance of \"multi-model clustering\" in this context. Also, by their definition of \"variadic\", how is this more variadic than Ren et al. or Snell et al.?"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

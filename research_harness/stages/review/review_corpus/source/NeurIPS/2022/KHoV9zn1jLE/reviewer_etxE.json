@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "KHoV9zn1jLE",
+  "reviewer": "etxE",
+  "paper": {
+    "title": "Implicitly regularized interaction between SGD and the loss landscape geometry",
+    "authors": [
+      "Sungyoon Lee",
+      "Cheongjae Jang"
+    ],
+    "abstract": "We study unstable dynamics of stochastic gradient descent (SGD) and its impact on generalization in neural networks. We find that SGD induces an implicit regularization on the interaction between the gradient distribution and the loss landscape geometry. Moreover, based on the analysis of a concentration measure of the batch gradient, we propose a more accurate scaling rule, Linear and Saturation Scaling Rule (LSSR), between batch size and learning rate.",
+    "keywords": [
+      "SGD",
+      "learning rate",
+      "batch size",
+      "optimization",
+      "generalization",
+      "implicit bias",
+      "implicit regularization",
+      "sharpness",
+      "scaling rule"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=KHoV9zn1jLE"
+  },
+  "review_fields": {
+    "summary": "The authors explore the notion of edge of stability for SGD dynamics, they introduce some quantities and explain / illustrate why they make sense for the understanding of the dynamics. They then propose a novel \"linear and saturation scaline rule\" and provide experimental support.",
+    "strengths_and_weaknesses": "Overall I believe there are some interesting ideas and observations. For example Figure 5 (right) (which illustrates the linear and saturation scaling rule) is rather convincing. Some quantities which are introduction seem to make sense. However the paper and the claims are not at all convincing enough. The abstract and introduction are very superficial and it is not even clear what the authors want to prove / show. The related work is neglected. \n\nI am also bothered by some very vague and imprecise claims and sentences. The title to start with: \"Implicitly regularized interaction between SGD and the loss landscape geometry\". I don't understand what this means: what is a \"regularised interaction\" ? \nThen in the text: \"we find that SGD induces an implicit regularization on the interaction between the gradient distribution and the loss landscape geometry.\", \"we find that SGD implicitly regularizes the interaction-aware sharpness\". I do not manage to understand these sentences, they are very vague and the meaning is not clear at all. \n\nThe fact that the paper is not well written with very unprecise statements and claims makes me heavily doubt on the sanity and significance of the presented results. In the following questions I give a few examples to support my opinion.",
+    "questions": "- eq (3): over what are you taking the expectation ? if it is the full expectation then you should also have $\\mathbb{E}[L_t]$, I guess you are taking the conditional expectation but this is not clear. \n- line 96: a bit weird to name a set a \"regime\". It would also be clearer to keep the $\\theta$ index in $H$: $H_\\theta$, to make clear that the hessian depends on $\\theta$.\n- unclear experiments in fig 1: what is the precise setting ? what dataset ?\n- l110: \" This result implies that the training loss L(θ) is approximately locally quadratic, i.e., ε ≈ 0, in the early phase.\" Why and what does this mean ? isn't any twice differentiable function approximately locally quadratic ?\n- \"We hypothesise that due to this non-quadraticity of the training loss, the iterate is discouraged from staying within the unstable regime.\" I don't see why this is due to non-quadraticity. If you want to optimise $f(x, y) = |y| x^2$ for example, which is always \"locally quadratic\": then for a large step-size, the iterates are \"discouraged from staying within the unstable regime\" too.\n- Figure 3: what is $\\Delta L$ ?\n- Figure 4: very hard to read labels, especially in fig (d)\n- equation 12: \"if $b$ is small\", \"if $b$ is large\": how small ? how large ?"
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 3,
+    "soundness": 1,
+    "presentation": 1,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

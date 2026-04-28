@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "ekeyCgeRfC",
+  "reviewer": "tbmK",
+  "paper": {
+    "title": "Understanding In-Context Learning in Transformers and LLMs by Learning to Learn Discrete Functions",
+    "authors": [
+      "Satwik Bhattamishra",
+      "Arkil Patel",
+      "Phil Blunsom",
+      "Varun Kanade"
+    ],
+    "abstract": "In order to understand the in-context learning phenomenon, recent works have adopted a stylized experimental framework and demonstrated that Transformers can match the performance of gradient-based learning algorithms for various classes of real-valued functions. However, the limitations of Transformers in implementing learning algorithms, and their ability to learn other forms of algorithms are not well understood. Additionally, the degree to which these capabilities are confined to attention-based models is unclear. Furthermore, it remains to be seen whether the insights derived from these stylized settings can be extrapolated to pretrained Large Language Models (LLMs). In this work, we take a step towards answering these questions by demonstrating the following: (a) On a test-bed with a variety of Boolean function classes, we find that Transformers can nearly match the optimal learning algorithm for 'simpler' tasks, while their performance deteriorates on more 'complex' tasks. Additionally, we find that certain attention-free models perform (almost) identically to Transformers on a range of tasks. (b) When provided a *teaching sequence*, i.e. a set of examples that uniquely identifies a function in a class, we show that Transformers learn more sample-efficiently. Interestingly, our results show that Transformers can learn to implement *two distinct* algorithms to solve a *single* task, and can adaptively select the more sample-efficient algorithm depending on the sequence of in-context examples. (c) Lastly, we show that extant LLMs, e.g. LLaMA-2, GPT-4, can compete with nearest-neighbor baselines on prediction tasks that are guaranteed to not be in their training set.",
+    "keywords": [
+      "In-context learning",
+      "Transformers",
+      "Large language models",
+      "Boolean functions"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=ekeyCgeRfC"
+  },
+  "review_fields": {
+    "comment": "Thank you for the further discussions, and I apologize for my late reply!\n\n- **re learnability of parity**: what I meant is that it's been well known that there is a computational-statistical gap for parity and various prior work has shown empirical evidence on how Transformers struggle to optimize for parity, hence I don't agree that \"We are not aware of any other precisely defined function classes where Transformers fail and which are known to be PAC-learnable in polynomial time.\" as stated in the reply to Reviewer fGea.\n    - Also as a minor clarification, re contradicting results of Liu et al. 23: I was referring to the optimization challenge pointed out in Liu et al. 23, e.g their Fig 3(b), and hence there is no contradiction. \n- **re LSTM/attention-free networks**: I agree with the authors that the results in their work are different from the empirical study you have in this work. What I meant is that it's inaccurate to claim \"in-context learning hasn't been observed in non-Transformer models\", and including the discussion you have in the response would be nice.\n- **re comparison between Bai et al.**, I understand the training from scratch vs pretraining distinction, but I think the more interesting distinction is that this work is trying to show the learning of different algorithm for the _same_ task, as you mentioned in your reply to Reviewer fGea which I missed previously -- apologies for the oversight on my end. The current comparison in the paper wasn't clear enough to me, and including these points would be helpful.\n- **re teaching sequences**: I'd like to get some further clarification please:\n    - The authors replied that \"The teaching sequences can be longer or shorter than seen during training\"; could you point me to the results in the paper please?\n    - I understand there are results on permuted examples (in Fig 20), which are however negative, i.e. Transformers fail to learn in this case. Is this evidence that TF is not successfully learning with teaching sequences? \n    - Also, have you tested on unseen teaching sequences? i.e. divide the set of teaching sequences into two disjoint sets, one used for training, and one used for testing; let's say each teaching sequence is at the beginning of the set of examples for both train and test."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:48Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:48Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2277,
+    "words": 384,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d49e8331-7eca-48c3-8f17-76491e643c11",
+    "error": null,
+    "scored_chars": 2295
+  }
+}

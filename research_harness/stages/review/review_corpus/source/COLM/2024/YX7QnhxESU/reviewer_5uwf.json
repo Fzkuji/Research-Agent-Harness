@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "YX7QnhxESU",
+  "reviewer": "5uwf",
+  "paper": {
+    "title": "Mapping the Increasing Use of LLMs in Scientific Papers",
+    "authors": [
+      "Weixin Liang",
+      "Yaohui Zhang",
+      "Zhengxuan Wu",
+      "Haley Lepp",
+      "Wenlong Ji",
+      "Xuandong Zhao",
+      "Hancheng Cao",
+      "Sheng Liu",
+      "Siyu He",
+      "Zhi Huang",
+      "Diyi Yang",
+      "Christopher Potts",
+      "Christopher D Manning",
+      "James Y. Zou"
+    ],
+    "abstract": "Scientific publishing lays the foundation of science by disseminating research findings, fostering collaboration, encouraging reproducibility, and ensuring that scientific knowledge is accessible, verifiable, and built upon over time. Recently, there has been immense speculation about how many people are using large language models (LLMs) like ChatGPT in their academic writing, and to what extent this tool might have an effect on global scientific practices. However, we lack a precise measure of the proportion of academic writing substantially modified or produced by LLMs. To address this gap, we conduct the first systematic, large-scale analysis across 950,965 papers published between January 2020 and February 2024 on the $\\textit{arXiv}$, $\\textit{bioRxiv}$, and $\\textit{Nature}$ portfolio journals, using a population-level statistical framework to measure the prevalence of LLM-modified content over time. The statistical framework operates on the population level without the need to perform inference on any individual instance. Our findings reveal a steady increase in LLM usage, with the largest and fastest growth observed in Computer Science papers (up to 17.5\\%). In comparison, Mathematics papers and the Nature portfolio showed the least LLM modification (up to 6.3\\%). Moreover, at an aggregate level, our analysis reveals that higher levels of LLM-modification are associated with papers whose first authors post preprints more frequently, papers in more crowded areas, and papers with shorter lengths. Our findings suggests that LLMs are being broadly used in scientific papers.",
+    "keywords": [
+      "Academic Writing",
+      "Computational Social Science",
+      "Science and Technology Studies",
+      "Societal Impact and LLM Adoption"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=YX7QnhxESU"
+  },
+  "review_fields": {
+    "summary": "The paper investigates the increase in the use of LLM-modified content in academic publications. In particular, changes in the percentage of LLM-modified content before and after the release of ChatGPT are analyzed from the viewpoints of the fields of papers, submission rates to arXiv, similarity between papers, and length of papers. The main finding is that the proportion of LLM-modified content in computer science papers was 17.5%, followed by Electrical Engineering and Systems Science at 14.4%, which is higher than that of other fields. The authors also report that higher levels of LLM revision are associated with papers in which the first author submits preprints more frequently, papers in crowded fields, and papers that are shorter in length.",
+    "reasons_to_accept": "- The paper addresses the interesting topic of the use of LLM in academic writing.\n- The analysis is based on relatively large data sets, and the analytical methods are considered to have a certain degree of reliability.\n- While there are no major surprises about the findings, the authors have found a clear trend in the use of LLMs.",
+    "reasons_to_reject": "- The related work section is a weakness of this paper, as it only mentions studies related to determining whether a given sentence is LLM-modified. The authors should indicate whether there are studies that analyze the proportion of LLM use as addressed in this paper, if they exist, what they are, and how this paper stands compared to those studies.\n- Although there are related references in the “limitation” section, it cannot be denied that one of the reasons for the significant change in trends before and after the appearance of ChatGPT in the field of computer science is the existence of many papers on LLM and studies using LLM in this field, and the possibility that the number of contents that could be mistakenly identified as LLM-modified has increased.",
+    "questions_to_authors": "- In the case of journal papers, a certain amount of time is considered to have elapsed between submission and acceptance. Is the analysis based on the date of submission or publication? If it is the latter, isn't some kind of correction necessary?\n- Whether the collected paper set is crowded or not depends on its coverage and the breadth of the field covered. As an extreme example, the field covered by Nature is very broad, and on the other hand, it does not cover all papers in the related field, so the paper set is unlikely to be crowded. Is it reasonable to discuss whether an area is crowded or not in a situation where different sources of the set of papers are used?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:38Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:38Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1785,
+    "words": 315,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/841e7a85-0cbf-4824-84ff-62283c0347b8",
+    "error": null,
+    "scored_chars": 1785
+  }
+}

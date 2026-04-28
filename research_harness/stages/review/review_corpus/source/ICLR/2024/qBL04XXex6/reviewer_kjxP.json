@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "qBL04XXex6",
+  "reviewer": "kjxP",
+  "paper": {
+    "title": "Boosting of Thoughts: Trial-and-Error Problem Solving with Large Language Models",
+    "authors": [
+      "Sijia Chen",
+      "Baochun Li",
+      "Di Niu"
+    ],
+    "abstract": "The reasoning performance of Large Language Models (LLMs) on a wide range of problems critically relies on chain-of-thought prompting, which involves providing a few chain of thought demonstrations as exemplars in prompts. Recent work, e.g., Tree of Thoughts, has pointed out the importance of exploration and self-evaluation in reasoning step selection for complex problem solving. In this paper, we present Boosting of Thoughts (BoT), an automated prompting framework for problem solving with LLMs by iteratively exploring and self-evaluating many trees of thoughts in order to acquire an ensemble of trial-and-error reasoning experiences, which will serve as a new form of prompting to solve the complex problem. Starting from a simple prompt without requiring examples, BoT iteratively explores and evaluates a large collection of reasoning steps, and more importantly, uses error analysis obtained from the LLM on them to explicitly revise prompting, which in turn enhances reasoning step generation, until a final answer is attained. Our experiments with GPT-4 and Llama2 across extensive complex mathematical problems demonstrate that BoT consistently achieves higher or comparable problem-solving rates than other advanced prompting approaches.",
+    "keywords": [
+      "Large Language Models; Prompt Engineering; Boosting Mechanism;"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=qBL04XXex6"
+  },
+  "review_fields": {
+    "summary": "The paper looks at optimizing prompting for GPT-4 and Llama2 for solving mathematical problems. They provide an iterative strategy to prompting models for complex problems. The key challenges are SVAMP (1000 tasks), GSM8K (8500 tasks), AQUA (100 000 tasks), and MATH (12 500 tasks). The BoT, especially when enhanced with CoT, outperforms alternative methods.",
+    "strengths": "When we reach the limits by simply increasing language models, optimal interaction becomes increasingly interesting. Exploring new ways of pushing the models to do more complex tasks can get more value out of existing LLMs and is highly relevant. \n\nThe paper provides code that is easy-to-read (although a Readme would be a nice addition).\n\nThe method shows that BoT and CoT perform above the comparisons.",
+    "weaknesses": "The use of the term 'boosting' in the context of refining 'weak thoughts' introduces some ambiguity. In traditional machine learning, boosting involves the iterative enhancement of quantifiably weak learners. In the BoT framework, the concept of a 'weak thought' is more abstract, and its \"weakness\" is not as straightforward to measure. This led me to perceive the process more as a 'pruning of weak thoughts' rather than 'boosting' in the conventional sense. It would be beneficial for the paper to clarify how the model aggregates and refines these thoughts in the tree structure, and how the \"weakness\" of a thought is determined and improved upon.\n\nI think the paper comes across unnecessarily complicated, compared to the code the text is hard to fully grasp. The figures all depict Game of 24, adding examples from both a successful and a failed example of BoT for the other tasks would be beneficial.\n\nFor complete reproducibility and clarity, it would be beneficial to provide the full codebase, including modules like 'llmpebase’s residual_tree_of_thoughts', which is referenced several times but not included.\n\nThe title suggests a general problem-solving approach using Large Language Models. However, the content is specifically focused on mathematical problems. It might be beneficial to make the domain-specific nature of the research clearer in the title or early in the abstract to set accurate expectations for readers.",
+    "questions": "Do I understand correctly that T 10 was maximum 10 prompts and M 15 consisted of 15 instances that generated binary trees that you then averaged over?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 3,
+    "mixed_pct": 6,
+    "human_pct": 91,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1995,
+    "words": 316,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/03e6230c-1b0d-49a5-bce6-511f0998b011",
+    "error": null,
+    "scored_chars": 1996
+  }
+}

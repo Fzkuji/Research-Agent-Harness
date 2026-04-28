@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "3M3t3tUbA2Y",
+  "reviewer": "FvUb",
+  "paper": {
+    "title": "DreamerPro: Reconstruction-Free Model-Based Reinforcement Learning with Prototypical Representations",
+    "authors": [
+      "Fei Deng",
+      "Ingook Jang",
+      "Sungjin Ahn"
+    ],
+    "abstract": "In model-based reinforcement learning (MBRL) such as Dreamer, the approaches based on observation reconstruction\noften fail to discard task-irrelevant details, thus struggling to handle visual distractions or generalize to unseen distractions. To address this issue, previous work has proposed to contrastively learn the latent representations and its temporal dynamics, but showed inconsistent performance, often worse than Dreamer. Although, in computer vision, an alternative prototypical approach has often shown to be more accurate and robust, it is elusive how this approach can be combined best with the temporal dynamics learning in MBRL. In this work, we propose a reconstruction-free MBRL agent, called DreamerPro, to achieve this goal. Similar to SwAV, by encouraging uniform cluster assignment across the batch, we implicitly push apart the embeddings of different observations. Additionally, we let the temporal latent state to 'reconstruct' the cluster assignment of the observation, thereby relieving the world model from modeling low-level details. We evaluate our model on the standard setting of DeepMind Control Suite, and also on a natural background setting, where the background is replaced by natural videos irrelevant to the task. The results show that the proposed model is consistently better than the previous models.",
+    "keywords": [
+      "model-based reinforcement learning",
+      "representation learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=3M3t3tUbA2Y"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes DreamerPro, an extension to Dreamer where it swaps the reconstruction loss with a prototype learning loss based on SWAV. At each optimization step, DreamerPro augments each batch of observations into two using different augmentations. It uses the Sinkhorn-Knopp algorithm to compute the target clusters for each batch, with the goal of   encouraging uniform clustering assignment within each augmented batch. Intuitively, the prototype learning loss rewards prediction accuracy both from across the views, which adapts from the original SWAV approach, and within the same view, which the authors mention help build temporal information into the learned prototypes. DreamerPro outperforms the original Dreamer on most of the tasks on the Deepmind Control benchmark, and drastically improves on the Deepmind Control benchmark with noisy backgrounds.",
+    "main_review": "=== Strengths ===\n\n+ The paper is well written and motivated, and the presentation is easy to follow. \n+ The presented approach shows convincing experimental results on the selected benchmark.\n\n=== Weaknesses ===\n\n- I would like to see a more thorough experimental analysis. The latest Dreamer implementation also evaluates all tasks in the Atari benchmark. I would like to see how DreamerPro compares to the basic Dreamer on the Atari benchmark as well.\n- I would like to see some visualizations on the learned features using the prototype learning loss. For example, a side-by-side comparison of t-SNE or nearest neighbor plots of the image observations with their representations learned from 1) the original reconstruction loss and 2) the proposed prototype learning loss. I would also like to visualize what the learned prototypes correspond to in the observation space.\n- The authors mention that they use continuous latent space for both Dreamer and DreamerPro as they found it to perform better. However, according to Dreamerv2, discrete latent space is one of the major improvements they found and it outperformed continuous latent space. I would appreciate it if the authors can further clarify this in the response.\n- I am concerned about the novelty of this paper, because it does seem like a straightforward combination of Dreamer and SWAV, with one additional novelty which is the proposed L_temp loss. This feels somewhat incremental to me.\n\n### Post rebuttal updates\nThe authors did a good job in rebuttal and with the additional experiments and visualizations, the paper is now in a much better shape in my honest opinion. I am updating my score from 3 to 5 to reflect the changes. While the paper proposes a valid combination of existing techniques (SwAV + Dreamer) with reasonable performance on the selected task of \"RL with random visual distractions\", to me this paper is not significant or novel enough to make a strong case for acceptance.",
+    "summary_of_the_review": "The paper is well-written and the presented approach shows promising results on the selected benchmark. However, it seems that the paper lacks novelty at the moment, and I would like to see a more thorough experimental section with more visualizations. Based on these, I do not recommend acceptance at this moment.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2278,
+    "words": 373,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/39672a5f-39dd-4eda-9d33-9c882ac2dd69",
+    "error": null,
+    "scored_chars": 2279
+  }
+}

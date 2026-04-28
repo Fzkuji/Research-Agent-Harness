@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "P0wSGDoip1",
+  "reviewer": "dEe2",
+  "paper": {
+    "title": "Gradient-based Explanations for Deep Learning Survival Models",
+    "authors": [
+      "Sophie Hanna Langbein",
+      "Niklas Koenen",
+      "Marvin N. Wright"
+    ],
+    "abstract": "Deep learning survival models often outperform classical methods in time-to-event predictions, particularly in personalized medicine, but their \"black box\" nature hinders broader adoption. We propose a framework for gradient-based explanation methods tailored to survival neural networks, extending their use beyond regression and classification. We analyze the implications of their theoretical assumptions for time-dependent explanations in the survival setting and propose effective visualizations incorporating the temporal dimension. Experiments on synthetic data show that gradient-based methods capture the magnitude and direction of local and global feature effects, including time dependencies. We introduce GradSHAP(t), a gradient-based counterpart to SurvSHAP(t), which outperforms SurvSHAP(t) and SurvLIME in a computational speed vs. accuracy trade-off. Finally, we apply these methods to medical data with multi-modal inputs, revealing relevant tabular features and visual patterns, as well as their temporal dynamics.",
+    "keywords": [
+      "Deep Learning",
+      "Survival Analysis",
+      "Explainable Artificial Intelligence",
+      "Interpretable Machine Learning",
+      "XAI",
+      "IML",
+      "Feature Attribution"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=P0wSGDoip1"
+  },
+  "review_fields": {
+    "summary": "This paper shows a comparative study on various explanation methods for survival analysis.  While there are several model-agnostic methods to interpret models for survival analysis, this paper considers gradient-based methods.  The applicability of the gradient-based methods is limited to models that can compute gradients (e.g., neural network models), but this paper shows its effectiveness compared to the other methods.",
+    "theoretical_claims": "No theoretical claims are presented in this paper.",
+    "relation_to_broader_scientific_literature": "While Langbein et al. (2024) review many methods to interpret survival models, gradient-based methods are briefly discussed in this review.  This paper focuses more on gradient-based methods, and the contribution of this paper can be seen as extensive experiments on comparative study of gradient-based methods for survival models.",
+    "other_strengths_and_weaknesses": "A weakness of this paper is that the technical contribution is marginal.  While there are many methods to interpret $y=f(x)$ for the standard regression analysis where $x$ is a feature vector and $y$ is a target value, this paper shows only adaptations of these methods to interpret $p=S(t|x)$ where $t$ is a time point and $p$ is a probability and the adaptations are almost straightforward.  In other words, this paper does not show any novel idea associated with applying the interpretation methods for the standard regression analysis to survival analysis.  (This is in contrast with (Krzyzinski et al., 2023), which proposes a modification of an evaluation metric specifically designed for survival analysis.  The modification is described in the appendix of this paper: from Equation (9) for the standard regression analysis to Equation (10) for survival analysis.)\n\nA strength of this paper can be seen as explicitly providing the adaptations (as summarized in Figure 2) and shows effectiveness of these adapted methods.   The results reported in the experiments (in Section 5) are reasonable and convincing.  For example, this paper shows the effectiveness of using the gradient-based method, GradShap(t), compared with existing model-agnostic methods SurvSHAP(t) and SurvLIME."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

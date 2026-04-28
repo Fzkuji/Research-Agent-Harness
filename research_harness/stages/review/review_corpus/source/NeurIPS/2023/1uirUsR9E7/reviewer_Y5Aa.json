@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "1uirUsR9E7",
+  "reviewer": "Y5Aa",
+  "paper": {
+    "title": "Explaining V1 Properties with a Biologically Constrained Deep Learning Architecture",
+    "authors": [
+      "Galen Pogoncheff",
+      "Jacob Granley",
+      "Michael Beyeler"
+    ],
+    "abstract": "Convolutional neural networks (CNNs) have recently emerged as promising models of the ventral visual stream, despite their lack of biological specificity.\nWhile current state-of-the-art models of the primary visual cortex (V1) have surfaced from training with adversarial examples and extensively augmented data, these models are still unable to explain key neural properties observed in V1 that arise from biological circuitry.\nTo address this gap, we systematically incorporated neuroscience-derived architectural components into CNNs to identify a set of mechanisms and architectures that more comprehensively explain V1 activity.\nUpon enhancing task-driven CNNs with architectural components that simulate center-surround antagonism, local receptive fields, tuned normalization, and cortical magnification, we uncover models with latent representations that yield state-of-the-art explanation of V1 neural activity and tuning properties.\nMoreover, analyses of the learned parameters of these components and stimuli that maximally activate neurons of the evaluated networks provide support for their role in explaining neural properties of V1.\nOur results highlight an important advancement in the field of NeuroAI, as we systematically establish a set of architectural components that contribute to unprecedented explanation of V1.\nThe neuroscience insights that could be gleaned from increasingly accurate in-silico models of the brain have the potential to greatly advance the fields of both neuroscience and artificial intelligence.",
+    "keywords": [
+      "NeuroAI",
+      "Neuroscience",
+      "Visual Stream",
+      "Convolutional Neural Networks",
+      "Biologically inspired deep learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=1uirUsR9E7"
+  },
+  "review_fields": {
+    "summary": "In this study the authors propose the incorporation of mechanistic biologically inspired filtering and normalization components in deep convolutional networks (DCNs) with the goal of increased alignment of model responses to V1 neural responses and tuning properties. The authors add center-surround receptive fields, local receptive fields, tuned divisive inhibition and cortical magnification to DCNs that are trained with downscaled ImageNet-64x64. The authors perform an extensive ablation of the components above to show their relative importance for alignment with V1 neural responses. The proposed best-performing model produces quite significant improvements on Brainscore's V1 model alignment. The authors also touch upon whether the above models with high V1 alignment are more robust to perceptual distortions.",
+    "strengths": "+ The authors propose a unique combination of biologically inspired components that have been shown to exist in primate early visual mechanisms. These components are also explained in good depth and clarity for readers who may not be familiar with the specific computations. To the best of my knowledge, even though each of these components by themselves are not novel, the unique combination explored here appears to be novel and not explored before from the perspective of bettering alignment to V1 properties.\n+ The proposed model is significantly outperforming the previous SOTA on explaining neural activity and tuning properties from the Brain-score dataset. The authors have run multiple simulations with different random seeds and add more credibility to their observed findings.",
+    "weaknesses": "- As the authors have pointed out, there is a significant drop in accuracy with respect to image classification accuracy. I believe the authors must try to address, from their perspective, why this drop occurs. It is common in this area that models that are trained to better represent biological neural activity tend to suffer from poor classification accuracy. Addressing this issue will be quite a strong contribution.\n- The scope of this work is quite limited; I am unsure if the produced improvement on alignment to V1 neural responses and tuning properties is sufficient as the only major contribution in this work. \n- It may help if the authors could please add some intuition about why each of the explored components help in improving neural predictivity; it is also important to find out whether these components are useful to improve model-brain alignment regardless of the underlying architecture.",
+    "questions": "Please see my review in the Weaknesses section for questions and suggestions.",
+    "limitations": "Yes, the authors have adequately addressed limitations in their work."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1847,
+    "words": 291,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/07ddb896-0da0-4460-9e21-3c71b1f71411",
+    "error": null,
+    "scored_chars": 1848
+  }
+}

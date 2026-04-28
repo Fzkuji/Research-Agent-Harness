@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "lClK4uBxSG",
+  "reviewer": "Ze6v",
+  "paper": {
+    "title": "ModHiFi: Identifying High Fidelity predictive components for Model Modification",
+    "authors": [
+      "Dhruva Kashyap",
+      "Chaitanya Murti",
+      "Pranav K Nayak",
+      "Tanay Narshana",
+      "Chiranjib Bhattacharyya"
+    ],
+    "abstract": "Open weight models, which are ubiquitous, rarely provide access to their training data or loss function. This makes modifying such models for tasks such as pruning or unlearning, which are constrained by this unavailability, an active area of research. Existing techniques typically require gradients or ground-truth labels, rendering them infeasible in settings with limited computational resources.\nIn this work, we investigate the fundamental question of identifying components that are critical to the model's predictive performance, without access to either gradients or the loss function, and with only distributional access such as synthetic data. \nWe theoretically demonstrate that the global error is linearly bounded by local reconstruction errors for Lipschitz-continuous networks such as CNNs and well-trained Transformers (which, contrary to existing literature, we find exhibit Lipschitz continuity).\nThis motivates using the locally reconstructive behavior of component subsets to quantify their global importance, via a metric that we term *Subset Fidelity*. \nIn the uncorrelated features setting, selecting individual components based on their Subset Fidelity scores is optimal, which we utilize to propose **ModHiFi**, an algorithm for model modification that requires neither training data nor access to a loss function. \n**ModHiFi-P**, for structured pruning, achieves an 11\\% speedup over the current state of the art on ImageNet models and competitive performance on language models. **ModHiFi-U**, for classwise unlearning, achieves complete unlearning on CIFAR-10 without fine-tuning and demonstrates competitive performance on Swin Transformers.",
+    "keywords": [
+      "Pruning",
+      "Machine Unlearning"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=lClK4uBxSG"
+  },
+  "review_fields": {
+    "summary": "This paper presents ModHiFi, a layer-wise reconstruction-based method for estimating feature importance in neural networks using synthetic data, avoiding the need for original training data. It introduces the High Fidelity (HiFi) metric, which quantifies the contribution of each component to local reconstruction. This importance score is used for both structured pruning (retaining high-HiFi components) and classwise unlearning (removing high-HiFi components). The method leverages the empirical observation that pretrained Transformers exhibit approximate Lipschitz continuity, and uses this to theoretically justify that local reconstruction errors can linearly bound global prediction degradation. ModHiFi is evaluated on CNNs and Transformers across CIFAR-10 and ImageNet, showing competitive performance without access to the original training data.",
+    "strengths_and_weaknesses": "Strengths\n- **Works for both pruning and unlearning**: ModHiFi applies the same reconstruction-based importance score to both structured pruning and classwise unlearning, demonstrating that the metric captures feature relevance across different model editing tasks.\n- No reliance on training data: The method does not require access to the original training set or supervised loss function. Instead, it operates using either synthetic inputs or a calibration set, making it significant for pre-trained models and their applications.\n- **Theoretical support via Lipschitz continuity**: By leveraging the Lipschitz property of trained networks, the paper provides a theoretical guarantee that local reconstruction errors upper-bound global output degradation. This justifies the use of local fidelity scores for importance estimation, and makes the approach more practical by avoiding the need for end-to-end evaluations.\n- **Empirical validation of the importance metric**: The paper includes several supporting experiments and ablations, such as noise injection that empirically demonstrate the HiFi score correlates with true functional importance.\n- **Empirical effectiveness**: Despite operating without training data, gradients, or loss access, the method achieves competitive performance across pruning and unlearning on CIFAR-10 and ImageNet.\n\nWeaknesses\n- **Limited novelty and insufficient comparison to prior reconstruction-based pruning methods**: While ModHiFi is framed as novel, the core idea of using reconstruction error to guide pruning, has been well explored in prior literature [1,2,3,4]. The paper does not adequately position its contributions relative to this body of work or clarify what distinguishes ModHiFi’s reconstruction-based formulation beyond its application to multiple tasks. Moreover, the practical implementation relies on singleton importance scores due to the infeasibility of true subset selection, which diminishes the claimed departure from per-component heuristics.\n\n- **Dependence on synthetic or calibration data**: While ModHiFi avoids training data, it still relies on synthetic or curated datasets to compute fidelity scores and fit compensation terms. The quality, representativeness, and diversity of this data can significantly impact performance, yet the main paper offers limited discussion or quantification of this sensitivity. Additionally, fitting compensation weights via linear regression constitutes a lightweight form of fine-tuning, which somewhat undermines the “no fine-tuning” framing.\n\n- **Theoretical guarantees rely on unrealistic assumptions**: Theorems 3.1 and 3.7 rely on assumptions that rarely hold in practice. The uncorrelated feature assumption underlying singleton optimality is implausible in deep networks, where strong interdependencies exist. Similarly, Theorem 3.1 assumes that each layer’s inputs remain fixed during analysis, yet ModHiFi prunes multiple layers simultaneously, violating this condition. \n\n- **Lack of computational cost analysis**: Although the method is presented as more efficient than fine-tuning, the paper does not quantify its computational demands. Evaluating fidelity scores requires full forward passes and activation logging across a dataset for each candidate component, which may scale poorly in large networks. The absence of runtime comparisons or memory profiling against baseline methods (e.g., magnitude-based pruning) leaves open questions about ModHiFi’s practical efficiency.\n\n\n[1] Jiang, Chunhui, et al. Efficient DNN Neuron Pruning by Minimizing Layer-wise Nonlinear Reconstruction Error. IJCAI, 2018.  \n[2] Kamma, Koji, and Toshikazu Wada. Reconstruction Error Aware Pruning for Accelerating Neural Networks. ISVC, 2019.  \n[3] Zhuang, Zhuangwei, et al. Discrimination-aware Channel Pruning for Deep Neural Networks. NeurIPS, 2018.  \n[4] Molchanov, Pavlo, et al. Importance Estimation for Neural Network Pruning. CVPR, 2019.",
+    "questions": "1. **Mitigating theoretical limitations in simultaneous pruning**: Theorem 3.1 assumes that inputs to each layer remain fixed, yet ModHiFi prunes multiple layers simultaneously. Could you clarify how the theoretical guarantees could hold under this setup? It might be worth considering including an empirical comparison between layerwise iterative and simultaneous pruning to assess the bound’s practical validity.\n\n2. **Addressing data sensitivity more explicitly**: The reliance on synthetic or calibration data is mentioned in the appendix but is central to the method’s performance. The paper would benefit from moving this discussion into the main text and expanding it with quantitative evaluations showing how fidelity scores and performance vary with data size, diversity, or distribution mismatch / dataset sfhit.\n\n3. **Quantifying computational overhead**: ModHiFi requires activation logging and per-layer evaluation for each candidate component. It could be worth providing runtime, memory, or efficiency comparisons with standard pruning baselines (e.g., L1-norm). Furthermore frontier plots of sparsity-accuracy tradeoffs would be helpful to position ModHiFi against related work.",
+    "limitations": "The authors acknowledge certain limitations, such as the method’s reliance on pretrained models and the intractability of full subset selection, which are briefly discussed in the main text. However, additional limitations - particularly the method’s dependence on data quality for synthetic inputs should be more explicitly addressed, and ideally consolidated.",
+    "final_justification": "The strong rebuttal clarified and addressed my mentioned concerns."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 2,
+    "significance": 3,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

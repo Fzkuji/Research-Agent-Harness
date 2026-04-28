@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "Orvjm9UqH2",
+  "reviewer": "EdtK",
+  "paper": {
+    "title": "Epistemic Alignment: A Mediating Framework for User-LLM Knowledge Delivery",
+    "authors": [
+      "Nicholas Clark",
+      "Hua Shen",
+      "Bill Howe",
+      "Tanu Mitra"
+    ],
+    "abstract": "Large Language Models (LLMs) increasingly serve as tools for knowledge acquisition, yet users cannot effectively specify how they want information presented. When users request that LLMs \"cite reputable sources,\" \"express appropriate uncertainty,\" or \"include multiple perspectives,\" they discover that current interfaces provide no structured way to articulate these preferences. The result is prompt sharing folklore: community-specific copied prompts passed through trust relationships rather than based on measured efficacy. We propose the Epistemic Alignment Framework, a set of ten challenges in knowledge transmission derived from the philosophical literature of epistemology, concerning issues such as uncertainty expression, evidence quality assessment, and calibration of testimonial reliance. The framework serves as a structured intermediary between user needs and system capabilities, creating a common vocabulary to bridge the gap between what users want and what systems deliver. Through a thematic analysis of custom prompts and personalization strategies shared on online communities where these issues are actively discussed, we find users develop elaborate workarounds to address each of the challenges. We then apply our framework to two prominent model providers, OpenAI and Anthropic, through structured content analysis of their documented policies and product features. Our analysis shows that while these providers have partially addressed the challenges we identified, they fail to establish adequate mechanisms for specifying epistemic preferences, lack transparency about how preferences are implemented, and offer no verification tools to confirm whether preferences were followed. For AI developers, the Epistemic Alignment Framework offers concrete guidance for supporting diverse approaches to knowledge; for users, it works toward information delivery that aligns with their specific needs rather than defaulting to one-size-fits-all approaches.",
+    "keywords": [
+      "epistemology of AI",
+      "language model behavior",
+      "human-AI interaction"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Orvjm9UqH2"
+  },
+  "review_fields": {
+    "summary": "The paper provides a framework for reviewing the capabilities of large language models in relation to user knowledge.\n\nThe framework is tested in a qualitative manner by analysing documentation of certain LLM providers, namely openAI and anthropic.\n\nThe overall goal of the paper is very valuable. The weakest point is it evaluation against LLM providers. With the dynamics in the generative AI industry, providers change and their offerings as well quite fast. The authors should consider an evaluation against reference data. I understand that this is not in the scope of their current research but would help to generalise their results.\n\nSuch data based approach could also give more weight to the recommendations in section 7. For example, values provided in a structured preference specification interface ultimately needs to be processed by the LLM. However, LLMs do not make any sense of preferences, for LLMs these are just additional input tokens. Hence, the quality of preference processing needs to be improved by related training data and evaluated by benchmarking data.",
+    "reasons_to_accept": "A new framework for defining user knowledge delivery to LLMs.",
+    "reasons_to_reject": "The evaluation is specific to two LLM providers and hard to replicate and generalise."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "skipped",
+    "reason": "too_short:148"
+  }
+}

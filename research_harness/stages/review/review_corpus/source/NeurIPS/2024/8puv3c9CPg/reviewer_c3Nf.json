@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "8puv3c9CPg",
+  "reviewer": "c3Nf",
+  "paper": {
+    "title": "Beyond the Doors of Perception: Vision Transformers Represent Relations Between Objects",
+    "authors": [
+      "Michael A. Lepori",
+      "Alexa R. Tartaglini",
+      "Wai Keen Vong",
+      "Thomas Serre",
+      "Brenden Lake",
+      "Ellie Pavlick"
+    ],
+    "abstract": "Though vision transformers (ViTs) have achieved state-of-the-art performance in a variety of settings, they exhibit surprising failures when performing tasks involving visual relations. This begs the question: how do ViTs attempt to perform tasks that require computing visual relations between objects? Prior efforts to interpret ViTs tend to focus on characterizing relevant low-level visual features. In contrast, we adopt methods from mechanistic interpretability to study the higher-level visual algorithms that ViTs use to perform abstract visual reasoning. We present a case study of a fundamental, yet surprisingly difficult, relational reasoning task: judging whether two visual entities are the same or different. We find that pretrained ViTs fine-tuned on this task often exhibit two qualitatively different stages of processing despite having no obvious inductive biases to do so: 1) a perceptual stage wherein local object features are extracted and stored in a disentangled representation, and 2) a relational stage wherein object representations are compared. In the second stage, we find evidence that ViTs can learn to represent somewhat abstract visual relations, a capability that has long been considered out of reach for artificial neural networks. Finally, we demonstrate that failures at either stage can prevent a model from learning a generalizable solution to our fairly simple tasks. By understanding ViTs in terms of discrete processing stages, one can more precisely diagnose and rectify shortcomings of existing and future models.",
+    "keywords": [
+      "visual reasoning",
+      "mechanistic interpretability",
+      "transformers",
+      "cognitive science"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=8puv3c9CPg"
+  },
+  "review_fields": {
+    "summary": "The paper aims to answer how Vision Transformers (ViTs) perform tasks requiring visual relational reasoning. The study focuses on two tasks: identity discrimination and relational match-to-sample (RMTS), showing that ViTs process information in two distinct stages: perceptual and relational. Further analyses using mechanistic interpretability approaches were used to validate this results. Overall, this work offered insights into same-different judgement which is intuitive to humans but proven hard for AI.",
+    "strengths": "- Similarity judgement task has been long studied in humans and animals, offering insights into perception and cognition, that's why the main question addressed in this study is of high interest for both psychology and AI community\n- The analyses included support the main claims\n- The boundaries of claims, and the questions remained to be answered were clearly stated in the discussion",
+    "weaknesses": "- Related work is poorly presented: Despite the vast literature on both the question and the methodology, only one paragraph was allocated to the related work. There are other works suggesting a two phase processing in transformers (see below for an example) which I think discussing them in the context of this work would help to put the relational reasoning in a broader context.\n- Maybe related to point one, but a theoretical explanation supporting the findings, that is, under what conditions these distinct phases appear would make the work stronger.\n\n@misc{cui2024,\n\n      title={A phase transition between positional and semantic learning in a solvable model of dot-product attention}, \n\n      author={Hugo Cui and Freya Behrens and Florent Krzakala and Lenka Zdeborová},\n\n      year={2024},\n\n      url={https://arxiv.org/abs/2402.03902}, \n}",
+    "questions": "I am curious about the potential impact of CLIP's text co-training, in contrast to DINO's image-only training, on their respective performances when fine-tuned for same-different tasks. Specifically, I wonder if CLIP's joint training on images and captions forces its embedding space (particularly in the later layers) to deviate from purely visual representations to accommodate textual information as well. Could this difference in training approaches be a significant factor in explaining their divergent behaviors on visual reasoning? In that case, the the perpetual/reasoning phases probably not a property of ViT (as title suggested) but a product of transformer combined with multi-modality.",
+    "limitations": "- Related work section is very limited.\n- Claims on ViT seem to confined to CLIP, so probably a slight revision of the title and text makes the basis of the claim stronger."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 5,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2086,
+    "words": 317,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/79d5c8d1-c8c7-40d7-aa7a-44c9eef1dac3",
+    "error": null,
+    "scored_chars": 2112
+  }
+}

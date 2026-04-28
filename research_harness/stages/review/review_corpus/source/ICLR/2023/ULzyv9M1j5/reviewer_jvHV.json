@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "ULzyv9M1j5",
+  "reviewer": "jvHV",
+  "paper": {
+    "title": "Transformer-based model for symbolic regression via joint supervised learning",
+    "authors": [
+      "Wenqiang Li",
+      "Weijun Li",
+      "Linjun Sun",
+      "Min Wu",
+      "Lina Yu",
+      "Jingyi Liu",
+      "Yanjie Li",
+      "Songsong Tian"
+    ],
+    "abstract": "Symbolic regression (SR) is an important technique for discovering hidden mathematical expressions from observed data. Transformer-based approaches have been widely used for machine translation due to their high performance, and are recently highly expected to be used for SR. They input the data points, then output the expression skeleton, and finally optimize the coefficients. However, recent transformer-based methods for SR focus more attention on large scale training data and ignore the ill-posed problem: the lack of sufficient supervision, i.e., expressions that may be completely different have the same supervision because of their same skeleton, which makes it challenging to deal with data that may be from the same expression skeleton but with different coefficients. Therefore, we present a transformer-based model for SR with the ability to alleviate this problem. Specifically, we leverage a feature extractor based on pure residual MLP networks to obtain more information about data points. Furthermore, the core idea is that we propose a joint learning mechanism combining supervised contrastive learning, which makes features of data points from expressions with the same skeleton more similar so as to effectively alleviates the ill-posed problem. The benchmark results show that the proposed method is up to 25% higher with respect to the recovery rate of skeletons than typical transformer-based methods. Moreover, our method outperforms state-of-the-art SR methods based on reinforcement learning and genetic programming in terms of the coefficient of determination ($R^2$).",
+    "keywords": [],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=ULzyv9M1j5"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper presents a symbolic regression algorithm that uses a transformer backbone to learn a new feature extractor via joint supervised learning mechanism. The ill-posed problem mentioned in the paper was addressed by using the joint supervised learning mechanism combining supervised contrastive learning, which strengthens the similarity of feature vectors from the same skeleton. Experiments were done to prove the efficacy of the method.",
+    "strength_and_weaknesses": "This paper is motivated by a practical issue. I like the idea of using the supervision of the whole expression skeleton and the supervision of the preorder traversal of its expression tree in contrastive learning (maybe with data augmentation) to deal with the case that different instances of the same skeleton can have very different shapes, and instances of very different skeletons can be very close.\nThe authors did extensive experiments, the presented algorithm performs very well on the benchmark dataset.\nThe paper has covered a wide range of related work.",
+    "clarity,_quality,_novelty_and_reproducibility": "The paper is easy to follow and straightforward. The novelty is not significant as it is a basic combination of contrastive learning and Transformers. The implementation is not hard but it works well.",
+    "summary_of_the_review": "This paper proposes a good approach to tackle the symbolic regression problem. Although the presented algorithm seems to be a combination of contrastive learning and Transformers, its performance on benchmark data sets looks good.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

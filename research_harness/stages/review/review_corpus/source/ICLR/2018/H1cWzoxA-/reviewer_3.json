@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "H1cWzoxA-",
+  "reviewer": "3",
+  "paper": {
+    "title": "Bi-Directional Block Self-Attention for Fast and Memory-Efficient Sequence Modeling",
+    "authors": [
+      "Tao Shen",
+      "Tianyi Zhou",
+      "Guodong Long",
+      "Jing Jiang",
+      "Chengqi Zhang"
+    ],
+    "abstract": "Recurrent neural networks (RNN), convolutional neural networks (CNN) and self-attention networks (SAN) are commonly used to produce context-aware representations. RNN can capture long-range dependency but is hard to parallelize and not time-efficient. CNN focuses on local dependency but does not perform well on some tasks. SAN can model both such dependencies via highly parallelizable computation, but memory requirement grows rapidly in line with sequence length. In this paper, we propose a model, called \"bi-directional block self-attention network (Bi-BloSAN)\", for RNN/CNN-free sequence encoding. It requires as little memory as RNN but with all the merits of SAN. Bi-BloSAN splits the entire sequence into blocks, and applies an intra-block SAN to each block for modeling local context, then applies an inter-block SAN to the outputs for all blocks to capture long-range dependency. Thus, each SAN only needs to process a short sequence, and only a small amount of memory is required. Additionally, we use feature-level attention to handle the variation of contexts around the same word, and use forward/backward masks to encode temporal order information. On nine benchmark datasets for different NLP tasks, Bi-BloSAN achieves or improves upon state-of-the-art accuracy, and shows better efficiency-memory trade-off than existing RNN/CNN/SAN.",
+    "keywords": [
+      "deep learning",
+      "attention mechanism",
+      "sequence modeling",
+      "natural language processing",
+      "sentence embedding"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H1cWzoxA-"
+  },
+  "review_fields": {
+    "review": "Pros: \nThe paper proposes a “bi-directional block self-attention network (Bi-BloSAN)” for sequence encoding, which inherits the advantages of multi-head (Vaswani et al., 2017) and DiSAN (Shen et al., 2017) network but is claimed to be more memory-efficient. The paper is written clearly and is easy to follow. The source code is released for duplicability. The main originality is using block (or hierarchical) structures; i.e., the proposed models split the an entire sequence into blocks, apply an intra-block SAN to each block for modeling local context, and then apply an inter-block SAN to the output for all blocks to capture long-range dependency. The proposed model was tested on nine benchmarks  and achieve good efficiency-memory trade-off. \n\nCons:\n- Methodology of the paper is very incremental compared with previous models.  \n- Many of the baselines listed in the paper are not competitive; e.g.,  for SNLI, state-of-the-art results are not included in the paper. \n- The paper argues advantages of the proposed models over CNN by assuming the latter only captures local dependency, which, however, is not supported by discussion on or comparison with hierarchical CNN.\n- The block splitting (as detailed in appendix) is rather arbitrary in terms of that it potentially divides coherent language segments apart. This is unnatural, e.g., compared  with alternatives such as using linguistic segments as blocks.\n- The main originality of paper is the block style. However, the paper doesn’t analyze how and why the block brings improvement. \n-If we remove intra-block self-attention (but only keep token-level self-attention), whether the performance will be significantly worse?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

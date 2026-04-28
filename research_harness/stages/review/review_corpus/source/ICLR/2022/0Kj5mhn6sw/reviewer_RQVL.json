@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "0Kj5mhn6sw",
+  "reviewer": "RQVL",
+  "paper": {
+    "title": "Gesture2Vec: Clustering Gestures using  Representation Learning Methods for Co-speech Gesture Generation",
+    "authors": [
+      "Payam Jome Yazdian",
+      "Mo Chen",
+      "Angelica Lim"
+    ],
+    "abstract": "Co-speech gestures are a principal component in conveying messages and enhancing interaction experiences between humans. Similarly, the co-speech gesture is a key ingredient in human-agent interaction including both virtual agents and robots. Existing machine learning approaches have yielded only marginal success in learning speech-to-motion at the frame level. Current methods generate repetitive gesture sequences that lack appropriateness with respect to the speech context. In this paper, we propose a Gesture2Vec model using representation learning methods to learn the relationship between semantic features and corresponding gestures. We propose a vector-quantized variational autoencoder structure as well as training techniques to learn a rigorous representation of gesture sequences. Furthermore, we use a machine translation model that takes input text and translates it into a discrete sequence of associated gesture chunks in the learned gesture space. Ultimately, we use translated quantized gestures from the input text as an input to the autoencoder’s decoder to produce gesture sequences. The resulting gestures can be applied to both virtual agents and humanoid robots. Subjective and objective evaluations confirm the success of our approach in terms of appropriateness, human-likeness, and diversity.",
+    "keywords": [
+      "representation learning",
+      "gesture generation",
+      "vector quantization",
+      "machine translation"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=0Kj5mhn6sw"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors present a method to generate co-speech gestures by learning a vector-quantized representation space of gestures coupled with a machine translation from natural language sentences to that representation space. They design a denoising variational autoencoder (DVAE) to learn the encoding space corresponding to gesture sequences, and then quantize that encoding space using nearest neighbor embeddings. Once the vector quantized representations are learned, they use a sequence-to-sequence network to translate the text transcript of the input speech to those representations, which they subsequently decode into the output co-speech gestures. They train and test their method on the Trinity Gesture Dataset and show the improvements achieved by their method on both objective and subjective evaluations.",
+    "main_review": "### Strengths\n1. The idea of representing gesture sequences as vector-quantized features is technically sound and clearly presented.\n2. The experimental results show reasonable benefits over prior work, especially in objective evaluation metrics.\n\n### Weaknesses\n1. Related work appears incomplete. There is at least one other work on generating gestures from input text transcripts:\nBhattacharya, U., Rewkowski, N., Banerjee, A., Guhan, P., Bera, A., & Manocha, D. (2021, March). Text2Gestures: A Transformer-Based Network for Generating Emotive Body Gestures for Virtual Agents. In 2021 IEEE Virtual Reality and 3D User Interfaces (VR) (pp. 1-10). IEEE.\n\n2. Some technical aspects of the proposed method are unclear to me:\n    1. For the DAE (Section 4.1), how do the authors ensure that the decoder outputs are valid rotation matrices?\n    2. What reconstruction loss is used for the DVAE that works with gesture sequences? Is it a mean squared error (MSE) similar to that used by the frame-level DAE? Since MSE forces the mean values of the poses in the input and the output gestures to be close, it may cause the outputs to be temporally smoothed out. If that is the case, then how does the proposed method provide the largest average jerk (Table 1, last row)? If not, do the authors perform any additional steps to safeguard against the smoothing?\n    3. Yoon et al. 2020, as referred to by the authors, have already proposed an objective measure for gesture diversity, dubbed Fréchet Gesture Distance (FGD). Since the authors propose their own metric, the Hellinger distance, for the same purpose, it would have been appropriate to have at least some discussion on how the two metrics compare. More importantly, what is the motivation to propose a new metric over the existing one?\n    4. Before the user study, were the users shown any good and bad examples (or something similar), as determined by the authors, for the questions they were subsequently asked?\n    5. Did the authors perform any inter-rater agreement, e.g., using Fleiss' Kappa measure, to verify the reliability of the responses?\n3. In Section 7.1, the authors mention that they were limited to one person in their work. However, multi-person datasets are already available, such as the TED Gesture Dataset proposed by Yoon et al. 2019, and used by both Yoon et al. 2019 and Yoon et al. 2020. Are there any specific reasons why the authors did not work with this dataset? Moreover, in Section 4 (page 5, last line), the authors mention that they only focus on upper body gestures. Again, were they any specific reasons to eliminate the lower-body gestures from the training and the testing processes?",
+    "summary_of_the_review": "The proposed method is technically sound and attempts to solve the challenging problem of co-speech gesture generation using an insightful approach, that of vector-quantizing the latent representation space of gestures and mapping from natural language sentences to it. However, a number of technical details were unclear to me, which makes the overall method and evaluations hard to follow. I invite the authors to respond to my comments under \"weaknesses\" before I can strongly recommend the paper for acceptance.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3172,
+    "words": 514,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c6ff9bd7-586c-4a32-99f2-1392bc50c2a6",
+    "error": null,
+    "scored_chars": 3192
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "UeE41VsK1KJ",
+  "reviewer": "R5W1",
+  "paper": {
+    "title": "Subjective Learning for Open-Ended Data",
+    "authors": [
+      "Tianren Zhang",
+      "Yizhou Jiang",
+      "Xin Su",
+      "Shangqi Guo",
+      "Feng Chen"
+    ],
+    "abstract": "Conventional supervised learning typically assumes that the learning task can be solved by learning a single function since the data is sampled from a fixed distribution. However, this assumption is invalid in open-ended environments where no task-level data partitioning is available. In this paper, we present a novel supervised learning framework of learning from open-ended data, which is modeled as data implicitly sampled from multiple domains with the data in each domain obeying a domain-specific target function. Since different domains may possess distinct target functions, open-ended data inherently requires multiple functions to capture all its input-output relations, rendering training a single global model problematic. To address this issue, we devise an Open-ended Supervised Learning (OSL) framework, of which the key component is a subjective function that allocates the data among multiple candidate models to resolve the \"conflict'' between the data from different domains, exhibiting a natural hierarchy. We theoretically analyze the learnability and the generalization error of OSL, and empirically validate its efficacy in both open-ended regression and classification tasks.",
+    "keywords": [
+      "Open-ended data",
+      "machine learning",
+      "supervised learning",
+      "data conflict"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=UeE41VsK1KJ"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper proposes a learning setting involving a sequence of domains\nand a collection of hypotheses, During learning, each domain should be\nassigned to the most appropriate hypothesis by iteratively grouping\ntogether non-conflicting domains and keeping apart conflicting ones,\nso as to minimize the number of hypotheses learned and leverage\ncross-domain information when appropriate.",
+    "main_review": "While the intuition behind the problem and the proposed solution is\nclear, the method is not clearly explained. In section 2.3, the\nconnection between the M and E steps is not clearly stated. More\nimportantly, the difference between conflicting and non-conflicting\ndomains is unclear. From the overall algorithm, it seems to me that\ndomains that do not share labels will be assigned to different\nhypotheses (even if, in principle, they could be mutually-exclusive\nlabels), because a hypothesis previously trained on a different set of\nlabels will not predict the new labels. If this is the case, the only\nnon-conflicting domains are those that share the same label set but\nmaybe have differences in the input (like in a domain-adaptation\nsetting).  In this case the method seems an overkill, as one can\neasily match the domains in the episodes by matching their labels (and\nthe subjective error should be minimized this way). The experiments\nseems to suggest that this is indeed the setting, because different\ndomains correspond to different label sets.\n\nAnother unclear part is how the method is applied in testing. Assuming\nthat testing is made on an episode corresponding to a single domain,\nhow is/are the appropriate hypothesis/hypotheses selected? If the\npredictions of all of them are collected, this seems to boil down to a\nsimple collection of multiclass classifiers (not sure what happens in\nthe regression case).\n\nDepending on the specific setting (to be clarified), there could be\nother (possibly simpler) competitors that are more appropriate. The\ncross-domain fertilization is not evaluated in the experiments as far\nas I can tell (apart from the matching of domains with the same\nlabels).",
+    "summary_of_the_review": "The paper is unclear in the description of the method, so much that\nsome trivial solutions seem even more appropriate for the setting.\n\nSubstantial clarifications are needed to properly evaluate the quality\nof the contribution.\n\nAFTER REBUTTAL:\n\nThe authors did manage to address many of my concerns in their detailed rebuttal and extended experimental evaluation. The difference between the proposed setting and the existing alternatives is now clearer and the advantage of the method better highlighted thanks to the novel experiments. Some aspects are still a bit unclear (e.g. how the method is applied at the test phase), but I am now more inclined towards acceptance.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2377,
+    "words": 379,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/790143e2-2541-4623-a26d-0ea409687512",
+    "error": null,
+    "scored_chars": 2378
+  }
+}

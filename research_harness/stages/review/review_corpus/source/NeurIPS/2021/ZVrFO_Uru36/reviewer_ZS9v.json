@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "ZVrFO_Uru36",
+  "reviewer": "ZS9v",
+  "paper": {
+    "title": "Deep inference of latent dynamics with spatio-temporal super-resolution using selective backpropagation through time",
+    "authors": [
+      "Feng Zhu",
+      "Andrew R Sedler",
+      "Harrison A Grier",
+      "Nauman Ahad",
+      "Mark A. Davenport",
+      "Matthew Kaufman",
+      "Andrea Giovannucci",
+      "Chethan Pandarinath"
+    ],
+    "abstract": "Modern neural interfaces allow access to the activity of up to a million neurons within brain circuits. However, bandwidth limits often create a trade-off between greater spatial sampling (more channels or pixels) and the temporal frequency of sampling. Here we demonstrate that it is possible to obtain spatio-temporal super-resolution in neuronal time series by exploiting relationships among neurons, embedded in latent low-dimensional population dynamics. Our novel neural network training strategy, selective backpropagation through time (SBTT), enables learning of deep generative models of latent dynamics from data in which the set of observed variables changes at each time step. The resulting models are able to infer activity for missing samples by combining observations with learned latent dynamics. We test SBTT applied to sequential autoencoders and demonstrate more efficient and higher-fidelity characterization of neural population dynamics in electrophysiological and calcium imaging data. In electrophysiology, SBTT enables accurate inference of neuronal population dynamics with lower interface bandwidths, providing an avenue to significant power savings for implanted neuroelectronic interfaces. In applications to two-photon calcium imaging, SBTT accurately uncovers high-frequency temporal structure underlying neural population activity, substantially outperforming the current state-of-the-art. Finally, we demonstrate that performance could be further improved by using limited, high-bandwidth sampling to pretrain dynamics models, and then using SBTT to adapt these models for sparsely-sampled data.",
+    "keywords": [
+      "Computational neuroscience",
+      "Systems neuroscience",
+      "Neural population dynamics",
+      "intermittent sampling",
+      "Electrophysiology",
+      "Calcium imaging",
+      "Brain-computer interfaces",
+      "Neuroscience",
+      "Neuroprosthetics",
+      "Neural coding",
+      "Motor control",
+      "Sequential autoencoders"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ZVrFO_Uru36"
+  },
+  "review_fields": {
+    "summary": "The authors proposed a training strategy, selective backpropagation through time (SBTT), for the deep structure to learn latent dynamics from irregularly or sparsely sampled time series data. The learned latent dynamics then can be used to infer activity for missing samples based on observations. The experimental results have demonstrated the effectiveness of the SBTT with various rates of dropped samples; the SBTT can recover some of missing information.",
+    "main_review": "The whole idea is interesting, but the authors should improve some parts of the draft before further consideration.\n1)\tThe author should explain the details of how does the SBTT work with SVAE.\n2)\tWhat is the relationship between the two equations in lines 137 and 128?\n3)\tThe experiments do not compare the effectiveness with other state-of-the-art methods, e.g. transformers, deepset and neural differential equations. Also, it would be better that the author provides recovered samples learned by other state-of-the-art methods to demonstrate the effectiveness of SBTT.\n4)\tThe SBTT might need to be tested with other structures to show its scalability rather than just SVAE.",
+    "limitations_and_societal_impact": "The authors should improve some parts of the draft mentioned in the above further consideration."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

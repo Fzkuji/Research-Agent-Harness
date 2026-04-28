@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "rkfbLilAb",
+  "reviewer": "2",
+  "paper": {
+    "title": "Improving Search Through A3C Reinforcement Learning Based Conversational Agent",
+    "authors": [
+      "Milan Aggarwal",
+      "Aarushi Arora",
+      "Shagun Sodhani",
+      "Balaji Krishnamurthy"
+    ],
+    "abstract": "We develop a reinforcement learning based search assistant which can assist users through a set of actions and sequence of interactions to enable them realize their intent. Our approach caters to subjective search where the user is seeking digital assets such as images which is fundamentally different from the tasks which have objective and limited search modalities. Labeled conversational data is generally not available in such search tasks and training the agent through human interactions can be time consuming. We propose a stochastic virtual user which impersonates a real user and can be used to sample user behavior efficiently to train the agent which accelerates the bootstrapping of the agent. We develop A3C algorithm based context preserving architecture which enables the agent to provide contextual assistance to the user. We compare the A3C agent with Q-learning and evaluate its performance on average rewards and state values it obtains with the virtual user in validation episodes. Our experiments show that the agent learns to achieve higher rewards and better states.",
+    "keywords": [
+      "Subjective search",
+      "Reinforcement Learning",
+      "Conversational Agent",
+      "Virtual user model",
+      "A3C",
+      "Context aggregation"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=rkfbLilAb"
+  },
+  "review_fields": {
+    "review": "The paper describes reinforcement learning techniques for digital asset search.  The RL techniques consist of A3C and DQN.  This is an application paper since the techniques described already exist.  Unfortunately, there is a lack of detail throughout the paper and therefore it is not possible for someone to reproduce the results if desired.  Since there is no corpus of message response pairs to train the model, the paper trains a simulator from logs to emulate user behaviours.  Unfortunately, there is no description of the algorithm used to obtain the simulator.  The paper explains that the simulator is obtained from log data, but this is not sufficient.  The RL problem is described at a very high level in the sense that abstract states and actions are listed, but there is no explanation about how those abstract states are recognized from the raw text and there is no explanation about how the actions are turned into text.  There seems to be some confusion in the notion of state.  After describing the abstract states, it is explained that actions are selected based on a history of states.  This suggests that the abstract states are really abstract observations.   In fact, this becomes obvious when the paper introduces the RNN where a hidden belief is computed by combining the observations.  The rewards are also described at a hiogh level, but it is not clear how exactly they are computed.  The digital search application is interesting, however a detailed description with comprehensive experiments are needed for the publication of an application paper."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

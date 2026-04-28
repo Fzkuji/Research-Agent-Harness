@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "RDbuSCWhad",
+  "reviewer": "SXh7",
+  "paper": {
+    "title": "Structured Sparse Transition Matrices to Enable State Tracking in State-Space Models",
+    "authors": [
+      "Aleksandar Terzic",
+      "Nicolas Menet",
+      "Michael Hersche",
+      "Thomas Hofmann",
+      "Abbas Rahimi"
+    ],
+    "abstract": "Modern state-space models (SSMs) often utilize structured transition matrices\nwhich enable efficient computation but pose restrictions on the model’s expressivity,\nas measured in terms of the ability to emulate finite-state automata (FSA). While\nunstructured transition matrices are optimal in terms of expressivity, they come\nat a prohibitively high compute and memory cost, even for moderate state sizes.\nWe propose a structured sparse parametrization of transition matrices in SSMs\nthat enables FSA state tracking with provably optimal state size and depth, while\nkeeping the computational cost of the recurrence comparable to that of diagonal\nSSMs. Our method, \\emph{PD-SSM}, parametrizes the transition matrix as the product\nof a column one-hot matrix ($P$) and a complex-valued diagonal matrix ($D$). As\na result, the computational cost of parallel scans scales linearly with the state\nsize. Theoretically, the model is BIBO-stable and can emulate any $N$-state FSA\nwith one layer of dimension $N$ and a linear readout of size $N ×N$, significantly\nimproving on all current structured SSM guarantees. Experimentally, the model\nsignificantly outperforms a wide collection of modern SSM variants on various FSA\nstate tracking tasks. On multivariate time-series classification, it outperforms neural\ncontrolled differential equations, a paradigm explicitly built for time-series analysis.\nFinally, we integrate PD-SSM into a hybrid Transformer-SSM architecture and\ndemonstrate that the model can effectively track the states of a complex FSA in\nwhich transitions are encoded into sets of variable-length English sentences. The\ncode is available at https://github.com/IBM/expressive-sparse-state-space-model.",
+    "keywords": [
+      "State-Space Models",
+      "Expressiveness",
+      "Efficiency",
+      "Matrix Parametrisation",
+      "State-Tracking",
+      "Finite-State Automata"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=RDbuSCWhad"
+  },
+  "review_fields": {
+    "comment": "Thank you for your detailed response. I address each point individually below.\n\n## Regular Language Results\n\nThis was my initial suspicion, although I disregarded the idea, as it would imply that PD-SSM achieves $99.7\\pm3\\\\%$ on parity, which I don't believe is possible. I would appreciate if the authors could provide the corrected row for PD-SSM with the true standard deviations, although I do not consider this a pre-requisite to me raising my score. The important aspect is including the comparison with alternative structures in the final version of the paper, which I believe it is clear the authors intend to do.\n\n## UEA Results\n\nThank you for clarifying the comparison and including the additional baselines. I feel these results are a strong addition to the paper.\n\n## Theoretical Expressiveness\n\nI apologise; I interpreted your statement about theoretical expressivity as being a general statement, as opposed to one in the context of FSA. I agree with your expanded analysis and think it makes another strong addition to the paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "NNooZoQpP4",
+  "reviewer": "1VUP",
+  "paper": {
+    "title": "To Stay or Not to Stay in the Pre-train Basin: Insights on Ensembling in Transfer Learning",
+    "authors": [
+      "Ildus Sadrtdinov",
+      "Dmitrii Pozdeev",
+      "Dmitry P. Vetrov",
+      "Ekaterina Lobacheva"
+    ],
+    "abstract": "Transfer learning and ensembling are two popular techniques for improving the performance and robustness of neural networks. \nDue to the high cost of pre-training, ensembles of models fine-tuned from a single pre-trained checkpoint are often used in practice. \nSuch models end up in the same basin of the loss landscape, which we call the pre-train basin, and thus have limited diversity. \nIn this work, we show that ensembles trained from a single pre-trained checkpoint may be improved by better exploring the pre-train basin, however, leaving the basin results in losing the benefits of transfer learning and in degradation of the ensemble quality. \nBased on the analysis of existing exploration methods, we propose a more effective modification of the Snapshot Ensembles (SSE) for transfer learning setup, StarSSE, which results in stronger ensembles and uniform model soups.",
+    "keywords": [
+      "ensembles",
+      "transfer learning",
+      "loss landscape basins",
+      "model soups"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NNooZoQpP4"
+  },
+  "review_fields": {
+    "summary": "This paper studies an interesting dilemma -- literature reports that ensembles work better if you end up in different \"basins\",  but pre-training often confines you to a single \"basin\". The question is therefore, what should you do? This paper answers that you should start out with a pre-trained model and _stay_ in the basin, but do so using StarSSE -- fine-tune once then fine-tune more times \"branching\" out from that first fine-tuned model. The solutions can be ensembled and also souped (weight-averaged).",
+    "strengths": "This paper tackles an interesting problem. I believe the community will find their results of interest. Some particular strenghts:\n- The proposed StarSSE method is well motivated and performs well on the datasets they examine. It seems like a practical modernization of SSE in the era of pre-trained networks.\n- I found the result particularly interesting: that if you leave the \"basin\" of the pre-trained model then you lose the benefits of pre-training.",
+    "weaknesses": "There are a few weaknesses that the authors could address to improve the paper:\n- The experiments are all very small scale for a paper whose main topic is pre-training. It is understandable to not be able to compare Global DE on larger problems but surely the authors could start out with a pre-trained network when contrasting SSE and StarSSE.\n- It seems in Figure 2 / Figure 3 that the runs may be overfitting (much higher train acc then test acc) -- could this be mitigated with standard interventions like label smoothing / data aug / stochastic depth?\n- There are terms in the paper which are used frequently but not formalized including \"basin\". This is OK but then strong claims involving these terms should be avoided (e.g., leaving the basin hurts model performance -- what does this actually mean? that you can no longer interpolate?).",
+    "questions": "- How do SSE and StarSSE compare when starting out with a large pre-trained network? For instance if the authors want to stick to image experiments than a pre-trained CLIP model is a good starting point. Here, you can already start out with a good \"zero-shot\" model.\n- How might the results change when using techniques to mitigate overfitting -- it seems like there is overfitting in some of the experiments.",
+    "limitations": "I would have like to see a limitations Section which discusses that all experiments are quite small scale."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1821,
+    "words": 309,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7ffc4201-34e9-426e-a5fa-6dd525247978",
+    "error": null,
+    "scored_chars": 1821
+  }
+}

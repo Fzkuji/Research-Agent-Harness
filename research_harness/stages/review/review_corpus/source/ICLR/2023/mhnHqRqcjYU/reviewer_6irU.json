@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "mhnHqRqcjYU",
+  "reviewer": "6irU",
+  "paper": {
+    "title": "DFPC: Data flow driven pruning of coupled channels without data.",
+    "authors": [
+      "Tanay Narshana",
+      "Chaitanya Murti",
+      "Chiranjib Bhattacharyya"
+    ],
+    "abstract": "Modern, multi-branched neural network architectures often possess complex interconnections between layers, which we call coupled channels (CCs). Structured pruning of CCs in these multi-branch networks is an under-researched problem, as most existing works are typically designed for pruning single-branch models like VGG-nets. While these methods yield accurate subnetworks, the improvements in inference times when applied to multi-branch networks are comparatively modest, as these methods do not prune CCs, which we observe contribute significantly to inference time. For instance, layers with CCs as input or output take more than 66% of the inference time in ResNet-50. Moreover, pruning in the data-free regime, where data is not used for pruning, is gaining traction owing to privacy concerns and computational costs associated with fine-tuning. Motivated by this, we study the problem of pruning CCs in the data-free regime. To facilitate the development of algorithms to prune CCs, we define Data Flow Couplings (DFCs) to enumerate the layers that constitute coupled connections and the associated transformation. Additionally, saliencies for pruning CCs cannot be gauged in isolation, as there may be discrepancies among the layerwise importance of CCs using conventional scoring strategies. This necessitates finding grouped saliencies to gauge the importance of all corresponding coupled elements in a network. We thus propose the Backwards Graph-based Saliency Computation (BGSC) algorithm, a data-free method that computes saliencies by estimating an upper bound to the reconstruction error of intermediate layers; we call this pruning strategy Data Flow driven Pruning of Coupled channels (DFPC). Finally, we show the efficacy of DFPC for models trained on standard datasets. Since we pruned coupled channels, we achieve up to 1.66x improvements in inference time for ResNet-101 trained on CIFAR-10 with a 5% accuracy drop without fine-tuning. With access to the ImageNet training set, we achieve significant improvements over the data-free method and see an improvement of at least 47.1% in speedup for a 2.3% accuracy drop for ResNet-50 against our baselines.",
+    "keywords": [
+      "Pruning",
+      "Data Free",
+      "Model Compression"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=mhnHqRqcjYU"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper focused on coupling the data flow to outputs and inputs, allowing for interconnections between outputs of\nmultiple layers. This led into the concept to prune CC without data to obtain aster latencies.",
+    "strength_and_weaknesses": "The algorithms and parameters were well outlined in this paper. In total, the contributions made in the paper were well set out.\n\nMore data visualisations could have been done to show the impact of this approach",
+    "clarity,_quality,_novelty_and_reproducibility": "The article was well written, and the novelty well understood.",
+    "summary_of_the_review": "Overall, this paper adds value to the body of knowledge.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

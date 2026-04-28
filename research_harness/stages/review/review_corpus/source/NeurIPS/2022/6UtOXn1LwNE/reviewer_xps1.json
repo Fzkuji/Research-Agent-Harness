@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "6UtOXn1LwNE",
+  "reviewer": "xps1",
+  "paper": {
+    "title": "Models of human preference for learning reward functions",
+    "authors": [
+      "W. Bradley Knox",
+      "Stephane Hatgis-Kessell",
+      "Serena Booth",
+      "Scott Niekum",
+      "Peter Stone",
+      "Alessandro G Allievi"
+    ],
+    "abstract": "The utility of reinforcement learning is limited by the alignment of reward functions with the interests of human stakeholders. One promising method for alignment is to learn the reward function from human-generated preferences between pairs of trajectory segments. These human preferences are typically assumed to be informed solely by partial return, the sum of rewards along each segment. We find this assumption to be flawed and propose modeling preferences instead as arising from a different statistic: each segment's regret, a measure of a segment's deviation from optimal decision-making. Given infinitely many preferences generated according to regret, we prove that we can identify a reward function equivalent to the reward function that generated those preferences. We also prove that the previous partial return model lacks this identifiability property without preference noise that reveals rewards' relative proportions, and we empirically show that our proposed regret preference model outperforms it with finite training data in otherwise the same setting. Additionally, our proposed regret preference model better predicts real human preferences and also learns reward functions from these preferences that lead to policies that are better human-aligned. Overall, this work establishes that the choice of preference model is impactful, and our proposed regret preference model provides an improvement upon a core assumption of recent research.",
+    "keywords": [
+      "reinforcement learning",
+      "learning reward functions",
+      "reward design",
+      "alignment",
+      "learning from preferences",
+      "regret",
+      "advantage",
+      "successor features"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=6UtOXn1LwNE"
+  },
+  "review_fields": {
+    "comment": "Thanks for your response. I appreciate the details and clarifications.\n\n> Noiseless preferences are not theoretically interesting or should be connected to past work. (@xps1, @SeBN)\n\nI’m not sure I understand this. My concern with this section was not related to the theoretical significance of noiseless settings (by the way, I do think it’s important). I don’t think SeBN suggested this either, so can you clarify what you mean by this?\n\n\nIn any case, I don’t think either of our points have been addressed here. I'm skeptical of the claimed difference between the regret model and the return model that is presented in Section 3 because it does not appear to be a fair comparison. As SeBN put it quite well: 3.1 and 3.2 do not satisfy the same premise. The noiseless setting falls outside the problem setting established in Eq 2 and 5 where a logistic model is used - it’s misspecified for this model class for finite rewards. Meanwhile, Theorem 3.1 is using this realizability to derive the positive result. This is used in the first line of the proof. I think the comparison would be fair if either the negative result of Theorem 3.2 were strengthened to the case where preference function is realizable but it still fails to be identifiable, or the positive result of Theorem 3.1 were shown to extend to a non-trivial class of problems where there is misspecification."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

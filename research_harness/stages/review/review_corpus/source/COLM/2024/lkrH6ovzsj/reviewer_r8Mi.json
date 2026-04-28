@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "lkrH6ovzsj",
+  "reviewer": "r8Mi",
+  "paper": {
+    "title": "Multi-FAct: Assessing Factuality of Multilingual LLMs using FActScore",
+    "authors": [
+      "Sheikh Shafayat",
+      "Eunsu Kim",
+      "Juhyun Oh",
+      "Alice Oh"
+    ],
+    "abstract": "Evaluating the factuality of long-form large language model (LLM)-generated text is an important challenge. Recently there has been a surge of interest in factuality evaluation for English, but little is known about the factuality evaluation of multilingual LLMs, specially when it comes to long-form generation.\nThis paper systematically evaluates multilingual LLMs' factual accuracy across languages and geographic regions.\nWe introduce a simple pipeline for multilingual factuality evaluation, by applying FActScore \\citep{min2023factscore} for diverse languages. In addition to evaluating multilingual factual generation, we evaluate the factual accuracy of long-form text generation in topics that reflect regional diversity. We also examine the feasibility of running the FActScore pipeline using non-English Wikipedia and provide comprehensive guidelines on multilingual factual evaluation for regionally diverse topics.",
+    "keywords": [
+      "multilinguality",
+      "factuality",
+      "knowledge representation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=lkrH6ovzsj"
+  },
+  "review_fields": {
+    "summary": "It is nice that this paper tackles the multilingual challenge – this is very, very underexplored in our field. Overall, the paper makes a few design decisions that I would have probably done differently, but the authors do justify their decisions relatively well and I think I would be able to replicate their methods. In particular, I think the paper could be improved with two experiments:\n•\tIncluding at least one small experiment using a non-LLM translation compared to a translation LLM.\n•\tTrying to see how FActScore would work on a language without translation. Aka an experiment similar to section 4.1, but just done monolingually in the languages (such as Bengali generation and Bengali evaluation).\n\nOne of my first questions when I read the paper was “Why translate with GPT-3.5?”. The authors do address this. It is ok for some languages, but if you are going to do automatic evaluation, another commercial solution like Google Translate may make more sense – especially for low-resource languages (Kocmi et al, 2023; Robinson et al., 2023). The authors make a nice point about gender in Google Translate and why they did not use it, but I would have still liked to have at lease seen one experiment showing what happens if you use that as well. A comparison even for one language with Google Translate and GPT-3.5.\n\n\nI would have also liked to have seen how the method works monolingually (aka not translating to English). Again, the authors make claims as to why they made these decisions such as “which makes it difficult to compare cross-lingual factuality if the knowledge base is different.” However, it would be nice to still see how it works in different resource settings. You are generating in that language, it could be another line or two in some tables. This feels like it could also answer some of my questions about translationese impacts.\n\nOverall, this paper is a nice attempt at multilingual fact checking, which is woefully underexplored. This alone is a worthwhile contribution to the field.",
+    "reasons_to_accept": "There are very few papers looking at multilingual fact checking in LLMs. The field needs more of these.",
+    "reasons_to_reject": "I'd like to see the following two experiments:\n•\tIncluding at least one small experiment using a non-LLM translation compared to a translation LLM.\n•\tTrying to see how FActScore would work on a language without translation. Aka an experiment similar to section 4.1, but just done monolingually in the languages (such as Bengali generation and Bengali evaluation).",
+    "questions_to_authors": "Figure 5, the x-axis should be the same between a and b. Either (0.0-1.0) for both or (0.0-0.8) for both - not for 0.8 for one and 1.0 for the other."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:12Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:12Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 619,
+    "words": 107,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/51dd73e0-b1d7-44e0-a8c5-1426e934fa9b",
+    "error": null,
+    "scored_chars": 619
+  }
+}

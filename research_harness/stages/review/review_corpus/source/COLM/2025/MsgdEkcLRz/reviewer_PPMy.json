@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "MsgdEkcLRz",
+  "reviewer": "PPMy",
+  "paper": {
+    "title": "LawFlow: Collecting and Simulating Lawyers’ Thought Processes on Business Formation Case Studies",
+    "authors": [
+      "Debarati Das",
+      "Khanh Chi Le",
+      "Ritik Sachin Parkar",
+      "Karin De Langis",
+      "Brendan Madson",
+      "Chad M. Berryman",
+      "Robin M Willis",
+      "Daniel H Moses",
+      "Brett McDonnell",
+      "Daniel Schwarcz",
+      "Dongyeop Kang"
+    ],
+    "abstract": "Legal practitioners, particularly those early in their careers, face complex, high-stakes tasks that require adaptive, context-sensitive reasoning. While AI holds promise in supporting legal work, current datasets and models are narrowly focused on isolated subtasks and fail to capture the end-to-end decision-making required in real-world practice. To address this gap, we introduce _LawFlow_, a dataset of complete end-to-end legal workflows collected from trained law students, grounded in real-world business entity formation scenarios. Unlike prior datasets focused on input-output pairs or linear chains of thought, _LawFlow_ captures dynamic, modular, and iterative reasoning processes that reflect the ambiguity, revision, and client-adaptive strategies of legal practice.\nUsing _LawFlow_, we compare human and LLM-generated workflows, revealing systematic differences in structure, reasoning flexibility, and plan execution. Human workflows tend to be modular and adaptive, while LLM workflows are more sequential, exhaustive, and less sensitive to downstream implications. Our findings also suggest that legal professionals prefer AI to carry out supportive roles, such as brainstorming, identifying blind spots, and surfacing alternatives, rather than executing complex workflows end-to-end. Our results highlight both the current limitations of LLMs in supporting complex legal workflows and opportunities for developing more collaborative, reasoning-aware legal AI systems. All data and code are available on our project page (https://minnesotanlp.github.io/LawFlow-website/)",
+    "keywords": [
+      "pretraining data; synthetic data; reasoning; legal perspectives; legal drafting; LLM; chain of thought"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=MsgdEkcLRz"
+  },
+  "review_fields": {
+    "summary": "This work describes LawFlow, a dataset aimed at supporting LLM-based systems in the task of defining  complete end-to-end legal workflows, in contrast to current approaches that typically focus on different sub-tasks.  The framework is based on real workflows extracted by trained law students that cover from initial intake to operating agreement drafting, and are decomposed into modular subtasks (client elicitation, document review, iterative editing, ...).\n\nThe paper describes the dataset in detail and shows a comparison between LLM and human generated legal workflows, analysing the differences and detecting improvement points.\n\nThe paper is well written and motivated and addresses an interesting topic. AI applications in the legal domain have gained enormous popularity in the last decade. However, there are still gaps and this work comes to fill one of them. Particularly, it treats the legal process not atomically or focusing on the outcomes only, but as a whole (what they call \"chain-of-decisions\"). This study has served to highlight the limitations of LLM-based approaches, paving the way to future approaches that will add more flexibility and revisioning capabilities. \n\nThe workflow preparation and annotation process is described in detail, as well as the comparative (human vs LLMs) analysis. \n\nThe paper describes still exploratory, non-conclusive, work, but progresses in the right direction and illustrates interesting findings in automatic workflow construction.",
+    "reasons_to_accept": "* The paper is well written and motivated and addresses an interesting topic. \n* The workflow preparation and annotation process is described in detail, as well as the comparative (human vs LLMs) analysis.",
+    "reasons_to_reject": "* The paper describes still exploratory, non-conclusive, work\n* More technical details could be given about the LLM-based workflow preparation+ execution. For instance, they mention using two reasoning models, but not how they are combined. \n* I miss a reference to the degree of competence of the involved law students. It can make a huge difference if they are undergraduate, master students, or PhD students. I also miss the number of students involved in the dataset preparation. \n* The study grounds on workflows for \"operating agreement\" preparation. I miss a discussion on how to generalise it to other type of legal activities."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 839,
+    "words": 135,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c03cccc9-3989-4d67-a4bc-8acf217fcdb2",
+    "error": null,
+    "scored_chars": 842
+  }
+}

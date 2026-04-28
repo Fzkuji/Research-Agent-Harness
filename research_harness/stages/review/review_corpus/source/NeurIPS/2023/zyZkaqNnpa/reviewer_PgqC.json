@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "zyZkaqNnpa",
+  "reviewer": "PgqC",
+  "paper": {
+    "title": "Don’t blame Dataset Shift! Shortcut Learning due to Gradients and Cross Entropy",
+    "authors": [
+      "Aahlad Manas Puli",
+      "Lily H Zhang",
+      "Yoav Wald",
+      "Rajesh Ranganath"
+    ],
+    "abstract": "Common explanations for shortcut learning assume that the shortcut improves prediction only under the training distribution. Thus, models trained in the typical way by minimizing log-loss using gradient descent, which we call default-ERM, should utilize the shortcut. However, even when the stable feature determines the label in the training distribution and the shortcut does not provide any additional information, like in perception tasks, default-ERM exhibits shortcut learning. Why are such solutions preferred when the loss can be driven to zero when using the stable feature alone? By studying a linear perception task, we show that default-ERM’s preference for maximizing the margin, even without overparameterization, leads to models that depend more on the shortcut than the stable feature. This insight suggests that default-ERM’s implicit inductive bias towards max-margin may be unsuitable for perception tasks. Instead, we consider inductive biases toward uniform margins. We show that uniform margins guarantee sole dependence on the perfect stable feature in the linear perception task and suggest alternative loss functions, termed margin control (MARG-CTRL), that encourage uniform-margin solutions. MARG-CTRL techniques mitigate shortcut learning on a variety of vision and language tasks, showing that changing inductive biases can remove the need for complicated shortcut-mitigating methods in perception tasks.",
+    "keywords": [
+      "shortcut learning",
+      "spurious correlations",
+      "perfect stable feature",
+      "perception tasks",
+      "implicit bias in optimization",
+      "improving inductive biases"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=zyZkaqNnpa"
+  },
+  "review_fields": {
+    "summary": "This paper provides an in-depth analysis of the phenomenon of \"shortened learning\" in machine learning models, especially in the context of perceptual tasks. The authors confirm that basic empirical risk minimization (ERM) methods tend to prefer models that depend on shortcut features, even when models can achieve zero loss using only stable features. They attribute this to ERM's inductive bias to maximize margins across all samples. To address this, the authors propose an alternative loss function biased inductively with a uniform margin called MARG-CTRL. The paper demonstrates that MARG-CTRL mitigates shortcut learning on multiple vision and language tasks without the use of annotations of the shortcut feature in training or even validation. They also show that MARG-CTRL performs on par or better than the more complex and costly two-step shortcut mitigation method.",
+    "strengths": "-This paper presents a thorough analysis of the shortcut learning problem. \n-The authors propose a novel solution, MARG-CTRL, which has been shown to effectively mitigate shortcut learning in several tasks.\n-The paper is well-written and easy to understand.",
+    "weaknesses": "-Although MARG-CTRL is shown to perform well across different tasks, it is not clear how MARG-CTRL perform in scenarios where the shortcut features and the stable features are highly correlated.\n-The paper compares MARG-CTRL with two-stage shortcut-mitigating methods like JTT and CNC, it would be helpful to understand the specific scenarios where MARG-CTRL outperforms these methods and where it does not.",
+    "questions": "-How does MARG-CTRL perform in scenarios where the shortcut features and the stable features are highly correlated? Does this affect the effectiveness of MARG-CTRL?\n-What are the trade-offs involved in using MARG-CTRL versus two-stage shortcut-mitigating methods??\n-Are there specific scenarios or types of tasks for which MARG-CTRL may not be as effective?",
+    "limitations": "Please see the weaknesses part."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1057,
+    "words": 156,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ae06f191-48ce-41d0-b015-3594791dcf58",
+    "error": null,
+    "scored_chars": 1058
+  }
+}

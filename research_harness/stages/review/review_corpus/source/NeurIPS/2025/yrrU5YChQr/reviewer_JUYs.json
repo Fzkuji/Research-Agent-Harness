@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "yrrU5YChQr",
+  "reviewer": "JUYs",
+  "paper": {
+    "title": "Vulnerable Data-Aware Adversarial Training",
+    "authors": [
+      "Yuqi Feng",
+      "Jiahao Fan",
+      "Yanan Sun"
+    ],
+    "abstract": "Fast adversarial training (FAT) has been considered as one of the most effective alternatives to the computationally-intensive adversarial training. Generally, FAT methods pay equal attention to each sample of the target task. However, the distance between each sample and the decision boundary is different, learning samples which are far from the decision boundary (i.e., less important to adversarial robustness) brings additional training cost and leads to sub-optimal results. To tackle this issue, we present vulnerable data-aware adversarial training (VDAT) in this study. Specifically, we first propose a margin-based vulnerability calculation method to measure the vulnerability of data samples. Moreover, we propose a vulnerability-aware data filtering method to reduce the training data for adversarial training thus improve the training efficiency. The experiments are conducted in terms of adversarial training and robust neural architecture search on CIFAR-10, CIFAR-100, and ImageNet-1K. The results demonstrate that VDAT is up to 76% more efficient than state-of-the-art FAT methods, while achieving improvements regarding the natural accuracy and adversarial accuracy in both scenarios. Furthermore, the visualizations and ablation studies show the effectiveness of both core components designed in VDAT.",
+    "keywords": [
+      "Adversarial Training",
+      "Adversarial Robustness",
+      "Decision Boundary Analysis"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=yrrU5YChQr"
+  },
+  "review_fields": {
+    "summary": "This paper proposes modifying fast adversarial training (FAT) methods by making it more probable to train on adversarial examples for vulnerable training examples, creating vulnerable data-aware adversarial training (VDAT). The vulnerability of a training example is evaluated by computing the difference between the margin between the clean training example and the decision boundary and the margin between a generated adversarial example and the decision boundary. In order to have this margin account for decision boundaries for multiple classes, the paper proposes a soft margin. The probability of training on a generated adversarial example is then computed, with adversarial examples corresponding to training examples that are more vulnerable than average being more likely to be selected for use for a training parameter update. Experiments on CIFAR-10, CIFAR-100, and ImageNet-1K show that the proposed method outperforms previous methods in both natural accuracy and robust accuracy. Additional evidence for the quality of the proposed method is given by showing that combining it with neural architecture search (NAS) also leads to performance improvement.",
+    "strengths_and_weaknesses": "Quality: This paper seems to be technically sound and the proposed methods appear to be properly applied. The claims seem to be supported by the experimental results. \n\nClarity: The paper is clear.\n\nSignificance: The proposed method is of interest to those that want to use adversarial training for developing more robust networks.\n\nOriginality: The proposed method is, to my knowledge, novel.",
+    "questions": "Line 174: Should R(0,1) denote a uniform random value ranged from zero to one?\n\nWhat do the authors see as the value added by Proposition 4.2?",
+    "limitations": "The big limitation of the method appears to be that it slows down FAT. This is discussed in the paper.",
+    "final_justification": "The paper covers a novel approach to adversarial training that focuses on vulnerable examples. The approach is thoroughly evaluated and appears to have better results than previous methods."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

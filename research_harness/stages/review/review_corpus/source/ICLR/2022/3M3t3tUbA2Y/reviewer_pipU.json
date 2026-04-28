@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "3M3t3tUbA2Y",
+  "reviewer": "pipU",
+  "paper": {
+    "title": "DreamerPro: Reconstruction-Free Model-Based Reinforcement Learning with Prototypical Representations",
+    "authors": [
+      "Fei Deng",
+      "Ingook Jang",
+      "Sungjin Ahn"
+    ],
+    "abstract": "In model-based reinforcement learning (MBRL) such as Dreamer, the approaches based on observation reconstruction\noften fail to discard task-irrelevant details, thus struggling to handle visual distractions or generalize to unseen distractions. To address this issue, previous work has proposed to contrastively learn the latent representations and its temporal dynamics, but showed inconsistent performance, often worse than Dreamer. Although, in computer vision, an alternative prototypical approach has often shown to be more accurate and robust, it is elusive how this approach can be combined best with the temporal dynamics learning in MBRL. In this work, we propose a reconstruction-free MBRL agent, called DreamerPro, to achieve this goal. Similar to SwAV, by encouraging uniform cluster assignment across the batch, we implicitly push apart the embeddings of different observations. Additionally, we let the temporal latent state to 'reconstruct' the cluster assignment of the observation, thereby relieving the world model from modeling low-level details. We evaluate our model on the standard setting of DeepMind Control Suite, and also on a natural background setting, where the background is replaced by natural videos irrelevant to the task. The results show that the proposed model is consistently better than the previous models.",
+    "keywords": [
+      "model-based reinforcement learning",
+      "representation learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=3M3t3tUbA2Y"
+  },
+  "review_fields": {
+    "comment": "Thank you for your response. I believe your comment addressed one of the major issues (motivation). I agree that resource can be an issue in this case. Unfortunately. it does not address the reminder of the issues (weak baselines and lack of analysis). This paper has the potential to be much more impactful, if compared if stronger baselines and particularly if it provides more analysis and insights. That's why, in its current form, I have to stick to my current recommendation."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 481,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/c711c1f9-ff66-48d3-aa57-64924bec109e",
+    "error": null,
+    "scored_chars": 481
+  }
+}

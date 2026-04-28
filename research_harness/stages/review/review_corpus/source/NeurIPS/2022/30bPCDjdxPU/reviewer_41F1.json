@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "30bPCDjdxPU",
+  "reviewer": "41F1",
+  "paper": {
+    "title": "Faster Reinforcement Learning with Value Target Lower Bounding",
+    "authors": [
+      "Le Zhao",
+      "Wei Xu"
+    ],
+    "abstract": "We show that an arbitrary lower bound of the maximum achievable value can be used to improve the Bellman value target during value learning.  In the tabular case, value learning using the lower bounded Bellman operator converges to the same optimal value as using the original Bellman operator, at a potentially faster speed.  In practice, discounted episodic return in episodic tasks and n-step bootstrapped return in continuing tasks can serve as lower bounds to improve the value target.  We experiment on Atari games, FetchEnv tasks and a challenging physically simulated car push and reach task.  We see large gains in sample efficiency as well as converged performance over common baselines such as TD3, SAC and Hindsight Experience Replay (HER) in most tasks, and observe a reliable and competitive performance against the stronger n-step methods such as td-lambda, Retrace and optimality tightening.  Prior works have already successfully applied a special case of lower bounding (using episodic return), but are limited to a small number of episodic tasks.  To the best of our knowledge, we are the first to propose the general method of value target lower bounding (with possibly bootstrapped return), to demonstrate its optimality in theory, and effectiveness in a wide range of tasks over many strong baselines.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=30bPCDjdxPU"
+  },
+  "review_fields": {
+    "summary": "This paper proposes value target lower bounding to improve the Bellman value target during value function learning. The proposed method computes and utilizes a lower bound for the value target during Bellman backup, and the resulting lower-bounded Bellman operator is claimed to converge to the same optimal value as using the vanilla Bellman operator in the tabular case. Additionally, the paper presents several ways of estimating the lower bound function in practice, such as using the episodic return in episodic tasks and n-step bootstrapped return in non-episodic tasks, and shows the effectiveness of value target lower bounding on several RL environments.",
+    "strengths_and_weaknesses": "Strengths:\n\n- The related work is well cited and discussed in the paper, and it is clear how this work differs from previous contributions. \n\n- The proposed method is simple, reproducible, and compatible with most state-of-the-art RL algorithms. \n\n\nWeaknesses:\n- There are several technical concerns in the paper. Specifically, \n\n    - I believe the main theoretical result, Theorem 2.3, does not hold if the lower bound function $f$ is fixed (or static). In the proof, for any $s$, where $f(s) \\geq v^*(s)$ and $f(s) \\geq B(v)(s)$, we have\n    $$ |B_f(v)(s) – v^*(s)| = |max(B(v)(s), f(s)) – v^*(s)| = |f(s) – v^*(s)| = f(s) – v^*(s) = Constant$$\n    So, the distance to the optimal value would not shrink under the new lower-bounded Bellman operator. If $f$ is updated together with the value function during learning, please do make this clear and clearly show how $f$ is updated together with $v$ in the main paper. Based on the current presentation, Theorem 2.3 does not hold. \n\n\n    - Results from value iteration (VI) do not directly generalize to RL settings where the transition dynamics and the reward function are unknown to the RL agent. This leads to a fundamental problem in RL that does not exist in VI, exploration vs. exploitation. However, the paper did not mention or address/discuss the exploration problem when transitioning from VI to RL, and thus the proposed method is not well justified in the RL setting.              \n\n    \n    - In general, the episodic return (or Monte Carlo estimate of the return) is not guaranteed to be a lower bound of the optimal value (or the expected return following an optimal policy). Although the authors mentioned this in Section 6 (Related Works) as the limitation of their work, it is still concerning to me in terms of the soundness and the algorithmic design of the proposed method.                \n\n\n- The clarity of the paper could be further improved, and the paper needs to be better organized in my opinion. I encourage the authors to move key results and plots to the main paper. Putting all experimental figures in the appendix would jeopardize the readability of the paper.     \n\n\nOverall, the paper feels more like a work in progress to me, and certain technical details may need a bit rework and the paper could be better organized. Unfortunately, I don’t think the current version can be accepted and vote for rejection.",
+    "questions": "Questions & Suggestions:\n\n\n1. [Technical Part]\n\n\n- 1.a. Please check Theorem 2.3. If $f$ is updated during training, please include the update rule/equation for $f$ in the main paper and in Algorithm 1.          \n\n\n- 1.b. Value iteration (VI) results do not directly generalize to RL settings and are not sufficient to rigorously justify performance in RL in my opinion. The authors may refer to Rmax [1] or randomized value function [2] for examples of rigorous analysis in the RL setting. \n\n\n- 1.c. Exploration is crucial for efficient/faster RL. In the example of Section 4.3, it would be more interesting to discuss for instance how value target lower bounding may help the agent reach the target state faster (with fewer number of episodes of training). Propagating the value back is a less interesting problem once the target state has been reached.                            \n\n\n2. [Clarity]\n\n\n- 2.a. In the actual implementation, is the lower bound function $f(s)$ fixed? or being constantly updated? It seems that the observed episodic return is written into the buffer and read out during training as the lower bound. So, $f(s)$ is updated by the newly-observed episodic return? Please try to clarify this in the paper revision.    \n\n\n- 2.b. Is a larger value always a better Bellman target? Breakout in Figure 2 and 3 could be a good counter-example. In Figure 3, lb­-DR on Breakout shows consistently 25-30% larger value targets than the baseline, which is also the highest percentage among all the 20 environments. However, the performance of lb-DR is much worse than the baseline (and I believe Breakout is a deterministic environment where the proposed lower-bounding should apply based on the claims in the paper). Further investigation is needed to better understand when lower bounding the target is helpful.         \n\n\n[1] Brafman, Ronen I., and Moshe Tennenholtz. \"R-max-a general polynomial time algorithm for near-optimal reinforcement learning.\" Journal of Machine Learning Research 3.Oct (2002): 213-231.\n\n[2] Osband, Ian, et al. \"Deep Exploration via Randomized Value Functions.\" J. Mach. Learn. Res. 20.124 (2019): 1-62.",
+    "limitations": "The authors have mentioned the limitation of their work in Section 6, and I would encourage the authors to discuss a bit more on scenarios where the proposed lower-bounding method may fail, e.g., why the performance is poor on Breakout? The potential negative societal impact has not been discussed in the paper. As an illustrative example, what if the algorithm was used by a malicious user to build a robot? Targeting tasks with (sparse) rewards that lead to some harmful behaviors for a society? I believe such kind of scenario could be discussed. In addition, what can and should be done to prevent it from happening?"
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

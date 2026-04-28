@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "n7XbkHOwKn6",
+  "reviewer": "fg6U",
+  "paper": {
+    "title": "CogVideo: Large-scale Pretraining for Text-to-Video Generation via Transformers",
+    "authors": [
+      "Wenyi Hong",
+      "Ming Ding",
+      "Wendi Zheng",
+      "Xinghan Liu",
+      "Jie Tang"
+    ],
+    "abstract": "Large-scale pretrained transformers have created milestones in text (GPT-3) and text-to-image (DALL-E) generation. Its application on video generation is still faced difficulties: The huge computation makes training from scratch unaffordable; The scarcity and weak relevance of text-video datasets hinder the model understanding complex movements. In this work, we present 9-billion-parameter CogVideo, which is trained by inheriting the knowledge from the pretrained large-scale text-to-image model, CogView2. We also propose multi-frame-rate hierarchical training strategy to better align text and video clips. As (probably) the first open-source large-scale pretrained text-to-video model, the CogVideo outperforms the previous public available models at a large margin in both machine and human evaluation.",
+    "keywords": [
+      "pretraining"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=n7XbkHOwKn6"
+  },
+  "review_fields": {
+    "summary": "This work addresses the large-scale pre-training in the open-domain Text-to-Video Generation. The major challenge to this task is the lack of large text-video paired datasets available and the weak relevance between them. In this paper, the authors propose a 9B-parameter transformer model CogVideo which is trained by inheriting the learned spatial semantics from a pre-trained text-to-image model (CogView2 in this paper).\n\nThey claim that the key difference between the text-to-video generation and the text-to-image generation is that the former needs huge of paired data to infer both spatial and temporal correlation between two modalities while the latter only requires the learning of spatial correlation. Therefore, they propose a dual-attention channel that adds an additional attention layer based on original structure of CogView2 to address the learning of temporal correlation (as illustrated in Figure 3). During training, it only optimizes the parameters of newly added temporal attention layer while keep all the parameters of CogView2 frozen.\n\nTo address the weak alignment of text and variable-length video (the example in Line 32-36 gives a good illustration of this issue), they propose multi-frame-rate hierarchical training. Concretely, it involves a two-stage generation process. In stage 1, they propose to add a frame-rate token to the text to generate the image frames at low frame rate. Then in stage 2, they introduce another frame interpolation transformer to generate the immediate transition frames between the generated frames of the first transformer model in stage 1.\n\nThe proposed hierarchical generation framework looks promising on long videos given a text input. The idea of interpolation transformer model that can utilize bidirectional frame context to finish the interpolation of current frame also make sense. However, there are some critical weaknesses and questions listed below.",
+    "strengths_and_weaknesses": "**Strengths:**\n1) The proposed multi-frame-rate hierarchical training has the potential on the text-to-video generation, especially the idea of frame interpolation transformer model that can utilize the bidirectional frame context to generate immediate frame. It indeed looks a promising solution to handle long video generation given a text input.\n2) The proposed CogVideo inherits the parameters of a pre-trained text-to-image models and avoid the expensive pre-training from scratch. \n3) In addition, the authors claim that they will open-source the proposed large-scale text-to-video generation model. This is another contribution to the community.\n\n**Weaknesses:**\n1) In the main experiment results in Table 1, it seems that CogVideo obviously underperforms TATS-base [9] on UCF-101 dataset and TriVD-GAN-FP [16] on Kinetics-600. This conflicts with the claim in abstract. Is that due to the issue of metric itself or other reasons? Could you explain more about results in Table 1 since I cannot find related information in the main text?\n2) It is not clear how much the temporal attention channel contributes to the performance gains of CogVideo. In the ablation study, it does not include the comparison of with/without temporal attention layer, i.e., compare the performance gap of directly fine-tuning CogView2’s weights and keeping CogView2’s weights frozen while tuning the temporal attention layer.\n3) The qualitative evaluation only includes one case analysis, it would be more convincing to provide more visualized comparison between different variants. Since the visualization samples are much more intuitive than evaluation metrics to directly judge the real performance of the model.",
+    "questions": "**Questions for the authors:**\n1) Why are there no detailed analysis about main experimental results in Table 1 in the main text of the paper?\n2) It seems there are only an ablation study on Kinetics-600. Why not including the ablation study on UCF-101 datasets in Section 5.3? It would be more convincing to cover the comparison results on UCF-101.\n3) In Figure 7, it looks there is no obvious performance gap between (a) and (e). Thus, what’s the advantage of hierarchical generation from the perspective of visualization results, not just in human evaluation results. Could you provide more visualized case analysis in appendix later to justify the superior performance of your proposed method?\n4) In Section 3.2, Is the restricted receptive field formulation in Eq. 4 like the 3D nearby attention mechanism in NUWA [36]? If yes, what’s the difference between two?\n5) How many seconds do the longest videos that your method generate can last? In my understanding, this is the key advantage of the hierarchical generation framework.\n6) How to understand the recursive process of hierarchical generation? Do you mean that immediate interpolated (generated) frames at each iteration will be used to generate new immediate frames between previous ones? Why not directly generating all immediate frames at once?\n\n**Minor issues:**\n1) Could you please add a citation or hyperlink for DeepSpeed in the paper later? Since it is a great work in the community, you should mention it at least.\n2) Grammar error in Line 287, “samples generated hierarchically performs…” => “samples … perform …”.",
+    "limitations": "The major limitation is that how long the generated videos by the proposed CogVideo can last. The submitted demos show that the generated videos can only last several seconds. It would be more exciting that CogVideo can generate longer videos for given text input."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "an_ndI09oVZ",
+  "reviewer": "kbJr",
+  "paper": {
+    "title": "Deep banach space kernels",
+    "authors": [
+      "Mrityunjay Bhardwaj"
+    ],
+    "abstract": "The recent success of deep learning has encouraged many researchers to explore the deep/concatenated variants of classical kernel methods. Some of which includes MLMKL, DGP and DKL. Although, These methods have proven to be quite useful in various real-world settings. They still suffer from the limitations of only utilizing kernels from Hilbert spaces. In this paper, we address these shortcomings by introducing a new class of concatenated kernel learning methods that use the kernels from the reproducing kernel Banach spaces(RKBSs). These spaces turned out to be one of the most general spaces where a reproducing Kernel exists. We propose a framework of construction for these Deep RKBS models and then provide a representer theorem for regularized learning problems. We also describe the relationship with its deep RKHS variant as well as standard Deep Gaussian Processes. In the end, we construct and implement a two-layer deep RKBS model and demonstrate it on a range of machine learning tasks.",
+    "keywords": [
+      "RKBS",
+      "RKHS",
+      "concatenated kernel learning",
+      "representation learning",
+      "deep learning",
+      "MLMKL",
+      "Deep Gaussian Processes",
+      "gaussian processes",
+      "kernel machines"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=an_ndI09oVZ"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper presents a means of constructing deep (concatenated) reproducing kernel Banach space kernels.  The main contribution appears to be a representor theory for concatenated Banach space kernels.  Some experimental results are provided to accompany this result.",
+    "main_review": "While I like the idea underlying this paper I found the paper somewhat unsatisfying.  Specifically:\n\n- unclear/lack of attribution: particularly for the background material, several theorems and definitions are taken almost word-for-word from Lin et al, 2019b.  For example the definition of RKBS corresponds to definition 1.1 in Lin et al, the feature-map construction is the boxed text on page 4 of Lin et al, and theorem 2.1 is the same in both this and Lin et al.  While I understand that re-wording is often tedious, at the very least a simple parenthetical citation (for example \"Theorem 2.1 (see theorem 2.1 in Lin et al): ...\") seems to be called for.\n\n- Related to the above, theorem 2.2 uses notation $A^\\vdash$ that isn't (as far as I can tell) introduced at all in the submission, which makes understanding somewhat difficult.\n\n- Continuing on the question of notation, what is $e_{k_2}$ in section 3.1?  I'm working on the assumption that this is some form of basis vector set (after all this is vector-valued regression) but this needs to be clarified.\n\n- Perhaps I am wrong, but (3.13) looks like it would, in practice, act like an RKBS with a N hyper-parameters and \\mathcal{O} (N^2) computation time.  I am curious how this affects the performance of an algorithm using such a kernel - in my experience kernels this complicated can have a severe effect on training and evaluation times, particularly for large datasets!\n\n- The experimental section is unsatisfactory.  A single experiment is described, but the size of the training set is not specified.  50 trials are completed, but no error bars are included.  A link to code is given but the algorithm is not described and training issues (training times etc) are not discussed.\n\nTo be clear I think this avenue of research is fascinating and potentially important, but I feel that the deficits of the paper need to be addressed first.",
+    "summary_of_the_review": "- The premise is interesting.\n- The clarity of attribution in the background section needs to be worked on.\n- \"Niche\" notations used but not defined.\n- Experimental results on a single dataset without important details (training set size, training times, details of training algorithm etc0.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2188,
+    "words": 367,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f889f3b6-a489-42bd-bc64-0d84cddea234",
+    "error": null,
+    "scored_chars": 2196
+  }
+}

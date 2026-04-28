@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "oN9STRYQVa",
+  "reviewer": "WJVa",
+  "paper": {
+    "title": "Synthetic Data Generation and Multi-Step Reinforcement Learning for Reasoning and Tool Use",
+    "authors": [
+      "Anna Goldie",
+      "Azalia Mirhoseini",
+      "Hao Zhou",
+      "Irene Cai",
+      "Christopher D Manning"
+    ],
+    "abstract": "Reinforcement learning has been shown to improve the performance of large language models. However, traditional approaches like RLHF or RLAIF treat the problem as single-step. As focus is shifting towards solving more complex reasoning and agentic tasks, language models must take multiple steps of text generation, reasoning and environment interaction before generating a solution. We propose a synthetic data generation and RL methodology targeting multi-step optimization scenarios. This approach, called Step-Wise Reinforcement Learning (SWiRL), iteratively generates multi-step reasoning and tool use data, and then learns from that data. It employs a simple step-wise decomposition that breaks each multi-step trajectory into multiple sub-trajectories corresponding to each action by the original model. It then applies synthetic data filtering and RL optimization on these sub-trajectories. We evaluated SWiRL on a number of multi-step tool use, question answering, and mathematical reasoning tasks. Our experiments show that SWiRL outperforms baseline approaches by 21.5\\%, 12.3\\%, 14.8\\%, 11.1\\%, and 15.3\\% in relative accuracy on GSM8k, HotPotQA, CofCA, MuSiQue, and BeerQA, respectively. Excitingly, the approach exhibits generalization across tasks: for example, training only on HotPotQA (text question-answering) improves zero-shot performance on GSM8k (a math dataset) by 16.9\\%.",
+    "keywords": [
+      "Large Language Models",
+      "Reinforcement Learning",
+      "Multi-Step Reasoning",
+      "Tool Use",
+      "Synthetic Data"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=oN9STRYQVa"
+  },
+  "review_fields": {
+    "summary": "* This paper proposes to apply multi-step reinforcement learning to improve LLMs' reasoning and tool use. While multi-step RL has already been explored in LLMs, the contribution of this paper should be considered as the introduction of a teacher LLM as a process reward model (PRM) to provide reward in the tool use area.\n\n* The writing and clarity of this paper can be further improved. Some key contributions and novelties in the paper are not easy to capture.\n\n* The experiment results are generally good, demonstrating the effectiveness of the proposed method in Gemma/ Gemini. One concern should be the limited number of teacher/ student models used in the experiment, which calls into question the generalization and robustness of the proposed method.",
+    "reasons_to_accept": "* This paper explores the effect of multi-step RL in tool use, which is an important area that should benefit from RL training intuitively.\n\n* The experiment results are good. The authors demonstrate that their method improves the base model's performance significantly and outperforms vanilla SFT by a considerable margin. Additionally, some insights they provide about the selection of rejection sampling and reward methods can also benefit future works in that area.",
+    "reasons_to_reject": "* This work appears somewhat incremental and engineering-oriented. The authors integrate several existing techniques—multi-step reinforcement learning, data synthesis with rejection sampling, and the use of LLMs as process reward models—and apply them to the task of tool use.\n\n* The experimental evaluation is limited to a single student-teacher model pair, which weakens the generalizability of the conclusions and findings."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 897,
+    "words": 131,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/10941440-85be-4b85-8b32-8ac34873a34a",
+    "error": null,
+    "scored_chars": 897
+  }
+}

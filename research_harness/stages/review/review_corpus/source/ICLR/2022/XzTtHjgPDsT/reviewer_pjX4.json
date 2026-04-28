@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "XzTtHjgPDsT",
+  "reviewer": "pjX4",
+  "paper": {
+    "title": "Coordination Among Neural Modules Through a Shared Global Workspace",
+    "authors": [
+      "Anirudh Goyal",
+      "Aniket Rajiv Didolkar",
+      "Alex Lamb",
+      "Kartikeya Badola",
+      "Nan Rosemary Ke",
+      "Nasim Rahaman",
+      "Jonathan Binas",
+      "Charles Blundell",
+      "Michael Curtis Mozer",
+      "Yoshua Bengio"
+    ],
+    "abstract": "Deep learning has seen a movement away from representing examples with a monolithic hidden state towards a richly structured state. For example, Transformers segment by position, and object-centric architectures decompose images into entities. In all these architectures, interactions between different elements are modeled via pairwise interactions: Transformers make use of self-attention to incorporate information from other positions and object-centric architectures make use of graph neural networks to model interactions among entities.  We consider how to improve on pairwise interactions in terms of global coordination and a coherent, integrated representation that can be used for downstream tasks. In cognitive science, a global workspace architecture has been proposed in which functionally  specialized  components share information through a common, bandwidth-limited communication channel. We explore the use of such a communication channel in the context of deep learning for modeling the structure of complex environments. The proposed method includes a shared workspace through which communication among different specialist modules takes place but due to limits on the communication bandwidth, specialist modules must compete for access. We show that capacity limitations have  a rational basis in that (1) they encourage specialization and compositionality and (2) they facilitate the synchronization of otherwise  independent specialists.",
+    "keywords": [
+      "slot based recurrent architectures",
+      "attention",
+      "transformers",
+      "latent bottleneck."
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=XzTtHjgPDsT"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper proposes a modification for attention-based network architectures drawing inspiration from the global workspace theory in cognitive science. Essentially connections are made sparser, with different ‘specialist’ units communicating with each other through a limited bandwidth channel.",
+    "main_review": "Strengths\n\n1. Interestingness of the approach\n\nThe proposed method is appealing since it applies a theory from cognitive science (the global workspace theory) to information processing in networks. The implementation of the idea is quite simple - individual ‘specialist’ units interact with a shared memory layer instead of with each other directly, and the shared memory then broadcasts information back to each of the specialists. The exact means by which this interaction is carried out is by using key-value attention. This approach when applied to transformers leads to much higher computational efficiency (linear instead of quadratic in the sequence length).\nFurther research in probing similar ideas for much more efficient information processing, backed by ideas from cognitive science, would be very beneficial for the field in my view and this paper would help the community in that regard.  \n\n2. Experimental Evaluation \n\nThe paper includes exhaustive experimental evaluation over 5-6 environments (including object tracking, and relational reasoning) where the solution requires considering a small portion of the input data, the authors demonstrate that adding the shared workspace model to attention based architectures like Transformers and RIMs leads to superior asymptotic performance, and faster learning. These environments include object tracking (CATER), relational reasoning (sort of CLEVR) and Atari games. The authors also include details about the experiments and algorithm implementation in the appendix, which will aid in reproducibility. \n\nWeaknesses \n\n1. Unclear if the approach will scale to larger, more unstructured datasets (where current attention based architectures have already been shown to thrive)\n\nMost of the experiments considered involve problems that only require a small portion of the input to be solved (eg: just the patch with the points for the equilateral triangles, or just the target object for Cater object tracking). I am concerned whether the framework proposed here will also be effective in settings where this is not necessarily the case, such as general modeling of language and images. For example, adding shared workspace to transformers imposes a communication bottleneck between representations at different positions of the sequence. It is possible that for problems where the solution does not depend on only a small portion of the input, considering the pairwise relationships of representations at every point in the sequence is critical for good performance. \nTo study this, the shared workspace model would have to be evaluated on larger, more unstructured datasets, where transformer based architectures have already been demonstrated to do well (for example the data on which GPT-2 was trained). Adoption of this approach would be much more widespread if the authors can demonstrate that on these larger datasets, training transformers with the shared workspace doesn’t lead to worse performance than training the regular transformer based models that are currently used.",
+    "summary_of_the_review": "The paper proposes an implementation of an interesting theory from cognitive science for more efficient information processing in networks, by making connections between entities sparser. While there is extensive evaluation on environments, most of these involve processing a small portion of the input. The paper will be made a lot stronger if the approach can be shown to scale to larger more unstructured datasets where transformers are known to work well.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:46Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:46Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3037,
+    "words": 452,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7854a0de-e15a-4cb0-977a-316df23ed93c",
+    "error": null,
+    "scored_chars": 3043
+  }
+}

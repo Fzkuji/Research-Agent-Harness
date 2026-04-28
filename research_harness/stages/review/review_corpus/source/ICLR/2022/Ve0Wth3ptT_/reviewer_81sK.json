@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "Ve0Wth3ptT_",
+  "reviewer": "81sK",
+  "paper": {
+    "title": "DEGREE: Decomposition Based Explanation for Graph Neural Networks",
+    "authors": [
+      "Qizhang Feng",
+      "Ninghao Liu",
+      "Fan Yang",
+      "Ruixiang Tang",
+      "Mengnan Du",
+      "Xia Hu"
+    ],
+    "abstract": "Graph Neural Networks (GNNs) are gaining extensive attention for their application in graph data. However, the black-box nature of GNNs prevents users from understanding and trusting the models, thus hampering their applicability. Whereas explaining GNNs remains a challenge, most existing methods fall into approximation based and perturbation based approaches with suffer from faithfulness problems and unnatural artifacts respectively. To tackle these problems, we propose DEGREE (Decomposition based Explanation for GRaph nEural nEtworks) to provide a faithful explanation for GNN predictions. By decomposing the information generation and aggregation mechanism of GNNs, DEGREE allows tracking the contributions of specific components of the input graph to the final prediction. Based on this, we further design a subgraph level interpretation algorithm to reveal complex interactions between graph nodes that are overlooked by previous methods. The efficiency of our algorithm can be further improved by utilizing GNN characteristics. Finally, we conduct quantitative and qualitative experiments on synthetic and real-world datasets to demonstrate the effectiveness of DEGREE on node classification and graph classification tasks.",
+    "keywords": [
+      "XAI",
+      "GNN"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Ve0Wth3ptT_"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper aims at tackling the black-box nature problem of GNN by introducing a new type of explainable GNN framework called DEGREE (Decomposition based Explanation for GRaph nEural nEtworks). There are mainly two innovations. The first one lies in its ability to track contribution of components in the input graph. The second one is the algorithm for subgraph-level explanation via agglomeration. The model achieves a good compromise between performance and time efficiency.",
+    "main_review": "Strengths:\nS1. The paper innovatively proposes a new explainable framework that decomposes the information into target and background portion. In contrast of previously used approximation-based, perturbation-based, additive feature attribution methods, the authors claim that the newly proposed method has the advantages of higher fidelity and node-level explainability.\nS2. Two popular GNN framework GCN and GAT are used as examples for decomposition operation, which demonstrates the methods compatibility to the current mainstream. A new subgraph construction algorithm is also proposed to tackle the problem arising during finding most important subgraphs, i.e., it’s impossible to enumerate all subgraphs.\nS3. The quantitative evaluation shows in two metrics: Explanation AUC and time efficiency. The proposed method significantly outperforms other benchmarked methods in at least one of the metrics (some benchmarked methods are only shown for Explanation AUC, not for time efficiency though), potentially making it a new choice under different use scenario. A qualitative evaluation was also included for a visual check of the result quality.\nS4. The paper is well organized and clearly written. Figures are provided with descriptive caption, including details needed for comprehension. Datasets includes both synthetic datasets and real-world datasets for diversity.\n\nWeaknesses: \nW1. The transition from absolute contribution scores to relative contribution score in Sec 4.1 is abrupt without detailed reasons. Why are relative scores preferred? Also, if they are preferred, why use absolute score in Sec 3? Providing answers to these two questions will make the logic flow more smoothly.\nW2. The exclusion of Graph-SST2 dataset from quantitative evaluation raises the question of whether the model has a poor performance on this dataset and hence has little generalization power. Providing the reasons for not including this dataset makes the benchmarking more supportive for the claimed superior model performance.\nW3. The limitation of the model was shown in the wrong prediction example in the qualitative evaluation but was not discussed in detail. What could have caused the wrong prediction and how to circumvent them?\nW4. Missing related work that should be discussed: On Explainability of Graph Neural Networks via Subgraph Explorations (ICML 2021)\n\nMinor comments:\n1. In Figure 2, I assume the shade of color means the value of the score, but it is probably a better idea to explicitly state it in the caption or have a legend in the figure.\n2. It would be preferred to include the statistics such as the number of graphs for synthetic datasets as well.",
+    "summary_of_the_review": "The paper innovatively proposes to decompose the information flow for explainability and provides a new algorithm to construct subgraphs to reveal more complex interactions. This novel way of explaining graph component contributions give insights into a new explainable GNN framework and is potentially inspiring for other works. The experiments also show its superior performance and time efficiency compared with other methods (although some related work is missing). Thus, I am slightly positive of this paper.\n\n====Post Response====\n\nAfter reading the author response, they have indeed addressed some of my concerns. However, after also reading through the other reviews and their respective replies, I am inclined to keep the score of \"marginally above the acceptance threshold\" because I am still more positive towards the work. I have additionally increased the novelty and significance from a 2 to a 3. Thank you for providing the reply, especially the details regarding my original concern about Graph-SST2.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3689,
+    "words": 556,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/823798cf-a618-4dea-9538-61a341095c1f",
+    "error": null,
+    "scored_chars": 3690
+  }
+}

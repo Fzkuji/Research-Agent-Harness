@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "98ekcwQqb7",
+  "reviewer": "B6Ky",
+  "paper": {
+    "title": "Latent Causal Probing: A Formal Perspective on Probing with Causal Models of Data",
+    "authors": [
+      "Charles Jin"
+    ],
+    "abstract": "As language models (LMs) deliver increasing performance on a range of NLP tasks, *probing classifiers* have become an indispensable technique in the effort to better understand their inner workings. A typical setup involves (1) defining an auxiliary task consisting of a dataset of text annotated with labels, then (2) supervising small classifiers to predict the labels from the representations of a pretrained LM as it processes the dataset. A high probing accuracy is interpreted as evidence that the LM has learned to perform the auxiliary task as an unsupervised byproduct of its original pretraining objective. Despite the widespread usage of probes, however, the robust design and analysis of probing experiments remains a challenge. We develop a formal perspective on probing using *structural causal models* (SCM). Specifically, given an SCM which explains the distribution of tokens observed during training, we frame the central hypothesis as whether the LM has learned to represent the latent variables of the SCM. Empirically, we extend a recent study of LMs in the context of a synthetic grid-world navigation task, where having an exact model of the underlying causal structure allows us to draw strong inferences from the result of probing experiments. Our techniques provide robust empirical evidence for the ability of LMs to induce the latent concepts underlying text.",
+    "keywords": [
+      "probing",
+      "causality",
+      "interpretability",
+      "understanding",
+      "world models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=98ekcwQqb7"
+  },
+  "review_fields": {
+    "comment": "Thank you for replying to my review. If the extra space is used to explain and discuss the results more, I would be more inclined to accept the paper. I also propose to discuss more in depth the fact that on true natural language data and models the method may not give conclusive results due to the enormous complexity and variation in causal reasoning that are required for natural language based tasks."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:33:38Z",
+    "migrated_from_v1_at": "2026-04-27T15:33:38Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 811,
+    "words": 144,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/425dfc65-37c1-4a26-8589-802c87bbc79d",
+    "error": null,
+    "scored_chars": 812
+  }
+}

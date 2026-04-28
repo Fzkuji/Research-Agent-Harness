@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "XsBzmJzJ2l",
+  "reviewer": "Jyaq",
+  "paper": {
+    "title": "The Structure of Relation Decoding Linear Operators in Large Language Models",
+    "authors": [
+      "Miranda Anna Christ",
+      "Adrián Csiszárik",
+      "Gergely Becsó",
+      "Dániel Varga"
+    ],
+    "abstract": "This paper investigates the structure of linear operators introduced in Hernandez et al. [2023] that decode specific relational facts in transformer language models. We extend their single-relation findings to a collection of relations and systematically chart their organization. We show that such collections of relation decoders can be highly compressed by simple order-3 tensor networks without significant loss in decoding accuracy. To explain this surprising redundancy, we develop a cross-evaluation protocol, in which we apply each linear decoder operator to the subjects of every other relation. Our results reveal that these linear maps do not encode distinct relations, but extract recurring, coarse-grained semantic properties (e.g., country of capital city and country of food are both in the country-of-X property). This property-centric structure clarifies both the operators' compressibility and highlights why they generalize only to new relations that are semantically close. Our findings thus interpret linear relational decoding in transformer language models as primarily property-based, rather than relation-specific.",
+    "keywords": [
+      "large language models",
+      "relations",
+      "tensor networks",
+      "interpretability"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=XsBzmJzJ2l"
+  },
+  "review_fields": {
+    "summary": "This paper presents an investigation into the decoding of relational knowledge from LLMs. Building based on the Linear Relational Embedding, this work proposes a rank-3 tensor network model to compress an entire collection of linear decoder functions into a single, compact model. The results show that such compression can largely reduce the model sizes.",
+    "strengths_and_weaknesses": "Strengths:\n- The paper is quite well written.\n- The designed approach is not too complicated.\n- The motivation is sound.\n- There are some in-depth analysis about why such compression should work.\n- There are some interesting, unobvious findings.\n- Evaluation has included an extended dataset with more relational types and a mathematical dataset.\n\nWeaknesses:\n- Evaluation has mainly focused on GPT-J. Is there any particular reason why this model is chosen? \n- Other models, such as Llama, is shown in the supplementary. How generalizable the results are across different models?\n- In the supplementary, it has been noted that the experiments took a total of 5000 GPU hours. How long would it take for training one instance of the tensor network model?\n- Some GPU memory analysis would be good too, including the effect of the dimension of the embedding space in the original models. \n- Many of the figures are too small to see.\n- Note: all left quotes need to be reformatted. \n- I wonder what the results would be, if instead of using pretrained LLMs, all experiments are conducted on smaller LMs, so that a training from scratch can be conducted using limited datasets. In this way, we can ensure that the LMs have not been exposed to more knowledge present in the test datasets. So we can evaluated whether the compression is not because of it's compressing out knowledge that is not included in the test dataset.",
+    "final_justification": "The rebuttal has addressed some of my comments."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 2,
+    "significance": 3,
+    "originality": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

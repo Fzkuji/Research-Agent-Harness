@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "gtkFw6sZGS",
+  "reviewer": "PG92",
+  "paper": {
+    "title": "Generative Judge for Evaluating Alignment",
+    "authors": [
+      "Junlong Li",
+      "Shichao Sun",
+      "Weizhe Yuan",
+      "Run-Ze Fan",
+      "hai zhao",
+      "Pengfei Liu"
+    ],
+    "abstract": "The rapid development of Large Language Models (LLMs) has substantially expanded the range of tasks they can address. In the field of Natural Language Processing (NLP), researchers have shifted their focus from conventional NLP tasks (e.g., sequence tagging and parsing) towards tasks that revolve around aligning with human needs (e.g., brainstorming and email writing). This shift in task distribution imposes new requirements on evaluating these aligned models regarding *generality* (i.e., assessing performance across diverse scenarios), *flexibility* (i.e., examining under different protocols), and *interpretability* (i.e., scrutinizing models with explanations). In this paper, we propose a generative judge with 13B parameters, **Auto-J**, designed to address these challenges. Our model is trained on user queries and LLM-generated responses under massive real-world scenarios and accommodates diverse evaluation protocols (e.g., pairwise response comparison and single-response evaluation) with well-structured natural language critiques. To demonstrate the efficacy of our approach, we construct a new testbed covering 58 different scenarios. Experimentally, **Auto-J** outperforms a series of strong competitors, including both open-source and closed-source models, by a large margin. We also provide detailed analysis and case studies to further reveal the potential of our method and make a variety of resources public at https://github.com/GAIR-NLP/auto-j.",
+    "keywords": [
+      "Generative",
+      "Evaluation",
+      "Alignment"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=gtkFw6sZGS"
+  },
+  "review_fields": {
+    "summary": "The paper fine-tunes a language model to automatically judge the output of another language model, either evaluating a single generation or a pair of generations. \n\n(Sorry that I do not think I understand the core training and evaluation setup of the paper; either it is my reading comprehension's problem or there might be issues with the presentation.)",
+    "strengths": "The paper provides an open-sourced model that can automatically judge a models' generated output; this could potentially enable more researchers to run automatic evaluation at a lower cost with higher reliability.",
+    "weaknesses": "- The papers is a large engineering effort (e.g., distilling GPT-4 for the task of evaluation) without much novel ideas (I do not think that a paper needs to be novel to be accepted, but this paper does score low in terms of novelty)\n- The presentation of the method and contribution feels very confusing to me (maybe it's just my fault). See questions below. I do not know whether other reviewers would have similar concerns though.",
+    "questions": "- If I understand correctly, did you define the scenarios and categories both for fine-tune the model to perform evaluation AND test the model to perform evaluation? In that case, if we want to evaluate an LM that performs a new task that is not in the 58 categories you have defined, would Auto-J generalize to categories unseen during training?\n- Did you use GPT-4 as the label generator? If so, if one had enough OpenAI credit, the optimal strategy of evaluation according to this paper would still be using GPT-4 or not? (both yes/no are okay answers, but I think it'd be useful to clarify)"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1244,
+    "words": 214,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4f4edbfa-8d70-442a-abd9-139b2a5df9b5",
+    "error": null,
+    "scored_chars": 1244
+  }
+}

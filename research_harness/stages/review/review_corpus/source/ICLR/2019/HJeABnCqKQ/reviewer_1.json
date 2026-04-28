@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "HJeABnCqKQ",
+  "reviewer": "1",
+  "paper": {
+    "title": "Generative Adversarial Self-Imitation Learning",
+    "authors": [
+      "Junhyuk Oh",
+      "Yijie Guo",
+      "Satinder Singh",
+      "Honglak Lee"
+    ],
+    "abstract": "This paper explores a simple regularizer for reinforcement learning by proposing Generative Adversarial Self-Imitation Learning (GASIL), which encourages the agent to imitate past good trajectories via generative adversarial imitation learning framework. Instead of directly maximizing rewards, GASIL focuses on reproducing past good trajectories, which can potentially make long-term credit assignment easier when rewards are sparse and delayed. GASIL can be easily combined with any policy gradient objective by using GASIL as a learned reward shaping function. Our experimental results show that GASIL improves the performance of proximal policy optimization on 2D Point Mass and MuJoCo environments with delayed reward and stochastic dynamics.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=HJeABnCqKQ"
+  },
+  "review_fields": {
+    "review": "This paper presents an incremental extension to the Self-imitation paper by Oh, Junhyuk, et al. The previous paper combined self-imitation learning with actor-critic methods, and this paper directly integrates the idea into the generative adversarial imitation learning framework.\n\nI think the idea is interesting, but there remains some issues very unclear to me. In the algorithms, when updating the good trajectory buffer, it is said \"We define ‘good trajectories’ as any trajectories whose the discounted sum of rewards are higher than that of the policy\". What does \"that of the policy\" mean? How do you know the reward of the policy?\n\nSecond, without defining good trajectories, I don't think Algorithm 1 would work. Algorithm ` 1 misses the part of how to update buffer B. After introducing their own algorithm, the author did not provide much solid proof or analysis for why this self-imitation learning works.\n\nIn the experiment section, the author implemented GASIL for various applications and presented reasonable results and compared them with other methods. Nevertheless, without theoretical proof, it is hardly convincing that the results could be consistently reproduced instead of being merely accidental for some applications.\n\nUpdate:\nThe rebuttal resolves some of my concerns. However, I still think the contribution is incremental. The current version looks too heuristic, more theoretical analysis or inspirations need to be added."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

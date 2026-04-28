@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "AZGIwqCyYY",
+  "reviewer": "hDu2",
+  "paper": {
+    "title": "Towards Cross Domain Generalization of Hamiltonian Representation via Meta Learning",
+    "authors": [
+      "Yeongwoo Song",
+      "Hawoong Jeong"
+    ],
+    "abstract": "Recent advances in deep learning for physics have focused on discovering shared representations of target systems by incorporating physics priors or inductive biases into neural networks. While effective, these methods are limited to the system domain, where the type of system remains consistent and thus cannot ensure the adaptation to new, or unseen physical systems governed by different laws. For instance, a neural network trained on a mass-spring system cannot guarantee accurate predictions for the behavior of a two-body system or any other system with different physical laws.\nIn this work, we take a significant leap forward by targeting cross domain generalization within the field of Hamiltonian dynamics. \nWe model our system with a graph neural network (GNN) and employ a meta learning algorithm to enable the model to gain experience over a distribution of systems and make it adapt to new physics. Our approach aims to learn a unified Hamiltonian representation that is generalizable across multiple system domains, thereby overcoming the limitations of system-specific models. \nWe demonstrate that the meta-trained model captures the generalized Hamiltonian representation that is consistent across different physical domains.\nOverall, through the use of meta learning, we offer a framework that achieves cross domain generalization, providing a step towards a unified model for understanding a wide array of dynamical systems via deep learning.",
+    "keywords": [
+      "hamiltonian dynamics",
+      "cross domain generalization",
+      "learning physics",
+      "meta learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=AZGIwqCyYY"
+  },
+  "review_fields": {
+    "comment": "Thank the authors for the clarification and additional experiments. Below are some suggestions that may improve the presentation of the work based on the discussion above:\n1. The authors could highlight the method is able to process unseen domains and add the details of the graph to the main text. The comparison of the proposed work and existing meta-learning works, including the non-MAML-based works, could be discussed in the related works.\n2. I appreciate the effort of adding experiments in such limited discussion time, although I still encourage the authors to make more effort on the non-MAML-based works, including the reasons of their inability to adapt to unseen domains and whether the proposed models can be applied to these frameworks.\n\nI modified my evaluation accordingly."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 790,
+    "words": 125,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6deb19aa-9f07-450c-a1dc-42b95469bf14",
+    "error": null,
+    "scored_chars": 790
+  }
+}

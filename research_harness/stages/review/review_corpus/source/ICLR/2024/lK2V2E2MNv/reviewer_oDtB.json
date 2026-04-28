@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "lK2V2E2MNv",
+  "reviewer": "oDtB",
+  "paper": {
+    "title": "Bridging Vision and Language Spaces with Assignment Prediction",
+    "authors": [
+      "Jungin Park",
+      "Jiyoung Lee",
+      "Kwanghoon Sohn"
+    ],
+    "abstract": "This paper introduces VLAP, a novel approach that bridges pretrained vision models and large language models (LLMs) to make frozen LLMs understand the visual world. VLAP transforms the embedding space of pretrained vision models into the LLMs' word embedding space using a single linear layer for efficient and general-purpose visual and language understanding. Specifically, we harness well-established word embeddings to bridge two modality embedding spaces. The visual and text representations are simultaneously assigned to a set of word embeddings within pretrained LLMs by formulating the assigning procedure as an optimal transport problem. We predict the assignment of one modality from the representation of another modality data, enforcing consistent assignments for paired multimodal data. This allows vision and language representations to contain the same information, grounding the frozen LLMs' word embedding space in visual data. Moreover, a robust semantic taxonomy of LLMs can be preserved with visual data since the LLMs interpret and reason linguistic information from correlations between word embeddings. Experimental results show that VLAP achieves substantial improvements over the previous linear transformation-based approaches across a range of vision-language tasks, including image captioning, visual question answering, and cross-modal retrieval. We also demonstrate the learned visual representations hold a semantic taxonomy of LLMs, making visual semantic arithmetic possible.",
+    "keywords": [
+      "Multimodal learning",
+      "vision-language tasks",
+      "frozen LLMs",
+      "optimal transport",
+      "assignment prediction"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=lK2V2E2MNv"
+  },
+  "review_fields": {
+    "comment": "I have read the author's response and other reviewer's reviews. I appreciate the author's efforts and devotion to solving our concerns. Most of my concerns are solved. However...\n\nI still think it's necessary to experiment with the larger dataset to see how this method performs with the increase in data volume. Many methods, especially for efficient training, don't show performance improvement with larger data scales. These works have merit and contribution in terms of efficient training and fast learning in small/modest data, but it's also important to demonstrate the relationship between performance gain and data scale. Not generalizing to a larger data scale is not a weakness, but we have to let the audience know in which cases/scales our method shines and fails."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 776,
+    "words": 123,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a071facb-2c05-44c1-969d-d908ae517758",
+    "error": null,
+    "scored_chars": 776
+  }
+}

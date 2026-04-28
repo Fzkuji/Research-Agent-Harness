@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "m4F3kQCfGX",
+  "reviewer": "Smv6",
+  "paper": {
+    "title": "LLM Unlearning Without an Expert Curated Dataset",
+    "authors": [
+      "Xiaoyuan Zhu",
+      "Muru Zhang",
+      "Ollie Liu",
+      "Robin Jia",
+      "Willie Neiswanger"
+    ],
+    "abstract": "Modern large language models often encode sensitive, harmful, or copyrighted knowledge, raising the need for post-hoc unlearning—the ability to remove specific domains of knowledge from a model without full retraining. A major bottleneck in current unlearning pipelines is constructing effective forget sets—datasets that approximate the target domain and guide the model to forget it. In this work, we introduce a scalable, automated approach to generate high-quality forget sets using language models themselves. Our method synthesizes textbook-style data through a structured prompting pipeline, requiring only a domain name as input. Through experiments on unlearning biosecurity, cybersecurity, and Harry Potter novels, we show that our synthetic datasets consistently outperform the baseline synthetic alternatives and are comparable to the expert-curated ones. Additionally, ablation studies reveal that the multi-step generation pipeline significantly boosts data diversity, which in turn improves unlearning utility. Overall, our findings suggest that synthetic datasets offer a promising path toward practical, scalable unlearning for a wide range of emerging domains without the need for manual intervention. We release our code and dataset at [https://github.com/xyzhu123/Synthetic_Textbook](https://github.com/xyzhu123/Synthetic_Textbook).",
+    "keywords": [
+      "NLP",
+      "Machine Unlearning",
+      "Synthetic Data Generation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=m4F3kQCfGX"
+  },
+  "review_fields": {
+    "summary": "This study proposes a way of creating unlearning datasets using language model themselves.\nVarious experiments demonstrate that synthetic datasets consistently outperform the baseline synthetic alternatives and are comparable to the expert-curated ones. \nAdditionally, ablation studies reveal that the multi-step generation pipeline significantly boosts data diversity, which in turn improves unlearning utility.",
+    "reasons_to_accept": "- This study proposes a novel perspective for unlearning LLMs by creating synthetic datasets.\n- The proposed approach is also practical.\n- Experiments on wide range of benchmarks (biosecurity, cybersecurity, and Harry Potter novels) and models (Mistral, llama3) demonstrates the effectiveness of the proposed method, supporting the main claim with various experiments.\n- An ablation study provides us with a new finding that higher diversity is important for achieving robust unlearning performance overall.\n- The paper is well written and easy to understand.",
+    "reasons_to_reject": "- The proposed method is not so exciting, i.e., just creating prompting and its application (pipeline).\n- It is unclear in the paper if the data samples are synthesized by target model itself, e.g., Does a Mistral model create unlearning datasets and the same model is used as target for unlearning?\n- The study does not investigate if the synthesized data is reliable or not. For example, do the synthesized datasets contain hallucination? Do the synthesized datasets similar to the ground truth datasets? (e.g., semantic similarity analysis with Bert)\n- A representative baseline unlearning methods: Gradient Ascent (https://arxiv.org/pdf/2210.01504) is not included in the experiment. Perhaps Negative Preference Optimization (https://arxiv.org/pdf/2404.05868) is also a major approach."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1350,
+    "words": 197,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9ba48c28-7a87-46ac-81eb-6f37e06b4da8",
+    "error": null,
+    "scored_chars": 1350
+  }
+}

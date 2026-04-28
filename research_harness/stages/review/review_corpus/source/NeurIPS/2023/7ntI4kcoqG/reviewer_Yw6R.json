@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "7ntI4kcoqG",
+  "reviewer": "Yw6R",
+  "paper": {
+    "title": "AMAG: Additive, Multiplicative and Adaptive Graph Neural Network For Forecasting Neuron Activity",
+    "authors": [
+      "Jingyuan Li",
+      "Leo Scholl",
+      "Trung Le",
+      "Pavithra Rajeswaran",
+      "Amy L Orsborn",
+      "Eli Shlizerman"
+    ],
+    "abstract": "Latent Variable Models (LVMs) propose to model the dynamics of neural populations by capturing low-dimensional structures that represent features involved in neural activity. Recent LVMs are based on deep learning methodology where a deep neural network is trained to reconstruct the same neural activity given as input and as a result to build the latent representation. Without taking past or future activity into account such a task is non-causal. In contrast, the task of forecasting neural activity based on given input extends the reconstruction task. LVMs that are trained on such a task could potentially capture temporal causality constraints within its latent representation. Forecasting has received less attention than reconstruction due to recording challenges such as limited neural measurements and trials. In this work, we address modeling neural population dynamics via the forecasting task and improve forecasting performance by including a prior, which consists of pairwise neural unit interaction as a multivariate dynamic system. Our proposed model---Additive, Multiplicative, and Adaptive Graph Neural Network (AMAG)---leverages additive and multiplicative message-passing operations analogous to the interactions in neuronal systems and adaptively learns the interaction among neural units to forecast their future activity. We demonstrate the advantage of AMAG compared to non-GNN based methods on synthetic data and multiple modalities of neural recordings (field potentials from penetrating electrodes or surface-level micro-electrocorticography) from four rhesus macaques. Our results show the ability of AMAG to recover ground truth spatial interactions and yield estimation for future dynamics of the neural population.",
+    "keywords": [
+      "Neuroscience and Cognitive Science",
+      "Neural Activity Forecasting",
+      "Graph Neural Network"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7ntI4kcoqG"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a graph neural network-based model to forecast neural activities, which advances the DNN technology for neural understanding. It also proposes a method to leverage the causality structure of the signal into the moded design that generalizes the neural reconstruction task.",
+    "strengths": "The paper uses a graph neural network to do future prediction tasks, which is more complex than a reconstruction task. \n\nThe method has been verified in neural signals from monkeys and shown to outperform other state-of-the-art methods, including LFADS, and TERN.",
+    "weaknesses": "Some analysis on the importance of each module, self-connection, add module, and modulator module need to be discussed. For example, why are they all necessary? \n\nFurthermore, the trade-off study between the model complexity and other sota methods is worth investigation. \n\nAlso, what is the computation bottleneck of the method, and how well does it scale?\n\nIs there any theoretical guarantee that the model can predict the neural activity if the trajectory satisfies some regularity?",
+    "questions": "It would be nice if the authors provided some theoretical analysis of why GNN based model can outperform the non-GNN-based model for neural forecasting.\n\nAlso, architecture complexity analysis is an interesting discussion.",
+    "limitations": "limitations have been addressed"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1004,
+    "words": 151,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7d0d9f0a-8a6f-44e8-bb1f-20ccfe90f08f",
+    "error": null,
+    "scored_chars": 1007
+  }
+}

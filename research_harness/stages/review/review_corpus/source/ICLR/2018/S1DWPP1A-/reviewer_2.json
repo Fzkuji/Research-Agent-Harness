@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "S1DWPP1A-",
+  "reviewer": "2",
+  "paper": {
+    "title": "Unsupervised Learning of Goal Spaces for Intrinsically Motivated Goal Exploration",
+    "authors": [
+      "Alexandre Péré",
+      "Sébastien Forestier",
+      "Olivier Sigaud",
+      "Pierre-Yves Oudeyer"
+    ],
+    "abstract": "Intrinsically motivated goal exploration algorithms enable machines to discover repertoires of policies that produce a diversity of effects in complex environments. These exploration algorithms have been shown to allow real world robots to acquire skills such as tool use in high-dimensional continuous state and action spaces. However, they have so far assumed that self-generated goals are sampled in a specifically engineered feature space, limiting their autonomy. In this work, we propose an approach using deep representation learning algorithms to learn an adequate goal space. This is a developmental 2-stage approach: first, in a perceptual learning stage, deep learning algorithms use passive raw sensor observations of world changes to learn a corresponding latent space; then goal exploration happens in a second stage by sampling goals in this latent space. We present experiments with a simulated robot arm interacting with an object, and we show that exploration algorithms using such learned representations can closely match, and even sometimes improve, the performance obtained using engineered representations.",
+    "keywords": [
+      "exploration; autonomous goal setting; diversity; unsupervised learning; deep neural network"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=S1DWPP1A-"
+  },
+  "review_fields": {
+    "review": "This paper introduces a representation learning step in the Intrinsically Motivated Exploration Process (IMGEP)  framework.\n\nThough this work is far from my expertise fields I find it quite easy to read and a good introduction to IMGEP.\nNevertheless I have some major concerns that prevent me from giving an acceptance decision.\n\n1) The method uses mechanisms than can project back and forth a signal  to the \"outcome\" space. Nevertheless only the encoder/projection part seems to be used in the algorithm presented p6. For example the encoder part of an AE/VAE is used as a preprocesing stage of the phenomenon dynamic D. It should be obviously noticed that the decoder part could also be used for helping the inverse model I but apparently that is not the case in the proposed method.\n\n2) The representation stage R seems to be learned at the beginning of the algorithm and then fixed. When using DNN as R (when using AE/VAE) why don't you propagate a gradient through R when optimizing D and I ? In this way, learning R at the beginning is only an old good pre-training of DNN with AE.\n\n3) Eventually, Why not directly considering R as lower layers of D and using up to date techniques to train it ? (drop-out, weight clipping, batch normalization ...).\nWhy not using architecture adapted to images such as CNN ?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "GIlsH0T4b2",
+  "reviewer": "Z2p9",
+  "paper": {
+    "title": "Two-Stage Learning to Defer with Multiple Experts",
+    "authors": [
+      "Anqi Mao",
+      "Christopher Mohri",
+      "Mehryar Mohri",
+      "Yutao Zhong"
+    ],
+    "abstract": "We study a two-stage scenario for learning to defer with multiple experts, which is crucial in practice for many applications.  In this scenario, a predictor is derived in a first stage by training with a common loss function such as cross-entropy.  In the second stage, a deferral function is learned to assign the most suitable expert to each input.  We design a new family of surrogate loss functions for this scenario both in the score-based and the predictor-rejector settings and prove that they are supported by $H$-consistency bounds, which implies their Bayes-consistency.  Moreover, we show that, for a constant cost function, our two-stage surrogate losses are realizable $H$-consistent. While the main focus of this work is a theoretical analysis, we also report the results of several experiments on CIFAR-10 and SVHN datasets.",
+    "keywords": [
+      "learning to defer",
+      "learning theory"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GIlsH0T4b2"
+  },
+  "review_fields": {
+    "summary": "This paper provides bounds on the difference between the target loss and its surrogate loss, for two-stage learning to defer to multiple experts. The bounds guarantee that a small surrogate risk leads to a small target risk. The authors also show that in realizable cases, achieving the minimum surrogate risk results in the zero target risk, which affirmatively answers an open question. The paper studies two setups of two-stage learning to defer with multiple experts and provides similar theoretical results for both. Finally, the paper presents experiments using CIFAR-10 and SVHN, showing that having more experts improves performance.",
+    "strengths": "- The paper studies the practically important task of learning to defer to experts.\n- The results seem to be non-trivial and critical theoretical guarantees for the approach studied.\n- The writing is overall well-written and easy to follow, except for some technical parts.\n- The paper provides a good review of previous work and clearly explains the contributions.\n- The experiment is interesting and shows the usefulness of the approach of learning to defer.",
+    "weaknesses": "- Some technical parts were a little unclear. (See the questions below.)\n- Section 3 and Section 4 are repetitive. I don't know how much the setups are different from each other.\n- I think some math expressions could be simplified. (See the Questions section below.)\n- The experiments are not extensive. I expected to see some experiments confirming the theoretical results, but the focus of the experiments presented in the paper seems to be the improvement by increasing the number of experts, which is quite independent of the theory part.\n- The paper stresses the novelty of the proof technique and there are brief explanations, but it is difficult for me to understand them without reading the appendix. (Unfortunately, I did not have time to read the appendix.)",
+    "questions": "- In line 21, the paper says, \"However, this is not relevant in practice: the cost of retraining the predictor would be prohibitive for many applications.\" I think saying it is \"not relevant\" is a bit too strong if there are still some scenarios to which it is applicable.\n- For the minimizability gap $\\mathcal{R}^*_l - \\mathbb{E}\\_{x}[\\inf\\_{h\\in \\mathcal{H}} \\mathbb{E}\\_{y | x}[\\texttt{L}(h, x, y)]]$, why do we want to consider the point-wise infimum for the second term? I think it is more natural to consider $\\inf\\_{h\\in \\mathcal{H}} \\mathbb{E}\\_{x, y}[\\texttt{L}(h, x, y)]$.\n- In lines 137-140, it is strange to \"decompose\" $\\mathcal{H}$ as $\\mathcal{H} = \\mathcal{H}_p \\times \\mathcal{H}_d$ when $\\mathcal{H}$ is a set of functions. ($\\mathcal{H}_p \\times \\mathcal{H}_d$ is a set of function pairs.)\n- I think it's nicer to express, e.g., Eq. (3) as $L_{h_p}(h_d, x, y) = \\sum\\_{j=0}^{n_e} c\\_j(x, y) \\ell_2(\\bar{h}\\_d, x, j)$, with $c_j$ extended by $c_0(x, y) = \\mathbb 1\\_{h\\_p(x) \\neq y}$. Equations are unnecessarily long and hard to read especially in Table 2.\n- Is Definition 4 correct? (I think there is something wrong with the organization of the sentences.)\n- What do the symbols in the \"Base cost\" column in Table 4 mean?\n- What does Accuracy in Table 4 mean? They are not related to the deferral loss?\n- In ll. 231-234, I could not understand this part: \"In their proof, the authors choose $\\bar h\\_{\\mu}$ based on individual scores $h(x, y)$, rather than the softmax. Consequently, if $h(x)$ or the label $y_{\\text{max}}$ that achieves the maximum conditional probability corresponds to the label zero, $\\mu$ cannot be optimized since the score $h(x, 0)$ is fixed at $\\lambda$.\"",
+    "limitations": "This paper focuses on bounds regarding population quantities. The results do not directly apply to empirical risk minimization although this extension does not seem very hard."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3110,
+    "words": 502,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f93a1dcb-34b9-400b-8217-8ab0c8635ede",
+    "error": null,
+    "scored_chars": 3110
+  }
+}

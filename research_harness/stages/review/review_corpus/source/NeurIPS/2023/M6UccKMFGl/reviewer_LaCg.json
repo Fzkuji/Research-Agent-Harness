@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "M6UccKMFGl",
+  "reviewer": "LaCg",
+  "paper": {
+    "title": "Multiply Robust Federated Estimation of Targeted Average Treatment Effects",
+    "authors": [
+      "Larry Han",
+      "Zhu Shen",
+      "Jose R Zubizarreta"
+    ],
+    "abstract": "Federated or multi-site studies have distinct advantages over single-site studies, including increased generalizability, the ability to study underrepresented populations, and the opportunity to study rare exposures and outcomes. However, these studies are complicated by the need to preserve the privacy of each individual's data, heterogeneity in their covariate distributions, and different data structures between sites. We propose a novel federated approach to derive valid causal inferences for a target population using multi-site data. We adjust for covariate shift and accommodate covariate mismatch between sites by developing a multiply-robust and privacy-preserving nuisance function estimation approach. Our methodology incorporates transfer learning to estimate ensemble weights to combine information from source sites. We show that these learned weights are efficient and optimal under different scenarios. We showcase the finite sample advantages of our approach in terms of efficiency and robustness compared to existing state-of-the-art approaches. We apply our approach to study the treatment effect of percutaneous coronary intervention (PCI) on the duration of hospitalization for patients experiencing acute myocardial infarction (AMI) with data from the Centers for Medicare \\& Medicaid Services (CMS).",
+    "keywords": [
+      "Causal inference",
+      "Covariate mismatch",
+      "Federated learning",
+      "Multiple robustness",
+      "Transportation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=M6UccKMFGl"
+  },
+  "review_fields": {
+    "summary": "This paper considers federated learning for causal inferences using multi-site data. The authors propose an estimator which is multiply-robust (to model misspecification and covariate shift) and privacy-preserving with additional nuisance function estimation. The authors then provide theoretical guarantees for the estimator and show it is at least as efficient as the estimator without federated learning under conditions.",
+    "strengths": "This paper aims at the problem of federeated learning for causal inference with multi-site data through a new estimator given by (5) and (8). This estimator is intuitive and has some properties like multiply-robust, and the idea is cool. This method allows covariate shift and covariate mismatch across the sites, which relaxes the classical assumption in causal inference with multiple source data. The flow is clear.",
+    "weaknesses": "This paper is mainly built on existing works like references [12,19] and most theoretical results are not surprising. It seems that the main contribution is the use of two additional nuisance functions and the density ratio in (5) when there is covariate mismatch or covariate shift. However, since assumption (A6) requires mean exchangeability over site selection, I'm not sure when will covariate mismatch happens if (A6) holds. That is, if the outcome model is the same across different data sources, what is the scenario that we have different covariates in different data sources in real application? If there is no covariate mismatch, then the estimator given in (5) then reduces to a naive AIPW estimator with importance sampling. The authors do not provide enough motivation for this and there is no real data in numerical experiments. \n\nAs for the results of theorem 2, I'm worried about the last term in (11). While the classical double robustness condition is $\\Vert\\hat{\\pi}-\\pi\\Vert \\Vert\\hat{m}-m\\Vert=o_p(n^{-1/2})$, the last term is the product of estimation error from the density ratio and the expectation of outcome conditional on v. The exponential tilt model for density ratio estimation can easily suffer from model misspecification, and the estimation for the density ratio is known to be vulnerable (large variance). In addition, $\\pi$ is a conditional mean whose estimator has no guarantee for fast convergence rate without stronger assumptions, and the discussions about its estimation provided in section 3.3 is quite simple. Thus, my feeling is that this product may generally not be $o_p(n^{-1/2})$, but I understand it's hard to provide further theoretical analysis for this part.\n\nThe numerical experiments are hard to follow at first glance. This is partially because the use of $X$ and $Z$ (I thought $Z$ was $V$ at first). It seems $X$ in numerical experiments is not the same as $X$ in the theory part, so the authors may want to modify their notations to make it consistent (for example, by pointing out $X$ and $V$ explicitly in the experiments).\n\nFurther, I do not see an easy path for the proposed method and theory to be making an impact in practice. I enjoy the theory. However, the assumptions are somewhat too strong. The authors did not provide evidence for real applications where the assumptions are verifiable.",
+    "questions": "There are some questions listed in \"Weaknesses\", and here are some other questions and typos:\n\n1. the definitions of $\\hat{m}$ in (4) and (5) are inconsistent: in (4) it is an expectation conditional on V, while in (5) it is conditioned on X.\n2. Line 213: $\\bar{\\mu}$ not defined\n3. In section 5.1, should specify the range of $k$, should it contain $k=T$?\n4. Theorem 3 mentions that some regularity conditions needed are provided in appendix, but I cannot easily find them (if exists). The authors should explicitly list them in the appendix before the proof of theorem 3.\n5. In the proof of theorem 3, the authors invoke lemma 4 of [12] to show the uncertainty introduced by $\\hat{\\eta}$ is negligible, but the definition of $\\hat{\\eta}$ in [12] is different from this paper, since the optimization problem is different, why can lemma 4 still work for this paper?\n6. Line 280: C not defined."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3671,
+    "words": 601,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/4787f41a-b51f-4445-8df8-04e312440763",
+    "error": null,
+    "scored_chars": 3672
+  }
+}

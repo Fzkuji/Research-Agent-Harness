@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "ULYqB2JORB",
+  "reviewer": "adW9",
+  "paper": {
+    "title": "Can a Crow Hatch a Falcon? Lineage Matters in Predicting Large Language Model Performance",
+    "authors": [
+      "Takuya Tamura",
+      "Taro Yano",
+      "Masafumi Enomoto",
+      "Masafumi Oyamada"
+    ],
+    "abstract": "Accurately forecasting the performance of Large Language Models (LLMs) before extensive fine-tuning or merging can substantially reduce both computational expense and development time. Although prior approaches like scaling laws account for global factors such as parameter size or training tokens, they often overlook explicit lineage relationships—i.e., which models are derived or merged from which parents. In this work, we propose a novel Lineage-Regularized Matrix Factorization (LRMF) framework that encodes ancestral ties among LLMs via a graph Laplacian regularizer. By leveraging multi-hop parent--child connections, LRMF consistently outperforms conventional matrix factorization and collaborative filtering methods in both instance-level and benchmark-level performance prediction. Our large-scale study includes 2,934 publicly available Hugging Face models and 21,000+ instances across 6 major benchmarks, \nshowing that the introduction of lineage constraints yields up to 0.15–0.30 higher correlation coefficients with actual performance compared to baseline methods.\nMoreover, LRMF effectively addresses the cold-start problem, providing accurate estimates for newly derived or merged models even with minimal data. This lineage-guided strategy thus offers a resource-efficient way to inform hyperparameter tuning, data selection, and model combination in modern LLM development.",
+    "keywords": [
+      "LLM",
+      "Performance Estimation",
+      "Matrix Factorization",
+      "Neural Collaborative Filtering"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ULYqB2JORB"
+  },
+  "review_fields": {
+    "summary": "This paper proposes to leverage lineage relationship between models to predict performance of fine-tuned or merged LLMs. It demonstrates improvement over a scaling-laws-based method and provide interesting observations with practical implications on the effect of the lineage on the model performance.",
+    "reasons_to_accept": "The use of the readily available model lineage information for performance prediction is a unique and novel approach to an important problem in current LLM research. In addition, the paper highlights intriguing characteristics of the relationship between model lineage and its performance, which would be interesting to explore further.",
+    "reasons_to_reject": "A few clarifications and additions would be helpful:\n* When a new model is to be evaluated, does the entire optimization problem have to be re-run or is there a more efficient approximation that can be done?\n* How stable are the obtained model embeddings? When adding a new model or several models for example, how different will the results be?\n* The comparison is done only with one previous work that relies on scaling laws. Comparing to another performance prediction technique, e.g. from the model routing works, would help highlight the importance of the model lineage information and could increase the impact of the paper.",
+    "questions_to_authors": "* Are the 1,000 random samples the same for all models or are they randomly selected for each model? What is the resulting size of the instance matrix?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1121,
+    "words": 183,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/951d87da-39e4-44ba-b4f7-6aba16bce3b1",
+    "error": null,
+    "scored_chars": 1121
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "B1xSperKvH",
+  "reviewer": "4",
+  "paper": {
+    "title": "Enabling Deep Spiking Neural Networks with Hybrid Conversion and Spike Timing Dependent Backpropagation",
+    "authors": [
+      "Nitin Rathi",
+      "Gopalakrishnan Srinivasan",
+      "Priyadarshini Panda",
+      "Kaushik Roy"
+    ],
+    "abstract": "Spiking Neural Networks (SNNs) operate with asynchronous discrete events (or spikes) which can potentially lead to higher energy-efficiency in neuromorphic hardware implementations. Many works have shown that an SNN for inference can be formed by copying the weights from a trained Artificial Neural Network (ANN) and setting the firing threshold for each layer as the maximum input received in that layer. These type of converted SNNs require a large number of time steps to achieve competitive accuracy which diminishes the energy savings. The number of time steps can be reduced by training SNNs with spike-based backpropagation from scratch, but that is computationally expensive and slow. To address these challenges, we present a computationally-efficient training technique for deep SNNs. We propose a hybrid training methodology: 1) take a converted SNN and use its weights and thresholds as an initialization step for spike-based backpropagation, and 2) perform incremental spike-timing dependent backpropagation (STDB) on this carefully initialized network to obtain an SNN that converges within few epochs and requires fewer time steps for input processing. STDB is performed with a novel surrogate gradient function defined using neuron's spike time. The weight update is proportional to the difference in spike timing between the current time step and the most recent time step the neuron generated an output spike. The SNNs trained with our hybrid conversion-and-STDB training perform at $10{\\times}{-}25{\\times}$ fewer number of time steps and achieve similar accuracy compared to purely converted SNNs. The proposed training methodology converges in less than $20$ epochs of spike-based backpropagation for most standard image classification datasets, thereby greatly reducing the training complexity compared to training SNNs from scratch. We perform experiments on CIFAR-10, CIFAR-100 and ImageNet datasets for both VGG and ResNet architectures. We achieve top-1 accuracy of $65.19\\%$ for ImageNet dataset on SNN with $250$ time steps, which is $10{\\times}$ faster compared to converted SNNs with similar accuracy.",
+    "keywords": [
+      "spiking neural networks",
+      "ann-snn conversion",
+      "spike-based backpropagation",
+      "imagenet"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=B1xSperKvH"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "This paper examines combining two approaches of obtaining a trained spikingneural network (SNN). The first approach of previous work is converting the weights of a trained artificial neural network (ANN) with a given architecture, to the weights and thresholds of a SNN, and the second approach uses a surrogate gradient to train an SNN with backpropagation. The true novelty of the paper seems to be in showing that combining the two approaches sequentially, trains a SNN that requiresfewer timesteps to determine an output which achieves state of the art performance. This is summarized by Table 1. However, it does not mention how many epochs it takes to train an SNN from scratch, nor compare this to the total training time (ANN training + SNN fine-tuning) of their approach. They also claim a novel spike-time based surrogate gradient function (eq. 11), but it is very practicallysimilar to the ones explored in the referenced Wu. et al 2018 (eq. 27 for instance), and these should be properly contrasted showing that this novel surrogate function is actually helpful (the performance/energy efficiency might only come from the hybrid approach). The authors argue for SOTA performance in Table 2, but the comparison to other work doesn’t clearly separate their performance from the otherlisted works; For example the accuracy gain against Lee et al.,2019 only comes from the architecture being VGG16 as opposed to VGG9, as can be seen from comparing with the VGG9 architecture from Table 1, furthermore they take the sameamount of timesteps, which is supposed to be the principle gain of this work.\n\nSome small suggestions that are independent from the above:\n\n1.The most similar or relevant version of equation (2) in previous work could be referenced nearby for context.\n\n2.The last sentence of the first paragraph on p.4 “the outputs from each copy...” is confusing. Are you just meaning to describe BPTT? \n\n3.Typos: sec7 4th line “neruons”, sec 2.2 “both the credit” (remove “the”)\n\n---------------\nFollowing the author response I have upgraded my rating."
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

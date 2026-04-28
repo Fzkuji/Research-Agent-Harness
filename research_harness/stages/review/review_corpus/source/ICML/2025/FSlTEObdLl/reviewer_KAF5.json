@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "FSlTEObdLl",
+  "reviewer": "KAF5",
+  "paper": {
+    "title": "CombiMOTS: Combinatorial Multi-Objective Tree Search for Dual-Target Molecule Generation",
+    "authors": [
+      "Thibaud Southiratn",
+      "Bonil Koo",
+      "Yijingxiu Lu",
+      "Sun Kim"
+    ],
+    "abstract": "Dual-target molecule generation, which focuses on discovering compounds capable of interacting with two target proteins, has garnered significant attention due to its potential for improving therapeutic efficiency, safety and resistance mitigation.\nExisting approaches face two critical challenges.\nFirst, by simplifying the complex dual-target optimization problem to scalarized combinations of individual objectives, they fail to capture important trade-offs between target engagement and molecular properties. \nSecond, they typically do not integrate synthetic planning into the generative process.\nThis highlights a need for more appropriate objective function design and synthesis-aware methodologies tailored to the dual-target molecule generation task.\nIn this work, we propose CombiMOTS, a Pareto Monte Carlo Tree Search (PMCTS) framework that generates dual-target molecules.\nCombiMOTS is designed to explore a synthesizable fragment space while employing vectorized optimization constraints to encapsulate target affinity and physicochemical properties.\nExtensive experiments on real-world databases demonstrate that CombiMOTS produces novel dual-target molecules with high docking scores, enhanced diversity, and balanced pharmacological characteristics, showcasing its potential as a powerful tool for dual-target drug discovery.\nThe code and data is accessible through \\url{https://github.com/Tibogoss/CombiMOTS}.",
+    "keywords": [
+      "Dual-target Molecule Generation",
+      "Fragment-based Drug Discovery",
+      "Monte-Carlo Tree Search",
+      "Pareto Optimization",
+      "Search Space Reduction"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=FSlTEObdLl"
+  },
+  "review_fields": {
+    "summary": "The paper introduces CombiMOTS - a Pareto Monte Carlo Tree Search based approach that is designed to efficiently handle complex multi-objective optimization problems. In particular, the authors tackle the dual-targeting molecule generation problem and evaluate the framework using three protein pairs. For this, they narrow down a large molecule fragment space into a synthesizable one and generate molecules with optimization of docking scores against two proteins.",
+    "claims_and_evidence": "1. The paper provides strong evidence that CombiMOTS generates molecules with better docking scores, diversity, and novelty. However, synthetic accessibility is not discussed in detail. The authors report SA scores, which are calculated based on the molecular structures, but do not include a retrosynthesis validation study to check if the proposed molecules can truly be synthesized.\n\n2. The authors demonstrate that CombiMOTS consistently outperforms existing methods, however it seems that several important baselines are missing. Additionally, it is not quite clear how the proposed approach compares to baselines in terms of efficiency.",
+    "methods_and_evaluation_criteria": "The proposed CombiMOTS method, real-world cases and evaluation criteria (originality and quality) do make sense for the problem of dual-targeting molecule generation. However, it is not quite evident how the proposed methodology compares to other existing approaches.",
+    "experimental_designs_or_analyses": "1. In Table 1 error rates are missing. It would be interesting to see how consistent CombiMOTS is and how it compares to other models in terms of stability of metrics.\n2. The authors evaluate their approach in terms of toxicity of generated molecules. It would be more informative to evaluate the impact of toxicity optimization in an ablation study.\n3. Although synthetic accessibility score is a common metric to estimate synthetic complexity of a compound, there are more advanced metrics capturing not only structural features of a molecule, but also possible retrosynthetic pathways (e.g., BR-SAscore and RAscore). Authors should consider calculating these metrics if they claim that synthetic accessibility of generated molecules increases.",
+    "relation_to_broader_scientific_literature": "The issue of multi-objective fragment-based molecular optimization has been investigated in various studies. The use of Pareto MCTS for molecular generation was studied in [1]. The novelty of the proposed approach lies in the application of Pareto MCTS for dual-targeting molecule generation.\n\n[1] Yang, Yaodong, et al. \"Enabling target-aware molecule generation to follow multi objectives with Pareto MCTS.\" Communications Biology 7.1 (2024): 1074.",
+    "essential_references_not_discussed": "FREED++ framework [1] was not cited, although it performs fragment-based molecule generation using RL and was reported to outperform REINVENT in certain scenarios. There are several models for multi-objective drug optimization that use MCTS [2-5] which were not cited. The authors should also consider adding these models as baselines. There is also one recent paper that introduces Pareto optimization for drug design [6].\n\n[1] Telepov, Alexander, et al. \"FREED++: Improving RL Agents for Fragment-Based Molecule Generation by Thorough Reproduction.\" arXiv preprint arXiv:2401.09840 (2024).  \n[2] Suzuki, Takamasa, et al. \"Mothra: Multiobjective de novo molecular generation using monte carlo tree search.\" Journal of Chemical Information and Modeling 64.19 (2024): 7291-7302.  \n[3] Roucairol, Milo, et al. \"DrugSynthMC: An Atom-Based Generation of Drug-like Molecules with Monte Carlo Search.\" Journal of Chemical Information and Modeling 64.18 (2024): 7097-7107.  \n[4] Sun, Mengying, et al. \"Molsearch: search-based multi-objective molecular generation and property optimization.\" Proceedings of the 28th ACM SIGKDD conference on knowledge discovery and data mining. 2022.  \n[5] Qian, Hao, et al. \"AlphaDrug: protein target specific de novo molecular generation.\" PNAS nexus 1.4 (2022): pgac227.  \n[6] Yang, Yaodong, et al. \"Enabling target-aware molecule generation to follow multi objectives with Pareto MCTS.\" Communications Biology 7.1 (2024): 1074.",
+    "other_strengths_and_weaknesses": "Strengths:\n1. The research in generation of dual-targeting molecules is topical and important for the broad scientific community.\n2. The paper is easy to follow. The plots and figures are visually attractive.\n\nWeaknesses:\n1. It seems that the idea of using Pareto MCTS for molecule generation is not novel. Although generating dual-targeting molecules is a more complex task, it is very similar to the conventional multi-objective molecule optimization.\n2. Some aspects of experimental design and analyses need improvements, e.g., inclusion of more baselines and experimental studies on robustness and efficiency of the presented approach.\n3. Not all the relevant papers on this topic were cited suggesting that the authors might not be aware of many significant developments in the field.\n4. Some claims are not supported with clear evidence or just vague  (e.g., about the proposed method generating interpretable compounds or the better synthetic accessibility of the generated molecules).",
+    "other_comments_or_suggestions": "1. The experiment reported in section C.1.1 of the Appendix demonstrates that Pareto optimization leads to better-balanced trade-offs than a naive scalarized reward function. It would be also interesting to investigate how adding Pareto optimization impacts the computational costs required to generate molecules.\n2. Comparison of CombiMOTS to baselines in terms of time was not reported, although given the complexity of multi-objective drug optimization, it would be interesting to see how much time is required for the proposed approach to achieve a certain quality of molecules.\n3. Exploring the aspect of selective molecule generation could be beneficial, as technically the idea remains the same, while expanding the scope of the study. Additional case studies to this point would strengthen the work by better demonstrating its practical utility.",
+    "questions_for_authors": "1. Why were only the three baselines considered? Why not consider other SOTA models that use MCTS, Pareto optimization and/or diffusion?\n2. The reported 11s/rollout time means that full runs take days. How does this compare to the other methods in terms of efficiency?\n3. What does “interpretable” compounds in line 96 mean? What are the statistically solid results supporting that claim?\n4. Is it possible to provide a retrosynthetic evaluation of the generated molecules?\n5. Is it possible to calculate standard deviations for metrics in Table 1 (e.g., after several runs with different random seeds)?\n6. Is it possible to compare CombiMOTS with and without toxicity optimization to see the differences more clearly?\n7. Is it possible to compare CombiMOTS with baselines in terms of time?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

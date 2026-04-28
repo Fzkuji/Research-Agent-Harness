@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "HylTBhA5tQ",
+  "reviewer": "3",
+  "paper": {
+    "title": "The Limitations of Adversarial Training and the Blind-Spot Attack",
+    "authors": [
+      "Huan Zhang*",
+      "Hongge Chen*",
+      "Zhao Song",
+      "Duane Boning",
+      "Inderjit S. Dhillon",
+      "Cho-Jui Hsieh"
+    ],
+    "abstract": "The adversarial training procedure proposed by Madry et al. (2018) is one of the most effective methods to defend against adversarial examples in deep neural net- works (DNNs). In our paper, we shed some lights on the practicality and the hardness of adversarial training by showing that the effectiveness (robustness on test set) of adversarial training has a strong correlation with the distance between a test point and the manifold of training data embedded by the network. Test examples that are relatively far away from this manifold are more likely to be vulnerable to adversarial attacks. Consequentially, an adversarial training based defense is susceptible to a new class of attacks, the “blind-spot attack”, where the input images reside in “blind-spots” (low density regions) of the empirical distri- bution of training data but is still on the ground-truth data manifold. For MNIST, we found that these blind-spots can be easily found by simply scaling and shifting image pixel values. Most importantly, for large datasets with high dimensional and complex data manifold (CIFAR, ImageNet, etc), the existence of blind-spots in adversarial training makes defending on any valid test examples difficult due to the curse of dimensionality and the scarcity of training data. Additionally, we find that blind-spots also exist on provable defenses including (Kolter & Wong, 2018) and (Sinha et al., 2018) because these trainable robustness certificates can only be practically optimized on a limited set of training data.",
+    "keywords": [
+      "Adversarial Examples",
+      "Adversarial Training",
+      "Blind-Spot Attack"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=HylTBhA5tQ"
+  },
+  "review_fields": {
+    "comment": "Thanks for the clarification. \n\n\"We use alpha and beta to obtain new natural reference images instead of adversarial images.\"\n\nThis is a key point which makes reviewer confusing, since in Sec. 3.3, blind-spot attacks seem to generate adversarial images only using scaling and shifting. However, in experiments x’ = \\alpha * x + \\beta is used to generate natural reference image. I am Okay with that only if the experiment is consistent, e.g., applying C\\&W attack on x’ = \\alpha * x + \\beta for all \\alpha and \\beta discussed in this paper. \n\nPlease carefully revise Sec. 3.3. and experiment section to make the aforementioned point clearer. \n\nBased on the authors's current response, I increase my score to 6."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "HndgQudNb91",
+  "reviewer": "eqeg",
+  "paper": {
+    "title": "Learning to Downsample for Segmentation of Ultra-High Resolution Images",
+    "authors": [
+      "Chen Jin",
+      "Ryutaro Tanno",
+      "Thomy Mertzanidou",
+      "Eleftheria Panagiotaki",
+      "Daniel C. Alexander"
+    ],
+    "abstract": "Many computer vision systems require low-cost segmentation algorithms based on deep learning, either because of the enormous size of input images or limited computational budget. Common solutions uniformly downsample the input images to meet memory constraints, assuming all pixels are equally informative. In this work, we demonstrate that this assumption can harm the segmentation performance\nbecause the segmentation difficulty varies spatially (see Figure 1 “Uniform”). We combat this problem by introducing a learnable downsampling module, which can be optimised together with the given segmentation model in an end-to-end fashion. We formulate the problem of training such downsampling module as optimisation of sampling density distributions over the input images given their low-resolution views. To defend against degenerate solutions (e.g. over-sampling trivial regions like the backgrounds), we propose a regularisation term that encourages the sampling locations to concentrate around the object boundaries. We find the downsampling\nmodule learns to sample more densely at difficult locations, thereby improving the segmentation performance (see Figure 1 \"Ours\"). Our experiments on benchmarks of high-resolution street view, aerial and medical images demonstrate substantial improvements in terms of efficiency-and-accuracy trade-off compared to both uniform downsampling and two recent advanced downsampling techniques.",
+    "keywords": [
+      "ultra-high resolution image segmentation",
+      "non-uniform dowmsampling",
+      "efficient segmentation",
+      "large volume image segmentation",
+      "medical image segmentation"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=HndgQudNb91"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper address the semantic segmentation problem on high-resolution images. Existing methods uniformly downsample the original image to a small version to meet the memory requirement, while the uniform downsampling is suboptimal. The authors propose a deformed downsampling method in this paper and mainly compare it with the previous edge-based downsampling, showing better performance. Although the proposed method is somewhat similar to one previous method, while directly applying which on segmentation task does not improve the performance. This demonstrates the importance of the modifications proposed by the authors in this paper.",
+    "main_review": "Strengths:\n\n1. The paper is well-written. The problem, motivation, idea, and method are clearly stated. Sufficient visualization is provided to make the paper easier to read.\n\n2. Comprehensive experiments and analyses are conducted. The results on three publicly available datasets are reported.\n\n\n\nWeaknesses:\n\n1. As the authors said, the proposed method is similar to [Recasens et al. 2018], so the novelty of the proposed method is somewhat limited. However, the authors show that directly applying [Recasens et al. 2018] to segmentation tasks is not necessarily effective. Hence, I agree with the authors that the proposed method is somewhat novel.",
+    "summary_of_the_review": "The paper is well-argued, and the proposed method is effective. Novelty is somewhat limited but can meet the ICLR bar.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 772,
+    "words": 119,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e4cba7e3-9f18-426f-9352-61179afd2671",
+    "error": null,
+    "scored_chars": 772
+  }
+}

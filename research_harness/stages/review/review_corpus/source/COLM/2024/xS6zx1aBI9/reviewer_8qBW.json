@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "xS6zx1aBI9",
+  "reviewer": "8qBW",
+  "paper": {
+    "title": "CLIN: A Continually Learning Language Agent for Rapid Task Adaptation and Generalization",
+    "authors": [
+      "Bodhisattwa Prasad Majumder",
+      "Bhavana Dalvi Mishra",
+      "Peter Jansen",
+      "Oyvind Tafjord",
+      "Niket Tandon",
+      "Li Zhang",
+      "Chris Callison-Burch",
+      "Peter Clark"
+    ],
+    "abstract": "Language agents have shown some ability to interact with an external environment, e.g., a virtual world such as ScienceWorld, to perform complex tasks, e.g.,  growing a plant, without the startup costs of reinforcement learning. While recent work, e.g., Reflexion, has demonstrated how such agents can also self-improve by adding a textual memory of ''hints'' learned from prior experience, such improvements have been limited both in size and scope. In contrast, our goal is a language agent that can robustly improve performance over time, including when both the task and environment are varied. Our approach is to have the agent learn a textual representation of how the world works (rather than just isolated hints), expressed as a memory of causal abstractions, to guide future decision-making. In experiments, we find CLIN is able to continually improve on repeated trials on the same task and environment, outperforming state-of-the-art reflective language agents like Reflexion by 23 points in ScienceWorld and 1.4 points in ALFWorld benchmarks. CLIN can also transfer its learning to new environments and tasks, enhancing performance by 21 points in ScienceWorld and 11 points in ALFWorld. This suggests that language agents with a textual causal memory can play a significant role in interactive environments, including being able to rapidly improve over time.",
+    "keywords": [
+      "Language Agents",
+      "Memory",
+      "Causal Abstraction",
+      "Continual Learning",
+      "Memory-augmented Agents",
+      "Task Adaptation",
+      "Text-based Simulator",
+      "Virtual Environment"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=xS6zx1aBI9"
+  },
+  "review_fields": {
+    "summary": "This paper presents CLIN, a novel learning algorithm for LMM agents to reflect and improve on their collected experience by forming a memory of causal abstractions.  Expanding upon the _Reflexion_ algorithm, CLIN introduces dual memory updates to construct synergistic abstractions targeting two learning objectives, namely adaptation and generalization. Experimental validation conducted in two diverse textual environments, ALFWorld and Science World, underscores the efficacy of CLIN compared to Reflexion and other relevant baselines. The findings not only underscore the superiority of CLIN but also unveil insights into its underlying learning mechanisms.\n\nOverall, this paper tackles an important problem within the field of decision-making systems and contributes to our comprehension of LLM's capabilities to form novel forms of reasoning. While a more detailed exploration of the role of language as an internal tool for decision-making systems could enhance the paper's positioning, it is well-motivated, clear, and supported by thorough experimentation.",
+    "reasons_to_accept": "The paper is very pedagogical and the results demonstrate the benefit of the proposed approach.\n\n### Pedagogy\n\n- The paper is, overall, very well-written. I enjoyed reading it.\n- The paper does a great job of explaining the challenges of Scienceworld in terms of steps to achieve tasks, and convincingly justifies its relevance as a benchmark.\n- Providing all the prompts used for the experiments is a strength. It should be the standard of every contribution leveraging LLM agents.\n\n### Robust findings and thorough methodology\n\n- Unlike previous approaches such as Reflexion, the authors also propose to emancipate from the gold trajectories provided by Scienceworld and use a zero-shot controller.\n- The results section's organization in the form of questions offers clarity, allowing for a thorough assessment of CLIN's performance across diverse scenarios. It effectively isolates the impact of the two memory mechanisms and sheds light on optimal memory structures.",
+    "reasons_to_reject": "### Positioning\n\n- Connecting the causal structure of memories with action models (Arorea et al 2018) is a relevant choice. However, the paper could include a brief discussion of previous approaches that use language as a means of abstraction for RL agents. This encompasses for instance approaches before LLM agents [1,2], as well as methodologies leveraging LLMs [3].\n- The following perspective paper [4] could be pertinent in the discussion of applying linguistic abstraction to goal-directed agents (highlighted by authors on page 3).\n\n### Method's limitation\n\n- A minor limitation of the method is that, as always with the immense action space of text games, the approach (like ReAct and Reflexion) only works if we can provide the set of actions available at each time step.\n- Experiments were only carried out using GPT-4 and could include other (maybe smaller) LLMs \n\n### References \n\n[1] Language as an Abstraction for Hierarchical Deep Reinforcement Learning, Yiding Jiang, Shixiang Gu, Kevin Murphy, Chelsea Finn, NeurIPS 2019\n\n[2] Language as a Cognitive Tool to Imagine Goals in Curiosity-Driven Exploration. Cédric Colas, Tristan Karch, Nicolas Lair, Jean-Michel Dussoux, Clément Moulin-Frier, Peter Ford Dominey, Pierre-Yves Oudeyer, NeurIPS 2020\n\n[3] Guiding Pretraining in Reinforcement Learning with Large Language Models, Yuqing Du, Olivia Watkins, Zihan Wang, Cédric Colas, Trevor Darrell, Pieter Abbeel, Abhishek Gupta, Jacob Andreas, ICML 2023\n\n[4] Language and Culture Internalization for Human-Like Autotelic AI, Cédric Colas, Tristan Karch, Clément Moulin-Frier, Pierre-Yves Oudeyer, Nature Machine Intelligence",
+    "questions_to_authors": "- I'm intrigued by the absence of algorithmic incentives for generating concise memories. LLMs often required constraints on their generation. Do you have an intuition on the underlying reasons for this phenomenon? The result section could investigate how often items are dropped in the memories.\n- It is very informative to explain the kind of fuzzy matching and steps used to retrieve an action when the LLM does not provide a clear candidate. I’m curious as to how often this kind of fuzzy matching occurs during interactions.\n- What are the shaded areas in figure 5?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:46Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:46Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 3,
+    "human_pct": 97,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3180,
+    "words": 486,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d8e0f063-87f1-4487-a4dd-3c65e4429547",
+    "error": null,
+    "scored_chars": 3182
+  }
+}

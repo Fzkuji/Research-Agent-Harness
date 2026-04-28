@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "0EXmFzUn5I",
+  "reviewer": "17as",
+  "paper": {
+    "title": "Pyraformer: Low-Complexity Pyramidal Attention for Long-Range Time Series Modeling and Forecasting",
+    "authors": [
+      "Shizhan Liu",
+      "Hang Yu",
+      "Cong Liao",
+      "Jianguo Li",
+      "Weiyao Lin",
+      "Alex X. Liu",
+      "Schahram Dustdar"
+    ],
+    "abstract": "Accurate prediction of the future given the past based on time series data is of paramount importance, since it opens the door for decision making and risk management ahead of time. In practice, the challenge is to build a flexible but parsimonious model that can capture a wide range of temporal dependencies. In this paper, we propose Pyraformer by exploring the multiresolution representation of the time series. Specifically, we introduce the pyramidal attention module (PAM) in which the inter-scale tree structure summarizes features at different resolutions and the intra-scale neighboring connections model the temporal dependencies of different ranges. Under mild conditions, the maximum length of the signal traversing path in Pyraformer is a constant (i.e., $\\mathcal O(1)$) with regard to the sequence length $L$, while its time and space complexity scale linearly with $L$. Extensive numerical results show that Pyraformer typically achieves the highest prediction accuracy in both single-step and long-range forecasting tasks with the least amount of time and memory consumption, especially when the sequence is long.",
+    "keywords": [
+      "sparse attention",
+      "pyramidal graph",
+      "Transformer",
+      "time series forecasting",
+      "long-range dependence",
+      "multiresolution"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=0EXmFzUn5I"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper proposes a variant of the transformer architecture called pyramidal attention. In this architecture one forms a pyramid graph over the sequence at different resolutions and then applies attention among the neighbors of that graph. This leads to a network that can attend to long sequences of length L with O(L) computation but at the same time attention path between two sequence positions is O(1). This is especially relevant for time-series forecasting as it has potential to summarize the time-series at different scales like hourly, daily, monthly etc. Some experiments are performed on 4 datasets to show the advantage of this architecture over other transformer variants.",
+    "main_review": "__Pros__\n\n1. Overall I like the idea conceptually. As mentioned in the summary it makes a lot of sense for time-series data as it has an implicit bias of summarizing the past at different resolutions. \n\n2. This architecture as claimed, can handle long sequences with computational complexity O(L) where $L$ is the number of elements in the sequence. It can also maintain short attention path distance between any node. This distance is O(1) w.r.t L. \n\n3. The experiments are good enough to demonstrate the advantage of this network over other attention mechanisms.\n\n4. The implementation has been done efficiently using TVM and when released the code base would be of value. I hope the paper is reproducible even though no code has been provided.\n\n5. The empirical speed and memory consumption graphs are useful.\n\n__Cons__\n\nI have certain clarifying questions. i would be happy to raise my scores if these are answered. Further I have some comments that would hopefully make the paper better.\n\n1. It would be better to formally define Signal Traversing Path and forward reference it from the introduction.\n\n2. While reading the initial description in the introduction, it is not fully clear what the nodes at each resolution represent. This is only evident to me after reading section 3.2 which states that convolutional layers with specific strides are applied repeatedly to get the coarser levels. It would be better if one states upfront that some external mechanism is used to extract the initial states of the coarser nodes. Related comment: I think the clarity of section 3,2 can be improved.\n\n3. I might be wrong but I believe N is not defined in section 3.1 before it is used. Please check this (ignore if I missed this somehow).What is the relation between N and S ? I would suggest defining A, L, C, N, S clearly in one place with some indentation in Section 3.1, for ease of reading.\n\n4. Please be slightly more clear in the second paragraph of section 3. 3. I would like to verify my understanding of the multi-step forecasting modules. In the first module, we just have a fixed output layer which is a dense mapping to F outputs, where F is the future prediction length. In the second mapping, there is a decoder that sequentially generated the multi-step output and the decoder is equivalent to the decoder in the original transformer paper. Is my understanding correct?\n\n5. In the experiments the information of the datasets and the experimental setup is not 100% clear to me even after reading the appendix. Please clarify or point me to the relevant places in the paper. In multi-step forecasting what is the length of the future prediction window. Also, is the task rolling prediction over the test set? These should be clearly defined. \n\n6. is there a validation set? Typically I would prefer if A and C are tuned on a validation set per dataset and the best results are reported. the ordering would stay the same I guess, because fixed set of A, C are used in all experiments.\n\n7. Is there a relation between A, C vs the granularity of the dataset. For example if the data is hourly, then one could build a resolution graph such that groups of 24 are constructed in the first level (24 hours in a day), then groups of 7 (7 days in a week), then 4 weeks in a month. Such a non-uniform pyramidal structure might be very useful. Can the authors comment on this or better yet try this? -- not absolutely essential but it would be interesting.\n\n8. Generally, it would be better if we could rank pyramidal attention vs state of the art models on the well known benchmarks used in the DCRNN paper and newer papers like https://arxiv.org/abs/2103.07719. For instance one could just do the evaluation of pyramidal attention in the same tasks as the linked paper and report the numbers. This would reveal the rank of pyramidal attention in the SOTA table and would be a useful signal for the community. Again this is not required but a nice to have.",
+    "summary_of_the_review": "I like the overall idea and the execution is decent (please see the pros and cons above). In my mind the pros outweigh the cons and I am currently rating it as above the acceptance threshold. I can strengthen my reviews if the authors answer the questions asked in the cons section.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:21Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:21Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3956,
+    "words": 691,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e89d5fef-6c82-477b-ac90-dd1a038905d9",
+    "error": null,
+    "scored_chars": 3959
+  }
+}

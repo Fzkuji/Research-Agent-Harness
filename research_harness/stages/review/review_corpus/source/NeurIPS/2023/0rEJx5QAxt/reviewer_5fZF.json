@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "0rEJx5QAxt",
+  "reviewer": "5fZF",
+  "paper": {
+    "title": "Convex-Concave Zero-Sum Markov Stackelberg Games",
+    "authors": [
+      "Denizalp Goktas",
+      "Arjun Prakash",
+      "Amy Greenwald"
+    ],
+    "abstract": "Zero-sum Markov Stackelberg games can be used to model myriad problems, in domains ranging from economics to human robot interaction. In this paper, we develop policy gradient methods that solve these games in continuous state and action settings using noisy gradient estimates computed from observed trajectories of play. When the games are convex-concave, we prove that our algorithms converge to Stackelberg equilibrium in polynomial time. We also show that reach-avoid problems are naturally modeled as convex-concave zero-sum Markov Stackelberg games, and that Stackelberg equilibrium policies are more effective than their Nash counterparts in these problems.",
+    "keywords": [
+      "Stackelberg games",
+      "Equilibrium Computation",
+      "Policy Gradient"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=0rEJx5QAxt"
+  },
+  "review_fields": {
+    "summary": "This paper develops policy gradient methods using stochastic gradient estimates from the trajectories of play for computing in polynomial time Stackelberg equilibria in convex-concave games, most notably including a certain class of reach-avoid problems. The authors also demonstrate through experiments the benefit of Stackelberg equilibria over their simultaneous-move counterparts in reach-avoid problems.",
+    "strengths": "Prior work by Goktas and Greenwald [23] addressed the problem of computing Stackelberg equilibria in a certain class of min-max optimization problems using an exact gradient oracle. The present paper extends those prior results by providing polynomial-time guarantees even when only stochastic gradient estimates from the trajectories of play are available, filling a gap that was left in prior work. Moreover, the paper nicely motivates the underlying problem, providing a number of concrete applications, especially with the experiments of Section 5 that demonstrate the benefit of computing Stackelberg versus Nash equilibria in a certain class of problems. Overall, the paper addresses an important problem with a theoretically sound approach, and provides non-trivial improvements over the prior state of the art.\n\nThe paper is also well-written, and the ideas and concepts are clearly exposed. The results are also accurately placed into the existing literature.",
+    "weaknesses": "The main weakness of this paper is that the overall contribution is arguably somewhat incremental in light of prior work, especially papers [23] and [25]. The techniques employed to extend the analysis from exact to stochastic gradient information are overall standard, and the main results are certainly not surprising. That being said, the paper closes a theoretical gap left from prior work, and I do believe that the technical contribution is non-trivial.",
+    "questions": "Some minor issues: \n1. Line 12: Missing space before the first set of references\n2. Line 50: A Stackelberg equilibria -> A Stackelberg equilibrium\n3. Lines 59-60: Technically this is a pseudo-polynomial time algorithm since the dependence on $1/\\epsilon$ is polynomial\n4. Why are you using the notation $\\mathbb{N}_+$ instead of just $\\mathbb{N}$? (those are presumably the same sets)\n5. Lines 132 - 134: The game being convex-concave is surely not the only condition that makes the problem amenable to first-order methods\n6. Theorem 3.1: then, in expectation over all runs of the algorithm, then (I would remove the second repetition of the word \"then\")\n7. Line 673: Missing dot\n8. Line 694: as as\n9. There are many overfull equations in pages 21-23 of supplementary; I strongly encourage to fix those\n10. Overall there are missing punctuation marks in the equations throughout the entire paper\n11. Line 839: the argument is incomplete\n12. It would be helpful to introduce the notion of stochastic convexity since it is quite non-standard",
+    "limitations": "The authors have adequately addressed all limitations."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2525,
+    "words": 392,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/bfce88eb-1c4d-451b-9832-db012fcf56a0",
+    "error": null,
+    "scored_chars": 2526
+  }
+}

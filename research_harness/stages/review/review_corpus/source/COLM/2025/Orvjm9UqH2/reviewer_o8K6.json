@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "Orvjm9UqH2",
+  "reviewer": "o8K6",
+  "paper": {
+    "title": "Epistemic Alignment: A Mediating Framework for User-LLM Knowledge Delivery",
+    "authors": [
+      "Nicholas Clark",
+      "Hua Shen",
+      "Bill Howe",
+      "Tanu Mitra"
+    ],
+    "abstract": "Large Language Models (LLMs) increasingly serve as tools for knowledge acquisition, yet users cannot effectively specify how they want information presented. When users request that LLMs \"cite reputable sources,\" \"express appropriate uncertainty,\" or \"include multiple perspectives,\" they discover that current interfaces provide no structured way to articulate these preferences. The result is prompt sharing folklore: community-specific copied prompts passed through trust relationships rather than based on measured efficacy. We propose the Epistemic Alignment Framework, a set of ten challenges in knowledge transmission derived from the philosophical literature of epistemology, concerning issues such as uncertainty expression, evidence quality assessment, and calibration of testimonial reliance. The framework serves as a structured intermediary between user needs and system capabilities, creating a common vocabulary to bridge the gap between what users want and what systems deliver. Through a thematic analysis of custom prompts and personalization strategies shared on online communities where these issues are actively discussed, we find users develop elaborate workarounds to address each of the challenges. We then apply our framework to two prominent model providers, OpenAI and Anthropic, through structured content analysis of their documented policies and product features. Our analysis shows that while these providers have partially addressed the challenges we identified, they fail to establish adequate mechanisms for specifying epistemic preferences, lack transparency about how preferences are implemented, and offer no verification tools to confirm whether preferences were followed. For AI developers, the Epistemic Alignment Framework offers concrete guidance for supporting diverse approaches to knowledge; for users, it works toward information delivery that aligns with their specific needs rather than defaulting to one-size-fits-all approaches.",
+    "keywords": [
+      "epistemology of AI",
+      "language model behavior",
+      "human-AI interaction"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Orvjm9UqH2"
+  },
+  "review_fields": {
+    "comment": "Thanks! Your rebuttal has cleared up a lot for me, and I'll revise my score accordingly.\n\n**Related Work and Contributions**\nThanks, I think making the revisions you are stating above will really help contextualize the work for COLM audience.\nAs for some of the other points, those are my misunderstandings when reading your paper. If there is a way you can clarify language a bit for future readers who may have similar misunderstandings, that'd be much appreciated.\n\n**Problem Definition**\nHonestly, this is what made it click for me in your rebuttal:\n>For example, a system that prioritizes minimizing error may abstain from uncertain responses, even if the user would prefer broader coverage.\nThe prose in this section (L115-L122) is quite high level. Even your explanation in rebuttal feels like restating the same thing, up until this example. I feel like adding even a sentence of example for each of these areas--Epistemic responsibility, Epistemic Personalization, Testimonial Reliability--could *really* help! That is, don't just approach framework top-down with high level definitions, but also bottom up with some examples.\n\nAgain, on math notation, this is where it clicked for me:\n>for example, the user’s error–ignorance trade-off parameter underpins the “Well-Calibrated Abstention” challenge; the partial order motivates our treatment of “Preference Specification” and “Ambiguity Resolution”; and the binary vector corresponds to assistive features like citation inclusion and uncertainty visualization.\nI still believe if you introduce math notation, that it should be used more than the place it's introduced. So like in your example here, I'd like to see a sentence of example in the paragraph on \"Well Calibrated Abstention\" that uses $r_u$ explicitly. And so on for the other passages as well.\n\n**Epistemic Alignment Framework**\nThanks for these changes!\n\n**User Knowledge Preferences in Practice**\nThis would be great, thanks!\n\n**Evaluating Platform Epistemic Policies**\nThanks, even just including a sentence or two about reviewing other models & finding them lacking comparable discussions would be good. On the whole, it does bring up the question of -- why don't open source models provide this? Does it even make sense to expect this of open source models given the way they aren't deployed with lay users in mind but released artifacts to be adapted for use by other developers? Or is it merely oversight from these developers and they really should be doing it? Not a requirement, but would be interesting to see some thought on this, given so much attention on AI ecosystem now is on open source vs closed source, and ensuring your framework is relevant to open source somehow can broaden the audience for your work.\n\n**Other Writing**\nThat would be helpful, thanks!"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 6,
+    "human_pct": 94,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2797,
+    "words": 439,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9d61f10b-facf-4caf-8f8c-a70e8e25f590",
+    "error": null,
+    "scored_chars": 2797
+  }
+}

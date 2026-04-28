@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "7J1kwZY72h",
+  "reviewer": "WGaL",
+  "paper": {
+    "title": "Kinetic Langevin Diffusion for Crystalline Materials Generation",
+    "authors": [
+      "François R J Cornet",
+      "Federico Bergamin",
+      "Arghya Bhowmik",
+      "Juan Maria Garcia-Lastra",
+      "Jes Frellsen",
+      "Mikkel N. Schmidt"
+    ],
+    "abstract": "Generative modeling of crystalline materials using diffusion models presents a series of challenges: the data distribution is characterized by inherent symmetries and involves multiple modalities, with some defined on specific manifolds. Notably, the treatment of fractional coordinates representing atomic positions in the unit cell requires careful consideration, as they lie on a hypertorus. In this work, we introduce Kinetic Langevin Diffusion for Materials (KLDM), a novel diffusion model for crystalline materials generation, where the key innovation resides in the modeling of the coordinates. Instead of resorting to Riemannian diffusion on the hypertorus directly, we generalize Trivialized Diffusion Model (TDM) to account for the symmetries inherent to crystals. By coupling coordinates with auxiliary Euclidean variables representing velocities, the diffusion process is now offset to a flat space. This allows us to effectively perform diffusion on the hypertorus while providing a training objective that accounts for the periodic translation symmetry of the true data distribution. We evaluate KLDM on both Crystal Structure Prediction (CSP) and De-novo Generation (DNG) tasks, demonstrating its competitive performance with current state-of-the-art models.",
+    "keywords": [
+      "generative models",
+      "diffusion models",
+      "crystals",
+      "materials"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7J1kwZY72h"
+  },
+  "review_fields": {
+    "summary": "The paper presents Kinetic Langevin Diffusion for Materials (KLDM), a groundbreaking diffusion model designed for generating crystalline materials. KLDM tackles the challenge of modeling fractional coordinates on a hypertorus by introducing auxiliary Euclidean velocity variables,  eliminating the need for approximations inherent in Riemannian diffusion and ensures consistent training objectives. The model is tested on two key tasks—Crystal Structure Prediction (CSP) and De-novo Generation (DNG)—and achieves competitive results compared to state-of-the-art models, especially on large datasets such as MP-20 and MPTS-52.",
+    "claims_and_evidence": "The claims in this paper are supported by clear evidence.",
+    "methods_and_evaluation_criteria": "This article provides a fairly detailed explanation of the methodology, and the evaluation is also quite reasonable.",
+    "theoretical_claims": "The theoretical claims presented in this paper are well-founded.",
+    "experimental_designs_or_analyses": "This paper conducts experiments on the CSP and DNG benchmarks, comparing with the mainstream models. The results serve as evidence supporting the effectiveness of the method.",
+    "relation_to_broader_scientific_literature": "This paper focuses on addressing the issue of inconsistent training objectives in crystal generation tasks, a problem that had not been adequately resolved in previous works such as DiffCSP [A] and EquiCSP [B]. Compared to these models, this paper introduces the Kinetic Langevin Diffusion process, inspired by TDM [C]. By incorporating an  auxiliary velocity $v$, the modeling of fractional coordinates is simplified, eliminating the need to focus on Riemannian manifolds. Compared to TDM [3], this paper extends the method to the crystal generation task, which requires considering additional symmetries.\n\n[A] Jiao, Rui, et al. \"Crystal structure prediction by joint equivariant diffusion.\" NeurIPS 2023.\n\n[B] Lin, Peijia, et al. \"Equivariant diffusion for crystal structure prediction.\" ICML 2024.\n\n[C] Zhu, Yuchen, et al. \"Trivialized Momentum Facilitates Diffusion Generative Modeling on Lie Groups.\" ICLR 2025/",
+    "essential_references_not_discussed": "The references in this paper are sufficient, requiring no further supplementation.",
+    "other_strengths_and_weaknesses": "Strengths: \n1. This paper tackles the challenge of inconsistent training objectives in crystal generation tasks. \n2.  The paper aligns both datasets and metrics with prior models, achieving state-of-the-art (SOTA) results in CSP tasks and comparable results in DNG tasks.\n\nWeaknesses:\n1. Technically, the diffusion framework they employ is derived from TDM [C], while the backbone model is based on DiffCSP [A]. Although the paper tackles a key issue and achieves good results, the level of technical innovation appears to be somewhat limited.",
+    "questions_for_authors": "1. Why can a zero-mean $v$ ensure that $f_0$ and $f_t$ share the same group element $g$? Please provide more intuition and explanation.\n2. The core operation of this paper is the introduction of the zero-mean $v$, which ensures the consistency of the target score function $s_\\theta$. Why does the paper not provide an ablation study for this operation? I believe such an experiment could highlight the key contribution of the work."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "Skl6peHFwS",
+  "reviewer": "2",
+  "paper": {
+    "title": "Best feature performance in codeswitched hate speech texts",
+    "authors": [
+      "Edward Ombui",
+      "Lawrence Muchemi",
+      "Peter Wagacha"
+    ],
+    "abstract": "How well can hate speech concept be abstracted in order to inform automatic classification in codeswitched texts by machine learning classifiers? We explore different representations and empirically evaluate their predictiveness using both conventional and deep learning algorithms in identifying hate speech in a ~48k human-annotated dataset that contain mixed languages, a phenomenon common among multilingual speakers. This paper espouses a novel approach to handle this challenge by introducing a hierarchical approach that employs Latent Dirichlet Allocation to generate topic models that feed into another high-level feature set that we acronym PDC. PDC groups similar meaning words in word families during the preprocessing stage for supervised learning models. The high-level PDC features generated are based on Ombui et al, (2019) hate speech annotation framework that is informed by the triangular theory of hate (Stanberg,2003).  Results obtained from frequency-based models using the PDC feature on the annotated dataset of ~48k short messages comprising of tweets generated during the 2012 and 2017 Kenyan presidential elections indicate an improvement on classification accuracy in identifying hate speech as compared to the baseline",
+    "keywords": [
+      "Hate Speech",
+      "Code-switching",
+      "feature selection",
+      "representation learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=Skl6peHFwS"
+  },
+  "review_fields": {
+    "experience_assessment": "I do not know much about this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I did not assess the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I made a quick assessment of this paper.",
+    "review": "This paper compared several classification methods, including deep neural networks (DNN), to identify hate speech texts. Mainly the data was corrected from twitter. The data was prepossessed to deal with by popular classification methods. The LDA and PDA are used to construct the identifier with high accuracy. Finally, Practical data was used to assess the performance of several machine learning algorithms.\n\nThe research topic is important from the sociological viewpoint. I'm not sure whether this paper suits to the publication from ICRL. Besides that, the authors did not show any technical insight into the numerical results. That is, can the authors explain the reason why the linear logistic regression with TF-IDF features outperformed all the other methods? Overall, this paper did not provide any useful knowledge, while this paper introduced some statistical methods and showed numerical results. I recommend the authors to add more beneficial insight and to submit the paper to other conferences that deals with sociological issues."
+  },
+  "review_metadata": {
+    "rating": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "ZZ4tcxJvux",
+  "reviewer": "rSVu",
+  "paper": {
+    "title": "E$^2$-RAG: Towards Editable Efficient RAG by Editing Compressed KV Caches",
+    "authors": [
+      "Tongxu Luo",
+      "Wenyu Du",
+      "HanWen Hao",
+      "Min Zhang",
+      "Hao Yang",
+      "Benyou Wang"
+    ],
+    "abstract": "Retrieval-Augmented Generation (RAG) demonstrates remarkable capabilities for enhancing the performance of Large Language Models (LLMs) by integrating external knowledge.\nStandard RAG introduces additional computations due to the extra retrieved context.\nTo improve efficiency, recent studies propose compressing chunk tokens into compact forms, such as key-value (KV) caches.\nHowever, maintaining these compressed KV caches in an updated state presents a significant challenge, undermining the primary goal of RAG: acquiring up-to-date knowledge.\nIn this work, we propose **E$^{2}$-RAG**, the first **E**ditable **E**fficient-**RAG** method designed to efficiently edit compressed KV caches for knowledge updates.\nE$^2$-RAG features an encoder-decoder architecture similar to efficient RAG methods, along with an additional editor.\nThe encoder-decoder compresses chunk tokens into KV caches and generates responses.\nThe editor takes old KV caches and new knowledge tokens as inputs, enabling efficient updates to the KV caches.\nTo formalize knowledge updating, we define three operations: INSERT, DELETE, and UPDATE.\nWe create three sets of datasets for each operation.\nThrough extensive experiments, E$^2$-RAG achieves nearly **40x faster** editing compared to recomputing KV caches while maintaining **3x faster** generation efficiency than standard RAG, with a performance downgrade of 1%-5%.\nWe also conduct various ablation studies, including multi-turn editing, multi-chunk capability, and knowledge conflicts, to explore the capabilities of E$^2$-RAG.",
+    "keywords": [
+      "Retrieval Augmented Generation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ZZ4tcxJvux"
+  },
+  "review_fields": {
+    "comment": "Thank you for the author’s response. While part of the issue has been addressed, I still have two concerns:\n\n1. In scenarios with frequent updates, your method also requires retraining. For instance, when 600,000 samples are updated, your approach must retrain all of them. Thus, the update frequency is irrelevant; what matters is comparing the cost of retraining LoRA on a single sample versus performing inference with the original model.\n\n2. It remains problematic to treat editor training as a sunk upfront cost without factoring in its actual expense.\n\nNonetheless, I would raise my score accordingly."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 100,
+    "mixed_pct": 0,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 795,
+    "words": 103,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9c599235-8069-4d41-b6b2-52426554f480",
+    "error": null,
+    "scored_chars": 607
+  }
+}

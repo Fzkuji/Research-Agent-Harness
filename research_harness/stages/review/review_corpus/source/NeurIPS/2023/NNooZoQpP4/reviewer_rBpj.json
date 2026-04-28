@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "NNooZoQpP4",
+  "reviewer": "rBpj",
+  "paper": {
+    "title": "To Stay or Not to Stay in the Pre-train Basin: Insights on Ensembling in Transfer Learning",
+    "authors": [
+      "Ildus Sadrtdinov",
+      "Dmitrii Pozdeev",
+      "Dmitry P. Vetrov",
+      "Ekaterina Lobacheva"
+    ],
+    "abstract": "Transfer learning and ensembling are two popular techniques for improving the performance and robustness of neural networks. \nDue to the high cost of pre-training, ensembles of models fine-tuned from a single pre-trained checkpoint are often used in practice. \nSuch models end up in the same basin of the loss landscape, which we call the pre-train basin, and thus have limited diversity. \nIn this work, we show that ensembles trained from a single pre-trained checkpoint may be improved by better exploring the pre-train basin, however, leaving the basin results in losing the benefits of transfer learning and in degradation of the ensemble quality. \nBased on the analysis of existing exploration methods, we propose a more effective modification of the Snapshot Ensembles (SSE) for transfer learning setup, StarSSE, which results in stronger ensembles and uniform model soups.",
+    "keywords": [
+      "ensembles",
+      "transfer learning",
+      "loss landscape basins",
+      "model soups"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NNooZoQpP4"
+  },
+  "review_fields": {
+    "summary": "This paper studies ensembling in the transfer learning setting. This is interesting because pre-training is important for strong predictive performance, yet has been shown to pre-determine the final basin in the loss-landscape after fine-tuning, reducing diversity. The authors explore the behavior of snapshot ensembles(SSE), which use different training iterates as ensemble members, and compare them to Global DE (fine-tune from independent pre-training runs) and Local DE (fine-tune from shared initialization), for both supervised and self-supervised pre-training. The authors find that Global DE is much superior to Local DE, but that Snapshot examples can start to close the gap. They also do some ablations and find that higher learning rates in SSE's increase diversity but decrease overall performance. The authors then propose StarSSE, where a single fine-tuning run seeds the initialization for multiple, parallel fine-tunings. The results of these parallel fine-tuning runs become ensemble members. StarSSE closes the gap between Local DE and Global DE further, and is more amenable to model souping than local DE..",
+    "strengths": "Originality:  The authors find that Snapshot Ensembles degrade in performance over subsequent snapshots, a key observation that inspires their \"Star SSE\". StarSSE is not a particularly large departure from SSE's, but it does seem to address a key limitation, \n\nQuality: The methodology and experimental setup seem sound, so given additional verification (see weaknesses) I would trust the result generalizes. \n\nClarity :The paper is clear and easy to follow. \n\nSignificance: Ensembles and pre-training are both crucial techniques in ML, any attempts to merge the strengths of both in easy-to-implement ways has strong impact.",
+    "weaknesses": "Weakness 1: Though results for StarSSE's look promising, only a few datasets are considered. Because different methodologies can be overfit (even unintentionally) to specific datasets, it would be much better to demonstrate efficacy on a larger suite of downstream tasks, as is common (e.g. [1]). \n\nWeakness 2: The baseline alluded to in Line 144 is an important one; \"Several recent works (Mustafa et al., 2020; Wortsman et al.,\n143 2022; Rame et al., 2022) study another technique for improving the diversity of Local DEs by training\n144 networks using different hyperparameters (learning rate, weight decay, data augmentation, etc.).\" \n\nThe argument that it cannot close the gap between Local and Global DE is not convincing; the given constraints are that you have target data and a pretrained model, and the goal is the best possible performance on target test data. The \"diversivied local DE\" is a logical choice for this setup, and it's important to charactherize its performance compared to StarSSE. \n\n[1] How Well Do Self-Supervised Models Transfer? - Ericsson et. al., CVPR 2021.",
+    "questions": "Please see Weaknesses. \n\nQ1(Weakness 1): How does StarSSE perform on additional downstream datasets, especially non-natural ones?\n\nQ2 (Weakness 2): How does StarSSE compared to \"diversifed Local DE's\" (line 144)? \n\nWith adequate addressing of these questions, I'd be willing to bump my score.",
+    "limitations": "The authors have appropriate addressed limitations."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2054,
+    "words": 313,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a9154876-0515-4326-a0ff-0c380886a6d3",
+    "error": null,
+    "scored_chars": 2063
+  }
+}

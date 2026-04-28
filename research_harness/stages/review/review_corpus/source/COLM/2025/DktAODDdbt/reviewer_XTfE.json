@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "DktAODDdbt",
+  "reviewer": "XTfE",
+  "paper": {
+    "title": "Evaluating Large Language Models as Expert Annotators",
+    "authors": [
+      "Yu-Min Tseng",
+      "Wei-Lin Chen",
+      "Chung-Chi Chen",
+      "Hsin-Hsi Chen"
+    ],
+    "abstract": "Textual data annotation, the process of labeling or tagging text with relevant information, is typically costly, time-consuming, and labor-intensive.\nWhile large language models (LLMs) have demonstrated their potential as direct alternatives to human annotators for general domains natural language processing (NLP) tasks, their effectiveness on annotation tasks in domains requiring expert knowledge remains underexplored.\nIn this paper, we investigate: whether top-performing LLMs, which might be perceived as having expert-level proficiency in academic and professional benchmarks, can serve as direct alternatives to human expert annotators?\nTo this end, we evaluate both individual LLMs and multi-agent approaches across three highly specialized domains: finance, biomedicine, and law.\nSpecifically, we propose a multi-agent discussion framework to simulate a group of human annotators, where LLMs are tasked to engage in discussions by considering others’ annotations and justifications before finalizing their labels.\nAdditionally, we incorporate reasoning models (*e.g.*, o3-mini) to enable a more comprehensive comparison.\nOur empirical results reveal that:\n*(1)* Individual LLMs equipped with inference-time techniques (*e.g.*, chain-of-thought (CoT), self-consistency) show only marginal or even negative performance gains, contrary to prior literature suggesting their broad effectiveness.\n*(2)* Overall, reasoning models do not demonstrate statistically significant improvements over non-reasoning models in most settings.\nThis suggests that extended long CoT provides relatively limited benefits for data annotation in specialized domains.\n*(3)* Certain model behaviors emerge in the multi-agent discussion environment.\nFor instance, Claude 3.7 Sonnet with thinking rarely changes its initial annotations, even when other agents provide correct annotations or valid reasoning.",
+    "keywords": [
+      "LLMs-as-expert-annotators",
+      "reasoning models",
+      "multi-agent framework"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=DktAODDdbt"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a general method for solving different classification tasks, showing that a simulation of inter-annotator discussion at inference timeleads to better matching the gold standard labels across tasks.",
+    "reasons_to_accept": "* The proposed method is straightforwards and applicable to any classification task. \n\n* The experimental results show the positive impact of implementing a strategy that emulates a discussion between agents, both in terms of inter-agent agreement and accuracy.",
+    "reasons_to_reject": "The selection of specific tasks on which the approach is tested may be critical, and it is not discussed. In fact, the definition of the tasks themselves is only found in the appendix. For one thing, different tasks call for different evaluation metrics. While accuracy is technically fit for any classification task, it may not be the best way to describe the performance, e.g. in the case of unbalanced label distribution. Generative models are also known to be sensitive to how they are prompted. Given the vast difference from one task to another, there need to be a strategy to minimize the dependance of the results from the variations in prompting.",
+    "questions_to_authors": "Why is the approach cast as \"annotation\" and not just as an ensemble-based classification approach? Is there a fundamental difference?"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1053,
+    "words": 169,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/9819eac6-1185-4497-9a2e-b5b369a76db4",
+    "error": null,
+    "scored_chars": 1054
+  }
+}

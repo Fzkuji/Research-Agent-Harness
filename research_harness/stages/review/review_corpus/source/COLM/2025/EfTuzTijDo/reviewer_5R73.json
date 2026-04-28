@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "EfTuzTijDo",
+  "reviewer": "5R73",
+  "paper": {
+    "title": "NoWag: A Unified Framework for Shape Preserving Com- pression of Large Language Models",
+    "authors": [
+      "Lawrence Ray Liu",
+      "Inesh Chakrabarti",
+      "Yixiao Li",
+      "Mengdi Wang",
+      "Tuo Zhao",
+      "Lin Yang"
+    ],
+    "abstract": "Large language models (LLMs) exhibit remarkable performance across various natural language processing tasks but suffer from immense computational and memory demands, limiting their deployment in resource-constrained environments. To address this challenge, we propose NoWag (Normalized Weight and Activation Guided Compression), a unified framework for one-shot shape preserving compression algorithms. We apply NoWag to compress Llama-2 (7B, 13B, 70B) and Llama-3 (8B, 70B) models using two popular shape-preserving techniques: vector quantization (NoWag-VQ) and unstructured/semi-structured pruning (NoWag-P). Our results show that NoWag-VQ significantly outperforms state-of-the-art one-shot vector quantization methods, while NoWag-P performs competitively against leading pruning techniques. These findings highlight underlying commonalities between these compression paradigms and suggest promising directions for future research. Our code is available at https://github.com/LawrenceRLiu/NoWag",
+    "keywords": [
+      "Quantization",
+      "Vector Quantization LLMs",
+      "Compression",
+      "Sparsity",
+      "Pruning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=EfTuzTijDo"
+  },
+  "review_fields": {
+    "summary": "This paper introduces NoWag (Normalized Weight and Activation Guided Compression), a framework for post-training compression of Large Language Models (LLMs). The core idea is a two-step normalization process applied to weight matrices (first column-wise, then row-wise) followed by compression guided by the second moment of activations (specifically, diag(XX^T)). The authors propose two instantiations: NoWag-VQ for vector quantization using weighted K-means, and NoWag-P for un-/semi-structured pruning by removing elements with the smallest normalized weight magnitude multiplied by activation norms. Experiments on Llama-2 and Llama-3 models show that NoWag-VQ significantly outperforms SOTA zero-shot VQ methods like QuIP# (especially with much less calibration data), and NoWag-P is competitive with or slightly better than SOTA pruning methods like Wanda in terms of perplexity, while being comparable in zero-shot task accuracy. The paper argues that the proposed normalization makes the weight distribution more amenable to compression and reduces sensitivity to outliers.",
+    "reasons_to_accept": "1. **Clarity**: The paper is generally well-written and easy to follow. The core normalization idea is explained clearly, supported by algorithms and illustrative figures (Figs. 1, 2, 3) that effectively convey the intuition. The problem formulation and connection to existing work are well-established.\n\n2. **Originality**: The main originality lies in the specific two-step normalization procedure (column-then-row normalization) and its application as a unified pre-processing step for both VQ and pruning, coupled with an activation-guided importance score. While components like weighted K-means or magnitude pruning with activation scaling are known, their combination with this particular normalization to improve compression is novel. The observation that this normalization creates a more \"ball-shaped\" distribution (Fig. 3) is an interesting insight.\n\n3. **Significance**: The work is significant for several reasons: (1) It presents a simple yet effective technique that improves zero-shot VQ performance, notably outperforming SOTA (QuIP#) while using 48x less calibration data. This is a substantial practical contribution. (2) It offers a competitive pruning method (NoWag-P) that slightly improves upon Wanda in perplexity. (3) The analysis and visualizations provide valuable insights into how weight normalization can benefit LLM compression. It suggests a common underlying principle that can be beneficial for different compression paradigms, potentially inspiring future unified approaches.",
+    "reasons_to_reject": "1. \"Unified Framework\" Scope: The term \"unified framework\" is used, but the actual compression algorithms (K-means for VQ, greedy selection for pruning) remain distinct. The unification primarily comes from the shared normalization pre-processing step and the conceptual objective (Eq. 3). This is a minor wording concern rather than a fundamental flaw.\n\n2. Performance on Llama-2 70B with Finetuning (Table 2): NoWag-VQ falls slightly short of AQLM on Llama-2 70B with finetuning. The authors attribute this to AQLM using d=8 vs. NoWag's d=7. While plausible, it's a point where NoWag-VQ isn't outperforming. This is a minor point as overall performance is strong.\n\n3. Clarity on Pruning Score: There's a slight ambiguity in the pruning score formulation.\nore). This should be clarified: is the pruning score based on |W_bar_ij| ||X_j||_2 or (W_bar_ij)^2 ||X_j||_2^2 (or its square root)? The former is used in Wanda-like methods, the latter aligns more directly with minimizing the squared error in Eq. 3. The current text and Figure 2 legend imply the former (|W_bar_ij| ||X_j||_2). If so, the connection to Eq. 3 for pruning is less direct than for VQ.",
+    "questions_to_authors": "1. Could you please clarify the exact pruning score used for NoWag-P? Is it |W_bar_ij| ||X_j||_2 (as implied by line 134 and Fig 2 legend) or is it derived more directly from minimizing Eq. 3, e.g., by pruning based on (W_bar_ij)^2 ||X_j||_2^2? If it's the former, how does this align with the objective in Eq. 3 for pruning\n\n2. (minor) The paper mentions (line 130) T << min(d_in, d_out) for the number of K-means iterations. For NoWag-VQ, 100 iterations were used (line 587). Could you comment on the sensitivity to T? Could fewer iterations still yield strong results, further speeding up the compression?\n\n3. The computational complexity for NoWag-VQ is given as O(d_in d_out T 2^(n_bpv d)) (line 129). This is O(N_{total\\_weights} T 2^{k}) where k is bits per subvector. Can you briefly compare this complexity to QuIP# or other VQ methods if readily available, beyond the Hessian-based methods which are O(d^3)? The main benefit seems to be fewer calibration samples rather than algorithmic complexity of the VQ step itself, correct?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 92,
+    "mixed_pct": 0,
+    "human_pct": 8,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 3709,
+    "words": 557,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f4e599c9-e1d1-478c-b08f-f61c2b4105f3",
+    "error": null,
+    "scored_chars": 3709
+  }
+}

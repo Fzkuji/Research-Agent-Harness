@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "Skxd6gSYDS",
+  "reviewer": "3",
+  "paper": {
+    "title": "Query-efficient Meta Attack to Deep Neural Networks",
+    "authors": [
+      "Jiawei Du",
+      "Hu Zhang",
+      "Joey Tianyi Zhou",
+      "Yi Yang",
+      "Jiashi Feng"
+    ],
+    "abstract": "Black-box attack methods aim to infer suitable attack patterns to targeted DNN models by only using output feedback of the models and the corresponding input queries. However, due to lack of prior and inefficiency in leveraging the query and feedback information, existing methods are mostly query-intensive for obtaining effective attack patterns. In this work, we propose a meta attack approach that is capable of attacking a targeted  model with much fewer queries. Its high query-efficiency stems from effective utilization of  meta learning approaches in learning generalizable prior abstraction from the previously observed attack patterns and exploiting  such prior to help infer attack patterns from only a few queries and outputs. Extensive experiments on MNIST, CIFAR10 and tiny-Imagenet demonstrate that our meta-attack method can remarkably reduce the number of model queries without sacrificing the attack performance. Besides, the obtained meta attacker is not restricted to a particular model but can be used easily with a fast adaptive ability to attack a variety of models. Our code will be released to the public.",
+    "keywords": [
+      "Adversarial attack",
+      "Meta learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Skxd6gSYDS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "Summary:\n\nThe authors of this paper propose a novel approach for query-efficient black-box adversarial attacks by leveraging meta-learning to approximate the gradient of given clean images. \n\nPaper strength:\n1.\tThe overall idea of this paper is interesting to improve the transferability of adversarial examples through meta-learning. \n2.\tThe paper is well-organized and easy to follow.\n3.\tAdequate experiment results demonstrate that the meta-attacker is efficient to decrease the number of queries for the adversarial attacks. It is interesting to see the meta attacker trained on certain source domain can be transferred to other domains.\n\nPaper weakness:\n\n1.\tThe authors miss some important details about training meta attackers like how many images you choose to get the image and its gradient pairs. Are the images from the training set or test set. Is there an overlap between the meta-attacker training set and the test set? \n2.\tWhat if you try to learn the adversarial perturbation directly instead of learning the gradient of images?\n3.\tHow about changing the meta learner to vanilla training and learning an autoencoder directly to map the image to its gradient? There could be a problem of how to incorporate the existing classifiers, but I think this could be an important baseline.\n4.\tThe authors try to use the gradient from the ZOO to guide the pre-trained meta attacker to adapt to a new classifier in Algorithm 2 (line 3). What if you take multi-step ZOO to give a much stronger prior to finetuning?\n5.\tTake a look at the confusion matrix in [1] which studies the transferability of white-box attack and black-box attack. I think it could be more interesting if the authors change the ground truth from gradient to estimated gradient from ZOO for learning meta-attacker. \n\n\nLi, Yandong, et al. \"NATTACK: Learning the Distributions of Adversarial Examples for an Improved Black-Box Attack on Deep Neural Networks.\" arXiv preprint arXiv:1905.00441 (2019)."
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

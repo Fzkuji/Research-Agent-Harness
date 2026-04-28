@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "ucASPPD9GKN",
+  "reviewer": "WXGg",
+  "paper": {
+    "title": "Is Homophily a Necessity for Graph Neural Networks?",
+    "authors": [
+      "Yao Ma",
+      "Xiaorui Liu",
+      "Neil Shah",
+      "Jiliang Tang"
+    ],
+    "abstract": "Graph neural networks (GNNs) have shown great prowess in learning representations suitable for numerous graph-based machine learning tasks. When applied to semi-supervised node classification,  GNNs are widely believed to work well due to the homophily assumption (``like attracts like''), and fail to generalize to heterophilous graphs where dissimilar nodes connect. Recent works design new architectures to overcome such heterophily-related limitations, citing poor baseline performance and new architecture improvements on a few heterophilous graph benchmark datasets as evidence for this notion. In our experiments, we empirically find that standard graph convolutional networks (GCNs) can actually achieve better performance than such carefully designed methods on some commonly used heterophilous graphs. This motivates us to reconsider whether homophily is truly necessary for good GNN performance.  We find that this claim is not quite true, and in fact, GCNs can achieve strong performance on heterophilous graphs under certain conditions. Our work carefully characterizes these conditions and provides supporting theoretical understanding and empirical observations.  Finally, we examine existing heterophilous graphs benchmarks and reconcile how the GCN (under)performs on them based on this understanding.",
+    "keywords": [],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ucASPPD9GKN"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper revisits the common belief in prior works, “GCNs require strong homophily assumption.” The paper claims that even under low homophily, if the nodes of each label have distinguishable neighbor label distributions, GCNs can learn distinguishable node representations. To prove this claim, the authors (1) show that GCNs outperform representative baselines on two heterophilous graphs, (2) theoretically analyze the relation between homophily and decision boundary on CSBM with two classes, (3) conduct experiments on synthetic benchmarks created by distinct/random edge addition, and (4) analyze real-world benchmarks qualitatively and quantitatively with the lens of (3).",
+    "main_review": "This work proposes a novel perspective on learning node representations under various homophily. Considering how recent GNN papers on heterophily treat GCNs (as the weakest baseline), we can say that empirical results by this paper are groundbreaking. However, this paper has several flaws which should be fixed/justified before publication.\n\nFirst, the Table 1 results are not convincing. We now agree that GCNs can learn good representations under some conditions on neighbor label distributions. However, this cannot justify how GCNs outperform other models. Does it not hold for other specialized architectures (H2GCN, CPGNN, GRRGNN)? Or, how about simple other baselines such as GraphSAGE and GAT?\n\nRelated to the first point, is there any reason for GCNs’ supremacy other than hyperparameter tuning? I have read Appendix D.4, and it is a standard procedure with reasonable computational budgets. Does it mean that other related works were doing something wrong? What is the magic here?\n\nSecond, the edge addition algorithm does not control the degree distribution; it monotonically increases the degree of nodes. In Theorem 1, the probability is bounded with singular value, feature dimension, and degree. However, the edge addition algorithm adds edges, and the average degree always increases; thus, whole experiments in Figure 3 do not control the key variate. Does it contribute to getting over-optimistic results for a high degree (or low homophily) regime? \n\nThird, the two-class graph results seem to be insufficient for the main claim. Theorem 2 is about the relation between decision boundary and degree, $p$, and $q$, and this is just one example of a graph with distinguishable neighbor label patterns. Can we say that Theorem 2 *theoretically supports* the paper’s argument? This can work just because predicting one can be reducible to predicting the other in a two-class problem, might not because of the distinguishability. \n\nFourth, the degree distribution $\\mathcal{D}_c$ for edge addition is clearly distinguishable to each other, but only one specific instance has been experimented with (i.e., having neighbors of two other classes other than itself). Is there any specific reason to experiment with one pattern across all datasets? Can we confirm that these empirical results generalize to various neighbor label distributions? For extreme cases, how does the model perform if the node connects to a single different label, or all labels except for itself (with the different number of classes)?",
+    "summary_of_the_review": "The authors discuss the interesting question (in the title) and their answers in theoretical and empirical ways. The paper has merits but also has the following weaknesses:\n\n- Table 1 and the following description cannot justify how GCNs outperform other models.\n- The edge addition algorithm does not control the degrees, which is the core control variate for the experiments.\n- The two-class graph results seem to be insufficient for the main claim.\n- Only one specific instance of the degree distribution $\\mathcal{D}_c$ for edge addition is used for the experiments.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3092,
+    "words": 478,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0e771ddf-186c-4e43-95fb-cbf8d7575a22",
+    "error": null,
+    "scored_chars": 3094
+  }
+}

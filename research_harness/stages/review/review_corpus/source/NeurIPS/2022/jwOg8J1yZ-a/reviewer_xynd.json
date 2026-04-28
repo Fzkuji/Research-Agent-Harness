@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "jwOg8J1yZ-a",
+  "reviewer": "xynd",
+  "paper": {
+    "title": "Adversarially Robust Learning with Tolerance",
+    "authors": [
+      "Hassan Ashtiani",
+      "Vinayak Pathak",
+      "Ruth Urner"
+    ],
+    "abstract": "We initiate the study of tolerant adversarial PAC learning with respect to metric perturbation sets. In adversarial PAC learning, an adversary is allowed to replace a test point $x$ with an arbitrary point in a closed ball of radius $r$ centered at $x$. In the tolerant version, the error of the learner is compared with the best achievable error with respect to a slightly larger perturbation radius $(1+\\gamma)r$. This simple tweak helps us bridge the gap between theory and practice and obtain the first PAC-type guarantees for algorithmic techniques that are popular in practice. Furthermore, our sample complexity bounds improve exponentially over best known (non-tolerant) bounds in terms of the VC dimension of the hypothesis class. In particular, for perturbation sets with doubling dimension $d$, we show that a variant of the  ``perturb-and-smooth'' algorithm PAC learns any hypothesis class $H$ with VC dimension $v$ in the $\\gamma$-tolerant adversarial setting with $O\\left(\\frac{v(1+1/\\gamma)^{O(d)}}{\\varepsilon}\\right)$ samples. This guarantee holds in the tolerant robust realizable setting. We extend this to the agnostic case by designing a novel sample compression scheme based on the perturb-and-smooth approach. This compression-based algorithm has a linear dependence on the doubling dimension as well as the VC-dimension.",
+    "keywords": [
+      "Statistical Learning Theory",
+      "PAC Learning",
+      "Adversarial Learning",
+      "Compression",
+      "Perturb and Smooth"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=jwOg8J1yZ-a"
+  },
+  "review_fields": {
+    "summary": "The paper studies the PAC learnability of adversarial robustness in the tolerant setting. The paper reveals a learnability result showing that VC hypothesis sets are tolerantly PAC learnable in the realizable case using a ``perturb-and-smooth'’ algorithm. As compared to previous non-tolerant results, their sample complexity has an exponential improvement on the dependence of VC dimension. The paper also reveals a learnability result in the agnostic setting through sample compression.",
+    "strengths_and_weaknesses": "Strengths:\n\n* Well-written assumptions and theorems.\n* New tolerant framework is considered.\n\nWeaknesses:\n\nThe significance is limited. The major issue is that their tolerance framework is not justified.\n\nOn the one hand, they do not specify how to choose a reasonable *reference* perturbation type V(x) given an *actual* perturbation type U(x) in definition 4. More precisely, the choice of tolerance parameter \\gamma in line 206 is unclear. I think this is very crucial and necessary in this framework. Consider the case where V(x)=0 and U(x) = B_{\\gamma}(x). Then the inequality between line 195 and 196 tells that the algorithm can find a classifier with clean error smaller than the adversarial bayes error within ball B_{\\gamma}(x), which is actually meaningless for any \\gamma since we know that the clean bayes error must be less than the adversarial bayes error and the sample-efficient PAC learners for clean bayes classifier is known.\n\nIn line 298 - 301, they want to set gamma to be above some threshold. Using their parameters of \\zeta=1, c =1000 and d=1000 in the provided example, the gamma is required to be larger than 1. It is hard to believe that such a large gamma is meaningful in terms of the tolerance of perbutation size.\n\nOn the other hand, they do not show negative results like \"some tolerance is necessary otherwise adversarial robustness is not possible\", which further limits the significance.\n\nTheir sample complexity such as that in Theorem 10 is independent of the actual perturbation size r for adversarial robustness. Their proposed algorithm does not train on the worst case perturbed samples. Instead, the algorithm only trains on the randomly perturbed samples, which I think is not useful for adversarial robustness. These facts suggest that such a tolerance framework seems not reliable."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

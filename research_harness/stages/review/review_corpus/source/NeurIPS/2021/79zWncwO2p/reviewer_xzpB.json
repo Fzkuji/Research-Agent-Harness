@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "79zWncwO2p",
+  "reviewer": "xzpB",
+  "paper": {
+    "title": "Collaborating with Humans without Human Data",
+    "authors": [
+      "DJ Strouse",
+      "Kevin R. McKee",
+      "Matthew Botvinick",
+      "Edward Hughes",
+      "Richard Everett"
+    ],
+    "abstract": "Collaborating with humans requires rapidly adapting to their individual strengths, weaknesses, and preferences. Unfortunately, most standard multi-agent reinforcement learning techniques, such as self-play (SP) or population play (PP), produce agents that overfit to their training partners and do not generalize well to humans. Alternatively, researchers can collect human data, train a human model using behavioral cloning, and then use that model to train \"human-aware\" agents (\"behavioral cloning play\", or BCP). While such an approach can improve the generalization of agents to new human co-players, it involves the onerous and expensive step of collecting large amounts of human data first. Here, we study the problem of how to train agents that collaborate well with human partners without using human data. We argue that the crux of the problem is to produce a diverse set of training partners. Drawing inspiration from successful multi-agent approaches in competitive domains, we find that a surprisingly simple approach is highly effective. We train our agent partner as the best response to a population of self-play agents and their past checkpoints taken throughout training, a method we call Fictitious Co-Play (FCP). Our experiments focus on a two-player collaborative cooking simulator that has recently been proposed as a challenge problem for coordination with humans. We find that FCP agents score significantly higher than SP, PP, and BCP when paired with novel agent and human partners. Furthermore, humans also report a strong subjective preference to partnering with FCP agents over all baselines.",
+    "keywords": [
+      "multi-agent",
+      "zero-shot coordination",
+      "collaboration",
+      "cooperation",
+      "common-payoff",
+      "human-ai interaction",
+      "reinforcement learning",
+      "deep reinforcement learning"
+    ],
+    "decision": "Accept (Spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=79zWncwO2p"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a method of training collaborator agents that cooperates with humans without the need for human behaviour data. It proposes that the main drawback of \"behaviour cloning play\"(BCP) is that it is expensive to collect sufficient human data. The method proposed in this paper is called Fictitious Co-Play(FCP), and is based on the prior methods self-play(SP). Through different settings, initialization and additional checkpoints, we can get a collection of self-play agents of different degrees of skill. Via training with the collection of self-play agents, a collaborator agent which collaborates with novel human well in common-payoff games can be obtained. Self-play agents and their checkpoints during training replace a large amount of human data.",
+    "main_review": "Quality: This paper makes possible the zero-shot coordination with humans. Yet, this paper does not give a theoretical basis for this, nor does it give a proof. The experimental environment to prove the effectiveness of this method is relatively simple.\n\nClarity: This paper illustrates the idea and logic in a very clear and easy-to-understand way.\n\nOriginality: The main innovation of this paper is to use the checkpoint in the training process, so as to improve the diversity of the behavior of the collaborators who train the collaborator agent, and make the collaborator agent have strong generalization ability. The application of this method in the field of agent human cooperation is an innovation, but in the field of deep computer vision, there has been the realization of similar idea.\n\nSignificance: This paper is of great significance to the research field of human agent cooperation. It proposes that human data can be unnecessary for training agents which collaborate with humans. This attempt is of significance.\n\nThe main weakness of this paper is that the author does not give the theoretical connection between the method and the effect, and does not give a large number of results under different experimental environment.\n\nYet, it is an interesting problem to train agents that can cooperate well with human beings without using human data. The author's attempt is worthy of affirmation.",
+    "limitations_and_societal_impact": "Question:\n1.Can the authors give theoretical proof of what the thought is effective?\n2.Can the experiment be carried out in more experimental environments to obtain more convincing experimental results?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "Al9yglQGKj",
+  "reviewer": "bXcV",
+  "paper": {
+    "title": "Phase diagram of early training dynamics in deep neural networks: effect of the learning rate, depth, and width",
+    "authors": [
+      "Dayal Singh Kalra",
+      "Maissam Barkeshli"
+    ],
+    "abstract": "We systematically analyze optimization dynamics in deep neural networks (DNNs) trained with stochastic gradient descent (SGD) and study the effect of learning rate $\\eta$, depth $d$, and width $w$ of the neural network. By analyzing the maximum eigenvalue $\\lambda^H_t$ of the Hessian of the loss, which is a measure of sharpness of the loss landscape, we find that the dynamics can show four distinct regimes: (i) an early time transient regime, (ii) an intermediate saturation regime, (iii) a progressive sharpening regime, and (iv) a late time \"edge of stability\" regime. The early and intermediate regimes (i) and (ii) exhibit a rich phase diagram depending on $\\eta \\equiv c / \\lambda_0^H $, $d$, and $w$. We identify several critical values of $c$, which separate qualitatively distinct phenomena in the early time dynamics of training loss and sharpness. Notably, we discover the opening up of a \"sharpness reduction\" phase, where sharpness decreases at early times, as $d$ and $ 1/w$ are increased.",
+    "keywords": [
+      "Optimization dynamics",
+      "Phase diagrams",
+      "learning rate transition",
+      "Catapult effect"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Al9yglQGKj"
+  },
+  "review_fields": {
+    "summary": "This work mainly investigates the learning dynamics depending on the learning rate and categorizes its qualitative behaviors in some phases. In particular, the authors identify new phases; sharpness reduction, and loss-sharpness catapult. They investigate the dependence of the critical learning rates (mainly, $c_{class}, c_{sharp}, c_{max}$ and $c_{barrier}$) on the width, depth & loss type, and try to identify a universal relationship between them. \nTheir empirical observations in some deep neural networks are also confirmed in a simple linear network and the obtained phase diagram is expected to hold in various situations.",
+    "strengths": "This work attacks the challenging problem to find any universal behavior of early learning dynamics in finite-size networks (I guess that the terminology of \"phase diagram\" comes from physics or chemistry but such a dynamic and finite-sized diagram seems not known). Despite this difficulty, the authors verified new phases (characterized by $c_{loss},c_{sharp},c_{max}$) in various settings and these new phases seem to have the originality. Their careful and elaborated experiments are persuasive and enhance the quality of the paper.",
+    "weaknesses": "(a) The whole findings are empirical. Even in a simple model of $uvx$, the authors did not solve the dynamics in an analytical form. It is quite hard to obtain any intuition on why the three phases characterized by $c_{loss}<c_{sharp}<c_{max}$ universally appear. \n\n (b)They are several unclear points that the authors should more clearly mention. See below.",
+    "questions": "**Connection to the infinite width limit**\n\nWhile the current work focuses on finite-sized networks, some previous work investigated the infinite-width limit [64]. In particular, [64] claims that for the infinite-width limit, the learning dynamics *must be* the kernel regime for SP initialization (nevertheless, the learning dynamics does not progress or explodes).  How is this infinite-width study related to your results? Since the critical learning rate of the kernel regime is given by $2/\\lambda_{0}^{NTK}$, does this suggest that all  $c_{loss,sharp,max}$ converge to 2 in the infinite width limit? \n\n**Phase diagram in previous work**\n\nRelated to [64], there are several studies on the phase diagram of convergence in the infinite width case (e.g. https://arxiv.org/abs/2012.15110 and https://arxiv.org/abs/2007.07497). It would be better to mention them for giving a rich overview of the phase-diagram studies in the literature.  More related to the current work, the phase diagram for width v.s. learning rate is also investigated in the literature (https://arxiv.org/abs/1806.01316). This work implies that 2/$\\lambda_{0}^{NTK}$ works as a critical learning rate of the convergence in the infinite width. \n\n**The effect of early learning dynamics on eventual minima**\n\nI understand that the main focus of the current work is on the early training regime, but it is quite curious how the sharpness reduction, loss catapult, and loss-sharpness catapult phases determine the eventual generalization performance and sharpness of minima in the trained models. If this point would be clarified, it would increase the significance of this paper much more.",
+    "limitations": "**No normalization layers**\n\nThe architectures in this work have no batch/layer normalization layer. Since the batch norm is known to strongly affect the sharpness (e.g. https://arxiv.org/abs/1901.10159), it is curious how the normalization layer potentially changes the results.  \n\n**Difference between MSE and cross-entropy cases**\n\nIt seems that the cross-entropy loss shows a different behavior of the critical learning rates. In particular, in most cases, $c_{loss}$ and $c_{sharp}$ decrease close to 2 as $1/w$ decreases in the MSE case while they keep far from 2 in the cross-ent case. In the revised version, I believe it would be better to give a more elaborated explanation of the difference in the main text."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3270,
+    "words": 485,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/2f622b91-d639-440f-881e-bf505dcc58c2",
+    "error": null,
+    "scored_chars": 3279
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "Z4eFqgYbha",
+  "reviewer": "irHX",
+  "paper": {
+    "title": "Structure-Aware Spectral Sparsification via Uniform Edge Sampling",
+    "authors": [
+      "Kaiwen He",
+      "Petros Drineas",
+      "Rajiv Khanna"
+    ],
+    "abstract": "Spectral clustering is a fundamental method for graph partitioning, but its reliance on eigenvector computation limits scalability to massive graphs. Classical sparsification methods preserve spectral properties by sampling edges proportionally to their effective resistances, but require expensive preprocessing to estimate these resistances. We study whether uniform edge sampling—a simple, structure-agnostic strategy—can suffice for spectral clustering. Our main result shows that for graphs admitting a well-separated $k$-clustering, characterized by a large structure ratio $\\Upsilon(k) = \\lambda_{k+1} / \\rho_G(k)$, uniform sampling preserves the spectral subspace used for clustering. Specifically, we prove that uniformly sampling $O(\\gamma^2 n \\log n / \\varepsilon^2)$ edges, where $\\gamma$ is the Laplacian condition number, yields a sparsifier whose top $(n-k)$-dimensional eigenspace is approximately orthogonal to the cluster indicators. This ensures that the spectral embedding remains faithful, and clustering quality is preserved. Our analysis introduces new resistance bounds for intra-cluster edges, a rank-$(n-k)$ effective resistance formulation, and a matrix Chernoff bound adapted to the dominant eigenspace. These tools allow us to bypass importance sampling entirely. Conceptually, our result connects recent coreset-based clustering theory to spectral sparsification, showing that under strong clusterability, even uniform sampling is structure-aware. This provides the first provable guarantee that uniform edge sampling suffices for structure-preserving spectral clustering.",
+    "keywords": [
+      "Spectral Clustering",
+      "Graph Sparsification"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Z4eFqgYbha"
+  },
+  "review_fields": {
+    "summary": "This paper investigates whether uniform edge sampling can suffice for spectral clustering in graphs with well-separated clusters. The main contribution is a theoretical analysis showing that uniform sampling preserves the spectral subspace necessary for clustering under strong clusterability conditions. The authors derive resistance bounds for intra-cluster edges to analyze uniform sampling for clustered graphs.",
+    "strengths_and_weaknesses": "Strengths\n1. Understanding the side effects of uniform edge sampling is an important topic for graph sparsification. The paper provides a novel theoretical analysis showing that uniform sampling suffices for spectral clustering under strong clusterability conditions.  \n2. The results suggest that simple and efficient uniform sampling can be effective for large-scale spectral clustering.  \n3. This paper introduces resistance bounds and the matrix Chernoff bound, which may be of independent interest for spectral graph theory.\n\nWeaknesses\n1. While the theory appears compelling, the numerical experiments are limited to small random graph models.\n2. Real-world graphs are seldom well-clustered so the structure ratio $\\Upsilon(k)$ is usually not large enough for the discussions to hold.",
+    "questions": "If I understand correctly, one main practical conclusion of this work is to show that the expensive effective resistance sampling does not surpass trivial uniform sampling as much as we'd expect. What about other sampling strategies?",
+    "paper_formatting_concerns": "Cross-reference fails on lines 210 and 217",
+    "final_justification": "The primary contributions of this work are theoretical in nature, and the overall quality is robust, albeit constrained by certain simplifying assumptions necessary to facilitate the proof."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 3,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

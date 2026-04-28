@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "pQm66IPmeE",
+  "reviewer": "JoXW",
+  "paper": {
+    "title": "Traceable and Explainable Multimodal Large Language Models: An Information-Theoretic View",
+    "authors": [
+      "Zihan Huang",
+      "Junda Wu",
+      "Rohan Surana",
+      "Raghav Jain",
+      "Tong Yu",
+      "Raghavendra Addanki",
+      "David Arbour",
+      "Sungchul Kim",
+      "Julian McAuley"
+    ],
+    "abstract": "Existing multimodal large language models (MLLMs) often lack traceable and explainable mechanisms for visual-textual alignment, making it challenging to understand how textual instructions shape multimodal representations. To address this shortcoming, we propose an information-theoretic framework that clarifies how MLLMs handle and transform both text and visual inputs. In particular, we measure the visual information gain that arises from textual instructions and multimodal encodings, thereby illuminating how different modalities interact and contribute to the model’s overall processing.\nOur framework decomposes the multimodal encoding process into layer-wise mutual information measures for better explainability, quantifying the visual contribution as the difference between unconditional and text-conditional mutual information. Specifically, inspired by the Information Bottleneck framework, we introduce a Concept Bottleneck that maps high-dimensional multimodal representations into an interpretable space, enabling tractable variational upper bounds on the mutual information between visual inputs and the model’s internal states. Furthermore, we quantify the contextual contribution introduced by textual cues via an InfoNCE mechanism that contrasts multimodal representations computed with and without text guidance. This dual perspective, facilitated by tractable variational upper bounds, provides insight into how visual information is encoded and filtered by textual instructions, while also highlighting the contextual information induced and enhanced by MLLMs. \nEmpirical findings demonstrate underexplored dynamics of visual-textual interaction within MLLMs, \nunderscoring how textual instructions distinctly shape visual representations and demonstrating how visual prompts, \nwhen effectively paired with instructions, enhance multimodal understanding.",
+    "keywords": [
+      "multimodal LLM",
+      "information theory"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=pQm66IPmeE"
+  },
+  "review_fields": {
+    "summary": "This paper proposes an information‑theoretic framework for tracing multimodal interactions in vision‑language models. By estimating layer‑wise mutual‑information metrics, the authors reveal how visual features are progressively filtered, blended, and ultimately compressed as textual context flows through the layers of LLaVA‑1.5.\n\nOverall, the motivation is clear and the framework could become a useful diagnostic tool for multimodal LLMs, pinpointing where visual and textual signals converge. Nonetheless, the study has two notable weaknesses: (a) crucial mathematical notation in Section 3.1 is ambiguous, and (b) the main claims rely entirely on the behaviour of the two proposed metrics without additional supporting experiments. Further empirical validation—such as interventions on hidden states—would be needed to substantiate the conclusions.",
+    "reasons_to_accept": "- Introduces a novel information‑theoretic diagnostic toolkit (F_V^{(l)}, F_T^{(l)}) enabling layer‑wise traceability in multimodal LLMs, a capability not provided by prior work.\n- The method is lightweight (post‑hoc, no retraining), making it a practical diagnostic for both researchers and practitioners.",
+    "reasons_to_reject": "- Key mathematical notation in §3.1 is ambiguous (e.g., inconsistent use of T, N, X_0^{(l)}, X_T^{(l)}), making it difficult to reproduce results or even compute the proposed metrics correctly.\n    - $T$ is introduced as raw text, yet in Eq. (1) it denotes a sequence of tokens. This usage is inconsistent with $I$, which represents a raw image fed to the VLM through the function $f$.\n    - $N$ is never defined (I presume it is the number of layers in $g_\\pi$).\n    - $X_{0}^{(l)}$ is labeled “encoded visual representation,” but the 0-th token is merely the first image token—it does not capture the full visual representation. The authors may have meant $X_{|f(V)|}^{(l)}$ (the last image token).\n    - $X_{T}^{(l)}$ is called the “multimodal representation,” yet $T$ is not an index but the text itself. Even if one sets $T = |T|$, the notation still seems off; perhaps $X_{|f(V)|+|T|}^{(l)}$ (the last input token) was intended.\n    - Because these symbols form the foundation of the method—and are reused in the proposed information-theoretic measurements—the notation must be clarified. In my review, I assumed $X_{0}^{(l)}$ refers to the last image token and $X_{T}^{(l)}$ to the last input token.\n- Core empirical claims rely solely on the shapes of two mutual‑information curves; without causal interventions or ablation studies, the four‑stage interpretation remains speculative.\n    - For example, the authors identify four stages of multimodal encoding solely from the shapes of the proposed metric curves. However, it is difficult—at least for me—to draw firm conclusions from these plots alone. They indicate when information from image tokens is injected into text tokens, but not how this integration occurs. We can certainly hypothesize, but for such hypotheses to be scientifically convincing we need more rigorous experiments—for instance, interventions on the model’s hidden states—to corroborate the claims.\n- Evaluation is limited to a single model (LLaVA‑1.5‑7B) and a concept bottleneck tied to 80 MS‑COCO classes, leaving generality to other architectures and tasks untested.\n- The experiments lack comparisons to simpler diagnostic tools (e.g., similarity of hidden states between image tokens and text tokens [1]), so the incremental benefit of the proposed toolkit is unclear.\n\n[1] https://arxiv.org/abs/2411.00646"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 100,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 2628,
+    "words": 393,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f8061976-3a62-4177-95a9-42220e05d11c",
+    "error": null,
+    "scored_chars": 2652
+  }
+}

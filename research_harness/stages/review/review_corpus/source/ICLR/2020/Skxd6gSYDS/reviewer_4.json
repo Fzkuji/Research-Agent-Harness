@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "Skxd6gSYDS",
+  "reviewer": "4",
+  "paper": {
+    "title": "Query-efficient Meta Attack to Deep Neural Networks",
+    "authors": [
+      "Jiawei Du",
+      "Hu Zhang",
+      "Joey Tianyi Zhou",
+      "Yi Yang",
+      "Jiashi Feng"
+    ],
+    "abstract": "Black-box attack methods aim to infer suitable attack patterns to targeted DNN models by only using output feedback of the models and the corresponding input queries. However, due to lack of prior and inefficiency in leveraging the query and feedback information, existing methods are mostly query-intensive for obtaining effective attack patterns. In this work, we propose a meta attack approach that is capable of attacking a targeted  model with much fewer queries. Its high query-efficiency stems from effective utilization of  meta learning approaches in learning generalizable prior abstraction from the previously observed attack patterns and exploiting  such prior to help infer attack patterns from only a few queries and outputs. Extensive experiments on MNIST, CIFAR10 and tiny-Imagenet demonstrate that our meta-attack method can remarkably reduce the number of model queries without sacrificing the attack performance. Besides, the obtained meta attacker is not restricted to a particular model but can be used easily with a fast adaptive ability to attack a variety of models. Our code will be released to the public.",
+    "keywords": [
+      "Adversarial attack",
+      "Meta learning"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Skxd6gSYDS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have published one or two papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "This paper proposed a meta attack approach that is capable of attacking a targeted model with fewer queries. It effectively utilizes meta learning approaches to abstract generalizable prior from previous observed attack patterns. Experiments on several benchmark datasets demonstrates it performance in reducing model queries.\n\n- The proposed meta learning approach seems to learn a universal gradient direction of an image x for all networks, which seems to be an ambitious goal. The authors did not provide any intuition or demonstrative explanations towards this. I hope the author could provide some more evidence showing that why this is achievable and is this indeed achieved by the meta learner (e.g., comparing the cosine similarity between the true gradient and the meta learner generated gradient?) \n\n- In Algorithm 2, the authors seem to use coordinate-wise zeroth-order gradient estimation as in ZOO. I wonder have the authors considered using NES type Gaussian noise to estimate the gradient? As it has been shown to be more efficient than coordinate-wise zeroth-order gradient estimation in (Ilyas et al. 2018).\n\n- I notice that the authors only consider L2 norm attack case and did not include more popular L-infinity norm case. Is there any reason why it can not be applied to L-infinity norm? I didn’t find anywhere in the algorithm that would restrict the choice of norm type. The author might also need to compare with the following recent papers regarding black-box attacks.\n\nYan, Ziang, Yiwen Guo, and Changshui Zhang. \"Subspace Attack: Exploiting Promising Subspaces for Query-Efficient Black-box Attacks.\" arXiv preprint arXiv:1906.04392 (2019).\nMoon, Seungyong, Gaon An, and Hyun Oh Song. \"Parsimonious Black-Box Adversarial Attacks via Efficient Combinatorial Optimization.\" ICML 2019.\nChen, Jinghui, Jinfeng Yi, and Quanquan Gu. \"A Frank-Wolfe Framework for Efficient and Effective Adversarial Attacks.\" arXiv preprint arXiv:1811.10828 (2018).\n\n- In experiments part, only 100 images from each dataset may not be representative enough. I would suggest the authors to test more samples. Also please consider only the images that can be correctly classified without perturbation, as there is no need to attack those already misclassified images."
+  },
+  "review_metadata": {
+    "rating": 6
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

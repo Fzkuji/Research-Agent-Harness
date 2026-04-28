@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "7vVWiCrFnd",
+  "reviewer": "rfPW",
+  "paper": {
+    "title": "Rethinking and Extending the Probabilistic Inference Capacity of GNNs",
+    "authors": [
+      "Tuo Xu",
+      "Lei Zou"
+    ],
+    "abstract": "Designing expressive Graph Neural Networks (GNNs) is an important topic in graph machine learning fields. Despite the existence of numerous approaches proposed to enhance GNNs based on Weisfeiler-Lehman (WL) tests, what GNNs can and cannot learn still lacks a deeper understanding. This paper adopts a fundamentally different approach to examine the expressive power of GNNs from a probabilistic perspective. By establishing connections between GNNs' predictions and the central inference problems of probabilistic graphical models (PGMs), we can analyze previous GNN variants with a novel hierarchical framework and gain new insights into their node-level and link-level behaviors. Additionally, we introduce novel methods that can provably enhance GNNs' ability to capture complex dependencies and make complex predictions. Experiments on both synthetic and real-world datasets demonstrate the effectiveness of our approaches.",
+    "keywords": [
+      "graph neural networks",
+      "expressiveness",
+      "approximate inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7vVWiCrFnd"
+  },
+  "review_fields": {
+    "summary": "The paper proposes a new approach to evaluate the expressive power of graph neural networks from a probabilistic perspective instead of Weisfeiler-Lehman (WL) tests, which are generally used for evaluating the expressiveness of GNNs. By introducing the central inference problems of probabilistic graphical models (PGMs), the authors analyze GNNs. In addition, the authors design two methods (phantom nodes and phantom edges) for the expressive power.",
+    "strengths": "- The paper is well written.\n- The research topic about the expressive power of GNNs is important and interesting.\n- The paper seems novel to me. Different from existing methods on the expressive power of GNNs, which use WL test, this paper analyze the expressive power of GNNs in the perspective of the probabilistic view.",
+    "weaknesses": "- Do you have any ideas for the graph classification tasks? Generally, the papers about the  expressiveness power of GNNs use graph classification tasks to demonstrate the effectiveness of their methods.\n- Could you apply your methods on large-scale graphs?",
+    "questions": "Please refer to the weaknesses."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 614,
+    "words": 101,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/eeb21627-3fd6-4554-8b8a-19de5f23a7f8",
+    "error": null,
+    "scored_chars": 615
+  }
+}

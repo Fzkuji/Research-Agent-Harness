@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "KtGsJm8bOC",
+  "reviewer": "QKAz",
+  "paper": {
+    "title": "MSRS: Evaluating Multi-Source Retrieval-Augmented Generation",
+    "authors": [
+      "Rohan Phanse",
+      "Ej Zhou",
+      "Kejian Shi",
+      "WENCAI ZHANG",
+      "Yixin Liu",
+      "Yilun Zhao",
+      "Arman Cohan"
+    ],
+    "abstract": "Retrieval-augmented systems are typically evaluated in settings where information required to answer the query can be found within a single source or the answer is short-form or factoid-based. However, many real-world applications demand the ability to integrate and summarize information scattered across multiple sources, where no single source is sufficient to respond to the user's question. In such settings, the retrieval component of a RAG pipeline must recognize a variety of relevance signals, and the generation component must connect and synthesize information across multiple sources. We present a scalable framework for constructing evaluation benchmarks that challenge RAG systems to integrate information across distinct sources and generate long-form responses. Using our framework, we build two new benchmarks on Multi-Source Retrieval and Synthesis: MSRS-Story and MSRS-Meet, representing narrative synthesis and summarization tasks, respectively, that require retrieval from large collections. Our extensive experiments with various RAG pipelines—including sparse and dense retrievers combined with frontier LLMs—reveal that generation quality is highly dependent on retrieval effectiveness, which varies greatly by task. While multi-source synthesis proves challenging even in an oracle retrieval setting, we find that reasoning models significantly outperform standard LLMs at this distinct step.",
+    "keywords": [
+      "Retrieval-Augmented Generation",
+      "Retrieval",
+      "Summarization",
+      "Evaluation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=KtGsJm8bOC"
+  },
+  "review_fields": {
+    "summary": "The paper presents a new benchmark for open-domain multi document summarisation (ODMDS). The authors leverage two pre-existing single document query oriented long-context summarisation datasets in the stories (SQuALITY) and meetings domains (QMSum). They convert the stories dataset into a ODMDS dataset by breaking the stories into chapters (each chapter is considered a document) and decontextualizing the query/question by re-writing it with an LLM. A question may seek information that is present in multiple chapters. For the meetings dataset they cluster queries and summaries in domains, merging similar queries and summaries into a single more comprehensive ones. The generated new resources are human validated for quality. Finally, the author test various RAG+LLM pipelines to assess the performance of various models in the newly generated benchmark. In terms of retrievers, dense retrievers seem to clearly outperform sparse one in the stories dataset, while sparse retrievers are more competitive in the more challenging meetings dataset. In terms of LLMs, DeepSeek v3 performs the best in the stories dataset while GPT-4o (and mini) perform the best in the meets dataset. The LLMs performance vary depending on the retriever.",
+    "reasons_to_accept": "- The paper is well written and the ideas clearly presented\n- Interesting related work section clearly describing the differences of multi-document summarisation (MDS), query focused MDS and Open-domain MDS.\n- Valuable resource for the research community to evaluate state-of-the-art ODMDS models\n- Well described generation of the dataset. Similar approaches may be used to generate more ODMDS datasets in other domains.",
+    "reasons_to_reject": "- I would have appreciated more analysis on that justify certain decisions on the creation of the dataset. For example, in the ODSum-Story dataset construction, the authors give a good rational for decontextualizing queries, as the queries in the original dataset are too dependent on the source document. However, it would be interesting to see that this step actually makes a difference in terms of downstream performance. Do the models perform better when these decontextualized queries are provided?"
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 926,
+    "words": 140,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e93e02ca-3e17-4082-b76c-2c42665342f2",
+    "error": null,
+    "scored_chars": 926
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "Q0rKYiVEZq",
+  "reviewer": "i3cs",
+  "paper": {
+    "title": "Emoji Attack: Enhancing Jailbreak Attacks Against Judge LLM Detection",
+    "authors": [
+      "Zhipeng Wei",
+      "Yuqi Liu",
+      "N. Benjamin Erichson"
+    ],
+    "abstract": "Jailbreaking techniques trick Large Language Models (LLMs) into producing restricted output, posing a potential threat. One line of defense is to use another LLM as a Judge to evaluate the harmfulness of generated text. However, we reveal that these Judge LLMs are vulnerable to token segmentation bias, an issue that arises when delimiters alter the tokenization process, splitting words into smaller sub-tokens. This alters the embeddings of the entire sequence, reducing detection accuracy and allowing harmful content to be misclassified as safe. In this paper, we introduce Emoji Attack, a novel strategy that amplifies existing jailbreak prompts by exploiting token segmentation bias. Our method leverages in-context learning to systematically insert emojis into text before it is evaluated by a Judge LLM, inducing embedding distortions that significantly lower the likelihood of detecting unsafe content. Unlike traditional delimiters, emojis also introduce semantic ambiguity, making them particularly effective in this attack. Through experiments on state-of-the-art Judge LLMs, we demonstrate that Emoji Attack substantially reduces the unsafe prediction rate, bypassing existing safeguards.",
+    "keywords": [
+      "LLM safety; Jailbreaking Attacks; Judge LLMs; Token Segmentation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Q0rKYiVEZq"
+  },
+  "review_fields": {
+    "summary": "This paper proposes an Emoji attack to fool the judge LLM and thus enhance the attack power of jailbreaking. Emoji attack finds the position to insert the Emoji that can achieve the maximized segmentation bias. Empirical results show that Emoji can successfully bypass the judge LLM.",
+    "claims_and_evidence": "Yes. The empirical results seem to support the claim.",
+    "methods_and_evaluation_criteria": "The authors should consider the adaptive defense. Some very simple defense methods are to remove the emoji in the LLM's output or to ask the judge LLM first remove the emoji and then start judging.",
+    "experimental_designs_or_analyses": "The evaluation should consider the potential defense.",
+    "relation_to_broader_scientific_literature": "The paper could pose potential risks when using LLMs.",
+    "other_comments_or_suggestions": "Please refer to the evaluation metrics.",
+    "questions_for_authors": "1. Could you show the results under the potential defensive methods?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

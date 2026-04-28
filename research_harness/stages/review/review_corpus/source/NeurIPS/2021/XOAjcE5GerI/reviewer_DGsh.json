@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "XOAjcE5GerI",
+  "reviewer": "DGsh",
+  "paper": {
+    "title": "On learning sparse vectors from mixture of responses",
+    "authors": [
+      "Nikita Polyanskii"
+    ],
+    "abstract": "In this paper, we address two learning problems. Suppose a family of $\\ell$ unknown sparse vectors is fixed, where each vector has at most $k$ non-zero elements. In the first problem, we concentrate on robust learning the supports of all vectors from the family using a sequence of noisy responses. Each response to a query vector shows the sign of the inner product between a randomly chosen vector from the family and the query vector. In the second problem, we aim at designing queries such that all sparse vectors from the family can be approximately reconstructed based on the error-free responses.  This learning model was introduced in the work of Gandikota et al., 2020, and these problems can be seen as generalizations of support recovery and approximate recovery problems, well-studied under the framework of  1-bit compressed sensing.  As the main contribution of the paper, we prove the existence of learning algorithms for the first problem which work without any assumptions. Under a mild structural assumption on the unknown vectors, we also show the existence of learning algorithms for the second problem and rigorously analyze their query complexity.",
+    "keywords": [
+      "sparse vectors",
+      "mixture of binary linear classifiers",
+      "1-bit compessed sensing",
+      "query complexity",
+      "noisy measurements"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=XOAjcE5GerI"
+  },
+  "review_fields": {
+    "comment": "Thanks to the authors for their response to my review. However, my overall score will remain the same since I believe that NeurIPS requires both theoretical and practical contributions unless the theoretical contribution is significant, e.g. a first proof for outstanding problems, extremely novel proof technique, necessary and sufficient conditions (or very tight bounds) for the query length or extremely good presentation in the proof."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "H1xAH2RqK7",
+  "reviewer": "4",
+  "paper": {
+    "title": "Generative Adversarial Models for Learning Private and Fair Representations",
+    "authors": [
+      "Chong Huang",
+      "Xiao Chen",
+      "Peter Kairouz",
+      "Lalitha Sankar",
+      "Ram Rajagopal"
+    ],
+    "abstract": "We present Generative Adversarial Privacy and Fairness (GAPF), a data-driven framework for learning private and fair representations of the data. GAPF leverages recent advances in adversarial learning to allow a data holder to learn \"universal\" representations that decouple a set of sensitive attributes from the rest of the dataset. Under GAPF, finding the optimal decorrelation scheme is formulated as a constrained minimax game between a generative decorrelator and an adversary. We show that for appropriately chosen adversarial loss functions, GAPF provides privacy guarantees against strong information-theoretic adversaries and enforces demographic parity. We also evaluate the performance of GAPF on multi-dimensional Gaussian mixture models and real datasets, and show how a designer can certify that representations learned under an adversary with a fixed architecture perform well against more complex adversaries.",
+    "keywords": [
+      "Data Privacy",
+      "Fairness",
+      "Adversarial Learning",
+      "Generative Adversarial Networks",
+      "Minimax Games",
+      "Information Theory"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H1xAH2RqK7"
+  },
+  "review_fields": {
+    "review": "The paper authors provide a good overview of the related work to Private/Fair Representation Learning (PRL). Well written, The theoretical approach is extensively explained and the first sections of the paper are easy to follow. The authors demonstrate the model performance on or the GMM, the comparison between theoretical and data driven performance is a good case study to understand the PRL.\n\nWe usually expect to see related work in the first sections, in this case it's has been put just before the conclusion. It can be still justified by the need o introduce the  PRL concepts before comparing with other works.\nThe GMM study case is interesting, but incorporates strong assumptions. Moreover, for a 4 or 8 dimensional GM, 20K data points are more than enough to infer the correct parameter. It would have been more useful if it was used to comapre between the mentioned methods in \"Related Work\".\n\nThere seems to be important parts of the paper that has been put in the appendices: how to solve the constrained problem, Algorithm.... Similarly, some technical details were expanded in the paper body (Network structure).\n\nThe authors mentioned the similarities with other works and their model choices that set theirs apart from other. Yet, the paper doesn't provide performance ( accuracy, MI) comparison to other works. There seems to be a strong similarity with Censoring representations with an adversary, Harrison Edwards and Amos Storke (link: https://arxiv.org/abs/1511.05897). Difference : distortion instead of H divergence, non-generative autoencoders.\n\nConsequently, I question the novelty of the paper's contribution. Without extensive comparison with other methods and especially to similar ones mentioned in the related work, there is little to say about the \"state-of-the-artness\". Yet, it is important to acknowledge the visible effort behind the paper and how the author(s) managed to leverage the simplicity and power of GANs.\n\nOn a lighter note:\nA)- the paper mention \"state-of-the-art CNNs, state-of-the-art entropy estimators, MI, generative models\", for the Machine Learning community, many of these elements have been around for a while now.\nB)- \"Observe that the hard constraint in equation 2 makes our minimax problem different from what is extensively studied in the machine learning community\": I would argue it's not an objective statement."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

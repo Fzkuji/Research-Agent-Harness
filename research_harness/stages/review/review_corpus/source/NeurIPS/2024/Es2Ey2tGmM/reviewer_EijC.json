@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "Es2Ey2tGmM",
+  "reviewer": "EijC",
+  "paper": {
+    "title": "Constrained Diffusion Models via Dual Training",
+    "authors": [
+      "Shervin Khalafi",
+      "Dongsheng Ding",
+      "Alejandro Ribeiro"
+    ],
+    "abstract": "Diffusion models have attained prominence for their ability to synthesize a probability distribution for a given dataset via a diffusion process,  enabling the generation of new data points with high fidelity. However, diffusion processes are prone to generating samples that reflect biases in a training dataset. To address this issue, we develop constrained diffusion models by imposing diffusion constraints based on desired distributions that are informed by requirements. Specifically, we cast the training of diffusion models under requirements as a constrained distribution optimization problem that aims to reduce the distribution difference between original and generated data while obeying constraints on the distribution of generated data. We show that our constrained diffusion models generate new data from a mixture data distribution that achieves the optimal trade-off among objective and constraints. To train constrained diffusion models, we develop a dual training algorithm and characterize the optimality of the trained constrained diffusion model. We empirically demonstrate the effectiveness of our constrained models in two constrained generation tasks: (i) we consider a dataset with one or more underrepresented classes where we train the model with constraints to ensure fairly sampling from all classes during inference; (ii) we fine-tune a pre-trained diffusion model to sample from a new dataset while avoiding overfitting.",
+    "keywords": [
+      "Constrained diffusion model",
+      "constrained optimization",
+      "Lagrangian method",
+      "dual algorithm"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Es2Ey2tGmM"
+  },
+  "review_fields": {
+    "summary": "This paper aims to address the issue of generating biased data based on the training dataset for diffusion models. The authors introduce a constrained diffusion model by imposing the diffusion constraints based on desired diffusions that are informed by requirements/constraints. They propose a dual training algorithm to train the model, and characterize the convergence of the trained model. Two constrained generation tasks are explored: ensuring fairness to underrepresented classes and adapting a pretrained model to new data.",
+    "strengths": "- The paper is well written and easy to follow.\n- Its key idea is using the quadratic loss formulation of score matching, which is equivalent to the ELBO of diffusion models. The authors employ Lagrangian duality to update both the parameters of the diffusion model and dual variables of constraints. While Lagrangian duality is commonly used for constrained optimization, particularly for constrained generative models, see [1,2,3], this paper first introduces this approach for diffusion models.\n- Thanks to the quadratic loss minimization of diffusion models, the authors can establish the convergence of the proposed constrained models. I think this is the most novel part of the paper.\n\n[1] Liu et al., Sampling with trustworthy constraints: a variational gradient framework\n, NeurIPS 2021.\n\n[2] Danilo et al., Generalized ELBO with Constrained Optimization, GECO,  Bayesian Deep Learning (NeurIPS 2018).\n\n[3] Ferdinando et al., Lagrangian Duality for Constrained Deep Learning, ECMLPKDD 2020.",
+    "weaknesses": "- This paper shares a close connection to [1] regarding its motivation: formulating fairness as a constrained distributional optimization. Both of them employs a methodology based on primal-dual optimization derived  from Lagrangian duality to address the constraints. While [1] focuses on the constrained SVGD, this paper focuses on constrained diffusion models.\n- Some minor corrections:\n   +) Algorithm 1, line 4: x_{\\theta}(h) should be s_{\\theta}(h)\n   +) Section 5, line 314, q(x_0:T) should be q_{i}(x_0:T) (constraint part)",
+    "questions": "- How efficient the model is as the number of constraints increases? Each time the model updates the duality variables, it needs to train a diffusion model, which is slow.\n- how the proposed method differs from existing constrained generative models, for example [1].",
+    "limitations": "The paper can be improved by:\n- a discussion of the efficiency of the proposed constrained diffusion models should be included.\n- a discussion of how the proposed method differs from existing constrained generative models should be added."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 4,
+    "human_pct": 96,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2032,
+    "words": 307,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e7e4b69e-6ec5-4715-8029-f177da77bf0b",
+    "error": null,
+    "scored_chars": 2040
+  }
+}

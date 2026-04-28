@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "Od6CHhPM7I",
+  "reviewer": "EMti",
+  "paper": {
+    "title": "Red Teaming Deep Neural Networks with Feature Synthesis Tools",
+    "authors": [
+      "Stephen Casper",
+      "Tong Bu",
+      "Yuxiao Li",
+      "Jiawei Li",
+      "Kevin Zhang",
+      "Kaivalya Hariharan",
+      "Dylan Hadfield-Menell"
+    ],
+    "abstract": "Interpretable AI tools are often motivated by the goal of understanding model behavior in out-of-distribution (OOD) contexts. Despite the attention this area of study receives, there are comparatively few cases where these tools have identified previously unknown bugs in models. We argue that this is due, in part, to a common feature of many interpretability methods: they analyze model behavior by using a particular dataset. This only allows for the study of the model in the context of features that the user can sample in advance. To address this, a growing body of research involves interpreting models using feature synthesis methods that do not depend on a dataset. In this paper, we benchmark the usefulness of interpretability tools for model debugging. Our key insight is that we can implant human-interpretable trojans into models and then evaluate these tools based on whether they can help humans discover them. This is analogous to finding OOD bugs, except the ground truth is known, allowing us to know when a user's interpretation is correct. We make four contributions. (1) We propose trojan discovery as an evaluation task for interpretability tools and introduce a benchmark with 12 trojans of 3 different types. (2) We demonstrate the difficulty of this benchmark with a preliminary evaluation of 16 state-of-the-art feature attribution/saliency tools. Even under ideal conditions, given direct access to data with the trojan trigger, these methods still often fail to identify bugs. (3) We evaluate 7 feature-synthesis methods on our benchmark. (4) We introduce and evaluate 2 new variants of the best-performing method from the previous evaluation.",
+    "keywords": [
+      "interpretability",
+      "benchmarking",
+      "auditing",
+      "diagnostics",
+      "debugging",
+      "adversarial attacks",
+      "feature synthesis"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Od6CHhPM7I"
+  },
+  "review_fields": {
+    "comment": "I thank the reviewers for providing nice and detailed explanations and new results. I am willing to increase my score after reading the rebuttal and considering other reviewer comments. As another reviewer was mentioning, writing can be improved significantly to improve clarity including clear motivation behind the work. If authors are going to address this in detail, I am ok with increasing my score. Thanks."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 412,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6c48046f-3e12-403c-b5d3-3d81df371ace",
+    "error": null,
+    "scored_chars": 412
+  }
+}

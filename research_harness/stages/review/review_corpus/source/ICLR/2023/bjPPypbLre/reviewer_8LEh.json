@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "bjPPypbLre",
+  "reviewer": "8LEh",
+  "paper": {
+    "title": "Making Substitute Models More Bayesian Can Enhance Transferability of Adversarial Examples",
+    "authors": [
+      "Qizhang Li",
+      "Yiwen Guo",
+      "Wangmeng Zuo",
+      "Hao Chen"
+    ],
+    "abstract": "The transferability of adversarial examples across deep neural networks (DNNs) is the crux of many black-box attacks. Many prior efforts have been devoted to improving the transferability via increasing the diversity in inputs of some substitute models. In this paper, by contrast, we opt for the diversity in substitute models and advocate to attack a Bayesian model for achieving desirable transferability. Deriving from the Bayesian formulation, we develop a principled strategy for possible finetuning, which can be combined with many off-the-shelf Gaussian posterior approximations over DNN parameters. Extensive experiments have been conducted to verify the effectiveness of our method, on common benchmark datasets, and the results demonstrate that our method outperforms recent state-of-the-arts by large margins (roughly 19% absolute increase in average attack success rate on ImageNet), and, by combining with these recent methods, further performance gain can be obtained. Our code: https://github.com/qizhangli/MoreBayesian-attack.",
+    "keywords": [
+      "Adversarial Examples",
+      "Black-box Attacks",
+      "Adversarial Transferability"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=bjPPypbLre"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes to optimize for diversity in substitute models and advocate attacking a Bayesian model for improving the transferability of adversarial examples.  The author also developed a Bayesian formulation for performing attacks and advocated possible finetuning for improving the Bayesian model.  Extensive experimental results have demonstrated that the proposed method can enhance the transferability of adversarial examples, yielding better attack success rates.",
+    "strength_and_weaknesses": "Strengths:\n1.\tUtilizing Bayesian models to increase generative adversarial sample mobility is instructive, and the study of ensemble attacks is interesting. The attack method can be equivalently regarded as performing adversarial attack on a set of infinitely many substitute models.\n2.\tThe baselines are advanced, and extensive experiments demonstrate the effectiveness of the proposed method.\n\nWeaknesses:\n1.\tSome experimental settings are not very reasonable. For example, in Table 4, the authors adopt ResNet-50, Inception v3, MobileNet, and MNASNet altogether as substitute architectures of baselines while adopting ResNet-50 and MobileNet as substitute architectures when combining their method with the ensemble methods. Why not experiment with the same surrogate model? This comparison may be unfair when most of the black box models use the ResNet structure. Moreover, it will be more convincing if the author can add some experiments on advanced defense models, such as adversarial training models, Randomized Smoothing (RS)[1], and Neural Representation Purifier (NRP)[2].\n2.\tThere are some severe spelling mistakes in the article that the author should check carefully, such as “Aidmix” should be “Admix”.\n3.\tThe authors could try to add some analysis on why this method works.\n[1]Cohen J, Rosenfeld E, Kolter Z. Certified adversarial robustness via randomized smoothing[C]//International Conference on Machine Learning. PMLR, 2019: 1310-1320.Naseer M, Khan S, Hayat M, et al.\n[2] A self-supervised approach for adversarial robustness[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2020: 262-271.",
+    "clarity,_quality,_novelty_and_reproducibility": "Clarity: The writing is clear and the paper is easy to follow.\nQuality: The experimental results are impressive.\nNovelty: Somewhat novel.\nReproducibility: Not applicable.",
+    "summary_of_the_review": "The experimental results are impressive and the idea is interesting.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

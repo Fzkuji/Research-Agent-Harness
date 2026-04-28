@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "BRZYhVHvSg",
+  "reviewer": "XWMb",
+  "paper": {
+    "title": "Multi-Group Proportional Representation in Retrieval",
+    "authors": [
+      "Alex Oesterling",
+      "Claudio Mayrink Verdun",
+      "Alexander Glynn",
+      "Carol Xuan Long",
+      "Lucas Monteiro Paes",
+      "Sajani Vithana",
+      "Martina Cardone",
+      "Flavio Calmon"
+    ],
+    "abstract": "Image search and retrieval tasks can perpetuate harmful stereotypes, erase cultural identities, and amplify social disparities. Current approaches to mitigate these representational harms balance the number of retrieved items across population groups defined by a small number of (often binary) attributes. However, most existing methods overlook intersectional groups determined by combinations of\ngroup attributes, such as gender, race, and ethnicity. We introduce Multi-Group Proportional Representation (MPR), a novel metric that measures representation across intersectional groups. We develop practical methods for estimating MPR, provide theoretical guarantees, and propose optimization algorithms to ensure MPR in retrieval. We demonstrate that existing methods optimizing for equal and proportional representation metrics may fail to promote MPR. Crucially, our work shows that optimizing MPR yields more proportional representation across multiple intersectional groups specified by a rich function class, often with minimal compromise in retrieval accuracy. Code is provided at https://github.com/alex-oesterling/multigroup-proportional-representation.",
+    "keywords": [
+      "Fairness",
+      "Proportional Representation",
+      "Multi-Group Fairness"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=BRZYhVHvSg"
+  },
+  "review_fields": {
+    "comment": "Thank you for the kind and detailed explanation. I have a few more questions I would like to ask:\n\n1. Regarding your statement, \"As we consider more combinations of attributes, achieving proportional representation becomes more difficult,\" I am curious if this means that in future work, achieving perfect balance will be impossible, or if it is something that you will continue to strive for.\n\n2. Concerning \"Moreover, the groups for which we aim to ensure representation can be encoded in the set of representation statistics,\" I wonder if these representative groups, which are ultimately based on subjective human judgment, can truly reflect fair representation."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 100,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text human written and polished with AI",
+    "confidence": "highly",
+    "chars": 666,
+    "words": 104,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f1f4afc3-6ca4-462c-8e62-7d3ebc9ea0c5",
+    "error": null,
+    "scored_chars": 666
+  }
+}

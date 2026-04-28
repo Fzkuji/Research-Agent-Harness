@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "Hvq9RtSoHG",
+  "reviewer": "iTYN",
+  "paper": {
+    "title": "Chain-of-Symbol Prompting For Spatial Reasoning in Large Language Models",
+    "authors": [
+      "Hanxu Hu",
+      "Hongyuan Lu",
+      "Huajian Zhang",
+      "Yunze Song",
+      "Wai Lam",
+      "Yue Zhang"
+    ],
+    "abstract": "While conventional Chain-of-Thought prompting shows promising performance on various language tasks for LLMs, the spatial scenarios are nearly unexplored. In this paper, we first investigate the performance of LLMs on complex spatial planning and understanding tasks that require LLMs to understand a virtual spatial environment simulated via natural language and act or reason correspondingly in text. By evaluating on classic spatial planning scenarios through natural language descriptions, we found that current popular LLMs still lack abilities to handle spatial relationships in texts. This arises a question -- do the natural language is the best way to represent complex spatial environments for LLMs, or maybe other alternatives such as symbolic representations are both more efficient and effective for LLMs? To this end, we propose a novel method called CoS (Chain-of-Symbol Prompting) that represents the spatial relationships with condensed symbols during the chained intermediate thinking steps. CoS is easy to use and does not need additional training on LLMs. Extensive experiments indicate that CoS clearly surpasses the performance of the Chain-of-Thought (CoT) Prompting described in natural langauge in all three spatial planning tasks and existing spatial QA benchmark, with even fewer tokens used in the inputs compared with CoT. The performance gain is strong, by up to 60.8% accuracy (from 31.8% to 92.6%) on Brick World scenarios for GPT-3.5-Turbo. CoS also reduces the number of tokens in the prompt obviously, by up to 65.8% of the tokens (from 407 to 139) for the intermediate steps from demonstrations on the Brick World task. Interestingly, we also observed emergent ability of abstract symbols understanding when the size of models scales up.",
+    "keywords": [
+      "In-Context Learning",
+      "Chain-of-Thought Prompting",
+      "Spatial Reasoning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=Hvq9RtSoHG"
+  },
+  "review_fields": {
+    "summary": "This paper proposes to use abstract chain-of-thought prompts that simply use symbols, rather than natural language. This results in notable improvements across a variety of planning and spatial reasoning tasks. This seems like a useful insight that will improve applications of language models, and is also somewhat conceptually interesting.",
+    "reasons_to_accept": "* Clear, simple idea — that illustrates a more general point about natural language not necessarily being the most effective way to get language models to reason.\n     - I actually felt that this point could be more strongly emphasized than it is; perhaps including natural language in the CoT \"distracts\" the model with the fuzzier processes of next word prediction and/or makes the distribution higher entropy, while the CoS prompting is more formulaic and rigid and therefore avoids one or both of these. It seems worth discussing these possibilities, and ideally investigating them in some way (see below). \n* Strong improvements on the tasks evaluated.\n    - as a bonus, saves some compute/tokens.\n* Some nice robustness & scaling experiments.",
+    "reasons_to_reject": "* The paper doesn't quantify thoroughly *when* and *why* CoS is beneficial. While there are a diversity of comparisons, it would be useful to dig into some of them in more depth; for example, are there characteristic patterns of errors that CoT makes but CoS is more likely to avoid? Conversely, where CoS makes an error, does CoT tend to make the same error, or are they uncorrelated? Etc. \n     - It would be even better if it were possible to link some of these analyses to the CoS itself; e.g. showing that it contains more correct steps than the CoT.\n     - If possible, it would also be very interesting to quantify the distributional effects of the CoT to CoS switch along the lines of the proposed hypothesis above: for example, is the distribution over next tokens higher entropy in CoT than in CoS? Could that help explain the benefit?\n* It would be nice to see some evaluations on more challenging benchmarks like https://arxiv.org/abs/2206.10498\n* If I understand correctly, in Fig. 3 \"None\" means no symbol or space between the letters; it seems to me that having a space would also be a useful comparison condition to run (to see if the eponymous symbols are actually critical, or if it's just necessary to have *some* break in between to avoid tokenizer weirdness)."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:15Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:15Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2009,
+    "words": 341,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/021a7bcf-bf7d-4a82-8e61-c44c9a809aa1",
+    "error": null,
+    "scored_chars": 2030
+  }
+}

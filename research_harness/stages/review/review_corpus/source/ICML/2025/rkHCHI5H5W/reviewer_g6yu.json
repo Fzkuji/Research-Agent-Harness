@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "rkHCHI5H5W",
+  "reviewer": "g6yu",
+  "paper": {
+    "title": "Compositional Generalization via Forced Rendering of Disentangled Latents",
+    "authors": [
+      "Qiyao Liang",
+      "Daoyuan Qian",
+      "Liu Ziyin",
+      "Ila R Fiete"
+    ],
+    "abstract": "Composition—the ability to generate myriad variations from finite means—is believed to underlie powerful generalization. However, compositional generalization remains a key challenge for deep learning. A widely held assumption is that learning disentangled (factorized) representations naturally supports this kind of extrapolation. Yet, empirical results are mixed, with many generative models failing to recognize and compose factors to generate out-of-distribution (OOD) samples. In this work, we investigate a controlled 2D Gaussian \"bump\" generation task with fully disentangled $(x,y)$ inputs, demonstrating that standard generative architectures still fail in OOD regions when training with partial data, by re-entangling latent representations  in subsequent layers. By examining the model's learned kernels and manifold geometry, we show that this failure reflects a \"memorization\" strategy for generation via data superposition rather than via composition of the true factorized features. We show that when models are forced—through architectural modifications with regularization or curated training data—to render the disentangled latents into the full-dimensional representational (pixel) space, they can be highly data-efficient and effective at composing in OOD regions. These findings underscore that disentangled latents in an abstract representation are insufficient and show that if models can represent disentangled factors directly in the output representational space, it can achieve robust compositional generalization.",
+    "keywords": [
+      "Factorization",
+      "Compositionality",
+      "Compositional Generalization",
+      "Data Efficiency"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rkHCHI5H5W"
+  },
+  "review_fields": {
+    "summary": "The paper investigates conditions under which a neural network learns to generalize \"compositionally\". The setting involves learning to generate a 2D \"bump function\". A key result is that a \"disentangled\" representation is not sufficient to ensure compositional generalization. The authors then describe data curation and regularization strategies that appear, in their synthetic setting, to be sufficient for compositionality.\n\n## update after rebuttal: As described in my comment later in the thread, I am keeping my initial rating,",
+    "claims_and_evidence": "The claims seem reasonably supported, and I appreciated the extensive use of visualizations to analyze the results. The setting is simple enough that the results seem fairly transparent—that's a plus, and kudos to the authors for creating such an easy-to-analyze model.\n\nIf I have any reservations, it's that the specific definition of \"compositional generalization\" (as described briefly in the body of the paper, and more extensively in Appendix A) seems potentially too narrow. When I look at the function learned in Figure 1d, for example, it actually seems like a fairly clever OOD generalization: the network appears to have learned that (1) center pixels are empty, (2) there must be bumps at the given x- and y-coordinates; (3) the centroid of the bumps appears at the given x- and y-coordinates. And this generalization appears \"compositional\" in the sense that it is superposing (adding) separate solutions for x- and y-coordinates.",
+    "methods_and_evaluation_criteria": "The methods seem reasonable for the given toy problem. One issue is that I didn't immediately see exact details on some of the networks used (e.g. for the bump functions). It's not clear to me there are sufficient details to reproduce the authors' experiments precisely.",
+    "theoretical_claims": "Generally the claims made sense to me. However, I have to admit I don't completely follow what's going on with equation 8, and would like to see more detail.",
+    "experimental_designs_or_analyses": "The experimental designs made sense, but note the question above about experimental detail.",
+    "relation_to_broader_scientific_literature": "The related work sections seems good: in particular, I appreciate that it was focused and did not bring in irrelevant details.",
+    "other_strengths_and_weaknesses": "Strengths:\n- The results from the initial toy model are not particularly surprising in retrospect, but are a very nice illustration that generalization doesn't always happen in the way that one would expect. I don't know of this example in the literature, and it seems like a good addition.\n- The regularization described in section 4 appears to be a simple way to encourage compositional generalization; I'm not 100% sure I understood it, but if I did, it seems potentially useful.\n\nWeaknesses:\n- I would have liked a more careful description of why this particular definition of \"compositional\" was chosen\n- Not clear there's enough detail to replicate the experiments exactly.",
+    "other_comments_or_suggestions": "I don't think you need to keep adding quotes around the word \"superpose\".",
+    "questions_for_authors": "Can you say more about equation 8?\n\nIs code available for this? If so, it would help in reproducing the results; apologies if I missed this in the text."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

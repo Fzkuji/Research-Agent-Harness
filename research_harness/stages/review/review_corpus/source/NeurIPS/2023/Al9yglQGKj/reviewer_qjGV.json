@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "Al9yglQGKj",
+  "reviewer": "qjGV",
+  "paper": {
+    "title": "Phase diagram of early training dynamics in deep neural networks: effect of the learning rate, depth, and width",
+    "authors": [
+      "Dayal Singh Kalra",
+      "Maissam Barkeshli"
+    ],
+    "abstract": "We systematically analyze optimization dynamics in deep neural networks (DNNs) trained with stochastic gradient descent (SGD) and study the effect of learning rate $\\eta$, depth $d$, and width $w$ of the neural network. By analyzing the maximum eigenvalue $\\lambda^H_t$ of the Hessian of the loss, which is a measure of sharpness of the loss landscape, we find that the dynamics can show four distinct regimes: (i) an early time transient regime, (ii) an intermediate saturation regime, (iii) a progressive sharpening regime, and (iv) a late time \"edge of stability\" regime. The early and intermediate regimes (i) and (ii) exhibit a rich phase diagram depending on $\\eta \\equiv c / \\lambda_0^H $, $d$, and $w$. We identify several critical values of $c$, which separate qualitatively distinct phenomena in the early time dynamics of training loss and sharpness. Notably, we discover the opening up of a \"sharpness reduction\" phase, where sharpness decreases at early times, as $d$ and $ 1/w$ are increased.",
+    "keywords": [
+      "Optimization dynamics",
+      "Phase diagrams",
+      "learning rate transition",
+      "Catapult effect"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Al9yglQGKj"
+  },
+  "review_fields": {
+    "summary": "In this paper, the authors studied the effects of learning rate, width and depth of neural networks for early training dynamics. Specifically, the authors focused on the value of loss and the maximum eigenvalue of Hessian of loss and found that there are 4 different possible training dynamics in the early training. These different regimes are determined by the value of learning rate and are related with depth and width. Experiment results are provided to support the claim. A simple example with the same phenomena is also given and analyzed.",
+    "strengths": "1.\tUnderstanding the effect of large learning rate and its effect on the nonlinear training dynamics is an important problem.\n2.\tThe paper presents many experiment results to support their findings.\n3.\tThe finding that there exist different regimes depending on the learning rate ($c_{loss}$, $c_{sharp}$, $c_{max}$) in the early training seems to be interesting and new.",
+    "weaknesses": "1.\tThe current paper seems to have lots of results and experiments in the main text. As a reader, it is not very easy for me to get the main conclusion for each section/set of experiments. It might be good to highlight the conclusions so that the readers can understand the point easier.\n2.\tThe current paper tries to study the effect of depth and width on those $c$ values ($c_{loss}$, $c_{sharp}$, $c_{max}$) related with stepsize. However, it seems to me that only a few choices of width $w$ are tried in the experiments (Figure 3) and no results showing the effect of depth $d$ in the main text. It might be good to include more results on different width and depth so that the fitted curves could use more than only 3 or 4 data points and the support of the conclusion could be stronger.",
+    "questions": "1.\tI was wondering for these $c$ values ($c_{loss}$, $c_{sharp}$, $c_{max}$), how many times do the experiments repeat?\n2.\tFor the definition of these $c$ values, I was wondering how time $T_1$ is chosen.\n3.\tIn Definition 4, should $\\chi_\\tau$ be $\\chi_\\tau^\\prime$?\n4.\tIn Figure 4, I was wondering if the networks have the same depth and width, or different point represents network that may have different depth and width.",
+    "limitations": "The limitations are discussed in the paper. This is a theoretical work and therefore does not seem to have negative societal impact."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "no_result",
+    "error": "extraction returned no ai_pct: {'ai_pct': None, 'mixed_pct': None, 'human_pct': None, 'verdict': None, 'confidence': None, 'chars': 1725, 'words': 295, 'ai_vocab': None, 'url': 'https://app.gptzero.me/documents/e37ec22d-a9b5-4715-95ba-aaf632c8d209'}",
+    "ai_pct": null,
+    "mixed_pct": null,
+    "human_pct": null,
+    "verdict": null,
+    "confidence": null,
+    "chars": null,
+    "words": null,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e37ec22d-a9b5-4715-95ba-aaf632c8d209",
+    "scored_chars": 1725
+  }
+}

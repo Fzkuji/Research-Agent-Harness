@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "SyxhaxBKPS",
+  "reviewer": "2",
+  "paper": {
+    "title": "Smart Ternary Quantization",
+    "authors": [
+      "Gregoire Morin",
+      "Ryan Razani",
+      "Vahid Partovi Nia",
+      "Eyyub Sari"
+    ],
+    "abstract": "Neural network models are resource hungry. Low bit quantization such as binary and ternary quantization is a common approach to alleviate this resource requirements. Ternary quantization provides a more flexible model and often beats binary quantization in terms of accuracy, but doubles memory and increases computation cost. Mixed quantization depth models, on another hand, allows a trade-off between accuracy and memory footprint. In such models, quantization depth is often chosen manually (which is a tiring task), or is tuned using a separate optimization routine (which requires training a quantized network multiple times). Here, we propose Smart Ternary Quantization (STQ) in which we modify the quantization depth directly through an adaptive regularization function, so that we train a model only once. This method jumps between binary and ternary quantization while training. We show its application  on image classification.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=SyxhaxBKPS"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "This paper presents an approach where the regularisation is used to optimise whether each layer of a DNN is binary or ternary. The paper presents an equation for performing this along with two examples of the process in use.\n\nThe paper is inconsistently written with work described at different levels in different sections and has an inconsistent feeling about it. For example the introduction seems to stop abruptly before it describes all the parts of the paper.\n\nThe paper seems to contain an idea which might have merit. However, the idea just does not seem to have been developed enough.\n\nMajor concerns:\n1) The authors claim that this is the first attempt at a training algorithm for mixed precision training. However, a simple google search throws up many papers in this area. Many of which are not mentioned in the related work.\n\n2) Equations are not discussed in enough detail, nor are the parameters defined. Or if they are defined they are done so much later in the work.\n\n3) There doesn’t seem to be enough material here to reproduce the work.\n\n4) In the results you talk about ‘the best’. Given that there has been much criticism over the last two years about good academic practice the fact that you don’t say at least ‘best out of …’ is worrying. \n\n5) You have magic parameters lambda and gamma. You say that these effect the outcome of the work but in your examples you only state values these are set to. One would expect to see at least some analysis of how varying these values effect the outcome. But better would be to show that you have identified good values for both of these parameters. Ideally would be an evaluation of how others could identify the best values.\n\n6) Figures 3 and 4 are difficult to interpret. They need a clear explanation.\n\nSome more generic comments:\n- The abstract seems to assume a huge prior knowledge by the reader.\n\n- ‘1 bit precision’ - precision seems to have no meaning in this context. Surely just ‘1 bit’\n\n- The related work contains a lot of equations, but no real explanation of what they are.\n\n- ‘we let β very per layer’ -> ‘we let β vary per layer’\n\n- In equation 10 what do I and J represent?\n\n- ’28 × 28 gray-scales images’ -> ’28 × 28 gray-scale images’\n\n- ‘For the training session, we pad the sides of the images with 4 pixels, then a 32 × 32 crop is sampled, and flipped horizontally at random.’ - why?\n\n- ‘As commonly practiced’ - by whom?\n\n- ‘which is costly, specially if’ -> ‘which is costly, especially if’"
+  },
+  "review_metadata": {
+    "rating": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

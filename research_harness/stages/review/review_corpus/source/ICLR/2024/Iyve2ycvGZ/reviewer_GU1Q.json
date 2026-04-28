@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "Iyve2ycvGZ",
+  "reviewer": "GU1Q",
+  "paper": {
+    "title": "Bellman Optimal Stepsize Straightening of Flow-Matching Models",
+    "authors": [
+      "Bao Nguyen",
+      "Binh Nguyen",
+      "Viet Anh Nguyen"
+    ],
+    "abstract": "Flow matching is a powerful framework for generating high-quality samples in various applications, especially image synthesis. However, the intensive computational demands of these models, especially during the finetuning process and sampling processes, pose significant challenges for low-resource scenarios. This paper introduces Bellman Optimal Stepsize Straightening (BOSS) technique for distilling flow-matching generative models: it aims specifically for a few-step efficient image sampling while adhering to a computational budget constraint. First, this technique involves a dynamic programming algorithm that optimizes the stepsizes of the pretrained network. Then, it refines the velocity network to match the optimal step sizes, aiming to straighten the generation paths. Extensive experimental evaluations across image generation tasks demonstrate the efficacy of BOSS in terms of both resource utilization and image quality. Our results reveal that BOSS achieves substantial gains in efficiency while maintaining competitive sample quality, effectively bridging the gap between low-resource constraints and the demanding requirements of flow-matching generative models. Our paper also fortifies the responsible development of artificial intelligence, offering a more sustainable generative model that reduces computational costs and environmental footprints. Our code can be found at https://github.com/nguyenngocbaocmt02/BOSS.",
+    "keywords": [
+      "flow matching",
+      "generative model",
+      "efficient sampling",
+      "distillation",
+      "responsible ML"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Iyve2ycvGZ"
+  },
+  "review_fields": {
+    "comment": "I understand the concern of authors that different models are trained on different datasets, and they should share different step sizes. However, it is crucial that the overarching objective of this method extends to large diffusion models, such as the recently proposed InstaFlow. I acknowledge the inherent difficulty in evaluating the performance of such expansive matching flow models during the rebuttal phase. Consequently, I suggest that the authors delve deeper into discussions and analyses pertaining to the generalization of their method.\n\nOn the whole, the authors have effectively addressed all my concerns. The only notable observation is that this paper has undergone a substantial revision compared to its initial submission, encompassing essential experiments and discussions. If the AC deems this extensive alteration acceptable, I would be inclined to revise my score to borderline acceptance."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 79,
+    "human_pct": 21,
+    "verdict": "We are moderately confident this text human written and polished with AI",
+    "confidence": "moderately",
+    "chars": 912,
+    "words": 134,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/664cddd5-5e49-4be7-a33b-40e7f86392a5",
+    "error": null,
+    "scored_chars": 912
+  }
+}

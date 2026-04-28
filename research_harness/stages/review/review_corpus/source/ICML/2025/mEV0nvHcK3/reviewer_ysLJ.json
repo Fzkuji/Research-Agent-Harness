@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "mEV0nvHcK3",
+  "reviewer": "ysLJ",
+  "paper": {
+    "title": "Towards Practical Defect-Focused Automated Code Review",
+    "authors": [
+      "Junyi Lu",
+      "Lili Jiang",
+      "Xiaojia Li",
+      "Jianbing Fang",
+      "Fengjun Zhang",
+      "Li Yang",
+      "Chun Zuo"
+    ],
+    "abstract": "The complexity of code reviews has driven efforts to automate review comments, but prior approaches oversimplify this task by treating it as snippet-level code-to-text generation and relying on text similarity metrics like BLEU for evaluation. These methods overlook repository context, real-world merge request evaluation, and defect detection, limiting their practicality. To address these issues, we explore the full automation pipeline within the online recommendation service of a company with nearly 400 million daily active users, analyzing industry-grade C++ codebases comprising hundreds of thousands of lines of code. We identify four key challenges: 1) capturing relevant context, 2) improving key bug inclusion (KBI), 3) reducing false alarm rates (FAR), and 4) integrating human workflows. To tackle these, we propose 1) code slicing algorithms for context extraction, 2) a multi-role LLM framework for KBI, 3) a filtering mechanism for FAR reduction, and 4) a novel prompt design for better human interaction. Our approach, validated on real-world merge requests from historical fault reports, achieves a 2× improvement over standard LLMs and a 10× gain over previous baselines. While the presented results focus on C++, the underlying framework design leverages language-agnostic principles (e.g., AST-based analysis), suggesting potential for broader applicability.",
+    "keywords": [
+      "Automated Code Review",
+      "Merge Request Analysis",
+      "Large Language Models (LLMs)",
+      "Defect Detection",
+      "Evaluation Metrics for Code Review",
+      "Code Context Extraction",
+      "Multi-Agent LLM Collaboration"
+    ],
+    "decision": "Accept (spotlight poster)",
+    "openreview_url": "https://openreview.net/forum?id=mEV0nvHcK3"
+  },
+  "review_fields": {
+    "summary": "The paper presents a language-model based system for automated code review. The methodology boils down to using static analysis tools to identify the most relevant parts of the code base, and then passing this through several LLM calls to generate the review, identify the key components, and filter out noise. The authors state that this approach is inspired by interviews with real-world code reviewers. Empirically, the authors find that on a dataset consisting of merge requests from an internal base, their method outperforms prior work. In particular, they evaluate their method in terms of whether the review correctly identifies the key bug introduced in the merge request, as well as how many \"false alarms\" the review raises and whether the faulty line(s) are correctly identified.\n\n## update after rebuttal\nFollowing the end of the rebuttal period I have decided to further raise my score to Accept (4). I like the motivations of the work and think it could have real-world impact, especially as C++ is at this point criminally understudied by academia in comparison to its popularity in the industry. The uncertainty quantification included by the authors in their final reply has convinced me that the findings are meaningful, and I appreciate that they have been responsive to changes requested in both the scope of the work as well as its exposition.\n\nI will note that I am not sure if ICML is the right venue for this work, as opposed to conferences such as ICSE or FSE, but given that none of the other reviewers seemed bothered by this I will chalk it up to being a symptom of AI/ML becoming increasingly relevant to many other areas of computer science and will not hold it against this paper in particular.",
+    "claims_and_evidence": "Overall, the claims made appear to be well supported by the experiments. Of course it is difficult to judge the validity of evaluating on an internal dataset, but I do not see any immediate causes for concern. The one thing that stands out to me as perhaps not being completely justified by the experiments is whether the method reduces the False Alarm Rate (FAR); the definition of this metric appears to be quite strict, as acknowledged by the authors in Appendix N and Q. Furthermore, it seems to go against the training objectives of prior work like CodeReviewer, so the fact that this new method outperforms it on this metric seems like an obvious result. However, this limitation is acknowledged by the authors (albeit hidden in the appendix), and if prior work failed to take real-world concerns such as limiting the cognitive burden imposed on the user then that is a shortcoming of their approach, not of this paper.",
+    "methods_and_evaluation_criteria": "Yes, the internal dataset used for the evaluation appears to be well suited for the study.  As mentioned in the preceding section, the FAR metric appears to be somewhat arbitrary. In particular, having a code review system point out minor issues and not just major faults seems like a feature, not a failure, to me. However, I appreciate that the authors are attempting to limit the amount of information that is presented to the end-user, since this is likely a make-or-break factor when applying the system in the real world.",
+    "experimental_designs_or_analyses": "I have checked the soundness of the experiments presented in the main text, and they appear valid and sound. The code slicing experiment in 5.2 seems a bit weak, however, since the absolute numbers of key bugs is relatively small, so it is hard to tell whether the different spreads in the Venn diagram are significant or just due to chance. Another, more important issue is that the text mentions that each experiment is repeated 3 times to account for the stochasticity of the system, but as far as I can see the results of each experiment is just reported as the mean of these 3 runs, rather than their complete spread. Just reporting the min and the max of each number would already be a significant improvement in terms of making it easier to tell if the results are significant or not.",
+    "relation_to_broader_scientific_literature": "Automated code review is a problem with significant real-world impact, and has been studied in the software engineering community for many years. This paper appears to be a significant step forward in this domain, since it evaluates the performance of their system on real-world fault reports and merge requests, using metrics that (are intended to) mimic the desiderata of real software developers. The methodology is not itself particularly novel or interesting, but the experiments are extensive and may inspire future work in this direction. I am not sure how interesting this paper would be to an ICML audience, rather than a software engineering audience, though.",
+    "essential_references_not_discussed": "None that I am aware of; this problem is well-studied in the software engineering literature, but the authors appear to have cited the most relevant works already (in particular those by Tufano et al.). I was surprised by the authors' claim in Appendix D that slicing (which is a very well established technique across software engineering) had not yet been applied to automated code review, but could not find any references myself for this, so it may be true.",
+    "other_strengths_and_weaknesses": "Strengths:\n- The paper is well organized, with clear hypotheses and thorough discussion of the experiments\n- The authors release the source code of their system, which will help others seeking to replicate or build upon their work\n\nWeaknesses:\n- The figures and tables are, on the whole, completely illegible (at least when printed). The text is much too small (in particular in Figures 1,2, 3, 4) and the black-on-dark-green formatting of the tables is difficult to read.\n- While very much understandable, it is unfortunate that the dataset could not be released, as this would certainly have been a very useful resource for others working in this area.",
+    "other_comments_or_suggestions": "Section 6 uses a very strange reference format, which should be simplified. For example, \"Gupta et al. (Gupta & Sundaresan, 2018)\" should just be \"Gupta & Sundaresan (2018)\".\n\nI really disagree with framing your system as being \"multi-agent\". There is no interaction with an environment, so there is in fact no agent involved at all. This is an abuse of the nomenclature.",
+    "questions_for_authors": "1. What was your motivation for submitting this work to ICML instead of ICSE, FSE or ASE, where the majority of prior work in this area was published?\n2. How certain are you that there is no prior work applying slicing in the context of automated code review?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

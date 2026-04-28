@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "Al9yglQGKj",
+  "reviewer": "bhX5",
+  "paper": {
+    "title": "Phase diagram of early training dynamics in deep neural networks: effect of the learning rate, depth, and width",
+    "authors": [
+      "Dayal Singh Kalra",
+      "Maissam Barkeshli"
+    ],
+    "abstract": "We systematically analyze optimization dynamics in deep neural networks (DNNs) trained with stochastic gradient descent (SGD) and study the effect of learning rate $\\eta$, depth $d$, and width $w$ of the neural network. By analyzing the maximum eigenvalue $\\lambda^H_t$ of the Hessian of the loss, which is a measure of sharpness of the loss landscape, we find that the dynamics can show four distinct regimes: (i) an early time transient regime, (ii) an intermediate saturation regime, (iii) a progressive sharpening regime, and (iv) a late time \"edge of stability\" regime. The early and intermediate regimes (i) and (ii) exhibit a rich phase diagram depending on $\\eta \\equiv c / \\lambda_0^H $, $d$, and $w$. We identify several critical values of $c$, which separate qualitatively distinct phenomena in the early time dynamics of training loss and sharpness. Notably, we discover the opening up of a \"sharpness reduction\" phase, where sharpness decreases at early times, as $d$ and $ 1/w$ are increased.",
+    "keywords": [
+      "Optimization dynamics",
+      "Phase diagrams",
+      "learning rate transition",
+      "Catapult effect"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Al9yglQGKj"
+  },
+  "review_fields": {
+    "summary": "The paper studies the effect of depth, width and learning rate on the early training dynamics of DNNs. The authors first describe four phases throughout, and then focus on the first two phases.\n\nIn the first phase, they identify three ranges of learning rates, according to how they affect the evolution of the training loss and the sharpness of the loss in the first few training steps:\n- for small learning rates both loss and sharpness decrease monotonically. Surprisingly, this regime extends to learning rates that are larger than the traditional threshold of $2 / \\lambda_{max}$ which guarantees a close match of GD to GF.\n- For larger learning rates, the loss is non-monotone but the sharpness still decreases.\n- For yet larger learning rates, both the loss and sharpness are non-monotone.\nAny larger learning rates lead to divergence.\nIn general larger depths $d$ and smaller widths $w$ shifts these regime to larger values of the learning rate.\n\nIn the second phase, the sharpness settles to some value. For small learning rates $\\eta$, this value is roughly constant w.r.t. $\\eta$ (but which depends on the width), but for large $\\eta$ the sharpness decreases and settles to a value which seems to be independent of the width.\n\nThe simple model of a shallow linear network with one datapoint and one dimensional inputs and outputs is studied, and the qualitative features described above are recovered.",
+    "strengths": "Understanding the different regimes of training as a function of width, depth and learning rates is an important problem, and any work that studies these questions either mathematically or empirically is welcome. The analysis and discussions are clear and insightful. A range of different architectures are tested. The regimes proposed and studied are to my knowledge new.",
+    "weaknesses": "The authors define a large number of regimes acoording to some rather subtle changes in behavior sometimes, and it is not always clear whether these regimes are also correlated with other quantities that we actually care about (e.g. generalization/feature learning). The training phase of neural networks features many strange/non-monotonic behavior and it is not clear that all of them have to be identified, since they might have a rather small impact.",
+    "questions": "It is shortly mentioned that setting the outputs of the network at initialization to zero changes the ranges of learning rates corresponding to the regimes of phase 1. In the appendix, it appears that the transitions between ranges become almost independent of the width in this case, and the smallest range (where both loss and sharpness decrease) stops much closer to the expected value of $2 / \\lambda_{max}$. This suggests that the dependence of these values on the width $w$ which is quite thoroughly studied in the main paper, might only be related to the variance size of the outputs at initialization, and not some deeper property of the network. Ideally I think that the plots of the appendix describing this phenomenon should be put in the main, as it greatly impacted my personal interpretation of the results of the paper. \n\nDid the authors also check the behavior of the output function norm in the first few timesteps? I was wondering whether the non-monotonic behavior at the begining of training might be related to the function norm having a similar non-monotonic behavior (scaling up then down, possibly to some value close to zero), since the function norm has an obvious impact on both the loss and sharpness of the loss.",
+    "limitations": "The limitations of the results presented are discussed well."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2132,
+    "words": 347,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0b7cebd7-b422-4952-9d39-3ff552c49b17",
+    "error": null,
+    "scored_chars": 2133
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "tBRNC6YemY",
+  "reviewer": "Umrp",
+  "paper": {
+    "title": "Gorilla: Large Language Model Connected with Massive APIs",
+    "authors": [
+      "Shishir G Patil",
+      "Tianjun Zhang",
+      "Xin Wang",
+      "Joseph E. Gonzalez"
+    ],
+    "abstract": "Large Language Models (LLMs) have seen an impressive wave of advances, with\nmodels now excelling in a variety of tasks, such as mathematical reasoning and\nprogram synthesis. However, their potential to effectively use tools via API calls\nremains unfulfilled. This is a challenging task even for today’s state-of-the-art\nLLMs such as GPT-4 largely due to their unawareness of what APIs are available\nand how to use them in a frequently updated tool set. We develop Gorilla, a\nfinetuned LLaMA model that surpasses the performance of GPT-4 on writing API\ncalls. Trained with the novel Retriever Aware Training (RAT), when combined\nwith a document retriever, Gorilla demonstrates a strong capability to adapt to\ntest-time document changes, allowing flexible user updates or version changes.\nIt also substantially mitigates the issue of hallucination, commonly encountered\nwhen prompting LLMs directly. To evaluate the model’s ability, we introduce\nAPIBench, a comprehensive dataset consisting of HuggingFace, TorchHub, and\nTensorHub APIs. The successful integration of the retrieval system with Gorilla\ndemonstrates the potential for LLMs to use tools more accurately, keep up with\nfrequently updated documentation, and consequently increase the reliability and\napplicability of their outputs. Gorilla’s code, model, data, and demo are available\nat: https://gorilla.cs.berkeley.edu",
+    "keywords": [
+      "LLM",
+      "Tool Use",
+      "APIs",
+      "Function Calling"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=tBRNC6YemY"
+  },
+  "review_fields": {
+    "summary": "This paper introduces Gorilla, a fine-tuned LLaMA model designed to improve large language models' ability to use APIs accurately. The authors created APIBench, a comprehensive dataset of ML APIs from HuggingFace, TorchHub, and TensorFlow Hub, and used self-instruct to generate instruction-API pairs for training. They fine-tuned LLaMA-7B with retrieval-aware training, incorporating tech like AST sub-tree matching for evaluating API call accuracy, retriever-aware training to adapt to API changes, and handling of constrained API calls. Results show that Gorilla outperforms existing LLMs (including GPT-4) on API call accuracy across multiple datasets, demonstrates ability to adapt to test-time changes in API documentation, and handles constrained API calls effectively. The paper presents a novel approach to improving LLMs' API usage capabilities, with promising results that outperform existing state-of-the-art models in this specific domain.",
+    "strengths": "* Gorilla outperforms existing state-of-the-art language models, including GPT-4 and Claude, in API call accuracy across multiple datasets (TorchHub, HuggingFace, and TensorFlow Hub).\n* Gorilla significantly reduces API argument hallucination errors compared to other models, improving the reliability of API calls.\n* The retriever-aware training enables Gorilla to adapt to test-time changes in API documentation, allowing it to remain up-to-date with evolving APIs without requiring retraining.\n* Gorilla demonstrates the ability to understand and respect constraints (e.g., accuracy requirements) when selecting appropriate APIs, outperforming other models in constraint-aware API invocations.",
+    "weaknesses": "A significant weakness of the Gorilla approach is that it relies heavily on knowledge augmentation, which is a common technique already used in various domains to improve language model performance on specific tasks. The use of retrieval-augmented generation to enhance API calling capabilities doesn't represent a novel improvement or implementation compared to similar approaches in other domains.\n\nEssentially, Gorilla applies existing knowledge augmentation techniques to the specific task of API invocation, rather than introducing a fundamentally new method for improving language model capabilities. While the results show improvements in API calling accuracy, the core approach of combining retrieval with language model fine-tuning is not innovative in itself. This limits the broader impact and generalizability of the work beyond the specific domain of API invocation.\n\nThe lack of significant methodological innovation suggests that similar performance improvements could potentially be achieved by applying existing retrieval-augmented generation techniques to the API calling task, without necessarily requiring the specific Gorilla architecture. This raises questions about the uniqueness and broader applicability of the Gorilla approach beyond the narrow domain explored in the paper.* While Gorilla performs well on the specific API datasets it was trained on, it's unclear how well it would generalize to entirely new APIs or domains not covered in the training data.\n\nOther Notes: \n* Although Gorilla shows some ability to handle constraints, its performance in this area is not significantly better than other models like GPT-3.5, suggesting room for improvement.\n* The paper doesn't compare Gorilla's performance with specialized API documentation tools or code completion systems, which might be more tailored for this specific task.\n* The paper doesn't provide an in-depth analysis of the cases where Gorilla fails, which could provide insights into its limitations and areas for improvement.",
+    "questions": "* How does Gorilla's performance compare to other specialized code generation or API-focused models, not just general-purpose LLMs?\n* What is the performance impact of varying the size of the training dataset or the base model size (e.g. using LLaMA-13B instead of 7B)?\n* How does Gorilla perform on more complex multi-step API workflows rather than just single API calls?",
+    "limitations": "NA - Appropriately discussed limitations."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 1
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 53,
+    "mixed_pct": 38,
+    "human_pct": 9,
+    "verdict": null,
+    "confidence": null,
+    "chars": 3130,
+    "words": 444,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/916f4dfc-84c2-4e31-92f4-361f9aa9d9a5",
+    "error": null,
+    "scored_chars": 3131
+  }
+}

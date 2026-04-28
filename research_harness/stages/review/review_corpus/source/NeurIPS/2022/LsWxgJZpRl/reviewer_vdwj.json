@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "LsWxgJZpRl",
+  "reviewer": "vdwj",
+  "paper": {
+    "title": "Near-optimal Distributional Reinforcement Learning towards Risk-sensitive Control",
+    "authors": [
+      "Hao Liang",
+      "Zhi-Quan Luo"
+    ],
+    "abstract": "We consider finite episodic Markov decision processes aiming at the entropic risk measure (ERM) of return for risk-sensitive control. We identify two properties of the ERM that enable risk-sensitive distributional dynamic programming. We propose two novel distributional reinforcement learning (DRL) algorithms, including a model-free one and a model-based one, that implement optimism through two different schemes. We prove that both of them attain $\\tilde{\\mathcal{O}}(\\frac{\\exp(|\\beta| H)-1}{|\\beta|H}H\\sqrt{HS^2AT})$ regret upper bound, where $S$ is the number of states, $A$ the number of states, $H$ the time horizon and $T$  the number of total time steps. It matches  RSVI2 proposed in \\cite{fei2021exponential} with a much simpler regret analysis. To the best of our knowledge, this is the first regret analysis of DRL,  which theoretically verifies the efficacy of  DRL for risk-sensitive control. Finally, we improve the existing lower bound by proving a tighter  bound of $\\Omega(\\frac{\\exp(\\beta H/6)-1}{\\beta H}H\\sqrt{SAT})$ for $\\beta>0$ case, which recovers the tight lower bound $\\Omega(H\\sqrt{SAT})$ in the risk-neutral setting.",
+    "keywords": [
+      "distributional reinforcement learning",
+      "risk-sensitive",
+      "sample complexity"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=LsWxgJZpRl"
+  },
+  "review_fields": {
+    "summary": "This paper is about distributional reinforcement learning (DRL), which aims at learning optimal policies (in terms of total payoff) in a Markov decision process. While the classical reinforcement learning (RL) paradigm is based on the expected total return, in DRL one is interested about the whole probability distribution of this total return. \n\nIn this work, the idea is to leverage this distributional information for risk-sensitivity purpose.\nThe focus is on the entropic risk-measure (ERM) of the total reward in an episodic MDP. Properties of ERM are given (additivity and monotonicity preserving) leading to an optimality principle akin to the classical one based on expected value.\nTwo algorithms (one model-free and the other model-based) called RODI are proposed: they both rely on the OFU principle applied to ERM.\nWhile most risk-aware DRL papers have no regret analysis, here both upper and lower regret bounds are provided.",
+    "strengths_and_weaknesses": "The paper is well-written and motivated by risk-sensitive applications. The DRL perspective makes a lot of sense to tackle risk-aware problems. The main strength of the paper is that its algorithmic RODI procedures are naturally derived from DRL applied to ERM and combined with the OFU principle.\n\nThe main weakness is the lack of numerical experiments, which is balanced by the theoretical nature of the paper.",
+    "questions": "(Minor) questions/comments:\n\n- line 80: more accurate to say that P_h maps state-action pair to probability distribution over S, i.e. P_h : SxA -> Delta(S)\n- line 108: replace Z(s) by Y(s)\n- footnote page 4: strange formulation? maybe rather say: \"The algorithms for random reward enjoy regret bounds of the same order\"\n- notational issue: at line 176, reference to \"c_h^k\" but in Algorithm 1 it is just written \"c_h\". Same holds for eta_h. Is it normal or a notation issue?\n- what is f_h in Proposition 2?",
+    "limitations": "The scope of the paper is limited to the ERM criterion, but it is a reasonable \"limitation\" in order to design a risk-sensitive DRL approach."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

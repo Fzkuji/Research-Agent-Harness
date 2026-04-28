@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "2aC0_RxkBL_",
+  "reviewer": "jXk1",
+  "paper": {
+    "title": "Where is the bottleneck in long-tailed classification?",
+    "authors": [
+      "Zaid Khan",
+      "Yun Fu"
+    ],
+    "abstract": "A commonly held belief in deep-learning based long-tailed classiﬁcation is that the representations learned from long-tailed data are ”good enough” and the performance bottleneck is the classiﬁcation head atop the representation learner. We design experiments to investigate this folk wisdom, and ﬁnd that representations learned from long-tailed data distributions substantially differ from the representations learned from ”normal” data distributions. We show that the long-tailed representations are volatile and brittle with respect to the true data distribution. Compared to the representations learned from the true, balanced distributions, long-tailed representations fail to localize tail classes and display vastly worse inter-class separation and intra-class compactness when unseen samples from the true data distribution are embedded into the feature space. We provide an explanation for why data augmentation helps long-tailed classiﬁcation despite leaving the dataset imbalance unchanged — it promotes inter-class separation, intra-class compactness, and improves localization of tail classes w.r.t to the true data distribution.",
+    "keywords": [
+      "fairness",
+      "bias",
+      "long tailed learning",
+      "imbalanced learning"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=2aC0_RxkBL_"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper poses an interesting and important question - where are the bottlenecks in long-tailed classification. The authors use empirical experiments to show their observations: (1) representation is more critical than classifier, (2) data augmentation is helpful.  Three datasets (CIFAR-10 LT, CIFAR-100 LT and ImageNet-LT) are employed to work with ResNet-32 and ResNet-10 models to demonstrate their observations.",
+    "main_review": "Strength: \n1. The topic is interesting and the papers pose some unique observations after extensive empirical analysis and experiments\n2. The paper defines several simple mathematical and statistical metrics to measure the differences between representations.\n\nWeakness：\n1. The posed questions are not well addressed\nThe paper shows some observations but did not provide a concrete and reasonable solution such that the long-tailed classification issue can be addressed. The useful insight from this paper is limited.  \n\n2. The empirical observations are not solid and rigorous \nThe paper only provides some simple metrics but did not explain why the metric is necessary and what's the high-level intuition. I did not get the motivation why the authors come up with these metrics to show the differences between representation. In addition, there is no rigorous mathematical proof or statistical analysis.\n\n3. Lack of careful related work discussion \nThe related work section is hard to follow and the authors did not explain their contributions and differences from existing works.  \n\n4. The writing needs to be improved. \nMany typos result in additional difficulties to read.   The citation format is not consistent. For example,  Cui et al.. in section 3 does not have a   year, and \"He et al (2015)\" followed by Resnet-32 should be \"(He et al, 2015)\".  The \"google enough\" and \"Normal\" in the abstract should be corrected.",
+    "summary_of_the_review": "An overall feeling is that the paper is an ongoing work and needs to be carefully written and improved. My recommendation is to reject it in the current form.",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "details_of_ethics_concerns": "I do not have any ethics concerns."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1572,
+    "words": 252,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/5294bc99-ce12-45ce-8f35-a704c65f4020",
+    "error": null,
+    "scored_chars": 1586
+  }
+}

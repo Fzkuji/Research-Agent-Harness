@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ryxjH3R5KQ",
+  "reviewer": "3",
+  "paper": {
+    "title": "Single Shot Neural Architecture Search Via Direct Sparse Optimization",
+    "authors": [
+      "Xinbang Zhang",
+      "Zehao Huang",
+      "Naiyan Wang"
+    ],
+    "abstract": "Recently Neural Architecture Search (NAS) has aroused great interest in both academia and industry, however it remains challenging because of its huge and non-continuous search space. Instead of applying evolutionary algorithm or reinforcement learning as previous works, this paper proposes a Direct Sparse Optimization NAS (DSO-NAS) method. In DSO-NAS, we provide a novel model pruning view to NAS problem. In specific, we start from a completely connected block, and then introduce scaling factors to scale the information flow between operations. Next, we impose sparse regularizations to prune useless connections in the architecture. Lastly, we derive an efficient and theoretically sound optimization method to solve it. Our method enjoys both advantages of differentiability and efficiency, therefore can be directly applied to large datasets like ImageNet. Particularly, On CIFAR-10 dataset, DSO-NAS achieves an average test error 2.84%, while on the ImageNet dataset DSO-NAS achieves 25.4% test error under 600M FLOPs with 8 GPUs in 18 hours.",
+    "keywords": [
+      "Neural Architecture Search",
+      "Sparse Optimization"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryxjH3R5KQ"
+  },
+  "review_fields": {
+    "review": "- Summary\nThis paper proposes a neural architecture search method based on a direct sparse optimization, where the proposed method provides a novel model pruning view to the neural architecture search problem. Specifically, the proposed method introduces scaling factors to connections between operations, and impose sparse regularizations to prune useless connections in the network. The proposed method is evaluated on CIFAR-10 and ImageNet dataset.\n\n- Pros\n  - The proposed method shows competitive or better performance than existing neural architecture search methods.\n  - The experiments are conducted thoroughly in the CIFAR-10 and ImageNet. The selection of the datasets is appropriate. Also, the selection of the methods to be compared is appropriate.\n  - The effect of each proposed technique is appropriately evaluated.\n\n- Cons\n  - The search space of the proposed method, such as the number of operations in the convolution block, is limited.\n  - The proposed method does not outperform the existing state-of-the-art methods in terms of classification accuracy.\n  - The technical contribution of the proposed method is not high, because the architecture space of neural network is similar to the prior works.\n\nOverall, if we focus on the balance between the classification accuracy and computational efficiency, the proposed method is promising."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

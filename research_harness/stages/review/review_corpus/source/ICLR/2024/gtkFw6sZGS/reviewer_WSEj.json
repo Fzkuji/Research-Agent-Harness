@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "gtkFw6sZGS",
+  "reviewer": "WSEj",
+  "paper": {
+    "title": "Generative Judge for Evaluating Alignment",
+    "authors": [
+      "Junlong Li",
+      "Shichao Sun",
+      "Weizhe Yuan",
+      "Run-Ze Fan",
+      "hai zhao",
+      "Pengfei Liu"
+    ],
+    "abstract": "The rapid development of Large Language Models (LLMs) has substantially expanded the range of tasks they can address. In the field of Natural Language Processing (NLP), researchers have shifted their focus from conventional NLP tasks (e.g., sequence tagging and parsing) towards tasks that revolve around aligning with human needs (e.g., brainstorming and email writing). This shift in task distribution imposes new requirements on evaluating these aligned models regarding *generality* (i.e., assessing performance across diverse scenarios), *flexibility* (i.e., examining under different protocols), and *interpretability* (i.e., scrutinizing models with explanations). In this paper, we propose a generative judge with 13B parameters, **Auto-J**, designed to address these challenges. Our model is trained on user queries and LLM-generated responses under massive real-world scenarios and accommodates diverse evaluation protocols (e.g., pairwise response comparison and single-response evaluation) with well-structured natural language critiques. To demonstrate the efficacy of our approach, we construct a new testbed covering 58 different scenarios. Experimentally, **Auto-J** outperforms a series of strong competitors, including both open-source and closed-source models, by a large margin. We also provide detailed analysis and case studies to further reveal the potential of our method and make a variety of resources public at https://github.com/GAIR-NLP/auto-j.",
+    "keywords": [
+      "Generative",
+      "Evaluation",
+      "Alignment"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=gtkFw6sZGS"
+  },
+  "review_fields": {
+    "summary": "This paper aims to present Auto-J, an LLM that may evaluate LLMs. This is in the line of LMs that are used to evaluate other LMs.",
+    "strengths": "- Auto-J proposes a way to produce evaluation methods for LLMs",
+    "weaknesses": "- It is strange that larger models are used to evaluate other models\n- LLMs should somehow emulate human capabilities and not other LLMs' capabilities.",
+    "questions": "It is clear that this paper is in a long line of other approaches. Yet, it is not clear why evaluating LLMs with an LLM is principled. Cna you comment on this?"
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 376,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/95468276-048f-4667-8202-500aea20ba01",
+    "error": null,
+    "scored_chars": 376
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "aajyHYjjsk",
+  "reviewer": "VXXD",
+  "paper": {
+    "title": "The Geometry of Truth: Emergent Linear Structure in Large Language Model Representations of True/False Datasets",
+    "authors": [
+      "Samuel Marks",
+      "Max Tegmark"
+    ],
+    "abstract": "Large Language Models (LLMs) have impressive capabilities, but are prone to outputting falsehoods. Recent work has developed techniques for inferring whether a LLM is telling the truth by training probes on the LLM's internal activations. However, this line of work is controversial, with some authors pointing out failures of these probes to generalize in basic ways, among other conceptual issues. In this work, we use high-quality datasets of simple true/false statements to study in detail the structure of LLM representations of truth, drawing on three lines of evidence: 1. Visualizations of LLM true/false statement representations, which reveal clear linear structure. 2. Transfer experiments in which probes trained on one dataset generalize to different datasets. 3. Causal evidence obtained by surgically intervening in a LLM's forward pass, causing it to treat false statements as true and vice versa. Overall, we present evidence that at sufficient scale, LLMs *linearly represent* the truth or falsehood of factual statements. We also show that simple difference-in-mean probes generalize as well as other probing techniques while identifying directions which are more causally implicated in model outputs.",
+    "keywords": [
+      "Interpretability",
+      "world models",
+      "knowledge representations",
+      "causal mediation analysis"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=aajyHYjjsk"
+  },
+  "review_fields": {
+    "comment": "Thanks for the response! I think most of the clarifications make sense. RE: calibrated few-shot, I think what I was trying to get at is slightly different because if I understood correctly, this still concerns true/false classification. I was wondering if there could be some evaluation that could tell us if preconditions for being able to determine truth/falsehood are satisfied or not (the method I mentioned might not be best instantiation of this). I might be misunderstanding something here though.\n\nThat being said, my score was already positive to begin with, and I'm happy with keeping it positive."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:50Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:50Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 4084,
+    "words": 648,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/89c85069-68f1-411d-9375-2524412a5286",
+    "error": null,
+    "scored_chars": 4087
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "ryxyCeHtPB",
+  "reviewer": "1",
+  "paper": {
+    "title": "Pay Attention to Features, Transfer Learn Faster CNNs",
+    "authors": [
+      "Kafeng Wang",
+      "Xitong Gao",
+      "Yiren Zhao",
+      "Xingjian Li",
+      "Dejing Dou",
+      "Cheng-Zhong Xu"
+    ],
+    "abstract": "Deep convolutional neural networks are now widely deployed in vision applications, but a limited size of training data can restrict their task performance. Transfer learning offers the chance for CNNs to learn with limited data samples by transferring knowledge from models pretrained on large datasets. Blindly transferring all learned features from the source dataset, however, brings unnecessary computation to CNNs on the target task. In this paper, we propose attentive feature distillation and selection (AFDS), which not only adjusts the strength of transfer learning regularization but also dynamically determines the important features to transfer. By deploying AFDS on ResNet-101, we achieved a state-of-the-art computation reduction at the same accuracy budget, outperforming all existing transfer learning methods. With a 10x MACs reduction budget, a ResNet-101 equipped with AFDS transfer learned from ImageNet to Stanford Dogs 120, can achieve an accuracy 11.07% higher than its best competitor.",
+    "keywords": [
+      "transfer learning",
+      "pruning",
+      "faster CNNs"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=ryxyCeHtPB"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_thoroughness_in_paper_reading": "I read the paper at least twice and used my best judgement in assessing the paper.",
+    "review": "The paper presents an improvement to the task of transfer learning by being deliberate about which channels from the base model are most relevant to the new task at hand. It does this by apply attentive feature selection (AFS) to select channels or features that align well with the down stream task and attentive feature distillation (AFD) to pass on these features to the student network. In the process they do channel pruning there by decreasing the size of the network and enabling faster inference speeds. Their major argument is that plain transfer learning is redundant and wasteful and careful attention applied to selection of the features and channels to be transfered can lead to smaller faster models which in several cases presented in the paper provide superior performance.\n\nPaper is clear and concise and experimentally sound showing a real contribution to the body of knowledge in transfer learning and pruning."
+  },
+  "review_metadata": {
+    "rating": 8
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

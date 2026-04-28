@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "RO5OGOzs6M",
+  "reviewer": "mBxJ",
+  "paper": {
+    "title": "PINNsAgent: Automated PDE Surrogation with Large Language Models",
+    "authors": [
+      "Qingpo Wuwu",
+      "Chonghan Gao",
+      "Tianyu Chen",
+      "Yihang Huang",
+      "Yuekai Zhang",
+      "Jianing Wang",
+      "Jianxin Li",
+      "Haoyi Zhou",
+      "Shanghang Zhang"
+    ],
+    "abstract": "Solving partial differential equations (PDEs) using neural methods has been a long-standing scientific and engineering research pursuit. Physics-Informed Neural Networks (PINNs) have emerged as a promising alternative to traditional numerical methods for solving PDEs. However, the gap between domain-specific knowledge and deep learning expertise often limits the practical application of PINNs. Previous works typically involve manually conducting extensive PINNs experiments and summarizing heuristic rules for hyperparameter tuning. In this work, we introduce PINNsAgent, a novel surrogation framework that leverages large language models (LLMs) to bridge the gap between domain-specific knowledge and deep learning. PINNsAgent integrates Physics-Guided Knowledge Replay (PGKR) for efficient knowledge transfer from solved PDEs to similar problems, and Memory Tree Reasoning for exploring the search space of optimal PINNs architectures. We evaluate PINNsAgent on 14 benchmark PDEs, demonstrating its effectiveness in automating the surrogation process and significantly improving the accuracy of PINNs-based solutions.",
+    "keywords": [
+      "pinns",
+      "llm-agent"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=RO5OGOzs6M"
+  },
+  "review_fields": {
+    "summary": "The paper introduces a framework that utilizes LLMs to design and optimize PINNs to solve PDEs. It facilitates solving PDEs with PINNs more efficiently without tuning parameters and choosing architectures manually. The paper demonstrated its effectiveness on dataset PINNacle.",
+    "methods_and_evaluation_criteria": "The proposed methods and evaluation criteria are well-suited to the problem at hand. However, I believe the paper could be improved by clarifying the following two aspects of the proposed method:\n\n1. What is the unique role of the LLM in your framework? Could a smaller language model be used instead? If the focus is solely on configuration generation, is an LLM even necessary?\n\n2. Could you provide more details on the pipeline for PDEs that are not already in the code bank? Perhaps an additional section would help clarify this process.",
+    "theoretical_claims": "There's no theoretical claims in the paper.",
+    "experimental_designs_or_analyses": "The experimental design in the paper is solid. However, the study was conducted on only one dataset, which is not a commonly used benchmark. I recommend that the authors conduct more extensive experiments to evaluate the framework’s performance on widely used benchmark datasets, such as PDEBench or PDEArena. This would better demonstrate the framework’s real-world applicability, particularly by comparing its performance with other PDE solvers and showing whether it produces comparable or superior results.",
+    "relation_to_broader_scientific_literature": "The scientific computing community can benefit from the proposed framework, as it automates the workflow for solving PDEs using PINNs. While PINNs are effective, they have a significant drawback—the process of tuning and designing the model structure requires substantial human effort. This framework helps bridge that gap.",
+    "other_strengths_and_weaknesses": "I believe the paper presents an innovative idea, and the problem it aims to solve is well-motivated with broad applications.\n\nHowever, the primary weakness, in my view, is the lack of comprehensive experimental results."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

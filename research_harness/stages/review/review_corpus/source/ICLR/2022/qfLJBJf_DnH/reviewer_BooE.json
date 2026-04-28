@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "qfLJBJf_DnH",
+  "reviewer": "BooE",
+  "paper": {
+    "title": "Brain insights improve RNNs' accuracy and robustness for hierarchical control of continually learned autonomous motor motifs",
+    "authors": [
+      "Laureline Logiaco",
+      "G Sean Escola"
+    ],
+    "abstract": "We study the problem of learning dynamics that can produce hierarchically organized continuous outputs consisting of the flexible chaining of re-usable motor ‘motifs’ from which complex behavior is generated. Can a motif library be efficiently and extendably learned without interference between motifs, and can these motifs be chained in arbitrary orders without first learning the corresponding motif transitions during training? This requires (i) parameter updates while learning a new motif that do not interfere with the parameters used for the previously acquired ones; and (ii) successful motif generation when starting from the network states reached at the end of any of the other motifs, even if these states were not present during training (a case of out-of-distribution generalization). We meet the first requirement by designing recurrent neural networks (RNNs) with specific architectures that segregate motif-dependent parameters (as customary in continual learning works), and try a standard method to address the second by training with random initial states. We find that these standard RNNs are very unreliable during zero-shot transfer to motif chaining. We then use insights from the motor thalamocortical circuit, featuring a specific module that shapes motif transitions. We develop a method to constrain the RNNs to function similarly to the thalamocortical circuit during motif transitions, while preserving the large expressivity afforded by gradient-based training of non-analytically tractable RNNs. We then show that this thalamocortical inductive bias not only acts in synergy with gradient-descent RNN training to improve accuracy during in-training-distribution motif production, but also leads to zero-shot transfer to new motif chains with no performance cost. Besides proposing an efficient, robust and flexible RNN architecture, our results shed new light on the function of motor preparation in the brain.",
+    "keywords": [
+      "neuroscience",
+      "dynamical systems",
+      "thalamocortical architecture",
+      "motor preparation",
+      "continual learning",
+      "hierarchical continuous motor control",
+      "out-of-distribution generalization",
+      "robustness"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=qfLJBJf_DnH"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper presents the problems in chaining nonlinear motor pattern generators and proposes a resetting mechanism inspired by the thalamo-cortical network.",
+    "main_review": "Strength: The proposed architectures have been shown to work for \"zero-shot learning,\" or recombination without re-learning.\n\nWeakness: It is not convincing whether the particular resetting mechanism is the most reasonable one, either computationally or biologically. Computationally, any strong inhibitory input to bring the network state to the origin should suffice. Biologically, the most likely mechanism is the tonic inhibition and timely disinhibition by the basal ganglia to the thalamus and subcortical motor controllers like the superior colliculus.",
+    "summary_of_the_review": "An interesting proposal worth discussion.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 602,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b0df6b34-336c-4d03-998b-8db733a23a4a",
+    "error": null,
+    "scored_chars": 602
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "gKfj7Jb1kj",
+  "reviewer": "MSYw",
+  "paper": {
+    "title": "X-Teaming: Multi-Turn Jailbreaks and Defenses with Adaptive Multi-Agents",
+    "authors": [
+      "Salman Rahman",
+      "Liwei Jiang",
+      "James Shiffer",
+      "Genglin Liu",
+      "Sheriff Issaka",
+      "Md Rizwan Parvez",
+      "Hamid Palangi",
+      "Kai-Wei Chang",
+      "Yejin Choi",
+      "Saadia Gabriel"
+    ],
+    "abstract": "Multi-turn interactions with language models (LMs) pose critical safety risks, as harmful intent can be strategically spread across exchanges. Yet, the vast majority of prior work has focused on single-turn safety, while adaptability and diversity remain among the key challenges of multi-turn red-teaming. To address these challenges, we present X-Teaming, a scalable framework that systematically explores how seemingly harmless interactions escalate into harmful outcomes and generates corresponding attack scenarios. X-Teaming employs collaborative agents for planning, attack optimization, and verification, achieving state-of-the-art multi-turn jailbreak effectiveness and diversity with success rates up to 98.1% across representative leading open-weight and closed-source models. In particular, X-Teaming achieves a 96.2% attack success rate against the latest Claude 3.7 Sonnet model, which has been considered nearly immune to single-turn attacks. Building on X-Teaming, we introduce X-Guard-Train, an open-source multi-turn safety training dataset that's $~20\\times$ larger than the previous best resource, comprising 30K interactive jailbreaks, designed to enable robust multi-turn safety alignment for LMs. Our work offers essential tools and insights for mitigating sophisticated conversational attacks, advancing the multi-turn safety of LMs.",
+    "keywords": [
+      "Multi-turn Jailbreaks",
+      "Adaptive Multi-Agent",
+      "Conversational AI Safety",
+      "Red-Teaming",
+      "Defensive Alignment"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=gKfj7Jb1kj"
+  },
+  "review_fields": {
+    "summary": "This paper presents X-Teaming, a well-engineered multi-agent framework for conducting multi-turn jailbreak attacks on language models, and introduces XGuard-Train, a large-scale dataset to support robust multi-turn safety training. The framework combines planning, attacking, verification, and prompt optimization agents in a cohesive system that achieves state-of-the-art success rates and diversity across both open and closed models. The empirical results are strong and the open-sourced resources are likely to have substantial practical impact. While the novelty stems more from the integration and scale of components than from introducing fundamentally new algorithms, the paper makes a valuable and timely contribution to the growing area of multi-turn safety in LLMs.",
+    "reasons_to_accept": "- High empirical performance: X-Teaming significantly outperforms both single- and multi-turn attack baselines in ASR and diversity.\n\n- Comprehensive system design: The integration of multi-agent collaboration, adaptive planning, and TextGrad optimization is thoughtfully implemented.\n\n- Practical impact: The release of XGuard-Train provides a scalable resource that advances multi-turn safety alignment in practice.\n\n- Rigorous evaluation: Experiments include multiple models (closed and open-weight), ablations (plans, turns, optimization), and agreement analysis across verifiers.",
+    "reasons_to_reject": "- Modest novelty: The main contribution lies in combining known components (planning, attack loops, gradient prompt optimization) rather than introducing fundamentally new algorithms or theory.\n\n- Verifier limitations: While GPT-4o is used for scoring, its bias as both generator and evaluator could skew success metrics. Cross-verifier agreement helps, but more human evaluation would strengthen conclusions.\n\n- Efficiency metrics: How many tokens or queries are needed to achieve jailbreak compared to baselines? This matters for both attackers and defenders.\n\n- Security implications: A stronger discussion on responsible deployment of such tools and how open-sourcing will be safeguarded would be beneficial.",
+    "questions_to_authors": "- Can you elaborate on why ASR drops when increasing the number of conversation turns beyond 8 (Figure 4b)?\n\n- Could you quantify attack efficiency by reporting the average number of tokens used or queries attempted until a successful jailbreak, and compare that with existing baselines?\n\n- How well does the framework generalize to non-English or code-focused jailbreak scenarios, if at all tested?\n\n- Did you observe any failure patterns or behaviors that consistently resisted jailbreak? If so, how could they inform defenses?\n\n- Can you clarify the rationale for the chosen thresholds (e.g., 5 TextGrad attempts, 7 turns)? Are these optimal across all models?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 65,
+    "mixed_pct": 0,
+    "human_pct": 35,
+    "verdict": "We are moderately confident this text was AI generated",
+    "confidence": "moderately",
+    "chars": 1963,
+    "words": 275,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a00b9772-50a7-416c-a152-3691c3d90464",
+    "error": null,
+    "scored_chars": 1963
+  }
+}

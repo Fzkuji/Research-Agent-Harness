@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "N0n_QyQ5lBF",
+  "reviewer": "3QG1",
+  "paper": {
+    "title": "Unsupervised Vision-Language Grammar Induction with Shared Structure Modeling",
+    "authors": [
+      "Bo Wan",
+      "Wenjuan Han",
+      "Zilong Zheng",
+      "Tinne Tuytelaars"
+    ],
+    "abstract": "We introduce a new task, unsupervised vision-language (VL) grammar induction. Given an image-caption pair, the goal is to extract a shared hierarchical structure for both image and language simultaneously.  We argue that such structured output, grounded in both modalities, is a clear step towards the high-level understanding of multimodal information. Besides challenges existing in conventional visually grounded grammar induction tasks, VL grammar induction requires a model to capture contextual semantics and perform a fine-grained alignment. To address these challenges, we propose a novel method, CLIORA, which constructs a shared vision-language constituency tree structure with context-dependent semantics for all possible phrases in different levels of the tree. It computes a matching score between each constituent and image region, trained via contrastive learning.  It integrates two levels of fusion, namely at feature-level and at score-level, so as to allow fine-grained alignment. We introduce a new evaluation metric for VL grammar induction, CCRA, and show a 3.3% improvement over a strong baseline on Flickr30k Entities. We also evaluate our model via two derived tasks, i.e., language grammar induction and phrase grounding, and improve over the state-of-the-art for both.",
+    "keywords": [
+      "Grammar Induction",
+      "Vision-Language Matching",
+      "Unsupervised Learning"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=N0n_QyQ5lBF"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper presents a new model for grammar induction for text, with help from the coupled images. The model was built on top of an existing unsupervised grammar induction model used for text without image information. The experimental results show the approach was effective. The work essentially demonstrates some effective ways of leveraging the additional image information for improving the grammar induction task. The paper also discussed some weaknesses of the approach and future work.",
+    "main_review": "The topic of grammar induction has been there for a very long time in NLP and is a very fundamental topic.  The model was largely built based on an existing model for purely text-based grammar induction. The model essentially makes use of neural networks to learn good latent representations (using a reconstruction loss) where the latent representation is defined with neural networks which yield scores for constituents and vector representations of them. The approach adopts the classical inside-outside process for the computing of the scores.\n\nThe paper essentially investigates what might be the effective methods for integrating image information into text for improved grammar induction. The execution of the paper was quite good, and the results are convincing. However, I feel the overall model is essentially a way to use image information to regularize the grammar induction process. Little can be said about in what precise manner the image is actively contributing to the induction process. Indeed, the authors also acknowledged something along with what I thought in the final section. Nevertheless, I think it is an interesting piece that might inspire future research on multimodal processing (for image + language).",
+    "summary_of_the_review": "I think this is a reasonable piece, with good writing and a nice set of experiments. It would be helpful for future research in this domain.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:31Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:31Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1232,
+    "words": 191,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b2b88ab2-2734-49e0-ad38-d78afa886fde",
+    "error": null,
+    "scored_chars": 1233
+  }
+}

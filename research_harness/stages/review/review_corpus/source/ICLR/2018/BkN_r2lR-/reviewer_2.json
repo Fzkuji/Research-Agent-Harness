@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "BkN_r2lR-",
+  "reviewer": "2",
+  "paper": {
+    "title": "Identifying Analogies Across Domains",
+    "authors": [
+      "Yedid Hoshen",
+      "Lior Wolf"
+    ],
+    "abstract": "Identifying analogies across domains without supervision is a key task for artificial intelligence. Recent advances in cross domain image mapping have concentrated on translating images across domains. Although the progress made is impressive, the visual fidelity many times does not suffice for identifying the matching sample from the other domain. In this paper, we tackle this very task of finding exact analogies between datasets i.e. for every image from domain A find an analogous image in domain B. We present a matching-by-synthesis approach: AN-GAN, and show that it outperforms current techniques. We further show that the cross-domain mapping task can be broken into two parts: domain alignment and learning the mapping function. The tasks can be iteratively solved, and as the alignment is improved, the unsupervised translation function reaches quality comparable to full supervision.",
+    "keywords": [
+      "unsupervised mapping",
+      "cross domain mapping"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=BkN_r2lR-"
+  },
+  "review_fields": {
+    "comment": "Thank you for your detailed reply.  I still think the paper could be much improved with more extensive experiments and better applications. However, I agree that the problem setting is interesting and novel, the method is compelling, and the experiments provide sufficient evidence that the method actually works. Therefore I would not mind seeing this paper accepted into ICLR, and, upon reflection, I think this paper is hovering around the acceptance threshold.\n\nI really like the real-world examples listed! I would be excited to see the proposed method applied to some of these problems. I think that would greatly improve the paper. (Although, I would still argue that several of the listed examples are cases where the data would naturally come in a paired format, and direct supervision could be applied.)\n\nIt's a good point that previous unsupervised, cross domain GANs were also evaluated on contrived datasets with exact matches available at training time. However, I'd argue that these papers were convincing mainly because of extensive qualitative results on datasets without exact matches. Those qualitative results were enough to demonstrate that unpaired translation is possible. The current paper aims to go further, and show that the proposed method does _better_ at unpaired translation than previous methods. Making a comparison like this is harder than simply showing that the method can work at all, and I think it calls for quantitative metrics on real unpaired problems (like the examples listed in the rebuttal).\n\nThere are a number of quantitative ways to evaluate performance on datasets without exact matches. First, user studies could be run on Mechanical Turk. Second, unconditional metrics could be evaluated, such as Inception score or moment matching (do the statistics of the output distribution match the statistics of the target domain?).\n\nHowever, I actually think it is fine to evaluate on ground truth matches as long as the training data is less contrived. For example, I would find it compelling if the system were tested on 3D point cloud matching, even if the training data contains exact matches, as long as there is no trivial way of finding these matches."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

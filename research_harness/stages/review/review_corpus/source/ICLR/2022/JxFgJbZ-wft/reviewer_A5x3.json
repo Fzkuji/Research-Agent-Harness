@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "JxFgJbZ-wft",
+  "reviewer": "A5x3",
+  "paper": {
+    "title": "Variational Predictive Routing with Nested Subjective Timescales",
+    "authors": [
+      "Alexey Zakharov",
+      "Qinghai Guo",
+      "Zafeirios Fountas"
+    ],
+    "abstract": "Discovery and learning of an underlying spatiotemporal hierarchy in sequential data is an important topic for machine learning. Despite this, little work has been done to explore hierarchical generative models that can flexibly adapt their layerwise representations in response to datasets with different temporal dynamics. Here, we present Variational Predictive Routing (VPR) – a neural probabilistic inference system that organizes latent representations of video features in a temporal hierarchy, based on their rates of change, thus modeling continuous data as a hierarchical renewal process. By employing an event detection mechanism that relies solely on the system’s latent representations (without the need of a separate model), VPR is able to dynamically adjust its internal state following changes in the observed features, promoting an optimal organisation of representations across the levels of the model’s latent hierarchy.  Using several video datasets, we show that VPR is able to detect event boundaries, disentangle spatiotemporal features across its hierarchy, adapt to the dynamics of the data, and produce accurate time-agnostic rollouts of the future. Our approach integrates insights from neuroscience and introduces a framework with high potential for applications in model-based reinforcement learning, where flexible and informative state-space rollouts are of particular interest.",
+    "keywords": [
+      "Hierarchical temporal abstraction",
+      "event discovery",
+      "hierarchical generative models",
+      "variational inference"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=JxFgJbZ-wft"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper introduces VPR, an unsupervised hierarchical latent variable model. The latent representation is organized into a temporal hierarchy, with deeper layers representing features with slower rates of change. This hierarchy is enabled by an event detection mechanism that finds expected events in the input using VPR's internal transition model, and finds unexpected events through changes in the latent distributions at each level of the hierarchy. The paper demonstrates VPR's performance on unsupervised event boundary discovery, and how it is able to learn disentangled representations, on a variety of synthetic video datasets.",
+    "main_review": "strengths\n---------\nVPR represents a significant advance over previous models like CW-VAE (which requires a fixed \"event detection\" interval) and VTA (where event detection must be learned separately).\n\nFor the most part the method is clearly explained; Figs 1 and 2 are very helpful.\n\nThe 1D synthetic dataset is useful for understanding the method in a simple setting. Do similar results to Fig. 4 emerge from the other datasets as well?\n\nThe layerwise rollouts are an interesting way to probe the representations at each layer.\n\n\nconcerns\n--------\nI still don't fully understand the event prediction (specifically CE). Though the paper does say in words what D_{st} and D_{ch} are (which is much appreciated), the fact that their comparison is a reasonable way to define a predictable event is not clear to me. Does D_{ch} represent a difference we would expect from the structure of the model with/without seeing new data? Why does it make to compare D_{st} to this? Spelling this out a bit more clearly would help explain this crucial piece of the method.\n\nHow is the F1 score computed for change detection? Do you arbitrarily define successive events (in both the data and the model) as 0->1->0->1->... and then compute F1 on these binary sequences? Would be useful to spell this out more clearly.\n\nThe current figure layout is convenient space-wise, but makes following the results harder than it needs to be.\n\nFig 4 legend is hard to parse. \n* \"CE\" appears to be \"CE with CU enabled\"; what then is CE+CU?\n* \"CU disabled\" appears to be \"CE with CU disabled\"; what then is CU? CU only, but in the context of \"CE with CU enabled\"?\n* why is there no CU curve in Fig 4A?\n* why do 4A and 4C show different models? would make more sense to show the same models under the noise and no-noise condition\n\nFig 5A - do you have an intuition for why the color changes in L2 on every frame? Given the frequency of these events (on wall bounce or otherwise with probability 0.1) I would have expected the model to learn slower transitions between colors.\n\nExperiments are run with other baselines, but inconsistently. Running VTA on the 1D synthetic data could be instructive, and would especially be interesting to see how it performs under different noise levels. It should also be easy enough to add a CW-VAE curve to Fig. 3B. This will perform terribly, but that also opens up an opportunity to revisit the fundamental differences between VPR and CW-VAE and why the new model is an advance. I think both rollouts and random samples should be added in appendix figures for the CW-VAE and VTA. In general, the results section could start off with an explanation of the datasets (as it does already) AND an explanation of the baseline models, and why those models were chosen. That gives a bit more structure to (and motivation for) the comparisons made later on.\n\nHow will this model behave when there are slow, continuous changes in high-level features, rather than discrete changes? For example, what if colors slowly cycled through hue space in the Moving Ball dataset (much more slowly than position)? Would kind of features would VPR learn at L2? Not suggesting this as an experiment to perform, but might be an interesting direction to address in the discussion.",
+    "summary_of_the_review": "This paper presents a novel, well-motivated method for inferring temporal hierarchy in latent representations of sequence data. I lean towards accepting this paper, and would be willing to further increase my score if some of the concerns above (especially regarding the experiments) are addressed in revision.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3573,
+    "words": 607,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/66d8c6a1-104a-4a85-96e3-f7057bde6a2e",
+    "error": null,
+    "scored_chars": 3574
+  }
+}

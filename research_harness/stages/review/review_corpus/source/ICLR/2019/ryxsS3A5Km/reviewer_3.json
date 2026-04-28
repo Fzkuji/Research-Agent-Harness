@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ryxsS3A5Km",
+  "reviewer": "3",
+  "paper": {
+    "title": "Continual Learning via Explicit Structure Learning",
+    "authors": [
+      "Xilai Li",
+      "Yingbo Zhou",
+      "Tianfu Wu",
+      "Richard Socher",
+      "Caiming Xiong"
+    ],
+    "abstract": "Despite recent advances in deep learning, neural networks suffer catastrophic forgetting when tasks are learned sequentially. We propose a conceptually simple and general framework for continual learning, where structure optimization is considered explicitly during learning. We implement this idea by separating the structure and parameter learning. During structure learning, the model optimizes for the best structure for the current task. The model learns when to reuse or modify structure from previous tasks, or create new ones when necessary. The model parameters are then estimated with the optimal structure. Empirically, we found that our approach leads to sensible structures when learning multiple tasks continuously. Additionally, catastrophic forgetting is also largely alleviated from explicit learning of structures. Our method also outperforms all other baselines on the permuted MNIST and split CIFAR datasets in continual learning setting.",
+    "keywords": [
+      "continuous learning",
+      "catastrophic forgetting",
+      "architecture learning"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryxsS3A5Km"
+  },
+  "review_fields": {
+    "review": "This paper proposes a new approach to mitigate the catastrophic forgetting for continual learning. The model is composed to the neural architecture search and parameter learning based on the intuition that largely different tasks should allow to use different network structure to train them. In structure learning, they introduce three candidate to decide network architecture, reuse, adaptation and new. In the experiments, they show that their model outperforms SGD and EWC.\n\nBasically, the intuition of structure learning and the validation of that is straight forward and easy to follow. However, I’m not sure that the proposed model can outperform the recent continual learning methods, such as IMM(Lee et al, 2017), DEN or  RCL(Ju Xu et al, 2018). There is only a relatively weak(and old) comparison with l2, and EWC.\n\n-\tIn the equation (4), I wonder that, in the model, the hyperparameter(lambda_i or beta_i) of regularizer looks different according to the task, is it correct?\n-\tAs shown in the Fig. 2) three choice-reuse, adaptation, and, new, is decided in the layer level. But with a semantic intuition, such that two different task can share specific features and simultaneously each of them requires the different neural space to learn discriminative ones at layer l, it seems better if the model could search structure much flexible. Is there some of experimental trial or plan about these kind of joint-adoption?\n-\tWhat is the main contribution of adaptation? I wonder that only reuse and new can work well including the role of adaptation, or not.\n-\tIs there any experiments to compare the recent continual learning methods(as I mentioned), in terms of AUC(or accuracy) and the network capacity?\n\nMinor remarks,\nPage 3: \t“is been” -> is\n\t“unlikely”-> unlike\nPage 4: \t“sharealbe” -> shareable\nPage 5: \t“, After” -> , after\n\t“permuated” -> permuted\nPage 6:\t“Fig. 5” -> Fig. 4"
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

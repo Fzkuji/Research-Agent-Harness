@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "nVV6S2sb_UL",
+  "reviewer": "Rb6v",
+  "paper": {
+    "title": "Securing Secure Aggregation: Mitigating Multi-Round Privacy Leakage in Federated Learning",
+    "authors": [
+      "Jinhyun So",
+      "Ramy E. Ali",
+      "Basak Guler",
+      "Jiantao Jiao",
+      "Salman Avestimehr"
+    ],
+    "abstract": "Secure aggregation is a critical component in federated learning, which enables the server to learn the aggregate model of the users without observing their local models. Conventionally, secure aggregation algorithms focus only on ensuring the privacy of individual users in a single training round. We contend that such designs can lead to significant privacy leakages over multiple training rounds, due to partial user selection/participation at each round of FL. In fact, we show that the conventional random user selection strategies in FL may lead to leaking users' individual models within a number of rounds that is linear in the number of users. To address this challenge, we introduce a secure aggregation framework, Multi-RoundSecAgg, with multi-round privacy guarantees. In particular, we introduce a new metric to quantify the privacy guarantees of FL over multiple training rounds, and develop a structured user selection strategy that guarantees the long-term privacy of each user (over any number of training rounds). Our framework also carefully accounts for the fairness and the average number of participating users at each round. Our experiments on MNIST, CIFAR-$10$ and CIFAR-$100$ datasets in the IID and the non-IID settings demonstrate the performance improvement over the baselines, both in terms of privacy protection and test accuracy.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=nVV6S2sb_UL"
+  },
+  "review_fields": {
+    "comment": "Thank you for the helpful comments.\n\n> In DP, however, the privacy guarantee sacrifices the model performance (privacy-utility trade-off)\n\nIf one wants to protect user privacy, some form of randomization is required, which inevitably leads to a privacy-utility trade-off. Secure aggregation does not require such a trade-off, since it does not try to guarantee any user privacy, but protects against information leakage from the intermediate computations. This is exactly the point I would like to see clarified also in the paper.\n\n> we assume that all clients and the server are honest-but-curious\n\nLooking at it quickly, it would seem that assuming all honest-but-curious clients can leak the private models to other clients (for a simple example, take N=T=2, since the updated model from the server is just the sum of the local models, both clients can remove their own contribution to reveal the other clients' model). Is this intended behaviour, or did I misunderstand? If so, it would be good to note this in the paper."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

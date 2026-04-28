@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "IAoSG4Q2xC",
+  "reviewer": "DSqh",
+  "paper": {
+    "title": "Hyperparameter Loss Surfaces Are Simple Near their Optima",
+    "authors": [
+      "Nicholas Lourie",
+      "He He",
+      "Kyunghyun Cho"
+    ],
+    "abstract": "Hyperparameters greatly impact models' capabilities; however, modern models are too large for extensive search. Instead, researchers design recipes that train well across scales based on their understanding of the hyperparameters. Despite this importance, few tools exist for understanding the hyperparameter loss surface. We discover novel structure in it and propose a new theory yielding such tools. The loss surface is complex, but as you approach the optimum simple structure emerges. It becomes characterized by a few basic features, like its effective dimension and the best possible loss. To uncover this *asymptotic regime*, we develop a novel technique based on random search. Within this regime, the best scores from random search take on a new distribution we discover. Its parameters are exactly the features defining the loss surface in the asymptotic regime. From these features, we derive a new asymptotic law for random search that can explain and extrapolate its convergence. These new tools enable new analyses, such as confidence intervals for the best possible performance or determining the effective number of hyperparameters. We make these tools available at: https://github.com/nicholaslourie/opda.",
+    "keywords": [
+      "experimental design",
+      "hyperparameters",
+      "scaling laws"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=IAoSG4Q2xC"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a new theory about hyperparameter tuning, that is, near the optimal point, the loss landscape of the hyperparameters are noisy quadratic, therefore one may apply Taylor approximation or other similar techniques to fit the hyperparameter space, which may help find better hyperparameters. \n\nI think the paper has many problems. I have two main questions:\n1. When does the theory hold? Does it hold universally?\n2. If the theory holds, is the method proposed in this paper really optimal?\n\nSpecifically, I think the theory does not hold in general:\n1(a). Generally hyperparameters can be arbitrary, so we are really dealing with a blackbox function. It's hard for me to believe all blackbox functions are noisy quadratic near optimal. \n1(b). I think the paper mainly discussed about continuous hyperparameters. Indeed, in the experiment, most parameters they pick are continuous. What if there are discrete parameters? How do you do Taylor expansion and fit it? Or, how is Taylor expansion defined?\n1(c). I think the authors mainly discussed some training task like training LLM/Resnet. However, it is not clear to me that, why this will hold for other ML tasks. I am asking about this because years ago, there were a crazy trend about using RL to find hyperparameters, but it turns out the RL algorithm will overfit to the training scenarios easily. Now, the authors did not convince me that this paper is not a similar story: maybe the noisy quadratic case only holds for the parameters they pick on the task they chose, not for other more general cases. \n\n2(a). Even if the theory is indeed true for most cases in AI, I still doubt the noisy quadratic theory is useful. If the landscape is noisy quadratic, it seems that Bayesian methods will be very useful here, because Bayesian methods will assume the function is close to Gaussian, where noisy quadratic is indeed close to Gaussian prior. Therefore, I believe using Bayesian will be as effective. So some comparison is necessary. \n2(b). Similarly, since most parameters in the experiment are continuous, I am thinking something like stochastic gradient descent on hyperparameters may help. See e.g., [1] Maybe the authors should compare with that work as well?\n\nQuality: Low. I think the paper is not complete right now. It still has many important discussions missing. \nClarity: Good, the paper is easy to follow. \nOriginality: Low. I do not think noisy quadratic theory for hyperpameter tuning is specifically novel or useful. \nSignificance: Low. I think more comparison with existing work, and discussion of generality is requried. \n\n\n[1] Gradient-based Hyperparameter Optimization through Reversible Learning, Maclaurin et al.",
+    "reasons_to_accept": "I think the paper cannot be accepted at the current form.",
+    "reasons_to_reject": "Please check my summary above. I think there are mainly two reasons:\n1. The theory does not seem to be general. And the paper did not provide a nice characterization of when this theory holds. \n2. If the theory holds, it is not clear to me that the method provided in the paper is the optimal one. I think there are many classical methods can do well, and more comparisons are needed."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 442,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7cc850e8-3b58-462f-8f0d-34c473f34cc7",
+    "error": null,
+    "scored_chars": 443
+  }
+}

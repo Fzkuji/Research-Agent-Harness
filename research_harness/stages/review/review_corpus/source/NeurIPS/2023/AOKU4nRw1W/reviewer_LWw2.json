@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "AOKU4nRw1W",
+  "reviewer": "LWw2",
+  "paper": {
+    "title": "Linguistic Binding in Diffusion Models: Enhancing Attribute Correspondence through Attention Map Alignment",
+    "authors": [
+      "Royi Rassin",
+      "Eran Hirsch",
+      "Daniel Glickman",
+      "Shauli Ravfogel",
+      "Yoav Goldberg",
+      "Gal Chechik"
+    ],
+    "abstract": "Text-conditioned image generation models often generate incorrect associations between entities and their visual attributes. This reflects an impaired mapping between linguistic binding of entities and modifiers in the prompt and visual binding of the corresponding elements in the generated image. As one example, a query like ``a pink sunflower and a yellow flamingo'' may incorrectly produce an image of a yellow sunflower and a pink flamingo. To remedy this issue, we propose SynGen, an approach which first syntactically analyses the prompt to identify entities and their modifiers, and then uses a novel loss function that encourages the cross-attention maps to agree with the linguistic binding reflected by the syntax. Specifically, we encourage large overlap between attention maps of entities and their modifiers, and small overlap with other entities and modifier words. The loss is optimized during inference, without retraining or fine-tuning the model. Human evaluation on three datasets, including one new and challenging set, demonstrate significant improvements of SynGen compared with current state of the art methods. This work highlights how making use of sentence structure during inference can efficiently and substantially improve the faithfulness of text-to-image generation.",
+    "keywords": [
+      "syntax",
+      "diffusion",
+      "stable diffusion",
+      "attribute",
+      "attention"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=AOKU4nRw1W"
+  },
+  "review_fields": {
+    "summary": "This paper presents an approach called “SynGen” to improve attribute binding between nouns and their modifiers for text-to-image latent diffusion models, specifically Stable Diffusion. They propose a two-part loss on attention maps that (1) encourages attention maps of nouns and their modifiers to be similar, and (2) encourages attention maps between the noun/modifier to be different from those of other tokens in the prompt. \n\nDatasets and baselines: They run experiments on three datasets: the attribute binding contrast set (ABC-6K) from the Structured Diffusion (baseline 1) paper, data from the Attend-and-Excite (baseline 2), and a newly proposed challenge set called Diverse Visual Modifier Prompts.\n\nEvaluation:  \n(1) Human evals for concept separation and visual appeal. They find that SynGen outperforms baselines.  \n(2) Qualitative analysis with sample prompts and generations for Syngen and the two baselines, demonstrating that SynGen overcomes failure cases of the other two models.  \n(3) Ablations on the loss components and loss weighting.",
+    "strengths": "1. This paper tackles an important and challenging drawback of text-to-image diffusion models struggling to faithfully generate objects with the right attributes. \n2. This paper proposes an interesting two-part loss that imposes localized pairwise constraints on the attention maps between image patches and token embeddings. The first constraint enforces that the same image patches attend to both the noun and its modifiers. The second constraint enforces that image patches attending to these nouns/modifiers do not attend to any other tokens in the prompt. \n3. This paper attempts to evaluate on a large set of prompts including those from prior work as well as proposing their own challenge set.\n4. This paper attempts to better understand the effects and side-effects of the proposed losses via ablations.",
+    "weaknesses": "1. The proposed method appears to be strongly grounded in the framework of the Attend-and-Excite paper. The writing doesn’t highlight this connection while introducing the approach in Section 2, beyond a minor footnote. Section 2 would probably need some revision to better draw this connection.\n2. Considering that the paper is tackling a very specific problem, the general “content separation” rating collected in the human eval seems pretty weak. Why not collect finer-grained scores for: number of objects in the prompt, number of objects from prompt generated, number of objects from prompt generated with the correct attributes? Wouldn’t this give a much better sense of task success and could potentially allow computing recall?\n3. The loss function ablation mentions that sometimes objects are omitted from the generated image. Is combining the proposed losses with global constraint defined in the Attend-and-Excite paper a viable option? Since the framework is identical, wouldn’t combining the losses have mitigated this issue? The Attend-and-Excite paper talks about attribute binding as well, so this appears to be a variant to try. \n\nNits:\n1. Maybe more explicitly state that this is an inference-only guidance procedure?\n2. There’s a typo on line 112 for the equation: $\\\\nabla_{z_t}\\\\mathcal{L}$ not $\\\\nabla z_t\\\\mathcal{L}$. Also $z’_t$ not $z’t$.",
+    "questions": "1. Was there a reason to not include numerical modifiers in the study? \n2. Are there unexpected side-effects of such constraints on model generalization?",
+    "limitations": "One limitation that was perhaps overlooked is the lack of standardized evaluation. Having to rely on different crowdsourcing tasks and qualitative comparisons makes it much harder to track progress."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:38:55Z",
+    "migrated_from_v1_at": "2026-04-27T15:38:55Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2175,
+    "words": 331,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/f97bfbd4-e25c-4307-bb5c-39d2a5afcf7c",
+    "error": null,
+    "scored_chars": 2178
+  }
+}

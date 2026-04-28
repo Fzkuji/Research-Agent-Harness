@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "KvPwXVcslY",
+  "reviewer": "TCTa",
+  "paper": {
+    "title": "Spatial-frequency channels, shape bias, and adversarial robustness",
+    "authors": [
+      "Ajay Subramanian",
+      "Elena Sizikova",
+      "Najib J. Majaj",
+      "Denis G. Pelli"
+    ],
+    "abstract": "What spatial frequency information do humans and neural networks use to recognize objects? In neuroscience, critical band masking is an established tool that can reveal the frequency-selective filters used for object recognition. Critical band masking measures the sensitivity of recognition performance to noise added at each spatial frequency. Existing critical band masking studies show that humans recognize periodic patterns (gratings) and letters by means of a spatial-frequency filter (or \"channel\") that has a frequency bandwidth of one octave (doubling of frequency). Here, we introduce critical band masking as a task for network-human comparison and test 14 humans and 76 neural networks on 16-way ImageNet categorization in the presence of narrowband noise. We find that humans recognize objects in natural images using the same one-octave-wide channel that they use for letters and gratings, making it a canonical feature of human object recognition. Unlike humans, the neural network channel is very broad, 2-4 times wider than the human channel. This means that the network channel extends to frequencies higher and lower than those that humans are sensitive to. Thus, noise at those frequencies will impair network performance and spare human performance. Adversarial and augmented-image training are commonly used to increase network robustness and shape bias. Does this training align network and human object recognition channels? Three network channel properties (bandwidth, center frequency, peak noise sensitivity) correlate strongly with shape bias (51% variance explained) and robustness of adversarially-trained networks (66% variance explained). Adversarial training increases robustness but expands the channel bandwidth even further beyond the human bandwidth. Thus, critical band masking reveals that the network channel is more than twice as wide as the human channel, and that adversarial training only makes it worse. Networks with narrower channels might be more robust.",
+    "keywords": [
+      "object recognition",
+      "critical band masking",
+      "spatial-frequency channels",
+      "shape bias",
+      "adversarial robustness"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=KvPwXVcslY"
+  },
+  "review_fields": {
+    "comment": "I would like to thank the authors for their detailed reply.\n\nI particularly appreciated that they corrected the alpha level for multiple comparisons and provided the updated plot, and explanations regarding experimental methods. Overall, I am satisfied with the author's response and promised edits to the paper. Some experimental weaknesses remain - e.g. in terms of monitor calibration hoping is great, measuring is better - but those are inherent to the online study design and cannot be expected to be resolved in a rebuttal. My final score is \"7: Accept: Technically solid paper, with high impact on at least one sub-area, or moderate-to-high impact on more than one areas, with good-to-excellent evaluation, resources, reproducibility, and no unaddressed ethical considerations.\" and I strongly support publication at NeurIPS."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:07Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:07Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2059,
+    "words": 329,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/60474735-2465-47c7-8150-30da9e16571b",
+    "error": null,
+    "scored_chars": 2059
+  }
+}

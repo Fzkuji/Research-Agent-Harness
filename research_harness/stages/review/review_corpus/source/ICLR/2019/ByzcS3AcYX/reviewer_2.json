@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ByzcS3AcYX",
+  "reviewer": "2",
+  "paper": {
+    "title": "Neural TTS Stylization with Adversarial and Collaborative Games",
+    "authors": [
+      "Shuang Ma",
+      "Daniel Mcduff",
+      "Yale Song"
+    ],
+    "abstract": "The modeling of style when synthesizing natural human speech from text has been the focus of significant attention. Some state-of-the-art approaches train an encoder-decoder network on paired text and audio samples (x_txt, x_aud) by encouraging its output to reconstruct x_aud. The synthesized audio waveform is expected to contain the verbal content of x_txt and the auditory style of x_aud. Unfortunately, modeling style in TTS is somewhat under-determined and training models with a reconstruction loss alone is insufficient to disentangle content and style from other factors of variation. In this work, we introduce an end-to-end TTS model that offers enhanced content-style disentanglement ability and controllability. We achieve this by combining a pairwise training procedure, an adversarial game, and a collaborative game into one training scheme. The adversarial game concentrates the true data distribution, and the collaborative game minimizes the distance between real samples and generated samples in both the original space and the latent space. As a result, the proposed model delivers a highly controllable generator, and a disentangled representation. Benefiting from the separate modeling of style and content, our model can generate human fidelity speech that satisfies the desired style conditions. Our model achieves start-of-the-art results across multiple tasks, including style transfer (content and style swapping), emotion modeling, and identity transfer (fitting a new speaker's voice).",
+    "keywords": [
+      "Text-To-Speech synthesis",
+      "GANs"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ByzcS3AcYX"
+  },
+  "review_fields": {
+    "review": "This paper proposes to use a generative adversarial network to model speaking style in end-to-end TTS. The paper shows the effectiveness of the proposed method compared with Takotron2 and other variants of end-to-end TTS with intensive experimental verifications. The proposed method of using adversarial and collaborative games is also quite unique. The experimental part of the paper is well written, but the formulation part is difficult to follow. Also, the method seems to be very complicated, and I’m concerning about the reproducibility of the method only with the description in Section 3.\n\nComments\n- Page 2, line 2: x _{aud} ^{+} -> x _{aud} ^{-} (?)\n- Section 2: $T$ is used for audio and the number of words."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "bjPPypbLre",
+  "reviewer": "o774",
+  "paper": {
+    "title": "Making Substitute Models More Bayesian Can Enhance Transferability of Adversarial Examples",
+    "authors": [
+      "Qizhang Li",
+      "Yiwen Guo",
+      "Wangmeng Zuo",
+      "Hao Chen"
+    ],
+    "abstract": "The transferability of adversarial examples across deep neural networks (DNNs) is the crux of many black-box attacks. Many prior efforts have been devoted to improving the transferability via increasing the diversity in inputs of some substitute models. In this paper, by contrast, we opt for the diversity in substitute models and advocate to attack a Bayesian model for achieving desirable transferability. Deriving from the Bayesian formulation, we develop a principled strategy for possible finetuning, which can be combined with many off-the-shelf Gaussian posterior approximations over DNN parameters. Extensive experiments have been conducted to verify the effectiveness of our method, on common benchmark datasets, and the results demonstrate that our method outperforms recent state-of-the-arts by large margins (roughly 19% absolute increase in average attack success rate on ImageNet), and, by combining with these recent methods, further performance gain can be obtained. Our code: https://github.com/qizhangli/MoreBayesian-attack.",
+    "keywords": [
+      "Adversarial Examples",
+      "Black-box Attacks",
+      "Adversarial Transferability"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=bjPPypbLre"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors consider the problem of crafting adversarial attacks that are transferable across different deep neural networks architectures (DNNs). In order to solve this problem the authors propose to craft the attacks on Bayesian neural networks (BNNs) trained with Gaussian posterior approximations. On a set of experiments on Cifar-10 and ImageNet the authors show that their approach outperforms state-of-the-art methods.",
+    "strength_and_weaknesses": "Strengths\n\n- The main idea of the paper, which is to use BNNs to obtain transferable adversarial attacks, is clear and intuitive\n\n- Experimental results are convincing and show that the proposed method outperforms competitive algorithms\n\nWeaknesses\n\n- A recent paper [Gubri et al (2022a)] also explored BNNs to obtain transferable attacks. While the methods in this paper seem to obtain better empirical results, the results of this paper feel incremental compared to [Gubri et al (2022a)]\n\n- Section 3 and 4 are often confusing and contain some inaccuracies. In particular:\n\n-- After Eqn 1, p(y | x,w) is the likelihood and not the predictive distribution.\n\n-- In Section 3, experiments are mixed with the explanation of the methods and this creates confusion. Furthermore, in this Section the authors present adversarial attacks for BNNs assuming that the posterior is an isotropic Gaussian. However, for basically all approximate posterior inference methods commonly employed for BNNs, the posterior will in general never be an isotropic Gaussian. In view of this, I would re-organise the Section presenting the method for a general Gaussian posterior.\n\n-- L is Eqn 3 is not defined (I guess it is the loss, but please say it explicitly)\n\n-- In Section 4 the description of the experimental setting takes almost one page. To improve readability I would move some of the details (especially those about the details of the methods the authors compare against) in the appendix. \n\n- Something that is not clear to me is why the authors need to develop a new method to attack BNNs, instead of using methods already available in the literature, see e.g. [1,2,3]. This should be at least discussed and motivated. Also, it is not clear how the authors are attacking BNNs trained with SWAG. Please, clarify\n\n- An important aspect that the authors should keep in mind (and discuss) is that BNNs are known to be more robust to adversarial attacks compared to standard neural networks [4] (depending on the approximate posterior method employed). As a consequence, the results of this paper seems to hint on the fact that while it may be harder to find adversarial attacks for BNNs, these may transfer more easily across different architectures.\n\n- Why in the experiments do you need to use a bigger $\\epsilon$ for ImageNet than for Cifar-10? This is counterintuitive for me  \n\n\n[1] Liu, Xuanqing, et al. \"Adv-BNN: Improved Adversarial Defense through Robust Bayesian Neural Network.\" International Conference on Learning Representations. 2018.\n\n[2] Yuan, Matthew, et al. \"Gradient-Free Adversarial Attacks for Bayesian Neural Networks.\" Third Symposium on Advances in Approximate Bayesian Inference. 2020.\n\n[3] Carbone, Ginevra, et al. \"Robustness of bayesian neural networks to gradient-based attacks.\" Advances in Neural Information Processing Systems 33 (2020): 15602-15613.",
+    "clarity,_quality,_novelty_and_reproducibility": "The idea of using BNNs to craft transferable adversarial attacks is not completely original and novel. The quality and clarity of the paper could be improved (see Strength and Weaknesses Section). Enough details are given in the paper to reproduce the results.",
+    "summary_of_the_review": "The paper presents an interesting empirical idea with encouraging experimental results. The quality of the paper is hindered by the clarity of the writing, some inaccuracies, and missing discussion and justification about the methods used to train and attack a BNN.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 5,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

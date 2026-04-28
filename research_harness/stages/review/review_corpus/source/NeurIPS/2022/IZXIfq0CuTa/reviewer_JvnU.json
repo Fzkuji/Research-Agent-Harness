@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "IZXIfq0CuTa",
+  "reviewer": "JvnU",
+  "paper": {
+    "title": "Highly Parallel Deep Ensemble Learning",
+    "authors": [
+      "Xiao-Yang Liu",
+      "Zeliang Zhang",
+      "Xiaodong Wang"
+    ],
+    "abstract": "In this paper, we propose a novel highly parallel deep ensemble learning, which leads to highly compact and  parallel deep neural networks. The main idea is to first represent the data in tensor form, apply a linear transform along certain dimension and split the transformed data into different independent spectral data sets; then the matrix product in conventional neural networks is replaced by tensor product, which in effect imposes certain transformed-induced structure on the original weight matrices, e.g., a block-circulant structure.  The key feature of the proposed spectral tensor network is that it consists of parallel branches with each branch being an independent neural network trained using one spectral subset of the training data. Besides, the joint data/model parallel amiable for GPU implementation. The outputs of the parallel branches, which are trained on different independent spectral, are combined for ensemble learning to produce an overall network with substantially stronger generalization capability than that of those parallel branches. Moreover, benefiting from the reducing size of inputs,  the proposed spectral tensor network exhibits an inherent network compression, and as a result, reduction in computation complexity, which leads to the acceleration of training process.  The high parallelism from the massive independent operations of the parallel spectral subnetworks enable a further acceleration  in training and inference process. We evaluate the proposed spectral tensor networks on the MNIST, CIFAR-10 and ImageNet data sets, to highlight that they simultaneously achieve network compression, reduction in computation and parallel speedup.",
+    "keywords": [
+      "parallel",
+      "deep ensemble learning",
+      "spectral tensor"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=IZXIfq0CuTa"
+  },
+  "review_fields": {
+    "comment": "Thank you for providing the response. The reviewer appreciates the added new results. However, the concerns are not addressed. In particular,\n\n(1) The discussion with respect to existing parallel training and sparse training is still largely inadequate. For example, MoE models also let each expert learn different data, and the exact data distribution is decided by a routing function, which has many proposed strategies, ranging from random, data-aware hashing, and many more [1]. \n\n(2)The reported results are not sufficient to make conclusions. As can be seen, the proposed method leads to faster training speed and smaller model size, but also much worse accuracy (e.g., >4 points drop in ResNet). In the reviewer's personal experience, if one directly trains a smaller ResNet (the authors did not say which ResNet was used as the baseline given that there were many ResNet variants), the accuracy drop might be smaller than the one from ResNet-Spectral. To be more convincing, it would be better to include results of variants of ResNet with different sizes, such as ResNet-18, ResNet-34, ResNet-50, ResNet-101, and draw Pareto curves to see where ResNet-Spectral fits. \n\n[1] BASE Layers: Simplifying Training of Large, Sparse Models, https://arxiv.org/pdf/2103.16716.pdf"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

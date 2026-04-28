@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "AHhDpMMXtf",
+  "reviewer": "Yag6",
+  "paper": {
+    "title": "Understanding and Improving Noisy Embedding Techniques in Instruction Finetuning",
+    "authors": [
+      "Abhay Yadav"
+    ],
+    "abstract": "Recent advancements in instructional fine-tuning have injected noise into embeddings, with NEFTune (Jain et al., 2024) setting benchmarks using uniform noise. Despite NEFTune’s empirical findings that uniform noise outperforms Gaussian noise, the reasons for this remain unclear. This paper aims to clarify this by offering a thorough analysis, both theoretical and empirical, indicating comparable performance among these noise types. Additionally, we introduce a new fine-tuning method for language models, utilizing symmetric noise in embeddings. This method aims to enhance the model’s function by more stringently regulating its local curvature, demonstrating superior performance over the current method, NEFTune. When fine-tuning the LLaMA-2-7B model using Alpaca, standard techniques yield a 29.79% score on AlpacaEval. However, our approach, SymNoise, increases this score significantly to 69.04%, using symmetric noisy embeddings. This is a 6.7% improvement over the state-of-the-art method, NEFTune (64.69%). Furthermore, when tested on various models and stronger baseline instruction datasets, such as Evol-Instruct, ShareGPT, OpenPlatypus, SymNoise consistently outperforms NEFTune. The current literature, including NEFTune, has underscored the importance of more in-depth research into the application of noise-based strategies in the fine-tuning of language models. Our approach, SymNoise, is another significant step towards this direction, showing notable improvement over the existing state-of-the-art method.",
+    "keywords": [
+      "Instruction Finetuning",
+      "LLM",
+      "Domain Adaptation",
+      "Multi-Task Learning",
+      "Language Models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=AHhDpMMXtf"
+  },
+  "review_fields": {
+    "summary": "This paper revisits noise injection strategies for instruction fine-tuning of large language models. It offers both theoretical and empirical insights into why NEFTune’s uniform noise works, showing that when scaled properly, Gaussian and uniform noise perform similarly. Building on this, the authors introduce SymNoise, a novel technique that uses symmetric Bernoulli noise to regularize local curvature. SymNoise leads to consistent performance gains across datasets like Alpaca, Evol-Instruct, OpenPlatypus, and ShareGPT. Compared to NEFTune, SymNoise improves AlpacaEval win rates by up to 6.7%, and yields similar or slightly better performance on other language modeling benchmarks.",
+    "reasons_to_accept": "- The theoretical grounding that Gaussian, uniform, and Bernoulli noise behave similarly in high-dimensional space is carefully laid out and empirically validated.\n- The introduction of SymNoise is intuitive, easy to implement, and effective in improving model generalization, particularly for instruction-tuned LLMs.\n- The experiments are broad and systematic. The paper covers multiple datasets, multiple models (OPT, LLaMA-1, LLaMA-2), and evaluation settings (AlpacaEval, OpenLLM Leaderboard).\n- The paper performs a detailed ablation studies that show robustness of SymNoise across different noise types and",
+    "reasons_to_reject": "- [Minor] The core innovation, SymNoise, is somewhat modest in novelty. While well-motivated and effective, it is primarily a minor extension of NEFTune with symmetric Bernoulli noise. But, it does work well, and it is simple.\n- [Minor] The presentation of Algorithm 2 (SymNoise) could benefit from more explanation or illustrative examples. The double-noise step may confuse readers unfamiliar with this type of regularization.\n\nTypos:\n- \"langudage\" should be \"language.\""
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 82,
+    "mixed_pct": 0,
+    "human_pct": 18,
+    "verdict": "We are highly confident this text was originally AI, but rewritten by AI or a human",
+    "confidence": "highly",
+    "chars": 1086,
+    "words": 153,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/aededbde-4851-4b11-960b-eb82fe2fd16c",
+    "error": null,
+    "scored_chars": 1086
+  }
+}

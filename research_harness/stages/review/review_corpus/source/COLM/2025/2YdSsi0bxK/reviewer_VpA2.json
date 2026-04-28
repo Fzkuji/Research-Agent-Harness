@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "2YdSsi0bxK",
+  "reviewer": "VpA2",
+  "paper": {
+    "title": "SUV: Scalable Large Language Model Copyright Compliance with Regularized Selective Unlearning",
+    "authors": [
+      "Tianyang Xu",
+      "Xiaoze Liu",
+      "Feijie Wu",
+      "Xiaoqian Wang",
+      "Jing Gao"
+    ],
+    "abstract": "Large Language Models (LLMs) have transformed natural language processing by learning from massive datasets, yet this rapid progress has also drawn legal scrutiny, as the ability to unintentionally generate copyrighted content has already prompted several prominent lawsuits. In this work, we introduce SUV (Selective Unlearning for Verbatim data), a selective unlearning framework designed to prevent LLM from memorizing copyrighted content while preserving its overall utility. In detail, the proposed method constructs a dataset that captures instances of copyrighted infringement cases by the targeted LLM. With the dataset, we unlearn the content from the LLM by means of Direct Preference Optimization (DPO), which replaces the verbatim copyrighted content with plausible and coherent alternatives. Since DPO may hinder the LLM’s performance in other unrelated tasks, we integrate gradient projection and Fisher information regularization to mitigate the degradation. We validate our approach using a large-scale dataset of 500 famous books (predominantly copyrighted works) and demonstrate that SUV significantly reduces verbatim memorization with negligible impact on the performance on unrelated tasks. Extensive experiments on both our dataset and public benchmarks confirm the scalability and efficacy of our approach, offering a promising solution for mitigating copyright risks in real-world LLM applications.",
+    "keywords": [
+      "LLMs; Calibration; Copyright; Unlearning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=2YdSsi0bxK"
+  },
+  "review_fields": {
+    "summary": "This paper introduces SUV, a framework designed to prevent large language models (LLMs) from memorizing and reproducing copyrighted content while preserving their overall utility. The authors identify key limitations in existing copyright compliance approaches, noting that current unlearning methods either significantly degrade model performance or fail to scale to large datasets. Their framework comprises three stages: Dataset Construction, Regularized Training, and Regularization Combination. The authors validate their approach using a large-scale dataset of 500 famous books. They demonstrate that SUV effectively reduces verbatim reproduction of copyrighted content while maintaining performance on benchmark tasks like MMLU and CommonsenseQA.",
+    "reasons_to_accept": "- The paper introduces a selective approach to copyright compliance that differs from prior work by targeting only problematic segments responsible for verbatim memorization rather than broadly removing knowledge.\n- The dual variant approach (SUV-AS and SUV-TV) is innovative, offering tailored solutions depending on whether preserving utility or maximizing copyright protection is prioritized.",
+    "reasons_to_reject": "- The process for selecting the 500 books for CBP-500 is not sufficiently explained. The authors mention \"famous books (predominantly copyrighted works),\" (Line#276) but don't specify the selection criteria, potential biases in the corpus, or whether they verified if these books were actually in the LLM's training data.\n- The paper doesn't evaluate the quality of generated counterfactuals beyond ROUGE-L scores. A human evaluation of the coherence, creativity, and contextual appropriateness of these generated alternatives would provide more insight into the real-world applicability of the approach.",
+    "questions_to_authors": "1. Could you provide more details about the selection criteria for the CBP-500 dataset? Specifically, how did you ensure these books were actually in the training data of the LLM being used?\n2. Your experiments focus exclusively on Llama 3.1-8B. Have you tested SUV on other model architectures or sizes? How would you expect the approach to perform on models with different memorization characteristics as larger models tend to memorize more? Is SUV expected to remain stable or effective in the context of stronger memorization?\n3. What level of similarity reduction would be considered sufficient to avoid copyright infringement? \n4. The paper presents two variants (SUV-AS and SUV-TV) with different trade-offs. Could you provide guidance on how practitioners should choose between SUV-AS and SUV-TV?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 2,
+    "mixed_pct": 73,
+    "human_pct": 25,
+    "verdict": "We are moderately confident this text human written and polished with AI",
+    "confidence": "moderately",
+    "chars": 1807,
+    "words": 263,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0e015fc1-1ce8-4c78-85e7-308b57a9035e",
+    "error": null,
+    "scored_chars": 1807
+  }
+}

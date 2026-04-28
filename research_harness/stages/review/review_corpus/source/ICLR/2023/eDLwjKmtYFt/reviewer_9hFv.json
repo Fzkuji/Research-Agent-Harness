@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "eDLwjKmtYFt",
+  "reviewer": "9hFv",
+  "paper": {
+    "title": "EquiMod: An Equivariance Module to Improve Visual Instance Discrimination",
+    "authors": [
+      "Alexandre DEVILLERS",
+      "Mathieu Lefort"
+    ],
+    "abstract": "Recent self-supervised visual representation methods are closing the gap with supervised learning performance. Most of these successful methods rely on maximizing the similarity between embeddings of related synthetic inputs created through data augmentations. This can be seen as a task that encourages embeddings to leave out factors modified by these augmentations, i.e. to be invariant to them. However, this only considers one side of the trade-off in the choice of the augmentations: they need to strongly modify the images to avoid simple solution shortcut learning (e.g. using only color histograms), but on the other hand, augmentations-related information may be lacking in the representations for some downstream tasks (e.g. literature shows that color is important for bird and flower classification). Few recent works proposed to mitigate this problem of using only an invariance task by exploring some form of equivariance to augmentations. This has been performed by learning additional embeddings space(s), where some augmentation(s) cause embeddings to differ, yet in a non-controlled way. In this work, we introduce EquiMod a generic equivariance module that structures the learned latent space, in the sense that our module learns to predict the displacement in the embedding space caused by the augmentations. We show that applying that module to state-of-the-art invariance models, such as BYOL and SimCLR, increases the performances on the usual CIFAR10 and ImageNet datasets. Moreover, while our model could collapse to a trivial equivariance, i.e. invariance, we observe that it instead automatically learns to keep some augmentations-related information beneficial to the representations.",
+    "keywords": [
+      "Representation learning",
+      "Self-supervised learning",
+      "Contrastive learning",
+      "Equivariance"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=eDLwjKmtYFt"
+  },
+  "review_fields": {
+    "comment": "Thanks to the authors' responses, which addressed some of the concerns. However, there are still some issues not well addressed, mainly about the claims and statements lacking convincing justification. The proposed method is based on several claims and assumptions but they are not backed up with convincing justifications. In the responses, the authors tried to explain some of them, which is good to see, but still not providing either theoretically or experimentally convincing justifications to support them. For example, the joint optimization of the invariance and equivariance, the learnable transformation together with the claimed equivariance, and the proposed equivariance metrics, to name a few. The insufficient experiment is another weakness of this paper. It is understandable of the authors-mentioned access to limited computational resources, but the claimed conclusion needs to be backed up at least by sufficient experimental validations, if not theoretically.\n\nAs a result, this could be a good work, but the paper in its current form still prevents me from recommending a clear \"accept\" for ICLR and the general readers. But I have to say the rebuttal did address some of the issues and I would increase my score a bit if there is one between the 'borderline' and 'reject'. I would suggest the authors revise and improve the paper to make it stronger and consider re-submit to a future venue."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

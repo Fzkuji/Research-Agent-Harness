@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2025,
+  "forum_id": "lClK4uBxSG",
+  "reviewer": "z8ND",
+  "paper": {
+    "title": "ModHiFi: Identifying High Fidelity predictive components for Model Modification",
+    "authors": [
+      "Dhruva Kashyap",
+      "Chaitanya Murti",
+      "Pranav K Nayak",
+      "Tanay Narshana",
+      "Chiranjib Bhattacharyya"
+    ],
+    "abstract": "Open weight models, which are ubiquitous, rarely provide access to their training data or loss function. This makes modifying such models for tasks such as pruning or unlearning, which are constrained by this unavailability, an active area of research. Existing techniques typically require gradients or ground-truth labels, rendering them infeasible in settings with limited computational resources.\nIn this work, we investigate the fundamental question of identifying components that are critical to the model's predictive performance, without access to either gradients or the loss function, and with only distributional access such as synthetic data. \nWe theoretically demonstrate that the global error is linearly bounded by local reconstruction errors for Lipschitz-continuous networks such as CNNs and well-trained Transformers (which, contrary to existing literature, we find exhibit Lipschitz continuity).\nThis motivates using the locally reconstructive behavior of component subsets to quantify their global importance, via a metric that we term *Subset Fidelity*. \nIn the uncorrelated features setting, selecting individual components based on their Subset Fidelity scores is optimal, which we utilize to propose **ModHiFi**, an algorithm for model modification that requires neither training data nor access to a loss function. \n**ModHiFi-P**, for structured pruning, achieves an 11\\% speedup over the current state of the art on ImageNet models and competitive performance on language models. **ModHiFi-U**, for classwise unlearning, achieves complete unlearning on CIFAR-10 without fine-tuning and demonstrates competitive performance on Swin Transformers.",
+    "keywords": [
+      "Pruning",
+      "Machine Unlearning"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=lClK4uBxSG"
+  },
+  "review_fields": {
+    "summary": "This paper presents a new theoretical result bounding the global impact of removing a component from the neural network (in terms of how it affects the loss) with respect to its local impact (the change to the output of that specific component, such as a convolutional filter). This result depends on the neural network being Lipschitz continuous to start with. When that is the case, this result can be used to make it more manageable to perform structured pruning or classwise unlearning. In the first case, we would look for components with little effect if removed. In the second case, we would look for components that mostly affect performance in the class to be unlearned if removed.",
+    "strengths_and_weaknesses": "The authors make an interesting case by first presenting general theoretical results, refining them in a usable way, and then applying those results to practical problems. That makes the approach sound and reasonable. \n\nWith that said, I would have appreciated a little more intuition about the results, since I am not in a position to fully vouch for the claims and proofs. Moreover, some parts of the development are not entirely clear, and some of the experimental results are difficult to understand. I go in more detail about those issues in Questions.",
+    "questions": "1) How do you characterize a well-trained model?\n\n2) Where is the evidence claimed in Lines 49-51 that transformers are Lipschitz continuous?\n\n3) There are many other approaches to structured pruning without access to the data or loss function that also measure the impact of components, such as [1-3]. Can you please contextualize your work with those and broaden your literature review accordingly?\n\n[1] https://proceedings.neurips.cc/paper/2020/file/46a4378f835dc8040c8057beb6a2da52-Paper.pdf\n\n[2] https://proceedings.neurips.cc/paper_files/paper/2021/file/e35d7a5768c4b85b4780384d55dc3620-Paper.pdf\n\n[3] https://ieeexplore.ieee.org/document/9878423\n\n4) How large can be the constants from Theorem 3.1? I am wondering if, either in theory or practice, these constants are sufficiently small to validate the approach.\n\n5) There is a certain confusion about complexity classes in the paper: you talk about computing optimal subsets being NP-complete in Line 59, then say that this is a binary quadratic optimization problem in Line 168, mentioned to be NP-complete in Line 169, and then seem to refer again to this same problem being NP hard in Line 193. To be clear, optimization problems are typically NP hard. So my impression is that all other mentions are wrong. Are all of these mentions of the same problem? What is the complexity class of this problem?\n\n6) Related to the item above, can you please rephrase footnote 2 in a clear and more detailed way?\n\n7) What is the intuition for Theorem 3.7?\n\n8) What do you mean by \"the compensation term\" in Line 228? Can you please rephrase that whole sentence for clarity?\n\n9) When you talk about greedy selection in Lines 235-237, do you mean sorting the components from smallest to largest fidelity? That should be made explicit.\n\n10) In Table 1 (which is actually two tables), what is the difference between the two rows for DFPC and Ours on ImageNet? Please make that clear in the paper.\n\n11) For the same table as before, what exactly do you mean with columns CPU and GPU?\n\n12) Across all tables, are the results in each row based on a single model or are they a summary of the results over multiple models with different random seeds?\n\n13) I cannot understand Table 2. Can you please explain it?\n\n14) Please consider these minor comments on the writing:\n- Use \"Lipschitz continuous\" rather than \"Lipschitz\" alone, as that is not very formal and may confuse the reader if read out of context.\n- Replace the word \"tasks\" with something like \"purposes\" in the abstract. Task may sound like the application of the neural network, such as classification for a specific dataset.\n- Separate text from the reference citations with a space. If you do not want the citations in a separate line, use something like \"x~\\cite{y}\".\n- What is \"F\" in Line 259?",
+    "limitations": "There is a brief and reasonable acknowledgement about limitations at the end.",
+    "final_justification": "I cannot vouch for the correctness of the proofs, but the idea seems sound and I am satisfied with how the authors addressed the points raised."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "quality": 3,
+    "clarity": 2,
+    "significance": 3,
+    "originality": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:25:42Z"
+  }
+}

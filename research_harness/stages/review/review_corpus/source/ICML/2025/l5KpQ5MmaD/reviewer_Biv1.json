@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "l5KpQ5MmaD",
+  "reviewer": "Biv1",
+  "paper": {
+    "title": "Scalable Non-Equivariant 3D Molecule Generation via Rotational Alignment",
+    "authors": [
+      "Yuhui Ding",
+      "Thomas Hofmann"
+    ],
+    "abstract": "Equivariant diffusion models have achieved impressive performance in 3D molecule generation. These models incorporate Euclidean symmetries of 3D molecules by utilizing an SE(3)-equivariant denoising network. However, specialized equivariant architectures limit the scalability and efficiency of diffusion models. In this paper, we propose an approach that relaxes such equivariance constraints. Specifically, our approach learns a sample-dependent SO(3) transformation for each molecule to construct an aligned latent space. A non-equivariant diffusion model is then trained over the aligned representations. Experimental results demonstrate that our approach performs significantly better than previously reported non-equivariant models. It yields sample quality comparable to state-of-the-art equivariant diffusion models and offers improved training and sampling efficiency. Our code is available at: https://github.com/skeletondyh/RADM",
+    "keywords": [
+      "Non-equivariant diffusion",
+      "3D molecule generation"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=l5KpQ5MmaD"
+  },
+  "review_fields": {
+    "summary": "This paper proposes learning a roto-aligned latent space for 3d molecule generation. The alignment is achieved through learning sample-wise rotation with auto-encoder. More specifically, ALDM adopts an equivariant encoder and a non-equivariant decoder, largely alleviating the constraints in architecture design, making Transformers potential for large-scale pretraining of small molecules. Experiments on QM9 and GEOM-DRUG shows ALDM performs better than non-equivariant baseline, and on par with SOTA equivariant models.",
+    "claims_and_evidence": "Equivariance constraints may not be necessary for molecule generation.\nSuccessfully supported.",
+    "experimental_designs_or_analyses": "1. Unconditional generation\nAblation of decoder choice is interesting, and it shows DiT's advantage over simple EGNN. Overall comparison is decent, ALDM achieves competitive results with GeoLDM. \n2. Conditional generation\nThe results look normal. Even though property-conditioned generation is not so useful.",
+    "essential_references_not_discussed": "There are some stronger baselines, yet the reviewer believes the results are enough to support main claims.",
+    "other_strengths_and_weaknesses": "Strengths\n1. The idea is simple, but elegant and effective, making non-equivariant Transformer more applicable to large scale pretraining of molecules. The scaling law and emergent ability of Transformer have already been proved in other domains.\n2. Generally good results, making the claim convincing.\nWeakness\n1. Lack of stronger baselines.\n2. Lack of analysis of learned alignment (the sample-wise rotation) and latent representation. The reviewer is quite curious about: 1. Does the learned rotation have some physical or chemical insights? Is there a natural canonical orientation for 3d molecules? 2. Does the VAE really learn chemical/structural semantics in latent space? More analysis or visualization would be insightful."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

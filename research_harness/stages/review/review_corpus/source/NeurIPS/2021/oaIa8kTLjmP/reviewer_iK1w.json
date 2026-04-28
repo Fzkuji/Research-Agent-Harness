@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "oaIa8kTLjmP",
+  "reviewer": "iK1w",
+  "paper": {
+    "title": "Asymptotics of the Bootstrap via Stability with Applications to Inference with Model Selection",
+    "authors": [
+      "Morgane Austern",
+      "Vasilis Syrgkanis"
+    ],
+    "abstract": "One of the most commonly used methods for forming confidence intervals is the empirical bootstrap, which is especially expedient when the limiting distribution of the estimator is unknown. However, despite its ubiquitous role in machine learning, its theoretical properties are still not well understood. Recent developments in probability have provided new tools to study the bootstrap method. However, they have been applied only to specific applications and contexts, and it is unclear whether these techniques are applicable to the understanding of the consistency of the bootstrap in machine learning pipelines. In this paper, we derive general stability conditions under which the empirical bootstrap estimator is consistent and quantify the speed of convergence. Moreover, we propose alternative ways to use the bootstrap method to build confidence intervals with coverage guarantees. Finally, we illustrate the generality and tightness of our results by examples of interest for machine learning including for two-sample kernel tests after kernel selection and the empirical risk of stacked estimators.",
+    "keywords": [
+      "bootstrap",
+      "asymptotics",
+      "confidence intervals",
+      "model selection"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=oaIa8kTLjmP"
+  },
+  "review_fields": {
+    "summary": "---------------------\n---------------------\n**Update after discussion with authors and other reviewers**\n\nThank you to the authors and other reviewers for engaging so much in the discussion period. I think the discussion has made clear that the  authors could significantly strengthen the paper by drawing connections between their proofs and others in the literature. I also think there should also be a discussion on the limitations of the example in Section 4, as the authors are not analyzing a standard kernel test (although, as they note, they are analyzing a statistic that is highly related to a common kernel test). I think this makes the results of Section 4 a little weaker. This, combined with XTTq's points about the relation to the existing literature, have led me to decrease my score somewhat. I'm still in favor of an accept because while the paper could be improved by restructuring, I think it still presents practically useful theory as-is. If the paper is accepted, I think the authors should at the very least include some discussion surrounding their discussions with XTTq.\n\n---------------------\n---------------------\n\n\nThis is a theoretical paper which aims to extend the reach of consistency results for the classical bootstrap. The authors prove some general theory about the bootstrap and then show that this theory can be specialized to prove consistency of the bootstrap for two sample kernel hypothesis tests and stacked ensemble estimators. To my knowledge, these results are novel in that previous bootstrap theory does not apply to them, and these results seem useful to the machine learning community. Besides solid results, I think this paper has a few nice strengths:\n\n1.\tThe paper is well written\n2.\tThe literature review is, to my knowledge, very thorough (which is not easy to do for a topic with as much background as the bootstrap).\n3.\tThe authors are careful to call out the flaws of their theory throughout the paper.\n4.\tThe authors try to explore the necessity of their assumptions with the use of counterexamples\n\nA downside is that all of this takes a *lot* of room – the appendix is 45 pages of additional results, examples, counterexamples, and proofs. I’ve tried to go through this as carefully as possible, but I have not been able to carefully check all the proofs. Overall, I think this is a solid paper, and my criticisms listed below are not major.",
+    "main_review": "I have three larger comments that I think could improve the paper, listed as (A), (B) (C) below:\n\n(A) I think it would be good to include some more discussion about what kinds of models in machine learning the paper does / does not extend the reach of bootstrap consistency proofs to. The authors give some generic theory and then show it applies to two specific examples (kernel hypothesis testing and stacked ensembled estimators). Is there some underlying theme between the proofs for these two examples? Can the authors conjecture about what kinds of other examples their proof techniques might work well for? Conversely, it seems that the authors do not cover *all* problems of interest in machine learning. My understanding is that for simple models like Poisson regression with covariates growing unbounded with n (that is, a GLM with unbounded link function with unbounded derivatives), existing common proof techniques for the consistency of the bootstrap (like linearization) are not known to apply. And it seems like the authors’ Assumption 1 would be violated in this case as well, so their theory will not apply to this case either. I don’t mean this as a criticism -- the authors definitely don’t try to sell their work as applying to everything. But it would be good to call out what’s still missing for the sake of future research.\n\n(B) The authors put a lot of discussion up front about their use of particular proof techniques backing their new results (“Chaterjee’s generalized Lindenberg approach and a smart path interpolation technique”). This sounds interesting, and I was hoping to learn more in the main text! I wonder if the authors could summarize how these techniques fuel their results in the main text. \n\n(C) I wonder if section 5, which is about bootstrapping ensembled estimators, could be reworked to include more discussion and fewer mathematical details, e.g. by making Prop 3 an informal statement and pointing to the appendix for a formal statement.  I say this because I think there are a few points in Section 5 that could use expanding on:\n1. The authors analyze the bootstrapping properties of what seems like a non-standard ensemble estimator. In particular, they consider the ensemble of estimators indexed by 1,…,p, where the ith estimator is fit on datapoints x_1, …, x_i. This seems like a very particular estimator. To be fair, the authors do note “[this specific ensemble] allows us to show that the distribution of the ensemble’s risk can be estimated with the bootstrap”. But it would be great to understand what properties of this estimator are required for the authors’ analysis vs required for the bootstrap to converge (i.e. did the authors choose a somewhat non-standard ensemble because the bootstrap doesn’t converge otherwise or because their analysis won’t go through otherwise?). \n2. What is \\beta_n doing here? Is it a hyperparameter again? It seems like \\beta_n is required to go to infinity, which in turn seems like it causes the ensembled estimator \\hat\\Theta_n to collapse to the best-performing \\hat\\theta^k_n. Is this correct? If so, why is this collapse a desirable thing?\n3. Are the base estimators (the \\hat\\theta^k_n) not required to satisfy Assumption 1? This seemed like a pretty important part of previous theory, so how is it that we are stacking Assumption 1-violating estimators to get a bootstrap-consistent estimator?\n4. Relatedly, it would be nice to have a conclusion at the very end summarizing the main results of the paper.\n\n-------- Scattered smaller comments:\nLine 263: what is d_n’? \n\nLine 156: Notation for Lindenberg path interpolation is defined, but I don’t think this was used in the main text.\n\nLine 167: Influence functions are mentioned here but not defined.\n\nThe title of Appendix N is “Further proofs from section 3”, but not all of the results discussed here seem to be from Section 3 (e.g. there is no Example 2 in Section 3)",
+    "limitations_and_societal_impact": "The authors do not discuss societal impact in this paper, but, given its subject, I think that is appropriate."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

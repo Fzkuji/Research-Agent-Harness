@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "NWKjVzkDzg",
+  "reviewer": "zFod",
+  "paper": {
+    "title": "Scalable Meta-Learning via Mixed-Mode Differentiation",
+    "authors": [
+      "Iurii Kemaev",
+      "Dan A. Calian",
+      "Luisa M Zintgraf",
+      "Gregory Farquhar",
+      "Hado van Hasselt"
+    ],
+    "abstract": "Gradient-based bilevel optimisation is a powerful technique with applications in hyperparameter optimisation, task adaptation, algorithm discovery, meta-learning more broadly, and beyond. It often requires differentiating through the gradient-based optimisation process itself, leading to \"gradient-of-a-gradient\" calculations with computationally expensive second-order and mixed derivatives. While modern automatic differentiation libraries provide a convenient way to write programs for calculating these derivatives, they oftentimes cannot fully exploit the specific structure of these problems out-of-the-box, leading to suboptimal performance. In this paper, we analyse such cases and propose Mixed-Flow Meta-Gradients, or MixFlow-MG -- a practical algorithm that uses mixed-mode differentiation to construct more efficient and scalable computational graphs yielding over 10x memory and up to 25\\% wall-clock time improvements over standard implementations in modern meta-learning setups.",
+    "keywords": [
+      "meta-learning",
+      "bilevel optimization",
+      "second-order optimization",
+      "automatic differentiation",
+      "autodiff",
+      "mixed-mode differentiation",
+      "gradient-based methods",
+      "scalable algorithms"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NWKjVzkDzg"
+  },
+  "review_fields": {
+    "summary": "This paper develops a novel efficient bi-level optimization framework, called MixFlow-MG. Based on the fact that, when computing HVPs, forward-over-reverse mode is usually much more efficient than other modes, the authors first reparameterize the update function, and replaces the usual VHP and VMP computations in the meta-gradient into HVP and MVP computations, respectively, significantly improving the computational efficiency of meta-gradient computation. The analysis show that the proposed method, combined with other techniques such as block rematerialization and inner-gradient saving, significantly reduce the memory overhead, as well as wall-clock speedups on various learning scenarios, making meta-learning feasible even on extremely large models with billions of parameters.",
+    "claims_and_evidence": "Overall, I think this paper is very strong. As a meta-learning researcher, it's really interesting and exciting to see that bi-level optimization now become scalable (up to some degree) even with LLMs. All the claims about its computational efficiency are strongly supported by clear evidence, everywhere. All the figures, from Figure 1 to Figure 7, clearly demonstrate that the proposed method dramatically reduce the memory burden and wall time, in a systematic way. I didn't find any issue regarding missing evidence for this paper.",
+    "methods_and_evaluation_criteria": "The propose method is quite simple - just reparameterize the update function, and switch the order of computation to change VHP and VMP into more efficient HVP and MVP. \n\nHonestly, I'm not super expert in low-level implementation, so I was not aware that HVP can be more efficiently computed with the forward-over-reverse mode. While I still don't fully understand the technical details as to why this is the case, but anyway, assuming this is true, I believe the proposed method is very reasonable and is a big contribution to the meta-learning field.\n\nI don't find any specific issue regarding the evaluation criteria.",
+    "theoretical_claims": "I carefully checked the derivation of meta-gradient in Section A.2, and it is correct.",
+    "experimental_designs_or_analyses": "Again, while I'm not an expert in low-level implementation and relevant terminologies, I can clearly see that the analysis are systematic and well controlled. I don't find any relevant issues.",
+    "relation_to_broader_scientific_literature": "This paper makes meta-learning scalable, so it can be a big contribution to the LLM and other relevant fields as well, i.e., all the area where meta-learning was infeasible due to the excessive memory issue.",
+    "essential_references_not_discussed": "I didn't find any missing references.",
+    "other_strengths_and_weaknesses": "I don't see any weaknesses of this paper.\n\nFor the strengths, see above.",
+    "other_comments_or_suggestions": "Just in case, what if you add a simple experiment (in the appendix) showing that the proposed algorithm produces the exact meta-gradient? I don't think it's essential, but it might be helpful to make readers more strongly believe the correctness of the proposed algorithm.",
+    "questions_for_authors": "I have a few simple questions. I'm open to further increase my score if those are resolved.\n\n1. I didn't fully understand how precisely the backprop is done with your algorithm. The one-step unrolling equation in Eq.(6) is for deriving the FMD algorithm, as far as I know (I might be wrong). But it seems that the proposed algorithm seems to be a kind of backprop algorithm. Could you elaborate on this? It's not entirely clear in Algorithm 1 and 2. Specifically, what is \"fwdrev_grad\"? Is it something you implemented, or an existing API? (I'm not familiar with JAX, so was not fully understand A.4)\n\n2. Regarding the proposed reparameterization, I didn't know that the publicly available auto-diff frameworks implements backprop in such a way (because there are extra terms in Eq.(6) compared to when we do not reparameterize). I thought they follow the original parameterization with $\\Phi$ (and in this case, the proposed trick cannot be applied as the blue and red terms in Eq.(6) disappear). Could you provide more details or references about this? \n\n3. It seems that most of the experiments assume rather short inner-learning trajectory, like $T \\in \\{2,4,8\\}$. Could you show the efficiency of your method when $T$ is very large, like $T=10^3$ or $10^4$? \n\n4. I'm a bit confused with the experiment in Section 3.2. Why is it a bi-level optimization problem? Could you elaborate more? What does it mean by controlling $M$?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

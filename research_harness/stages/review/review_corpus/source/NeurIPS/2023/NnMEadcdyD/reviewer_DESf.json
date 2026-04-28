@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "NnMEadcdyD",
+  "reviewer": "DESf",
+  "paper": {
+    "title": "Understanding Diffusion Objectives as the ELBO with Simple Data Augmentation",
+    "authors": [
+      "Diederik P Kingma",
+      "Ruiqi Gao"
+    ],
+    "abstract": "To achieve the highest perceptual quality, state-of-the-art diffusion models are optimized with objectives that typically look very different from the maximum likelihood and the Evidence Lower Bound (ELBO) objectives. In this work, we reveal that diffusion model objectives are actually closely related to the ELBO.\n\nSpecifically, we show that all commonly used diffusion model objectives equate to a weighted integral of ELBOs over different noise levels, where the weighting depends on the specific objective used. Under the condition of monotonic weighting, the connection is even closer: the diffusion objective then equals the ELBO, combined with simple data augmentation, namely Gaussian noise perturbation. We show that this condition holds for a number of state-of-the-art diffusion models. \n\nIn experiments, we explore new monotonic weightings and demonstrate their effectiveness, achieving state-of-the-art FID scores on the high-resolution ImageNet benchmark.",
+    "keywords": [
+      "Diffusion Model",
+      "Evidence Lower Bound",
+      "Maximum Likelihood"
+    ],
+    "decision": "Accept (oral)",
+    "openreview_url": "https://openreview.net/forum?id=NnMEadcdyD"
+  },
+  "review_fields": {
+    "summary": "This is a nice paper that provides a comprensive framework for diffusion objectives, giving the ELBO the driver's seat.\n\nThe paper shows that all of the axes along which diffusion objectives differ (elbo vs Ho-perceptual weighting, noise schedules, different parameterizations like x vs epsilon vs v) can all be seen under a type of weighted and importance sampled ELBO. Moreover, the paper show that the weightings that don't exactly look like the original ELBO can be made equal to it under the right data augmentation. Finally, the authors also present a few techniques for adaptive/learnable importance sampling distributions to help assemble all the aforementioned ingredients in a computationally efficient manner. Finally, the authors show conveying results for image quality for ELBO trained models, whereas people usually result to non-ELBO trained models to do this.",
+    "strengths": "I'm a big fan of papers like this since their primary aim to build solid understanding for people that already work with diffusions but that may have some doubts about how the common moving parts relate to each other (noise schedules, elbo weighting, parameterizations, etc). \n\nOn top of the above, they also present great results for ELBO trained models, whereas there is some common beliefs that non-elbo \"perceptual weighting\" (what the authors call \"reweighted losses\") are the only ones that can be used for good image quality.",
+    "weaknesses": "No comments/weaknesses.\n\nThe adaptive importance sampling also comes up in the following work:\n\nImproved Techniques for Maximum Likelihood Estimation for Diffusion ODEs https://arxiv.org/abs/2305.03935\n\nThis is completely fine since:\n- I can see how both works would arrive at this algorithmic detail independently, given that both dive deeply into related but distinct variance issues in diffusion elbos.\n- both works present a lot of additional insights and techinques beyond this\n\nI do find it appropriate to cite and discuss relationship in either case though, including possible similarities and differences, since it will really help readers of both papers.",
+    "questions": "Just a brief suggestion:\n\n- around eq 3 it would be good to mention that the f(x,t)-g^2(t) s_\\theta(x,t) form is a backward time SDE since some other authors use the g^2(T-t)s_\\theta(x,T-t) -f(x, T-t) forward time SDE.\n\n- Not necessary to address but I'm quite curious which of the invariance and change of variables bits apply for multivariate (augmented) diffusions like CLD (https://arxiv.org/abs/2112.07068), MDMs (https://arxiv.org/abs/2302.07261), PSLD (https://arxiv.org/abs/2303.01748), and FP-Diffusion (https://arxiv.org/abs/2206.10365). You can't quite take the g^2/sigma^2 weighting out of the squared error like in the scalar diffusion case, but I'm sure there should be some relevant version of your results."
+  },
+  "review_metadata": {
+    "rating": 9,
+    "confidence": 4,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:39:16Z",
+    "migrated_from_v1_at": "2026-04-27T15:39:16Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1196,
+    "words": 184,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3be91014-ad78-45a7-a23d-68394da0c37a",
+    "error": null,
+    "scored_chars": 1197
+  }
+}

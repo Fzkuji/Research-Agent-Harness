@@ -91,6 +91,17 @@ class VenueScoring:
     notes: str = ""
     """Caveats, e.g. 'overall scale changed in 2025'."""
 
+    form_fields: dict = field(default_factory=dict)
+    """Venue-specific JSON-schema property fragments to merge into the
+    reviewer schema beyond the generic score/verdict/strengths/weaknesses/
+    sub_scores/confidence. Use this to mirror fields that appear on the
+    official OpenReview form but aren't covered by the generic shape —
+    e.g. ACM MM's detailed `review` block, `fit_justification`, and
+    `best_paper_candidate`. Each value is a JSON-schema fragment plus an
+    optional `_required` boolean (default True) to mark whether the field
+    is mandatory for submission.
+    """
+
 
 # ---------------------------------------------------------------------------
 # Venue specs
@@ -421,82 +432,138 @@ CVPR = VenueScoring(
 
 ACM_MM = VenueScoring(
     name="ACM Multimedia (ACM MM)",
-    aliases=("acmmm", "acm mm", "acm_mm", "mm", "acm-mm"),
-    year_known="2025",
+    aliases=("acmmm", "acm mm", "acm_mm", "mm", "acm-mm",
+             "acmmm 2026", "acm mm 2026",
+             "acm multimedia", "acmm multimedia 2026",
+             "acm multimedia (acm mm)"),
+    year_known="2026",
     overall_dim=ScoreDim(
-        scale=(1.0, 6.0),
+        scale=(1.0, 5.0),
         meanings={
-            6.0: "Strong Accept — outstanding contribution to multimedia",
-            5.0: "Accept — solid contribution, recommend acceptance",
-            4.0: "Weak Accept — marginal accept, reasons to accept outweigh reject",
-            3.0: "Weak Reject — marginal reject, reasons to reject outweigh accept",
-            2.0: "Reject — significant issues, not ready for publication",
-            1.0: "Strong Reject — fundamental problems",
+            5.0: "Accept",
+            4.0: "Weak Accept",
+            3.0: "Borderline",
+            2.0: "Weak Reject",
+            1.0: "Reject",
         },
         description=(
-            "ACM MM uses a 1-6 overall scale. Inferred from PaperCopilot stats "
-            "(2024 reviewer averages spanned 2.5-5.5)."
+            "Rating field on the ACM MM 2026 OpenReview form (overall "
+            "recommendation). 5-point scale, no Strong Accept / Strong "
+            "Reject buckets."
         ),
     ),
     sub_dimensions={
-        "soundness": ScoreDim(
+        "fit": ScoreDim(
             scale=(1.0, 5.0),
-            meanings={5.0: "excellent", 4.0: "good", 3.0: "fair",
-                      2.0: "marginal", 1.0: "poor"},
-            description="Technical soundness of methodology and claims.",
+            meanings={
+                5.0: "Perfect match",
+                4.0: "Large audience",
+                3.0: "Relevant to part of the community",
+                2.0: "Small audience",
+                1.0: "Out-of-scope",
+            },
+            description=(
+                "How well the paper aligns with the ACM Multimedia "
+                "Topics of Interest. Reviewer must also write a "
+                "fit_justification text."
+            ),
         ),
-        "originality": ScoreDim(
+        "technical_quality": ScoreDim(
             scale=(1.0, 5.0),
-            meanings={5.0: "excellent", 4.0: "good", 3.0: "fair",
-                      2.0: "marginal", 1.0: "poor"},
-            description="Novelty of ideas / approach.",
+            meanings={
+                5.0: "Outstanding",
+                4.0: "Excellent",
+                3.0: "Good",
+                2.0: "Medium",
+                1.0: "Low",
+            },
+            description="Technical quality of the work.",
         ),
-        "significance": ScoreDim(
+        "technical_presentation": ScoreDim(
             scale=(1.0, 5.0),
-            meanings={5.0: "excellent", 4.0: "good", 3.0: "fair",
-                      2.0: "marginal", 1.0: "poor"},
-            description="Significance of contribution to multimedia research.",
-        ),
-        "clarity": ScoreDim(
-            scale=(1.0, 5.0),
-            meanings={5.0: "excellent", 4.0: "good", 3.0: "fair",
-                      2.0: "marginal", 1.0: "poor"},
-            description="Clarity of presentation, writing, figures.",
-        ),
-        "reproducibility": ScoreDim(
-            scale=(1.0, 5.0),
-            meanings={5.0: "easily reproducible", 3.0: "with difficulty",
-                      1.0: "not reproducible"},
-            optional=True,
-            description="How easily the work could be reproduced.",
+            meanings={
+                5.0: "Excellent",
+                4.0: "Good",
+                3.0: "Fair",
+                2.0: "Poor",
+                1.0: "Very poor",
+            },
+            description="Technical presentation / clarity.",
         ),
     },
     confidence_dim=ScoreDim(
-        scale=(1.0, 5.0),
-        meanings={5.0: "Expert", 3.0: "Confident", 1.0: "Outsider"},
+        scale=(1.0, 4.0),
+        meanings={
+            4.0: "Expert",
+            3.0: "Knowledgeable",
+            2.0: "Familiar",
+            1.0: "Not my area",
+        },
+        description=(
+            "Reviewer confidence — 4-point scale (no 5-point variant)."
+        ),
     ),
     accept_threshold=4.0,                  # Weak Accept and above
     secondary_threshold=None,
+    # Order matters: most-specific first. map_verdict_to_score does
+    # substring matching, so "weak accept" must be tried before "accept",
+    # otherwise "Weak Accept" catches the bare "accept" rule.
     verdict_canonical={
-        "strong_accept": ["strong accept"],
-        "accept":        ["accept"],
-        "weak_accept":   ["weak accept", "borderline accept"],
-        "weak_reject":   ["weak reject", "borderline reject"],
-        "reject":        ["reject"],
-        "strong_reject": ["strong reject"],
+        "weak_accept": ["weak accept"],
+        "weak_reject": ["weak reject"],
+        "borderline":  ["borderline"],
+        "accept":      ["accept"],
+        "reject":      ["reject"],
     },
     verdict_to_score={
-        "strong_accept": 6.0, "accept": 5.0, "weak_accept": 4.0,
-        "weak_reject": 3.0, "reject": 2.0, "strong_reject": 1.0,
+        "accept": 5.0, "weak_accept": 4.0, "borderline": 3.0,
+        "weak_reject": 2.0, "reject": 1.0,
     },
-    source_url="https://acmmm2025.org/reviewer-and-area-chair-guidelines/",
-    confidence="medium",
+    source_url="https://2026.acmmm.org/site/review-process-guidelines.html",
+    confidence="high",
     notes=(
-        "ACM MM does not publicly publish exact review form. Overall scale "
-        "(1-6) inferred from PaperCopilot statistics; sub-dimensions are "
-        "ACM standard (Soundness/Originality/Significance/Clarity/"
-        "Reproducibility). Verify against actual review form in OpenReview."
+        "Schema verified against the ACM MM 2026 OpenReview review form "
+        "(see stages/review/review_corpus/.../template.pdf in the lab share). "
+        "Required fields on the form: Strengths, Weaknesses, Review "
+        "(detailed), Fit (1-5), Fit Justification, Technical Quality (1-5), "
+        "Technical Presentation (1-5), Rating (1-5), Confidence (1-4), "
+        "Best Paper Candidate (Yes/No). The lab worksheet additionally "
+        "requires a GPTZero AI-rate report on the review prose, with the "
+        "AI rate kept under 20% — this is enforced outside the venue spec, "
+        "in the humanize/detection pipeline."
     ),
+    form_fields={
+        "review": {
+            "type": "string",
+            "minLength": 4500,
+            "maxLength": 6500,
+            "description": (
+                "REQUIRED long-prose review (the OpenReview `Review` field). "
+                "MUST be 4500-6500 chars of substantial paragraph prose, "
+                "NOT empty, NOT a single line, NOT a duplicate of the "
+                "strengths/weaknesses bullets. "
+                "Suggested structure: overall judgment → comments on Method "
+                "→ comments on Experiments → writing/reproducibility notes "
+                "→ concrete questions for the authors. 6-8 paragraphs."
+            ),
+        },
+        "fit_justification": {
+            "type": "string",
+            "description": (
+                "Brief justification for the Fit score: which ACM Multimedia "
+                "Topics of Interest the paper hits, and why the chosen "
+                "1-5 fit value is appropriate."
+            ),
+        },
+        "best_paper_candidate": {
+            "type": "boolean",
+            "description": (
+                "True iff the paper is a plausible Best Paper candidate "
+                "(`Yes` on the form). Default to False unless the paper is "
+                "clearly outstanding across Technical Quality and Fit."
+            ),
+        },
+    },
 )
 
 AAAI = VenueScoring(
@@ -1203,11 +1270,20 @@ def render_criteria_text(spec: VenueScoring) -> str:
 
 
 def build_review_schema(spec: VenueScoring,
-                        require_strengths_weaknesses: bool = True) -> dict:
+                        require_strengths_weaknesses: bool = True,
+                        exclude_fields: tuple[str, ...] = ()) -> dict:
     """Build a JSON schema for a single reviewer's submission to this venue.
 
     Used by review_paper / review_paper_grounded with call_with_schema.
     Score field is constrained to the venue's exact scale.
+
+    Args:
+        spec: venue specification.
+        require_strengths_weaknesses: include sub_scores in `required`.
+        exclude_fields: omit named fields from the resulting schema.
+            Used by the two-stage reviewer to drop the long-prose `review`
+            field from the structured tool call (it is generated separately
+            via free-form codex CLI for verbatim-template enforcement).
     """
     s_min, s_max = spec.overall_dim.scale
     sub_props = {}
@@ -1264,7 +1340,15 @@ def build_review_schema(spec: VenueScoring,
             "type": "object",
             "properties": sub_props,
             "required": list(sub_props.keys()),
-            "description": f"Per-dimension scores on {spec.name}'s sub-scales.",
+            # additionalProperties=false stops the LLM from substituting
+            # dimension names from other venues (e.g. NeurIPS-style
+            # soundness/novelty/clarity/significance on an ACM MM paper).
+            "additionalProperties": False,
+            "description": (
+                f"Per-dimension scores on {spec.name}'s sub-scales. "
+                f"Use ONLY these dimension names: {sorted(sub_props.keys())}. "
+                f"Do not substitute names from other venues."
+            ),
         }
     if spec.confidence_dim:
         c_min, c_max = spec.confidence_dim.scale
@@ -1278,6 +1362,25 @@ def build_review_schema(spec: VenueScoring,
     required = ["score", "verdict", "weaknesses", "strengths"]
     if require_strengths_weaknesses and "sub_scores" in schema_props:
         required.append("sub_scores")
+
+    # Merge venue-specific form fields (ACM MM's detailed `review`, etc).
+    # Copy each fragment so we don't mutate the venue spec across calls.
+    for fname, fragment in (spec.form_fields or {}).items():
+        if fname in exclude_fields:
+            continue
+        if not isinstance(fragment, dict):
+            continue
+        frag = dict(fragment)
+        is_required = frag.pop("_required", True)
+        schema_props[fname] = frag
+        if is_required and fname not in required:
+            required.append(fname)
+
+    # Final filter: drop excluded fields from required + properties.
+    for f in exclude_fields:
+        schema_props.pop(f, None)
+        if f in required:
+            required.remove(f)
 
     return {
         "type": "object",

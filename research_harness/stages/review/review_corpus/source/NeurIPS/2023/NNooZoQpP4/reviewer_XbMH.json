@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "NNooZoQpP4",
+  "reviewer": "XbMH",
+  "paper": {
+    "title": "To Stay or Not to Stay in the Pre-train Basin: Insights on Ensembling in Transfer Learning",
+    "authors": [
+      "Ildus Sadrtdinov",
+      "Dmitrii Pozdeev",
+      "Dmitry P. Vetrov",
+      "Ekaterina Lobacheva"
+    ],
+    "abstract": "Transfer learning and ensembling are two popular techniques for improving the performance and robustness of neural networks. \nDue to the high cost of pre-training, ensembles of models fine-tuned from a single pre-trained checkpoint are often used in practice. \nSuch models end up in the same basin of the loss landscape, which we call the pre-train basin, and thus have limited diversity. \nIn this work, we show that ensembles trained from a single pre-trained checkpoint may be improved by better exploring the pre-train basin, however, leaving the basin results in losing the benefits of transfer learning and in degradation of the ensemble quality. \nBased on the analysis of existing exploration methods, we propose a more effective modification of the Snapshot Ensembles (SSE) for transfer learning setup, StarSSE, which results in stronger ensembles and uniform model soups.",
+    "keywords": [
+      "ensembles",
+      "transfer learning",
+      "loss landscape basins",
+      "model soups"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=NNooZoQpP4"
+  },
+  "review_fields": {
+    "comment": "Thank you for your rebuttal. I am happy with the work done to address the weakensses that I noted, and I am now convinced that StarSSE provides a meaningful improvement to ensemble performance in the transfer learning setting. Likewise, I am happy with the way the authors have addresed my questions, and I find the results concerning ensemble diversity to be quite interesting in their own right, in particularly the fact that SSE/StarSSE produce ensembles that are more diverse than LocalDE. I look forwards to seeing an updated version of this paper with these results (and those discussed in your response to Reviewer rBpj), and I have updated my score."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 657,
+    "words": 110,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/8c7da578-af3c-455d-b125-078161034ee1",
+    "error": null,
+    "scored_chars": 657
+  }
+}

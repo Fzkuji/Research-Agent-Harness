@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "ryxhB3CcK7",
+  "reviewer": "3",
+  "paper": {
+    "title": "Probabilistic Neural-Symbolic Models for Interpretable Visual Question Answering",
+    "authors": [
+      "Ramakrishna Vedantam",
+      "Stefan Lee",
+      "Marcus Rohrbach",
+      "Dhruv Batra",
+      "Devi Parikh"
+    ],
+    "abstract": "We propose a new class of probabilistic neural-symbolic models for visual question answering (VQA) that provide interpretable explanations of their decision making in the form of programs, given a small annotated set of human programs. The key idea of our approach is to learn a rich latent space which effectively propagates program annotations from known questions to novel questions. We do this by formalizing prior work on VQA, called module networks (Andreas, 2016) as discrete, structured, latent variable models on the joint distribution over questions and answers given images, and devise a procedure to train the model effectively. Our results on a dataset of compositional questions about SHAPES (Andreas, 2016) show that our model generates more interpretable programs and obtains better accuracy on VQA in the low-data regime than prior work.",
+    "keywords": [
+      "Neural-symbolic models",
+      "visual question answering",
+      "reasoning",
+      "interpretability",
+      "graphical models",
+      "variational inference"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryxhB3CcK7"
+  },
+  "review_fields": {
+    "comment": "I have found section 2.1 good enough though it is more descriptive than mathematically detailed. However, comments of Rev #2 are right so I can agree with them, maybe authors could add such details in the appendix or in the remaining half page depending on how long would be the discussion.\nI still think that the document is worthy in this version. If the authors manage to add a good response to the Rev #2 comments, my current score will at least be confirmed if not increased."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

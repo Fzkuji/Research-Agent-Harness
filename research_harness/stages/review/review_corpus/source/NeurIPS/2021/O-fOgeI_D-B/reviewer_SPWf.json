@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "O-fOgeI_D-B",
+  "reviewer": "SPWf",
+  "paper": {
+    "title": "Active Learning of Convex Halfspaces on Graphs",
+    "authors": [
+      "Maximilian Thiessen",
+      "Thomas Gärtner"
+    ],
+    "abstract": "We systematically study the query complexity of learning geodesically convex halfspaces on graphs. Geodesic convexity is a natural generalisation of Euclidean convexity and allows the definition of convex sets and halfspaces on graphs. We prove an upper bound on the query complexity linear in the treewidth and the minimum hull set size but only logarithmic in the diameter. We show tight lower bounds along well-established separation axioms and identify the Radon number as a central parameter of the query complexity and the VC dimension. While previous bounds typically depend on the cut size of the labelling, all parameters in our bounds can be computed from the unlabelled graph. We provide evidence that ground-truth communities in real-world graphs are often convex and empirically compare our proposed approach with other active learning algorithms.",
+    "keywords": [
+      "active learning",
+      "learning theory",
+      "semi-supervised learning",
+      "transduction",
+      "vertex classification",
+      "graphs",
+      "convexity theory",
+      "geodesic convexity",
+      "shortest paths",
+      "halfspaces",
+      "query complexity"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=O-fOgeI_D-B"
+  },
+  "review_fields": {
+    "summary": "This paper considers the problem of learning labels on graphs, assuming the true separator is convex. It gives an algorithm for labeling the entire graph while attempting to minimize the number of queried vertices, and also gives lower-bounds which depend on graph properties.",
+    "main_review": "In convexity theory, a straightforward analogue to Euclidean convexity exists for graphs as well, and this analogue extends to the notions of convex hull and halfspaces. This paper considers exact active learning for halfspaces on graphs, and so it attempts to discover all graph labels under the assumption of halfspace separability. This extends the familiar notion of learning halfspaces to the settings of graphs. \n\nThe work suggests a couple of learning algorithms, which are algorithmically relatively straightforward. The first algorithm has dependence on the size of the shortest-paths cover and graph diameter, and can be implemented by a standard greedy algorithm. The second features dependence on the diameter, hull size and another term which can be bounded, for example, by the treewidh of the graph. The runtimes of these algorithms are particularly high, as one might expect for graph algorithms, though it would be nice if the authors are able to reduce these (in particular, the O(|V|^4 runtime of theorem 11).\n\nComplementing these algorithm are tight lower-bounds based on previously studied graph properties; these are related to the separation of induced geodesic convexity spaces of the graphs. Lower-bounds are expressed in terms of the Radon number, or the size of the hull or extremal point set of the graph.\n\nAlthough one could find faults with the paper (high running times, lower-bounds not exactly matching the algorithmic upper-bounds), I find that this paper is a good introduction to a new and natural learning problem."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

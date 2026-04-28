@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "Srt1hhQgqa",
+  "reviewer": "K4oy",
+  "paper": {
+    "title": "Cappy: Outperforming and Boosting Large Multi-Task LMs with a Small Scorer",
+    "authors": [
+      "Bowen Tan",
+      "Yun Zhu",
+      "Lijuan Liu",
+      "Eric Xing",
+      "Zhiting Hu",
+      "Jindong Chen"
+    ],
+    "abstract": "Large language models (LLMs) such as T0, FLAN, and OPT-IML excel in multi-tasking under a unified instruction-following paradigm, where they also exhibit remarkable generalization abilities to unseen tasks. Despite their impressive performance, these LLMs, with sizes ranging from several billion to hundreds of billions of parameters, demand substantial computational resources, making their training and inference expensive and inefficient. Furthermore, adapting these models to downstream applications, particularly complex tasks, is often unfeasible due to the extensive hardware requirements for finetuning, even when utilizing parameter-efficient approaches such as prompt tuning. Additionally, the most powerful multi-task LLMs, such as OPT-IML-175B and FLAN-PaLM-540B, are not publicly accessible, severely limiting their customization potential. To address these challenges, we introduce a pretrained small scorer, \\textit{Cappy}, designed to enhance the performance and efficiency of multi-task LLMs. With merely 360 million parameters, Cappy functions either independently on classification tasks or serve as an auxiliary component for LLMs, boosting their performance. Moreover, Cappy enables efficiently integrating downstream supervision without requiring LLM finetuning nor the access to their parameters. Our experiments demonstrate that, when working independently on 11 language understanding tasks from PromptSource, Cappy outperforms LLMs that are several orders of magnitude larger. Besides, on 45 complex tasks from BIG-Bench, Cappy boosts the performance of the advanced multi-task LLM, FLAN-T5, by a large margin. Furthermore, Cappy is flexible to cooperate with other LLM adaptations, including finetuning and in-context learning, offering additional performance enhancement.",
+    "keywords": [
+      "multi-task",
+      "large language models",
+      "pretrain model"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Srt1hhQgqa"
+  },
+  "review_fields": {
+    "comment": "Hi, thank you for the detailed response! I agree that the collection/generation of the dataset for training the cappy model is novel and interesting, and the way cappy is applied is simple. Additionally, thank you for the clarification with the contrastive data, that makes sense, and thank you for the rouge-l data. It’s interesting it's mostly centred around .2, which suggests lots of generations with low overlap - it makes me wonder if better balancing the distribution might improve results somewhat (but this is beyond the scope of this paper).\n\nHowever, I disagree that the methods in [1,8] are significantly different or fancier than what is proposed here. As stated on page 24 of [1], their best-of-n procedure is to “Sample N summaries from a supervised baseline at temperature 0.7, score them with a reward model, and take the summary with the highest score”. This is very similar to Cappy (argmax based on an answer rating module), but using slightly different decoding strategies, and using a reward model instead of Cappy. There are publicly available datasets for training reward models (e.g. https://huggingface.co/datasets/stanfordnlp/SHP, https://huggingface.co/datasets/Anthropic/hh-rlhf), and I think it is reasonable to compare a model trained using the Cappy data to models trained using these datasets - my guess is cappy would do better since it is focussed on correctness instead of helpfulness/harmfulness, but since the method is so close to prior best-of-n work, I think it is a necessary comparison.\n\nIn my personal opinion, this is why I lean still reject and am not updating my score, but if other reviewers and AC are satisfied the method is novel enough, and the comparisons are rigorous enough, I think the other aspects of the work are solid and the empirical results certainly still useful for the community."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1845,
+    "words": 295,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/1019c7ec-1990-483d-aa06-c8a03694dd5f",
+    "error": null,
+    "scored_chars": 1845
+  }
+}

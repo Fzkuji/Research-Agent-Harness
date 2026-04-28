@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "P0wSGDoip1",
+  "reviewer": "5uUz",
+  "paper": {
+    "title": "Gradient-based Explanations for Deep Learning Survival Models",
+    "authors": [
+      "Sophie Hanna Langbein",
+      "Niklas Koenen",
+      "Marvin N. Wright"
+    ],
+    "abstract": "Deep learning survival models often outperform classical methods in time-to-event predictions, particularly in personalized medicine, but their \"black box\" nature hinders broader adoption. We propose a framework for gradient-based explanation methods tailored to survival neural networks, extending their use beyond regression and classification. We analyze the implications of their theoretical assumptions for time-dependent explanations in the survival setting and propose effective visualizations incorporating the temporal dimension. Experiments on synthetic data show that gradient-based methods capture the magnitude and direction of local and global feature effects, including time dependencies. We introduce GradSHAP(t), a gradient-based counterpart to SurvSHAP(t), which outperforms SurvSHAP(t) and SurvLIME in a computational speed vs. accuracy trade-off. Finally, we apply these methods to medical data with multi-modal inputs, revealing relevant tabular features and visual patterns, as well as their temporal dynamics.",
+    "keywords": [
+      "Deep Learning",
+      "Survival Analysis",
+      "Explainable Artificial Intelligence",
+      "Interpretable Machine Learning",
+      "XAI",
+      "IML",
+      "Feature Attribution"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=P0wSGDoip1"
+  },
+  "review_fields": {
+    "summary": "The paper benchmarks previously proposed gradient-based explanation methods across three previously proposed deep survival analysis methods. Experimental results on synthetic and real-world datasets highlight differences in performance across scenarios.",
+    "claims_and_evidence": "- The paper claims an extension of previously proposed GradSHAP to GradSHAP(t) as a key contribution. However, it seems like a straightforward application of GradSHAP to survival outcomes. It is unclear what the actual contributions or challenges unique to survival time GradSHAP(t) address.\n- The paper claims that GradSHAP(t) offers a better balance in computational efficiency and accuracy. However, only Figure 6 is provided to support this claim, and the definition of local accuracy is not provided in the paper. Additionally, it is unclear why alternative approaches such as SurvLIME are not discussed.\n- The paper claims that gradient-based explanation methods effectively identify prediction-relevant features. Unfortunately, most experiments are based on synthetic data, with only Grad(t) and Grad(t) × Input(t) benchmarked on preselected instances. It is unclear why comprehensive evaluations of all gradient-based approaches, including GradSHAP(t), are not provided, with evaluations summarized across all instances.",
+    "methods_and_evaluation_criteria": "- The proposed approach, GradSHAP(t), is a straightforward extension of the previously proposed GradSHAP to survival outcomes.\n- The evaluation criteria on synthetic data is based on two preselected instances, which do not comprehensively capture the variance across test examples. Additionally, it is unclear what local accuracy in survival outcomes entails (Figure 6). \n- The comparisons are not consistent across the deep survival methods and the gradient-based approaches across experimental settings.",
+    "experimental_designs_or_analyses": "- Given that this is a benchmarking paper, the experimental results are underwhelming. The experimental comparisons are not consistent and seem cherry-picked. I encourage the author(s) to provide extensive analysis and results across all experiments, where all methods are included and results are summarized across all instances.",
+    "relation_to_broader_scientific_literature": "- Gradient-based explanations for deep survival models are an important research area for clinical decision-making",
+    "essential_references_not_discussed": "- The paper should also discuss other non-time-varying survival explanation approaches, e.g., Kovalev et al. (2021) and Utkin et al. (2022).",
+    "other_strengths_and_weaknesses": "The writing could be improved to focus on key contributions. Also, the experimental section is difficult to follow given the inconsistency in the experimental setup.",
+    "other_comments_or_suggestions": "**Minor**\n- Eqn 4: Should be $\\ln$ instead of $\\log$",
+    "questions_for_authors": "- Could you provide comprehensive results for all experiments?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

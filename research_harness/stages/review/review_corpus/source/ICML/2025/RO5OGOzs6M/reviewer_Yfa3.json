@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "RO5OGOzs6M",
+  "reviewer": "Yfa3",
+  "paper": {
+    "title": "PINNsAgent: Automated PDE Surrogation with Large Language Models",
+    "authors": [
+      "Qingpo Wuwu",
+      "Chonghan Gao",
+      "Tianyu Chen",
+      "Yihang Huang",
+      "Yuekai Zhang",
+      "Jianing Wang",
+      "Jianxin Li",
+      "Haoyi Zhou",
+      "Shanghang Zhang"
+    ],
+    "abstract": "Solving partial differential equations (PDEs) using neural methods has been a long-standing scientific and engineering research pursuit. Physics-Informed Neural Networks (PINNs) have emerged as a promising alternative to traditional numerical methods for solving PDEs. However, the gap between domain-specific knowledge and deep learning expertise often limits the practical application of PINNs. Previous works typically involve manually conducting extensive PINNs experiments and summarizing heuristic rules for hyperparameter tuning. In this work, we introduce PINNsAgent, a novel surrogation framework that leverages large language models (LLMs) to bridge the gap between domain-specific knowledge and deep learning. PINNsAgent integrates Physics-Guided Knowledge Replay (PGKR) for efficient knowledge transfer from solved PDEs to similar problems, and Memory Tree Reasoning for exploring the search space of optimal PINNs architectures. We evaluate PINNsAgent on 14 benchmark PDEs, demonstrating its effectiveness in automating the surrogation process and significantly improving the accuracy of PINNs-based solutions.",
+    "keywords": [
+      "pinns",
+      "llm-agent"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=RO5OGOzs6M"
+  },
+  "review_fields": {
+    "summary": "In this work, the authors introduce PINNsAgent, a surrogation framework that leverages large language models (LLMs) enabling efficient knowledge transfer from solved PDEs to similar problems. By leveraging LLMs and exploration strategies, PINNsAgent enhances the automation and efficiency of PINNs-based solutions. PINNsAgent is evaluated on 14 benchmark PDEs, demonstrating its effectiveness in automating the surrogation process.",
+    "claims_and_evidence": "1. PINNsAgent is an agent to enhance the process of automatically searching for the best hyperparameters settings for a PDE, may be useful for non-expert users of PINNs. \n2. This work is mainly engineering-oriented, lacking the depth suitable for ICML. The PGKR module is simple and the MTRS is a simple application of conventional Monte Carlo Tree Search technique. \n3. This work utilizes LLM's output hyperparameters to determine the action. Are the hyperparameters output by LLM reliable? Only prompt is given in the appendix. It is recomended to give examples or experiments to show the effectiveness of LLM's output. What is going to happen if we input some rare PDE configurations to LLM? Also, only GPT-4 is used in experiments, ablation study should be conducted to show the effect of using different LLMs. \n4. In the MTRS module, there is eq.7 to select the best action for a state, and \"The planner, serving as the policy model πpl(a|s), uses the distribution of the LLM’s output to determine the following action to take\". These seem confusing. Please descibe them in detail, including how the best action is selected and how the distribution of the LLM’s output is used. Is the LLM used for exploration?\n5. For the training of MCTS, what is the initial tree? Does the policy model need update?",
+    "methods_and_evaluation_criteria": "Standard benchmark PDEs are used in experiments.",
+    "experimental_designs_or_analyses": "Only GPT-4 is used in experiments, ablation study should be conducted to show the effect of using different LLMs.",
+    "relation_to_broader_scientific_literature": "The proposed LLM-based agent to automatically search for suitable hyperparameters for PINN training seems to be new."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

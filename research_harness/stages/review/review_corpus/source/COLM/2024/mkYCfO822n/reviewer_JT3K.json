@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "mkYCfO822n",
+  "reviewer": "JT3K",
+  "paper": {
+    "title": "AmbigDocs: Reasoning across Documents on Different Entities under the Same Name",
+    "authors": [
+      "Yoonsang Lee",
+      "Xi Ye",
+      "Eunsol Choi"
+    ],
+    "abstract": "Different entities with the same name can be difficult to distinguish. Handling confusing entity mentions is a crucial skill for language models (LMs). For example, given the question “Where was Michael Jordan educated?” and a set of documents discussing different people named Michael Jordan, can LMs distinguish entity mentions to generate a cohesive answer to the question? To test this ability, we introduce a new benchmark, AmbigDocs. By leveraging Wikipedia’s disambiguation pages, we identify a set of documents, belonging to different entities who share an ambiguous name. From these documents, we generate questions containing an ambiguous name\nand their corresponding sets of answers. Our analysis reveals that current state-of-the-art models often yield ambiguous answers or incorrectly merge information belonging to different entities. We establish an ontology categorizing four types of incomplete answers and automatic evaluation metrics to identify such categories. We lay the foundation for future work on reasoning across multiple documents with ambiguous entities.",
+    "keywords": [
+      "multi-document reasoning",
+      "entity disambiguation",
+      "ambiguous QA"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=mkYCfO822n"
+  },
+  "review_fields": {
+    "summary": "This paper proposes AmbigDocs, a new benchmark for studying the behavior of LLMs on ambiguous document-based QA, and a methodological pipeline that can be used to create similar benchmarks from Wikipedia disambiguation pages using LLMs. The questions in the benchmark are ambiguous in the sense that they contain a surface form of a named entity, which may refer to multiple actual entities in the answer documents.\n\nThe paper also gives a new spin to the definition of an answer in the context of LLMs and document-based QA and provides a taxonomy of 5 answer types, against which several SOTA closed- and open-source LLMs (LLaMa 7b and 13b, Mistral 7b, GPT-3.5 and GPT-4) are evaluated. The benchmark and the answer taxonomy are the main contributions.\n\nThe key findings are twofold: 1) generating complete answers for ambiguous questions in AmbigDocs is a challenging task for the open- and close-source LLMs 2) prompting with in-domain in-context examples significantly improves the performance of LLMs.\n\nThe paper is generally well-written and the benchmark creation pipeline is clearly presented, although the analysis of results is quite short and shallow, which is the main limitation of this paper. Another weakness is the artificial nature of ambiguity in benchmark questions and its unclear practical applications.",
+    "reasons_to_accept": "1. The behavior of LLMs on ambiguous document-based QA has not been studied before\n2. Taxonomy of answer types with heuristics for answer classification",
+    "reasons_to_reject": "1. Detailed analysis of results is lacking\n2. The ambiguity in questions seems quite artificial, unclear whether this benchmark has any practical applications",
+    "questions_to_authors": "1. Some of your findings are quite counter-intuitive (e.g. LLaMa 2 with 13b parameters performing worse than the one with 7b parameters, Mistral demonstrating the best overall performance). Do you have any intuition why?\n2. What are some practical applications of your benchmark besides examining the performance of LLMs on the ambiguous QA task?"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:36:14Z",
+    "migrated_from_v1_at": "2026-04-27T15:36:14Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 660,
+    "words": 101,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/d2ccc425-f139-4ab8-bafb-1cdd3b466def",
+    "error": null,
+    "scored_chars": 660
+  }
+}

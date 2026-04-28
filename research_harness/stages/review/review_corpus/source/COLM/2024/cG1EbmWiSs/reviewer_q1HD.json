@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "cG1EbmWiSs",
+  "reviewer": "q1HD",
+  "paper": {
+    "title": "Unified View of Grokking, Double Descent and Emergent Abilities: A Comprehensive Study on Algorithm Task",
+    "authors": [
+      "Yufei Huang",
+      "Shengding Hu",
+      "Xu Han",
+      "Zhiyuan Liu",
+      "Maosong Sun"
+    ],
+    "abstract": "Recent studies have uncovered intriguing phenomena in deep learning, such as *grokking*, *double descent*, and *emergent abilities* in large language models, which challenge human intuition and are crucial for a deeper understanding of neural models. In this paper, we present a comprehensive study on algorithm task to provide a unified view of these three phenomena, with a focus on the interplay between memorization and generalization. Through extensive experiments spanning a wide range of model sizes and training data quantities, we uncover four distinct training dynamics, each arising from unique combinations of model size and training data quantity, formulating a theoretical framework for further analysis. Utilizing this framework, we establish connections between *double descent* and *grokking* and propose two verifiable predictions regarding the occurrence of *double descent*, both substantiated by our experimental results. Moreover, we expand our experiments to the multi-task learning paradigm, demonstrating how algorithm tasks can be turned into emergent abilities by mixing some pure memorization data. This offers a novel perspective to understand *emergent abilities* in Large Language Models.",
+    "keywords": [
+      "Deep Learning",
+      "Grokking",
+      "Double Descent",
+      "Emergent Abilities"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=cG1EbmWiSs"
+  },
+  "review_fields": {
+    "comment": "Thanks for the response. It sounds like some of the more straightforward writing concerns (R1 and R2) will be addressed. I also appreciate the inclusion of these new results; these make Fig. 3 even more interesting! That said, R3 still holds.\n\nOverall, I believe that this paper makes an interesting contribution and will generate interesting discussion at the conference if accepted. Given this and the responses to other reviewers, I am raising my score to an 8."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:35:04Z",
+    "migrated_from_v1_at": "2026-04-27T15:35:04Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 9,
+    "mixed_pct": 0,
+    "human_pct": 91,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3077,
+    "words": 393,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/6f0fc3fa-a3ce-4d1f-82d3-649b072101b4",
+    "error": null,
+    "scored_chars": 2854
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "6ox8XZGOqP",
+  "reviewer": "zZwi",
+  "paper": {
+    "title": "Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale",
+    "authors": [
+      "Bowen Jiang",
+      "Zhuoqun Hao",
+      "Young Min Cho",
+      "Bryan Li",
+      "Yuan Yuan",
+      "Sihao Chen",
+      "Lyle Ungar",
+      "Camillo Jose Taylor",
+      "Dan Roth"
+    ],
+    "abstract": "Large Language Models (LLMs) have emerged as personalized assistants for users across a wide range of tasks – from offering writing support to delivering tailored recommendations or consultations. Over time, the interaction history between a user and an LLM can provide extensive information about an individual’s traits and preferences. However, open questions remain on how well LLMs today can effectively leverage such history to (1) internalize the user’s inherent traits and preferences, (2) track how the user profiling and preferences evolve over time, and (3) generate personalized responses accordingly in new scenarios.\n\nIn this work, we introduce the PERSONAMEM benchmark. PERSONAMEM features curated user profiles with over 180 simulated user-LLM interaction histories, each containing up to 60 sessions of multi-turn conversations across 15 real-world tasks that require personalization. Given an in-situ user query at a specific time point, we evaluate LLM chatbots’ ability to identify the most suitable response according to the current state of the user’s profile. We observe that current LLMs still struggle to recognize the dynamic evolution in users’ profiles over time through direct prompting approaches. As a consequence, LLMs often fail to deliver responses that align with users’ current situations and preferences, with frontier models such as GPT-4.5, or Gemini-2.0 achieving only around 50% overall accuracy, suggesting room for improvement. We hope that PERSONAMEM, along with the user profile and conversation simulation pipeline, can facilitate future research in the development of truly user-aware chatbots.",
+    "keywords": [
+      "personalization",
+      "long context",
+      "memory",
+      "conversational chatbot"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=6ox8XZGOqP"
+  },
+  "review_fields": {
+    "summary": "This paper introduces PERSONAMEM, a novel benchmark for evaluating how well large language models (LLMs) can track and respond to users' evolving traits and preferences over time. The authors present a comprehensive evaluation framework with simulated user-LLM interaction histories containing up to 60 conversation sessions across 15 real-world personalization tasks.\n\nThe quality of the technical work is good. The authors have clearly put significant effort into developing a robust benchmark that tests multiple dimensions of personalization capabilities. The data generation pipeline is well-designed, with careful consideration for creating realistic, temporally-consistent user profiles and conversations. The evaluation methodology is thorough, assessing different aspects of LLM performance across various context lengths and model architectures.\n\nThe paper is generally clear in its presentation. The methodology, benchmark design, and evaluation results are presented in a logical, easy-to-follow structure. Figure 1 effectively illustrates the benchmark's core concept, showing how user preferences evolve over time across multiple conversation sessions. The authors provide concrete examples for each of their seven query types, which helps in understanding the specific personalization capabilities being evaluated.\n\nIn terms of originality, PERSONAMEM makes a good contribution by focusing on dynamic user profiling and preference evolution over time - an area that has received limited attention in prior work. While other benchmarks have evaluated long-context understanding or static personalization, this work specifically addresses the temporal dimension of user preferences, which is crucial for real-world LLM assistants.\n\nAs LLMs become increasingly used as personal assistants, their ability to remember and adapt to evolving user preferences becomes critical for user satisfaction. The benchmark reveals significant shortcomings in current state-of-the-art models, with even frontier models like GPT-4.5 and Gemini-2.0 achieving only around 50% accuracy overall. This highlights an important area for improvement in LLM development.",
+    "reasons_to_accept": "1. **Novel Benchmark for an Important Capability**: PERSONAMEM addresses a critical gap in existing LLM evaluation frameworks by focusing specifically on dynamic user profiling over time. The benchmark's design is thoughtful and comprehensive, covering various aspects of personalization that matter in real-world applications.\n\n2. **Scalable Data Generation Pipeline**: The authors introduce a well-designed, modular pipeline for generating synthetic persona-based conversations that simulate realistic preference evolution. This methodology could be valuable for other researchers exploring personalization in LLMs.\n\n3. **Comprehensive Evaluation**: The paper evaluates 12 state-of-the-art models across multiple dimensions (7 query types, different context lengths, retrieval augmentation) providing a thorough assessment of current capabilities and limitations in this space.\n\n4. **Practical Insights**: The findings offer valuable insights for LLM developers and researchers working on personalization. The analysis of how factors like position of information in context, retrieval techniques, and different query types affect performance provides clear directions for improvement.\n\n5. **Rigorous Validation**: The human validation study demonstrating high agreement rates (>90% across most dimensions) provides confidence in the quality and reliability of the benchmark.",
+    "reasons_to_reject": "1. **Limited Exploration of Retrieval Enhancement**: While the paper includes some evaluation of retrieval-augmented approaches like RAG and Mem0, this analysis is relatively brief. A more extensive exploration of how various retrieval strategies might address the identified limitations would strengthen the paper, especially given the poor performance on longer contexts.\n\n2. **Generative Evaluation Limitations**: The generative evaluation is conducted only on a smaller subset of the benchmark (10 sessions/32k tokens) and with fewer models due to computational constraints. A more comprehensive analysis of generation quality would be valuable, as this better reflects real-world LLM use cases.\n\n3. **Potential Dataset Artifacts**: Although the authors conducted human validation, there could still be artifacts in the synthetic data that make the benchmark easier or harder in ways that don't reflect real user-LLM interactions. A discussion of potential limitations in the dataset generation approach would strengthen the paper.\n\n4. **Analysis of Error Patterns**: The paper identifies which types of queries are most challenging for models, but there's limited analysis of specific error patterns or failure modes. A deeper exploration of why models fail at certain types of personalization would provide more actionable insights for improvement.\n\n5. **Limited Discussion of Broader Context**: The paper would benefit from a more extensive discussion of how this work connects to broader questions about LLM personalization, such as the tension between privacy considerations and personalization capabilities.",
+    "questions_to_authors": "1. The benchmark evaluates models on their ability to select the correct response from multiple options, but real-world applications require generating appropriate responses. While this evaluation approach is reasonable, a discussion of the potential gap between discriminative and generative performance would be valuable.\n\n2. It would be interesting to see how the performance varies across different topics/domains. Do models perform better on certain types of preferences (e.g., food) versus others (e.g., therapy)?\n\n3. The paper briefly mentions that the benchmark contains \"around 6k in-situ user query and LLM response pairs,\" but it would be helpful to provide a more detailed breakdown of the dataset statistics (e.g., distribution across query types, topics, etc.).\n\n4. The authors could consider making their data generation pipeline and prompts publicly available to facilitate research on improving personalization capabilities in LLMs.\n\n5. The paper primarily focuses on evaluating existing models rather than proposing solutions to the identified limitations. While this is perfectly acceptable for a benchmark paper, a brief discussion of potential approaches to address these limitations would strengthen the paper's impact."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 41,
+    "mixed_pct": 12,
+    "human_pct": 47,
+    "verdict": null,
+    "confidence": null,
+    "chars": 4238,
+    "words": 577,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0d87f46f-d8cf-4efa-a550-9721c9747692",
+    "error": null,
+    "scored_chars": 4238
+  }
+}

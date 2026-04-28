@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "Rupt2o4Fu6J",
+  "reviewer": "xSwS",
+  "paper": {
+    "title": "Machine learning structure preserving brackets for forecasting irreversible processes",
+    "authors": [
+      "Kookjin Lee",
+      "Nathaniel Trask",
+      "Panos Stinis"
+    ],
+    "abstract": "Forecasting of time-series data requires imposition of inductive biases to obtain predictive extrapolation, and recent works have imposed Hamiltonian/Lagrangian form to preserve structure for systems with \\emph{reversible} dynamics. In this work we present a novel parameterization of dissipative brackets from metriplectic dynamical systems appropriate for learning \\emph{irreversible} dynamics with unknown a priori model form. The process learns generalized Casimirs for energy and entropy guaranteed to be conserved and nondecreasing, respectively. Furthermore, for the case of added thermal noise, we guarantee exact preservation of a fluctuation-dissipation theorem, ensuring thermodynamic consistency. We provide benchmarks for dissipative systems demonstrating learned dynamics are more robust and generalize better than either \"black-box\" or penalty-based approaches.",
+    "keywords": [
+      "structure preserving machine learning",
+      "neural odes",
+      "forecasting",
+      "dissipative systems"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Rupt2o4Fu6J"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their rebuttal. However, I am not really satisfied with the response.\n\n*Writing* None of my issues about the writing concerns the Einsum notation, which the author's response exclusively focuses on. Thus my issues regarding the writing are not addressed at all.\n\n*Alternative approaches* Neural ODEs are defined with respect to arbitrary neural network dynamic functions. Therefore, any method developed for static extrapolation can be incorporated into a NODE setting. Besides, all deep learning frameworks (PyTorch, TensorFlow, JAX) have an ODE solver implementation. So there is no reason why ML extrapolation methods are inapplicable in the paper's context.\n\n*black-box property* The arguments about the learnable components inside the logarithm are precisely that: arguments. \nIn ML, all models are wrong, but some are useful. As this paper has been submitted to an ML venue, I have to evaluate it from an ML perspective. For a counterargument, one could simply approximate the log term arbitrarily close or have a stable network without a formal stability proof. I strongly believe the authors need to evaluate whether this \"approximation\" fails in existing ML models and that the authors' parametrization can scale to learning complex dynamics (i.e., does not prevent learning). As mentioned in my review, the paper falls short on this, as 1) from the class of existing ML models, only a Neural ODE is used as the baseline. As the tasks in the experiment concern time-series data of dynamical systems, any recurrent neural network could be applied here.\n2) The amount of learning tasks is small. Moreover, the presented datasets are all low dimensional, as I mentioned.\nIf authors argue that the presented datasets are difficult, then show it by evaluating how other types of existing ML models fail here (as mentioned above).\n\nIn conclusion, as I mentioned in the review, I think this paper has potential, and I have no criticisms of the proposed parameterization.\nHowever, the paper should involve less arguing and more empirical evidence to convey its significance for the ML domain."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

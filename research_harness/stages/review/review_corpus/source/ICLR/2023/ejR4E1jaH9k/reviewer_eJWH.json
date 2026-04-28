@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2023,
+  "forum_id": "ejR4E1jaH9k",
+  "reviewer": "eJWH",
+  "paper": {
+    "title": "Solving stochastic weak Minty variational inequalities without increasing batch size",
+    "authors": [
+      "Thomas Pethick",
+      "Olivier Fercoq",
+      "Puya Latafat",
+      "Panagiotis Patrinos",
+      "Volkan Cevher"
+    ],
+    "abstract": "This paper introduces a family of stochastic extragradient-type algorithms for a class of nonconvex-nonconcave problems characterized by the weak Minty variational inequality (MVI). Unlike existing results on extragradient methods in the monotone setting, employing diminishing stepsizes is no longer possible in the weak MVI setting. This has led to approaches such as increasing batch sizes per iteration which can however be prohibitively expensive. In contrast, our proposed methods involves two stepsizes and only requires one additional oracle evaluation per iteration. We show that it is possible to keep one fixed stepsize while it is only the second stepsize that is taken to be diminishing, making it interesting even in the monotone setting. Almost sure convergence is established and we provide a unified analysis for this family of schemes which contains a nonlinear generalization of the celebrated primal dual hybrid gradient algorithm.",
+    "keywords": [
+      "Variational inequalities",
+      "stochastic first-order methods",
+      "nonconvex-nonconcave",
+      "minimax"
+    ],
+    "decision": "Accept: poster",
+    "openreview_url": "https://openreview.net/forum?id=ejR4E1jaH9k"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The paper, proposes new variants of stochastic extra-gradient methods for solving inclusion problems that satisfy the minty variational inequality (MVI). The proposed algorithms BCSEG+ (Alg. 1 and Alg. 2) and NP-PDGG (Alg. 3) have been designed and analyzed for solving the inclusion problem under the unconstrained smooth case, constrained case, and min-max problem (8.5) respectively. The most important contribution of this work is that by using the new algorithms it is possible to provide analysis without requiring increasing batch sizes as the algorithm progress.",
+    "strength_and_weaknesses": "The paper is well-written and the idea is easy to follow. The authors did a great job on the separation of sections and on the presentation of the results. In particular, I find that it is very helpful for the reader that the authors included separate sections for the unconstrained and constrained setting. \n\nHowever, I believe the paper has some issues in terms of notation and numerical evaluation. In addition, the paper missing some relevant recent works on other classes of structured non-monotone problems.\n\nLet me provide some details below:\n\nOn presentation: \n1. There is no part in the paper where the sets $zer T$, and $gph T$ are defined. Even if the definition is trivial is currently missing. In addition, what do we call a maximally monotone operator (assumption on operator A in the main problem)? this detail is required for a self-contained paper. \n\n2. Inequality 3.2 used $\\Gamma$ and $\\Gamma^{-1}$ without a proper explanation of why the  $ \\Gamma^{-1}$ is needed. The standard $L_f$-Lipschitz used identity matrices, so further details are needed. The same holds for Assumption III.\n\n3. The paper mentions in several parts that: ``employing diminishing stepsizes is no longer possible in the weak MVI setting.\" but they do not properly explain why. Why is this true? is there an existing paper that proves that or is it a speculation of the authors? more details are needed.\n\n4. Minor: The deterministic operator is defined as $Fz$ while the stochastic estimator is denoted with $F(z,\\xi)$. It might have been better if one used F(z) as well for the deterministic variant. \n\n5. After the definition of SEG, the paper mentions: ``Even with a two-timescale variant (when $\\beta_k > \\alpha_k$) it has only been possible to show convergence for MVI (Hsieh et al., 2020).\"  what this means exactly? note that (Hsieh et al., 2020) has nothing to do with MVI. \n\nOn proofs:\n1. What is b in equation C.1 in the appendix?\n2. I find that the steps in the proofs require further explanation for the reader to be able to follow easily (probably by splitting steps into several parts). The parts where Young's inequality is used are not always very clear. \n3. In C.8 the previous bound is used by now it has expectation conditional on $f_k$ even if the quantity is deterministic. This is not wrong but it is not standard.\n\nOn experiments: (This is probably an important issue of the current version of the paper) \n\nThe authors mentioned the following: \"Except for BCSEG+, all methods fail to converge in these examples.\" and \"In comparison (EG+) gets closer to a solution in both problems but fails to converge due to the non-diminishing stepsize, while BCSEG+ converges for both example.\" \nIn my viewpoint figure, 2 does not show any benefit of BCSEG+, compared to EG+. both methods converge to a very similar neighborhood $(10^{-2})$ of the solution. Probably the methods should be run for more iterations to obtain something useful. \nAlso, I suspect that the method here is SEG+ and not EG+, right? \n\nMissing references on other structured non-monotone problems: \n\n[1] Yang, J., Kiyavash, N., and He, N. (2020). Global convergence and variance reduction for a class of nonconvexnonconcave minimax problems. NeurIPS\n\n[2] Song, C., Zhou, Z., Zhou, Y., Jiang, Y., and Ma, Y.\n(2020). Optimistic dual extrapolation for coherent nonmonotone variational inequalities. NeurIPS\n\n[3] Loizou, N., Berard, H., Gidel, G., Mitliagkas, I., and\nLacoste-Julien, S. (2021). Stochastic gradient descentascent and consensus optimization for smooth games:\nConvergence analysis under expected co-coercivity.NeurIPS\n\n[4] Loizou, N., Berard, H., Jolicoeur-Martineau, A., Vincent,\nP., Lacoste-Julien, S., and Mitliagkas, I. (2020). Stochastic hamiltonian gradient methods for smooth games. ICML\n\n[5] Kannan, A. and Shanbhag, U. V. (2019). Optimal\nstochastic extragradient schemes for pseudomonotone\nstochastic variational inequality problems and their variants. Computational Optimization and Applications,\n74(3):779–820.\n\n[6] Aleksandr Beznosikov, Eduard Gorbunov, Hugo Berard, and Nicolas\nLoizou. Stochastic gradient descent-ascent: Unified theory and new\nefficient methods. arXiv preprint arXiv:2202.07262, 2022",
+    "clarity,_quality,_novelty_and_reproducibility": "Please see the above review for further details.",
+    "summary_of_the_review": "I give \"6: marginally above the acceptance threshold\" for this work. \nThe theoretical results are novel however there are several points of weakness (in terms of clarity) of the paper and limitations in terms of experiments.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "4: The contributions are significant, and do not exist in prior works.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "summary_of_the_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:35:19Z"
+  }
+}

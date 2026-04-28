@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "ybaK4asBT2",
+  "reviewer": "NP7f",
+  "paper": {
+    "title": "LLM Discussion: Enhancing the Creativity of Large Language Models via Discussion Framework and Role-Play",
+    "authors": [
+      "Li-Chun Lu",
+      "Shou-Jen Chen",
+      "Tsung-Min Pai",
+      "Chan-Hung Yu",
+      "Hung-yi Lee",
+      "Shao-Hua Sun"
+    ],
+    "abstract": "Large language models (LLMs) have shown exceptional proficiency in natural language processing but often fall short of generating creative and original responses to open-ended questions. To enhance LLM creativity, our key insight is to emulate the human process of inducing collective creativity through engaging discussions with participants from diverse backgrounds and perspectives. To this end, we propose LLM Discussion, a three-phase discussion framework that facilitates vigorous and diverging idea exchanges and ensures convergence to creative answers. Moreover, we adopt a role-playing technique by assigning distinct roles to LLMs to combat the homogeneity of LLMs. We evaluate the efficacy of the proposed framework with the Alternative Uses Test, Similarities Test, Instances Test, and Scientific Creativity Test through both LLM evaluation and human study. The results show that our proposed framework outperforms single-LLM approaches and existing multi-LLM frameworks across various creativity metrics. The code is available at https://github.com/lawraa/LLM-Discussion.",
+    "keywords": [
+      "multi-agent discussion",
+      "creativity",
+      "role-play",
+      "large language models"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ybaK4asBT2"
+  },
+  "review_fields": {
+    "summary": "This paper proposes an approach to enhancing the creativity of large language models (LLMs) by facilitating multi-agent discussions and incorporating role-playing elements. The key ideas of a three-phase discussion framework and role assignment are well-motivated and explained. The authors conduct evaluations across 4 creativity benchmarks, comparing their proposed method against baselines. The results demonstrate improvements in some metrics of TTCT like originality and elaboration, suggesting that the proposed approach can indeed induce more creative and novel responses from LLMs. Overall, this work presents a relatively convincing approach to an important problem in AI, with findings that are likely to stimulate further research in this area.",
+    "reasons_to_accept": "1) Clever use of multi agent discussion and roleplaying in open domain NLG task\n2) Good evaluation with LLM and humans and also showing correlation between each",
+    "reasons_to_reject": "While the paper presents an interesting approach and promising results, there are a few key concerns that should be addressed before it is ready for publication\n\n1) The role-playing component is a novel contribution, but the paper lacks deeper analysis on the specific roles used, how they were chosen/generated, and whether these roles may introduce unintended biases or perspectives that could skew the results.The role-playing aims to induce diverse perspectives, but the paper does not discuss how the chosen roles represent or account for diversity across different demographics, cultures, domains, etc. A more critical examination of this aspect is needed.\n\n2) The task chosen are relatively old and sentence level so not very clear if this approach would be generalizable for other creative tasks such as design, ideation, creative writing, generating metaphors etc\n\n3) The results are primarily quantitative, but a deeper qualitative analysis examining the generated responses, the nature of conversations/discussions, and specific strengths/weaknesses could provide valuable insights.\n\n4) Theoretical grounding: While the motivations are clear, the paper could benefit from stronger theoretical foundations explaining why multi-agent discussion and role-playing are expected to enhance LLM creativity from a cognitive/psychological perspective.",
+    "questions_to_authors": "Why AUT ? There is mounting evidence that GPT4 is good at this so to benchmark you should focus on complex creative tasks\nhttps://arxiv.org/abs/2303.12003\nhttps://news.uark.edu/articles/69688/ai-outperforms-humans-in-standardized-tests-of-creative-potential"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 5
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:37:17Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:17Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1774,
+    "words": 243,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/efba55ed-0791-4a5d-b082-b7ff02bbaaf1",
+    "error": null,
+    "scored_chars": 1774
+  }
+}

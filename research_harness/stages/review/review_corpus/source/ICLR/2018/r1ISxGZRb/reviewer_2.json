@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "r1ISxGZRb",
+  "reviewer": "2",
+  "paper": {
+    "title": "Generation and Consolidation of Recollections for Efficient Deep Lifelong Learning",
+    "authors": [
+      "Matt Riemer",
+      "Michele Franceschini",
+      "and Tim Klinger"
+    ],
+    "abstract": "Deep lifelong learning systems need to efficiently manage resources to scale to large numbers of experiences and non-stationary goals. In this paper, we explore the relationship between lossy compression and the resource constrained lifelong learning problem of function transferability. We demonstrate that lossy episodic experience storage can enable efficient function transferability between different architectures and algorithms at a fraction of the storage cost of lossless storage. This is achieved by introducing a generative knowledge distillation strategy that does not store any full training examples. As an important extension of this idea, we show that lossy recollections stabilize deep networks much better than lossless sampling in resource constrained settings of lifelong learning while avoiding catastrophic forgetting. For this setting, we propose a novel dual purpose recollection buffer used to both stabilize the recollection generator itself and an accompanying reasoning model.",
+    "keywords": [],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=r1ISxGZRb"
+  },
+  "review_fields": {
+    "review": "This paper addresses lifelong learning setting under resource constraints, i.e. how to efficiently manage the storage and how to generalise well with a relatively small diversity of prior experiences. The authors investigate how to avoid storing a lot of original training data points while avoiding catastrophic forgetting at the same time.\nThe authors propose a complex neural network architecture that has several components. One of the components is a variational autoencoder with discrete latent variables, where the recently proposed Gumbel-softmax distribution is used to efficiently draw samples from a categorical distribution (Jang et al ICLR 2017). Discrete variables are categorical latent variables using 1-hot encoding of the class variables. In fact, in the manuscript, the authors describe one-hot encoding of c classes as l-dimensional representation. Why is it not c-dimentional? Also the class probabilities p_i are not defined in (7). \nThis design choice is reasonable, as autoencoder with categorical latent variables can achieve more storage compression of input observations in comparison with autoencoders with continuos variables. \nAnother component of the proposed model is a recollection buffer/generator, a generative module (alongside the main model) which produces pseudo-experiences. These self generated pseudo experiences are sampled from the buffer and are combined with available real samples during training to avoid catastrophic forgetting of prior experiences. This module is inspired by episodic training proposed by Lopez-Paz and Ranzato in ICLR2017 for continual learning. In fact, a recollection buffer for MNIST benchmark has 50K codes to store. How fast would it grow with more tasks/training data? Is it suitable for lifelong learning? \n\nMy main concern with this paper is that it is not easy to grasp the gist of it. The paper is 11 pages long and often has sections with weakly related motivations described in details (essentially it would be good to cut the first 6 pages into half and concentrate on the relevant aspects only). It is easy to get lost in unimportant details, where as important details on model components are not very clear and not structured. Second concern is limited novelty (from what I understood)."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

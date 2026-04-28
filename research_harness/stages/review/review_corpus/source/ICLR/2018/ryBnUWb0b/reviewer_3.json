@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "ryBnUWb0b",
+  "reviewer": "3",
+  "paper": {
+    "title": "Predicting Floor-Level for 911 Calls with Neural Networks and Smartphone Sensor Data",
+    "authors": [
+      "William Falcon",
+      "Henning Schulzrinne"
+    ],
+    "abstract": "In cities with tall buildings, emergency responders need an accurate floor level location to find 911 callers quickly. We introduce a system to estimate a victim's floor level via their mobile device's sensor data in a two-step process. First, we train a neural network to determine when a smartphone enters or exits a building via GPS signal changes. Second, we use a barometer equipped smartphone to measure the change in barometric pressure from the entrance of the building to the victim's indoor location. Unlike impractical previous approaches, our system is the first that does not require the use of beacons, prior knowledge of the building infrastructure, or knowledge of user behavior. We demonstrate real-world feasibility through 63 experiments across five different tall buildings throughout New York City where our system predicted the correct floor level with 100% accuracy.",
+    "keywords": [
+      "Recurrent Neural Networks",
+      "RNN",
+      "LSTM",
+      "Mobile Device",
+      "Sensors"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=ryBnUWb0b"
+  },
+  "review_fields": {
+    "comment": "Can you explain why in the table 1 in the revision from 29th October the validation and test accuracy of the LSTM are 0.949 and 0.911 and in the most recent version they have dropped to 0.935 and 0.898 (worse than the baselines)?\n\nAlso I agree with the statement by reviewer 2:\n\n\"The RNN model for Indoor/Outdoor determination is compared to several baseline classifiers.  However these are not the right methods to compare to -- at least, it is not clear how you set up the vector input to these non-auto-regressive classifiers. You need to compare your model to a time series method that includes auto-regressive terms, or other state space methods like Markov models or HMMs.\"\n\nIt seems like no changes have been made to address this."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

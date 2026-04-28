@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "Es2Ey2tGmM",
+  "reviewer": "c1z8",
+  "paper": {
+    "title": "Constrained Diffusion Models via Dual Training",
+    "authors": [
+      "Shervin Khalafi",
+      "Dongsheng Ding",
+      "Alejandro Ribeiro"
+    ],
+    "abstract": "Diffusion models have attained prominence for their ability to synthesize a probability distribution for a given dataset via a diffusion process,  enabling the generation of new data points with high fidelity. However, diffusion processes are prone to generating samples that reflect biases in a training dataset. To address this issue, we develop constrained diffusion models by imposing diffusion constraints based on desired distributions that are informed by requirements. Specifically, we cast the training of diffusion models under requirements as a constrained distribution optimization problem that aims to reduce the distribution difference between original and generated data while obeying constraints on the distribution of generated data. We show that our constrained diffusion models generate new data from a mixture data distribution that achieves the optimal trade-off among objective and constraints. To train constrained diffusion models, we develop a dual training algorithm and characterize the optimality of the trained constrained diffusion model. We empirically demonstrate the effectiveness of our constrained models in two constrained generation tasks: (i) we consider a dataset with one or more underrepresented classes where we train the model with constraints to ensure fairly sampling from all classes during inference; (ii) we fine-tune a pre-trained diffusion model to sample from a new dataset while avoiding overfitting.",
+    "keywords": [
+      "Constrained diffusion model",
+      "constrained optimization",
+      "Lagrangian method",
+      "dual algorithm"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Es2Ey2tGmM"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for the detailed response. I have raised my score in response to the additional empirical results and clarifications and will outline my remaining concerns below.\n\n---\n\n**Re Weakness 1**: ... more challenging datasets ...\n\nThank you for providing these additional results. I believe that they are helpful and strengthen the empirical evaluation presented in the paper.\n\n**Re Weakness 2**: ... quantitative results for models fine-tuned without constraints ... baselines ...\n\n> We refer to Figure (2b) in the paper which in fact provides a quantitative baseline for models fine-tuned without constraints, both as generated samples and its FID score. \n\nThank you for pointing out the FID scores in the figure captions. They do indeed provide the quantitative results I was referring to. Could you briefly touch on why they are so much higher than the results reported in other works (e.g. 3.17 in [1] for unconditional image generation on CIFAR-10)? \n\n> Regarding the second point, we believe there is no meaningful metric of comparing a constrained unconditional model to existing conditional models since the conditional model can sample from any class if it is conditioned to do so. The suggested approach of using a conditional model with balanced conditioning information at inference time is interesting. However, we were unable to find any existing baselines using the suggested approach. Hence, we believe implementing such a novel approach to use as a baseline is beyond the scope of this paper.\n\nI am not sure I understand this point. Conditioning diffusion models via classifier-free guidance [2] is a standard approach in image diffusion models, including the latent diffusion model [3] that I assume was used for the additional ImageNet results. Since this approach enables the specification of arbitrary class labels at inference time, it should be straightforward to sample them uniformly before sample generation.\n\nSince all class labels need to be known at training time to specify the KL divergence-constrained optimization problem (U-KL), it seems reasonable to compare the method to other approaches that use class labels to train conditional diffusion models that allow us to flexibly constrain the sample generation process. The reasoning behind this question is to better understand the potential practical impact the proposed approach, compared to simply adapting existing diffusion model techniques to the experimental settings investigated in the manuscript.\n\n**Re Questions 1-3**: \n\nI appreciate the detailed response and the primal/dual batch size sensitivity study. In addition to the conceptual considerations provided in response to Question 1 of Reviewer EijC, I think it would be helpful to add an actual empirical comparison of the computational cost of standard and dual training approaches in the paper.\n\n---\n\n### References\n\n[1] Ho, Jonathan, Ajay Jain, and Pieter Abbeel. \"Denoising diffusion probabilistic models.\" Advances in neural information processing systems 33 (2020): 6840-6851.\n\n[2] Ho, Jonathan, and Tim Salimans. \"Classifier-Free Diffusion Guidance.\" NeurIPS 2021 Workshop on Deep Generative Models and Downstream Applications. 2021.\n\n[3] Rombach, Robin, et al. \"High-resolution image synthesis with latent diffusion models.\" Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 2022."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3379,
+    "words": 508,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/7d1c9b96-173a-44d2-866e-c1b72d168956",
+    "error": null,
+    "scored_chars": 3382
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "7ntI4kcoqG",
+  "reviewer": "zdkz",
+  "paper": {
+    "title": "AMAG: Additive, Multiplicative and Adaptive Graph Neural Network For Forecasting Neuron Activity",
+    "authors": [
+      "Jingyuan Li",
+      "Leo Scholl",
+      "Trung Le",
+      "Pavithra Rajeswaran",
+      "Amy L Orsborn",
+      "Eli Shlizerman"
+    ],
+    "abstract": "Latent Variable Models (LVMs) propose to model the dynamics of neural populations by capturing low-dimensional structures that represent features involved in neural activity. Recent LVMs are based on deep learning methodology where a deep neural network is trained to reconstruct the same neural activity given as input and as a result to build the latent representation. Without taking past or future activity into account such a task is non-causal. In contrast, the task of forecasting neural activity based on given input extends the reconstruction task. LVMs that are trained on such a task could potentially capture temporal causality constraints within its latent representation. Forecasting has received less attention than reconstruction due to recording challenges such as limited neural measurements and trials. In this work, we address modeling neural population dynamics via the forecasting task and improve forecasting performance by including a prior, which consists of pairwise neural unit interaction as a multivariate dynamic system. Our proposed model---Additive, Multiplicative, and Adaptive Graph Neural Network (AMAG)---leverages additive and multiplicative message-passing operations analogous to the interactions in neuronal systems and adaptively learns the interaction among neural units to forecast their future activity. We demonstrate the advantage of AMAG compared to non-GNN based methods on synthetic data and multiple modalities of neural recordings (field potentials from penetrating electrodes or surface-level micro-electrocorticography) from four rhesus macaques. Our results show the ability of AMAG to recover ground truth spatial interactions and yield estimation for future dynamics of the neural population.",
+    "keywords": [
+      "Neuroscience and Cognitive Science",
+      "Neural Activity Forecasting",
+      "Graph Neural Network"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=7ntI4kcoqG"
+  },
+  "review_fields": {
+    "summary": "This manuscript looks at time series forecasting in neural multi-channel electrical signals.  They propose a new graph neural network based approach called AMAG that infers connectivity between channels to improve the ability to forecast over competing approaches, most of which are designed to infer latent dynamics or predict relevant task related behavior.  There are multiple steps in this approach, and the entire system is trained to maximize multi-step prediction.  Experimental results suggest the ability to capture relevant connectivity.",
+    "strengths": "This approach appears to accurately capture connectivity in synthetic signals, which appears to largely hold up in real world data as well.\n\nPredictive performance shows large improvements in the forecasting (both one-step and multi-step) problem compared to competing approaches.\n\nAn ablation study implies that all components of the network are beneficial, motivating each component.",
+    "weaknesses": "The major evaluation metric is forecasting in neural time series.  It is unclear how important this metric is by itself, whereas one often wants to evaluate how well we can extract relevant information (such as neural decoding) from the neural signals.  There is an implication that improving forecast of neural signals would improve these other problems, but it would be much stronger to explicitly show that.\n\nMy biggest hesitation is that it is unclear where the predictive improvements are coming from.  Most of the compared methods have performed well in many contexts, and the proposed structure is not so different than these existing methods.  The largest difference seems to be the GNN operating in the latent space of the system, whereas other methods capture these relationships in other ways, such as in the encoder function.  The ablation study does not clearly enough elucidate such differences, as all variants of the model seem to be extremely highly performing.  (I am assuming that Table 3 corresponds to Monkey C since the AMAG result matches up, but it doesn't explicitly state).  In fact, the ablated models still seem to be state-of-the-art, which is confusing.  I would encourage the authors to really explore the differences between their approach and existing methods and clearly show where the majority of the performance improvements happens.\n\nThere's a number of fuzzy details that need additional explanation throughout, such as the aforementioned ablation not clearly describing the data, and explicitly stating what the training of reconstruction and reconstruction with mask are in Figure 2.",
+    "questions": "What component is responsible for the major performance improvements compared to existing approaches?\n\nHow does this approach do at capturing other information such as neural decoding?  Is there evidence that improving at this forecasting task will really improve other downstream tasks?\n\nFor AM-G with the non-learnable adjacency, do you use the initialized correlation?  How sensitive is performance to that choice?",
+    "limitations": "The only thing that I would add is that the authors should discuss more clearly that their improvements and results are focused on forecasting in the discussion, and that results are not shown for many of the other tasks where competing models have been effective.  Other than that, the comments seem fair."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 2,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2726,
+    "words": 421,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/576ab3e9-07bb-4c40-9db3-dadd3692ff04",
+    "error": null,
+    "scored_chars": 2737
+  }
+}

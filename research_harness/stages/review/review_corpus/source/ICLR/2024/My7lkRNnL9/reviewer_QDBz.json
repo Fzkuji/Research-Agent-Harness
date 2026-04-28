@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "My7lkRNnL9",
+  "reviewer": "QDBz",
+  "paper": {
+    "title": "Forward Learning with Top-Down Feedback: Empirical and Analytical Characterization",
+    "authors": [
+      "Ravi Francesco Srinivasan",
+      "Francesca Mignacco",
+      "Martino Sorbaro",
+      "Maria Refinetti",
+      "Avi Cooper",
+      "Gabriel Kreiman",
+      "Giorgia Dellaferrera"
+    ],
+    "abstract": "\"Forward-only\" algorithms, which train neural networks while avoiding a backward pass, have recently gained attention as a way of solving the biologically unrealistic aspects of backpropagation. Here, we first address compelling challenges related to the \"forward-only\" rules, which include reducing the performance gap with backpropagation and providing an analytical understanding of their dynamics. To this end, we show that the forward-only algorithm with top-down feedback is well-approximated by an \"adaptive-feedback-alignment\" algorithm, and we analytically track its performance during learning in a prototype high-dimensional setting. Then, we compare different versions of forward-only algorithms, focusing on the Forward-Forward and PEPITA frameworks, and we show that they share the same learning principles. Overall, our work unveils the connections between three key neuro-inspired learning rules, providing a link between \"forward-only\" algorithms, i.e., Forward-Forward and PEPITA, and an approximation of backpropagation, i.e., Feedback Alignment.",
+    "keywords": [
+      "Forward-only learning",
+      "Biologically inspired learning",
+      "Artificial neural networks",
+      "Analytical characterization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=My7lkRNnL9"
+  },
+  "review_fields": {
+    "summary": "The paper connects several forward pass-only learning methods as biologically plausible alternatives to backprop, analyses their performance and error dynamics, and also proposes Hebbian and temporally local approximations for one of those methods.",
+    "strengths": "1. The paper is well-written and does a good job articulating its aims and contributions.\n2. The paper provides a theoretical link between several algorithms, and derives error dynamics (for a simple problem) for one of them. \n3. The Hebbian/anti-Hebbian approximation works as well as the PEPITA algorithm, which is a good sign for bio plausibility (of both PEPITA and FF, since they work similarly).",
+    "weaknesses": "1. Performance on CIFAR10/100 of algorithms is lacking compared to backprop (although surprisingly much less so for CIFAR100). This performance gap would likely increase for larger networks.\n2. No experiments with convnets, and I haven't found a justification for that. Since cifar10/100 performance gets much better with introducing convolutions (for backprop), it'd be interesting to look at the performance gap there.",
+    "questions": "If I understand correctly, PEPITA-TL differs from PEPITA-Hebbian by one feature: the anti-Hebbian error term is computed for the updated weights. Based on that, I have two questions:\n1. Would performance of both algorithms match if we reduce the learning rate of PEPITA-TL? Intuitively it should, since the anti-Hebbian error terms would match.\n2. Can we consider PEPITA-Hebbian temporally local since it's a long-term plasticity rule? Since the network is trained with two passes over the same input, the PEPITA-TL approximation adds the first Hebbian term immediately after the first forward pass, so 10s/100s of ms. This would be too short for long-term Hebbian changes (as far as I know), so in your model you can treat both parts of the update rule as if they happen for the same network state -- meaning that PEPITA-Hebbian would be temporally local. (I guess you can account for short-term plasticity as a result of the first forward pass (so non-Hebbian changes proportional to input activity only).)\n\nSmall comments:\n1. Tab1 should have PEPITA-Hebbian performance too.\n2. The appendix can be included in the main pdf in this conference."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 4,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1969,
+    "words": 312,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/aba86253-603d-4263-acf3-cc257f92dae3",
+    "error": null,
+    "scored_chars": 1970
+  }
+}

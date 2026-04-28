@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2024,
+  "forum_id": "cG1EbmWiSs",
+  "reviewer": "ANPL",
+  "paper": {
+    "title": "Unified View of Grokking, Double Descent and Emergent Abilities: A Comprehensive Study on Algorithm Task",
+    "authors": [
+      "Yufei Huang",
+      "Shengding Hu",
+      "Xu Han",
+      "Zhiyuan Liu",
+      "Maosong Sun"
+    ],
+    "abstract": "Recent studies have uncovered intriguing phenomena in deep learning, such as *grokking*, *double descent*, and *emergent abilities* in large language models, which challenge human intuition and are crucial for a deeper understanding of neural models. In this paper, we present a comprehensive study on algorithm task to provide a unified view of these three phenomena, with a focus on the interplay between memorization and generalization. Through extensive experiments spanning a wide range of model sizes and training data quantities, we uncover four distinct training dynamics, each arising from unique combinations of model size and training data quantity, formulating a theoretical framework for further analysis. Utilizing this framework, we establish connections between *double descent* and *grokking* and propose two verifiable predictions regarding the occurrence of *double descent*, both substantiated by our experimental results. Moreover, we expand our experiments to the multi-task learning paradigm, demonstrating how algorithm tasks can be turned into emergent abilities by mixing some pure memorization data. This offers a novel perspective to understand *emergent abilities* in Large Language Models.",
+    "keywords": [
+      "Deep Learning",
+      "Grokking",
+      "Double Descent",
+      "Emergent Abilities"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=cG1EbmWiSs"
+  },
+  "review_fields": {
+    "summary": "This paper considers some of the most intriguing phenomena in the field (grokking, emergence, double descent), which have proven to be interesting yet poorly understood. The most direct contributions are some interesting findings that arise from systematic exploration of different model and data sizes. \n\nIn short: \n1. Methodologically, I do not find the paper to make meaningful contributions. The core ideas has been identified in prior work, and the extension of sweeping systematically over model/data sizes is extremely natural. This is not to say the paper needs to provide methodological insight to be valuable, just that I don't see it as providing methodological insight.\n2. With respect to rigor, I generally find the decisions and execution reasonably, though I did not interrogate them too deeply.\n3. With respect to findings, I see this as the area where the paper shines. The figures, and the discussion of them, seem clearly of interest and make progress in advancing our understanding of these fascinating topics. \n\nSo, on balance, I generally am positive on the paper, find that it certainly befits COLM, and think it will gain traction as an interesting paper that makes people think and galvanizes further research.",
+    "reasons_to_accept": "The main reason to accept the paper is that it advances our understanding of emergence/grokking, both in the process-level sense of conducting useful new experiments and in the outcome-level sense of providing new qualitative insights. \n\nThe authors present their framework as a key contribution. I am not sure I would have foregrounded the framework so much, since it is hard to see why this is the right/preferable way to conceptualize what is going on, but it seems reasonable enough. I do not work in this area, so I will defer to other reviewers/the community in the future to see if this framework is worthy of uptake, but for now I see at as a second-order reason to be supportive of acceptance.",
+    "reasons_to_reject": "Given the emphasis placed on the framework, I am generally left dissatisfied: how do we arrive at this framework, why is it good, and how would it connect to a more theoretical account? I am not even sure it makes sense to call it a framework: it seems more reasonable to say it is a way of assigning terms to some phenomena, which perhaps helps build common terminology, but I am not sure this really advanced my conceptual understanding.\n\nWhile the paper is clear in a certain structural sentence, I found the writing more confusing than helpful in most places, perhaps because it is meandering. Since this is a general comment, it is hard to isolate specific paragraphs that could benefit from re-writing, so I would say the key principle I feel is not upheld is each sentence does not have a clear rhetorical purpose, nor is the ordering of the sentences particularly deliberate as far as I can tell. As a result, while I don't object to the writing, I feel it will not only inhibit my understanding but that of other readers.",
+    "questions_to_authors": "No specific questions - I will monitor the responses to other reviewers to see if I want to adjust my score.\n\nIf you want to best attempt to raise my score:\n1. Convince me the framework is the right conceptual model\n2. Tell me how you will rewrite parts to make the writing sharper\n\nThere are a lot of terms/concepts/ideas floating around in the paper. I would encourage adding some clear takeaways after each section or so on. If you want the reader to reminder some findings, make them more salient (in intro, in the actual content sections), because I would worry readers will sort of leave this paper with a muddled conceptual model of what it says a few days after reading it."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:34:54Z",
+    "migrated_from_v1_at": "2026-04-27T15:34:54Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2520,
+    "words": 429,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/3c205665-e154-4556-8158-e4a4c29e9890",
+    "error": null,
+    "scored_chars": 2417
+  }
+}

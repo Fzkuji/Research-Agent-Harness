@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "IAoSG4Q2xC",
+  "reviewer": "tyYN",
+  "paper": {
+    "title": "Hyperparameter Loss Surfaces Are Simple Near their Optima",
+    "authors": [
+      "Nicholas Lourie",
+      "He He",
+      "Kyunghyun Cho"
+    ],
+    "abstract": "Hyperparameters greatly impact models' capabilities; however, modern models are too large for extensive search. Instead, researchers design recipes that train well across scales based on their understanding of the hyperparameters. Despite this importance, few tools exist for understanding the hyperparameter loss surface. We discover novel structure in it and propose a new theory yielding such tools. The loss surface is complex, but as you approach the optimum simple structure emerges. It becomes characterized by a few basic features, like its effective dimension and the best possible loss. To uncover this *asymptotic regime*, we develop a novel technique based on random search. Within this regime, the best scores from random search take on a new distribution we discover. Its parameters are exactly the features defining the loss surface in the asymptotic regime. From these features, we derive a new asymptotic law for random search that can explain and extrapolate its convergence. These new tools enable new analyses, such as confidence intervals for the best possible performance or determining the effective number of hyperparameters. We make these tools available at: https://github.com/nicholaslourie/opda.",
+    "keywords": [
+      "experimental design",
+      "hyperparameters",
+      "scaling laws"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=IAoSG4Q2xC"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their response.\n\nI still don't agree that this should be called a scaling law. Chinchilla-style scaling laws are mostly about data and model size and how they trade off with compute. As far as I can tell, there's nothing in your results that would tell you in advance the optimum quantity of FLOPs to spend on hyperparameter optimization for a model and training set of a given sizes. What you're doing seems to me to be a lot more in the tradition of optimal stopping or PAC learning. But that's kind of a minor point of terminology.\n\nAbout the literature review, I take the authors' point. I'll change the score.\n\nBut: if there is another version of this paper, I would encourage to authors to try to make it clearer in the paper what they're actually doing. It took me four readings to figure it out and from looking at the discussion I don't think some of the other reviewers ever got it. That's because this paper seems to be about one thing (which is a very active area of research and we've all read tons of papers about) but it's actually about something completely different (which no one else is doing and we've never seen before). The fact that it confused all the reviewers so much is a sign that it could be making its point in a better way."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1278,
+    "words": 236,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b001ae1e-8476-4d76-a640-a1c260b19029",
+    "error": null,
+    "scored_chars": 1278
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2020,
+  "forum_id": "HJeYalBKvr",
+  "reviewer": "1",
+  "paper": {
+    "title": "Attention over Phrases",
+    "authors": [
+      "Wanyun Cui"
+    ],
+    "abstract": "How to represent the sentence ``That's the last straw for her''? The answer of the self-attention is a weighted sum of each individual words, i.e. $$semantics=\\alpha_1Emb(\\text{That})+\\alpha_2Emb(\\text{'s})+\\cdots+\\alpha_nEmb(\\text{her})$$. But the weighted sum of ``That's'', ``the'', ``last'', ``straw'' can hardly represent the semantics of the phrase. We argue that the phrases play an important role in attention.\nIf we combine some words into phrases, a more reasonable representation with compositions is \n$$semantics=\\alpha_1Emb(\\text{That's})+Emb_2(\\text{the last straw})+\\alpha_3Emb(\\text{for})+\\alpha_4Emb(\\text{her})$$.\nWhile recent studies prefer to use the attention mechanism to represent the natural language, few noticed the word compositions. In this paper, we study the problem of representing such compositional attentions in phrases. In this paper, we proposed a new attention architecture called HyperTransformer. Besides representing the words of the sentence, we introduce hypernodes to represent the candidate phrases in attention. \nHyperTransformer has two phases. The first phase is used to attend over all word/phrase pairs, which is similar to the standard Transformer. The second phase is used to represent the inductive bias within each phrase. Specially, we incorporate the non-linear attention in the second phase. The non-linearity represents the the semantic mutations in phrases. The experimental performance has been greatly improved. In WMT16 English-German translation task, the BLEU increases from 20.90 (by Transformer) to 34.61 (by HyperTransformer).",
+    "keywords": [
+      "representation learning",
+      "natural language processing",
+      "attention"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=HJeYalBKvr"
+  },
+  "review_fields": {
+    "experience_assessment": "I have read many papers in this area.",
+    "review_assessment:_thoroughness_in_paper_reading": "I made a quick assessment of this paper.",
+    "review_assessment:_checking_correctness_of_experiments": "I assessed the sensibility of the experiments.",
+    "review_assessment:_checking_correctness_of_derivations_and_theory": "I assessed the sensibility of the derivations and theory.",
+    "review": "This paper addresses an issue of compositionality in self-attention models such Transformer. A simple idea of composing multiple words into a phrase as a hypernode and representing it using a non-linear function to capture the semantic mutation is proposed. In the machine translation and PoS tagging tasks, the proposed PhraseTransformer achieves impressive gain, especially +13.7 BLEU score compared to the Transformer.\n\nThe motivation of the paper is very clear, and I love this kind of paper; with a simple idea, making a huge impact on the field. I appreciate the real example to compare how word-level self-attention is different from the phrase-level self-attention in Abstract and Figure 1. The problem itself; tackling the semantic compositionality of self-attention, is a very important problem, and I like the part that authors described it as an inductive bias as a model perspective. \n\nHowever, this work seems to be problematic in terms of presentation, clarity, and meaningful comparisons. Please see my detailed comments below.\n\nFirst, what exactly is “semantic mutation”? The term has been used here and there to describe the inductive bias in semantic compositionality and to show how the nonlinearity can effectively capture it. But, I couldn’t find any definition from the paper, couldn’t find any formal definition from any ACL papers, and couldn’t guess myself based on the context. I am guessing it is probably some sort of combination of meaning in phrase-level words. If so, more importantly, how does the simple non-linear function (i.e., sigmoid) can capture such semantic combinations of words? How could it make such a huge gain (PhraseTransformer vs Linear PhraseTransformer) in Table 1 on MT task? This seems to be the most important contribution of this paper, of which I don’t understand yet. \n\n\nWhat is the “concept of hypernodes in hypergraph”? I think it is not a common word that I can understand it clearly without any references or any background. It would be better to add some references for the concept. Again, I am guessing it is a sort of graph theory that decomposes a large node into small pieces but keeps their connectivity. But, then how is that exactly linked to phrases of words? If you make phrases only on consecutive words, it is basically just chunking. I don’t find any relevance of phrases in a sentence with the (hyper)graph something. \n\nIn Figure 2, how is the bidirectional path made between the word representations and phrase representations? In my understanding of your algorithm based on Equation 2-6, I only see the attention of phrases is computed by word attention, but not the other way.  Please clarify this. If so, how does the gradient back-propagate to each other?\n\nThe biggest concern of this work is the scores reported in Table 1. I have checked the recent papers which used the Mutli30K(de-en) and other results from WMT[16-18] reports, but the BLEU score reported in Table 1 (20.90) seems way lower than the scores reported by any systems trained by either non-Transformer or Transformer systems. For that reason, it would be fair to include some results from the state-of-the-art systems on the same dataset. \n\nA minor point but in the complexity analysis, your m is basically n because you take consecutive words from n length of sentence. You better distinguish which variables are dependent on each other first. \n\n\nThere are MANY typos, missing captions, grammatical errors in the paper. Here are only some of them:\nThere is no caption for Figure 1. \nWhen you cite a reference with its model name, you better make the citation under parenthesis. \n“equation equation 5” -? “equation 5”\n“Wee” -> “We”"
+  },
+  "review_metadata": {
+    "rating": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:47:36Z"
+  }
+}

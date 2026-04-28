@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "iEeiZlTbts",
+  "reviewer": "gAKk",
+  "paper": {
+    "title": "No Regrets: Investigating and Improving Regret Approximations for Curriculum Discovery",
+    "authors": [
+      "Alexander Rutherford",
+      "Michael Beukman",
+      "Timon Willi",
+      "Bruno Lacerda",
+      "Nick Hawes",
+      "Jakob Nicolaus Foerster"
+    ],
+    "abstract": "What data or environments to use for training to improve downstream performance is a longstanding and very topical question in reinforcement learning. \nIn particular, Unsupervised Environment Design (UED) methods have gained recent attention as their adaptive curricula promise to enable agents to be robust to in- and out-of-distribution tasks.\nThis work investigates how existing UED methods select training environments, focusing on task prioritisation metrics.\nSurprisingly, despite methods aiming to maximise regret in theory, the practical approximations do not correlate with regret but with success rate.\nAs a result, a significant portion of an agent's experience comes from environments it has already mastered, offering little to no contribution toward enhancing its abilities. Put differently, current methods fail to predict intuitive measures of *learnability*. Specifically, they are unable to consistently identify those scenarios that the agent can sometimes solve, but not always.\nBased on our analysis, we develop a method that directly trains on scenarios with high learnability. This simple and intuitive approach outperforms existing UED methods in several binary-outcome environments, including the standard domain of Minigrid and a novel setting closely inspired by a real-world robotics problem. \nWe further introduce a new adversarial evaluation procedure for directly measuring robustness, closely mirroring the conditional value at risk (CVaR).\nWe open-source all our code and present visualisations of final policies here: https://github.com/amacrutherford/sampling-for-learnability.",
+    "keywords": [
+      "MARL",
+      "UED",
+      "Robotics"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=iEeiZlTbts"
+  },
+  "review_fields": {
+    "summary": "This work proposes a new Unsupervised Environment Design (UED) method, called Sampling for Learnability (SFL), developed for navigation tasks. SFL upsamples environment configurations with high learnability scores, i.e., p*(1-p), where p is the success rate in a specific configuration. The paper highlights the failure of some of the state-of-the-art (SOTA) UED approaches on such tasks and argues that they cannot approximate learning agents' regret, unlike SFL. They evaluate SFL in JaxNav, a Jax-based single and multi-agent navigation benchmark they introduce, and MiniGrid. Their empirical results evidence that SFL is robust and can outperform Domain Randomisation (DS) and SoTA UED approaches in JaxNav and MiniGrid. The paper demonstrates these outcomes by following two evaluation protocols, respectively: 1) A risk-based protocol that they introduce, computing the conditional value-at-risk (CVaR) of the distribution of success rate based on randomly sampled levels, and 2) a common protocol in the UED literature that evaluates performance/success in hand-designed test sets, as they focus on complex, yet, solvable configurations.",
+    "strengths": "- This paper is well-written, clearly expresses the motivation and the gap in the literature, and illustratively analyses the failure of existing UED methods in navigation tasks. \n\n- Their contribution is a simple yet novel UED approach called SFL that explicitly addresses this failure mode. Their empirical results through two evaluation protocols highlight that SFL is robust (in terms of CVaR-based metrics) and outperforms existing approaches in expected return/success.\n\n- I agree with the authors' claim that existing UED methods claim robustness yet fail to quantify it accurately. Hence, the robustness evaluation protocol utilized in this work may be considered new in the UED literature.",
+    "weaknesses": "- Section 4.1 analyses MaxMC and PVL, popular UED score functions, in terms of their predictiveness of learnability. However, there is no demonstration of a similar analysis for SFL. Although SFL's scoring function is intuitive and it is not as challenging to guess what the scoring would look like, including such an illustrative comparison would support the claims in this paper.\n\n- The empirical results according to the proposed evaluation protocol for robustness (Figures 3a, 5a, and 7a) show that SFL outperforms the rest of the evaluated methods for alpha < 1 (100%). However, except in the multi-agent case (Fig 5a), the expected success rates indicate marginal or no improvement. In MiniGrid, the difference between DR and SFL drops quickly as alpha gets above 0.1 (10%). This is likely due to SFL not doing so well in easier levels compared to other baselines. Although this is expected, as the proposed metric results in upsampling learnable environments, not easy ones, I suggest a comparison of results in easy levels to conclude whether this is the case or not.",
+    "questions": "Table 4 showcases compute times for each evaluated approach. Most of these approaches have similar components, except maybe SFL's extra rollout phase. So why is SFL one of the fastest?",
+    "limitations": "- The major limitation of the proposed approach is the rollouts needed to compute the learnability score of randomly sampled levels. Section 4.2 indicates that 5000 levels are sampled, and n-step rollouts, where n is not specified, are generated to compute the scores. It would be more informative if the amount of computation and time spent in this phase were reported (in comparison to the usual curriculum learning task sampling phase). In addition, I wonder how SFL is one of the fastest in the single agent nav environment, as reported in Table 4 in Appendix F, despite having this additional phase."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 4,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:15:36Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 2566,
+    "words": 413,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/648c6ef5-9967-4fbf-8787-f5ecf7537002",
+    "error": null,
+    "scored_chars": 2567
+  }
+}

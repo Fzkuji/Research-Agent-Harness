@@ -1,0 +1,45 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2021,
+  "forum_id": "IVV1putQ90",
+  "reviewer": "VGyX",
+  "paper": {
+    "title": "Latent Equilibrium: A unified learning theory for arbitrarily fast computation with arbitrarily slow neurons",
+    "authors": [
+      "Paul Haider",
+      "Benjamin Ellenberger",
+      "Laura Kriener",
+      "Jakob Jordan",
+      "Walter Senn",
+      "Mihai A. Petrovici"
+    ],
+    "abstract": "The response time of physical computational elements is finite, and neurons are no exception. In hierarchical models of cortical networks each layer thus introduces a response lag. This inherent property of physical dynamical systems results in delayed processing of stimuli and causes a timing mismatch between network output and instructive signals, thus afflicting not only inference, but also learning. We introduce Latent Equilibrium, a new framework for inference and learning in networks of slow components which avoids these issues by harnessing the ability of biological neurons to phase-advance their output with respect to their membrane potential. This principle enables quasi-instantaneous inference independent of network depth and avoids the need for phased plasticity or computationally expensive network relaxation phases. We jointly derive disentangled neuron and synapse dynamics from a prospective energy function that depends on a network's generalized position and momentum. The resulting model can be interpreted as a biologically plausible approximation of error backpropagation in deep cortical networks with continuous-time, leaky neuronal dynamics and continuously active, local plasticity. We demonstrate successful learning of standard benchmark datasets, achieving competitive performance using both fully-connected and convolutional architectures, and show how our principle can be applied to detailed models of cortical microcircuitry. Furthermore, we study the robustness of our model to spatio-temporal substrate imperfections to demonstrate its feasibility for physical realization, be it in vivo or in silico.",
+    "keywords": [
+      "dynamical systems",
+      "cortical microcircuits",
+      "deep learning",
+      "prospective coding",
+      "noise robustness",
+      "synaptic plasticity"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=IVV1putQ90"
+  },
+  "review_fields": {
+    "comment": "Thank you for your detailed and thoughtful response. I still have major objections regarding the novelty and relevance of this work and will spell them out in more detail below:\n> Both references you cite as prior work (Knight and van Vreeswijk / Sompolinsky) investigate the responses of neuronal populations, either with or without random recurrent connectivity in the presence of background noise. Using (by now standard) mean-field theory arguments, they demonstrate that under such conditions, the population-averaged response can be faster than those of individual neurons. Simply speaking, in an ensemble of neurons with a wide enough distribution of states one always finds some neurons with membrane potentials close to spiking threshold which can respond to input changes (almost) instantaneously.\n\nIt is correct that both papers address neural populations, however, the mechanism of tracking of input in van Vreeswijk / Sompolinsky is not only the irregular/asynchronous activity, but also that the recurrent rates are large (of order \\sqrt{K} in sparse or \\sqrt{N} in dense networks), resulting in increased speed of tracking with population size (see Renart et al. 2010 including supplementary material).\n\n> In contrast, our work shows how - and why, in the context of deep learning - individual neurons can respond to input changes arbitrarily fast via prospective dynamics without relying on ensemble effects and/or background noise. In particular, we discuss an exact prospective mechanism and the means to achieve it, which is different from simply having a response on a different time scale, which also changes with the properties of the input (such as frequency) and the ensemble (neuron parameters, connectivity as well as fixed recurrent weights). \n\nWhat you call here an individual neuron is a firing rate unit, which -at least in large parts of the theoretical neuroscience community- is being thought of as a population of individual neurons. This becomes clear in the biological evidence you are citing. \nKöndgen studies exactly the population response, they inject many times a time-varying current into a single cell on top of noise and measure the PSTH (figure 2). Thus, the effect of phase-advancement is an effect on a population level, not on a single-cell level. Thus, the core insight of  Bruce Knight directly applies here.\n \nThe study by Köndgen (an similar experimental studies of frequency-response) has been widely processed in theory community (113 citations on Google Scholar many of which are theoretical studies). \n Note, that there is a large body of work in populations of various neuron models (both recurrent and unconnected) that investigated under what conditions a \"quasi-instantaneous\" response is obtained, moreover developed theoretical understanding of high-frequency response to external stimuli and the biophysical mechanisms of phase advancement. \n\nIncomplete list of examples:\nLindner 2001\nhttps://doi.org/10.1103/PhysRevLett.86.2934\nFourcaud-Trocmé et al., 2003\nhttps://doi.org/10.1523/JNEUROSCI.23-37-11628.2003 \nRichardson 2018\nhttps://doi.org/10.1103/PhysRevE.98.042405\nTchumatchenko et al., 2011\nhttps://doi.org/10.1523/JNEUROSCI.2182-11.2011 \n\n> We are sad, but also honestly surprised to hear that you find a theoretical/mathematical understanding of the model missing. Throughout the manuscript we have tried to make our theory accessible to a broad audience and provide an understanding of the mathematical framework. For the interested readers, we have provided all mathematical details in the supplement. If you could provide specific examples of where you would see opportunities for improving the main manuscript, it would help us to make it more accessible.\n\nJust do describe in more detail what a mathematical/theoretical understanding (which is missing in the presented study) would/could entail:\n* A mathematical theory of how the frequency-response characteristics of the proposed \"Latent Equilibrium\" approach depend on the various model parameters.\n* An analytical study of the high-frequency response and how it depends on the various model parameters.\n* A comparison of predictions of such a theory with numerical simulations (possibly also with experimental data if applicable)\nSuch a theory (which also predicts phase-advancement) exists for various biologically more plausible neuron models already (some example references are given above).\nHow such phase-advancement would interact with training on tasks would indeed be an interesting theoretical question.\n\n\n> While we are not entirely sure what you mean by an “unphysiological prospective time constant”, we would like to highlight that experimental evidence suggests prospective coding properties in cortical neurons. See for example Köndgen [16], showing that the instantaneous firing of pyramidal neurons can be phase advanced with respect to oscillatory synaptic input.\n\nSee comment on Köndgen above.\n\n> We kindly, but confidently disagree that synaptic time constants in the (sub)millisecond range are unphysiological. Multiple experiments have documented synaptic response times in this regime (see, e.g., Spruston, Jonas, & Sakmann (1995) [a5]; Bellingham, Lim, Walmsley (1998) [a6]; Geiger, Lbke, Roth, Frotscher & Jonas (1997) [a7]). \n\nSpruston, Jonas, & Sakmann (1995) report a shortest synaptic time (6.3ms) for AMPA, that is not submillisecond. Are you mixing up rise-time and decay time? Rise times can be much faster than decay times."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:42:57Z"
+  }
+}

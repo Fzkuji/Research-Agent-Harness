@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "Iyve2ycvGZ",
+  "reviewer": "pSht",
+  "paper": {
+    "title": "Bellman Optimal Stepsize Straightening of Flow-Matching Models",
+    "authors": [
+      "Bao Nguyen",
+      "Binh Nguyen",
+      "Viet Anh Nguyen"
+    ],
+    "abstract": "Flow matching is a powerful framework for generating high-quality samples in various applications, especially image synthesis. However, the intensive computational demands of these models, especially during the finetuning process and sampling processes, pose significant challenges for low-resource scenarios. This paper introduces Bellman Optimal Stepsize Straightening (BOSS) technique for distilling flow-matching generative models: it aims specifically for a few-step efficient image sampling while adhering to a computational budget constraint. First, this technique involves a dynamic programming algorithm that optimizes the stepsizes of the pretrained network. Then, it refines the velocity network to match the optimal step sizes, aiming to straighten the generation paths. Extensive experimental evaluations across image generation tasks demonstrate the efficacy of BOSS in terms of both resource utilization and image quality. Our results reveal that BOSS achieves substantial gains in efficiency while maintaining competitive sample quality, effectively bridging the gap between low-resource constraints and the demanding requirements of flow-matching generative models. Our paper also fortifies the responsible development of artificial intelligence, offering a more sustainable generative model that reduces computational costs and environmental footprints. Our code can be found at https://github.com/nguyenngocbaocmt02/BOSS.",
+    "keywords": [
+      "flow matching",
+      "generative model",
+      "efficient sampling",
+      "distillation",
+      "responsible ML"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Iyve2ycvGZ"
+  },
+  "review_fields": {
+    "summary": "Flow matching is a powerful framework for generating high-quality samples, especially in image synthesis. However, the computational demands of these models pose challenges in low-resource scenarios. This paper introduces the Bellman Optimal Step-size Straightening (BOSS) technique for efficient image sampling within a computational budget. BOSS optimizes step sizes and refines the velocity network to improve generation paths. Experimental evaluations demonstrate BOSS's effectiveness in resource utilization and image quality. It provides a sustainable solution that reduces costs and environmental footprints.",
+    "strengths": "Not only in flow matching, but also in diffusion models, all endeavors are focused on predicting the efficiency of noise, score, and vector field. While most of them set the step size based on a heuristic principle (e.g., DDIM, DDPM), this paper explores generative models of ODE from a different perspective - the step size itself, rather than the \"direction\" of a specific step.",
+    "weaknesses": "- The baseline is too weak, as it only compares quantitatively with the fixed-step size ODE solver euler, while it doesn't compare with adaptive step size ODE solvers such as dopri5 or rk45. This comparison should be included in Table 1.\n- The optimization needs to be conducted on a case-by-case basis. Additionally, the use of the dynamic programming algorithm using Gorubi may result in slow performance, rendering the method impractical. Optimization time is also not discussed in this paper."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 5,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 878,
+    "words": 144,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/68cbbcff-c3ed-4729-b5d2-152b8186262a",
+    "error": null,
+    "scored_chars": 878
+  }
+}

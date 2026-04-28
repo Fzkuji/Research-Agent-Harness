@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "1BJUwgi3ed",
+  "reviewer": "x9gX",
+  "paper": {
+    "title": "Controlling Confusion via Generalisation Bounds",
+    "authors": [
+      "Reuben Adams",
+      "John Shawe-Taylor",
+      "Benjamin Guedj"
+    ],
+    "abstract": "We establish new generalisation bounds for multiclass classification by abstracting to a more general setting of discretised error types. Extending the PAC-Bayes theory, we are hence able to provide fine-grained bounds on performance for multiclass classification, as well as applications to other learning problems including discretisation of regression losses. Tractable training objectives are derived from the bounds. The bounds are uniform over all weightings of the discretised error types and thus can be used to bound weightings not foreseen at training, including the full confusion matrix in the multiclass classification case.",
+    "keywords": [
+      "PAC-Bayes",
+      "Generalisation bounds",
+      "Multiclass classification"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=1BJUwgi3ed"
+  },
+  "review_fields": {
+    "comment": "Dear authors,\n\nThanks for your response! While I like the binary example you give about unequal error interesting, I still don't see how this can be applied practically. Can you please turn this into a real experiment, and demonstrate that existing methods fall short, and quantify benefits of the new bound?\n\nThanks for sharing references on connections between your work and fairness literature. I asked this question as a potential area for the authors to work out the bounds and perhaps show something new and non-trivial in an important practical problem.\n\nAs it stands, I think the theory is correct; there is some novelty in how the proofs are extended from previous work, but I am yet to see a concrete application for the new results. As a pure theoretical paper, I think the contribution of this paper is borderline. I would be inclined to be supportive of acceptance if the authors can showcase how the extended theory can shed insights in practice. IMHO, the examples discussed in words are not sufficient to motivate the paper. I hope the authors can apply these new bounds to a real problem and actually show something new and insightful!\n\nThanks, \\\nReviewer x9gX"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

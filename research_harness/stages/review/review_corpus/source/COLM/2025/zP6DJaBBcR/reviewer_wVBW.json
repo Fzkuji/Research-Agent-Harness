@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "zP6DJaBBcR",
+  "reviewer": "wVBW",
+  "paper": {
+    "title": "REFA: Reference Free Alignment with Fine-Grained Length Control",
+    "authors": [
+      "Taneesh Gupta",
+      "Rahul Madhavan",
+      "Xuchao Zhang",
+      "Chetan Bansal",
+      "Saravan Rajmohan"
+    ],
+    "abstract": "To mitigate reward hacking from response verbosity, modern preference optimization methods are increasingly adopting length normalization (e.g., SimPO, ORPO, LN-DPO). While effective against this bias, we demonstrate that length normalization itself introduces a failure mode: the **URSLA shortcut**. Here models learn to satisfy the alignment objective by prematurely truncating low-quality responses rather than learning from their semantic content. To address this, we introduce **REFA**, a new alignment framework that proposes probabilistic control on a structural token that controls termination. Our core innovation is a new class of regularizers that operate directly on the probability of the End-of-Sequence (EOS) token, a previously unexploited control lever. This token-level intervention provides a principled solution to the URSLA shortcut, ensuring genuine quality improvements. Furthermore, it unlocks a versatile mechanism for managing the alignment-efficiency tradeoff, enabling practitioners to fine-tune models that adhere to specific token budgets. Empirically, REFA achieves a **60.29\\%** win rate and a **52.17\\%** length-controlled win rate on AlpacaEval2 with Llama-3-8B-Instruct, demonstrating the power of our token-level control paradigm.",
+    "keywords": [
+      "Model Alignment",
+      "RLHF",
+      "Preference Optimization"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=zP6DJaBBcR"
+  },
+  "review_fields": {
+    "summary": "This paper introduces a reference-free multi-preference optimization method. It combines some of more successful techniques in the literature such as deviation-based weighting and length-normalized scores. In addition, an additional EOS regularization term is introduced to further control the termination of model predictions. On both Mistral and Llama models, the experiments show that the proposed method (REFA-dynamic) significantly outperforms various baselines.",
+    "reasons_to_accept": "1. The proposed method is well-motivated and for the most part straightforward to follow. I find the section on URSLA illuminating and intuitive.\n2. The gains appear solid, although see the question section below for one of my concerns.\n3. The ablations are good additions, answering many questions I had in mind while reading through the experiment section.",
+    "reasons_to_reject": "My main reason for rejection concerns the lack of details on the many variants of the proposed methods, all presented in the bottom block of rows in Table 2. It's critical information and I couldn't find relevant information despite multiple readthroughs. For instance, what is \"dyamic\", \"1-vs-k\", and how do you combine REFA with \"InfoNCA\"? For this reason, I'm giving a below-acceptance assessment, although I do believe with proper explanations it should merit a higher score.",
+    "questions_to_authors": "1. The main results in Table 2 look the best for AlpacaEval 2, but less so for Arena-Hard, and much less for MT-Bench. I wonder if there's an alternative way to evaluate two systems head-to-head (i.g. pairwise comparison) so that we can conclude method X is significantly better than method Y.\n2. Out of curiosity, do you have a plausible explanation for why the trends for Llama-3 looks different than those for Mistral? For instance, REFA-1-vs-k (p=0) performs the best for Llama-3 on Arena-Hard, but not so much for Mistral.\n3. The paper is very heavy on analytical and quantitative results, but I think it would benefit greatly from some additional examples to show how the proposed methods might help (e.g., how did EOS regularization help on a specific example?)"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1609,
+    "words": 264,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/59629bcd-e891-4617-8d71-63759896495e",
+    "error": null,
+    "scored_chars": 1609
+  }
+}

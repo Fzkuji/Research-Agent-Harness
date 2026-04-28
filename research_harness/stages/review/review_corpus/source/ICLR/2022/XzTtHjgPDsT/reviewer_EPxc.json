@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "XzTtHjgPDsT",
+  "reviewer": "EPxc",
+  "paper": {
+    "title": "Coordination Among Neural Modules Through a Shared Global Workspace",
+    "authors": [
+      "Anirudh Goyal",
+      "Aniket Rajiv Didolkar",
+      "Alex Lamb",
+      "Kartikeya Badola",
+      "Nan Rosemary Ke",
+      "Nasim Rahaman",
+      "Jonathan Binas",
+      "Charles Blundell",
+      "Michael Curtis Mozer",
+      "Yoshua Bengio"
+    ],
+    "abstract": "Deep learning has seen a movement away from representing examples with a monolithic hidden state towards a richly structured state. For example, Transformers segment by position, and object-centric architectures decompose images into entities. In all these architectures, interactions between different elements are modeled via pairwise interactions: Transformers make use of self-attention to incorporate information from other positions and object-centric architectures make use of graph neural networks to model interactions among entities.  We consider how to improve on pairwise interactions in terms of global coordination and a coherent, integrated representation that can be used for downstream tasks. In cognitive science, a global workspace architecture has been proposed in which functionally  specialized  components share information through a common, bandwidth-limited communication channel. We explore the use of such a communication channel in the context of deep learning for modeling the structure of complex environments. The proposed method includes a shared workspace through which communication among different specialist modules takes place but due to limits on the communication bandwidth, specialist modules must compete for access. We show that capacity limitations have  a rational basis in that (1) they encourage specialization and compositionality and (2) they facilitate the synchronization of otherwise  independent specialists.",
+    "keywords": [
+      "slot based recurrent architectures",
+      "attention",
+      "transformers",
+      "latent bottleneck."
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=XzTtHjgPDsT"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes a communication framework to have multiple modules communicate and switch precedence efficiently, taking inspiration from Global Workspace Theory in cognitive science. The primary contribution is a scheme to replace complete pairwise communications in modularized architectures with a single, limited-capacity workspace that persists and changes over stages of computation. This workspace is implemented with a read/write scheme that iterates through stages of computation (layers in a Transformer or steps in a recurrent architecture): in the write phase, the shared memory is updated according to the current states of the modules that are most informative to the shared memory's current state as determined by a key-value attention scheme, with the modules competing via softmax. In the read phase, the internal states of all modules are updated via another key-value attention scheme. The advantages are claimed to be 1) higher order interaction among modules because every module learns from every other one (at least, more than pairwise), dynamic filtering because the memory persists and updates stage to stage; and linear computational complexity because the number of memory slots doesn't change much (and it's typically small, 1-10).  \n\nThe related work motivates this paper by the classical AI principle that intelligent systems should have multiple specialized modules rather than one general entity. It distinguishes from prior slot-based memory work in that memory writes here are sparse and competitive, and prior work on reducing computational complexity of Transformer dot product attention through its persistent memory. It aptly assesses itself as a unification of existing ideas. \n\nThe experimentation section tests different parts of the proposed scheme. The triangles experiment tests the comparative speed to convergence (and accuracy) of the HO communications here compared to pairwise in baseline Transformer. The MNIST generation experiment with TIMs shows that the shared workspace gives an advantage on domains where input dimensions are mostly independent. The CATER experiment shows a similar result to the triangles experiment (quickly picking out only relevant information) but in a time series, and the Sort-of-CLEVR experiment again reinforces the power of the shared workspace on sparse tasks. The physical reasoning shows general improvement, and the Atari performance shows considerable improvement due to modularization.",
+    "main_review": "I enjoyed reading this paper! I think the strengths fall into three main categories: good problem setup that took the reader from concept to formulation well, an interesting idea with good scoping, and an impressive experimentation suite. More details:\n\n**Good problem setup:** I found the discussion of advantages of a shared workspace compelling. The proposed structure is intuitive and simple, but nonetheless convincing about its claimed advantages of higher-order communications, dynamic filtering, and complexity advantages. The qualitative parts of the writing are strong, effectively building a case for reading this paper. \n\n**Interesting idea with good scoping:** I appreciate that this is one architectural change that considers all inputs and outputs, and shows its advantages over the right baselines. This work avoids the trap of making minor changes and then being unable to really ablate them. The paper does seem to be a unification of existing ideas, but I distinguish that from (and prefer it over) merely concatenating existing ideas. \n\n**Impressive experimentation suite:** There are of course many experiments with thematic consistency, which is great - always better than papers with two testbeds and virtually the same experiment over and over. The first four testbeds make a nuanced point about sparse inputs, and the results on Atari are particularly exciting because they make a general claim and show significant improvement. \n\nMy critiques are as follows, in order of significance: \n\n**Content**\n1. Main critique: the goals of this paper seem to be to show that accuracy and performance improve **overall**, with a mechanism of higher order communications, dynamic filtering, and linear complexity that we will be convinced are attributes of the SW. This paper doesn't quite get there, though it gets part of the way there. \n\nFrom my understanding, Triangles, CATER, and Sort-of-CLEVR all tell us that the higher-order communication and single channel will help identify relevant information earlier in the pairwise communication, leading to faster convergence - *if* information is sparse in the input. The MNIST generation experiment tells us something similar about independent regions in inputs. Figs 4 and 5 are convincing to this end. However, the main claim - higher-order communication and a sparser connection of graphs - help for inputs with sparse information in various locations - is less surprising than a claim of general improvement. Even if that's still interesting (it is), the intro and conclusion seem to make a more general claim. Physical reasoning and Atari show more general improvement (and the results on Atari are impressive), but they're also the weakest, most qualitative parts of Sec 4. The ideal solution would be more robust testing of general improvement in these two testbeds, but if not then I would at least appreciate a claim that acknowledges the common and specific nature of the first four testbeds. \n\nThis is the crux of the motivation behind my score: I worry that this paper overstates its claim and the real claim is elegant but not that surprising. It's made even murkier by a couple promising results that receive little attention. \n\n2. Relatedly, the Atari section makes a claim about considerable improvement due specifically to more appropriate modularization. That would be cool and a real testament to this approach, but I would need more specific experimentation to demonstrate that the effect really was more appropriate modularization. \n\n**Presentation**\n1. The mathematical formulation is quite clear, but it's not presented clearly. I had to puzzle over the paragraph for a while, not because it was overly complicated but because it took a lot of treasure hunting to find all the parts and put them together. The issue is that the *Notation* and *Step 1/2/3* sections write the math into large blocks of text without pause. It would be more helpful to present some end-to-end equations, then break those down in text. It can be unclear without doing it myself whether something is being element-wise updated, transformed, dotted, etc. \n\n2. I really appreciate the slew of testbeds. However, that's how they come across: a laundry list of experiments, one after another, even though they support similar claims. That robustness can be shown by having a claims-driven structure for the results section rather than a testbed-driven structure, which to the reader is arbitrary and doesn't deliver the important information as well as it could. E.g. section titles like \"Performance advantage on sparse data\", then talk about the different results that show it. If one experiment shows multiple advantages, multiple sections can still point to the same figures. \n\n3. The figures are confusing - they are cramped, small, and have lots of acronyms I have to hunt down in various parts of the paper. They're all helpful content-wise, but this could be shown better with something as simple as better aesthetics and tagging.\n\n4. Nit: the text seems to switch between \"specialist\" and \"neural module\". Are these the same thing? Is \"specialist\" an abstraction/metaphor for \"neural module\"? Is \"neural module\" an example of \"specialist\"? All of those are great, just signpost and explain the switch.",
+    "summary_of_the_review": "**Strengths:**\n1. Good problem setup\n2. Interesting idea with good scoping \n3. Impressive experimentation suite \n\n**Critiques:**\n*Content:*\n1. The experimentation section mainly convinces me that this architecture is good for accuracy and convergence speed on sparse inputs, not that it's generally advantageous - but the latter seems to be the claim of the paper, and the former is less surprising given the nature of the architecture (though still interesting - it's compelling to see that the architecture works). \n2. The experimentation on general improvement is a bit weak. \n\n*Presentation*\n1. Formulation is clear, but it's presented piecemeal in long paragraphs that make it hard to parse and put together. Since the formulation is simple (a good, elegant thing), it's frustrating to spend a lot of time hunting down all the pieces.\n2. Excellent thoroughness in testbeds, but the results don't have to be presented in such a process-driven way. They can and should be claims/driven. \n3. The figures need to be more readable \n4. \"Specialist\"/\"neural module\" distinction is unclear (see main review)",
+    "correctness": "2: Several of the paper’s claims are incorrect or not well-supported.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:42Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:42Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 5263,
+    "words": 830,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/97b0c076-3e6a-4455-9e8b-18a25d83a228",
+    "error": null,
+    "scored_chars": 5273
+  }
+}

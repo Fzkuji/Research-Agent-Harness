@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2019,
+  "forum_id": "H1xAH2RqK7",
+  "reviewer": "1",
+  "paper": {
+    "title": "Generative Adversarial Models for Learning Private and Fair Representations",
+    "authors": [
+      "Chong Huang",
+      "Xiao Chen",
+      "Peter Kairouz",
+      "Lalitha Sankar",
+      "Ram Rajagopal"
+    ],
+    "abstract": "We present Generative Adversarial Privacy and Fairness (GAPF), a data-driven framework for learning private and fair representations of the data. GAPF leverages recent advances in adversarial learning to allow a data holder to learn \"universal\" representations that decouple a set of sensitive attributes from the rest of the dataset. Under GAPF, finding the optimal decorrelation scheme is formulated as a constrained minimax game between a generative decorrelator and an adversary. We show that for appropriately chosen adversarial loss functions, GAPF provides privacy guarantees against strong information-theoretic adversaries and enforces demographic parity. We also evaluate the performance of GAPF on multi-dimensional Gaussian mixture models and real datasets, and show how a designer can certify that representations learned under an adversary with a fixed architecture perform well against more complex adversaries.",
+    "keywords": [
+      "Data Privacy",
+      "Fairness",
+      "Adversarial Learning",
+      "Generative Adversarial Networks",
+      "Minimax Games",
+      "Information Theory"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H1xAH2RqK7"
+  },
+  "review_fields": {
+    "review": "The authors describe a framework of how to learn a \"fair\" (demographic parity) representation that can be used to train certain classifiers, in their case facial expression and activity recognition. The method describes an adversarial framework with a constraint that bounds the distortion of the learned representation compared to the original input.\n\nClarity:\nThe paper is well written and easy to follow. The appendix is rather extensive though and contains some important parts of the paper, though the paper can be understood w/o it.\n\nI didn't quite follow Sec 3. It is a bit sparse on the details and the final conclusion isn't entirely clear. It also isn't clear to me how general the conclusions drawn from the Gaussian mixture model are for more complex cases.\n\nNovelty:\nAdversarial fairness methods are not new, but in my opinion the authors do a good job of summarizing the literature and formalizing the problem. I am not fully familiar with the space to judge if this is enough novelty.\n\nUsing the distortion constraint is interesting and seems to work according to the experiments. Generally though, I think that distortion can be a very restrictive constraint. One could imagine representations with a very high distortion (e.g. by completely removing the sensitive attribute) and predictive qualities equivalent to the original representation. Some further discussion of this would be good.\n\nExperiments:\nThe experiments are somewhat limited, but show the expected correlations (e.g. distortion vs predictiveness). \n\nOverall, I do believe that this work is in the right direction in this more and more popular area of great importance. I also think that contributions compared to other works could be made more clear, as well as additional experiments and discussions of the shortcomings of this approach may be added."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:49:55Z"
+  }
+}

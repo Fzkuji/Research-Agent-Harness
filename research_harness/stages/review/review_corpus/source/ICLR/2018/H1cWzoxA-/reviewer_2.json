@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2018,
+  "forum_id": "H1cWzoxA-",
+  "reviewer": "2",
+  "paper": {
+    "title": "Bi-Directional Block Self-Attention for Fast and Memory-Efficient Sequence Modeling",
+    "authors": [
+      "Tao Shen",
+      "Tianyi Zhou",
+      "Guodong Long",
+      "Jing Jiang",
+      "Chengqi Zhang"
+    ],
+    "abstract": "Recurrent neural networks (RNN), convolutional neural networks (CNN) and self-attention networks (SAN) are commonly used to produce context-aware representations. RNN can capture long-range dependency but is hard to parallelize and not time-efficient. CNN focuses on local dependency but does not perform well on some tasks. SAN can model both such dependencies via highly parallelizable computation, but memory requirement grows rapidly in line with sequence length. In this paper, we propose a model, called \"bi-directional block self-attention network (Bi-BloSAN)\", for RNN/CNN-free sequence encoding. It requires as little memory as RNN but with all the merits of SAN. Bi-BloSAN splits the entire sequence into blocks, and applies an intra-block SAN to each block for modeling local context, then applies an inter-block SAN to the outputs for all blocks to capture long-range dependency. Thus, each SAN only needs to process a short sequence, and only a small amount of memory is required. Additionally, we use feature-level attention to handle the variation of contexts around the same word, and use forward/backward masks to encode temporal order information. On nine benchmark datasets for different NLP tasks, Bi-BloSAN achieves or improves upon state-of-the-art accuracy, and shows better efficiency-memory trade-off than existing RNN/CNN/SAN.",
+    "keywords": [
+      "deep learning",
+      "attention mechanism",
+      "sequence modeling",
+      "natural language processing",
+      "sentence embedding"
+    ],
+    "decision": null,
+    "openreview_url": "https://openreview.net/forum?id=H1cWzoxA-"
+  },
+  "review_fields": {
+    "review": "This paper introduces bi-directional block self-attention model (Bi-BioSAN) as a general-purpose encoder for sequence modeling tasks in NLP. The experiments include tasks like natural language inference, reading comprehension (SquAD), semantic relatedness and sentence classifications. The new model shows decent performance when comparing with Bi-LSTM, CNN and other baselines while running at a reasonably fast speed.\n\nThe advantage of this model is that we can use little memory (as in RNNs) and enjoy the parallelizable computation as in (SANs), and achieve similar (or better) performance.\n\nWhile I do appreciate the solid experiment section, I don't think the model itself is sufficient contribution for a publication at ICLR. First, there is not much innovation in the model architecture. The idea of the Bi-BioSAN model simply to split the sentence into blocks and compute self-attention for each of them, and then using the same mechanisms as a pooling operation followed by a fusion level. I think this more counts as careful engineering of the SAN model rather than a main innovation. Second, the model introduces much more parameters. In the experiments, it can easily use 2 times parameters than the commonly used encoders. What if we use the same amount of parameters for Bi-LSTM encoders? Will the gap between the new model and the commonly used ones be smaller?\n\n====\n\nI appreciate the answers the authors added and I change the score to 6."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:52:14Z"
+  }
+}

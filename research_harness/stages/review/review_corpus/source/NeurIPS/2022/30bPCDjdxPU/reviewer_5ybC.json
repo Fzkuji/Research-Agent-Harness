@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2022,
+  "forum_id": "30bPCDjdxPU",
+  "reviewer": "5ybC",
+  "paper": {
+    "title": "Faster Reinforcement Learning with Value Target Lower Bounding",
+    "authors": [
+      "Le Zhao",
+      "Wei Xu"
+    ],
+    "abstract": "We show that an arbitrary lower bound of the maximum achievable value can be used to improve the Bellman value target during value learning.  In the tabular case, value learning using the lower bounded Bellman operator converges to the same optimal value as using the original Bellman operator, at a potentially faster speed.  In practice, discounted episodic return in episodic tasks and n-step bootstrapped return in continuing tasks can serve as lower bounds to improve the value target.  We experiment on Atari games, FetchEnv tasks and a challenging physically simulated car push and reach task.  We see large gains in sample efficiency as well as converged performance over common baselines such as TD3, SAC and Hindsight Experience Replay (HER) in most tasks, and observe a reliable and competitive performance against the stronger n-step methods such as td-lambda, Retrace and optimality tightening.  Prior works have already successfully applied a special case of lower bounding (using episodic return), but are limited to a small number of episodic tasks.  To the best of our knowledge, we are the first to propose the general method of value target lower bounding (with possibly bootstrapped return), to demonstrate its optimality in theory, and effectiveness in a wide range of tasks over many strong baselines.",
+    "keywords": [],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=30bPCDjdxPU"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a form of target value lower bounding, which induces a new Bellman operator. The authors show the operator is a contraction, and propose several lower bounds. Extensive experiments are conducted (provided in the supplementary material) to show the performance of the proposed approach.",
+    "strengths_and_weaknesses": "This paper is written clearly and the overall concept is interesting. There are several aspects of this paper that are problematic. \n\nFirst, theoretically, the paper is not strong. Theorem 2.3 does not present any interesting new theory, and it is unclear why this result is important. The authors do not show or prove any benefit of using the bounded Bellman operator. When would this operator be useful for cases that don't bound $G_\\infty$? It would seem that due to over-optimism of the Bellman operator, $G_0$ will usually maximize $\\bar{G}$. \n\nSecond, the examples for lower bounds in the paper require deterministic environments. The lower bounds themselves feel somewhat trivial. It is unclear why these lower bounds are good. \n\nFinally, the experiments do not show any significant improvement using the proposed approach. Also, the experiments themselves are shown only in the appendix, which should not be used to place major contributions. The authors chose to do this due to space constraints, which is not fair to other reviewed papers.\n\nStrengths:\n\n- Paper is clearly written\n- Proposed Bellman operator may be having interesting characteristics to be researched\n- Authors conducted extensive experiments\n\nWeaknesses:\n\n- Lack of theory, and unsure about novelty\n- Setting is limited. Examples require deterministic environments. Unsure why $\\bar{G}$ is useful.\n- Experiments don't show a clear benefit of approach. Also, experiments are only provided in appendix which does not need to be evaluated for review.",
+    "questions": "- For the proposed lower bounds - are the theoretical gaps between the deterministic and non-deterministic settings?\n- When is $\\bar{G}$ more beneficial than $G_\\infty$\n- Why does $B_f$ improve convergence?\n- How does $B_f$ affect the overestimation problem?",
+    "limitations": "The authors discuss limitations of their work. Particularly, deterministic requirements."
+  },
+  "review_metadata": {
+    "rating": 3,
+    "confidence": 4,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "limitations",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T20:45:16Z"
+  }
+}

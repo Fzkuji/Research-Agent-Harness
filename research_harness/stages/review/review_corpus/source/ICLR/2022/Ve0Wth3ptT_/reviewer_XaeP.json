@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "Ve0Wth3ptT_",
+  "reviewer": "XaeP",
+  "paper": {
+    "title": "DEGREE: Decomposition Based Explanation for Graph Neural Networks",
+    "authors": [
+      "Qizhang Feng",
+      "Ninghao Liu",
+      "Fan Yang",
+      "Ruixiang Tang",
+      "Mengnan Du",
+      "Xia Hu"
+    ],
+    "abstract": "Graph Neural Networks (GNNs) are gaining extensive attention for their application in graph data. However, the black-box nature of GNNs prevents users from understanding and trusting the models, thus hampering their applicability. Whereas explaining GNNs remains a challenge, most existing methods fall into approximation based and perturbation based approaches with suffer from faithfulness problems and unnatural artifacts respectively. To tackle these problems, we propose DEGREE (Decomposition based Explanation for GRaph nEural nEtworks) to provide a faithful explanation for GNN predictions. By decomposing the information generation and aggregation mechanism of GNNs, DEGREE allows tracking the contributions of specific components of the input graph to the final prediction. Based on this, we further design a subgraph level interpretation algorithm to reveal complex interactions between graph nodes that are overlooked by previous methods. The efficiency of our algorithm can be further improved by utilizing GNN characteristics. Finally, we conduct quantitative and qualitative experiments on synthetic and real-world datasets to demonstrate the effectiveness of DEGREE on node classification and graph classification tasks.",
+    "keywords": [
+      "XAI",
+      "GNN"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=Ve0Wth3ptT_"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper proposes a decomposition-based explanation method for graph neural networks. The motivation of this paper is that existing works based on approximation and perturbation suffer from drawbacks. To address the issue of existing works, the authors directly decompose the influence of node groups in the forward pass. The decomposition rules are designed for GCN and GAT. Further, to efficiently select subgraph groups from all possible combinations, the authors propose a greedy approach to search for maximally influential node sets. Experiments on synthetic and real-world datasets verify the improvements over existing works.",
+    "main_review": "Strengths: \n- The problem studied is of importance and interesting. \n- The paper is generally well organized. \n- Quantitative experiments are done, which is a plus for subjective topics like XAI. \n\nWeaknesses: \n- Concepts are not defined or hard to follow. See details. \n- Qualitative experiments are hard to follow. See details. \n- Questions/unclear points regarding technical details. See details. \n- The decomposition method seems straightforward, especially the GCN decomposition (as it is largely linear). \n\nDetails. \n- Some technical concepts are not defined or hard to follow. \n    - Section 3.1. The goal of explanation is to find the most important subgraph in $\\mathcal{G}$ given $f(\\mathcal{G})$. The concept is vaguely defined. What is the concept of 'important'? Further, in the experiments, the task is actually to predict whether a node/edge is important or not. This seems to deviate from the definition. \n    - Section 4. 'We could compute the contribution score of any given node groups'. However, the notion of 'contribution score' is not defined previously. This makes this section hard to understand. \n- Qualitative experiments are hard to follow. \n    - Figure 2. What does it mean 'the process goes from left to right'?\n    - The authors claim that 'existing works suffer from adversarial triggering issues (perturbation) or inaccuracy (approximation)'. However, the claim is not supported, especially the perturbation-based drawback of unrealistic structures. I think this point can be better supported by showing examples that perturbation-based methods indeed generate such samples. At this point, I find it hard to evaluate the qualitative experiments. \n- Questions regarding technical details. \n    - Section 3.1, $f: \\mathcal{G}\\mapsto \\mathbb{R}^{|\\mathcal{V}|}$ or $\\mathbb{R}$. It seems that the formulation only works on binary classification or regression. Can this framework (respectively, DEGREE) be extended to the multi-class setting? \n    - Section 3.3 Intuition (2): ideally there should be little interaction between the target portion and the background portion. However, in graphs, this intuition can hardly be satisfied because nodes are connected to each other. How does the framework work when this intuition does not hold? Or can you provide evidence that this intuition somehow holds in real-world data? \n    - Equation 13, this equation is hard to understand. First, what does it mean $softmax(\\mathbf{X}[t])$? Second, what does it mean $\\exp(|\\mathbf{X}^\\gamma[t]|)$? Third, what does it mean to divide vectors with vectors (given that $\\mathbf{X}[t]$ is a vector)?\n\n- Minor issues. \n    - Please change the coloring of the figures such that they are visible when printed out. \n    - Section 4.2, how should we initialize $\\mathcal{E}$, $\\mathcal{S}_i$? How should we tune the parameters $I, q$? \n    - How is the definition of 'importance' in Graph-SST2? \n    - Section 5, last paragraph, 'detect non-linear interactions', what does it mean non-linear interactions? Does it mean language conjunctions such as 'if', 'but'?",
+    "summary_of_the_review": "In summary, this paper has its merits. The paper tackles an interesting problem. The proposed framework is generally sound. The paper is organized well in general. However, given its unclear points in experiments and technical details, I do not recommend acceptance at this point. \n\n====Post Response====\n\nMy doubts and suggested weaknesses are addressed partly. I am willing to suggest borderline accept.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3412,
+    "words": 512,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/a75a3378-9868-4e66-9ac9-ea2c2813d4eb",
+    "error": null,
+    "scored_chars": 3479
+  }
+}

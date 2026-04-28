@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "0EXmFzUn5I",
+  "reviewer": "cdAe",
+  "paper": {
+    "title": "Pyraformer: Low-Complexity Pyramidal Attention for Long-Range Time Series Modeling and Forecasting",
+    "authors": [
+      "Shizhan Liu",
+      "Hang Yu",
+      "Cong Liao",
+      "Jianguo Li",
+      "Weiyao Lin",
+      "Alex X. Liu",
+      "Schahram Dustdar"
+    ],
+    "abstract": "Accurate prediction of the future given the past based on time series data is of paramount importance, since it opens the door for decision making and risk management ahead of time. In practice, the challenge is to build a flexible but parsimonious model that can capture a wide range of temporal dependencies. In this paper, we propose Pyraformer by exploring the multiresolution representation of the time series. Specifically, we introduce the pyramidal attention module (PAM) in which the inter-scale tree structure summarizes features at different resolutions and the intra-scale neighboring connections model the temporal dependencies of different ranges. Under mild conditions, the maximum length of the signal traversing path in Pyraformer is a constant (i.e., $\\mathcal O(1)$) with regard to the sequence length $L$, while its time and space complexity scale linearly with $L$. Extensive numerical results show that Pyraformer typically achieves the highest prediction accuracy in both single-step and long-range forecasting tasks with the least amount of time and memory consumption, especially when the sequence is long.",
+    "keywords": [
+      "sparse attention",
+      "pyramidal graph",
+      "Transformer",
+      "time series forecasting",
+      "long-range dependence",
+      "multiresolution"
+    ],
+    "decision": "Accept (Oral)",
+    "openreview_url": "https://openreview.net/forum?id=0EXmFzUn5I"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "This paper presents a new hierarchical transformer architecture with constant connection path length and linear time and space complexity for long-range time series modeling. The module at core is a pyramidal attention network that makes multi-resolution representations in a tree structure and perform attention operations on the tree. A stack of convolutions is used to initialize the pyramidal tree. Experiments show the proposed method is able to make more accurate predictions with significantly fewer attention operations and, as a result, less time and memory expenses.",
+    "main_review": "## Strengths\n1. The paper is well-written and well-motivated with sufficient technical details\n2. The extensive empirical results demonstrate the effectiveness and efficiency of the proposed method\n3. A proof is provided to guarantee the linear complexity of long sequence encoding\n\n## Comments\n1. More datasets for multi-step forecasting would be helpful in evaluating the method.\n2. The reason of using the second prediction module in multi-step forecasting need more justification, e.g. why take the concatenation as key/value in the second layer.",
+    "summary_of_the_review": "Overall I find this paper quite interesting with great potential contribution to the community, and recommend an accept.",
+    "correctness": "4: All of the claims and statements are well-supported and correct.",
+    "technical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work.",
+    "empirical_novelty_and_significance": "3: The contributions are significant and somewhat new. Aspects of the contributions exist in prior work."
+  },
+  "review_metadata": {
+    "recommendation": 8,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T15:37:26Z",
+    "migrated_from_v1_at": "2026-04-27T15:37:26Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 604,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/cf74d506-ee58-4501-bc1a-3c5e92098260",
+    "error": null,
+    "scored_chars": 550
+  }
+}

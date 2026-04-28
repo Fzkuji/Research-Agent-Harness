@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2024,
+  "forum_id": "TPZRq4FALB",
+  "reviewer": "Hrwp",
+  "paper": {
+    "title": "Test-time Adaptation against Multi-modal Reliability Bias",
+    "authors": [
+      "Mouxing Yang",
+      "Yunfan Li",
+      "Changqing Zhang",
+      "Peng Hu",
+      "Xi Peng"
+    ],
+    "abstract": "Test-time adaptation (TTA) has emerged as a new paradigm for reconciling distribution shifts across domains without accessing source data. However, existing TTA methods mainly concentrate on uni-modal tasks, overlooking the complexity of multi-modal scenarios.\nIn this paper, we delve into the multi-modal test-time adaptation and reveal a new challenge named reliability bias. Different from the definition of traditional distribution shifts, reliability bias refers to the information discrepancies across different modalities derived from intra-modal distribution shifts. To solve the challenge, we propose a novel method, dubbed REliable fusion and robust ADaptation (READ). On the one hand, unlike the existing TTA paradigm that mainly repurposes the normalization layers, READ employs a new paradigm that modulates the attention between modalities in a self-adaptive way, supporting reliable fusion against reliability bias. On the other hand, READ adopts a novel objective function for robust multi-modal adaptation, where the contributions of confident predictions could be amplified and the negative impacts of noisy predictions could be mitigated. Moreover, we introduce two new benchmarks to facilitate comprehensive evaluations of multi-modal TTA under reliability bias. Extensive experiments on the benchmarks verify the effectiveness of our method against multi-modal reliability bias. The code and benchmarks are available at https://github.com/XLearning-SCU/2024-ICLR-READ.",
+    "keywords": [
+      "Test-time adaption",
+      "Imbalanced multi-modal learning"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=TPZRq4FALB"
+  },
+  "review_fields": {
+    "summary": "This work proposes a method for multi-modal test-time adaption (TTA) in the presence of cross-modal reliability bias. While there are numberer of works in test-time adaption, most of them focus on single-modality tasks and few works consider the practical multi-modal scenarios. In contrast, the authors investigate the characteristics of multi-modal TTA and reveal the task-specific cross-modal reliability bias setting where the information between modalities is unbalanced during test time derived from the distribution shifts across domains in some modalities. The authors conduct analysis experiments finding that the unreliable cross-modal fusion and noisy predictions hinder the robustness against cross-modal reliability bias. As a remedy, this paper proposes a novel method dubbed reliable fusion and robust adaption (RFRA). The idea of RFRA is straightforward. A self-adaptive attention is employed to achieve reliable cross-fusion during test time and a robust loss is adopted to prevent the prediction noise from dominating the adaption process. The authors experimentally validate their method on two new benchmarks against several baselines showing reasonable improvements.",
+    "strengths": "1. This paper has a good motivation. The authors focus on multi-modal test-time adaption and reveal a NEW task-specific challenge (i.e., cross-modal reliability bias) for the first time. This paper first empirically proves that the existing test-time adaption methods cannot tackle the cross-modal reliability bias problem. Furthermore, the authors also investigate the effect of adopting the existing unbalanced multi-modal learning methods to handle the cross-modal information discrepancy.  The unbalanced multi-modal learning methods handle the unbalanced multi-modal data during training time with the help of labeled data, which resembles the test-time training paradigm in the domain adaption community. The results indicate that the multi-modal learning methods cannot take superiority for the challenge. In other words, the authors support the claim that designing an elaborated method for the cross-modal reliability bias during test time is essential.\n\n2. The authors take an in-depth study on the cross-modal reliability bias challenge and find that robust cross-modal fusion and noise resistance are essential to achieve multi-modal TTA against reliability bias. To this end, the authors design a novel method dubbed reliable fusion and robust adaption (RFRA). On the one hand, RFRA achieves reliable fusion through the self-adaptive fusion module. On the other hand, RFRA employs an elaborately designed objective function to achieve noise-robust adaption. Figs. 1 and 2 clearly depict the motivation and key idea of the paper. Overall evaluation, this paper is with strong motivation, a technical sound approach, extensive experiments, and good writing.",
+    "weaknesses": "1. The authors have conducted extensive evaluations on two newly constructed benchmarks regarding the most challenged setting (severity 5 in this paper), and the results indeed verify the effectiveness of handling the cross-modal reliability bias challenge. Even so, I think some challenging TTA settings that are orthogonal to the cross-modal reliability bias might help to improve the practicalness and impact of this work. First, in the practical multi-modal scenarios, the severity of distribution shifts might dynamically vary. It would make the work more practical if the authors could additionally investigate the robustness of the proposed method under the setting MIXED SEVERITIES. Furthermore, it is also common that the corruption types continually vary in the wild, resulting in the demand for continual test-time adaption (CTTA). The proposed approach would be more solid and universal if the proposed method could work in the MIXED DISTRIBUTION SHIFTS setting (i.e., continual TTA setting).\n\n2. Some details are missing. It is not clear how many layers of the attention module are used and repurposed during test time adaption in the proposed approach. And how many parameters do these self-attention layers account for? It is encouraged to supplement comparisons with the TTA baselines regarding the number of modulated parameters and the adaption time, which would make the comparisons more comprehensive.\n\n3. The results of the default setting can be added to the ablation tables for clear clarification. In the current form, the readers need to compare the main table (1,2,3) and the ablation tables for contrast.\n\n4. I carefully read the paper and found two potential mathematical typos. $\\theta_{s}^{m}$ in Line 5, page 4. $\\partial$ in Eq. 9.",
+    "questions": "My questions are mainly in the efficiency comparisons between the proposed SAF module and the TTA baselines, and some clarification on statements. Moreover, I wonder about the effect of the proposed method on the settings of MIXED SEVERITIES and MIXED DISTRIBUTION SHIFTS. Certainly, this is optional during the rebuttal time because the settings are out of the scope of the paper, but I think the results would strengthen this work."
+  },
+  "review_metadata": {
+    "rating": 8,
+    "confidence": 5,
+    "soundness": 4,
+    "presentation": 4,
+    "contribution": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:20:28Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3867,
+    "words": 582,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/095d6952-50c8-4a05-884d-01f5a7589aa8",
+    "error": null,
+    "scored_chars": 3868
+  }
+}

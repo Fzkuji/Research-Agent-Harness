@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "Od6CHhPM7I",
+  "reviewer": "ChpR",
+  "paper": {
+    "title": "Red Teaming Deep Neural Networks with Feature Synthesis Tools",
+    "authors": [
+      "Stephen Casper",
+      "Tong Bu",
+      "Yuxiao Li",
+      "Jiawei Li",
+      "Kevin Zhang",
+      "Kaivalya Hariharan",
+      "Dylan Hadfield-Menell"
+    ],
+    "abstract": "Interpretable AI tools are often motivated by the goal of understanding model behavior in out-of-distribution (OOD) contexts. Despite the attention this area of study receives, there are comparatively few cases where these tools have identified previously unknown bugs in models. We argue that this is due, in part, to a common feature of many interpretability methods: they analyze model behavior by using a particular dataset. This only allows for the study of the model in the context of features that the user can sample in advance. To address this, a growing body of research involves interpreting models using feature synthesis methods that do not depend on a dataset. In this paper, we benchmark the usefulness of interpretability tools for model debugging. Our key insight is that we can implant human-interpretable trojans into models and then evaluate these tools based on whether they can help humans discover them. This is analogous to finding OOD bugs, except the ground truth is known, allowing us to know when a user's interpretation is correct. We make four contributions. (1) We propose trojan discovery as an evaluation task for interpretability tools and introduce a benchmark with 12 trojans of 3 different types. (2) We demonstrate the difficulty of this benchmark with a preliminary evaluation of 16 state-of-the-art feature attribution/saliency tools. Even under ideal conditions, given direct access to data with the trojan trigger, these methods still often fail to identify bugs. (3) We evaluate 7 feature-synthesis methods on our benchmark. (4) We introduce and evaluate 2 new variants of the best-performing method from the previous evaluation.",
+    "keywords": [
+      "interpretability",
+      "benchmarking",
+      "auditing",
+      "diagnostics",
+      "debugging",
+      "adversarial attacks",
+      "feature synthesis"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=Od6CHhPM7I"
+  },
+  "review_fields": {
+    "summary": "This paper aims to use interpretation tools to identify unknown bugs in out-of-distribution (OOD) models. It highlights the lack of capability to analyze features that cannot be sampled or identified in advance. To resolve this, authors propose to train models that respond to specific triggers and evaluate interpretability tools based on how they can help humans to identify these triggers. Authors propose trojan discovery as an evaluation task and present a benchmark with 12 trojans of 3 types. It assesses the difficulty of the task through the evaluation of 16 feature attribution/saliency tools and 7 feature-synthesis methods. Lastly, authors introduce and evaluate 2 variants of the best-performing methods.",
+    "strengths": "I am not an expert in this field and haven’t had any prior experience working in this field, so my evaluations are an educated guess. \n\nQuality and significance: The authors conducted extensive experiments benchmarking 12 trojans and 16 feature attribution/saliency tools. The authors also included a comprehensive discussion section with honest limitations, which I highly appreciate. So I think this paper meets the quality and significance standard. \n\nOriginality: the authors proposed two novel variants of the best performing methods, though the first one “robust feature level adversaries via a generator” is only marginally novel. So I think this paper is on the borderline of the originality standard.",
+    "weaknesses": "My main concern for this paper is the poor writing clarity. Understandably, this paper contains a lot of information and thus writing is harder than usual. But for someone new to this field like myself, I find it very hard to follow the big picture and also I find it hard to understand exactly what the authors did. \n\nThere are also grammar issues here and there, or maybe the grammar is technically correct but the style is unusual, making it hard to read. For example: \nline 209 “we introduce using …”\nline 94 the logic of “instead” is not very straight forward. \nline 79 “[27] who used” I think “who” here is redundant? \nLines 56-57: “one which … another which”. \n\nOther than grammar issues, the overall writing is just not very clear and easy to follow, and it feels the paper was rushed and not polished. This is the main reason for my rating of 4. I think this paper is not yet ready to be circulated amoung the neurips community.",
+    "limitations": "Yes, the authors have adequately addressed the limitations."
+  },
+  "review_metadata": {
+    "rating": 4,
+    "confidence": 2,
+    "soundness": 3,
+    "presentation": 1,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1702,
+    "words": 286,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/711c7148-bf5c-4169-8e59-8d56c6ffed32",
+    "error": null,
+    "scored_chars": 1709
+  }
+}

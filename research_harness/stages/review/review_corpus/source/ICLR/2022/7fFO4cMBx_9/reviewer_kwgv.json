@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "7fFO4cMBx_9",
+  "reviewer": "kwgv",
+  "paper": {
+    "title": "Variational Neural Cellular Automata",
+    "authors": [
+      "Rasmus Berg Palm",
+      "Miguel González Duque",
+      "Shyam Sudhakaran",
+      "Sebastian Risi"
+    ],
+    "abstract": "In nature, the process of cellular growth and differentiation has lead to an amazing diversity of organisms --- algae, starfish, giant sequoia, tardigrades, and orcas are all created by the same generative process.\nInspired by the incredible diversity of this biological generative process, we propose a generative model, the Variational Neural Cellular Automata (VNCA), which is loosely inspired by the biological processes of cellular growth and differentiation. Unlike previous related works, the VNCA is a proper probabilistic generative model, and we evaluate it according to best practices. We find that the VNCA learns to reconstruct samples well and that despite its relatively few parameters and simple local-only communication, the VNCA can learn to generate a large variety of output from information encoded in a common vector format. While there is a significant gap to the current state-of-the-art in terms of generative modeling performance, we show that the VNCA can learn a purely self-organizing generative process of data. Additionally, the self-organizing nature bestows the VNCA with some inherent robustness against perturbations in the early stages of growth.",
+    "keywords": [
+      "Neural Cellular Automata",
+      "Cellular Automata",
+      "Self-Organization",
+      "Generative Models"
+    ],
+    "decision": "Accept (Poster)",
+    "openreview_url": "https://openreview.net/forum?id=7fFO4cMBx_9"
+  },
+  "review_fields": {
+    "comment": "I thank the authors for their reply. \n\nThe authors have improved the paper significantly after the reviews, and they have addressed all questions and comments that I raised. \n\nQuestion 2 in my review was an oversight on my part. Thanks for the reply. \nI also thank the authors for clarifying my doubts regarding the architecture. As long as everything is properly reported in the paper, I don't see any further issues.\n\nI was already in favour of accepting the paper. After the rebuttal, I have raised my score to a full \"accept\"."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 527,
+    "words": 100,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/ba2cbb83-426e-4c56-beba-927f8ccc6b8d",
+    "error": null,
+    "scored_chars": 530
+  }
+}

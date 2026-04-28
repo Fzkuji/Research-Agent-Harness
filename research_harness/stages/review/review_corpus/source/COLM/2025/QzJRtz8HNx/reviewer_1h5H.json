@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "QzJRtz8HNx",
+  "reviewer": "1h5H",
+  "paper": {
+    "title": "Can LLMs Handle WebShell Detection? Overcoming Detection Challenges with Behavioral Function-Aware Framework",
+    "authors": [
+      "Feijiang Han",
+      "Jiaming Zhang",
+      "Chuyi Deng",
+      "Jianheng Tang",
+      "Yunhuai Liu"
+    ],
+    "abstract": "WebShell attacks, where malicious scripts are injected into web servers, pose a significant cybersecurity threat. Traditional machine learning and deep learning methods are often hampered by challenges such as the need for extensive training data, catastrophic forgetting, and poor generalization. Recently, Large Language Models (LLMs) have emerged as a powerful alternative for code-related tasks, but their potential in WebShell detection remains underexplored. In this paper, we make two major contributions: (1) a comprehensive evaluation of seven LLMs, including GPT-4, LLaMA 3.1 70B, and Qwen 2.5 variants, benchmarked against traditional sequence- and graph-based methods using a dataset of 26.59K PHP scripts, and (2) the Behavioral Function-Aware Detection (BFAD) framework, designed to address the specific challenges of applying LLMs to this domain. Our framework integrates three components: a Critical Function Filter that isolates malicious PHP function calls, a Context-Aware Code Extraction strategy that captures the most behaviorally indicative code segments, and Weighted Behavioral Function Profiling (WBFP) that enhances in-context learning by prioritizing the most relevant demonstrations based on discriminative function-level profiles. Our results show that, stemming from their distinct analytical strategies, larger LLMs achieve near-perfect precision but lower recall, while smaller models exhibit the opposite trade-off. However, all baseline models lag behind previous State-Of-The-Art (SOTA) methods. With the application of BFAD, the performance of all LLMs improves significantly, yielding an average F1 score increase of 13.82%. Notably, larger models like GPT-4, LLaMA-3.1-70B, and Qwen-2.5-Coder-14B now outperform SOTA benchmarks, while smaller models such as Qwen-2.5-Coder-3B achieve performance competitive with traditional methods. This work is the first to explore the feasibility and limitations of LLMs for WebShell detection and provides solutions to address the challenges in this task.",
+    "keywords": [
+      "WebShell detection",
+      "Large Language Models",
+      "Code Analysis",
+      "Cybersecurity",
+      "In-Context Learning"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=QzJRtz8HNx"
+  },
+  "review_fields": {
+    "summary": "this paper explores the feasibility of using llms  for detecting WebShells, which are malicious scripts injected into web servers. Authors stated that more traditional ML/DL methods suffer from data scarcity, poor generalization, and are resource-intensive, while LLMs  “could” offer a promising alternative but they face a series of technical obstacles that make its direct application unfeasible ( working with obfuscated code, very long inputs, etc ) . The authors evaluate seven LLMs on a dataset of 26.6K PHP scripts, revealing that large LLMs achieve high precision but low recall, while smaller models show the reverse.\n Based on that finding , and to address these limitations, they propose the “Behavioral Function-Aware Detection” (BFAD) framework. BFAD consists of (1) Critical Function Filter, (2) Context-Aware Code Extraction, and (3) Weighted Behavioral Function Profiling (WBFP)\nAll these 3 blocks basically work together to obtain a more effective in context learning scenario, which is one the key differentiating elements of the approach (for example, there seems no use of other popular techniques such as RAG)\nThe proposed framework , BFAD,  improves LLM F1 scores by an average of 13.82%, with GPT-4 surpassing traditional GAT-based methods. The approach enhances recall for large models and precision for small models, mitigating token limitations and reducing hallucinations.",
+    "reasons_to_accept": "In general, while this paper does not propose a novel architecture or methodology, it can be seen as a very clever orchestration of existing techniques to overcome a possibly unexplored problem. Specifically*\n\n. WebShell detection seems to be an important but underexplored cybersecurity challenge. The paper benchmarks both large (GPT-4, LLaMa 3.1 70B) and small LLMs across a realistic dataset, I think in that sense it is trying to  fill a gap in both AI and security research.\n\n. while the problem or scenario may seem niche, there is a consistent improvement over state of the art . for example, GPT-4 with BFAD surpass a graph-based methods (GAT) at all metrics .",
+    "reasons_to_reject": "The proposed approach is tailored to PHP WebShells with critical function taxonomies and behavior-specific profiling. It is unclear how generalizable BFAD would be to other malware formats (e.g., JavaScript web shells, binary exploits) . Is this an approach that only work for the specific setting set on the paper, or is there a way to quantify its generalization capabilities ?\n\nThe paper reports quantitative metrics but lacks an in-depth analysis of failure cases, such as why certain benign files are misclassified or why small models hallucinate. Understanding these failure modes is essential for practical deployment in security-sensitive applications.\n\nWebshell in general are known for obfuscation and evasive tactics, that is where its main threat resides.  In paper , we have a bit of an idealized scenario, which is understandable as at the end it needs to be framed as a ML problem. Ideally,  the paper should have evaluated adversarial robustness (e.g., obfuscated or zero-day shells). Without this, the real-world resilience of BFAD-enhanced LLMs may remain \"unproven\" (this point may be a bit out of scope, but I see it as quite critical in the context of security research )\n\nWwhile the paper provides extensive empirical results comparing large and small LLMs, it lacks a deeper analysis explaining why larger models tend to achieve high precision but low recall, while smaller models exhibit the opposite pattern. This observed trade-off is repeatedly mentioned but remains unexplained beyond surface-level speculation (e.g., prompt sensitivity, model capacity).",
+    "questions_to_authors": "You mention challenges with LLM context windows, yet you chose WBFP-enhanced ICL over RAG-based retrieval methods. Could you clarify why RAG was not explored as an alternative? What are the practical trade-offs between BFAD and a lightweight RAG approach in this domain?\n\nHave you considered evaluating the framework's robustness against more advanced obfuscation techniques (e.g., polymorphism, control flow flattening)\n\nWhat are the computational overheads introduced by BFAD (especially WBFP) during inference? How does the latency compare to baseline LLM usage or graph-based methods, and is the framework feasible for real-time or near-real-time detection scenarios?\n\n(maybe out of scope) how difficult would it be  adapting BFAD to WebShells written in other languages (e.g., ASP.NET, JSP) or to general web malware detection? Would the Critical Function taxonomy and WBFP weighting require retraining or manual redefinition? I think this is quite critical in terms of generalization of the approach"
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 2,
+    "mixed_pct": 6,
+    "human_pct": 92,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 3256,
+    "words": 500,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/57d4b945-c8b6-452b-955d-bd5cbba6df96",
+    "error": null,
+    "scored_chars": 3260
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "ZZ4tcxJvux",
+  "reviewer": "qvW3",
+  "paper": {
+    "title": "E$^2$-RAG: Towards Editable Efficient RAG by Editing Compressed KV Caches",
+    "authors": [
+      "Tongxu Luo",
+      "Wenyu Du",
+      "HanWen Hao",
+      "Min Zhang",
+      "Hao Yang",
+      "Benyou Wang"
+    ],
+    "abstract": "Retrieval-Augmented Generation (RAG) demonstrates remarkable capabilities for enhancing the performance of Large Language Models (LLMs) by integrating external knowledge.\nStandard RAG introduces additional computations due to the extra retrieved context.\nTo improve efficiency, recent studies propose compressing chunk tokens into compact forms, such as key-value (KV) caches.\nHowever, maintaining these compressed KV caches in an updated state presents a significant challenge, undermining the primary goal of RAG: acquiring up-to-date knowledge.\nIn this work, we propose **E$^{2}$-RAG**, the first **E**ditable **E**fficient-**RAG** method designed to efficiently edit compressed KV caches for knowledge updates.\nE$^2$-RAG features an encoder-decoder architecture similar to efficient RAG methods, along with an additional editor.\nThe encoder-decoder compresses chunk tokens into KV caches and generates responses.\nThe editor takes old KV caches and new knowledge tokens as inputs, enabling efficient updates to the KV caches.\nTo formalize knowledge updating, we define three operations: INSERT, DELETE, and UPDATE.\nWe create three sets of datasets for each operation.\nThrough extensive experiments, E$^2$-RAG achieves nearly **40x faster** editing compared to recomputing KV caches while maintaining **3x faster** generation efficiency than standard RAG, with a performance downgrade of 1%-5%.\nWe also conduct various ablation studies, including multi-turn editing, multi-chunk capability, and knowledge conflicts, to explore the capabilities of E$^2$-RAG.",
+    "keywords": [
+      "Retrieval Augmented Generation"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=ZZ4tcxJvux"
+  },
+  "review_fields": {
+    "summary": "This paper introduces E²-RAG, an editable and efficient Retrieval-Augmented Generation (RAG) framework designed to update compressed key-value (KV) caches for timely knowledge integration. Traditional RAG systems face computational bottlenecks when regenerating compressed representations after edits. E²-RAG addresses this by introducing an editor module that directly modifies KV caches using INSERT, DELETE, and UPDATE operations, inspired by database principles. The framework achieves 40x faster editing and 3x faster generation compared to baseline methods, with minimal performance degradation (1%-5%) on QA benchmarks. Experiments on diverse datasets (HotpotQA, ASQA, Drop) and models (Llama3.1-8B, Qwen2.5-7B) validate its efficiency and scalability. Ablation studies explore multi-turn editing, multi-chunk inference, and knowledge conflict resolution.",
+    "reasons_to_accept": "- Novel Contribution: First work to enable efficient editing of compressed KV caches in RAG, addressing a critical gap in maintaining up-to-date knowledge.\n\n- Strong Empirical Results: Demonstrates significant speed improvements (40x editing, 3x generation) with minimal accuracy loss across multiple tasks and models.\n\n- Comprehensive Evaluation: Includes ablation studies, multi-chunk analysis, and OOD testing, offering insights into operational robustness and limitations.",
+    "reasons_to_reject": "- Limited Model Generalization: Experiments are confined to Llama and Qwen models; broader validation across architectures (e.g., GPT, Mistral) is missing.\n\n- Superficial Discussion on Conflicts: While knowledge conflicts during UPDATE/DELETE are noted, the resolution mechanisms lack depth and theoretical grounding."
+  },
+  "review_metadata": {
+    "rating": 6,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 100,
+    "mixed_pct": 0,
+    "human_pct": 0,
+    "verdict": "We are highly confident this text was AI generated",
+    "confidence": "highly",
+    "chars": 795,
+    "words": 103,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/833c437b-45f5-41f0-84b1-a608e49755b1",
+    "error": null,
+    "scored_chars": 795
+  }
+}

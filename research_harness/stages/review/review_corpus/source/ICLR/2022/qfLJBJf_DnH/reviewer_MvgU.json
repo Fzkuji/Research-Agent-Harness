@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "venue": "ICLR",
+  "year": 2022,
+  "forum_id": "qfLJBJf_DnH",
+  "reviewer": "MvgU",
+  "paper": {
+    "title": "Brain insights improve RNNs' accuracy and robustness for hierarchical control of continually learned autonomous motor motifs",
+    "authors": [
+      "Laureline Logiaco",
+      "G Sean Escola"
+    ],
+    "abstract": "We study the problem of learning dynamics that can produce hierarchically organized continuous outputs consisting of the flexible chaining of re-usable motor ‘motifs’ from which complex behavior is generated. Can a motif library be efficiently and extendably learned without interference between motifs, and can these motifs be chained in arbitrary orders without first learning the corresponding motif transitions during training? This requires (i) parameter updates while learning a new motif that do not interfere with the parameters used for the previously acquired ones; and (ii) successful motif generation when starting from the network states reached at the end of any of the other motifs, even if these states were not present during training (a case of out-of-distribution generalization). We meet the first requirement by designing recurrent neural networks (RNNs) with specific architectures that segregate motif-dependent parameters (as customary in continual learning works), and try a standard method to address the second by training with random initial states. We find that these standard RNNs are very unreliable during zero-shot transfer to motif chaining. We then use insights from the motor thalamocortical circuit, featuring a specific module that shapes motif transitions. We develop a method to constrain the RNNs to function similarly to the thalamocortical circuit during motif transitions, while preserving the large expressivity afforded by gradient-based training of non-analytically tractable RNNs. We then show that this thalamocortical inductive bias not only acts in synergy with gradient-descent RNN training to improve accuracy during in-training-distribution motif production, but also leads to zero-shot transfer to new motif chains with no performance cost. Besides proposing an efficient, robust and flexible RNN architecture, our results shed new light on the function of motor preparation in the brain.",
+    "keywords": [
+      "neuroscience",
+      "dynamical systems",
+      "thalamocortical architecture",
+      "motor preparation",
+      "continual learning",
+      "hierarchical continuous motor control",
+      "out-of-distribution generalization",
+      "robustness"
+    ],
+    "decision": "Reject",
+    "openreview_url": "https://openreview.net/forum?id=qfLJBJf_DnH"
+  },
+  "review_fields": {
+    "summary_of_the_paper": "The authors seek to use a small RNN to generate extended, time-varying outputs given a cue indicating which output to generate. They focus on the problem of generating a sequence of outputs, cued in series, without the end state of one interfering with the subsequently cued trajectory. They show that small vanilla RNNs do not readily perform this task: RNNs at a random state can generate a sequence when cued, but they fail to do so when their state is at the end point of another sequence. The authors then show that by biasing the activity of the network towards the origin in the absence of an input (which they suggest is inspired by neuroscience), RNNs more readily learn sequences and more consistently generate accurate sequences in series. My enthusiasm for the work is relatively low for a variety of reasons. Primarily, the authors fail to test obvious alternative hypotheses of ways that the problem domain they design could be solved by a learned system, without the need to add the inductive bias they add. Moreover, and more fundamentally, the relevance of such a small toy system (300 units, trained to generate just 10 trajectories) for machine learning is unclear.",
+    "main_review": "The authors discuss two important alternatives to the approach that they ultimate pursue, which would involve attacking the problem with learning rather than with building in inductive biases. Rather than running experiments to test the efficacy of these alternatives, the authors instead tried to argue away these points (bottom of pg. 6). This is extremely unsatisfying. \n\nLearning has proven remarkably powerful, and incorporating constraints/structure/inductive biases, may indeed be necessary in some domains to overcome current challenges, as the work the authors cite suggests. But those domains are ones in which learning has been doggedly pursued for an extended period of time. These authors instead introduce a novel synthetic task and immediately jump to the need to incorporate more structure, without doing the legwork necessary to convincingly demonstrate that such structure is indeed necessary.\n\nTo directly respond to the authors arguments over why these alternatives are insufficient:\nFirst, they suggest that directly training the RNNs to generalize from end states is insufficient, because they can't train from all possible end states, particularly as the number of trained states scales. This argument is unpersuasive, as training on all of anything is often impossible in general, yet still learned systems generalize. E.g., work with ImageNet over the last decade provides a great example of this. \n\nThe authors could instead test this possibility by incorporating the end points into training as initial states for subsequent trajectories. They could hold out some transitions and test how well the system generates the motifs on these left-out transitions. They could hold out the transitions in two ways: Either exclude some transitions randomly (i.e., salt and pepper of the transition matrix) or hold out some motifs from the training at all (i.e., holding out rows or columns of the motifs). The latter would be a stronger test, but both would be important to see. Critically, for the authors to convincingly show that learning was insufficient, they would need far, far more than 10 motifs (e.g., like >>1000, most likely).\n\nSecond, the authors could train to return to a consistent point at the end of each motif. The authors assert that doing so would make the system not robust to perturbation/noise, but that would be true only if the system actually learned to arrive at an identical point each time, which I imagine would not occur (and if they did, they could add noise to the network during training). The network could return to the origin imperfectly and convey state information (e.g., on 299 dimensions return to origin, but on one axis keep information about). Who knows if these speculations are correct -- but an experimental test of these ideas would be quite useful.\n\nMy second major concern is the relevance of this work to the broader field. The networks are small and seemingly toy: 300 units, 10 motifs. This is smaller than MNIST. I'm not one to think that everything needs to be shown on ImageNet and achieve SOTA to be a useful contribution, but the scale of these experiments are so, so small that I worry that anything learned in this domain would transfer or inform work at far greater scales -- particularly when the conclusion is that in such a low data regime, greater inductive biases are required rather than learning.\n\n\nMinor issues:\n\n- The authors assert that thalamic activity may change the effective connectivity of motor cortical activity, but they don't make clear why that change would result in a bias towards the origin. In what sense is biasing the network to the origin motivated by neuroscience? Also, how is preparatory activity being the same across all motifs brain-like? Isn't that not seen in the brain (e.g., in Susillo et al. 2015)?\n\n- The authors seem to repeatedly suggest that matching the marginals of a distribution is a strong approximation to the joint -- e.g., \"Subtle variations in the state of the network at the end of different first motifs x_{end}^{\\mu} can lead to very different outcomes\". I don't understand why the authors are overstating the extent to which the marginals and the joint are the same thing...\n\n- The authors assert that \"a standard normal is a good choice\" for the marginals of the states. Please provide some quantification for this claim. As it stands, the authors visualize cumulative distributions of a subset of the states rather than performing statistics. \n\n- How did the authors pick a standard deviation of 1.2 (in Fig 2.a.iv-v)? Did they fit this number to the marginals?\n\n- Typo, top of page 5: \"require less neurons\" --> \"require fewer neurons\"",
+    "summary_of_the_review": "The small scale of the models/data combined with the lack of evaluation of alternative approaches diminishes the potential contribution of this work.",
+    "correctness": "3: Some of the paper’s claims have minor issues. A few statements are not well-supported, or require small changes to be made correct.",
+    "technical_novelty_and_significance": "2: The contributions are only marginally significant or novel.",
+    "empirical_novelty_and_significance": "2: The contributions are only marginally significant or novel."
+  },
+  "review_metadata": {
+    "recommendation": 3,
+    "confidence": 4
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary_of_the_paper",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "main_review"
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v1",
+    "collected_at": "2026-04-27T16:27:51Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 4821,
+    "words": 783,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/0127742f-f395-462b-8f4f-f46a7a138589",
+    "error": null,
+    "scored_chars": 4824
+  }
+}

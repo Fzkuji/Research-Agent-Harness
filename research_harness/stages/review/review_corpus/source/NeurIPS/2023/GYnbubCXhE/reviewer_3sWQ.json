@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "GYnbubCXhE",
+  "reviewer": "3sWQ",
+  "paper": {
+    "title": "Conditional Matrix Flows for Gaussian Graphical Models",
+    "authors": [
+      "Marcello Massimo Negri",
+      "Fabricio Arend Torres",
+      "Volker Roth"
+    ],
+    "abstract": "Studying conditional independence among many variables with few observations is a challenging task.\nGaussian Graphical Models (GGMs) tackle this problem by encouraging sparsity in the precision matrix through $l_q$ regularization with $q\\leq1$.\nHowever, most GMMs rely on the $l_1$ norm because the objective is highly non-convex for sub-$l_1$ pseudo-norms.\nIn the frequentist formulation, the $l_1$ norm relaxation provides the solution path as a function of the shrinkage parameter $\\lambda$.\nIn the Bayesian formulation, sparsity is instead encouraged through a Laplace prior, but posterior inference for different $\\lambda$ requires repeated runs of expensive Gibbs samplers.\nHere we propose a general framework for variational inference with matrix-variate Normalizing Flow in GGMs, which unifies the benefits of frequentist and Bayesian frameworks.\nAs a key improvement on previous work, we train with one flow a continuum of sparse regression models jointly for all regularization parameters $\\lambda$ and all $l_q$ norms, including non-convex sub-$l_1$ pseudo-norms.\nWithin one model we thus have access to (i) the evolution of the posterior for any $\\lambda$ and any $l_q$ (pseudo-) norm, (ii) the marginal log-likelihood for model selection, and (iii) the frequentist solution paths through simulated annealing in the MAP limit.",
+    "keywords": [
+      "normalizing flow",
+      "variational inference",
+      "graphical lasso",
+      "gaussian graphical model",
+      "bayesian inference"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GYnbubCXhE"
+  },
+  "review_fields": {
+    "summary": "This paper proposes a method that can be used to infer conditional independencies in a Gaussian model. These conditional independencies are related to zeros in the precision matrix. Typically, sparse enforcing norms are used to estimate the precision matrix while enforcing zeros in the elements outside of the diagonal. In this paper a Bayesian approach is considered. For this a pseudo-distribution for the data is considered by taking the exponential to the p-norm. The method is trained via variational inference combined with normalizing flows to increase the accuracy of the posterior approximation. The variational distribution is tuned via simulated annealing and a temperature parameter allows to interpolate between the Bayesian and the Map solution.",
+    "strengths": "- Well written paper.\n\n        - Illustrative toy experiments.",
+    "weaknesses": "- The proposed method is a combination of already known techniques.\n\n        - The experimental section is weak as only a single real problem is considered.\n\n        - Although the proposed method is a generalization of several known techniques, I have found in the experimental section a lack of comparisons with other related methods.\n\n        My main point of criticism is the weak experimental section which only considers a single real problem and no comparisons with other related methods are carried out in real problems.\n\n        Another point of criticism is that, for some particular values of the p parameter one does not actually observe sparsity in the Bayesian solution. For example, when sampling from the Laplace distribution one never observes zeros in practice. Spike and slab priors (a mix between a Gaussian and a point of mass center at zero) are the ones that actually lead to zeros.",
+    "limitations": "The authors have not commented on the limitations of their approach."
+  },
+  "review_metadata": {
+    "rating": 5,
+    "confidence": 3,
+    "soundness": 2,
+    "presentation": 3,
+    "contribution": 2
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 999,
+    "words": 164,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/e6cff74f-2bc3-48a6-b051-388c6a623a67",
+    "error": null,
+    "scored_chars": 1039
+  }
+}

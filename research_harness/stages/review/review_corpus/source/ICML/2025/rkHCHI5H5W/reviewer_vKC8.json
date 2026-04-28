@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "rkHCHI5H5W",
+  "reviewer": "vKC8",
+  "paper": {
+    "title": "Compositional Generalization via Forced Rendering of Disentangled Latents",
+    "authors": [
+      "Qiyao Liang",
+      "Daoyuan Qian",
+      "Liu Ziyin",
+      "Ila R Fiete"
+    ],
+    "abstract": "Composition—the ability to generate myriad variations from finite means—is believed to underlie powerful generalization. However, compositional generalization remains a key challenge for deep learning. A widely held assumption is that learning disentangled (factorized) representations naturally supports this kind of extrapolation. Yet, empirical results are mixed, with many generative models failing to recognize and compose factors to generate out-of-distribution (OOD) samples. In this work, we investigate a controlled 2D Gaussian \"bump\" generation task with fully disentangled $(x,y)$ inputs, demonstrating that standard generative architectures still fail in OOD regions when training with partial data, by re-entangling latent representations  in subsequent layers. By examining the model's learned kernels and manifold geometry, we show that this failure reflects a \"memorization\" strategy for generation via data superposition rather than via composition of the true factorized features. We show that when models are forced—through architectural modifications with regularization or curated training data—to render the disentangled latents into the full-dimensional representational (pixel) space, they can be highly data-efficient and effective at composing in OOD regions. These findings underscore that disentangled latents in an abstract representation are insufficient and show that if models can represent disentangled factors directly in the output representational space, it can achieve robust compositional generalization.",
+    "keywords": [
+      "Factorization",
+      "Compositionality",
+      "Compositional Generalization",
+      "Data Efficiency"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=rkHCHI5H5W"
+  },
+  "review_fields": {
+    "summary": "The authors investigate the role of disentangled representations in compositional generalization, which remains unclear in the literature. The authors observe that while inputs may be disentangled, this disentanglement can \"erode\" through subsequent layers, such that the model overall is not able to generalize OOD. Looking deeper, the authors find that this \"erosion\" usually stems from models memorizing training instances. Finally, the \"erosion\" can be mitigated via architectural constraints or curated datasets. Overall, disentangled representations seem to be a necessary but not sufficient condition for compositional generalization.",
+    "claims_and_evidence": "1. Factorization alone, independent of input encoding formats, is not sufficient for comp. gen.\n    - This claim is mostly well supported by the data, especially Fig. 1b-c.\n    - More comprehensive numbers (e.g., MSE ID/OOD for different encodings in a table) would have been nice to see.\n    - The different input encodings are not exhaustive, e.g., what about simple (normalized) scalar inputs instead of 1-hot encoding?\n    - Does the shape of the ID/OOD region play any role? E.g., if the ID region was a diagonal strip as in [3] (see below), correlation of factors in the training data might be an additional issue.\n2. Failures are due to memorization and \"superposition\" of seen data points.\n    - This claim is somewhat supported by the plots in Fig. 1b-d.\n    - The kernel perspective from Sec. 3.3 and Fig. 1e should give a more comprehensive perspective, but it is somewhat unclear to me what Fig. 1e depicts, see below.\n3. Manifold warping ruins factorization\n    - This claim is clear and well supported by the evidence in Fig. 2.\n4. Architecture/regularization can encourage compositional generalization.\n    - This claim is mostly supported by the visualizations in Fig. 2 and especially the ablation in Fig. 2d.\n    - However, the visualizations in Fig. 2b,c are for one specific model only. A more comprehensive comparison, e.g., in terms of average ID/OOD performance over multiple models with/without regularization in a table could give increased certainty that the results hold in general.\n5. Dataset augmentations can encourage comp. gen.\n    - As with 4, this claim is mostly supported by the results, but more general results averaged over multiple models would increase confidence in the visualizations.",
+    "methods_and_evaluation_criteria": "The proposed evaluations make sense for the most part. However, I have some questions about the evaluation setup in Sec. 4.2.:\n\n- Was the fixed coordinate still an input to the network?\n- I find the stripes somewhat problematic since, by definition, their superposition results in the Gaussian blob. If the model simply memorizes and superimposes factors as before, this would mostly \"solve\" the OOD case, as we can see in Fig. 7b with $p=0$%.\n- What could this augmentation look like for other types of compositional data? I'm having a hard time imagining an analogy to the 1d stripes for factors such as \"color\", \"shape\", \"size\" in, e.g., a sprites setting.\n- How does this compare to model performance when restricting the ID set to x/y combinations with 1 fixed coordinate, but where the output is still a bump (i.e., the dataset consists solely of bumps on the left with varying y, or bumps on the bottom with varying x)? I find this to be there more widely applicable data augmentation that also provides the model with independent influence of each factor.",
+    "theoretical_claims": "The paper makes no theoretical claims.",
+    "experimental_designs_or_analyses": "The analyses are mostly clear, except for:\n\n- Sec. 3.3/Fig. 1e: What does \"agreement between the binary factorized kernel and the similarity matrix between the OOD and ID generated samples\" mean? It would be helpful if this could be formalized in an equation. What regions of the complete plots in Fig. 8 does Fig. 1e correspond to? What regions in Fig. 1e correspond to ID/OOD? From the y-axis label it seems like the entire plot corresponds to OOD samples?",
+    "relation_to_broader_scientific_literature": "In my understanding, the main and titular observation that disentangled representations are not sufficient for comp. gen. is well known in the literature and has been shown in multiple prior works, including Wiedemer et al., 2023 (cited in the paper) as well as [1,3,4] (see below).\n\nWiedemer et al., 2023, and [3,4] specifically show theoretically that compositional inputs _alone_ are not enough and additional assumptions in the form of regularizations, architectural constraints, or conditions on the training data are required.\n\nThat said, the additional kernel and transport perspectives on how disentangled representations might be \"diluted\" throughout a model, and the (to my understanding) novel regularization scheme in Sec. 4.1. are still interesting, but the main claim should be adapted to properly reflect prior work, which might also have to be reflected in the title.",
+    "essential_references_not_discussed": "- [1] _Montero et al., 2022, Lost in Latent Space: Examining failures of disentangled models at combinatorial generalisation_. This is a follow up to Montero et al., 2021, which the authors cited. It investigates whether failure to generalize compositionally is largely due to a model's inability to disentangle inputs (the encoder), or its inability to generate new compositions (the decoder) and finds decoder errors to be most prominent.\n- [2] _Schott et al., 2022, Visual Representation Learning Does Not Generalize Strongly Within the Same Domain_. This paper is similar to Montero et al., 2021, but focuses on the encoder rather than the decoder\n- [3] _Wiedemer et al., 2023, Provable Compositional Generalization for Object-Centric Learning_. Similar to [1], this paper shows decoder errors to be responsible for failures to generate compositionally, which can be overcome by additional architectural constraints. The paper discusses how models that disentangle latent factors can be guaranteed to robustly compose them, albeit with a focus on object-centric learning methods.\n- [4] _Lachapelle et al., 2023, Additive decoders for latent variables identification and cartesian-product extrapolation_. Like [3], the authors explore compositional generalization in object-centric learning.\n\nSpecifically, [1], [3], and [4] hint at the finding that factorization must be actively maintained, e.g., via additional architectural constraints.",
+    "other_strengths_and_weaknesses": "As outlined above, I believe the main contribution (in its current phrasing) is not novel, however, additional insights provided in Secs. 3.3-4.2 are still interesting.",
+    "other_comments_or_suggestions": "- I would suggest picking either \"disentangled\" _or_ \"factorized\" and using it consistently throughout\n- unclear how the OOD coordinates in Fig. 1e come to be\n- Fig. 2a-b, e-f and Fig. 4e are too small to read. There is white space to both sides, a different arrangement of plots might be possible.\n- Page 6, left, first paragraph ends in incomplete sentence",
+    "questions_for_authors": "Please refer to the questions above."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

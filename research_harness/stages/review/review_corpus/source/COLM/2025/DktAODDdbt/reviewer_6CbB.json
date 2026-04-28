@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "venue": "COLM",
+  "year": 2025,
+  "forum_id": "DktAODDdbt",
+  "reviewer": "6CbB",
+  "paper": {
+    "title": "Evaluating Large Language Models as Expert Annotators",
+    "authors": [
+      "Yu-Min Tseng",
+      "Wei-Lin Chen",
+      "Chung-Chi Chen",
+      "Hsin-Hsi Chen"
+    ],
+    "abstract": "Textual data annotation, the process of labeling or tagging text with relevant information, is typically costly, time-consuming, and labor-intensive.\nWhile large language models (LLMs) have demonstrated their potential as direct alternatives to human annotators for general domains natural language processing (NLP) tasks, their effectiveness on annotation tasks in domains requiring expert knowledge remains underexplored.\nIn this paper, we investigate: whether top-performing LLMs, which might be perceived as having expert-level proficiency in academic and professional benchmarks, can serve as direct alternatives to human expert annotators?\nTo this end, we evaluate both individual LLMs and multi-agent approaches across three highly specialized domains: finance, biomedicine, and law.\nSpecifically, we propose a multi-agent discussion framework to simulate a group of human annotators, where LLMs are tasked to engage in discussions by considering others’ annotations and justifications before finalizing their labels.\nAdditionally, we incorporate reasoning models (*e.g.*, o3-mini) to enable a more comprehensive comparison.\nOur empirical results reveal that:\n*(1)* Individual LLMs equipped with inference-time techniques (*e.g.*, chain-of-thought (CoT), self-consistency) show only marginal or even negative performance gains, contrary to prior literature suggesting their broad effectiveness.\n*(2)* Overall, reasoning models do not demonstrate statistically significant improvements over non-reasoning models in most settings.\nThis suggests that extended long CoT provides relatively limited benefits for data annotation in specialized domains.\n*(3)* Certain model behaviors emerge in the multi-agent discussion environment.\nFor instance, Claude 3.7 Sonnet with thinking rarely changes its initial annotations, even when other agents provide correct annotations or valid reasoning.",
+    "keywords": [
+      "LLMs-as-expert-annotators",
+      "reasoning models",
+      "multi-agent framework"
+    ],
+    "decision": "Accept",
+    "openreview_url": "https://openreview.net/forum?id=DktAODDdbt"
+  },
+  "review_fields": {
+    "summary": "**Summary**: This paper presents an extensive evaluation for using LLMs in expert annotation tasks. The evaluation is conducted on five datasets covering three domains that require expert knowledge (biomedicine, law, and finance). The authors first evaluate four state-of-the-art LLMs with various recent prompting techniques and find that none of them lead to a clear improvement across all domains. They then evaluate different combinations of models in a multi-agent discussion framework and find that this does improve the overall performance. The analysis reveals some interesting model behaviors and establishes the correctness of the initial predictions as the upper bound for the multi-agent discussion framework.\n\n* *Quality*: This paper presents a good analysis on using LLMs as expert annotators across different domains, models, and methods. The experiments are well motivated and conducted in a systematic manner (e.g., the authors explicitly focus on datasets that include annotation guidelines). \n\n* *Clarity*: The paper is well written and easy to follow. Some parts could be explained in more detail (see reasons to reject/ questions).\n\n* *Originality*: The paper is more a systematic study of existing methods and models; which somewhat impacts the originality. However, the selection of domains and datasets is somewhat creative and original.\n\n* *Significance*: Considering the recent trend of utilizing LLMs for annotation tasks and for synthetic data generation, the results of this work provide some interesting evidence towards how questionable such usage is. Moreover, this work makes a good case towards a more thorough evaluation of many frequently used approaches.\n\n----\n\nRebuttal update: raised score to 7",
+    "reasons_to_accept": "The paper presents a systematic study on the use of LLMs for expert annotation tasks. The paper is well written and clearly motivated; and the conducted experiments cover recent models as well as methods. The results clearly show the limitations of existing methods as well as models and raise some interesting questions for future research.",
+    "reasons_to_reject": "While it nice that this work presents extensive results on many state-of-the-art models, this is at the same time one of the weaknesses of this work. The use of proprietary models makes it impossible to conduct in-depth analysis which could have been also very insightful (e.g., some attribution analysis to see which parts of the discussion contributed to the final vote). Finally, some details about the conducted experiments is missing which impacts reproducibility (see questions).",
+    "questions_to_authors": "Thank you for this interesting work! Although the presented results were quite insightful, there are some open questions where responses would really help to fine-tune the rating:  \n\n1. How was the discussion history compiled? Is this just a concatenation of the individual model outputs? Or was there some additional summarization step? \n2. Figure 4: Looks quite nice, but could you please elaborate and provide some explicit numbers? What can be observed there? \n3. Are you planning to release the full responses of the models for further analysis?"
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "reasons_to_accept",
+      "weaknesses": "reasons_to_reject",
+      "questions": "questions_to_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:41:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 1376,
+    "words": 217,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/b5b0e943-8071-4716-8a94-5e4cd606d74f",
+    "error": null,
+    "scored_chars": 1380
+  }
+}

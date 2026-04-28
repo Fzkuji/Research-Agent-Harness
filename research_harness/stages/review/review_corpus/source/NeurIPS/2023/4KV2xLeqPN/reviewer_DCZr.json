@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2023,
+  "forum_id": "4KV2xLeqPN",
+  "reviewer": "DCZr",
+  "paper": {
+    "title": "On the Variance, Admissibility, and Stability of Empirical Risk Minimization",
+    "authors": [
+      "Gil Kur",
+      "Eli Putterman",
+      "Alexander Rakhlin"
+    ],
+    "abstract": "It is well known that Empirical Risk Minimization (ERM) may attain minimax suboptimal rates in terms of the mean squared error (Birgé and Massart, 1993). In this paper, we prove that, under relatively mild assumptions, the suboptimality of ERM must be due to its bias. Namely, the variance error term of ERM (in terms of the bias and variance decomposition) enjoys the minimax rate. In the fixed design setting, we provide an elementary proof of this result using the probabilistic method. Then, we extend our proof to the random design setting for various models. In addition, we provide a simple proof of Chatterjee’s admissibility theorem (Chatterjee, 2014, Theorem 1.4), which states that in the fixed design setting, ERM cannot be ruled out as an optimal method, and then we extend this result to the random design setting. We also show that our estimates imply stability of ERM, complementing the main result of Caponnetto and Rakhlin (2006) for non-Donsker classes. Finally, we highlight the somewhat irregular nature of the loss landscape of ERM in the non-Donsker regime, by showing that functions can be close to ERM, in terms of $L_2$ distance, while still being far from almost-minimizers of the empirical loss.",
+    "keywords": [
+      "empirical risk minimization",
+      "bias-variance decomposition",
+      "admissibility"
+    ],
+    "decision": "Accept (spotlight)",
+    "openreview_url": "https://openreview.net/forum?id=4KV2xLeqPN"
+  },
+  "review_fields": {
+    "summary": "This paper studies the suboptimality of Empirical Risk minimization (ERM) of the squared loss, or equivalently, Least Squares (LS), for convex function classes, in both fixed and random design settings. In the context of non-parametric statistics, necessary and sufficient conditions for the optimality of LS are not known (though sufficient conditions were given by Birge and Massart, '93).\nRoughly speaking, the main message of this paper is showing in both settings that the suboptimality is due to the bias term, where the variance term enjoys minimax rates, under some reasonable assumptions.",
+    "strengths": "This paper studies a classic and fundamental question in statistics, understanding the suboptimality of Least Squares.\nThis paper makes nice progress in this direction. Besides the main result (mentioned in the summary), there are several other contributions, such as the (weak) admissibility property of the ERM in the random design setting; sometimes ERM can be optimal.\nMoreover, one of the results shows that ERM is stable; all approximate minimizers of the squared loss are close to each other in the functions space, and on the other end, the converse doesn't hold, sometimes the ERM is an optimal estimate and there exist close functions to it with high empirical error.\n\nAlso, the proof techniques (the isoperimetry approach for example) look interesting and elegant.",
+    "weaknesses": "I don't see any.\nThere is a chance that I didn't understand some details, this is not my main research field and some proof techniques were new to me.",
+    "questions": "Typos:\nline 69: should be $f*\\in F$.\n\nline 16: should be \"in detail\"."
+  },
+  "review_metadata": {
+    "rating": 7,
+    "confidence": 3,
+    "soundness": 3,
+    "presentation": 3,
+    "contribution": 3
+  },
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "strengths",
+      "weaknesses": "weaknesses",
+      "questions": "questions",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T15:56:59Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 0,
+    "mixed_pct": 0,
+    "human_pct": 100,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 998,
+    "words": 164,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/62126dda-897a-4d4a-a98b-453dd8f0b90f",
+    "error": null,
+    "scored_chars": 998
+  }
+}

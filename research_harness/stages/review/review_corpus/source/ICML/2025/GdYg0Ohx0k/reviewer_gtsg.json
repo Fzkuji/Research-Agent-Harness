@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "venue": "ICML",
+  "year": 2025,
+  "forum_id": "GdYg0Ohx0k",
+  "reviewer": "gtsg",
+  "paper": {
+    "title": "LSCD: Lomb--Scargle Conditioned Diffusion for Time series Imputation",
+    "authors": [
+      "Elizabeth Fons",
+      "Alejandro Sztrajman",
+      "Yousef El-Laham",
+      "Luciana Ferrer",
+      "Svitlana Vyetrenko",
+      "Manuela Veloso"
+    ],
+    "abstract": "Time series with missing or irregularly sampled data are a persistent challenge in machine learning. Many methods operate on the frequency-domain, relying on the Fast Fourier Transform (FFT) which assumes uniform sampling, therefore requiring prior interpolation that can distort the spectra. To address this limitation, we introduce a differentiable Lomb--Scargle layer that enables a reliable computation of the power spectrum of irregularly sampled data.\nWe integrate this layer into a novel score-based diffusion model (LSCD) for time series imputation conditioned on the entire signal spectrum. \nExperiments on synthetic and real-world benchmarks demonstrate that our method recovers missing data more accurately than purely time-domain baselines, while simultaneously producing consistent frequency estimates. Crucially, our method can be easily integrated into learning frameworks, enabling broader adoption of spectral guidance in machine learning approaches involving incomplete or irregular data.",
+    "keywords": [
+      "time series",
+      "diffusion models",
+      "frequency spectrum"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=GdYg0Ohx0k"
+  },
+  "review_fields": {
+    "summary": "This paper introduces Lomb–Scargle Conditioned Diffusion (LSCD), an approach for irregularly sampled time series imputation. Unlike traditional frequency-domain methods that rely on the Fast Fourier Transform (FFT), which assumes uniform sampling and requires interpolation, LSCD leverages the Lomb–Scargle periodogram to handle missing data directly in the frequency domain. The method integrates a score-based diffusion model conditioned on the Lomb–Scargle spectrum, ensuring that the imputed time series aligns with its true spectral content. To enhance performance, LSCD employs a spectral encoder and a spectral consistency loss, reinforcing the coherence between imputed series and their frequency representation. Experiments on synthetic sine wave data and two real-world datasets, PhysioNet ICU patient records and PM2.5 air quality data, demonstrate that LSCD outperforms existing baselines in both time-domain accuracy (MAE, RMSE) and spectral preservation (S-MAE).",
+    "relation_to_broader_scientific_literature": "The study highlights the potential of Lomb–Scargle-based spectral conditioning in machine learning applications involving incomplete time series.",
+    "essential_references_not_discussed": "Key related works on irregularly sampled time series, particularly those for regression tasks, are missing.",
+    "other_strengths_and_weaknesses": "Strengths:\n1. LSCD elegantly integrates the Lomb–Scargle periodogram into a diffusion model, allowing it to directly condition time-domain imputation on spectral information without requiring interpolation or zero-filling. This fusion preserves the frequency structure of irregularly sampled data while leveraging the powerful generative capabilities of diffusion models.\n2. By providing a differentiable implementation of the Lomb–Scargle periodogram, LSCD enables end-to-end learning, making it seamlessly compatible with modern deep learning frameworks and adaptable to various time series tasks with missing or irregularly sampled data.\n3. LSCD consistently outperforms both FFT-based and diffusion-based imputation methods by achieving lower MAE, RMSE, and better spectral fidelity (S-MAE).\n\n\nWeaknesses:\n1. This paper lacks discussion on related works addressing irregularly sampled time series, particularly for regression tasks such as imputation and forecasting [1-9] (a representative but non-exhaustive list). The authors should elaborate on the differences and advantages of their approach over these prior works and compare it with some state-of-the-art algorithms among them. \n2. This work lacks an efficiency evaluation of the proposed model, which is crucial for practical applicability and broader usage.\n\n[1] Latent ODEs for Irregularly-Sampled Time Series. NeurIPS, 2019.  \n[2] GRU-ODE-Bayes: Continuous modeling of sporadically-observed time series. NeurIPS, 2019.  \n[3] Neural Flows: Efficient Alternative to Neural ODEs. NeurIPS, 2021.  \n[4] Multi-time attention networks for irregularly sampled time series. ICLR, 2021.  \n[5] Modeling Irregular Time Series with Continuous Recurrent Units. ICML, 2022.  \n[6] Neural Continuous-Discrete State Space Models for Irregularly-Sampled Time Series. ICML, 2023.  \n[7] Modeling Temporal Data as Continuous Functions with Stochastic Process Diffusion. ICML, 2023.  \n[8] GraFITi: Graphs for Forecasting Irregularly Sampled Time Series. AAAI, 2024.  \n[9] Irregular Multivariate Time Series Forecasting: A Transformable Patching Graph Neural Networks Approach. ICML, 2024.",
+    "other_comments_or_suggestions": "1. There is a typo: ‘Ls’ in the equation in Section 4.2.",
+    "questions_for_authors": "1. Can this model impute measurements at any timestamp even without mask placeholders? Given the same observed time series, does the number of mask placeholders influence the imputation results for a specific timestamp?\n2.  What are the limitations of the proposed model?"
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "summary",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "questions_for_authors",
+      "full_review": ""
+    },
+    "openreview_invitation": "Official_Review",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T20:28:18Z"
+  }
+}

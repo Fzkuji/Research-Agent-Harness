@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "venue": "NeurIPS",
+  "year": 2024,
+  "forum_id": "qrfp4eeZ47",
+  "reviewer": "c6jF",
+  "paper": {
+    "title": "FactorizePhys: Matrix Factorization for Multidimensional Attention in Remote Physiological Sensing",
+    "authors": [
+      "Jitesh Joshi",
+      "Sos Agaian",
+      "Youngjun Cho"
+    ],
+    "abstract": "Remote photoplethysmography (rPPG) enables non-invasive extraction of blood volume pulse signals through imaging, transforming spatial-temporal data into time series signals. Advances in end-to-end rPPG approaches have focused on this transformation where attention mechanisms are crucial for feature extraction. However, existing methods compute attention disjointly across spatial, temporal, and channel dimensions. Here, we propose the Factorized Self-Attention Module (FSAM), which jointly computes multidimensional attention from voxel embeddings using nonnegative matrix factorization. To demonstrate FSAM's effectiveness, we developed FactorizePhys, an end-to-end 3D-CNN architecture for estimating blood volume pulse signals from raw video frames. Our approach adeptly factorizes voxel embeddings to achieve comprehensive spatial, temporal, and channel attention, enhancing performance of generic signal extraction tasks. Furthermore, we deploy FSAM within an existing 2D-CNN-based rPPG architecture to illustrate its versatility. FSAM and FactorizePhys are thoroughly evaluated against state-of-the-art rPPG methods, each representing different types of architecture and attention mechanism. We perform ablation studies to investigate the architectural decisions and hyperparameters of FSAM. Experiments on four publicly available datasets and intuitive visualization of learned spatial-temporal features substantiate the effectiveness of FSAM and enhanced cross-dataset generalization in estimating rPPG signals, suggesting its broader potential as a multidimensional attention mechanism. The code is accessible at https://github.com/PhysiologicAILab/FactorizePhys.",
+    "keywords": [
+      "Time-series estimation",
+      "remote photo-plethysmography",
+      "spatial-temporal attention",
+      "non-negative matrix factorization"
+    ],
+    "decision": "Accept (poster)",
+    "openreview_url": "https://openreview.net/forum?id=qrfp4eeZ47"
+  },
+  "review_fields": {
+    "comment": "Thank you for responding thoughtfully to my concerns. Overall my main concerns have been addressed so I shall update my score accordingly. \n\n> If we understand your suggestion correctly, it relates to reporting within-dataset performance.\n\nYes that is correct, thank you for including these.\n\nRegarding the new Table 7:\n\n- Some of the STD values seem very large, for example the RMSE STD is around ten times larger than the mean. Is this a typo or just a feature of the dataset?\n\n- For the MAE values in \"Performance evaluation on PURE\", it seems as though Physnet should be bolded since it has 2.78, vs 2.83 which is currently in bold."
+  },
+  "review_metadata": {},
+  "source": {
+    "openreview_field_keys": {
+      "summary": "",
+      "strengths": "",
+      "weaknesses": "",
+      "questions": "",
+      "full_review": "comment"
+    },
+    "openreview_invitation": "Official_Comment",
+    "api_version": "v2",
+    "collected_at": "2026-04-27T16:16:10Z"
+  },
+  "ai_score": {
+    "status": "ok",
+    "ai_pct": 1,
+    "mixed_pct": 0,
+    "human_pct": 99,
+    "verdict": "We are highly confident this text is entirely human",
+    "confidence": "highly",
+    "chars": 635,
+    "words": 111,
+    "ai_vocab": null,
+    "url": "https://app.gptzero.me/documents/cb404db7-3caa-4648-aa49-87596db8daba",
+    "error": null,
+    "scored_chars": 636
+  }
+}
