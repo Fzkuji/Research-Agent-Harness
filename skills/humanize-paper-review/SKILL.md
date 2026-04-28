@@ -2,30 +2,20 @@
 name: humanize-paper-review
 version: 4.0.0
 description: |
-  Humanize an existing peer review draft (typically LLM-generated) so it
-  passes AI-detection (e.g. GPTZero <=20% per the ACM MM 2026 lab cap),
-  while preserving the user's score / verdict / sub_scores / per-section
-  observations. Use when the user has a review draft already and needs
-  the prose to read as human-written without losing factual content or
-  rewriting the judgment.
+  Humanize an existing LLM-generated peer review so it passes
+  AI-detection (e.g. GPTZero <=20% for ACM MM 2026), while preserving
+  the user's score / verdict / sub_scores / observations.
 
-  v4 architecture (2-stage redaction):
-    Stage A: codex CLI compresses the draft into a structured judgment
-             dict (numbers + ≤80-char fragment bullets per section). The
-             draft's prose never enters any further LLM context.
-    Stage B: from-scratch generation via the source-repo CLI
-             `python -m research_harness.review_app --draft <draft>`,
-             which feeds (paper + structured judgment + corpus templates)
-             to the prose generator. The generator never sees the
-             draft's sentences, so the output prose carries no LLM
-             signature from the draft.
-  Empirical: 1% AI / 99% Human on GPTZero (ACM MM smoke test, 2026-04-28),
-  with score / verdict / sub_scores / confidence preserved verbatim from
-  the draft.
+  v4 uses 2-stage redaction (the previous in-context rewrite path
+  empirically failed at 100% AI): stage A compresses the draft into a
+  structured judgment dict (numbers + ≤80-char fragment bullets); stage
+  B regenerates prose from scratch via review_app --draft, so no
+  draft-prose token ever enters the prose-generator's context.
+  Empirical: 1% AI on GPTZero, ACM MM smoke test.
 
-  Sibling skill `paper-review` is for the from-scratch case (paper in,
-  review out, no draft). Use this skill when the user already has a
-  review draft they want to keep the judgment from.
+  Sibling `paper-review` is for the from-scratch case (no draft).
+  Use this skill when the user has a draft they want to keep the
+  judgment from.
 license: MIT
 compatibility: claude-code opencode
 allowed-tools:
