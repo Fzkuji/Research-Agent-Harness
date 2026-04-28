@@ -258,6 +258,10 @@ def generate_review_text(*, paper_content: str, venue_name: str,
             draft_judgment=draft_judgment,
         )
 
+        # Strip NUL bytes — fork_exec rejects argv with embedded \x00,
+        # which leaks in from upstream PDF/docx conversions and from
+        # zero-padded markdown writers.
+        prompt = prompt.replace("\x00", "")
         cmd = [
             "codex", "exec",
             "--sandbox", "workspace-write",

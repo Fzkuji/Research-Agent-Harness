@@ -59,6 +59,8 @@ def _stage2_freeform_codex(*, venue_name: str, venue_criteria: str,
             f"exact `sub_scores` dimension names (do not substitute names "
             f"from other venues). Do not write anything else."
         )
+        # Strip NUL bytes — fork_exec rejects argv with embedded \x00.
+        prompt = prompt.replace("\x00", "")
         cmd = [
             "codex", "exec",
             "--sandbox", "workspace-write",

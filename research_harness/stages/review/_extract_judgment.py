@@ -96,6 +96,9 @@ def extract_judgment(draft_text: str, *,
             "fences. The draft is below:\n\n---\n\n"
             f"{draft_text}\n"
         )
+        # Strip NUL bytes — fork_exec rejects argv with embedded \x00,
+        # which sometimes leaks in from upstream markdown sources.
+        prompt = prompt.replace("\x00", "")
         cmd = [
             "codex", "exec",
             "--sandbox", "workspace-write",
