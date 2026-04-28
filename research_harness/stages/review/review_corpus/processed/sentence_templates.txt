@@ -1,0 +1,320 @@
+# Real human reviewer sentences extracted verbatim from 52 GPTZero-verified-human reviews.
+# Source: human_reviews.json
+# Use these as sentence-skeleton templates: keep the syntactic frame, replace specific paper content with target-paper facts.
+
+
+========== SUMMARY (30) ==========
+I would like to thank the authors for addressing my questions and providing additional results.
+Overall, these empirical results provide greater clarification; particularly, human evaluation results.
+I like this work and think it is an incorrect topic.
+The authors have promised some revisions which I think are minor and easy to do.
+Thanks for your response.
+Regarding the first point about the "bias" of the dataset: While standard examinations can alleviate some bias, sourcing data from a single source can still introduce significant bias, such as in the style and difficulty of the questions.
+I acknowledge reading the authors' response and thank them for addressing my questions.
+l believe my original scorer still correctly reflects my overall evaluation of the paper, and therefore, I'm keeping my score the same.
+Overall I like the idea conceptually.
+The architecture is well-motivated, tackles the important problem of LSTF, and improves both forecasting performance and computational efficiency of state-of-the-art baselines.
+The paper is well-written and well-motivated with sufficient technical details 2.
+The paper is well written and the proposed architecture is easy to understand.
+The topic of grammar induction has been there for a very long time in NLP and is a very fundamental topic.
+The model was largely built based on an existing model for purely text-based grammar induction.
+Strengths: The idea of jointly inducing structure in natural language and grounding the constituents with real-world images is intuitively correct.
+The ablation study also shows that both feature-level fusion and score-level fusion (including the contrastive loss, if I understand correctly) helps in improving the parsing results.
+### Strengths - As far as I know, this is the first paper that proposes joint visual-linguistic grammar induction in a real-world setting (in contrast to synthetic settings; Hong et al., 2021).
+- The approach and the evaluation process are solid and make a lot of sense to me.
+Strengths: - The paper is written very well.
+The introduction provides a good motivation and challenges and illustrates the use cases clearly using examples.
+Novel and significant contribution by proposing a new mechanism for inter-subnets information exchange/learning.
+I enjoyed reading this paper!
+I think the strengths fall into three main categories: good problem setup that took the reader from concept to formulation well, an interesting idea with good scoping, and an impressive experimentation suite.
+Interestingness of the approach The proposed method is appealing since it applies a theory from cognitive science (the global workspace theory) to information processing in networks.
+The proposed method is novel and opens potential for new line of research in graph grammar.
+I personally find the submission to be clear and well-written.
+Strength: This method is very data efficient given grammar-based learning.
+The hypergraph contraction-based production rule learning process is very novel (at least from my perspective).
+This is a pretty solid contribution.
+Although the paper is written clearly, I admit I had trouble trying to understand the method initially, but once I got the big picture, everything lined up nicely.
+
+========== STRENGTH (30) ==========
+I would like to thank the authors for addressing my questions and providing additional results.
+I agree with reviewer a4f9 that more models would be nice - perhaps the authors could use Together.ai (if they can't run them locally) to use some of the larger models like Llama3-70B (but of course you couldn't have put that in the paper since it wasn't out yet).
+Overall, the authors have addressed some of my concerns, and I would like to increase my score to 6.
+I still believe that the "answer extraction methods" need to be described more clearly and recommend that as a major area of focus and perhaps rewriting for the camera-ready version to the authors.
+Overall I like the idea conceptually.
+While reading the initial description in the introduction, it is not fully clear what the nodes at each resolution represent.
+I would suggest defining A, L, C, N, S clearly in one place with some indentation in Section 3.1, for ease of reading.
+Please be slightly more clear in the second paragraph of section 3.
+I would like to verify my understanding of the multi-step forecasting modules.
+In the experiments the information of the datasets and the experimental setup is not 100% clear to me even after reading the appendix.
+These should be clearly defined.
+-- not absolutely essential but it would be interesting.
+Generally, it would be better if we could rank pyramidal attention vs state of the art models on the well known benchmarks used in the DCRNN paper and newer papers like For instance one could just do the evaluation of pyramidal attention in the same tasks as the linked paper and report the numbers.
+Paper is well written and easy to follow – making motivations and contributions clear.
+The paper is well-written and well-motivated with sufficient technical details 2.
+The paper is well written and the proposed architecture is easy to understand.
+Nevertheless, I think it is an interesting piece that might inspire future research on multimodal processing (for image + language).
+- The approach and the evaluation process are solid and make a lot of sense to me.
+- The visually grounded parsing results are quite impressive.
+Despite that there is a clear gap between their dataset and the real world settings, they are aligning the "visual grammars" to language grammars, yielding an arguably unified VL structure.
+The introduction provides a good motivation and challenges and illustrates the use cases clearly using examples.
+I also like that the authors use different types of backbones (Transformers and RIMs) in different experiments which indicates the proposed Shared Workspace method is not specific to certain kind of backbones.
+Novel and significant contribution by proposing a new mechanism for inter-subnets information exchange/learning.
+I enjoyed reading this paper!
+**Interesting idea with good scoping:** I appreciate that this is one architectural change that considers all inputs and outputs, and shows its advantages over the right baselines.
+**Impressive experimentation suite:** There are of course many experiments with thematic consistency, which is great - always better than papers with two testbeds and virtually the same experiment over and over.
+Even if that's still interesting (it is), the intro and conclusion seem to make a more general claim.
+Physical reasoning and Atari show more general improvement (and the results on Atari are impressive), but they're also the weakest, most qualitative parts of Sec 4.
+The ideal solution would be more robust testing of general improvement in these two testbeds, but if not then I would at least appreciate a claim that acknowledges the common and specific nature of the first four testbeds.
+This is the crux of the motivation behind my score: I worry that this paper overstates its claim and the real claim is elegant but not that surprising.
+
+========== WEAKNESS (50) ==========
+I like this work and think it is an incorrect topic.
+However, I don't think that is a major blocker - simple analyses done well are important also.
+This is something I would like the authors to discuss in the paper.
+On the data contamination issue, it's good to see that the authors conducted some numerical checks.
+However, the hypothesis that "the website features an authentication-required login interface that prevents access through common web crawling methods, thereby helping to prevent data contamination" is not very convincing.
+The architecture is well-motivated, tackles the important problem of LSTF, and improves both forecasting performance and computational efficiency of state-of-the-art baselines.
+Weaknesses --- However, some key architectural details can be clarified further for full reproducibility and analysis.
+However, it would be more convincing if the evaluation could also illustrate this perspective.
+In other words, inaccuracy in long-term prediction could be resulted from (1) accumulated noise in predictions along time, and (2) lack of long-term temporal dependency modelling.
+However, I feel the overall model is essentially a way to use image information to regularize the grammar induction process.
+Weakness: 1) The image features are only used for computing the inside pass.
+The image feature should contain information that can help predict the missing word, such that it could be used in the outside pass too.
+Selecting the best image region for predicting the missing word is also an intuitively correct way to build the vision-language alignment.
+### Weakness - My major concern is about the model selection process and the potential unfair comparisons to existing work.
+\ This issue also undermines the authors' arguments about potential links to how humans learn language.
+### Other comments and questions - Introduction: "These works, however, fail to consider a unified VL structure, nor have they demonstrated impact on visual understanding." \ I don't think I necessarily agree with this statement, especially regarding Hong et al.
+### Missing Reference Kojima et al.
+However, the paper neither cited it nor discussed the relevant issues.
+Weaknesses: - Although the authors perform experiments with wide variety of tasks, multi-agent tasks are missing where I believe coordination is more important.
+- It is unclear how certain hyper parameters are chosen.
+I think the strengths fall into three main categories: good problem setup that took the reader from concept to formulation well, an interesting idea with good scoping, and an impressive experimentation suite.
+More details: **Good problem setup:** I found the discussion of advantages of a shared workspace compelling.
+However, the main claim - higher-order communication and a sparser connection of graphs - help for inputs with sparse information in various locations - is less surprising than a claim of general improvement.
+The issue is that the *Notation* and *Step 1/2/3* sections write the math into large blocks of text without pause.
+It can be unclear without doing it myself whether something is being element-wise updated, transformed, dotted, etc.
+However, that's how they come across: a laundry list of experiments, one after another, even though they support similar claims.
+However, I have few more comments that I hope to help improve the paper.
+Weakness: It seems like the model can only work on a small set of molecules to generate the rules due to the computational complexity.
+However, it draws from previous methods in a clever way and addresses most of their limitations (for example, the production rules involve substructures instead of single atoms).
+Nonetheless, I have a few points I would like the authors to address before I give complete acceptance.
+1) It is unclear to me what is the computational cost of constructing the grammar and training the model since generating the production rules involves graph matching (and although you affirm this isn't an issue).
+The notation in section 4 is a bit unclear.
+While in section 4.2 right before Equation (3) we see there is $e_t^{(j)}$, where the meaning of superscript $(j)$ is unclear.
+It is however unfortunate that the evaluation framework did not consider faithfulness.
+Minor issue: you mention in section 3 that "we did not find summaries online for any books in our dataset, which means LLM memorization of these summaries is impossible." Not finding results online by no means imply that memorization is impossible.
+The paper addresses an important problem in summarization, proposing solutions to scale the evaluation of very long documents that are longer (for now) than current context sizes of large language models.
+However, the authors are open about this limitation.
+- This paper targets an interesting and exciting problem in the community, test set contamination.
+If the full network fails to learn in that case, it would confirm the applicability of the analysis to the full network.
+While fuller characterization of that will be a task for future work, noting this issue as a limitation of the present effort and pointing considering how these results inform us about what is happening in LLMs will be valuable.
+I don't see any major weakness.
+The problem instances considered can be solved perfectly with Gaussian elimination.
+This is not a weakness of the paper per se, but when the method my main remaining (aesthetic) dissatisfaction is the reliance on an external parser, and the possibility of cascading failure that any such pipeline-based system entails.
+The issue of improper linguistic binding is one that plagues not only attempts at image generation, but many other model uses of grounded language.
+It's an important problem that has not been adequately resolved by prior work, whereas this paper has demonstrated substantial steps to overcoming this issue without sacrificing on generated image quality.
+The paper is clearly written, and makes effective use of figures to illustrate the problem and how the proposed method resolves it.
+The qualitative results seem promising and the human evaluation results suggest that the proposed method outperforms previous approaches to mitigate the binding issue.
+Considering that the paper is tackling a very specific problem, the general “content separation” rating collected in the human eval seems pretty weak.
+This paper tackles an important and challenging drawback of text-to-image diffusion models struggling to faithfully generate objects with the right attributes.
+- Using tree-based methods for binding may fail for more complicated and practical prompts.
+
+========== TRANSITION (40) ==========
+However, I don't think that is a major blocker - simple analyses done well are important also.
+However, the hypothesis that "the website features an authentication-required login interface that prevents access through common web crawling methods, thereby helping to prevent data contamination" is not very convincing.
+For example if the data is hourly, then one could build a resolution graph such that groups of 24 are constructed in the first level (24 hours in a day), then groups of 7 (7 days in a week), then 4 weeks in a month.
+In addition, while the ablation analysis tests the impact of changing CSCM architectures, it would be good to evaluate the base performance without the PAM to determine the value added by attention.
+Finally, could I double check which dataset was used for the ablation analysis as well?
+Although I couldn't find any specific publication, I believe hierarchical structure illustrated in Figure 1 (d) has been explored before in the context of LSTM/RNN.
+In addition, another line of work trying to apply the residual connections from ResNet to RNNs (e.g., also provides a means for long-range time-series modelling.
+However, it would be more convincing if the evaluation could also illustrate this perspective.
+However, I feel the overall model is essentially a way to use image information to regularize the grammar induction process.
+For example, the sentence describes the entire image, while each phrase describes part of the image.
+However, the paper neither cited it nor discussed the relevant issues.
+For example why is the patch size 4x4 in equilateral triangles, 6x6 in object tracking?
+For example, the section on the key-query-value attention mechanism is quite brief.
+However, the main claim - higher-order communication and a sparser connection of graphs - help for inputs with sparse information in various locations - is less surprising than a claim of general improvement.
+However, that's how they come across: a laundry list of experiments, one after another, even though they support similar claims.
+For example, adding shared workspace to transformers imposes a communication bottleneck between representations at different positions of the sequence.
+However, I have few more comments that I hope to help improve the paper.
+Second, aside from the computational challenge, can the proposed algorithm benefit from more data?
+Although the paper is written clearly, I admit I had trouble trying to understand the method initially, but once I got the big picture, everything lined up nicely.
+However, it draws from previous methods in a clever way and addresses most of their limitations (for example, the production rules involve substructures instead of single atoms).
+Although technically the proposed method is similar to some previous work like MHG[1], it cleverly preserves the class-specific properties by operating on subgraphs instead of individual atoms.
+Still, this is arguably one of the most rigorous attempts to create a test set that avoids dataset contamination.
+However, the authors are open about this limitation.
+Furthermore, the evaluation of different models does not further investigate whether some of the score differences can be explained by the different length of the summaries (e.g., a shorter summary may be more prone to omissions).
+For example, testing 49 files using 1000 permutations per shard can take 12 hours for LLaMA2.
+In particular, the phenomenological model Equation 10 (and its illustration Figure 7) is a standout novel contribution, and clearly worthy of publication, in our view.
+For example, you can explain early on in the paper what "induction head" means for readers that are less familiar with this area.
+For instance, "Induction head formation drives the abrupt transition during ICL." As far as I can tell no evidence is given for this claim, other than the (very suggestive, I agree!) fact that they coincide in time.
+Although I consider the analysis presented a tour de force, possessing all the strengths describe above, it is not perfectly clear that the analysis of the 2-3 parameter reduction would carry over to the full 2-attention-head network of Figure 1c.
+First, I don't feel I have an intuitive understanding of why the loss landscape of the 3 parameter model does not have a saddle point at the point were all three parameters are equal to 0.
+Second, paper is harder to read than it should be.
+Although ultimately the conclusions are stated in (what I find myself to be) conceptual terms, there should be engagement with this conceptual structure in the referential expressions used.
+Finally, they make an even further reduction in the form of a 2- or 3- parameter 'phenomenological model' whose loss landscape can be fully characterized.
+For example, suppose the algorithm that TFs learn is: randomly pick one decision rule (or Boolean function) which is in the conjunction function class and agrees with all examples in the test context (the x_i, y_i pairs at test time).
+However, I think the contribution of SynGen still matters a lot as the community needs time to develop from methods for short prompts to more generalized methods.
+However, AT is notoriously poor at generalizing to new attacks.
+In particular, they measure the human critical channel and show that models measure higher bandwidths.
+First, for a paper whose main contribution is on the exploration of different weighting schemes, the authors only experiment on a single dataset (ImageNet 64x64).
+For instance, is setting mu_t as the least squares estimator and T_t as the Grammian a good idea?
+For example, we'd usually like that for a random set $A'$ subset of $A$, for any $a \in A$, the event $\{a \in A'\}$ is measurable.
+
+========== HEDGE (30) ==========
+I would like to thank the authors for addressing my questions and providing additional results.
+I like this work and think it is an incorrect topic.
+The authors have promised some revisions which I think are minor and easy to do.
+I think the paper will make for good conversation at the conference and agree it is an understudied area.
+Re: other reviewer concerns: I agree that this paper doesn't propose any new methods and the evaluation process is simple.
+I agree with reviewer a4f9 that more models would be nice - perhaps the authors could use Together.ai (if they can't run them locally) to use some of the larger models like Llama3-70B (but of course you couldn't have put that in the paper since it wasn't out yet).
+I think the authors could and probably should do this so that there are reproducible results but again this wouldn't take very long to add.
+This is something I would like the authors to discuss in the paper.
+Overall, the authors have addressed some of my concerns, and I would like to increase my score to 6.
+I still believe that the "answer extraction methods" need to be described more clearly and recommend that as a major area of focus and perhaps rewriting for the camera-ready version to the authors.
+Overall I like the idea conceptually.
+This is only evident to me after reading section 3.2 which states that convolutional layers with specific strides are applied repeatedly to get the coarser levels.
+Related comment: I think the clarity of section 3,2 can be improved.
+I might be wrong but I believe N is not defined in section 3.1 before it is used.
+I would like to verify my understanding of the multi-step forecasting modules.
+In the experiments the information of the datasets and the experimental setup is not 100% clear to me even after reading the appendix.
+Typically I would prefer if A and C are tuned on a validation set per dataset and the best results are reported.
+I believe the equations are correct, and the included model illustrations makes the model design very intuitive.
+Although I couldn't find any specific publication, I believe hierarchical structure illustrated in Figure 1 (d) has been explored before in the context of LSTM/RNN.
+However, I feel the overall model is essentially a way to use image information to regularize the grammar induction process.
+Nevertheless, I think it is an interesting piece that might inspire future research on multimodal processing (for image + language).
+- The approach and the evaluation process are solid and make a lot of sense to me.
+Despite that there is a clear gap between their dataset and the real world settings, they are aligning the "visual grammars" to language grammars, yielding an arguably unified VL structure.
+- Some more thoughts regarding motivation limitations: humans arguably learns how to parse concrete sentences first, and can then generalize to abstract domains that are not visually groundable.
+(2019) propose - In my opinion, putting Section 3.4 before 3.3 would better streamline the paper.
+Weaknesses: - Although the authors perform experiments with wide variety of tasks, multi-agent tasks are missing where I believe coordination is more important.
+I enjoyed reading this paper!
+I think the strengths fall into three main categories: good problem setup that took the reader from concept to formulation well, an interesting idea with good scoping, and an impressive experimentation suite.
+**Interesting idea with good scoping:** I appreciate that this is one architectural change that considers all inputs and outputs, and shows its advantages over the right baselines.
+This is the crux of the motivation behind my score: I worry that this paper overstates its claim and the real claim is elegant but not that surprising.
+
+========== QUESTION (40) ==========
+Please check this (ignore if I missed this somehow).What is the relation between N and S ?
+Is my understanding correct?
+Also, is the task rolling prediction over the test set?
+is there a validation set?
+Can the authors comment on this or better yet try this?
+How are historical observations combined with inputs known over all time given differences in sequence lengths (L vs L+M)?
+Can each node attend to its own lower-level representation?
+Do the authors have any guidelines on how to select S/A/C (and consequently N) for a given receptive field L?
+Finally, could I double check which dataset was used for the ablation analysis as well?
+To be more specific, how do we know from the current evaluation setting that the model indeed learns multi resolution temporal dependencies?
+How does the authors distinguish the result from these two perspectives?
+I'm wondering if this is a design choice with some thoughts behind it, or could this number be treated as a hyper parameter?
+" \ Do you mean *terminal* symbols here?
+- Task definition, evaluation metrics: if I understood correctly, CCRA requires some extra annotation of critical concepts -- how did you collect such annotations to determine which NPs are critical?
+\ (Very minor) based on the full name, CCRA should really be CCRR -- what does A stand for here?
+(2019b) paper is not relevant to image features at all -- did you mean Shi et al., (2019)?
+- Table 1: what is the dagger after VGNSL-HI?
+- Section 4.3: did you mean "augments" by "arguments"?
+Do you have any thoughts on enabling a trained CLIORA model to parse pure text without grounding signals?
+For example why is the patch size 4x4 in equilateral triangles, 6x6 in object tracking?
+Why are both SSW and HSW not evaluated in all the experiments?
+Are these the same thing?
+Is "specialist" an abstraction/metaphor for "neural module"?
+Is "neural module" an example of "specialist"?
+Can the authors provide data to support this claim?
+Is the REINFORCE algorithm stable across random seeds?
+Can the authors provide error bars in for their data?
+Can the authors provide convergence curves to demonstrate the learning?
+Second, aside from the computational challenge, can the proposed algorithm benefit from more data?
+If so, can we estimate how much we can gain by including the whole training set of the large polymer dataset?
+How does your training/grammar inference cost compares to other approaches?
+I might have missed it, but where is this shown?
+3) Why are some results in the tables underlined?
+How is the final set of grammar rules chosen?
+Is there any pruning process after the optimization has been performed, or just everything is kept?
+5) How many rules does the grammar construction process produce in the datasets you evaluated?
+But in practice, there must be a lot of hyperparameters to tune, such as the number of production rules, the maximum/minimum length of a single production rule, etc.?
+How do you decide these parameters?
+Do you do any pruning for the production rules?
+Do you sample the production rules uniformly randomly during testing?
+
+========== CLOSING (20) ==========
+Additionally, a more elaborate discussion along the lines of a more signifcant safety vector in larger models, would be helpful in encouraging future research on the topic.
+I have increased my score accordingly.
+I agree with reviewer a4f9 that more models would be nice - perhaps the authors could use Together.ai (if they can't run them locally) to use some of the larger models like Llama3-70B (but of course you couldn't have put that in the paper since it wasn't out yet).
+I think the authors could and probably should do this so that there are reproducible results but again this wouldn't take very long to add.
+Therefore, one possible solution would be to check the n-gram overlap of the questions with common crawl dumps, which might be more convincing.
+Overall, the authors have addressed some of my concerns, and I would like to increase my score to 6.
+l believe my original scorer still correctly reflects my overall evaluation of the paper, and therefore, I'm keeping my score the same.
+I still believe that the "answer extraction methods" need to be described more clearly and recommend that as a major area of focus and perhaps rewriting for the camera-ready version to the authors.
+This would reveal the rank of pyramidal attention in the SOTA table and would be a useful signal for the community.
+Again this is not required but a nice to have.
+Finally, could I double check which dataset was used for the ablation analysis as well?
+I seem to be having some difficulty lining the numbers in Tables 4-6 up with Table 3.
+The reason of using the second prediction module in multi-step forecasting need more justification, e.g.
+why take the concatenation as key/value in the second layer.
+I'm wondering if this is a design choice with some thoughts behind it, or could this number be treated as a hyper parameter?
+Basically this number will decide the number of hierarchies in the structure.
+Indeed, the authors also acknowledged something along with what I thought in the final section.
+Nevertheless, I think it is an interesting piece that might inspire future research on multimodal processing (for image + language).
+3) As the author mentioned in the discussion section, the model doesn't consider the latent hierarchical structure of the image.
+For example, the sentence describes the entire image, while each phrase describes part of the image.
+
+========== GENERIC (60) ==========
+I would strongly urge the authors to include them in the paper.
+I assume there are also many copies outside this specific site if such an exam is a very important one.
+As mentioned in the summary it makes a lot of sense for time-series data as it has an implicit bias of summarizing the past at different resolutions.
+This architecture as claimed, can handle long sequences with computational complexity O(L) where $L$ is the number of elements in the sequence.
+It can also maintain short attention path distance between any node.
+This distance is O(1) w.r.t L.
+The experiments are good enough to demonstrate the advantage of this network over other attention mechanisms.
+The implementation has been done efficiently using TVM and when released the code base would be of value.
+I hope the paper is reproducible even though no code has been provided.
+The empirical speed and memory consumption graphs are useful.
+__Cons__ I have certain clarifying questions.
+i would be happy to raise my scores if these are answered.
+Further I have some comments that would hopefully make the paper better.
+It would be better to formally define Signal Traversing Path and forward reference it from the introduction.
+It would be better if one states upfront that some external mechanism is used to extract the initial states of the coarser nodes.
+In the first module, we just have a fixed output layer which is a dense mapping to F outputs, where F is the future prediction length.
+In the second mapping, there is a decoder that sequentially generated the multi-step output and the decoder is equivalent to the decoder in the original transformer paper.
+Please clarify or point me to the relevant places in the paper.
+In multi-step forecasting what is the length of the future prediction window.
+the ordering would stay the same I guess, because fixed set of A, C are used in all experiments.
+Is there a relation between A, C vs the granularity of the dataset.
+Such a non-uniform pyramidal structure might be very useful.
+The text mentions separate embedding and addition with positional encoding, but clarifications on how the embeddings are combined and fed into the CSCM are needed.
+From equation 2, it seems to be that only neighbouring nodes are attended to, based on the description of N_l^(s).
+This would also provide a simple comparison vs dilated CNNs which have been used successfully in time series forecasting applications (e.g.
+The extensive empirical results demonstrate the effectiveness and efficiency of the proposed method 3.
+A proof is provided to guarantee the linear complexity of long sequence encoding ## Comments 1.
+More datasets for multi-step forecasting would be helpful in evaluating the method.
+Extensive evaluation is provided, and the proposed model consistently outperforms baseline models.
+A ablation study is provided to justify the effectiveness of each component in the proposed architecture.
+The paper states that Pyraformer simultaneously capture temporal dependencies of different ranges in a compact multi resolution fashion.
+This is intuitively understandable.
+Connected to comment 2, it would be better if the authors could illustrate a bit more on why these datasets can be used to evaluate long-term dependency modelling.
+In my understanding, long-term dependency modelling could be a bit different from long-term prediction.
+The former focuses on extract meaningful information from long-term previous steps, and the latter focuses on accurate prediction into the far future.
+If the real-world dataset does not include the long-term dependency in it, some study on a synthetic dataset would help readers understand the benefit of the proposed model.
+The proposed method uses a factor of 2 to construct the hierarchy.
+This number seems a bit arbitrary.
+The model essentially makes use of neural networks to learn good latent representations (using a reconstruction loss) where the latent representation is defined with neural networks which yield scores for constituents and vector representations of them.
+The approach adopts the classical inside-outside process for the computing of the scores.
+The paper essentially investigates what might be the effective methods for integrating image information into text for improved grammar induction.
+The execution of the paper was quite good, and the results are convincing.
+Little can be said about in what precise manner the image is actively contributing to the induction process.
+2) The compute of sim(I, c_ij) includes a max operator, this could lead to a biased gradient.
+- Model selection: If I understood correctly, for text parsing, the best models are selected w.r.t.
+to the parsing performance on a 1000-example dev set (Appendix F).
+\ This is an unrealistic setting (see for discussions; in short, for any fancy unsupervised parsing model that uses a labeled development set, a supervised model trained on these development examples should be considered as a strong baseline) -- introducing unsupervised criteria for model selection is more important than our initial impression.
+- Unfair comparison: CLIORA, the model proposed in this paper, uses DIORA as initialization, which uses ELMo to initialize word embeddings and the PTB labeled development set for model selection.
+This means that CLIORA has seen far more text than other baselines (VG-NSL, C-PCFG, VC-PCFG, and so on) and human language learners.
+I expect either a CLIORA trained from scratch (without DIORA initialization) or weakened arguments about the relationship between the current CLIORA and human language learning.
+- There seem to be some confusion on basic linguistic concepts, e.g., nonterminal vs.
+terminal symbols, and a few typos that affects smooth understanding (please see also detailed comments below).
+- Introduction: "The non-terminal symbol of a conventional constituency structure is a category label from a limited set (e.g., the set of part-of-speech (POS) tags) (Hopcroft et al., 2001).
+We usually refer to POS tags (to clarify, phrase tags are not POS tags) by preterminal or terminal (depending on whether the phrase-structure grammar is lexicalized, i.e., whether it's considering real words or just POS tags), and refer to the phrase nodes by nonterminal nodes/symbols (e.g., NP, PP).
+It seems that this is not a typo -- I have the same questions for the following task definition section on page 3.
+- Section 3.2, feature extraction: the Yoon Kim et al.
+In this work, it seems that the model only works when both the text and image are available, as there is a need to infuse visual features into text spans.
+[1] has strengthened the VG-NSL model by simplifying the architecture, and argued that such visually grounded models are potentially biased towards concrete noun phrases.
+[1] There have been a lot of relevant work earlier than 2019 on visual-semantic embeddings or structured visual understanding with text.
+The related work compares the proposed approach with other memory-based neural models.
