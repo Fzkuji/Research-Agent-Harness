@@ -1,6 +1,6 @@
 ---
 name: self-paper-review
-version: 1.2.0
+version: 1.3.0
 description: |
   Critically review your own paper to find real weaknesses before
   submission. Output is meant to be read by you (the author) and fed
@@ -113,17 +113,65 @@ already has an LLM-written review draft they want to humanize, use
    step 7 (the Recommendation), and you commit to it *before* the
    weakness pass biases you downward.
 
-   **Calibration anchors to keep yourself honest**:
-   - A NeurIPS/ICLR-quality paper with a real new method, solid
-     experiments, and a clean execution → base value 7-8.
-   - A paper with a real but small contribution and standard execution
-     → 5-6.
-   - A paper that is mostly a known method on a slightly different
-     dataset, with no new mechanism → 3-4.
-   - "Lots of weaknesses" alone does NOT lower the base value here — a
-     paper can be base-value 8 *and* still have 15 weaknesses. The
-     weaknesses go in their own list (step 6); the base value reflects
-     only the contribution, not the polish.
+   **Calibration anchors — ICLR-style 1-10 scale**.
+
+   The single biggest source of miscalibration in earlier versions of
+   this skill was using vague band-anchors ("NeurIPS-quality = 7-8").
+   Use the explicit per-point anchors below. When in doubt between two
+   adjacent points, default to the *higher* one — the well-known LLM
+   bias is to under-rate, not over-rate, so an active counter-bias
+   keeps the base near the real distribution.
+
+   - **10**: best-paper / oral-tier. Rare; top ~1%. Genuinely changes
+     how the field thinks about the problem. If you are tempted to
+     give 10 you are almost certainly wrong; reserve it for a
+     once-a-year paper.
+   - **8**: strong accept. Top ~15-20% at ICLR/NeurIPS. A real new
+     method or phenomenon, clear motivation, solid experiments across
+     more than one setting, the kind of paper a researcher in the area
+     wants to read on day one. Most "spotlight" papers land here.
+   - **6**: weak accept / borderline accept. The modal accepted poster
+     at ICLR/NeurIPS. A real (often incremental) contribution, decent
+     execution, no fatal flaw — the kind of paper that gets in but
+     reviewers do not push to highlight. **If the paper has a real
+     method that works on standard benchmarks at the venue's bar,
+     default to 6 unless something clearly elevates or deflates it.**
+   - **5**: borderline reject / weak reject. Either the contribution
+     is small (one knob change, one new dataset, one new variant) or
+     the execution is below the venue bar (single seed, missing
+     baseline, narrow domain) but the paper is not fundamentally wrong.
+     A reviewer leaning negative still goes here, not lower.
+   - **3**: clear reject. Known method on a marginally different
+     dataset with no new mechanism, OR experiments contradict the
+     claim, OR the paper does not target a problem the venue cares
+     about.
+   - **1**: strong reject. Method is wrong (broken theorem, fabricated
+     data, unsupported claim contradicted by the paper's own
+     experiments) or out-of-scope.
+
+   How to pick the number:
+   1. Locate which two adjacent anchors the paper falls between.
+   2. Pick the higher of the two unless you can name a *specific*
+      reason to drop. "Could be more rigorous" / "I would have liked
+      more analysis" / "writing could be tighter" are NOT reasons to
+      drop — they go in `## What's wrong` later. Only "the
+      contribution is genuinely smaller than the higher anchor
+      requires" is a reason to drop.
+   3. Round to integer. Half-points are not part of the scale; they
+      indicate you are hedging instead of committing. If you wrote
+      6.5, decide whether the contribution clears the 7-anchor bar
+      ("strong accept territory") or sits at the modal-accept-poster
+      bar (6).
+   4. **Cross-check by venue distribution**: the modal accepted ICLR
+     paper is rated 6 by reviewers. If your base is below 5, you are
+     claiming this paper would not be accepted at ICLR; that is a
+     strong claim and should match a specific deficit in
+     contribution, not vibes about polish.
+
+   "Lots of weaknesses" alone does NOT lower the base value — a paper
+   can be base-value 8 *and* still have 15 weaknesses. The weaknesses
+   go in their own list (step 6); the base value reflects only the
+   contribution, not the polish.
 
 5. **Stress-test the core claim against the paper's own evidence.** For
    each piece of evidence (theorem, experiment, ablation, qualitative
