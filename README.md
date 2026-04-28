@@ -85,37 +85,7 @@ result = research_agent(
 > /agentic-research "Polish this paragraph for NeurIPS: <text>"
 ```
 
-## Install as Claude Code / opencode skills
-
-Two skills ship with this repo for paper review:
-
-- **`paper-review`** — write a venue-format peer review from scratch using sentence skeletons drawn live from a corpus of ~500 GPTZero-verified human reviews (COLM / ICLR / NeurIPS / ICML, 2018-2025). Empirically 0% AI on GPTZero (ACM MM smoke test).
-- **`humanize-paper-review`** — humanize an existing LLM-generated review draft via 2-stage redaction (extract structured judgment from draft, then re-generate prose from scratch). Preserves score / verdict / sub_scores verbatim, lands at 1% AI on GPTZero.
-
-One-line install (Mac / Linux):
-```bash
-curl -sSL https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/install.py | python3
-```
-
-Windows (PowerShell):
-```powershell
-irm https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/install.py | python
-```
-
-The installer clones this repo to `~/.research-agent-harness`, symlinks the two skills into `~/.claude/skills/`, and adds the repo to `PYTHONPATH`. Customize via env vars:
-
-```bash
-AGENT_SKILL_DIR=~/.opencode/skills python install.py        # opencode
-RESEARCH_HARNESS_DIR=/opt/rah AGENT_SKILL_DIR=~/my-prompts python install.py
-```
-
-Use after install:
-```
-> /paper-review my_paper.pdf venue="NeurIPS"
-> /humanize-paper-review my_paper.pdf draft=existing_review.md venue="ACM Multimedia"
-```
-
-Upgrade later: `python ~/.research-agent-harness/install.py` (it does `git pull` + re-links).
+> **Side note**: this repo also ships two stand-alone skills for peer review (`paper-review` from-scratch, `humanize-paper-review` for existing LLM drafts), with a one-line cross-platform installer for Claude Code / opencode users. See [research_harness/stages/review/README.md](research_harness/stages/review/README.md).
 
 ## Architecture
 
