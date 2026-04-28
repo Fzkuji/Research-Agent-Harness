@@ -1,6 +1,6 @@
 ---
 name: self-paper-review
-version: 1.4.0
+version: 1.5.0
 description: |
   Critically review your own paper to find real weaknesses before
   submission. Output is meant to be read by you (the author) and fed
@@ -106,11 +106,17 @@ already has an LLM-written review draft they want to humanize, use
    evidence from the paper.
 
    - **Problem importance** (P): is this a real problem the venue's
-     community cares about?
-     - 8: a problem multiple top-tier papers per year address.
-     - 6: a problem the subfield acknowledges but is not the
-       hottest direction.
-     - 4: a niche / under-motivated problem.
+     community cares about? **Default to 6**. Only give 7+ when you
+     can point to specific evidence the problem is hot (multiple
+     concurrent top-tier submissions on it, a named open challenge,
+     a workshop dedicated to it).
+     - 8: a top-N hot problem of the year — you can name 5+ recent
+       top-tier papers tackling it.
+     - 7: an active research direction with several recent papers,
+       not the very hottest.
+     - 6: **default**. The subfield acknowledges the problem; some
+       prior work exists; not a hot direction. (Most papers land here.)
+     - 4: niche or under-motivated; a small group cares.
      - 2: out-of-scope or contrived.
    - **Conceptual contribution** (C): does the paper propose something
      genuinely new — a method, a phenomenon, a connection, a benchmark
@@ -129,9 +135,17 @@ already has an LLM-written review draft they want to humanize, use
      - 4: thin experiments (one dataset, one seed, weak baselines).
      - 2: experiments do not actually test the claim.
    - **Impact / interest** (I): would a researcher in the area
-     actively want to read, cite, or build on this paper?
-     - 8: yes, will be on a follow-up paper's reading list.
-     - 6: noted by the subfield but not pivotal.
+     actively want to read, cite, or build on this paper? **Default
+     to 6**. Only give 7+ when the contribution is genuinely
+     pivotal (introduces a new framing the field will adopt, opens a
+     new research direction, or releases an artifact the community
+     will reuse).
+     - 8: pivotal — follow-up papers will need to cite this; sets the
+       new baseline for the subfield.
+     - 7: meaningful — researchers in the area will read it and likely
+       use one of its contributions.
+     - 6: **default**. Of interest to the subfield, will get some
+       citations, but not pivotal. (Most papers land here.)
      - 4: of limited interest beyond a small group.
      - 2: unlikely to be read.
 
