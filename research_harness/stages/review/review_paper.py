@@ -35,7 +35,11 @@ def _stage2_freeform_codex(*, venue_name: str, venue_criteria: str,
             "stage 2 fallback needs codex CLI but it's not on PATH"
         )
 
-    workdir = Path(tempfile.mkdtemp(prefix="review_stage2_"))
+    # Tempdir under cwd so codex sandbox (nested via Claude Code Bash)
+    # can write to it.
+    import os as _os
+    workdir = Path(tempfile.mkdtemp(prefix="review_stage2_",
+                                    dir=_os.getcwd()))
     try:
         out_path = workdir / "structured.json"
         prompt = (

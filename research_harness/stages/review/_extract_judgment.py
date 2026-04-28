@@ -14,6 +14,7 @@ The 2-stage humanize pipeline:
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -43,7 +44,11 @@ def extract_judgment(draft_text: str, *,
             "extract_judgment needs codex CLI but it's not on PATH"
         )
 
-    workdir = Path(tempfile.mkdtemp(prefix="extract_judgment_"))
+    # Tempdir under cwd so codex sandbox (when called from a Bash tool
+    # inside another agent like Claude Code) can write to it without
+    # tripping workspace-write restrictions on /var/folders/.
+    workdir = Path(tempfile.mkdtemp(prefix="extract_judgment_",
+                                    dir=os.getcwd()))
     try:
         draft_path = workdir / "draft.md"
         draft_path.write_text(draft_text)

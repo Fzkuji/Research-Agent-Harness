@@ -236,7 +236,12 @@ def generate_review_text(*, paper_content: str, venue_name: str,
     if shutil.which("codex") is None:
         raise RuntimeError("codex CLI not on PATH; install or fix PATH")
 
-    workdir = Path(tempfile.mkdtemp(prefix="review_artifact_"))
+    # Tempdir under cwd so codex sandbox (when nested via Claude Code /
+    # opencode Bash tool) can write to it. /var/folders is sometimes
+    # outside workspace-write scope.
+    import os as _os
+    workdir = Path(tempfile.mkdtemp(prefix="review_artifact_",
+                                    dir=_os.getcwd()))
     try:
         paper_path = workdir / "paper.md"
         paper_path.write_text(paper_content)
