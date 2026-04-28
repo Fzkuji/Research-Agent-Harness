@@ -29,25 +29,72 @@ Windows (PowerShell):
 irm https://raw.githubusercontent.com/Fzkuji/Research-Agent-Harness/main/research_harness/stages/review/install.py | python
 ```
 
-The installer:
-1. Clones this repo to `~/.research-agent-harness`
-2. Symlinks the two skills into `~/.claude/skills/` (or copies on Windows
-   when symlink isn't permitted)
-3. Adds the repo to `PYTHONPATH` (shell rc on Unix, `setx` on Windows)
+### What gets installed where
 
-## Customization
+The installer touches **three places** on your machine:
 
-Override paths via env vars or CLI flags:
+| What | Default path | Override |
+|---|---|---|
+| 1. The repo (full clone, ~13 MB) — contains review_app, corpus (1265 reviewer JSONs + sentence index), and the skill source files | `~/.research-agent-harness/` | `RESEARCH_HARNESS_DIR=<path>` env var or `--repo-dir <path>` flag |
+| 2. The two skills (symlink → repo on Mac/Linux; copy on Windows w/o dev mode) | `~/.claude/skills/paper-review/`<br>`~/.claude/skills/humanize-paper-review/` | `AGENT_SKILL_DIR=<path>` env var or `--skill-dir <path>` flag |
+| 3. `PYTHONPATH` (so `python -m research_harness.review_app` resolves) | Appended to `~/.zshrc` (Mac, default shell) or `~/.bashrc` (Linux) — Windows uses `setx` to write the user-scope env var | `--no-pythonpath` flag to skip |
+
+After install your filesystem looks like:
+
+```
+~/.research-agent-harness/                # ← the repo
+├── research_harness/
+│   ├── review_app.py                     # the CLI both skills call
+│   └── stages/review/
+│       ├── install.py                    # this installer
+│       ├── README.md                     # this file
+│       └── review_corpus/
+│           ├── source/                   # 1265 GPTZero-verified human reviewer JSONs
+│           └── processed/                # sentence-template index for sample_for_venue
+└── skills/
+    ├── paper-review/SKILL.md
+    └── humanize-paper-review/SKILL.md
+
+~/.claude/skills/                         # ← where Claude Code looks for skills
+├── paper-review            -> ~/.research-agent-harness/skills/paper-review
+└── humanize-paper-review   -> ~/.research-agent-harness/skills/humanize-paper-review
+
+~/.zshrc                                  # ← appended:
+                                          # export PYTHONPATH="$HOME/.research-agent-harness:$PYTHONPATH"
+```
+
+### Customization (when default paths don't fit)
+
+Defaults assume Claude Code on a single-user machine. Other agents and
+layouts:
 
 ```bash
-# opencode — different skill directory
+# opencode — write skills to its own directory instead of ~/.claude/skills
 AGENT_SKILL_DIR=~/.opencode/skills python install.py
 
-# Custom repo location and skill directory
+# Custom repo location and a non-Claude/non-opencode skill directory
 RESEARCH_HARNESS_DIR=/opt/rah AGENT_SKILL_DIR=~/my-prompts python install.py
 
-# Skip the PYTHONPATH step (set it yourself)
+# Install side-by-side for two agents (re-run with a different SKILL dir)
+python install.py                                      # → ~/.claude/skills/
+AGENT_SKILL_DIR=~/.opencode/skills python install.py   # → ~/.opencode/skills/
+# Both symlink to the same repo, so `git pull` updates both.
+
+# Skip touching PYTHONPATH (you'll set it yourself)
 python install.py --no-pythonpath
+```
+
+### Uninstall
+
+There is no uninstaller, but cleanup is three deletes (whatever paths
+you actually used):
+
+```bash
+rm -rf ~/.research-agent-harness                          # the repo + corpus
+rm ~/.claude/skills/paper-review                          # the symlinks
+rm ~/.claude/skills/humanize-paper-review
+# Then remove the `export PYTHONPATH=...` line install.py added
+# to ~/.zshrc / ~/.bashrc (or `setx PYTHONPATH ""` on Windows).
 ```
 
 ## Use after install
