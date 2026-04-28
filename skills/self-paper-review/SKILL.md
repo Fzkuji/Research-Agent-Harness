@@ -1,6 +1,6 @@
 ---
 name: self-paper-review
-version: 1.1.0
+version: 1.2.0
 description: |
   Critically review your own paper to find real weaknesses before
   submission. Output is meant to be read by you (the author) and fed
@@ -178,43 +178,39 @@ already has an LLM-written review draft they want to humanize, use
    - `## Recommendation` — strict rule below. One sentence + one
      numeric rating estimate.
 
-   **Recommendation rule (strict, applies regardless of weakness list
-   length)**:
+   **Recommendation rule (strict)**:
 
-       final rating = base value
-                      − 1 point per Major weakness that materially
-                        undermines the core claim
-                      − 0 points for Medium / Minor weaknesses
-                        (they go in the list but DO NOT lower rating)
+       final rating = base value (from step 4, unchanged)
 
-   Examples of correct calibration:
-   - Base value 8, list contains 12 Medium + 3 Minor + 0 Major
-     deal-breakers → final rating ≈ 8 (an Accept paper with cleanup to
-     do). The weakness list is long; the rating does NOT drop.
-   - Base value 8, list contains 1 Major deal-breaker + 10 Medium →
-     final rating ≈ 7 (still likely accept). One major issue does not
-     drop a strong paper to borderline.
-   - Base value 6, list contains 2 Major deal-breakers + 8 Medium →
-     final rating ≈ 4 (likely reject). Two majors on a borderline-base
-     paper kills it.
-   - Base value 4, list is short → final rating ≈ 4 (rating is already
-     low because the contribution is small, regardless of weakness
-     count).
+   That is: the weakness list does NOT lower the rating, no matter how
+   long it is or how severe the items look. The list goes into
+   `## What's wrong` so the user can use it to revise the paper, but
+   it does not drive the verdict.
 
-   Examples of WRONG calibration that the previous version of this
-   skill made and you must avoid:
-   - "Many weaknesses → AI says borderline-to-weak / could be rejected"
-     even when base value is 8 and no Major weakness materially
-     undermines the core claim. This is the failure mode that empirical
-     evaluation of v1 caught (5/5 ICLR 2024 papers were systematically
-     under-rated by 1-3 points by the v1 skill). Do not repeat it.
+   Why this rule (read once and internalize):
+   v1.0 of this skill let weakness count drive the rating directly,
+   producing 5/5 systematically under-rated papers (e.g. ratings of 8
+   read as "borderline-to-weak"). v1.1 tried to fix it by allowing
+   only Major deal-breakers to subtract — but LLMs (you, me, all of
+   us) cannot reliably distinguish Major from Medium and consistently
+   over-classify ordinary "could-be-improved" issues as Major. v1.2
+   removes the subtraction entirely. The base value from step 4 is
+   the only thing reflected in the rating; the weakness list is
+   reflected in the *content* of `## What's wrong` instead.
+
+   The base value already incorporates a critical look at the
+   contribution (step 4 explicitly tells you to be honest about a
+   small / standard / unoriginal contribution → low base). So if you
+   judge the paper has a true fatal flaw, that should already be
+   visible in your base value, not bolted on later as a "Major
+   deduction."
 
    Output format for `## Recommendation`:
 
-       Final rating estimate: <N>/10 (base <B> − <M_major> Major
-       deal-breaker adjustments). At <venue> as currently written, this
-       paper would <accept / borderline / reject>. <one sentence on the
-       single most important thing to fix to move the rating up>.
+       Final rating estimate: <N>/10 (= base value). At <venue> as
+       currently written, this paper would <accept / borderline /
+       reject>. <one sentence on the single most important thing in
+       `## What's wrong` for the user to fix>.
 
 8. **Be specific.** Every finding cites a section / figure / equation
    number when possible. "The experimental section is weak" is useless;
