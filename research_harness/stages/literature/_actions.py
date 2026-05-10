@@ -485,10 +485,16 @@ def _dispatch(action: str, args: dict, state: dict, direction: str,
                 )
                 continue
             merged_text_parts.append(batch_text)
-            batch_parsed = (
-                parse_json(batch_text)
-                if isinstance(batch_text, str) else None
-            )
+            # parse_json raises ValueError when codex's response has no
+            # JSON object (rare — happens when the model emits prose
+            # only). Treat that batch as a parse miss and move on; the
+            # remaining batches still produce valid annotations.
+            batch_parsed = None
+            if isinstance(batch_text, str):
+                try:
+                    batch_parsed = parse_json(batch_text)
+                except ValueError:
+                    batch_parsed = None
             if not isinstance(batch_parsed, dict):
                 continue
             anns = batch_parsed.get("annotations") or []
