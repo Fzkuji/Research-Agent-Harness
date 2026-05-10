@@ -122,15 +122,40 @@ def _format_draft_judgment(judgment: dict) -> str:
         parts.append(f"\n### Points to make in `{field}`")
         for it in items:
             it = (it or "").strip().rstrip(".").strip()
-            if len(it) > 80:
-                it = it[:77] + "…"
             parts.append(f"- {it}")
-    parts.append("\nThese bullets are the reviewer's own observations. "
-                 "Use them to choose which paper aspects to discuss in "
-                 "each section, but write every sentence by picking a "
-                 "template from the templates block above and slotting "
-                 "in paper facts. Do not copy any phrasing from these "
-                 "bullets.")
+    parts.append("\nThese bullets are the reviewer's pre-culled "
+                 "compressed observations. The list has already been "
+                 "trimmed to importance-ordered, paper-grounded points; "
+                 "the count you see is the final count.\n\n"
+                 "Mapping rules:\n"
+                 "- 1:1 mapping. Each bullet -> one output item. Do NOT "
+                 "add bullets that are not in the input. Do NOT drop "
+                 "bullets that are in the input. Do NOT split or merge.\n"
+                 "- PRESERVE the substantive content of each bullet: "
+                 "the problem named, the component, the dataset, the "
+                 "baseline, the design choice, the missing experiment, "
+                 "the specific number when the bullet has one. These "
+                 "are the load-bearing content. The output sentence "
+                 "must convey what specifically the paper did or "
+                 "failed to do, not just a label. Do NOT force-insert "
+                 "Eq./Table/Figure citations that are not in the "
+                 "bullet — natural prose can name a component or "
+                 "dataset without a parenthetical reference. RULE 1 "
+                 "(paper grounding) and content preservation override "
+                 "RULE 2 (template fidelity) when they conflict.\n"
+                 "- Do not pad. If the bullet is one specific point, "
+                 "the output sentence is one specific sentence. Do not "
+                 "add generic flourish ('this demonstrates the "
+                 "thoroughness of the work', 'a notable strength of "
+                 "the paper') — the bullet's specific content IS the "
+                 "sentence; nothing else gets added.\n"
+                 "- Do not copy the bullet phrasing literally; pick a "
+                 "template skeleton and slot in the paper facts plus "
+                 "the specific tokens from the bullet.\n"
+                 "- If a bullet reads like a platitude with no specific "
+                 "tokens, that is a Phase-2 failure — render it as one "
+                 "short sentence and move on; do not invent specifics "
+                 "to dress it up.")
     return "\n".join(parts)
 
 
@@ -271,9 +296,8 @@ def generate_review_text(*, paper_content: str, venue_name: str,
             "--model", model,
             prompt,
         ]
-        result = subprocess.run(
-            cmd, capture_output=True, text=True, timeout=timeout_s,
-        )
+        from research_harness.stages.review._codex_run import run_codex
+        result = run_codex(cmd, timeout_s=timeout_s)
         if result.returncode != 0:
             raise RuntimeError(
                 f"codex exec failed (rc={result.returncode}): "
