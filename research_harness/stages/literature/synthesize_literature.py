@@ -9,128 +9,181 @@ def synthesize_literature(direction: str, framework_json: str,
                           papers_json: str, surveys_json: str,
                           output_dir: str,
                           runtime: Runtime) -> str:
-    """Produce the final, publication-ready literature synthesis.
+    """Produce ONE strict survey-paper-style markdown file.
 
-    Produce six coherent artifacts that, taken together, let a reader (or
-    downstream `run_idea` stage) understand the field, see where it's at,
-    and pick promising directions.
+    Output: a single file at `<output_dir>/synthesis/review.md` with the
+    structure of an academic survey paper. The orchestrator appends the
+    programmatic bibliography to the same file after you finish — leave
+    a placeholder section for it (see workflow step 9).
 
     Inputs:
-    - `direction`: overall research direction (tree root).
+    - `direction`: overall research direction (root of the tree).
     - `framework_json`: the stabilized topic tree.
     - `papers_json`: all annotated papers with per-topic contribution_summary.
     - `surveys_json`: all surveys with TOC + key claims.
-    - `output_dir`: directory to save artifacts into.
+    - `output_dir`: base directory; you write to `<output_dir>/synthesis/review.md`.
 
-    MODE DETECTION — before writing, CHECK IF `<output_dir>/synthesis/`
-    ALREADY HAS FILES:
-    - If NO — write everything from scratch (instructions below).
-    - If YES — this is a REFINEMENT pass. Do NOT overwrite blindly:
-        a. Read each existing file with the Read tool first.
-        b. Compare the existing content with the current state (framework +
-           papers + surveys provided here). Identify what changed:
-             * New topics added → extend framework.md + create new topic_*.md
-             * Topics renamed/merged/split/dropped → rename/merge/rewrite the
-               corresponding topic_*.md files and update framework.md
-             * New papers in a topic → append new paragraphs to topic_*.md
-               and bibliography.md
-             * Papers upgraded tier (abstract_only → pdf) → rewrite that
-               paper's paragraph with the richer PDF-derived detail
-             * New gaps surfaced / gaps resolved → update gaps.md and
-               ideas.md accordingly
-        c. Preserve sections that are STILL CORRECT. Do not rewrite text just
-           for stylistic reasons — only when the underlying evidence changed.
-        d. Keep the narrative flow of synthesis.md; weave new evidence in,
-           don't restart the story.
-        e. At the end, write a short `CHANGELOG.md` in `<output_dir>/synthesis/`
-           summarizing what this refinement pass changed. Append to it if it
-           already exists.
+    ## Mode
 
-    Workflow — write (or refine) these files under `<output_dir>/synthesis/`:
+    If `<output_dir>/synthesis/review.md` already exists, this is a
+    refinement pass:
+    - Read the existing file with the Read tool first.
+    - Overwrite it in place with an updated version that integrates new
+      evidence (added papers, refined topics, upgraded tiers). Preserve
+      sections still supported by the evidence; rewrite only what
+      changed. Keep the narrative flow.
 
-    1. `framework.md`
-       Tree rendered as nested markdown headers (H1=direction, H2=branch, ...).
-       Each node: description + source tag + open_questions + "N papers"
-       count + 2–3 representative papers (title + 1-line takeaway).
+    Otherwise, write from scratch.
 
-    2. `topic_<slug>.md` (one per leaf topic)
-       For each leaf with >=1 paper:
-       - Overview of the sub-problem (2–4 sentences)
-       - Papers ordered by method lineage (foundations → refinements → recent),
-         each as a paragraph with: short citation, problem framing, method,
-         evidence (datasets/numbers), limitation. Use `contribution_summary`
-         as the backbone. If a paper has a non-null `pdf_path`, use the Read
-         tool to open the PDF and enrich the paragraph with method details
-         (architectures, key equations, experiment setup) that the summary
-         alone wouldn't capture.
-       - Trends paragraph: what has shifted over time in this sub-problem.
-       - Open questions pulled from the framework node plus anything papers
-         consistently identify as unresolved.
+    ## Required structure for review.md
 
-    3. `synthesis.md`
-       Cross-topic narrative:
-       - Opening: scope + why it matters.
-       - How the sub-problems connect (shared primitives, conflicting goals,
-         pipeline stages, etc.).
-       - Consensus vs contested claims (what most papers agree on vs where
-         surveys or recent work disagree).
-       - Historical arc: where was the field 5 years ago, what changed.
+    Output ONE markdown file with these top-level sections, in this
+    exact order, using `#` and `##` headings:
 
-    4. `gaps.md`
-       Concrete, actionable gaps — not "more research needed".
-       Organize under headings per framework branch.
-       Each gap:
-       - What's missing (1 sentence, specific)
-       - Why existing work doesn't address it (evidence from papers)
-       - What would plausibly fix it (method sketch — not full design)
+    ```
+    # <direction>: A Literature Review
 
-    5. `ideas.md`
-       Candidate research directions derived from gaps.
-       Each idea:
-       - Title
-       - One-paragraph pitch (problem → approach → expected contribution)
-       - Feasibility (easy / medium / hard + why)
-       - Novelty (incremental / substantial / breakthrough + why, citing
-         closest prior work by id)
-       - Rough experiment sketch (2–3 bullets)
+    ## Abstract
+    150-250 words. What the field is, what problem it addresses, the
+    scope of this review (what is and is not covered), the main
+    organizing axes, the key findings or trends, and the gaps highlighted.
 
-    6. `bibliography.md`
-       All papers and surveys, unified format: `[id] Authors (year). Title.
-       Venue.` Sorted by year desc, then author.
+    ## 1. Introduction
+    - Problem framing: 2-3 paragraphs. Define the field, state why it
+      matters, and surface the central tension or open question that
+      structures the review.
+    - Scope: bounded statement of what counts as in-scope (which sub-
+      problems, time range, methodologies). 1 paragraph.
+    - Roadmap: 1 paragraph mapping each later section to a part of the
+      story.
 
-    After writing all six files, return ONE short JSON summary:
+    ## 2. Taxonomy
+    The stabilized topic tree as nested subsections (`### 2.1`, `#### 2.1.1`,
+    etc), one node per heading. For each node: a 1-2 sentence
+    description, the source tag (survey / llm-induced / paper-induced),
+    open questions if any, and the count of papers placed in that node
+    (or in any descendant if non-leaf).
+
+    Do not list every paper here — that goes in section 3. Keep this
+    section a structural map.
+
+    ## 3. Per-topic detailed review
+    One subsection per leaf in the taxonomy that has >=1 placed paper.
+    Use 2.X.Y numbering aligned with section 2 where natural; or just
+    sequential 3.1, 3.2, ... if alignment is awkward. For each subsection:
+
+    - **Overview** (2-4 sentences): the sub-problem and what makes it
+      hard.
+    - **Methods** (paragraph-per-paper, ordered by method lineage —
+      foundations first, then refinements, then recent work):
+      Each paper paragraph has, in order:
+        1. Citation as `[<id>]` where `<id>` is the paper's id field
+           verbatim (e.g. `[arXiv:2409.12917]`).
+        2. Problem framing: what the paper specifically targets.
+        3. Method: the technical core, in 2-4 sentences. If the paper's
+           `pdf_path` is non-null, use the Read tool on the PDF to enrich
+           the method description with architecture / equations / setup
+           details that the summary alone misses.
+        4. Evidence: datasets, metrics, headline numbers (only numbers
+           that appear in the paper or in `contribution_summary`; do NOT
+           invent).
+        5. Limitation: what this paper acknowledges or what later work
+           identified as a weakness. One sentence.
+    - **Trends** (1 paragraph): what has shifted over time within this
+      sub-problem.
+    - **Open questions** (bullet list): pulled from the framework node
+      plus anything multiple papers identify as unresolved.
+
+    Leaves with 0 placed papers should NOT appear here. The orchestrator
+    has already pruned empty leaves with no survey support; survey-only
+    leaves (no primary papers in state) may still be referenced briefly
+    in section 4 instead.
+
+    ## 4. Cross-cutting synthesis
+    - **How the sub-problems connect**: 2-3 paragraphs on shared
+      primitives, conflicting goals, pipeline stages — what makes the
+      taxonomy a coherent field rather than a list of unrelated topics.
+    - **Consensus vs contested claims**: two short subsections.
+        - Consensus: claims most surveys / multiple primary papers
+          agree on. Cite at least 2 sources per claim.
+        - Contested or open: claims where surveys disagree or where
+          recent work challenges older consensus. Cite the disagreeing
+          sources.
+    - **Historical arc**: 1-2 paragraphs. Where was the field 3-5 years
+      ago, what changed, what is the current frontier.
+
+    ## 5. Research gaps
+    Concrete, actionable gaps. Not "more research needed". Organize as
+    `### 5.1`, `### 5.2`, ... numbered. Each gap has the structure:
+    - **Gap <n>.<m> — <short title>**
+    - **What's missing** (1 sentence, specific).
+    - **Why existing work doesn't address it** (cite specific papers
+      and what they do / don't do — not just generic gestures at the
+      literature).
+    - **What would plausibly fix it** (method sketch in 2-4 sentences;
+      not a full design).
+
+    Group gaps by framework branch where natural — gaps under section
+    5.1 aligned with branch 1 of the taxonomy, etc.
+
+    ## 6. References
+    Leave EXACTLY this single line in this section:
+
+        <!-- bibliography appended programmatically -->
+
+    Do not write any references yourself. The orchestrator appends the
+    bibliography to this section after you finish, derived from
+    `state["papers"]` and `state["surveys"]` directly. If you write
+    references here, they will be overwritten.
+    ```
+
+    ## Citation style
+
+    Inline citations use the paper's id verbatim, in square brackets:
+    `[arXiv:2409.12917]`, `[arXiv:2308.03188]`, etc. The orchestrator
+    audits these against state — IDs not in state are flagged in
+    `_citation_audit.md` next to the review file.
+
+    ## Writing rules
+
+    - Output ONLY the final JSON summary (after writing the file).
+    - Do not fabricate papers, numbers, citations, or method details.
+      If `contribution_summary` is thin and the paper has no
+      `pdf_path`, write what you can and explicitly say "the abstract
+      reports X but the method details are not available in the
+      retrieved metadata".
+    - When citing surveys, cite their id like any other paper.
+    - Use plain markdown. No LaTeX, no HTML. Inline math like `$x$` is
+      fine for variable names but no equations.
+    - Length: aim for 8000-15000 words total in review.md. The
+      Per-topic detailed review (section 3) is normally the longest;
+      sections 4 and 5 are 1500-2500 words each.
+    - Use the Write tool to save to `<output_dir>/synthesis/review.md`.
+    - Do NOT write any other markdown files. The previous version
+      produced framework.md / topic_*.md / synthesis.md / gaps.md as
+      separate files; this is now consolidated into review.md.
+
+    ## Return
+
+    After writing the file, return ONE short JSON object:
     ```json
     {
-      "artifacts": {
-        "framework_md": "<path>",
-        "topic_files": ["<path>", "..."],
-        "synthesis_md": "<path>",
-        "gaps_md": "<path>",
-        "ideas_md": "<path>",
-        "bibliography_md": "<path>"
-      },
+      "artifact": "<output_dir>/synthesis/review.md",
       "stats": {
         "topics": 0, "leaves_with_papers": 0, "papers": 0,
-        "surveys": 0, "ideas": 0, "gaps": 0
+        "surveys": 0, "gaps": 0, "words": 0
       },
       "done": true
     }
     ```
-
-    Rules:
-    - Output ONLY the final JSON (after files are written).
-    - Do NOT fabricate papers, numbers, or citations.
-    - If a paper has only a short abstract, write what you can and say so —
-      do not invent results.
-    - LaTeX is not required here — this is human-readable markdown. Leave
-      LaTeX formatting for the writing stage.
 
     Args:
         direction:       Research direction.
         framework_json:  Stabilized topic tree.
         papers_json:     All annotated papers.
         surveys_json:    All surveys.
-        output_dir:      Base directory (the function writes under `<output_dir>/synthesis/`).
+        output_dir:      Base directory; output written to
+                         `<output_dir>/synthesis/review.md`.
         runtime:         LLM runtime.
     """
     return runtime.exec(content=[
