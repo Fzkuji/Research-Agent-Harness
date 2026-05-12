@@ -455,7 +455,7 @@ def extract_pdf_figure(
         #   (c) the block must sit at least min_fig_height above the
         #       caption — figures are typically ≥80 pt tall.
         cap_width = cap_x1 - cap_x0
-        min_fig_height = 80.0
+        min_fig_height = 95.0
         prev_y_bottom = 0.0
 
         _subcap_pat = re.compile(r"^\s*\(?[a-z]\)\s+[A-Z]")  # "(a) Recovery ..." / "a) Recovery ..."
@@ -494,6 +494,7 @@ def extract_pdf_figure(
                     return True
             return False
 
+        body_idx = None
         for j in range(cap_idx - 1, -1, -1):
             pb_x0, pb_y0, pb_x1, pb_y1, pb_text, *_ = text_blocks[j]
             if pb_x1 < cap_x0 - 5 or pb_x0 > cap_x1 + 5:
@@ -503,8 +504,29 @@ def extract_pdf_figure(
             pb_width = pb_x1 - pb_x0
             if not _looks_like_body(pb_text, pb_width):
                 continue
+            body_idx = j
             prev_y_bottom = pb_y1
             break
+
+        # PyMuPDF often splits one paragraph into multiple blocks
+        # (one per line). After locating the first body line going
+        # up, walk DOWN to absorb subsequent text blocks that look
+        # like continuation lines of the same paragraph — same
+        # column, small vertical gap, alphabetic content.
+        if body_idx is not None:
+            cur_y_bottom = prev_y_bottom
+            for k in range(body_idx + 1, cap_idx):
+                nx0, ny0, nx1, ny1, ntext, *_ = text_blocks[k]
+                if nx1 < cap_x0 - 5 or nx0 > cap_x1 + 5:
+                    continue
+                if ny0 - cur_y_bottom > 8:
+                    break
+                if not any(c.isalpha() for c in ntext):
+                    break
+                if _subcap_pat.match(ntext.strip()):
+                    break
+                cur_y_bottom = ny1
+            prev_y_bottom = cur_y_bottom
 
         fig_top = max(prev_y_bottom, prev_fig_y_max) + margin_pt
         fig_bottom = cap_y_end + margin_pt if include_caption else cap_y0 - margin_pt
