@@ -334,8 +334,8 @@ def extract_pdf_figure(
     callers in research_harness.
     """
     try:
-        from openprogram.tools.pdf.figure_by_caption import (
-            extract_figure as _extract,
+        from openprogram.programs.applications.pdf_figures import (
+            extract_one_figure as _extract,
         )
     except ImportError:
         _extract = None  # type: ignore
