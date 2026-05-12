@@ -334,7 +334,7 @@ def extract_pdf_figure(
     callers in research_harness.
     """
     try:
-        from openprogram.tools.pdf.extract_figure import (
+        from openprogram.programs.applications.pdf_figures._heuristic import (
             extract_one_figure as _extract,
         )
     except ImportError:
