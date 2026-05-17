@@ -385,4 +385,4 @@ Research-Agent-Harness/
 
 - [ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) — autonomous research pipeline with cross-model review (primary reference for review loop design)
 - [awesome-ai-research-writing](https://github.com/Leey21/awesome-ai-research-writing) — battle-tested writing prompts from top research labs
-- [Agentic Programming](https://github.com/Fzkuji/Agentic-Programming) — the runtime framework (`@agentic_function`, `Runtime.exec()`)
+- [OpenProgram](https://github.com/Fzkuji/OpenProgram) — the runtime framework (`@agentic_function`, `Runtime.exec()`); *Agentic Programming* is the paradigm it ships

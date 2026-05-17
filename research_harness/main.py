@@ -17,9 +17,9 @@ import sys
 
 from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
-from openprogram.programs.functions.buildin.build_catalog import build_catalog
-from openprogram.programs.functions.buildin.parse_action import parse_action
-from openprogram.programs.functions.buildin.prepare_args import prepare_args
+from openprogram.programs.functions.buildin.render_options import render_options
+from openprogram.programs.functions.buildin.parse_args import extract_action
+from openprogram.programs.functions.buildin.parse_args import parse_args
 
 from research_harness.registry import (
     STAGES, AUTO_PARAMS, HIDDEN_PARAMS,
@@ -34,42 +34,30 @@ from research_harness.registry import (
 
 @agentic_function(render_range={"depth": 0, "siblings": 0})
 def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
-    """Route a research task to the next stage. Single-step classification.
-
-Pick one entry from the Stages catalog below. Reply in the standard
-openprogram dispatch action format:
-
-    {"call": "<stage_name>", "args": {"sub_task": "..."}}
-
-Picking `call`:
-Read each stage's description in the catalog. Look at Progress so far. If
-the stage that naturally produces that progress isn't complete, continue
-there. If it is complete, pick the stage that consumes its output. For a
-fresh project, start with the earliest stage that fits unless the task
-explicitly skips it.
-
-`sub_task` guidance is in the catalog. The downstream stage dispatcher
-reads it to locate the project workspace folder, so copy the user's path
-or research direction verbatim — do not paraphrase.
-
-Pick `"call": "done"` (no args) only when every stage has finished and
-the final artifact exists.
-
-Args:
-    task: The user's research project description.
-    progress: Summary of what prior stages produced.
-    runtime: LLM runtime instance.
-"""
+    """Route a research task to its next stage — one classification step."""
     available = build_stages_available()
-    catalog = build_catalog(available)
+    catalog = render_options(available)
     reply = runtime.exec(content=[
         {"type": "text", "text": (
             f"User project description:\n{task}\n\n"
             f"Progress so far:\n{progress or '(nothing yet)'}\n\n"
-            f"== Stages ==\n{catalog}"
+            f"== Stages ==\n{catalog}\n\n"
+            "Pick the next stage to enter. Read each stage's description "
+            "and the progress so far: if the stage that produces the "
+            "current progress is not finished, continue it; once it is, "
+            "pick the stage that consumes its output. For a fresh "
+            "project, start at the earliest stage that fits unless the "
+            "task explicitly skips it.\n\n"
+            "Copy the user's path or research direction into `sub_task` "
+            "verbatim — the downstream dispatcher uses it to locate the "
+            "project folder, so do not paraphrase.\n\n"
+            "Reply with this exact JSON and nothing else:\n"
+            '  {"call": "<stage_name>", "args": {"sub_task": "..."}}\n'
+            'Reply {"call": "done"} (no args) only when every stage is '
+            "finished and the final artifact exists."
         )},
     ])
-    action = parse_action(reply)
+    action = extract_action(reply)
     if action is None:
         return {"stage": None, "reasoning": str(reply)[:200], "done": True}
     call = action.get("call") or ""
@@ -94,62 +82,10 @@ Args:
 @agentic_function(render_range={"depth": 0, "siblings": 0})
 def _stage_step(stage: str, sub_task: str, context: str,
                 runtime: Runtime, review_runtime: Runtime = None) -> dict:
-    """Pick ONE function from this stage's catalog and return the action
-to execute. This is a routing step — the chosen function does the work.
-
-Reply in the standard openprogram dispatch action format:
-
-    {"call": "<function_name>", "args": { ... }}
-
-Pick `"call": "stage_done"` (no args) only when previous steps have
-already completed this stage and no further call is needed this turn.
-
-Orchestrator preference:
-If the catalog lists a "run_*" / "*_loop" orchestrator for this stage
-(e.g. run_literature, run_idea, run_experiments, review_loop,
-paper_improvement_loop), prefer it over calling individual leaf
-functions yourself — the orchestrator chains steps internally and
-persists state. If it returns done=false (or an equivalent incomplete
-signal), call it AGAIN next turn. Do not mark the stage done just
-because an orchestrator was called once — check the returned flag.
-
-All results must be saved to files. Orchestrators save automatically;
-for individual leaves, save the output yourself.
-
-Workspace path (for orchestrators taking `output_dir`):
-Pass `output_dir` as an absolute path in this shape:
-
-    output_dir = <base> / <project_name> / <stage_folder>
-
-- base: if the task/sub_task/context mentions an absolute path
-  (e.g. "/Users/.../LLM Distillation", "~/..."), reuse the directory
-  CONTAINING that path. Otherwise use "<HOME>/Documents" (HOME is
-  given in the input below).
-- project_name: the last component of the mentioned path, or a readable
-  name derived from the research direction. Use the SAME project_name
-  across every stage of the same project.
-- stage_folder: "literature review" | "ideas" | "experiments" | "paper"
-  | "review" | "rebuttal" | "presentation" | "theory" | "knowledge" | ""
-  (the "project" stage writes directly under the project root — empty
-  stage_folder).
-
-Example: user said "/Users/X/Documents/LLM Distillation", stage=literature
-    → output_dir = "/Users/X/Documents/LLM Distillation/literature review"
-
-If the computed directory already has material from a prior run, the
-orchestrator resumes — do NOT invent a fresh folder. Never pass relative
-paths like "auto_xxx".
-
-Args:
-    stage: Current research stage name.
-    sub_task: What to accomplish in this step.
-    context: Results from previous steps in this stage.
-    runtime: LLM runtime instance.
-    review_runtime: Separate runtime for review tasks.
-"""
+    """Pick and dispatch one function within a research stage — one routing step."""
     import os as _os
     available = build_stage_available(stage)
-    catalog = build_catalog(available)
+    catalog = render_options(available)
     home = _os.path.expanduser("~")
     reply = runtime.exec(content=[
         {"type": "text", "text": (
@@ -157,10 +93,39 @@ Args:
             f"Sub-task: {sub_task}\n\n"
             f"Context from previous steps:\n{context or '(first step)'}\n\n"
             f"HOME: {home}\n\n"
-            f"== Functions ==\n{catalog}"
+            f"== Functions ==\n{catalog}\n\n"
+            "Pick ONE function from the catalog to run this turn.\n\n"
+            'If the catalog lists a "run_*" / "*_loop" orchestrator '
+            "(run_literature, run_idea, run_experiments, review_loop, "
+            "paper_improvement_loop ...), prefer it over individual leaf "
+            "functions — it chains steps and persists state. If it "
+            "returns done=false, call it AGAIN next turn; do not mark "
+            "the stage done just because it ran once — check the flag. "
+            "All results must be saved to files: orchestrators save "
+            "automatically, for leaf functions save the output "
+            "yourself.\n\n"
+            "For an orchestrator taking `output_dir`, pass an absolute "
+            "path shaped <base>/<project_name>/<stage_folder>:\n"
+            "- base: if the task/sub_task/context names an absolute "
+            'path ("/Users/.../LLM Distillation", "~/..."), reuse the '
+            "directory CONTAINING it; otherwise use <HOME>/Documents.\n"
+            "- project_name: the last component of that path, or a "
+            "readable name from the research direction — keep it the "
+            "SAME across every stage of one project.\n"
+            '- stage_folder: one of "literature review", "ideas", '
+            '"experiments", "paper", "review", "rebuttal", '
+            '"presentation", "theory", "knowledge", or "" (the '
+            '"project" stage writes at the project root).\n'
+            "If that directory already holds material from a prior run, "
+            "the orchestrator resumes — do not invent a fresh folder. "
+            'Never pass relative paths like "auto_xxx".\n\n'
+            "Reply with this exact JSON and nothing else:\n"
+            '  {"call": "<function_name>", "args": { ... }}\n'
+            'Reply {"call": "stage_done"} (no args) only when previous '
+            "steps already completed this stage."
         )},
     ])
-    action = parse_action(reply)
+    action = extract_action(reply)
     if action is None:
         return {"call": None, "result": f"JSON parse failed: {str(reply)[:500]}",
                 "success": False, "stage_done": False}
@@ -177,17 +142,15 @@ Args:
         return {"call": call, "result": f"Unknown function: {call}",
                 "success": False, "stage_done": False}
 
-    # Drop system-controlled params the LLM may have set
-    raw_args = {k: v for k, v in (action.get("args") or {}).items()
-                if k not in HIDDEN_PARAMS}
-    cleaned_action = {"call": call, "args": raw_args}
-
+    # parse_args takes the RAW reply, locates the chosen function in the
+    # stage registry, validates + binds its args (runtime auto-injected,
+    # non-signature / hidden args dropped) and returns (callable, kwargs).
     try:
-        args = prepare_args(cleaned_action, available, runtime)
+        _chosen, args = parse_args(reply, available, runtime)
     except ValueError as e:
         return {"call": call, "result": str(e), "success": False, "stage_done": False}
 
-    # prepare_args wires `runtime` into every AUTO_PARAM slot the function
+    # parse_args wires `runtime` into every AUTO_PARAM slot the function
     # exposes, but stage_step routes review tasks to a separate reviewer
     # runtime when one is configured — override after the fact.
     func = available[call]["function"]
@@ -243,25 +206,14 @@ def research_agent(
 ) -> dict:
     """Autonomous research agent with two-level control.
 
-Level 1: LLM decides which research stage to enter (literature, idea, writing, etc.)
-Level 2: Within a stage, LLM sequentially picks and executes functions.
-
-Cross-model review: when review_runtime is provided, review functions use a
-different model (e.g. GPT) from the executor (e.g. Claude). This follows the
-ARIS design where the reviewer and author are adversarial by being different models.
-
-The runtime's working directory must be configured before calling this function
-(webui sets it via exec_rt.set_workdir(); CLI uses --work-dir). Every codex
-shell command and file write the LLM issues runs with that as cwd.
-
-Args:
-    task: What the user wants to accomplish.
-    runtime: LLM runtime instance (executor).
-    review_runtime: Separate LLM runtime for review (different model recommended).
-
-Returns:
-    dict with: task, success, stages_completed, history
-"""
+    Level 1: the LLM picks which research stage to enter (literature,
+    idea, writing, ...). Level 2: within a stage, the LLM sequentially
+    picks and runs functions. When review_runtime is provided, review
+    functions run on a different model from the executor (ARIS-style
+    adversarial reviewer). The runtime's working directory must be set
+    before calling — every shell command and file write runs with that
+    as cwd. Returns a dict with task, success, stages_completed, history.
+    """
     if runtime is None:
         raise ValueError("research_agent() requires a runtime argument")
 
