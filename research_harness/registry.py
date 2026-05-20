@@ -120,7 +120,17 @@ _ENTRIES: dict[str, tuple[str, str, str]] = {
     "write_proof":              ("research_harness.stages.theory", "write_proof", "theory"),
     "write_grant_proposal":     ("research_harness.stages.theory", "write_grant_proposal", "theory"),
     # Knowledge & Meta
-    "research_wiki":            ("research_harness.wiki.wiki_agent", "research_wiki", "knowledge"),
+    "wiki_init":                ("research_harness.stages.wiki", "wiki_init", "knowledge"),
+    "wiki_import":              ("research_harness.stages.wiki", "wiki_import", "knowledge"),
+    "wiki_import_litreview":    ("research_harness.stages.wiki", "wiki_import_litreview", "knowledge"),
+    "wiki_migrate":             ("research_harness.stages.wiki", "wiki_migrate", "knowledge"),
+    "wiki_ingest":              ("research_harness.stages.wiki", "wiki_ingest", "knowledge"),
+    "wiki_survey":              ("research_harness.stages.wiki", "wiki_survey", "knowledge"),
+    "wiki_research":            ("research_harness.stages.wiki", "wiki_research", "knowledge"),
+    "wiki_refactor":            ("research_harness.stages.wiki", "wiki_refactor", "knowledge"),
+    "wiki_rename":              ("research_harness.stages.wiki", "wiki_rename", "knowledge"),
+    "wiki_lint":                ("research_harness.stages.wiki", "wiki_lint", "knowledge"),
+    "wiki_dedup":               ("research_harness.stages.wiki", "wiki_dedup", "knowledge"),
     "meta_optimize":            ("research_harness.stages.meta", "meta_optimize", "knowledge"),
     # Project
     "research_pipeline":        ("research_harness.pipeline", "research_pipeline", "project"),
@@ -234,14 +244,14 @@ def build_function_list() -> str:
 
 
 # ---------------------------------------------------------------------------
-# Builders for openprogram dispatch pattern (build_catalog / parse_action / prepare_args)
+# Builders for openprogram dispatch pattern (render_options / render_options / parse_args)
 # ---------------------------------------------------------------------------
 
 def _noop(**_kw):
     """Placeholder callable for catalog entries that aren't directly called.
 
     `_pick_stage` picks a stage name and returns it to the orchestrator —
-    it never invokes the entry's `function`. `build_catalog` requires the
+    it never invokes the entry's `function`. `render_options` requires the
     field to exist but never reads it, so a no-op satisfies the shape.
     """
     return None
@@ -250,7 +260,7 @@ def _noop(**_kw):
 def build_stages_available() -> dict:
     """Build the `available` registry for stage-level routing.
 
-    Each stage becomes an entry consumable by `build_catalog()`. Plus a
+    Each stage becomes an entry consumable by `render_options()`. Plus a
     `done` meta-entry for signaling the whole task is complete.
 
     Consumed by: `_pick_stage` in main.py.
@@ -291,7 +301,7 @@ def build_stage_available(stage: str) -> dict:
 
     Includes every function in the stage plus a `stage_done` meta-entry for
     signaling the stage has nothing more to do. Consumable by
-    `build_catalog()` + `parse_action()` + `prepare_args()`.
+    `render_options()` + `render_options()` + `parse_args()`.
 
     Consumed by: `_stage_step` in main.py.
     """

@@ -147,6 +147,7 @@ def review_paper_grounded(paper_content: str, venue: str,
         paper_content=paper_content,
         venue_name=spec.name,
         venue_criteria=enriched_criteria,
+        runtime=runtime,
     )
 
     # Stage 2: structured numeric / enum / boolean fields only. Exclude

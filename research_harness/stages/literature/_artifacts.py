@@ -380,9 +380,16 @@ _BIB_PLACEHOLDER = "<!-- bibliography appended programmatically -->"
 
 def _splice_bibliography_into_review(review_path: Path, bib_md: str,
                                      state: dict) -> bool:
-    """Replace the bibliography placeholder in review.md with rendered
-    bib. Falls back to appending a `## 6. References` section if no
-    placeholder is found. Returns True if the splice happened."""
+    """Install programmatic bibliography in review.md.
+
+    Strategy: regardless of what the LLM wrote, the final References
+    section is owned by us. We (a) replace the explicit placeholder if
+    present, otherwise (b) cut from the first `## 6. References` /
+    `## References` heading to EOF and replace with our bib, otherwise
+    (c) append. This prevents duplicate `## 6. References` headings
+    when the LLM disregards the placeholder instruction and writes its
+    own bibliography.
+    """
     if not review_path.exists():
         return False
     text = review_path.read_text(encoding="utf-8")
@@ -397,8 +404,13 @@ def _splice_bibliography_into_review(review_path: Path, bib_md: str,
     if _BIB_PLACEHOLDER in text:
         new_text = text.replace(_BIB_PLACEHOLDER, block.lstrip())
     else:
-        sep = "\n\n" if not text.endswith("\n") else "\n"
-        new_text = text + f"{sep}## 6. References\n{block}"
+        m = _re.search(r"(?m)^##\s+(?:6\.\s+)?References\s*$", text)
+        if m:
+            head = text[:m.start()].rstrip() + "\n\n"
+            new_text = head + "## 6. References\n" + block
+        else:
+            sep = "\n\n" if not text.endswith("\n") else "\n"
+            new_text = text + f"{sep}## 6. References\n{block}"
     review_path.write_text(new_text, encoding="utf-8")
     return True
 

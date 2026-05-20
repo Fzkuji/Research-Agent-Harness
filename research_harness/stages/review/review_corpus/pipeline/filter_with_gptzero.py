@@ -37,7 +37,7 @@ def _ensure_cdp_up() -> bool:
     """Make sure the sidecar Chrome on port 9222 is alive; relaunch otherwise.
     Returns True iff CDP is reachable after the call."""
     try:
-        from openprogram.tools.browser._chrome_bootstrap import (
+        from openprogram.functions.tools.browser._chrome_bootstrap import (
             cdp_url_if_available, launch_sidecar_chrome,
         )
     except ImportError:

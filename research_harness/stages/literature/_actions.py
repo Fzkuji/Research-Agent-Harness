@@ -27,7 +27,7 @@ import os
 
 from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
-from openprogram.programs.functions.buildin.build_catalog import build_catalog
+from openprogram.agentic_programming.decision import render_options
 
 from research_harness.stages.literature.annotate_papers import (
     annotate_papers,
@@ -42,6 +42,7 @@ from research_harness.stages.literature.search_papers_for_topic import (
     search_papers_for_topic,
 )
 from research_harness.stages.literature.seed_surveys import seed_surveys
+from research_harness.stages.literature.digest_paper import digest_paper
 from research_harness.stages.literature._artifacts import (
     _prune_empty_leaves,
 )
@@ -64,9 +65,24 @@ def _noop(**_kw):
     return None
 
 
+def _safe_digest_name(s: str) -> str:
+    """Deterministic ascii-safe filename stem for digest output.
+
+    Preferred input is the canonical paper id (`arXiv:2409.12917`,
+    `doi:10.xxxx/...`); falls back to a slug of arbitrary target text.
+    """
+    import re as _re
+    if not s:
+        return "paper"
+    cleaned = _re.sub(r"[^A-Za-z0-9._:/-]+", "_", s.strip())
+    cleaned = cleaned.replace("/", "_").replace(":", "_")
+    cleaned = _re.sub(r"_+", "_", cleaned).strip("._-")
+    return (cleaned or "paper")[:80]
+
+
 def _build_lit_actions_available() -> dict:
-    """Registry of literature-loop actions for build_catalog /
-    parse_action."""
+    """Registry of literature-loop actions for render_options /
+    render_options."""
     return {
         "seed_surveys": {
             "function": _noop,
@@ -149,6 +165,30 @@ def _build_lit_actions_available() -> dict:
             "input": {},
             "output": {},
         },
+        "digest_paper": {
+            "function": _noop,
+            "description": (
+                "Produce a structured single-paper digest "
+                "(problem / method / experiments / contributions / "
+                "limitations / connections) and save it under "
+                "<output_dir>/digests/<id>.md. Use this for papers "
+                "that warrant a deeper read than the standard "
+                "annotation — e.g. a foundational reference, a "
+                "paper whose method this review will lean on, or a "
+                "paper the user explicitly asked to read."
+            ),
+            "input": {
+                "target": {
+                    "source": "llm", "type": str,
+                    "description": (
+                        "free-form pointer to the paper: an id "
+                        "(arXiv:NNNN.NNNNN), title, local pdf path, "
+                        "URL, or unique search query"
+                    ),
+                },
+            },
+            "output": {},
+        },
         "done": {
             "function": _noop,
             "description": (
@@ -187,6 +227,10 @@ Guidance — FIRST-PASS mode (no prior synthesize in state):
   with no structural review: evolve_framework.
 - Framework stable for several rounds AND every leaf has ≥5 annotated
   papers AND no orphans remain: done.
+- A specific paper warrants a deeper read than the standard annotation
+  (foundational reference, the method this review will lean on, or a
+  paper the user explicitly flagged): digest_paper. Skip if the paper
+  already has `digested=true` in state.
 
 Guidance — REFINEMENT mode (prior synthesize exists):
 Improve what's there, don't redo it. Priorities, in order:
@@ -205,7 +249,7 @@ Improve what's there, don't redo it. Priorities, in order:
 Returns raw JSON text; the orchestrator parses and dispatches.
 """
     available = _build_lit_actions_available()
-    catalog = build_catalog(available)
+    catalog = render_options(available)
     return runtime.exec(content=[
         {"type": "text", "text": (
             f"Research direction:\n{direction}\n\n"
@@ -328,6 +372,39 @@ def _merge_annotate(state: dict, parsed: dict) -> tuple[int, str]:
     )
 
 
+def _merge_digest_paper(state: dict, parsed: dict) -> tuple[int, str]:
+    """Record digest artifact path on the matching paper (if any) and
+    keep a top-level digests log so picker can avoid re-digesting."""
+    artifact = parsed.get("artifact") or ""
+    rid = parsed.get("id") or ""
+    title = parsed.get("title") or ""
+    if not artifact:
+        return 0, "digest_paper: missing artifact path"
+    log = state.setdefault("digests", [])
+    if not any(d.get("artifact") == artifact for d in log):
+        log.append({
+            "artifact": artifact, "id": rid, "title": title,
+            "tier": parsed.get("tier"), "words": parsed.get("words"),
+            "target": parsed.get("target"),
+        })
+    matched = False
+    if rid:
+        for p in state.get("papers", []):
+            pid = p.get("id") or p.get("arxiv_id") or ""
+            if pid and pid == rid:
+                p["digest_path"] = artifact
+                p["digested"] = True
+                matched = True
+                break
+    tier = parsed.get("tier") or "?"
+    words = parsed.get("words") or 0
+    suffix = " (matched paper in state)" if matched else ""
+    return 1, (
+        f"digest written: {artifact} [tier={tier}, words={words}]"
+        f"{suffix}"
+    )
+
+
 def _merge_evolve(state: dict, parsed: dict) -> tuple[int, str]:
     new_fw = parsed.get("new_framework")
     deltas = parsed.get("deltas") or []
@@ -354,6 +431,8 @@ def _merge_evolve(state: dict, parsed: dict) -> tuple[int, str]:
                 if pl.get("topic_path") == old:
                     pl["topic_path"] = new
 
+    n_snapped, n_dropped, n_unannotated = _reconcile_placements(state)
+
     if stable or not non_trivial:
         state["no_delta_streak"] = state.get("no_delta_streak", 0) + 1
     else:
@@ -363,13 +442,77 @@ def _merge_evolve(state: dict, parsed: dict) -> tuple[int, str]:
     prune_part = (
         f", pruned {n_pruned} empty leaves" if n_pruned else ""
     )
+    reconcile_part = ""
+    if n_snapped or n_dropped:
+        reconcile_part = (
+            f", reconciled placements (snapped {n_snapped} to ancestor, "
+            f"dropped {n_dropped}, "
+            f"{n_unannotated} papers re-queued for annotate)"
+        )
 
     return len(deltas), (
         f"applied {len(deltas)} deltas "
         f"({len(non_trivial)} non-trivial), "
         f"relocated {len(relocations)} papers, "
-        f"streak={state['no_delta_streak']}{prune_part}"
+        f"streak={state['no_delta_streak']}{prune_part}{reconcile_part}"
     )
+
+
+def _reconcile_placements(state: dict) -> tuple[int, int, int]:
+    """Sync paper.placements against the current framework.
+
+    For each placement whose topic_path is no longer a valid framework
+    leaf:
+    - Try parent-fallback: walk up the path and snap to the longest
+      prefix that IS a current leaf.
+    - Otherwise drop the placement.
+
+    A paper that ends with zero valid placements is marked
+    `annotated = False` so the next annotate cycle re-places it.
+    Idempotent: leaves already-valid placements untouched.
+
+    Returns `(snapped, dropped, papers_marked_unannotated)`.
+    """
+    fw = state.get("framework") or {}
+    leaf_paths = {path for path, _node in _iter_leaves(fw)}
+    if not leaf_paths:
+        return (0, 0, 0)
+
+    snapped = 0
+    dropped = 0
+    re_annotate = 0
+
+    for p in state["papers"]:
+        placements = p.get("placements") or []
+        if not placements:
+            continue
+        new_placements = []
+        for pl in placements:
+            tp = pl.get("topic_path", "")
+            if tp in leaf_paths:
+                new_placements.append(pl)
+                continue
+            # Walk up: try parent prefixes against current leaf set.
+            parts = tp.split("/")
+            snapped_to = None
+            for k in range(len(parts) - 1, 0, -1):
+                prefix = "/".join(parts[:k])
+                if prefix in leaf_paths:
+                    snapped_to = prefix
+                    break
+            if snapped_to:
+                pl["topic_path"] = snapped_to
+                new_placements.append(pl)
+                snapped += 1
+            else:
+                dropped += 1
+        if len(new_placements) != len(placements):
+            p["placements"] = new_placements
+            if not new_placements and p.get("annotated"):
+                p["annotated"] = False
+                re_annotate += 1
+
+    return (snapped, dropped, re_annotate)
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -511,6 +654,53 @@ def _dispatch(action: str, args: dict, state: dict, direction: str,
             ),
         }
         return text, combined
+
+    elif action == "digest_paper":
+        target = (args.get("target") or "").strip()
+        if not target:
+            return "", {"error": "digest_paper requires target"}
+        digests_dir = os.path.join(output_dir, "digests")
+        os.makedirs(digests_dir, exist_ok=True)
+        # Match target to a paper already in state (id / arxiv_id /
+        # title substring). Used both for the hint payload AND for a
+        # deterministic, ascii-safe digest filename.
+        hint: dict = {}
+        tlow = target.lower()
+        for p in state.get("papers", []):
+            pid = (p.get("id") or p.get("arxiv_id") or "").lower()
+            title = (p.get("title") or "").lower()
+            if (pid and (pid == tlow or pid in tlow or tlow in pid)) or (
+                title and tlow in title
+            ):
+                hint = {
+                    "id": p.get("id") or p.get("arxiv_id"),
+                    "title": p.get("title"),
+                    "authors": p.get("authors"),
+                    "year": p.get("year"),
+                    "venue": p.get("venue"),
+                    "abstract": p.get("abstract"),
+                    "pdf_path": p.get("pdf_path"),
+                    "context_excerpt": p.get("context_excerpt"),
+                    "placements": p.get("placements"),
+                }
+                break
+        safe = _safe_digest_name(hint.get("id") or target)
+        # Per-paper folder so future artifacts (notes, figures,
+        # follow-ups) live alongside the digest md.
+        paper_dir = os.path.join(digests_dir, safe)
+        os.makedirs(paper_dir, exist_ok=True)
+        out_path = os.path.join(paper_dir, "digest.md")
+        text = digest_paper(
+            target=target,
+            paper_hint_json=json.dumps(hint, ensure_ascii=False),
+            output_path=out_path, papers_dir=papers_dir,
+            runtime=runtime,
+        )
+        parsed = _safe_parse(text)
+        if isinstance(parsed, dict):
+            parsed.setdefault("artifact", out_path)
+            parsed.setdefault("target", target)
+        return text, parsed
 
     elif action == "evolve_framework":
         framework_json = json.dumps(

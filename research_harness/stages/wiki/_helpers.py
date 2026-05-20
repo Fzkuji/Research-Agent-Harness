@@ -327,33 +327,14 @@ def extract_pdf_figure(
 ) -> tuple[int, tuple[float, float, float, float]]:
     """Crop one figure from a PDF, anchored on its caption.
 
-    Thin back-compat wrapper around
-    ``openprogram.tools.pdf.extract_figure.extract_figure``. The
-    canonical implementation lives there; this shim preserves the
-    legacy ``(page, bbox)`` tuple return shape used by existing
-    callers in research_harness.
+    Self-contained PyMuPDF heuristic. The openprogram-side helper
+    that used to provide this (a pure-Python heuristic that returned
+    the same ``(page, bbox)`` shape) was removed in the
+    function-calling refactor; the only PDF figure helper there now
+    is an ``@agentic_function`` with a different return contract.
+    Rather than retrofit one shape onto the other, this helper just
+    inlines the PyMuPDF crop logic directly.
     """
-    try:
-        from openprogram.programs.applications.pdf_figures._heuristic import (
-            extract_one_figure as _extract,
-        )
-    except ImportError:
-        _extract = None  # type: ignore
-
-    if _extract is not None:
-        result = _extract(
-            pdf_path=pdf_path,
-            caption_prefix=caption_prefix,
-            out_path=out_path,
-            include_caption=include_caption,
-            dpi=dpi,
-            page_hint=page_hint,
-            max_caption_lines=max_caption_lines,
-            margin_pt=margin_pt,
-        )
-        return result.page, result.bbox
-
-    # Fallback: inline implementation if OpenProgram isn't on PYTHONPATH.
     import fitz  # type: ignore
 
     pdf_path = Path(pdf_path)

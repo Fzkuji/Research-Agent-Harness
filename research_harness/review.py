@@ -133,19 +133,22 @@ def review(
 def _write_detailed_draft(paper_content: str, venue_spec, venue_criteria: str,
                           model: str = "gpt-5.5",
                           reasoning_effort: str = "medium",
-                          timeout_s: int = 600) -> str:
+                          timeout_s: int = 600,
+                          runtime=None) -> str:
     """Phase 1 of peer mode: codex writes a long, detailed, paper-grounded
     review with NO template constraint and NO AI-detection concern.
 
-    Output is a markdown file with the section headers extract_judgment
-    expects (Summary / Strengths / Weaknesses / Review / Fit Justification
-    or whatever the venue uses), plus structured numerics at the top.
+    Two backends: pass ``runtime=`` to use the OpenAICodexRuntime API
+    (recommended); leave None to fall back to legacy codex CLI subprocess.
 
-    Returns the markdown text. Caller decides what to do with it (next
-    step extracts the judgment and re-renders prose under templates).
+    Output is markdown with the section headers extract_judgment expects
+    (Summary / Strengths / Weaknesses / Review / Fit Justification or
+    whatever the venue uses), plus structured numerics at the top.
+
+    Returns the markdown text.
     """
-    if shutil.which("codex") is None:
-        raise RuntimeError("codex CLI not on PATH; install or fix PATH")
+    import re as _re
+    paper_content = _re.sub(r"[\ud800-\udfff]", "", paper_content)
 
     workdir = Path(tempfile.mkdtemp(prefix="detailed_draft_",
                                     dir=os.getcwd()))
@@ -158,27 +161,56 @@ def _write_detailed_draft(paper_content: str, venue_spec, venue_criteria: str,
             output_path=str(out_path),
         )
         prompt = prompt.replace("\x00", "")
-        cmd = [
-            "codex", "exec",
-            "--sandbox", "workspace-write",
-            "--skip-git-repo-check",
-            "--cd", str(workdir),
-            "-c", f'model_reasoning_effort="{reasoning_effort}"',
-            "--model", model,
-            prompt,
-        ]
-        result = run_codex(cmd, timeout_s=timeout_s)
-        if result.returncode != 0:
-            # Even if rc != 0, the file may exist (codex finished writing
-            # before the parent process died). Try to read it anyway.
-            print(f"[detailed_draft] codex rc={result.returncode}; "
-                  f"checking file on disk", file=sys.stderr)
-        if not out_path.exists():
-            raise RuntimeError(
-                f"detailed_draft did not write {out_path}; "
-                f"stderr: {result.stderr[-500:]}"
+
+        if runtime is not None:
+            # Strip every variant of "write to <out_path>" so the
+            # model emits the artifact inline instead of trying to
+            # write a file it has no tool for.
+            prompt_for_api = prompt
+            for marker in (
+                f"`{out_path}`", str(out_path),
+            ):
+                prompt_for_api = prompt_for_api.replace(marker, "your response")
+            prompt_for_api += (
+                "\n\nIMPORTANT: emit the markdown artifact as your "
+                "response text, no preamble, no fences. Do NOT attempt "
+                "to write any file."
             )
-        text = out_path.read_text(encoding="utf-8")
+            try:
+                resp = runtime.exec(
+                    content=[{"type": "text", "text": prompt_for_api}]
+                )
+            except Exception as e:
+                raise RuntimeError(f"detailed_draft runtime.exec failed: {e}")
+            text = (str(resp) if resp is not None else "").strip()
+            if text.startswith("```"):
+                text = _re.sub(r"^```[a-zA-Z]*\n", "", text, count=1)
+                text = _re.sub(r"\n```\s*$", "", text, count=1)
+        else:
+            if shutil.which("codex") is None:
+                raise RuntimeError(
+                    "detailed_draft needs codex CLI on PATH or runtime="
+                )
+            cmd = [
+                "codex", "exec",
+                "--sandbox", "workspace-write",
+                "--skip-git-repo-check",
+                "--cd", str(workdir),
+                "-c", f'model_reasoning_effort="{reasoning_effort}"',
+                "--model", model,
+                prompt,
+            ]
+            result = run_codex(cmd, timeout_s=timeout_s)
+            if result.returncode != 0:
+                print(f"[detailed_draft] codex rc={result.returncode}; "
+                      f"checking file on disk", file=sys.stderr)
+            if not out_path.exists():
+                raise RuntimeError(
+                    f"detailed_draft did not write {out_path}; "
+                    f"stderr: {result.stderr[-500:]}"
+                )
+            text = out_path.read_text(encoding="utf-8")
+
         if len(text) < 500:
             raise RuntimeError(
                 f"detailed_draft produced only {len(text)} chars; "
@@ -428,13 +460,14 @@ def _review_peer(*, paper_path: str, venue: str,
         paper_content=paper_content,
         venue_spec=spec,
         venue_criteria=venue_criteria,
+        runtime=review_runtime,
     )
     phase1_path.write_text(detailed_draft, encoding="utf-8")
     print(f"[peer]   saved {phase1_path}", file=sys.stderr)
 
     # Phase 2: extract structured judgment from the draft
     print(f"[peer] phase 2: extracting judgment", file=sys.stderr)
-    draft_judgment = extract_judgment(detailed_draft)
+    draft_judgment = extract_judgment(detailed_draft, runtime=review_runtime)
     phase2_path.write_text(
         json.dumps(draft_judgment, ensure_ascii=False, indent=2),
         encoding="utf-8",

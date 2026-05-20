@@ -183,6 +183,7 @@ def review_paper(paper_content: str, venue: str, venue_criteria: str,
         venue_name=spec.name,
         venue_criteria=venue_criteria,
         draft_judgment=draft_judgment,
+        runtime=runtime,
     )
 
     # Stage 2: numerics. Two paths:

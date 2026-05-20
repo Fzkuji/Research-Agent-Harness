@@ -152,3 +152,119 @@ def _abstract_only_count(state: dict) -> int:
     return sum(
         1 for p in state["papers"] if p.get("tier") == "abstract_only"
     )
+
+
+_CROSS_CUTTING_NAMES = {
+    "cross-cutting concerns", "cross cutting concerns",
+    "cross-cutting", "cross cutting",
+}
+
+
+def _section3_leaves(state: dict) -> list[tuple[str, str, int]]:
+    """Method-side leaves that should appear as §3 subsections.
+
+    Returns ordered list of `(leaf_name, full_path, paper_count)` for
+    every leaf with >=1 placed paper, excluding the Cross-Cutting
+    Concerns subtree (those go to §4). Order follows the framework's
+    own child order — that determines §3.1, §3.2, ...
+    """
+    framework = state.get("framework") or {}
+    counts = _papers_per_topic(state)
+    out: list[tuple[str, str, int]] = []
+
+    def walk(node: dict, prefix: str, in_xcut: bool) -> None:
+        name = (node.get("name") or "").strip()
+        path = f"{prefix}/{name}".strip("/")
+        if name.lower() in _CROSS_CUTTING_NAMES:
+            in_xcut = True
+        children = node.get("children") or []
+        if not children:
+            if not in_xcut:
+                n = counts.get(path, 0)
+                if n > 0:
+                    out.append((name, path, n))
+            return
+        for c in children:
+            walk(c, path, in_xcut)
+
+    walk(framework, "", False)
+    return out
+
+
+def _section3_leaves_md(state: dict) -> str:
+    leaves = _section3_leaves(state)
+    if not leaves:
+        return "(no §3 leaves — framework has no method-side leaves with placed papers)"
+    return "\n".join(
+        f"{i}. {name}  ({n} papers)"
+        for i, (name, _path, n) in enumerate(leaves, 1)
+    )
+
+
+def _section3_outline(state: dict) -> list[dict]:
+    """Hierarchical §3 outline preserving framework structure.
+
+    Returns a list of dicts in DFS order, each:
+        {"name": str, "path": str, "depth": int,
+         "is_leaf": bool, "papers": int, "number": str}
+    where `number` is the nested heading number (e.g. "3.1", "3.1.2").
+
+    Excludes the Cross-Cutting Concerns subtree. Prunes any subtree with
+    zero descendant papers (so empty branches don't create empty headings).
+    The root direction node is itself omitted; its children become §3.1,
+    §3.2, ...
+    """
+    framework = state.get("framework") or {}
+    counts = _papers_per_topic(state)
+
+    def descendant_papers(node: dict, prefix: str, in_xcut: bool) -> int:
+        name = (node.get("name") or "").strip()
+        path = f"{prefix}/{name}".strip("/")
+        if name.lower() in _CROSS_CUTTING_NAMES:
+            return 0
+        children = node.get("children") or []
+        if not children:
+            return counts.get(path, 0)
+        return sum(descendant_papers(c, path, in_xcut) for c in children)
+
+    out: list[dict] = []
+
+    def walk(node: dict, prefix: str, depth: int, number: str) -> None:
+        children = [
+            c for c in (node.get("children") or [])
+            if (c.get("name") or "").strip().lower() not in _CROSS_CUTTING_NAMES
+            and descendant_papers(c, prefix, False) > 0
+        ]
+        for idx, c in enumerate(children, 1):
+            cname = (c.get("name") or "").strip()
+            cpath = f"{prefix}/{cname}".strip("/")
+            cnum = f"{number}.{idx}" if number else f"3.{idx}"
+            grand = c.get("children") or []
+            is_leaf = not grand
+            n_papers = (
+                counts.get(cpath, 0) if is_leaf
+                else descendant_papers(c, prefix, False)
+            )
+            out.append({
+                "name": cname, "path": cpath, "depth": depth + 1,
+                "is_leaf": is_leaf, "papers": n_papers, "number": cnum,
+            })
+            walk(c, cpath, depth + 1, cnum)
+
+    walk(framework, "", 0, "")
+    return out
+
+
+def _section3_outline_md(state: dict) -> str:
+    outline = _section3_outline(state)
+    if not outline:
+        return "(no §3 outline — no method-side branches with placed papers)"
+    lines = []
+    for it in outline:
+        indent = "  " * (it["depth"] - 1)
+        kind = "leaf" if it["is_leaf"] else "group"
+        lines.append(
+            f"{indent}{it['number']} {it['name']}  "
+            f"[{kind}, {it['papers']} papers]"
+        )
+    return "\n".join(lines)

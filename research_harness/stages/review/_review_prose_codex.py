@@ -115,47 +115,96 @@ def _format_draft_judgment(judgment: dict) -> str:
             parts.append(f"- {k}: {v}")
     if confidence is not None:
         parts.append(f"- confidence: {confidence}")
+    # Prose-style fields render as connected paragraphs (one cohesive
+    # piece weaving the points together with transitions); bullet-style
+    # fields render as separate items 1:1.
+    _PROSE_FIELDS = {
+        "summary", "review", "fit_justification",
+        "reasons_to_accept", "reasons_to_reject",
+        "soundness_justification",
+    }
+
     bullets = judgment.get("bullets") or {}
     for field, items in bullets.items():
         if not items:
             continue
-        parts.append(f"\n### Points to make in `{field}`")
+        is_prose = field.lower() in _PROSE_FIELDS
+        kind = "paragraph points" if is_prose else "list items"
+        parts.append(f"\n### Points to make in `{field}` ({kind})")
         for it in items:
             it = (it or "").strip().rstrip(".").strip()
             parts.append(f"- {it}")
-    parts.append("\nThese bullets are the reviewer's pre-culled "
-                 "compressed observations. The list has already been "
-                 "trimmed to importance-ordered, paper-grounded points; "
-                 "the count you see is the final count.\n\n"
-                 "Mapping rules:\n"
-                 "- 1:1 mapping. Each bullet -> one output item. Do NOT "
-                 "add bullets that are not in the input. Do NOT drop "
-                 "bullets that are in the input. Do NOT split or merge.\n"
-                 "- PRESERVE the substantive content of each bullet: "
-                 "the problem named, the component, the dataset, the "
-                 "baseline, the design choice, the missing experiment, "
-                 "the specific number when the bullet has one. These "
-                 "are the load-bearing content. The output sentence "
-                 "must convey what specifically the paper did or "
-                 "failed to do, not just a label. Do NOT force-insert "
-                 "Eq./Table/Figure citations that are not in the "
-                 "bullet — natural prose can name a component or "
-                 "dataset without a parenthetical reference. RULE 1 "
-                 "(paper grounding) and content preservation override "
-                 "RULE 2 (template fidelity) when they conflict.\n"
-                 "- Do not pad. If the bullet is one specific point, "
-                 "the output sentence is one specific sentence. Do not "
-                 "add generic flourish ('this demonstrates the "
-                 "thoroughness of the work', 'a notable strength of "
-                 "the paper') — the bullet's specific content IS the "
-                 "sentence; nothing else gets added.\n"
-                 "- Do not copy the bullet phrasing literally; pick a "
-                 "template skeleton and slot in the paper facts plus "
-                 "the specific tokens from the bullet.\n"
-                 "- If a bullet reads like a platitude with no specific "
-                 "tokens, that is a Phase-2 failure — render it as one "
-                 "short sentence and move on; do not invent specifics "
-                 "to dress it up.")
+        if is_prose:
+            parts.append(
+                "\nThis is a PROSE field. Compose the bullets into 2-4 "
+                "paragraphs (no bullet markers, no `- ` prefixes), "
+                "grouping related points within the same paragraph. "
+                "RULE 2 STILL APPLIES — every sentence MUST be a "
+                "minimal modification of a real-human reviewer "
+                "sentence template from the templates block. The "
+                "corpus contains transitional templates ('However,', "
+                "'In addition,', 'Specifically,', 'For example,', "
+                "'On the other hand,', 'The authors should also...') "
+                "— pick template sentences that connect to each other "
+                "naturally. Do NOT invent free-form transitions or "
+                "stitching phrases. Do NOT use 'Furthermore,', "
+                "'Moreover,', 'Additionally,' unless those appear in "
+                "the templates. The paragraph format is just the "
+                "visual arrangement; every sentence in it is still a "
+                "template clone with paper-content tokens substituted "
+                "in. All bullet content must be covered.")
+    parts.append("\nThese bullets are PRE-CULLED telegraph-style "
+                 "skeletons: subject + verb + object + key modifiers "
+                 "(numbers, equation/table/figure/section refs, "
+                 "baseline names, dataset names, component names), "
+                 "with articles, transitions, hedges, and first-person "
+                 "stripped. Your job: INFLATE each skeleton back into "
+                 "a real reviewer-style sentence (1-2 sentences for "
+                 "LIST fields; paragraph-form composition for PROSE "
+                 "fields per the per-field note above).\n\n"
+                 "Mapping rules (LIST fields only — for PROSE fields, "
+                 "see the per-field note above):\n"
+                 "- 1:1 mapping. Each skeleton -> one output bullet "
+                 "(1-2 sentences). Do NOT add bullets not in input. "
+                 "Do NOT drop bullets in input. Do NOT split or merge.\n"
+                 "- INFLATE the skeleton: insert articles, "
+                 "prepositions, connectives that the skeleton "
+                 "stripped, so the sentence reads like English. EVERY "
+                 "specific token in the skeleton (number, table ref, "
+                 "baseline name, etc.) MUST appear in the output. "
+                 "Adding paper-grounded context that helps the "
+                 "sentence read naturally is fine — for example, "
+                 "skeleton 'Table 5 -7.2% w/o X / Sec 6.1 +3.1% / "
+                 "explanation unclear / numbers inconsistent' could "
+                 "inflate to: 'Table 5 shows a 7.2% drop in metric A "
+                 "when module X is removed, but Section 6.1 reports "
+                 "only a 3.1% gain from X over the baseline; the "
+                 "explanation that the two use different starting "
+                 "points is not clearly written and the numbers read "
+                 "as inconsistent.'\n"
+                 "- RULE 1 (paper grounding) AND content preservation "
+                 "override RULE 2 (template fidelity). If a corpus "
+                 "template skeleton can host the skeleton's specifics, "
+                 "use it. If no template fits without dropping a "
+                 "specific, write a plain reviewer sentence that "
+                 "keeps the specifics — do not drop the number, table "
+                 "ref, baseline name, etc. for template fidelity.\n"
+                 "- Do NOT generate filler: no 'this demonstrates the "
+                 "thoroughness', 'a notable strength', 'an interesting "
+                 "direction'. Every clause in the output sentence "
+                 "must come from the skeleton's tokens or trivial "
+                 "English glue.\n"
+                 "- Style: typical real-reviewer features — varied "
+                 "sentence length, occasional hedge ('I think', "
+                 "'It seems', 'Perhaps'), mild first-person, plain "
+                 "transitions ('However,', 'Specifically,', 'In "
+                 "addition,'). NO em dashes, NO 'Furthermore', NO "
+                 "'Moreover', NO 'comprehensive', NO 'robust', NO "
+                 "'extensive'.\n"
+                 "- If a skeleton has so few specifics that you "
+                 "cannot inflate it without padding, that is a "
+                 "Phase-2 failure — write the shortest faithful "
+                 "sentence and move on; do not invent specifics.")
     return "\n".join(parts)
 
 
@@ -247,10 +296,18 @@ def generate_review_text(*, paper_content: str, venue_name: str,
                          model: str = "gpt-5.5",
                          reasoning_effort: str = "medium",
                          timeout_s: int = 600,
-                         draft_judgment: dict | None = None
+                         draft_judgment: dict | None = None,
+                         runtime=None,
                          ) -> dict[str, object]:
-    """Drive codex CLI to produce all free-text review fields for the
-    target venue's review form.
+    """Produce all free-text review fields for the target venue's form.
+
+    Two backends, selected by what's passed:
+
+    - ``runtime`` is given → call ``runtime.exec(prompt)`` directly
+      (recommended; same gpt-5.5 model, same prompt, but no codex CLI
+      subprocess so it doesn't hang on large prompts or auth contention).
+    - ``runtime`` is None → fall back to the legacy ``codex exec`` CLI
+      subprocess. Kept for callers that still pass nothing.
 
     Returns: dict mapping each expected field name (lowercased) to
     either str (prose) or list[str] (bullets). Field names depend on
@@ -258,19 +315,21 @@ def generate_review_text(*, paper_content: str, venue_name: str,
 
     Raises RuntimeError if codex fails or output cannot be parsed.
     """
-    if shutil.which("codex") is None:
-        raise RuntimeError("codex CLI not on PATH; install or fix PATH")
-
     # Tempdir under cwd so codex sandbox (when nested via Claude Code /
     # opencode Bash tool) can write to it. /var/folders is sometimes
     # outside workspace-write scope.
     import os as _os
+    # Strip lone UTF-16 surrogate code points anywhere upstream let in;
+    # write_text would crash on them and the model doesn't need them.
+    paper_content = re.sub(r"[\ud800-\udfff]", "", paper_content)
+
     workdir = Path(tempfile.mkdtemp(prefix="review_artifact_",
                                     dir=_os.getcwd()))
     try:
-        paper_path = workdir / "paper.md"
-        paper_path.write_text(paper_content)
         output_path = workdir / "review.md"
+        if runtime is None:
+            # CLI-mode only needs paper on disk for the sandbox.
+            (workdir / "paper.md").write_text(paper_content)
 
         prompt, expected_fields = _build_prompt(
             venue_name=venue_name,
@@ -287,29 +346,60 @@ def generate_review_text(*, paper_content: str, venue_name: str,
         # which leaks in from upstream PDF/docx conversions and from
         # zero-padded markdown writers.
         prompt = prompt.replace("\x00", "")
-        cmd = [
-            "codex", "exec",
-            "--sandbox", "workspace-write",
-            "--skip-git-repo-check",
-            "--cd", str(workdir),
-            "-c", f'model_reasoning_effort="{reasoning_effort}"',
-            "--model", model,
-            prompt,
-        ]
-        from research_harness.stages.review._codex_run import run_codex
-        result = run_codex(cmd, timeout_s=timeout_s)
-        if result.returncode != 0:
-            raise RuntimeError(
-                f"codex exec failed (rc={result.returncode}): "
-                f"{result.stderr[-500:] or result.stdout[-500:]}"
-            )
 
-        if not output_path.exists():
-            raise RuntimeError(
-                f"codex did not write {output_path}; "
-                f"last stderr: {result.stderr[-500:]}"
+        if runtime is not None:
+            # API path. Strip all variants of write-to-file so the
+            # model emits the artifact inline (no codex sandbox here).
+            prompt_for_api = prompt
+            for marker in (f"`{output_path}`", str(output_path)):
+                prompt_for_api = prompt_for_api.replace(
+                    marker, "your response"
+                )
+            prompt_for_api += (
+                "\n\nIMPORTANT: emit the markdown artifact directly as "
+                "your response text — no preamble, no code fences. "
+                "Do NOT attempt to write any file."
             )
-        artifact = output_path.read_text().strip()
+            try:
+                resp = runtime.exec(
+                    content=[{"type": "text", "text": prompt_for_api}]
+                )
+            except Exception as e:
+                raise RuntimeError(f"runtime.exec failed: {e}")
+            artifact = (str(resp) if resp is not None else "").strip()
+            # Strip code fences if the model wrapped the artifact.
+            if artifact.startswith("```"):
+                artifact = re.sub(r"^```[a-zA-Z]*\n", "", artifact, count=1)
+                artifact = re.sub(r"\n```\s*$", "", artifact, count=1)
+        else:
+            if shutil.which("codex") is None:
+                raise RuntimeError(
+                    "codex CLI not on PATH and no runtime passed; "
+                    "either install codex or pass runtime="
+                )
+            cmd = [
+                "codex", "exec",
+                "--sandbox", "workspace-write",
+                "--skip-git-repo-check",
+                "--cd", str(workdir),
+                "-c", f'model_reasoning_effort="{reasoning_effort}"',
+                "--model", model,
+                prompt,
+            ]
+            from research_harness.stages.review._codex_run import run_codex
+            result = run_codex(cmd, timeout_s=timeout_s)
+            if result.returncode != 0:
+                raise RuntimeError(
+                    f"codex exec failed (rc={result.returncode}): "
+                    f"{result.stderr[-500:] or result.stdout[-500:]}"
+                )
+            if not output_path.exists():
+                raise RuntimeError(
+                    f"codex did not write {output_path}; "
+                    f"last stderr: {result.stderr[-500:]}"
+                )
+            artifact = output_path.read_text().strip()
+
         if len(artifact) < 1500:
             raise RuntimeError(
                 f"codex produced only {len(artifact)} chars "
@@ -318,7 +408,7 @@ def generate_review_text(*, paper_content: str, venue_name: str,
 
         # Save a debug copy regardless of parse outcome.
         try:
-            shutil.copy(output_path, "/tmp/last_review_artifact_codex.md")
+            Path("/tmp/last_review_artifact_codex.md").write_text(artifact)
         except OSError:
             pass
 

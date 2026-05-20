@@ -17,9 +17,12 @@ import sys
 
 from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
-from openprogram.programs.functions.buildin.render_options import render_options
-from openprogram.programs.functions.buildin.parse_args import extract_action
-from openprogram.programs.functions.buildin.parse_args import parse_args
+# These helpers moved from buildin/ into the decision module.
+from openprogram.agentic_programming.decision import (
+    render_options,
+    extract_action,
+    parse_args,
+)
 
 from research_harness.registry import (
     STAGES, AUTO_PARAMS, HIDDEN_PARAMS,
@@ -188,6 +191,8 @@ _MAX_STEPS_PER_STAGE = 20
 
 
 @agentic_function(
+    as_tool=True,
+    toolset=("harness",),
     render_range={"siblings": -1},
     input={
         "task": {

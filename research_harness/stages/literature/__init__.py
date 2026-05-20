@@ -39,8 +39,8 @@ import sys
 from pathlib import Path
 
 from openprogram.agentic_programming.runtime import Runtime
-from openprogram.programs.functions.buildin.parse_action import (
-    parse_action,
+from openprogram.agentic_programming.decision import (
+    extract_action,
 )
 
 from research_harness.stages.literature.annotate_papers import (
@@ -56,6 +56,7 @@ from research_harness.stages.literature.search_papers_for_topic import (
     search_papers_for_topic,
 )
 from research_harness.stages.literature.seed_surveys import seed_surveys
+from research_harness.stages.literature.digest_paper import digest_paper
 from research_harness.stages.literature.synthesize_literature import (
     synthesize_literature,
 )
@@ -76,6 +77,8 @@ from research_harness.stages.literature._state import (
     _paper_id,
     _safe_parse,
     _save_state,
+    _section3_leaves,
+    _section3_leaves_md,
     _unannotated_count,
 )
 from research_harness.stages.literature._artifacts import (
@@ -90,6 +93,7 @@ from research_harness.stages.literature._actions import (
     _dispatch,
     _lit_decide,
     _merge_annotate,
+    _merge_digest_paper,
     _merge_evolve,
     _merge_extract_framework,
     _merge_search_papers,
@@ -104,6 +108,35 @@ from research_harness.stages.literature.synthesize_literature import (
 
 
 _DEFAULT_MAX_OUTER = 8
+
+
+def _audit_section3_headings(review_path: Path,
+                             expected_leaves: list) -> list[str]:
+    """Compare §3 subsection headings in review.md against the
+    authoritative leaf list. Returns list of human-readable mismatch
+    strings (extras / missing / order). Empty list = clean."""
+    import re
+    if not review_path.exists():
+        return []
+    text = review_path.read_text(encoding="utf-8")
+    # Slice §3 region: from "## 3. ..." up to next "## " heading.
+    m = re.search(r"(?m)^##\s+3\.\s+[^\n]*$", text)
+    if not m:
+        return ["§3 heading not found in review.md"]
+    rest = text[m.end():]
+    n = re.search(r"(?m)^##\s+\d", rest)
+    s3_text = rest if not n else rest[:n.start()]
+    # Collect all nested headings inside §3 (### / #### / #####, with
+    # numbered prefix like 3.1, 3.2.1, 3.2.1.1, ...).
+    found = re.findall(
+        r"(?m)^#{3,6}\s+3(?:\.\d+)+\s+(.+?)\s*$", s3_text,
+    )
+    f_set = set(found)
+    expected = [name for name, _path, _n in expected_leaves]
+    out: list[str] = []
+    for miss in [x for x in expected if x not in f_set]:
+        out.append(f"missing §3 leaf heading: {miss!r}")
+    return out
 _DEFAULT_MAX_INNER = 10
 
 
@@ -215,31 +248,25 @@ def _run_final_synthesize(state: dict, direction: str,
     """
     state["iter"] = state.get("iter", 0) + 1
     i = state["iter"]
-    framework_json = json.dumps(
-        state["framework"] or {}, ensure_ascii=False,
-    )
-    papers_json = json.dumps(state["papers"], ensure_ascii=False)
-    surveys_json = json.dumps(state["surveys"], ensure_ascii=False)
+    s3_leaves = _section3_leaves(state)
     print(
-        "    [literature/finalize] synthesize", file=sys.stderr,
+        f"    [literature/finalize] synthesize "
+        f"(§3 leaves={len(s3_leaves)}; section-by-section)",
+        file=sys.stderr,
     )
-    text = ""
-    synthesize_error: Exception | None = None
+    parsed: dict = {}
     try:
-        text = _synthesize_literature_leaf(
-            direction=direction, framework_json=framework_json,
-            papers_json=papers_json, surveys_json=surveys_json,
+        parsed = _synthesize_literature_leaf(
+            direction=direction, state=state,
             output_dir=output_dir, runtime=runtime,
-        )
+        ) or {}
     except Exception as e:  # noqa: BLE001
-        synthesize_error = e
         print(
             f"    [literature/finalize] WARNING: synthesize raised "
-            f"{type(e).__name__}; checking disk anyway.",
+            f"{type(e).__name__}: {e}; checking disk anyway.",
             file=sys.stderr,
         )
 
-    parsed = _safe_parse(text) if text else {}
     done = bool(parsed.get("done"))
 
     review_path = Path(output_dir) / "synthesis" / "review.md"
@@ -261,6 +288,16 @@ def _run_final_synthesize(state: dict, direction: str,
             f"LLM output.",
             file=sys.stderr,
         )
+
+    s3_warnings = _audit_section3_headings(review_path, s3_leaves)
+    if s3_warnings:
+        print(
+            f"    [literature/finalize] §3 adherence: "
+            f"{len(s3_warnings)} mismatch(es):",
+            file=sys.stderr,
+        )
+        for w in s3_warnings:
+            print(f"      {w}", file=sys.stderr)
 
     cite_warnings = _audit_citations(state, output_dir)
     if cite_warnings:
@@ -377,7 +414,7 @@ def run_literature(
             )
 
             parsed_action = (
-                parse_action(reply) if isinstance(reply, str)
+                extract_action(reply) if isinstance(reply, str)
                 else None
             )
             if parsed_action is None:
@@ -448,6 +485,8 @@ def run_literature(
                 changed, summary = _merge_annotate(state, parsed)
             elif action == "evolve_framework":
                 changed, summary = _merge_evolve(state, parsed)
+            elif action == "digest_paper":
+                changed, summary = _merge_digest_paper(state, parsed)
             else:
                 changed = 0
                 summary = f"unknown action: {action}"
