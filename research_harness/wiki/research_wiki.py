@@ -73,11 +73,11 @@ def init_wiki(wiki_root: str) -> str:
     for fname, content in defaults.items():
         path = root / fname
         if not path.exists():
-            path.write_text(content)
+            path.write_text(content, encoding="utf-8")
 
     edges_path = root / "graph" / "edges.jsonl"
     if not edges_path.exists():
-        edges_path.write_text("")
+        edges_path.write_text("", encoding="utf-8")
 
     append_log(wiki_root, "Wiki initialized")
     return str(root)
@@ -97,7 +97,7 @@ def _load_edges(edges_path: Path) -> list[dict]:
     if not edges_path.exists():
         return []
     edges = []
-    for line in edges_path.read_text().strip().split("\n"):
+    for line in edges_path.read_text(encoding="utf-8").strip().split("\n"):
         if line.strip():
             try:
                 edges.append(json.loads(line))
@@ -137,7 +137,7 @@ def add_edge(
         "evidence": evidence,
         "added": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
-    with open(edges_path, "a") as f:
+    with open(edges_path, "a", encoding="utf-8") as f:
         f.write(json.dumps(edge, ensure_ascii=False) + "\n")
     return True
 
@@ -155,14 +155,14 @@ def rebuild_query_pack(wiki_root: str, max_chars: int = 8000) -> int:
     for name in ("RESEARCH_BRIEF.md", "README.md"):
         brief_path = root.parent / name
         if brief_path.exists():
-            brief = brief_path.read_text()[:300]
+            brief = brief_path.read_text(encoding="utf-8")[:300]
             sections.append(f"## Project Direction\n{brief}\n")
             break
 
     # 2. Gap map (1200 chars)
     gap_path = root / "gap_map.md"
     if gap_path.exists():
-        raw = gap_path.read_text()
+        raw = gap_path.read_text(encoding="utf-8")
         # Skip if it's only the default header
         if raw.strip() not in (
             "# Gap Map",
@@ -175,7 +175,7 @@ def rebuild_query_pack(wiki_root: str, max_chars: int = 8000) -> int:
     if ideas_dir.exists():
         failed: list[str] = []
         for f in sorted(ideas_dir.glob("*.md")):
-            content = f.read_text()
+            content = f.read_text(encoding="utf-8")
             if "outcome: negative" in content or "outcome: mixed" in content:
                 lines = content.split("\n")
                 title = ""
@@ -200,7 +200,7 @@ def rebuild_query_pack(wiki_root: str, max_chars: int = 8000) -> int:
     if papers_dir.exists():
         summaries: list[str] = []
         for f in sorted(papers_dir.glob("*.md")):
-            content = f.read_text()
+            content = f.read_text(encoding="utf-8")
             node_id = title = thesis = ""
             content_lines = content.split("\n")
             for i, line in enumerate(content_lines):
@@ -247,7 +247,7 @@ def rebuild_query_pack(wiki_root: str, max_chars: int = 8000) -> int:
                 pack += s[:remaining] + "\n...(truncated)\n"
             break
 
-    (root / "query_pack.md").write_text(pack)
+    (root / "query_pack.md").write_text(pack, encoding="utf-8")
     return len(pack)
 
 
@@ -269,7 +269,7 @@ def get_stats(wiki_root: str) -> dict:
             return 0
         return sum(
             1 for f in d.glob("*.md")
-            if f"{field}: {value}" in f.read_text()
+            if f"{field}: {value}" in f.read_text(encoding="utf-8")
         )
 
     edges_path = root / "graph" / "edges.jsonl"
@@ -316,10 +316,10 @@ def append_log(wiki_root: str, message: str):
     entry = f"- `{ts}` {message}\n"
 
     if log_path.exists():
-        with open(log_path, "a") as f:
+        with open(log_path, "a", encoding="utf-8") as f:
             f.write(entry)
     else:
-        log_path.write_text(f"# Research Wiki Log\n\n{entry}")
+        log_path.write_text(f"# Research Wiki Log\n\n{entry}", encoding="utf-8")
 
 
 # ---------------------------------------------------------------------------

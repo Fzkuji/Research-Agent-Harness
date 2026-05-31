@@ -55,13 +55,13 @@ If the input file is not `.md` or `.txt`, convert it first:
 
 **PDF:**
 ```bash
-cd /Users/fzkuji/Documents/Research-Agent-Harness && \
+cd $RESEARCH_HARNESS_DIR && \
 python -m research_harness.stages.review.pdf_to_markdown "<file.pdf>" > "<file.md>"
 ```
 
 **DOCX:**
 ```bash
-cd /Users/fzkuji/Documents/Research-Agent-Harness && \
+cd $RESEARCH_HARNESS_DIR && \
 python -m research_harness.stages.review.docx_to_markdown "<file.docx>" > "<file.md>"
 ```
 
@@ -80,7 +80,7 @@ If it fails, start Chrome:
 ```bash
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
   --remote-debugging-port=9222 \
-  --user-data-dir=/Users/fzkuji/.openprogram/chrome-profile &
+  --user-data-dir=$HOME/.openprogram/chrome-profile &
 sleep 4
 ```
 
@@ -90,7 +90,7 @@ user to open app.gptzero.me in that Chrome window and log in.
 ## Run the scan
 
 ```bash
-cd /Users/fzkuji/Documents/Research-Agent-Harness && \
+cd $RESEARCH_HARNESS_DIR && \
 python -m research_harness.stages.external.gptzero_check \
   "<file1>" "<file2>" "<file3>"
 ```

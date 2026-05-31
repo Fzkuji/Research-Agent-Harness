@@ -477,7 +477,7 @@ def synthesize_literature(direction: str, state: dict,
         f"# {direction}: A Literature Review\n\n"
         f"## Abstract\n\n{abstract_text}\n"
     )
-    (sections_dir / "00_abstract.md").write_text(abstract_block)
+    (sections_dir / "00_abstract.md").write_text(abstract_block, encoding="utf-8")
     pieces.append(("abstract", abstract_block))
 
     # ─ §1 introduction ─────────────────────────────────────────────
@@ -490,7 +490,7 @@ def synthesize_literature(direction: str, state: dict,
     )
     if not intro_text.lstrip().startswith("## 1."):
         intro_text = f"## 1. Introduction\n\n{intro_text}"
-    (sections_dir / "01_introduction.md").write_text(intro_text + "\n")
+    (sections_dir / "01_introduction.md").write_text(intro_text + "\n", encoding="utf-8")
     pieces.append(("introduction", intro_text))
 
     # ─ §2 taxonomy overview ────────────────────────────────────────
@@ -503,14 +503,14 @@ def synthesize_literature(direction: str, state: dict,
     )
     if not tax_text.lstrip().startswith("## 2."):
         tax_text = f"## 2. Taxonomy\n\n{tax_text}"
-    (sections_dir / "02_taxonomy.md").write_text(tax_text + "\n")
+    (sections_dir / "02_taxonomy.md").write_text(tax_text + "\n", encoding="utf-8")
     pieces.append(("taxonomy", tax_text))
 
     # ─ §3 per top-level branch (one LLM call each) ─────────────────
     branches = _top_level_branches(framework)
     section3_header = "## 3. Per-topic detailed review\n"
     pieces.append(("section3_header", section3_header))
-    (sections_dir / "03_section3_header.md").write_text(section3_header)
+    (sections_dir / "03_section3_header.md").write_text(section3_header, encoding="utf-8")
 
     branch_summaries: list[dict] = []
     for idx, (bnode, bprefix) in enumerate(branches, 1):
@@ -535,7 +535,7 @@ def synthesize_literature(direction: str, state: dict,
 
         slug = _slug(bname).lower().replace(" ", "_")
         fname = f"03_branch_{idx:02d}_{slug}.md"
-        (sections_dir / fname).write_text(text + "\n")
+        (sections_dir / fname).write_text(text + "\n", encoding="utf-8")
         pieces.append((f"branch_{idx}", text))
         branch_summaries.append({
             "number": bnumber, "name": bname,
@@ -561,7 +561,7 @@ def synthesize_literature(direction: str, state: dict,
     )
     if not xcut_text.lstrip().startswith("## 4."):
         xcut_text = f"## 4. Cross-cutting synthesis\n\n{xcut_text}"
-    (sections_dir / "04_cross_cutting.md").write_text(xcut_text + "\n")
+    (sections_dir / "04_cross_cutting.md").write_text(xcut_text + "\n", encoding="utf-8")
     pieces.append(("cross_cutting", xcut_text))
 
     # ─ §5 research gaps ────────────────────────────────────────────
@@ -575,18 +575,18 @@ def synthesize_literature(direction: str, state: dict,
     )
     if not gaps_text.lstrip().startswith("## 5."):
         gaps_text = f"## 5. Research gaps\n\n{gaps_text}"
-    (sections_dir / "05_research_gaps.md").write_text(gaps_text + "\n")
+    (sections_dir / "05_research_gaps.md").write_text(gaps_text + "\n", encoding="utf-8")
     pieces.append(("gaps", gaps_text))
 
     # ─ §6 references placeholder ───────────────────────────────────
     refs_block = f"## 6. References\n\n{_BIB_PLACEHOLDER_LINE}\n"
-    (sections_dir / "06_references_placeholder.md").write_text(refs_block)
+    (sections_dir / "06_references_placeholder.md").write_text(refs_block, encoding="utf-8")
     pieces.append(("references", refs_block))
 
     # ─ assemble review.md ──────────────────────────────────────────
     body = "\n\n".join(text.strip() for _name, text in pieces) + "\n"
     review_path.parent.mkdir(parents=True, exist_ok=True)
-    review_path.write_text(body)
+    review_path.write_text(body, encoding="utf-8")
 
     word_count = len(body.split())
     return {

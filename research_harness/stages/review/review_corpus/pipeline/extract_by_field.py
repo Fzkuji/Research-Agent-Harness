@@ -91,7 +91,7 @@ def _split_sentences(text: str) -> list[str]:
 def _load_reviewer_jsons(only_human_kept: bool = True) -> list[dict]:
     keep = None
     if only_human_kept and HUMAN_REVIEWS_PATH.is_file():
-        kept = json.loads(HUMAN_REVIEWS_PATH.read_text())
+        kept = json.loads(HUMAN_REVIEWS_PATH.read_text(encoding="utf-8"))
         keep = {(r["venue"], int(r["year"]), r["forum_id"], r["reviewer"])
                 for r in kept}
     out: list[dict] = []
@@ -100,7 +100,7 @@ def _load_reviewer_jsons(only_human_kept: bool = True) -> list[dict]:
             for forum_dir in sorted(p for p in year_dir.iterdir() if p.is_dir()):
                 for rpath in sorted(forum_dir.glob("reviewer_*.json")):
                     try:
-                        d = json.loads(rpath.read_text())
+                        d = json.loads(rpath.read_text(encoding="utf-8"))
                     except Exception:
                         continue
                     key = (d.get("venue"), int(d.get("year") or 0),
@@ -191,7 +191,7 @@ def extract(only_human_kept: bool = True) -> dict:
         index["sentences"].extend(by_bucket.get(b, []))
 
     DERIVED_ROOT.mkdir(parents=True, exist_ok=True)
-    OUT_JSON.write_text(json.dumps(index, indent=2, ensure_ascii=False))
+    OUT_JSON.write_text(json.dumps(index, indent=2, ensure_ascii=False, encoding="utf-8"))
 
     with OUT_TXT.open("w") as f:
         f.write(f"# Sentence templates by canonical field, extracted from "

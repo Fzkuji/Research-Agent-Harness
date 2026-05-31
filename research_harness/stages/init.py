@@ -122,7 +122,7 @@ def _create_section(project_dir: str, section: str, readme_content: str):
 def _write_if_missing(path: str, content: str):
     """Write file only if it doesn't already exist (never overwrite)."""
     if not os.path.exists(path):
-        with open(path, "w") as f:
+        with open(path, "w", encoding="utf-8") as f:
             f.write(content)
 
 

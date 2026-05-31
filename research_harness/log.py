@@ -15,7 +15,7 @@ def append(log_file: str | None, text: str):
     if not log_file:
         return
     os.makedirs(os.path.dirname(log_file) or ".", exist_ok=True)
-    with open(log_file, "a") as f:
+    with open(log_file, "a", encoding="utf-8") as f:
         f.write(text)
 
 

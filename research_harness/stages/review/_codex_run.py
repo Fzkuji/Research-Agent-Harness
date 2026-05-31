@@ -43,7 +43,7 @@ def run_codex(cmd: list[str], *, timeout_s: int,
         try:
             r = subprocess.run(
                 cmd, capture_output=True, text=True, timeout=timeout_s,
-            )
+            , encoding="utf-8")
         except subprocess.TimeoutExpired as e:
             last_exc = e
             if attempt < max_attempts:

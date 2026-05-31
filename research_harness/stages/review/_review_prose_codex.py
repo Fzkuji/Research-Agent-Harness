@@ -65,7 +65,7 @@ def _sample_for_venue(venue_name: str,
         # Last-resort fallback: legacy static pool with generic sections.
         return (
             f"# Sampler failed: {type(e).__name__}: {e}. Using full pre-baked pool.\n\n"
-            + _FULL_TEMPLATES_PATH.read_text()
+            + _FULL_TEMPLATES_PATH.read_text(encoding="utf-8")
         ), ["summary", "strengths", "weaknesses", "questions"]
 
 
@@ -77,7 +77,7 @@ def _build_prompt(*, venue_name: str, venue_criteria: str,
                   draft_judgment: dict | None = None
                   ) -> tuple[str, list[str]]:
     """Returns (prompt_string, expected_field_names)."""
-    template = _PROMPT_TEMPLATE_PATH.read_text()
+    template = _PROMPT_TEMPLATE_PATH.read_text(encoding="utf-8")
     sentence_templates, field_names = _sample_for_venue(
         venue_name, num_reviewers=num_reviewers,
         few_shot_count=few_shot_count, seed=seed)
@@ -323,13 +323,12 @@ def generate_review_text(*, paper_content: str, venue_name: str,
     # write_text would crash on them and the model doesn't need them.
     paper_content = re.sub(r"[\ud800-\udfff]", "", paper_content)
 
-    workdir = Path(tempfile.mkdtemp(prefix="review_artifact_",
-                                    dir=_os.getcwd()))
+    workdir = Path(tempfile.mkdtemp(prefix="review_artifact_"))
     try:
         output_path = workdir / "review.md"
         if runtime is None:
             # CLI-mode only needs paper on disk for the sandbox.
-            (workdir / "paper.md").write_text(paper_content)
+            (workdir / "paper.md").write_text(paper_content, encoding="utf-8")
 
         prompt, expected_fields = _build_prompt(
             venue_name=venue_name,
@@ -398,7 +397,7 @@ def generate_review_text(*, paper_content: str, venue_name: str,
                     f"codex did not write {output_path}; "
                     f"last stderr: {result.stderr[-500:]}"
                 )
-            artifact = output_path.read_text().strip()
+            artifact = output_path.read_text(encoding="utf-8").strip()
 
         if len(artifact) < 1500:
             raise RuntimeError(
@@ -408,7 +407,7 @@ def generate_review_text(*, paper_content: str, venue_name: str,
 
         # Save a debug copy regardless of parse outcome.
         try:
-            Path("/tmp/last_review_artifact_codex.md").write_text(artifact)
+            Path("/tmp/last_review_artifact_codex.md").write_text(artifact, encoding="utf-8")
         except OSError:
             pass
 

@@ -111,7 +111,7 @@ def extract() -> dict[str, int]:
     if not CORPUS_PATH.exists():
         raise FileNotFoundError(
             f"{CORPUS_PATH} missing. Run filter_with_gptzero.py first.")
-    reviews = json.loads(CORPUS_PATH.read_text())
+    reviews = json.loads(CORPUS_PATH.read_text(encoding="utf-8"))
 
     # Flatten to sentences with positional info (for SUMMARY / CLOSING).
     sentences: list[dict] = []

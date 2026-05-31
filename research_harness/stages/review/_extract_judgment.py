@@ -49,12 +49,11 @@ def extract_judgment(draft_text: str, *,
     draft_text = re.sub(r"[\ud800-\udfff]", "", draft_text)
 
     # Tempdir only needed for CLI sandbox path.
-    workdir = Path(tempfile.mkdtemp(prefix="extract_judgment_",
-                                    dir=os.getcwd()))
+    workdir = Path(tempfile.mkdtemp(prefix="extract_judgment_"))
     try:
         out_path = workdir / "judgment.json"
         if runtime is None:
-            (workdir / "draft.md").write_text(draft_text)
+            (workdir / "draft.md").write_text(draft_text, encoding="utf-8")
         prompt = (
             "Read the review draft below and write a single JSON object "
             f"to the file at {out_path}. The JSON must contain only "
@@ -214,7 +213,7 @@ def extract_judgment(draft_text: str, *,
                     f"extract_judgment codex did not write {out_path}; "
                     f"stderr: {r.stderr[-400:]}"
                 )
-            text = out_path.read_text().strip()
+            text = out_path.read_text(encoding="utf-8").strip()
         m = re.search(r"\{.*\}", text, re.DOTALL)
         if not m:
             raise RuntimeError(

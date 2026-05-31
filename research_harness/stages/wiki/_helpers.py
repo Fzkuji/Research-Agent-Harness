@@ -259,7 +259,7 @@ if not _WAH_HELPERS:
         """Rewrite every ``[[old_stem...]]`` to ``[[new_stem...]]`` across the vault."""
         changed = 0
         for path in iter_md_files(root):
-            text = path.read_text()
+            text = path.read_text(encoding="utf-8")
 
             def _sub(m: re.Match) -> str:
                 target = m.group(1).strip()
@@ -271,7 +271,7 @@ if not _WAH_HELPERS:
 
             new_text = _WIKILINK_RE.sub(_sub, text)
             if new_text != text:
-                path.write_text(new_text)
+                path.write_text(new_text, encoding="utf-8")
                 changed += 1
         return changed
 

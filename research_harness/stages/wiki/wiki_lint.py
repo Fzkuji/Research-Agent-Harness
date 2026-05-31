@@ -134,7 +134,7 @@ def wiki_lint(wiki_root: str) -> str:
     _section("Orphan pages (no inbound, no outbound)", issues_orphans)
 
     report = root / "lint-report.md"
-    report.write_text("\n".join(lines))
+    report.write_text("\n".join(lines, encoding="utf-8"))
 
     total = (
         len(issues_missing_type) + len(issues_bad_type) + len(issues_naming)

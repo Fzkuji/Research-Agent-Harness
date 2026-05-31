@@ -104,7 +104,7 @@ def wiki_survey(topic: str, wiki_root: str, depth: int, runtime: Runtime) -> str
             f"Ingest papers under {topic_dir} before running survey."
         )
 
-    current_body = topic_md.read_text()
+    current_body = topic_md.read_text(encoding="utf-8")
 
     prompt = (
         f"=== Topic ===\n"

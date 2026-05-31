@@ -31,3 +31,4 @@ review_artifact_*/
 detailed_draft_*/
 review_stage2_*/
 extract_judgment_*/
+.claude/scheduled_tasks.lock

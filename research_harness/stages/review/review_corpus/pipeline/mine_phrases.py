@@ -260,7 +260,7 @@ def mine() -> dict:
             [(w, c) for w, c in word_freq.most_common(50)
              if w.isalpha() and len(w) >= 4],
     }
-    with open(OUT_PATH, "w") as f:
+    with open(OUT_PATH, "w", encoding="utf-8") as f:
         json.dump(library, f, ensure_ascii=False, indent=2)
     return library
 

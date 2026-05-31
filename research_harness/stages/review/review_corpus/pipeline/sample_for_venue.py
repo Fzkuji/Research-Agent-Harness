@@ -179,7 +179,7 @@ def _load_reviewer_jsons() -> list[dict]:
             for forum_dir in sorted(p for p in year_dir.iterdir() if p.is_dir()):
                 for rpath in sorted(forum_dir.glob("reviewer_*.json")):
                     try:
-                        d = json.loads(rpath.read_text())
+                        d = json.loads(rpath.read_text(encoding="utf-8"))
                         # Only include if marked human by GPTZero
                         score = d.get("ai_score") or {}
                         if (score.get("status") == "ok"
@@ -210,7 +210,7 @@ def sample_for_venue(*, venue: str, num_reviewers: int = 10,
             f"{INDEX_PATH} missing. Run extract_by_field.py first.")
 
     canonical_venue, form = _resolve_venue(venue)
-    index = json.loads(INDEX_PATH.read_text())
+    index = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
     sentences: list[dict] = index["sentences"]
 
     in_corpus = _venue_in_corpus(canonical_venue, sentences)
@@ -401,7 +401,7 @@ if __name__ == "__main__":
     else:
         rendered = render_for_prompt(sample)
         if args.out:
-            Path(args.out).expanduser().write_text(rendered)
+            Path(args.out).expanduser().write_text(rendered, encoding="utf-8")
             print(f"wrote {args.out} ({len(rendered)} chars)")
         else:
             print(rendered)

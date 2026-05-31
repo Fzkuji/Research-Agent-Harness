@@ -244,7 +244,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"error: corpus missing: {corpus_path}. "
               f"Run filter_with_gptzero.py first.", file=sys.stderr)
         return 2
-    reviews = json.loads(corpus_path.read_text())
+    reviews = json.loads(corpus_path.read_text(encoding="utf-8"))
     if not reviews:
         print("error: corpus is empty", file=sys.stderr)
         return 2

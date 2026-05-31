@@ -148,7 +148,7 @@ def main() -> None:
 
         # Persist a normalized copy in the hop dir.
         norm_path = os.path.join(hop_dir, "humanized_only.txt")
-        with open(norm_path, "w") as f:
+        with open(norm_path, "w", encoding="utf-8") as f:
             f.write(humanized)
         print(f"  → {len(humanized)} chars, {len(humanized.split())} words "
               f"(artifact={artifact})")
@@ -174,7 +174,7 @@ def main() -> None:
 
     # Final report.
     out = os.path.join(WORK_ROOT, "trajectory.json")
-    with open(out, "w") as f:
+    with open(out, "w", encoding="utf-8") as f:
         json.dump(trajectory, f, ensure_ascii=False, indent=2)
 
     print("\n=== Trajectory ===")

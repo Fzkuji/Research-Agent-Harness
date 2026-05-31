@@ -35,7 +35,7 @@ def gather_context(project_dir: str, section: str) -> str:
     # Outline
     outline_path = os.path.join(project_dir, "outline", "outline.md")
     if os.path.exists(outline_path):
-        with open(outline_path, "r") as f:
+        with open(outline_path, "r", encoding="utf-8") as f:
             parts.append(f"## Outline\n{f.read()[:3000]}")
 
     # Section-specific notes
@@ -47,7 +47,7 @@ def gather_context(project_dir: str, section: str) -> str:
             fpath = os.path.join(section_dir, fname)
             if os.path.isfile(fpath):
                 try:
-                    with open(fpath, "r") as f:
+                    with open(fpath, "r", encoding="utf-8") as f:
                         parts.append(f"## Notes: {fname}\n{f.read()[:2000]}")
                 except (UnicodeDecodeError, IOError):
                     pass

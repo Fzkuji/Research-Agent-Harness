@@ -150,8 +150,7 @@ def _write_detailed_draft(paper_content: str, venue_spec, venue_criteria: str,
     import re as _re
     paper_content = _re.sub(r"[\ud800-\udfff]", "", paper_content)
 
-    workdir = Path(tempfile.mkdtemp(prefix="detailed_draft_",
-                                    dir=os.getcwd()))
+    workdir = Path(tempfile.mkdtemp(prefix="detailed_draft_"))
     try:
         out_path = workdir / "draft.md"
         prompt = _build_detailed_draft_prompt(
@@ -469,7 +468,7 @@ def _review_peer(*, paper_path: str, venue: str,
     print(f"[peer] phase 2: extracting judgment", file=sys.stderr)
     draft_judgment = extract_judgment(detailed_draft, runtime=review_runtime)
     phase2_path.write_text(
-        json.dumps(draft_judgment, ensure_ascii=False, indent=2),
+        json.dumps(draft_judgment, ensure_ascii=False, indent=2, encoding="utf-8"),
         encoding="utf-8",
     )
     print(f"[peer]   saved {phase2_path}", file=sys.stderr)
@@ -559,7 +558,7 @@ def main() -> int:
 
     out = json.dumps(result, ensure_ascii=False, indent=2)
     if a.output:
-        with open(a.output, "w") as f:
+        with open(a.output, "w", encoding="utf-8") as f:
             f.write(out)
         print(f"[research-review] wrote {a.output}", file=sys.stderr)
     else:

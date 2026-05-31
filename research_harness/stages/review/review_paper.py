@@ -38,8 +38,7 @@ def _stage2_freeform_codex(*, venue_name: str, venue_criteria: str,
     # Tempdir under cwd so codex sandbox (nested via Claude Code Bash)
     # can write to it.
     import os as _os
-    workdir = Path(tempfile.mkdtemp(prefix="review_stage2_",
-                                    dir=_os.getcwd()))
+    workdir = Path(tempfile.mkdtemp(prefix="review_stage2_"))
     try:
         out_path = workdir / "structured.json"
         prompt = (
@@ -71,7 +70,7 @@ def _stage2_freeform_codex(*, venue_name: str, venue_criteria: str,
             prompt,
         ]
         r = subprocess.run(cmd, capture_output=True, text=True,
-                           timeout=timeout_s)
+                           timeout=timeout_s, encoding="utf-8")
         if r.returncode != 0:
             raise RuntimeError(
                 f"stage2 codex exec failed (rc={r.returncode}): "
@@ -82,7 +81,7 @@ def _stage2_freeform_codex(*, venue_name: str, venue_criteria: str,
                 f"stage2 codex did not write {out_path}; "
                 f"stderr: {r.stderr[-400:]}"
             )
-        text = out_path.read_text().strip()
+        text = out_path.read_text(encoding="utf-8").strip()
         # Strip ```json fences if codex added them despite the instruction.
         m = re.search(r"\{.*\}", text, re.DOTALL)
         if not m:

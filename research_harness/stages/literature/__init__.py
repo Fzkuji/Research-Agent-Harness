@@ -313,7 +313,7 @@ def _run_final_synthesize(state: dict, direction: str,
         )
         audit_path.write_text(
             "# Citation audit\n\n"
-            "These arXiv IDs appear in review.md (sections 1-5) but "
+            "These arXiv IDs appear in review.md (sections 1-5, encoding="utf-8") but "
             "are not in the literature state (state.json papers / "
             "surveys). They may be hallucinations, or references to "
             "important work the search step missed. Verify and "

@@ -1,10 +1,9 @@
 """End-to-end tests — run research_agent against a real project.
 
-Tests use the Travel Agent project at /Users/fzkuji/Documents/Travel Agent/
-as the target research project. The agent should read existing files,
-identify what's missing, and work on improving the project.
+Set TEST_PROJECT_DIR to the absolute path of a research project directory
+before running. Tests are skipped when the env var is not set.
 
-Run with:  pytest tests/test_e2e.py -v -s -m e2e
+Run with:  TEST_PROJECT_DIR=/path/to/project pytest tests/test_e2e.py -v -s -m e2e
 """
 
 import os
@@ -14,8 +13,8 @@ import pytest
 from openprogram.providers import create_runtime
 from research_harness.main import research_agent
 
-# The real research project to work on
-TRAVEL_AGENT_PROJECT = "/Users/fzkuji/Documents/Travel Agent/2026-EMNLP-6002-TravelAgent"
+# The real research project to work on — must be set in the environment
+TRAVEL_AGENT_PROJECT = os.environ.get("TEST_PROJECT_DIR", "")
 
 
 @pytest.fixture(scope="module")
@@ -36,6 +35,7 @@ def _print_result(result):
 
 
 @pytest.mark.e2e
+@pytest.mark.skipif(not TRAVEL_AGENT_PROJECT, reason="TEST_PROJECT_DIR not set")
 class TestTravelAgentProject:
     """Tests that work ON the Travel Agent research project."""
 

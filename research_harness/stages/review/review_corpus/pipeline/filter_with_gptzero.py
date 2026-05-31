@@ -176,7 +176,7 @@ def filter_all(*, sleep_between: float = 1.5,
                     if len(text) < min_chars:
                         review["ai_score"] = {"status": "skipped",
                                               "reason": f"too_short:{len(text)}"}
-                        with open(review_path, "w") as f:
+                        with open(review_path, "w", encoding="utf-8") as f:
                             json.dump(review, f, ensure_ascii=False, indent=2)
                         summary["skipped_short"] += 1
                         bk["short"] += 1
@@ -192,7 +192,7 @@ def filter_all(*, sleep_between: float = 1.5,
                             "error": "CDP unreachable and could not be relaunched",
                             "ai_pct": None,
                         }
-                        with open(review_path, "w") as f:
+                        with open(review_path, "w", encoding="utf-8") as f:
                             json.dump(review, f, ensure_ascii=False, indent=2)
                         summary["scored_failures"] += 1
                         bk["errors"] += 1
@@ -208,7 +208,7 @@ def filter_all(*, sleep_between: float = 1.5,
                                   "error": f"{type(e).__name__}: {e}",
                                   "ai_pct": None}
                     review["ai_score"] = {**result, "scored_chars": len(text)}
-                    with open(review_path, "w") as f:
+                    with open(review_path, "w", encoding="utf-8") as f:
                         json.dump(review, f, ensure_ascii=False, indent=2)
 
                     if result.get("status") != "ok":
@@ -254,9 +254,9 @@ def filter_all(*, sleep_between: float = 1.5,
                     time.sleep(sleep_between)
 
     DERIVED_ROOT.mkdir(parents=True, exist_ok=True)
-    with open(DERIVED_ROOT / "filter_summary.json", "w") as f:
+    with open(DERIVED_ROOT / "filter_summary.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)
-    with open(DERIVED_ROOT / "human_reviews.json", "w") as f:
+    with open(DERIVED_ROOT / "human_reviews.json", "w", encoding="utf-8") as f:
         json.dump(human_reviews, f, ensure_ascii=False, indent=2)
     return summary
 

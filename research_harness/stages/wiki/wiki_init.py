@@ -116,7 +116,7 @@ def wiki_init(wiki_root: str) -> str:
 
     readme = root / "README.md"
     if not readme.exists():
-        readme.write_text(_README_MD)
+        readme.write_text(_README_MD, encoding="utf-8")
 
     ensure_git_repo(root)
     committed = git_commit_all(root, "wiki: init vault scaffolding")

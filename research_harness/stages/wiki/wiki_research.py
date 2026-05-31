@@ -75,7 +75,7 @@ def _write_topic_chain(root: Path, topic_path: str, summaries: dict[str, str]) -
             body = summaries.get(part, "")
             leaf_md.write_text(
                 f"---\ntype: topic\n---\n\n# {part}\n\n{body}\n"
-            )
+, encoding="utf-8")
     return leaf_md
 
 
@@ -106,7 +106,7 @@ def _write_paper(root: Path, topic_dir: Path, paper: dict, pdf: bool) -> Path:
         results=paper.get("results", "").strip() or "(to be filled)",
         limitations=paper.get("limitations", "").strip() or "(to be filled)",
     )
-    paper_md.write_text(dump_frontmatter(fm, "\n" + body))
+    paper_md.write_text(dump_frontmatter(fm, "\n" + body, encoding="utf-8"))
 
     if pdf:
         download_arxiv_pdf(meta["arxiv_id"], root / "Attachments" / f"{slug}.pdf")
@@ -209,7 +209,7 @@ def wiki_research(direction: str, wiki_root: str, k: int, runtime: Runtime) -> s
     raw = runtime.exec(content=[{"type": "text", "text": prompt}])
     # Persist raw output for debugging — regardless of parse success.
     (root / ".runs").mkdir(exist_ok=True)
-    (root / ".runs" / "last_research_raw.txt").write_text(str(raw))
+    (root / ".runs" / "last_research_raw.txt").write_text(str(raw, encoding="utf-8"))
     try:
         data = parse_json(raw)
     except (ValueError, Exception) as e:
@@ -307,7 +307,7 @@ def wiki_research(direction: str, wiki_root: str, k: int, runtime: Runtime) -> s
         f"- [[{slug}]] ({(topic_dir / slug / f'{slug}.md').relative_to(root)})"
         for slug in written_slugs
     )
-    current_topic_body = leaf_md.read_text()
+    current_topic_body = leaf_md.read_text(encoding="utf-8")
 
     survey_prompt = (
         f"=== Topic page to rewrite ===\n{leaf_md}\n\n"

@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Cross-platform installer for the self-paper-review +
-official-paper-review + humanize-paper-review skills, plus the
-underlying review_app + corpus.
+"""Cross-platform installer for the self-review + peer-review +
+humanizer skills, plus the underlying review_app + corpus.
 
 Default behavior:
   1. Clone (or update) https://github.com/Fzkuji/Research-Agent-Harness
      into ~/.research-agent-harness
   2. Symlink (or copy on Windows w/o dev mode) the three skills into
-     ~/.claude/skills/{self,official,humanize}-paper-review
+     ~/.claude/skills/{self-review,peer-review,humanizer}
   3. Add the repo path to PYTHONPATH (in shell rc on Unix, or via setx
      on Windows) so `python -m research_harness.review_app` resolves.
 
@@ -43,8 +42,7 @@ import sys
 from pathlib import Path
 
 REPO_URL = "https://github.com/Fzkuji/Research-Agent-Harness"
-SKILLS = ("self-paper-review", "official-paper-review",
-          "humanize-paper-review")
+SKILLS = ("self-review", "peer-review", "humanizer")
 
 
 def _resolve_paths(args: argparse.Namespace) -> tuple[Path, Path]:
@@ -121,7 +119,7 @@ def _set_pythonpath(repo: Path) -> None:
     candidates = [home / ".zshrc", home / ".bashrc", home / ".profile"]
     rc = next((c for c in candidates if c.exists()), candidates[0])
     line = f'export PYTHONPATH="{repo}:$PYTHONPATH"'
-    existing = rc.read_text() if rc.exists() else ""
+    existing = rc.read_text(encoding="utf-8") if rc.exists() else ""
     if line in existing:
         print(f"  PYTHONPATH already in {rc}")
         return

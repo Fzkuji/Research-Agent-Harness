@@ -53,7 +53,7 @@ def _is_api_v2(venue: str, year: int) -> bool:
 def migrate_one(rpath: Path, *, dry_run: bool = False) -> dict:
     """Upgrade one reviewer JSON. Returns a status dict."""
     try:
-        old = json.loads(rpath.read_text())
+        old = json.loads(rpath.read_text(encoding="utf-8"))
     except Exception as e:
         return {"path": str(rpath), "status": "error",
                 "error": f"read failed: {type(e).__name__}: {e}"}
@@ -145,7 +145,7 @@ def migrate_one(rpath: Path, *, dry_run: bool = False) -> dict:
                 "decision": paper_meta.get("decision"),
                 "n_authors": len(paper_meta.get("authors", []))}
 
-    rpath.write_text(json.dumps(new_record, indent=2, ensure_ascii=False))
+    rpath.write_text(json.dumps(new_record, indent=2, ensure_ascii=False, encoding="utf-8"))
     return {"path": str(rpath), "status": "upgraded",
             "n_review_fields": len(review_fields),
             "decision": paper_meta.get("decision")}

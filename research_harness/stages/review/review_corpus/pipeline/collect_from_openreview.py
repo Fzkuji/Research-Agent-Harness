@@ -742,7 +742,7 @@ def collect_all(*, force_refresh: bool = False) -> dict:
                     "source": source_extras,
                     # ai_score added later by filter_with_gptzero.py
                 }
-                with open(rpath, "w") as out:
+                with open(rpath, "w", encoding="utf-8") as out:
                     json.dump(record, out, ensure_ascii=False, indent=2)
                 written += 1
 
