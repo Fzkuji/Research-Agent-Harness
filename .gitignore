@@ -25,3 +25,9 @@ build/
 /literature_results/
 /test/
 /test_research_project/
+
+# Review/codex temp working dirs (must never be committed — they hold paper text)
+review_artifact_*/
+detailed_draft_*/
+review_stage2_*/
+extract_judgment_*/
