@@ -9,9 +9,12 @@ description = "Autonomous research agent: from topic to submission-ready paper."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-dependencies = [
-    "openprogram @ git+https://github.com/Fzkuji/OpenProgram.git",
-]
+# No third-party dependencies. OpenProgram itself is deliberately NOT
+# declared: this harness runs inside an existing OpenProgram install
+# (`openprogram programs install research` pip-installs this clone), and
+# declaring it would make pip re-install OpenProgram from git — clobbering
+# the user's local (often editable) install.
+dependencies = []
 
 [project.scripts]
 research-harness = "research_harness.main:main"

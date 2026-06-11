@@ -4,35 +4,62 @@ Autonomous research agent: from topic to submission-ready paper.
 
 Built with [OpenProgram](https://github.com/Fzkuji/OpenProgram) (Agentic Programming paradigm) — Python controls the workflow, LLM reasons at each step via `@agentic_function` docstrings.
 
+> **This harness is an OpenProgram program — it runs *inside* OpenProgram.**
+> Install OpenProgram first, then add this harness to it.
+
 ## Quick Start
 
 ### 1. Install
 
 ```bash
-# Install dependencies
-pip install -r requirements.txt
+# 1. Install the OpenProgram host (one command)
+git clone https://github.com/Fzkuji/OpenProgram && cd OpenProgram
+./scripts/install.sh            # Windows: .\scripts\install.ps1
 
-# Then install the harness itself
-pip install research-agent-harness
+# 2. Add this harness — clones it into OpenProgram's functions/agentics/
+#    and installs its deps. The first-run wizard also offers this.
+openprogram programs install research
 ```
 
-<details>
-<summary><b>Local development (editable)</b></summary>
+Restart OpenProgram and `research_agent` appears in the Functions page /
+chat. That's the whole install.
 
-Clone both repos, install OpenProgram first (this repo depends on it):
+<details>
+<summary><b>How OpenProgram detects this harness (and how to build your own)</b></summary>
+
+OpenProgram walks `openprogram/functions/agentics/` at startup and loads
+any cloned repo that satisfies the harness contract:
+
+```
+Research-Agent-Harness/              ← cloned into functions/agentics/
+├── pyproject.toml                   ← declares THIS repo's own deps only
+└── research_harness/                ← importable package
+    ├── __init__.py                  ← kept dependency-light
+    └── agentics/
+        └── __init__.py              ← exposes AGENTIC_FUNCTIONS = [research_agent]
+```
+
+Importing `research_harness.agentics` fires the `@agentic_function`
+decorators, which self-register the functions. Two rules keep this safe:
+the top-level `__init__` must import cleanly on a machine without the
+harness's optional deps, and `pyproject.toml` must NOT declare
+`openprogram` as a dependency (the host already provides it; declaring it
+re-installs the host from git). Full contract:
+[docs/installing-harnesses.md](https://github.com/Fzkuji/OpenProgram/blob/main/docs/installing-harnesses.md).
+
+</details>
+
+<details>
+<summary><b>Standalone development (without the OpenProgram host UI)</b></summary>
 
 ```bash
-# 1. Clone and install OpenProgram
-git clone https://github.com/Fzkuji/OpenProgram.git
-pip install -e OpenProgram
-
-# 2. Clone and install this harness
+git clone https://github.com/Fzkuji/OpenProgram.git && pip install -e OpenProgram
 git clone https://github.com/Fzkuji/Research-Agent-Harness.git
-pip install -r Research-Agent-Harness/requirements.txt
 pip install -e Research-Agent-Harness
 ```
 
-`pip install -e` hard-codes absolute paths into `site-packages/*.pth`. If you rename any parent folder, `import research_harness` (or `openprogram`) will break with `ModuleNotFoundError` until you rerun `pip install -e .` from the new location.
+`pip install -e` hard-codes absolute paths into `site-packages/*.pth` — if
+you rename a parent folder, rerun `pip install -e .` from the new location.
 
 </details>
 

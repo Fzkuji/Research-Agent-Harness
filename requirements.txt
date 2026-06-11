@@ -1,20 +1,12 @@
 # Research Agent Harness — dependencies
-# Install: pip install -r requirements.txt
-# Then install the harness itself: pip install -e .
 #
-# Core dependency is OpenProgram (the agentic programming framework).
-# Install it first:
-#   pip install git+https://github.com/Fzkuji/OpenProgram.git
-# Or clone locally and pip install -e <path>.
-
-openprogram @ git+https://github.com/Fzkuji/OpenProgram.git
+# None. The harness only uses OpenProgram itself, which is deliberately
+# NOT listed: it runs inside an existing OpenProgram install (see README
+# — `openprogram programs install research` clones it in). Listing
+# openprogram here would re-install the host from git on every install.
 
 # Optional: PDF parsing (for reading/reviewing paper PDFs)
-# pip install pymupdf
 # PyMuPDF
 
 # Optional: Wiki integration
-# pip install git+https://github.com/Fzkuji/Wiki-Agent-Harness.git
-
-# Optional: Web search / literature retrieval
-requests>=2.31
+# install via: openprogram programs install wiki
