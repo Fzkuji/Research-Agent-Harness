@@ -176,6 +176,33 @@ class TestResearchAgent:
         assert result["stages_completed"] >= 1
         assert any(h.get("stage") == "writing" for h in result["history"])
 
+    def test_repetition_guard_cuts_off_spinning_stage(self):
+        """A model that re-picks the same function with the same args
+        (e.g. on a chat-only runtime that cannot save files) is cut off
+        at _REPEAT_BREAK identical calls instead of burning all 20 steps."""
+        from research_harness.main import research_agent, _REPEAT_BREAK
+
+        dispatch = _json({"call": "polish_rigorous",
+                          "args": {"text": "x"}, "reasoning": "again"})
+        responses = (
+            # pick_stage: enter writing
+            [_json({"call": "writing", "args": {"sub_task": "polish"},
+                    "reasoning": "", "done": False})]
+            # each step consumes 2 replies (dispatcher + the function's
+            # own exec) — the same JSON string serves as both
+            + [dispatch] * (2 * _REPEAT_BREAK)
+            # after the guard breaks, pick_stage #2 ends the run
+            + [_json({"call": "done", "args": {}, "reasoning": "done",
+                      "done": True})]
+        )
+        rt = MockRuntime(responses)
+        result = research_agent(task="polish forever", runtime=rt)
+
+        writing = next(h for h in result["history"]
+                       if h.get("stage") == "writing")
+        assert len(writing["steps"]) == _REPEAT_BREAK  # not 20
+        assert result["success"] is True
+
     def test_unknown_stage_retried_by_decision_layer(self):
         """A non-existent stage pick is re-asked INSIDE the next-step
         decision (framework retry), not surfaced to the loop: the retry

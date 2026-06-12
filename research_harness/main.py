@@ -226,6 +226,11 @@ def _stage_step(stage: str, sub_task: str, context: str,
 
 _MAX_STAGES = 10
 _MAX_STEPS_PER_STAGE = 20
+# Repetition guard: an LLM that re-picks the SAME function with the SAME
+# args is spinning (e.g. a chat-only runtime that cannot save files keeps
+# "retrying" a save). Warn it once, then cut the stage off.
+_REPEAT_WARN = 3
+_REPEAT_BREAK = 5
 
 
 @agentic_function(
@@ -294,6 +299,8 @@ def research_agent(
         # Level 2: Execute within stage
         stage_context_parts = []
         stage_history = []
+        last_repeat_id = None
+        repeat_count = 0
 
         for step_num in range(1, _MAX_STEPS_PER_STAGE + 1):
             context = "\n".join(stage_context_parts) if stage_context_parts else ""
@@ -315,6 +322,30 @@ def research_agent(
 
             # Stage is done if: no function call resolved, or LLM signals stage_done
             if step_result.get("call") is None or step_result.get("stage_done"):
+                break
+
+            # Repetition guard: identical (function, args) calls in a row.
+            repeat_id = (call, args_summary)
+            if repeat_id == last_repeat_id:
+                repeat_count += 1
+            else:
+                last_repeat_id, repeat_count = repeat_id, 1
+            if repeat_count == _REPEAT_WARN:
+                stage_context_parts.append(
+                    f"  NOTE: {call} has now run with identical arguments "
+                    f"{_REPEAT_WARN} times — repeating it will not change "
+                    "the result. Pick a DIFFERENT function, or stage_done."
+                )
+            elif repeat_count >= _REPEAT_BREAK:
+                print(
+                    f"    [{stage}] repetition guard: {call} ran with "
+                    f"identical args {repeat_count} times — ending stage.",
+                    file=sys.stderr,
+                )
+                oplog.append(
+                    log_file,
+                    f"- repetition guard: `{call}` x{repeat_count} — stage cut off\n",
+                )
                 break
 
         # Summarize stage progress
