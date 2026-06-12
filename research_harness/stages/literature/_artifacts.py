@@ -493,8 +493,14 @@ def _prune_empty_leaves(state: dict) -> tuple[int, list[str]]:
             return True
         return False
 
+    # Topic paths are rooted at the framework's own name ("dir/a/b" —
+    # see _papers_per_topic / _iter_leaves); build walk paths the same
+    # way or every count lookup misses and non-survey leaves get pruned.
+    root_name = fw.get("name") or ""
     for child in list(fw.get("children") or []):
-        child_path = child["name"]
+        child_path = (
+            f"{root_name}/{child['name']}" if root_name else child["name"]
+        )
         if not _walk(child, child_path):
             pruned.append(child_path)
             fw["children"].remove(child)
@@ -542,6 +548,51 @@ def _improvements_since_synth(state: dict) -> int:
             continue
         n += 1
     return n
+
+
+# Adapted from academic-research-skills v3.12.0
+# (https://github.com/Imbad0202/academic-research-skills),
+# (c) Cheng-I Wu, CC BY-NC 4.0
+# Changed: ARS deep-research's distributional-skew advisory is recast as
+# a deterministic helper over the harness's literature state dict.
+def _skew_advisory(state: dict) -> list[str]:
+    """Advisory lines when one value dominates a corpus dimension.
+
+    For each dimension (publication year, venue family, preprint vs
+    published), when a single value covers >= 70% of the papers that
+    have that dimension AND at least 8 papers carry it, emit one line
+    nudging the picker LLM to diversify search. Deterministic, no LLM.
+    """
+    papers = state.get("papers") or []
+    dims: dict[str, list[str]] = {
+        "year": [], "venue family": [], "publication status": [],
+    }
+    for p in papers:
+        year = p.get("year")
+        if year:
+            dims["year"].append(str(year))
+        venue = (p.get("venue") or "").strip().lower()
+        if venue:
+            dims["venue family"].append(venue.split()[0])
+        dims["publication status"].append(
+            "preprint" if (not venue or "arxiv" in venue) else "published"
+        )
+    lines = []
+    for dim, values in dims.items():
+        total = len(values)
+        if total < 8:
+            continue
+        counts: dict[str, int] = {}
+        for v in values:
+            counts[v] = counts.get(v, 0) + 1
+        top_value = max(counts, key=lambda k: counts[k])
+        share = counts[top_value] / total
+        if share >= 0.70:
+            lines.append(
+                f"skew: {round(share * 100)}% of corpus is {top_value} "
+                f"({dim}) — consider diversifying search"
+            )
+    return lines
 
 
 def _build_state_summary(state: dict) -> str:
@@ -620,6 +671,8 @@ def _build_state_summary(state: dict) -> str:
                     f"  weakness: {len(thin)} thin leaves "
                     "(<5 annotated papers)"
                 )
+
+    lines.extend(_skew_advisory(state))
 
     if audit_tail:
         lines.append("recent audit:")

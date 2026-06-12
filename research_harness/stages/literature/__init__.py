@@ -64,11 +64,6 @@ from research_harness.stages.literature.search import (
     search_arxiv,
     search_semantic_scholar,
 )
-from research_harness.stages.literature.tools import (
-    comprehensive_lit_review,
-    identify_gaps,
-    survey_topic,
-)
 
 from research_harness.stages.literature._state import (
     _leaf_count,
@@ -255,12 +250,14 @@ def _run_final_synthesize(state: dict, direction: str,
         file=sys.stderr,
     )
     parsed: dict = {}
+    synthesize_error: Exception | None = None
     try:
         parsed = _synthesize_literature_leaf(
             direction=direction, state=state,
             output_dir=output_dir, runtime=runtime,
         ) or {}
     except Exception as e:  # noqa: BLE001
+        synthesize_error = e
         print(
             f"    [literature/finalize] WARNING: synthesize raised "
             f"{type(e).__name__}: {e}; checking disk anyway.",
@@ -313,7 +310,7 @@ def _run_final_synthesize(state: dict, direction: str,
         )
         audit_path.write_text(
             "# Citation audit\n\n"
-            "These arXiv IDs appear in review.md (sections 1-5, encoding="utf-8") but "
+            "These arXiv IDs appear in review.md (sections 1-5) but "
             "are not in the literature state (state.json papers / "
             "surveys). They may be hallucinations, or references to "
             "important work the search step missed. Verify and "
@@ -535,15 +532,13 @@ def run_literature(
 
 __all__ = [
     'annotate_papers',
-    'comprehensive_lit_review',
+    'digest_paper',
     'evolve_framework',
     'extract_framework',
-    'identify_gaps',
     'run_literature',
     'search_arxiv',
     'search_papers_for_topic',
     'search_semantic_scholar',
     'seed_surveys',
-    'survey_topic',
     'synthesize_literature',
 ]

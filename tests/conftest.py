@@ -62,6 +62,16 @@ class MockRuntime:
         self.calls.append({"content": content, **kwargs})
         resp = self._responses[min(self._index, len(self._responses) - 1)]
         self._index += 1
+        choices = kwargs.get("choices")
+        if choices is not None:
+            # Emulate the real runtime's `exec(choices=...)` finish: the
+            # canned reply is parsed as the decision; re-pick retries land
+            # back here (without choices) and consume the next reply.
+            from openprogram.agentic_programming.decision import (
+                _normalize_options, resolve_decision,
+            )
+            menu, values = _normalize_options(choices)
+            return resolve_decision(str(resp), menu, values, self)
         return resp
 
 

@@ -11,6 +11,8 @@ Tests check that the LLM understands the task and produces relevant output.
 
 import pytest
 
+pytestmark = pytest.mark.e2e
+
 from openprogram.providers import create_runtime
 
 

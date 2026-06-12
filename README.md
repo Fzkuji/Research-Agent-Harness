@@ -90,8 +90,8 @@ research-harness --work-dir /abs/path "Survey recent work on LLM uncertainty"
 research-harness --work-dir /abs/path --provider claude-code --review-provider openai-codex \
     "Review the paper at ./my-project/"
 
-# List all 48+ registered functions
-research-harness --work-dir /tmp --list
+# List all registered functions
+research-harness --list
 ```
 
 **`research-review`** is the focused paper-review CLI. One paper in, one structured review JSON out.
@@ -99,9 +99,6 @@ research-harness --work-dir /tmp --list
 ```bash
 # Peer mode (default): one venue-form review of someone else's paper
 research-review paper.pdf --venue NeurIPS -o review.json
-
-# Humanize an existing draft (preserves score / verdict / observations)
-research-review paper.pdf --venue "ACM MM" --draft my_draft.md -o review.json
 
 # Revise mode: multi-round ARIS-style review-fix loop on your own paper
 research-review paper.pdf --venue NeurIPS --mode revise --auto-fix --max-rounds 4
@@ -111,21 +108,22 @@ Defaults: provider `auto`, review provider `openai-codex` (gpt-5.5), output stdo
 
 ### 4. Use the skills (Claude Code / opencode)
 
-Three skills ship with this repo and depend on the `research-review` CLI installed by step 1.
+These review skills ship with this repo; `/peer-review` and `/gptzero-check` depend on the CLI installed by step 1.
 
 | Skill | What it does | Backing CLI |
 |---|---|---|
 | `/peer-review` | Venue-form review of someone else's paper, prose humanized for AI-detection | `research-review paper.pdf --venue X -o out.json` |
-| `/humanize-paper-review` | Take an existing review draft, rewrite prose to pass AI-detection, preserve judgment | `research-review paper.pdf --venue X --draft draft.md -o out.json` |
 | `/self-review` | Harsh self-critique of your own paper (no detector concern, no humanization) | Pure prompt, no CLI |
 | `/gptzero-check` | Run GPTZero on a review file via Chrome CDP | `python -m research_harness.stages.external.gptzero_check ...` |
+| `/agentic-research` | Drive the full `research-harness` agent from an interactive session | `research-harness --work-dir X "task"` |
+
+(The other directories under `skills/` — humanizer, docx, doc-coauthoring, canvas-design, 20-ml-paper-writing — are vendored utility skills, optional.)
 
 **Install the skills (one time)**:
 
 ```bash
 # symlink (Mac / Linux)
 ln -s "$(pwd)/skills/peer-review"            ~/.claude/skills/peer-review
-ln -s "$(pwd)/skills/humanize-paper-review"  ~/.claude/skills/humanize-paper-review
 ln -s "$(pwd)/skills/self-review"            ~/.claude/skills/self-review
 ln -s "$(pwd)/skills/gptzero-check"          ~/.claude/skills/gptzero-check
 ```
@@ -136,7 +134,6 @@ For opencode, replace `~/.claude/skills/` with `~/.config/opencode/skills/`.
 
 ```
 > /peer-review paper.pdf venue=NeurIPS
-> /humanize-paper-review paper.pdf draft=my_draft.md venue="ACM MM"
 > /self-review my_paper.tex
 > /gptzero-check review.md
 ```
@@ -150,9 +147,6 @@ from research_harness.review import review
 
 # Peer mode
 result = review("paper.pdf", venue="NeurIPS")
-
-# Humanize an existing draft
-result = review("paper.pdf", venue="ACM MM", draft="my_draft.md")
 
 # Self / revise mode (multi-round ARIS loop)
 result = review("paper.pdf", venue="NeurIPS", mode="revise",
@@ -193,7 +187,7 @@ research_agent(task, runtime, review_runtime)
 
 ### Registry
 
-All 48+ functions are registered in `registry.py` with their stage membership. Functions are lazy-loaded. The dispatcher shows only functions in the current stage.
+Every function is registered in `registry.py` with its stage membership (92 functions across 10 stages at last count — `research-harness --list` is the source of truth). Functions are lazy-loaded; a broken module degrades to "function unavailable" instead of crashing the run. The dispatcher shows only functions in the current stage.
 
 ```python
 STAGES = {
@@ -268,7 +262,7 @@ The key design from ARIS: difficulty controls **information asymmetry**. In medi
 | Provider | CLI Flag | Session | File Access | Auth |
 |----------|----------|---------|-------------|------|
 | `claude-code` | `--provider claude-code` | Yes (reset per step) | Full file system | `claude login` |
-| `codex` | `--provider codex` | Yes (auto thread ID) | Repo access | `codex auth login` |
+| `openai-codex` | `--provider openai-codex` | Yes (auto thread ID) | Repo access | `codex auth login` |
 | `openai` | `--provider openai` | No (stateless API) | None | `OPENAI_API_KEY` |
 | `anthropic` | `--provider anthropic` | No (stateless API) | None | `ANTHROPIC_API_KEY` |
 
@@ -278,17 +272,17 @@ The key design from ARIS: difficulty controls **information asymmetry**. In medi
 - `AUTO_REVIEW.md` — cumulative review log with full raw reviewer responses, debate transcripts.
 - Results are saved to the **target project directory** (the agent infers the path from the task description).
 
-## All Functions (48+)
+## All Functions
+
+Curated highlights — run `research-harness --list` for the complete, always-current list (92 functions including the wiki_* knowledge-base suite and the literature-loop leaves).
 
 ### Literature & Search
 | Function | Description |
 |----------|-------------|
-| `survey_topic` | Survey literature: find papers, organize by subtopic, note gaps |
-| `identify_gaps` | Identify specific, actionable research gaps from a survey |
+| `run_literature` | **Orchestrator**: the taxonomy loop — seed surveys → extract framework → search → annotate → evolve → synthesize, with persistent state |
 | `search_arxiv` | Search arXiv API for papers |
 | `search_semantic_scholar` | Search Semantic Scholar API |
-| `comprehensive_lit_review` | Full literature review with structured output |
-| `run_literature` | **Orchestrator**: survey + gaps in one call |
+| `prisma_report` | PRISMA-style flow report computed from the loop's real ledger (no LLM) |
 
 ### Idea Generation
 | Function | Description |
@@ -320,7 +314,6 @@ The key design from ARIS: difficulty controls **information asymmetry**. In medi
 | `expand_text` | Add 5-15 words with deeper logic |
 | `check_logic` | Final check for fatal errors only |
 | `analyze_results` | Experimental data -> LaTeX analysis |
-| `results_to_claims` | Judge what claims results support |
 
 ### Writing (Chinese)
 | Function | Description |
@@ -343,6 +336,7 @@ The key design from ARIS: difficulty controls **information asymmetry**. In medi
 ### Review & Rebuttal
 | Function | Description |
 |----------|-------------|
+| `verify_citations` | Deterministic 4-index citation existence check (no LLM) |
 | `review_paper` | Review paper against venue criteria |
 | `fix_paper` | Fix paper based on review feedback |
 | `lookup_venue_criteria` | Query venue-specific scoring rubric |
@@ -371,8 +365,41 @@ The key design from ARIS: difficulty controls **information asymmetry**. In medi
 ### Knowledge & Meta
 | Function | Description |
 |----------|-------------|
-| `research_wiki` | Persistent knowledge base |
+| `wiki_*` (11 functions) | Persistent research wiki (init/import/ingest/survey/research/lint/...) |
 | `meta_optimize` | Analyze usage, propose harness improvements |
+
+### Citation Existence Gate (deterministic)
+
+`verify_citations` / `python -m research_harness.citation_gate refs.bib` checks every BibTeX entry against four bibliographic indexes (Crossref, OpenAlex, Semantic Scholar, arXiv) — no LLM involved. Verdict per citation: **true** (exists), **false** (a DOI/arXiv ID provably fails to resolve = likely fabricated), **unresolvable** (coverage gap, verify manually). Lookups are cached in SQLite (90-day TTL) so review-loop reruns are cheap. Resolver clients are vendored from ARS (CC BY-NC 4.0 — see `research_harness/citation_gate/LICENSE`; this makes the combined project non-commercial).
+
+```bash
+python -m research_harness.citation_gate paper/references.bib
+# -> citation_gate_report.md next to the .bib; exit 1 if anything looks fabricated
+```
+
+### Verification & Integrity
+
+| Function | Stage | Description |
+|----------|-------|-------------|
+| `verify_citations` | review | Deterministic 4-index citation existence check (no LLM) |
+| `uncited_assertion_check` | writing | Flags quantified empirical claims with no citation / own-result reference (deterministic LaTeX lint) |
+| `citation_context_check` | writing | Flags bare citation dumps, `\cite`-as-noun misuse, cargo-cult cites (deterministic) |
+| `integrity_gate` | writing | Audits draft claims against experiment `run_record.json` provenance: ALIGNED / OVERSTATED / NOT_SUPPORTED / NO_PROVENANCE; `research_pipeline` runs it before the writing stage (warn, don't block) |
+| `build_style_profile` | writing | Learn the author's voice from past papers into a persisted style card |
+| `write_disclosure` | writing | Draft the venue-specific AI-usage disclosure statement |
+
+The review loop also gained three ARS-derived protocols (no new functions — built into `review_loop`): **concession-threshold debate** (a weakness is withdrawn only on a 5/5 rebuttal — author persistence is not evidence), **score-trajectory regression detection** (per-dimension deltas across rounds; regressions are fed back to the author model), and a **revision commitment ledger** (every plan item is audited FULLY/PARTIALLY/NOT_ADDRESSED/MADE_WORSE next round; unaddressed items can't silently drop).
+
+### Dialogue Mode (attended, inside the harness)
+
+The harness has its own Socratic dialogue mode — no slash commands, no plugin needed:
+
+```bash
+research-harness --work-dir /abs/path --chat "Survey LLM uncertainty"
+```
+
+The mentor asks you **one question at a time** in the terminal (clarifying → probing → structuring → challenging, never answering for you), extracts `[INSIGHT]` commitments in your own words, and when the plan converges writes `RESEARCH_BRIEF.md` + the full transcript — then offers to hand the brief straight to the autonomous run. Type `done` anytime to wrap up early. The same function (`socratic_plan`) works over the OpenProgram WebUI or a chat channel via the `ask_user` handler; it is registered `oversight="interactive"` so the unattended loop never wanders into it. (Questioning strategy adapted from ARS's socratic mentor.)
+
 
 ## Project Structure
 
@@ -389,7 +416,7 @@ Research-Agent-Harness/
 │   ├── wiki/                    # Research Wiki (persistent knowledge base)
 │   └── stages/
 │       ├── init.py              # Project directory setup
-│       ├── literature/          # survey_topic, identify_gaps, search_arxiv, ...
+│       ├── literature/          # run_literature taxonomy loop, search tools, prisma
 │       ├── idea/                # generate_ideas, check_novelty, rank_ideas
 │       ├── experiment/          # design_experiments, run_experiment, check_training, ...
 │       ├── writing/             # 20 functions: write/polish/translate/analyze/figures
@@ -418,8 +445,13 @@ Research-Agent-Harness/
 5. **Orchestrators for complete workflows** — `review_loop`, `run_literature`, `run_idea`, `run_experiments` chain multiple steps. The dispatcher prefers these over individual leaf functions.
 6. **Everything leaves a trace** — AUTO_REVIEW.md, operation logs, file saves. No work is lost.
 
-## References
+## Acknowledgments
 
-- [ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) — autonomous research pipeline with cross-model review (primary reference for review loop design)
-- [awesome-ai-research-writing](https://github.com/Leey21/awesome-ai-research-writing) — battle-tested writing prompts from top research labs
-- [OpenProgram](https://github.com/Fzkuji/OpenProgram) — the runtime framework (`@agentic_function`, `Runtime.exec()`); *Agentic Programming* is the paradigm it ships
+This harness stands on several open projects. Thank you to their authors:
+
+- **[OpenProgram](https://github.com/Fzkuji/OpenProgram)** — the runtime framework underneath everything here: `@agentic_function`, `Runtime.exec()`, and the next-step decision mechanism (`exec(choices=...)` / `decision.make`) that drives both levels of the autonomous loop. *Agentic Programming* is the paradigm it ships.
+- **[ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep)** (wanshuiyin) — the cross-model review design this harness's review loop is built on: a GPT reviewer and a Claude author kept adversarial by construction, with difficulty levels controlling information asymmetry.
+- **[awesome-ai-research-writing](https://github.com/Leey21/awesome-ai-research-writing)** (Leey21) — the battle-tested writing/polish/translation prompts that seeded the writing stage's 20+ functions.
+- **[Academic Research Skills](https://github.com/Imbad0202/academic-research-skills)** (Cheng-I Wu, CC BY-NC 4.0) — the deepest single influence on the harness's verification layer, fully absorbed into the harness's own design: the vendored deterministic citation-existence gate (`research_harness/citation_gate/`) and writing lints; the re-implemented protocols — concession-threshold debate, revision commitment ledger, score-trajectory regression detection, the experiment→writing integrity gate, the enriched reviewer persona pool, oversight-level metadata; and the Socratic mentor strategy behind `--chat`. ARS itself credits [The AI Scientist](https://github.com/SakanaAI/AI-Scientist) (Lu et al.) for the autonomous-research failure-mode catalog and [PaperOrchestra](https://arxiv.org/abs/2604.05018) (Song et al.) for verification ideas — both indirectly shaped this harness too.
+
+Licensing note: the harness's own code is MIT; directories vendoring ARS content carry CC BY-NC 4.0 (see their LICENSE files), which makes the combined distribution non-commercial.

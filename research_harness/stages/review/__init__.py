@@ -7,6 +7,12 @@ The reviewer audits the paper, the author rebuts and fixes.
 Reference: https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep
 """
 
+# Adapted from academic-research-skills v3.12.0 (https://github.com/Imbad0202/academic-research-skills), (c) Cheng-I Wu, CC BY-NC 4.0
+# Changed: the ARS devil's-advocate concession threshold, score-trajectory
+# regression flags, and re-review commitment ledger (markdown protocols) are
+# reimplemented here as deterministic Python helpers + agentic-function
+# prompts wired into review_loop.
+
 from research_harness.stages.review.adaptive_summarize_priors import adaptive_summarize_priors
 from research_harness.stages.review.build_revision_plan import build_revision_plan
 from research_harness.stages.review.calibrate_score import calibrate_score
@@ -25,6 +31,7 @@ from research_harness.stages.external.gptzero_browser import check_ai_score_gptz
 
 import json
 import os
+import re
 import time
 import urllib.parse
 import urllib.request
@@ -80,7 +87,7 @@ def _infer_project_dir(paper_dir: str) -> str:
 def _save(directory: str, filename: str, content: str):
     """Save raw content to file."""
     os.makedirs(directory, exist_ok=True)
-    with open(os.path.join(directory, filename), "w") as f:
+    with open(os.path.join(directory, filename), "w", encoding="utf-8") as f:
         f.write(content)
 
 
@@ -123,7 +130,7 @@ def _gptzero_sample(paper_content: str, *, max_chars: int = 4500) -> str:
 #   nightmare: reviewer reads files independently, author has zero control
 # ---------------------------------------------------------------------------
 
-DEFAULT_PERSONAS = ("empiricist", "theorist", "novelty_hawk", "clarity_critic")
+DEFAULT_PERSONAS = ("empiricist", "theorist", "novelty_hawk", "devils_advocate")
 
 
 def _call_review(paper_content: str, venue: str, venue_criteria: str,
@@ -280,15 +287,155 @@ def _review_nightmare(paper_dir: str, venue: str, venue_criteria: str,
 
 # ---------------------------------------------------------------------------
 # Debate protocol (Step 4 of review_loop, hard + nightmare only)
+#
+# Concession threshold (ARS devil's-advocate "Attack Intensity Preservation"
+# protocol): the reviewer scores each author rebuttal 1-5 and may only
+# withdraw a weakness at 5, downgrade at 4. After any concession, the bar
+# for further concessions in the same debate rises to 5-only. The rulings
+# are parsed and APPLIED — withdrawn weaknesses are dropped and the score
+# is adjusted before the stop-condition check.
 # ---------------------------------------------------------------------------
 
+def _parse_debate_rulings(ruling_text: str) -> list[dict]:
+    """Parse the JSON rulings block from the reviewer's ruling reply.
+
+    Returns [] when no parseable rulings are found (the debate then has
+    no effect on the review — every weakness implicitly SUSTAINED).
+    """
+    try:
+        obj = parse_json(ruling_text)
+    except ValueError:
+        return []
+    rulings = obj.get("rulings", [])
+    if not isinstance(rulings, list):
+        return []
+    out = []
+    for r in rulings:
+        if not isinstance(r, dict):
+            continue
+        try:
+            idx = int(r.get("weakness_index"))
+        except (TypeError, ValueError):
+            continue
+        try:
+            score = int(r.get("rebuttal_score", 1))
+        except (TypeError, ValueError):
+            score = 1
+        out.append({
+            "weakness_index": idx,
+            "rebuttal_score": max(1, min(5, score)),
+            "action": str(r.get("action", "")).strip().upper(),
+            "reason": str(r.get("reason", "")),
+        })
+    return out
+
+
+def _enforce_concession_policy(rulings: list[dict]) -> list[dict]:
+    """Deterministically enforce the concession threshold over LLM rulings.
+
+    - WITHDRAWN requires rebuttal_score == 5.
+    - DOWNGRADED requires rebuttal_score >= 4.
+    - After ANY concession (withdraw or downgrade), the bar for further
+      concessions rises to 5-only: a score-4 concession then becomes
+      SUSTAINED ("no consecutive concessions" rule).
+    - The policy only demotes concessions the score does not support; it
+      never escalates a SUSTAINED ruling into a concession.
+    """
+    conceded = False
+    out = []
+    for r in rulings:
+        score = r["rebuttal_score"]
+        intended = r["action"]
+        if intended == "WITHDRAWN" and score >= 5:
+            action = "WITHDRAWN"
+        elif intended in ("WITHDRAWN", "DOWNGRADED") and (
+            score >= 5 or (score == 4 and not conceded)
+        ):
+            action = "DOWNGRADED"
+        else:
+            action = "SUSTAINED"
+        if action in ("WITHDRAWN", "DOWNGRADED"):
+            conceded = True
+        out.append({
+            **r,
+            "action": action,
+            "intended_action": intended,
+            "enforced": action != intended,
+        })
+    return out
+
+
+def _apply_debate_rulings(review: dict, rulings: list[dict],
+                          scale_max: float = 10.0) -> dict:
+    """Apply enforced debate rulings to a parsed review IN PLACE.
+
+    - WITHDRAWN weaknesses are dropped from review["weaknesses"].
+    - DOWNGRADED weaknesses are annotated (kept, lower severity).
+    - Score adjustment (documented heuristic): when k of the n recorded
+      weaknesses are withdrawn, the score moves proportionally toward the
+      venue scale max:  new = old + (scale_max - old) * (k / n).
+      Rationale: withdrawing every weakness removes the entire negative
+      case, so the score should approach the ceiling; withdrawing a
+      fraction closes that fraction of the gap. Downgrades do not move
+      the score. The pre-debate score is preserved as
+      review["pre_debate_score"].
+
+    Returns a summary dict (also useful for logging).
+    """
+    weaknesses = list(review.get("weaknesses") or [])
+    n = len(weaknesses)
+    summary = {"n_weaknesses": n, "withdrawn": 0, "downgraded": 0,
+               "sustained": 0, "pre_debate_score": review.get("score"),
+               "adjusted_score": review.get("score")}
+    if not n or not rulings:
+        return summary
+
+    withdrawn_idx, downgraded_idx = set(), set()
+    for r in rulings:
+        i = r["weakness_index"] - 1  # 1-based in the debate prompt
+        if not (0 <= i < n):
+            continue
+        if r["action"] == "WITHDRAWN":
+            withdrawn_idx.add(i)
+        elif r["action"] == "DOWNGRADED":
+            downgraded_idx.add(i)
+    downgraded_idx -= withdrawn_idx
+
+    new_weaknesses = []
+    for i, w in enumerate(weaknesses):
+        if i in withdrawn_idx:
+            continue
+        if i in downgraded_idx:
+            w = f"[severity downgraded after rebuttal] {w}"
+        new_weaknesses.append(w)
+    review["weaknesses"] = new_weaknesses
+
+    k = len(withdrawn_idx)
+    summary["withdrawn"] = k
+    summary["downgraded"] = len(downgraded_idx)
+    summary["sustained"] = sum(1 for r in rulings
+                               if r["action"] == "SUSTAINED")
+    if k:
+        old = review.get("score") or 0
+        if isinstance(old, (int, float)):
+            new = round(old + max(scale_max - old, 0) * (k / n), 2)
+            review["pre_debate_score"] = old
+            review["score"] = new
+            summary["adjusted_score"] = new
+    return summary
+
+
 def _run_debate(weaknesses: list, paper_content: str,
-                exec_runtime: Runtime, review_runtime: Runtime) -> str:
+                exec_runtime: Runtime, review_runtime: Runtime,
+                return_rulings: bool = False):
     """Author (Claude) rebuts weaknesses, reviewer (GPT) rules on each.
 
-    - SUSTAINED: valid rebuttal, withdraw weakness
-    - OVERRULED: criticism stands
-    - PARTIALLY SUSTAINED: narrow the scope
+    The reviewer scores each rebuttal 1-5 under the concession-threshold
+    protocol (withdraw only at 5, downgrade at 4, otherwise SUSTAINED).
+    With return_rulings=True, returns
+    {"transcript": str, "rulings": [enforced ruling dicts]} so the caller
+    can apply the rulings; default returns the transcript string
+    (backward compatible).
     """
 
     @agentic_function(render_range={"depth": 0, "siblings": 0})
@@ -314,19 +461,40 @@ def _run_debate(weaknesses: list, paper_content: str,
 
     @agentic_function(render_range={"depth": 0, "siblings": 0})
     def _rule_on_rebuttal(rebuttal_text: str, runtime: Runtime) -> str:
-        """Rule on the author's rebuttals (from the reviewer's perspective).
-        For each rebuttal, decide:
-        - SUSTAINED (valid, withdraw weakness)
-        - OVERRULED (criticism stands, explain why)
-        - PARTIALLY SUSTAINED (revise to narrower scope)
+        """Rule on the author's rebuttals (from the reviewer's perspective),
+        under a strict concession-threshold protocol.
 
-        Then update your overall assessment if any weaknesses were withdrawn.
+        For each rebuttal, first score it 1-5:
+        - 5 = decisive NEW evidence or logic that directly dismantles the weakness
+        - 4 = substantially weakens the weakness, but the core partially stands
+        - 3 = partially addresses, core of the weakness intact
+        - 2 = tangential or changes the subject
+        - 1 = assertion without evidence
+
+        Then derive the action:
+        - WITHDRAWN: ONLY at score 5
+        - DOWNGRADED: severity downgraded one level, ONLY at score 4
+        - SUSTAINED: any score 3 or below — the weakness stands
+
+        Anti-sycophancy rules:
+        - Author persistence is not evidence; pressure does not raise the score.
+        - No consecutive concessions: after ANY concession (WITHDRAWN or
+          DOWNGRADED) in this debate, the bar for every further concession
+          rises to 5-only — a score-4 rebuttal then yields SUSTAINED.
+        - Do not soften the wording of sustained weaknesses.
+
+        Write a brief prose ruling per rebuttal, then end your reply with
+        ONLY this JSON object (no fence commentary after it):
+        {"rulings": [{"weakness_index": <1-based index from the numbered
+        weakness list>, "rebuttal_score": <1-5>, "action":
+        "WITHDRAWN" | "DOWNGRADED" | "SUSTAINED", "reason": "<one line>"}]}
         """
         return runtime.exec(content=[
             {"type": "text", "text": rebuttal_text},
         ])
 
-    weaknesses_text = "\n".join(f"- {w}" for w in weaknesses[:5])
+    weaknesses_text = "\n".join(f"{i}. {w}"
+                                for i, w in enumerate(weaknesses[:5], 1))
 
     rebuttal = _generate_rebuttal(
         weaknesses_text=weaknesses_text,
@@ -335,14 +503,344 @@ def _run_debate(weaknesses: list, paper_content: str,
     )
 
     ruling = _rule_on_rebuttal(
-        rebuttal_text=f"Author's rebuttal:\n{rebuttal}",
+        rebuttal_text=(
+            f"Numbered weaknesses under debate:\n{weaknesses_text}\n\n"
+            f"Author's rebuttal:\n{rebuttal}"
+        ),
         runtime=review_runtime,
     )
 
-    return (
+    transcript = (
         f"**Author's Rebuttal:**\n{rebuttal}\n\n"
         f"**Reviewer's Ruling:**\n{ruling}"
     )
+    if not return_rulings:
+        return transcript
+    rulings = _enforce_concession_policy(_parse_debate_rulings(ruling))
+    return {"transcript": transcript, "rulings": rulings}
+
+
+# ---------------------------------------------------------------------------
+# Score trajectory (ARS score_trajectory_protocol): per-dimension deltas
+# between consecutive rounds, with regression flags so the author model
+# learns what its previous fix damaged.
+# ---------------------------------------------------------------------------
+
+def _score_trajectory(reviews: list, scale_range=None):
+    """Deterministic per-dimension score deltas between the last two rounds.
+
+    Args:
+        reviews:     List of parsed review dicts (each with "sub_scores",
+                     "score", "round"). Only the last two entries are compared.
+        scale_range: Optional (lo, hi) venue scale. Regression threshold is
+                     venue-scale-agnostic: a drop >= 25% of the scale range
+                     when the range is known, else an absolute drop >= 2.
+
+    Returns:
+        None when fewer than 2 reviews, else
+        {"round_prev", "round_now", "threshold", "rows": [{"dimension",
+         "prev", "now", "delta", "flag"}], "regressions": [dims]}.
+        Flags: REGRESSION (drop >= threshold), warn (any smaller drop),
+        improved, stable, n/a (dimension missing in one round).
+    """
+    if len(reviews) < 2:
+        return None
+    prev, now = reviews[-2], reviews[-1]
+    if (scale_range and len(scale_range) == 2
+            and scale_range[1] > scale_range[0]):
+        threshold = 0.25 * (float(scale_range[1]) - float(scale_range[0]))
+    else:
+        threshold = 2.0
+
+    prev_subs = prev.get("sub_scores") or {}
+    now_subs = now.get("sub_scores") or {}
+    dims = list(dict.fromkeys(list(prev_subs) + list(now_subs)))
+    pairs = [(d, prev_subs.get(d), now_subs.get(d)) for d in dims]
+    pairs.append(("overall", prev.get("score"), now.get("score")))
+
+    rows, regressions = [], []
+    for dim, p, n in pairs:
+        if isinstance(p, (int, float)) and isinstance(n, (int, float)):
+            delta = round(n - p, 2)
+            if delta <= -threshold:
+                flag = "REGRESSION"
+                regressions.append(dim)
+            elif delta < 0:
+                flag = "warn"
+            elif delta > 0:
+                flag = "improved"
+            else:
+                flag = "stable"
+        else:
+            delta, flag = None, "n/a"
+        rows.append({"dimension": dim, "prev": p, "now": n,
+                     "delta": delta, "flag": flag})
+    return {
+        "round_prev": prev.get("round"),
+        "round_now": now.get("round"),
+        "threshold": threshold,
+        "rows": rows,
+        "regressions": regressions,
+    }
+
+
+def _trajectory_table(traj: dict) -> str:
+    """Render a trajectory dict as a '## Score trajectory' markdown section."""
+    lines = [
+        f"## Score trajectory (round {traj.get('round_prev', '?')} → "
+        f"{traj.get('round_now', '?')})",
+        "",
+        "| Dimension | Prev | Now | Delta | Flag |",
+        "|---|---|---|---|---|",
+    ]
+    for row in traj.get("rows", []):
+        delta = row.get("delta")
+        delta_s = f"{delta:+g}" if isinstance(delta, (int, float)) else "—"
+        prev = row.get("prev") if row.get("prev") is not None else "—"
+        now = row.get("now") if row.get("now") is not None else "—"
+        lines.append(f"| {row.get('dimension', '?')} | {prev} | {now} "
+                     f"| {delta_s} | {row.get('flag', '')} |")
+    if traj.get("regressions"):
+        lines.append("")
+        lines.append(
+            f"**REGRESSION detected** (drop >= {traj.get('threshold', 2):g}): "
+            f"{', '.join(traj['regressions'])}"
+        )
+    return "\n".join(lines) + "\n"
+
+
+def _regression_warning(traj: dict) -> str:
+    """Explicit warning for the next fix prompt about damaged dimensions."""
+    if not traj or not traj.get("regressions"):
+        return ""
+    details = []
+    for row in traj.get("rows", []):
+        if row.get("dimension") in traj["regressions"]:
+            details.append(
+                f"- **{row['dimension']}**: {row.get('prev')} → "
+                f"{row.get('now')} (delta {row.get('delta'):+g})"
+            )
+    return (
+        "\n\n## REGRESSION WARNING (score trajectory)\n\n"
+        "The previous revision DAMAGED these dimensions:\n"
+        + "\n".join(details) + "\n\n"
+        "While executing this plan you MUST restore quality in the damaged "
+        "dimensions and avoid repeating the kind of edits that caused these "
+        "drops.\n"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Commitment ledger (ARS re_review_mode_protocol, "Commitment Ledger
+# Verification"): revision-plan action items persist as structured
+# commitments; the next round's reviewer audits each one
+# (FULLY_ADDRESSED / PARTIALLY_ADDRESSED / NOT_ADDRESSED / MADE_WORSE)
+# and unaddressed items are carried forward verbatim so they cannot
+# silently drop.
+# ---------------------------------------------------------------------------
+
+_AUDIT_STATUSES = ("FULLY_ADDRESSED", "PARTIALLY_ADDRESSED",
+                   "NOT_ADDRESSED", "MADE_WORSE")
+# UNVERIFIED (audit reply unparseable / commitment missing from the reply)
+# is also carried forward: an unverified commitment must not silently drop.
+_CARRY_STATUSES = ("NOT_ADDRESSED", "MADE_WORSE", "UNVERIFIED")
+_COMMITMENT_FEED_CAP = 15
+
+_PLAN_ACTION_RE = re.compile(
+    r"^###\s*\[([A-Za-z]+-\d+)\]\s*(.+?)\s*$", re.MULTILINE)
+_PLAN_FIX_ACTION_RE = re.compile(
+    r"^-\s*\*\*Fix action\*\*:\s*(.*)$", re.MULTILINE)
+_PLAN_NUMBERED_RE = re.compile(r"^\s*\d+[.)]\s+(.{10,})$", re.MULTILINE)
+
+
+def _parse_plan_commitments(plan_text: str) -> list[dict]:
+    """Deterministically parse revision-plan action items into commitments.
+
+    Primary format: the `### [CRITICAL-1] Title` blocks rendered by
+    build_revision_plan (fix action lifted from the `- **Fix action**:`
+    line). Fallback for free-form plans: markdown numbered items
+    (>= 10 chars, bare action-id lines from the Sequencing list skipped).
+    """
+    commitments = []
+    headers = list(_PLAN_ACTION_RE.finditer(plan_text))
+    for i, m in enumerate(headers):
+        end = headers[i + 1].start() if i + 1 < len(headers) else len(plan_text)
+        block = plan_text[m.end():end]
+        next_sec = re.search(r"^##\s", block, re.MULTILINE)
+        if next_sec:
+            block = block[:next_sec.start()]
+        fix_m = _PLAN_FIX_ACTION_RE.search(block)
+        cid = m.group(1).upper()
+        commitments.append({
+            "id": cid,
+            "title": m.group(2).strip(),
+            "fix_action": fix_m.group(1).strip() if fix_m else "",
+            "severity": cid.split("-")[0].lower(),
+        })
+    if commitments:
+        return commitments
+
+    for n, m in enumerate(_PLAN_NUMBERED_RE.finditer(plan_text), 1):
+        text = m.group(1).strip()
+        if re.fullmatch(r"[A-Za-z]+-\d+\.?", text):
+            continue  # Sequencing list entries are bare action ids
+        commitments.append({
+            "id": f"ITEM-{n}",
+            "title": text,
+            "fix_action": text,
+            "severity": "unknown",
+        })
+    return commitments
+
+
+@agentic_function(render_range={"depth": 0, "siblings": 0})
+def _classify_commitments(commitments_json: str, paper_content: str,
+                          runtime: Runtime) -> str:
+    """Audit prior-round revision commitments against the CURRENT paper
+    (R&R traceability). For EACH commitment in the JSON list, independently
+    verify whether the promised fix is actually present in the paper text.
+    The author's claim is not evidence — navigate to where the change
+    should be and check.
+
+    Classify each commitment as exactly one of:
+    - FULLY_ADDRESSED:     the promised change is present and substantively
+                           resolves the issue
+    - PARTIALLY_ADDRESSED: some change is present but the core issue remains
+    - NOT_ADDRESSED:       no corresponding change found in the paper
+    - MADE_WORSE:          the revision degraded this aspect of the paper
+
+    Reply with ONLY a JSON object, no other text:
+    {"audit": [{"id": "<commitment id>", "status": "<one of the four>",
+                "evidence": "<one line: where in the paper you checked>"}]}
+    Every commitment id from the input MUST appear exactly once in "audit".
+    """
+    return runtime.exec(content=[
+        {"type": "text", "text": (
+            f"Commitments from the previous revision round:\n"
+            f"{commitments_json}\n\n"
+            f"Current paper:\n{paper_content}"
+        )},
+    ])
+
+
+def _audit_commitments(commitments: list[dict], paper_content: str,
+                       review_runtime: Runtime) -> list[dict]:
+    """Audit commitments against the current paper (one reviewer exec).
+
+    Feeds at most the _COMMITMENT_FEED_CAP most recent commitments. The
+    reply is JSON-parsed robustly; commitments missing from the reply (or
+    an unparseable reply) are marked UNVERIFIED so they carry forward.
+
+    Returns [{"id", "round", "title", "status", "evidence"}, ...] aligned
+    with the fed commitments.
+    """
+    feed = commitments[-_COMMITMENT_FEED_CAP:]
+    if not feed:
+        return []
+    feed_json = json.dumps(
+        [{"id": c.get("id"), "round": c.get("round"),
+          "title": c.get("title"), "fix_action": c.get("fix_action")}
+         for c in feed],
+        ensure_ascii=False, indent=1,
+    )
+    if hasattr(review_runtime, "reset"):
+        review_runtime.reset()
+    reply = _classify_commitments(
+        commitments_json=feed_json,
+        paper_content=paper_content[:12000],
+        runtime=review_runtime,
+    )
+
+    by_id = {}
+    try:
+        obj = parse_json(reply)
+        for entry in obj.get("audit", []):
+            if not isinstance(entry, dict):
+                continue
+            eid = str(entry.get("id", "")).upper()
+            status = str(entry.get("status", "")).strip().upper().replace(" ", "_")
+            if status not in _AUDIT_STATUSES:
+                status = "UNVERIFIED"
+            by_id.setdefault(eid, {
+                "status": status,
+                "evidence": str(entry.get("evidence", "")),
+            })
+    except ValueError:
+        pass
+
+    results = []
+    for c in feed:
+        cid = str(c.get("id", "")).upper()
+        hit = by_id.get(cid, {
+            "status": "UNVERIFIED",
+            "evidence": "audit reply unparseable or missing this id",
+        })
+        results.append({
+            "id": cid,
+            "round": c.get("round"),
+            "title": c.get("title", ""),
+            "status": hit["status"],
+            "evidence": hit["evidence"],
+        })
+    return results
+
+
+def _carry_from_audit(audit: list[dict],
+                      commitments: list[dict]) -> list[dict]:
+    """Select commitments whose audit status requires carrying forward.
+
+    NOT_ADDRESSED / MADE_WORSE (and UNVERIFIED, see _CARRY_STATUSES) items
+    are returned with their original title/fix_action so they can be
+    appended verbatim to the next revision plan input.
+    """
+    status_by_id = {a.get("id"): a.get("status") for a in audit
+                    if a.get("status") in _CARRY_STATUSES}
+    carry = []
+    for c in commitments:
+        cid = str(c.get("id", "")).upper()
+        if cid in status_by_id:
+            carry.append({**c, "id": cid, "status": status_by_id[cid]})
+    return carry
+
+
+def _carry_section(carry_items: list[dict]) -> str:
+    """Render carried-over commitments as a markdown section (verbatim)."""
+    if not carry_items:
+        return ""
+    lines = [
+        "",
+        "## Unresolved commitments from previous round "
+        "(carried over — MUST be addressed, do not drop)",
+        "",
+    ]
+    for c in carry_items:
+        lines.append(
+            f"- [{c.get('id', '?')}] ({c.get('status', '?')}) "
+            f"{c.get('title', '')} — fix action: {c.get('fix_action', '')}"
+        )
+    return "\n".join(lines) + "\n"
+
+
+def _commitment_audit_table(audit: list[dict], round_num) -> str:
+    """Render a commitment audit as a markdown summary table."""
+    lines = [
+        f"## Commitment audit (round {round_num})",
+        "",
+        "| ID | Commitment | Status |",
+        "|---|---|---|",
+    ]
+    for a in audit:
+        title = str(a.get("title", "")).replace("|", "\\|")[:100]
+        lines.append(f"| {a.get('id', '?')} | {title} | {a.get('status', '?')} |")
+    return "\n".join(lines) + "\n"
+
+
+def _append_auto_review(base_dir: str, text: str):
+    """Append a section to AUTO_REVIEW.md (created if missing)."""
+    os.makedirs(base_dir, exist_ok=True)
+    path = os.path.join(base_dir, "AUTO_REVIEW.md")
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(text.rstrip() + "\n\n")
 
 
 # ---------------------------------------------------------------------------
@@ -484,7 +982,7 @@ def build_prior_work_context(
     )
     if debug_dir:
         try:
-            with open(os.path.join(debug_dir, "_grounding_queries_raw.md"), "w") as f:
+            with open(os.path.join(debug_dir, "_grounding_queries_raw.md"), "w", encoding="utf-8") as f:
                 f.write(queries_raw)
         except OSError:
             pass
@@ -536,7 +1034,7 @@ def build_prior_work_context(
     )
     if debug_dir:
         try:
-            with open(os.path.join(debug_dir, "_grounding_filter_raw.md"), "w") as f:
+            with open(os.path.join(debug_dir, "_grounding_filter_raw.md"), "w", encoding="utf-8") as f:
                 f.write(selected_raw)
         except OSError:
             pass
@@ -666,7 +1164,39 @@ def apply_revision_plan(
 
     # Decide how to write the revised paper based on the source layout.
     revised_path = _write_revised_paper(paper_dir, body, output_dir)
+
+    # Copy non-regenerated sibling assets (missing .tex, .bib/.sty/.cls,
+    # figure dirs) so the revised tree is self-contained — review_loop and
+    # paper_improvement_loop repoint paper_dir at output_dir next round,
+    # and an asset-less tree breaks compile and later reviews.
+    if os.path.isdir(paper_dir):
+        _copy_sibling_assets(paper_dir, output_dir)
     return revised_path
+
+
+_ASSET_EXTS = (".bib", ".bst", ".sty", ".cls", ".tex")
+
+
+def _copy_sibling_assets(src_dir: str, output_dir: str) -> list[str]:
+    """Copy source files the revision did not regenerate into output_dir.
+
+    Existing files in output_dir are never overwritten."""
+    import shutil
+    copied = []
+    for name in sorted(os.listdir(src_dir)):
+        if name.startswith("."):
+            continue
+        src = os.path.join(src_dir, name)
+        dst = os.path.join(output_dir, name)
+        if os.path.exists(dst):
+            continue
+        if os.path.isdir(src):
+            shutil.copytree(src, dst)
+            copied.append(name + "/")
+        elif name.lower().endswith(_ASSET_EXTS):
+            shutil.copy2(src, dst)
+            copied.append(name)
+    return copied
 
 
 def _split_fix_output(fix_reply: str) -> tuple[str, str]:
@@ -767,7 +1297,7 @@ def _write_multi_tex(body: str, original_files: list[str],
             written.append(fname)
         missing = set(original_files) - set(written)
         if missing:
-            with open(os.path.join(output_dir, "_WARNING.md"), "w") as f:
+            with open(os.path.join(output_dir, "_WARNING.md"), "w", encoding="utf-8") as f:
                 f.write(
                     f"# Warning: fix_paper output dropped some source files\n\n"
                     f"Original .tex files: {sorted(original_files)}\n"
@@ -783,7 +1313,7 @@ def _write_multi_tex(body: str, original_files: list[str],
         out_path = os.path.join(output_dir, "manuscript.tex")
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(body)
-        with open(os.path.join(output_dir, "_WARNING.md"), "w") as f:
+        with open(os.path.join(output_dir, "_WARNING.md"), "w", encoding="utf-8") as f:
             f.write(
                 f"# Warning: fix_paper output had no `% === fname ===` markers\n\n"
                 f"Original was a multi-.tex layout: {sorted(original_files)}\n"
@@ -1063,7 +1593,7 @@ def review_loop(
     review_runtime: Runtime = None,
     num_reviewers: int = 4,
     max_rounds: int = 4,
-    pass_threshold: int = POSITIVE_THRESHOLD,
+    pass_threshold: Optional[float] = None,
     difficulty: str = "medium",
     auto_fix: bool = False,
     with_grounding: bool = True,
@@ -1111,7 +1641,8 @@ def review_loop(
         review_runtime:   Runtime for reviewing (each reviewer gets a fresh session).
         num_reviewers:    Number of independent reviewers per round (default: 4).
         max_rounds:       Max review-fix cycles (default: 4).
-        pass_threshold:   Min score to pass (default: 6/10).
+        pass_threshold:   Min score to pass, on the venue's own scale.
+                          Default None = the venue's accept threshold.
         difficulty:       "medium" | "hard" | "nightmare".
         auto_fix:         If True, auto-fix paper after each round (default: False).
         with_grounding:   If True, retrieve prior work from arXiv before each
@@ -1119,10 +1650,18 @@ def review_loop(
         grounding_top_k:  Number of prior works to surface per round (default: 8).
         personas:         Per-reviewer persona pool (ReviewerToo-style diversity).
                           Default = DEFAULT_PERSONAS = ("empiricist", "theorist",
-                          "novelty_hawk", "clarity_critic"). Reviewer i gets
-                          personas[i % len(personas)]. Persona is only honored
-                          when with_grounding=True (review_paper_grounded path).
-                          Set to () or None to disable persona injection.
+                          "novelty_hawk", "devils_advocate") — the widest
+                          4-lens spread (experiments / theory / prior work /
+                          claim-level attack; clarity issues are also caught
+                          by paper_improvement_loop). Full pool (see
+                          _PERSONA_INSTRUCTIONS in review_paper_grounded):
+                          balanced, empiricist, theorist, novelty_hawk,
+                          clarity_critic, methodologist, statistician,
+                          reproducibility_auditor, devils_advocate.
+                          Reviewer i gets personas[i % len(personas)].
+                          Persona is only honored when with_grounding=True
+                          (review_paper_grounded path). Set to () or None to
+                          disable persona injection.
         external_providers:    Tuple of external review services to also query
                           (e.g. ("paperreview_ai",)). Each provider's review
                           is appended to individual_reviews as an extra reviewer
@@ -1170,8 +1709,11 @@ def review_loop(
     project_dir = _infer_project_dir(paper_dir)
     reviews = []
     reviewer_memory = ""
+    commitment_ledger: list[dict] = []  # accumulated revision-plan commitments
 
     venue_criteria = lookup_venue_criteria(venue=venue, runtime=review_runtime)
+    from research_harness.references.venue_scoring import get_venue_spec
+    venue_scale = get_venue_spec(venue).overall_dim.scale  # (lo, hi)
     passed = False
 
     for round_num in range(1, max_rounds + 1):
@@ -1203,6 +1745,26 @@ def review_loop(
                 # fall back to vanilla review (no context).
                 grounding_meta = {"error": str(e)}
                 prior_work_context = ""
+
+        # ── 1.7. Commitment ledger audit (R&R traceability) ──
+        # Prior rounds' revision-plan commitments are verified against the
+        # CURRENT paper at the start of the review phase. NOT_ADDRESSED /
+        # MADE_WORSE (and UNVERIFIED) items carry forward verbatim into
+        # this round's revision-plan input.
+        carry_items = []
+        commitment_audit = None
+        if commitment_ledger:
+            commitment_audit = _audit_commitments(
+                commitments=commitment_ledger,
+                paper_content=paper_content,
+                review_runtime=review_runtime,
+            )
+            _save(round_dir, "commitment_audit.json",
+                  json.dumps(commitment_audit, ensure_ascii=False, indent=2))
+            _append_auto_review(
+                base_dir, _commitment_audit_table(commitment_audit, round_num))
+            carry_items = _carry_from_audit(
+                commitment_audit, commitment_ledger[-_COMMITMENT_FEED_CAP:])
 
         # ── 2. N independent reviews (each with fresh session) ──
         individual_replies = []
@@ -1383,12 +1945,41 @@ def review_loop(
                 f"- **Suspicions**: {meta_reply[:500]}\n"
             )
 
-        # ── 5. Debate (hard/nightmare) ──
+        # ── 5. Debate (hard/nightmare) — rulings APPLIED to the review ──
+        # Concession-threshold protocol: withdraw only at rebuttal score 5,
+        # downgrade at 4, escalating to 5-only after any concession.
+        # Withdrawn weaknesses are dropped and the score is adjusted BEFORE
+        # the stop-condition check (closes the old "debate is cosmetic" gap).
         if difficulty in ("hard", "nightmare") and review.get("weaknesses"):
-            review["debate_transcript"] = _run_debate(
+            debate = _run_debate(
                 review["weaknesses"], paper_content,
                 exec_runtime, review_runtime,
+                return_rulings=True,
             )
+            review["debate_transcript"] = debate["transcript"]
+            if debate["rulings"]:
+                review["debate_rulings"] = debate["rulings"]
+                adj = _apply_debate_rulings(
+                    review, debate["rulings"], scale_max=venue_scale[1])
+                review["debate_adjustment"] = adj
+                review["debate_transcript"] += (
+                    "\n\n**Applied rulings:** "
+                    + json.dumps(adj, ensure_ascii=False)
+                )
+
+        # ── 5.7. Score trajectory (per-dimension deltas vs previous round) ──
+        regression_warning = ""
+        traj = _score_trajectory(reviews + [review], scale_range=venue_scale)
+        if traj:
+            review["score_trajectory"] = traj
+            _append_auto_review(base_dir, _trajectory_table(traj))
+            if traj["regressions"]:
+                review["regression_flags"] = traj["regressions"]
+                regression_warning = _regression_warning(traj)
+        if commitment_audit is not None:
+            review["commitment_audit"] = commitment_audit
+        if carry_items:
+            review["carried_commitments"] = carry_items
 
         # ── 6. Save debate + accumulate reviews ──
         if review.get("debate_transcript"):
@@ -1398,14 +1989,22 @@ def review_loop(
         #         review and fix, decoupled from auto_fix decision) ──
         if hasattr(review_runtime, 'reset'):
             review_runtime.reset()
+        carry_text = _carry_section(carry_items)
         revision_plan = build_revision_plan(
             paper_content=paper_content,
             individual_reviews=all_reviews_text,
-            meta_review=meta_reply,
+            # Carried-over commitments ride along with the meta-review so the
+            # planner cannot silently drop them.
+            meta_review=meta_reply + ("\n" + carry_text if carry_text else ""),
             venue=venue,
             venue_criteria=venue_criteria,
             runtime=review_runtime,
         )
+        # The saved plan IS the fix prompt (apply_revision_plan reads it):
+        # append the regression warning + carried commitments verbatim so the
+        # author model sees what it damaged and what it still owes.
+        if regression_warning or carry_text:
+            revision_plan = revision_plan + regression_warning + carry_text
         _save(round_dir, "revision_plan.md", revision_plan)
         review["revision_plan"] = revision_plan
         review["revision_plan_path"] = os.path.join(round_dir, "revision_plan.md")
@@ -1426,8 +2025,13 @@ def review_loop(
         )
         venue_spec = get_venue_spec(venue)
         venue_threshold = venue_spec.accept_threshold
-        # Use the stricter of: caller-supplied pass_threshold OR venue main-track threshold
-        effective_threshold = max(pass_threshold, venue_threshold)
+        # A caller-supplied threshold (on the venue's own scale) wins;
+        # the default is the venue's main-track accept threshold. Taking
+        # max() against a fixed 1-10-scale default made passing impossible
+        # for venues scored on 1-5 / 1-6 scales.
+        effective_threshold = (
+            venue_threshold if pass_threshold is None else float(pass_threshold)
+        )
 
         passed_by_score = score >= effective_threshold
         # Verdict-keyword fallback uses venue-specific mapping (ARR's "Findings"
@@ -1446,6 +2050,17 @@ def review_loop(
         # against the saved revision_plan.md.
         if not auto_fix:
             break
+
+        # ── 7.5. Commitment ledger: persist this plan's action items ──
+        new_commitments = _parse_plan_commitments(revision_plan)
+        for c in new_commitments:
+            c["round"] = round_num
+        if new_commitments:
+            _save(round_dir, "commitments.json",
+                  json.dumps({"round": round_num,
+                              "commitments": new_commitments},
+                             ensure_ascii=False, indent=2))
+            commitment_ledger.extend(new_commitments)
 
         if hasattr(exec_runtime, 'reset'):
             exec_runtime.reset()
@@ -1538,10 +2153,24 @@ def review_loop(
                 )
         if r.get("debate_transcript"):
             summary_lines.append(f"- Debate → `round_{rn}/debate.md`")
+        da = r.get("debate_adjustment")
+        if da:
+            summary_lines.append(
+                f"- Debate rulings applied: {da.get('withdrawn', 0)} withdrawn, "
+                f"{da.get('downgraded', 0)} downgraded, "
+                f"{da.get('sustained', 0)} sustained "
+                f"(score {da.get('pre_debate_score', '?')} → "
+                f"{da.get('adjusted_score', '?')})"
+            )
         if r.get("revision_plan_path"):
             summary_lines.append(f"- Revision plan → `round_{rn}/revision_plan.md`")
         summary_lines.append(f"- Verdict: {r.get('verdict', 'N/A')}")
         summary_lines.append("")
+        if r.get("commitment_audit"):
+            summary_lines.append(
+                _commitment_audit_table(r["commitment_audit"], rn))
+        if r.get("score_trajectory"):
+            summary_lines.append(_trajectory_table(r["score_trajectory"]))
 
     summary_lines.append("")
     summary_lines.append("## Next steps")

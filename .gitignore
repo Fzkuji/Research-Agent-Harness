@@ -12,11 +12,17 @@ build/
 # Tooling cache
 .openprogram/
 
-# Generated research artifacts at repo root (keep README/SKILL)
+# Generated research artifacts at repo root (keep README/SKILL).
+# NOTE: blanket ignore — any new legitimate root doc (CHANGELOG.md,
+# CONTRIBUTING.md, ...) needs its own `!` entry below or git add will
+# silently do nothing.
 /*.md
 /*.tex
 !/README.md
 !/SKILL.md
+
+# Archived outputs from past test runs
+/_archive/
 
 # Result directories from past runs
 /auto_review/

@@ -1,0 +1,37 @@
+The code in this directory is vendored or adapted from
+Academic Research Skills (ARS) v3.12.0
+https://github.com/Imbad0202/academic-research-skills
+Copyright (c) Cheng-I Wu
+
+Licensed under Creative Commons Attribution-NonCommercial 4.0 International
+(CC BY-NC 4.0): https://creativecommons.org/licenses/by-nc/4.0/
+
+Adapted files (derived from ARS code):
+  uncited_assertions.py        <- scripts/uncited_assertion_detector.py +
+                                  scripts/_claim_audit_constants.py (the D4-c
+                                  detector and its constants, merged into one
+                                  module). Behavioral changes relative to
+                                  upstream: the citation condition is
+                                  retargeted from markdown <!--ref:slug-->
+                                  markers to LaTeX markers (\cite-family
+                                  commands, \ref{tab:/fig:}, textual
+                                  "Table N"/"Figure N" own-result references);
+                                  the trigger vocabulary is extended
+                                  (outperform-family verbs, "improved by"
+                                  phrases, p-values); a hyphenated-identifier
+                                  guard (CIFAR-10, GPT-4) and extra section
+                                  cues (equation, algorithm, theorem, ...)
+                                  are added; a LaTeX prose view plus the
+                                  check_tex / uncited_assertion_check entry
+                                  points and report writer are new.
+
+Original files (this repository, but NC applies to the directory as a unit):
+  __init__.py, _latex.py, _files.py, citation_context.py
+  (citation_context.py is an original, simpler LaTeX descendant of the
+   failure classes exercised by ARS's
+   scripts/check_v3_7_3_three_layer_citation.py; no ARS code is reused.)
+
+NOTE: because this directory is CC BY-NC 4.0, the Research-Agent-Harness
+project as distributed includes non-commercial-only components. Commercial
+use of the combined work is not permitted; remove this directory for a
+pure-MIT build.

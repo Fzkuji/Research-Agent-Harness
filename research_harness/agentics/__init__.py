@@ -9,10 +9,21 @@ side effects and self-register).
 """
 from __future__ import annotations
 
-try:
-    from ..main import research_agent
-    AGENTIC_FUNCTIONS = [research_agent]
-except ImportError:
-    AGENTIC_FUNCTIONS = []
+
+def __getattr__(name):
+    # PEP 562 lazy export: importing research_agent eagerly here recurses
+    # into research_harness.__init__ -> main -> openprogram's registry
+    # loader while THIS module is still initializing, so the eager
+    # `from ..main import ...` always hit ImportError and exported [].
+    if name == "AGENTIC_FUNCTIONS":
+        try:
+            from research_harness.main import research_agent
+        except ImportError:
+            # Deps-less machine (installing-harnesses.md rule 2):
+            # discovery must never break the whole registry load.
+            return []
+        return [research_agent]
+    raise AttributeError(name)
+
 
 __all__ = ["AGENTIC_FUNCTIONS"]

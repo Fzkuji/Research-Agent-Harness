@@ -8,13 +8,19 @@ version = "0.1.0"
 description = "Autonomous research agent: from topic to submission-ready paper."
 readme = "README.md"
 requires-python = ">=3.10"
-license = {text = "MIT"}
+# Own code MIT; research_harness/citation_gate/ is vendored from
+# academic-research-skills (CC BY-NC 4.0), making the combined work
+# non-commercial. See research_harness/citation_gate/LICENSE.
+license = {text = "MIT AND CC-BY-NC-4.0"}
 # No third-party dependencies. OpenProgram itself is deliberately NOT
 # declared: this harness runs inside an existing OpenProgram install
 # (`openprogram programs install research` pip-installs this clone), and
 # declaring it would make pip re-install OpenProgram from git — clobbering
 # the user's local (often editable) install.
 dependencies = []
+
+[project.optional-dependencies]
+pdf = ["pymupdf"]
 
 [project.scripts]
 research-harness = "research_harness.main:main"
@@ -27,6 +33,7 @@ include = ["research_harness*"]
 markers = [
     "e2e: end-to-end tests that call a real LLM (slow, needs API key or claude-code)",
 ]
+addopts = "-m \"not e2e\""
 
 [project.urls]
 Homepage = "https://github.com/Fzkuji/Research-Agent-Harness"

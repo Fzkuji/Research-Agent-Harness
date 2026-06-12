@@ -427,9 +427,18 @@ def _merge_evolve(state: dict, parsed: dict) -> tuple[int, str]:
                 continue
             old = r.get("old_path", "")
             new = r.get("new_path", "")
+            moved = False
             for pl in p.get("placements", []):
                 if pl.get("topic_path") == old:
                     pl["topic_path"] = new
+                    moved = True
+            if not moved and new:
+                # Orphan absorption (evolve contract step 1/6): the evolve
+                # added a topic FOR this paper, which has no placement to
+                # re-point — create one, else _prune_empty_leaves removes
+                # the new topic right away and the orphan stays orphaned.
+                p.setdefault("placements", []).append({"topic_path": new})
+                p["is_orphan"] = False
 
     n_snapped, n_dropped, n_unannotated = _reconcile_placements(state)
 

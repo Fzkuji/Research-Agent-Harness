@@ -46,12 +46,11 @@ _ENTRIES: dict[str, tuple[str, str, str]] = {
     "annotate_papers":          ("research_harness.stages.literature", "annotate_papers", "literature"),
     "evolve_framework":         ("research_harness.stages.literature", "evolve_framework", "literature"),
     "synthesize_literature":    ("research_harness.stages.literature", "synthesize_literature", "literature"),
-    # Legacy / complementary leaves (still available; run_literature does not chain them)
-    "survey_topic":             ("research_harness.stages.literature", "survey_topic", "literature"),
-    "identify_gaps":            ("research_harness.stages.literature", "identify_gaps", "literature"),
+    "digest_paper":             ("research_harness.stages.literature", "digest_paper", "literature"),
+    # Standalone search tools (also used inside the loop's search step)
     "search_arxiv":             ("research_harness.stages.literature", "search_arxiv", "literature"),
     "search_semantic_scholar":  ("research_harness.stages.literature", "search_semantic_scholar", "literature"),
-    "comprehensive_lit_review": ("research_harness.stages.literature", "comprehensive_lit_review", "literature"),
+    "prisma_report":            ("research_harness.stages.literature.prisma", "prisma_report", "literature"),
     # Idea — individual functions + orchestrator
     "generate_ideas":           ("research_harness.stages.idea", "generate_ideas", "idea"),
     "check_novelty":            ("research_harness.stages.idea", "check_novelty", "idea"),
@@ -73,7 +72,6 @@ _ENTRIES: dict[str, tuple[str, str, str]] = {
     "expand_text":              ("research_harness.stages.writing", "expand_text", "writing"),
     "check_logic":              ("research_harness.stages.writing", "check_logic", "writing"),
     "analyze_results":          ("research_harness.stages.writing", "analyze_results", "writing"),
-    "results_to_claims":        ("research_harness.stages.writing", "results_to_claims", "writing"),
     "translate_zh2en":          ("research_harness.stages.writing", "translate_zh2en", "writing"),
     "translate_en2zh":          ("research_harness.stages.writing", "translate_en2zh", "writing"),
     "rewrite_zh":               ("research_harness.stages.writing", "rewrite_zh", "writing"),
@@ -87,13 +85,20 @@ _ENTRIES: dict[str, tuple[str, str, str]] = {
     "generate_paper_figures":     ("research_harness.stages.writing", "generate_paper_figures", "writing"),
     "generate_mermaid_diagram":   ("research_harness.stages.writing", "generate_mermaid_diagram", "writing"),
     "compile_paper":              ("research_harness.stages.writing", "compile_paper", "writing"),
+    "write_disclosure":           ("research_harness.stages.writing.write_disclosure", "write_disclosure", "writing"),
+    # Deterministic writing lints (vendored/adapted ARS — writing_lint/)
+    "uncited_assertion_check":    ("research_harness.writing_lint", "uncited_assertion_check", "writing"),
+    "citation_context_check":     ("research_harness.writing_lint", "citation_context_check", "writing"),
+    # Integrity gate: audit empirical claims against experiment run records
+    # (claim extraction is its internal step, not a separate routing option)
+    "integrity_gate":             ("research_harness.stages.integrity", "integrity_gate", "writing"),
+    # Author voice profile (persisted style card for polish/write prompts)
+    "build_style_profile":        ("research_harness.stages.writing.style_profile", "build_style_profile", "writing"),
     # Review — individual functions + orchestrators
     "review_paper":             ("research_harness.stages.review", "review_paper", "review"),
     "fix_paper":                ("research_harness.stages.review", "fix_paper", "review"),
     "review_loop":              ("research_harness.stages.review", "review_loop", "review"),
     "paper_improvement_loop":   ("research_harness.stages.review", "paper_improvement_loop", "review"),
-    "pdf_to_markdown":          ("research_harness.stages.review", "pdf_to_markdown", "review"),
-    "docx_to_markdown":         ("research_harness.stages.review", "docx_to_markdown", "review"),
     "load_paper":               ("research_harness.stages.review", "load_paper", "review"),
     "detect_ai_flavor":         ("research_harness.stages.review", "detect_ai_flavor", "review"),
     "build_revision_plan":      ("research_harness.stages.review", "build_revision_plan", "review"),
@@ -102,9 +107,11 @@ _ENTRIES: dict[str, tuple[str, str, str]] = {
     "filter_relevant_priors":   ("research_harness.stages.review", "filter_relevant_priors", "review"),
     "adaptive_summarize_priors":("research_harness.stages.review", "adaptive_summarize_priors", "review"),
     "build_prior_work_context": ("research_harness.stages.review", "build_prior_work_context", "review"),
-    "review_paper_grounded":    ("research_harness.stages.review", "review_paper_grounded", "review"),
     "fetch_external_review":    ("research_harness.stages.review", "fetch_external_review", "review"),
     "calibrate_score":          ("research_harness.stages.review", "calibrate_score", "review"),
+    "lookup_venue_criteria":    ("research_harness.stages.review.lookup_venue_criteria", "lookup_venue_criteria", "review"),
+    # Deterministic citation-existence gate (vendored ARS clients — citation_gate/)
+    "verify_citations":         ("research_harness.citation_gate", "verify_citations", "review"),
     # Rebuttal
     "parse_reviews":            ("research_harness.stages.rebuttal", "parse_reviews", "rebuttal"),
     "build_rebuttal_strategy":  ("research_harness.stages.rebuttal", "build_rebuttal_strategy", "rebuttal"),
@@ -135,7 +142,29 @@ _ENTRIES: dict[str, tuple[str, str, str]] = {
     # Project
     "research_pipeline":        ("research_harness.pipeline", "research_pipeline", "project"),
     "init_research":            ("research_harness.stages.init", "init_research", "project"),
+    # Interactive (oversight="interactive": hidden from the autonomous loop;
+    # entry points are `research-harness --chat` and direct Python calls)
+    "socratic_plan":            ("research_harness.stages.interactive", "socratic_plan", "project"),
 }
+
+# ---------------------------------------------------------------------------
+# Oversight levels — machine-readable autonomy signal per function.
+#   "autonomous"  — safe for the unattended two-level loop (the default).
+#   "interactive" — needs a human in the loop; excluded from the loop's
+#                   routing catalogs, callable only programmatically.
+# (Pattern from ARS's MODE_REGISTRY oversight column.)
+# ---------------------------------------------------------------------------
+
+OVERSIGHT: dict[str, str] = {
+    # Human-in-the-loop functions (block on ask_user between model turns).
+    "socratic_plan": "interactive",
+}
+
+
+def oversight(name: str) -> str:
+    """Oversight level for a registered function (default: autonomous)."""
+    return OVERSIGHT.get(name, "autonomous")
+
 
 # Parameters auto-injected by the framework (hidden from LLM and CLI)
 AUTO_PARAMS = {"runtime", "exec_runtime", "review_runtime"}
@@ -155,15 +184,30 @@ _cache: dict[str, callable] = {}
 
 
 def get_function(name: str) -> Optional[callable]:
-    """Lazily import and return a function by registry name."""
+    """Lazily import and return a function by registry name.
+
+    A broken module (SyntaxError, missing dependency, renamed symbol)
+    returns None with a stderr warning instead of raising, so one bad
+    stage module degrades to "function unavailable" rather than killing
+    a multi-hour agent run.
+    """
     if name in _cache:
         return _cache[name]
     entry = _ENTRIES.get(name)
     if entry is None:
         return None
     module_path, func_name, _ = entry
-    mod = importlib.import_module(module_path)
-    func = getattr(mod, func_name)
+    try:
+        mod = importlib.import_module(module_path)
+        func = getattr(mod, func_name)
+    except (ImportError, SyntaxError, AttributeError) as e:
+        import sys
+        print(
+            f"[registry] WARNING: {name} unavailable "
+            f"({module_path}.{func_name}: {type(e).__name__}: {e})",
+            file=sys.stderr,
+        )
+        return None
     _cache[name] = func
     return func
 
@@ -307,6 +351,8 @@ def build_stage_available(stage: str) -> dict:
     """
     out: dict = {}
     for name in stage_functions(stage):
+        if oversight(name) != "autonomous":
+            continue
         func = get_function(name)
         if func is None:
             continue

@@ -90,7 +90,10 @@ def compete(
     except ValueError:
         result = {"winner": 1, "scores": [5] * len(candidates), "reasoning": reply[:200]}
 
-    idx = result.get("winner", 1) - 1
+    try:
+        idx = int(result.get("winner", 1)) - 1
+    except (TypeError, ValueError):
+        idx = 0
     idx = max(0, min(idx, len(candidates) - 1))
 
     return {

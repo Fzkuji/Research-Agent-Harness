@@ -28,19 +28,22 @@ def run_idea(
     """
     os.makedirs(output_dir, exist_ok=True)
 
+    if runtime is None:
+        raise ValueError("Runtime parameter is required for idea module")
+
     if not gaps:
         gaps = "No gaps identified yet. Generate ideas based on the topic directly."
 
     ideas = generate_ideas(topic=topic, gaps=gaps, runtime=runtime)
-    with open(os.path.join(output_dir, "ideas.md"), "w") as f:
+    with open(os.path.join(output_dir, "ideas.md"), "w", encoding="utf-8") as f:
         f.write(ideas)
 
     novelty = check_novelty(idea=ideas, runtime=runtime)
-    with open(os.path.join(output_dir, "novelty.md"), "w") as f:
+    with open(os.path.join(output_dir, "novelty.md"), "w", encoding="utf-8") as f:
         f.write(novelty)
 
     ranking = rank_ideas(ideas=ideas, novelty_results=novelty, runtime=runtime)
-    with open(os.path.join(output_dir, "ranking.md"), "w") as f:
+    with open(os.path.join(output_dir, "ranking.md"), "w", encoding="utf-8") as f:
         f.write(ranking)
 
     summary = (
@@ -50,7 +53,7 @@ def run_idea(
         f"- **Novelty check**: `{output_dir}/novelty.md`\n"
         f"- **Ranking**: `{output_dir}/ranking.md`\n"
     )
-    with open(os.path.join(output_dir, "SUMMARY.md"), "w") as f:
+    with open(os.path.join(output_dir, "SUMMARY.md"), "w", encoding="utf-8") as f:
         f.write(summary)
 
     return {"summary": summary, "ideas": ideas, "novelty": novelty, "ranking": ranking}

@@ -1,5 +1,12 @@
 from __future__ import annotations
 
+# The "Knowledge isolation" docstring block is adapted from
+# academic-research-skills v3.12.0
+# (https://github.com/Imbad0202/academic-research-skills),
+# (c) Cheng-I Wu, CC BY-NC 4.0
+# Changed: ARS's anti-leakage protocol (academic-paper/references/
+# anti_leakage_protocol.md) is condensed into prompt rules with an
+# inline [MATERIAL GAP: ...] marker contract.
 from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
@@ -22,6 +29,13 @@ def write_section(section: str, context: str, runtime: Runtime) -> str:
     - Use \\citep{} for parenthetical, \\citet{} for textual. Never use citations as subjects.
     - Present tense for methods/results, past tense only for specific historical events.
     - No AI-flavor words (leverage, delve, tapestry, utilize). Use simple, clear vocabulary.
+
+    Knowledge isolation:
+    - Prefer the provided context/materials over your parametric memory for
+      every factual statement (results, numbers, citations, procedures).
+    - When a needed fact is NOT in the materials, do NOT fill it from memory.
+      Write the sentence with an explicit [MATERIAL GAP: what is missing]
+      marker so the gap stays visible downstream.
 
     Output ONLY the LaTeX content for the section. No explanation.
     

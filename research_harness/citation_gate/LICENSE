@@ -1,0 +1,41 @@
+The code in this directory is vendored or adapted from
+Academic Research Skills (ARS) v3.12.0
+https://github.com/Imbad0202/academic-research-skills
+Copyright (c) Cheng-I Wu
+
+Licensed under Creative Commons Attribution-NonCommercial 4.0 International
+(CC BY-NC 4.0): https://creativecommons.org/licenses/by-nc/4.0/
+
+Behavioral changes relative to upstream (beyond import paths):
+  - crossref_client.py / openalex_client.py: a resolved DOI whose upstream
+    record carries an EMPTY title no longer counts as DOI_MISMATCH (it made
+    real ACL Anthology papers look fabricated); openalex additionally
+    guards the 404/empty-record case.
+  - _resolve.py: verdict-upgrading title-search hits are re-checked at
+    0.85 similarity (the clients' internal 0.70 let short fabricated
+    titles match different real works).
+
+Vendored files (import paths adapted, otherwise verbatim):
+  _text_similarity.py          <- scripts/_text_similarity.py
+  crossref_client.py           <- scripts/crossref_client.py
+  openalex_client.py           <- scripts/openalex_client.py
+  semantic_scholar_client.py   <- scripts/semantic_scholar_client.py
+                                  (SemanticScholarUnavailable moved in from
+                                   scripts/contamination_signals.py)
+  arxiv_client.py              <- scripts/arxiv_client.py
+  reducer.py                   <- scripts/citation_verification_summary.py
+  cache.py                     <- scripts/verification_cache.py
+                                  (default path/env renamed to harness names)
+
+Adapted files (derived from ARS designs/code):
+  _resolve.py                  <- scripts/contamination_signals.py (excerpts;
+                                  passport/ref_slug plumbing removed, cache
+                                  threaded through)
+
+Original files (this repository, but NC applies to the directory as a unit):
+  __init__.py, bib.py, __main__.py
+
+NOTE: because this directory is CC BY-NC 4.0, the Research-Agent-Harness
+project as distributed includes non-commercial-only components. Commercial
+use of the combined work is not permitted; remove this directory for a
+pure-MIT build.

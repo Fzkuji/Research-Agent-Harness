@@ -16,7 +16,6 @@ from research_harness.stages.writing.polish_rigorous import polish_rigorous
 from research_harness.stages.writing.polish_zh import polish_zh
 from research_harness.stages.writing.recommend_visualization import recommend_visualization
 from research_harness.stages.writing.remove_ai_flavor_zh import remove_ai_flavor_zh
-from research_harness.stages.writing.results_to_claims import results_to_claims
 from research_harness.stages.writing.rewrite_zh import rewrite_zh
 from research_harness.stages.writing.translate_en2zh import translate_en2zh
 from research_harness.stages.writing.translate_zh2en import translate_zh2en
@@ -55,4 +54,4 @@ def gather_context(project_dir: str, section: str) -> str:
     return "\n\n".join(parts) if parts else "No context available yet."
 
 
-__all__ = ['analyze_results', 'check_logic', 'compile_paper', 'compress_text', 'design_architecture_figure', 'expand_text', 'generate_figure_caption', 'generate_mermaid_diagram', 'generate_paper_figures', 'generate_table_caption', 'humanize_text', 'polish_natural', 'polish_rigorous', 'polish_zh', 'recommend_visualization', 'remove_ai_flavor_zh', 'results_to_claims', 'rewrite_zh', 'translate_en2zh', 'translate_zh2en', 'write_section', 'gather_context']
+__all__ = ['analyze_results', 'check_logic', 'compile_paper', 'compress_text', 'design_architecture_figure', 'expand_text', 'generate_figure_caption', 'generate_mermaid_diagram', 'generate_paper_figures', 'generate_table_caption', 'humanize_text', 'polish_natural', 'polish_rigorous', 'polish_zh', 'recommend_visualization', 'remove_ai_flavor_zh', 'rewrite_zh', 'translate_en2zh', 'translate_zh2en', 'write_section', 'gather_context']

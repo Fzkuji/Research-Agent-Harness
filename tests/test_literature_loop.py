@@ -33,8 +33,8 @@ def _j(obj) -> str:
 
 def _decide(action: str, **args) -> str:
     return _j({
-        "action": action,
-        "action_args": args,
+        "call": action,
+        "args": args,
         "reasoning": f"scripted: {action}",
         "expect": "merged into state",
     })
@@ -47,8 +47,8 @@ def _done(scope: str = "all") -> str:
     scope='all'   — break inner AND outer; go straight to final synthesize.
     """
     return _j({
-        "action": "done",
-        "action_args": {"scope": scope},
+        "call": "done",
+        "args": {"scope": scope},
         "reasoning": f"scripted: done scope={scope}",
         "expect": "",
     })
@@ -132,16 +132,23 @@ class TestLeafFunctionsInvokeRuntime:
         assert json.loads(out)["stable"] is True
 
     def test_synthesize_literature_calls_runtime(self, tmp_dir):
+        # Current contract: a Python orchestrator that calls one LLM per
+        # section, writes synthesis/review.md, and returns a dict with
+        # done=True (no not-done path — failures raise).
         from research_harness.stages.literature.synthesize_literature import (
             synthesize_literature,
         )
-        rt = MockRuntime(_j({"artifacts": {}, "stats": {}, "done": True}))
+        rt = MockRuntime("Section text.")
         out = synthesize_literature(
-            direction="x", framework_json="{}", papers_json="[]",
-            surveys_json="[]", output_dir=tmp_dir, runtime=rt,
+            direction="x",
+            state={"framework": {}, "papers": [], "surveys": []},
+            output_dir=tmp_dir, runtime=rt,
         )
-        assert len(rt.calls) == 1
-        assert json.loads(out)["done"] is True
+        assert out["done"] is True
+        assert len(rt.calls) >= 1
+        assert os.path.exists(
+            os.path.join(tmp_dir, "synthesis", "review.md")
+        )
 
 
 # ── Orchestrator: dispatcher + merge + state persistence ─────────────
@@ -276,15 +283,16 @@ class TestRunLiteratureLoop:
         assert p1["placements"][0]["topic_path"] == "direction/sub_a"
         assert p1["placements"][0]["contribution_summary"] == "does X"
 
-    def test_final_synthesize_not_done_returns_false(self, tmp_dir):
-        """If the final synthesize returns done=false, run_literature reports
-        done=false (not retried — finalize runs exactly once)."""
+    def test_final_synthesize_always_completes(self, tmp_dir):
+        """Finalize synthesize is a section-by-section Python orchestrator:
+        it always writes synthesis/review.md and reports done=True (the old
+        done=false reply path no longer exists — failures raise instead)."""
         from research_harness.stages.literature import run_literature
 
         responses = [
             _done(scope="all"),     # outer 1 inner 1 — skip straight to end
             _COMP_STABLE,           # compensation evolve
-            _final(done=False),     # finalize synth returns done=false
+            "Section text.",        # finalize synth: one reply per section
         ]
         rt = MockRuntime(responses)
 
@@ -292,7 +300,10 @@ class TestRunLiteratureLoop:
             direction="x", output_dir=tmp_dir, runtime=rt,
             max_outer=3, max_inner=3,
         )
-        assert result["done"] is False
+        assert result["done"] is True
+        assert os.path.exists(
+            os.path.join(tmp_dir, "synthesis", "review.md")
+        )
 
     def test_parse_failure_recorded_in_audit(self, tmp_dir):
         """A dispatcher reply that isn't JSON is logged as PARSE_FAIL and the
@@ -300,11 +311,12 @@ class TestRunLiteratureLoop:
         from research_harness.stages.literature import run_literature
 
         # inner fills with garbage until max_inner used up, then compensation
-        # evolve + finalize synth close the run.
+        # evolve + finalize synth close the run (finalize always completes,
+        # even with an empty framework — the parse failures live in audit).
         responses = [
             "not json at all", "not json at all", "not json at all",
             _COMP_STABLE,        # compensation evolve
-            _final(done=False),  # finalize synth — no real framework/papers
+            "Section text.",     # finalize synth replies
         ]
         rt = MockRuntime(responses)
 
@@ -312,7 +324,7 @@ class TestRunLiteratureLoop:
             direction="x", output_dir=tmp_dir, runtime=rt,
             max_outer=1, max_inner=3,
         )
-        assert result["done"] is False
+        assert result["done"] is True
         with open(os.path.join(tmp_dir, "state.json")) as f:
             state = json.load(f)
         assert any("parse failed" in a.get("summary", "") for a in state["audit"])
@@ -756,8 +768,9 @@ class TestRunLiteratureLoop:
     def test_improvements_since_synth_counts_correctly(self, tmp_dir):
         """After a synth, each non-trivial non-synth action bumps the
         improvements counter in the summary."""
-        from research_harness.stages.literature import (
-            run_literature, _build_state_summary, _improvements_since_synth,
+        from research_harness.stages.literature import run_literature
+        from research_harness.stages.literature._artifacts import (
+            _build_state_summary, _improvements_since_synth,
         )
         import os as _os, json as _json
 
@@ -861,7 +874,7 @@ class TestStateHelpers:
         assert _leaf_count(tree) == 3
 
     def test_iter_leaves_paths(self):
-        from research_harness.stages.literature import _iter_leaves
+        from research_harness.stages.literature._state import _iter_leaves
         tree = {"name": "r", "children": [
             {"name": "a", "children": [{"name": "a1", "children": []}]},
             {"name": "b", "children": []},

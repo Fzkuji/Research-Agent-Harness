@@ -134,7 +134,7 @@ def _write_topic_page(target_dir: Path, name: str, overview: dict, paper_slugs: 
         for s in paper_slugs:
             body_parts.append(f"- [[{s}]]")
         body_parts.append("")
-    page.write_text(dump_frontmatter(fm, "\n".join(body_parts, encoding="utf-8")))
+    page.write_text(dump_frontmatter(fm, "\n".join(body_parts)), encoding="utf-8")
 
 
 def _write_paper_page(target_dir: Path, slug: str, ann: dict):
@@ -162,7 +162,7 @@ def _write_paper_page(target_dir: Path, slug: str, ann: dict):
         "## Contribution\n",
         f"{ann['contribution'] or '(no contribution annotation in source)'}\n",
     ])
-    page.write_text(dump_frontmatter(fm, body, encoding="utf-8"))
+    page.write_text(dump_frontmatter(fm, body), encoding="utf-8")
     return True
 
 

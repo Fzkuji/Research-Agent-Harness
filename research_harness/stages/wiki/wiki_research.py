@@ -106,7 +106,7 @@ def _write_paper(root: Path, topic_dir: Path, paper: dict, pdf: bool) -> Path:
         results=paper.get("results", "").strip() or "(to be filled)",
         limitations=paper.get("limitations", "").strip() or "(to be filled)",
     )
-    paper_md.write_text(dump_frontmatter(fm, "\n" + body, encoding="utf-8"))
+    paper_md.write_text(dump_frontmatter(fm, "\n" + body), encoding="utf-8")
 
     if pdf:
         download_arxiv_pdf(meta["arxiv_id"], root / "Attachments" / f"{slug}.pdf")
@@ -209,7 +209,7 @@ def wiki_research(direction: str, wiki_root: str, k: int, runtime: Runtime) -> s
     raw = runtime.exec(content=[{"type": "text", "text": prompt}])
     # Persist raw output for debugging — regardless of parse success.
     (root / ".runs").mkdir(exist_ok=True)
-    (root / ".runs" / "last_research_raw.txt").write_text(str(raw, encoding="utf-8"))
+    (root / ".runs" / "last_research_raw.txt").write_text(str(raw), encoding="utf-8")
     try:
         data = parse_json(raw)
     except (ValueError, Exception) as e:

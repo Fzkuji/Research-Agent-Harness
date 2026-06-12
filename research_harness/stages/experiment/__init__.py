@@ -27,18 +27,21 @@ def run_experiments(
     """
     os.makedirs(output_dir, exist_ok=True)
 
+    if runtime is None:
+        raise ValueError("Runtime parameter is required for experiment module")
+
     if not idea:
         idea = "Design experiments based on the project context in the current directory."
 
     plan = design_experiments(idea=idea, runtime=runtime)
-    with open(os.path.join(output_dir, "plan.md"), "w") as f:
+    with open(os.path.join(output_dir, "plan.md"), "w", encoding="utf-8") as f:
         f.write(plan)
 
     summary = (
         f"# Experiment Plan Summary\n\n"
         f"- **Plan**: `{output_dir}/plan.md`\n"
     )
-    with open(os.path.join(output_dir, "SUMMARY.md"), "w") as f:
+    with open(os.path.join(output_dir, "SUMMARY.md"), "w", encoding="utf-8") as f:
         f.write(summary)
 
     return {"summary": summary, "plan": plan}

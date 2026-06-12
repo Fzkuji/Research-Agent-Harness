@@ -53,7 +53,7 @@ def wiki_migrate(wiki_root: str, default_type: str) -> str:
         if any(k in fm for k in ("arxiv", "authors", "venue")):
             inferred = "paper"
         new_fm = {"type": inferred, **fm}
-        md.write_text(dump_frontmatter(new_fm, body if body.startswith("\n", encoding="utf-8") else "\n" + body))
+        md.write_text(dump_frontmatter(new_fm, body if body.startswith("\n") else "\n" + body), encoding="utf-8")
         migrated += 1
 
     committed = git_commit_all(

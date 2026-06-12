@@ -35,7 +35,7 @@ def run_slides(
     parts = []
     for f in sorted(os.listdir(paper_dir)):
         if f.endswith(".tex"):
-            with open(os.path.join(paper_dir, f), "r") as fh:
+            with open(os.path.join(paper_dir, f), "r", encoding="utf-8") as fh:
                 parts.append(fh.read())
     paper_content = "\n".join(parts)[:15000]
 
@@ -50,9 +50,9 @@ def run_slides(
     slides_dir = os.path.join(project_dir, "slides")
     os.makedirs(slides_dir, exist_ok=True)
 
-    with open(os.path.join(slides_dir, "slides.tex"), "w") as f:
+    with open(os.path.join(slides_dir, "slides.tex"), "w", encoding="utf-8") as f:
         f.write(slides)
-    with open(os.path.join(slides_dir, "speaker_notes.md"), "w") as f:
+    with open(os.path.join(slides_dir, "speaker_notes.md"), "w", encoding="utf-8") as f:
         f.write(notes)
 
     return {"slides": slides, "notes": notes}

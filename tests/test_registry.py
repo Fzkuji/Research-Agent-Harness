@@ -52,10 +52,10 @@ class TestEntries:
 class TestStageFunctions:
     """stage_functions() returns correct membership."""
 
-    def test_literature_has_survey(self):
+    def test_literature_has_search_tools(self):
         names = stage_functions("literature")
-        assert "survey_topic" in names
         assert "search_arxiv" in names
+        assert "seed_surveys" in names
 
     def test_literature_has_orchestrator(self):
         names = stage_functions("literature")
@@ -97,12 +97,12 @@ class TestAutoParams:
         assert "runtime" in AUTO_PARAMS
 
     def test_signature_hides_runtime(self):
-        sig = get_signature("survey_topic")
+        sig = get_signature("generate_ideas")
         assert "runtime" not in sig
         assert "topic" in sig
 
     def test_get_user_params_excludes_runtime(self):
-        func = get_function("survey_topic")
+        func = get_function("generate_ideas")
         params = get_user_params(func)
         assert "runtime" not in params
         assert "topic" in params
@@ -136,4 +136,4 @@ class TestBuilders:
         assert "[literature]" in text
         assert "[writing]" in text
         # Should list functions
-        assert "survey_topic" in text
+        assert "run_literature" in text

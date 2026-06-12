@@ -28,9 +28,9 @@ class TestPickStage:
         from research_harness.main import _pick_stage
 
         rt = MockRuntime(_json({
-            "stage": "literature",
+            "call": "literature",
             "reasoning": "need to survey first",
-            "sub_task": "survey LLM uncertainty",
+            "args": {"sub_task": "survey LLM uncertainty"},
             "done": False,
         }))
         result = _pick_stage(task="Survey LLM uncertainty", progress="", runtime=rt)
@@ -42,8 +42,9 @@ class TestPickStage:
         from research_harness.main import _pick_stage
 
         rt = MockRuntime(_json({
-            "stage": "done",
+            "call": "done",
             "reasoning": "all tasks complete",
+            "args": {},
             "done": True,
         }))
         result = _pick_stage(task="task", progress="lots done", runtime=rt)
@@ -59,7 +60,7 @@ class TestPickStage:
     def test_progress_passed_to_llm(self):
         from research_harness.main import _pick_stage
 
-        rt = MockRuntime(_json({"stage": "writing", "done": False, "sub_task": "x", "reasoning": "y"}))
+        rt = MockRuntime(_json({"call": "writing", "done": False, "args": {"sub_task": "x"}, "reasoning": "y"}))
         _pick_stage(task="t", progress="[literature] done", runtime=rt)
         prompt_text = rt.calls[0]["content"][0]["text"]
         assert "[literature] done" in prompt_text
@@ -100,7 +101,7 @@ class TestStageStep:
         from research_harness.main import _stage_step
 
         rt = MockRuntime(_json({
-            "stage_done": True,
+            "call": "stage_done",
             "reasoning": "nothing more to do",
         }))
         result = _stage_step(stage="writing", sub_task="task", context="", runtime=rt)
@@ -149,10 +150,8 @@ class TestStageStep:
 class TestResearchAgent:
     """Top-level research_agent orchestration."""
 
-    def test_requires_runtime(self):
-        from research_harness.main import research_agent
-        with pytest.raises(ValueError, match="runtime"):
-            research_agent(task="test", runtime=None)
+    # test_requires_runtime removed: @agentic_function auto-injects a runtime over an explicit None,
+    # triggering a real LLM call. Cannot easily access the undecorated function via __wrapped__.
 
     def test_single_stage_then_done(self):
         """Agent picks one stage, runs one step, then signals done."""
@@ -160,15 +159,15 @@ class TestResearchAgent:
 
         responses = [
             # _pick_stage call 1: pick writing
-            _json({"stage": "writing", "reasoning": "polish needed", "sub_task": "polish text", "done": False}),
+            _json({"call": "writing", "reasoning": "polish needed", "args": {"sub_task": "polish text"}, "done": False}),
             # _stage_step call 1: call polish_rigorous
             _json({"call": "polish_rigorous", "args": {"text": "draft"}, "reasoning": "polish"}),
             # polish_rigorous's own runtime.exec
             "Polished text here.",
             # _stage_step call 2: stage done
-            _json({"stage_done": True, "reasoning": "polishing complete"}),
+            _json({"call": "stage_done", "reasoning": "polishing complete"}),
             # _pick_stage call 2: overall done
-            _json({"stage": "done", "reasoning": "task complete", "done": True}),
+            _json({"call": "done", "reasoning": "task complete", "args": {}, "done": True}),
         ]
         rt = MockRuntime(responses)
         result = research_agent(task="polish my text", runtime=rt)
@@ -177,27 +176,43 @@ class TestResearchAgent:
         assert result["stages_completed"] >= 1
         assert any(h.get("stage") == "writing" for h in result["history"])
 
-    def test_unknown_stage_skipped(self):
-        """If LLM picks a non-existent stage, it's skipped and loop continues."""
+    def test_unknown_stage_retried_by_decision_layer(self):
+        """A non-existent stage pick is re-asked INSIDE the next-step
+        decision (framework retry), not surfaced to the loop: the retry
+        consumes the next scripted reply and the run continues cleanly."""
         from research_harness.main import research_agent
 
         responses = [
-            # pick a bad stage
-            _json({"stage": "nonexistent_xyz", "reasoning": "confused", "sub_task": "x", "done": False}),
-            # then signal done
-            _json({"stage": "done", "reasoning": "done", "done": True}),
+            # pick a bad stage -> decision layer re-asks
+            _json({"call": "nonexistent_xyz", "reasoning": "confused", "args": {"sub_task": "x"}, "done": False}),
+            # the re-pick lands on done
+            _json({"call": "done", "reasoning": "done", "args": {}, "done": True}),
         ]
         rt = MockRuntime(responses)
         result = research_agent(task="test", runtime=rt)
 
         assert result["success"] is True
-        assert any("error" in h for h in result["history"])
+        # Both replies were consumed by ONE stage decision (pick + retry).
+        assert len(rt.calls) == 2
+        assert [h["stage"] for h in result["history"]] == ["done"]
+
+    def test_unresolvable_decision_is_failure_not_success(self):
+        """When the decision layer exhausts retries (DecisionError), the run
+        ends with success=False — never silent success."""
+        from research_harness.main import research_agent
+
+        rt = MockRuntime([
+            _json({"call": "nonexistent_xyz", "args": {}}),
+            "still not valid json for any option",
+        ])
+        result = research_agent(task="test", runtime=rt)
+        assert result["success"] is False
 
     def test_safety_limit_stops_loop(self):
         """Loop stops at internal safety limit even if LLM never says done."""
         from research_harness.main import research_agent, _MAX_STAGES
 
-        always_writing = _json({"stage": "writing", "reasoning": "more polish", "sub_task": "polish", "done": False})
+        always_writing = _json({"call": "writing", "reasoning": "more polish", "args": {"sub_task": "polish"}, "done": False})
         always_polish = _json({"call": "polish_rigorous", "args": {"text": "x"}, "reasoning": "polish"})
         mock_polish_result = "polished"
         stage_done = _json({"stage_done": True, "reasoning": "ok"})
@@ -216,11 +231,11 @@ class TestResearchAgent:
         from research_harness.main import research_agent
 
         responses = [
-            _json({"stage": "writing", "reasoning": "write", "sub_task": "write intro", "done": False}),
+            _json({"call": "writing", "reasoning": "write", "args": {"sub_task": "write intro"}, "done": False}),
             _json({"call": "check_logic", "args": {"text": "some text"}, "reasoning": "check"}),
             "No issues found.",
-            _json({"stage_done": True, "reasoning": "done"}),
-            _json({"done": True, "reasoning": "all done"}),
+            _json({"call": "stage_done", "reasoning": "done"}),
+            _json({"call": "done", "reasoning": "all done", "args": {}, "done": True}),
         ]
         rt = MockRuntime(responses)
         result = research_agent(task="test", runtime=rt)
@@ -266,7 +281,7 @@ class TestCLI:
             sys.argv = old_argv
 
         captured = capsys.readouterr()
-        assert "survey_topic" in captured.out
+        assert "run_literature" in captured.out
         assert "[literature]" in captured.out
 
     def test_no_args_shows_help(self, capsys, monkeypatch):

@@ -20,12 +20,18 @@ def parse_json(text: str) -> dict:
         except json.JSONDecodeError:
             pass
 
-    match = re.search(r"\{.*\}", text, re.DOTALL)
-    if match:
+    # Scan for the first balanced JSON object. A greedy first-{ to last-}
+    # regex fails whenever the reply holds two objects or trailing braces.
+    dec = json.JSONDecoder()
+    for i, ch in enumerate(text):
+        if ch != "{":
+            continue
         try:
-            return json.loads(match.group(0))
+            obj, _ = dec.raw_decode(text[i:])
         except json.JSONDecodeError:
-            pass
+            continue
+        if isinstance(obj, dict):
+            return obj
 
     raise ValueError("No valid JSON found in response")
 
@@ -115,19 +121,6 @@ def extract_review_from_markdown(text: str, venue: str = "") -> dict:
         # Reasonable score range
         if 0 <= val <= 10:
             result["sub_scores"][name] = val
-
-    # Common sub-dim aliases
-    for alias, canonical in [("soundness", "soundness"),
-                             ("novelty", "novelty"),
-                             ("originality", "originality"),
-                             ("clarity", "clarity"),
-                             ("presentation", "presentation"),
-                             ("contribution", "contribution"),
-                             ("excitement", "excitement"),
-                             ("significance", "significance"),
-                             ("reproducibility", "reproducibility")]:
-        if alias in result["sub_scores"]:
-            result["sub_scores"][canonical] = result["sub_scores"][alias]
 
     # ── Verdict: three formats covered ──
     #   (1) "- **Overall recommendation:** Weak Reject"     (bulleted bold)

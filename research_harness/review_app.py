@@ -30,16 +30,19 @@ def generate_review(paper_path: str, *, venue: str = "NeurIPS",
                     model: Optional[str] = None,
                     draft_path: Optional[str] = None) -> dict:
     """Backward-compatible single-review entry. Forwards to
-    `research_harness.review.review(mode='external')`.
+    `research_harness.review.review(mode='peer')`.
+
+    `draft_path` is accepted for signature compatibility but ignored —
+    the unified pipeline regenerates prose from scratch for every paper
+    (review.py removed draft input in v7).
     """
     # `runtime` was the legacy single-runtime param; map it to both
     # exec and review runtimes so the new API still works.
     return _review_unified(
-        paper=paper_path, venue=venue, mode="external",
+        paper=paper_path, venue=venue, mode="peer",
         exec_runtime=runtime, review_runtime=runtime,
         work_dir=work_dir, provider=provider,
         review_model=model,
-        draft=draft_path,
     )
 
 

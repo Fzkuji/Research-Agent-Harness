@@ -5,8 +5,8 @@
 # — `openprogram programs install research` clones it in). Listing
 # openprogram here would re-install the host from git on every install.
 
-# Optional: PDF parsing (for reading/reviewing paper PDFs)
-# PyMuPDF
+# Optional: PDF parsing (needed by load_paper / wiki ingest)
+# pip install pymupdf      (or: pip install "research-agent-harness[pdf]")
 
 # Optional: Wiki integration
 # install via: openprogram programs install wiki

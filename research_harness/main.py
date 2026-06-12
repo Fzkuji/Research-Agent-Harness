@@ -17,8 +17,8 @@ import sys
 
 from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
-# These helpers moved from buildin/ into the decision module.
 from openprogram.agentic_programming.decision import (
+    DecisionError,
     render_options,
     extract_action,
     parse_args,
@@ -26,56 +26,79 @@ from openprogram.agentic_programming.decision import (
 
 from research_harness.registry import (
     STAGES, AUTO_PARAMS, HIDDEN_PARAMS,
-    get_function,
-    build_stages_available, build_stage_available,
+    build_stage_available,
 )
+from research_harness import log as oplog
 
 
 # ═══════════════════════════════════════════
 # Level 1: Pick a stage
 # ═══════════════════════════════════════════
 
+_SUB_TASK_FIELD = (
+    "if the task mentions an absolute path (/Users/.../X, ~/...) or a "
+    "named project folder, copy that string verbatim; otherwise copy "
+    "the research direction phrase"
+)
+
+
+def _stage_choices() -> dict:
+    """Stage routing options for `exec(choices=...)` (next-step decision).
+
+    Each stage is a schema option — picking it returns
+    {"decision": <stage>, "sub_task": ...}. `done` is a value option that
+    resolves directly to the loop's terminal dict.
+    """
+    choices: dict = {
+        stage: (desc, {"sub_task": _SUB_TASK_FIELD})
+        for stage, desc in STAGES.items()
+    }
+    choices["done"] = (
+        {"stage": None, "reasoning": "LLM signaled done",
+         "done": True, "ok": True},
+        "Mark the overall task complete. Pick only when every stage has "
+        "finished and the final artifact exists.",
+    )
+    return choices
+
+
 @agentic_function(render_range={"depth": 0, "siblings": 0})
 def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
-    """Route a research task to its next stage — one classification step."""
-    available = build_stages_available()
-    catalog = render_options(available)
-    reply = runtime.exec(content=[
-        {"type": "text", "text": (
-            f"User project description:\n{task}\n\n"
-            f"Progress so far:\n{progress or '(nothing yet)'}\n\n"
-            f"== Stages ==\n{catalog}\n\n"
-            "Pick the next stage to enter. Read each stage's description "
-            "and the progress so far: if the stage that produces the "
-            "current progress is not finished, continue it; once it is, "
-            "pick the stage that consumes its output. For a fresh "
-            "project, start at the earliest stage that fits unless the "
-            "task explicitly skips it.\n\n"
-            "Copy the user's path or research direction into `sub_task` "
-            "verbatim — the downstream dispatcher uses it to locate the "
-            "project folder, so do not paraphrase.\n\n"
-            "Reply with this exact JSON and nothing else:\n"
-            '  {"call": "<stage_name>", "args": {"sub_task": "..."}}\n'
-            'Reply {"call": "done"} (no args) only when every stage is '
-            "finished and the final artifact exists."
-        )},
-    ])
-    action = extract_action(reply)
-    if action is None:
-        return {"stage": None, "reasoning": str(reply)[:200], "done": True}
-    call = action.get("call") or ""
-    if call == "done":
-        return {"stage": None, "reasoning": "LLM signaled done", "done": True}
-    if call not in available:
-        return {"stage": None, "reasoning": f"unknown call: {call!r}; reply: {str(reply)[:200]}",
-                "done": True}
-    args = action.get("args") or {}
-    return {
-        "stage": call,
-        "sub_task": args.get("sub_task", ""),
-        "reasoning": "",
-        "done": False,
-    }
+    """Route a research task to its next stage — one next-step decision."""
+    try:
+        result = runtime.exec(
+            content=[{"type": "text", "text": (
+                f"User project description:\n{task}\n\n"
+                f"Progress so far:\n{progress or '(nothing yet)'}\n\n"
+                "Pick the next stage to enter. Read each stage's "
+                "description and the progress so far: if the stage that "
+                "produces the current progress is not finished, continue "
+                "it; once it is, pick the stage that consumes its output. "
+                "For a fresh project, start at the earliest stage that "
+                "fits unless the task explicitly skips it.\n\n"
+                "Copy the user's path or research direction into "
+                "`sub_task` verbatim — the downstream dispatcher uses it "
+                "to locate the project folder, so do not paraphrase."
+            )}],
+            choices=_stage_choices(),
+        )
+    except DecisionError as e:
+        # The framework already re-asked once; a still-unresolvable pick
+        # ends the loop as a failure, never as silent success.
+        return {"stage": None, "reasoning": str(e)[:200],
+                "done": True, "ok": False}
+    if isinstance(result, dict) and "decision" in result:
+        return {
+            "stage": result["decision"],
+            "sub_task": result.get("sub_task", ""),
+            "reasoning": "",
+            "done": False,
+            "ok": True,
+        }
+    if isinstance(result, dict):
+        return result  # the `done` value option resolves to the terminal dict
+    return {"stage": None, "reasoning": str(result)[:200],
+            "done": True, "ok": False}
 
 
 # ═══════════════════════════════════════════
@@ -149,14 +172,27 @@ def _stage_step(stage: str, sub_task: str, context: str,
     # stage registry, validates + binds its args (runtime auto-injected,
     # non-signature / hidden args dropped) and returns (callable, kwargs).
     try:
-        _chosen, args = parse_args(reply, available, runtime)
+        func, args = parse_args(reply, available, runtime)
     except ValueError as e:
         return {"call": call, "result": str(e), "success": False, "stage_done": False}
+
+    # parse_args retries internally on arg-validation failure and the
+    # re-pick may bind a DIFFERENT function than the first reply named —
+    # trust the callable it returns and re-derive the name for history.
+    call = next(
+        (n for n, ent in available.items() if ent["function"] is func), call
+    )
+    if call == "stage_done":
+        return {
+            "call": None,
+            "result": "LLM signaled stage_done",
+            "success": True,
+            "stage_done": True,
+        }
 
     # parse_args wires `runtime` into every AUTO_PARAM slot the function
     # exposes, but stage_step routes review tasks to a separate reviewer
     # runtime when one is configured — override after the fact.
-    func = available[call]["function"]
     func_sig = inspect.signature(func)
     if "review_runtime" in func_sig.parameters and review_runtime is not None:
         args["review_runtime"] = review_runtime
@@ -171,7 +207,9 @@ def _stage_step(stage: str, sub_task: str, context: str,
             ),
             "result": result_str[:3000],
             "success": True,
-            "stage_done": False,
+            # An LLM may attach stage_done=true alongside a call — execute
+            # the call first, then honor the flag.
+            "stage_done": bool(action.get("stage_done")),
         }
     except Exception as e:
         return {
@@ -208,6 +246,7 @@ def research_agent(
     task: str,
     runtime: Runtime = None,
     review_runtime: Runtime = None,
+    log_file: str = None,
 ) -> dict:
     """Autonomous research agent with two-level control.
 
@@ -217,12 +256,14 @@ def research_agent(
     functions run on a different model from the executor (ARIS-style
     adversarial reviewer). The runtime's working directory must be set
     before calling — every shell command and file write runs with that
-    as cwd. Returns a dict with task, success, stages_completed, history.
+    as cwd. When log_file is provided, every stage pick and function
+    call is appended to it (operation log). Returns a dict with task,
+    success, stages_completed, history.
     """
     if runtime is None:
         raise ValueError("research_agent() requires a runtime argument")
 
-    # Init log
+    oplog.log_session(log_file, task)
     history = []
     progress_parts = []
 
@@ -234,12 +275,12 @@ def research_agent(
         if stage_decision.get("done"):
             reasoning = stage_decision.get('reasoning', '')[:80]
             print(f"  [stage {stage_num}] DONE: {reasoning}", file=sys.stderr)
-
+            oplog.log_done(log_file, reasoning)
             history.append({"stage_num": stage_num, "stage": "done", "decision": stage_decision})
             break
 
         stage = stage_decision.get("stage", "")
-        sub_task = stage_decision.get("sub_task", task)
+        sub_task = stage_decision.get("sub_task") or task
         reasoning = stage_decision.get("reasoning", "")
 
         if stage not in STAGES:
@@ -248,7 +289,7 @@ def research_agent(
             continue
 
         print(f"  [stage {stage_num}] → {stage}: {reasoning[:80]}", file=sys.stderr)
-
+        oplog.log_stage(log_file, stage_num, stage, sub_task)
 
         # Level 2: Execute within stage
         stage_context_parts = []
@@ -267,7 +308,7 @@ def research_agent(
             args_summary = step_result.get("args_summary", "")
 
             print(f"    [{stage}/{step_num}] {call}: {'OK' if success else 'FAIL'}", file=sys.stderr)
-
+            oplog.log_step(log_file, str(call), args_summary, success, result_preview)
 
             stage_history.append(step_result)
             stage_context_parts.append(f"  {call} → {result_preview}")
@@ -289,8 +330,11 @@ def research_agent(
             "steps": stage_history,
         })
 
+    # Only an explicit, well-formed LLM "done" counts as success —
+    # parse failures and unknown stage names also end the loop (done=True)
+    # but carry ok=False and must not be reported as task completion.
     completed = any(
-        h.get("stage") == "done" or h.get("decision", {}).get("done")
+        h.get("stage") == "done" and h.get("decision", {}).get("ok", False)
         for h in history
     )
 
@@ -315,13 +359,16 @@ def main():
         description="Research Agent — autonomous research task execution"
     )
     parser.add_argument("task", nargs="?", help="What to do (natural language)")
-    parser.add_argument("--work-dir", required=True,
+    parser.add_argument("--work-dir",
                         help="Absolute path for all research artifacts. Runtime's codex --cd target.")
-    parser.add_argument("--provider", help="LLM provider: claude-code, codex, openai, anthropic")
+    parser.add_argument("--provider", help="LLM provider: claude-code, openai-codex, anthropic, openai")
     parser.add_argument("--model", help="Model name override")
-    parser.add_argument("--review-provider", help="Review model provider (default: codex for cross-model review)")
-    parser.add_argument("--review-model", help="Review model name (default: gpt-5.4-mini)")
+    parser.add_argument("--review-provider", help="Review model provider (default: openai)")
+    parser.add_argument("--review-model", help="Review model name (default: provider default)")
     parser.add_argument("--list", action="store_true", help="List all available functions")
+    parser.add_argument("--chat", action="store_true",
+                        help="Start with an attended Socratic planning dialogue; "
+                             "afterwards you can hand the refined brief to the autonomous run")
     args = parser.parse_args()
 
     if args.list:
@@ -338,6 +385,9 @@ def main():
         else:
             parser.print_help()
             return
+
+    if not args.work_dir:
+        parser.error("--work-dir is required to run a task")
 
     from openprogram.providers import create_runtime
 
@@ -362,10 +412,31 @@ def main():
         print(f"Reviewer: {args.review_provider or 'openai'}/{args.review_model or 'default'}")
     print()
 
+    if args.chat:
+        from research_harness.stages.interactive import socratic_plan
+        print("— Socratic planning dialogue (answer in the terminal; "
+              "type 'done' to finish early) —\n")
+        chat_result = socratic_plan(topic=task, output_dir=work_dir, runtime=rt)
+        print(f"\n{chat_result}\n")
+        brief_path = os.path.join(work_dir, "RESEARCH_BRIEF.md")
+        if not os.path.exists(brief_path):
+            return
+        try:
+            go = input("Hand the brief to the autonomous run now? [y/N] ")
+        except EOFError:
+            go = ""
+        if go.strip().lower() not in ("y", "yes"):
+            print(f"Brief saved — rerun without --chat to start the "
+                  f"autonomous run from {brief_path}.")
+            return
+        task = (f"{task}\n\nA confirmed research brief exists at "
+                f"{brief_path} — follow it.")
+
     result = research_agent(
         task=task,
         runtime=rt,
         review_runtime=review_rt,
+        log_file=os.path.join(work_dir, "OPERATION_LOG.md"),
     )
 
     # Report

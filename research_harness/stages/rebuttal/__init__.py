@@ -50,7 +50,7 @@ def run_rebuttal(
         paper_parts = []
         for f in sorted(os.listdir(paper_dir)):
             if f.endswith(".tex"):
-                with open(os.path.join(paper_dir, f), "r") as fh:
+                with open(os.path.join(paper_dir, f), "r", encoding="utf-8") as fh:
                     paper_parts.append(fh.read())
         paper_summary = "\n".join(paper_parts)
     paper_summary = paper_summary[:10000]
@@ -81,12 +81,12 @@ def run_rebuttal(
     rebuttal_dir = os.path.join(project_dir, "rebuttal")
     os.makedirs(rebuttal_dir, exist_ok=True)
 
-    with open(os.path.join(rebuttal_dir, "REBUTTAL_DRAFT.md"), "w") as f:
+    with open(os.path.join(rebuttal_dir, "REBUTTAL_DRAFT.md"), "w", encoding="utf-8") as f:
         f.write(f"# Rebuttal — {venue}\n\n{draft}")
-    with open(os.path.join(rebuttal_dir, "STRATEGY.md"), "w") as f:
+    with open(os.path.join(rebuttal_dir, "STRATEGY.md"), "w", encoding="utf-8") as f:
         f.write(f"# Rebuttal Strategy\n\n{strategy}")
     if audit is not None:
-        with open(os.path.join(rebuttal_dir, "ANTI_SYCOPHANCY_AUDIT.md"), "w") as f:
+        with open(os.path.join(rebuttal_dir, "ANTI_SYCOPHANCY_AUDIT.md"), "w", encoding="utf-8") as f:
             f.write(f"# Anti-Sycophancy Audit\n\n{audit}")
 
     return {

@@ -1,3 +1,8 @@
+# Adapted from academic-research-skills v3.12.0 (https://github.com/Imbad0202/academic-research-skills), (c) Cheng-I Wu, CC BY-NC 4.0
+# Changed: ARS reviewer-agent prompts (methodology / domain / devil's-advocate
+# / EIC agents + quality-rubric dimensions) are distilled into the
+# _PERSONA_INSTRUCTIONS pool below; ARS's fixed 0-100 rubric weights dropped.
+
 from __future__ import annotations
 
 import json
@@ -28,39 +33,151 @@ def _format_review_text_for_prompt(review_text: dict) -> str:
     return "\n\n".join(out)
 
 
+# Persona pool. Personas bias WHERE weaknesses focus (the "80% of your
+# weaknesses" pattern); they never change the output schema. Substance per
+# persona is distilled from these ARS academic-paper-reviewer sources:
+#   balanced                — agents/eic_agent.md (bird's-eye overall quality)
+#                             + references/quality_rubrics.md (dimension list
+#                             only; the fixed 0-100 weights were rejected)
+#   empiricist              — agents/methodology_reviewer_agent.md
+#                             (Steps 3-5 + methodological fallacies checklist)
+#   theorist                — agents/methodology_reviewer_agent.md
+#                             (Theoretical/Conceptual paradigm + edge case 1)
+#   novelty_hawk            — agents/domain_reviewer_agent.md
+#                             (Step 1 literature audit + Step 4 contribution)
+#   clarity_critic          — references/quality_rubrics.md (argument
+#                             coherence + writing quality indicators)
+#   methodologist           — agents/methodology_reviewer_agent.md
+#                             (Review Protocol Steps 1-6 + fallacy checklist)
+#   statistician            — agents/methodology_reviewer_agent.md (Step 4a)
+#                             + references/statistical_reporting_standards.md
+#   reproducibility_auditor — agents/methodology_reviewer_agent.md (Step 6)
+#   devils_advocate         — agents/devils_advocate_reviewer_agent.md
+#                             (challenge dimensions + anti-sycophancy rules)
 _PERSONA_INSTRUCTIONS = {
     "balanced": (
         "Default reviewer — assess all dimensions evenly with no bias toward "
-        "any one aspect."
+        "any one aspect. Take the editor's bird's-eye view of overall quality "
+        "and strategic value: originality, methodological rigor, evidence "
+        "sufficiency, argument coherence, and writing quality. Ask what this "
+        "paper contributes to the field as a whole and whether the venue's "
+        "readers would care. Surface the 2-3 most fundamental problems rather "
+        "than an exhaustive defect list."
     ),
     "empiricist": (
         "**Empiricist persona**: focus 80% of your weaknesses on experimental "
-        "setup. Flag missing baselines, unfair comparisons (different GPU/token "
-        "budgets), missing ablations on core design decisions, weak evaluation "
-        "protocols (no random seeds, no significance tests), biased dataset "
-        "choices. Other dimensions still scored but with less weight."
+        "setup. Flag missing or weak baselines and unfair comparisons "
+        "(different GPU/token/tuning budgets — baselines must get the same "
+        "care as the method); missing ablations on core design decisions; "
+        "evaluation protocols without random seeds, variance reporting, or "
+        "significance tests; biased or cherry-picked dataset choices; "
+        "train/test contamination or leakage; selective reporting of only "
+        "favorable results (survivorship bias); overfitting signs such as no "
+        "held-out set or tuning on the test set. Check that figures and "
+        "tables actually support the claims made about them. Other "
+        "dimensions still scored but with less weight."
     ),
     "theorist": (
         "**Theorist persona**: focus 80% of your weaknesses on theory. Check "
         "notation consistency, derivation completeness (no skipped steps), "
-        "theorem assumptions, whether proofs actually support claims, complexity "
-        "analysis correctness. If purely empirical, evaluate logical rigor of "
-        "the method design / algorithm description."
+        "whether every theorem states its assumptions and the proofs actually "
+        "support the claimed statements, complexity analysis correctness, and "
+        "whether the stated assumptions hold in the experimental setting the "
+        "paper then runs. Hunt for hidden assumptions, circular reasoning, "
+        "and over-inference (conclusions stronger than the premises license). "
+        "If purely empirical, evaluate the logical rigor of the method design "
+        "/ algorithm description instead: are the premises sound, are the "
+        "inferences valid, are counterexamples handled?"
     ),
     "novelty_hawk": (
         "**Novelty Hawk persona**: focus 80% of your weaknesses on novelty / "
         "prior-work positioning. For each claimed novelty, judge against the "
         "prior_work_context: genuinely_new / incremental / already_done [N]. "
         "Find missing citations (papers tagged missing_citation=true). "
-        "Question every 'we propose the first' phrase. Other dimensions scored "
-        "more leniently, but novelty is strict."
+        "Question every 'we propose the first' phrase. Check that seminal "
+        "works AND key developments from the last 3-5 years are covered, "
+        "that important opposing results are not omitted, and that the paper "
+        "states precisely how it differs from its closest prior work. Name "
+        "specific missing references instead of vaguely asking for 'more "
+        "related work'. Flag overclaiming of the contribution's scale. Other "
+        "dimensions scored more leniently, but novelty is strict."
     ),
     "clarity_critic": (
         "**Clarity Critic persona**: focus 80% of your weaknesses on "
         "presentation. Does the abstract reflect the paper? Are introduction "
-        "claims supported in method/experiment? Are figures/tables independently "
-        "readable? Is notation defined before use? Are sections coherent? Is "
-        "pseudocode complete? Find what is hard to understand."
+        "claims supported in method/experiment? Is there a clear logical "
+        "flow problem → gap → method → findings → implications, with each "
+        "section building on the previous (no orphaned sections, no logical "
+        "jumps the reader must infer)? Are figures/tables independently "
+        "readable (axes, captions, units)? Is notation defined before use "
+        "and terminology used consistently? Is pseudocode complete? Find "
+        "what is hard to understand."
+    ),
+    "methodologist": (
+        "**Methodologist persona**: focus 80% of your weaknesses on "
+        "experimental design rigor — can the method as designed answer the "
+        "question the paper poses? Check: research question clearly stated "
+        "and answerable; design appropriate, and whether a more suitable "
+        "design was overlooked; sample/dataset size justified (power "
+        "analysis or at least a sensitivity argument — 'we used what we "
+        "had' is not justification); selection bias in data collection; "
+        "train/test leakage and contamination; baseline fairness (equal "
+        "tuning budget, equal data, equal compute); seeds and variance "
+        "reported across runs; results presented completely, including "
+        "negative ones; conclusions that extend beyond what the data "
+        "supports. Consult the fallacy checklist: p-hacking, survivorship "
+        "bias, Simpson's paradox, overfitting without holdout, reverse "
+        "causation, confounding. For every weakness give: problem + why it "
+        "matters + how to fix."
+    ),
+    "statistician": (
+        "**Statistician persona**: focus 80% of your weaknesses on "
+        "statistical validity. Check: test choice matches the data type and "
+        "design (paired vs independent; parametric assumptions — normality, "
+        "independence, variance homogeneity — tested, or a robust "
+        "alternative used); effect sizes reported alongside every test "
+        "(Cohen's d, eta-squared, r) with magnitude interpreted, not just "
+        "p-values; 95% confidence intervals on key estimates; exact "
+        "p-values (p = .032, not p < .05); multiple comparisons corrected "
+        "(Bonferroni / Holm / FDR) when many hypotheses are tested; a-priori "
+        "power analysis, or Type-II-error discussion for null results; "
+        "missing-data amounts and handling stated; red-flag scan for "
+        "p-hacking, HARKing, and selective reporting. Distinguish "
+        "statistical from practical significance. Other dimensions still "
+        "scored but with less weight."
+    ),
+    "reproducibility_auditor": (
+        "**Reproducibility Auditor persona**: focus 80% of your weaknesses "
+        "on whether another researcher could re-run this work from the "
+        "paper alone. Audit: all hyperparameters and training details "
+        "stated (optimizer, schedule, budget, hardware); dataset versions, "
+        "splits, preprocessing and filtering steps specified; random seeds "
+        "and number of runs reported; code and data availability (or an "
+        "explicit statement why not); prompts and decoding parameters given "
+        "verbatim for LLM-based work; evaluation metrics defined precisely "
+        "enough to reimplement; every number in the tables traceable to a "
+        "described procedure. Flag each missing item with exactly what must "
+        "be added. A paper that cannot be re-run earns no benefit of the "
+        "doubt on its empirical claims."
+    ),
+    "devils_advocate": (
+        "**Devil's Advocate persona**: steelman first, then attack. State "
+        "the paper's central claim in its strongest form, then construct "
+        "the strongest counter-argument a hostile expert would make — this "
+        "drives 80% of your weaknesses. Attack surface: foundation collapse "
+        "(a core assumption is false or unsubstantiated); logic chain break "
+        "(the conclusion does not follow even if the evidence is valid); "
+        "data-conclusion mismatch (the paper's own numbers contradict its "
+        "claims); a stronger counter-narrative (a more parsimonious "
+        "alternative explanation that fits the data better, e.g. selection "
+        "bias instead of the proposed mechanism); cherry-picked evidence "
+        "(supporting work cited, contradicting work omitted); "
+        "overgeneralization beyond the evaluated setting; the 'so what?' "
+        "test — if the conclusions are correct, what actually changes? "
+        "Every attack must cite the specific section/table it targets and "
+        "must bear on the core argument — no nitpicking. In any rebuttal "
+        "debate: author persistence is not evidence; do not soften a "
+        "finding under pushback without decisive new evidence."
     ),
 }
 
@@ -118,8 +235,12 @@ def review_paper_grounded(paper_content: str, venue: str,
         venue_criteria:       Pre-rendered criteria text.
         prior_work_context:   Markdown blob from adaptive_summarize_priors,
                               with [N] citations for the reviewer to use.
-        persona:              "balanced" / "empiricist" / "theorist" /
-                              "novelty_hawk" / "clarity_critic".
+        persona:              One of _PERSONA_INSTRUCTIONS: "balanced" /
+                              "empiricist" / "theorist" / "novelty_hawk" /
+                              "clarity_critic" / "methodologist" /
+                              "statistician" / "reproducibility_auditor" /
+                              "devils_advocate". Unknown values fall back
+                              to "balanced".
     """
     spec = get_venue_spec(venue)
 
