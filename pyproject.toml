@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "research-agent-harness"
-version = "0.1.0"
+version = "1.0.0"
 description = "Autonomous research agent: from topic to submission-ready paper."
 readme = "README.md"
 requires-python = ">=3.10"
