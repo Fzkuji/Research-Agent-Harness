@@ -124,25 +124,17 @@ you rename a parent folder, rerun `pip install -e .` from the new location.
 
 </details>
 
-### 2. Set up LLM providers
+### 2. Pick LLM providers
 
-```bash
-# Executor: Claude Code CLI (recommended — full file system access)
-npm install -g @anthropic-ai/claude-code && claude login
+Providers are configured **on the OpenProgram host**, not here — run `openprogram providers configure` (or the first-run wizard) and follow [OpenProgram's provider setup](https://github.com/Fzkuji/OpenProgram/blob/main/docs/GETTING_STARTED.md#choose-your-provider). This harness just chooses *which* configured provider plays each role:
 
-# Reviewer: Codex CLI (recommended — cross-model review with GPT)
-npm install -g @openai/codex && codex auth login
+| `--provider` | Role fit | Session | File access |
+|----------|------|---------|-------------|
+| `claude-code` | executor (recommended) — uses your Claude subscription via the OpenProgram host | yes | full file system |
+| `openai-codex` | reviewer (recommended) — cross-model review with GPT | yes | repo access |
+| `anthropic` / `openai` / `gemini` | either role, via API key | stateless | none |
 
-# Or use API keys directly
-export ANTHROPIC_API_KEY=sk-...
-export OPENAI_API_KEY=sk-...
-```
-
-| Provider | CLI flag | Session | File access | Auth |
-|----------|----------|---------|-------------|------|
-| `claude-code` | `--provider claude-code` | yes | full file system | `claude login` |
-| `openai-codex` | `--provider openai-codex` | yes | repo access | `codex auth login` |
-| `openai` / `anthropic` | `--provider openai` | stateless API | none | API key |
+For cross-model review, point the two roles at different vendors: `--provider claude-code --review-provider openai-codex`.
 
 The full autonomous experience (functions that save their own artifacts) needs a file-capable executor — `claude-code` or `openai-codex`. Pure-API providers still run every Python-side orchestrator (literature loop, citation gate, lints, PRISMA, review parsing).
 
