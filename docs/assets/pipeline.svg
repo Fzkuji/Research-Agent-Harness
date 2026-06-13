@@ -131,7 +131,7 @@
     <g transform="translate(296,262)" stroke="var(--muted)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="2" x2="10" y2="17"/><line x1="6.5" y1="18" x2="13.5" y2="18"/><line x1="3" y1="5" x2="17" y2="5"/><path d="M4.5,5 L2,10.5 a2.7,2.7 0 0 0 5,0 Z"/><path d="M15.5,5 L13,10.5 a2.7,2.7 0 0 0 5,0 Z"/></g>
     <text x="334" y="278" font-size="14.5" font-weight="600" class="t">Review loop</text>
     <text x="300" y="306" font-size="11" class="s">a different model reviews —</text>
-    <text x="300" y="322" font-size="11" class="s">multi-round, no self-grading</text>
+    <text x="300" y="322" font-size="11" class="s">multi-round, cross-model</text>
   </g>
   <line x1="278" y1="290" x2="230" y2="290" stroke="#8b949e" stroke-width="1.6" marker-end="url(#arrow)" class="flow"/>
 
@@ -150,8 +150,8 @@
 
   <!-- footer legend -->
   <line x1="42" y1="376" x2="938" y2="376" stroke="var(--divider)"/>
-  <text x="42" y="406" font-size="11.5" class="s"><tspan class="a" font-weight="700">◆ gates run zero tokens</tspan> — fabricated DOIs, unsupported numbers and uncited claims are caught by pure Python,</text>
-  <text x="42" y="424" font-size="11.5" class="s">so they cost nothing, never hallucinate, and cannot be sweet-talked.  Every stage writes to OPERATION_LOG.md.</text>
+  <text x="42" y="406" font-size="11.5" class="s"><tspan class="a" font-weight="700">◆ verification gates</tspan> — fabricated DOIs and uncited claims are caught by pure Python (zero tokens);</text>
+  <text x="42" y="424" font-size="11.5" class="s">the integrity gate uses one bounded LLM pass to check claims against run records.  Every stage logs to OPERATION_LOG.md.</text>
   <text x="938" y="406" text-anchor="end" font-size="11" class="s">prefer to steer? start with</text>
   <text x="938" y="424" text-anchor="end" font-size="11" fill="#58a6ff" font-weight="600">research-harness --chat</text>
 </svg>

@@ -19,10 +19,10 @@ Built with [OpenProgram](https://github.com/Fzkuji/OpenProgram) (*Agentic Progra
 
 ## Why this harness
 
-- ⚖️ **Adversarial by construction** — your paper is written by one model (Claude) and reviewed by a *different* one (GPT via Codex). No self-grading. The reviewer keeps memory across rounds, debates the author under a strict concession protocol, and audits whether promised revisions actually happened.
+- ⚖️ **Built for cross-model review** — your paper can be written by one model and reviewed by a *different* one (e.g. Claude as author, GPT via Codex as reviewer) so it isn't self-grading. Cross-model is the default in the dedicated `research-review` CLI and one flag away in the autonomous run (`--review-provider openai-codex`). At `hard`/`nightmare` difficulty the reviewer keeps memory across rounds and debates the author under a strict concession protocol; at every difficulty it audits whether promised revisions actually happened.
 - 🔍 **Trust-but-verify, deterministically** — fabricated citations are caught by *code, not vibes*: every BibTeX entry is checked against four bibliographic indexes (Crossref / OpenAlex / Semantic Scholar / arXiv). Quantified claims without citations, citation-dump abuse, and paper numbers with no experiment provenance are flagged by pure-Python lints and gates.
 - 🗣️ **Dialogue when you want it, autonomy when you don't** — `--chat` starts a Socratic planning mentor that asks you one question at a time until your research plan converges, then hands the brief to the autonomous run. Same framework, no slash commands.
-- 🧠 **9-persona review panel** — empiricist, theorist, novelty hawk, methodologist, statistician, reproducibility auditor, devil's advocate, clarity critic, balanced — each a concrete, checkable lens, not a costume.
+- 🧠 **9-persona reviewer pool** — empiricist, theorist, novelty hawk, methodologist, statistician, reproducibility auditor, devil's advocate, clarity critic, balanced — each a concrete, checkable lens, not a costume. The default round draws four (empiricist, theorist, novelty hawk, devil's advocate).
 - 🧰 **Everything is an editable function** — every step is a plain Python file whose docstring *is* the prompt. Open it, read it, change it. No hidden chains.
 - 📜 **Everything leaves a trace** — operation log, cumulative review log with full transcripts, PRISMA flow report computed from the literature loop's real ledger (every number auditable), commitment ledgers, integrity reports.
 
@@ -45,7 +45,7 @@ Built with [OpenProgram](https://github.com/Fzkuji/OpenProgram) (*Agentic Progra
 
 ## The verification layer
 
-Deterministic checkpoints — pure Python, zero tokens — sit between the model and your paper:
+Checkpoints sit between the model and your paper. Four are pure Python, zero tokens; the integrity gate uses one bounded LLM pass to map each extracted claim to machine-readable `run_record.json` provenance:
 
 | Checkpoint | What it catches | How |
 |---|---|---|
@@ -58,10 +58,10 @@ Deterministic checkpoints — pure Python, zero tokens — sit between the model
 ## The review loop (ARIS design, upgraded)
 
 <p align="center">
-  <img src="docs/assets/review.svg" width="980" alt="No self-grading: the author and the reviewer are different vendors, kept honest by three protocols enforced in code">
+  <img src="docs/assets/review.svg" width="980" alt="Built for cross-model review: author and reviewer can be different vendors, kept honest by three protocols enforced in code">
 </p>
 
-Three protocols keep multi-round review honest (all enforced in code, adapted from [ARS](https://github.com/Imbad0202/academic-research-skills) protocol specs):
+Three protocols keep multi-round review honest (enforced in code, adapted from [ARS](https://github.com/Imbad0202/academic-research-skills) protocol specs). The concession-threshold debate and reviewer memory activate at `hard`/`nightmare` difficulty; the commitment ledger and score trajectory run at every difficulty:
 
 - **Concession threshold** — a weakness is withdrawn only when the rebuttal scores 5/5 on evidence; after any concession the bar rises. Pressure doesn't move scores.
 - **Commitment ledger** — every revision-plan item is re-audited next round; unaddressed items are carried forward verbatim and cannot silently drop.
@@ -213,7 +213,7 @@ Research-Agent-Harness/
 │   ├── references/              # venue scoring, writing principles, citation discipline
 │   └── stages/                  # literature / idea / experiment / writing / review /
 │                                #   rebuttal / presentation / theory / wiki / integrity /
-│                                #   interactive / external / meta
+│                                #   interactive / submission / external / meta
 ├── skills/                      # Claude Code skill shims (/peer-review, /self-review, …)
 └── tests/                       # 288 tests, no network, mocked LLM
 ```
@@ -222,7 +222,7 @@ Research-Agent-Harness/
 
 1. **Python controls the loop, the LLM makes the decisions** — every routing point is a typed next-step decision with retry and loud failure; every guard (repetition, oversight, gates) is code.
 2. **The docstring is the prompt** — no hidden prompt files; reading a function tells you exactly what the model is told.
-3. **Different models must disagree** — the executor and the reviewer are different vendors by default; review protocols are designed for an adversary, not a collaborator.
+3. **Different models should disagree** — cross-model review is the default in the `research-review` CLI and one flag (`--review-provider`) away in the autonomous run; the review protocols are designed for an adversary, not a collaborator.
 4. **Verify with code wherever code can verify** — citation existence, claim provenance, assertion lints, PRISMA counts: deterministic, free, and immune to model mood.
 5. **Everything leaves a trace** — operation log, review transcripts, commitment audits, integrity reports; no work is lost, no decision is unexplained.
 

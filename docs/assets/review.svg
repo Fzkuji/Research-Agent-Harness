@@ -49,8 +49,8 @@
   <rect x="1" y="1" width="978" height="438" rx="16" fill="none" stroke="var(--border)"/>
   <rect x="1" y="1" width="978" height="4" rx="2" fill="url(#vs)"/>
 
-  <text x="490" y="46" text-anchor="middle" font-size="21" font-weight="700" class="t2">No self-grading. Ever.</text>
-  <text x="490" y="70" text-anchor="middle" font-size="12.5" class="s2">the author and the reviewer are different vendors — kept honest by three protocols enforced in code</text>
+  <text x="490" y="46" text-anchor="middle" font-size="21" font-weight="700" class="t2">Built for cross-model review.</text>
+  <text x="490" y="70" text-anchor="middle" font-size="12.5" class="s2">author and reviewer can be different vendors — kept honest by three protocols enforced in code</text>
 
   <!-- AUTHOR card -->
   <g filter="url(#soft2)">
