@@ -159,6 +159,42 @@ class TestRunLiteratureLoop:
         with pytest.raises(ValueError, match="runtime"):
             run_literature(direction="x", runtime=None)
 
+    def test_zero_progress_stops_early(self, tmp_dir):
+        """Regression: when retrieval is dry (seed_surveys keeps returning
+        no new surveys, every compensation evolve applies 0 deltas), the
+        no_delta_streak guard must stop the loop after _MAX_NO_DELTA_STREAK
+        cycles instead of burning all max_outer cycles. This is the real
+        spin observed when codex had no internet — seed_surveys ran 80x
+        producing nothing."""
+        from research_harness.stages.literature import (
+            run_literature, _MAX_NO_DELTA_STREAK,
+        )
+
+        # Every inner step: pick seed_surveys, get an EMPTY surveys list
+        # (changed=0). Every outer compensation: stable (streak++). The LLM
+        # never says done. MockRuntime repeats the last reply forever, so
+        # this scripted pattern continues for as many cycles as the loop
+        # runs. _final lets the run finish cleanly once it breaks.
+        seed_pick = _decide("seed_surveys", query="dry topic", k=2)
+        seed_empty = _j({"surveys": [], "notes": "nothing found"})
+        responses = [seed_pick, seed_empty, _COMP_STABLE] * 20 + [_final(done=False)]
+        rt = MockRuntime(responses)
+
+        result = run_literature(
+            direction="dry topic", output_dir=tmp_dir, runtime=rt,
+            max_outer=8, max_inner=10,
+        )
+
+        # Stopped early: the streak guard fired, so far fewer than the
+        # full 8 outer cycles ran. With _MAX_NO_DELTA_STREAK=2 the loop
+        # breaks right after the 2nd stable cycle.
+        state_path = os.path.join(tmp_dir, "state.json")
+        with open(state_path) as f:
+            state = json.load(f)
+        assert state.get("no_delta_streak", 0) >= _MAX_NO_DELTA_STREAK
+        assert state["outer"] <= _MAX_NO_DELTA_STREAK + 1  # not 8
+        assert len(state["surveys"]) == 0
+
     def test_cold_start_seeds_then_synthesizes(self, tmp_dir):
         """One inner action (seed) → LLM says done(all) → compensation evolve
         → finalize synthesize."""

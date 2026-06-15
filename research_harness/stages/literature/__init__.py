@@ -103,6 +103,12 @@ from research_harness.stages.literature.synthesize_literature import (
 
 
 _DEFAULT_MAX_OUTER = 8
+# Zero-progress early stop: if this many consecutive outer cycles end with
+# the framework gaining nothing (no_delta_streak — every compensation
+# evolve applied 0 deltas), the loop is spinning (e.g. seed_surveys keeps
+# returning nothing because retrieval is dry / the model won't produce
+# usable data). Stop instead of burning all max_outer*max_inner steps.
+_MAX_NO_DELTA_STREAK = 2
 
 
 def _audit_section3_headings(review_path: Path,
@@ -504,6 +510,20 @@ def run_literature(
         _flush_artifacts(state, output_dir, state["iter"])
 
         if stop_all:
+            break
+
+        # Zero-progress early stop: consecutive outer cycles that add
+        # nothing to the framework mean the loop is spinning (dry
+        # retrieval, a model that won't return usable data). Stop and let
+        # final synthesis run on whatever was gathered, instead of burning
+        # every remaining cycle re-trying the same dead action.
+        if state.get("no_delta_streak", 0) >= _MAX_NO_DELTA_STREAK:
+            print(
+                f"    [literature] no-progress streak "
+                f"{state['no_delta_streak']} >= {_MAX_NO_DELTA_STREAK} "
+                f"after cycle {outer} — stopping early.",
+                file=sys.stderr,
+            )
             break
 
     # End-of-run finalization
