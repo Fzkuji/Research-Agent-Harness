@@ -103,4 +103,4 @@ def search_papers_for_topic(topic_path: str, topic_description: str,
             f"PDF destination: {papers_dir}\n\n"
             f"Papers already in state (skip):\n{existing_ids or '(none)'}"
         )},
-    ])
+    ], web_search=True)

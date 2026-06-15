@@ -8,41 +8,38 @@ from openprogram.agentic_programming.runtime import Runtime
 def seed_surveys(query: str, k: int, existing_titles: str,
                  papers_dir: str,
                  runtime: Runtime) -> str:
-    """Search for survey papers and DOWNLOAD their PDFs for deeper analysis.
+    """Search for survey papers (via web search) and extract their metadata.
 
-    Actually search the web / arXiv / Semantic Scholar — do NOT fabricate
-    results.
+    Actually search the web / arXiv / Semantic Scholar with the web_search
+    tool — do NOT fabricate results.
 
     Workflow:
-    1. Search for SURVEY / REVIEW papers on `query`.
+    1. Search for SURVEY / REVIEW papers on `query` using web search.
        - Prefer: recent (<=5 yrs), high-cited, reputable venues.
-       - Sources (in order): Semantic Scholar, arXiv (filter by "survey" or
-         "review" in title/abstract), Google Scholar as fallback.
+       - Sources: arXiv (filter by "survey"/"review" in title/abstract),
+         Semantic Scholar, Google Scholar.
        - Target up to `k` NEW surveys. Skip any whose title appears in
          `existing_titles` — already in state.
 
-    2. For EACH new survey, ALWAYS download the PDF:
-       - `papers_dir` (absolute path) is the download destination.
-       - Create `papers_dir` if it does not exist.
-       - Filename: `<arxiv_id>.pdf` (e.g. `2402.13116.pdf`) or a slugified
-         DOI if not on arXiv. Never overwrite an existing file of the same
-         name — if it exists, reuse it.
-       - Verify the file is a real PDF (> 20 KB, starts with "%PDF"). If not,
-         retry once after 5 s. If still broken, record `pdf_path: null` and
-         move on — don't fabricate the path.
-       - Respect rate limits: 1 s between downloads; retry once on HTTP 429.
+    2. PDF download is OPTIONAL and depends on your tools. If — and ONLY if —
+       you have a working filesystem/shell tool, you MAY download each PDF to
+       `papers_dir` (filename `<arxiv_id>.pdf`; verify it starts with "%PDF";
+       reuse an existing file) and set `pdf_path`. If you do NOT have file
+       access (e.g. you only have web_search), that is fine: set
+       `pdf_path: null` and move on. NEVER fabricate a path, and NEVER refuse
+       the whole task just because you cannot download — the metadata below is
+       what matters.
 
-    3. For each survey, extract:
+    3. For each survey, extract (from search results / the arXiv abstract page
+       / the arXiv HTML version `arxiv.org/html/<id>`):
        - `id` (arXiv id / DOI / S2 id)
        - `title`, `authors` (first 4 + et al.), `year`, `venue`
        - `abstract` (<= 400 chars)
-       - `toc`: list of section/subsection titles (read from arXiv HTML
-                version `arxiv.org/html/<id>` if available, else from the
-                downloaded PDF's TOC/bookmarks or first pages).
+       - `toc`: list of section/subsection titles if visible (else []).
        - `key_claims`: 3–6 bullets on how this survey partitions the field,
                         open problems it flags, and the main methodological
                         camps it identifies.
-       - `pdf_path`: absolute path to the downloaded PDF (or null on failure).
+       - `pdf_path`: absolute path to a downloaded PDF, or null.
 
     4. Return ONE JSON object, nothing else:
     ```json
@@ -65,10 +62,13 @@ def seed_surveys(query: str, k: int, existing_titles: str,
     ```
 
     Rules:
-    - Output ONLY the JSON (no markdown fence, no commentary).
+    - Output ONLY the JSON object (no markdown fence, no prose, no
+      preamble like "Found 2 papers..."). The VERY FIRST character of your
+      reply must be `{`.
+    - Do NOT discuss whether you can write files. PDF download is optional;
+      if you can't, just set every `pdf_path` to null and proceed.
     - If you cannot find any new surveys, return {"surveys": [], "notes": "..."}.
-    - Never fabricate a paper or a file path. If pdf download failed, set
-      `pdf_path: null` and explain in `notes`.
+    - Never fabricate a paper or a file path.
 
     Args:
         query:            Search query (direction or topic path).
@@ -81,7 +81,10 @@ def seed_surveys(query: str, k: int, existing_titles: str,
         {"type": "text", "text": (
             f"Search query: {query}\n"
             f"Max new surveys: {k}\n"
-            f"Download destination (papers_dir): {papers_dir}\n\n"
-            f"Surveys already in state (skip these):\n{existing_titles or '(none)'}"
+            f"Optional PDF dir (only if you have file tools): {papers_dir}\n\n"
+            f"Surveys already in state (skip these):\n{existing_titles or '(none)'}\n\n"
+            "Use web_search to find real surveys. Reply with ONLY the JSON "
+            "object specified in your instructions — first character `{`, "
+            "no prose, no 'Found N papers' preamble, no file-access caveats."
         )},
-    ])
+    ], web_search=True)

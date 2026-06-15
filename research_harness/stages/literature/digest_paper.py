@@ -161,4 +161,4 @@ def digest_paper(target: str, paper_hint_json: str,
         f"Resolve the paper, write the digest to the output path "
         f"following the structure in your instructions, then return "
         f"the JSON summary."
-    )}])
+    )}], web_search=True)
