@@ -219,8 +219,10 @@ class TestResearchAgent:
         result = research_agent(task="test", runtime=rt)
 
         assert result["success"] is True
-        # Both replies were consumed by ONE stage decision (pick + retry).
-        assert len(rt.calls) == 2
+        # Both replies were consumed by ONE stage decision (pick + retry),
+        # then the run's final _conclusion() makes one more exec call to
+        # write the summary — 2 decision calls + 1 conclusion = 3.
+        assert len(rt.calls) == 3
         assert [h["stage"] for h in result["history"]] == ["done"]
 
     def test_unresolvable_decision_is_failure_not_success(self):
