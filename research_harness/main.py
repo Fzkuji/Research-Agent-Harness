@@ -75,6 +75,17 @@ def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
                 "it; once it is, pick the stage that consumes its output. "
                 "For a fresh project, start at the earliest stage that "
                 "fits unless the task explicitly skips it.\n\n"
+                "Typical dependency order — do NOT pick a stage whose "
+                "input doesn't exist yet:\n"
+                "  literature → idea → experiment → writing → review → "
+                "rebuttal/presentation\n"
+                "A stage needs its predecessor's output: idea needs gaps "
+                "from literature; experiment needs an idea; writing needs "
+                "results; review needs a written paper; rebuttal needs "
+                "reviews. If 'Progress so far' shows the predecessor "
+                "hasn't run, pick the PREDECESSOR, not the consumer. Skip "
+                "a stage only when the task explicitly asks for just one "
+                "stage (e.g. 'just survey the literature').\n\n"
                 "Copy the user's path or research direction into "
                 "`sub_task` verbatim — the downstream dispatcher uses it "
                 "to locate the project folder, so do not paraphrase."
@@ -106,10 +117,18 @@ def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
 
 @agentic_function(render_range={"depth": 0, "siblings": 0})
 def _stage_step(stage: str, sub_task: str, context: str,
-                runtime: Runtime, review_runtime: Runtime = None) -> dict:
-    """Pick and dispatch one function within a research stage — one routing step."""
+                runtime: Runtime, review_runtime: Runtime = None,
+                blocked: frozenset = frozenset()) -> dict:
+    """Pick and dispatch one function within a research stage — one routing step.
+
+    ``blocked`` is the set of function names that have failed too many
+    times this run; they are removed from the catalog so the LLM cannot
+    keep re-selecting a broken function (the loop's failure backstop).
+    """
     import os as _os
     available = build_stage_available(stage)
+    if blocked:
+        available = {n: e for n, e in available.items() if n not in blocked}
     catalog = render_options(available)
     home = _os.path.expanduser("~")
     reply = runtime.exec(content=[
@@ -123,9 +142,14 @@ def _stage_step(stage: str, sub_task: str, context: str,
             'If the catalog lists a "run_*" / "*_loop" orchestrator '
             "(run_literature, run_idea, run_experiments, review_loop, "
             "paper_improvement_loop ...), prefer it over individual leaf "
-            "functions — it chains steps and persists state. If it "
-            "returns done=false, call it AGAIN next turn; do not mark "
-            "the stage done just because it ran once — check the flag. "
+            "functions. An orchestrator runs its OWN internal loop to "
+            "completion in a single call — it iterates as many rounds as "
+            "the work needs and persists state. Call it ONCE; do NOT "
+            "re-call it to 'continue' — it already finished its rounds. "
+            "After it returns, the stage's deliverable exists: do any "
+            "leftover leaf work, otherwise reply stage_done. (Only re-call "
+            "an orchestrator if its result explicitly says it was "
+            "interrupted and must resume.) "
             "All results must be saved to files: orchestrators save "
             "automatically, for leaf functions save the output "
             "yourself.\n\n"
@@ -196,9 +220,36 @@ def _stage_step(stage: str, sub_task: str, context: str,
     if "review_runtime" in func_sig.parameters and review_runtime is not None:
         args["review_runtime"] = review_runtime
 
+    # Self-closing iteration: an orchestrator that exposes `auto_fix`
+    # (review_loop) defaults it to False, which makes it run ONE review
+    # round and stop — pushing the review→fix→re-review loop onto the LLM
+    # to drive by re-calling. That mechanical re-calling is exactly what
+    # spins. Inside the agent loop we want the orchestrator to close its
+    # own loop in a single call, so default auto_fix to True unless the
+    # LLM explicitly set it. (CLI / pipeline callers pass it explicitly
+    # and are unaffected.)
+    if "auto_fix" in func_sig.parameters and "auto_fix" not in args:
+        args["auto_fix"] = True
+
     try:
         result = func(**args)
         result_str = str(result) if result is not None else "(no output)"
+        # Normalize the orchestrator's completion signal in ONE place so the
+        # loop doesn't depend on the LLM parsing str(result). Stage
+        # orchestrators are inconsistent: run_literature returns `done`,
+        # review_loop returns `passed`, several single-shot ones
+        # (run_idea / run_experiments / run_rebuttal / run_slides / ...)
+        # return no flag at all. Map all of them to one `func_done` bool:
+        #   - dict with `done`   -> use it (the iterating orchestrators)
+        #   - dict with `passed` -> map it (review_loop: passed==accepted)
+        #   - dict without a flag, or a non-dict (str / None) -> True
+        #     (a single-shot function that ran is, by definition, done)
+        if isinstance(result, dict) and "done" in result:
+            func_done = bool(result.get("done"))
+        elif isinstance(result, dict) and "passed" in result:
+            func_done = bool(result.get("passed"))
+        else:
+            func_done = True
         return {
             "call": call,
             "args_summary": ", ".join(
@@ -206,6 +257,10 @@ def _stage_step(stage: str, sub_task: str, context: str,
             ),
             "result": result_str[:3000],
             "success": True,
+            # Did the function itself report it has nothing left to do this
+            # turn? The loop uses this (not str(result)) to decide whether a
+            # re-call of an iterating orchestrator is warranted.
+            "func_done": func_done,
             # An LLM may attach stage_done=true alongside a call — execute
             # the call first, then honor the flag.
             "stage_done": bool(action.get("stage_done")),
@@ -215,6 +270,7 @@ def _stage_step(stage: str, sub_task: str, context: str,
             "call": call,
             "result": f"{e.__class__.__name__}: {e}",
             "success": False,
+            "func_done": False,
             "stage_done": False,
         }
 
@@ -230,6 +286,23 @@ _MAX_STEPS_PER_STAGE = 20
 # "retrying" a save). Warn it once, then cut the stage off.
 _REPEAT_WARN = 3
 _REPEAT_BREAK = 5
+
+# Global run budget — a hard ceiling on TOTAL Level-2 steps across all
+# stages, independent of per-stage / per-stage-count caps. Without this a
+# run can ping-pong between two stages (e.g. review <-> writing), each
+# under its own limits, yet burn hundreds of steps overall. This is the
+# backstop the per-stage guards can't provide.
+_MAX_TOTAL_STEPS = 60
+# A stage that is RE-ENTERED this many times without the run advancing
+# (no new successful step since the last visit) is stuck — stop re-routing
+# back into it. Catches the cross-stage ping-pong the per-stage repeat
+# guard is blind to.
+_MAX_STAGE_REVISITS = 3
+# A single function that FAILS this many times across the whole run is
+# broken for this run (bad env, missing dependency, a model that won't
+# call its submit tool). Drop it from the catalog so the loop stops
+# retrying it and the LLM must route around it.
+_MAX_FUNC_FAILURES = 3
 
 
 # ═══════════════════════════════════════════
@@ -318,8 +391,21 @@ def research_agent(
 
     history = []
     progress_parts = []
+    # Run-wide guards (cross-stage; the per-stage repeat guard can't see these):
+    total_steps = 0                       # against _MAX_TOTAL_STEPS
+    func_failures: dict[str, int] = {}    # function name -> failure count
+    blocked_funcs: set[str] = set()       # funcs dropped after too many failures
+    stage_visits: dict[str, int] = {}     # stage -> times entered
+    successes_at_last_visit: dict[str, int] = {}  # stage -> total_successes seen last time
+    total_successes = 0
+    stop_reason = None
 
     for stage_num in range(1, _MAX_STAGES + 1):
+        if total_steps >= _MAX_TOTAL_STEPS:
+            stop_reason = f"global step budget reached ({_MAX_TOTAL_STEPS})"
+            print(f"  [budget] {stop_reason} — ending run.", file=sys.stderr)
+            break
+
         # Level 1: Pick stage
         progress = "\n".join(progress_parts) if progress_parts else ""
         stage_decision = _pick_stage(task=task, progress=progress, runtime=runtime)
@@ -339,6 +425,23 @@ def research_agent(
             history.append({"stage_num": stage_num, "stage": stage, "error": "unknown stage"})
             continue
 
+        # Cross-stage ping-pong guard: if we keep re-entering a stage that
+        # isn't moving the run forward (no new successful step since the
+        # last time we were here), it's stuck — refuse to route back in.
+        stage_visits[stage] = stage_visits.get(stage, 0) + 1
+        if stage_visits[stage] > _MAX_STAGE_REVISITS:
+            prev = successes_at_last_visit.get(stage, -1)
+            if total_successes == prev:
+                stop_reason = (
+                    f"stage '{stage}' re-entered {stage_visits[stage]}x with no "
+                    f"progress — stuck"
+                )
+                print(f"  [stuck] {stop_reason} — ending run.", file=sys.stderr)
+                history.append({"stage_num": stage_num, "stage": stage,
+                                "error": "stuck — no progress on re-entry"})
+                break
+        successes_at_last_visit[stage] = total_successes
+
         print(f"  [stage {stage_num}] → {stage}: {reasoning[:80]}", file=sys.stderr)
 
         # Level 2: Execute within stage
@@ -348,14 +451,22 @@ def research_agent(
         repeat_count = 0
 
         for step_num in range(1, _MAX_STEPS_PER_STAGE + 1):
+            if total_steps >= _MAX_TOTAL_STEPS:
+                stop_reason = f"global step budget reached ({_MAX_TOTAL_STEPS})"
+                print(f"    [budget] {stop_reason} — ending stage.", file=sys.stderr)
+                break
+
             context = "\n".join(stage_context_parts) if stage_context_parts else ""
             step_result = _stage_step(
                 stage=stage, sub_task=sub_task, context=context,
                 runtime=runtime, review_runtime=review_runtime,
+                blocked=frozenset(blocked_funcs),
             )
+            total_steps += 1
 
             call = step_result.get("call", "?")
             success = step_result.get("success", False)
+            func_done = step_result.get("func_done", False)
             result_preview = step_result.get("result", "")[:200]
             args_summary = step_result.get("args_summary", "")
 
@@ -364,9 +475,43 @@ def research_agent(
             stage_history.append(step_result)
             stage_context_parts.append(f"  {call} → {result_preview}")
 
+            # Failure backstop: a function that fails repeatedly across the
+            # WHOLE run is broken (bad env, a model that won't call its
+            # submit tool, …). Count failures and, past the cap, drop it
+            # from the catalog so it can't be re-selected.
+            if call and call != "?":
+                if success:
+                    total_successes += 1
+                else:
+                    func_failures[call] = func_failures.get(call, 0) + 1
+                    if (func_failures[call] >= _MAX_FUNC_FAILURES
+                            and call not in blocked_funcs):
+                        blocked_funcs.add(call)
+                        print(
+                            f"    [block] {call} failed {func_failures[call]}x "
+                            f"this run — removed from the catalog.",
+                            file=sys.stderr,
+                        )
+                        stage_context_parts.append(
+                            f"  NOTE: {call} failed repeatedly and is now "
+                            "DISABLED for this run. Use a different function "
+                            "or stage_done."
+                        )
+
             # Stage is done if: no function call resolved, or LLM signals stage_done
             if step_result.get("call") is None or step_result.get("stage_done"):
                 break
+
+            # An iterating orchestrator that reports it finished its work
+            # (func_done) signals the stage's core deliverable is in place.
+            # Tell the model explicitly — it no longer has to infer "done"
+            # by parsing str(result), the failure mode that caused spinning.
+            if success and func_done:
+                stage_context_parts.append(
+                    f"  NOTE: {call} reported it COMPLETED its work "
+                    "(done=true). The stage's main deliverable exists — "
+                    "do remaining cleanup or reply stage_done."
+                )
 
             # Repetition guard: identical (function, args) calls in a row.
             repeat_id = (call, args_summary)
@@ -401,6 +546,9 @@ def research_agent(
             "steps": stage_history,
         })
 
+        if stop_reason:
+            break
+
     # Only an explicit, well-formed LLM "done" counts as success —
     # parse failures and unknown stage names also end the loop (done=True)
     # but carry ok=False and must not be reported as task completion.
@@ -420,6 +568,11 @@ def research_agent(
         "success": completed,
         "summary": summary,
         "stages_completed": len(history),
+        # Why the loop ended when it wasn't an explicit LLM "done":
+        # "global step budget reached" / "stage '...' ... stuck" / None.
+        # Lets the caller tell a clean finish from a guard-triggered stop.
+        "stop_reason": stop_reason,
+        "total_steps": total_steps,
         "history": history,
     }
 
