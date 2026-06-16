@@ -65,6 +65,7 @@ _ENTRIES: dict[str, tuple[str, str, str]] = {
     "plan_ablations":           ("research_harness.stages.theory", "plan_ablations", "experiment"),
     "run_experiments":          ("research_harness.stages.experiment", "run_experiments", "experiment"),
     # Writing
+    "write_paper":              ("research_harness.stages.writing", "write_paper", "writing"),
     "write_section":            ("research_harness.stages.writing", "write_section", "writing"),
     "polish_rigorous":          ("research_harness.stages.writing", "polish_rigorous", "writing"),
     "polish_natural":           ("research_harness.stages.writing", "polish_natural", "writing"),
