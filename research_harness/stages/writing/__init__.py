@@ -175,6 +175,46 @@ def _strip_code_fences(text: str) -> str:
     return t.strip()
 
 
+_COT_LEAD_RE = __import__("re").compile(
+    r"^\s*(looking at this task|here is the|here's the|my job is|i (?:will|need to|'ll)\b|"
+    r"i am going to|let me\b|to write (?:this|the) section|as requested|sure[,!]|okay[,!]|"
+    r"below is|the following is|i'll write)",
+    __import__("re").IGNORECASE,
+)
+
+
+def _strip_cot_preamble(body: str) -> str:
+    """Drop a leading chain-of-thought / planning preamble a weak model
+    leaked before the real prose ("Looking at this task, I need to... 1. ...").
+
+    Conservative: only fires when the body STARTS with a known CoT lead-in.
+    Then skips lines until the first real content — a LaTeX command line
+    (\\section, \\subsection, \\paragraph) or a substantive sentence that is
+    not itself a planning/numbered-outline line — and returns from there."""
+    import re as _re
+    b = body.lstrip()
+    if not _COT_LEAD_RE.match(b):
+        return body  # no CoT lead-in → leave untouched
+    lines = b.splitlines()
+    start = 0
+    for i, ln in enumerate(lines):
+        s = ln.strip()
+        if not s:
+            continue
+        # Real content starts at a LaTeX command, or a normal sentence that
+        # isn't a numbered-outline / planning line.
+        is_latex = s.startswith("\\")
+        is_outline = bool(_re.match(r"^(\d+[.)]|[-*]|step\b)", s, _re.IGNORECASE))
+        is_plan = bool(_COT_LEAD_RE.match(s)) or s.endswith(":")
+        if is_latex or (not is_outline and not is_plan and len(s) > 40):
+            start = i
+            break
+    else:
+        return body  # couldn't find clean content → don't risk gutting it
+    stripped = "\n".join(lines[start:]).strip()
+    return stripped or body
+
+
 def _strip_own_header(name: str, body: str) -> str:
     """Drop a section/abstract wrapper the model included in its own body.
 
@@ -185,7 +225,7 @@ def _strip_own_header(name: str, body: str) -> str:
     Strip fences first, then a leading matching wrapper, so wrapping happens
     exactly once."""
     import re as _re
-    b = _strip_code_fences(body)
+    b = _strip_cot_preamble(_strip_code_fences(body))
     if name.lower() == "abstract":
         # Drop every abstract-environment delimiter the model included
         # (it sometimes nests them); the assembler re-adds exactly one.

@@ -8,6 +8,7 @@ from research_harness.stages.writing import (
     gather_context,
     _clean_title,
     _strip_own_header,
+    _strip_cot_preamble,
 )
 
 
@@ -60,6 +61,25 @@ class TestLatexAssembly:
         out = _strip_own_header("Abstract", body)
         assert "```" not in out
         assert out.strip() == "We survey memory."
+
+    def test_strip_cot_preamble(self):
+        # Weak model leaked planning prose + a numbered outline before the
+        # real introduction. Both must be removed, real prose kept.
+        leak = ("Looking at this task, I need to write an Introduction. "
+                "My job is to:\n\n1. Open with a hook\n2. Establish the gap\n\n"
+                "Large language model agents increasingly take real actions "
+                "with real consequences, changing the safety calculus.")
+        out = _strip_cot_preamble(leak)
+        assert "Looking at this task" not in out
+        assert "My job is" not in out
+        assert out.startswith("Large language model agents")
+
+    def test_strip_cot_leaves_clean_body(self):
+        clean = ("Large language model agents now make control-flow decisions "
+                 "across many steps, introducing new failure modes.")
+        assert _strip_cot_preamble(clean) == clean
+        sec = "\\section{Method}\nWe define the guardrail set as follows."
+        assert _strip_cot_preamble(sec) == sec
 
 
 class TestGatherContext:

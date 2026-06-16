@@ -41,6 +41,13 @@ def write_section(section: str, context: str, runtime: Runtime) -> str:
     - Output ONLY the LaTeX body for this section (no \\documentclass, no
       preamble, no \\begin{document}; just the \\section{...} content the
       caller will assemble into the paper). Start directly with the LaTeX.
+    - Do NOT think out loud or restate the task. Your FIRST characters must
+      be the section's actual prose. NEVER begin with planning text such as
+      "Looking at this task, I need to...", "Here is the section...", "My job
+      is to...", or a numbered outline of what you will write. Such
+      meta-commentary leaks into the paper and must never appear.
+    - Do NOT wrap the output in markdown code fences (no ```latex / ```).
+      Emit raw LaTeX only.
     - Continuous paragraphs, no bullet lists. Present tense for methods,
       past tense for results. No AI-flavor words (leverage, delve, tapestry,
       utilize).
