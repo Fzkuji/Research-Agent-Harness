@@ -592,6 +592,10 @@ def main():
     parser.add_argument("task", nargs="?", help="What to do (natural language)")
     parser.add_argument("--work-dir",
                         help="Absolute path for all research artifacts. Runtime's codex --cd target.")
+    parser.add_argument("--session", default=None,
+                        help="Session id to continue (history carries over). "
+                             "Omit to start a fresh session — the new id is "
+                             "printed so you can pass it back with --session next time.")
     parser.add_argument("--provider", help="LLM provider: claude-code, openai-codex, anthropic, openai")
     parser.add_argument("--model", help="Model name override")
     parser.add_argument("--review-provider", help="Review model provider (default: openai)")
@@ -663,11 +667,25 @@ def main():
         task = (f"{task}\n\nA confirmed research brief exists at "
                 f"{brief_path} — follow it.")
 
-    result = research_agent(
-        task=task,
-        runtime=rt,
-        review_runtime=review_rt,
-    )
+    # Run inside a session so docstring-into-prompt, DAG persistence, and
+    # ask_user tracking work on the CLI exactly as they do on the web
+    # (the dispatcher installs the same context). Pass --session to
+    # continue a prior run; omit it to start fresh (id printed below).
+    from openprogram.store.session.context import session_context
+    with session_context(session_id=args.session, runtime=rt,
+                         id_prefix="research", agent_id="research") as _sess:
+        rt.session_id = _sess.session_id
+        if _sess.created:
+            print(f"Session: {_sess.session_id}  "
+                  f"(reuse with --session {_sess.session_id})")
+        else:
+            print(f"Session: {_sess.session_id} (continued)")
+        print()
+        result = research_agent(
+            task=task,
+            runtime=rt,
+            review_runtime=review_rt,
+        )
 
     # Report
     print()
