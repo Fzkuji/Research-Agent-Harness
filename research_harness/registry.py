@@ -155,12 +155,25 @@ _ENTRIES: dict[str, tuple[str, str, str]] = {
 #   "autonomous"  — safe for the unattended two-level loop (the default).
 #   "interactive" — needs a human in the loop; excluded from the loop's
 #                   routing catalogs, callable only programmatically.
+#   "helper"      — an internal sub-step of an orchestrator (no standalone
+#                   deliverable); excluded from the loop so it can't be picked
+#                   instead of the orchestrator that actually persists output.
 # (Pattern from ARS's MODE_REGISTRY oversight column.)
 # ---------------------------------------------------------------------------
 
 OVERSIGHT: dict[str, str] = {
     # Human-in-the-loop functions (block on ask_user between model turns).
     "socratic_plan": "interactive",
+    # Helper sub-steps that the autonomous loop must NOT pick directly — they
+    # are called INTERNALLY by an orchestrator and don't persist deliverables
+    # on their own. Exposing write_section to the loop let a weaker model pick
+    # it (returns LaTeX text, saves nothing) and call the writing stage "done"
+    # with no paper on disk — the whole run went hollow. The loop must reach
+    # the paper through write_paper (the orchestrator that assembles + saves
+    # main.tex), which calls these internally.
+    "write_section": "helper",
+    "define_core_contribution": "helper",
+    "outline_paper_structure": "helper",
 }
 
 

@@ -193,7 +193,7 @@ def review_paper(paper_content: str, venue: str, venue_criteria: str,
     #       / sub_scores / confidence. Tool-use first, codex CLI fallback.
     stage1_fields = tuple(review_text.keys())
     schema = build_review_schema(spec, exclude_fields=stage1_fields)
-    if draft_judgment:
+    if isinstance(draft_judgment, dict) and draft_judgment:
         result: dict = {}
         for k in ("score", "verdict", "confidence",
                   "best_paper_candidate"):
