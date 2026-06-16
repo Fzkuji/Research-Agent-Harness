@@ -137,6 +137,51 @@ _LATEX_PREAMBLE = r"""\documentclass[11pt]{article}
 """
 
 
+def _clean_title(topic: str) -> str:
+    """Derive a real paper title from whatever ``topic`` the caller passed.
+
+    The autonomous loop sometimes dispatches write_paper with the whole task
+    description as ``topic`` (a paragraph of instructions), which then lands
+    verbatim in ``\\title{}``. Prefer a quoted title inside the topic
+    ("...": the convention the task uses), else the first sentence, capped to
+    a sane length."""
+    import re as _re
+    if not topic or not topic.strip():
+        return "Research Paper"
+    t = topic.strip()
+    m = _re.search(r'["“]([^"”]{8,200})["”]', t)
+    if m:
+        return m.group(1).strip()
+    # First sentence / line, capped.
+    first = _re.split(r'(?<=[.!?])\s|\n', t)[0].strip()
+    return (first[:160].rstrip() + ("…" if len(first) > 160 else "")) or "Research Paper"
+
+
+def _strip_own_header(name: str, body: str) -> str:
+    """Drop a section/abstract wrapper the model included in its own body.
+
+    write_section's contract is "body only", but models frequently emit a
+    leading ``\\section{...}`` (or the whole ``\\begin{abstract}...\\end{abstract}``
+    environment). The assembler also wraps, so without this the paper gets
+    doubled headers. Strip a leading matching wrapper so wrapping happens
+    exactly once."""
+    import re as _re
+    b = body.strip()
+    if name.lower() == "abstract":
+        # Drop every abstract-environment delimiter the model included
+        # (it sometimes nests them); the assembler re-adds exactly one.
+        b = _re.sub(r"\\(begin|end)\{abstract\}", "", b)
+        return b.strip()
+    # Drop ALL leading \section{...} / \section*{...} lines — models sometimes
+    # repeat the header, and one re-wrap by the assembler is enough.
+    while True:
+        nb = _re.sub(r"^\\section\*?\{[^}]*\}\s*", "", b, count=1)
+        if nb == b:
+            break
+        b = nb
+    return b.strip()
+
+
 def write_paper(
     topic: str = "",
     output_dir: str = "auto_paper",
@@ -188,8 +233,11 @@ def write_paper(
         written.append((section, body))
 
     # Assemble LaTeX: abstract in its environment, the rest as \section{}.
-    parts = [_LATEX_PREAMBLE % {"title": topic or "Research Paper"}]
+    # Strip any wrapper the model already put in its body so headers aren't
+    # doubled, and derive a clean title from the topic.
+    parts = [_LATEX_PREAMBLE % {"title": _clean_title(topic)}]
     for name, body in written:
+        body = _strip_own_header(name, body)
         if name.lower() == "abstract":
             parts.append("\\begin{abstract}\n" + body + "\n\\end{abstract}\n")
         else:

@@ -4,7 +4,46 @@ import os
 
 import pytest
 
-from research_harness.stages.writing import gather_context
+from research_harness.stages.writing import (
+    gather_context,
+    _clean_title,
+    _strip_own_header,
+)
+
+
+class TestLatexAssembly:
+    """write_paper helpers that prevent doubled headers / junk titles."""
+
+    def test_title_from_quoted_task_prompt(self):
+        task = ('Optimize the existing paper in this project: "Deterministic '
+                'Control-Flow Guardrails for Long-Horizon LLM Agents". Use the '
+                'existing literature review and draft.')
+        assert (_clean_title(task)
+                == "Deterministic Control-Flow Guardrails for Long-Horizon LLM Agents")
+
+    def test_title_empty_falls_back(self):
+        assert _clean_title("") == "Research Paper"
+
+    def test_title_plain_short_passthrough(self):
+        assert _clean_title("A Study of Widgets") == "A Study of Widgets"
+
+    def test_strip_doubled_section_header(self):
+        body = "\\section{Introduction}\n\\section{Introduction}\n\nText here."
+        out = _strip_own_header("Introduction", body)
+        assert "\\section" not in out
+        assert out.startswith("Text here.")
+
+    def test_strip_clean_body_untouched(self):
+        body = "Long-horizon agents fail when control compounds."
+        assert _strip_own_header("Method", body) == body
+
+    def test_strip_nested_abstract_env(self):
+        body = ("\\begin{abstract}\n\\begin{abstract}\nWe study guardrails.\n"
+                "\\end{abstract}\n\\end{abstract}")
+        out = _strip_own_header("Abstract", body)
+        assert "\\begin{abstract}" not in out
+        assert "\\end{abstract}" not in out
+        assert out.strip() == "We study guardrails."
 
 
 class TestGatherContext:
