@@ -93,20 +93,40 @@ def _gather_project_materials(output_dir: str) -> str:
     return "\n\n".join(parts)
 
 
+# Section name -> LaTeX command. Abstract uses the abstract environment;
+# the rest are \section{...}. The model returns the section BODY only
+# (write_section's contract), which we wrap here into a real LaTeX paper.
+_LATEX_PREAMBLE = r"""\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+\title{%(title)s}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+"""
+
+
 def write_paper(
     topic: str = "",
     output_dir: str = "auto_paper",
     runtime: Runtime = None,
 ) -> dict:
-    """Write a COMPLETE paper end to end and save it to ``<output_dir>/PAPER.md``.
+    """Write a COMPLETE LaTeX paper end to end and save it to
+    ``<output_dir>/main.tex`` (+ a references.bib stub).
 
     Orchestrator: runs its own internal loop over the standard paper
     sections (Abstract..Conclusion), calling ``write_section`` for each with
     the gathered project materials (literature synthesis, ideas, experiment
-    plan) as context, then concatenates them into one markdown paper and
-    persists it. One call produces the whole paper — do NOT re-call to
-    "continue". Does its own file writing (the caller's host has a
-    filesystem; the per-section model calls do not need one).
+    plan) as context. Each section returns LaTeX body only; this assembles
+    them under a standard article preamble into a compilable main.tex. One
+    call produces the whole paper — do NOT re-call to "continue". Does its
+    own file writing (the host has a filesystem; the per-section model calls
+    do not need one).
     """
     import os as _os
     if runtime is None:
@@ -124,13 +144,13 @@ def write_paper(
     written: list[tuple[str, str]] = []
     for section in _PAPER_SECTIONS:
         prior = "\n\n".join(
-            f"### Already-written {name}\n{body[:1500]}" for name, body in written
+            f"% Already-written {name}:\n{body[:1500]}" for name, body in written
         )
         ctx = base_context + (f"\n\n=== Sections written so far ===\n{prior}" if prior else "")
         # One section failing (e.g. an intermittent provider mid-stream
-        # break) must not lose the whole paper. Try once, retry once, then
-        # record a visible gap and keep going so the remaining sections —
-        # and the persisted PAPER.md — still get written.
+        # break) must not lose the whole paper. Try twice, then record a
+        # visible LaTeX-comment gap and keep going so the remaining sections
+        # — and the persisted main.tex — still get written.
         body = ""
         for _attempt in (1, 2):
             try:
@@ -138,20 +158,35 @@ def write_paper(
                 if body.strip():
                     break
             except Exception as e:  # noqa: BLE001 — provider/stream errors vary
-                body = f"[SECTION GAP: '{section}' failed to generate ({e.__class__.__name__}: {str(e)[:120]})]"
+                body = f"% [SECTION GAP: '{section}' failed to generate ({e.__class__.__name__}: {str(e)[:120]})]"
         written.append((section, body))
 
-    paper = "\n\n".join(f"# {name}\n\n{body}" for name, body in written)
-    paper_path = _os.path.join(output_dir, "PAPER.md")
+    # Assemble LaTeX: abstract in its environment, the rest as \section{}.
+    parts = [_LATEX_PREAMBLE % {"title": topic or "Research Paper"}]
+    for name, body in written:
+        if name.lower() == "abstract":
+            parts.append("\\begin{abstract}\n" + body + "\n\\end{abstract}\n")
+        else:
+            parts.append("\\section{" + name + "}\n" + body + "\n")
+    parts.append("\\bibliographystyle{plainnat}\n\\bibliography{references}\n\\end{document}\n")
+    paper = "\n".join(parts)
+
+    paper_path = _os.path.join(output_dir, "main.tex")
     with open(paper_path, "w", encoding="utf-8") as f:
         f.write(paper)
+    # references.bib stub — write_section emits \cite keys / [VERIFY] markers;
+    # citation verification (P2) fills real entries. Don't fabricate here.
+    bib_path = _os.path.join(output_dir, "references.bib")
+    if not _os.path.exists(bib_path):
+        with open(bib_path, "w", encoding="utf-8") as f:
+            f.write("% References — verified entries added by citation step.\n")
 
     return {
         "done": True,
         "paper_path": paper_path,
         "sections": [n for n, _ in written],
         "chars": len(paper),
-        "summary": f"Wrote {len(written)}-section paper ({len(paper)} chars) to {paper_path}",
+        "summary": f"Wrote {len(written)}-section LaTeX paper ({len(paper)} chars) to {paper_path}",
     }
 
 
