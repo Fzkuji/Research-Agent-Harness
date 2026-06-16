@@ -166,18 +166,11 @@ def _stage_step(stage: str, sub_task: str, context: str,
             "All results must be saved to files: orchestrators save "
             "automatically, for leaf functions save the output "
             "yourself.\n\n"
-            "For an orchestrator taking `output_dir`, the PROJECT ROOT is "
-            "fixed for this run:\n"
-            f"  PROJECT ROOT = {work_dir}\n"
-            "Pass output_dir = <PROJECT ROOT>/<stage_folder>, where "
-            'stage_folder is one of "literature review", "ideas", '
-            '"experiments", "paper", "review", "rebuttal", "presentation", '
-            '"theory", "knowledge", or "" (the "project" stage writes at '
-            "the root). Do NOT invent your own base or project_name and do "
-            "NOT create a fresh folder elsewhere — every stage of this run "
-            "writes under the SAME project root above, so re-running "
-            "continues the same project in place. Never pass relative "
-            'paths like "auto_xxx".\n\n'
+            "Do NOT pass output_dir / paper_dir / project_dir in args — the "
+            "host sets them automatically to this run's single project "
+            f"folder ({work_dir}). Any path you put there is ignored. There "
+            "is ONE project folder for the whole run; you never create or "
+            "name folders.\n\n"
             "Reply with this exact JSON and nothing else:\n"
             '  {"call": "<function_name>", "args": { ... }}\n'
             'Reply {"call": "stage_done"} (no args) only when previous '
@@ -241,6 +234,21 @@ def _stage_step(stage: str, sub_task: str, context: str,
     if "auto_fix" in func_sig.parameters and "auto_fix" not in args:
         args["auto_fix"] = True
 
+    # Hard path anchoring: the LLM (esp. codex) ignores the prompt's
+    # "write under the SAME project root" rule and invents its own
+    # output_dir from the paper title — producing stray sibling folders
+    # like "~/Documents/Deterministic Control-Flow Guardrails" instead of
+    # writing into the one work_dir. Don't trust the LLM-supplied path:
+    # OVERRIDE any directory arg to <work_dir>/<stage_folder>, computed by
+    # the host. One project, one folder — enforced, not requested.
+    if work_dir:
+        stage_folder = _STAGE_FOLDER.get(stage, stage)
+        anchored = (_os.path.join(work_dir, stage_folder)
+                    if stage_folder else work_dir)
+        for _pname in ("output_dir", "paper_dir", "project_dir"):
+            if _pname in func_sig.parameters:
+                args[_pname] = anchored
+
     try:
         result = func(**args)
         result_str = str(result) if result is not None else "(no output)"
@@ -288,6 +296,23 @@ def _stage_step(stage: str, sub_task: str, context: str,
 # ═══════════════════════════════════════════
 # research_agent — top-level entry
 # ═══════════════════════════════════════════
+
+# Stage -> on-disk subfolder under the project root. Used to HARD-ANCHOR
+# every orchestrator's output_dir to <work_dir>/<folder> in _stage_step,
+# so the LLM cannot invent its own path. Must match the stage_folder list
+# in the dispatcher prompt. "project" writes at the root ("" folder).
+_STAGE_FOLDER = {
+    "literature": "literature review",
+    "idea": "ideas",
+    "experiment": "experiments",
+    "writing": "paper",
+    "review": "review",
+    "rebuttal": "rebuttal",
+    "presentation": "presentation",
+    "theory": "theory",
+    "knowledge": "knowledge",
+    "project": "",
+}
 
 _MAX_STAGES = 10
 _MAX_STEPS_PER_STAGE = 20
