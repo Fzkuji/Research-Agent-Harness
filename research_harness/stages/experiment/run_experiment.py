@@ -35,9 +35,18 @@ def run_experiment(plan: str, step: str, runtime: Runtime) -> str:
     against these run records. If the step ran nothing (e.g. setup only),
     still write the record with key_metrics: {} and exit_status noted.
     """
-    return runtime.exec(content=[
-        {"type": "text", "text": (
-            f"Experiment plan:\n{plan}\n\n"
-            f"Current step:\n{step}"
-        )},
-    ])
+    # Hand the model REAL execution tools (bash/read/write/edit/apply_patch/
+    # glob/grep/...). Without tools, runtime.exec is a pure REASONING call —
+    # the model can only DESCRIBE running an experiment, never actually write
+    # code, run it, or save run_record.json. That is why "executed" steps
+    # produced zero run records. toolset="default" gives the shell + file
+    # tools the docstring promises ("write code, run commands, manage files").
+    return runtime.exec(
+        content=[
+            {"type": "text", "text": (
+                f"Experiment plan:\n{plan}\n\n"
+                f"Current step:\n{step}"
+            )},
+        ],
+        toolset="default",
+    )
