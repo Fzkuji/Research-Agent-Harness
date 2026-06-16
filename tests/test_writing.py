@@ -45,6 +45,22 @@ class TestLatexAssembly:
         assert "\\end{abstract}" not in out
         assert out.strip() == "We study guardrails."
 
+    def test_strip_markdown_fences_and_header(self):
+        # MiniMax-style: ```latex fence + the model's own \section + ``` close.
+        # Both the fences and the duplicate header must go (else literal fences
+        # break compile and the assembler's wrap doubles the heading).
+        body = "```latex\n\\section{Introduction}\n\nAgents operate long.\n```"
+        out = _strip_own_header("Introduction", body)
+        assert "```" not in out
+        assert not out.startswith("\\section")
+        assert out.startswith("Agents operate long.")
+
+    def test_strip_fences_on_abstract(self):
+        body = "```latex\nWe survey memory.\n```"
+        out = _strip_own_header("Abstract", body)
+        assert "```" not in out
+        assert out.strip() == "We survey memory."
+
 
 class TestGatherContext:
     """Test context gathering from project directories."""

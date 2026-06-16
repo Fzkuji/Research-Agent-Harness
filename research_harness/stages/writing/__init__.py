@@ -157,16 +157,33 @@ def _clean_title(topic: str) -> str:
     return (first[:160].rstrip() + ("…" if len(first) > 160 else "")) or "Research Paper"
 
 
+def _strip_code_fences(text: str) -> str:
+    """Remove markdown code fences a model wrapped its LaTeX in.
+
+    Some models (e.g. MiniMax) return ```latex ... ``` around the section
+    body. Left in, the literal fences break compilation AND push the real
+    \\section header off the start so _strip_own_header can't see it (→
+    doubled headers). Strip opening ```lang fences and closing ``` anywhere."""
+    import re as _re
+    t = text
+    # Opening fences: ```latex / ```tex / ``` at line start.
+    t = _re.sub(r"(?m)^\s*```[a-zA-Z]*\s*$", "", t)
+    # Any stray inline ``` left over.
+    t = t.replace("```", "")
+    return t.strip()
+
+
 def _strip_own_header(name: str, body: str) -> str:
     """Drop a section/abstract wrapper the model included in its own body.
 
     write_section's contract is "body only", but models frequently emit a
     leading ``\\section{...}`` (or the whole ``\\begin{abstract}...\\end{abstract}``
-    environment). The assembler also wraps, so without this the paper gets
-    doubled headers. Strip a leading matching wrapper so wrapping happens
+    environment), sometimes wrapped in ```latex fences. The assembler also
+    wraps, so without this the paper gets doubled headers / literal fences.
+    Strip fences first, then a leading matching wrapper, so wrapping happens
     exactly once."""
     import re as _re
-    b = body.strip()
+    b = _strip_code_fences(body)
     if name.lower() == "abstract":
         # Drop every abstract-environment delimiter the model included
         # (it sometimes nests them); the assembler re-adds exactly one.
