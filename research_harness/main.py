@@ -459,6 +459,27 @@ def research_agent(
     def _stop_requested() -> bool:
         return (stop_event is not None and stop_event.is_set()) or _stopmod.stop_requested()
 
+    # Mid-run steering: user course-corrections pushed from any surface. We
+    # drain them at stage/step boundaries and fold them into the next routing
+    # decision's context — the model then weighs whether to change direction
+    # (we don't force a re-route). Accumulated so a steer issued mid-stage is
+    # still visible to the next stage pick.
+    from research_harness import steering as _steeringmod
+    steering_notes: list[str] = []
+    _sid = getattr(runtime, "session_id", None) or ""
+
+    def _absorb_steering() -> None:
+        if not _sid:
+            return
+        msgs = _steeringmod.drain(_sid)
+        for m in msgs:
+            note = f"[USER STEERING — mid-run course correction] {m}"
+            steering_notes.append(note)
+            print(f"  [steer] absorbed: {m[:80]}", file=sys.stderr)
+
+    def _steering_block() -> str:
+        return ("\n".join(steering_notes) + "\n") if steering_notes else ""
+
     history = []
     progress_parts = []
     # Run-wide guards (cross-stage; the per-stage repeat guard can't see these):
@@ -485,7 +506,12 @@ def research_agent(
             break
 
         # Level 1: Pick stage
+        _absorb_steering()
         progress = "\n".join(progress_parts) if progress_parts else ""
+        if steering_notes:
+            # Surface steering at the TOP of progress so the router weighs the
+            # user's correction first when choosing the next stage.
+            progress = _steering_block() + "\n" + progress
         stage_decision = _pick_stage(task=task, progress=progress, runtime=runtime)
 
         if stage_decision.get("done"):
@@ -542,7 +568,15 @@ def research_agent(
                 print(f"    [stop] {stop_reason} — ending stage (no new step).", file=sys.stderr)
                 break
 
+            # Mid-stage steering: a correction issued while this stage runs is
+            # absorbed and prepended to the step context so the next function
+            # pick sees it. The user may be redirecting within the stage or
+            # toward a different one — the step dispatcher / next stage pick
+            # both surface it.
+            _absorb_steering()
             context = "\n".join(stage_context_parts) if stage_context_parts else ""
+            if steering_notes:
+                context = _steering_block() + "\n" + context
             # A provider stream failure (codex mid-stream break, rate limit,
             # transient 5xx) inside _stage_step's own runtime.exec used to
             # raise straight through and kill the entire multi-hour run.
@@ -673,6 +707,9 @@ def research_agent(
     # process starts clean (matters for webui/TUI long-lived workers).
     if stop_event is not None:
         _stopmod.clear()
+    # Drop any un-drained steering so it doesn't leak into the next run.
+    if _sid:
+        _steeringmod.clear(_sid)
 
     return {
         "task": task,
@@ -696,7 +733,35 @@ agentic_research = research_agent
 # CLI entry point
 # ═══════════════════════════════════════════
 
+def _steer_cli() -> int:
+    """`research-harness steer --session <id> "<message>"` — drop a mid-run
+    course-correction into a LIVE run from another terminal. The running
+    process (in-process CLI run, or a worker-hosted run) drains the file
+    inbox at its next stage/step boundary and folds the message into the next
+    routing decision. Cross-process: writes a file under the session dir."""
+    import argparse as _ap
+    p = _ap.ArgumentParser(prog="research-harness steer",
+                           description="Send a mid-run steering message to a live run")
+    p.add_argument("--session", required=True, help="Session id of the running task")
+    p.add_argument("message", help="The course-correction, e.g. 'skip experiments, fill literature first'")
+    args = p.parse_args(sys.argv[2:])
+    from research_harness import steering
+    ok = steering.push(args.session, args.message)
+    if ok:
+        print(f"Steering message queued for session {args.session}. The run "
+              f"will pick it up at its next step boundary.")
+        return 0
+    print(f"Could not queue steering for session {args.session} "
+          f"(unknown session or no write access).", file=sys.stderr)
+    return 1
+
+
 def main():
+    # `steer` subcommand — handled before the main argparse so it has its own
+    # flags and never tries to start a run.
+    if len(sys.argv) > 1 and sys.argv[1] == "steer":
+        sys.exit(_steer_cli())
+
     parser = argparse.ArgumentParser(
         description="Research Agent — autonomous research task execution"
     )
