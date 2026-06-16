@@ -716,6 +716,11 @@ def main():
                              "opening new stages/steps once exceeded and "
                              "finalizes normally (in-flight step finishes, "
                              "conclusion written). Omit for no time limit.")
+    parser.add_argument("--attended", action="store_true",
+                        help="Allow the agent to ask you questions mid-run "
+                             "(a human is watching). Default is unattended: a "
+                             "CLI run has no watcher, so the ask tool is "
+                             "withheld and the agent proceeds on its own.")
     parser.add_argument("--list", action="store_true", help="List all available functions")
     parser.add_argument("--chat", action="store_true",
                         help="Start with an attended Socratic planning dialogue; "
@@ -742,6 +747,12 @@ def main():
 
     from openprogram.providers import create_runtime
 
+    # Attended / unattended: a CLI run defaults to unattended (no watcher), so
+    # the user-question tool is withheld and the agent never blocks on a prompt
+    # nobody can answer. --attended opts back in.
+    from openprogram.agent.attended import set_attended
+    set_attended(bool(args.attended))
+
     work_dir = os.path.abspath(os.path.expanduser(args.work_dir))
     os.makedirs(work_dir, exist_ok=True)
 
@@ -763,6 +774,7 @@ def main():
         print(f"Reviewer: {args.review_provider or 'openai'}/{args.review_model or 'default'}")
     if args.max_minutes:
         print(f"Time budget: ~{args.max_minutes:.0f} min (soft — finishes in-flight step)")
+    print(f"Mode: {'attended (agent may ask you)' if args.attended else 'unattended (no questions — ask tool withheld)'}")
     print()
 
     if args.chat:
