@@ -97,6 +97,16 @@ def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
         # ends the loop as a failure, never as silent success.
         return {"stage": None, "reasoning": str(e)[:200],
                 "done": True, "ok": False}
+    except Exception as e:
+        # A provider stream failure (codex empty-error / rate limit / 5xx)
+        # in the stage-pick exec must not crash the whole run. End the loop
+        # cleanly as a non-success so the caller can resume (--session) once
+        # the backend recovers, instead of a traceback.
+        print(f"  [pick_stage] provider error: {e.__class__.__name__}: "
+              f"{str(e)[:120]} — ending run (resume with --session).",
+              file=sys.stderr)
+        return {"stage": None, "reasoning": f"provider error: {str(e)[:160]}",
+                "done": True, "ok": False}
     if isinstance(result, dict) and "decision" in result:
         return {
             "stage": result["decision"],
