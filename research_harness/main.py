@@ -403,6 +403,7 @@ def _conclusion(task: str, history: list, completed: bool, runtime: Runtime) -> 
         },
         "runtime": {"hidden": True},
         "work_dir": {"hidden": True},
+        "max_runtime_s": {"hidden": True},
     },
 )
 def research_agent(
@@ -410,6 +411,7 @@ def research_agent(
     runtime: Runtime = None,
     review_runtime: Runtime = None,
     work_dir: str = "",
+    max_runtime_s: float = None,
 ) -> dict:
     """Autonomous research agent with two-level control.
 
@@ -421,9 +423,22 @@ def research_agent(
     before calling — every shell command and file write runs with that
     as cwd. Returns a dict with task, success, summary,
     stages_completed, history.
+
+    ``max_runtime_s`` is a soft wall-clock budget: the run keeps a
+    deadline and, at each stage/step boundary, stops opening NEW work once
+    it's passed — the in-flight step finishes and the run finalizes
+    normally (conclusion still written). None = no time limit (only the
+    step-count budget applies). This lets a caller say "spend ~2 hours"
+    instead of guessing a step count.
     """
     if runtime is None:
         raise ValueError("research_agent() requires a runtime argument")
+
+    import time as _time
+    _deadline = (_time.monotonic() + max_runtime_s) if max_runtime_s else None
+
+    def _out_of_time() -> bool:
+        return _deadline is not None and _time.monotonic() >= _deadline
 
     history = []
     progress_parts = []
@@ -440,6 +455,10 @@ def research_agent(
         if total_steps >= _MAX_TOTAL_STEPS:
             stop_reason = f"global step budget reached ({_MAX_TOTAL_STEPS})"
             print(f"  [budget] {stop_reason} — ending run.", file=sys.stderr)
+            break
+        if _out_of_time():
+            stop_reason = f"time budget reached ({max_runtime_s/60:.0f} min)"
+            print(f"  [time] {stop_reason} — finalizing (no new stage).", file=sys.stderr)
             break
 
         # Level 1: Pick stage
@@ -490,6 +509,10 @@ def research_agent(
             if total_steps >= _MAX_TOTAL_STEPS:
                 stop_reason = f"global step budget reached ({_MAX_TOTAL_STEPS})"
                 print(f"    [budget] {stop_reason} — ending stage.", file=sys.stderr)
+                break
+            if _out_of_time():
+                stop_reason = f"time budget reached ({max_runtime_s/60:.0f} min)"
+                print(f"    [time] {stop_reason} — ending stage (no new step).", file=sys.stderr)
                 break
 
             context = "\n".join(stage_context_parts) if stage_context_parts else ""
@@ -656,6 +679,11 @@ def main():
     parser.add_argument("--model", help="Model name override")
     parser.add_argument("--review-provider", help="Review model provider (default: openai)")
     parser.add_argument("--review-model", help="Review model name (default: provider default)")
+    parser.add_argument("--max-minutes", type=float, default=None,
+                        help="Soft wall-clock budget in minutes. The run stops "
+                             "opening new stages/steps once exceeded and "
+                             "finalizes normally (in-flight step finishes, "
+                             "conclusion written). Omit for no time limit.")
     parser.add_argument("--list", action="store_true", help="List all available functions")
     parser.add_argument("--chat", action="store_true",
                         help="Start with an attended Socratic planning dialogue; "
@@ -701,6 +729,8 @@ def main():
     print(f"Executor: {args.provider or 'auto'}/{args.model or 'default'}")
     if review_rt:
         print(f"Reviewer: {args.review_provider or 'openai'}/{args.review_model or 'default'}")
+    if args.max_minutes:
+        print(f"Time budget: ~{args.max_minutes:.0f} min (soft — finishes in-flight step)")
     print()
 
     if args.chat:
@@ -742,6 +772,7 @@ def main():
             runtime=rt,
             review_runtime=review_rt,
             work_dir=work_dir,
+            max_runtime_s=(args.max_minutes * 60) if args.max_minutes else None,
         )
 
     # Report
