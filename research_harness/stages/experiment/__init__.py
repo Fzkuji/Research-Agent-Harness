@@ -66,10 +66,16 @@ def run_experiments(
     # plus a running log of what already ran (its reports + result files), so
     # it picks the next concrete step, runs code, and writes run_record.json.
     # Stop when the model signals completion or the step cap is hit.
+    from research_harness.stop import stop_requested
+
     reports: list[str] = []
     steps_run = 0
     done = False
     for i in range(1, max_steps + 1):
+        # Graceful stop: a run-level stop (Ctrl-C / stop button) lands here
+        # too, not just the outer loop — finish nothing new, summarize what ran.
+        if stop_requested():
+            break
         prior = "\n\n".join(reports[-3:]) if reports else "(nothing run yet)"
         step_instruction = (
             f"Execute the NEXT not-yet-done step of the experiment plan and "

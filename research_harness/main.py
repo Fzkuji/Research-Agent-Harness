@@ -446,11 +446,18 @@ def research_agent(
     import time as _time
     _deadline = (_time.monotonic() + max_runtime_s) if max_runtime_s else None
 
+    # Publish the stop event process-wide so long-running orchestrators
+    # (run_experiments' step loop, review_loop's round loop) can see it and
+    # break gracefully mid-flight — not just the outer stage/step loop here.
+    from research_harness import stop as _stopmod
+    if stop_event is not None:
+        _stopmod.install_stop_event(stop_event)
+
     def _out_of_time() -> bool:
         return _deadline is not None and _time.monotonic() >= _deadline
 
     def _stop_requested() -> bool:
-        return stop_event is not None and stop_event.is_set()
+        return (stop_event is not None and stop_event.is_set()) or _stopmod.stop_requested()
 
     history = []
     progress_parts = []
@@ -661,6 +668,11 @@ def research_agent(
     except Exception as e:
         print(f"  [conclusion] ERROR: {e}", file=sys.stderr)
         summary = ""
+
+    # Clear the process-wide stop flag so a subsequent run in the same
+    # process starts clean (matters for webui/TUI long-lived workers).
+    if stop_event is not None:
+        _stopmod.clear()
 
     return {
         "task": task,

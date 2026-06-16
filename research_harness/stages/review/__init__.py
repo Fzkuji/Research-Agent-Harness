@@ -1384,7 +1384,10 @@ def paper_improvement_loop(
 
     venue_criteria = lookup_venue_criteria(venue=venue, runtime=review_runtime)
 
+    from research_harness.stop import stop_requested
     for round_num in range(1, max_rounds + 1):
+        if stop_requested():
+            break  # graceful run-level stop reaches the round loop too
         round_dir = os.path.join(base_dir, f"round_{round_num}")
         paper_content = _read_paper(paper_dir, exec_runtime)
 
@@ -1716,7 +1719,10 @@ def review_loop(
     venue_scale = get_venue_spec(venue).overall_dim.scale  # (lo, hi)
     passed = False
 
+    from research_harness.stop import stop_requested
     for round_num in range(1, max_rounds + 1):
+        if stop_requested():
+            break  # graceful run-level stop reaches the round loop too
         ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
         # ── 1. Read paper (any format: dir, .pdf, .docx, .md, .tex, ...) ──
