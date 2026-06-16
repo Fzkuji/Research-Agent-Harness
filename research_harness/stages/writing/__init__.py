@@ -20,6 +20,8 @@ from research_harness.stages.writing.rewrite_zh import rewrite_zh
 from research_harness.stages.writing.translate_en2zh import translate_en2zh
 from research_harness.stages.writing.translate_zh2en import translate_zh2en
 from research_harness.stages.writing.write_section import write_section
+from research_harness.stages.writing.define_core_contribution import define_core_contribution
+from research_harness.stages.writing.outline_paper_structure import outline_paper_structure
 
 import os
 from typing import Optional
@@ -190,4 +192,4 @@ def write_paper(
     }
 
 
-__all__ = ['analyze_results', 'check_logic', 'compile_paper', 'compress_text', 'design_architecture_figure', 'expand_text', 'generate_figure_caption', 'generate_mermaid_diagram', 'generate_paper_figures', 'generate_table_caption', 'humanize_text', 'polish_natural', 'polish_rigorous', 'polish_zh', 'recommend_visualization', 'remove_ai_flavor_zh', 'rewrite_zh', 'translate_en2zh', 'translate_zh2en', 'write_section', 'write_paper', 'gather_context']
+__all__ = ['analyze_results', 'check_logic', 'compile_paper', 'compress_text', 'design_architecture_figure', 'expand_text', 'generate_figure_caption', 'generate_mermaid_diagram', 'generate_paper_figures', 'generate_table_caption', 'humanize_text', 'polish_natural', 'polish_rigorous', 'polish_zh', 'recommend_visualization', 'remove_ai_flavor_zh', 'rewrite_zh', 'translate_en2zh', 'translate_zh2en', 'write_section', 'define_core_contribution', 'outline_paper_structure', 'write_paper', 'gather_context']

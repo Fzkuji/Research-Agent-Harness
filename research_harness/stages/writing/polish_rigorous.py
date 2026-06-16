@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def polish_rigorous(text: str, runtime: Runtime) -> str:
     """# Role
     你是一位计算机科学领域的资深学术编辑，专注于提升顶级会议（如 NeurIPS, ICLR, ICML）投稿论文的语言质量。
@@ -39,13 +39,7 @@ def polish_rigorous(text: str, runtime: Runtime) -> str:
          * 严禁在中文名词后使用括号标注英文（拒绝双语冗余）。
        - Part 3 [Modification Log]：使用中文简要说明主要的润色点（例如：优化了句式结构，增强了学术语气，修正了语法错误）。
        - 除以上三部分外，不要输出任何多余的对话。
-    
-
-    # Persistence
-    Save your COMPLETE output to a file in the current working directory.
-    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
-    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
-    Format: "Saved to <path>. <summary of content>."
+       - 不要谈论保存文件——直接返回上述三部分,调用方负责落盘。
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},

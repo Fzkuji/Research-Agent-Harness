@@ -67,6 +67,8 @@ _ENTRIES: dict[str, tuple[str, str, str]] = {
     # Writing
     "write_paper":              ("research_harness.stages.writing", "write_paper", "writing"),
     "write_section":            ("research_harness.stages.writing", "write_section", "writing"),
+    "define_core_contribution": ("research_harness.stages.writing", "define_core_contribution", "writing"),
+    "outline_paper_structure":  ("research_harness.stages.writing", "outline_paper_structure", "writing"),
     "polish_rigorous":          ("research_harness.stages.writing", "polish_rigorous", "writing"),
     "polish_natural":           ("research_harness.stages.writing", "polish_natural", "writing"),
     "compress_text":            ("research_harness.stages.writing", "compress_text", "writing"),
