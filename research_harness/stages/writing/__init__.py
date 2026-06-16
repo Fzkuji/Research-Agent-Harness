@@ -124,6 +124,8 @@ def _gather_project_materials(output_dir: str) -> str:
 # (write_section's contract), which we wrap here into a real LaTeX paper.
 _LATEX_PREAMBLE = r"""\documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
 \usepackage{booktabs}
