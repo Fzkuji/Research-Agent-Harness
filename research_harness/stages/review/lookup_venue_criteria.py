@@ -8,7 +8,7 @@ from research_harness.references.venue_scoring import (
 )
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def lookup_venue_criteria(venue: str, runtime: Runtime) -> str:
     """Return the venue's exact review scoring criteria.
 

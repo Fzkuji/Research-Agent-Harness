@@ -16,7 +16,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def digest_paper(target: str, paper_hint_json: str,
                  output_path: str, papers_dir: str,
                  runtime: Runtime) -> str:

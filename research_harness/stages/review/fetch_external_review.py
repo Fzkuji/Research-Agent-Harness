@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def fetch_external_review(paper_path: str, provider: str, venue: str,
                           email: str, review_url: str,
                           runtime: Runtime) -> str:

@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def translate_en2zh(text: str, runtime: Runtime) -> str:
     """# Role
     你是一位资深的计算机科学领域的学术翻译官。你的任务是帮助科研人员快速理解复杂的英文论文段落。
@@ -28,11 +28,6 @@ def translate_en2zh(text: str, runtime: Runtime) -> str:
        - 不要包含任何 LaTeX 代码（包括数学公式的语法符号）。
     
 
-    # Persistence
-    Save your COMPLETE output to a file in the current working directory.
-    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
-    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
-    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},

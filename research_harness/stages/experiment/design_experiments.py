@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def design_experiments(idea: str, runtime: Runtime) -> str:
     """Design a rigorous, complete experiment plan for the given idea.
 

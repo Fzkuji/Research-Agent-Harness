@@ -49,7 +49,7 @@ _QUERIES_SCHEMA = {
 }
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def generate_multi_specificity_queries(paper_content: str,
                                        runtime: Runtime) -> str:
     """Generate arXiv search queries for prior-work grounding.

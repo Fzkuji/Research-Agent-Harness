@@ -184,7 +184,7 @@ def _render_audit_markdown(audit: dict) -> str:
     return "\n".join(lines)
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def anti_sycophancy_guard(rebuttal_draft: str, original_reviews: str,
                           paper_content: str, venue: str,
                           runtime: Runtime) -> str:

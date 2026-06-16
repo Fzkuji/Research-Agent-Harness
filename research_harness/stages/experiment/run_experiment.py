@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"siblings": -1})
+@agentic_function(render_range={"subcalls": -1})
 def run_experiment(plan: str, step: str, runtime: Runtime) -> str:
     """Execute one step of the experiment plan.
 
@@ -20,11 +20,6 @@ def run_experiment(plan: str, step: str, runtime: Runtime) -> str:
     Output: Execution report with results.
     
 
-    # Persistence
-    Save your COMPLETE output to a file in the current working directory.
-    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
-    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
-    Format: "Saved to <path>. <summary of content>."
 
     ALSO write a machine-readable run_record.json NEXT TO your report file:
     {"run_id": "<short unique id for this run>",

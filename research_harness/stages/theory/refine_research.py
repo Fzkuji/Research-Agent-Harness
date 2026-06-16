@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def refine_research(direction: str, runtime: Runtime) -> str:
     """Turn a vague research direction into a problem-anchored, elegant,
     frontier-aware, implementation-oriented method plan.
@@ -52,11 +52,6 @@ def refine_research(direction: str, runtime: Runtime) -> str:
     - Complexity budget: max 2 new trainable components, max 2 paper-level claims
     
 
-    # Persistence
-    Save your COMPLETE output to a file in the current working directory.
-    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
-    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
-    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": direction},

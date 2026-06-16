@@ -172,7 +172,7 @@ def _compact_survey(s: dict) -> dict:
 # ─── Section-level leaves (one LLM call each) ──────────────────────────
 
 
-@agentic_function(render_range={"siblings": -1})
+@agentic_function
 def _write_abstract(direction: str, framework_outline: str,
                     stats_json: str, surveys_brief: str,
                     runtime: Runtime) -> str:
@@ -196,7 +196,7 @@ def _write_abstract(direction: str, framework_outline: str,
     )}])
 
 
-@agentic_function(render_range={"siblings": -1})
+@agentic_function
 def _write_introduction(direction: str, framework_outline: str,
                         surveys_brief: str,
                         runtime: Runtime) -> str:
@@ -227,7 +227,7 @@ def _write_introduction(direction: str, framework_outline: str,
     )}])
 
 
-@agentic_function(render_range={"siblings": -1})
+@agentic_function
 def _write_taxonomy_overview(direction: str, framework_outline: str,
                              counts_json: str,
                              runtime: Runtime) -> str:
@@ -256,7 +256,7 @@ def _write_taxonomy_overview(direction: str, framework_outline: str,
     )}])
 
 
-@agentic_function(render_range={"siblings": -1})
+@agentic_function
 def _write_branch_detail(direction: str, branch_name: str,
                          branch_number: str,
                          branch_outline: str,
@@ -317,7 +317,7 @@ def _write_branch_detail(direction: str, branch_name: str,
     )}])
 
 
-@agentic_function(render_range={"siblings": -1})
+@agentic_function
 def _write_cross_cutting(direction: str, framework_outline: str,
                          xcut_outline: str,
                          papers_json: str,
@@ -355,7 +355,7 @@ def _write_cross_cutting(direction: str, framework_outline: str,
     )}])
 
 
-@agentic_function(render_range={"siblings": -1})
+@agentic_function
 def _write_research_gaps(direction: str, framework_outline: str,
                          papers_json: str,
                          runtime: Runtime) -> str:

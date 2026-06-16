@@ -213,7 +213,7 @@ def _build_structured_instructions(*, venue_name: str, venue_criteria: str,
     )
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def review_paper_grounded(paper_content: str, venue: str,
                           venue_criteria: str, prior_work_context: str,
                           persona: str,

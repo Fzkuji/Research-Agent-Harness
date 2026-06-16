@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def compile_paper(paper_dir: str, runtime: Runtime) -> str:
     """Compile LaTeX paper to PDF, fix errors, and verify output.
 
@@ -54,11 +54,6 @@ def compile_paper(paper_dir: str, runtime: Runtime) -> str:
     undefined references/citations count, overfull hbox count).
     
 
-    # Persistence
-    Save your COMPLETE output to a file in the current working directory.
-    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
-    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
-    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": f"Paper directory: {paper_dir}"},

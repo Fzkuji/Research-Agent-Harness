@@ -14,7 +14,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def build_style_profile(sample_paths: str, output_path: str = "",
                         runtime: Runtime = None) -> str:
     """Learn the author's writing voice from past writing samples.
@@ -43,12 +43,6 @@ def build_style_profile(sample_paths: str, output_path: str = "",
     style. With fewer than 3 samples, still produce the profile but add
     "(low confidence: N samples)" inside register_notes.
 
-    # Persistence
-    Save the JSON object to `output_path`; when output_path is empty,
-    save to style_profile.json in the current working directory.
-    After saving, return a brief summary (2-3 sentences) of the most
-    distinctive traits, including the file path.
-    Format: "Saved to <path>. <summary>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": (

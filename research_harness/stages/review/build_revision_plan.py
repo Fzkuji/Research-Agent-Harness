@@ -215,7 +215,7 @@ def _render_plan_markdown(plan: dict, round_num: int = 1) -> str:
     return "\n".join(lines)
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def build_revision_plan(paper_content: str, individual_reviews: str,
                         meta_review: str, venue: str, venue_criteria: str,
                         runtime: Runtime) -> str:

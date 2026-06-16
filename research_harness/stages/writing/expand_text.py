@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def expand_text(text: str, runtime: Runtime) -> str:
     """# Role
     你是一位专注于逻辑流畅度的顶级学术编辑。你的特长是通过深挖内容深度和增强逻辑连接，使文本更加饱满、充分。
@@ -42,11 +42,6 @@ def expand_text(text: str, runtime: Runtime) -> str:
     2. 风格检查：扩写后的文字是否依然凝练？（避免变成废话文学）。
     
 
-    # Persistence
-    Save your COMPLETE output to a file in the current working directory.
-    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
-    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
-    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},

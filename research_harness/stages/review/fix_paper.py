@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"siblings": -1})
+@agentic_function(render_range={"subcalls": -1})
 def fix_paper(paper_content: str, review_feedback: str,
               round_num: int, runtime: Runtime) -> str:
     """# Role

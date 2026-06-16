@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"siblings": -1})
+@agentic_function(render_range={"subcalls": -1})
 def experiment_bridge(plan: str, runtime: Runtime) -> str:
     """Bridge between idea discovery and auto review loop. Takes an experiment plan
     and turns it into running experiments with initial results.
@@ -55,11 +55,6 @@ def experiment_bridge(plan: str, runtime: Runtime) -> str:
     deployment status, initial results collected.
     
 
-    # Persistence
-    Save your COMPLETE output to a file in the current working directory.
-    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
-    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
-    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": f"Experiment plan to implement:\n{plan}"},

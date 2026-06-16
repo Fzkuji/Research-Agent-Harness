@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def rewrite_zh(text: str, runtime: Runtime) -> str:
     """# Role
     你是一位资深的中文学术期刊（如《计算机学报》、《软件学报》）编辑，同时也是顶尖会议的中文审稿人。你拥有极高的文字驾驭能力，擅长将碎片化、口语化的表达重构为逻辑严密、用词考究的学术文本。
@@ -40,11 +40,6 @@ def rewrite_zh(text: str, runtime: Runtime) -> str:
     3. 复制到 Word 里是否会有讨厌的格式符？（如有，请立即删除）
     
 
-    # Persistence
-    Save your COMPLETE output to a file in the current working directory.
-    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
-    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
-    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": text},

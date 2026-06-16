@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def humanize_text(text: str, lang: str, voice_sample: str,
                   runtime: Runtime,
                   phrase_library_json: str = "") -> str:
@@ -238,14 +238,6 @@ def humanize_text(text: str, lang: str, voice_sample: str,
     If unchanged, write "[检测通过] 原文表达自然，无明显 AI 特征，建议保留。"
     / "[clean] no changes needed."
 
-    # Persistence
-    Save your COMPLETE output (Part 1 + Part 2 + Part 3) to a file in the
-    current working directory. Choose a descriptive filename based on the
-    function and context (e.g., humanize_intro_en.md, humanize_method_zh.md).
-    After saving, return a brief summary (2-3 sentences) including the file
-    path, the language detected, and whether the text was changed or passed
-    through.
-    Format: "Saved to <path>. <summary>."
     """
     library_block = ""
     if phrase_library_json:

@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def search_semantic_scholar(query: str, runtime: Runtime) -> str:
     """Search published venue papers (IEEE, ACM, Springer, etc.) via Semantic Scholar
     API. Complements arXiv (preprints) with citation counts, venue metadata, and TLDR.
@@ -61,11 +61,6 @@ def search_semantic_scholar(query: str, runtime: Runtime) -> str:
     Output: Structured list of papers with citation counts, venues, and DOI links.
     
 
-    # Persistence
-    Save your COMPLETE output to a file in the current working directory.
-    Choose a descriptive filename based on the function and context (e.g., survey_llm_uncertainty.md).
-    After saving, return a brief summary (2-3 sentences) of what you produced, including the file path.
-    Format: "Saved to <path>. <summary of content>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": f"Search query: {query}"},

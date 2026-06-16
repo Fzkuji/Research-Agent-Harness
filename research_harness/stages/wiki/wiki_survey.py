@@ -14,7 +14,7 @@ from research_harness.stages.wiki._helpers import (
 )
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def wiki_survey(topic: str, wiki_root: str, depth: int, runtime: Runtime) -> str:
     """Rewrite a topic page as a Wikipedia-style article from its papers.
 

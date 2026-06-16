@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def write_disclosure(paper_path: str, venue: str = "",
                      runtime: Runtime = None) -> str:
     """Draft the venue-specific AI-usage disclosure statement for a paper.
@@ -31,10 +31,6 @@ def write_disclosure(paper_path: str, venue: str = "",
     - State facts only — if how something was produced is not evident
       from the materials, write [TO CONFIRM: ...] rather than guessing.
 
-    # Persistence
-    Save the statement to a file next to the paper (e.g. DISCLOSURE.md).
-    After saving, return a brief summary (1-2 sentences) including the
-    file path. Format: "Saved to <path>. <summary>."
     """
     return runtime.exec(content=[
         {"type": "text", "text": (

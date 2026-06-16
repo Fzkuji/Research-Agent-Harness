@@ -94,7 +94,7 @@ def _wrap_up_choice() -> dict:
     }
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def socratic_plan(
     topic: str,
     output_dir: str = "",
