@@ -77,18 +77,31 @@ def extract_claims(paper_or_analysis_path: str, runtime: Runtime) -> str:
 # Evidence collection (deterministic)
 # ---------------------------------------------------------------------------
 
+# Experiment artifacts land in one of two folders depending on entry point:
+# the autonomous run prompt assigns the stage_folder ``experiments/``, while
+# the ``run_experiments`` orchestrator (pipeline.py) defaults to
+# ``auto_experiment/``. The integrity gate scans both so it never silently
+# misses run records.
+_EXPERIMENT_DIRS = ("experiments", "auto_experiment")
+
+
 def _load_run_records(project_dir: str) -> list[dict]:
-    """Load all auto_experiment/**/run_record.json files (malformed ones noted)."""
+    """Load all <experiment dir>/**/run_record.json files (malformed noted)."""
     records = []
-    pattern = os.path.join(project_dir, "auto_experiment", "**", "run_record.json")
-    for path in sorted(glob.glob(pattern, recursive=True)):
-        rel = os.path.relpath(path, project_dir)
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                records.append({"path": rel, "record": json.load(f)})
-        except (json.JSONDecodeError, OSError) as e:
-            records.append({"path": rel, "record": None,
-                            "error": f"unreadable run_record.json: {e}"})
+    seen = set()
+    for d in _EXPERIMENT_DIRS:
+        pattern = os.path.join(project_dir, d, "**", "run_record.json")
+        for path in sorted(glob.glob(pattern, recursive=True)):
+            if path in seen:
+                continue
+            seen.add(path)
+            rel = os.path.relpath(path, project_dir)
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    records.append({"path": rel, "record": json.load(f)})
+            except (json.JSONDecodeError, OSError) as e:
+                records.append({"path": rel, "record": None,
+                                "error": f"unreadable run_record.json: {e}"})
     return records
 
 
@@ -96,9 +109,10 @@ def _result_file_excerpts(project_dir: str, per_file: int = 1500,
                           total: int = 9000) -> list[str]:
     """Bounded excerpts of experiments/ result files (csv/json)."""
     paths = set()
-    for ext in ("csv", "json"):
-        paths.update(glob.glob(os.path.join(project_dir, "experiments",
-                                            "**", f"*.{ext}"), recursive=True))
+    for d in _EXPERIMENT_DIRS:
+        for ext in ("csv", "json"):
+            paths.update(glob.glob(os.path.join(project_dir, d,
+                                                "**", f"*.{ext}"), recursive=True))
     excerpts, used = [], 0
     for path in sorted(paths):
         if used >= total:
@@ -115,12 +129,13 @@ def _result_file_excerpts(project_dir: str, per_file: int = 1500,
 
 
 def _find_claim_sources(project_dir: str) -> list[str]:
-    """Analysis/paper text to audit: analysis_*.md, paper/*.tex, auto_experiment/SUMMARY.md."""
+    """Analysis/paper text to audit: analysis_*.md, paper/*.tex, experiments/SUMMARY.md."""
     sources = sorted(glob.glob(os.path.join(project_dir, "analysis_*.md")))
     sources += sorted(glob.glob(os.path.join(project_dir, "paper", "*.tex")))
-    summary = os.path.join(project_dir, "auto_experiment", "SUMMARY.md")
-    if os.path.exists(summary):
-        sources.append(summary)
+    for d in _EXPERIMENT_DIRS:
+        summary = os.path.join(project_dir, d, "SUMMARY.md")
+        if os.path.exists(summary):
+            sources.append(summary)
     return sources
 
 
@@ -219,8 +234,8 @@ def integrity_gate(project_dir: str, runtime: Runtime = None) -> dict:
     """Audit empirical claims in analysis/paper text against run artifacts.
 
     Mechanically grounded: evidence is the harness's own
-    auto_experiment/**/run_record.json plus experiments/ result files —
-    not scholar declarations as in ARS #260.
+    run_record.json files (under experiments/ or auto_experiment/) plus
+    result files — not scholar declarations as in ARS #260.
 
     Args:
         project_dir: Research project directory.

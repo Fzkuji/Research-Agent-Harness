@@ -82,6 +82,10 @@ def _gather_project_materials(output_dir: str) -> str:
         ("ideas/ranking.md", 4000),
         ("ideas/ideas.md", 3000),
         ("experiments/plan.md", 6000),
+        # Measured results so the paper reports real numbers, not just the
+        # plan: the experiment SUMMARY and machine-readable run records the
+        # integrity gate audits against.
+        ("experiments/SUMMARY.md", 4000),
     ]
     parts = []
     for rel, cap in picks:
@@ -92,6 +96,26 @@ def _gather_project_materials(output_dir: str) -> str:
                     parts.append(f"## {rel}\n{f.read()[:cap]}")
             except (UnicodeDecodeError, IOError):
                 pass
+    # Run records carry the exact key_metrics every claimed number must trace
+    # to. Fold them in (bounded) so write_section can cite measured values.
+    import glob as _glob
+    records = []
+    used = 0
+    for d in ("experiments", "auto_experiment"):
+        for rp in sorted(_glob.glob(_os.path.join(root, d, "**", "run_record.json"),
+                                    recursive=True)):
+            if used >= 6000:
+                break
+            try:
+                with open(rp, encoding="utf-8") as f:
+                    snippet = f.read(1500)
+            except (UnicodeDecodeError, IOError):
+                continue
+            used += len(snippet)
+            records.append(f"### {_os.path.relpath(rp, root)}\n{snippet}")
+    if records:
+        parts.append("## Measured run records (cite exact numbers from here)\n"
+                     + "\n\n".join(records))
     return "\n\n".join(parts)
 
 
