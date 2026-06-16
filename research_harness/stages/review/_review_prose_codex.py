@@ -424,14 +424,17 @@ def generate_review_text(*, paper_content: str, venue_name: str,
                 raise RuntimeError(
                     f"summary section only {len(s)} chars (expected longer). "
                     f"Full artifact saved to /tmp/last_review_artifact_codex.md")
-        # Soft sanity for bullet-style fields if they're in this venue's form.
+        # Sanity for bullet-style fields: a field is only broken when it's
+        # ENTIRELY empty (the model skipped it). A single bullet is a thin but
+        # valid review — not a parse failure — so don't crash the whole review
+        # loop over it (it previously raised at <2, contradicting its own
+        # "soft sanity" intent and killing otherwise-usable reviews).
         for f in norm_expected:
             v = parsed.get(f)
-            if isinstance(v, list) and len(v) < 2:
+            if isinstance(v, list) and len(v) == 0:
                 raise RuntimeError(
-                    f"field {f!r} only produced {len(v)} bullets "
-                    f"(expected ≥2). Full artifact at "
-                    f"/tmp/last_review_artifact_codex.md")
+                    f"field {f!r} produced 0 bullets (model skipped it). "
+                    f"Full artifact at /tmp/last_review_artifact_codex.md")
         return parsed
     finally:
         shutil.rmtree(workdir, ignore_errors=True)
