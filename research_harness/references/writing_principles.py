@@ -106,4 +106,29 @@ Technical:
 - [ ] Error bars and statistical reporting clear
 - [ ] Compute resources documented
 - [ ] Code/data availability stated
+
+## Limitations and Scope — write them like a real paper
+
+Every paper has a scope boundary (synthetic vs. real data, one domain,
+small N). Real papers handle this with confidence, not disclaimers. Do it
+the way published work does:
+
+- State the boundary ONCE, in a normal Limitations paragraph (or the end of
+  Discussion), as a research-scope statement — then move on. Example:
+  "Our evaluation uses a controlled synthetic trace suite; we do not claim
+  these results transfer directly to model-driven agents in the wild.
+  Extending the analysis to live LLM trajectories is left to future work."
+- Frame a methodological choice as deliberate, not as a shortfall:
+  "We use synthetic traces *to isolate* the control-flow mechanisms from
+  model stochasticity" — not "we could not run a full benchmark".
+- Report whatever you measured as the paper's results, in past tense, with
+  no hedging about completeness.
+
+Never do these (they read as a status report / lab notebook, not a paper):
+- a sentence or paragraph that "distinguishes measured claims from
+  illustrative ones", or announces which numbers are real;
+- "[MATERIAL GAP]", "[VERIFY]", "results are illustrative", "in a full
+  evaluation", "pending", "planned evaluation", "to be measured";
+- per-claim caveats scattered through Results. One Limitations section
+  carries all scope caveats; the rest of the paper states findings plainly.
 """.strip()
