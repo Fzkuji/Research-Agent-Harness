@@ -26,7 +26,11 @@ def compile_paper(paper_dir: str, runtime: Runtime) -> str:
        - Undefined references: check \\\\label exists in correct environment
        - Missing figures: check extension (.png vs .pdf), update \\\\includegraphics path
        - Citation undefined: add entry to references.bib or fix citation key
-       - [VERIFY] markers: search for correct info or flag to user
+       - Any [VERIFY] / PLACEHOLDER markers or "results illustrative" / "in a
+         full evaluation" / gap notes that slipped into the body: resolve them
+         — verify and cite the real source, or rewrite the sentence so it no
+         longer needs the marker. The shipped PDF must read as a finished
+         paper, never leave scaffolding text.
        - Overfull hbox: minor if <20pt, rephrase if severe
        - BibTeX syntax errors: fix missing comma, unmatched braces, special chars
        - \\\\crefname undefined: add after \\\\newtheorem in preamble

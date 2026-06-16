@@ -248,8 +248,8 @@ def write_paper(
     paper_path = _os.path.join(output_dir, "main.tex")
     with open(paper_path, "w", encoding="utf-8") as f:
         f.write(paper)
-    # references.bib stub — write_section emits \cite keys / [VERIFY] markers;
-    # citation verification (P2) fills real entries. Don't fabricate here.
+    # references.bib stub — write_section cites verified keys (it verifies or
+    # rephrases, never leaves markers); the citation step fills entries.
     bib_path = _os.path.join(output_dir, "references.bib")
     if not _os.path.exists(bib_path):
         with open(bib_path, "w", encoding="utf-8") as f:

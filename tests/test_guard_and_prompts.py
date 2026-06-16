@@ -94,15 +94,22 @@ class TestSkewAdvisory:
 
 # ── 3. Knowledge-isolation directive ─────────────────────────────────
 
-class TestKnowledgeIsolation:
-    def test_docstring_contains_material_gap_contract(self):
+class TestFinishedPaperWriting:
+    def test_docstring_forbids_scaffolding_markers(self):
+        """write_section must produce a FINISHED paper — no [MATERIAL GAP] /
+        [VERIFY] / illustrative scaffolding (the user wants a real paper, not
+        a status report). It must still forbid fabricating data."""
         from research_harness.stages.writing.write_section import (
             write_section,
         )
         doc = write_section.__doc__
-        assert "Knowledge isolation" in doc
-        assert "[MATERIAL GAP:" in doc
-        assert "parametric memory" in doc
+        # The old gap-marker contract ("[MATERIAL GAP: what is missing]") is gone.
+        assert "[MATERIAL GAP:" not in doc
+        # New contract: write it as a finished paper, forbidding scaffolding.
+        assert "finished" in doc.lower()
+        assert "illustrative" in doc.lower()  # named as something to NEVER emit
+        # Still must not fabricate data.
+        assert "fabricate" in doc.lower()
 
 
 # ── 4. Style profile persistence ─────────────────────────────────────

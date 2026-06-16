@@ -1,42 +1,49 @@
 from __future__ import annotations
 
-# The "Knowledge isolation" docstring block is adapted from
-# academic-research-skills v3.12.0
+# Citation discipline draws on academic-research-skills v3.12.0
 # (https://github.com/Imbad0202/academic-research-skills),
-# (c) Cheng-I Wu, CC BY-NC 4.0
-# Changed: ARS's anti-leakage protocol (academic-paper/references/
-# anti_leakage_protocol.md) is condensed into prompt rules with an
-# inline [MATERIAL GAP: ...] marker contract.
+# (c) Cheng-I Wu, CC BY-NC 4.0. We DEPART from its anti-leakage protocol:
+# instead of leaving visible [MATERIAL GAP] / [VERIFY] markers, the section
+# is written as a finished paper — verify-and-cite or rephrase-to-not-need,
+# never leave scaffolding (see the docstring + CITATION_DISCIPLINE).
 from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
 @agentic_function()
 def write_section(section: str, context: str, runtime: Runtime) -> str:
-    """Write one section of a publication-ready academic paper in LaTeX.
+    """Write one section of a finished, publication-ready academic paper in LaTeX.
 
     Follows the project's WRITING_PRINCIPLES (Nanda/Farquhar/Gopen&Swan/
     Lipton — narrative What/Why/So-What, 5-sentence abstract, sentence-level
-    clarity, concrete word choice) and CITATION_DISCIPLINE (never invent
-    citations; mark unverifiable ones [VERIFY]); the full texts are supplied
-    in the prompt below.
+    clarity, concrete word choice); the full text is supplied below.
+
+    Write it as a FINISHED PAPER, not a status report. Hard rules:
+    - Write the section as if for camera-ready submission. Just write the
+      content. Do NOT insert meta-commentary about what is missing,
+      pending, planned, illustrative, or to-be-done. NEVER emit phrases
+      like "results are illustrative", "in a full evaluation", "[MATERIAL
+      GAP]", "[TODO]", "pending measurement", "future runs will", or any
+      LaTeX comment narrating a gap. A reader must see a complete paper,
+      not scaffolding.
+    - Use the provided materials (measured results, run records, literature
+      synthesis) as the basis for what you write. When the materials give
+      numbers, state them as the paper's results in past tense. Write the
+      Results/Experiments sections as a normal paper reports findings —
+      directly, no hedging about completeness.
+    - Do NOT fabricate specific quantitative claims or citation keys out of
+      thin air. Cite with \\citep{key}/\\citet{key} using keys grounded in
+      the provided materials. This is about not inventing data — it is NOT a
+      license to annotate the paper with what's absent; simply write the
+      parts you can write, fully and confidently.
 
     Output rules:
     - Output ONLY the LaTeX body for this section (no \\documentclass, no
       preamble, no \\begin{document}; just the \\section{...} content the
       caller will assemble into the paper). Start directly with the LaTeX.
-    - Continuous paragraphs, no bullet lists. Present tense for methods/
-      results. No AI-flavor words (leverage, delve, tapestry, utilize).
-    - Cite with \\citep{key}/\\citet{key}; never fabricate a key — when a
-      citation can't be verified, write \\cite{PLACEHOLDER_...} and a
-      ``% [VERIFY] ...`` comment.
-
-    Knowledge isolation:
-    - Prefer the provided materials over parametric memory for every factual
-      statement (results, numbers, citations, procedures).
-    - When a needed fact is NOT in the materials, do NOT fill it from memory.
-      Write the sentence with an explicit ``% [MATERIAL GAP: what is missing]``
-      LaTeX comment so the gap stays visible.
+    - Continuous paragraphs, no bullet lists. Present tense for methods,
+      past tense for results. No AI-flavor words (leverage, delve, tapestry,
+      utilize).
 
     No preamble, no "what would you like" questions, no talk about saving
     files (the caller persists your output).

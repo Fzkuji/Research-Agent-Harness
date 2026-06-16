@@ -5,8 +5,20 @@ CITATION_DISCIPLINE = r"""
 
 ## Core Principle
 
-**Never generate citations from memory.** If a citation cannot be verified
-programmatically, mark it as [VERIFY] — do not fabricate BibTeX.
+**Never generate citations from memory, but never leave scaffolding in the
+paper either.** Two non-negotiables that work together:
+  1. Do not fabricate a citation (real author + fake title, real arXiv id +
+     wrong venue, etc.). Cite only papers you have verified.
+  2. The finished paper must read as camera-ready — NO `[VERIFY]` comments,
+     NO `\cite{PLACEHOLDER_...}` keys, NO "citation pending" notes left in
+     the body.
+
+When a claim needs a citation: VERIFY it first (you have search tools), then
+cite the real key. If you cannot verify a citation for a specific claim,
+REWRITE the sentence so it stands on its own without that citation (state it
+as the paper's own reasoning, or drop the unsupported specific) — do NOT keep
+the claim with a placeholder. "Verify and cite" or "rephrase to not need it"
+— never "leave a marker".
 
 ## Typical Hallucination Patterns
 
@@ -46,12 +58,15 @@ CrossRef/DOI:
     firstauthor_year_keyword
     e.g.: vaswani_2017_attention, devlin_2019_bert
 
-## Placeholder Policy
+## When verification fails
 
-If verification fails, leave explicit markers:
-
-    % [VERIFY] could not confirm DOI / venue / exact title
-    \cite{PLACEHOLDER_author2024_verify}
+Do NOT leave a marker in the paper. Either:
+  - find a different, verifiable source for the same point, or
+  - rewrite the sentence so it no longer depends on an external citation
+    (present it as the paper's own argument, or remove the unverifiable
+    specific claim).
+The body must never contain `[VERIFY]` or `PLACEHOLDER` — those are working
+notes, not paper content.
 
 ## BibTeX Management Rules
 
@@ -69,5 +84,5 @@ If verification fails, leave explicit markers:
 - [ ] Author list complete
 - [ ] Year and venue verified
 - [ ] Cited claim actually supported by the paper
-- [ ] Unresolved uncertainty marked with [VERIFY]
+- [ ] Unverifiable claims rewritten to not need a citation (NOT left as a marker)
 """.strip()
