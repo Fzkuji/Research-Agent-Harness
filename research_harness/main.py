@@ -457,11 +457,30 @@ def research_agent(
                 break
 
             context = "\n".join(stage_context_parts) if stage_context_parts else ""
-            step_result = _stage_step(
-                stage=stage, sub_task=sub_task, context=context,
-                runtime=runtime, review_runtime=review_runtime,
-                blocked=frozenset(blocked_funcs),
-            )
+            # A provider stream failure (codex mid-stream break, rate limit,
+            # transient 5xx) inside _stage_step's own runtime.exec used to
+            # raise straight through and kill the entire multi-hour run.
+            # Treat it like any other failed step: record it, let the
+            # repeated-failure / global-budget guards decide, and keep going
+            # so the run can still reach a stage_done / finalize instead of
+            # crashing. The exception is NOT a logic bug in the harness.
+            try:
+                step_result = _stage_step(
+                    stage=stage, sub_task=sub_task, context=context,
+                    runtime=runtime, review_runtime=review_runtime,
+                    blocked=frozenset(blocked_funcs),
+                )
+            except Exception as e:
+                step_result = {
+                    "call": "_stage_step",
+                    "result": f"{e.__class__.__name__}: {str(e)[:200]}",
+                    "success": False,
+                    "func_done": False,
+                    "stage_done": False,
+                }
+                print(f"    [{stage}] step raised "
+                      f"{e.__class__.__name__} — recorded as failure, continuing.",
+                      file=sys.stderr)
             total_steps += 1
 
             call = step_result.get("call", "?")
