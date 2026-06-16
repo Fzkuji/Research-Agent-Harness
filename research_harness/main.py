@@ -412,6 +412,7 @@ def research_agent(
     review_runtime: Runtime = None,
     work_dir: str = "",
     max_runtime_s: float = None,
+    stop_event=None,
 ) -> dict:
     """Autonomous research agent with two-level control.
 
@@ -430,6 +431,14 @@ def research_agent(
     normally (conclusion still written). None = no time limit (only the
     step-count budget applies). This lets a caller say "spend ~2 hours"
     instead of guessing a step count.
+
+    ``stop_event`` is a graceful-stop signal (anything with ``is_set()``,
+    e.g. a ``threading.Event``). When set — by the CLI's first Ctrl-C, a
+    webui/TUI stop button, etc. — the loop finishes the in-flight step,
+    then stops opening new work and finalizes normally (conclusion still
+    written), same shape as the time budget. HARD stop (kill the in-flight
+    model call) is a separate concern handled by the caller (2nd Ctrl-C /
+    runtime cancel) — this flag is the GRACEFUL tier only.
     """
     if runtime is None:
         raise ValueError("research_agent() requires a runtime argument")
@@ -439,6 +448,9 @@ def research_agent(
 
     def _out_of_time() -> bool:
         return _deadline is not None and _time.monotonic() >= _deadline
+
+    def _stop_requested() -> bool:
+        return stop_event is not None and stop_event.is_set()
 
     history = []
     progress_parts = []
@@ -459,6 +471,10 @@ def research_agent(
         if _out_of_time():
             stop_reason = f"time budget reached ({max_runtime_s/60:.0f} min)"
             print(f"  [time] {stop_reason} — finalizing (no new stage).", file=sys.stderr)
+            break
+        if _stop_requested():
+            stop_reason = "graceful stop requested"
+            print(f"  [stop] {stop_reason} — finalizing (no new stage).", file=sys.stderr)
             break
 
         # Level 1: Pick stage
@@ -513,6 +529,10 @@ def research_agent(
             if _out_of_time():
                 stop_reason = f"time budget reached ({max_runtime_s/60:.0f} min)"
                 print(f"    [time] {stop_reason} — ending stage (no new step).", file=sys.stderr)
+                break
+            if _stop_requested():
+                stop_reason = "graceful stop requested"
+                print(f"    [stop] {stop_reason} — ending stage (no new step).", file=sys.stderr)
                 break
 
             context = "\n".join(stage_context_parts) if stage_context_parts else ""
@@ -767,13 +787,41 @@ def main():
         else:
             print(f"Session: {_sess.session_id} (continued)")
         print()
-        result = research_agent(
-            task=task,
-            runtime=rt,
-            review_runtime=review_rt,
-            work_dir=work_dir,
-            max_runtime_s=(args.max_minutes * 60) if args.max_minutes else None,
-        )
+
+        # Two-stage Ctrl-C: 1st = graceful stop (finish the in-flight step,
+        # save, write conclusion, exit cleanly); 2nd = hard stop (restore the
+        # default SIGINT so the next Ctrl-C raises KeyboardInterrupt and kills
+        # the process immediately — the escape hatch when the model hangs).
+        import signal as _signal
+        import threading as _threading
+        _stop_event = _threading.Event()
+        _orig_sigint = _signal.getsignal(_signal.SIGINT)
+
+        def _on_sigint(signum, frame):
+            if not _stop_event.is_set():
+                _stop_event.set()
+                print("\n[stop] graceful stop requested — finishing the current "
+                      "step, then saving + writing the conclusion. Press Ctrl-C "
+                      "again to force-quit immediately.", file=sys.stderr)
+            else:
+                # Second Ctrl-C: hand control back to the default handler and
+                # re-raise so the process dies now.
+                _signal.signal(_signal.SIGINT, _orig_sigint)
+                print("\n[stop] force-quitting.", file=sys.stderr)
+                raise KeyboardInterrupt
+
+        _signal.signal(_signal.SIGINT, _on_sigint)
+        try:
+            result = research_agent(
+                task=task,
+                runtime=rt,
+                review_runtime=review_rt,
+                work_dir=work_dir,
+                max_runtime_s=(args.max_minutes * 60) if args.max_minutes else None,
+                stop_event=_stop_event,
+            )
+        finally:
+            _signal.signal(_signal.SIGINT, _orig_sigint)
 
     # Report
     print()
