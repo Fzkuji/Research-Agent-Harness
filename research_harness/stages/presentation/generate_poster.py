@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def generate_poster(paper_content: str, venue: str,
                     runtime: Runtime) -> str:
     """Generate a conference poster (article + tcbposter LaTeX) from a compiled paper.

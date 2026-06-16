@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def define_core_contribution(repo_context: str, runtime: Runtime) -> str:
     """Consolidate a paper's contribution into ONE sentence with three pillars.
 

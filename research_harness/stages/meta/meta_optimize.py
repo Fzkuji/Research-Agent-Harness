@@ -15,7 +15,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def meta_optimize(target: str, runtime: Runtime) -> str:
     """Analyze usage logs and propose optimizations to the research harness.
 

@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def outline_paper_structure(contribution: str, context: str,
                             runtime: Runtime) -> str:
     """Produce a section-by-section outline for the paper, each with its goal.

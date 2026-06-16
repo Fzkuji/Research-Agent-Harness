@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def adaptive_summarize_priors(paper_content: str, selected_json: str,
                               max_total_tokens: int, runtime: Runtime) -> str:
     """# Role
@@ -101,6 +101,11 @@ def adaptive_summarize_priors(paper_content: str, selected_json: str,
     - Approximate token count: <int>
     ```
 
+    # Persistence
+    Save your COMPLETE output to a file in the current working directory.
+    Filename: prior_work_context.md (or with a round suffix if obvious from context).
+    After saving, return:
+    `Saved to <path>. <N> priors summarized (<A> abstract, <F> fulltext, <X> failed); ~<T> tokens.`
     """
     return runtime.exec(content=[
         {"type": "text", "text": (

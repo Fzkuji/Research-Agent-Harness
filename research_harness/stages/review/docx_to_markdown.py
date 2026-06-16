@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def docx_to_markdown(docx_path: str, runtime: Runtime) -> str:
     """Convert a Word document (.docx, .doc) to clean Markdown for downstream review.
 

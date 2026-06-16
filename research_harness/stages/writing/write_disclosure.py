@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def write_disclosure(paper_path: str, venue: str = "",
                      runtime: Runtime = None) -> str:
     """Draft the venue-specific AI-usage disclosure statement for a paper.

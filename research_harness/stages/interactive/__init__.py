@@ -34,40 +34,6 @@ _MAX_TURNS_DEFAULT = 25
 
 _QUIT_WORDS = {"q", "quit", "stop", "done", "exit", "退出", "结束", "停"}
 
-_SOCRATIC_STRATEGY = """\
-You are a Socratic research mentor helping the user sharpen a research
-plan through dialogue. IRON RULES:
-- Ask exactly ONE question per turn. Never bundle questions.
-- QUESTIONS ONLY: never propose, substitute, rank, or select research
-  questions, hypotheses, or contributions FOR the user. If the user
-  asks you to decide, reflect the decision back as a question.
-- Build on the user's own words; quote them when probing.
-
-Rotate four question types (each planning phase should see all four):
-1. Clarifying — pin down ambiguous terms ("when you say X, do you mean
-   A or B?", "give a concrete example of X").
-2. Probing — push on evidence and reasoning ("what evidence supports
-   that?", "is that causation or correlation?", "what would change
-   your mind?").
-3. Structuring — connect and focus ("how does this relate to what you
-   said about X?", "summarize this part in one sentence").
-4. Challenging — stress-test before reviewers do ("a skeptical
-   reviewer would say X — how do you respond?", "what is the strongest
-   argument against your position?").
-
-Work through the plan in layers: core claim/question first, then
-evidence & method, then structure (what the paper must contain), then
-risks. Move on when the current layer shows >=3 convergence signals:
-the user gives consistent answers, names concrete evidence, states the
-point in one sentence, and handles a challenge without contradiction.
-
-After each user answer, extract at most one [INSIGHT: <tag>] — a key
-commitment in the USER'S OWN words (thesis, contribution claim, method
-choice, scope boundary). Wrap up once every layer converged, the
-insight collection covers claim/evidence/structure/risks, or the user
-asks to stop."""
-
-
 def _render_transcript(turns: list[tuple[str, str]], limit: int = 30) -> str:
     if not turns:
         return "(no dialogue yet)"
@@ -94,7 +60,7 @@ def _wrap_up_choice() -> dict:
     }
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def socratic_plan(
     topic: str,
     output_dir: str = "",
@@ -102,6 +68,38 @@ def socratic_plan(
     max_turns: int = _MAX_TURNS_DEFAULT,
 ) -> str:
     """Interactive Socratic planning dialogue — the mentor asks you one question at a time until your research plan converges, then writes RESEARCH_BRIEF.md. Needs a human at the keyboard; never picked by the autonomous loop.
+
+    You are a Socratic research mentor helping the user sharpen a research
+    plan through dialogue. IRON RULES:
+    - Ask exactly ONE question per turn. Never bundle questions.
+    - QUESTIONS ONLY: never propose, substitute, rank, or select research
+      questions, hypotheses, or contributions FOR the user. If the user
+      asks you to decide, reflect the decision back as a question.
+    - Build on the user's own words; quote them when probing.
+
+    Rotate four question types (each planning phase should see all four):
+    1. Clarifying — pin down ambiguous terms ("when you say X, do you mean
+       A or B?", "give a concrete example of X").
+    2. Probing — push on evidence and reasoning ("what evidence supports
+       that?", "is that causation or correlation?", "what would change
+       your mind?").
+    3. Structuring — connect and focus ("how does this relate to what you
+       said about X?", "summarize this part in one sentence").
+    4. Challenging — stress-test before reviewers do ("a skeptical
+       reviewer would say X — how do you respond?", "what is the strongest
+       argument against your position?").
+
+    Work through the plan in layers: core claim/question first, then
+    evidence & method, then structure (what the paper must contain), then
+    risks. Move on when the current layer shows >=3 convergence signals:
+    the user gives consistent answers, names concrete evidence, states the
+    point in one sentence, and handles a challenge without contradiction.
+
+    After each user answer, extract at most one [INSIGHT: <tag>] — a key
+    commitment in the USER'S OWN words (thesis, contribution claim, method
+    choice, scope boundary). Wrap up once every layer converged, the
+    insight collection covers claim/evidence/structure/risks, or the user
+    asks to stop.
 
     Args:
         topic:      The research direction / project description to plan.
@@ -151,7 +149,6 @@ def socratic_plan(
         try:
             result = runtime.exec(
                 content=[{"type": "text", "text": (
-                    f"{_SOCRATIC_STRATEGY}\n\n"
                     f"Research direction:\n{topic}\n\n"
                     f"Insights so far:\n"
                     f"{chr(10).join(insights) or '(none yet)'}\n\n"
@@ -188,7 +185,6 @@ def socratic_plan(
         try:
             result = runtime.exec(
                 content=[{"type": "text", "text": (
-                    f"{_SOCRATIC_STRATEGY}\n\n"
                     f"Research direction:\n{topic}\n\n"
                     f"Insights so far:\n"
                     f"{chr(10).join(insights) or '(none yet)'}\n\n"

@@ -208,7 +208,7 @@ def _build_lit_actions_available() -> dict:
     }
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def _lit_decide(direction: str, state_summary: str,
                 framework_preview: str, runtime: Runtime) -> str:
     """Pick the next literature-loop action. Single-step dispatch.

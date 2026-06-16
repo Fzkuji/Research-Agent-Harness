@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def plan_ablations(method_description: str, results: str,
                    claims: str, runtime: Runtime) -> str:
     """Systematically design ablation studies that answer the questions reviewers

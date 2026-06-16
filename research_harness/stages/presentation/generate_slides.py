@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def generate_slides(paper_content: str, venue: str, talk_type: str,
                     minutes: int, runtime: Runtime) -> str:
     """Generate conference presentation slides (Beamer LaTeX) from a compiled paper.

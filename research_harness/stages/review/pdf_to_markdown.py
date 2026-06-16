@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def pdf_to_markdown(pdf_path: str, runtime: Runtime) -> str:
     """Convert a paper PDF to clean Markdown for downstream review.
 

@@ -14,7 +14,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def build_style_profile(sample_paths: str, output_path: str = "",
                         runtime: Runtime = None) -> str:
     """Learn the author's writing voice from past writing samples.

@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def humanize_text(text: str, lang: str, voice_sample: str,
                   runtime: Runtime,
                   phrase_library_json: str = "") -> str:

@@ -14,7 +14,7 @@ from research_harness.stages.wiki._helpers import (
 )
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def wiki_refactor(topic: str, wiki_root: str, runtime: Runtime) -> str:
     """Split an over-crowded topic into subtopic folders.
 

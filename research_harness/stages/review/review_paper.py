@@ -142,7 +142,7 @@ def _build_structured_instructions(*, venue_name: str, venue_criteria: str,
     )
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def review_paper(paper_content: str, venue: str, venue_criteria: str,
                  runtime: Runtime,
                  draft_judgment: dict | None = None) -> str:

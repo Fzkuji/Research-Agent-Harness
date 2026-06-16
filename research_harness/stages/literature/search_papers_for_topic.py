@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def search_papers_for_topic(topic_path: str, topic_description: str,
                             k: int, existing_ids: str, papers_dir: str,
                             top_k_pdf: int,

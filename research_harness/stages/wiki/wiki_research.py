@@ -114,7 +114,7 @@ def _write_paper(root: Path, topic_dir: Path, paper: dict, pdf: bool) -> Path:
     return paper_md
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def wiki_research(direction: str, wiki_root: str, k: int, runtime: Runtime) -> str:
     """Investigate a research direction end-to-end and grow the wiki.
 

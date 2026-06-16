@@ -11,7 +11,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def write_section(section: str, context: str, runtime: Runtime) -> str:
     """Write one section of a publication-ready academic paper in LaTeX.
 

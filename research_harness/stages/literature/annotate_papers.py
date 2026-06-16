@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def annotate_papers(papers_json: str, framework_json: str,
                     runtime: Runtime) -> str:
     """Place each paper in the framework and annotate its contribution.

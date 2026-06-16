@@ -85,7 +85,7 @@ def _detect(source: str) -> tuple[str, Optional[str]]:
     return "unknown", s
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def wiki_ingest(source: str, wiki_root: str, runtime: Runtime) -> str:
     """Ingest any source into the wiki — arXiv id, URL, or local PDF.
 

@@ -61,7 +61,7 @@ def _stage_choices() -> dict:
     return choices
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
     """Route a research task to its next stage — one next-step decision."""
     try:
@@ -125,15 +125,18 @@ def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
 # Level 2: Execute within a stage
 # ═══════════════════════════════════════════
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def _stage_step(stage: str, sub_task: str, context: str,
                 runtime: Runtime, review_runtime: Runtime = None,
-                blocked: frozenset = frozenset()) -> dict:
+                blocked: frozenset = frozenset(), work_dir: str = "") -> dict:
     """Pick and dispatch one function within a research stage — one routing step.
 
     ``blocked`` is the set of function names that have failed too many
     times this run; they are removed from the catalog so the LLM cannot
     keep re-selecting a broken function (the loop's failure backstop).
+    ``work_dir`` is the project root — every orchestrator's output_dir is
+    ``<work_dir>/<stage_folder>`` so all stages of one project land in one
+    folder instead of the model inventing a fresh path per run.
     """
     import os as _os
     available = build_stage_available(stage)
@@ -163,21 +166,18 @@ def _stage_step(stage: str, sub_task: str, context: str,
             "All results must be saved to files: orchestrators save "
             "automatically, for leaf functions save the output "
             "yourself.\n\n"
-            "For an orchestrator taking `output_dir`, pass an absolute "
-            "path shaped <base>/<project_name>/<stage_folder>:\n"
-            "- base: if the task/sub_task/context names an absolute "
-            'path ("/Users/.../LLM Distillation", "~/..."), reuse the '
-            "directory CONTAINING it; otherwise use <HOME>/Documents.\n"
-            "- project_name: the last component of that path, or a "
-            "readable name from the research direction — keep it the "
-            "SAME across every stage of one project.\n"
-            '- stage_folder: one of "literature review", "ideas", '
-            '"experiments", "paper", "review", "rebuttal", '
-            '"presentation", "theory", "knowledge", or "" (the '
-            '"project" stage writes at the project root).\n'
-            "If that directory already holds material from a prior run, "
-            "the orchestrator resumes — do not invent a fresh folder. "
-            'Never pass relative paths like "auto_xxx".\n\n'
+            "For an orchestrator taking `output_dir`, the PROJECT ROOT is "
+            "fixed for this run:\n"
+            f"  PROJECT ROOT = {work_dir}\n"
+            "Pass output_dir = <PROJECT ROOT>/<stage_folder>, where "
+            'stage_folder is one of "literature review", "ideas", '
+            '"experiments", "paper", "review", "rebuttal", "presentation", '
+            '"theory", "knowledge", or "" (the "project" stage writes at '
+            "the root). Do NOT invent your own base or project_name and do "
+            "NOT create a fresh folder elsewhere — every stage of this run "
+            "writes under the SAME project root above, so re-running "
+            "continues the same project in place. Never pass relative "
+            'paths like "auto_xxx".\n\n'
             "Reply with this exact JSON and nothing else:\n"
             '  {"call": "<function_name>", "args": { ... }}\n'
             'Reply {"call": "stage_done"} (no args) only when previous '
@@ -369,7 +369,6 @@ def _conclusion(task: str, history: list, completed: bool, runtime: Runtime) -> 
 @agentic_function(
     as_tool=True,
     toolset=("harness",),
-    render_range={"callers": 0, "subcalls": 0},
     input={
         "task": {
             "source": "llm",
@@ -378,12 +377,14 @@ def _conclusion(task: str, history: list, completed: bool, runtime: Runtime) -> 
             "multiline": True,
         },
         "runtime": {"hidden": True},
+        "work_dir": {"hidden": True},
     },
 )
 def research_agent(
     task: str,
     runtime: Runtime = None,
     review_runtime: Runtime = None,
+    work_dir: str = "",
 ) -> dict:
     """Autonomous research agent with two-level control.
 
@@ -479,6 +480,7 @@ def research_agent(
                     stage=stage, sub_task=sub_task, context=context,
                     runtime=runtime, review_runtime=review_runtime,
                     blocked=frozenset(blocked_funcs),
+                    work_dir=work_dir,
                 )
             except Exception as e:
                 step_result = {
@@ -714,6 +716,7 @@ def main():
             task=task,
             runtime=rt,
             review_runtime=review_rt,
+            work_dir=work_dir,
         )
 
     # Report

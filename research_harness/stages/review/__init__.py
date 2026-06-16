@@ -438,7 +438,7 @@ def _run_debate(weaknesses: list, paper_content: str,
     (backward compatible).
     """
 
-    @agentic_function(render_range={"callers": 0})
+    @agentic_function()
     def _generate_rebuttal(weaknesses_text: str, paper_context: str,
                            runtime: Runtime) -> str:
         """Write a structured rebuttal (from the author's perspective) to the
@@ -459,7 +459,7 @@ def _run_debate(weaknesses: list, paper_content: str,
             {"type": "text", "text": f"Weaknesses:\n{weaknesses_text}\n\nPaper:\n{paper_context[:5000]}"},
         ])
 
-    @agentic_function(render_range={"callers": 0})
+    @agentic_function()
     def _rule_on_rebuttal(rebuttal_text: str, runtime: Runtime) -> str:
         """Rule on the author's rebuttals (from the reviewer's perspective),
         under a strict concession-threshold protocol.
@@ -693,7 +693,7 @@ def _parse_plan_commitments(plan_text: str) -> list[dict]:
     return commitments
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def _classify_commitments(commitments_json: str, paper_content: str,
                           runtime: Runtime) -> str:
     """Audit prior-round revision commitments against the CURRENT paper

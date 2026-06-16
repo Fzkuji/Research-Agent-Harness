@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def derive_formula(notes: str, runtime: Runtime) -> str:
     """Build an honest derivation package from scattered notes, not a fake polished
     theorem story.

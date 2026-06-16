@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def rank_ideas(ideas: str, novelty_results: str, runtime: Runtime) -> str:
     """Rank research ideas by overall promise.
 

@@ -44,7 +44,7 @@ _VERDICT_SCHEMA = {
 }
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def extract_claims(paper_or_analysis_path: str, runtime: Runtime) -> str:
     """Extract the empirical claims from a draft or analysis document.
 

@@ -66,7 +66,7 @@ _SELECTED_SCHEMA = {
 }
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def filter_relevant_priors(paper_content: str, candidates_json: str,
                            top_k: int, runtime: Runtime) -> str:
     """Select the top-k most relevant prior works from arXiv candidates.

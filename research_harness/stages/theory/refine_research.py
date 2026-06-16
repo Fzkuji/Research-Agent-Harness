@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def refine_research(direction: str, runtime: Runtime) -> str:
     """Turn a vague research direction into a problem-anchored, elegant,
     frontier-aware, implementation-oriented method plan.

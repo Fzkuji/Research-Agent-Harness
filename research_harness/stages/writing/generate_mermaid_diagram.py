@@ -4,7 +4,7 @@ from openprogram.agentic_programming.function import agentic_function
 from openprogram.agentic_programming.runtime import Runtime
 
 
-@agentic_function(render_range={"callers": 0})
+@agentic_function()
 def generate_mermaid_diagram(description: str, runtime: Runtime) -> str:
     """Generate a Mermaid diagram from user requirements, with file output and
     syntax verification.
