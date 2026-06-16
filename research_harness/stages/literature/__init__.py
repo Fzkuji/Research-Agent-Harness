@@ -401,10 +401,23 @@ def run_literature(
     done = False
     stop_all = False
 
+    from research_harness import steering as _steering
+    _steer_break = False
     for outer in range(1, max_outer + 1):
         state["outer"] = outer
+        if _steer_break:
+            break
 
         for inner in range(1, max_inner + 1):
+            # Mid-run steering: a user course-correction queued while this
+            # long orchestrator churns its own loop. Break out so control
+            # returns to research_agent's checkpoint, which absorbs the steer
+            # into the next stage decision (don't swallow it for minutes).
+            if _steering.pending_current():
+                print("    [literature] steering received — yielding to "
+                      "research_agent for course-correction.", file=sys.stderr)
+                _steer_break = True
+                break
             state["iter"] = state.get("iter", 0) + 1
             i = state["iter"]
 

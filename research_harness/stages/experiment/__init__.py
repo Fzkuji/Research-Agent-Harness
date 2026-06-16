@@ -71,10 +71,15 @@ def run_experiments(
     reports: list[str] = []
     steps_run = 0
     done = False
+    from research_harness.steering import pending_current as _steer_pending
     for i in range(1, max_steps + 1):
         # Graceful stop: a run-level stop (Ctrl-C / stop button) lands here
         # too, not just the outer loop — finish nothing new, summarize what ran.
         if stop_requested():
+            break
+        # Mid-run steering: yield to research_agent so a course-correction is
+        # absorbed promptly instead of after all steps run.
+        if _steer_pending():
             break
         prior = "\n\n".join(reports[-3:]) if reports else "(nothing run yet)"
         step_instruction = (

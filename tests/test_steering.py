@@ -39,3 +39,20 @@ def test_clear(_state_dir):
     steering.push(sid, "x")
     steering.clear(sid)
     assert steering.pending(sid) is False
+
+
+def test_pending_current_for_orchestrator_loops(_state_dir):
+    """Long orchestrators (run_literature/experiments/review) poll
+    pending_current() with no session_id and break their inner loop so a
+    mid-run steer isn't swallowed for minutes."""
+    from research_harness import steering
+    sid = "research_steer_current"
+    steering.set_current_session(sid)
+    try:
+        assert steering.pending_current() is False
+        steering.push(sid, "change direction")
+        assert steering.pending_current() is True
+    finally:
+        steering.set_current_session(None)
+    # No current session registered → never reports pending.
+    assert steering.pending_current() is False

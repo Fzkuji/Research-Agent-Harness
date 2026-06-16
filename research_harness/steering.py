@@ -38,6 +38,32 @@ def _steer_dir(session_id: str) -> "str | None":
         return None
 
 
+# Process-global "session of the run in flight", so long orchestrators can
+# check for steering WITHOUT being passed the session_id (they have big
+# internal loops — run_literature's outer/inner cycles, etc. — that otherwise
+# never see a steer until they finish, defeating mid-run course-correction).
+# research_agent sets this for the duration of a run; orchestrators poll
+# pending_current() and break their inner loop early so control returns to
+# research_agent's checkpoint, which absorbs the steer into the next decision.
+import threading as _threading
+_current_sid: "str | None" = None
+_sid_lock = _threading.Lock()
+
+
+def set_current_session(session_id: "str | None") -> None:
+    global _current_sid
+    with _sid_lock:
+        _current_sid = session_id or None
+
+
+def pending_current() -> bool:
+    """True if a steer is queued for the in-flight run's session. Safe to call
+    from any orchestrator's internal loop (no session_id needed)."""
+    with _sid_lock:
+        sid = _current_sid
+    return pending(sid) if sid else False
+
+
 def push(session_id: str, message: str) -> bool:
     """Queue a steering message for ``session_id``. Returns True if written.
 

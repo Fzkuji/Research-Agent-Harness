@@ -467,6 +467,12 @@ def research_agent(
     from research_harness import steering as _steeringmod
     steering_notes: list[str] = []
     _sid = getattr(runtime, "session_id", None) or ""
+    # Publish the session process-wide so long orchestrators' internal loops
+    # can poll for steering (steering.pending_current()) and break early —
+    # otherwise a steer issued while run_literature/etc. churns its own
+    # outer/inner loop is only seen after the whole orchestrator finishes.
+    if _sid:
+        _steeringmod.set_current_session(_sid)
 
     def _absorb_steering() -> None:
         if not _sid:
@@ -710,6 +716,7 @@ def research_agent(
     # Drop any un-drained steering so it doesn't leak into the next run.
     if _sid:
         _steeringmod.clear(_sid)
+    _steeringmod.set_current_session(None)
 
     return {
         "task": task,
