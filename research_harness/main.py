@@ -61,7 +61,7 @@ def _stage_choices() -> dict:
     return choices
 
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
     """Route a research task to its next stage — one next-step decision."""
     try:
@@ -125,7 +125,7 @@ def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
 # Level 2: Execute within a stage
 # ═══════════════════════════════════════════
 
-@agentic_function(render_range={"depth": 0, "siblings": 0})
+@agentic_function(render_range={"callers": 0})
 def _stage_step(stage: str, sub_task: str, context: str,
                 runtime: Runtime, review_runtime: Runtime = None,
                 blocked: frozenset = frozenset()) -> dict:
@@ -369,7 +369,7 @@ def _conclusion(task: str, history: list, completed: bool, runtime: Runtime) -> 
 @agentic_function(
     as_tool=True,
     toolset=("harness",),
-    render_range={"siblings": -1},
+    render_range={"callers": 0, "subcalls": 0},
     input={
         "task": {
             "source": "llm",
