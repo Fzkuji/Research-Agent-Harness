@@ -61,7 +61,7 @@ def _stage_choices() -> dict:
     return choices
 
 
-@agentic_function()
+@agentic_function(as_tool=False)  # internal stage router — never an LLM-callable tool
 def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
     """Route a research task to its next stage — one next-step decision."""
     try:
@@ -125,7 +125,7 @@ def _pick_stage(task: str, progress: str, runtime: Runtime) -> dict:
 # Level 2: Execute within a stage
 # ═══════════════════════════════════════════
 
-@agentic_function()
+@agentic_function(as_tool=False)  # internal in-stage dispatcher — not an LLM tool
 def _stage_step(stage: str, sub_task: str, context: str,
                 runtime: Runtime, review_runtime: Runtime = None,
                 blocked: frozenset = frozenset(), work_dir: str = "") -> dict:
