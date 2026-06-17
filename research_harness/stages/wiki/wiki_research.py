@@ -206,7 +206,12 @@ def wiki_research(direction: str, wiki_root: str, k: int, runtime: Runtime) -> s
         f"Output ONLY the JSON object as your final message."
     )
 
-    raw = runtime.exec(content=[{"type": "text", "text": prompt}])
+    # Searching arXiv + fetching papers needs the framework's web_search /
+    # web_fetch tools (toolset="research"), not the model's built-in web
+    # access — otherwise a non-codex model (e.g. MiniMax) can't search and
+    # returns nothing. Same bug class as the literature stage.
+    raw = runtime.exec(content=[{"type": "text", "text": prompt}],
+                       toolset="research", web_search=True)
     # Persist raw output for debugging — regardless of parse success.
     (root / ".runs").mkdir(exist_ok=True)
     (root / ".runs" / "last_research_raw.txt").write_text(str(raw), encoding="utf-8")
@@ -323,7 +328,11 @@ def wiki_research(direction: str, wiki_root: str, k: int, runtime: Runtime) -> s
         f"verbatim. Use the Edit tool to update the topic page; do not "
         f"create any other files."
     )
-    survey_summary = runtime.exec(content=[{"type": "text", "text": survey_prompt}])
+    # The prompt tells the model to Read each paper page and Edit the topic
+    # page — it needs the file tools to do so (toolset="default" = read/edit/
+    # write/bash). A bare exec gives no tools, so the rewrite never persists.
+    survey_summary = runtime.exec(content=[{"type": "text", "text": survey_prompt}],
+                                  toolset="default")
 
     committed = git_commit_all(root, f"wiki: research direction: {direction[:60]}")
     suffix = " (committed)" if committed else " (no changes to commit)"

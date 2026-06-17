@@ -284,7 +284,13 @@ def wiki_ingest(source: str, wiki_root: str, runtime: Runtime) -> str:
     )
 
     prompt = "\n\n".join(header_parts)
-    llm_summary = runtime.exec(content=[{"type": "text", "text": prompt}])
+    # The workflow tells the model to web_fetch non-arXiv URLs/PDFs and to
+    # write the ingested notes into the wiki tree — both need real tools.
+    # toolset="research" = web_search/web_fetch + bash/read/write/edit. A bare
+    # exec leaves the model unable to fetch or persist (the empty-output bug
+    # on any model without built-in web/file access).
+    llm_summary = runtime.exec(content=[{"type": "text", "text": prompt}],
+                               toolset="research", web_search=True)
 
     committed = git_commit_all(root, f"wiki: ingest {source[:80]}")
     suffix = " (committed)" if committed else " (no changes to commit)"
