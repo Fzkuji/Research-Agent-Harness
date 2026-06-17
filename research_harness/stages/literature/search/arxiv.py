@@ -61,8 +61,8 @@ def search_arxiv(query: str, runtime: Runtime) -> str:
     # save to papers/. That needs real execution tools — a bare exec is a pure
     # reasoning call (no shell/file/network), so the model can only DESCRIBE a
     # search and nothing lands in papers/ (the empty-papers bug on weak models
-    # with no built-in web tool). toolset="default" gives bash/read/write so it
+    # with no built-in web tool). toolset="research" gives the framework web_search + web_fetch + bash/read/write so it
     # can query the arXiv API and persist results.
     return runtime.exec(content=[
         {"type": "text", "text": f"Search query: {query}"},
-    ], toolset="default")
+    ], toolset="research")

@@ -94,7 +94,7 @@ def search_papers_for_topic(topic_path: str, topic_description: str,
                            (typical: 3).
         runtime:           LLM runtime.
     """
-    # toolset="default" gives bash/read/write so a model WITHOUT a built-in
+    # toolset="research" gives the framework web_search + web_fetch + bash/read/write so a model WITHOUT a built-in
     # web tool (e.g. MiniMax) can hit the arXiv / Semantic Scholar API itself
     # via curl/python and save PDFs to papers_dir. web_search=True additionally
     # lets codex use its native search. Without the toolset, non-codex models
@@ -112,4 +112,4 @@ def search_papers_for_topic(topic_path: str, topic_description: str,
             f"and/or Semantic Scholar, then write results. Actually run code; "
             f"do not just describe a search."
         )},
-    ], toolset="default", web_search=True)
+    ], toolset="research", web_search=True)

@@ -152,7 +152,7 @@ def digest_paper(target: str, paper_hint_json: str,
     }
     ```
     """
-    # toolset="default": shell/file tools so any model can fetch the paper
+    # toolset="research": framework web_search/web_fetch + shell/file tools so any model can fetch the paper
     # (arXiv API / PDF) and WRITE the digest to output_path. web_search=True
     # additionally enables codex's native search. A bare exec leaves a
     # non-codex model unable to fetch or save → empty digests.
@@ -166,4 +166,4 @@ def digest_paper(target: str, paper_hint_json: str,
         f"fetch the PDF — actually run code), write the digest to the output "
         f"path following the structure in your instructions, then return "
         f"the JSON summary."
-    )}], toolset="default", web_search=True)
+    )}], toolset="research", web_search=True)
