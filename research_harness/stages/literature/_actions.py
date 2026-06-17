@@ -52,7 +52,7 @@ from research_harness.stages.literature._state import (
     _paper_id,
     _safe_parse,
 )
-from research_harness.utils import parse_json
+from research_harness.utils import parse_json, call_with_schema
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -748,4 +748,57 @@ def _dispatch(action: str, args: dict, state: dict, direction: str,
         return "", {"error": f"unknown action: {action}"}
 
     parsed = _safe_parse(text)
+    # JSON-discipline fallback: a weaker model (e.g. MiniMax) may DO the work
+    # (search + download real PDFs) but report it in prose instead of the
+    # required JSON, so the direct parse finds nothing. Rather than lose the
+    # papers it actually found, run one structured-extraction pass that reads
+    # the model's own report and emits the schema. Only fires when the direct
+    # parse is empty and the action is one whose result must be JSON.
+    if not parsed and action in ("seed_surveys", "search_papers") \
+            and isinstance(text, str) and text.strip():
+        parsed = _reextract_papers(text, action, runtime)
+
     return text, parsed
+
+
+def _reextract_papers(text: str, action: str, runtime: Runtime) -> dict:
+    """Force the prose report into the expected {papers|surveys: [...]} JSON
+    via a structured submit call. Best-effort: returns {} on failure."""
+    key = "surveys" if action == "seed_surveys" else "papers"
+    item_props = {
+        "id": {"type": "string"},
+        "title": {"type": "string"},
+        "authors": {"type": "array", "items": {"type": "string"}},
+        "year": {"type": "integer"},
+        "venue": {"type": "string"},
+        "abstract": {"type": "string"},
+        "pdf_path": {"type": "string"},
+    }
+    try:
+        result = call_with_schema(
+            runtime=runtime,
+            instructions=(
+                "The text below is your own report of an academic-paper search "
+                "you just ran. Extract EVERY paper you found/downloaded into the "
+                "structured list. Use the exact ids, titles, and pdf paths you "
+                "reported. Do not invent papers not in the report.\n\n"
+                f"=== report ===\n{text[:12000]}"
+            ),
+            schema_name=f"submit_{key}",
+            schema_description=f"Submit the {key} found during the search.",
+            parameters={
+                "type": "object",
+                "properties": {
+                    key: {"type": "array", "items": {
+                        "type": "object", "properties": item_props}},
+                },
+                "required": [key],
+            },
+            max_attempts=2,
+        )
+        return result if isinstance(result, dict) else {}
+    except Exception as e:  # noqa: BLE001 — best-effort, but make failures visible
+        import sys as _sys
+        print(f"    [literature] re-extract fallback failed: "
+              f"{type(e).__name__}: {str(e)[:120]}", file=_sys.stderr)
+        return {}
