@@ -112,4 +112,4 @@ def search_papers_for_topic(topic_path: str, topic_description: str,
             f"and/or Semantic Scholar, then write results. Actually run code; "
             f"do not just describe a search."
         )},
-    ], toolset="research", web_search=True)
+    ], web_search=True)

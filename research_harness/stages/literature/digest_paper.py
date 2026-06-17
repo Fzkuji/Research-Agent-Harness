@@ -166,4 +166,4 @@ def digest_paper(target: str, paper_hint_json: str,
         f"fetch the PDF — actually run code), write the digest to the output "
         f"path following the structure in your instructions, then return "
         f"the JSON summary."
-    )}], toolset="research", web_search=True)
+    )}], web_search=True)

@@ -65,4 +65,4 @@ def search_arxiv(query: str, runtime: Runtime) -> str:
     # can query the arXiv API and persist results.
     return runtime.exec(content=[
         {"type": "text", "text": f"Search query: {query}"},
-    ], toolset="research")
+    ])

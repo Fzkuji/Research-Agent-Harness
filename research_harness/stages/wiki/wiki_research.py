@@ -211,7 +211,7 @@ def wiki_research(direction: str, wiki_root: str, k: int, runtime: Runtime) -> s
     # access — otherwise a non-codex model (e.g. MiniMax) can't search and
     # returns nothing. Same bug class as the literature stage.
     raw = runtime.exec(content=[{"type": "text", "text": prompt}],
-                       toolset="research", web_search=True)
+                       web_search=True)
     # Persist raw output for debugging — regardless of parse success.
     (root / ".runs").mkdir(exist_ok=True)
     (root / ".runs" / "last_research_raw.txt").write_text(str(raw), encoding="utf-8")

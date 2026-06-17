@@ -68,4 +68,4 @@ def search_semantic_scholar(query: str, runtime: Runtime) -> str:
     # is persisted. toolset="research" gives the framework web_search + web_fetch + bash/read/write.
     return runtime.exec(content=[
         {"type": "text", "text": f"Search query: {query}"},
-    ], toolset="research")
+    ])

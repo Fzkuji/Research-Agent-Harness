@@ -90,4 +90,4 @@ def seed_surveys(query: str, k: int, existing_titles: str,
             "Reply with ONLY the JSON object specified in your instructions — "
             "first character `{`, no prose, no preamble, no caveats."
         )},
-    ], toolset="research", web_search=True)
+    ], web_search=True)
