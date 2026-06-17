@@ -94,6 +94,11 @@ def search_papers_for_topic(topic_path: str, topic_description: str,
                            (typical: 3).
         runtime:           LLM runtime.
     """
+    # toolset="default" gives bash/read/write so a model WITHOUT a built-in
+    # web tool (e.g. MiniMax) can hit the arXiv / Semantic Scholar API itself
+    # via curl/python and save PDFs to papers_dir. web_search=True additionally
+    # lets codex use its native search. Without the toolset, non-codex models
+    # return "I can't search" and papers/ stays empty.
     return runtime.exec(content=[
         {"type": "text", "text": (
             f"Topic path: {topic_path}\n"
@@ -101,6 +106,10 @@ def search_papers_for_topic(topic_path: str, topic_description: str,
             f"Max new papers: {k}\n"
             f"Tier-1 PDF downloads (top by citation): {top_k_pdf}\n"
             f"PDF destination: {papers_dir}\n\n"
-            f"Papers already in state (skip):\n{existing_ids or '(none)'}"
+            f"Papers already in state (skip):\n{existing_ids or '(none)'}\n\n"
+            f"You have shell + file tools: query the arXiv API "
+            f"(http://export.arxiv.org/api/query, follow the https redirect) "
+            f"and/or Semantic Scholar, then write results. Actually run code; "
+            f"do not just describe a search."
         )},
-    ], web_search=True)
+    ], toolset="default", web_search=True)

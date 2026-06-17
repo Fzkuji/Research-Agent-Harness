@@ -62,6 +62,10 @@ def search_semantic_scholar(query: str, runtime: Runtime) -> str:
     
 
     """
+    # Needs real execution tools to query the Semantic Scholar API and save
+    # results — a bare exec is reasoning-only (no shell/network), so a weak
+    # model with no built-in web tool returns a described search and nothing
+    # is persisted. toolset="default" gives bash/read/write.
     return runtime.exec(content=[
         {"type": "text", "text": f"Search query: {query}"},
-    ])
+    ], toolset="default")

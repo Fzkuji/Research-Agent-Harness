@@ -81,10 +81,13 @@ def seed_surveys(query: str, k: int, existing_titles: str,
         {"type": "text", "text": (
             f"Search query: {query}\n"
             f"Max new surveys: {k}\n"
-            f"Optional PDF dir (only if you have file tools): {papers_dir}\n\n"
+            f"PDF dir: {papers_dir}\n\n"
             f"Surveys already in state (skip these):\n{existing_titles or '(none)'}\n\n"
-            "Use web_search to find real surveys. Reply with ONLY the JSON "
-            "object specified in your instructions — first character `{`, "
-            "no prose, no 'Found N papers' preamble, no file-access caveats."
+            "Find real surveys: query the arXiv API "
+            "(http://export.arxiv.org/api/query, follow the https redirect) "
+            "and/or Semantic Scholar using your shell/file tools — actually "
+            "run code, don't just describe. (codex may also use web_search.) "
+            "Reply with ONLY the JSON object specified in your instructions — "
+            "first character `{`, no prose, no preamble, no caveats."
         )},
-    ], web_search=True)
+    ], toolset="default", web_search=True)
